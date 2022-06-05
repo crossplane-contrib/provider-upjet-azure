@@ -1,0 +1,18 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha1
+kind: SQLRoleDefinition
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountName: ${azurerm_cosmosdb_account.example.name}
+    assignableScopes:
+    - /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}/dbs/sales
+    name: acctestsqlrole
+    permissions:
+    - dataActions:
+      - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read
+    resourceGroupNameRef:
+      name: example
+    roleDefinitionId: 84cf3a8b-4122-4448-bce2-fa423cfe0a15
+  providerConfigRef:
+    name: example

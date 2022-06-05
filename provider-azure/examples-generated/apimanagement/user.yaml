@@ -1,0 +1,16 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: User
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: example-apim
+    email: tom+tfdev@hashicorp.com
+    firstName: Example
+    lastName: User
+    resourceGroupNameRef:
+      name: example
+    state: active
+    userId: 5931a75ae4bbd512288c680b
+  providerConfigRef:
+    name: example

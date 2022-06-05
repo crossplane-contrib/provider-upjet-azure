@@ -1,0 +1,14 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: LBRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendPort: 3389
+    frontendIpConfigurationName: PublicIPAddress
+    frontendPort: 3389
+    loadbalancerId: ${azurerm_lb.example.id}
+    name: LBRule
+    protocol: Tcp
+  providerConfigRef:
+    name: example

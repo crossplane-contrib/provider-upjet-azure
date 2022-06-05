@@ -1,0 +1,12 @@
+apiVersion: cache.azure.upbound.io/v1alpha2
+kind: RedisEnterpriseCluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    skuName: EnterpriseFlash_F300-3
+  providerConfigRef:
+    name: example

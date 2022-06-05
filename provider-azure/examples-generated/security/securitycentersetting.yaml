@@ -1,0 +1,10 @@
+apiVersion: security.azure.upbound.io/v1alpha1
+kind: SecurityCenterSetting
+metadata:
+  name: example
+spec:
+  forProvider:
+    enabled: true
+    settingName: MCAS
+  providerConfigRef:
+    name: example

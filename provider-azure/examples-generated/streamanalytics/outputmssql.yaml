@@ -1,0 +1,17 @@
+apiVersion: streamanalytics.azure.upbound.io/v1alpha1
+kind: OutputMSSQL
+metadata:
+  name: example
+spec:
+  forProvider:
+    database: myexamplesqldatabase
+    name: example-output-sql
+    password: ${azurerm_sql_server.example.administrator_login_password}
+    resourceGroupNameRef:
+      name: example
+    server: ${azurerm_sql_server.example.fully_qualified_domain_name}
+    streamAnalyticsJobName: example-job
+    table: ExampleTable
+    user: ${azurerm_sql_server.example.administrator_login}
+  providerConfigRef:
+    name: example

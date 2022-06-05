@@ -1,0 +1,17 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: BastionHost
+metadata:
+  name: example
+spec:
+  forProvider:
+    ipConfiguration:
+    - name: configuration
+      publicIpAddressId: ${azurerm_public_ip.example.id}
+      subnetIdRef:
+        name: example
+    location: West Europe
+    name: examplebastion
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: servicebus.azure.upbound.io/v1alpha1
+kind: QueueAuthorizationRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    listen: true
+    manage: false
+    name: examplerule
+    queueId: ${azurerm_servicebus_queue.example.id}
+    send: true
+  providerConfigRef:
+    name: example

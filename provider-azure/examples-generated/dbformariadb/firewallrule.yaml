@@ -1,0 +1,14 @@
+apiVersion: dbformariadb.azure.upbound.io/v1alpha2
+kind: FirewallRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example
+    startIpAddress: 40.112.8.12
+  providerConfigRef:
+    name: example

@@ -1,0 +1,18 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: DNSTXTRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: test
+    record:
+    - value: google-site-authenticator
+    - value: more site information here
+    resourceGroupNameRef:
+      name: example
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneName: mydomain.com
+  providerConfigRef:
+    name: example

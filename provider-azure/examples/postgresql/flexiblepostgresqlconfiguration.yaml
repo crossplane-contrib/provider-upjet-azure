@@ -1,0 +1,12 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: FlexibleServerConfiguration
+metadata:
+  name: example-flexible-psql-configuration
+spec:
+  forProvider:
+    name: backslash_quote
+    serverIdRef:
+      name: example-flexible-psqlserver
+    value: "on"
+  providerConfigRef:
+    name: example

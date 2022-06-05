@@ -1,0 +1,19 @@
+apiVersion: keyvault.azure.upbound.io/v1alpha2
+kind: ManagedHardwareSecurityModule
+metadata:
+  name: examplehsm
+spec:
+  forProvider:
+    adminObjectIds:
+    - <object id>
+    location: West Europe
+    purgeProtectionEnabled: false
+    resourceGroupNameRef:
+      name: example
+    skuName: Standard_B1
+    softDeleteRetentionDays: 90
+    tags:
+      Purpose: example
+    tenantId: <tenant id>
+  providerConfigRef:
+    name: example

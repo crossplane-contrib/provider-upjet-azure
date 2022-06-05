@@ -1,0 +1,25 @@
+apiVersion: keyvault.azure.upbound.io/v1alpha2
+kind: Vault
+metadata:
+  name: example
+spec:
+  forProvider:
+    access_policy:
+    - key_permissions:
+      - Get
+      object_id: ${data.azurerm_client_config.current.object_id}
+      secret_permissions:
+      - Get
+      storage_permissions:
+      - Get
+      tenant_id: ${data.azurerm_client_config.current.tenant_id}
+    enabledForDiskEncryption: true
+    location: West Europe
+    purgeProtectionEnabled: false
+    resourceGroupNameRef:
+      name: example
+    skuName: standard
+    softDeleteRetentionDays: 7
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+  providerConfigRef:
+    name: example

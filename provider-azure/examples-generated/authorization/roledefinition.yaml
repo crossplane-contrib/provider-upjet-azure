@@ -1,0 +1,17 @@
+apiVersion: authorization.azure.upbound.io/v1alpha1
+kind: RoleDefinition
+metadata:
+  name: example
+spec:
+  forProvider:
+    assignableScopes:
+    - ${data.azurerm_subscription.primary.id}
+    description: This is a custom role created via Terraform
+    name: my-custom-role
+    permissions:
+    - actions:
+      - '*'
+      notActions: []
+    scope: ${data.azurerm_subscription.primary.id}
+  providerConfigRef:
+    name: example

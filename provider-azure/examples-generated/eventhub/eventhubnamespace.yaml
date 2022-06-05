@@ -1,0 +1,15 @@
+apiVersion: eventhub.azure.upbound.io/v1alpha2
+kind: EventHubNamespace
+metadata:
+  name: example
+spec:
+  forProvider:
+    capacity: 2
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    sku: Standard
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example

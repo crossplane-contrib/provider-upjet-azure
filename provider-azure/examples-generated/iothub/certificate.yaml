@@ -1,0 +1,14 @@
+apiVersion: iothub.azure.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificateContent: ${filebase64("example.cer")}
+    iothubName: ${azurerm_iothub.example.name}
+    isVerified: true
+    name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

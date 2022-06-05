@@ -1,0 +1,17 @@
+apiVersion: devices.azure.upbound.io/v1alpha1
+kind: IOTHubRoute
+metadata:
+  name: example
+spec:
+  forProvider:
+    condition: "true"
+    enabled: true
+    endpointNames:
+    - ${azurerm_iothub_endpoint_storage_container.example.name}
+    iothubName: ${azurerm_iothub.example.name}
+    name: example
+    resourceGroupNameRef:
+      name: example
+    source: DeviceMessages
+  providerConfigRef:
+    name: example

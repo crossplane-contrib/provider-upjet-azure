@@ -1,0 +1,13 @@
+apiVersion: insights.azure.upbound.io/v1alpha1
+kind: ApplicationInsightsAnalyticsItem
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationInsightsId: ${azurerm_application_insights.example.id}
+    content: requests //simple example query
+    name: testquery
+    scope: shared
+    type: query
+  providerConfigRef:
+    name: example

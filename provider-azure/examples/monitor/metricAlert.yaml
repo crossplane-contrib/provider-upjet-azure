@@ -1,0 +1,20 @@
+apiVersion: insights.azure.upbound.io/v1alpha2
+kind: MonitorMetricAlert
+metadata:
+  name: example-ma
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+    scopes:
+      - "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DBforPostgreSQL/servers/example-psqlserver"
+    criteria:
+      - metricNamespace: "Microsoft.DBforPostgreSQL/servers"
+        metricName: "cpu_percent"
+        aggregation: "Average"
+        operator: "GreaterThan"
+        threshold: 80
+    action:
+      - actionGroupId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.Insights/actionGroups/example-ag"
+  providerConfigRef:
+    name: example

@@ -1,0 +1,15 @@
+apiVersion: stream.azure.upbound.io/v1alpha1
+kind: AnalyticsOutputFunction
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiKey: exampleapikey
+    functionApp: test-azure-functions
+    functionName: examplefunctionname
+    name: exampleoutput
+    resourceGroupNameRef:
+      name: example
+    streamAnalyticsJobName: example-job
+  providerConfigRef:
+    name: example

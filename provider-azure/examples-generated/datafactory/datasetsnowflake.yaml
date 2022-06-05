@@ -1,0 +1,13 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: DataSetSnowflake
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataFactoryId: ${azurerm_data_factory.test.id}
+    linkedServiceName: example
+    name: example
+    schemaName: foo_schema
+    tableName: foo_table
+  providerConfigRef:
+    name: example

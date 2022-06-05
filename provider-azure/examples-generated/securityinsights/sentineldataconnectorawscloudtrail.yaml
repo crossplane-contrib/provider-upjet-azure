@@ -1,0 +1,11 @@
+apiVersion: securityinsights.azure.upbound.io/v1alpha1
+kind: SentinelDataConnectorAWSCloudTrail
+metadata:
+  name: example
+spec:
+  forProvider:
+    awsRoleArn: arn:aws:iam::000000000000:role/role1
+    logAnalyticsWorkspaceId: ${azurerm_log_analytics_solution.example.workspace_resource_id}
+    name: example
+  providerConfigRef:
+    name: example

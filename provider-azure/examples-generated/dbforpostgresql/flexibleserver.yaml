@@ -1,0 +1,20 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: FlexibleServer
+metadata:
+  name: example
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorPassword: H@Sh1CoR3!
+    delegatedSubnetIdRef:
+      name: example
+    location: West Europe
+    privateDnsZoneId: ${azurerm_private_dns_zone.example.id}
+    resourceGroupNameRef:
+      name: example
+    skuName: GP_Standard_D4s_v3
+    storageMb: 32768
+    version: "12"
+    zone: "1"
+  providerConfigRef:
+    name: example

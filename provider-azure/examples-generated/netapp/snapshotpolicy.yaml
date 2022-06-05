@@ -1,0 +1,37 @@
+apiVersion: netapp.azure.upbound.io/v1alpha1
+kind: SnapshotPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountName: example-netapp
+    dailySchedule:
+    - hour: 20
+      minute: 15
+      snapshotsToKeep: 2
+    enabled: true
+    hourlySchedule:
+    - minute: 15
+      snapshotsToKeep: 4
+    location: West Europe
+    monthlySchedule:
+    - daysOfMonth:
+      - 1
+      - 15
+      - 20
+      - 30
+      hour: 5
+      minute: 45
+      snapshotsToKeep: 1
+    name: snapshotpolicy-01
+    resourceGroupNameRef:
+      name: example
+    weeklySchedule:
+    - daysOfWeek:
+      - Monday
+      - Friday
+      hour: 23
+      minute: 0
+      snapshotsToKeep: 1
+  providerConfigRef:
+    name: example

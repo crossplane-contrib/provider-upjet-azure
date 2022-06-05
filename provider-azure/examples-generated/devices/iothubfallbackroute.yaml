@@ -1,0 +1,16 @@
+apiVersion: devices.azure.upbound.io/v1alpha2
+kind: IOTHubFallbackRoute
+metadata:
+  name: example
+spec:
+  forProvider:
+    condition: "true"
+    enabled: true
+    endpointNamesRefs:
+    - name: example
+    iotHubNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

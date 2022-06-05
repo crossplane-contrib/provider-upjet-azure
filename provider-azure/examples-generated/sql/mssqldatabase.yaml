@@ -1,0 +1,23 @@
+apiVersion: sql.azure.upbound.io/v1alpha1
+kind: MSSQLDatabase
+metadata:
+  name: example
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    extended_auditing_policy:
+    - retention_in_days: 6
+      storage_account_access_key: ${azurerm_storage_account.example.primary_access_key}
+      storage_account_access_key_is_secondary: true
+      storage_endpoint: ${azurerm_storage_account.example.primary_blob_endpoint}
+    licenseType: LicenseIncluded
+    maxSizeGb: 4
+    name: acctest-db-d
+    readScale: true
+    serverId: ${azurerm_mssql_server.example.id}
+    skuName: S0
+    tags:
+      foo: bar
+    zoneRedundant: true
+  providerConfigRef:
+    name: example

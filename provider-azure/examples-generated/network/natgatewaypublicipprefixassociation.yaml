@@ -1,0 +1,10 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: NATGatewayPublicIPPrefixAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    natGatewayId: ${azurerm_nat_gateway.example.id}
+    publicIpPrefixId: ${azurerm_public_ip_prefix.example.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: devices.azure.upbound.io/v1alpha1
+kind: IOTHubEndpointEventHub
+metadata:
+  name: example
+spec:
+  forProvider:
+    connectionString: ${azurerm_eventhub_authorization_rule.example.primary_connection_string}
+    iothubId: ${azurerm_iothub.example.id}
+    name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

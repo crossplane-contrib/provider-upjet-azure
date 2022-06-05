@@ -1,0 +1,14 @@
+apiVersion: stream.azure.upbound.io/v1alpha1
+kind: AnalyticsManagedPrivateEndpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: exampleprivateendpoint
+    resourceGroupNameRef:
+      name: example
+    streamAnalyticsClusterName: examplestreamanalyticscluster
+    subresourceName: blob
+    targetResourceId: ${azurerm_storage_account.example.id}
+  providerConfigRef:
+    name: example

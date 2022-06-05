@@ -1,0 +1,14 @@
+apiVersion: devices.azure.upbound.io/v1alpha2
+kind: IOTHubSharedAccessPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    iotHubNameRef:
+      name: example
+    registryRead: true
+    registryWrite: true
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

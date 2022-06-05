@@ -1,0 +1,11 @@
+apiVersion: cognitiveservices.azure.upbound.io/v1alpha1
+kind: AccountCustomerManagedKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    cognitiveAccountId: ${azurerm_cognitive_account.example.id}
+    identityClientId: ${azurerm_user_assigned_identity.example.client_id}
+    keyVaultKeyId: ${azurerm_key_vault_key.example.id}
+  providerConfigRef:
+    name: example

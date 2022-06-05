@@ -1,0 +1,17 @@
+apiVersion: datashare.azure.upbound.io/v1alpha1
+kind: DataShare
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountId: ${azurerm_data_share_account.example.id}
+    description: example desc
+    kind: CopyBased
+    name: example_dss
+    snapshotSchedule:
+    - name: example-ss
+      recurrence: Day
+      startTime: "2020-04-17T04:47:52.9614956Z"
+    terms: example terms
+  providerConfigRef:
+    name: example

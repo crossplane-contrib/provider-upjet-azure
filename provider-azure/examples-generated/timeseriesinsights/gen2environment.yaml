@@ -1,0 +1,19 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1alpha1
+kind: Gen2Environment
+metadata:
+  name: example
+spec:
+  forProvider:
+    idProperties:
+    - id
+    location: West Europe
+    name: example
+    resourceGroupNameRef:
+      name: example
+    skuName: L1
+    storage:
+    - key: ${azurerm_storage_account.storage.primary_access_key}
+      name: ${azurerm_storage_account.storage.name}
+    warmStoreDataRetentionTime: P30D
+  providerConfigRef:
+    name: example

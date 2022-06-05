@@ -1,0 +1,25 @@
+apiVersion: compute.azure.upbound.io/v1alpha1
+kind: WindowsVirtualMachine
+metadata:
+  name: example
+spec:
+  forProvider:
+    adminPassword: P@$$w0rd1234!
+    adminUsername: adminuser
+    location: West Europe
+    name: example-machine
+    networkInterfaceIds:
+    - ${azurerm_network_interface.example.id}
+    osDisk:
+    - caching: ReadWrite
+      storageAccountType: Standard_LRS
+    resourceGroupNameRef:
+      name: example
+    size: Standard_F2
+    sourceImageReference:
+    - offer: WindowsServer
+      publisher: MicrosoftWindowsServer
+      sku: 2016-Datacenter
+      version: latest
+  providerConfigRef:
+    name: example

@@ -1,0 +1,25 @@
+apiVersion: compute.azure.upbound.io/v1alpha1
+kind: PolicyVirtualMachineConfigurationAssignment
+metadata:
+  name: example
+spec:
+  forProvider:
+    configuration:
+    - assignmentType: ApplyAndMonitor
+      parameter:
+      - name: Minimum Password Length;ExpectedValue
+        value: "16"
+      - name: Minimum Password Age;ExpectedValue
+        value: "0"
+      - name: Maximum Password Age;ExpectedValue
+        value: 30,45
+      - name: Enforce Password History;ExpectedValue
+        value: "10"
+      - name: Password Must Meet Complexity Requirements;ExpectedValue
+        value: "1"
+      version: 1.*
+    location: West Europe
+    name: AzureWindowsBaseline
+    virtualMachineId: ${azurerm_windows_virtual_machine.example.id}
+  providerConfigRef:
+    name: example

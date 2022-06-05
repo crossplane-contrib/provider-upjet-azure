@@ -1,0 +1,20 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: PrivateDNSMXRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    record:
+    - exchange: mx1.contoso.com
+      preference: 10
+    - exchange: backupmx.contoso.com
+      preference: 20
+    resourceGroupNameRef:
+      name: example
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneName: mydomain.com
+  providerConfigRef:
+    name: example

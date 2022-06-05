@@ -1,0 +1,17 @@
+apiVersion: compute.azure.upbound.io/v1alpha1
+kind: ManagedDisk
+metadata:
+  name: example
+spec:
+  forProvider:
+    createOption: Empty
+    diskSizeGb: "1"
+    location: West Europe
+    name: acctestmd
+    resourceGroupNameRef:
+      name: example
+    storageAccountType: Standard_LRS
+    tags:
+      environment: staging
+  providerConfigRef:
+    name: example

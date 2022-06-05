@@ -1,0 +1,18 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+kind: CassandraTable
+metadata:
+  name: example
+spec:
+  forProvider:
+    cassandraKeySpaceIdRef:
+      name: example
+    schema:
+    - column:
+      - name: test1
+        type: ascii
+      - name: test2
+        type: int
+      partitionKey:
+      - name: test1
+  providerConfigRef:
+    name: example

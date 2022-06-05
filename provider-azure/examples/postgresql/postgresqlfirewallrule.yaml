@@ -1,0 +1,14 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: FirewallRule
+metadata:
+  name: example-firewall-rule
+spec:
+  forProvider:
+    endIpAddress: 255.255.255.255
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example-psqlserver
+    startIpAddress: 0.0.0.0
+  providerConfigRef:
+    name: example

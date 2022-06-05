@@ -1,0 +1,14 @@
+apiVersion: operationalinsights.azure.upbound.io/v1alpha1
+kind: LogAnalyticsLinkedStorageAccount
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataSourceType: customlogs
+    resourceGroupNameRef:
+      name: example
+    storageAccountIds:
+    - ${azurerm_storage_account.example.id}
+    workspaceResourceId: ${azurerm_log_analytics_workspace.example.id}
+  providerConfigRef:
+    name: example

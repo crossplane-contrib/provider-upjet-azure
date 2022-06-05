@@ -1,0 +1,20 @@
+apiVersion: storage.azure.upbound.io/v1alpha2
+kind: Account
+metadata:
+  name: example-storage-account
+  annotations:
+    crossplane.io/external-name: crossplaneexamplestoracc
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+    location: "East US"
+    accountTier: "Standard"
+    accountReplicationType: "LRS"
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: crossplane-system

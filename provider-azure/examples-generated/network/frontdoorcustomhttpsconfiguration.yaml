@@ -1,0 +1,10 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: FrontdoorCustomHTTPSConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    customHttpsProvisioningEnabled: false
+    frontendEndpointId: ${azurerm_frontdoor.example.frontend_endpoints["exampleFrontendEndpoint1"]}
+  providerConfigRef:
+    name: example

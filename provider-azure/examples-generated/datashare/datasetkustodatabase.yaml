@@ -1,0 +1,11 @@
+apiVersion: datashare.azure.upbound.io/v1alpha1
+kind: DataSetKustoDatabase
+metadata:
+  name: example
+spec:
+  forProvider:
+    kustoDatabaseId: ${azurerm_kusto_database.example.id}
+    name: example-dskd
+    shareId: ${azurerm_data_share.example.id}
+  providerConfigRef:
+    name: example

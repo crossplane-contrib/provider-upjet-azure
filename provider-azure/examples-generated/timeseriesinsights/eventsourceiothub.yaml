@@ -1,0 +1,16 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1alpha1
+kind: EventSourceIOTHub
+metadata:
+  name: example
+spec:
+  forProvider:
+    consumerGroupName: ${azurerm_iothub_consumer_group.example.name}
+    environmentId: ${azurerm_iot_time_series_insights_gen2_environment.example.id}
+    eventSourceResourceId: ${azurerm_iothub.example.id}
+    iothubName: ${azurerm_iothub.example.name}
+    location: West Europe
+    name: example
+    sharedAccessKey: ${azurerm_iothub.example.shared_access_policy.0.primary_key}
+    sharedAccessKeyName: ${azurerm_iothub.example.shared_access_policy.0.key_name}
+  providerConfigRef:
+    name: example

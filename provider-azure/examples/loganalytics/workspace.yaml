@@ -1,0 +1,12 @@
+apiVersion: loganalytics.azure.upbound.io/v1alpha2
+kind: Workspace
+metadata:
+  name: example-ws
+spec:
+  forProvider:
+    location: "East US"
+    resourceGroupNameRef:
+      name: example
+    retentionInDays: 45
+  providerConfigRef:
+    name: example

@@ -1,0 +1,16 @@
+apiVersion: operationalinsights.azure.upbound.io/v1alpha1
+kind: LogAnalyticsDataExportRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinationResourceId: ${azurerm_storage_account.example.id}
+    enabled: true
+    name: dataExport1
+    resourceGroupNameRef:
+      name: example
+    tableNames:
+    - Heartbeat
+    workspaceResourceId: ${azurerm_log_analytics_workspace.example.id}
+  providerConfigRef:
+    name: example

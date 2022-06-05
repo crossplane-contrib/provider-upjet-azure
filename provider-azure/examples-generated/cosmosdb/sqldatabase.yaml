@@ -1,0 +1,13 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+kind: SQLDatabase
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+    throughput: 400
+  providerConfigRef:
+    name: example

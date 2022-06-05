@@ -1,0 +1,11 @@
+apiVersion: authorization.azure.upbound.io/v1alpha1
+kind: RoleAssignment
+metadata:
+  name: example
+spec:
+  forProvider:
+    principalId: ${data.azurerm_client_config.example.object_id}
+    roleDefinitionName: Reader
+    scope: ${data.azurerm_subscription.primary.id}
+  providerConfigRef:
+    name: example

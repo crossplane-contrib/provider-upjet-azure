@@ -1,0 +1,15 @@
+apiVersion: logic.azure.upbound.io/v1alpha1
+kind: AppStandard
+metadata:
+  name: example
+spec:
+  forProvider:
+    appServicePlanId: ${azurerm_app_service_plan.example.id}
+    location: West Europe
+    name: test-azure-functions
+    resourceGroupNameRef:
+      name: example
+    storageAccountAccessKey: ${azurerm_storage_account.example.primary_access_key}
+    storageAccountName: ${azurerm_storage_account.example.name}
+  providerConfigRef:
+    name: example

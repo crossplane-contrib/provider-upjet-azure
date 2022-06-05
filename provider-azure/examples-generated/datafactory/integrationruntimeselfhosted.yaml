@@ -1,0 +1,10 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: IntegrationRuntimeSelfHosted
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    name: example
+  providerConfigRef:
+    name: example

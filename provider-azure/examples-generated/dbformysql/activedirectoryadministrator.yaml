@@ -1,0 +1,14 @@
+apiVersion: dbformysql.azure.upbound.io/v1alpha1
+kind: ActiveDirectoryAdministrator
+metadata:
+  name: example
+spec:
+  forProvider:
+    login: sqladmin
+    objectId: ${data.azurerm_client_config.current.object_id}
+    resourceGroupNameRef:
+      name: example
+    serverName: example-mysqlserver
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+  providerConfigRef:
+    name: example

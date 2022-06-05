@@ -1,0 +1,13 @@
+apiVersion: recoveryservices.azure.upbound.io/v1alpha1
+kind: SiteRecoveryProtectionContainer
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: protection-container
+    recoveryFabricName: primary-fabric
+    recoveryVaultName: example-recovery-vault
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

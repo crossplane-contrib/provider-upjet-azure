@@ -1,0 +1,11 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: InterfaceNATRuleAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    ipConfigurationName: testconfiguration1
+    natRuleId: ${azurerm_lb_nat_rule.example.id}
+    networkInterfaceId: ${azurerm_network_interface.example.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: avs.azure.upbound.io/v1alpha1
+kind: VMwareCluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterNodeCount: 3
+    name: example-Cluster
+    skuName: av36
+    vmwareCloudId: ${azurerm_vmware_private_cloud.example.id}
+  providerConfigRef:
+    name: example

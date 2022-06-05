@@ -1,0 +1,14 @@
+apiVersion: appplatform.azure.upbound.io/v1alpha1
+kind: SpringCloudAppMySQLAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    databaseName: exampledb
+    mysqlServerId: ${azurerm_mysql_server.example.id}
+    name: example-bind
+    password: ${azurerm_mysql_server.example.administrator_login_password}
+    springCloudAppId: ${azurerm_spring_cloud_app.example.id}
+    username: ${azurerm_mysql_server.example.administrator_login}
+  providerConfigRef:
+    name: example

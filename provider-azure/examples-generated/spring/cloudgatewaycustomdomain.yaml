@@ -1,0 +1,10 @@
+apiVersion: spring.azure.upbound.io/v1alpha1
+kind: CloudGatewayCustomDomain
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example.com
+    springCloudGatewayId: ${azurerm_spring_cloud_gateway.example.id}
+  providerConfigRef:
+    name: example

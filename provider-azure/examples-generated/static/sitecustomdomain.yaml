@@ -1,0 +1,11 @@
+apiVersion: static.azure.upbound.io/v1alpha1
+kind: SiteCustomDomain
+metadata:
+  name: example
+spec:
+  forProvider:
+    domainName: ${azurerm_dns_cname_record.example.name}.${azurerm_dns_cname_record.example.zone_name}
+    staticSiteId: ${azurerm_static_site.example.id}
+    validationType: cname-delegation
+  providerConfigRef:
+    name: example

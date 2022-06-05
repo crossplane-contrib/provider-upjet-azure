@@ -1,0 +1,14 @@
+apiVersion: botservice.azure.upbound.io/v1alpha1
+kind: BotChannelDirectLineSpeech
+metadata:
+  name: example
+spec:
+  forProvider:
+    botName: example
+    cognitiveServiceAccessKey: ${azurerm_cognitive_account.example.primary_access_key}
+    cognitiveServiceLocation: West Europe
+    location: global
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

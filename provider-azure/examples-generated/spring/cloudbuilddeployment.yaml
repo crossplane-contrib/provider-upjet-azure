@@ -1,0 +1,18 @@
+apiVersion: spring.azure.upbound.io/v1alpha1
+kind: CloudBuildDeployment
+metadata:
+  name: example
+spec:
+  forProvider:
+    buildResultId: <default>
+    environmentVariables:
+      Env: Staging
+      Foo: Bar
+    instanceCount: 2
+    name: example
+    quota:
+    - cpu: "2"
+      memory: 4Gi
+    springCloudAppId: ${azurerm_spring_cloud_app.example.id}
+  providerConfigRef:
+    name: example

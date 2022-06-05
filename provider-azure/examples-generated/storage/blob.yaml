@@ -1,0 +1,14 @@
+apiVersion: storage.azure.upbound.io/v1alpha2
+kind: Blob
+metadata:
+  name: example
+spec:
+  forProvider:
+    source: some-local-file.zip
+    storageAccountNameRef:
+      name: example
+    storageContainerNameRef:
+      name: example
+    type: Block
+  providerConfigRef:
+    name: example

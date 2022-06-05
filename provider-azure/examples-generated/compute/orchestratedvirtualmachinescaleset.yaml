@@ -1,0 +1,15 @@
+apiVersion: compute.azure.upbound.io/v1alpha1
+kind: OrchestratedVirtualMachineScaleSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-VMSS
+    platformFaultDomainCount: 1
+    resourceGroupNameRef:
+      name: example
+    zones:
+    - "1"
+  providerConfigRef:
+    name: example

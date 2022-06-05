@@ -1,0 +1,12 @@
+apiVersion: subscription.azure.upbound.io/v1alpha1
+kind: PolicyExemption
+metadata:
+  name: example
+spec:
+  forProvider:
+    exemptionCategory: Mitigated
+    name: exampleExemption
+    policyAssignmentId: ${azurerm_subscription_policy_assignment.example.id}
+    resource_group_id: ${data.azurerm_subscription.example.id}
+  providerConfigRef:
+    name: example

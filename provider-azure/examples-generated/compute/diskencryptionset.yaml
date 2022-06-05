@@ -1,0 +1,15 @@
+apiVersion: compute.azure.upbound.io/v1alpha1
+kind: DiskEncryptionSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    keyVaultKeyId: ${azurerm_key_vault_key.example.id}
+    location: West Europe
+    name: des
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

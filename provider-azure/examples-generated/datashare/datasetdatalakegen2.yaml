@@ -1,0 +1,13 @@
+apiVersion: datashare.azure.upbound.io/v1alpha1
+kind: DataSetDataLakeGen2
+metadata:
+  name: example
+spec:
+  forProvider:
+    filePath: myfile.txt
+    fileSystemName: example
+    name: accexample-dlg2ds
+    shareId: ${azurerm_data_share.example.id}
+    storageAccountId: ${azurerm_storage_account.example.id}
+  providerConfigRef:
+    name: example

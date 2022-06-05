@@ -1,0 +1,11 @@
+apiVersion: maintenance.azure.upbound.io/v1alpha1
+kind: MaintenanceAssignmentVirtualMachineScaleSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    maintenanceConfigurationId: ${azurerm_maintenance_configuration.example.id}
+    virtualMachineScaleSetId: ${azurerm_linux_virtual_machine.example.id}
+  providerConfigRef:
+    name: example

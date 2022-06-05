@@ -1,0 +1,13 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+kind: SQLTrigger
+metadata:
+  name: example
+spec:
+  forProvider:
+    body: function trigger(){}
+    containerIdRef:
+      name: example
+    operation: Delete
+    type: Post
+  providerConfigRef:
+    name: example

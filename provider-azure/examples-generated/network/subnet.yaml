@@ -1,0 +1,21 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: Subnet
+metadata:
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/24
+    delegation:
+    - name: delegation
+      serviceDelegation:
+      - actions:
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        - Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
+        name: Microsoft.ContainerInstance/containerGroups
+    resourceGroupNameRef:
+      name: example
+    virtualNetworkNameRef:
+      name: example
+  providerConfigRef:
+    name: example

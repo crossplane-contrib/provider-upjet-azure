@@ -1,0 +1,14 @@
+apiVersion: devtestlab.azure.upbound.io/v1alpha1
+kind: Lab
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-devtestlab
+    resourceGroupNameRef:
+      name: example
+    tags:
+      Sydney: Australia
+  providerConfigRef:
+    name: example

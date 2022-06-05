@@ -1,0 +1,12 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: ExpressRouteCircuitAuthorization
+metadata:
+  name: example
+spec:
+  forProvider:
+    expressRouteCircuitName: expressRoute1
+    name: exampleERCAuth
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

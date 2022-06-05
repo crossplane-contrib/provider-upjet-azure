@@ -1,0 +1,14 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1alpha1
+kind: StandardEnvironment
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataRetentionTime: P30D
+    location: West Europe
+    name: example
+    resourceGroupNameRef:
+      name: example
+    skuName: S1_1
+  providerConfigRef:
+    name: example

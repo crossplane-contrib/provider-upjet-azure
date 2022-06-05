@@ -1,0 +1,13 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: IdentityProviderMicrosoft
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: example-apim
+    clientId: 00000000-0000-0000-0000-000000000000
+    clientSecret: "00000000000000000000000000000000"
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

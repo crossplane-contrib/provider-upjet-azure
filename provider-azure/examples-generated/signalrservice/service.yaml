@@ -1,0 +1,30 @@
+apiVersion: signalrservice.azure.upbound.io/v1alpha1
+kind: Service
+metadata:
+  name: example
+spec:
+  forProvider:
+    connectivityLogsEnabled: true
+    cors:
+    - allowedOrigins:
+      - http://www.example.com
+    location: West Europe
+    messagingLogsEnabled: true
+    name: tfex-signalr
+    resourceGroupNameRef:
+      name: example
+    serviceMode: Default
+    sku:
+    - capacity: 1
+      name: Free_F1
+    upstreamEndpoint:
+    - categoryPattern:
+      - connections
+      - messages
+      eventPattern:
+      - '*'
+      hubPattern:
+      - hub1
+      urlTemplate: http://foo.com
+  providerConfigRef:
+    name: example

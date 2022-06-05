@@ -1,0 +1,24 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: acceptanceTestSecurityGroup1
+    resourceGroupNameRef:
+      name: example
+    securityRule:
+    - access: Allow
+      destinationAddressPrefix: '*'
+      destinationPortRange: '*'
+      direction: Inbound
+      name: test123
+      priority: 100
+      protocol: Tcp
+      sourceAddressPrefix: '*'
+      sourcePortRange: '*'
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example

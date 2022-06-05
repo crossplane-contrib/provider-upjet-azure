@@ -1,0 +1,13 @@
+apiVersion: synapse.azure.upbound.io/v1alpha1
+kind: WorkspaceExtendedAuditingPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    retentionInDays: 6
+    storageAccountAccessKey: ${azurerm_storage_account.audit_logs.primary_access_key}
+    storageAccountAccessKeyIsSecondary: false
+    storageEndpoint: ${azurerm_storage_account.audit_logs.primary_blob_endpoint}
+    synapseWorkspaceId: ${azurerm_synapse_workspace.example.id}
+  providerConfigRef:
+    name: example

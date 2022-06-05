@@ -1,0 +1,13 @@
+apiVersion: compute.azure.upbound.io/v1alpha1
+kind: SSHPublicKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example
+    publicKey: ${file("~/.ssh/id_rsa.pub")}
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

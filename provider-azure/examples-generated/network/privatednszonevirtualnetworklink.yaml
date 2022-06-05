@@ -1,0 +1,13 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: PrivateDNSZoneVirtualNetworkLink
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: test
+    privateDnsZoneName: mydomain.com
+    resourceGroupNameRef:
+      name: example
+    virtualNetworkId: ${azurerm_virtual_network.example.id}
+  providerConfigRef:
+    name: example

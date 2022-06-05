@@ -1,0 +1,14 @@
+apiVersion: machinelearningservices.azure.upbound.io/v1alpha1
+kind: SynapseSpark
+metadata:
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    machineLearningWorkspaceId: ${azurerm_machine_learning_workspace.example.id}
+    name: example
+    synapseSparkPoolId: ${azurerm_synapse_spark_pool.example.id}
+  providerConfigRef:
+    name: example

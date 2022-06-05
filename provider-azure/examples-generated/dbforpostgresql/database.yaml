@@ -1,0 +1,14 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: Database
+metadata:
+  name: example
+spec:
+  forProvider:
+    charset: UTF8
+    collation: English_United States.1252
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example
+  providerConfigRef:
+    name: example

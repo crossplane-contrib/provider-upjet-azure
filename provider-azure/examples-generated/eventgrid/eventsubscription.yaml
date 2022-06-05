@@ -1,0 +1,13 @@
+apiVersion: eventgrid.azure.upbound.io/v1alpha1
+kind: EventSubscription
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: defaultEventSubscription
+    scope: ${azurerm_resource_group.example.id}
+    storageQueueEndpoint:
+    - queueName: mysamplequeue
+      storageAccountId: ${azurerm_storage_account.default.id}
+  providerConfigRef:
+    name: example

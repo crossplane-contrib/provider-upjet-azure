@@ -1,0 +1,11 @@
+apiVersion: authorization.azure.upbound.io/v1alpha1
+kind: SubscriptionPolicyAssignment
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    policyDefinitionId: ${azurerm_policy_definition.example.id}
+    subscriptionId: ${data.azurerm_subscription.current.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,18 @@
+apiVersion: sql.azure.upbound.io/v1alpha1
+kind: MSSQLServerSecurityAlertPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    disabledAlerts:
+    - Sql_Injection
+    - Data_Exfiltration
+    resourceGroupNameRef:
+      name: example
+    retentionDays: 20
+    serverName: ${azurerm_sql_server.example.name}
+    state: Enabled
+    storageAccountAccessKey: ${azurerm_storage_account.example.primary_access_key}
+    storageEndpoint: ${azurerm_storage_account.example.primary_blob_endpoint}
+  providerConfigRef:
+    name: example

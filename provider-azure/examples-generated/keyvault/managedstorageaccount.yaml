@@ -1,0 +1,14 @@
+apiVersion: keyvault.azure.upbound.io/v1alpha2
+kind: ManagedStorageAccount
+metadata:
+  name: example
+spec:
+  forProvider:
+    keyVaultIdRef:
+      name: example
+    regenerateKeyAutomatically: false
+    storageAccountIdRef:
+      name: example
+    storageAccountKey: key1
+  providerConfigRef:
+    name: example

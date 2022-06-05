@@ -1,0 +1,13 @@
+apiVersion: containerregistry.azure.upbound.io/v1alpha1
+kind: Token
+metadata:
+  name: example
+spec:
+  forProvider:
+    containerRegistryName: containerRegistry1
+    name: exampletoken
+    resourceGroupNameRef:
+      name: example
+    scopeMapId: ${azurerm_container_registry_scope_map.map.id}
+  providerConfigRef:
+    name: example

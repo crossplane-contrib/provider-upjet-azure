@@ -1,0 +1,17 @@
+apiVersion: automation.azure.upbound.io/v1alpha1
+kind: Webhook
+metadata:
+  name: example
+spec:
+  forProvider:
+    automationAccountName: example-account
+    enabled: true
+    expiryTime: "2021-12-31T00:00:00Z"
+    name: TestRunbook_webhook
+    parameters:
+      input: parameter
+    resourceGroupNameRef:
+      name: example
+    runbookName: Get-AzureVMTutorial
+  providerConfigRef:
+    name: example

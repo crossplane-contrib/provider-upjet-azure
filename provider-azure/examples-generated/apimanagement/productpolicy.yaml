@@ -1,0 +1,18 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: ProductPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: ${data.azurerm_api_management_product.example.api_management_name}
+    productId: ${data.azurerm_api_management_product.example.product_id}
+    resourceGroupNameRef:
+      name: example
+    xmlContent: |
+      <policies>
+        <inbound>
+          <find-and-replace from="xyz" to="abc" />
+        </inbound>
+      </policies>
+  providerConfigRef:
+    name: example

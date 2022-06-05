@@ -1,0 +1,9 @@
+apiVersion: web.azure.upbound.io/v1alpha1
+kind: AppActiveSlot
+metadata:
+  name: example
+spec:
+  forProvider:
+    slotId: ${azurerm_windows_web_app_slot.example.id}
+  providerConfigRef:
+    name: example

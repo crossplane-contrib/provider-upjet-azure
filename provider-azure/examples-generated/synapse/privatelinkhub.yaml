@@ -1,0 +1,12 @@
+apiVersion: synapse.azure.upbound.io/v1alpha1
+kind: PrivateLinkHub
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-resource
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

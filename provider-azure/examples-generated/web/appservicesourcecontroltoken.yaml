@@ -1,0 +1,10 @@
+apiVersion: web.azure.upbound.io/v1alpha1
+kind: AppServiceSourceControlToken
+metadata:
+  name: example
+spec:
+  forProvider:
+    token: 7e57735e77e577e57
+    type: GitHub
+  providerConfigRef:
+    name: example

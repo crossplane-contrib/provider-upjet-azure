@@ -1,0 +1,22 @@
+apiVersion: stream.azure.upbound.io/v1alpha1
+kind: AnalyticsReferenceInputMSSQL
+metadata:
+  name: example
+spec:
+  forProvider:
+    database: acctest-db-d
+    fullSnapshotQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]
+    name: example-reference-input
+    password: examplepassword
+    refreshIntervalDuration: "00:20:00"
+    refreshType: RefreshPeriodicallyWithFull
+    resourceGroupNameRef:
+      name: example
+    server: ${azurerm_mssql_server.example.fully_qualified_domain_name}
+    streamAnalyticsJobName: example-job
+    username: exampleuser
+  providerConfigRef:
+    name: example

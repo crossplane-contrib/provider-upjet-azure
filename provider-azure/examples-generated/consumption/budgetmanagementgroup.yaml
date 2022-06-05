@@ -1,0 +1,39 @@
+apiVersion: consumption.azure.upbound.io/v1alpha1
+kind: BudgetManagementGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    amount: 1000
+    filter:
+    - dimension:
+      - name: ResourceGroupName
+        values:
+        - ${azurerm_resource_group.example.name}
+      tag:
+      - name: foo
+        values:
+        - bar
+        - baz
+    managementGroupId: ${azurerm_management_group.example.id}
+    name: example
+    notification:
+    - contactEmails:
+      - foo@example.com
+      - bar@example.com
+      enabled: true
+      operator: EqualTo
+      threshold: 90
+    - contactEmails:
+      - foo@example.com
+      - bar@example.com
+      enabled: false
+      operator: GreaterThan
+      threshold: 100
+      thresholdType: Forecasted
+    timeGrain: Monthly
+    timePeriod:
+    - endDate: "2022-07-01T00:00:00Z"
+      startDate: "2022-06-01T00:00:00Z"
+  providerConfigRef:
+    name: example

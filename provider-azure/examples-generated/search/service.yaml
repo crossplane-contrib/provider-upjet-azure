@@ -1,0 +1,13 @@
+apiVersion: search.azure.upbound.io/v1alpha1
+kind: Service
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-search-service
+    resourceGroupNameRef:
+      name: example
+    sku: standard
+  providerConfigRef:
+    name: example

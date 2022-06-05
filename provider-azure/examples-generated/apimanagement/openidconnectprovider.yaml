@@ -1,0 +1,15 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: OpenIDConnectProvider
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: example-apim
+    clientId: 00001111-2222-3333-4444-555566667777
+    displayName: Example Provider
+    metadataEndpoint: https://example.com/example
+    name: example-provider
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

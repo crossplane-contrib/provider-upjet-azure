@@ -1,0 +1,31 @@
+apiVersion: media.azure.upbound.io/v1alpha1
+kind: StreamingPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    commonEncryptionCbcs:
+    - drmFairplay:
+      - allowPersistentLicense: true
+        customLicenseAcquisitionUrlTemplate: https://contoso.com/{AssetAlternativeId}/fairplay/{ContentKeyId}
+      enabledProtocols:
+      - dash: true
+        download: false
+        hls: false
+        smoothStreaming: false
+    commonEncryptionCenc:
+    - drmPlayready:
+      - customAttributes: PlayReady CustomAttributes
+        customLicenseAcquisitionUrlTemplate: https://contoso.com/{AssetAlternativeId}/playready/{ContentKeyId}
+      drmWidevineCustomLicenseAcquisitionUrlTemplate: https://contoso.com/{AssetAlternativeId}/widevine/{ContentKeyId}
+      enabledProtocols:
+      - dash: true
+        download: false
+        hls: false
+        smoothStreaming: false
+    mediaServicesAccountName: examplemediaacc
+    name: Policy-1
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

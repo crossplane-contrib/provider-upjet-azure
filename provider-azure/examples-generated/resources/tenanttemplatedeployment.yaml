@@ -1,0 +1,11 @@
+apiVersion: resources.azure.upbound.io/v1alpha1
+kind: TenantTemplateDeployment
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example
+    templateSpecVersionId: ${data.azurerm_template_spec_version.example.id}
+  providerConfigRef:
+    name: example

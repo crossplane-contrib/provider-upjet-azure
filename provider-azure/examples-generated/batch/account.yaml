@@ -1,0 +1,16 @@
+apiVersion: batch.azure.upbound.io/v1alpha1
+kind: Account
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: testbatchaccount
+    poolAllocationMode: BatchService
+    resourceGroupNameRef:
+      name: example
+    storageAccountId: ${azurerm_storage_account.example.id}
+    tags:
+      env: test
+  providerConfigRef:
+    name: example

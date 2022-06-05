@@ -1,0 +1,19 @@
+apiVersion: cache.azure.upbound.io/v1alpha2
+kind: RedisCache
+metadata:
+  name: example-redis
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+    location: "East US"
+    redisVersion: "4"
+    capacity: 2
+    family: "C"
+    skuName: "Standard"
+    minimumTlsVersion: "1.2"
+  writeConnectionSecretToRef:
+    name: conn-example-redis
+    namespace: crossplane-system
+  providerConfigRef:
+    name: example

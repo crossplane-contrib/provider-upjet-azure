@@ -1,0 +1,16 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: IdentityProviderAADB2C
+metadata:
+  name: example
+spec:
+  forProvider:
+    allowedTenant: myb2ctenant.onmicrosoft.com
+    apiManagementName: example-apim
+    authority: myb2ctenant.b2clogin.com
+    clientId: ${azuread_application.example.application_id}
+    clientSecret: P@55w0rD!%[7]s
+    signinPolicy: B2C_1_Login
+    signinTenant: myb2ctenant.onmicrosoft.com
+    signupPolicy: B2C_1_Signup
+  providerConfigRef:
+    name: example

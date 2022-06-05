@@ -1,0 +1,20 @@
+apiVersion: streamanalytics.azure.upbound.io/v1alpha1
+kind: StreamInputEventHub
+metadata:
+  name: example
+spec:
+  forProvider:
+    eventhubConsumerGroupName: ${azurerm_eventhub_consumer_group.example.name}
+    eventhubName: ${azurerm_eventhub.example.name}
+    name: eventhub-stream-input
+    resourceGroupNameRef:
+      name: example
+    serialization:
+    - encoding: UTF8
+      type: Json
+    servicebusNamespace: ${azurerm_eventhub_namespace.example.name}
+    sharedAccessPolicyKey: ${azurerm_eventhub_namespace.example.default_primary_key}
+    sharedAccessPolicyName: RootManageSharedAccessKey
+    streamAnalyticsJobName: ${data.azurerm_stream_analytics_job.example.name}
+  providerConfigRef:
+    name: example

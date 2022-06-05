@@ -1,0 +1,11 @@
+apiVersion: servicebus.azure.upbound.io/v1alpha1
+kind: Subscription
+metadata:
+  name: example
+spec:
+  forProvider:
+    maxDeliveryCount: 1
+    name: tfex_servicebus_subscription
+    topicId: ${azurerm_servicebus_topic.example.id}
+  providerConfigRef:
+    name: example

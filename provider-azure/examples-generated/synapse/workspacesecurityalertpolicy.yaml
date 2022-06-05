@@ -1,0 +1,16 @@
+apiVersion: synapse.azure.upbound.io/v1alpha1
+kind: WorkspaceSecurityAlertPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    disabledAlerts:
+    - Sql_Injection
+    - Data_Exfiltration
+    policyState: Enabled
+    retentionDays: 20
+    storageAccountAccessKey: ${azurerm_storage_account.audit_logs.primary_access_key}
+    storageEndpoint: ${azurerm_storage_account.audit_logs.primary_blob_endpoint}
+    synapseWorkspaceId: ${azurerm_synapse_workspace.example.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,16 @@
+apiVersion: cache.azure.upbound.io/v1alpha2
+kind: RedisLinkedServer
+metadata:
+  name: example-link
+spec:
+  forProvider:
+    targetRedisCacheNameRef:
+      name: example-redis
+    resourceGroupNameRef:
+      name: example
+    linkedRedisCacheIdRef:
+      name: example-redis-to-link
+    linkedRedisCacheLocation: "East US"
+    serverRole: "Secondary"
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: storage.azure.upbound.io/v1alpha1
+kind: DataLakeGen2FileSystem
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    properties:
+      hello: aGVsbG8=
+    storageAccountId: ${azurerm_storage_account.example.id}
+  providerConfigRef:
+    name: example

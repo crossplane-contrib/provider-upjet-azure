@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: NetworkPacketCapture
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: pctestcapture
+    networkWatcherName: production-nwwatcher
+    resourceGroupNameRef:
+      name: example
+    storageLocation:
+    - storageAccountId: ${azurerm_storage_account.example.id}
+    targetResourceId: ${azurerm_virtual_machine.example.id}
+  providerConfigRef:
+    name: example

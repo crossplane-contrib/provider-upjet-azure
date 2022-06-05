@@ -1,0 +1,10 @@
+apiVersion: sql.azure.upbound.io/v1alpha2
+kind: MSSQLServerTransparentDataEncryption
+metadata:
+  name: example
+spec:
+  forProvider:
+    serverIdRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: digitaltwins.azure.upbound.io/v1alpha1
+kind: EndpointEventGrid
+metadata:
+  name: example
+spec:
+  forProvider:
+    digitalTwinsId: ${azurerm_digital_twins_instance.example.id}
+    eventgridTopicEndpoint: ${azurerm_eventgrid_topic.example.endpoint}
+    eventgridTopicPrimaryAccessKey: ${azurerm_eventgrid_topic.example.primary_access_key}
+    eventgridTopicSecondaryAccessKey: ${azurerm_eventgrid_topic.example.secondary_access_key}
+    name: example-EG
+  providerConfigRef:
+    name: example

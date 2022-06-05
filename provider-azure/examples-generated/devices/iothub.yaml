@@ -1,0 +1,55 @@
+apiVersion: devices.azure.upbound.io/v1alpha2
+kind: IOTHub
+metadata:
+  name: example
+spec:
+  forProvider:
+    cloudToDevice:
+    - defaultTtl: PT1H
+      feedback:
+      - lockDuration: PT30S
+        maxDeliveryCount: 15
+        timeToLive: PT1H10M
+      maxDeliveryCount: 30
+    endpoint:
+    - batchFrequencyInSeconds: 60
+      connectionString: ${azurerm_storage_account.example.primary_blob_connection_string}
+      containerNameRef:
+        name: example
+      encoding: Avro
+      fileNameFormat: '{iothub}/{partition}_{YYYY}_{MM}_{DD}_{HH}_{mm}'
+      maxChunkSizeInBytes: 10485760
+      name: export
+      type: AzureIotHub.StorageContainer
+    - connectionString: ${azurerm_eventhub_authorization_rule.example.primary_connection_string}
+      name: export2
+      type: AzureIotHub.EventHub
+    enrichment:
+    - endpointNames:
+      - export
+      - export2
+      key: tenant
+      value: $twin.tags.Tenant
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    route:
+    - condition: "true"
+      enabled: true
+      endpointNames:
+      - export
+      name: export
+      source: DeviceMessages
+    - condition: "true"
+      enabled: true
+      endpointNames:
+      - export2
+      name: export2
+      source: DeviceMessages
+    sku:
+    - capacity: "1"
+      name: S1
+    tags:
+      purpose: testing
+  providerConfigRef:
+    name: example

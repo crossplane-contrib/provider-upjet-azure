@@ -1,0 +1,13 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: IdentityProviderTwitter
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiKey: "00000000000000000000000000000000"
+    apiManagementName: example-apim
+    apiSecretKey: "00000000000000000000000000000000"
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

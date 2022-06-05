@@ -1,0 +1,14 @@
+apiVersion: web.azure.upbound.io/v1alpha1
+kind: AppServiceCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-cert
+    password: terraform
+    pfxBlob: ${filebase64("certificate.pfx")}
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

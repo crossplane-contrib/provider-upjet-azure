@@ -1,0 +1,14 @@
+apiVersion: cache.azure.upbound.io/v1alpha2
+kind: RedisFirewallRule
+metadata:
+  name: examplerule
+spec:
+  forProvider:
+    redisCacheNameRef:
+      name: example-redis
+    resourceGroupNameRef:
+      name: example
+    startIp: "1.2.3.4"
+    endIp: "2.3.4.5"
+  providerConfigRef:
+    name: example

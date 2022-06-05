@@ -1,0 +1,19 @@
+apiVersion: appplatform.azure.upbound.io/v1alpha1
+kind: SpringCloudJavaDeployment
+metadata:
+  name: example
+spec:
+  forProvider:
+    environmentVariables:
+      Env: Staging
+      Foo: Bar
+    instanceCount: 2
+    jvmOptions: -XX:+PrintGC
+    name: deploy1
+    quota:
+    - cpu: "2"
+      memory: 4Gi
+    runtimeVersion: Java_11
+    springCloudAppId: ${azurerm_spring_cloud_app.example.id}
+  providerConfigRef:
+    name: example

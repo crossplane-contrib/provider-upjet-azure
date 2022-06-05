@@ -1,0 +1,12 @@
+apiVersion: synapse.azure.upbound.io/v1alpha1
+kind: FirewallRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 255.255.255.255
+    name: AllowAll
+    startIpAddress: 0.0.0.0
+    synapseWorkspaceId: ${azurerm_synapse_workspace.test.id}
+  providerConfigRef:
+    name: example

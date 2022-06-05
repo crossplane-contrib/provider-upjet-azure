@@ -1,0 +1,14 @@
+apiVersion: storagecache.azure.upbound.io/v1alpha1
+kind: HPCCacheBlobTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    cacheName: examplehpccache
+    name: examplehpccblobtarget
+    namespacePath: /blob_storage
+    resourceGroupNameRef:
+      name: example
+    storageContainerId: ${azurerm_storage_container.example.resource_manager_id}
+  providerConfigRef:
+    name: example

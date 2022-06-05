@@ -1,0 +1,27 @@
+apiVersion: compute.azure.upbound.io/v1alpha1
+kind: LinuxVirtualMachine
+metadata:
+  name: example
+spec:
+  forProvider:
+    adminSshKey:
+    - publicKey: ${file("~/.ssh/id_rsa.pub")}
+      username: adminuser
+    adminUsername: adminuser
+    location: West Europe
+    name: example-machine
+    networkInterfaceIds:
+    - ${azurerm_network_interface.example.id}
+    osDisk:
+    - caching: ReadWrite
+      storageAccountType: Standard_LRS
+    resourceGroupNameRef:
+      name: example
+    size: Standard_F2
+    sourceImageReference:
+    - offer: UbuntuServer
+      publisher: Canonical
+      sku: 16.04-LTS
+      version: latest
+  providerConfigRef:
+    name: example

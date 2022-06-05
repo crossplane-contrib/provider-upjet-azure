@@ -1,0 +1,11 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: LinkedServiceKeyVault
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    keyVaultId: ${azurerm_key_vault.example.id}
+    name: example
+  providerConfigRef:
+    name: example

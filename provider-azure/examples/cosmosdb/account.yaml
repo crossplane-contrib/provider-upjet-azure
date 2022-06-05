@@ -1,0 +1,28 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+kind: Account
+metadata:
+  name: example-account
+spec:
+  forProvider:
+    kind: MongoDB
+    location:  "East US"
+    offerType: Standard
+    mongoServerVersion: "4.0"
+    backup:
+    - type: Continuous
+    consistencyPolicy:
+    - consistencyLevel: Session
+    resourceGroupNameRef:
+      name: example
+    geoLocation:
+    - failoverPriority: 0
+      location: "East US"
+      zoneRedundant: False
+    capabilities:
+    - name: EnableMongo
+    - name: DisableRateLimitingResponses
+  providerConfigRef:
+    name: example
+  writeConnectionSecretToRef:
+    name: conn-example-cosmos
+    namespace: crossplane-system 

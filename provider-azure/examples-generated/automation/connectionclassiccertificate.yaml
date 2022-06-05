@@ -1,0 +1,15 @@
+apiVersion: automation.azure.upbound.io/v1alpha1
+kind: ConnectionClassicCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    automationAccountName: example-account
+    certificateAssetName: cert1
+    name: connection-example
+    resourceGroupNameRef:
+      name: example
+    subscriptionId: ${data.azurerm_client_config.example.subscription_id}
+    subscriptionName: subs1
+  providerConfigRef:
+    name: example

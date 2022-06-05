@@ -1,0 +1,13 @@
+apiVersion: container.azure.upbound.io/v1alpha1
+kind: RegistryAgentPool
+metadata:
+  name: example
+spec:
+  forProvider:
+    containerRegistryName: containerRegistry1
+    location: West Europe
+    name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

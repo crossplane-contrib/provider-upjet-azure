@@ -1,0 +1,19 @@
+apiVersion: automation.azure.upbound.io/v1alpha1
+kind: Schedule
+metadata:
+  name: example
+spec:
+  forProvider:
+    automationAccountName: example-account
+    description: This is an example schedule
+    frequency: Week
+    interval: 1
+    name: tfex-automation-schedule
+    resourceGroupNameRef:
+      name: example
+    startTime: "2014-04-15T18:00:15+02:00"
+    timezone: Australia/Perth
+    weekDays:
+    - Friday
+  providerConfigRef:
+    name: example

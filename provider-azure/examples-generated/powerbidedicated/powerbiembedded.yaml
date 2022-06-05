@@ -1,0 +1,15 @@
+apiVersion: powerbidedicated.azure.upbound.io/v1alpha1
+kind: PowerBIEmbedded
+metadata:
+  name: example
+spec:
+  forProvider:
+    administrators:
+    - azsdktest@microsoft.com
+    location: West Europe
+    name: examplepowerbi
+    resourceGroupNameRef:
+      name: example
+    skuName: A1
+  providerConfigRef:
+    name: example

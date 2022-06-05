@@ -1,0 +1,11 @@
+apiVersion: synapse.azure.upbound.io/v1alpha1
+kind: IntegrationRuntimeAzure
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example
+    synapseWorkspaceId: ${azurerm_synapse_workspace.example.id}
+  providerConfigRef:
+    name: example

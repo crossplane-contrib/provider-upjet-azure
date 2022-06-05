@@ -1,0 +1,14 @@
+apiVersion: dbformariadb.azure.upbound.io/v1alpha2
+kind: Database
+metadata:
+  name: example
+spec:
+  forProvider:
+    charset: utf8
+    collation: utf8_general_ci
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example
+  providerConfigRef:
+    name: example

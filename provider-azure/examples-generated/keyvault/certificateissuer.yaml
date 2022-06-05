@@ -1,0 +1,14 @@
+apiVersion: keyvault.azure.upbound.io/v1alpha2
+kind: CertificateIssuer
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountId: "0000"
+    keyVaultIdRef:
+      name: example
+    orgId: ExampleOrgName
+    password: example-password
+    providerName: DigiCert
+  providerConfigRef:
+    name: example

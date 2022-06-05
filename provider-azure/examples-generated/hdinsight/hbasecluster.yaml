@@ -1,0 +1,37 @@
+apiVersion: hdinsight.azure.upbound.io/v1alpha1
+kind: HBaseCluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterVersion: "3.6"
+    componentVersion:
+    - hbase: "1.1"
+    gateway:
+    - password: TerrAform123!
+      username: acctestusrgw
+    location: West Europe
+    name: example-hdicluster
+    resourceGroupNameRef:
+      name: example
+    roles:
+    - headNode:
+      - password: AccTestvdSC4daf986!
+        username: acctestusrvm
+        vmSize: Standard_D3_V2
+      workerNode:
+      - password: AccTestvdSC4daf986!
+        targetInstanceCount: 3
+        username: acctestusrvm
+        vmSize: Standard_D3_V2
+      zookeeperNode:
+      - password: AccTestvdSC4daf986!
+        username: acctestusrvm
+        vmSize: Standard_D3_V2
+    storageAccount:
+    - isDefault: true
+      storageAccountKey: ${azurerm_storage_account.example.primary_access_key}
+      storageContainerId: ${azurerm_storage_container.example.id}
+    tier: Standard
+  providerConfigRef:
+    name: example

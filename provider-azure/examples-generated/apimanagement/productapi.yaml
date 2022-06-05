@@ -1,0 +1,13 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: ProductAPI
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: ${data.azurerm_api_management.example.name}
+    apiName: ${data.azurerm_api_management_api.example.name}
+    productId: ${data.azurerm_api_management_product.example.product_id}
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

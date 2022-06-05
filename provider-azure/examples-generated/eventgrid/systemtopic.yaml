@@ -1,0 +1,14 @@
+apiVersion: eventgrid.azure.upbound.io/v1alpha1
+kind: SystemTopic
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-topic
+    resourceGroupNameRef:
+      name: example
+    sourceArmResourceId: ${azurerm_storage_account.example.id}
+    topicType: Microsoft.Storage.StorageAccounts
+  providerConfigRef:
+    name: example

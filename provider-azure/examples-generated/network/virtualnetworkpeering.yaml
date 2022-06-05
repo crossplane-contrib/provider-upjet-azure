@@ -1,0 +1,14 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: VirtualNetworkPeering
+metadata:
+  name: example
+spec:
+  forProvider:
+    remoteVirtualNetworkIdRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+    virtualNetworkNameRef:
+      name: example
+  providerConfigRef:
+    name: example

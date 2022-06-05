@@ -1,0 +1,32 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: LinkedServiceAzureDatabricks
+metadata:
+  name: example
+spec:
+  forProvider:
+    adbDomain: https://${azurerm_databricks_workspace.example.workspace_url}
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    description: ADB Linked Service via MSI
+    msiWorkSpaceResourceId: ${azurerm_databricks_workspace.example.id}
+    name: ADBLinkedServiceViaMSI
+    newClusterConfig:
+    - clusterVersion: 5.5.x-gpu-scala2.11
+      customTags:
+        custom_tag1: sct_value_1
+        custom_tag2: sct_value_2
+      driverNodeType: Standard_NC12
+      initScripts:
+      - init.sh
+      - init2.sh
+      logDestination: dbfs:/logs
+      maxNumberOfWorkers: 5
+      minNumberOfWorkers: 1
+      nodeType: Standard_NC12
+      sparkConfig:
+        config1: value1
+        config2: value2
+      sparkEnvironmentVariables:
+        envVar1: value1
+        envVar2: value2
+  providerConfigRef:
+    name: example

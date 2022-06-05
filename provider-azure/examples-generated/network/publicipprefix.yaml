@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: PublicIPPrefix
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: acceptanceTestPublicIpPrefix1
+    prefixLength: 31
+    resourceGroupNameRef:
+      name: example
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example

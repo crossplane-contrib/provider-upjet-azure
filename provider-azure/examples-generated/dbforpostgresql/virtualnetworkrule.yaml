@@ -1,0 +1,15 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: VirtualNetworkRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    ignoreMissingVnetServiceEndpoint: true
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

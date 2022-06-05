@@ -1,0 +1,15 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: LinkedServiceSFTP
+metadata:
+  name: example
+spec:
+  forProvider:
+    authenticationType: Basic
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    host: http://www.bing.com
+    name: example
+    password: bar
+    port: 22
+    username: foo
+  providerConfigRef:
+    name: example

@@ -1,0 +1,32 @@
+apiVersion: service.azure.upbound.io/v1alpha1
+kind: FabricManagedCluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    clientConnectionPort: 12345
+    httpGatewayPort: 4567
+    lbRule:
+    - backendPort: 38080
+      frontendPort: 80
+      probeProtocol: http
+      probeRequestPath: /test
+      protocol: tcp
+    location: West Europe
+    name: example
+    nodeType:
+    - applicationPortRange: 30000-49000
+      dataDiskSizeGb: 130
+      ephemeralPortRange: 10000-20000
+      name: test1
+      primary: true
+      vmImageOffer: WindowsServer
+      vmImagePublisher: MicrosoftWindowsServer
+      vmImageSku: 2019-Datacenter-with-Containers
+      vmImageVersion: latest
+      vmInstanceCount: 5
+      vmSize: Standard_DS1_v2
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

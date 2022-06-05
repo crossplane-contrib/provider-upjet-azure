@@ -1,0 +1,11 @@
+apiVersion: synapse.azure.upbound.io/v1alpha1
+kind: RoleAssignment
+metadata:
+  name: example
+spec:
+  forProvider:
+    principalId: ${data.azurerm_client_config.current.object_id}
+    roleName: Synapse SQL Administrator
+    synapseWorkspaceId: ${azurerm_synapse_workspace.example.id}
+  providerConfigRef:
+    name: example

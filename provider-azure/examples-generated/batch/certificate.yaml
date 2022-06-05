@@ -1,0 +1,16 @@
+apiVersion: batch.azure.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountName: testbatchaccount
+    certificate: ${filebase64("certificate.pfx")}
+    format: Pfx
+    password: terraform
+    resourceGroupNameRef:
+      name: example
+    thumbprint: 42C107874FD0E4A9583292A2F1098E8FE4B2EDDA
+    thumbprintAlgorithm: SHA1
+  providerConfigRef:
+    name: example

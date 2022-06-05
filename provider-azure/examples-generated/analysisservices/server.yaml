@@ -1,0 +1,22 @@
+apiVersion: analysisservices.azure.upbound.io/v1alpha1
+kind: Server
+metadata:
+  name: example
+spec:
+  forProvider:
+    adminUsers:
+    - myuser@domain.tld
+    enablePowerBiService: true
+    ipv4FirewallRule:
+    - name: myRule1
+      rangeEnd: 210.117.252.255
+      rangeStart: 210.117.252.0
+    location: West Europe
+    name: analysisservicesserver
+    resourceGroupNameRef:
+      name: example
+    sku: S0
+    tags:
+      abc: 123
+  providerConfigRef:
+    name: example

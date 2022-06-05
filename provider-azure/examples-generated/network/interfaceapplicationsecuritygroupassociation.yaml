@@ -1,0 +1,10 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: InterfaceApplicationSecurityGroupAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationSecurityGroupId: ${azurerm_application_security_group.example.id}
+    networkInterfaceId: ${azurerm_network_interface.example.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,14 @@
+apiVersion: devices.azure.upbound.io/v1alpha2
+kind: IOTHubDPSSharedAccessPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    enrollmentRead: true
+    enrollmentWrite: true
+    iotHubDpsNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,24 @@
+apiVersion: devtestlab.azure.upbound.io/v1alpha1
+kind: Schedule
+metadata:
+  name: example
+spec:
+  forProvider:
+    labName: example-devtestlab
+    location: West Europe
+    name: LabVmAutoStart
+    notificationSettings:
+    - {}
+    resourceGroupNameRef:
+      name: example
+    tags:
+      environment: Production
+    taskType: LabVmsStartupTask
+    timeZoneId: Pacific Standard Time
+    weeklyRecurrence:
+    - time: "1100"
+      weekDays:
+      - Monday
+      - Tuesday
+  providerConfigRef:
+    name: example

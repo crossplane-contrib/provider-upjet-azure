@@ -1,0 +1,13 @@
+apiVersion: eventhub.azure.upbound.io/v1alpha2
+kind: ConsumerGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    eventhubName: acceptanceTestEventHub
+    namespaceName: example-namespace
+    resourceGroupNameRef:
+      name: example
+    userMetadata: some-meta-data
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: authorization.azure.upbound.io/v1alpha1
+kind: ManagementLock
+metadata:
+  name: example
+spec:
+  forProvider:
+    lockLevel: CanNotDelete
+    name: subscription-level
+    notes: Items can't be deleted in this subscription!
+    scope: ${data.azurerm_subscription.current.id}
+  providerConfigRef:
+    name: example

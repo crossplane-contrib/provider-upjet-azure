@@ -1,0 +1,13 @@
+apiVersion: devices.azure.upbound.io/v1alpha2
+kind: IOTHubDPSCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificateContent: ${filebase64("example.cer")}
+    iotdpsNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

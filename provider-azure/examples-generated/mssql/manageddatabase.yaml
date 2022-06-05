@@ -1,0 +1,10 @@
+apiVersion: mssql.azure.upbound.io/v1alpha1
+kind: ManagedDatabase
+metadata:
+  name: example
+spec:
+  forProvider:
+    managedInstanceId: ${azurerm_mssql_managed_instance.example.id}
+    name: example
+  providerConfigRef:
+    name: example

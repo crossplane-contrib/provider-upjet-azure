@@ -1,0 +1,11 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+kind: SQLFunction
+metadata:
+  name: example
+spec:
+  forProvider:
+    body: function trigger(){}
+    containerIdRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: automation.azure.upbound.io/v1alpha1
+kind: VariableInt
+metadata:
+  name: example
+spec:
+  forProvider:
+    automationAccountName: example-account
+    name: tfex-example-var
+    resourceGroupNameRef:
+      name: example
+    value: 1234
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: eventhub.azure.upbound.io/v1alpha2
+kind: EventHub
+metadata:
+  name: example
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceName: example
+    partitionCount: 2
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

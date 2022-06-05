@@ -1,0 +1,11 @@
+apiVersion: monitor.azure.upbound.io/v1alpha1
+kind: PrivateLinkScope
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example-ampls
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

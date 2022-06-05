@@ -1,0 +1,15 @@
+apiVersion: netapp.azure.upbound.io/v1alpha1
+kind: Snapshot
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountName: example-netapp
+    location: West Europe
+    name: example-netappsnapshot
+    poolName: example-netapppool
+    resourceGroupNameRef:
+      name: example
+    volumeName: example-netappvolume
+  providerConfigRef:
+    name: example

@@ -1,0 +1,11 @@
+apiVersion: storage.azure.upbound.io/v1alpha1
+kind: AccountCustomerManagedKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    keyName: ${azurerm_key_vault_key.example.name}
+    keyVaultId: ${azurerm_key_vault.example.id}
+    storageAccountId: ${azurerm_storage_account.example.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,15 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha1
+kind: CassandraCluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    defaultAdminPassword: Password1234
+    delegatedManagementSubnetIdRef:
+      name: example
+    location: West Europe
+    name: example-cluster
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

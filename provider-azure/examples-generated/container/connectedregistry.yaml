@@ -1,0 +1,11 @@
+apiVersion: container.azure.upbound.io/v1alpha1
+kind: ConnectedRegistry
+metadata:
+  name: example
+spec:
+  forProvider:
+    containerRegistryId: ${azurerm_container_registry.example.id}
+    name: examplecr
+    syncTokenId: ${azurerm_container_registry_token.example.id}
+  providerConfigRef:
+    name: example

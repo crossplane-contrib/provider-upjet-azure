@@ -1,0 +1,10 @@
+apiVersion: web.azure.upbound.io/v1alpha1
+kind: SourceControlToken
+metadata:
+  name: example
+spec:
+  forProvider:
+    token: ghp_sometokenvaluesecretsauce
+    type: GitHub
+  providerConfigRef:
+    name: example

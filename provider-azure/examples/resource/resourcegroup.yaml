@@ -1,0 +1,11 @@
+apiVersion: azure.upbound.io/v1alpha2
+kind: ResourceGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: "East US"
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example

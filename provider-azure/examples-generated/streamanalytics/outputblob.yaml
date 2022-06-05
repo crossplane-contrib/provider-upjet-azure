@@ -1,0 +1,22 @@
+apiVersion: streamanalytics.azure.upbound.io/v1alpha1
+kind: OutputBlob
+metadata:
+  name: example
+spec:
+  forProvider:
+    dateFormat: yyyy-MM-dd
+    name: output-to-blob-storage
+    pathPattern: some-pattern
+    resourceGroupNameRef:
+      name: example
+    serialization:
+    - encoding: UTF8
+      fieldDelimiter: ','
+      type: Csv
+    storageAccountKey: ${azurerm_storage_account.example.primary_access_key}
+    storageAccountName: ${azurerm_storage_account.example.name}
+    storageContainerName: ${azurerm_storage_container.example.name}
+    streamAnalyticsJobName: ${data.azurerm_stream_analytics_job.example.name}
+    timeFormat: HH
+  providerConfigRef:
+    name: example

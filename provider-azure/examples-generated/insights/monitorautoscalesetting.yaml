@@ -1,0 +1,60 @@
+apiVersion: insights.azure.upbound.io/v1alpha1
+kind: MonitorAutoscaleSetting
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: myAutoscaleSetting
+    notification:
+    - email:
+      - customEmails:
+        - admin@contoso.com
+        sendToSubscriptionAdministrator: true
+        sendToSubscriptionCoAdministrator: true
+    profile:
+    - capacity:
+      - default: 1
+        maximum: 10
+        minimum: 1
+      name: defaultProfile
+      rule:
+      - metricTrigger:
+        - dimensions:
+          - name: AppName
+            operator: Equals
+            values:
+            - App1
+          metricName: Percentage CPU
+          metricNamespace: microsoft.compute/virtualmachinescalesets
+          metricResourceId: ${azurerm_virtual_machine_scale_set.example.id}
+          operator: GreaterThan
+          statistic: Average
+          threshold: 75
+          timeAggregation: Average
+          timeGrain: PT1M
+          timeWindow: PT5M
+        scaleAction:
+        - cooldown: PT1M
+          direction: Increase
+          type: ChangeCount
+          value: "1"
+      - metricTrigger:
+        - metricName: Percentage CPU
+          metricResourceId: ${azurerm_virtual_machine_scale_set.example.id}
+          operator: LessThan
+          statistic: Average
+          threshold: 25
+          timeAggregation: Average
+          timeGrain: PT1M
+          timeWindow: PT5M
+        scaleAction:
+        - cooldown: PT1M
+          direction: Decrease
+          type: ChangeCount
+          value: "1"
+    resourceGroupNameRef:
+      name: example
+    targetResourceId: ${azurerm_virtual_machine_scale_set.example.id}
+  providerConfigRef:
+    name: example

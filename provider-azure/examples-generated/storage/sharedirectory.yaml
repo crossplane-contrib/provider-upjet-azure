@@ -1,0 +1,11 @@
+apiVersion: storage.azure.upbound.io/v1alpha1
+kind: ShareDirectory
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    shareName: sharename
+    storageAccountName: ${azurerm_storage_account.example.name}
+  providerConfigRef:
+    name: example

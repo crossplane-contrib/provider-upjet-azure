@@ -1,0 +1,15 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: DataSetParquet
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    httpServerLocation:
+    - filename: fizz.txt
+      path: foo/bar/
+      relativeUrl: http://www.bing.com
+    linkedServiceName: example
+    name: example
+  providerConfigRef:
+    name: example

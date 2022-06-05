@@ -1,0 +1,15 @@
+apiVersion: customproviders.azure.upbound.io/v1alpha1
+kind: CustomProvider
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example_provider
+    resourceGroupNameRef:
+      name: example
+    resourceType:
+    - endpoint: https://testendpoint.com/
+      name: dEf1
+  providerConfigRef:
+    name: example

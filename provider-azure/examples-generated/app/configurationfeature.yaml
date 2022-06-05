@@ -1,0 +1,13 @@
+apiVersion: app.azure.upbound.io/v1alpha1
+kind: ConfigurationFeature
+metadata:
+  name: example
+spec:
+  forProvider:
+    configurationStoreId: ${azurerm_app_configuration.appconf.id}
+    description: test description
+    enabled: true
+    label: acctest-ackeylabel-%d
+    name: acctest-ackey-%d
+  providerConfigRef:
+    name: example

@@ -1,0 +1,20 @@
+apiVersion: mssql.azure.upbound.io/v1alpha1
+kind: ManagedInstance
+metadata:
+  name: example
+spec:
+  forProvider:
+    administratorLogin: mradministrator
+    administratorLoginPassword: thisIsDog11
+    licenseType: BasePrice
+    location: West Europe
+    name: managedsqlinstance
+    resourceGroupNameRef:
+      name: example
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdRef:
+      name: example
+    vcores: 4
+  providerConfigRef:
+    name: example

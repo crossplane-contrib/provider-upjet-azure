@@ -1,0 +1,18 @@
+apiVersion: devtestlab.azure.upbound.io/v1alpha1
+kind: Policy
+metadata:
+  name: example
+spec:
+  forProvider:
+    evaluatorType: MaxValuePolicy
+    factData: ""
+    labName: example-devtestlab
+    name: LabVmCount
+    policySetName: default
+    resourceGroupNameRef:
+      name: example
+    tags:
+      Acceptance: Test
+    threshold: "999"
+  providerConfigRef:
+    name: example

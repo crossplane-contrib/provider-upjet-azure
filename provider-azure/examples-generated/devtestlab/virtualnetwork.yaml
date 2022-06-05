@@ -1,0 +1,15 @@
+apiVersion: devtestlab.azure.upbound.io/v1alpha1
+kind: VirtualNetwork
+metadata:
+  name: example
+spec:
+  forProvider:
+    labName: example-devtestlab
+    name: example-network
+    resourceGroupNameRef:
+      name: example
+    subnet:
+    - useInVirtualMachineCreation: Allow
+      usePublicIpAddress: Allow
+  providerConfigRef:
+    name: example

@@ -1,0 +1,18 @@
+apiVersion: cache.azure.upbound.io/v1alpha2
+kind: RedisCache
+metadata:
+  name: example
+spec:
+  forProvider:
+    capacity: 2
+    enableNonSslPort: false
+    family: C
+    location: West Europe
+    minimumTlsVersion: "1.2"
+    redisConfiguration:
+    - {}
+    resourceGroupNameRef:
+      name: example
+    skuName: Standard
+  providerConfigRef:
+    name: example

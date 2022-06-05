@@ -1,0 +1,17 @@
+apiVersion: eventhub.azure.upbound.io/v1alpha2
+kind: AuthorizationRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    eventHubNameRef:
+      name: example
+    listen: true
+    manage: false
+    namespaceNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+    send: false
+  providerConfigRef:
+    name: example

@@ -1,0 +1,15 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: Logger
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: example-apim
+    applicationInsights:
+    - instrumentationKey: ${azurerm_application_insights.example.instrumentation_key}
+    name: example-logger
+    resourceGroupNameRef:
+      name: example
+    resourceId: ${azurerm_application_insights.example.id}
+  providerConfigRef:
+    name: example

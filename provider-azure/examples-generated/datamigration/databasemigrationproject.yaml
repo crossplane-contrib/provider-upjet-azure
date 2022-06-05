@@ -1,0 +1,15 @@
+apiVersion: datamigration.azure.upbound.io/v1alpha1
+kind: DatabaseMigrationProject
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-dbms-project
+    resourceGroupNameRef:
+      name: example
+    serviceName: example-dms
+    sourcePlatform: SQL
+    targetPlatform: SQLDB
+  providerConfigRef:
+    name: example

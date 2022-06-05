@@ -1,0 +1,13 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: example-apim
+    data: ${filebase64("example.pfx")}
+    name: example-cert
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

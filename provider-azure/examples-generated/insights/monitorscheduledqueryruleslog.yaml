@@ -1,0 +1,22 @@
+apiVersion: insights.azure.upbound.io/v1alpha1
+kind: MonitorScheduledQueryRulesLog
+metadata:
+  name: example
+spec:
+  forProvider:
+    criteria:
+    - dimension:
+      - name: Computer
+        operator: Include
+        values:
+        - targetVM
+      metricName: Average_% Idle Time
+    dataSourceId: ${azurerm_log_analytics_workspace.example.id}
+    description: Scheduled query rule LogToMetric example
+    enabled: true
+    location: West Europe
+    name: ${format("%s-queryrule", var.prefix)}
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: synapse.azure.upbound.io/v1alpha1
+kind: SQLPoolExtendedAuditingPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    retentionInDays: 6
+    sqlPoolId: ${azurerm_synapse_sql_pool.example.id}
+    storageAccountAccessKey: ${azurerm_storage_account.audit_logs.primary_access_key}
+    storageAccountAccessKeyIsSecondary: false
+    storageEndpoint: ${azurerm_storage_account.audit_logs.primary_blob_endpoint}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,24 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: EmailTemplate
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: example-apim
+    body: |
+      <!DOCTYPE html >
+      <html>
+      <head>
+        <meta charset="UTF-8" />
+        <title>Customized Letter Title</title>
+      </head>
+      <body>
+        <p style="font-size:12pt;font-family:'Segoe UI'">Dear $DevFirstName $DevLastName,</p>
+      </body>
+      </html>
+    resourceGroupNameRef:
+      name: example
+    subject: Customized confirmation email for your new $OrganizationName API account
+    templateName: ConfirmSignUpIdentityDefault
+  providerConfigRef:
+    name: example

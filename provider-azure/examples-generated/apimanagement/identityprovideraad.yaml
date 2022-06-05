@@ -1,0 +1,15 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: IdentityProviderAAD
+metadata:
+  name: example
+spec:
+  forProvider:
+    allowedTenants:
+    - 00000000-0000-0000-0000-000000000000
+    apiManagementName: example-apim
+    clientId: 00000000-0000-0000-0000-000000000000
+    clientSecret: "00000000000000000000000000000000"
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

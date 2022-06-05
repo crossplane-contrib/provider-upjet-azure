@@ -1,0 +1,14 @@
+apiVersion: appplatform.azure.upbound.io/v1alpha1
+kind: SpringCloudApp
+metadata:
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    name: example-springcloudapp
+    resourceGroupNameRef:
+      name: example
+    serviceName: example-springcloud
+  providerConfigRef:
+    name: example

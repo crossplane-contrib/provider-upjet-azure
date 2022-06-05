@@ -1,0 +1,30 @@
+apiVersion: aad.azure.upbound.io/v1alpha1
+kind: ActiveDirectoryDomainService
+metadata:
+  name: example
+spec:
+  forProvider:
+    domainName: widgetslogin.net
+    filteredSyncEnabled: false
+    initialReplicaSet:
+    - subnetIdRef:
+        name: example
+    location: West Europe
+    name: example-aadds
+    notifications:
+    - additionalRecipients:
+      - notifyA@example.net
+      - notifyB@example.org
+      notifyDcAdmins: true
+      notifyGlobalAdmins: true
+    resourceGroupNameRef:
+      name: example
+    security:
+    - syncKerberosPasswords: true
+      syncNtlmPasswords: true
+      syncOnPremPasswords: true
+    sku: Enterprise
+    tags:
+      Environment: prod
+  providerConfigRef:
+    name: example

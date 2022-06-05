@@ -1,0 +1,17 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha1
+kind: CassandraDatacenter
+metadata:
+  name: example
+spec:
+  forProvider:
+    availabilityZonesEnabled: false
+    cassandraClusterId: ${azurerm_cosmosdb_cassandra_cluster.example.id}
+    delegatedManagementSubnetIdRef:
+      name: example
+    diskCount: 4
+    location: West Europe
+    name: example-datacenter
+    nodeCount: 3
+    skuName: Standard_DS14_v2
+  providerConfigRef:
+    name: example

@@ -1,0 +1,23 @@
+apiVersion: sql.azure.upbound.io/v1alpha1
+kind: MSSQLElasticPool
+metadata:
+  name: example
+spec:
+  forProvider:
+    licenseType: LicenseIncluded
+    location: West Europe
+    maxSizeGb: 756
+    name: test-epool
+    perDatabaseSettings:
+    - maxCapacity: 4
+      minCapacity: 0.25
+    resourceGroupNameRef:
+      name: example
+    serverName: ${azurerm_sql_server.example.name}
+    sku:
+    - capacity: 4
+      family: Gen4
+      name: BasicPool
+      tier: Basic
+  providerConfigRef:
+    name: example

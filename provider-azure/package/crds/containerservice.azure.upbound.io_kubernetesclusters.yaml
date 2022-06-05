@@ -1,0 +1,1001 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: kubernetesclusters.containerservice.azure.upbound.io
+spec:
+  group: containerservice.azure.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - azure
+    kind: KubernetesCluster
+    listKind: KubernetesClusterList
+    plural: kubernetesclusters
+    singular: kubernetescluster
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha2
+    schema:
+      openAPIV3Schema:
+        description: KubernetesCluster is the Schema for the KubernetesClusters API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: KubernetesClusterSpec defines the desired state of KubernetesCluster
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  aciConnectorLinux:
+                    items:
+                      properties:
+                        subnetName:
+                          type: string
+                        subnetNameRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        subnetNameSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
+                      type: object
+                    type: array
+                  apiServerAuthorizedIpRanges:
+                    items:
+                      type: string
+                    type: array
+                  autoScalerProfile:
+                    items:
+                      properties:
+                        balanceSimilarNodeGroups:
+                          type: boolean
+                        emptyBulkDeleteMax:
+                          type: string
+                        expander:
+                          type: string
+                        maxGracefulTerminationSec:
+                          type: string
+                        maxNodeProvisioningTime:
+                          type: string
+                        maxUnreadyNodes:
+                          type: number
+                        maxUnreadyPercentage:
+                          type: number
+                        newPodScaleUpDelay:
+                          type: string
+                        scaleDownDelayAfterAdd:
+                          type: string
+                        scaleDownDelayAfterDelete:
+                          type: string
+                        scaleDownDelayAfterFailure:
+                          type: string
+                        scaleDownUnneeded:
+                          type: string
+                        scaleDownUnready:
+                          type: string
+                        scaleDownUtilizationThreshold:
+                          type: string
+                        scanInterval:
+                          type: string
+                        skipNodesWithLocalStorage:
+                          type: boolean
+                        skipNodesWithSystemPods:
+                          type: boolean
+                      type: object
+                    type: array
+                  automaticChannelUpgrade:
+                    type: string
+                  azureActiveDirectoryRoleBasedAccessControl:
+                    items:
+                      properties:
+                        adminGroupObjectIds:
+                          items:
+                            type: string
+                          type: array
+                        azureRbacEnabled:
+                          type: boolean
+                        clientAppId:
+                          type: string
+                        managed:
+                          type: boolean
+                        serverAppId:
+                          type: string
+                        serverAppSecretSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        tenantId:
+                          type: string
+                      type: object
+                    type: array
+                  azurePolicyEnabled:
+                    type: boolean
+                  defaultNodePool:
+                    items:
+                      properties:
+                        enableAutoScaling:
+                          type: boolean
+                        enableHostEncryption:
+                          type: boolean
+                        enableNodePublicIp:
+                          type: boolean
+                        fipsEnabled:
+                          type: boolean
+                        kubeletConfig:
+                          items:
+                            properties:
+                              allowedUnsafeSysctls:
+                                items:
+                                  type: string
+                                type: array
+                              containerLogMaxLine:
+                                type: number
+                              containerLogMaxSizeMb:
+                                type: number
+                              cpuCfsQuotaEnabled:
+                                type: boolean
+                              cpuCfsQuotaPeriod:
+                                type: string
+                              cpuManagerPolicy:
+                                type: string
+                              imageGcHighThreshold:
+                                type: number
+                              imageGcLowThreshold:
+                                type: number
+                              podMaxPid:
+                                type: number
+                              topologyManagerPolicy:
+                                type: string
+                            type: object
+                          type: array
+                        kubeletDiskType:
+                          type: string
+                        linuxOsConfig:
+                          items:
+                            properties:
+                              swapFileSizeMb:
+                                type: number
+                              sysctlConfig:
+                                items:
+                                  properties:
+                                    fsAioMaxNr:
+                                      type: number
+                                    fsFileMax:
+                                      type: number
+                                    fsInotifyMaxUserWatches:
+                                      type: number
+                                    fsNrOpen:
+                                      type: number
+                                    kernelThreadsMax:
+                                      type: number
+                                    netCoreNetdevMaxBacklog:
+                                      type: number
+                                    netCoreOptmemMax:
+                                      type: number
+                                    netCoreRmemDefault:
+                                      type: number
+                                    netCoreRmemMax:
+                                      type: number
+                                    netCoreSomaxconn:
+                                      type: number
+                                    netCoreWmemDefault:
+                                      type: number
+                                    netCoreWmemMax:
+                                      type: number
+                                    netIpv4IpLocalPortRangeMax:
+                                      type: number
+                                    netIpv4IpLocalPortRangeMin:
+                                      type: number
+                                    netIpv4NeighDefaultGcThresh1:
+                                      type: number
+                                    netIpv4NeighDefaultGcThresh2:
+                                      type: number
+                                    netIpv4NeighDefaultGcThresh3:
+                                      type: number
+                                    netIpv4TcpFinTimeout:
+                                      type: number
+                                    netIpv4TcpKeepaliveIntvl:
+                                      type: number
+                                    netIpv4TcpKeepaliveProbes:
+                                      type: number
+                                    netIpv4TcpKeepaliveTime:
+                                      type: number
+                                    netIpv4TcpMaxSynBacklog:
+                                      type: number
+                                    netIpv4TcpMaxTwBuckets:
+                                      type: number
+                                    netIpv4TcpTwReuse:
+                                      type: boolean
+                                    netNetfilterNfConntrackBuckets:
+                                      type: number
+                                    netNetfilterNfConntrackMax:
+                                      type: number
+                                    vmMaxMapCount:
+                                      type: number
+                                    vmSwappiness:
+                                      type: number
+                                    vmVfsCachePressure:
+                                      type: number
+                                  type: object
+                                type: array
+                              transparentHugePageDefrag:
+                                type: string
+                              transparentHugePageEnabled:
+                                type: string
+                            type: object
+                          type: array
+                        maxCount:
+                          type: number
+                        maxPods:
+                          type: number
+                        minCount:
+                          type: number
+                        name:
+                          type: string
+                        nodeCount:
+                          type: number
+                        nodeLabels:
+                          additionalProperties:
+                            type: string
+                          type: object
+                        nodePublicIpPrefixId:
+                          type: string
+                        nodeTaints:
+                          items:
+                            type: string
+                          type: array
+                        onlyCriticalAddonsEnabled:
+                          type: boolean
+                        orchestratorVersion:
+                          type: string
+                        osDiskSizeGb:
+                          type: number
+                        osDiskType:
+                          type: string
+                        osSku:
+                          type: string
+                        podSubnetId:
+                          type: string
+                        podSubnetIdRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        podSubnetIdSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
+                        proximityPlacementGroupId:
+                          type: string
+                        tags:
+                          additionalProperties:
+                            type: string
+                          type: object
+                        type:
+                          type: string
+                        ultraSsdEnabled:
+                          type: boolean
+                        upgradeSettings:
+                          items:
+                            properties:
+                              maxSurge:
+                                type: string
+                            required:
+                            - maxSurge
+                            type: object
+                          type: array
+                        vmSize:
+                          type: string
+                        vnetSubnetId:
+                          type: string
+                        vnetSubnetIdRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        vnetSubnetIdSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
+                        zones:
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - name
+                      - vmSize
+                      type: object
+                    type: array
+                  diskEncryptionSetId:
+                    type: string
+                  dnsPrefix:
+                    type: string
+                  dnsPrefixPrivateCluster:
+                    type: string
+                  enablePodSecurityPolicy:
+                    type: boolean
+                  httpApplicationRoutingEnabled:
+                    type: boolean
+                  httpProxyConfig:
+                    items:
+                      properties:
+                        httpProxy:
+                          type: string
+                        httpsProxy:
+                          type: string
+                        noProxy:
+                          items:
+                            type: string
+                          type: array
+                        trustedCaSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      type: object
+                    type: array
+                  identity:
+                    items:
+                      properties:
+                        identityIds:
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          type: string
+                      required:
+                      - type
+                      type: object
+                    type: array
+                  ingressApplicationGateway:
+                    items:
+                      properties:
+                        gatewayId:
+                          type: string
+                        gatewayName:
+                          type: string
+                        subnetCidr:
+                          type: string
+                        subnetId:
+                          type: string
+                        subnetIdRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        subnetIdSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
+                      type: object
+                    type: array
+                  keyVaultSecretsProvider:
+                    items:
+                      properties:
+                        secretRotationEnabled:
+                          type: boolean
+                        secretRotationInterval:
+                          type: string
+                      type: object
+                    type: array
+                  kubeletIdentity:
+                    items:
+                      properties:
+                        clientId:
+                          type: string
+                        objectId:
+                          type: string
+                        userAssignedIdentityId:
+                          type: string
+                      type: object
+                    type: array
+                  kubernetesVersion:
+                    type: string
+                  linuxProfile:
+                    items:
+                      properties:
+                        adminUsername:
+                          type: string
+                        sshKey:
+                          items:
+                            properties:
+                              keyData:
+                                type: string
+                            required:
+                            - keyData
+                            type: object
+                          type: array
+                      required:
+                      - adminUsername
+                      - sshKey
+                      type: object
+                    type: array
+                  localAccountDisabled:
+                    type: boolean
+                  location:
+                    type: string
+                  maintenanceWindow:
+                    items:
+                      properties:
+                        allowed:
+                          items:
+                            properties:
+                              day:
+                                type: string
+                              hours:
+                                items:
+                                  type: number
+                                type: array
+                            required:
+                            - day
+                            - hours
+                            type: object
+                          type: array
+                        notAllowed:
+                          items:
+                            properties:
+                              end:
+                                type: string
+                              start:
+                                type: string
+                            required:
+                            - end
+                            - start
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  microsoftDefender:
+                    items:
+                      properties:
+                        logAnalyticsWorkspaceId:
+                          type: string
+                      required:
+                      - logAnalyticsWorkspaceId
+                      type: object
+                    type: array
+                  networkProfile:
+                    items:
+                      properties:
+                        dnsServiceIp:
+                          type: string
+                        dockerBridgeCidr:
+                          type: string
+                        ipVersions:
+                          items:
+                            type: string
+                          type: array
+                        loadBalancerProfile:
+                          items:
+                            properties:
+                              idleTimeoutInMinutes:
+                                type: number
+                              managedOutboundIpCount:
+                                type: number
+                              outboundIpAddressIds:
+                                items:
+                                  type: string
+                                type: array
+                              outboundIpPrefixIds:
+                                items:
+                                  type: string
+                                type: array
+                              outboundPortsAllocated:
+                                type: number
+                            type: object
+                          type: array
+                        loadBalancerSku:
+                          type: string
+                        natGatewayProfile:
+                          items:
+                            properties:
+                              idleTimeoutInMinutes:
+                                type: number
+                              managedOutboundIpCount:
+                                type: number
+                            type: object
+                          type: array
+                        networkMode:
+                          type: string
+                        networkPlugin:
+                          type: string
+                        networkPolicy:
+                          type: string
+                        outboundType:
+                          type: string
+                        podCidr:
+                          type: string
+                        serviceCidr:
+                          type: string
+                      required:
+                      - networkPlugin
+                      type: object
+                    type: array
+                  nodeResourceGroup:
+                    type: string
+                  oidcIssuerEnabled:
+                    type: boolean
+                  omsAgent:
+                    items:
+                      properties:
+                        logAnalyticsWorkspaceId:
+                          type: string
+                      required:
+                      - logAnalyticsWorkspaceId
+                      type: object
+                    type: array
+                  openServiceMeshEnabled:
+                    type: boolean
+                  privateClusterEnabled:
+                    type: boolean
+                  privateClusterPublicFqdnEnabled:
+                    type: boolean
+                  privateDnsZoneId:
+                    type: string
+                  publicNetworkAccessEnabled:
+                    type: boolean
+                  resourceGroupName:
+                    type: string
+                  resourceGroupNameRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  roleBasedAccessControlEnabled:
+                    type: boolean
+                  runCommandEnabled:
+                    type: boolean
+                  servicePrincipal:
+                    items:
+                      properties:
+                        clientId:
+                          type: string
+                        clientSecretSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - clientId
+                      - clientSecretSecretRef
+                      type: object
+                    type: array
+                  skuTier:
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  windowsProfile:
+                    items:
+                      properties:
+                        adminPasswordSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        adminUsername:
+                          type: string
+                        license:
+                          type: string
+                      required:
+                      - adminUsername
+                      type: object
+                    type: array
+                required:
+                - defaultNodePool
+                - location
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: KubernetesClusterStatus defines the observed state of KubernetesCluster.
+            properties:
+              atProvider:
+                properties:
+                  fqdn:
+                    type: string
+                  httpApplicationRoutingZoneName:
+                    type: string
+                  id:
+                    type: string
+                  identity:
+                    items:
+                      properties:
+                        principalId:
+                          type: string
+                        tenantId:
+                          type: string
+                      type: object
+                    type: array
+                  ingressApplicationGateway:
+                    items:
+                      properties:
+                        effectiveGatewayId:
+                          type: string
+                        ingressApplicationGatewayIdentity:
+                          items:
+                            properties:
+                              clientId:
+                                type: string
+                              objectId:
+                                type: string
+                              userAssignedIdentityId:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  keyVaultSecretsProvider:
+                    items:
+                      properties:
+                        secretIdentity:
+                          items:
+                            properties:
+                              clientId:
+                                type: string
+                              objectId:
+                                type: string
+                              userAssignedIdentityId:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  networkProfile:
+                    items:
+                      properties:
+                        loadBalancerProfile:
+                          items:
+                            properties:
+                              effectiveOutboundIps:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        natGatewayProfile:
+                          items:
+                            properties:
+                              effectiveOutboundIps:
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  oidcIssuerUrl:
+                    type: string
+                  omsAgent:
+                    items:
+                      properties:
+                        omsAgentIdentity:
+                          items:
+                            properties:
+                              clientId:
+                                type: string
+                              objectId:
+                                type: string
+                              userAssignedIdentityId:
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  portalFqdn:
+                    type: string
+                  privateFqdn:
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

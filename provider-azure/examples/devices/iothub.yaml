@@ -1,0 +1,46 @@
+apiVersion: devices.azure.upbound.io/v1alpha2
+kind: IOTHub
+metadata:
+  name: example-iothub
+spec:
+  forProvider:
+    location: "East US"
+    resourceGroupNameRef:
+      name: example
+    sku:
+    - name: "S1"
+      capacity: 1
+    endpoint:
+    - type: "AzureIotHub.StorageContainer"
+      connectionStringSecretRef:
+        name: example-storage-account
+        namespace: crossplane-system
+        key: attribute.primary_blob_connection_string
+      name: "export"
+      resourceGroupNameRef:
+        name: example
+      batchFrequencyInSeconds: 60
+      maxChunkSizeInBytes: 10485760
+      containerNameRef:
+        name: example-content
+      encoding: "Avro"
+      fileNameFormat: "{iothub}/{partition}_{YYYY}_{MM}_{DD}_{HH}_{mm}"
+    route:
+    - name: "export"
+      source: "DeviceMessages"
+      condition: "true"
+      endpointNames:
+      - "export"
+      enabled: true
+    enrichment:
+    - key: "tenant"
+      value: "$twin.tags.Tenant"
+      endpointNames:
+      - "export"
+    tags:
+      purpose: example
+  providerConfigRef:
+    name: example
+  writeConnectionSecretToRef:
+    name: example-iothub
+    namespace: crossplane-system

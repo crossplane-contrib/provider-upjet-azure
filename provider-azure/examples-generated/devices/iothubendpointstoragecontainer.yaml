@@ -1,0 +1,18 @@
+apiVersion: devices.azure.upbound.io/v1alpha2
+kind: IOTHubEndpointStorageContainer
+metadata:
+  name: example
+spec:
+  forProvider:
+    batchFrequencyInSeconds: 60
+    connectionString: ${azurerm_storage_account.example.primary_blob_connection_string}
+    containerNameRef:
+      name: example
+    encoding: JSON
+    fileNameFormat: '{iothub}/{partition}_{YYYY}_{MM}_{DD}_{HH}_{mm}'
+    iothubId: ${azurerm_iothub.example.id}
+    maxChunkSizeInBytes: 10485760
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

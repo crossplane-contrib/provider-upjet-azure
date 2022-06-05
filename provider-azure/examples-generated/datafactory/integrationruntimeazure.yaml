@@ -1,0 +1,11 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: IntegrationRuntimeAzure
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    location: West Europe
+    name: example
+  providerConfigRef:
+    name: example

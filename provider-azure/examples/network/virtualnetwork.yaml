@@ -1,0 +1,16 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: VirtualNetwork
+metadata:
+  name: example-vn
+spec:
+  forProvider:
+    location: "East US"
+    resourceGroupNameRef:
+      name: example
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+  providerConfigRef:
+    name: example

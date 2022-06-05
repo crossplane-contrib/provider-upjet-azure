@@ -1,0 +1,13 @@
+apiVersion: appplatform.azure.upbound.io/v1alpha1
+kind: SpringCloudCertificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    keyVaultCertificateId: ${azurerm_key_vault_certificate.example.id}
+    name: example-scc
+    resourceGroupNameRef:
+      name: example
+    serviceName: example-springcloud
+  providerConfigRef:
+    name: example

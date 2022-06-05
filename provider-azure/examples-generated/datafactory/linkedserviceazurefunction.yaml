@@ -1,0 +1,12 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: LinkedServiceAzureFunction
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    key: foo
+    name: example
+    url: https://${data.azurerm_function_app.example.default_hostname}
+  providerConfigRef:
+    name: example

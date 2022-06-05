@@ -1,0 +1,13 @@
+apiVersion: devices.azure.upbound.io/v1alpha2
+kind: IOTHubConsumerGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    eventhubEndpointName: events
+    iotHubNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,22 @@
+apiVersion: spring.azure.upbound.io/v1alpha1
+kind: CloudContainerDeployment
+metadata:
+  name: example
+spec:
+  forProvider:
+    arguments:
+    - -c
+    - echo hello
+    commands:
+    - /bin/sh
+    environmentVariables:
+      Env: Staging
+      Foo: Bar
+    image: springio/gs-spring-boot-docker
+    instanceCount: 2
+    languageFramework: springboot
+    name: example
+    server: docker.io
+    springCloudAppId: ${azurerm_spring_cloud_app.example.id}
+  providerConfigRef:
+    name: example

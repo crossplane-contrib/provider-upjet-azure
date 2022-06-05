@@ -1,0 +1,24 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: VirtualNetwork
+metadata:
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    dnsServers:
+    - 10.0.0.4
+    - 10.0.0.5
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    subnet:
+    - addressPrefix: 10.0.1.0/24
+      name: subnet1
+    - addressPrefix: 10.0.2.0/24
+      name: subnet2
+      securityGroup: ${azurerm_network_security_group.example.id}
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example

@@ -1,0 +1,40 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: ConnectionMonitor
+metadata:
+  name: example
+spec:
+  forProvider:
+    endpoint:
+    - filter:
+      - item:
+        - address: ${azurerm_virtual_machine.example.id}
+          type: AgentAddress
+        type: Include
+      name: source
+      targetResourceId: ${azurerm_virtual_machine.example.id}
+    - address: terraform.io
+      name: destination
+    location: West Europe
+    name: example-Monitor
+    network_watcher_name: production-nwwatcher
+    notes: examplenote
+    outputWorkspaceResourceIds:
+    - ${azurerm_log_analytics_workspace.example.id}
+    resource_group_name: ${azurerm_resource_group.example.name}
+    testConfiguration:
+    - name: tcpName
+      protocol: Tcp
+      tcpConfiguration:
+      - port: 80
+      testFrequencyInSeconds: 60
+    testGroup:
+    - destinationEndpoints:
+      - destination
+      disable: false
+      name: exampletg
+      sourceEndpoints:
+      - source
+      testConfigurationNames:
+      - tcpName
+  providerConfigRef:
+    name: example

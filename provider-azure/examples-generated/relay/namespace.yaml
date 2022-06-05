@@ -1,0 +1,15 @@
+apiVersion: relay.azure.upbound.io/v1alpha1
+kind: Namespace
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-relay
+    resourceGroupNameRef:
+      name: example
+    skuName: Standard
+    tags:
+      source: terraform
+  providerConfigRef:
+    name: example

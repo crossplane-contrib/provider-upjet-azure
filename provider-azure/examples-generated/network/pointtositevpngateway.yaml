@@ -1,0 +1,20 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: PointToSiteVPNGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    connectionConfiguration:
+    - name: example-gateway-config
+      vpnClientAddressPool:
+      - addressPrefixes:
+        - 10.0.2.0/24
+    location: West Europe
+    name: example-vpn-gateway
+    resourceGroupNameRef:
+      name: example
+    scaleUnit: 1
+    virtualHubId: ${azurerm_virtual_hub.example.id}
+    vpnServerConfigurationId: ${azurerm_vpn_server_configuration.example.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: appplatform.azure.upbound.io/v1alpha1
+kind: SpringCloudAppCosmosDBAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiType: table
+    cosmosdbAccessKey: ${azurerm_cosmosdb_account.example.primary_key}
+    cosmosdbAccountId: ${azurerm_cosmosdb_account.example.id}
+    name: example-bind
+    springCloudAppId: ${azurerm_spring_cloud_app.example.id}
+  providerConfigRef:
+    name: example

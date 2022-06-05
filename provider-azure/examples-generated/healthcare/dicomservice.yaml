@@ -1,0 +1,15 @@
+apiVersion: healthcare.azure.upbound.io/v1alpha1
+kind: DICOMService
+metadata:
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: east us
+    name: tfexDicom
+    tags:
+      environment: None
+    workspaceId: ${azurerm_healthcare_workspace.test.id}
+  providerConfigRef:
+    name: example

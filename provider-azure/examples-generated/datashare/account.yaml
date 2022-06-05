@@ -1,0 +1,16 @@
+apiVersion: datashare.azure.upbound.io/v1alpha1
+kind: Account
+metadata:
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    name: example-dsa
+    resourceGroupNameRef:
+      name: example
+    tags:
+      foo: bar
+  providerConfigRef:
+    name: example

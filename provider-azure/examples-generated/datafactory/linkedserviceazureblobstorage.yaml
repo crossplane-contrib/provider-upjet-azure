@@ -1,0 +1,11 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: LinkedServiceAzureBlobStorage
+metadata:
+  name: example
+spec:
+  forProvider:
+    connectionString: ${data.azurerm_storage_account.example.primary_connection_string}
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    name: example
+  providerConfigRef:
+    name: example

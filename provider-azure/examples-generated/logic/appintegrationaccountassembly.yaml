@@ -1,0 +1,14 @@
+apiVersion: logic.azure.upbound.io/v1alpha1
+kind: AppIntegrationAccountAssembly
+metadata:
+  name: example
+spec:
+  forProvider:
+    assemblyName: TestAssembly
+    content: ${filebase64("testdata/log4net.dll")}
+    integrationAccountName: example-ia
+    name: example-assembly
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

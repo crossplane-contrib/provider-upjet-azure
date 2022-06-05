@@ -1,0 +1,14 @@
+apiVersion: storagesync.azure.upbound.io/v1alpha1
+kind: StorageSync
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-storage-sync
+    resourceGroupNameRef:
+      name: example
+    tags:
+      foo: bar
+  providerConfigRef:
+    name: example

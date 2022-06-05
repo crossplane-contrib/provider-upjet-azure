@@ -1,0 +1,10 @@
+apiVersion: securityinsights.azure.upbound.io/v1alpha1
+kind: SentinelDataConnectorAzureAdvancedThreatProtection
+metadata:
+  name: example
+spec:
+  forProvider:
+    logAnalyticsWorkspaceId: ${azurerm_log_analytics_solution.example.workspace_resource_id}
+    name: example
+  providerConfigRef:
+    name: example

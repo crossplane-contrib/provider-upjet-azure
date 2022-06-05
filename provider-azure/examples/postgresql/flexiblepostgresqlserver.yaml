@@ -1,0 +1,19 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: FlexibleServer
+metadata:
+  name: example-flexible-psqlserver
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+    location: "East US"
+    version: "12"
+    administratorLogin: "psqladminun"
+    administratorPasswordSecretRef:
+      name: psql-password
+      namespace: crossplane-system
+      key: password
+    storageMb: 32768
+    skuName: "GP_Standard_D4s_v3"
+  providerConfigRef:
+    name: example

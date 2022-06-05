@@ -1,0 +1,12 @@
+apiVersion: windows.azure.upbound.io/v1alpha1
+kind: WebAppSlot
+metadata:
+  name: example
+spec:
+  forProvider:
+    appServiceId: ${azurerm_windows_web_app.example.id}
+    name: example-slot
+    siteConfig:
+    - {}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,13 @@
+apiVersion: dbformariadb.azure.upbound.io/v1alpha2
+kind: Database
+metadata:
+  name: examplemariadbdatabase
+spec:
+  forProvider:
+    charset: utf8
+    collation: utf8_general_ci
+    resourceGroupNameRef:
+      name: example
+    serverName: example-mariadb-server
+  providerConfigRef:
+    name: default

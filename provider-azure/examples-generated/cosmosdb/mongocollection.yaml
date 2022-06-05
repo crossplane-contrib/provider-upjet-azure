@@ -1,0 +1,21 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+kind: MongoCollection
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example
+    databaseNameRef:
+      name: example
+    defaultTtlSeconds: "777"
+    index:
+    - keys:
+      - _id
+      unique: true
+    resourceGroupNameRef:
+      name: example
+    shardKey: uniqueKey
+    throughput: 400
+  providerConfigRef:
+    name: example

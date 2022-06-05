@@ -1,0 +1,10 @@
+apiVersion: batch.azure.upbound.io/v1alpha1
+kind: Job
+metadata:
+  name: example
+spec:
+  forProvider:
+    batchPoolId: ${azurerm_batch_pool.example.id}
+    name: examplejob
+  providerConfigRef:
+    name: example

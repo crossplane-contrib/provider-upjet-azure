@@ -1,0 +1,19 @@
+apiVersion: kusto.azure.upbound.io/v1alpha1
+kind: EventHubDataConnection
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterName: kustocluster
+    consumerGroup: ${azurerm_eventhub_consumer_group.consumer_group.name}
+    dataFormat: JSON
+    databaseName: my-kusto-database
+    eventhubId: ${azurerm_eventhub.eventhub.id}
+    location: West Europe
+    mappingRuleName: my-table-mapping
+    name: my-kusto-eventhub-data-connection
+    resourceGroupNameRef:
+      name: example
+    tableName: my-table
+  providerConfigRef:
+    name: example

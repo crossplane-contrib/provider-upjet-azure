@@ -1,0 +1,14 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: PublicIP
+metadata:
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: default

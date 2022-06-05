@@ -1,0 +1,11 @@
+apiVersion: insights.azure.upbound.io/v1alpha1
+kind: ApplicationInsightsSmartDetectionRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationInsightsId: ${azurerm_application_insights.example.id}
+    enabled: false
+    name: Slow server response time
+  providerConfigRef:
+    name: example

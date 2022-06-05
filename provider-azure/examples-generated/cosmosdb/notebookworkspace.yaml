@@ -1,0 +1,12 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+kind: NotebookWorkspace
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

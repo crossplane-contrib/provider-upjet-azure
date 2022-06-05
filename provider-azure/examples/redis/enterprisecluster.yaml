@@ -1,0 +1,15 @@
+apiVersion: cache.azure.upbound.io/v1alpha2
+kind: RedisEnterpriseCluster
+metadata:
+  name: example-redis-enterprise-cluster
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+    location: "East US"
+    skuName: "EnterpriseFlash_F300-3"
+  writeConnectionSecretToRef:
+    name: conn-example-redis-enterprise-cluster
+    namespace: crossplane-system
+  providerConfigRef:
+    name: example

@@ -1,0 +1,15 @@
+apiVersion: cache.azure.upbound.io/v1alpha2
+kind: RedisEnterpriseDatabase
+metadata:
+  name: default
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+    clusterIdRef:
+      name: example-redis-enterprise-cluster
+  writeConnectionSecretToRef:
+    name: conn-example-redis-enterprise-database
+    namespace: crossplane-system
+  providerConfigRef:
+    name: example

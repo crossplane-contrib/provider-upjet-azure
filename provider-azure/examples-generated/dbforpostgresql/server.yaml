@@ -1,0 +1,22 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: Server
+metadata:
+  name: example
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorLoginPassword: H@Sh1CoR3!
+    autoGrowEnabled: true
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: true
+    location: West Europe
+    publicNetworkAccessEnabled: false
+    resourceGroupNameRef:
+      name: example
+    skuName: GP_Gen5_4
+    sslEnforcementEnabled: true
+    sslMinimalTlsVersionEnforced: TLS1_2
+    storageMb: 640000
+    version: "11"
+  providerConfigRef:
+    name: example

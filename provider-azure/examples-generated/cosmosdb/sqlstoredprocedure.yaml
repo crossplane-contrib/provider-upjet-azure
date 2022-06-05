@@ -1,0 +1,18 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+kind: SQLStoredProcedure
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example
+    body: "  \tfunction () { var context = getContext(); var response = context.getResponse();
+      response.setBody('Hello, World'); }\n"
+    containerNameRef:
+      name: example
+    databaseNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

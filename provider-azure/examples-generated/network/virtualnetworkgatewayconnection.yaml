@@ -1,0 +1,16 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: VirtualNetworkGatewayConnection
+metadata:
+  name: example
+spec:
+  forProvider:
+    localNetworkGatewayId: ${azurerm_local_network_gateway.onpremise.id}
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    sharedKey: 4-v3ry-53cr37-1p53c-5h4r3d-k3y
+    type: IPsec
+    virtualNetworkGatewayIdRef:
+      name: example
+  providerConfigRef:
+    name: example

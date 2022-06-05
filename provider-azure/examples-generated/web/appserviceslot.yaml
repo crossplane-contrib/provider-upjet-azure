@@ -1,0 +1,22 @@
+apiVersion: web.azure.upbound.io/v1alpha1
+kind: AppServiceSlot
+metadata:
+  name: example
+spec:
+  forProvider:
+    appServiceName: example-app-service
+    appServicePlanId: ${azurerm_app_service_plan.example.id}
+    appSettings:
+      SOME_KEY: some-value
+    connectionString:
+    - name: Database
+      type: SQLServer
+      value: Server=some-server.mydomain.com;Integrated Security=SSPI
+    location: West Europe
+    name: ${random_id.server.hex}
+    resourceGroupNameRef:
+      name: example
+    siteConfig:
+    - dotnetFrameworkVersion: v4.0
+  providerConfigRef:
+    name: example

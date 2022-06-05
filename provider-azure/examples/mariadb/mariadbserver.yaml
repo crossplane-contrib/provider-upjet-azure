@@ -1,0 +1,27 @@
+apiVersion: dbformariadb.azure.upbound.io/v1alpha2
+kind: Server
+metadata:
+  name: example-mariadb-server
+spec:
+  forProvider:
+    administratorLogin: mariadbadmin
+    administratorLoginPasswordSecretRef:
+      key: password
+      name: mariadb-password
+      namespace: crossplane-system
+    autoGrowEnabled: true
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: false
+    location: West Europe
+    publicNetworkAccessEnabled: true
+    resourceGroupNameRef:
+      name: example
+    skuName: B_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 5120
+    version: "10.2"
+  providerConfigRef:
+    name: default
+  writeConnectionSecretToRef:
+    name: example-connection-mariadbserver
+    namespace: crossplane-system

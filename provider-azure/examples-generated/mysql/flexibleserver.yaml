@@ -1,0 +1,19 @@
+apiVersion: mysql.azure.upbound.io/v1alpha1
+kind: FlexibleServer
+metadata:
+  name: example
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorPassword: H@Sh1CoR3!
+    backupRetentionDays: 7
+    delegatedSubnetIdRef:
+      name: example
+    location: West Europe
+    name: example-fs
+    privateDnsZoneId: ${azurerm_private_dns_zone.example.id}
+    resourceGroupNameRef:
+      name: example
+    skuName: GP_Standard_D2ds_v4
+  providerConfigRef:
+    name: example

@@ -1,0 +1,24 @@
+apiVersion: databoxedge.azure.upbound.io/v1alpha1
+kind: Order
+metadata:
+  name: example
+spec:
+  forProvider:
+    contact:
+    - companyName: Contoso Corporation
+      email_lists:
+      - bart@example.com
+      name: Bart
+      phone: (800) 867-5309
+    deviceName: example-device
+    resourceGroupNameRef:
+      name: example
+    shipmentAddress:
+    - address:
+      - 740 Evergreen Terrace
+      city: Springfield
+      country: United States
+      postalCode: "97403"
+      state: OR
+  providerConfigRef:
+    name: example

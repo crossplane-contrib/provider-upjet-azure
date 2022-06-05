@@ -1,0 +1,15 @@
+apiVersion: botservice.azure.upbound.io/v1alpha1
+kind: BotChannelDirectLine
+metadata:
+  name: example
+spec:
+  forProvider:
+    botName: example
+    location: global
+    resourceGroupNameRef:
+      name: example
+    site:
+    - enabled: true
+      name: default
+  providerConfigRef:
+    name: example

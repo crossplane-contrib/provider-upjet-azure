@@ -1,0 +1,13 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: LinkedServiceCosmosDB
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountEndpoint: ${azurerm_cosmosdb_account.example.endpoint}
+    accountKey: ${data.azurerm_cosmosdb_account.example.primary_key}
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    database: foo
+    name: example
+  providerConfigRef:
+    name: example

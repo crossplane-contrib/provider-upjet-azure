@@ -1,0 +1,14 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: DataSetHTTP
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    linkedServiceName: example
+    name: example
+    relativeUrl: http://www.bing.com
+    requestBody: foo=bar
+    requestMethod: POST
+  providerConfigRef:
+    name: example

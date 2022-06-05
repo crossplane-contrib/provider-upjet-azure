@@ -1,0 +1,12 @@
+apiVersion: mixedreality.azure.upbound.io/v1alpha1
+kind: SpatialAnchorsAccount
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

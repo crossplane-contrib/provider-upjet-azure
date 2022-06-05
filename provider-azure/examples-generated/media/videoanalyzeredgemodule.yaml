@@ -1,0 +1,12 @@
+apiVersion: media.azure.upbound.io/v1alpha1
+kind: VideoAnalyzerEdgeModule
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example-edge-module
+    resourceGroupNameRef:
+      name: example
+    videoAnalyzerName: exampleanalyzer
+  providerConfigRef:
+    name: example

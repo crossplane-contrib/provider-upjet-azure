@@ -1,0 +1,13 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: LinkedServiceKusto
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    kustoDatabaseName: my-kusto-database
+    kustoEndpoint: ${azurerm_kusto_cluster.example.uri}
+    name: example
+    useManagedIdentity: true
+  providerConfigRef:
+    name: example

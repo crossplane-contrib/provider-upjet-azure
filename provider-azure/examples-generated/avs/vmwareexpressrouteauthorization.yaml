@@ -1,0 +1,10 @@
+apiVersion: avs.azure.upbound.io/v1alpha1
+kind: VMwareExpressRouteAuthorization
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example-authorization
+    privateCloudId: ${azurerm_vmware_private_cloud.example.id}
+  providerConfigRef:
+    name: example

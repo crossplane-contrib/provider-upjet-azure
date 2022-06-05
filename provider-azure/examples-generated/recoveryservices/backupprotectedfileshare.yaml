@@ -1,0 +1,14 @@
+apiVersion: recoveryservices.azure.upbound.io/v1alpha1
+kind: BackupProtectedFileShare
+metadata:
+  name: example
+spec:
+  forProvider:
+    backupPolicyId: ${azurerm_backup_policy_file_share.example.id}
+    recoveryVaultName: example-recovery-vault
+    resourceGroupNameRef:
+      name: example
+    sourceFileShareName: sharename
+    sourceStorageAccountId: ${azurerm_backup_container_storage_account.protection-container.storage_account_id}
+  providerConfigRef:
+    name: example

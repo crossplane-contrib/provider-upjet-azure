@@ -1,0 +1,13 @@
+apiVersion: compute.azure.upbound.io/v1alpha1
+kind: DedicatedHost
+metadata:
+  name: example
+spec:
+  forProvider:
+    dedicatedHostGroupId: ${azurerm_dedicated_host_group.example.id}
+    location: West Europe
+    name: example-host
+    platformFaultDomain: 1
+    skuName: DSv3-Type1
+  providerConfigRef:
+    name: example

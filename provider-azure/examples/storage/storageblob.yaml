@@ -1,0 +1,16 @@
+apiVersion: storage.azure.upbound.io/v1alpha2
+kind: Blob
+metadata:
+  name: example-blob
+  annotations:
+    crossplane.io/external-name: sample_content
+spec:
+  forProvider:
+    type: Block
+    sourceContent: inline contents of this blob
+    storageAccountNameRef:
+      name: example-storage-account
+    storageContainerNameRef:
+      name: example-content
+  providerConfigRef:
+    name: example

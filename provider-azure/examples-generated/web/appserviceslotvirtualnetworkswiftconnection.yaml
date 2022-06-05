@@ -1,0 +1,12 @@
+apiVersion: web.azure.upbound.io/v1alpha1
+kind: AppServiceSlotVirtualNetworkSwiftConnection
+metadata:
+  name: example
+spec:
+  forProvider:
+    appServiceId: ${azurerm_app_service.example.id}
+    slotName: ${random_id.server.hex}
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

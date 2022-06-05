@@ -1,0 +1,17 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: NetworkInterface
+metadata:
+  name: example-nic
+spec:
+  forProvider:
+    ipConfiguration:
+      - name: internal
+        primary: true
+        privateIpAddressAllocation: Dynamic
+        subnetIdRef:
+          name: example-subnet
+    location: East US
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

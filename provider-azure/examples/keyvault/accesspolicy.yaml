@@ -1,0 +1,41 @@
+apiVersion: keyvault.azure.upbound.io/v1alpha2
+kind: AccessPolicy
+metadata:
+  name: example-vaultpolicy
+spec:
+  forProvider:
+    keyVaultIdRef:
+      name: example-keyvault
+
+    keyPermissions:
+      - Get
+      - Create
+      - Delete
+      - List
+    tenantId: <tenant id>
+    objectId: <object id>
+    certificatePermissions:
+      - Get
+      - GetIssuers
+      - Create
+      - SetIssuers
+      - Delete
+      - DeleteIssuers
+      - List
+      - ListIssuers
+    secretPermissions:
+      - Get
+      - Set
+      - Delete
+      - List
+    storagePermissions:
+      - Get
+      - Set
+      - Delete
+      - List
+      - SetSAS
+      - GetSAS
+      - DeleteSAS
+      - RegenerateKey
+  providerConfigRef:
+    name: example

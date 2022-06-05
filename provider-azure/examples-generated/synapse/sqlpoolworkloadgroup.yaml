@@ -1,0 +1,16 @@
+apiVersion: synapse.azure.upbound.io/v1alpha1
+kind: SQLPoolWorkloadGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    importance: normal
+    maxResourcePercent: 100
+    maxResourcePercentPerRequest: 3
+    minResourcePercent: 0
+    minResourcePercentPerRequest: 3
+    name: example
+    queryExecutionTimeoutInSeconds: 0
+    sqlPoolId: ${azurerm_synapse_sql_pool.example.id}
+  providerConfigRef:
+    name: example

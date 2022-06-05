@@ -1,0 +1,14 @@
+apiVersion: dataprotection.azure.upbound.io/v1alpha1
+kind: BackupVault
+metadata:
+  name: example
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    location: West Europe
+    name: example-backup-vault
+    redundancy: LocallyRedundant
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

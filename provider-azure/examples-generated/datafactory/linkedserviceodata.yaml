@@ -1,0 +1,11 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: LinkedServiceOData
+metadata:
+  name: example
+spec:
+  forProvider:
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    name: anonymous
+    url: https://services.odata.org/v4/TripPinServiceRW/People
+  providerConfigRef:
+    name: example

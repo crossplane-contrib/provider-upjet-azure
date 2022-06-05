@@ -1,0 +1,13 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1alpha1
+kind: AccessPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: example
+    principalObjectId: aGUID
+    roles:
+    - Reader
+    timeSeriesInsightsEnvironmentId: example
+  providerConfigRef:
+    name: example

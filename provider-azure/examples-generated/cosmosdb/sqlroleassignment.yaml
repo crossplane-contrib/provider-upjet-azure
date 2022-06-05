@@ -1,0 +1,15 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha1
+kind: SQLRoleAssignment
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountName: ${azurerm_cosmosdb_account.example.name}
+    name: 736180af-7fbc-4c7f-9004-22735173c1c3
+    principalId: ${data.azurerm_client_config.current.object_id}
+    resourceGroupNameRef:
+      name: example
+    roleDefinitionId: ${azurerm_cosmosdb_sql_role_definition.example.id}
+    scope: /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,11 @@
+apiVersion: securityinsights.azure.upbound.io/v1alpha1
+kind: SentinelAlertRuleMachineLearningBehaviorAnalytics
+metadata:
+  name: example
+spec:
+  forProvider:
+    alertRuleTemplateGuid: 737a2ce1-70a3-4968-9e90-3e6aca836abf
+    logAnalyticsWorkspaceId: ${azurerm_log_analytics_solution.example.workspace_resource_id}
+    name: example-ml-alert-rule
+  providerConfigRef:
+    name: example

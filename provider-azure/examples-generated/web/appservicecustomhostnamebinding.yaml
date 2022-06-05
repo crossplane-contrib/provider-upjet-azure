@@ -1,0 +1,12 @@
+apiVersion: web.azure.upbound.io/v1alpha1
+kind: AppServiceCustomHostNameBinding
+metadata:
+  name: example
+spec:
+  forProvider:
+    appServiceName: example-app-service
+    hostname: www.mywebsite.com
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

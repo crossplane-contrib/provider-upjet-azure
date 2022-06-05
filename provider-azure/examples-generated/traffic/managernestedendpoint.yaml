@@ -1,0 +1,13 @@
+apiVersion: traffic.azure.upbound.io/v1alpha1
+kind: ManagerNestedEndpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    min_child_endpoints: 5
+    name: example-endpoint
+    priority: 1
+    profileId: ${azurerm_traffic_manager_profile.parent.id}
+    targetResourceId: ${azurerm_traffic_manager_profile.child.id}
+  providerConfigRef:
+    name: example

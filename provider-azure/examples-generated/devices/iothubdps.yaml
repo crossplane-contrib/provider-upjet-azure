@@ -1,0 +1,15 @@
+apiVersion: devices.azure.upbound.io/v1alpha2
+kind: IOTHubDPS
+metadata:
+  name: example
+spec:
+  forProvider:
+    allocationPolicy: Hashed
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    sku:
+    - capacity: "1"
+      name: S1
+  providerConfigRef:
+    name: example

@@ -1,0 +1,16 @@
+apiVersion: cognitiveservices.azure.upbound.io/v1alpha1
+kind: Account
+metadata:
+  name: example
+spec:
+  forProvider:
+    kind: Face
+    location: West Europe
+    name: example-account
+    resourceGroupNameRef:
+      name: example
+    skuName: S0
+    tags:
+      Acceptance: Test
+  providerConfigRef:
+    name: example

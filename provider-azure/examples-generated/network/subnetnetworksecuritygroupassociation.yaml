@@ -1,0 +1,11 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: SubnetNetworkSecurityGroupAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    networkSecurityGroupId: ${azurerm_network_security_group.example.id}
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

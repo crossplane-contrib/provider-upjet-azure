@@ -1,0 +1,16 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: PrivateDNSAAAARecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: test
+    records:
+    - fd5d:70bc:930e:d008:0000:0000:0000:7334
+    - fd5d:70bc:930e:d008::7335
+    resourceGroupNameRef:
+      name: example
+    ttl: 300
+    zoneName: mydomain.com
+  providerConfigRef:
+    name: example

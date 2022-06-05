@@ -1,0 +1,12 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: ServerKey
+metadata:
+  name: data-encryption-example
+spec:
+  forProvider:
+    serverIdRef:
+      name: example-psqlserver
+    keyVaultKeyIdRef:
+      name: example-vaultkey
+  providerConfigRef:
+    name: example

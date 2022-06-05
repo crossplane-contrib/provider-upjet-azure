@@ -1,0 +1,12 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: FlexibleServerDatabase
+metadata:
+  name: example
+spec:
+  forProvider:
+    charset: utf8
+    collation: en_US.utf8
+    serverIdRef:
+      name: example
+  providerConfigRef:
+    name: example

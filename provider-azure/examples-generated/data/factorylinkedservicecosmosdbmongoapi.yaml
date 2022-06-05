@@ -1,0 +1,12 @@
+apiVersion: data.azure.upbound.io/v1alpha1
+kind: FactoryLinkedServiceCosmosDBMongoapi
+metadata:
+  name: example
+spec:
+  forProvider:
+    connectionString: mongodb://testinstance:testkey@testinstance.documents.azure.com:10255/?ssl=true
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    database: foo
+    name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,19 @@
+apiVersion: machinelearningservices.azure.upbound.io/v1alpha1
+kind: ComputeInstance
+metadata:
+  name: example
+spec:
+  forProvider:
+    authorizationType: personal
+    description: foo
+    location: West Europe
+    machineLearningWorkspaceId: ${azurerm_machine_learning_workspace.example.id}
+    name: example
+    ssh:
+    - publicKey: ${var.ssh_key}
+    subnetResourceId: ${azurerm_subnet.example.id}
+    tags:
+      foo: bar
+    virtualMachineSize: STANDARD_DS2_V2
+  providerConfigRef:
+    name: example

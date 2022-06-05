@@ -1,0 +1,21 @@
+apiVersion: virtual.azure.upbound.io/v1alpha1
+kind: NetworkGatewayNATRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    externalMapping:
+    - addressSpace: 10.2.0.0/26
+      portRange: "200"
+    internalMapping:
+    - addressSpace: 10.4.0.0/26
+      portRange: "400"
+    ipConfigurationId: ${data.azurerm_virtual_network_gateway.example.ip_configuration.0.id}
+    mode: EgressSnat
+    name: example-vnetgwnatrule
+    resourceGroupNameRef:
+      name: example
+    type: Dynamic
+    virtualNetworkGatewayId: ${data.azurerm_virtual_network_gateway.example.id}
+  providerConfigRef:
+    name: example

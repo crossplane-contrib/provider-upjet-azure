@@ -1,0 +1,10 @@
+apiVersion: security.azure.upbound.io/v1alpha1
+kind: SecurityCenterWorkspace
+metadata:
+  name: example
+spec:
+  forProvider:
+    scope: /subscriptions/00000000-0000-0000-0000-000000000000
+    workspaceId: ${azurerm_log_analytics_workspace.example.id}
+  providerConfigRef:
+    name: example

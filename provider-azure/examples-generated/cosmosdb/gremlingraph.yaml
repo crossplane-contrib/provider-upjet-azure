@@ -1,0 +1,30 @@
+apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+kind: GremlinGraph
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example
+    conflictResolutionPolicy:
+    - conflictResolutionPath: /_ts
+      mode: LastWriterWins
+    databaseNameRef:
+      name: example
+    indexPolicy:
+    - automatic: true
+      excludedPaths:
+      - /"_etag"/?
+      includedPaths:
+      - /*
+      indexingMode: Consistent
+    partitionKeyPath: /Example
+    resourceGroupNameRef:
+      name: example
+    throughput: 400
+    uniqueKey:
+    - paths:
+      - /definition/id1
+      - /definition/id2
+  providerConfigRef:
+    name: example

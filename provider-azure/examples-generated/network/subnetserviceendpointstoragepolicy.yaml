@@ -1,0 +1,17 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: SubnetServiceEndpointStoragePolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    definition:
+    - description: definition1
+      name: name1
+      serviceResources:
+      - ${azurerm_resource_group.example.id}
+      - ${azurerm_storage_account.example.id}
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

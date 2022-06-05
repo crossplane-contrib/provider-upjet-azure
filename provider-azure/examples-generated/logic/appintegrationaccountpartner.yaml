@@ -1,0 +1,15 @@
+apiVersion: logic.azure.upbound.io/v1alpha1
+kind: AppIntegrationAccountPartner
+metadata:
+  name: example
+spec:
+  forProvider:
+    businessIdentity:
+    - qualifier: ZZ
+      value: AA
+    integrationAccountName: example-ia
+    name: example-iap
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

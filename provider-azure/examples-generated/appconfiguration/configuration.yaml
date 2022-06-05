@@ -1,0 +1,12 @@
+apiVersion: appconfiguration.azure.upbound.io/v1alpha1
+kind: Configuration
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: appConf1
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

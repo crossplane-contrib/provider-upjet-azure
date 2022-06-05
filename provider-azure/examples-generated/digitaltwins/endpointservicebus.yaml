@@ -1,0 +1,12 @@
+apiVersion: digitaltwins.azure.upbound.io/v1alpha1
+kind: EndpointServiceBus
+metadata:
+  name: example
+spec:
+  forProvider:
+    digitalTwinsId: ${azurerm_digital_twins_instance.example.id}
+    name: example-EndpointSB
+    servicebusPrimaryConnectionString: ${azurerm_servicebus_topic_authorization_rule.example.primary_connection_string}
+    servicebusSecondaryConnectionString: ${azurerm_servicebus_topic_authorization_rule.example.secondary_connection_string}
+  providerConfigRef:
+    name: example

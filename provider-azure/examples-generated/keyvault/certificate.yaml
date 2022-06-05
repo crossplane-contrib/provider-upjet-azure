@@ -1,0 +1,13 @@
+apiVersion: keyvault.azure.upbound.io/v1alpha2
+kind: Certificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    certificate:
+    - contents: ${filebase64("certificate-to-import.pfx")}
+      password: ""
+    keyVaultIdRef:
+      name: example
+  providerConfigRef:
+    name: example

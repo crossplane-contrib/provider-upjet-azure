@@ -1,0 +1,15 @@
+apiVersion: operationalinsights.azure.upbound.io/v1alpha1
+kind: LogAnalyticsDataSourceWindowsEvent
+metadata:
+  name: example
+spec:
+  forProvider:
+    eventLogName: Application
+    eventTypes:
+    - Error
+    name: example-lad-wpc
+    resourceGroupNameRef:
+      name: example
+    workspaceName: ${azurerm_log_analytics_workspace.example.name}
+  providerConfigRef:
+    name: example

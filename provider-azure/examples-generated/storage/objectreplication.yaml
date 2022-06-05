@@ -1,0 +1,13 @@
+apiVersion: storage.azure.upbound.io/v1alpha1
+kind: ObjectReplication
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinationStorageAccountId: ${azurerm_storage_account.dst.id}
+    rules:
+    - destinationContainerName: ${azurerm_storage_container.dst.name}
+      sourceContainerName: ${azurerm_storage_container.src.name}
+    sourceStorageAccountId: ${azurerm_storage_account.src.id}
+  providerConfigRef:
+    name: example

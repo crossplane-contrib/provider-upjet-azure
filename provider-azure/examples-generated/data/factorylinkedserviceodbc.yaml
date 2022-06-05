@@ -1,0 +1,11 @@
+apiVersion: data.azure.upbound.io/v1alpha1
+kind: FactoryLinkedServiceOdbc
+metadata:
+  name: example
+spec:
+  forProvider:
+    connectionString: Driver={SQL Server};Server=test;Database=test;Uid=test;Pwd=test;
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    name: anonymous
+  providerConfigRef:
+    name: example

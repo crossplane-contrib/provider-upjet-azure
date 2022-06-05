@@ -1,0 +1,19 @@
+apiVersion: bot.azure.upbound.io/v1alpha1
+kind: ServiceAzureBot
+metadata:
+  name: example
+spec:
+  forProvider:
+    developerAppInsightsApiKey: ${azurerm_application_insights_api_key.example.api_key}
+    developerAppInsightsApplicationId: ${azurerm_application_insights.example.app_id}
+    endpoint: https://example.com
+    location: global
+    microsoftAppId: ${data.azurerm_client_config.current.client_id}
+    name: exampleazurebot
+    resourceGroupNameRef:
+      name: example
+    sku: F0
+    tags:
+      environment: test
+  providerConfigRef:
+    name: example

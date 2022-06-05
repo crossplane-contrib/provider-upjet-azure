@@ -1,0 +1,12 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: DDOSProtectionPlan
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-protection-plan
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

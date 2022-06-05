@@ -1,0 +1,14 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: ActiveDirectoryAdministrator
+metadata:
+  name: example
+spec:
+  forProvider:
+    objectId: ${data.azurerm_client_config.current.object_id}
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+  providerConfigRef:
+    name: example

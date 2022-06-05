@@ -1,0 +1,12 @@
+apiVersion: appconfiguration.azure.upbound.io/v1alpha1
+kind: Key
+metadata:
+  name: example
+spec:
+  forProvider:
+    configurationStoreId: ${azurerm_app_configuration.appconf.id}
+    key: appConfKey1
+    label: somelabel
+    value: a test
+  providerConfigRef:
+    name: example

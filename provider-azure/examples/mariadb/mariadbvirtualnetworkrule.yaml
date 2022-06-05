@@ -1,0 +1,13 @@
+apiVersion: dbformariadb.azure.upbound.io/v1alpha2
+kind: VirtualNetworkRule
+metadata:
+  name: example-mariadb-vnet-rule
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+    serverName: example-mariadb-server
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: default

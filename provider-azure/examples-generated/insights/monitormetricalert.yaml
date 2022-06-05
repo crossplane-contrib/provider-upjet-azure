@@ -1,0 +1,27 @@
+apiVersion: insights.azure.upbound.io/v1alpha2
+kind: MonitorMetricAlert
+metadata:
+  name: example
+spec:
+  forProvider:
+    action:
+    - actionGroupId: ${azurerm_monitor_action_group.main.id}
+    criteria:
+    - aggregation: Total
+      dimension:
+      - name: ApiName
+        operator: Include
+        values:
+        - '*'
+      metricName: Transactions
+      metricNamespace: Microsoft.Storage/storageAccounts
+      operator: GreaterThan
+      threshold: 50
+    description: Action will be triggered when Transactions count is greater than
+      50.
+    resourceGroupNameRef:
+      name: example
+    scopes:
+    - ${azurerm_storage_account.to_monitor.id}
+  providerConfigRef:
+    name: example

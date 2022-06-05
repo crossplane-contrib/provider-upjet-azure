@@ -1,0 +1,11 @@
+apiVersion: network.azure.upbound.io/v1alpha2
+kind: SubnetNATGatewayAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    natGatewayId: ${azurerm_nat_gateway.example.id}
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

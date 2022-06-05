@@ -1,0 +1,28 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: TriggerCustomEvent
+metadata:
+  name: example
+spec:
+  forProvider:
+    additionalProperties:
+      bar: bar2
+      foo: foo1
+    annotations:
+    - example1
+    - example2
+    - example3
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    description: example description
+    eventgridTopicId: ${azurerm_eventgrid_topic.example.id}
+    events:
+    - event1
+    - event2
+    name: example
+    pipeline:
+    - name: example
+      parameters:
+        Env: Prod
+    subjectBeginsWith: abc
+    subjectEndsWith: xyz
+  providerConfigRef:
+    name: example

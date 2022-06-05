@@ -1,0 +1,14 @@
+apiVersion: maps.azure.upbound.io/v1alpha1
+kind: Creator
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    mapsAccountId: ${azurerm_maps_account.example.id}
+    name: example-maps-creator
+    storageUnits: 1
+    tags:
+      environment: Test
+  providerConfigRef:
+    name: example

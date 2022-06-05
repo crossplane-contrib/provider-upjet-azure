@@ -1,0 +1,12 @@
+apiVersion: web.azure.upbound.io/v1alpha1
+kind: AppHybridConnection
+metadata:
+  name: example
+spec:
+  forProvider:
+    hostname: myhostname.example
+    port: 8081
+    relayId: ${azurerm_relay_hybrid_connection.example.id}
+    webAppId: ${azurerm_windows_web_app.example.id}
+  providerConfigRef:
+    name: example

@@ -1,0 +1,14 @@
+apiVersion: network.azure.upbound.io/v1alpha1
+kind: DNSCNAMERecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: test
+    record: contoso.com
+    resourceGroupNameRef:
+      name: example
+    ttl: 300
+    zoneName: mydomain.com
+  providerConfigRef:
+    name: example

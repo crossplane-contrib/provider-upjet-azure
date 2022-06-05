@@ -1,0 +1,12 @@
+apiVersion: eventgrid.azure.upbound.io/v1alpha1
+kind: DomainTopic
+metadata:
+  name: example
+spec:
+  forProvider:
+    domainName: my-eventgrid-domain
+    name: my-eventgrid-domain-topic
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

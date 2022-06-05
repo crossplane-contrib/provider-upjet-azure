@@ -1,0 +1,19 @@
+apiVersion: sqlvirtualmachine.azure.upbound.io/v1alpha1
+kind: MSSQLVirtualMachine
+metadata:
+  name: example
+spec:
+  forProvider:
+    autoPatching:
+    - dayOfWeek: Sunday
+      maintenanceWindowDurationInMinutes: 60
+      maintenanceWindowStartingHour: 2
+    rServicesEnabled: true
+    sqlConnectivityPort: 1433
+    sqlConnectivityType: PRIVATE
+    sqlConnectivityUpdatePassword: Password1234!
+    sqlConnectivityUpdateUsername: sqllogin
+    sqlLicenseType: PAYG
+    virtualMachineId: ${data.azurerm_virtual_machine.example.id}
+  providerConfigRef:
+    name: example

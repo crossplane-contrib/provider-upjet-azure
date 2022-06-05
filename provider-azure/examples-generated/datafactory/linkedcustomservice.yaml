@@ -1,0 +1,23 @@
+apiVersion: datafactory.azure.upbound.io/v1alpha1
+kind: LinkedCustomService
+metadata:
+  name: example
+spec:
+  forProvider:
+    annotations:
+    - test1
+    - test2
+    - test3
+    dataFactoryId: ${azurerm_data_factory.example.id}
+    description: test description
+    name: example
+    parameters:
+      Env: Test
+      foo: bar
+    type: AzureBlobStorage
+    typePropertiesJson: |
+      {
+        "connectionString":"${azurerm_storage_account.test.primary_connection_string}"
+      }
+  providerConfigRef:
+    name: example

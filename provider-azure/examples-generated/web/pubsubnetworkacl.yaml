@@ -1,0 +1,18 @@
+apiVersion: web.azure.upbound.io/v1alpha1
+kind: PubsubNetworkACL
+metadata:
+  name: example
+spec:
+  forProvider:
+    defaultAction: Allow
+    privateEndpoint:
+    - deniedRequestTypes:
+      - RESTAPI
+      - ClientConnection
+      id: ${azurerm_private_endpoint.example.id}
+    publicNetwork:
+    - deniedRequestTypes:
+      - ClientConnection
+    webPubsubId: ${azurerm_web_pubsub.example.id}
+  providerConfigRef:
+    name: example

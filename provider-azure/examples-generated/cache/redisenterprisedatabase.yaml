@@ -1,0 +1,20 @@
+apiVersion: cache.azure.upbound.io/v1alpha2
+kind: RedisEnterpriseDatabase
+metadata:
+  name: example
+spec:
+  forProvider:
+    clientProtocol: Encrypted
+    clusterIdRef:
+      name: example
+    clusteringPolicy: EnterpriseCluster
+    evictionPolicy: NoEviction
+    linkedDatabaseGroupNickname: tftestGeoGroup
+    linkedDatabaseId:
+    - ${azurerm_redis_enterprise_cluster.example.id}/databases/default
+    - ${azurerm_redis_enterprise_cluster.example1.id}/databases/default
+    port: 10000
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

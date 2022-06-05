@@ -1,0 +1,15 @@
+apiVersion: aadb2c.azure.upbound.io/v1alpha1
+kind: Directory
+metadata:
+  name: example
+spec:
+  forProvider:
+    countryCode: US
+    dataResidencyLocation: United States
+    displayName: example-b2c-tenant
+    domainName: exampleb2ctenant.onmicrosoft.com
+    resourceGroupNameRef:
+      name: example
+    skuName: PremiumP1
+  providerConfigRef:
+    name: example

@@ -1,0 +1,12 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+kind: ServerKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    keyVaultKeyIdRef:
+      name: example
+    serverIdRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,15 @@
+apiVersion: servicebus.azure.upbound.io/v1alpha1
+kind: Namespace
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: tfex-servicebus-namespace
+    resourceGroupNameRef:
+      name: example
+    sku: Standard
+    tags:
+      source: terraform
+  providerConfigRef:
+    name: example

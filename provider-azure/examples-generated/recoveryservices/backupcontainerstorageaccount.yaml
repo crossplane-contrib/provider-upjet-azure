@@ -1,0 +1,12 @@
+apiVersion: recoveryservices.azure.upbound.io/v1alpha1
+kind: BackupContainerStorageAccount
+metadata:
+  name: example
+spec:
+  forProvider:
+    recoveryVaultName: example-recovery-vault
+    resourceGroupNameRef:
+      name: example
+    storageAccountId: ${azurerm_storage_account.sa.id}
+  providerConfigRef:
+    name: example

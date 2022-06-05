@@ -1,0 +1,11 @@
+apiVersion: securityinsights.azure.upbound.io/v1alpha1
+kind: SentinelAlertRuleFusion
+metadata:
+  name: example
+spec:
+  forProvider:
+    alertRuleTemplateGuid: f71aba3d-28fb-450b-b192-4e76a83015c8
+    logAnalyticsWorkspaceId: ${azurerm_log_analytics_solution.example.workspace_resource_id}
+    name: example-fusion-alert-rule
+  providerConfigRef:
+    name: example
