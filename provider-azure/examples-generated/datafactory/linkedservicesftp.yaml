@@ -8,7 +8,10 @@ spec:
     dataFactoryId: ${azurerm_data_factory.example.id}
     host: http://www.bing.com
     name: example
-    password: bar
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     port: 22
     username: foo
   providerConfigRef:

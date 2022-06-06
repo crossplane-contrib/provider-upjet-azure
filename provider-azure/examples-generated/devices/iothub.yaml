@@ -13,7 +13,10 @@ spec:
       maxDeliveryCount: 30
     endpoint:
     - batchFrequencyInSeconds: 60
-      connectionString: ${azurerm_storage_account.example.primary_blob_connection_string}
+      connectionStringSecretRef:
+        key: attribute.primary_blob_connection_string
+        name: example-storage-account
+        namespace: crossplane-system
       containerNameRef:
         name: example
       encoding: Avro
@@ -21,7 +24,10 @@ spec:
       maxChunkSizeInBytes: 10485760
       name: export
       type: AzureIotHub.StorageContainer
-    - connectionString: ${azurerm_eventhub_authorization_rule.example.primary_connection_string}
+    - connectionStringSecretRef:
+        key: attribute.primary_connection_string
+        name: example-eventhub-authorization-rule
+        namespace: crossplane-system
       name: export2
       type: AzureIotHub.EventHub
     enrichment:

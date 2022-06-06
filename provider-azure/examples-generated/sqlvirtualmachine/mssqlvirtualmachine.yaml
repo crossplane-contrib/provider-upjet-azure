@@ -11,8 +11,14 @@ spec:
     rServicesEnabled: true
     sqlConnectivityPort: 1433
     sqlConnectivityType: PRIVATE
-    sqlConnectivityUpdatePassword: Password1234!
-    sqlConnectivityUpdateUsername: sqllogin
+    sqlConnectivityUpdatePasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    sqlConnectivityUpdateUsernameSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     sqlLicenseType: PAYG
     virtualMachineId: ${data.azurerm_virtual_machine.example.id}
   providerConfigRef:

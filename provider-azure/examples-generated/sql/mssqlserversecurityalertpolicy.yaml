@@ -12,7 +12,10 @@ spec:
     retentionDays: 20
     serverName: ${azurerm_sql_server.example.name}
     state: Enabled
-    storageAccountAccessKey: ${azurerm_storage_account.example.primary_access_key}
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: crossplane-system
     storageEndpoint: ${azurerm_storage_account.example.primary_blob_endpoint}
   providerConfigRef:
     name: example

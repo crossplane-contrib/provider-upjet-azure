@@ -10,10 +10,16 @@ spec:
     - size: 3
     name: example-vmware-private-cloud
     networkSubnetCidr: 192.168.48.0/22
-    nsxtPassword: QazWsx13$Edc
+    nsxtPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     resourceGroupNameRef:
       name: example
     skuName: av36
-    vcenterPassword: WsxEdc23$Rfv
+    vcenterPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
   providerConfigRef:
     name: example

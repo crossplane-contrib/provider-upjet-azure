@@ -5,7 +5,10 @@ metadata:
 spec:
   forProvider:
     addressPrefixIpv4: 192.169.9.0/29
-    authorizationKey: 846a1918-b7a2-4917-b43c-8c4cdaee006a
+    authorizationKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     name: example-ercircuitconnection
     peerPeeringId: ${azurerm_express_route_circuit_peering.example2.id}
     peeringId: ${azurerm_express_route_circuit_peering.example.id}

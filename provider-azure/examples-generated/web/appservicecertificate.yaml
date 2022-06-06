@@ -6,8 +6,14 @@ spec:
   forProvider:
     location: West Europe
     name: example-cert
-    password: terraform
-    pfxBlob: ${filebase64("certificate.pfx")}
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    pfxBlobSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     resourceGroupNameRef:
       name: example
   providerConfigRef:

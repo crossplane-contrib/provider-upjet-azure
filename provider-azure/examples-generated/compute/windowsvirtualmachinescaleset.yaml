@@ -4,7 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    adminPassword: P@55w0rd1234!
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     adminUsername: adminuser
     instances: 1
     location: West Europe

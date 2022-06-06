@@ -9,7 +9,10 @@ spec:
     - Data_Exfiltration
     policyState: Enabled
     retentionDays: 20
-    storageAccountAccessKey: ${azurerm_storage_account.audit_logs.primary_access_key}
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: crossplane-system
     storageEndpoint: ${azurerm_storage_account.audit_logs.primary_blob_endpoint}
     synapseWorkspaceId: ${azurerm_synapse_workspace.example.id}
   providerConfigRef:

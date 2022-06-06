@@ -10,7 +10,10 @@ spec:
     iothubName: ${azurerm_iothub.example.name}
     location: West Europe
     name: example
-    sharedAccessKey: ${azurerm_iothub.example.shared_access_policy.0.primary_key}
     sharedAccessKeyName: ${azurerm_iothub.example.shared_access_policy.0.key_name}
+    sharedAccessKeySecretRef:
+      key: attribute.shared_access_policy.0.primary_key
+      name: example-iothub
+      namespace: crossplane-system
   providerConfigRef:
     name: example

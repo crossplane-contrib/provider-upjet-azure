@@ -6,7 +6,10 @@ spec:
   forProvider:
     botName: example
     clientId: exampleId
-    clientSecret: exampleSecret
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     location: global
     name: example
     resourceGroupNameRef:

@@ -8,7 +8,10 @@ spec:
     apiManagementName: example-apim
     authority: myb2ctenant.b2clogin.com
     clientId: ${azuread_application.example.application_id}
-    clientSecret: P@55w0rD!%[7]s
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     signinPolicy: B2C_1_Login
     signinTenant: myb2ctenant.onmicrosoft.com
     signupPolicy: B2C_1_Signup

@@ -5,7 +5,10 @@ metadata:
 spec:
   forProvider:
     dataFactoryId: ${azurerm_data_factory.example.id}
-    key: foo
+    keySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     name: example
     url: https://${data.azurerm_function_app.example.default_hostname}
   providerConfigRef:

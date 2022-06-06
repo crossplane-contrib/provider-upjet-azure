@@ -10,7 +10,10 @@ spec:
           INTO [YourOutputAlias]
           FROM [YourInputAlias]
     name: example-reference-input
-    password: examplepassword
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     refreshIntervalDuration: "00:20:00"
     refreshType: RefreshPeriodicallyWithFull
     resourceGroupNameRef:

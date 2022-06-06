@@ -5,7 +5,10 @@ metadata:
 spec:
   forProvider:
     automationAccountName: example-account
-    base64: ${filebase64("certificate.pfx")}
+    base64SecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     description: This is an example certificate
     exportable: true
     name: certificate1

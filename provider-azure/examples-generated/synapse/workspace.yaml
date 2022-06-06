@@ -15,7 +15,10 @@ spec:
     resourceGroupNameRef:
       name: example
     sqlAdministratorLogin: sqladminuser
-    sqlAdministratorLoginPassword: H@Sh1CoR3!
+    sqlAdministratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     storageDataLakeGen2FilesystemId: ${azurerm_storage_data_lake_gen2_filesystem.example.id}
     tags:
       Env: production

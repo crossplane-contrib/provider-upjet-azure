@@ -4,7 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    token: ghp_sometokenvaluesecretsauce
+    tokenSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     type: GitHub
   providerConfigRef:
     name: example

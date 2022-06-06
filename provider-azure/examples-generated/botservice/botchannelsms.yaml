@@ -10,6 +10,9 @@ spec:
     resourceGroupNameRef:
       name: example
     smsChannelAccountSecurityId: BG61f7cf5157f439b084e98256409c2815
-    smsChannelAuthToken: jh8980432610052ed4e29565c5e232f
+    smsChannelAuthTokenSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
   providerConfigRef:
     name: example

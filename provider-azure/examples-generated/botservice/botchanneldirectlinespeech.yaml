@@ -5,7 +5,10 @@ metadata:
 spec:
   forProvider:
     botName: example
-    cognitiveServiceAccessKey: ${azurerm_cognitive_account.example.primary_access_key}
+    cognitiveServiceAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-cognitive-account
+      namespace: crossplane-system
     cognitiveServiceLocation: West Europe
     location: global
     resourceGroupNameRef:

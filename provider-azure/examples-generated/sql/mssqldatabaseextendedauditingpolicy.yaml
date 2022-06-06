@@ -6,8 +6,11 @@ spec:
   forProvider:
     databaseId: ${azurerm_mssql_database.example.id}
     retentionInDays: 6
-    storageAccountAccessKey: ${azurerm_storage_account.example.primary_access_key}
     storageAccountAccessKeyIsSecondary: false
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: crossplane-system
     storageEndpoint: ${azurerm_storage_account.example.primary_blob_endpoint}
   providerConfigRef:
     name: example

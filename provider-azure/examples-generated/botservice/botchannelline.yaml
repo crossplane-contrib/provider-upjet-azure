@@ -6,8 +6,14 @@ spec:
   forProvider:
     botName: example
     lineChannel:
-    - accessToken: asdfdsdfTYUIOIoj1231hkjhk
-      secret: aagfdgfd123567
+    - accessTokenSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: crossplane-system
+      secretSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: crossplane-system
     location: global
     resourceGroupNameRef:
       name: example

@@ -5,8 +5,14 @@ metadata:
 spec:
   forProvider:
     certificate:
-    - contents: ${filebase64("certificate-to-import.pfx")}
-      password: ""
+    - contentsSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: crossplane-system
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: crossplane-system
     keyVaultIdRef:
       name: example
   providerConfigRef:

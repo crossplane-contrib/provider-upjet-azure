@@ -4,7 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    connectionString: ${azurerm_servicebus_queue_authorization_rule.example.primary_connection_string}
+    connectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-servicebus-queue-authorization-rule
+      namespace: crossplane-system
     iothubId: ${azurerm_iothub.example.id}
     name: example
     resourceGroupNameRef:

@@ -5,7 +5,10 @@ metadata:
 spec:
   forProvider:
     apiManagementName: example-apim
-    clientId: 00001111-2222-3333-4444-555566667777
+    clientIdSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     displayName: Example Provider
     metadataEndpoint: https://example.com/example
     name: example-provider

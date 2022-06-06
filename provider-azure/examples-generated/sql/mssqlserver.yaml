@@ -5,7 +5,10 @@ metadata:
 spec:
   forProvider:
     administratorLogin: missadministrator
-    administratorLoginPassword: thisIsKat11
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     azureadAdministrator:
     - loginUsername: AzureAD Admin
       objectId: 00000000-0000-0000-0000-000000000000

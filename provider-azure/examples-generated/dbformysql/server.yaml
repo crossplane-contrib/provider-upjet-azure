@@ -5,7 +5,10 @@ metadata:
 spec:
   forProvider:
     administratorLogin: mysqladminun
-    administratorLoginPassword: H@Sh1CoR3!
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     autoGrowEnabled: true
     backupRetentionDays: 7
     geoRedundantBackupEnabled: false

@@ -5,8 +5,11 @@ metadata:
 spec:
   forProvider:
     retentionInDays: 6
-    storageAccountAccessKey: ${azurerm_storage_account.audit_logs.primary_access_key}
     storageAccountAccessKeyIsSecondary: false
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: crossplane-system
     storageEndpoint: ${azurerm_storage_account.audit_logs.primary_blob_endpoint}
     synapseWorkspaceId: ${azurerm_synapse_workspace.example.id}
   providerConfigRef:

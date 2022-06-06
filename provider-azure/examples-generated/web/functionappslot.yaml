@@ -10,7 +10,10 @@ spec:
     name: test-azure-functions_slot
     resourceGroupNameRef:
       name: example
-    storageAccountAccessKey: ${azurerm_storage_account.example.primary_access_key}
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: crossplane-system
     storageAccountName: ${azurerm_storage_account.example.name}
   providerConfigRef:
     name: example

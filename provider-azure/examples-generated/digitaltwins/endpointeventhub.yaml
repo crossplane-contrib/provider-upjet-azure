@@ -5,8 +5,14 @@ metadata:
 spec:
   forProvider:
     digitalTwinsId: ${azurerm_digital_twins_instance.example.id}
-    eventhubPrimaryConnectionString: ${azurerm_eventhub_authorization_rule.example.primary_connection_string}
-    eventhubSecondaryConnectionString: ${azurerm_eventhub_authorization_rule.example.secondary_connection_string}
+    eventHubPrimaryConnectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-eventhub-authorization-rule
+      namespace: crossplane-system
+    eventHubSecondaryConnectionStringSecretRef:
+      key: attribute.secondary_connection_string
+      name: example-eventhub-authorization-rule
+      namespace: crossplane-system
     name: example-EH
   providerConfigRef:
     name: example

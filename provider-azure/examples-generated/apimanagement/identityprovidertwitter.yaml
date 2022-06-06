@@ -6,7 +6,10 @@ spec:
   forProvider:
     apiKey: "00000000000000000000000000000000"
     apiManagementName: example-apim
-    apiSecretKey: "00000000000000000000000000000000"
+    apiSecretKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     resourceGroupNameRef:
       name: example
   providerConfigRef:

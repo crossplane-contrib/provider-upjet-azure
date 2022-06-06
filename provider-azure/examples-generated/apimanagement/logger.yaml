@@ -6,7 +6,10 @@ spec:
   forProvider:
     apiManagementName: example-apim
     applicationInsights:
-    - instrumentationKey: ${azurerm_application_insights.example.instrumentation_key}
+    - instrumentationKeySecretRef:
+        key: attribute.instrumentation_key
+        name: example-application-insights
+        namespace: crossplane-system
     name: example-logger
     resourceGroupNameRef:
       name: example

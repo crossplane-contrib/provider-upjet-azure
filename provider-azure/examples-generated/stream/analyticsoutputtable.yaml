@@ -10,7 +10,10 @@ spec:
     resourceGroupNameRef:
       name: example
     rowKey: bar
-    storageAccountKey: ${azurerm_storage_account.example.primary_access_key}
+    storageAccountKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: crossplane-system
     storageAccountName: ${azurerm_storage_account.example.name}
     streamAnalyticsJobName: example-job
     table: mysampletable

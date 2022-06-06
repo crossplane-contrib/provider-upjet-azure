@@ -11,7 +11,10 @@ spec:
     location: West Europe
     name: example
     namespaceName: ${azurerm_eventhub_namespace.example.name}
-    sharedAccessKey: ${azurerm_eventhub_authorization_rule.example.primary_key}
     sharedAccessKeyName: ${azurerm_eventhub_authorization_rule.example.name}
+    sharedAccessKeySecretRef:
+      key: attribute.primary_key
+      name: example-eventhub-authorization-rule
+      namespace: crossplane-system
   providerConfigRef:
     name: example

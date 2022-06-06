@@ -5,7 +5,10 @@ metadata:
 spec:
   forProvider:
     administratorLogin: mradministrator
-    administratorLoginPassword: thisIsDog11
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     licenseType: BasePrice
     location: West Europe
     name: managedsqlinstance

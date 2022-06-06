@@ -6,7 +6,10 @@ spec:
   forProvider:
     database: master
     name: example-output-synapse
-    password: ${azurerm_synapse_workspace.test.sql_administrator_login_password}
+    passwordSecretRef:
+      key: attribute.sql_administrator_login_password
+      name: example-synapse-workspace
+      namespace: crossplane-system
     resourceGroupNameRef:
       name: example
     server: ${azurerm_synapse_workspace.test.connectivity_endpoints["sqlOnDemand"]}

@@ -5,7 +5,10 @@ metadata:
 spec:
   forProvider:
     administratorLogin: psqladmin
-    administratorPassword: H@Sh1CoR3!
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     delegatedSubnetIdRef:
       name: example
     location: West Europe

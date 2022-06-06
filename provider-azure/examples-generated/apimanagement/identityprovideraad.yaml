@@ -8,7 +8,10 @@ spec:
     - 00000000-0000-0000-0000-000000000000
     apiManagementName: example-apim
     clientId: 00000000-0000-0000-0000-000000000000
-    clientSecret: "00000000000000000000000000000000"
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     resourceGroupNameRef:
       name: example
   providerConfigRef:

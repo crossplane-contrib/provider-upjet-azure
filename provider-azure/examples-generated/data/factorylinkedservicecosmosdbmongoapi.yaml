@@ -4,7 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    connectionString: mongodb://testinstance:testkey@testinstance.documents.azure.com:10255/?ssl=true
+    connectionStringSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     dataFactoryId: ${azurerm_data_factory.example.id}
     database: foo
     name: example

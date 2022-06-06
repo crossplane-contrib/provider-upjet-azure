@@ -4,7 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    certificateContent: ${filebase64("example.cer")}
+    certificateContentSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     iothubName: ${azurerm_iothub.example.name}
     isVerified: true
     name: example

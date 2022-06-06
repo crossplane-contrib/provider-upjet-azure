@@ -4,7 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiKey: exampleapikey
+    apiKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     functionApp: test-azure-functions
     functionName: examplefunctionname
     name: exampleoutput

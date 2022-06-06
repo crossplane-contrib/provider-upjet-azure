@@ -8,7 +8,10 @@ spec:
     keyVaultIdRef:
       name: example
     orgId: ExampleOrgName
-    password: example-password
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     providerName: DigiCert
   providerConfigRef:
     name: example

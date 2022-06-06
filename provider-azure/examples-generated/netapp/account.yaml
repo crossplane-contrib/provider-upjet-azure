@@ -9,7 +9,10 @@ spec:
       - 1.2.3.4
       domain: westcentralus.com
       organizationalUnit: OU=FirstLevel
-      password: aduserpwd
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: crossplane-system
       smbServerName: SMBSERVER
       username: aduser
     location: West Europe

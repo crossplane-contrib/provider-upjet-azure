@@ -4,7 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    defaultAdminPassword: Password1234
+    defaultAdminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     delegatedManagementSubnetIdRef:
       name: example
     location: West Europe

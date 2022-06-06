@@ -5,9 +5,15 @@ metadata:
 spec:
   forProvider:
     accountName: testbatchaccount
-    certificate: ${filebase64("certificate.pfx")}
+    certificateSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     format: Pfx
-    password: terraform
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
     resourceGroupNameRef:
       name: example
     thumbprint: 42C107874FD0E4A9583292A2F1098E8FE4B2EDDA

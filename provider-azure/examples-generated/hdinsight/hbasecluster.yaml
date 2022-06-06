@@ -8,7 +8,10 @@ spec:
     componentVersion:
     - hbase: "1.1"
     gateway:
-    - password: TerrAform123!
+    - passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: crossplane-system
       username: acctestusrgw
     location: West Europe
     name: example-hdicluster
@@ -16,21 +19,33 @@ spec:
       name: example
     roles:
     - headNode:
-      - password: AccTestvdSC4daf986!
+      - passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: crossplane-system
         username: acctestusrvm
         vmSize: Standard_D3_V2
       workerNode:
-      - password: AccTestvdSC4daf986!
+      - passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: crossplane-system
         targetInstanceCount: 3
         username: acctestusrvm
         vmSize: Standard_D3_V2
       zookeeperNode:
-      - password: AccTestvdSC4daf986!
+      - passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: crossplane-system
         username: acctestusrvm
         vmSize: Standard_D3_V2
     storageAccount:
     - isDefault: true
-      storageAccountKey: ${azurerm_storage_account.example.primary_access_key}
+      storageAccountKeySecretRef:
+        key: attribute.primary_access_key
+        name: example-storage-account
+        namespace: crossplane-system
       storageContainerId: ${azurerm_storage_container.example.id}
     tier: Standard
   providerConfigRef:

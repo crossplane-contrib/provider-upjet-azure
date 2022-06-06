@@ -12,7 +12,10 @@ spec:
       name: example
     skuName: L1
     storage:
-    - key: ${azurerm_storage_account.storage.primary_access_key}
+    - keySecretRef:
+        key: attribute.primary_access_key
+        name: example-storage-account
+        namespace: crossplane-system
       name: ${azurerm_storage_account.storage.name}
     warmStoreDataRetentionTime: P30D
   providerConfigRef:

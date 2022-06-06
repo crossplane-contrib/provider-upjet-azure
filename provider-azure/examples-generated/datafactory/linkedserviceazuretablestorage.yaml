@@ -4,7 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    connectionString: ${data.azurerm_storage_account.example.primary_connection_string}
+    connectionStringSecretRef:
+      key: attribute.example.primary_connection_string
+      name: example-
+      namespace: crossplane-system
     dataFactoryId: ${azurerm_data_factory.example.id}
     name: example
   providerConfigRef:

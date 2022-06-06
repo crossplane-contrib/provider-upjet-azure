@@ -6,7 +6,10 @@ spec:
   forProvider:
     database: myexamplesqldatabase
     name: example-output-sql
-    password: ${azurerm_sql_server.example.administrator_login_password}
+    passwordSecretRef:
+      key: attribute.administrator_login_password
+      name: example-sql-server
+      namespace: crossplane-system
     resourceGroupNameRef:
       name: example
     server: ${azurerm_sql_server.example.fully_qualified_domain_name}

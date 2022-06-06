@@ -4,7 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    developerAppInsightsApiKey: ${azurerm_application_insights_api_key.example.api_key}
+    developerAppInsightsApiKeySecretRef:
+      key: attribute.api_key
+      name: example-application-insights-api-key
+      namespace: crossplane-system
     developerAppInsightsApplicationId: ${azurerm_application_insights.example.app_id}
     endpoint: https://example.com
     location: global
