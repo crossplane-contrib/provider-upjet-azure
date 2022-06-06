@@ -1,7 +1,7 @@
 apiVersion: azure.upbound.io/v1alpha2
 kind: ResourceGroup
 metadata:
-  name: example
+  name: test-official-providers-jet
 spec:
   forProvider:
     location: West Europe
