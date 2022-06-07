@@ -27,6 +27,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/apimanagement"
 	"github.com/upbound/official-providers/provider-azure/config/base"
 	"github.com/upbound/official-providers/provider-azure/config/common"
+	"github.com/upbound/official-providers/provider-azure/config/compute"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
 	"github.com/upbound/official-providers/provider-azure/config/devices"
@@ -86,6 +87,7 @@ var includedResources = []string{
 	"azurerm_network_interface$",
 	"azurerm_mariadb_.+",
 	"azurerm_public_ip$",
+	"azurerm_disk_encryption_set$",
 }
 
 // These resources cannot be generated because of their suffixes colliding with
@@ -185,6 +187,7 @@ func GetProvider() *tjconfig.Provider {
 		keyvault.Configure,
 		eventhub.Configure,
 		mariadb.Configure,
+		compute.Configure,
 	} {
 		configure(pc)
 	}

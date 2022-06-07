@@ -13,6 +13,7 @@ import (
 	v1alpha2 "github.com/upbound/official-providers/provider-azure/apis/authorization/v1alpha2"
 	v1alpha2azure "github.com/upbound/official-providers/provider-azure/apis/azure/v1alpha2"
 	v1alpha2cache "github.com/upbound/official-providers/provider-azure/apis/cache/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/compute/v1beta1"
 	v1alpha2containerservice "github.com/upbound/official-providers/provider-azure/apis/containerservice/v1alpha2"
 	v1alpha1 "github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1alpha1"
 	v1alpha2cosmosdb "github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1alpha2"
@@ -40,6 +41,7 @@ func init() {
 		v1alpha2.SchemeBuilder.AddToScheme,
 		v1alpha2azure.SchemeBuilder.AddToScheme,
 		v1alpha2cache.SchemeBuilder.AddToScheme,
+		v1beta1.SchemeBuilder.AddToScheme,
 		v1alpha2containerservice.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha2cosmosdb.SchemeBuilder.AddToScheme,
