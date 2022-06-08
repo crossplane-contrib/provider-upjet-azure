@@ -16,6 +16,7 @@ import (
 	redisenterprisedatabase "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisfirewallrule"
 	redislinkedserver "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redislinkedserver"
+	diskencryptionset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/diskencryptionset"
 	kubernetescluster "github.com/upbound/official-providers/provider-azure/internal/controller/containerservice/kubernetescluster"
 	kubernetesclusternodepool "github.com/upbound/official-providers/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
 	account "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/account"
@@ -119,6 +120,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
 		redislinkedserver.Setup,
+		diskencryptionset.Setup,
 		kubernetescluster.Setup,
 		kubernetesclusternodepool.Setup,
 		account.Setup,
