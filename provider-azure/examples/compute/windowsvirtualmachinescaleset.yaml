@@ -1,0 +1,35 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: WindowsVirtualMachineScaleSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    adminUsername: adminuser
+    instances: 1
+    location: West Europe
+    networkInterface:
+    - ipConfiguration:
+      - name: internal
+        primary: true
+        subnetId: ...
+        subnetIdRef:
+          name: internal
+      name: example
+      primary: true
+    osDisk:
+    - caching: ReadWrite
+      storageAccountType: Standard_LRS
+    resourceGroupNameRef:
+      name: example
+    sku: Standard_F2
+    sourceImageReference:
+    - offer: WindowsServer
+      publisher: MicrosoftWindowsServer
+      sku: 2016-Datacenter-Server-Core
+      version: latest
+  providerConfigRef:
+    name: example

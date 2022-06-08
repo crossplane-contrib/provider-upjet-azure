@@ -8,9 +8,7 @@ spec:
     - type: SystemAssigned
     keyVaultKeyId: https://yyy-example-keyvault.vault.azure.net/keys/yyppdd-example-key/0cdfea4ef85045b0a3a8ca539f6a311c
     location: West Europe
-    #name: des
-    resourceGroupName: example-resources
     resourceGroupNameRef:
-      name: example-resources
+      name: example
   providerConfigRef:
-    name: default
+    name: example

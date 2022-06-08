@@ -86,3 +86,299 @@ func (tr *DiskEncryptionSet) LateInitialize(attrs []byte) (bool, error) {
 func (tr *DiskEncryptionSet) GetTerraformSchemaVersion() int {
 	return 0
 }
+
+// GetTerraformResourceType returns Terraform resource type for this LinuxVirtualMachine
+func (mg *LinuxVirtualMachine) GetTerraformResourceType() string {
+	return "azurerm_linux_virtual_machine"
+}
+
+// GetConnectionDetailsMapping for this LinuxVirtualMachine
+func (tr *LinuxVirtualMachine) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"admin_password": "spec.forProvider.adminPasswordSecretRef", "custom_data": "spec.forProvider.customDataSecretRef"}
+}
+
+// GetObservation of this LinuxVirtualMachine
+func (tr *LinuxVirtualMachine) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinuxVirtualMachine
+func (tr *LinuxVirtualMachine) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinuxVirtualMachine
+func (tr *LinuxVirtualMachine) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinuxVirtualMachine
+func (tr *LinuxVirtualMachine) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinuxVirtualMachine
+func (tr *LinuxVirtualMachine) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinuxVirtualMachine using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinuxVirtualMachine) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinuxVirtualMachineParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinuxVirtualMachine) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinuxVirtualMachineScaleSet
+func (mg *LinuxVirtualMachineScaleSet) GetTerraformResourceType() string {
+	return "azurerm_linux_virtual_machine_scale_set"
+}
+
+// GetConnectionDetailsMapping for this LinuxVirtualMachineScaleSet
+func (tr *LinuxVirtualMachineScaleSet) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"admin_password": "spec.forProvider.adminPasswordSecretRef", "custom_data": "spec.forProvider.customDataSecretRef", "extension[*].protected_settings": "spec.forProvider.extension[*].protectedSettingsSecretRef"}
+}
+
+// GetObservation of this LinuxVirtualMachineScaleSet
+func (tr *LinuxVirtualMachineScaleSet) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinuxVirtualMachineScaleSet
+func (tr *LinuxVirtualMachineScaleSet) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinuxVirtualMachineScaleSet
+func (tr *LinuxVirtualMachineScaleSet) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinuxVirtualMachineScaleSet
+func (tr *LinuxVirtualMachineScaleSet) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinuxVirtualMachineScaleSet
+func (tr *LinuxVirtualMachineScaleSet) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinuxVirtualMachineScaleSet using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinuxVirtualMachineScaleSet) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinuxVirtualMachineScaleSetParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinuxVirtualMachineScaleSet) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this WindowsVirtualMachine
+func (mg *WindowsVirtualMachine) GetTerraformResourceType() string {
+	return "azurerm_windows_virtual_machine"
+}
+
+// GetConnectionDetailsMapping for this WindowsVirtualMachine
+func (tr *WindowsVirtualMachine) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"additional_unattend_content[*].content": "spec.forProvider.additionalUnattendContent[*].contentSecretRef", "admin_password": "spec.forProvider.adminPasswordSecretRef", "custom_data": "spec.forProvider.customDataSecretRef"}
+}
+
+// GetObservation of this WindowsVirtualMachine
+func (tr *WindowsVirtualMachine) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this WindowsVirtualMachine
+func (tr *WindowsVirtualMachine) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this WindowsVirtualMachine
+func (tr *WindowsVirtualMachine) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this WindowsVirtualMachine
+func (tr *WindowsVirtualMachine) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this WindowsVirtualMachine
+func (tr *WindowsVirtualMachine) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this WindowsVirtualMachine using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *WindowsVirtualMachine) LateInitialize(attrs []byte) (bool, error) {
+	params := &WindowsVirtualMachineParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *WindowsVirtualMachine) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this WindowsVirtualMachineScaleSet
+func (mg *WindowsVirtualMachineScaleSet) GetTerraformResourceType() string {
+	return "azurerm_windows_virtual_machine_scale_set"
+}
+
+// GetConnectionDetailsMapping for this WindowsVirtualMachineScaleSet
+func (tr *WindowsVirtualMachineScaleSet) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"additional_unattend_content[*].content": "spec.forProvider.additionalUnattendContent[*].contentSecretRef", "admin_password": "spec.forProvider.adminPasswordSecretRef", "custom_data": "spec.forProvider.customDataSecretRef", "extension[*].protected_settings": "spec.forProvider.extension[*].protectedSettingsSecretRef"}
+}
+
+// GetObservation of this WindowsVirtualMachineScaleSet
+func (tr *WindowsVirtualMachineScaleSet) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this WindowsVirtualMachineScaleSet
+func (tr *WindowsVirtualMachineScaleSet) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this WindowsVirtualMachineScaleSet
+func (tr *WindowsVirtualMachineScaleSet) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this WindowsVirtualMachineScaleSet
+func (tr *WindowsVirtualMachineScaleSet) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this WindowsVirtualMachineScaleSet
+func (tr *WindowsVirtualMachineScaleSet) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this WindowsVirtualMachineScaleSet using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *WindowsVirtualMachineScaleSet) LateInitialize(attrs []byte) (bool, error) {
+	params := &WindowsVirtualMachineScaleSetParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *WindowsVirtualMachineScaleSet) GetTerraformSchemaVersion() int {
+	return 0
+}

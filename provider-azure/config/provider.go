@@ -88,6 +88,7 @@ var includedResources = []string{
 	"azurerm_mariadb_.+",
 	"azurerm_public_ip$",
 	"azurerm_disk_encryption_set$",
+	"azurerm_(windows|linux)_virtual_.+",
 }
 
 // These resources cannot be generated because of their suffixes colliding with
