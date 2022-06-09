@@ -53,7 +53,7 @@ UP_CHANNEL = main
 # Setup Images
 
 DOCKER_REGISTRY ?= crossplane
-IMAGES = provider-azure provider-azure-controller
+IMAGES = provider-azure-controller
 -include build/makelib/image.mk
 
 # ====================================================================================
