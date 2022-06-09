@@ -1,4 +1,4 @@
-apiVersion: relay.azure.upbound.io/v1alpha1
+apiVersion: relay.azure.upbound.io/v1beta1
 kind: NamespaceAuthorizationRule
 metadata:
   name: example

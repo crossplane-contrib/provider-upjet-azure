@@ -1,4 +1,4 @@
-apiVersion: mysql.azure.upbound.io/v1alpha1
+apiVersion: mysql.azure.upbound.io/v1beta1
 kind: FlexibleServerConfiguration
 metadata:
   name: example

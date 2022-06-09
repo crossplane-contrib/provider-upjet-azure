@@ -1,4 +1,4 @@
-apiVersion: communication.azure.upbound.io/v1alpha1
+apiVersion: communication.azure.upbound.io/v1beta1
 kind: Service
 metadata:
   name: example

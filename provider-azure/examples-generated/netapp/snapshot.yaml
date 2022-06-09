@@ -1,4 +1,4 @@
-apiVersion: netapp.azure.upbound.io/v1alpha1
+apiVersion: netapp.azure.upbound.io/v1beta1
 kind: Snapshot
 metadata:
   name: example

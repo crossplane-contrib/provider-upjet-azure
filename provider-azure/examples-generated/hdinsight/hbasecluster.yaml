@@ -1,4 +1,4 @@
-apiVersion: hdinsight.azure.upbound.io/v1alpha1
+apiVersion: hdinsight.azure.upbound.io/v1beta1
 kind: HBaseCluster
 metadata:
   name: example

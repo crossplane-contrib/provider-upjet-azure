@@ -1,4 +1,4 @@
-apiVersion: hardwaresecuritymodules.azure.upbound.io/v1alpha1
+apiVersion: hardwaresecuritymodules.azure.upbound.io/v1beta1
 kind: DedicatedHardwareSecurityModule
 metadata:
   name: example

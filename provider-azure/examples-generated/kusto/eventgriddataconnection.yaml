@@ -1,4 +1,4 @@
-apiVersion: kusto.azure.upbound.io/v1alpha1
+apiVersion: kusto.azure.upbound.io/v1beta1
 kind: EventGridDataConnection
 metadata:
   name: example

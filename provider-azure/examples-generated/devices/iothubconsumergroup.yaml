@@ -1,4 +1,4 @@
-apiVersion: devices.azure.upbound.io/v1alpha2
+apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHubConsumerGroup
 metadata:
   name: example

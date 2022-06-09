@@ -1,4 +1,4 @@
-apiVersion: avs.azure.upbound.io/v1alpha1
+apiVersion: avs.azure.upbound.io/v1beta1
 kind: VMwareExpressRouteAuthorization
 metadata:
   name: example

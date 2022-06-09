@@ -1,4 +1,4 @@
-apiVersion: healthcare.azure.upbound.io/v1alpha1
+apiVersion: healthcare.azure.upbound.io/v1beta1
 kind: FHIRService
 metadata:
   name: example

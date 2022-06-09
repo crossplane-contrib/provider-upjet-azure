@@ -1,4 +1,4 @@
-apiVersion: storagecache.azure.upbound.io/v1alpha1
+apiVersion: storagecache.azure.upbound.io/v1beta1
 kind: HPCCacheBlobNFSTarget
 metadata:
   name: example

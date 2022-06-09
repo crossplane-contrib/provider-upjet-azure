@@ -1,4 +1,4 @@
-apiVersion: vpn.azure.upbound.io/v1alpha1
+apiVersion: vpn.azure.upbound.io/v1beta1
 kind: GatewayNATRule
 metadata:
   name: example

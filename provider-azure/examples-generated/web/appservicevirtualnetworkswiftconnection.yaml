@@ -1,4 +1,4 @@
-apiVersion: web.azure.upbound.io/v1alpha1
+apiVersion: web.azure.upbound.io/v1beta1
 kind: AppServiceVirtualNetworkSwiftConnection
 metadata:
   name: example

@@ -1,4 +1,4 @@
-apiVersion: managedidentity.azure.upbound.io/v1alpha1
+apiVersion: managedidentity.azure.upbound.io/v1beta1
 kind: UserAssignedIdentity
 metadata:
   name: example

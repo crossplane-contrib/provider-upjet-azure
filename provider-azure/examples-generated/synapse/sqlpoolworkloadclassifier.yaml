@@ -1,4 +1,4 @@
-apiVersion: synapse.azure.upbound.io/v1alpha1
+apiVersion: synapse.azure.upbound.io/v1beta1
 kind: SQLPoolWorkloadClassifier
 metadata:
   name: example

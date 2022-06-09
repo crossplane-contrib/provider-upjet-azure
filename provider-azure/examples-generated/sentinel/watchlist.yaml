@@ -1,4 +1,4 @@
-apiVersion: sentinel.azure.upbound.io/v1alpha1
+apiVersion: sentinel.azure.upbound.io/v1beta1
 kind: Watchlist
 metadata:
   name: example

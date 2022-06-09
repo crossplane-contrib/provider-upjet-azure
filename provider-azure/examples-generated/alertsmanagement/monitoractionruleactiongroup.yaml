@@ -1,4 +1,4 @@
-apiVersion: alertsmanagement.azure.upbound.io/v1alpha1
+apiVersion: alertsmanagement.azure.upbound.io/v1beta1
 kind: MonitorActionRuleActionGroup
 metadata:
   name: example

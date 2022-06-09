@@ -1,4 +1,4 @@
-apiVersion: compute.azure.upbound.io/v1alpha1
+apiVersion: compute.azure.upbound.io/v1beta1
 kind: DedicatedHost
 metadata:
   name: example

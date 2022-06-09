@@ -146,7 +146,7 @@ var skipList = []string{
 
 // GetProvider returns provider configuration
 func GetProvider() *tjconfig.Provider {
-	pc := tjconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, "",
+	pc := tjconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, "hack/provider-metadata.yaml",
 		tjconfig.WithShortName("azure"),
 		tjconfig.WithRootGroup("azure.upbound.io"),
 		tjconfig.WithIncludeList(includedResources),

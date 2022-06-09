@@ -1,4 +1,4 @@
-apiVersion: management.azure.upbound.io/v1alpha1
+apiVersion: management.azure.upbound.io/v1beta1
 kind: GroupPolicyRemediation
 metadata:
   name: example

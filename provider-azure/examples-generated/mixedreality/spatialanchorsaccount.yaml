@@ -1,4 +1,4 @@
-apiVersion: mixedreality.azure.upbound.io/v1alpha1
+apiVersion: mixedreality.azure.upbound.io/v1beta1
 kind: SpatialAnchorsAccount
 metadata:
   name: example

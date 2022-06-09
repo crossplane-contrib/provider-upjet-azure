@@ -1,4 +1,4 @@
-apiVersion: compute.azure.upbound.io/v1alpha1
+apiVersion: compute.azure.upbound.io/v1beta1
 kind: WindowsVirtualMachine
 metadata:
   name: example
@@ -10,7 +10,6 @@ spec:
       namespace: crossplane-system
     adminUsername: adminuser
     location: West Europe
-    name: example-machine
     networkInterfaceIds:
     - ${azurerm_network_interface.example.id}
     osDisk:

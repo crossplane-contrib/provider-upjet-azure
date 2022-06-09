@@ -1,4 +1,4 @@
-apiVersion: monitor.azure.upbound.io/v1alpha1
+apiVersion: monitor.azure.upbound.io/v1beta1
 kind: PrivateLinkScopedService
 metadata:
   name: example

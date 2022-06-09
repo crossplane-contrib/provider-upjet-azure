@@ -1,4 +1,4 @@
-apiVersion: machinelearningservices.azure.upbound.io/v1alpha1
+apiVersion: machinelearningservices.azure.upbound.io/v1beta1
 kind: SynapseSpark
 metadata:
   name: example

@@ -1,4 +1,4 @@
-apiVersion: iotcentral.azure.upbound.io/v1alpha1
+apiVersion: iotcentral.azure.upbound.io/v1beta1
 kind: Application
 metadata:
   name: example

@@ -1,4 +1,4 @@
-apiVersion: managedservices.azure.upbound.io/v1alpha1
+apiVersion: managedservices.azure.upbound.io/v1beta1
 kind: LighthouseAssignment
 metadata:
   name: example

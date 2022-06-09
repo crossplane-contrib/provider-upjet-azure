@@ -1,4 +1,4 @@
-apiVersion: dbformariadb.azure.upbound.io/v1alpha2
+apiVersion: dbformariadb.azure.upbound.io/v1beta1
 kind: VirtualNetworkRule
 metadata:
   name: example

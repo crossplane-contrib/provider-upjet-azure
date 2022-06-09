@@ -1,4 +1,4 @@
-apiVersion: maintenance.azure.upbound.io/v1alpha1
+apiVersion: maintenance.azure.upbound.io/v1beta1
 kind: MaintenanceConfiguration
 metadata:
   name: example

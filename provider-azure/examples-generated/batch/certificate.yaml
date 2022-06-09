@@ -1,4 +1,4 @@
-apiVersion: batch.azure.upbound.io/v1alpha1
+apiVersion: batch.azure.upbound.io/v1beta1
 kind: Certificate
 metadata:
   name: example

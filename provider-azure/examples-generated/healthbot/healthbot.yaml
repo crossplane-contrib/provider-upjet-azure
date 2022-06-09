@@ -1,4 +1,4 @@
-apiVersion: healthbot.azure.upbound.io/v1alpha1
+apiVersion: healthbot.azure.upbound.io/v1beta1
 kind: HealthBot
 metadata:
   name: example

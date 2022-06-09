@@ -1,4 +1,4 @@
-apiVersion: cosmosdb.azure.upbound.io/v1alpha2
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: MongoDatabase
 metadata:
   name: example

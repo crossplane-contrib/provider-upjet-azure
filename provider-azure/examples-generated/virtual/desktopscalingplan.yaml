@@ -1,4 +1,4 @@
-apiVersion: virtual.azure.upbound.io/v1alpha1
+apiVersion: virtual.azure.upbound.io/v1beta1
 kind: DesktopScalingPlan
 metadata:
   name: example

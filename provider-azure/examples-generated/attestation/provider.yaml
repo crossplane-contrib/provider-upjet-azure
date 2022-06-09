@@ -1,4 +1,4 @@
-apiVersion: attestation.azure.upbound.io/v1alpha1
+apiVersion: attestation.azure.upbound.io/v1beta1
 kind: Provider
 metadata:
   name: example

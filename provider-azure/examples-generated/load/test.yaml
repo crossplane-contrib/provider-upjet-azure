@@ -1,4 +1,4 @@
-apiVersion: load.azure.upbound.io/v1alpha1
+apiVersion: load.azure.upbound.io/v1beta1
 kind: Test
 metadata:
   name: example

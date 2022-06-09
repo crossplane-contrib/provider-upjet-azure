@@ -1,4 +1,4 @@
-apiVersion: aad.azure.upbound.io/v1alpha1
+apiVersion: aad.azure.upbound.io/v1beta1
 kind: ActiveDirectoryDomainService
 metadata:
   name: example

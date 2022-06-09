@@ -1,4 +1,4 @@
-apiVersion: eventgrid.azure.upbound.io/v1alpha1
+apiVersion: eventgrid.azure.upbound.io/v1beta1
 kind: SystemTopicEventSubscription
 metadata:
   name: example

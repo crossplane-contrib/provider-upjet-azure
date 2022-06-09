@@ -1,4 +1,4 @@
-apiVersion: servicebus.azure.upbound.io/v1alpha1
+apiVersion: servicebus.azure.upbound.io/v1beta1
 kind: NamespaceNetworkRuleSet
 metadata:
   name: example

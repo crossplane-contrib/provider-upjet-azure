@@ -1,4 +1,4 @@
-apiVersion: resources.azure.upbound.io/v1alpha1
+apiVersion: resources.azure.upbound.io/v1beta1
 kind: ManagementGroupSubscriptionAssociation
 metadata:
   name: example

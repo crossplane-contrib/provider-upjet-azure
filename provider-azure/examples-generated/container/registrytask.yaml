@@ -1,6 +1,6 @@
 # This example manifest is auto-generated, and has not been tested.
 # Please make the necessary adjustments before using it.
-#apiVersion: container.azure.upbound.io/v1alpha1
+#apiVersion: container.azure.upbound.io/v1beta1
 #kind: RegistryTask
 #metadata:
 #  name: example

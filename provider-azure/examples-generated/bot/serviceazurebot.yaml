@@ -1,4 +1,4 @@
-apiVersion: bot.azure.upbound.io/v1alpha1
+apiVersion: bot.azure.upbound.io/v1beta1
 kind: ServiceAzureBot
 metadata:
   name: example

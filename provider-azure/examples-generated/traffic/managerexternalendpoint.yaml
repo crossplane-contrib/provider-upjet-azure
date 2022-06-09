@@ -1,4 +1,4 @@
-apiVersion: traffic.azure.upbound.io/v1alpha1
+apiVersion: traffic.azure.upbound.io/v1beta1
 kind: ManagerExternalEndpoint
 metadata:
   name: example

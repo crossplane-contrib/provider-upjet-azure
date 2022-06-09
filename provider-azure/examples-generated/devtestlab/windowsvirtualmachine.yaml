@@ -1,4 +1,4 @@
-apiVersion: devtestlab.azure.upbound.io/v1alpha1
+apiVersion: devtestlab.azure.upbound.io/v1beta1
 kind: WindowsVirtualMachine
 metadata:
   name: example

@@ -1,4 +1,4 @@
-apiVersion: resource.azure.upbound.io/v1alpha1
+apiVersion: resource.azure.upbound.io/v1beta1
 kind: PolicyExemption
 metadata:
   name: example

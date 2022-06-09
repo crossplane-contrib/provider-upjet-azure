@@ -1,4 +1,4 @@
-apiVersion: static.azure.upbound.io/v1alpha1
+apiVersion: static.azure.upbound.io/v1beta1
 kind: SiteCustomDomain
 metadata:
   name: example

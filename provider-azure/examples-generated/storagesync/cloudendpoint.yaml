@@ -1,4 +1,4 @@
-apiVersion: storagesync.azure.upbound.io/v1alpha1
+apiVersion: storagesync.azure.upbound.io/v1beta1
 kind: CloudEndpoint
 metadata:
   name: example

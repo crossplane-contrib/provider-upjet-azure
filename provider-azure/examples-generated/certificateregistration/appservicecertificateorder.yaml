@@ -1,4 +1,4 @@
-apiVersion: certificateregistration.azure.upbound.io/v1alpha1
+apiVersion: certificateregistration.azure.upbound.io/v1beta1
 kind: AppServiceCertificateOrder
 metadata:
   name: example

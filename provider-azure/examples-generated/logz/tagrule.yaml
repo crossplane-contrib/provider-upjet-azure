@@ -1,4 +1,4 @@
-apiVersion: logz.azure.upbound.io/v1alpha1
+apiVersion: logz.azure.upbound.io/v1beta1
 kind: TagRule
 metadata:
   name: example

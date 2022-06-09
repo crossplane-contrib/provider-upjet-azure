@@ -1,4 +1,4 @@
-apiVersion: streamanalytics.azure.upbound.io/v1alpha1
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: ReferenceInputBlob
 metadata:
   name: example

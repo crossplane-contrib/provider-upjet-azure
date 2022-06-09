@@ -1,4 +1,4 @@
-apiVersion: api.azure.upbound.io/v1alpha1
+apiVersion: api.azure.upbound.io/v1beta1
 kind: ManagementNotificationRecipientUser
 metadata:
   name: example

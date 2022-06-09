@@ -1,4 +1,4 @@
-apiVersion: timeseriesinsights.azure.upbound.io/v1alpha1
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
 kind: StandardEnvironment
 metadata:
   name: example

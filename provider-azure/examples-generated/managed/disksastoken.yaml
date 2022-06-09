@@ -1,4 +1,4 @@
-apiVersion: managed.azure.upbound.io/v1alpha1
+apiVersion: managed.azure.upbound.io/v1beta1
 kind: DiskSASToken
 metadata:
   name: example

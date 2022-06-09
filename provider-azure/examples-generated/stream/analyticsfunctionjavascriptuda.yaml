@@ -1,4 +1,4 @@
-apiVersion: stream.azure.upbound.io/v1alpha1
+apiVersion: stream.azure.upbound.io/v1beta1
 kind: AnalyticsFunctionJavascriptUda
 metadata:
   name: example

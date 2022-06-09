@@ -1,4 +1,4 @@
-apiVersion: aadb2c.azure.upbound.io/v1alpha1
+apiVersion: aadb2c.azure.upbound.io/v1beta1
 kind: Directory
 metadata:
   name: example

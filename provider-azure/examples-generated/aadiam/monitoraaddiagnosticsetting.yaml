@@ -1,4 +1,4 @@
-apiVersion: aadiam.azure.upbound.io/v1alpha1
+apiVersion: aadiam.azure.upbound.io/v1beta1
 kind: MonitorAADDiagnosticSetting
 metadata:
   name: example

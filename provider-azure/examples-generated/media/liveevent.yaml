@@ -1,4 +1,4 @@
-apiVersion: media.azure.upbound.io/v1alpha1
+apiVersion: media.azure.upbound.io/v1beta1
 kind: LiveEvent
 metadata:
   name: example

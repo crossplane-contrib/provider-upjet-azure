@@ -1,4 +1,4 @@
-apiVersion: container.azure.upbound.io/v1alpha1
+apiVersion: container.azure.upbound.io/v1beta1
 kind: ConnectedRegistry
 metadata:
   name: example

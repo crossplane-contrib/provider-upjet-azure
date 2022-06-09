@@ -1,4 +1,4 @@
-apiVersion: blueprint.azure.upbound.io/v1alpha1
+apiVersion: blueprint.azure.upbound.io/v1beta1
 kind: Assignment
 metadata:
   name: example

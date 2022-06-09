@@ -1,4 +1,4 @@
-apiVersion: authorization.azure.upbound.io/v1alpha2
+apiVersion: authorization.azure.upbound.io/v1beta1
 kind: ResourceGroupPolicyAssignment
 metadata:
   name: example

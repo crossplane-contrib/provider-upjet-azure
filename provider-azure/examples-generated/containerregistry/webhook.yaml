@@ -1,4 +1,4 @@
-apiVersion: containerregistry.azure.upbound.io/v1alpha1
+apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: Webhook
 metadata:
   name: example

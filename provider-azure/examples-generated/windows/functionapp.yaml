@@ -1,4 +1,4 @@
-apiVersion: windows.azure.upbound.io/v1alpha1
+apiVersion: windows.azure.upbound.io/v1beta1
 kind: FunctionApp
 metadata:
   name: example

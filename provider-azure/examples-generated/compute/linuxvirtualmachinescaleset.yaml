@@ -1,4 +1,4 @@
-apiVersion: compute.azure.upbound.io/v1alpha1
+apiVersion: compute.azure.upbound.io/v1beta1
 kind: LinuxVirtualMachineScaleSet
 metadata:
   name: example
@@ -10,7 +10,6 @@ spec:
     adminUsername: adminuser
     instances: 1
     location: West Europe
-    name: example-vmss
     networkInterface:
     - ipConfiguration:
       - name: internal

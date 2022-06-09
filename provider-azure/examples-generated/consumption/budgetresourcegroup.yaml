@@ -1,4 +1,4 @@
-apiVersion: consumption.azure.upbound.io/v1alpha1
+apiVersion: consumption.azure.upbound.io/v1beta1
 kind: BudgetResourceGroup
 metadata:
   name: example

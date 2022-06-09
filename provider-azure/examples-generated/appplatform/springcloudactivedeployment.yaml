@@ -1,4 +1,4 @@
-apiVersion: appplatform.azure.upbound.io/v1alpha1
+apiVersion: appplatform.azure.upbound.io/v1beta1
 kind: SpringCloudActiveDeployment
 metadata:
   name: example

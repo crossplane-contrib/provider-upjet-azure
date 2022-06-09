@@ -1,4 +1,4 @@
-apiVersion: automation.azure.upbound.io/v1alpha1
+apiVersion: automation.azure.upbound.io/v1beta1
 kind: RunBook
 metadata:
   name: example

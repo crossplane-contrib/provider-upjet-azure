@@ -1,4 +1,4 @@
-apiVersion: botservice.azure.upbound.io/v1alpha1
+apiVersion: botservice.azure.upbound.io/v1beta1
 kind: BotChannelDirectLine
 metadata:
   name: example

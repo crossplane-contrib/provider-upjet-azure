@@ -1,4 +1,4 @@
-apiVersion: azurestackhci.azure.upbound.io/v1alpha1
+apiVersion: azurestackhci.azure.upbound.io/v1beta1
 kind: Cluster
 metadata:
   name: example

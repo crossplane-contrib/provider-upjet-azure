@@ -1,4 +1,4 @@
-apiVersion: digitaltwins.azure.upbound.io/v1alpha1
+apiVersion: digitaltwins.azure.upbound.io/v1beta1
 kind: Instance
 metadata:
   name: example

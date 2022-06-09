@@ -1,4 +1,4 @@
-apiVersion: disk.azure.upbound.io/v1alpha1
+apiVersion: disk.azure.upbound.io/v1beta1
 kind: PoolISCSITarget
 metadata:
   name: example

@@ -1,4 +1,4 @@
-apiVersion: subscription.azure.upbound.io/v1alpha1
+apiVersion: subscription.azure.upbound.io/v1beta1
 kind: CostManagementExport
 metadata:
   name: example

@@ -1,4 +1,4 @@
-apiVersion: spring.azure.upbound.io/v1alpha1
+apiVersion: spring.azure.upbound.io/v1beta1
 kind: CloudStorage
 metadata:
   name: example

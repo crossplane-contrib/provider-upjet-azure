@@ -1,4 +1,4 @@
-apiVersion: sqlvirtualmachine.azure.upbound.io/v1alpha1
+apiVersion: sqlvirtualmachine.azure.upbound.io/v1beta1
 kind: MSSQLVirtualMachine
 metadata:
   name: example

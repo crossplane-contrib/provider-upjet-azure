@@ -1,4 +1,4 @@
-apiVersion: solutions.azure.upbound.io/v1alpha1
+apiVersion: solutions.azure.upbound.io/v1beta1
 kind: ManagedApplicationDefinition
 metadata:
   name: example

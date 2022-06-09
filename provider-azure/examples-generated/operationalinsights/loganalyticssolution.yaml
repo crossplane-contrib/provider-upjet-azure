@@ -1,4 +1,4 @@
-apiVersion: operationalinsights.azure.upbound.io/v1alpha1
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
 kind: LogAnalyticsSolution
 metadata:
   name: example

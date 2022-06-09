@@ -1,4 +1,4 @@
-apiVersion: elastic.azure.upbound.io/v1alpha1
+apiVersion: elastic.azure.upbound.io/v1beta1
 kind: CloudElasticsearch
 metadata:
   name: example
