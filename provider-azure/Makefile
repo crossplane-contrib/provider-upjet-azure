@@ -107,7 +107,7 @@ xpkg.build: $(UP)
 
 xpkg.push: $(UP)
 	@$(INFO) Pushing package provider-azure-$(VERSION).xpkg
-	@$(UP) xpkg push -f $(OUTPUT_DIR)/provider-azure-$(VERSION).xpkg upbound/provider-azure-staging:$(VERSION) || $(FAIL)
+	@$(UP) xpkg push -f $(OUTPUT_DIR)/xpkg/provider-azure-$(VERSION).xpkg upbound/provider-azure-staging:$(VERSION) || $(FAIL)
 	@$(OK) Pushed package provider-azure-$(VERSION).xpkg
 
 xpkg.load: $(UP)
