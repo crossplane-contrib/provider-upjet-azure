@@ -132,7 +132,7 @@ type IPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPAddress []PublicIPAddressParameters `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1alpha2.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -334,7 +334,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1alpha2.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -40,7 +40,6 @@ const (
 // Configure configures postgresql group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_postgresql_server", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"ssl_enforcement", "storage_profile"},
 		}
@@ -65,7 +64,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_configuration", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"server_id": config.Reference{
 				Type:      "FlexibleServer",
@@ -76,7 +74,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_database", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -96,7 +93,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_active_directory_administrator", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			// TODO(aru): this may have to be a reference to the server's resource group
 			"resource_group_name": config.Reference{
@@ -122,7 +118,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_database", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"server_id": config.Reference{
 				Type:      "FlexibleServer",
@@ -147,7 +142,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_firewall_rule", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -167,7 +161,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_firewall_rule", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"server_id": config.Reference{
 				Type:      "FlexibleServer",
@@ -192,7 +185,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"ssl_enforcement", "storage_profile"},
 		}
@@ -215,7 +207,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_virtual_network_rule", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -239,7 +230,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_server_key", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"server_id": config.Reference{
 				Type:      "Server",
@@ -261,7 +251,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_configuration", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,

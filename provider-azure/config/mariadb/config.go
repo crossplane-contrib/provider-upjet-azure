@@ -34,7 +34,6 @@ const (
 // Configure configures mariadb group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mariadb_server", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"ssl_enforcement", "storage_profile"},
 		}
@@ -54,7 +53,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_mariadb_database", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"server_name": config.Reference{
 				Type: "Server",
@@ -71,7 +69,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_mariadb_firewall_rule", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"server_name": config.Reference{
 				Type: "Server",
@@ -88,7 +85,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_mariadb_virtual_network_rule", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"server_name": config.Reference{
 				Type: "Server",
@@ -105,7 +101,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_mariadb_configuration", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"server_name": config.Reference{
 				Type: "Server",

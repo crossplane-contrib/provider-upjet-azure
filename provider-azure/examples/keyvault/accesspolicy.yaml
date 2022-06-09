@@ -1,4 +1,4 @@
-apiVersion: keyvault.azure.upbound.io/v1alpha2
+apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
   name: example-vaultpolicy

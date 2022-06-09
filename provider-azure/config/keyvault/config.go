@@ -92,7 +92,6 @@ func getIssuerURLIDFn(resourceType string) config.GetIDFn {
 // Configure configures keyvault group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_key_vault", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.UseAsync = true
 		delete(r.TerraformResource.Schema, "access_policy") // we have the keyvault.AccessPolicy instead
 		r.ExternalName = config.NameAsIdentifier
@@ -102,7 +101,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_secret", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetResourceNameFromIDURLFn(2)
@@ -117,7 +115,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_key", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetResourceNameFromIDURLFn(2)
@@ -132,7 +129,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_certificate", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetResourceNameFromIDURLFn(2)
@@ -147,7 +143,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_certificate_issuer", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetResourceNameFromIDURLFn(1)
@@ -162,7 +157,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_managed_storage_account", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetResourceNameFromIDURLFn(1)
@@ -181,7 +175,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_managed_hardware_security_module", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
@@ -190,7 +183,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_access_policy", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.UseAsync = true
 		// TODO(aru): Adopt this function for azurerm_key_vault_access_policy
 		/* r.ExternalName = config.NameAsIdentifier
@@ -207,7 +199,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_managed_storage_account_sas_token_definition", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetResourceNameFromIDURLFn(1)

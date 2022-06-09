@@ -60,7 +60,6 @@ func msSQLConnectionDetails(attr map[string]interface{}) (map[string][]byte, err
 // Configure configures sql group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mssql_server", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -76,7 +75,6 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("azurerm_mssql_server_transparent_data_encryption", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"server_id": config.Reference{
 				Type:      "MSSQLServer",

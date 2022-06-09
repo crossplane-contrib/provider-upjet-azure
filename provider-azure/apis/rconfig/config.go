@@ -29,11 +29,17 @@ const (
 	// ExtractResourceIDFuncPath holds the Azure resource ID extractor func name
 	ExtractResourceIDFuncPath = APISPackagePath + "/rconfig.ExtractResourceID()"
 
+	// VersionV1Alpha2 is used as minimum version for all manually configured resources.
+	// Deprecated: Please use VersionV1Beta1 as minimum.
+	VersionV1Alpha2 = "v1alpha2"
+	// VersionV1Beta1 is used to signify that the resource has been tested and external name configured
+	VersionV1Beta1 = "v1beta1"
+
 	// ResourceGroupPath is used as subpackage path for ResourceGroup
-	ResourceGroupPath = "/azure/v1alpha2.ResourceGroup"
+	ResourceGroupPath = "/azure/" + VersionV1Beta1 + ".ResourceGroup"
 
 	// SubnetPath is used as subpackage path for network.Subnet
-	SubnetPath = "/network/v1alpha2.Subnet"
+	SubnetPath = "/network/" + VersionV1Beta1 + ".Subnet"
 
 	// ResourceGroupReferencePath is used as import path for ResourceGroup
 	ResourceGroupReferencePath = APISPackagePath + ResourceGroupPath
@@ -42,10 +48,13 @@ const (
 	SubnetReferencePath = APISPackagePath + SubnetPath
 
 	// StorageAccountReferencePath is used as import path for StorageAccount
-	StorageAccountReferencePath = APISPackagePath + "/storage/v1alpha2.Account"
+	StorageAccountReferencePath = APISPackagePath + "/storage/" + VersionV1Beta1 + ".Account"
 
 	// VaultKeyReferencePath is used as import path for VaultKey
-	VaultKeyReferencePath = APISPackagePath + "/keyvault/v1alpha2.Key"
+	VaultKeyReferencePath = APISPackagePath + "/keyvault/" + VersionV1Beta1 + ".Key"
+
+	// ContainerReferencePath is used as import path for Container
+	ContainerReferencePath = APISPackagePath + "/storage/" + VersionV1Beta1 + ".Container"
 )
 
 // ExtractResourceID extracts the value of `spec.atProvider.id`

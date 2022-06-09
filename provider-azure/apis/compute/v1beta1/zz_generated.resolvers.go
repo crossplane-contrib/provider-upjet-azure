@@ -9,8 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1alpha2 "github.com/upbound/official-providers/provider-azure/apis/azure/v1alpha2"
-	v1alpha21 "github.com/upbound/official-providers/provider-azure/apis/network/v1alpha2"
+	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -28,8 +28,8 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1alpha2.ResourceGroupList{},
-			Managed: &v1alpha2.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -54,8 +54,8 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1alpha2.ResourceGroupList{},
-			Managed: &v1alpha2.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -82,8 +82,8 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 				Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 				To: reference.To{
-					List:    &v1alpha21.SubnetList{},
-					Managed: &v1alpha21.Subnet{},
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
 				},
 			})
 			if err != nil {
@@ -100,8 +100,8 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1alpha2.ResourceGroupList{},
-			Managed: &v1alpha2.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -126,8 +126,8 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1alpha2.ResourceGroupList{},
-			Managed: &v1alpha2.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -154,8 +154,8 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 				Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 				To: reference.To{
-					List:    &v1alpha21.SubnetList{},
-					Managed: &v1alpha21.Subnet{},
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
 				},
 			})
 			if err != nil {
@@ -172,8 +172,8 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1alpha2.ResourceGroupList{},
-			Managed: &v1alpha2.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {

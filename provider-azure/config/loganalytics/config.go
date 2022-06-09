@@ -28,7 +28,6 @@ const groupLog = "loganalytics"
 // Configure configures loganalytics group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_log_analytics_workspace", func(r *config.Resource) {
-		r.Version = common.VersionV1Beta1
 		r.Kind = "Workspace"
 		r.ShortGroup = groupLog
 		r.References = config.References{
