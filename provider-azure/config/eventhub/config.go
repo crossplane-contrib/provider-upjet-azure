@@ -25,7 +25,7 @@ import (
 // Configure configures resource group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_eventhub_namespace", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.Kind = "EventHubNamespace"
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -40,7 +40,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"namespace_name": config.Reference{
 				Type: "EventHubNamespace",
@@ -57,7 +57,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub_consumer_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"namespace_name": config.Reference{
 				Type: "EventHubNamespace",
@@ -78,7 +78,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub_authorization_rule", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"namespace_name": config.Reference{
 				Type: "EventHubNamespace",

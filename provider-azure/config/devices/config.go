@@ -30,7 +30,7 @@ import (
 // Configure configures iothub group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_iothub", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 
 		// Note(ezgidemirel): Following fields are not marked as "sensitive" in Terraform cli schema output.
 		// We need to configure them explicitly to store in connectionDetails secret.
@@ -61,7 +61,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_consumer_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -79,7 +79,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_dps", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -93,7 +93,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_dps_certificate", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -111,7 +111,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_dps_shared_access_policy", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -129,7 +129,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_shared_access_policy", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -147,7 +147,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_endpoint_storage_container", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"iothub_name": config.Reference{
 				Type: "IOTHub",
@@ -166,7 +166,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_fallback_route", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"iothub_name": config.Reference{
 				Type: "IOTHub",

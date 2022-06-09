@@ -32,7 +32,7 @@ import (
 // Configure configures redis group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_redis_cache", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -51,7 +51,7 @@ func Configure(p *config.Provider) {
 		)
 	})
 	p.AddResourceConfigurator("azurerm_redis_firewall_rule", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"redis_cache_name": config.Reference{
 				Type: "RedisCache",
@@ -70,7 +70,7 @@ func Configure(p *config.Provider) {
 		)
 	})
 	p.AddResourceConfigurator("azurerm_redis_linked_server", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"linked_redis_cache_id": config.Reference{
 				Type:      "RedisCache",
@@ -88,7 +88,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_redis_enterprise_cluster", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
@@ -104,7 +104,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_redis_enterprise_database", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
+		r.Version = common.VersionV1Beta1
 		r.References = config.References{
 			"resource_group_name": config.Reference{
 				Type: rconfig.ResourceGroupReferencePath,
