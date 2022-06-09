@@ -53,7 +53,7 @@ UP_CHANNEL = main
 # Setup Images
 
 DOCKER_REGISTRY ?= upbound
-IMAGES = provider-azure-controller
+IMAGES = provider-azure
 -include build/makelib/image.mk
 
 # ====================================================================================
@@ -102,7 +102,7 @@ run: go.build
 xpkg.build: $(UP)
 	@$(INFO) Building package provider-azure-$(VERSION).xpkg
 	@mkdir -p $(OUTPUT_DIR)/xpkg
-	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-azure-controller-$(SAFEHOSTARCH) -f ./package -e ./examples --name ../_output/xpkg/provider-azure-$(VERSION).xpkg || $(FAIL)
+	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-azure-$(SAFEHOSTARCH) -f ./package -e ./examples --name ../_output/xpkg/provider-azure-$(VERSION).xpkg || $(FAIL)
 	@$(OK) Built package provider-azure-$(VERSION).xpkg
 
 xpkg.push: $(UP)
@@ -121,7 +121,7 @@ generate: codegen.pipeline
 provider-azure.vendor: prepare.azurerm vendor
 
 # must match Docker build file env. variable TERRAFORM_PROVIDER_AZURERM_VERSION in
-# cluster/images/provider-azure-controller/Dockerfile
+# cluster/images/provider-azure/Dockerfile
 prepare.azurerm:
 	@WORK_DIR=.work TERRAFORM_PROVIDER_VERSION=$(TERRAFORM_PROVIDER_VERSION) ./scripts/prepare_azurerm.sh
 
