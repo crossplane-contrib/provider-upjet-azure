@@ -45,13 +45,15 @@ GO_LINT_ARGS ?= --skip-files internal/controller/zz_setup.go --skip-files intern
 # ====================================================================================
 # Setup Kubernetes tools
 
+UP_VERSION = v0.12.0-rc.0.30.g591e132
+UP_CHANNEL = main
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
 # Setup Images
 
-DOCKER_REGISTRY ?= crossplane
-IMAGES = provider-azure provider-azure-controller
+DOCKER_REGISTRY ?= upbound
+IMAGES = provider-azure
 -include build/makelib/image.mk
 
 # ====================================================================================
@@ -97,13 +99,29 @@ run: go.build
 	@# To see other arguments that can be provided, run the command with --help instead
 	$(GO_OUT_DIR)/provider --debug
 
+xpkg.build: $(UP)
+	@$(INFO) Building package provider-azure-$(VERSION).xpkg
+	@mkdir -p $(OUTPUT_DIR)/xpkg
+	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-azure-$(SAFEHOSTARCH) -f ./package -e ./examples --name ../_output/xpkg/provider-azure-$(VERSION).xpkg || $(FAIL)
+	@$(OK) Built package provider-azure-$(VERSION).xpkg
+
+xpkg.push: $(UP)
+	@$(INFO) Pushing package provider-azure-$(VERSION).xpkg
+	@$(UP) xpkg push -f $(OUTPUT_DIR)/xpkg/provider-azure-$(VERSION).xpkg upbound/provider-azure-staging:$(VERSION) || $(FAIL)
+	@$(OK) Pushed package provider-azure-$(VERSION).xpkg
+
+xpkg.load: $(UP)
+	@$(INFO) Loading package provider-azure-$(VERSION).xpkg into Docker daemon
+	@docker load -i $(OUTPUT_DIR)/xpkg/provider-azure-$(VERSION).xpkg
+	@$(OK) Loaded package provider-azure-$(VERSION).xpkg into Docker daemon
+
 reviewable: prepare.azurerm
 test: prepare.azurerm
 generate: codegen.pipeline
 provider-azure.vendor: prepare.azurerm vendor
 
 # must match Docker build file env. variable TERRAFORM_PROVIDER_AZURERM_VERSION in
-# cluster/images/provider-azure-controller/Dockerfile
+# cluster/images/provider-azure/Dockerfile
 prepare.azurerm:
 	@WORK_DIR=.work TERRAFORM_PROVIDER_VERSION=$(TERRAFORM_PROVIDER_VERSION) ./scripts/prepare_azurerm.sh
 
