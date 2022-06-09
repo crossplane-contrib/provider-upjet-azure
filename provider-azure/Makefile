@@ -45,6 +45,8 @@ GO_LINT_ARGS ?= --skip-files internal/controller/zz_setup.go --skip-files intern
 # ====================================================================================
 # Setup Kubernetes tools
 
+UP_VERSION = v0.12.0-rc.0.30.g591e132
+UP_CHANNEL = main
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
@@ -96,6 +98,22 @@ run: go.build
 	@$(INFO) Running Crossplane locally out-of-cluster . . .
 	@# To see other arguments that can be provided, run the command with --help instead
 	$(GO_OUT_DIR)/provider --debug
+
+xpkg.build: $(UP)
+	@$(INFO) Building package provider-azure-$(VERSION).xpkg
+	@mkdir -p $(OUTPUT_DIR)/xpkg
+	@$(UP) xpkg build --controller $(BUILD_REGISTRY)/provider-azure-controller-$(SAFEHOSTARCH) -f ./package -e ./examples --name ../_output/xpkg/provider-azure-$(VERSION).xpkg || $(FAIL)
+	@$(OK) Built package provider-azure-$(VERSION).xpkg
+
+xpkg.push: $(UP)
+	@$(INFO) Pushing package provider-azure-$(VERSION).xpkg
+	@$(UP) xpkg push -f $(OUTPUT_DIR)/provider-azure-$(VERSION).xpkg upbound/provider-azure-staging:$(VERSION) || $(FAIL)
+	@$(OK) Pushed package provider-azure-$(VERSION).xpkg
+
+xpkg.load: $(UP)
+	@$(INFO) Loading package provider-azure-$(VERSION).xpkg into Docker daemon
+	@docker load -i $(OUTPUT_DIR)/xpkg/provider-azure-$(VERSION).xpkg
+	@$(OK) Loaded package provider-azure-$(VERSION).xpkg into Docker daemon
 
 reviewable: prepare.azurerm
 test: prepare.azurerm
