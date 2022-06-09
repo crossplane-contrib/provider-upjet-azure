@@ -52,7 +52,7 @@ UP_CHANNEL = main
 # ====================================================================================
 # Setup Images
 
-DOCKER_REGISTRY ?= crossplane
+DOCKER_REGISTRY ?= upbound
 IMAGES = provider-azure-controller
 -include build/makelib/image.mk
 
