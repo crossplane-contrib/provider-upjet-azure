@@ -1,4 +1,4 @@
-apiVersion: dbforpostgresql.azure.upbound.io/v1alpha2
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: FirewallRule
 metadata:
   name: example-firewall-rule

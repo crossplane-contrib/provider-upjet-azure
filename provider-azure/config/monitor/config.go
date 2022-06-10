@@ -26,7 +26,6 @@ import (
 // Configure configures monitor group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_monitor_metric_alert", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		// TODO: configure azurerm_monitor_action_group reference
 		// TODO: configure generic reference for 'scopes' field
 		r.References = config.References{

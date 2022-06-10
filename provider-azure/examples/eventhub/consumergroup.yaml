@@ -1,4 +1,4 @@
-apiVersion: eventhub.azure.upbound.io/v1alpha2
+apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: ConsumerGroup
 metadata:
   name: example

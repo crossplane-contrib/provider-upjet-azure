@@ -21,6 +21,8 @@ import (
 
 	tjconfig "github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/types/name"
+
+	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
 )
 
 var (
@@ -70,6 +72,12 @@ func groupOverrides() tjconfig.ResourceOption {
 			i = len(parts) - 1
 		}
 		r.Kind = name.NewFromSnake(strings.Join(parts[i:], "_")).Camel
+	}
+}
+
+func defaultVersion() tjconfig.ResourceOption {
+	return func(r *tjconfig.Resource) {
+		r.Version = rconfig.VersionV1Beta1
 	}
 }
 

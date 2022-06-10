@@ -28,7 +28,6 @@ import (
 // Configure configures management group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_management_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "ManagementGroup"
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID

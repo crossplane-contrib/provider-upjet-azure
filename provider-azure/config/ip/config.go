@@ -26,7 +26,6 @@ import (
 // Configure configures ip group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_ip_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "IPGroup"
 		r.ShortGroup = "network"
 		r.References = config.References{

@@ -41,11 +41,6 @@ const (
 	nameReferenceKind = "name"
 	// idReferenceKind represents ID reference kind
 	idReferenceKind = "id"
-
-	// VersionV1Alpha2 is used as minimum version for all manually configured resources.
-	VersionV1Alpha2 = "v1alpha2"
-	// VersionV1Beta1 is used to signify that the resource has been tested and external name configured
-	VersionV1Beta1 = "v1beta1"
 )
 
 // GetNameFromFullyQualifiedID extracts external-name from Azure ID

@@ -31,8 +31,6 @@ import (
 // Configure configures kubernetes group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_kubernetes_cluster", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
-
 		// Note(ezgidemirel): Following fields are not marked as "sensitive" in Terraform cli schema output.
 		// We need to configure them explicitly to store in connectionDetails secret.
 		r.TerraformResource.Schema["kube_admin_config"].Elem.(*schema.Resource).
@@ -91,7 +89,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_kubernetes_cluster_node_pool", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "KubernetesClusterNodePool"
 		r.ShortGroup = "containerservice"
 		r.References = config.References{

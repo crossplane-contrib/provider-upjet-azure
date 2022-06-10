@@ -42,7 +42,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_resource_group", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "ResourceGroup"
 		r.ShortGroup = ""
 		r.ExternalName = config.NameAsIdentifier

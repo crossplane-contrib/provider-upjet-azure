@@ -28,7 +28,6 @@ const groupNetwork = "network"
 // Configure configures virtual group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_network_interface", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "NetworkInterface"
 		r.ShortGroup = groupNetwork
 		r.ExternalName = config.NameAsIdentifier
@@ -37,7 +36,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_lb", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "LoadBalancer"
 		r.ShortGroup = groupNetwork
 		r.References = config.References{
@@ -52,7 +50,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "VirtualNetwork"
 		r.ShortGroup = groupNetwork
 		r.References = config.References{
@@ -72,7 +69,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "VirtualNetworkGateway"
 		r.ShortGroup = groupNetwork
 		r.References = config.References{
@@ -94,7 +90,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_peering", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "VirtualNetworkPeering"
 		r.ShortGroup = groupNetwork
 		r.References = config.References{
@@ -138,7 +133,6 @@ func Configure(p *config.Provider) {
 	})*/
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway_connection", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "VirtualNetworkGatewayConnection"
 		r.ShortGroup = groupNetwork
 		r.References = config.References{
@@ -173,7 +167,6 @@ func Configure(p *config.Provider) {
 	})*/
 
 	p.AddResourceConfigurator("azurerm_virtual_wan", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "VirtualWAN"
 		r.ShortGroup = groupNetwork
 		r.References = config.References{
@@ -199,7 +192,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_public_ip", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
 		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/publicIPAddresses/myPublicIpAddress1

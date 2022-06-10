@@ -26,7 +26,6 @@ import (
 // Configure configures resource group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_resource_group_template_deployment", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "ResourceGroupTemplateDeployment"
 		r.ShortGroup = "resources"
 		r.References = config.References{
@@ -44,7 +43,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_resource_group_policy_assignment", func(r *config.Resource) {
-		r.Version = common.VersionV1Alpha2
 		r.Kind = "ResourceGroupPolicyAssignment"
 		r.ShortGroup = "authorization"
 		r.References = config.References{
