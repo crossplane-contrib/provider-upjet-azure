@@ -1,9 +1,0 @@
-apiVersion: security.azure.upbound.io/v1beta1
-kind: SecurityCenterAutoProvisioning
-metadata:
-  name: example
-spec:
-  forProvider:
-    autoProvision: "On"
-  providerConfigRef:
-    name: example
