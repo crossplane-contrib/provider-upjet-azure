@@ -15,3 +15,39 @@ func (l *DiskEncryptionSetList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this LinuxVirtualMachineList.
+func (l *LinuxVirtualMachineList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this LinuxVirtualMachineScaleSetList.
+func (l *LinuxVirtualMachineScaleSetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WindowsVirtualMachineList.
+func (l *WindowsVirtualMachineList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WindowsVirtualMachineScaleSetList.
+func (l *WindowsVirtualMachineScaleSetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

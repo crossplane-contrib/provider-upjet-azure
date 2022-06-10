@@ -72,3 +72,267 @@ func (mg *DiskEncryptionSet) SetPublishConnectionDetailsTo(r *xpv1.PublishConnec
 func (mg *DiskEncryptionSet) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinuxVirtualMachine.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinuxVirtualMachine) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinuxVirtualMachine.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinuxVirtualMachine) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinuxVirtualMachine.
+func (mg *LinuxVirtualMachine) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinuxVirtualMachineScaleSet.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinuxVirtualMachineScaleSet) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinuxVirtualMachineScaleSet.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinuxVirtualMachineScaleSet) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinuxVirtualMachineScaleSet.
+func (mg *LinuxVirtualMachineScaleSet) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this WindowsVirtualMachine.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *WindowsVirtualMachine) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this WindowsVirtualMachine.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *WindowsVirtualMachine) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WindowsVirtualMachine.
+func (mg *WindowsVirtualMachine) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this WindowsVirtualMachineScaleSet.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *WindowsVirtualMachineScaleSet) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this WindowsVirtualMachineScaleSet.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *WindowsVirtualMachineScaleSet) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WindowsVirtualMachineScaleSet.
+func (mg *WindowsVirtualMachineScaleSet) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

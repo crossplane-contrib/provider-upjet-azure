@@ -1,0 +1,26 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: LinuxVirtualMachine
+metadata:
+  name: example
+spec:
+  forProvider:
+    adminSshKey:
+    - publicKey: ...
+      username: adminuser
+    adminUsername: adminuser
+    location: West Europe
+    networkInterfaceIds:
+    - '...'
+    osDisk:
+    - caching: ReadWrite
+      storageAccountType: Standard_LRS
+    resourceGroupNameRef:
+      name: example
+    size: Standard_F2
+    sourceImageReference:
+    - offer: UbuntuServer
+      publisher: Canonical
+      sku: 16.04-LTS
+      version: latest
+  providerConfigRef:
+    name: example

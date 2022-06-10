@@ -17,6 +17,10 @@ import (
 	redisfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisfirewallrule"
 	redislinkedserver "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redislinkedserver"
 	diskencryptionset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/diskencryptionset"
+	linuxvirtualmachine "github.com/upbound/official-providers/provider-azure/internal/controller/compute/linuxvirtualmachine"
+	linuxvirtualmachinescaleset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/linuxvirtualmachinescaleset"
+	windowsvirtualmachine "github.com/upbound/official-providers/provider-azure/internal/controller/compute/windowsvirtualmachine"
+	windowsvirtualmachinescaleset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
 	kubernetescluster "github.com/upbound/official-providers/provider-azure/internal/controller/containerservice/kubernetescluster"
 	kubernetesclusternodepool "github.com/upbound/official-providers/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
 	account "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/account"
@@ -121,6 +125,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		redisfirewallrule.Setup,
 		redislinkedserver.Setup,
 		diskencryptionset.Setup,
+		linuxvirtualmachine.Setup,
+		linuxvirtualmachinescaleset.Setup,
+		windowsvirtualmachine.Setup,
+		windowsvirtualmachinescaleset.Setup,
 		kubernetescluster.Setup,
 		kubernetesclusternodepool.Setup,
 		account.Setup,
