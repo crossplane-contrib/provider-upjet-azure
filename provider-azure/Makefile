@@ -3,6 +3,7 @@
 
 PROJECT_NAME := provider-azure
 PROJECT_REPO := github.com/upbound/official-providers/$(PROJECT_NAME)
+PROJECT_VERSION_TAG_GROUP := azure
 
 export TERRAFORM_PROVIDER_SOURCE ?= hashicorp/azurerm
 export TERRAFORM_VERSION ?= 1.2.1
