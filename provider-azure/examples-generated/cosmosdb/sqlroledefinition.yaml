@@ -1,4 +1,4 @@
-apiVersion: cosmosdb.azure.upbound.io/v1alpha1
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLRoleDefinition
 metadata:
   name: example

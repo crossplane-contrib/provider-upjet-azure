@@ -1,9 +1,0 @@
-apiVersion: portal.azure.upbound.io/v1alpha1
-kind: TenantConfiguration
-metadata:
-  name: example
-spec:
-  forProvider:
-    privateMarkdownStorageEnforced: true
-  providerConfigRef:
-    name: example

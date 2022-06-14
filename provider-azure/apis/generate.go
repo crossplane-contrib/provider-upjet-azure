@@ -23,6 +23,12 @@ limitations under the License.
 // Remove existing CRDs
 //go:generate rm -rf ../package/crds
 
+// Remove generated example manifests
+//go:generate rm -rf ../examples-generated
+
+// Run Terrajet generator
+//go:generate go run ../cmd/generator/main.go ..
+
 // Generate deepcopy methodsets and CRD manifests
 //go:generate go run -tags generate sigs.k8s.io/controller-tools/cmd/controller-gen object:headerFile=../hack/boilerplate.go.txt paths=./... crd:crdVersions=v1,allowDangerousTypes=true output:artifacts:config=../package/crds
 

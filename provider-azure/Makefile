@@ -116,19 +116,6 @@ xpkg.load: $(UP)
 	@docker load -i $(OUTPUT_DIR)/xpkg/provider-azure-$(VERSION).xpkg
 	@$(OK) Loaded package provider-azure-$(VERSION).xpkg into Docker daemon
 
-reviewable: prepare.azurerm
-test: prepare.azurerm
-generate: codegen.pipeline
-provider-azure.vendor: prepare.azurerm vendor
-
-# must match Docker build file env. variable TERRAFORM_PROVIDER_AZURERM_VERSION in
-# cluster/images/provider-azure/Dockerfile
-prepare.azurerm:
-	@WORK_DIR=.work TERRAFORM_PROVIDER_VERSION=$(TERRAFORM_PROVIDER_VERSION) ./scripts/prepare_azurerm.sh
-
-codegen.pipeline: prepare.azurerm
-	@USE_INCLUDE_LIST=true go run cmd/generator/main.go
-
 .PHONY: cobertura submodules fallthrough run crds.clean
 
 # ====================================================================================

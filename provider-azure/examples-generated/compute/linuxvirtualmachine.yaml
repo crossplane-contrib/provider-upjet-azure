@@ -1,4 +1,4 @@
-apiVersion: compute.azure.upbound.io/v1alpha1
+apiVersion: compute.azure.upbound.io/v1beta1
 kind: LinuxVirtualMachine
 metadata:
   name: example
@@ -9,7 +9,6 @@ spec:
       username: adminuser
     adminUsername: adminuser
     location: West Europe
-    name: example-machine
     networkInterfaceIds:
     - ${azurerm_network_interface.example.id}
     osDisk:

@@ -1,9 +1,0 @@
-apiVersion: web.azure.upbound.io/v1alpha1
-kind: AppServiceManagedCertificate
-metadata:
-  name: example
-spec:
-  forProvider:
-    customHostnameBindingId: ${azurerm_app_service_custom_hostname_binding.example.id}
-  providerConfigRef:
-    name: example

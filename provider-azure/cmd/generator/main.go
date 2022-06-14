@@ -17,6 +17,7 @@ limitations under the License.
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -29,17 +30,26 @@ import (
 )
 
 func main() {
+	if len(os.Args) < 2 || os.Args[1] == "" {
+		panic("root directory is required to be given as argument")
+	}
+	rootDir := os.Args[1]
+	absRootDir, err := filepath.Abs(rootDir)
+	if err != nil {
+		panic(fmt.Sprintf("cannot calculate the absolute path with %s", rootDir))
+	}
+
 	// delete API dirs
-	deleteGenDirs("apis", map[string]struct{}{
+	deleteGenDirs(absRootDir+"/apis", map[string]struct{}{
 		"v1alpha1": {},
 		"rconfig":  {},
 	})
 	// delete controller dirs
-	deleteGenDirs("internal/controller", map[string]struct{}{
+	deleteGenDirs(absRootDir+"/internal/controller", map[string]struct{}{
 		"providerconfig": {},
 	})
 
-	pipeline.Run(config.GetProvider(), "")
+	pipeline.Run(config.GetProvider(), absRootDir)
 }
 
 // delete API subdirs for a clean start
