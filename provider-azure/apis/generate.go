@@ -23,6 +23,9 @@ limitations under the License.
 // Remove existing CRDs
 //go:generate rm -rf ../package/crds
 
+// Remove generated example manifests
+//go:generate rm -rf ../examples-generated
+
 // Run Terrajet generator
 //go:generate go run ../cmd/generator/main.go ..
 
