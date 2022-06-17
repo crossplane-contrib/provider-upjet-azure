@@ -1,11 +1,11 @@
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
-  name: test-official-providers
+  name: test-official-rg
 spec:
   forProvider:
     location: "East US"
     tags:
-      provisioner: crossplane
+      provisioner: upbound
   providerConfigRef:
     name: default
