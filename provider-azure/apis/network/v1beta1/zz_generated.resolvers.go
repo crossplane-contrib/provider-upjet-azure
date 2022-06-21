@@ -23,6 +23,24 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.FrontendIPConfiguration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressIDRef,
+			Selector:     mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressIDSelector,
+			To: reference.To{
+				List:    &PublicIPList{},
+				Managed: &PublicIP{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressID")
+		}
+		mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.FrontendIPConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FrontendIPConfiguration[i3].SubnetID),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.FrontendIPConfiguration[i3].SubnetIDRef,
@@ -54,6 +72,252 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadbalancerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LoadbalancerIDRef,
+		Selector:     mg.Spec.ForProvider.LoadbalancerIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerList{},
+			Managed: &LoadBalancer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadbalancerID")
+	}
+	mg.Spec.ForProvider.LoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadbalancerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackendAddressPoolID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.BackendAddressPoolIDRef,
+		Selector:     mg.Spec.ForProvider.BackendAddressPoolIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerBackendAddressPoolList{},
+			Managed: &LoadBalancerBackendAddressPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BackendAddressPoolID")
+	}
+	mg.Spec.ForProvider.BackendAddressPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackendAddressPoolIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualNetworkID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualNetworkIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualNetworkIDSelector,
+		To: reference.To{
+			List:    &VirtualNetworkList{},
+			Managed: &VirtualNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualNetworkID")
+	}
+	mg.Spec.ForProvider.VirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualNetworkIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadbalancerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LoadbalancerIDRef,
+		Selector:     mg.Spec.ForProvider.LoadbalancerIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerList{},
+			Managed: &LoadBalancer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadbalancerID")
+	}
+	mg.Spec.ForProvider.LoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadbalancerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadbalancerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LoadbalancerIDRef,
+		Selector:     mg.Spec.ForProvider.LoadbalancerIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerList{},
+			Managed: &LoadBalancer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadbalancerID")
+	}
+	mg.Spec.ForProvider.LoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadbalancerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackendAddressPoolID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.BackendAddressPoolIDRef,
+		Selector:     mg.Spec.ForProvider.BackendAddressPoolIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerBackendAddressPoolList{},
+			Managed: &LoadBalancerBackendAddressPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BackendAddressPoolID")
+	}
+	mg.Spec.ForProvider.BackendAddressPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackendAddressPoolIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadbalancerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LoadbalancerIDRef,
+		Selector:     mg.Spec.ForProvider.LoadbalancerIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerList{},
+			Managed: &LoadBalancer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadbalancerID")
+	}
+	mg.Spec.ForProvider.LoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadbalancerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadbalancerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LoadbalancerIDRef,
+		Selector:     mg.Spec.ForProvider.LoadbalancerIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerList{},
+			Managed: &LoadBalancer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadbalancerID")
+	}
+	mg.Spec.ForProvider.LoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadbalancerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LoadBalancerRule.
+func (mg *LoadBalancerRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadbalancerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LoadbalancerIDRef,
+		Selector:     mg.Spec.ForProvider.LoadbalancerIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerList{},
+			Managed: &LoadBalancer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoadbalancerID")
+	}
+	mg.Spec.ForProvider.LoadbalancerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoadbalancerIDRef = rsp.ResolvedReference
 
 	return nil
 }

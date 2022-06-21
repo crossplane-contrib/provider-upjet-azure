@@ -75,7 +75,7 @@ var includedResources = []string{
 	"azurerm_sql_server",
 	"azurerm_mssql_server$",
 	"azurerm_mssql_server_transparent_data_encryption$",
-	"azurerm_lb$",
+	"azurerm_lb.*",
 	"azurerm_log_analytics_workspace",
 	"azurerm_iothub.*",
 	"azurerm_monitor_metric_alert",

@@ -1,0 +1,14 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerBackendAddressPoolAddress
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendAddressPoolIdRef:
+      name: example
+    ipAddress: 10.0.0.1
+    name: example
+    virtualNetworkIdRef:
+      name: example
+  providerConfigRef:
+    name: example

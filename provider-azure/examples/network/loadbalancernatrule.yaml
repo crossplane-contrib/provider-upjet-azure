@@ -1,0 +1,16 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerNatRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendPort: 3389
+    frontendIpConfigurationName: PublicIPAddress
+    frontendPort: 3389
+    loadbalancerIdRef:
+      name: example-lb
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

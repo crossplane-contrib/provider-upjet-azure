@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: loadbalancers.network.azure.upbound.io
+  name: loadbalancernatpools.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: LoadBalancer
-    listKind: LoadBalancerList
-    plural: loadbalancers
-    singular: loadbalancer
+    kind: LoadBalancerNatPool
+    listKind: LoadBalancerNatPoolList
+    plural: loadbalancernatpools
+    singular: loadbalancernatpool
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LoadBalancer is the Schema for the LoadBalancers API
+        description: LoadBalancerNatPool is the Schema for the LoadBalancerNatPools
+          API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: LoadBalancerSpec defines the desired state of LoadBalancer
+            description: LoadBalancerNatPoolSpec defines the desired state of LoadBalancerNatPool
             properties:
               deletionPolicy:
                 default: Delete
@@ -63,84 +64,44 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  edgeZone:
+                  backendPort:
+                    type: number
+                  floatingIpEnabled:
+                    type: boolean
+                  frontendIpConfigurationName:
                     type: string
-                  frontendIpConfiguration:
-                    items:
-                      properties:
-                        gatewayLoadBalancerFrontendIpConfigurationId:
+                  frontendPortEnd:
+                    type: number
+                  frontendPortStart:
+                    type: number
+                  idleTimeoutInMinutes:
+                    type: number
+                  loadbalancerId:
+                    type: string
+                  loadbalancerIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  loadbalancerIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
                           type: string
-                        name:
-                          type: string
-                        privateIpAddress:
-                          type: string
-                        privateIpAddressAllocation:
-                          type: string
-                        privateIpAddressVersion:
-                          type: string
-                        publicIpAddressId:
-                          type: string
-                        publicIpAddressIdRef:
-                          description: A Reference to a named object.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                          required:
-                          - name
-                          type: object
-                        publicIpAddressIdSelector:
-                          description: A Selector selects an object.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                          type: object
-                        publicIpPrefixId:
-                          type: string
-                        subnetId:
-                          type: string
-                        subnetIdRef:
-                          description: A Reference to a named object.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                          required:
-                          - name
-                          type: object
-                        subnetIdSelector:
-                          description: A Selector selects an object.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                          type: object
-                        zones:
-                          items:
-                            type: string
-                          type: array
-                      required:
-                      - name
-                      type: object
-                    type: array
-                  location:
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  protocol:
                     type: string
                   resourceGroupName:
                     type: string
@@ -167,16 +128,14 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  sku:
-                    type: string
-                  skuTier:
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    type: object
+                  tcpResetEnabled:
+                    type: boolean
                 required:
-                - location
+                - backendPort
+                - frontendIpConfigurationName
+                - frontendPortEnd
+                - frontendPortStart
+                - protocol
                 type: object
               providerConfigRef:
                 default:
@@ -275,37 +234,14 @@ spec:
             - forProvider
             type: object
           status:
-            description: LoadBalancerStatus defines the observed state of LoadBalancer.
+            description: LoadBalancerNatPoolStatus defines the observed state of LoadBalancerNatPool.
             properties:
               atProvider:
                 properties:
-                  frontendIpConfiguration:
-                    items:
-                      properties:
-                        id:
-                          type: string
-                        inboundNatRules:
-                          items:
-                            type: string
-                          type: array
-                        loadBalancerRules:
-                          items:
-                            type: string
-                          type: array
-                        outboundRules:
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
+                  frontendIpConfigurationId:
+                    type: string
                   id:
                     type: string
-                  privateIpAddress:
-                    type: string
-                  privateIpAddresses:
-                    items:
-                      type: string
-                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -87,6 +87,13 @@ import (
 	vault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/vault"
 	workspace "github.com/upbound/official-providers/provider-azure/internal/controller/loganalytics/workspace"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
+	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
+	loadbalancerbackendaddresspooladdress "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspooladdress"
+	loadbalancernatpool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancernatpool"
+	loadbalancernatrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancernatrule"
+	loadbalanceroutboundrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalanceroutboundrule"
+	loadbalancerprobe "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerprobe"
+	loadbalancerrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerrule"
 	networkinterface "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterface"
 	publicip "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicip"
 	subnet "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnet"
@@ -195,6 +202,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vault.Setup,
 		workspace.Setup,
 		loadbalancer.Setup,
+		loadbalancerbackendaddresspool.Setup,
+		loadbalancerbackendaddresspooladdress.Setup,
+		loadbalancernatpool.Setup,
+		loadbalancernatrule.Setup,
+		loadbalanceroutboundrule.Setup,
+		loadbalancerprobe.Setup,
+		loadbalancerrule.Setup,
 		networkinterface.Setup,
 		publicip.Setup,
 		subnet.Setup,

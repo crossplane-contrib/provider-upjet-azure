@@ -73,6 +73,468 @@ func (mg *LoadBalancer) SetWriteConnectionSecretToReference(r *xpv1.SecretRefere
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LoadBalancerBackendAddressPool.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LoadBalancerBackendAddressPool) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LoadBalancerBackendAddressPool.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LoadBalancerBackendAddressPool) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LoadBalancerBackendAddressPool.
+func (mg *LoadBalancerBackendAddressPool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LoadBalancerBackendAddressPoolAddress.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LoadBalancerBackendAddressPoolAddress) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LoadBalancerBackendAddressPoolAddress.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LoadBalancerBackendAddressPoolAddress) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LoadBalancerBackendAddressPoolAddress.
+func (mg *LoadBalancerBackendAddressPoolAddress) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LoadBalancerNatPool.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LoadBalancerNatPool) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LoadBalancerNatPool.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LoadBalancerNatPool) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LoadBalancerNatPool.
+func (mg *LoadBalancerNatPool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LoadBalancerNatRule.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LoadBalancerNatRule) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LoadBalancerNatRule.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LoadBalancerNatRule) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LoadBalancerNatRule.
+func (mg *LoadBalancerNatRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LoadBalancerOutboundRule.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LoadBalancerOutboundRule) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LoadBalancerOutboundRule.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LoadBalancerOutboundRule) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LoadBalancerOutboundRule.
+func (mg *LoadBalancerOutboundRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LoadBalancerProbe.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LoadBalancerProbe) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LoadBalancerProbe.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LoadBalancerProbe) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LoadBalancerProbe.
+func (mg *LoadBalancerProbe) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LoadBalancerRule.
+func (mg *LoadBalancerRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LoadBalancerRule.
+func (mg *LoadBalancerRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LoadBalancerRule.
+func (mg *LoadBalancerRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LoadBalancerRule.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LoadBalancerRule) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LoadBalancerRule.
+func (mg *LoadBalancerRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LoadBalancerRule.
+func (mg *LoadBalancerRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LoadBalancerRule.
+func (mg *LoadBalancerRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LoadBalancerRule.
+func (mg *LoadBalancerRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LoadBalancerRule.
+func (mg *LoadBalancerRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LoadBalancerRule.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LoadBalancerRule) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LoadBalancerRule.
+func (mg *LoadBalancerRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LoadBalancerRule.
+func (mg *LoadBalancerRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this NetworkInterface.
 func (mg *NetworkInterface) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

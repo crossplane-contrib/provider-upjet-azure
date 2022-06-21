@@ -87,6 +87,524 @@ func (tr *LoadBalancer) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this LoadBalancerBackendAddressPool
+func (mg *LoadBalancerBackendAddressPool) GetTerraformResourceType() string {
+	return "azurerm_lb_backend_address_pool"
+}
+
+// GetConnectionDetailsMapping for this LoadBalancerBackendAddressPool
+func (tr *LoadBalancerBackendAddressPool) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LoadBalancerBackendAddressPool
+func (tr *LoadBalancerBackendAddressPool) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LoadBalancerBackendAddressPool
+func (tr *LoadBalancerBackendAddressPool) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LoadBalancerBackendAddressPool
+func (tr *LoadBalancerBackendAddressPool) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LoadBalancerBackendAddressPool
+func (tr *LoadBalancerBackendAddressPool) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LoadBalancerBackendAddressPool
+func (tr *LoadBalancerBackendAddressPool) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LoadBalancerBackendAddressPool using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LoadBalancerBackendAddressPool) LateInitialize(attrs []byte) (bool, error) {
+	params := &LoadBalancerBackendAddressPoolParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LoadBalancerBackendAddressPool) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LoadBalancerBackendAddressPoolAddress
+func (mg *LoadBalancerBackendAddressPoolAddress) GetTerraformResourceType() string {
+	return "azurerm_lb_backend_address_pool_address"
+}
+
+// GetConnectionDetailsMapping for this LoadBalancerBackendAddressPoolAddress
+func (tr *LoadBalancerBackendAddressPoolAddress) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LoadBalancerBackendAddressPoolAddress
+func (tr *LoadBalancerBackendAddressPoolAddress) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LoadBalancerBackendAddressPoolAddress
+func (tr *LoadBalancerBackendAddressPoolAddress) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LoadBalancerBackendAddressPoolAddress
+func (tr *LoadBalancerBackendAddressPoolAddress) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LoadBalancerBackendAddressPoolAddress
+func (tr *LoadBalancerBackendAddressPoolAddress) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LoadBalancerBackendAddressPoolAddress
+func (tr *LoadBalancerBackendAddressPoolAddress) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LoadBalancerBackendAddressPoolAddress using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LoadBalancerBackendAddressPoolAddress) LateInitialize(attrs []byte) (bool, error) {
+	params := &LoadBalancerBackendAddressPoolAddressParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LoadBalancerBackendAddressPoolAddress) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LoadBalancerNatPool
+func (mg *LoadBalancerNatPool) GetTerraformResourceType() string {
+	return "azurerm_lb_nat_pool"
+}
+
+// GetConnectionDetailsMapping for this LoadBalancerNatPool
+func (tr *LoadBalancerNatPool) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LoadBalancerNatPool
+func (tr *LoadBalancerNatPool) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LoadBalancerNatPool
+func (tr *LoadBalancerNatPool) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LoadBalancerNatPool
+func (tr *LoadBalancerNatPool) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LoadBalancerNatPool
+func (tr *LoadBalancerNatPool) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LoadBalancerNatPool
+func (tr *LoadBalancerNatPool) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LoadBalancerNatPool using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LoadBalancerNatPool) LateInitialize(attrs []byte) (bool, error) {
+	params := &LoadBalancerNatPoolParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LoadBalancerNatPool) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LoadBalancerNatRule
+func (mg *LoadBalancerNatRule) GetTerraformResourceType() string {
+	return "azurerm_lb_nat_rule"
+}
+
+// GetConnectionDetailsMapping for this LoadBalancerNatRule
+func (tr *LoadBalancerNatRule) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LoadBalancerNatRule
+func (tr *LoadBalancerNatRule) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LoadBalancerNatRule
+func (tr *LoadBalancerNatRule) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LoadBalancerNatRule
+func (tr *LoadBalancerNatRule) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LoadBalancerNatRule
+func (tr *LoadBalancerNatRule) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LoadBalancerNatRule
+func (tr *LoadBalancerNatRule) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LoadBalancerNatRule using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LoadBalancerNatRule) LateInitialize(attrs []byte) (bool, error) {
+	params := &LoadBalancerNatRuleParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LoadBalancerNatRule) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LoadBalancerOutboundRule
+func (mg *LoadBalancerOutboundRule) GetTerraformResourceType() string {
+	return "azurerm_lb_outbound_rule"
+}
+
+// GetConnectionDetailsMapping for this LoadBalancerOutboundRule
+func (tr *LoadBalancerOutboundRule) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LoadBalancerOutboundRule
+func (tr *LoadBalancerOutboundRule) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LoadBalancerOutboundRule
+func (tr *LoadBalancerOutboundRule) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LoadBalancerOutboundRule
+func (tr *LoadBalancerOutboundRule) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LoadBalancerOutboundRule
+func (tr *LoadBalancerOutboundRule) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LoadBalancerOutboundRule
+func (tr *LoadBalancerOutboundRule) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LoadBalancerOutboundRule using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LoadBalancerOutboundRule) LateInitialize(attrs []byte) (bool, error) {
+	params := &LoadBalancerOutboundRuleParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LoadBalancerOutboundRule) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LoadBalancerProbe
+func (mg *LoadBalancerProbe) GetTerraformResourceType() string {
+	return "azurerm_lb_probe"
+}
+
+// GetConnectionDetailsMapping for this LoadBalancerProbe
+func (tr *LoadBalancerProbe) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LoadBalancerProbe
+func (tr *LoadBalancerProbe) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LoadBalancerProbe
+func (tr *LoadBalancerProbe) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LoadBalancerProbe
+func (tr *LoadBalancerProbe) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LoadBalancerProbe
+func (tr *LoadBalancerProbe) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LoadBalancerProbe
+func (tr *LoadBalancerProbe) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LoadBalancerProbe using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LoadBalancerProbe) LateInitialize(attrs []byte) (bool, error) {
+	params := &LoadBalancerProbeParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LoadBalancerProbe) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LoadBalancerRule
+func (mg *LoadBalancerRule) GetTerraformResourceType() string {
+	return "azurerm_lb_rule"
+}
+
+// GetConnectionDetailsMapping for this LoadBalancerRule
+func (tr *LoadBalancerRule) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LoadBalancerRule
+func (tr *LoadBalancerRule) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LoadBalancerRule
+func (tr *LoadBalancerRule) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LoadBalancerRule
+func (tr *LoadBalancerRule) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LoadBalancerRule
+func (tr *LoadBalancerRule) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LoadBalancerRule
+func (tr *LoadBalancerRule) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LoadBalancerRule using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LoadBalancerRule) LateInitialize(attrs []byte) (bool, error) {
+	params := &LoadBalancerRuleParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LoadBalancerRule) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this NetworkInterface
 func (mg *NetworkInterface) GetTerraformResourceType() string {
 	return "azurerm_network_interface"

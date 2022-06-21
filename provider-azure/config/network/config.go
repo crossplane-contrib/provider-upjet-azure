@@ -17,6 +17,10 @@ limitations under the License.
 package network
 
 import (
+	"context"
+	"fmt"
+
+	"github.com/pkg/errors"
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
@@ -24,6 +28,22 @@ import (
 )
 
 const groupNetwork = "network"
+
+// getLoadBalancerBasedIDFn returns a GetIDFn that returns load balancer based ID FQDNs
+// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/resourceType/resourceType1
+func getLoadBalancerBasedIDFn(resourceType string) config.GetIDFn {
+	return func(_ context.Context, name string, parameters map[string]interface{}, providerConfig map[string]interface{}) (string, error) {
+		loadBalancerID, ok := parameters["loadbalancer_id"]
+		if !ok {
+			return "", errors.Errorf(common.ErrFmtNoAttribute, "loadbalancer_id")
+		}
+		loadBalancerIDStr, ok := loadBalancerID.(string)
+		if !ok {
+			return "", errors.Errorf(common.ErrFmtUnexpectedType, "loadbalancer_id")
+		}
+		return fmt.Sprintf("%s/%s/%s", loadBalancerIDStr, resourceType, name), nil
+	}
+}
 
 // Configure configures virtual group
 func Configure(p *config.Provider) {
@@ -38,15 +58,146 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_lb", func(r *config.Resource) {
 		r.Kind = "LoadBalancer"
 		r.ShortGroup = groupNetwork
+
+		r.References["frontend_ip_configuration.public_ip_address_id"] = config.Reference{
+			Type:      "PublicIP",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.UseAsync = true
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1
+		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network", "loadBalancers", "name")
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_backend_address_pool", func(r *config.Resource) {
+		r.Kind = "LoadBalancerBackendAddressPool"
+		r.ShortGroup = groupNetwork
 		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
+			"loadbalancer_id": config.Reference{
+				Type:      "LoadBalancer",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
 			},
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network", "loadBalancers", "name")
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/pool1
+		r.ExternalName.GetIDFn = getLoadBalancerBasedIDFn("backendAddressPools")
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_backend_address_pool_address", func(r *config.Resource) {
+		r.Kind = "LoadBalancerBackendAddressPoolAddress"
+		r.ShortGroup = groupNetwork
+		r.References = config.References{
+			"backend_address_pool_id": config.Reference{
+				Type:      "LoadBalancerBackendAddressPool",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
+			},
+			"virtual_network_id": config.Reference{
+				Type:      "VirtualNetwork",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
+			},
+		}
+		r.UseAsync = true
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/loadBalancer1/backendAddressPools/backendAddressPool1/addresses/address1
+		r.ExternalName.GetIDFn = func(_ context.Context, name string, parameters map[string]interface{}, providerConfig map[string]interface{}) (string, error) {
+			backendAddressPoolID, ok := parameters["backend_address_pool_id"]
+			if !ok {
+				return "", errors.Errorf(common.ErrFmtNoAttribute, "backend_address_pool_id")
+			}
+			backendAddressPoolIDStr, ok := backendAddressPoolID.(string)
+			if !ok {
+				return "", errors.Errorf(common.ErrFmtUnexpectedType, "backend_address_pool_id")
+			}
+			return fmt.Sprintf("%s/addresses/%s", backendAddressPoolIDStr, name), nil
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_nat_pool", func(r *config.Resource) {
+		r.Kind = "LoadBalancerNatPool"
+		r.ShortGroup = groupNetwork
+		r.References = config.References{
+			"loadbalancer_id": config.Reference{
+				Type:      "LoadBalancer",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
+			},
+		}
+		r.UseAsync = true
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/inboundNatPools/pool1
+		r.ExternalName.GetIDFn = getLoadBalancerBasedIDFn("inboundNatPools")
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_nat_rule", func(r *config.Resource) {
+		r.Kind = "LoadBalancerNatRule"
+		r.ShortGroup = groupNetwork
+		r.References = config.References{
+			"loadbalancer_id": config.Reference{
+				Type:      "LoadBalancer",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
+			},
+		}
+		r.UseAsync = true
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/inboundNatRules/rule1
+		r.ExternalName.GetIDFn = getLoadBalancerBasedIDFn("inboundNatRules")
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_outbound_rule", func(r *config.Resource) {
+		r.Kind = "LoadBalancerOutboundRule"
+		r.ShortGroup = groupNetwork
+		r.References = config.References{
+			"backend_address_pool_id": config.Reference{
+				Type:      "LoadBalancerBackendAddressPool",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
+			},
+			"loadbalancer_id": config.Reference{
+				Type:      "LoadBalancer",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
+			},
+		}
+		r.UseAsync = true
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/outboundRules/rule1
+		r.ExternalName.GetIDFn = getLoadBalancerBasedIDFn("outboundRules")
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_probe", func(r *config.Resource) {
+		r.Kind = "LoadBalancerProbe"
+		r.ShortGroup = groupNetwork
+		r.References = config.References{
+			"loadbalancer_id": config.Reference{
+				Type:      "LoadBalancer",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
+			},
+		}
+		r.UseAsync = true
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/probes/probe1
+		r.ExternalName.GetIDFn = getLoadBalancerBasedIDFn("probes")
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_rule", func(r *config.Resource) {
+		r.Kind = "LoadBalancerRule"
+		r.ShortGroup = groupNetwork
+		r.References = config.References{
+			"loadbalancer_id": config.Reference{
+				Type:      "LoadBalancer",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
+			},
+		}
+		r.UseAsync = true
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/loadBalancingRules/rule1
+		r.ExternalName.GetIDFn = getLoadBalancerBasedIDFn("loadBalancingRules")
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
