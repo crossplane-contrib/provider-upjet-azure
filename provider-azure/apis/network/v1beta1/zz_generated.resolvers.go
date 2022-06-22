@@ -14,6 +14,32 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this ConnectionMonitor.
+func (mg *ConnectionMonitor) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkWatcherID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.NetworkWatcherIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkWatcherIDSelector,
+		To: reference.To{
+			List:    &WatcherList{},
+			Managed: &Watcher{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkWatcherID")
+	}
+	mg.Spec.ForProvider.NetworkWatcherID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkWatcherIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this LoadBalancer.
 func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

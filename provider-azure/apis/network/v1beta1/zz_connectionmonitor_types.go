@@ -25,11 +25,16 @@ type ConnectionMonitorParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +crossplane:generate:reference:type=Watcher
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NetworkWatcherID *string `json:"networkWatcherId,omitempty" tf:"network_watcher_id,omitempty"`
 
-	// +kubebuilder:validation:Required
-	NetworkWatcherID *string `json:"networkWatcherId" tf:"network_watcher_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	NetworkWatcherIDRef *v1.Reference `json:"networkWatcherIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	NetworkWatcherIDSelector *v1.Selector `json:"networkWatcherIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`

@@ -263,6 +263,31 @@ func Configure(p *config.Provider) {
 		)
 	})
 
+	p.AddResourceConfigurator("azurerm_network_connection_monitor", func(r *config.Resource) {
+		r.Kind = "ConnectionMonitor"
+		r.ShortGroup = groupNetwork
+		r.References = config.References{
+			"network_watcher_id": config.Reference{
+				Type:      "Watcher",
+				Extractor: rconfig.ExtractResourceIDFuncPath,
+			},
+		}
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/networkWatchers/watcher1/connectionMonitors/connectionMonitor1
+		r.ExternalName.GetIDFn = func(_ context.Context, name string, parameters map[string]interface{}, providerConfig map[string]interface{}) (string, error) {
+			paramID, ok := parameters["network_watcher_id"]
+			if !ok {
+				return "", errors.Errorf(common.ErrFmtNoAttribute, "network_watcher_id")
+			}
+			paramIDStr, ok := paramID.(string)
+			if !ok {
+				return "", errors.Errorf(common.ErrFmtUnexpectedType, "network_watcher_id")
+			}
+			return fmt.Sprintf("%s/connectionMonitors/%s", paramIDStr, name), nil
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
 		r.Kind = "VirtualNetwork"
 		r.ShortGroup = groupNetwork

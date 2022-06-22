@@ -15,7 +15,6 @@ spec:
     - address: terraform.io
       name: destination
     location: West Europe
-    name: example-Monitor
     network_watcher_name: ${azurerm_network_watcher.example.name}
     notes: examplenote
     outputWorkspaceResourceIds:

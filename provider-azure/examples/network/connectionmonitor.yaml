@@ -1,0 +1,88 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ConnectionMonitor
+metadata:
+  name: example
+spec:
+  forProvider:
+    endpoint:
+    - name: source
+      targetResourceId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/norway-watcher-rg/providers/Microsoft.Network/virtualNetworks/example-vn-for-connection-monitor
+      targetResourceType: AzureVNet
+    - address: terraform.io
+      name: destination
+    location: Norway East
+    networkWatcherIdRef:
+      name: norway-watcher
+    notes: examplenote
+    testConfiguration:
+    - name: tcpName
+      protocol: Tcp
+      tcpConfiguration:
+      - port: 80
+      testFrequencyInSeconds: 60
+    testGroup:
+    - destinationEndpoints:
+      - destination
+      name: exampletg
+      sourceEndpoints:
+      - source
+      testConfigurationNames:
+      - tcpName
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn-for-connection-monitor
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet-for-connection-monitor
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    virtualNetworkNameRef:
+      name: example-vn-for-connection-monitor
+    addressPrefixes:
+      - "10.0.0.0/24"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Watcher
+metadata:
+  name: norway-watcher
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: norway-watcher-rg
+spec:
+  forProvider:
+    location: Norway East
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example

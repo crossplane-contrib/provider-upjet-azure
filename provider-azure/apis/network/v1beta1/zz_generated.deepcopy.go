@@ -153,15 +153,20 @@ func (in *ConnectionMonitorParameters) DeepCopyInto(out *ConnectionMonitorParame
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.NetworkWatcherID != nil {
 		in, out := &in.NetworkWatcherID, &out.NetworkWatcherID
 		*out = new(string)
 		**out = **in
+	}
+	if in.NetworkWatcherIDRef != nil {
+		in, out := &in.NetworkWatcherIDRef, &out.NetworkWatcherIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.NetworkWatcherIDSelector != nil {
+		in, out := &in.NetworkWatcherIDSelector, &out.NetworkWatcherIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Notes != nil {
 		in, out := &in.Notes, &out.Notes
