@@ -1,0 +1,89 @@
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: nat-gateway-example-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NATGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    idleTimeoutInMinutes: 10
+    location: West Europe
+    resourceGroupNameRef:
+      name: nat-gateway-example-rg
+    skuName: Standard
+    zones:
+    - "1"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  name: publicipfornatgw
+spec:
+  forProvider:
+    sku: Standard
+    allocationMethod: Static
+    location: West Europe
+    zones:
+    - "1"
+    resourceGroupNameRef:
+      name: nat-gateway-example-rg
+    tags:
+      environment: Test
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NATGatewayPublicIPAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    natGatewayIdRef:
+      name: example
+    publicIpAddressIdRef:
+      name: publicipfornatgw
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIPPrefix
+metadata:
+  name: publicipprefixfornatgw
+spec:
+  forProvider:
+    location: West Europe
+    zones:
+    - "1"
+    prefixLength: 31
+    resourceGroupNameRef:
+      name: nat-gateway-example-rg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NATGatewayPublicIPPrefixAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    natGatewayIdRef:
+      name: example
+    publicIpPrefixIdRef:
+      name: publicipprefixfornatgw
+  providerConfigRef:
+    name: example

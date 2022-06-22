@@ -94,8 +94,13 @@ import (
 	loadbalanceroutboundrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalanceroutboundrule"
 	loadbalancerprobe "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerprobe"
 	loadbalancerrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerrule"
+	localnetworkgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/localnetworkgateway"
+	natgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/natgateway"
+	natgatewaypublicipassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/natgatewaypublicipassociation"
+	natgatewaypublicipprefixassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/natgatewaypublicipprefixassociation"
 	networkinterface "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterface"
 	publicip "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicip"
+	publicipprefix "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicipprefix"
 	subnet "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnet"
 	subnetnatgatewayassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnetnatgatewayassociation"
 	subnetnetworksecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnetnetworksecuritygroupassociation"
@@ -209,8 +214,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loadbalanceroutboundrule.Setup,
 		loadbalancerprobe.Setup,
 		loadbalancerrule.Setup,
+		localnetworkgateway.Setup,
+		natgateway.Setup,
+		natgatewaypublicipassociation.Setup,
+		natgatewaypublicipprefixassociation.Setup,
 		networkinterface.Setup,
 		publicip.Setup,
+		publicipprefix.Setup,
 		subnet.Setup,
 		subnetnatgatewayassociation.Setup,
 		subnetnetworksecuritygroupassociation.Setup,

@@ -79,6 +79,42 @@ func (l *LoadBalancerRuleList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this LocalNetworkGatewayList.
+func (l *LocalNetworkGatewayList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this NATGatewayList.
+func (l *NATGatewayList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this NATGatewayPublicIPAssociationList.
+func (l *NATGatewayPublicIPAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this NATGatewayPublicIPPrefixAssociationList.
+func (l *NATGatewayPublicIPPrefixAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this NetworkInterfaceList.
 func (l *NetworkInterfaceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -90,6 +126,15 @@ func (l *NetworkInterfaceList) GetItems() []resource.Managed {
 
 // GetItems of this PublicIPList.
 func (l *PublicIPList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PublicIPPrefixList.
+func (l *PublicIPPrefixList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

@@ -13,22 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BGPSettingsObservation struct {
-	PeeringAddresses []PeeringAddressesObservation `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
-}
-
-type BGPSettingsParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PeeringAddresses []PeeringAddressesParameters `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
-}
-
 type CustomRouteObservation struct {
 }
 
@@ -113,6 +97,22 @@ type VPNClientConfigurationParameters struct {
 	VPNClientProtocols []*string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
 }
 
+type VirtualNetworkGatewayBGPSettingsObservation struct {
+	PeeringAddresses []PeeringAddressesObservation `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
+}
+
+type VirtualNetworkGatewayBGPSettingsParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PeeringAddresses []PeeringAddressesParameters `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
+}
+
 type VirtualNetworkGatewayIPConfigurationObservation struct {
 }
 
@@ -140,7 +140,7 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 }
 
 type VirtualNetworkGatewayObservation struct {
-	BGPSettings []BGPSettingsObservation `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
+	BGPSettings []VirtualNetworkGatewayBGPSettingsObservation `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -151,7 +151,7 @@ type VirtualNetworkGatewayParameters struct {
 	ActiveActive *bool `json:"activeActive,omitempty" tf:"active_active,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	BGPSettings []BGPSettingsParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
+	BGPSettings []VirtualNetworkGatewayBGPSettingsParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CustomRoute []CustomRouteParameters `json:"customRoute,omitempty" tf:"custom_route,omitempty"`
