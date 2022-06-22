@@ -86,6 +86,7 @@ import (
 	secret "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/secret"
 	vault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/vault"
 	workspace "github.com/upbound/official-providers/provider-azure/internal/controller/loganalytics/workspace"
+	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
 	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
 	loadbalancerbackendaddresspooladdress "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspooladdress"
@@ -111,6 +112,7 @@ import (
 	virtualnetworkgatewayconnection "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkgatewayconnection"
 	virtualnetworkpeering "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkpeering"
 	virtualwan "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualwan"
+	watcher "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcher"
 	providerconfig "github.com/upbound/official-providers/provider-azure/internal/controller/providerconfig"
 	groupcostmanagementexport "github.com/upbound/official-providers/provider-azure/internal/controller/resource/groupcostmanagementexport"
 	grouppolicyexemption "github.com/upbound/official-providers/provider-azure/internal/controller/resource/grouppolicyexemption"
@@ -206,6 +208,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		secret.Setup,
 		vault.Setup,
 		workspace.Setup,
+		connectionmonitor.Setup,
 		loadbalancer.Setup,
 		loadbalancerbackendaddresspool.Setup,
 		loadbalancerbackendaddresspooladdress.Setup,
@@ -231,6 +234,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualnetworkgatewayconnection.Setup,
 		virtualnetworkpeering.Setup,
 		virtualwan.Setup,
+		watcher.Setup,
 		providerconfig.Setup,
 		groupcostmanagementexport.Setup,
 		grouppolicyexemption.Setup,

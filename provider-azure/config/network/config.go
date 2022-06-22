@@ -252,14 +252,20 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.IdentifierFromProvider
 	})
 
+	p.AddResourceConfigurator("azurerm_network_watcher", func(r *config.Resource) {
+		r.Kind = "Watcher"
+		r.ShortGroup = groupNetwork
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/networkWatchers/watcher1
+		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network",
+			"networkWatchers", "name",
+		)
+	})
+
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
 		r.Kind = "VirtualNetwork"
 		r.ShortGroup = groupNetwork
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"subnet"},
 		}
@@ -275,9 +281,6 @@ func Configure(p *config.Provider) {
 		r.Kind = "VirtualNetworkGateway"
 		r.ShortGroup = groupNetwork
 		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
 			"ip_configuration.subnet_id": config.Reference{
 				Type:      "Subnet",
 				Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -296,9 +299,6 @@ func Configure(p *config.Provider) {
 		r.Kind = "VirtualNetworkPeering"
 		r.ShortGroup = groupNetwork
 		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
 			"virtual_network_name": config.Reference{
 				Type: "VirtualNetwork",
 			},
@@ -339,9 +339,6 @@ func Configure(p *config.Provider) {
 		r.Kind = "VirtualNetworkGatewayConnection"
 		r.ShortGroup = groupNetwork
 		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
 			"virtual_network_gateway_id": config.Reference{
 				Type:      "VirtualNetworkGateway",
 				Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -372,11 +369,6 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_virtual_wan", func(r *config.Resource) {
 		r.Kind = "VirtualWAN"
 		r.ShortGroup = groupNetwork
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID

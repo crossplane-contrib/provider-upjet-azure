@@ -80,6 +80,8 @@ var includedResources = []string{
 	"azurerm_log_analytics_workspace",
 	"azurerm_iothub.*",
 	"azurerm_monitor_metric_alert",
+	"azurerm_network_connection_monitor$",
+	"azurerm_network_watcher$",
 	"azurerm_nat_gateway.*",
 	"azurerm_key_vault.*",
 	"azurerm_eventhub_namespace$",

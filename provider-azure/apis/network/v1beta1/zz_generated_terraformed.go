@@ -901,6 +901,80 @@ func (tr *NATGatewayPublicIPPrefixAssociation) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ConnectionMonitor
+func (mg *ConnectionMonitor) GetTerraformResourceType() string {
+	return "azurerm_network_connection_monitor"
+}
+
+// GetConnectionDetailsMapping for this ConnectionMonitor
+func (tr *ConnectionMonitor) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ConnectionMonitor
+func (tr *ConnectionMonitor) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ConnectionMonitor
+func (tr *ConnectionMonitor) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ConnectionMonitor
+func (tr *ConnectionMonitor) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ConnectionMonitor
+func (tr *ConnectionMonitor) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ConnectionMonitor
+func (tr *ConnectionMonitor) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ConnectionMonitor using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ConnectionMonitor) LateInitialize(attrs []byte) (bool, error) {
+	params := &ConnectionMonitorParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ConnectionMonitor) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this NetworkInterface
 func (mg *NetworkInterface) GetTerraformResourceType() string {
 	return "azurerm_network_interface"
@@ -972,6 +1046,80 @@ func (tr *NetworkInterface) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *NetworkInterface) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this Watcher
+func (mg *Watcher) GetTerraformResourceType() string {
+	return "azurerm_network_watcher"
+}
+
+// GetConnectionDetailsMapping for this Watcher
+func (tr *Watcher) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this Watcher
+func (tr *Watcher) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this Watcher
+func (tr *Watcher) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this Watcher
+func (tr *Watcher) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this Watcher
+func (tr *Watcher) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this Watcher
+func (tr *Watcher) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this Watcher using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *Watcher) LateInitialize(attrs []byte) (bool, error) {
+	params := &WatcherParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *Watcher) GetTerraformSchemaVersion() int {
 	return 0
 }
 
