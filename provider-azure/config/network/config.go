@@ -27,8 +27,6 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/common"
 )
 
-const groupNetwork = "network"
-
 // getParameterBasedIDFn returns a GetIDFn that returns load balancer based ID FQDNs
 // /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/parameter/parameter1/resourceType/resourceType1
 // TODO(ytsarev): deperecate it when similar upjet function is available https://github.com/upbound/upjet/pull/22
@@ -50,7 +48,6 @@ func getParameterBasedIDFn(parameter string, resourceType string) config.GetIDFn
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_network_interface", func(r *config.Resource) {
 		r.Kind = "NetworkInterface"
-		r.ShortGroup = groupNetwork
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
 		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network", "networkInterfaces", "name")
@@ -58,7 +55,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb", func(r *config.Resource) {
 		r.Kind = "LoadBalancer"
-		r.ShortGroup = groupNetwork
 
 		r.References["frontend_ip_configuration.public_ip_address_id"] = config.Reference{
 			Type:      "PublicIP",
@@ -73,7 +69,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_backend_address_pool", func(r *config.Resource) {
 		r.Kind = "LoadBalancerBackendAddressPool"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"loadbalancer_id": config.Reference{
 				Type:      "LoadBalancer",
@@ -89,7 +84,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_backend_address_pool_address", func(r *config.Resource) {
 		r.Kind = "LoadBalancerBackendAddressPoolAddress"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"backend_address_pool_id": config.Reference{
 				Type:      "LoadBalancerBackendAddressPool",
@@ -109,7 +103,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_nat_pool", func(r *config.Resource) {
 		r.Kind = "LoadBalancerNatPool"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"loadbalancer_id": config.Reference{
 				Type:      "LoadBalancer",
@@ -125,7 +118,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_nat_rule", func(r *config.Resource) {
 		r.Kind = "LoadBalancerNatRule"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"loadbalancer_id": config.Reference{
 				Type:      "LoadBalancer",
@@ -141,7 +133,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_outbound_rule", func(r *config.Resource) {
 		r.Kind = "LoadBalancerOutboundRule"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"backend_address_pool_id": config.Reference{
 				Type:      "LoadBalancerBackendAddressPool",
@@ -161,7 +152,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_probe", func(r *config.Resource) {
 		r.Kind = "LoadBalancerProbe"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"loadbalancer_id": config.Reference{
 				Type:      "LoadBalancer",
@@ -177,7 +167,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_rule", func(r *config.Resource) {
 		r.Kind = "LoadBalancerRule"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"loadbalancer_id": config.Reference{
 				Type:      "LoadBalancer",
@@ -192,7 +181,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_local_network_gateway", func(r *config.Resource) {
-		r.ShortGroup = groupNetwork
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
@@ -201,7 +189,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_nat_gateway", func(r *config.Resource) {
-		r.ShortGroup = groupNetwork
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
@@ -210,7 +197,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_association", func(r *config.Resource) {
-		r.ShortGroup = groupNetwork
 		r.UseAsync = true
 		r.References = config.References{
 			"nat_gateway_id": config.Reference{
@@ -227,7 +213,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_prefix_association", func(r *config.Resource) {
-		r.ShortGroup = groupNetwork
 		r.UseAsync = true
 		r.References = config.References{
 			"nat_gateway_id": config.Reference{
@@ -245,7 +230,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_watcher", func(r *config.Resource) {
 		r.Kind = "Watcher"
-		r.ShortGroup = groupNetwork
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
 		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/networkWatchers/watcher1
@@ -256,7 +240,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_connection_monitor", func(r *config.Resource) {
 		r.Kind = "ConnectionMonitor"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"network_watcher_id": config.Reference{
 				Type:      "Watcher",
@@ -271,7 +254,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_ddos_protection_plan", func(r *config.Resource) {
 		r.Kind = "DDoSProtectionPlan"
-		r.ShortGroup = groupNetwork
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
 		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/ddosProtectionPlans/testddospplan
@@ -282,7 +264,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
 		r.Kind = "VirtualNetwork"
-		r.ShortGroup = groupNetwork
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"subnet"},
 		}
@@ -296,7 +277,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkGateway"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"ip_configuration.subnet_id": config.Reference{
 				Type:      "Subnet",
@@ -314,7 +294,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_network_peering", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkPeering"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"virtual_network_name": config.Reference{
 				Type: "VirtualNetwork",
@@ -354,7 +333,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway_connection", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkGatewayConnection"
-		r.ShortGroup = groupNetwork
 		r.References = config.References{
 			"virtual_network_gateway_id": config.Reference{
 				Type:      "VirtualNetworkGateway",
@@ -385,7 +363,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_wan", func(r *config.Resource) {
 		r.Kind = "VirtualWAN"
-		r.ShortGroup = groupNetwork
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
