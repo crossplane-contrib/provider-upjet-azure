@@ -269,6 +269,17 @@ func Configure(p *config.Provider) {
 		r.ExternalName.GetIDFn = getParameterBasedIDFn("network_watcher_id", "connectionMonitors")
 	})
 
+	p.AddResourceConfigurator("azurerm_network_ddos_protection_plan", func(r *config.Resource) {
+		r.Kind = "DDoSProtectionPlan"
+		r.ShortGroup = groupNetwork
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/ddosProtectionPlans/testddospplan
+		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network",
+			"ddosProtectionPlans", "name",
+		)
+	})
+
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
 		r.Kind = "VirtualNetwork"
 		r.ShortGroup = groupNetwork

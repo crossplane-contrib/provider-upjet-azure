@@ -975,6 +975,80 @@ func (tr *ConnectionMonitor) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this DDoSProtectionPlan
+func (mg *DDoSProtectionPlan) GetTerraformResourceType() string {
+	return "azurerm_network_ddos_protection_plan"
+}
+
+// GetConnectionDetailsMapping for this DDoSProtectionPlan
+func (tr *DDoSProtectionPlan) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this DDoSProtectionPlan
+func (tr *DDoSProtectionPlan) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this DDoSProtectionPlan
+func (tr *DDoSProtectionPlan) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this DDoSProtectionPlan
+func (tr *DDoSProtectionPlan) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this DDoSProtectionPlan
+func (tr *DDoSProtectionPlan) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this DDoSProtectionPlan
+func (tr *DDoSProtectionPlan) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this DDoSProtectionPlan using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *DDoSProtectionPlan) LateInitialize(attrs []byte) (bool, error) {
+	params := &DDoSProtectionPlanParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *DDoSProtectionPlan) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this NetworkInterface
 func (mg *NetworkInterface) GetTerraformResourceType() string {
 	return "azurerm_network_interface"

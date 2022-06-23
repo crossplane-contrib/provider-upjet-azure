@@ -87,6 +87,7 @@ import (
 	vault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/vault"
 	workspace "github.com/upbound/official-providers/provider-azure/internal/controller/loganalytics/workspace"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
+	ddosprotectionplan "github.com/upbound/official-providers/provider-azure/internal/controller/network/ddosprotectionplan"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
 	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
 	loadbalancerbackendaddresspooladdress "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspooladdress"
@@ -209,6 +210,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vault.Setup,
 		workspace.Setup,
 		connectionmonitor.Setup,
+		ddosprotectionplan.Setup,
 		loadbalancer.Setup,
 		loadbalancerbackendaddresspool.Setup,
 		loadbalancerbackendaddresspooladdress.Setup,
