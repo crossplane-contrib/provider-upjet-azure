@@ -14,7 +14,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	"github.com/upbound/official-providers/provider-azure/apis/v1alpha1"
+	"github.com/upbound/official-providers/provider-azure/apis/v1beta1"
 )
 
 const (
@@ -59,12 +59,12 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if configRef == nil {
 			return ps, errors.New(errNoProviderConfig)
 		}
-		pc := &v1alpha1.ProviderConfig{}
+		pc := &v1beta1.ProviderConfig{}
 		if err := client.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
 			return ps, errors.Wrap(err, errGetProviderConfig)
 		}
 
-		t := xpresource.NewProviderConfigUsageTracker(client, &v1alpha1.ProviderConfigUsage{})
+		t := xpresource.NewProviderConfigUsageTracker(client, &v1beta1.ProviderConfigUsage{})
 		if err := t.Track(ctx, mg); err != nil {
 			return ps, errors.Wrap(err, errTrackUsage)
 		}
@@ -91,7 +91,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 	}
 }
 
-func spAuth(ctx context.Context, pc *v1alpha1.ProviderConfig, ps *terraform.Setup, client client.Client) error {
+func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup, client client.Client) error {
 	data, err := xpresource.CommonCredentialExtractor(ctx, pc.Spec.Credentials.Source, client, pc.Spec.Credentials.CommonCredentialSelectors)
 	if err != nil {
 		return errors.Wrap(err, errExtractCredentials)
@@ -108,7 +108,7 @@ func spAuth(ctx context.Context, pc *v1alpha1.ProviderConfig, ps *terraform.Setu
 	return nil
 }
 
-func msiAuth(pc *v1alpha1.ProviderConfig, ps *terraform.Setup) error {
+func msiAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	if pc.Spec.SubscriptionID == nil || len(*pc.Spec.SubscriptionID) == 0 {
 		return errors.New(errSubscriptionIDNotSet)
 	}

@@ -30,6 +30,7 @@ import (
 	v1beta1sql "github.com/upbound/official-providers/provider-azure/apis/sql/v1beta1"
 	v1beta1storage "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
 	v1alpha1 "github.com/upbound/official-providers/provider-azure/apis/v1alpha1"
+	v1beta1apis "github.com/upbound/official-providers/provider-azure/apis/v1beta1"
 	v1beta1virtual "github.com/upbound/official-providers/provider-azure/apis/virtual/v1beta1"
 )
 
@@ -56,6 +57,7 @@ func init() {
 		v1beta1sql.SchemeBuilder.AddToScheme,
 		v1beta1storage.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1beta1apis.SchemeBuilder.AddToScheme,
 		v1beta1virtual.SchemeBuilder.AddToScheme,
 	)
 }

@@ -42,6 +42,7 @@ func main() {
 	// delete API dirs
 	deleteGenDirs(absRootDir+"/apis", map[string]struct{}{
 		"v1alpha1": {},
+		"v1beta1":  {},
 		"rconfig":  {},
 	})
 	// delete controller dirs
