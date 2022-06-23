@@ -17,13 +17,7 @@ limitations under the License.
 package base
 
 import (
-	"context"
-	"fmt"
-
-	"github.com/pkg/errors"
 	"github.com/upbound/upjet/pkg/config"
-
-	"github.com/upbound/official-providers/provider-azure/config/common"
 )
 
 const (
@@ -44,19 +38,5 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_resource_group", func(r *config.Resource) {
 		r.Kind = "ResourceGroup"
 		r.ShortGroup = ""
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example
-		r.ExternalName.GetIDFn = func(ctx context.Context, name string, _ map[string]interface{}, providerConfig map[string]interface{}) (string, error) {
-			subID, ok := providerConfig["subscription_id"]
-			if !ok {
-				return "", errors.Errorf(errFmtNoAttribute, "subscription_id")
-			}
-			subIDStr, ok := subID.(string)
-			if !ok {
-				return "", errors.Errorf(errFmtUnexpectedType, "subscription_id")
-			}
-			return fmt.Sprintf("/subscriptions/%s/resourceGroups/%s", subIDStr, name), nil
-		}
 	})
 }

@@ -46,6 +46,9 @@ func getParameterBasedIDFn(parameter string, resourceType string) config.GetIDFn
 
 // Configure configures virtual group
 func Configure(p *config.Provider) {
+	p.AddResourceConfigurator("azurerm_ip_group", func(r *config.Resource) {
+		r.Kind = "IPGroup"
+	})
 	p.AddResourceConfigurator("azurerm_network_interface", func(r *config.Resource) {
 		r.Kind = "NetworkInterface"
 		r.ExternalName = config.NameAsIdentifier

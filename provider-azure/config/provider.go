@@ -22,8 +22,6 @@ import (
 
 	tjconfig "github.com/upbound/upjet/pkg/config"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	"github.com/upbound/official-providers/provider-azure/config/apimanagement"
 	"github.com/upbound/official-providers/provider-azure/config/base"
 	"github.com/upbound/official-providers/provider-azure/config/common"
@@ -177,15 +175,12 @@ func GetProvider() *tjconfig.Provider {
 		tjconfig.WithRootGroup("azure.upbound.io"),
 		tjconfig.WithIncludeList(includedResources),
 		tjconfig.WithSkipList(skipList),
-		tjconfig.WithDefaultResourceFn(defaultResource(defaultVersion(), externalNameConfig(), groupOverrides())),
+		tjconfig.WithDefaultResourceOptions(
+			ExternalNameConfigurations(),
+			groupOverrides(),
+			KnownReferences(),
+		),
 	)
-	// external-name configuration for all resources
-	for name := range pc.Resources {
-		// external-name configuration
-		pc.AddResourceConfigurator(name, func(r *tjconfig.Resource) {
-			r.ExternalName = tjconfig.IdentifierFromProvider
-		})
-	}
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
@@ -229,10 +224,4 @@ func GetProvider() *tjconfig.Provider {
 	}
 
 	return pc
-}
-
-func defaultResource(opts ...tjconfig.ResourceOption) tjconfig.DefaultResourceFn {
-	return func(name string, terraformResource *schema.Resource, orgOpts ...tjconfig.ResourceOption) *tjconfig.Resource {
-		return tjconfig.DefaultResource(name, terraformResource, append(orgOpts, opts...)...)
-	}
 }

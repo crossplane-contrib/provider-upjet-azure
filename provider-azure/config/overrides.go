@@ -19,10 +19,11 @@ package config
 import (
 	"strings"
 
+	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
+
+	"github.com/upbound/upjet/pkg/config"
 	tjconfig "github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/types/name"
-
-	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
 )
 
 var (
@@ -75,15 +76,25 @@ func groupOverrides() tjconfig.ResourceOption {
 	}
 }
 
-func defaultVersion() tjconfig.ResourceOption {
+func KnownReferences() tjconfig.ResourceOption {
 	return func(r *tjconfig.Resource) {
-		r.Version = rconfig.VersionV1Beta1
-	}
-}
-
-func externalNameConfig() tjconfig.ResourceOption {
-	return func(r *tjconfig.Resource) {
-		r.ExternalName = tjconfig.IdentifierFromProvider
+		for f, s := range r.TerraformResource.Schema {
+			// We shouldn't add referencers for status fields and sensitive fields
+			// since they already have secret referencer.
+			if (s.Computed && !s.Optional) || s.Sensitive {
+				continue
+			}
+			switch {
+			case f == "resource_group_name":
+				r.References["resource_group_name"] = config.Reference{
+					Type: rconfig.ResourceGroupReferencePath,
+				}
+			case r.ShortGroup == "cosmosdb" && f == "account_name":
+				r.References["account_name"] = config.Reference{
+					Type: "Account",
+				}
+			}
+		}
 	}
 }
 

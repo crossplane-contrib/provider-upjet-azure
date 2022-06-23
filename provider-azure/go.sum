@@ -598,6 +598,8 @@ github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822/go.mod h1:+n7T8m
 github.com/muvaf/typewriter v0.0.0-20210910160850-80e49fe1eb32/go.mod h1:SAAdeMEiFXR8LcHffvIdiLI1w243DCH2DuHq7UrA5YQ=
 github.com/muvaf/typewriter v0.0.0-20220131201631-921e94e8e8d7 h1:CxRHKnh1YJXgNKxcos9rrKL6AcmOl1AS/fygmxFDzh4=
 github.com/muvaf/typewriter v0.0.0-20220131201631-921e94e8e8d7/go.mod h1:SAAdeMEiFXR8LcHffvIdiLI1w243DCH2DuHq7UrA5YQ=
+github.com/muvaf/upjet v0.5.1-0.20220622124443-6411f42ce53b h1:Fy5E6J9z8aFZQQ22nUzp/ZTLhwoQ4Z4Xe3lfOS/pij0=
+github.com/muvaf/upjet v0.5.1-0.20220622124443-6411f42ce53b/go.mod h1:Un5UPFf56YMjXtHfQ6DGr6c9YDXkv6aWIU3Cx9XeQH0=
 github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/mwitkow/go-conntrack v0.0.0-20190716064945-2f068394615f/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/mxk/go-flowrate v0.0.0-20140419014527-cca7078d478f/go.mod h1:ZdcZmHo+o7JKHSa8/e818NopupXU1YMK5fe1lsApnBw=
@@ -739,8 +741,6 @@ github.com/tmc/grpc-websocket-proxy v0.0.0-20201229170055-e5319fda7802/go.mod h1
 github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926/go.mod h1:9ESjWnEqriFuLhtthL60Sar/7RFoluCcXsuvEwTV5KM=
 github.com/ulikunitz/xz v0.5.5/go.mod h1:2bypXElzHzzJZwzH67Y6wb67pO62Rzfn7BSiF4ABRW8=
 github.com/ulikunitz/xz v0.5.8/go.mod h1:nbz6k7qbPmH4IRqmfOplQw/tblSgqTqBwxkY0oWt/14=
-github.com/upbound/upjet v0.5.1-0.20220609144735-1a4a07960c3a h1:g4ZLtxfBhru9y2T7DfflTbiEsweOpmjdbHPOgwoSBI0=
-github.com/upbound/upjet v0.5.1-0.20220609144735-1a4a07960c3a/go.mod h1:Un5UPFf56YMjXtHfQ6DGr6c9YDXkv6aWIU3Cx9XeQH0=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
