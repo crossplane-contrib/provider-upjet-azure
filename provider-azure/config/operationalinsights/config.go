@@ -14,31 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package loganalytics
+package operationalinsights
 
 import (
 	"github.com/upbound/upjet/pkg/config"
-
-	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
-	"github.com/upbound/official-providers/provider-azure/config/common"
 )
-
-const groupLog = "loganalytics"
 
 // Configure configures loganalytics group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_log_analytics_workspace", func(r *config.Resource) {
 		r.Kind = "Workspace"
-		r.ShortGroup = groupLog
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-		}
 		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.OperationalInsights/workspaces/workspace1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.OperationalInsights", "workspaces", "name")
 	})
 }

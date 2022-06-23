@@ -3,6 +3,11 @@ package config
 import "github.com/upbound/upjet/pkg/config"
 
 var ExternalNameConfigs = map[string]config.ExternalName{
+	// apimanagement
+	"azurerm_api_management": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .externalName }}"),
+
+	// authorization
+	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Authorization/policyAssignments/{{ .externalName }}"),
 
 	// base group
 	"azurerm_subscription":                   config.TemplatedStringAsIdentifier("alias", "/providers/Microsoft.Subscription/aliases/{{ .externalName }}"),
@@ -59,22 +64,95 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Configured individually since it doesn't have a naming argument.
 	"azurerm_iothub_fallback_route": {},
 
-	// ip
-	"azurerm_ip_group": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/ipGroups/{{ .externalName }}"),
-
 	// eventhub
 	"azurerm_eventhub_namespace":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Eventhub/namespaces/{{ .externalName }}"),
 	"azurerm_eventhub":                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Eventhub/namespaces/{{ .parameters.namespace_name }}/eventhubs/{{ .externalName }}"),
 	"azurerm_eventhub_consumer_group":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Eventhub/namespaces/{{ .parameters.namespace_name }}/eventhubs/{{ .parameters.eventhub_name }}/consumergroups/{{ .externalName }}"),
 	"azurerm_eventhub_authorization_rule": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Eventhub/namespaces/{{ .parameters.namespace_name }}/eventhubs/{{ .parameters.eventhub_name }}/authorizationRules/{{ .externalName }}"),
 
-	// apimanagement
-	//
-	"azurerm_api_management": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .externalName }}"),
+	// keyvault
+	"azurerm_key_vault":                                              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/vaults/{{ .externalName }}"),
+	"azurerm_key_vault_secret":                                       config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/secrets/{{ .externalName }}/{{ .parameters.version }}"),
+	"azurerm_key_vault_key":                                          config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/keys/{{ .externalName }}/{{ .parameters.version }}"),
+	"azurerm_key_vault_certificate":                                  config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/certificates/{{ .externalName }}/{{ .parameters.version }}"),
+	"azurerm_key_vault_certificate_issuer":                           config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/certificates/issuers/{{ .externalName }}"),
+	"azurerm_key_vault_managed_storage_account":                      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/storage/{{ .externalName }}"),
+	"azurerm_key_vault_managed_storage_account_sas_token_definition": config.TemplatedStringAsIdentifier("name", "{{ .parameters.managed_storage_account_id }}/sas/{{ .externalName }}"),
+	"azurerm_key_vault_managed_hardware_security_module":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/managedHSMs//{{ .externalName }}"),
+	"azurerm_key_vault_access_policy":                                config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/managedHSMs//{{ .externalName }}"),
 
-	// mssql
-	//
-	"azurerm_mssql_server": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/servers/{{ .externalName }}"),
+	// containerservice
+	"azurerm_kubernetes_cluster":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerService/managedClusters/{{ .externalName }}"),
+	"azurerm_kubernetes_cluster_node_pool": config.TemplatedStringAsIdentifier("name", "{{ .parameters.kubernetes_cluster_id }}/agentPools/{{ .externalName }}"),
+
+	// operationalinsights
+	"azurerm_log_analytics_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.OperationalInsights/workspaces/{{ .externalName }}"),
+
+	// logic
+	"azurerm_integration_service_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logic/integrationServiceEnvironments/{{ .externalName }}"),
+
+	// management
+	"azurerm_management_group": config.TemplatedStringAsIdentifier("name", "/providers/Microsoft.Management/managementGroups/{{ .externalName }}"),
+
+	// mariadb
+	"azurerm_mariadb_server":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMariaDB/servers/{{ .externalName }}"),
+	"azurerm_mariadb_database":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMariaDB/servers/{{ .parameters.server_name }}/databases/{{ .externalName }}"),
+	"azurerm_mariadb_firewall_rule":        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMariaDB/servers/{{ .parameters.server_name }}/firewallRules/{{ .externalName }}"),
+	"azurerm_mariadb_virtual_network_rule": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMariaDB/servers/{{ .parameters.server_name }}/virtualNetworkRules/{{ .externalName }}"),
+	"azurerm_mariadb_configuration":        config.IdentifierFromProvider,
+
+	// monitor
+	"azurerm_monitor_metric_alert": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Insights/metricAlerts/{{ .externalName }}"),
+
+	// network
+	"azurerm_ip_group":                                  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/ipGroups/{{ .externalName }}"),
+	"azurerm_subnet":                                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ .parameters.virtual_network_name }}/subnets/{{ .externalName }}"),
+	"azurerm_subnet_nat_gateway_association":            config.IdentifierFromProvider,
+	"azurerm_subnet_network_security_group_association": config.IdentifierFromProvider,
+	"azurerm_subnet_service_endpoint_storage_policy":    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/serviceEndpointPolicies/{{ .externalName }}"),
+	"azurerm_subnet_route_table_association":            config.IdentifierFromProvider,
+
+	// notification
+	"azurerm_notification_hub": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.NotificationHubs/namespaces/{{ .parameters.namespace_name }}/notificationHubs/{{ .externalName }}"),
+
+	// postgresql
+	"azurerm_postgresql_server":                         config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforPostgreSQL/servers/{{ .externalName }}"),
+	"azurerm_postgresql_flexible_server_configuration":  config.IdentifierFromProvider,
+	"azurerm_postgresql_database":                       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforPostgreSQL/servers/{{ .parameters.server_name }}/databases/{{ .externalName }}"),
+	"azurerm_postgresql_active_directory_administrator": config.TemplatedStringAsIdentifier("login", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforPostgreSQL/servers/{{ .parameters.server_name }}/administrators/{{ .externalName }}"),
+	"azurerm_postgresql_flexible_server_database":       config.TemplatedStringAsIdentifier("name", "{{ .parameters.server_id }}/databases/{{ .externalName }}"),
+	"azurerm_postgresql_flexible_server_firewall_rule":  config.TemplatedStringAsIdentifier("name", "{{ .parameters.server_id }}/firewallRules/{{ .externalName }}"),
+	"azurerm_postgresql_firewall_rule":                  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforPostgreSQL/servers/{{ .parameters.server_name }}/firewallRules/{{ .externalName }}"),
+	"azurerm_postgresql_flexible_server":                config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{{ .externalName }}"),
+	"azurerm_postgresql_virtual_network_rule":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforPostgreSQL/servers/{{ .parameters.server_name }}/virtualNetworkRules/{{ .externalName }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DBforPostgreSQL/servers/server1/keys/keyvaultname_key-name_keyversion
+	"azurerm_postgresql_server_key": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.DBforPostgreSQL/servers/server1/configurations/backslash_quote
+	"azurerm_postgresql_configuration": config.IdentifierFromProvider,
+
+	// redis
+	"azurerm_redis_cache":              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/Redis/{{ .externalName }}"),
+	"azurerm_redis_firewall_rule":      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/Redis/{{ .parameters.redis_cache_name }}/firewallRules/{{ .externalName }}"),
+	"azurerm_redis_enterprise_cluster": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Cache/redisEnterprise/{{ .externalName }}"),
+	// Done individually.
+	"azurerm_redis_enterprise_database": {},
+	// Unknown format.
+	"azurerm_redis_linked_server": config.IdentifierFromProvider,
+
+	// resource
+	"azurerm_resource_group_template_deployment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Resources/deployments/{{ .externalName }}"),
+
+	// security
+	"azurerm_advanced_threat_protection": config.TemplatedStringAsIdentifier("", "{{ .parameters.target_resource_id }}/providers/Microsoft.Security/advancedThreatProtectionSettings/default"),
+	"azurerm_iot_security_device_group":  config.TemplatedStringAsIdentifier("name", "{{ .parameters.target_resource_id }}/providers/Microsoft.Security/deviceSecurityGroups/{{ .externalName }}"),
+	"azurerm_iot_security_solution":      config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Security/IoTSecuritySolutions/{{ .externalName }}"),
+
+	// sql
+	"azurerm_mssql_server":                             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/servers/{{ .externalName }}"),
+	"azurerm_mssql_server_transparent_data_encryption": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/encryptionProtector/current"),
+
+	// storagesync
+	"azurerm_storage_sync": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageSync/storageSyncServices/{{ .externalName }}"),
 }
 
 func ExternalNameConfigurations() config.ResourceOption {

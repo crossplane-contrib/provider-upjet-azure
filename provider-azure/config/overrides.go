@@ -93,6 +93,10 @@ func KnownReferences() tjconfig.ResourceOption {
 				r.References["account_name"] = config.Reference{
 					Type: "Account",
 				}
+			case r.ShortGroup == "mariadb" && f == "server_name":
+				r.References["server_name"] = config.Reference{
+					Type: "Server",
+				}
 			}
 		}
 	}

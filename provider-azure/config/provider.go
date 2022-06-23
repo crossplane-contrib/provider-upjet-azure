@@ -26,20 +26,20 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/base"
 	"github.com/upbound/official-providers/provider-azure/config/common"
 	"github.com/upbound/official-providers/provider-azure/config/compute"
+	"github.com/upbound/official-providers/provider-azure/config/containerservice"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
 	"github.com/upbound/official-providers/provider-azure/config/devices"
 	"github.com/upbound/official-providers/provider-azure/config/eventhub"
 	"github.com/upbound/official-providers/provider-azure/config/ip"
 	"github.com/upbound/official-providers/provider-azure/config/keyvault"
-	"github.com/upbound/official-providers/provider-azure/config/kubernetes"
-	"github.com/upbound/official-providers/provider-azure/config/loganalytics"
 	"github.com/upbound/official-providers/provider-azure/config/logic"
 	"github.com/upbound/official-providers/provider-azure/config/management"
 	"github.com/upbound/official-providers/provider-azure/config/mariadb"
 	"github.com/upbound/official-providers/provider-azure/config/monitor"
 	"github.com/upbound/official-providers/provider-azure/config/network"
 	"github.com/upbound/official-providers/provider-azure/config/notificationhubs"
+	"github.com/upbound/official-providers/provider-azure/config/operationalinsights"
 	"github.com/upbound/official-providers/provider-azure/config/postgresql"
 	"github.com/upbound/official-providers/provider-azure/config/redis"
 	"github.com/upbound/official-providers/provider-azure/config/resource"
@@ -189,13 +189,13 @@ func GetProvider() *tjconfig.Provider {
 		management.Configure,
 		redis.Configure,
 		resource.Configure,
-		kubernetes.Configure,
+		containerservice.Configure,
 		postgresql.Configure,
 		cosmosdb.Configure,
 		sql.Configure,
 		subnet.Configure,
 		storage.Configure,
-		loganalytics.Configure,
+		operationalinsights.Configure,
 		devices.Configure,
 		monitor.Configure,
 		apimanagement.Configure,
