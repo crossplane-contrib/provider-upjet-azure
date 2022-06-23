@@ -69,11 +69,9 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_backend_address_pool", func(r *config.Resource) {
 		r.Kind = "LoadBalancerBackendAddressPool"
-		r.References = config.References{
-			"loadbalancer_id": config.Reference{
-				Type:      "LoadBalancer",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -84,15 +82,13 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_backend_address_pool_address", func(r *config.Resource) {
 		r.Kind = "LoadBalancerBackendAddressPoolAddress"
-		r.References = config.References{
-			"backend_address_pool_id": config.Reference{
-				Type:      "LoadBalancerBackendAddressPool",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-			"virtual_network_id": config.Reference{
-				Type:      "VirtualNetwork",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["backend_address_pool_id"] = config.Reference{
+			Type:      "LoadBalancerBackendAddressPool",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["virtual_network_id"] = config.Reference{
+			Type:      "VirtualNetwork",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -103,11 +99,9 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_nat_pool", func(r *config.Resource) {
 		r.Kind = "LoadBalancerNatPool"
-		r.References = config.References{
-			"loadbalancer_id": config.Reference{
-				Type:      "LoadBalancer",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -118,11 +112,9 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_nat_rule", func(r *config.Resource) {
 		r.Kind = "LoadBalancerNatRule"
-		r.References = config.References{
-			"loadbalancer_id": config.Reference{
-				Type:      "LoadBalancer",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -133,15 +125,13 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_outbound_rule", func(r *config.Resource) {
 		r.Kind = "LoadBalancerOutboundRule"
-		r.References = config.References{
-			"backend_address_pool_id": config.Reference{
-				Type:      "LoadBalancerBackendAddressPool",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-			"loadbalancer_id": config.Reference{
-				Type:      "LoadBalancer",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["backend_address_pool_id"] = config.Reference{
+			Type:      "LoadBalancerBackendAddressPool",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -152,11 +142,9 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_probe", func(r *config.Resource) {
 		r.Kind = "LoadBalancerProbe"
-		r.References = config.References{
-			"loadbalancer_id": config.Reference{
-				Type:      "LoadBalancer",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -167,11 +155,9 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_lb_rule", func(r *config.Resource) {
 		r.Kind = "LoadBalancerRule"
-		r.References = config.References{
-			"loadbalancer_id": config.Reference{
-				Type:      "LoadBalancer",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -198,15 +184,13 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_association", func(r *config.Resource) {
 		r.UseAsync = true
-		r.References = config.References{
-			"nat_gateway_id": config.Reference{
-				Type:      "NATGateway",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-			"public_ip_address_id": config.Reference{
-				Type:      "PublicIP",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["nat_gateway_id"] = config.Reference{
+			Type:      "NATGateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["public_ip_address_id"] = config.Reference{
+			Type:      "PublicIP",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/natGateways/gateway1|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/publicIPAddresses/myPublicIpAddress1
 		r.ExternalName = config.IdentifierFromProvider
@@ -214,15 +198,13 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_prefix_association", func(r *config.Resource) {
 		r.UseAsync = true
-		r.References = config.References{
-			"nat_gateway_id": config.Reference{
-				Type:      "NATGateway",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-			"public_ip_prefix_id": config.Reference{
-				Type:      "PublicIPPrefix",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["nat_gateway_id"] = config.Reference{
+			Type:      "NATGateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["public_ip_prefix_id"] = config.Reference{
+			Type:      "PublicIPPrefix",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/natGateways/gateway1|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/publicIPPrefixes/myPublicIpPrefix1
 		r.ExternalName = config.IdentifierFromProvider
@@ -240,11 +222,9 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_connection_monitor", func(r *config.Resource) {
 		r.Kind = "ConnectionMonitor"
-		r.References = config.References{
-			"network_watcher_id": config.Reference{
-				Type:      "Watcher",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["network_watcher_id"] = config.Reference{
+			Type:      "Watcher",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
@@ -277,11 +257,9 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkGateway"
-		r.References = config.References{
-			"ip_configuration.subnet_id": config.Reference{
-				Type:      "Subnet",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["ip_configuration.subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -294,14 +272,12 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_network_peering", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkPeering"
-		r.References = config.References{
-			"virtual_network_name": config.Reference{
-				Type: "VirtualNetwork",
-			},
-			"remote_virtual_network_id": config.Reference{
-				Type:      "VirtualNetwork",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["virtual_network_name"] = config.Reference{
+			Type: "VirtualNetwork",
+		}
+		r.References["remote_virtual_network_id"] = config.Reference{
+			Type:      "VirtualNetwork",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
@@ -333,15 +309,13 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway_connection", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkGatewayConnection"
-		r.References = config.References{
-			"virtual_network_gateway_id": config.Reference{
-				Type:      "VirtualNetworkGateway",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-			"peer_virtual_network_gateway_id": config.Reference{
-				Type:      "VirtualNetworkGateway",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["virtual_network_gateway_id"] = config.Reference{
+			Type:      "VirtualNetworkGateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["peer_virtual_network_gateway_id"] = config.Reference{
+			Type:      "VirtualNetworkGateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
