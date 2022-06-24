@@ -664,6 +664,48 @@ func (mg *NetworkInterfaceBackendAddressPoolAssociation) ResolveReferences(ctx c
 	return nil
 }
 
+// ResolveReferences of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NATRuleID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.NATRuleIDRef,
+		Selector:     mg.Spec.ForProvider.NATRuleIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerNatRuleList{},
+			Managed: &LoadBalancerNatRule{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NATRuleID")
+	}
+	mg.Spec.ForProvider.NATRuleID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NATRuleIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterfaceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.NetworkInterfaceIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkInterfaceIDSelector,
+		To: reference.To{
+			List:    &NetworkInterfaceList{},
+			Managed: &NetworkInterface{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkInterfaceID")
+	}
+	mg.Spec.ForProvider.NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkInterfaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this PublicIP.
 func (mg *PublicIP) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

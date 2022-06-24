@@ -1195,6 +1195,72 @@ func (mg *NetworkInterfaceBackendAddressPoolAssociation) SetWriteConnectionSecre
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this NetworkInterfaceNatRuleAssociation.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *NetworkInterfaceNatRuleAssociation) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this NetworkInterfaceNatRuleAssociation.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *NetworkInterfaceNatRuleAssociation) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this NetworkInterfaceNatRuleAssociation.
+func (mg *NetworkInterfaceNatRuleAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this PublicIP.
 func (mg *PublicIP) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

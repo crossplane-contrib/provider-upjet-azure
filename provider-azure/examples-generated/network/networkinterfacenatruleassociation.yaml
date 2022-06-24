@@ -1,0 +1,13 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterfaceNatRuleAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    ipConfigurationName: testconfiguration1
+    natRuleIdRef:
+      name: example
+    networkInterfaceIdRef:
+      name: example
+  providerConfigRef:
+    name: example

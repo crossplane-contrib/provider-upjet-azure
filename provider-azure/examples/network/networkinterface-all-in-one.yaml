@@ -140,3 +140,34 @@ spec:
       name: example-nic
   providerConfigRef:
     name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerNatRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendPort: 3389
+    frontendIpConfigurationName: publicipaddress
+    frontendPort: 3389
+    loadbalancerIdRef:
+      name: testloadbalancer
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterfaceNatRuleAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    ipConfigurationName: testconfiguration1
+    natRuleIdRef:
+      name: example
+    networkInterfaceIdRef:
+      name: example-nic
+  providerConfigRef:
+    name: example
