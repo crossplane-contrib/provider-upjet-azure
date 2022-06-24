@@ -1,0 +1,20 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRange: '*'
+    direction: Outbound
+    networkSecurityGroupNameRef:
+      name: example
+    priority: 100
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: example
+    sourceAddressPrefix: '*'
+    sourcePortRange: '*'
+  providerConfigRef:
+    name: example

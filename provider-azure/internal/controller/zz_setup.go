@@ -105,8 +105,11 @@ import (
 	networkinterfaceapplicationsecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfaceapplicationsecuritygroupassociation"
 	networkinterfacebackendaddresspoolassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacebackendaddresspoolassociation"
 	networkinterfacenatruleassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacenatruleassociation"
+	networkinterfacesecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacesecuritygroupassociation"
 	publicip "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicip"
 	publicipprefix "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicipprefix"
+	securitygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/securitygroup"
+	securityrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/securityrule"
 	subnet "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnet"
 	subnetnatgatewayassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnetnatgatewayassociation"
 	subnetnetworksecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnetnetworksecuritygroupassociation"
@@ -232,8 +235,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		networkinterfaceapplicationsecuritygroupassociation.Setup,
 		networkinterfacebackendaddresspoolassociation.Setup,
 		networkinterfacenatruleassociation.Setup,
+		networkinterfacesecuritygroupassociation.Setup,
 		publicip.Setup,
 		publicipprefix.Setup,
+		securitygroup.Setup,
+		securityrule.Setup,
 		subnet.Setup,
 		subnetnatgatewayassociation.Setup,
 		subnetnetworksecuritygroupassociation.Setup,

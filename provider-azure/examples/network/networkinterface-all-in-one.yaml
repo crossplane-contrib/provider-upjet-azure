@@ -171,3 +171,51 @@ spec:
       name: example-nic
   providerConfigRef:
     name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRange: '*'
+    direction: Outbound
+    networkSecurityGroupNameRef:
+      name: example
+    priority: 100
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    sourceAddressPrefix: '*'
+    sourcePortRange: '*'
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterfaceSecurityGroupAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    networkInterfaceIdRef:
+      name: example-nic
+    networkSecurityGroupIdRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -87,6 +87,9 @@ var includedResources = []string{
 	"azurerm_network_interface_application_security_group_association$",
 	"azurerm_network_interface_backend_address_pool_association$",
 	"azurerm_network_interface_nat_rule_association$",
+	"azurerm_network_interface_security_group_association$",
+	"azurerm_network_security_group$",
+	"azurerm_network_security_rule$",
 	"azurerm_nat_gateway.*",
 	"azurerm_key_vault.*",
 	"azurerm_eventhub_namespace$",
@@ -117,7 +120,6 @@ var skipList = []string{
 	"azurerm_sentinel_data_connector_microsoft_defender_advanced_threat_protection",
 	// cannot generate a unique name
 	"azurerm_route",
-	"azurerm_network_security_rule",
 	// deprecated
 	"azurerm_virtual_machine_scale_set",
 	"azurerm_virtual_machine_configuration_policy_assignment",
