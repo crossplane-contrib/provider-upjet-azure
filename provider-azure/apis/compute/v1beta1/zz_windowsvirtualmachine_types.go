@@ -252,7 +252,7 @@ type WindowsVirtualMachineParameters struct {
 	VtpmEnabled *bool `json:"vtpmEnabled,omitempty" tf:"vtpm_enabled,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	WinrmListener []WinrmListenerParameters `json:"winrmListener,omitempty" tf:"winrm_listener,omitempty"`
+	WinrmListener []WindowsVirtualMachineWinrmListenerParameters `json:"winrmListener,omitempty" tf:"winrm_listener,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -327,10 +327,10 @@ type WindowsVirtualMachineTerminationNotificationParameters struct {
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
-type WinrmListenerObservation struct {
+type WindowsVirtualMachineWinrmListenerObservation struct {
 }
 
-type WinrmListenerParameters struct {
+type WindowsVirtualMachineWinrmListenerParameters struct {
 
 	// +kubebuilder:validation:Optional
 	CertificateURL *string `json:"certificateUrl,omitempty" tf:"certificate_url,omitempty"`

@@ -1,0 +1,15 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: SharedImageGallery
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Shared images and things.
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    tags:
+      Hello: There
+      World: Example
+  providerConfigRef:
+    name: example

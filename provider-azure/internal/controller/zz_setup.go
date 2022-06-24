@@ -16,9 +16,18 @@ import (
 	redisenterprisedatabase "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisfirewallrule"
 	redislinkedserver "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redislinkedserver"
+	availabilityset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/availabilityset"
+	dedicatedhost "github.com/upbound/official-providers/provider-azure/internal/controller/compute/dedicatedhost"
+	diskaccess "github.com/upbound/official-providers/provider-azure/internal/controller/compute/diskaccess"
 	diskencryptionset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/diskencryptionset"
+	image "github.com/upbound/official-providers/provider-azure/internal/controller/compute/image"
 	linuxvirtualmachine "github.com/upbound/official-providers/provider-azure/internal/controller/compute/linuxvirtualmachine"
 	linuxvirtualmachinescaleset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/linuxvirtualmachinescaleset"
+	manageddisk "github.com/upbound/official-providers/provider-azure/internal/controller/compute/manageddisk"
+	orchestratedvirtualmachinescaleset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/orchestratedvirtualmachinescaleset"
+	proximityplacementgroup "github.com/upbound/official-providers/provider-azure/internal/controller/compute/proximityplacementgroup"
+	sharedimagegallery "github.com/upbound/official-providers/provider-azure/internal/controller/compute/sharedimagegallery"
+	snapshot "github.com/upbound/official-providers/provider-azure/internal/controller/compute/snapshot"
 	windowsvirtualmachine "github.com/upbound/official-providers/provider-azure/internal/controller/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
 	kubernetescluster "github.com/upbound/official-providers/provider-azure/internal/controller/containerservice/kubernetescluster"
@@ -86,6 +95,7 @@ import (
 	secret "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/secret"
 	vault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/vault"
 	workspace "github.com/upbound/official-providers/provider-azure/internal/controller/loganalytics/workspace"
+	marketplaceagreement "github.com/upbound/official-providers/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
 	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
 	ddosprotectionplan "github.com/upbound/official-providers/provider-azure/internal/controller/network/ddosprotectionplan"
@@ -146,9 +156,18 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
 		redislinkedserver.Setup,
+		availabilityset.Setup,
+		dedicatedhost.Setup,
+		diskaccess.Setup,
 		diskencryptionset.Setup,
+		image.Setup,
 		linuxvirtualmachine.Setup,
 		linuxvirtualmachinescaleset.Setup,
+		manageddisk.Setup,
+		orchestratedvirtualmachinescaleset.Setup,
+		proximityplacementgroup.Setup,
+		sharedimagegallery.Setup,
+		snapshot.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
 		kubernetescluster.Setup,
@@ -216,6 +235,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		secret.Setup,
 		vault.Setup,
 		workspace.Setup,
+		marketplaceagreement.Setup,
 		applicationsecuritygroup.Setup,
 		connectionmonitor.Setup,
 		ddosprotectionplan.Setup,

@@ -1,0 +1,9 @@
+apiVersion: marketplaceordering.azure.upbound.io/v1beta1
+kind: MarketplaceAgreement
+metadata:
+  name: example
+spec:
+  forProvider:
+    offer: waf
+    plan: hourly
+    publisher: barracudanetworks

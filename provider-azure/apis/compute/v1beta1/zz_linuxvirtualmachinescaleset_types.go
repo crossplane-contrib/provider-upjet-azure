@@ -37,39 +37,6 @@ type AutomaticOsUpgradePolicyParameters struct {
 	EnableAutomaticOsUpgrade *bool `json:"enableAutomaticOsUpgrade" tf:"enable_automatic_os_upgrade,omitempty"`
 }
 
-type DataDiskObservation struct {
-}
-
-type DataDiskParameters struct {
-
-	// +kubebuilder:validation:Required
-	Caching *string `json:"caching" tf:"caching,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
-
-	// +kubebuilder:validation:Required
-	DiskSizeGb *float64 `json:"diskSizeGb" tf:"disk_size_gb,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Lun *float64 `json:"lun" tf:"lun,omitempty"`
-
-	// +kubebuilder:validation:Required
-	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	UltraSsdDiskIopsReadWrite *float64 `json:"ultraSsdDiskIopsReadWrite,omitempty" tf:"ultra_ssd_disk_iops_read_write,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
-}
-
 type ExtensionObservation struct {
 }
 
@@ -189,6 +156,39 @@ type LinuxVirtualMachineScaleSetBootDiagnosticsParameters struct {
 	StorageAccountURI *string `json:"storageAccountUri,omitempty" tf:"storage_account_uri,omitempty"`
 }
 
+type LinuxVirtualMachineScaleSetDataDiskObservation struct {
+}
+
+type LinuxVirtualMachineScaleSetDataDiskParameters struct {
+
+	// +kubebuilder:validation:Required
+	Caching *string `json:"caching" tf:"caching,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	DiskSizeGb *float64 `json:"diskSizeGb" tf:"disk_size_gb,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Lun *float64 `json:"lun" tf:"lun,omitempty"`
+
+	// +kubebuilder:validation:Required
+	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	UltraSsdDiskIopsReadWrite *float64 `json:"ultraSsdDiskIopsReadWrite,omitempty" tf:"ultra_ssd_disk_iops_read_write,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
+}
+
 type LinuxVirtualMachineScaleSetIdentityObservation struct {
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
@@ -272,7 +272,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	DataDisk []DataDiskParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
+	DataDisk []LinuxVirtualMachineScaleSetDataDiskParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DisablePasswordAuthentication *bool `json:"disablePasswordAuthentication,omitempty" tf:"disable_password_authentication,omitempty"`
