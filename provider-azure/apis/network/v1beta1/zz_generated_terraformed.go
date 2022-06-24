@@ -13,6 +13,80 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this ApplicationSecurityGroup
+func (mg *ApplicationSecurityGroup) GetTerraformResourceType() string {
+	return "azurerm_application_security_group"
+}
+
+// GetConnectionDetailsMapping for this ApplicationSecurityGroup
+func (tr *ApplicationSecurityGroup) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ApplicationSecurityGroup
+func (tr *ApplicationSecurityGroup) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ApplicationSecurityGroup
+func (tr *ApplicationSecurityGroup) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ApplicationSecurityGroup
+func (tr *ApplicationSecurityGroup) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ApplicationSecurityGroup
+func (tr *ApplicationSecurityGroup) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ApplicationSecurityGroup
+func (tr *ApplicationSecurityGroup) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ApplicationSecurityGroup using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ApplicationSecurityGroup) LateInitialize(attrs []byte) (bool, error) {
+	params := &ApplicationSecurityGroupParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ApplicationSecurityGroup) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this LoadBalancer
 func (mg *LoadBalancer) GetTerraformResourceType() string {
 	return "azurerm_lb"
@@ -1121,6 +1195,80 @@ func (tr *NetworkInterface) LateInitialize(attrs []byte) (bool, error) {
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *NetworkInterface) GetTerraformSchemaVersion() int {
 	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this NetworkInterfaceApplicationSecurityGroupAssociation
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) GetTerraformResourceType() string {
+	return "azurerm_network_interface_application_security_group_association"
+}
+
+// GetConnectionDetailsMapping for this NetworkInterfaceApplicationSecurityGroupAssociation
+func (tr *NetworkInterfaceApplicationSecurityGroupAssociation) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this NetworkInterfaceApplicationSecurityGroupAssociation
+func (tr *NetworkInterfaceApplicationSecurityGroupAssociation) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this NetworkInterfaceApplicationSecurityGroupAssociation
+func (tr *NetworkInterfaceApplicationSecurityGroupAssociation) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this NetworkInterfaceApplicationSecurityGroupAssociation
+func (tr *NetworkInterfaceApplicationSecurityGroupAssociation) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this NetworkInterfaceApplicationSecurityGroupAssociation
+func (tr *NetworkInterfaceApplicationSecurityGroupAssociation) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this NetworkInterfaceApplicationSecurityGroupAssociation
+func (tr *NetworkInterfaceApplicationSecurityGroupAssociation) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this NetworkInterfaceApplicationSecurityGroupAssociation using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *NetworkInterfaceApplicationSecurityGroupAssociation) LateInitialize(attrs []byte) (bool, error) {
+	params := &NetworkInterfaceApplicationSecurityGroupAssociationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *NetworkInterfaceApplicationSecurityGroupAssociation) GetTerraformSchemaVersion() int {
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this Watcher

@@ -7,6 +7,72 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ApplicationSecurityGroup.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ApplicationSecurityGroup) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ApplicationSecurityGroup.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ApplicationSecurityGroup) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ApplicationSecurityGroup.
+func (mg *ApplicationSecurityGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ConnectionMonitor.
 func (mg *ConnectionMonitor) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -994,6 +1060,72 @@ func (mg *NetworkInterface) SetPublishConnectionDetailsTo(r *xpv1.PublishConnect
 
 // SetWriteConnectionSecretToReference of this NetworkInterface.
 func (mg *NetworkInterface) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this NetworkInterfaceApplicationSecurityGroupAssociation.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this NetworkInterfaceApplicationSecurityGroupAssociation.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this NetworkInterfaceApplicationSecurityGroupAssociation.
+func (mg *NetworkInterfaceApplicationSecurityGroupAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

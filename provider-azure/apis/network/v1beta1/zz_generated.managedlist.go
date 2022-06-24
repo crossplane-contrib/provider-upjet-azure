@@ -7,6 +7,15 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this ApplicationSecurityGroupList.
+func (l *ApplicationSecurityGroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ConnectionMonitorList.
 func (l *ConnectionMonitorList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -126,6 +135,15 @@ func (l *NATGatewayPublicIPAssociationList) GetItems() []resource.Managed {
 
 // GetItems of this NATGatewayPublicIPPrefixAssociationList.
 func (l *NATGatewayPublicIPPrefixAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this NetworkInterfaceApplicationSecurityGroupAssociationList.
+func (l *NetworkInterfaceApplicationSecurityGroupAssociationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

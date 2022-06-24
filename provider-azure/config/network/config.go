@@ -242,6 +242,30 @@ func Configure(p *config.Provider) {
 		)
 	})
 
+	p.AddResourceConfigurator("azurerm_application_security_group", func(r *config.Resource) {
+		r.ExternalName = config.NameAsIdentifier
+		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/applicationSecurityGroups/securitygroup1
+		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network",
+			"applicationSecurityGroups", "name",
+		)
+	})
+
+	p.AddResourceConfigurator("azurerm_network_interface_application_security_group_association", func(r *config.Resource) {
+		r.Kind = "NetworkInterfaceApplicationSecurityGroupAssociation"
+		r.UseAsync = true
+		r.References["network_interface_id"] = config.Reference{
+			Type:      "NetworkInterface",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["application_security_group_id"] = config.Reference{
+			Type:      "ApplicationSecurityGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/microsoft.network/networkInterfaces/nic1|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/applicationSecurityGroups/securityGroup1
+		r.ExternalName = config.IdentifierFromProvider
+	})
+
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
 		r.Kind = "VirtualNetwork"
 		r.LateInitializer = config.LateInitializer{

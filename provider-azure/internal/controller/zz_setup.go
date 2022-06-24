@@ -86,6 +86,7 @@ import (
 	secret "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/secret"
 	vault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/vault"
 	workspace "github.com/upbound/official-providers/provider-azure/internal/controller/loganalytics/workspace"
+	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
 	ddosprotectionplan "github.com/upbound/official-providers/provider-azure/internal/controller/network/ddosprotectionplan"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
@@ -101,6 +102,7 @@ import (
 	natgatewaypublicipassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/natgatewaypublicipassociation"
 	natgatewaypublicipprefixassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/natgatewaypublicipprefixassociation"
 	networkinterface "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterface"
+	networkinterfaceapplicationsecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfaceapplicationsecuritygroupassociation"
 	publicip "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicip"
 	publicipprefix "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicipprefix"
 	subnet "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnet"
@@ -209,6 +211,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		secret.Setup,
 		vault.Setup,
 		workspace.Setup,
+		applicationsecuritygroup.Setup,
 		connectionmonitor.Setup,
 		ddosprotectionplan.Setup,
 		loadbalancer.Setup,
@@ -224,6 +227,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		natgatewaypublicipassociation.Setup,
 		natgatewaypublicipprefixassociation.Setup,
 		networkinterface.Setup,
+		networkinterfaceapplicationsecuritygroupassociation.Setup,
 		publicip.Setup,
 		publicipprefix.Setup,
 		subnet.Setup,
