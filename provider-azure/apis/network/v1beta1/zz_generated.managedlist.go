@@ -151,6 +151,15 @@ func (l *NetworkInterfaceApplicationSecurityGroupAssociationList) GetItems() []r
 	return items
 }
 
+// GetItems of this NetworkInterfaceBackendAddressPoolAssociationList.
+func (l *NetworkInterfaceBackendAddressPoolAssociationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this NetworkInterfaceList.
 func (l *NetworkInterfaceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

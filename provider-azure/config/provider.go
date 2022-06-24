@@ -85,6 +85,7 @@ var includedResources = []string{
 	"azurerm_network_watcher$",
 	"azurerm_application_security_group$",
 	"azurerm_network_interface_application_security_group_association$",
+	"azurerm_network_interface_backend_address_pool_association$",
 	"azurerm_nat_gateway.*",
 	"azurerm_key_vault.*",
 	"azurerm_eventhub_namespace$",

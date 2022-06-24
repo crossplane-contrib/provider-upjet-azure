@@ -266,6 +266,21 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.IdentifierFromProvider
 	})
 
+	p.AddResourceConfigurator("azurerm_network_interface_backend_address_pool_association", func(r *config.Resource) {
+		r.Kind = "NetworkInterfaceBackendAddressPoolAssociation"
+		r.UseAsync = true
+		r.References["network_interface_id"] = config.Reference{
+			Type:      "NetworkInterface",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["backend_address_pool_id"] = config.Reference{
+			Type:      "LoadBalancerBackendAddressPool",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/microsoft.network/networkInterfaces/nic1/ipConfigurations/example|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/pool1
+		r.ExternalName = config.IdentifierFromProvider
+	})
+
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
 		r.Kind = "VirtualNetwork"
 		r.LateInitializer = config.LateInitializer{

@@ -103,6 +103,7 @@ import (
 	natgatewaypublicipprefixassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/natgatewaypublicipprefixassociation"
 	networkinterface "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterface"
 	networkinterfaceapplicationsecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfaceapplicationsecuritygroupassociation"
+	networkinterfacebackendaddresspoolassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacebackendaddresspoolassociation"
 	publicip "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicip"
 	publicipprefix "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicipprefix"
 	subnet "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnet"
@@ -228,6 +229,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		natgatewaypublicipprefixassociation.Setup,
 		networkinterface.Setup,
 		networkinterfaceapplicationsecuritygroupassociation.Setup,
+		networkinterfacebackendaddresspoolassociation.Setup,
 		publicip.Setup,
 		publicipprefix.Setup,
 		subnet.Setup,

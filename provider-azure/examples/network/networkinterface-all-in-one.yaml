@@ -82,3 +82,61 @@ spec:
       name: example-nic
   providerConfigRef:
     name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  name: publicipfornetworkinterface
+spec:
+  forProvider:
+    sku: Standard
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  name: testloadbalancer
+spec:
+  forProvider:
+    sku: Standard
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    frontendIpConfiguration:
+      - name: publicipaddress
+        publicIpAddressIdRef:
+          name: publicipfornetworkinterface
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerBackendAddressPool
+metadata:
+  name: example
+spec:
+  forProvider:
+    loadbalancerIdRef:
+      name: testloadbalancer
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterfaceBackendAddressPoolAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendAddressPoolIdRef:
+      name: example
+    ipConfigurationName: testconfiguration1
+    networkInterfaceIdRef:
+      name: example-nic
+  providerConfigRef:
+    name: example
