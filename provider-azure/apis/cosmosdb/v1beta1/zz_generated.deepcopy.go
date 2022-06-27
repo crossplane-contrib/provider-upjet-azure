@@ -672,11 +672,6 @@ func (in *CassandraClusterParameters) DeepCopyInto(out *CassandraClusterParamete
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -867,11 +862,6 @@ func (in *CassandraDatacenterParameters) DeepCopyInto(out *CassandraDatacenterPa
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
-		*out = new(string)
-		**out = **in
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}
@@ -4169,10 +4159,15 @@ func (in *SQLRoleAssignmentParameters) DeepCopyInto(out *SQLRoleAssignmentParame
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
 		**out = **in
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrincipalID != nil {
 		in, out := &in.PrincipalID, &out.PrincipalID
@@ -4337,6 +4332,16 @@ func (in *SQLRoleDefinitionParameters) DeepCopyInto(out *SQLRoleDefinitionParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountNameRef != nil {
+		in, out := &in.AccountNameRef, &out.AccountNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.AccountNameSelector != nil {
+		in, out := &in.AccountNameSelector, &out.AccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AssignableScopes != nil {
 		in, out := &in.AssignableScopes, &out.AssignableScopes
 		*out = make([]*string, len(*in))
@@ -4347,11 +4352,6 @@ func (in *SQLRoleDefinitionParameters) DeepCopyInto(out *SQLRoleDefinitionParame
 				**out = **in
 			}
 		}
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
 	}
 	if in.Permissions != nil {
 		in, out := &in.Permissions, &out.Permissions

@@ -1,0 +1,13 @@
+apiVersion: notificationhubs.azure.upbound.io/v1alpha1
+kind: Namespace
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    namespaceType: NotificationHub
+    resourceGroupNameRef:
+      name: example
+    skuName: Free
+  providerConfigRef:
+    name: example

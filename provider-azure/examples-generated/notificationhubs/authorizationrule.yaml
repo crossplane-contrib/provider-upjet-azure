@@ -1,0 +1,15 @@
+apiVersion: notificationhubs.azure.upbound.io/v1alpha1
+kind: AuthorizationRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    listen: true
+    manage: true
+    namespaceName: ${azurerm_notification_hub_namespace.example.name}
+    notificationHubName: ${azurerm_notification_hub.example.name}
+    resourceGroupNameRef:
+      name: example
+    send: true
+  providerConfigRef:
+    name: example

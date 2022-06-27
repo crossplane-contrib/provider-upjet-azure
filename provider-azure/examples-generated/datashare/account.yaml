@@ -1,0 +1,15 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    tags:
+      foo: bar
+  providerConfigRef:
+    name: example

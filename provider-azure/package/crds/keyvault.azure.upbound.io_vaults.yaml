@@ -249,6 +249,33 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accessPolicy:
+                    items:
+                      properties:
+                        applicationId:
+                          type: string
+                        certificatePermissions:
+                          items:
+                            type: string
+                          type: array
+                        keyPermissions:
+                          items:
+                            type: string
+                          type: array
+                        objectId:
+                          type: string
+                        secretPermissions:
+                          items:
+                            type: string
+                          type: array
+                        storagePermissions:
+                          items:
+                            type: string
+                          type: array
+                        tenantId:
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
                   vaultUri:

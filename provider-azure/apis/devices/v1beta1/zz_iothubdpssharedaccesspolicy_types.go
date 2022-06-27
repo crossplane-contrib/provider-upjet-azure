@@ -25,15 +25,8 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	EnrollmentWrite *bool `json:"enrollmentWrite,omitempty" tf:"enrollment_write,omitempty"`
 
-	// +crossplane:generate:reference:type=IOTHubDPS
-	// +kubebuilder:validation:Optional
-	IOTHubDPSName *string `json:"iothubDpsName,omitempty" tf:"iothub_dps_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	IOTHubDPSNameRef *v1.Reference `json:"iotHubDpsNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	IOTHubDPSNameSelector *v1.Selector `json:"iotHubDpsNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	IOTHubDPSName *string `json:"iothubDpsName" tf:"iothub_dps_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RegistrationRead *bool `json:"registrationRead,omitempty" tf:"registration_read,omitempty"`

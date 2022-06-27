@@ -1,0 +1,11 @@
+apiVersion: management.azure.upbound.io/v1alpha1
+kind: GroupPolicyExemption
+metadata:
+  name: example
+spec:
+  forProvider:
+    exemptionCategory: Mitigated
+    managementGroupId: ${azurerm_management_group.example.id}
+    policyAssignmentId: ${azurerm_management_group_policy_assignment.example.id}
+  providerConfigRef:
+    name: example

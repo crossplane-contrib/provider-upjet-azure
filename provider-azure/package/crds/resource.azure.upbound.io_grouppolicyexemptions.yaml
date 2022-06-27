@@ -32,7 +32,7 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
-    name: v1beta1
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: GroupPolicyExemption is the Schema for the GroupPolicyExemptions
@@ -74,8 +74,6 @@ spec:
                     type: string
                   metadata:
                     type: string
-                  name:
-                    type: string
                   policyAssignmentId:
                     type: string
                   policyDefinitionReferenceIds:
@@ -109,7 +107,6 @@ spec:
                     type: object
                 required:
                 - exemptionCategory
-                - name
                 - policyAssignmentId
                 type: object
               providerConfigRef:

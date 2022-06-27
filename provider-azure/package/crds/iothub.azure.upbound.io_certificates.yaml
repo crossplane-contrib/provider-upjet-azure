@@ -32,7 +32,7 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
-    name: v1beta1
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: Certificate is the Schema for the Certificates API
@@ -85,8 +85,6 @@ spec:
                     type: string
                   isVerified:
                     type: boolean
-                  name:
-                    type: string
                   resourceGroupName:
                     type: string
                   resourceGroupNameRef:
@@ -115,7 +113,6 @@ spec:
                 required:
                 - certificateContentSecretRef
                 - iothubName
-                - name
                 type: object
               providerConfigRef:
                 default:

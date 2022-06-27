@@ -1,0 +1,16 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: RedisCache
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementId: ${azurerm_api_management.example.id}
+    cacheLocation: East Us
+    connectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-redis-cache
+      namespace: crossplane-system
+    description: Redis cache instances
+    redisCacheId: ${azurerm_redis_cache.example.id}
+  providerConfigRef:
+    name: example

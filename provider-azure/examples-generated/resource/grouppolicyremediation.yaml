@@ -1,4 +1,4 @@
-apiVersion: resource.azure.upbound.io/v1beta1
+apiVersion: resource.azure.upbound.io/v1alpha1
 kind: GroupPolicyRemediation
 metadata:
   name: example
@@ -6,7 +6,6 @@ spec:
   forProvider:
     locationFilters:
     - West Europe
-    name: example-policy-remediation
     policyAssignmentId: ${azurerm_policy_assignment.example.id}
     resourceGroupIdRef:
       name: example

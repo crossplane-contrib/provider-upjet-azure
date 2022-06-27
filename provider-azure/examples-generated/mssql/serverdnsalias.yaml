@@ -1,0 +1,9 @@
+apiVersion: mssql.azure.upbound.io/v1alpha1
+kind: ServerDNSAlias
+metadata:
+  name: example
+spec:
+  forProvider:
+    mssqlServerId: ${azurerm_mssql_server.example.id}
+  providerConfigRef:
+    name: example

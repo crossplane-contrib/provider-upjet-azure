@@ -32,7 +32,7 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
-    name: v1beta1
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: GroupCostManagementExport is the Schema for the GroupCostManagementExports
@@ -91,8 +91,6 @@ spec:
                       - rootFolderPath
                       type: object
                     type: array
-                  name:
-                    type: string
                   recurrencePeriodEndDate:
                     type: string
                   recurrencePeriodStartDate:
@@ -127,7 +125,6 @@ spec:
                 required:
                 - exportDataOptions
                 - exportDataStorageLocation
-                - name
                 - recurrencePeriodEndDate
                 - recurrencePeriodStartDate
                 - recurrenceType

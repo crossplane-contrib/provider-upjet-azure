@@ -1,0 +1,19 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: APIOperationPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: ${azurerm_api_management_api_operation.example.api_management_name}
+    apiName: ${azurerm_api_management_api_operation.example.api_name}
+    operationId: ${azurerm_api_management_api_operation.example.operation_id}
+    resourceGroupNameRef:
+      name: example
+    xmlContent: |
+      <policies>
+        <inbound>
+          <find-and-replace from="xyz" to="abc" />
+        </inbound>
+      </policies>
+  providerConfigRef:
+    name: example

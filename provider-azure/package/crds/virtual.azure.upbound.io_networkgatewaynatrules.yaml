@@ -32,7 +32,7 @@ spec:
     - jsonPath: .metadata.creationTimestamp
       name: AGE
       type: date
-    name: v1beta1
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: NetworkGatewayNATRule is the Schema for the NetworkGatewayNATRules
@@ -90,8 +90,6 @@ spec:
                     type: string
                   mode:
                     type: string
-                  name:
-                    type: string
                   resourceGroupName:
                     type: string
                   resourceGroupNameRef:
@@ -124,7 +122,6 @@ spec:
                 required:
                 - externalMapping
                 - internalMapping
-                - name
                 - virtualNetworkGatewayId
                 type: object
               providerConfigRef:

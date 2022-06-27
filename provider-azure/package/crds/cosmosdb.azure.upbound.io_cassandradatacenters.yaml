@@ -97,8 +97,6 @@ spec:
                     type: number
                   location:
                     type: string
-                  name:
-                    type: string
                   nodeCount:
                     type: number
                   skuName:
@@ -106,7 +104,6 @@ spec:
                 required:
                 - cassandraClusterId
                 - location
-                - name
                 type: object
               providerConfigRef:
                 default:

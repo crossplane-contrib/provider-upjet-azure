@@ -6,8 +6,7 @@ spec:
   forProvider:
     enrollmentRead: true
     enrollmentWrite: true
-    iotHubDpsNameRef:
-      name: example
+    iothubDpsName: ${azurerm_iothub_dps.example.name}
     resourceGroupNameRef:
       name: example
   providerConfigRef:

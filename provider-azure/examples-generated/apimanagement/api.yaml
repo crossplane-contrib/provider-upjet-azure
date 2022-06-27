@@ -1,0 +1,19 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: API
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: ${azurerm_api_management.example.name}
+    displayName: Example API
+    import:
+    - contentFormat: swagger-link-json
+      contentValue: http://conferenceapi.azurewebsites.net/?format=json
+    path: example
+    protocols:
+    - https
+    resourceGroupNameRef:
+      name: example
+    revision: "1"
+  providerConfigRef:
+    name: example

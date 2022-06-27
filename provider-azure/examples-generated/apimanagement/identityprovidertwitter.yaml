@@ -1,0 +1,16 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: IdentityProviderTwitter
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiKey: "00000000000000000000000000000000"
+    apiManagementName: ${azurerm_api_management.example.name}
+    apiSecretKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

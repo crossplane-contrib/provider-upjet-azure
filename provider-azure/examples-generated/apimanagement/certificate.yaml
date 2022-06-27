@@ -1,0 +1,15 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: ${azurerm_api_management.example.name}
+    dataSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

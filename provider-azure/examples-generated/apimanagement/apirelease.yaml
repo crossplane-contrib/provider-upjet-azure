@@ -1,0 +1,9 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: APIRelease
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiId: ${azurerm_api_management_api.example.id}
+  providerConfigRef:
+    name: example

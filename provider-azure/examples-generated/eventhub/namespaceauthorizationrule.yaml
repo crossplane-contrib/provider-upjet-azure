@@ -1,0 +1,14 @@
+apiVersion: eventhub.azure.upbound.io/v1alpha1
+kind: NamespaceAuthorizationRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    listen: true
+    manage: false
+    namespaceName: ${azurerm_eventhub_namespace.example.name}
+    resourceGroupNameRef:
+      name: example
+    send: false
+  providerConfigRef:
+    name: example

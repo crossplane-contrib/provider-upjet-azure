@@ -1,0 +1,18 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: IdentityProviderAAD
+metadata:
+  name: example
+spec:
+  forProvider:
+    allowedTenants:
+    - 00000000-0000-0000-0000-000000000000
+    apiManagementName: ${azurerm_api_management.example.name}
+    clientId: 00000000-0000-0000-0000-000000000000
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

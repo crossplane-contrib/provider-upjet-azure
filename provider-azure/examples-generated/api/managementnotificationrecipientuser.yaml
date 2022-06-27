@@ -1,0 +1,11 @@
+apiVersion: api.azure.upbound.io/v1alpha1
+kind: ManagementNotificationRecipientUser
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementId: ${azurerm_api_management.example.id}
+    notificationType: AccountClosedPublisher
+    userId: ${azurerm_api_management_user.example.user_id}
+  providerConfigRef:
+    name: example

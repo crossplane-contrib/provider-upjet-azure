@@ -29,18 +29,28 @@ type CloudToDeviceParameters struct {
 }
 
 type EndpointObservation struct {
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
+
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
+
+	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path,omitempty"`
+
+	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
+
+	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
+
+	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
+
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EndpointParameters struct {
-
-	// +kubebuilder:validation:Optional
-	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type"`
-
-	// +kubebuilder:validation:Optional
-	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds"`
-
-	// +kubebuilder:validation:Optional
-	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
@@ -52,27 +62,6 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Optional
-	Encoding *string `json:"encoding,omitempty" tf:"encoding"`
-
-	// +kubebuilder:validation:Optional
-	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri"`
-
-	// +kubebuilder:validation:Optional
-	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path"`
-
-	// +kubebuilder:validation:Optional
-	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format"`
-
-	// +kubebuilder:validation:Optional
-	IdentityID *string `json:"identityId,omitempty" tf:"identity_id"`
-
-	// +kubebuilder:validation:Optional
-	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes"`
-
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name"`
-
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name"`
@@ -82,42 +71,30 @@ type EndpointParameters struct {
 
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type"`
 }
 
 type EnrichmentObservation struct {
+	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type EnrichmentParameters struct {
-
-	// +kubebuilder:validation:Optional
-	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names"`
-
-	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key"`
-
-	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value"`
 }
 
 type FallbackRouteObservation struct {
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type FallbackRouteParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type FeedbackObservation struct {
@@ -169,6 +146,10 @@ type FileUploadParameters struct {
 }
 
 type IOTHubObservation struct {
+	Endpoint []EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	Enrichment []EnrichmentObservation `json:"enrichment,omitempty" tf:"enrichment,omitempty"`
+
 	EventHubEventsEndpoint *string `json:"eventHubEventsEndpoint,omitempty" tf:"event_hub_events_endpoint,omitempty"`
 
 	EventHubEventsNamespace *string `json:"eventHubEventsNamespace,omitempty" tf:"event_hub_events_namespace,omitempty"`
@@ -179,11 +160,15 @@ type IOTHubObservation struct {
 
 	EventHubOperationsPath *string `json:"eventHubOperationsPath,omitempty" tf:"event_hub_operations_path,omitempty"`
 
+	FallbackRoute []FallbackRouteObservation `json:"fallbackRoute,omitempty" tf:"fallback_route,omitempty"`
+
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	Route []RouteObservation `json:"route,omitempty" tf:"route,omitempty"`
 
 	SharedAccessPolicy []SharedAccessPolicyObservation `json:"sharedAccessPolicy,omitempty" tf:"shared_access_policy,omitempty"`
 
@@ -195,20 +180,14 @@ type IOTHubParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudToDevice []CloudToDeviceParameters `json:"cloudToDevice,omitempty" tf:"cloud_to_device,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	Endpoint []EndpointParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Enrichment []EnrichmentParameters `json:"enrichment,omitempty" tf:"enrichment,omitempty"`
+	// +kubebuilder:validation:Required
+	Endpoint []EndpointParameters `json:"endpoint" tf:"endpoint,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EventHubPartitionCount *float64 `json:"eventHubPartitionCount,omitempty" tf:"event_hub_partition_count,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EventHubRetentionInDays *float64 `json:"eventHubRetentionInDays,omitempty" tf:"event_hub_retention_in_days,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	FallbackRoute []FallbackRouteParameters `json:"fallbackRoute,omitempty" tf:"fallback_route,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	FileUpload []FileUploadParameters `json:"fileUpload,omitempty" tf:"file_upload,omitempty"`
@@ -237,9 +216,6 @@ type IOTHubParameters struct {
 
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	Route []RouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Sku []SkuParameters `json:"sku" tf:"sku,omitempty"`
@@ -294,24 +270,18 @@ type NetworkRuleSetParameters struct {
 }
 
 type RouteObservation struct {
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type RouteParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Condition *string `json:"condition,omitempty" tf:"condition"`
-
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
-
-	// +kubebuilder:validation:Optional
-	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names"`
-
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name"`
-
-	// +kubebuilder:validation:Optional
-	Source *string `json:"source,omitempty" tf:"source"`
 }
 
 type SharedAccessPolicyObservation struct {

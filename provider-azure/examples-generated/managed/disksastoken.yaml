@@ -1,0 +1,11 @@
+apiVersion: managed.azure.upbound.io/v1alpha1
+kind: DiskSASToken
+metadata:
+  name: example
+spec:
+  forProvider:
+    accessLevel: Read
+    durationInSeconds: 300
+    managedDiskId: ${azurerm_managed_disk.test.id}
+  providerConfigRef:
+    name: example

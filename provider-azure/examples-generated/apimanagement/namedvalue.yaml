@@ -1,0 +1,16 @@
+apiVersion: apimanagement.azure.upbound.io/v1alpha1
+kind: NamedValue
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiManagementName: ${azurerm_api_management.example.name}
+    displayName: ExampleProperty
+    resourceGroupNameRef:
+      name: example
+    valueSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+  providerConfigRef:
+    name: example

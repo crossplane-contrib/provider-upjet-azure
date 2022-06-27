@@ -1,4 +1,4 @@
-apiVersion: iothub.azure.upbound.io/v1beta1
+apiVersion: iothub.azure.upbound.io/v1alpha1
 kind: Certificate
 metadata:
   name: example
@@ -10,7 +10,6 @@ spec:
       namespace: crossplane-system
     iothubName: ${azurerm_iothub.example.name}
     isVerified: true
-    name: example
     resourceGroupNameRef:
       name: example
   providerConfigRef:

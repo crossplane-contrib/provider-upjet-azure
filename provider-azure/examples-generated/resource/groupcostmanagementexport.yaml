@@ -1,4 +1,4 @@
-apiVersion: resource.azure.upbound.io/v1beta1
+apiVersion: resource.azure.upbound.io/v1alpha1
 kind: GroupCostManagementExport
 metadata:
   name: example
@@ -10,7 +10,6 @@ spec:
     exportDataStorageLocation:
     - containerId: ${azurerm_storage_container.test.resource_manager_id}
       rootFolderPath: /root/updated
-    name: example
     recurrencePeriodEndDate: "2020-09-18T00:00:00Z"
     recurrencePeriodStartDate: "2020-08-18T00:00:00Z"
     recurrenceType: Monthly

@@ -1,0 +1,18 @@
+apiVersion: subscription.azure.upbound.io/v1alpha1
+kind: CostManagementExport
+metadata:
+  name: example
+spec:
+  forProvider:
+    exportDataOptions:
+    - timeFrame: WeekToDate
+      type: Usage
+    exportDataStorageLocation:
+    - containerId: ${azurerm_storage_container.example.resource_manager_id}
+      rootFolderPath: /root/updated
+    recurrencePeriodEndDate: "2020-09-18T00:00:00Z"
+    recurrencePeriodStartDate: "2020-08-18T00:00:00Z"
+    recurrenceType: Monthly
+    subscriptionId: ${azurerm_subscription.example.id}
+  providerConfigRef:
+    name: example
