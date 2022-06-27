@@ -35,6 +35,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// cosmosdb
 	"azurerm_cosmosdb_sql_database":         config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .externalName }}"),
 	"azurerm_cosmosdb_sql_container":        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .parameters.database_name }}/containers/{{ .externalName }}"),
+	"azurerm_cosmosdb_sql_role_assignment":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlRoleAssignments/{{ .externalName }}"),
+	"azurerm_cosmosdb_sql_role_definition":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlRoleDefinitions/{{ .externalName }}"),
 	"azurerm_cosmosdb_mongo_database":       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .externalName }}"),
 	"azurerm_cosmosdb_mongo_collection":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .parameters.database_name }}/collections/{{ .externalName }}"),
 	"azurerm_cosmosdb_cassandra_keyspace":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/cassandraKeyspaces/{{ .externalName }}"),
@@ -43,11 +45,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_cosmosdb_gremlin_graph":        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/gremlinDatabases/{{ .parameters.database_name }}/graphs/{{ .externalName }}"),
 	"azurerm_cosmosdb_sql_stored_procedure": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .parameters.database_name }}/containers/{{ .parameters.container_name }}/storedProcedures/{{ .externalName }}"),
 	// Contains only container_id as parameter which includes other information like resource group name etc.
-	"azurerm_cosmosdb_sql_function":       config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_id }}/userDefinedFunctions/{{ .externalName }}"),
-	"azurerm_cosmosdb_table":              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/tables/{{ .externalName }}"),
-	"azurerm_cosmosdb_account":            config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .externalName }}"),
-	"azurerm_cosmosdb_notebook_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/notebookWorkspaces/{{ .externalName }}"),
-	"azurerm_cosmosdb_sql_trigger":        config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_id }}/triggers/{{ .externalName }}"),
+	"azurerm_cosmosdb_sql_function":         config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_id }}/userDefinedFunctions/{{ .externalName }}"),
+	"azurerm_cosmosdb_table":                config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/tables/{{ .externalName }}"),
+	"azurerm_cosmosdb_account":              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .externalName }}"),
+	"azurerm_cosmosdb_notebook_workspace":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/notebookWorkspaces/{{ .externalName }}"),
+	"azurerm_cosmosdb_sql_trigger":          config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_id }}/triggers/{{ .externalName }}"),
+	"azurerm_cosmosdb_cassandra_cluster":    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/cassandraClusters/{{ .externalName }}"),
+	"azurerm_cosmosdb_cassandra_datacenter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cassandra_cluster_id }}/dataCenters/{{ .externalName }}"),
 
 	// datashare
 	"azurerm_data_share_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataShare/accounts/{{ .externalName }}"),
@@ -62,7 +66,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_iothub_shared_access_policy":       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/IotHubs/{{ .parameters.iothub_name }}/IotHubKeys/{{ .externalName }}"),
 	"azurerm_iothub_endpoint_storage_container": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/IotHubs/{{ .parameters.iothub_name }}/Endpoints/{{ .externalName }}"),
 	// Configured individually since it doesn't have a naming argument.
-	"azurerm_iothub_fallback_route": {},
+	"azurerm_iothub_fallback_route":            {},
+	"azurerm_iothub_endpoint_eventhub":         config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/IotHubs/{{ .parameters.iothub_name }}/Endpoints/{{ .externalName }}"),
+	"azurerm_iothub_endpoint_servicebus_queue": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/IotHubs/{{ .parameters.iothub_name }}/Endpoints/{{ .externalName }}"),
+	"azurerm_iothub_endpoint_servicebus_topic": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/IotHubs/{{ .parameters.iothub_name }}/Endpoints/{{ .externalName }}"),
+	"azurerm_iothub_route":                     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/IotHubs/{{ .parameters.iothub_name }}/Routes/{{ .externalName }}"),
+	// No name field.
+	"azurerm_iothub_enrichment": config.IdentifierFromProvider,
 
 	// eventhub
 	"azurerm_eventhub_namespace":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Eventhub/namespaces/{{ .externalName }}"),
@@ -105,6 +115,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_monitor_metric_alert": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Insights/metricAlerts/{{ .externalName }}"),
 
 	// network
+	"azurerm_virtual_network":                           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ .externalName }}"),
 	"azurerm_ip_group":                                  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/ipGroups/{{ .externalName }}"),
 	"azurerm_subnet":                                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ .parameters.virtual_network_name }}/subnets/{{ .externalName }}"),
 	"azurerm_subnet_nat_gateway_association":            config.IdentifierFromProvider,
@@ -150,6 +161,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// sql
 	"azurerm_mssql_server":                             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/servers/{{ .externalName }}"),
 	"azurerm_mssql_server_transparent_data_encryption": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/encryptionProtector/current"),
+
+	// storage
+	"azurerm_storage_account":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .externalName }}"),
+	"azurerm_storage_blob":      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .parameters.storage_container_name }}/{{ .externalName }}"),
+	"azurerm_storage_container": config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .externalName }}"),
 
 	// storagesync
 	"azurerm_storage_sync": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .providerConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageSync/storageSyncServices/{{ .externalName }}"),

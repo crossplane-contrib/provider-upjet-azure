@@ -108,4 +108,10 @@ func Configure(p *config.Provider) {
 		}
 		r.UseAsync = true
 	})
+	p.AddResourceConfigurator("azurerm_cosmosdb_cassandra_cluster", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+	p.AddResourceConfigurator("azurerm_cosmosdb_cassandra_datacenter", func(r *config.Resource) {
+		r.UseAsync = true
+	})
 }

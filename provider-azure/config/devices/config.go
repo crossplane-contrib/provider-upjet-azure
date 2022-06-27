@@ -125,4 +125,11 @@ func Configure(p *config.Provider) {
 			return fmt.Sprintf("%s/FallbackRoute/default", p), nil
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_iothub_endpoint_eventhub", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+	p.AddResourceConfigurator("azurerm_iothub_route", func(r *config.Resource) {
+		r.UseAsync = true
+	})
 }

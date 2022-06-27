@@ -341,12 +341,6 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"subnet"},
 		}
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/virtualNetworks/myvnet1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network",
-			"virtualNetworks", "name",
-		)
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
