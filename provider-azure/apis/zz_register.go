@@ -24,6 +24,7 @@ import (
 	v1beta1iothub "github.com/upbound/official-providers/provider-azure/apis/iothub/v1beta1"
 	v1beta1keyvault "github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1"
 	v1beta1loganalytics "github.com/upbound/official-providers/provider-azure/apis/loganalytics/v1beta1"
+	v1beta1marketplaceordering "github.com/upbound/official-providers/provider-azure/apis/marketplaceordering/v1beta1"
 	v1beta1network "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	v1beta1resource "github.com/upbound/official-providers/provider-azure/apis/resource/v1beta1"
 	v1beta1resources "github.com/upbound/official-providers/provider-azure/apis/resources/v1beta1"
@@ -50,6 +51,7 @@ func init() {
 		v1beta1iothub.SchemeBuilder.AddToScheme,
 		v1beta1keyvault.SchemeBuilder.AddToScheme,
 		v1beta1loganalytics.SchemeBuilder.AddToScheme,
+		v1beta1marketplaceordering.SchemeBuilder.AddToScheme,
 		v1beta1network.SchemeBuilder.AddToScheme,
 		v1beta1resource.SchemeBuilder.AddToScheme,
 		v1beta1resources.SchemeBuilder.AddToScheme,

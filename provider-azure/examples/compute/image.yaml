@@ -1,0 +1,16 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: Image
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    osDisk:
+    - osState: Generalized
+      blobUri: uri_here
+      osType: Linux
+      sizeGb: 30
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -101,6 +101,21 @@ var includedResources = []string{
 	"azurerm_public_ip.*",
 	"azurerm_disk_encryption_set$",
 	"azurerm_(windows|linux)_virtual_.+",
+	"azurerm_availability_set$",
+	"azurerm_disk_access$",
+	"azurerm_image$",
+	"azurerm_managed_disk$",
+	"azurerm_orchestrated_virtual_machine_scale_set$",
+	"azurerm_proximity_placement_group$",
+	"azurerm_shared_image_gallery",
+	"azurerm_snapshot$",
+	"azurerm_marketplace_agreement$",
+	"azurerm_dedicated_host$",
+	// Those resources do not work, nore details in #311
+	// "azurerm_disk_sas_token",
+	// "azurerm_shared_image",
+	// "azurerm_shared_image_version",
+	// "azurerm_ssh_public_key",
 }
 
 // These resources cannot be generated because of their suffixes colliding with

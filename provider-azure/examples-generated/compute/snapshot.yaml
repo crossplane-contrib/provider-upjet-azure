@@ -1,0 +1,13 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: Snapshot
+metadata:
+  name: example
+spec:
+  forProvider:
+    createOption: Copy
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    sourceUri: ${azurerm_managed_disk.example.id}
+  providerConfigRef:
+    name: example

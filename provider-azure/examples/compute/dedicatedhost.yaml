@@ -1,0 +1,11 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: DedicatedHost
+metadata:
+  name: example
+spec:
+  forProvider:
+    dedicatedHostGroupId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-resources/providers/Microsoft.Compute/hostGroups/hostGroupOne
+    location: West Europe
+    platformFaultDomain: 0
+    # This SKU has 8 vCPUs. We have only 10 available in our subscription
+    skuName: DCSv2-Type1
