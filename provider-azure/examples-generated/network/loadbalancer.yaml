@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  name: example
+spec:
+  forProvider:
+    frontendIpConfiguration:
+    - name: PublicIPAddress
+      publicIpAddressIdRef:
+        name: example
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

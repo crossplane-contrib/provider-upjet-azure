@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerOutboundRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendAddressPoolIdRef:
+      name: example
+    frontendIpConfiguration:
+    - name: PublicIPAddress
+    loadbalancerIdRef:
+      name: example
+    protocol: Tcp
+  providerConfigRef:
+    name: example

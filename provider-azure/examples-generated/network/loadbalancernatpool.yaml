@@ -1,0 +1,17 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerNatPool
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendPort: 8080
+    frontendIpConfigurationName: PublicIPAddress
+    frontendPortEnd: 81
+    frontendPortStart: 80
+    loadbalancerIdRef:
+      name: example
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

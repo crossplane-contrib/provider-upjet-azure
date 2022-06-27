@@ -7,200 +7,68 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
-// GetCondition of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetProviderConfigReference of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 /*
-GetProviderReference of this VirtualNetworkGateway.
+GetProviderReference of this WatcherFlowLog.
 Deprecated: Use GetProviderConfigReference.
 */
-func (mg *VirtualNetworkGateway) GetProviderReference() *xpv1.Reference {
+func (mg *WatcherFlowLog) GetProviderReference() *xpv1.Reference {
 	return mg.Spec.ProviderReference
 }
 
-// GetPublishConnectionDetailsTo of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+// GetPublishConnectionDetailsTo of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
-// GetWriteConnectionSecretToReference of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetProviderConfigReference of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 /*
-SetProviderReference of this VirtualNetworkGateway.
+SetProviderReference of this WatcherFlowLog.
 Deprecated: Use SetProviderConfigReference.
 */
-func (mg *VirtualNetworkGateway) SetProviderReference(r *xpv1.Reference) {
+func (mg *WatcherFlowLog) SetProviderReference(r *xpv1.Reference) {
 	mg.Spec.ProviderReference = r
 }
 
-// SetPublishConnectionDetailsTo of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+// SetPublishConnectionDetailsTo of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
 }
 
-// SetWriteConnectionSecretToReference of this VirtualNetworkGateway.
-func (mg *VirtualNetworkGateway) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
-// GetCondition of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetProviderConfigReference of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) GetProviderConfigReference() *xpv1.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this VirtualNetworkGatewayConnection.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VirtualNetworkGatewayConnection) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
-// GetPublishConnectionDetailsTo of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
-// GetWriteConnectionSecretToReference of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) SetConditions(c ...xpv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetProviderConfigReference of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) SetProviderConfigReference(r *xpv1.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VirtualNetworkGatewayConnection.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VirtualNetworkGatewayConnection) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
-// SetWriteConnectionSecretToReference of this VirtualNetworkGatewayConnection.
-func (mg *VirtualNetworkGatewayConnection) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
-	mg.Spec.WriteConnectionSecretToReference = r
-}
-
-// GetCondition of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
-	return mg.Status.GetCondition(ct)
-}
-
-// GetDeletionPolicy of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) GetDeletionPolicy() xpv1.DeletionPolicy {
-	return mg.Spec.DeletionPolicy
-}
-
-// GetProviderConfigReference of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) GetProviderConfigReference() *xpv1.Reference {
-	return mg.Spec.ProviderConfigReference
-}
-
-/*
-GetProviderReference of this VirtualNetworkPeering.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VirtualNetworkPeering) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
-// GetPublishConnectionDetailsTo of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
-	return mg.Spec.PublishConnectionDetailsTo
-}
-
-// GetWriteConnectionSecretToReference of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
-	return mg.Spec.WriteConnectionSecretToReference
-}
-
-// SetConditions of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) SetConditions(c ...xpv1.Condition) {
-	mg.Status.SetConditions(c...)
-}
-
-// SetDeletionPolicy of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) SetDeletionPolicy(r xpv1.DeletionPolicy) {
-	mg.Spec.DeletionPolicy = r
-}
-
-// SetProviderConfigReference of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) SetProviderConfigReference(r *xpv1.Reference) {
-	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VirtualNetworkPeering.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VirtualNetworkPeering) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
-}
-
-// SetPublishConnectionDetailsTo of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
-	mg.Spec.PublishConnectionDetailsTo = r
-}
-
-// SetWriteConnectionSecretToReference of this VirtualNetworkPeering.
-func (mg *VirtualNetworkPeering) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

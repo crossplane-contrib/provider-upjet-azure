@@ -45,7 +45,6 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/sql"
 	"github.com/upbound/official-providers/provider-azure/config/storage"
 	"github.com/upbound/official-providers/provider-azure/config/storagesync"
-	"github.com/upbound/official-providers/provider-azure/config/subnet"
 )
 
 const (
@@ -57,6 +56,8 @@ var (
 	//go:embed schema.json
 	providerSchema string
 
+	// BasePackages contains the non-generated package information for Upjet
+	// to include whenever needed.
 	BasePackages = tjconfig.BasePackages{
 		APIVersion: []string{
 			"apis/v1alpha1",
@@ -122,7 +123,7 @@ func GetProvider() *tjconfig.Provider {
 	pc := tjconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, "config/provider-metadata.yaml",
 		tjconfig.WithShortName("azure"),
 		tjconfig.WithRootGroup("azure.upbound.io"),
-		tjconfig.WithIncludeList(ExternalNameConfigured()),
+		tjconfig.WithIncludeList(ResourcesWithExternalNameConfig()),
 		tjconfig.WithSkipList(skipList),
 		tjconfig.WithBasePackages(BasePackages),
 		tjconfig.WithDefaultResourceOptions(
@@ -142,7 +143,6 @@ func GetProvider() *tjconfig.Provider {
 		postgresql.Configure,
 		cosmosdb.Configure,
 		sql.Configure,
-		subnet.Configure,
 		storage.Configure,
 		operationalinsights.Configure,
 		devices.Configure,
@@ -172,14 +172,4 @@ func GetProvider() *tjconfig.Provider {
 	}
 
 	return pc
-}
-
-func ExternalNameConfigured() []string {
-	l := make([]string, len(ExternalNameConfigs))
-	i := 0
-	for r := range ExternalNameConfigs {
-		l[i] = r
-		i++
-	}
-	return l
 }

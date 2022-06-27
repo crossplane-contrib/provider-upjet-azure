@@ -29,6 +29,8 @@ type VirtualNetworkObservation struct {
 	GUID *string `json:"guid,omitempty" tf:"guid,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	Subnet []VirtualNetworkSubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
 }
 
 type VirtualNetworkParameters struct {
@@ -65,28 +67,20 @@ type VirtualNetworkParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	Subnet []VirtualNetworkSubnetParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
-
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VirtualNetworkSubnetObservation struct {
+	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
+
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	SecurityGroup *string `json:"securityGroup,omitempty" tf:"security_group,omitempty"`
 }
 
 type VirtualNetworkSubnetParameters struct {
-
-	// +kubebuilder:validation:Optional
-	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix"`
-
-	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id"`
-
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name"`
-
-	// +kubebuilder:validation:Optional
-	SecurityGroup *string `json:"securityGroup,omitempty" tf:"security_group"`
 }
 
 // VirtualNetworkSpec defines the desired state of VirtualNetwork

@@ -76,7 +76,9 @@ func groupOverrides() tjconfig.ResourceOption {
 	}
 }
 
-func KnownReferences() tjconfig.ResourceOption {
+// KnownReferences adds common and known references.
+func KnownReferences() tjconfig.ResourceOption { // nolint:gocyclo
+	// gocyclo: A bunch of switch cases with no room to reduce.
 	return func(r *tjconfig.Resource) {
 		for f, s := range r.TerraformResource.Schema {
 			// We shouldn't add referencers for status fields and sensitive fields
@@ -96,6 +98,11 @@ func KnownReferences() tjconfig.ResourceOption {
 			case r.ShortGroup == "dbformariadb" && f == "server_name":
 				r.References["server_name"] = config.Reference{
 					Type: "Server",
+				}
+			case r.ShortGroup == "network" && f == "loadbalancer_id":
+				r.References["loadbalancer_id"] = config.Reference{
+					Type:      "LoadBalancer",
+					Extractor: rconfig.ExtractResourceIDFuncPath,
 				}
 			}
 		}

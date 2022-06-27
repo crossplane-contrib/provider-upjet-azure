@@ -71,7 +71,14 @@ func Configure(p *config.Provider) {
 		}
 		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+			id, ok := tfstate["id"]
+			if !ok {
+				return "", errors.New("cannot find id in tfstate")
+			}
+			l := strings.Split(id.(string), "/")
+			return l[len(l)-1], nil
+		}
 		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Cache/redisEnterprise/cluster1/databases/database1
 		r.ExternalName.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, providerConfig map[string]interface{}) (string, error) {
 			subIDStr, err := getStr(providerConfig, "subscription_id")

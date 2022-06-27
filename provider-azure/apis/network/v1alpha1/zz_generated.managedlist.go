@@ -7,26 +7,8 @@ package v1alpha1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
-// GetItems of this VirtualNetworkGatewayConnectionList.
-func (l *VirtualNetworkGatewayConnectionList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VirtualNetworkGatewayList.
-func (l *VirtualNetworkGatewayList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
-// GetItems of this VirtualNetworkPeeringList.
-func (l *VirtualNetworkPeeringList) GetItems() []resource.Managed {
+// GetItems of this WatcherFlowLogList.
+func (l *WatcherFlowLogList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

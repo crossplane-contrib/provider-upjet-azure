@@ -28,9 +28,6 @@ import (
 )
 
 const (
-	errFmtNoAttribute    = `"attribute not found: %s`
-	errFmtUnexpectedType = `unexpected type for attribute %s: Expecting a string`
-
 	postgresqlServerPort = 5432
 )
 

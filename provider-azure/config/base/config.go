@@ -20,11 +20,6 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-const (
-	errFmtNoAttribute    = `"attribute not found: %s`
-	errFmtUnexpectedType = `unexpected type for attribute %s: Expecting a string`
-)
-
 // Configure configures the base group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_subscription", func(r *config.Resource) {

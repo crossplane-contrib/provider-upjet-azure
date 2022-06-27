@@ -17,14 +17,10 @@ limitations under the License.
 package devices
 
 import (
-	"context"
-	"fmt"
-
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
-	"github.com/upbound/official-providers/provider-azure/config/common"
 )
 
 // Configure configures iothub group
@@ -112,18 +108,6 @@ func Configure(p *config.Provider) {
 			},
 		}
 		r.UseAsync = true
-		r.ExternalName = config.IdentifierFromProvider
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Devices/IotHubs/hub1/FallbackRoute/default
-		// https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/iothub_fallback_route#import
-		// FallbackRoute is always default and we don't have associated parameter for it
-		r.ExternalName.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, providerConfig map[string]interface{}) (string, error) {
-			p, err := common.GetFullyQualifiedIDFn("Microsoft.Devices", "IotHubs", "iothub_name")(ctx, externalName, parameters, providerConfig)
-			if err != nil {
-				return "", err
-			}
-			return fmt.Sprintf("%s/FallbackRoute/default", p), nil
-		}
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_endpoint_eventhub", func(r *config.Resource) {

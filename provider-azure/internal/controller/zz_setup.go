@@ -153,7 +153,31 @@ import (
 	managementgroup "github.com/upbound/official-providers/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/official-providers/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
 	serverdnsalias "github.com/upbound/official-providers/provider-azure/internal/controller/mssql/serverdnsalias"
+	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
+	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
+	ddosprotectionplan "github.com/upbound/official-providers/provider-azure/internal/controller/network/ddosprotectionplan"
 	ipgroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/ipgroup"
+	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
+	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
+	loadbalancerbackendaddresspooladdress "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspooladdress"
+	loadbalancernatpool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancernatpool"
+	loadbalancernatrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancernatrule"
+	loadbalanceroutboundrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalanceroutboundrule"
+	loadbalancerprobe "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerprobe"
+	loadbalancerrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerrule"
+	localnetworkgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/localnetworkgateway"
+	natgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/natgateway"
+	natgatewaypublicipassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/natgatewaypublicipassociation"
+	natgatewaypublicipprefixassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/natgatewaypublicipprefixassociation"
+	networkinterface "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterface"
+	networkinterfaceapplicationsecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfaceapplicationsecuritygroupassociation"
+	networkinterfacebackendaddresspoolassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacebackendaddresspoolassociation"
+	networkinterfacenatruleassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacenatruleassociation"
+	networkinterfacesecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacesecuritygroupassociation"
+	publicip "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicip"
+	publicipprefix "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicipprefix"
+	securitygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/securitygroup"
+	securityrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/securityrule"
 	subnet "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnet"
 	subnetnatgatewayassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnetnatgatewayassociation"
 	subnetnetworksecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnetnetworksecuritygroupassociation"
@@ -163,6 +187,9 @@ import (
 	virtualnetworkgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkgateway"
 	virtualnetworkgatewayconnection "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkgatewayconnection"
 	virtualnetworkpeering "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkpeering"
+	virtualwan "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualwan"
+	watcher "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcher"
+	watcherflowlog "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcherflowlog"
 	authorizationrulenotificationhubs "github.com/upbound/official-providers/provider-azure/internal/controller/notificationhubs/authorizationrule"
 	namespace "github.com/upbound/official-providers/provider-azure/internal/controller/notificationhubs/namespace"
 	notificationhub "github.com/upbound/official-providers/provider-azure/internal/controller/notificationhubs/notificationhub"
@@ -344,7 +371,31 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managementgroup.Setup,
 		marketplaceagreement.Setup,
 		serverdnsalias.Setup,
+		applicationsecuritygroup.Setup,
+		connectionmonitor.Setup,
+		ddosprotectionplan.Setup,
 		ipgroup.Setup,
+		loadbalancer.Setup,
+		loadbalancerbackendaddresspool.Setup,
+		loadbalancerbackendaddresspooladdress.Setup,
+		loadbalancernatpool.Setup,
+		loadbalancernatrule.Setup,
+		loadbalanceroutboundrule.Setup,
+		loadbalancerprobe.Setup,
+		loadbalancerrule.Setup,
+		localnetworkgateway.Setup,
+		natgateway.Setup,
+		natgatewaypublicipassociation.Setup,
+		natgatewaypublicipprefixassociation.Setup,
+		networkinterface.Setup,
+		networkinterfaceapplicationsecuritygroupassociation.Setup,
+		networkinterfacebackendaddresspoolassociation.Setup,
+		networkinterfacenatruleassociation.Setup,
+		networkinterfacesecuritygroupassociation.Setup,
+		publicip.Setup,
+		publicipprefix.Setup,
+		securitygroup.Setup,
+		securityrule.Setup,
 		subnet.Setup,
 		subnetnatgatewayassociation.Setup,
 		subnetnetworksecuritygroupassociation.Setup,
@@ -354,6 +405,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualnetworkgateway.Setup,
 		virtualnetworkgatewayconnection.Setup,
 		virtualnetworkpeering.Setup,
+		virtualwan.Setup,
+		watcher.Setup,
+		watcherflowlog.Setup,
 		authorizationrulenotificationhubs.Setup,
 		namespace.Setup,
 		notificationhub.Setup,

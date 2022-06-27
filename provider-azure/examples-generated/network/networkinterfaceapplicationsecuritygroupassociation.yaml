@@ -1,0 +1,12 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterfaceApplicationSecurityGroupAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationSecurityGroupIdRef:
+      name: example
+    networkInterfaceIdRef:
+      name: example
+  providerConfigRef:
+    name: example
