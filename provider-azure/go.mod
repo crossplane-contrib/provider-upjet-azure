@@ -3,11 +3,14 @@ module github.com/upbound/official-providers/provider-azure
 go 1.17
 
 require (
+	github.com/antchfx/htmlquery v1.2.4
 	github.com/crossplane/crossplane-runtime v0.16.0
 	github.com/crossplane/crossplane-tools v0.0.0-20220310165030-1f43fc12793e
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
 	github.com/pkg/errors v0.9.1
-	github.com/upbound/upjet v0.5.1-0.20220627135947-ea91b1b471bd
+	github.com/tmccombs/hcl2json v0.3.3
+	github.com/upbound/upjet v0.5.1-0.20220609144735-1a4a07960c3a
+	github.com/yuin/goldmark v1.4.4
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.24.0
 	k8s.io/client-go v0.24.0
@@ -20,7 +23,8 @@ require (
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
-	github.com/alecthomas/units v0.0.0-20210912230133-d1bdfacee922 // indirect
+	github.com/alecthomas/units v0.0.0-20210927113745-59d0afb8317a // indirect
+	github.com/antchfx/xpath v1.2.0 // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
 	github.com/armon/go-metrics v0.3.9 // indirect
 	github.com/armon/go-radix v1.0.0 // indirect
@@ -140,4 +144,4 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace github.com/hashicorp/terraform-provider-azurerm => ./.work/.azurerm
+replace github.com/upbound/upjet => github.com/ulucinar/upjet v0.5.1-0.20220627002120-9af0ea7da8bc
