@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSARecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    records:
+    - 10.0.180.17
+    resourceGroupNameRef:
+      name: example
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example

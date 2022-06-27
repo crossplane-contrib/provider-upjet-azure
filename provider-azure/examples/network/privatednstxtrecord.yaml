@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSTXTRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    record:
+    - value: v=spf1 mx ~all
+    resourceGroupNameRef:
+      name: example
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example

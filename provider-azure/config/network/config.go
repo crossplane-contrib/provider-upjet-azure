@@ -149,6 +149,20 @@ func Configure(p *config.Provider) {
 		r.Kind = "Watcher"
 	})
 
+	p.AddResourceConfigurator("azurerm_network_watcher_flow_log", func(r *config.Resource) {
+		r.References["network_watcher_name"] = config.Reference{
+			Type: "Watcher",
+		}
+		r.References["network_security_group_id"] = config.Reference{
+			Type:      "SecurityGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["storage_account_id"] = config.Reference{
+			Type:      rconfig.APISPackagePath + "/storage/v1beta1.Account",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_network_connection_monitor", func(r *config.Resource) {
 		r.Kind = "ConnectionMonitor"
 		r.References["network_watcher_id"] = config.Reference{
@@ -242,6 +256,60 @@ func Configure(p *config.Provider) {
 			Type: "VirtualNetwork",
 		}
 		r.References["remote_virtual_network_id"] = config.Reference{
+			Type:      "VirtualNetwork",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_network_profile", func(r *config.Resource) {
+		r.References["container_network_interface.ip_configuration.subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_a_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_aaaa_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_mx_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_ptr_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_srv_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_txt_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_zone_virtual_network_link", func(r *config.Resource) {
+		r.References["private_dns_zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+		r.References["virtual_network_id"] = config.Reference{
 			Type:      "VirtualNetwork",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}

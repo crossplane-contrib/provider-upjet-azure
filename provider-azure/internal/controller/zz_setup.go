@@ -122,6 +122,15 @@ import (
 	networkinterfacebackendaddresspoolassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacebackendaddresspoolassociation"
 	networkinterfacenatruleassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacenatruleassociation"
 	networkinterfacesecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacesecuritygroupassociation"
+	privatednsaaaarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsaaaarecord"
+	privatednsarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsarecord"
+	privatednsmxrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsmxrecord"
+	privatednsptrrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsptrrecord"
+	privatednssrvrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednssrvrecord"
+	privatednstxtrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednstxtrecord"
+	privatednszone "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednszone"
+	privatednszonevirtualnetworklink "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednszonevirtualnetworklink"
+	profile "github.com/upbound/official-providers/provider-azure/internal/controller/network/profile"
 	publicip "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicip"
 	publicipprefix "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicipprefix"
 	securitygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/securitygroup"
@@ -137,6 +146,7 @@ import (
 	virtualnetworkpeering "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkpeering"
 	virtualwan "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualwan"
 	watcher "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcher"
+	watcherflowlog "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcherflowlog"
 	notificationhub "github.com/upbound/official-providers/provider-azure/internal/controller/notificationhubs/notificationhub"
 	workspace "github.com/upbound/official-providers/provider-azure/internal/controller/operationalinsights/workspace"
 	providerconfig "github.com/upbound/official-providers/provider-azure/internal/controller/providerconfig"
@@ -269,6 +279,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		networkinterfacebackendaddresspoolassociation.Setup,
 		networkinterfacenatruleassociation.Setup,
 		networkinterfacesecuritygroupassociation.Setup,
+		privatednsaaaarecord.Setup,
+		privatednsarecord.Setup,
+		privatednsmxrecord.Setup,
+		privatednsptrrecord.Setup,
+		privatednssrvrecord.Setup,
+		privatednstxtrecord.Setup,
+		privatednszone.Setup,
+		privatednszonevirtualnetworklink.Setup,
+		profile.Setup,
 		publicip.Setup,
 		publicipprefix.Setup,
 		securitygroup.Setup,
@@ -284,6 +303,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualnetworkpeering.Setup,
 		virtualwan.Setup,
 		watcher.Setup,
+		watcherflowlog.Setup,
 		notificationhub.Setup,
 		workspace.Setup,
 		providerconfig.Setup,

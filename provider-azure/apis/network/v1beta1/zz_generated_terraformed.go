@@ -1567,6 +1567,80 @@ func (tr *NetworkInterfaceSecurityGroupAssociation) GetTerraformSchemaVersion() 
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this Profile
+func (mg *Profile) GetTerraformResourceType() string {
+	return "azurerm_network_profile"
+}
+
+// GetConnectionDetailsMapping for this Profile
+func (tr *Profile) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this Profile
+func (tr *Profile) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this Profile
+func (tr *Profile) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this Profile
+func (tr *Profile) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this Profile
+func (tr *Profile) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this Profile
+func (tr *Profile) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this Profile using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *Profile) LateInitialize(attrs []byte) (bool, error) {
+	params := &ProfileParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *Profile) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this SecurityGroup
 func (mg *SecurityGroup) GetTerraformResourceType() string {
 	return "azurerm_network_security_group"
@@ -1786,6 +1860,672 @@ func (tr *Watcher) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Watcher) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this WatcherFlowLog
+func (mg *WatcherFlowLog) GetTerraformResourceType() string {
+	return "azurerm_network_watcher_flow_log"
+}
+
+// GetConnectionDetailsMapping for this WatcherFlowLog
+func (tr *WatcherFlowLog) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this WatcherFlowLog
+func (tr *WatcherFlowLog) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this WatcherFlowLog
+func (tr *WatcherFlowLog) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this WatcherFlowLog
+func (tr *WatcherFlowLog) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this WatcherFlowLog
+func (tr *WatcherFlowLog) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this WatcherFlowLog
+func (tr *WatcherFlowLog) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this WatcherFlowLog using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *WatcherFlowLog) LateInitialize(attrs []byte) (bool, error) {
+	params := &WatcherFlowLogParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *WatcherFlowLog) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateDNSARecord
+func (mg *PrivateDNSARecord) GetTerraformResourceType() string {
+	return "azurerm_private_dns_a_record"
+}
+
+// GetConnectionDetailsMapping for this PrivateDNSARecord
+func (tr *PrivateDNSARecord) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateDNSARecord
+func (tr *PrivateDNSARecord) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateDNSARecord
+func (tr *PrivateDNSARecord) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateDNSARecord
+func (tr *PrivateDNSARecord) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateDNSARecord
+func (tr *PrivateDNSARecord) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateDNSARecord
+func (tr *PrivateDNSARecord) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateDNSARecord using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateDNSARecord) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateDNSARecordParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateDNSARecord) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateDNSAAAARecord
+func (mg *PrivateDNSAAAARecord) GetTerraformResourceType() string {
+	return "azurerm_private_dns_aaaa_record"
+}
+
+// GetConnectionDetailsMapping for this PrivateDNSAAAARecord
+func (tr *PrivateDNSAAAARecord) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateDNSAAAARecord
+func (tr *PrivateDNSAAAARecord) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateDNSAAAARecord
+func (tr *PrivateDNSAAAARecord) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateDNSAAAARecord
+func (tr *PrivateDNSAAAARecord) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateDNSAAAARecord
+func (tr *PrivateDNSAAAARecord) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateDNSAAAARecord
+func (tr *PrivateDNSAAAARecord) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateDNSAAAARecord using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateDNSAAAARecord) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateDNSAAAARecordParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateDNSAAAARecord) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateDNSMXRecord
+func (mg *PrivateDNSMXRecord) GetTerraformResourceType() string {
+	return "azurerm_private_dns_mx_record"
+}
+
+// GetConnectionDetailsMapping for this PrivateDNSMXRecord
+func (tr *PrivateDNSMXRecord) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateDNSMXRecord
+func (tr *PrivateDNSMXRecord) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateDNSMXRecord
+func (tr *PrivateDNSMXRecord) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateDNSMXRecord
+func (tr *PrivateDNSMXRecord) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateDNSMXRecord
+func (tr *PrivateDNSMXRecord) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateDNSMXRecord
+func (tr *PrivateDNSMXRecord) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateDNSMXRecord using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateDNSMXRecord) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateDNSMXRecordParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateDNSMXRecord) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateDNSPTRRecord
+func (mg *PrivateDNSPTRRecord) GetTerraformResourceType() string {
+	return "azurerm_private_dns_ptr_record"
+}
+
+// GetConnectionDetailsMapping for this PrivateDNSPTRRecord
+func (tr *PrivateDNSPTRRecord) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateDNSPTRRecord
+func (tr *PrivateDNSPTRRecord) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateDNSPTRRecord
+func (tr *PrivateDNSPTRRecord) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateDNSPTRRecord
+func (tr *PrivateDNSPTRRecord) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateDNSPTRRecord
+func (tr *PrivateDNSPTRRecord) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateDNSPTRRecord
+func (tr *PrivateDNSPTRRecord) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateDNSPTRRecord using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateDNSPTRRecord) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateDNSPTRRecordParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateDNSPTRRecord) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateDNSSRVRecord
+func (mg *PrivateDNSSRVRecord) GetTerraformResourceType() string {
+	return "azurerm_private_dns_srv_record"
+}
+
+// GetConnectionDetailsMapping for this PrivateDNSSRVRecord
+func (tr *PrivateDNSSRVRecord) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateDNSSRVRecord
+func (tr *PrivateDNSSRVRecord) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateDNSSRVRecord
+func (tr *PrivateDNSSRVRecord) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateDNSSRVRecord
+func (tr *PrivateDNSSRVRecord) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateDNSSRVRecord
+func (tr *PrivateDNSSRVRecord) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateDNSSRVRecord
+func (tr *PrivateDNSSRVRecord) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateDNSSRVRecord using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateDNSSRVRecord) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateDNSSRVRecordParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateDNSSRVRecord) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateDNSTXTRecord
+func (mg *PrivateDNSTXTRecord) GetTerraformResourceType() string {
+	return "azurerm_private_dns_txt_record"
+}
+
+// GetConnectionDetailsMapping for this PrivateDNSTXTRecord
+func (tr *PrivateDNSTXTRecord) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateDNSTXTRecord
+func (tr *PrivateDNSTXTRecord) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateDNSTXTRecord
+func (tr *PrivateDNSTXTRecord) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateDNSTXTRecord
+func (tr *PrivateDNSTXTRecord) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateDNSTXTRecord
+func (tr *PrivateDNSTXTRecord) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateDNSTXTRecord
+func (tr *PrivateDNSTXTRecord) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateDNSTXTRecord using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateDNSTXTRecord) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateDNSTXTRecordParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateDNSTXTRecord) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateDNSZone
+func (mg *PrivateDNSZone) GetTerraformResourceType() string {
+	return "azurerm_private_dns_zone"
+}
+
+// GetConnectionDetailsMapping for this PrivateDNSZone
+func (tr *PrivateDNSZone) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateDNSZone
+func (tr *PrivateDNSZone) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateDNSZone
+func (tr *PrivateDNSZone) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateDNSZone
+func (tr *PrivateDNSZone) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateDNSZone
+func (tr *PrivateDNSZone) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateDNSZone
+func (tr *PrivateDNSZone) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateDNSZone using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateDNSZone) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateDNSZoneParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateDNSZone) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateDNSZoneVirtualNetworkLink
+func (mg *PrivateDNSZoneVirtualNetworkLink) GetTerraformResourceType() string {
+	return "azurerm_private_dns_zone_virtual_network_link"
+}
+
+// GetConnectionDetailsMapping for this PrivateDNSZoneVirtualNetworkLink
+func (tr *PrivateDNSZoneVirtualNetworkLink) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateDNSZoneVirtualNetworkLink
+func (tr *PrivateDNSZoneVirtualNetworkLink) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateDNSZoneVirtualNetworkLink
+func (tr *PrivateDNSZoneVirtualNetworkLink) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateDNSZoneVirtualNetworkLink
+func (tr *PrivateDNSZoneVirtualNetworkLink) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateDNSZoneVirtualNetworkLink
+func (tr *PrivateDNSZoneVirtualNetworkLink) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateDNSZoneVirtualNetworkLink
+func (tr *PrivateDNSZoneVirtualNetworkLink) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateDNSZoneVirtualNetworkLink using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateDNSZoneVirtualNetworkLink) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateDNSZoneVirtualNetworkLinkParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateDNSZoneVirtualNetworkLink) GetTerraformSchemaVersion() int {
 	return 0
 }
 

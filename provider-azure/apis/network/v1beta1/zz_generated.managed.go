@@ -1393,6 +1393,600 @@ func (mg *NetworkInterfaceSecurityGroupAssociation) SetWriteConnectionSecretToRe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateDNSAAAARecord.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateDNSAAAARecord) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateDNSAAAARecord.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateDNSAAAARecord) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSAAAARecord.
+func (mg *PrivateDNSAAAARecord) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateDNSARecord.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateDNSARecord) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateDNSARecord.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateDNSARecord) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSARecord.
+func (mg *PrivateDNSARecord) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateDNSMXRecord.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateDNSMXRecord) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateDNSMXRecord.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateDNSMXRecord) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSMXRecord.
+func (mg *PrivateDNSMXRecord) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateDNSPTRRecord.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateDNSPTRRecord) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateDNSPTRRecord.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateDNSPTRRecord) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSPTRRecord.
+func (mg *PrivateDNSPTRRecord) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateDNSSRVRecord.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateDNSSRVRecord) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateDNSSRVRecord.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateDNSSRVRecord) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSSRVRecord.
+func (mg *PrivateDNSSRVRecord) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateDNSTXTRecord.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateDNSTXTRecord) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateDNSTXTRecord.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateDNSTXTRecord) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSTXTRecord.
+func (mg *PrivateDNSTXTRecord) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PrivateDNSZone.
+func (mg *PrivateDNSZone) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSZone.
+func (mg *PrivateDNSZone) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateDNSZone.
+func (mg *PrivateDNSZone) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateDNSZone.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateDNSZone) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSZone.
+func (mg *PrivateDNSZone) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSZone.
+func (mg *PrivateDNSZone) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSZone.
+func (mg *PrivateDNSZone) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSZone.
+func (mg *PrivateDNSZone) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateDNSZone.
+func (mg *PrivateDNSZone) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateDNSZone.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateDNSZone) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSZone.
+func (mg *PrivateDNSZone) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSZone.
+func (mg *PrivateDNSZone) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateDNSZoneVirtualNetworkLink.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateDNSZoneVirtualNetworkLink) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateDNSZoneVirtualNetworkLink.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateDNSZoneVirtualNetworkLink) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSZoneVirtualNetworkLink.
+func (mg *PrivateDNSZoneVirtualNetworkLink) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this Profile.
+func (mg *Profile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this Profile.
+func (mg *Profile) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this Profile.
+func (mg *Profile) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this Profile.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *Profile) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this Profile.
+func (mg *Profile) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this Profile.
+func (mg *Profile) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this Profile.
+func (mg *Profile) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this Profile.
+func (mg *Profile) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this Profile.
+func (mg *Profile) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this Profile.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *Profile) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this Profile.
+func (mg *Profile) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this Profile.
+func (mg *Profile) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this PublicIP.
 func (mg *PublicIP) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -2380,5 +2974,71 @@ func (mg *Watcher) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetail
 
 // SetWriteConnectionSecretToReference of this Watcher.
 func (mg *Watcher) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this WatcherFlowLog.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *WatcherFlowLog) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WatcherFlowLog.
+func (mg *WatcherFlowLog) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this WatcherFlowLog.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *WatcherFlowLog) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WatcherFlowLog.
+func (mg *WatcherFlowLog) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
