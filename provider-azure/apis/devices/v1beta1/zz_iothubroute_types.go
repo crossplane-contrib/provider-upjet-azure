@@ -31,9 +31,6 @@ type IOTHubRouteParameters struct {
 	// +kubebuilder:validation:Required
 	IOTHubName *string `json:"iothubName" tf:"iothub_name,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`

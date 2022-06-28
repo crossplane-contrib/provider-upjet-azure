@@ -1,0 +1,13 @@
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    retentionInDays: 30
+    sku: PerGB2018
+  providerConfigRef:
+    name: example

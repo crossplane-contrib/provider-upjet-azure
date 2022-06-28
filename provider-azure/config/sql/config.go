@@ -17,7 +17,6 @@ limitations under the License.
 package sql
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/pkg/errors"
@@ -26,7 +25,6 @@ import (
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
 	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
-	"github.com/upbound/official-providers/provider-azure/config/common"
 )
 
 func msSQLConnectionDetails(attr map[string]interface{}) (map[string][]byte, error) {
@@ -60,36 +58,17 @@ func msSQLConnectionDetails(attr map[string]interface{}) (map[string][]byte, err
 // Configure configures sql group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mssql_server", func(r *config.Resource) {
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-		}
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
 		r.Sensitive.AdditionalConnectionDetailsFn = msSQLConnectionDetails
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myresourcegroup/providers/Microsoft.Sql/servers/myserver
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Sql",
-			"servers", "name",
-		)
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("azurerm_mssql_server_transparent_data_encryption", func(r *config.Resource) {
-		r.References = config.References{
-			"server_id": config.Reference{
-				Type:      "MSSQLServer",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-			"key_vault_key_id": config.Reference{
-				Type:      rconfig.VaultKeyReferencePath,
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["server_id"] = config.Reference{
+			Type:      "MSSQLServer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.SetIdentifierArgumentFn = config.NopSetIdentifierArgument
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		r.ExternalName.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-			return fmt.Sprintf("%s/encryptionProtector/current", parameters["server_id"]), nil
+		r.References["key_vault_key_id"] = config.Reference{
+			Type:      rconfig.VaultKeyReferencePath,
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }

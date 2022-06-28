@@ -1,0 +1,14 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameRef:
+      name: example
+    skuName: Developer_1
+  providerConfigRef:
+    name: example

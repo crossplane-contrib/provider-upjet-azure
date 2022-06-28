@@ -24,5 +24,7 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_api_management", func(r *config.Resource) {
 		r.Kind = "Management"
+		// Mutually exclusive with azurerm_api_management_custom_domain
+		config.MoveToStatus(r.TerraformResource, "hostname_configuration")
 	})
 }

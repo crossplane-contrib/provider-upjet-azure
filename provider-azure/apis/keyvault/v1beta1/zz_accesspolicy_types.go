@@ -13,11 +13,11 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AccessPolicyObservation struct {
+type AccessPolicyObservation_2 struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
-type AccessPolicyParameters struct {
+type AccessPolicyParameters_2 struct {
 
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
@@ -55,13 +55,13 @@ type AccessPolicyParameters struct {
 // AccessPolicySpec defines the desired state of AccessPolicy
 type AccessPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     AccessPolicyParameters `json:"forProvider"`
+	ForProvider     AccessPolicyParameters_2 `json:"forProvider"`
 }
 
 // AccessPolicyStatus defines the observed state of AccessPolicy.
 type AccessPolicyStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        AccessPolicyObservation `json:"atProvider,omitempty"`
+	AtProvider        AccessPolicyObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

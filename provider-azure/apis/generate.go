@@ -23,7 +23,11 @@ limitations under the License.
 // Remove existing CRDs
 //go:generate rm -rf ../package/crds
 
-// Remove generated example manifests
+// Remove generated files
+//go:generate bash -c "find . -iname 'zz_*' -delete"
+//go:generate bash -c "find . -type d -empty -delete"
+//go:generate bash -c "find ../internal/controller -iname 'zz_*' -delete"
+//go:generate bash -c "find ../internal/controller -type d -empty -delete"
 //go:generate rm -rf ../examples-generated
 
 // Run Terrajet generator

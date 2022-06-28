@@ -22,26 +22,22 @@ import (
 
 	tjconfig "github.com/upbound/upjet/pkg/config"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
 	"github.com/upbound/official-providers/provider-azure/config/apimanagement"
 	"github.com/upbound/official-providers/provider-azure/config/base"
 	"github.com/upbound/official-providers/provider-azure/config/common"
 	"github.com/upbound/official-providers/provider-azure/config/compute"
+	"github.com/upbound/official-providers/provider-azure/config/containerservice"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
 	"github.com/upbound/official-providers/provider-azure/config/devices"
 	"github.com/upbound/official-providers/provider-azure/config/eventhub"
-	"github.com/upbound/official-providers/provider-azure/config/ip"
 	"github.com/upbound/official-providers/provider-azure/config/keyvault"
-	"github.com/upbound/official-providers/provider-azure/config/kubernetes"
-	"github.com/upbound/official-providers/provider-azure/config/loganalytics"
 	"github.com/upbound/official-providers/provider-azure/config/logic"
 	"github.com/upbound/official-providers/provider-azure/config/management"
 	"github.com/upbound/official-providers/provider-azure/config/mariadb"
-	"github.com/upbound/official-providers/provider-azure/config/monitor"
 	"github.com/upbound/official-providers/provider-azure/config/network"
 	"github.com/upbound/official-providers/provider-azure/config/notificationhubs"
+	"github.com/upbound/official-providers/provider-azure/config/operationalinsights"
 	"github.com/upbound/official-providers/provider-azure/config/postgresql"
 	"github.com/upbound/official-providers/provider-azure/config/redis"
 	"github.com/upbound/official-providers/provider-azure/config/resource"
@@ -49,7 +45,6 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/sql"
 	"github.com/upbound/official-providers/provider-azure/config/storage"
 	"github.com/upbound/official-providers/provider-azure/config/storagesync"
-	"github.com/upbound/official-providers/provider-azure/config/subnet"
 )
 
 const (
@@ -57,66 +52,19 @@ const (
 	modulePath     = "github.com/upbound/official-providers/provider-azure"
 )
 
-//go:embed schema.json
-var providerSchema string
+var (
+	//go:embed schema.json
+	providerSchema string
 
-var includedResources = []string{
-	// "azurerm_.+",
-	"azurerm_virtual_.+",
-	"azurerm_kubernetes_.+",
-	"azurerm_postgresql_.+",
-	"azurerm_cosmosdb_.+",
-	"azurerm_redis_.+",
-	"azurerm_resource_group",
-	"azurerm_subnet",
-	"azurerm_storage_account$",
-	"azurerm_storage_container$",
-	"azurerm_storage_blob$",
-	"azurerm_sql_server",
-	"azurerm_mssql_server$",
-	"azurerm_mssql_server_transparent_data_encryption$",
-	"azurerm_lb.*",
-	"azurerm_local_network_gateway$",
-	"azurerm_log_analytics_workspace",
-	"azurerm_iothub.*",
-	"azurerm_monitor_metric_alert",
-	"azurerm_application_security_group$",
-	"azurerm_network_connection_monitor$",
-	"azurerm_network_ddos_protection_plan$",
-	"azurerm_network_watcher$",
-	"azurerm_network_interface_application_security_group_association$",
-	"azurerm_network_interface_backend_address_pool_association$",
-	"azurerm_network_interface_nat_rule_association$",
-	"azurerm_network_interface_security_group_association$",
-	"azurerm_network_security_group$",
-	"azurerm_network_security_rule$",
-	"azurerm_nat_gateway.*",
-	"azurerm_key_vault.*",
-	"azurerm_eventhub_namespace$",
-	"azurerm_eventhub$",
-	"azurerm_eventhub_consumer_group$",
-	"azurerm_eventhub_authorization_rule$",
-	"azurerm_network_interface$",
-	"azurerm_mariadb_.+",
-	"azurerm_public_ip.*",
-	"azurerm_disk_encryption_set$",
-	"azurerm_(windows|linux)_virtual_.+",
-	"azurerm_availability_set$",
-	"azurerm_disk_access$",
-	"azurerm_image$",
-	"azurerm_managed_disk$",
-	"azurerm_orchestrated_virtual_machine_scale_set$",
-	"azurerm_proximity_placement_group$",
-	"azurerm_shared_image_gallery",
-	"azurerm_snapshot$",
-	"azurerm_marketplace_agreement$",
-	"azurerm_dedicated_host$",
-	// Those resources do not work, nore details in #311
-	// "azurerm_disk_sas_token",
-	// "azurerm_shared_image",
-	// "azurerm_shared_image_version",
-	// "azurerm_ssh_public_key",
-}
+	// BasePackages contains the non-generated package information for Upjet
+	// to include whenever needed.
+	BasePackages = tjconfig.BasePackages{
+		APIVersion: []string{
+			"apis/v1alpha1",
+		},
+		Controller: tjconfig.DefaultBasePackages.Controller,
+	}
+)
 
 // These resources cannot be generated because of their suffixes colliding with
 // kubebuilder-accepted type suffixes.
@@ -175,34 +123,29 @@ func GetProvider() *tjconfig.Provider {
 	pc := tjconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, "config/provider-metadata.yaml",
 		tjconfig.WithShortName("azure"),
 		tjconfig.WithRootGroup("azure.upbound.io"),
-		tjconfig.WithIncludeList(includedResources),
+		tjconfig.WithIncludeList(ResourcesWithExternalNameConfig()),
 		tjconfig.WithSkipList(skipList),
-		tjconfig.WithDefaultResourceFn(defaultResource(defaultVersion(), externalNameConfig(), groupOverrides())),
+		tjconfig.WithBasePackages(BasePackages),
+		tjconfig.WithDefaultResourceOptions(
+			ExternalNameConfigurations(),
+			groupOverrides(),
+			KnownReferences(),
+		),
 	)
-	// external-name configuration for all resources
-	for name := range pc.Resources {
-		// external-name configuration
-		pc.AddResourceConfigurator(name, func(r *tjconfig.Resource) {
-			r.ExternalName = tjconfig.IdentifierFromProvider
-		})
-	}
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
 		network.Configure,
-		ip.Configure,
 		management.Configure,
 		redis.Configure,
 		resource.Configure,
-		kubernetes.Configure,
+		containerservice.Configure,
 		postgresql.Configure,
 		cosmosdb.Configure,
 		sql.Configure,
-		subnet.Configure,
 		storage.Configure,
-		loganalytics.Configure,
+		operationalinsights.Configure,
 		devices.Configure,
-		monitor.Configure,
 		apimanagement.Configure,
 		logic.Configure,
 		security.Configure,
@@ -229,10 +172,4 @@ func GetProvider() *tjconfig.Provider {
 	}
 
 	return pc
-}
-
-func defaultResource(opts ...tjconfig.ResourceOption) tjconfig.DefaultResourceFn {
-	return func(name string, terraformResource *schema.Resource, orgOpts ...tjconfig.ResourceOption) *tjconfig.Resource {
-		return tjconfig.DefaultResource(name, terraformResource, append(orgOpts, opts...)...)
-	}
 }

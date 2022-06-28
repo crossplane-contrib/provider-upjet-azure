@@ -86,28 +86,6 @@ spec:
                   endpoint:
                     items:
                       properties:
-                        authenticationType:
-                          type: string
-                        batchFrequencyInSeconds:
-                          type: number
-                        connectionStringSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
                         containerName:
                           type: string
                         containerNameRef:
@@ -134,20 +112,6 @@ spec:
                                 labels is selected.
                               type: object
                           type: object
-                        encoding:
-                          type: string
-                        endpointUri:
-                          type: string
-                        entityPath:
-                          type: string
-                        fileNameFormat:
-                          type: string
-                        identityId:
-                          type: string
-                        maxChunkSizeInBytes:
-                          type: number
-                        name:
-                          type: string
                         resourceGroupName:
                           type: string
                         resourceGroupNameRef:
@@ -174,42 +138,12 @@ spec:
                                 labels is selected.
                               type: object
                           type: object
-                        type:
-                          type: string
-                      type: object
-                    type: array
-                  enrichment:
-                    items:
-                      properties:
-                        endpointNames:
-                          items:
-                            type: string
-                          type: array
-                        key:
-                          type: string
-                        value:
-                          type: string
                       type: object
                     type: array
                   eventHubPartitionCount:
                     type: number
                   eventHubRetentionInDays:
                     type: number
-                  fallbackRoute:
-                    items:
-                      properties:
-                        condition:
-                          type: string
-                        enabled:
-                          type: boolean
-                        endpointNames:
-                          items:
-                            type: string
-                          type: array
-                        source:
-                          type: string
-                      type: object
-                    type: array
                   fileUpload:
                     items:
                       properties:
@@ -319,23 +253,6 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  route:
-                    items:
-                      properties:
-                        condition:
-                          type: string
-                        enabled:
-                          type: boolean
-                        endpointNames:
-                          items:
-                            type: string
-                          type: array
-                        name:
-                          type: string
-                        source:
-                          type: string
-                      type: object
-                    type: array
                   sku:
                     items:
                       properties:
@@ -353,6 +270,7 @@ spec:
                       type: string
                     type: object
                 required:
+                - endpoint
                 - location
                 - sku
                 type: object
@@ -457,6 +375,44 @@ spec:
             properties:
               atProvider:
                 properties:
+                  endpoint:
+                    items:
+                      properties:
+                        authenticationType:
+                          type: string
+                        batchFrequencyInSeconds:
+                          type: number
+                        encoding:
+                          type: string
+                        endpointUri:
+                          type: string
+                        entityPath:
+                          type: string
+                        fileNameFormat:
+                          type: string
+                        identityId:
+                          type: string
+                        maxChunkSizeInBytes:
+                          type: number
+                        name:
+                          type: string
+                        type:
+                          type: string
+                      type: object
+                    type: array
+                  enrichment:
+                    items:
+                      properties:
+                        endpointNames:
+                          items:
+                            type: string
+                          type: array
+                        key:
+                          type: string
+                        value:
+                          type: string
+                      type: object
+                    type: array
                   eventHubEventsEndpoint:
                     type: string
                   eventHubEventsNamespace:
@@ -467,6 +423,21 @@ spec:
                     type: string
                   eventHubOperationsPath:
                     type: string
+                  fallbackRoute:
+                    items:
+                      properties:
+                        condition:
+                          type: string
+                        enabled:
+                          type: boolean
+                        endpointNames:
+                          items:
+                            type: string
+                          type: array
+                        source:
+                          type: string
+                      type: object
+                    type: array
                   hostname:
                     type: string
                   id:
@@ -477,6 +448,23 @@ spec:
                         principalId:
                           type: string
                         tenantId:
+                          type: string
+                      type: object
+                    type: array
+                  route:
+                    items:
+                      properties:
+                        condition:
+                          type: string
+                        enabled:
+                          type: boolean
+                        endpointNames:
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          type: string
+                        source:
                           type: string
                       type: object
                     type: array

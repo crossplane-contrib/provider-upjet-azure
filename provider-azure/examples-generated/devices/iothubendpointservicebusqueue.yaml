@@ -9,7 +9,6 @@ spec:
       name: example-servicebus-queue-authorization-rule
       namespace: crossplane-system
     iothubId: ${azurerm_iothub.example.id}
-    name: example
     resourceGroupNameRef:
       name: example
   providerConfigRef:

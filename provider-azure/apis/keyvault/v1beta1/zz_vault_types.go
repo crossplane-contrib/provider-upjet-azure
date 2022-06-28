@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessPolicyObservation struct {
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
+	CertificatePermissions []*string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty"`
+
+	KeyPermissions []*string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
+
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	SecretPermissions []*string `json:"secretPermissions,omitempty" tf:"secret_permissions,omitempty"`
+
+	StoragePermissions []*string `json:"storagePermissions,omitempty" tf:"storage_permissions,omitempty"`
+
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
+type AccessPolicyParameters struct {
+}
+
 type ContactObservation struct {
 }
 
@@ -47,6 +66,8 @@ type NetworkAclsParameters struct {
 }
 
 type VaultObservation struct {
+	AccessPolicy []AccessPolicyObservation `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	VaultURI *string `json:"vaultUri,omitempty" tf:"vault_uri,omitempty"`

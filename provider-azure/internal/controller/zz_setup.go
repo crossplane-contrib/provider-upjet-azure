@@ -9,8 +9,11 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	management "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/management"
 	resourcegrouppolicyassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	resourcegroup "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourcegroup"
+	resourceproviderregistration "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourceproviderregistration"
+	subscription "github.com/upbound/official-providers/provider-azure/internal/controller/azure/subscription"
 	rediscache "github.com/upbound/official-providers/provider-azure/internal/controller/cache/rediscache"
 	redisenterprisecluster "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisenterprisedatabase"
@@ -50,6 +53,8 @@ import (
 	sqlstoredprocedure "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqlstoredprocedure"
 	sqltrigger "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqltrigger"
 	table "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/table"
+	accountdatashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/account"
+	datashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datashare"
 	configuration "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/configuration"
 	database "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/database"
 	firewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/firewallrule"
@@ -84,9 +89,8 @@ import (
 	eventhub "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/eventhub"
 	eventhubnamespace "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/eventhubnamespace"
 	monitormetricalert "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitormetricalert"
-	certificate "github.com/upbound/official-providers/provider-azure/internal/controller/iothub/certificate"
 	accesspolicy "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/accesspolicy"
-	certificatekeyvault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificate"
+	certificate "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificate"
 	certificateissuer "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificateissuer"
 	key "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/key"
 	managedhardwaresecuritymodule "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/managedhardwaresecuritymodule"
@@ -94,11 +98,13 @@ import (
 	managedstorageaccountsastokendefinition "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/managedstorageaccountsastokendefinition"
 	secret "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/secret"
 	vault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/vault"
-	workspace "github.com/upbound/official-providers/provider-azure/internal/controller/loganalytics/workspace"
+	integrationserviceenvironment "github.com/upbound/official-providers/provider-azure/internal/controller/logic/integrationserviceenvironment"
+	managementgroup "github.com/upbound/official-providers/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/official-providers/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
 	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
 	ddosprotectionplan "github.com/upbound/official-providers/provider-azure/internal/controller/network/ddosprotectionplan"
+	ipgroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/ipgroup"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
 	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
 	loadbalancerbackendaddresspooladdress "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspooladdress"
@@ -131,26 +137,30 @@ import (
 	virtualnetworkpeering "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkpeering"
 	virtualwan "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualwan"
 	watcher "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcher"
+	notificationhub "github.com/upbound/official-providers/provider-azure/internal/controller/notificationhubs/notificationhub"
+	workspace "github.com/upbound/official-providers/provider-azure/internal/controller/operationalinsights/workspace"
 	providerconfig "github.com/upbound/official-providers/provider-azure/internal/controller/providerconfig"
-	groupcostmanagementexport "github.com/upbound/official-providers/provider-azure/internal/controller/resource/groupcostmanagementexport"
-	grouppolicyexemption "github.com/upbound/official-providers/provider-azure/internal/controller/resource/grouppolicyexemption"
-	grouppolicyremediation "github.com/upbound/official-providers/provider-azure/internal/controller/resource/grouppolicyremediation"
 	resourcegrouptemplatedeployment "github.com/upbound/official-providers/provider-azure/internal/controller/resources/resourcegrouptemplatedeployment"
+	advancedthreatprotection "github.com/upbound/official-providers/provider-azure/internal/controller/security/advancedthreatprotection"
+	iotsecuritydevicegroup "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritydevicegroup"
+	iotsecuritysolution "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritysolution"
 	mssqlserver "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlservertransparentdataencryption "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	accountstorage "github.com/upbound/official-providers/provider-azure/internal/controller/storage/account"
 	blob "github.com/upbound/official-providers/provider-azure/internal/controller/storage/blob"
 	container "github.com/upbound/official-providers/provider-azure/internal/controller/storage/container"
-	desktopscalingplan "github.com/upbound/official-providers/provider-azure/internal/controller/virtual/desktopscalingplan"
-	networkgatewaynatrule "github.com/upbound/official-providers/provider-azure/internal/controller/virtual/networkgatewaynatrule"
+	storagesync "github.com/upbound/official-providers/provider-azure/internal/controller/storagesync/storagesync"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		management.Setup,
 		resourcegrouppolicyassignment.Setup,
 		resourcegroup.Setup,
+		resourceproviderregistration.Setup,
+		subscription.Setup,
 		rediscache.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,
@@ -190,6 +200,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sqlstoredprocedure.Setup,
 		sqltrigger.Setup,
 		table.Setup,
+		accountdatashare.Setup,
+		datashare.Setup,
 		configuration.Setup,
 		database.Setup,
 		firewallrule.Setup,
@@ -224,9 +236,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventhub.Setup,
 		eventhubnamespace.Setup,
 		monitormetricalert.Setup,
-		certificate.Setup,
 		accesspolicy.Setup,
-		certificatekeyvault.Setup,
+		certificate.Setup,
 		certificateissuer.Setup,
 		key.Setup,
 		managedhardwaresecuritymodule.Setup,
@@ -234,11 +245,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedstorageaccountsastokendefinition.Setup,
 		secret.Setup,
 		vault.Setup,
-		workspace.Setup,
+		integrationserviceenvironment.Setup,
+		managementgroup.Setup,
 		marketplaceagreement.Setup,
 		applicationsecuritygroup.Setup,
 		connectionmonitor.Setup,
 		ddosprotectionplan.Setup,
+		ipgroup.Setup,
 		loadbalancer.Setup,
 		loadbalancerbackendaddresspool.Setup,
 		loadbalancerbackendaddresspooladdress.Setup,
@@ -271,18 +284,19 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualnetworkpeering.Setup,
 		virtualwan.Setup,
 		watcher.Setup,
+		notificationhub.Setup,
+		workspace.Setup,
 		providerconfig.Setup,
-		groupcostmanagementexport.Setup,
-		grouppolicyexemption.Setup,
-		grouppolicyremediation.Setup,
 		resourcegrouptemplatedeployment.Setup,
+		advancedthreatprotection.Setup,
+		iotsecuritydevicegroup.Setup,
+		iotsecuritysolution.Setup,
 		mssqlserver.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		accountstorage.Setup,
 		blob.Setup,
 		container.Setup,
-		desktopscalingplan.Setup,
-		networkgatewaynatrule.Setup,
+		storagesync.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
