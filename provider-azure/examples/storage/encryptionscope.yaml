@@ -1,0 +1,9 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: EncryptionScope
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: microsoftmanaged
+    source: Microsoft.Storage
+    storageAccountId: /subscriptions/.../resourceGroups/example-resources111/providers/Microsoft.Storage/storageAccounts/examplestoracc111

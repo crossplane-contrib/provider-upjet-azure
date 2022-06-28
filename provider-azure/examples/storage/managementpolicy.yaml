@@ -1,0 +1,43 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: ManagementPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    rule:
+    - actions:
+      - baseBlob:
+        - deleteAfterDaysSinceModificationGreaterThan: 100
+          tierToArchiveAfterDaysSinceModificationGreaterThan: 50
+          tierToCoolAfterDaysSinceModificationGreaterThan: 10
+        snapshot:
+        - deleteAfterDaysSinceCreationGreaterThan: 30
+      enabled: true
+      filters:
+      - blobTypes:
+        - blockBlob
+        prefixMatch:
+        - container1/prefix1
+      name: rule1
+    - actions:
+      - baseBlob:
+        - deleteAfterDaysSinceModificationGreaterThan: 101
+          tierToArchiveAfterDaysSinceModificationGreaterThan: 51
+          tierToCoolAfterDaysSinceModificationGreaterThan: 11
+        snapshot:
+        - changeTierToArchiveAfterDaysSinceCreation: 90
+          changeTierToCoolAfterDaysSinceCreation: 23
+          deleteAfterDaysSinceCreationGreaterThan: 31
+        version:
+        - changeTierToArchiveAfterDaysSinceCreation: 9
+          changeTierToCoolAfterDaysSinceCreation: 90
+          deleteAfterDaysSinceCreation: 3
+      enabled: false
+      filters:
+      - blobTypes:
+        - blockBlob
+        prefixMatch:
+        - container2/prefix1
+        - container2/prefix2
+      name: rule2
+    storageAccountId: /subscriptions/.../resourceGroups/example-resources111/providers/Microsoft.Storage/storageAccounts/examplestoracc111

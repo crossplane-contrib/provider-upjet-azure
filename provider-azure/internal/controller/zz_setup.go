@@ -164,8 +164,22 @@ import (
 	mssqlserver "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlservertransparentdataencryption "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	accountstorage "github.com/upbound/official-providers/provider-azure/internal/controller/storage/account"
+	accountnetworkrules "github.com/upbound/official-providers/provider-azure/internal/controller/storage/accountnetworkrules"
 	blob "github.com/upbound/official-providers/provider-azure/internal/controller/storage/blob"
+	blobinventorypolicy "github.com/upbound/official-providers/provider-azure/internal/controller/storage/blobinventorypolicy"
 	container "github.com/upbound/official-providers/provider-azure/internal/controller/storage/container"
+	datalakegen2filesystem "github.com/upbound/official-providers/provider-azure/internal/controller/storage/datalakegen2filesystem"
+	encryptionscope "github.com/upbound/official-providers/provider-azure/internal/controller/storage/encryptionscope"
+	managementpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/storage/managementpolicy"
+	objectreplication "github.com/upbound/official-providers/provider-azure/internal/controller/storage/objectreplication"
+	queue "github.com/upbound/official-providers/provider-azure/internal/controller/storage/queue"
+	share "github.com/upbound/official-providers/provider-azure/internal/controller/storage/share"
+	tablestorage "github.com/upbound/official-providers/provider-azure/internal/controller/storage/table"
+	hpccache "github.com/upbound/official-providers/provider-azure/internal/controller/storagecache/hpccache"
+	hpccacheaccesspolicy "github.com/upbound/official-providers/provider-azure/internal/controller/storagecache/hpccacheaccesspolicy"
+	hpccacheblobnfstarget "github.com/upbound/official-providers/provider-azure/internal/controller/storagecache/hpccacheblobnfstarget"
+	hpccacheblobtarget "github.com/upbound/official-providers/provider-azure/internal/controller/storagecache/hpccacheblobtarget"
+	hpccachenfstarget "github.com/upbound/official-providers/provider-azure/internal/controller/storagecache/hpccachenfstarget"
 	storagesync "github.com/upbound/official-providers/provider-azure/internal/controller/storagesync/storagesync"
 )
 
@@ -328,8 +342,22 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mssqlserver.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		accountstorage.Setup,
+		accountnetworkrules.Setup,
 		blob.Setup,
+		blobinventorypolicy.Setup,
 		container.Setup,
+		datalakegen2filesystem.Setup,
+		encryptionscope.Setup,
+		managementpolicy.Setup,
+		objectreplication.Setup,
+		queue.Setup,
+		share.Setup,
+		tablestorage.Setup,
+		hpccache.Setup,
+		hpccacheaccesspolicy.Setup,
+		hpccacheblobnfstarget.Setup,
+		hpccacheblobtarget.Setup,
+		hpccachenfstarget.Setup,
 		storagesync.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

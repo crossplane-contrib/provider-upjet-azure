@@ -1,0 +1,14 @@
+apiVersion: storagecache.azure.upbound.io/v1beta1
+kind: HPCCacheBlobNFSTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    cacheName: ${azurerm_hpc_cache.example.name}
+    namespacePath: /p1
+    resourceGroupNameRef:
+      name: example
+    storageContainerId: ${jsondecode(azurerm_resource_group_template_deployment.storage-containers.output_content).id.value}
+    usageModel: READ_HEAVY_INFREQ
+  providerConfigRef:
+    name: example

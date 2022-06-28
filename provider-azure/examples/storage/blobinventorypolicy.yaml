@@ -1,0 +1,16 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: BlobInventoryPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    rules:
+    - format: Csv
+      name: rule1
+      schedule: Daily
+      schemaFields:
+      - Name
+      - Last-Modified
+      scope: Container
+      storageContainerName: examplecontainer
+    storageAccountId: /subscriptions/.../resourceGroups/example-resources111/providers/Microsoft.Storage/storageAccounts/examplestoracc111

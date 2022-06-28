@@ -34,6 +34,7 @@ import (
 	v1beta1security "github.com/upbound/official-providers/provider-azure/apis/security/v1beta1"
 	v1beta1sql "github.com/upbound/official-providers/provider-azure/apis/sql/v1beta1"
 	v1beta1storage "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
+	v1beta1storagecache "github.com/upbound/official-providers/provider-azure/apis/storagecache/v1beta1"
 	v1beta1storagesync "github.com/upbound/official-providers/provider-azure/apis/storagesync/v1beta1"
 	v1alpha1 "github.com/upbound/official-providers/provider-azure/apis/v1alpha1"
 )
@@ -65,6 +66,7 @@ func init() {
 		v1beta1security.SchemeBuilder.AddToScheme,
 		v1beta1sql.SchemeBuilder.AddToScheme,
 		v1beta1storage.SchemeBuilder.AddToScheme,
+		v1beta1storagecache.SchemeBuilder.AddToScheme,
 		v1beta1storagesync.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 	)

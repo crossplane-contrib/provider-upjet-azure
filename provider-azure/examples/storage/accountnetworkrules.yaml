@@ -1,0 +1,14 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: AccountNetworkRules
+metadata:
+  name: example
+spec:
+  forProvider:
+    bypass:
+    - Metrics
+    defaultAction: Allow
+    ipRules:
+    - 127.0.0.1
+    storageAccountId: /subscriptions/.../resourceGroups/example-resources/providers/Microsoft.Storage/storageAccounts/storageaccountname777
+    virtualNetworkSubnetIds:
+    - /subscriptions/.../resourceGroups/example-resources/providers/Microsoft.Network/virtualNetworks/example-vnet/subnets/example-subnet
