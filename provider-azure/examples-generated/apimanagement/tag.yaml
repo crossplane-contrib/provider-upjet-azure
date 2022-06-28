@@ -1,9 +1,0 @@
-apiVersion: apimanagement.azure.upbound.io/v1alpha1
-kind: Tag
-metadata:
-  name: example
-spec:
-  forProvider:
-    apiManagementId: ${azurerm_api_management.example.id}
-  providerConfigRef:
-    name: example

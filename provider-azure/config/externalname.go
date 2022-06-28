@@ -228,7 +228,7 @@ func ResourcesWithExternalNameConfig() []string {
 	l := make([]string, len(ExternalNameConfigs))
 	i := 0
 	for r := range ExternalNameConfigs {
-		l[i] = r
+		l[i] = r + "$"
 		i++
 	}
 	return l

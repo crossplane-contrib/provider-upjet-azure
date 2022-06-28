@@ -9,51 +9,12 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
-	managementapitag "github.com/upbound/official-providers/provider-azure/internal/controller/api/managementapitag"
-	managementnotificationrecipientuser "github.com/upbound/official-providers/provider-azure/internal/controller/api/managementnotificationrecipientuser"
-	api "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/api"
-	apidiagnostic "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/apidiagnostic"
-	apioperation "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/apioperation"
-	apioperationpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/apioperationpolicy"
-	apioperationtag "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/apioperationtag"
-	apipolicy "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/apipolicy"
-	apirelease "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/apirelease"
-	apischema "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/apischema"
-	apiversionset "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/apiversionset"
-	authorizationserver "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/authorizationserver"
-	backend "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/backend"
-	certificate "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/certificate"
-	customdomain "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/customdomain"
-	diagnostic "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/diagnostic"
-	emailtemplate "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/emailtemplate"
-	gateway "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/gateway"
-	gatewayapi "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/gatewayapi"
-	identityprovideraad "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/identityprovideraad"
-	identityprovideraadb2c "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/identityprovideraadb2c"
-	identityproviderfacebook "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/identityproviderfacebook"
-	identityprovidergoogle "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/identityprovidergoogle"
-	identityprovidermicrosoft "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/identityprovidermicrosoft"
-	identityprovidertwitter "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/identityprovidertwitter"
-	logger "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/logger"
 	management "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/management"
-	namedvalue "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/namedvalue"
-	notificationrecipientemail "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/notificationrecipientemail"
-	openidconnectprovider "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/openidconnectprovider"
-	policy "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/policy"
-	product "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/product"
-	productapi "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/productapi"
-	productpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/productpolicy"
-	rediscache "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/rediscache"
-	subscription "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/subscription"
-	tag "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/tag"
-	user "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/user"
-	managementgrouppolicyassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/managementgrouppolicyassignment"
 	resourcegrouppolicyassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
-	subscriptionpolicyassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/subscriptionpolicyassignment"
 	resourcegroup "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourceproviderregistration"
-	subscriptionazure "github.com/upbound/official-providers/provider-azure/internal/controller/azure/subscription"
-	rediscachecache "github.com/upbound/official-providers/provider-azure/internal/controller/cache/rediscache"
+	subscription "github.com/upbound/official-providers/provider-azure/internal/controller/azure/subscription"
+	rediscache "github.com/upbound/official-providers/provider-azure/internal/controller/cache/rediscache"
 	redisenterprisecluster "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/cache/redisfirewallrule"
@@ -93,10 +54,6 @@ import (
 	sqltrigger "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqltrigger"
 	table "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/table"
 	accountdatashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/account"
-	datasetblobstorage "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetblobstorage"
-	datasetdatalakegen2 "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetdatalakegen2"
-	datasetkustocluster "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetkustocluster"
-	datasetkustodatabase "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetkustodatabase"
 	datashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datashare"
 	configuration "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/configuration"
 	database "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/database"
@@ -128,17 +85,12 @@ import (
 	iothubroute "github.com/upbound/official-providers/provider-azure/internal/controller/devices/iothubroute"
 	iothubsharedaccesspolicy "github.com/upbound/official-providers/provider-azure/internal/controller/devices/iothubsharedaccesspolicy"
 	authorizationrule "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/authorizationrule"
-	cluster "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/cluster"
 	consumergroup "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/consumergroup"
 	eventhub "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/eventhub"
 	eventhubnamespace "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/eventhubnamespace"
-	namespaceauthorizationrule "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/namespaceauthorizationrule"
-	namespacecustomermanagedkey "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/namespacecustomermanagedkey"
-	namespacedisasterrecoveryconfig "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/namespacedisasterrecoveryconfig"
 	monitormetricalert "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitormetricalert"
-	certificateiothub "github.com/upbound/official-providers/provider-azure/internal/controller/iothub/certificate"
 	accesspolicy "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/accesspolicy"
-	certificatekeyvault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificate"
+	certificate "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificate"
 	certificateissuer "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificateissuer"
 	key "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/key"
 	managedhardwaresecuritymodule "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/managedhardwaresecuritymodule"
@@ -147,12 +99,8 @@ import (
 	secret "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/secret"
 	vault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/vault"
 	integrationserviceenvironment "github.com/upbound/official-providers/provider-azure/internal/controller/logic/integrationserviceenvironment"
-	disksastoken "github.com/upbound/official-providers/provider-azure/internal/controller/managed/disksastoken"
-	grouppolicyexemption "github.com/upbound/official-providers/provider-azure/internal/controller/management/grouppolicyexemption"
-	grouppolicyremediation "github.com/upbound/official-providers/provider-azure/internal/controller/management/grouppolicyremediation"
 	managementgroup "github.com/upbound/official-providers/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/official-providers/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
-	serverdnsalias "github.com/upbound/official-providers/provider-azure/internal/controller/mssql/serverdnsalias"
 	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
 	ddosprotectionplan "github.com/upbound/official-providers/provider-azure/internal/controller/network/ddosprotectionplan"
@@ -189,89 +137,31 @@ import (
 	virtualnetworkpeering "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkpeering"
 	virtualwan "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualwan"
 	watcher "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcher"
-	watcherflowlog "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcherflowlog"
-	authorizationrulenotificationhubs "github.com/upbound/official-providers/provider-azure/internal/controller/notificationhubs/authorizationrule"
-	namespace "github.com/upbound/official-providers/provider-azure/internal/controller/notificationhubs/namespace"
 	notificationhub "github.com/upbound/official-providers/provider-azure/internal/controller/notificationhubs/notificationhub"
 	workspace "github.com/upbound/official-providers/provider-azure/internal/controller/operationalinsights/workspace"
 	providerconfig "github.com/upbound/official-providers/provider-azure/internal/controller/providerconfig"
-	groupcostmanagementexport "github.com/upbound/official-providers/provider-azure/internal/controller/resource/groupcostmanagementexport"
-	grouppolicyexemptionresource "github.com/upbound/official-providers/provider-azure/internal/controller/resource/grouppolicyexemption"
-	grouppolicyremediationresource "github.com/upbound/official-providers/provider-azure/internal/controller/resource/grouppolicyremediation"
-	managementgroupsubscriptionassociation "github.com/upbound/official-providers/provider-azure/internal/controller/resources/managementgroupsubscriptionassociation"
-	managementgrouptemplatedeployment "github.com/upbound/official-providers/provider-azure/internal/controller/resources/managementgrouptemplatedeployment"
 	resourcegrouptemplatedeployment "github.com/upbound/official-providers/provider-azure/internal/controller/resources/resourcegrouptemplatedeployment"
-	subscriptiontemplatedeployment "github.com/upbound/official-providers/provider-azure/internal/controller/resources/subscriptiontemplatedeployment"
 	advancedthreatprotection "github.com/upbound/official-providers/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritydevicegroup"
 	iotsecuritysolution "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritysolution"
 	mssqlserver "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserver"
-	mssqlserversecurityalertpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserversecurityalertpolicy"
 	mssqlservertransparentdataencryption "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
-	mssqlservervulnerabilityassessment "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservervulnerabilityassessment"
 	accountstorage "github.com/upbound/official-providers/provider-azure/internal/controller/storage/account"
-	accountcustomermanagedkey "github.com/upbound/official-providers/provider-azure/internal/controller/storage/accountcustomermanagedkey"
-	accountnetworkrules "github.com/upbound/official-providers/provider-azure/internal/controller/storage/accountnetworkrules"
 	blob "github.com/upbound/official-providers/provider-azure/internal/controller/storage/blob"
-	blobinventorypolicy "github.com/upbound/official-providers/provider-azure/internal/controller/storage/blobinventorypolicy"
 	container "github.com/upbound/official-providers/provider-azure/internal/controller/storage/container"
-	cloudendpoint "github.com/upbound/official-providers/provider-azure/internal/controller/storagesync/cloudendpoint"
 	storagesync "github.com/upbound/official-providers/provider-azure/internal/controller/storagesync/storagesync"
-	costmanagementexport "github.com/upbound/official-providers/provider-azure/internal/controller/subscription/costmanagementexport"
-	policyexemption "github.com/upbound/official-providers/provider-azure/internal/controller/subscription/policyexemption"
-	policyremediation "github.com/upbound/official-providers/provider-azure/internal/controller/subscription/policyremediation"
-	networkgatewaynatrule "github.com/upbound/official-providers/provider-azure/internal/controller/virtual/networkgatewaynatrule"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		managementapitag.Setup,
-		managementnotificationrecipientuser.Setup,
-		api.Setup,
-		apidiagnostic.Setup,
-		apioperation.Setup,
-		apioperationpolicy.Setup,
-		apioperationtag.Setup,
-		apipolicy.Setup,
-		apirelease.Setup,
-		apischema.Setup,
-		apiversionset.Setup,
-		authorizationserver.Setup,
-		backend.Setup,
-		certificate.Setup,
-		customdomain.Setup,
-		diagnostic.Setup,
-		emailtemplate.Setup,
-		gateway.Setup,
-		gatewayapi.Setup,
-		identityprovideraad.Setup,
-		identityprovideraadb2c.Setup,
-		identityproviderfacebook.Setup,
-		identityprovidergoogle.Setup,
-		identityprovidermicrosoft.Setup,
-		identityprovidertwitter.Setup,
-		logger.Setup,
 		management.Setup,
-		namedvalue.Setup,
-		notificationrecipientemail.Setup,
-		openidconnectprovider.Setup,
-		policy.Setup,
-		product.Setup,
-		productapi.Setup,
-		productpolicy.Setup,
-		rediscache.Setup,
-		subscription.Setup,
-		tag.Setup,
-		user.Setup,
-		managementgrouppolicyassignment.Setup,
 		resourcegrouppolicyassignment.Setup,
-		subscriptionpolicyassignment.Setup,
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
-		subscriptionazure.Setup,
-		rediscachecache.Setup,
+		subscription.Setup,
+		rediscache.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
@@ -311,10 +201,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sqltrigger.Setup,
 		table.Setup,
 		accountdatashare.Setup,
-		datasetblobstorage.Setup,
-		datasetdatalakegen2.Setup,
-		datasetkustocluster.Setup,
-		datasetkustodatabase.Setup,
 		datashare.Setup,
 		configuration.Setup,
 		database.Setup,
@@ -346,17 +232,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iothubroute.Setup,
 		iothubsharedaccesspolicy.Setup,
 		authorizationrule.Setup,
-		cluster.Setup,
 		consumergroup.Setup,
 		eventhub.Setup,
 		eventhubnamespace.Setup,
-		namespaceauthorizationrule.Setup,
-		namespacecustomermanagedkey.Setup,
-		namespacedisasterrecoveryconfig.Setup,
 		monitormetricalert.Setup,
-		certificateiothub.Setup,
 		accesspolicy.Setup,
-		certificatekeyvault.Setup,
+		certificate.Setup,
 		certificateissuer.Setup,
 		key.Setup,
 		managedhardwaresecuritymodule.Setup,
@@ -365,12 +246,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		secret.Setup,
 		vault.Setup,
 		integrationserviceenvironment.Setup,
-		disksastoken.Setup,
-		grouppolicyexemption.Setup,
-		grouppolicyremediation.Setup,
 		managementgroup.Setup,
 		marketplaceagreement.Setup,
-		serverdnsalias.Setup,
 		applicationsecuritygroup.Setup,
 		connectionmonitor.Setup,
 		ddosprotectionplan.Setup,
@@ -407,38 +284,19 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualnetworkpeering.Setup,
 		virtualwan.Setup,
 		watcher.Setup,
-		watcherflowlog.Setup,
-		authorizationrulenotificationhubs.Setup,
-		namespace.Setup,
 		notificationhub.Setup,
 		workspace.Setup,
 		providerconfig.Setup,
-		groupcostmanagementexport.Setup,
-		grouppolicyexemptionresource.Setup,
-		grouppolicyremediationresource.Setup,
-		managementgroupsubscriptionassociation.Setup,
-		managementgrouptemplatedeployment.Setup,
 		resourcegrouptemplatedeployment.Setup,
-		subscriptiontemplatedeployment.Setup,
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,
 		iotsecuritysolution.Setup,
 		mssqlserver.Setup,
-		mssqlserversecurityalertpolicy.Setup,
 		mssqlservertransparentdataencryption.Setup,
-		mssqlservervulnerabilityassessment.Setup,
 		accountstorage.Setup,
-		accountcustomermanagedkey.Setup,
-		accountnetworkrules.Setup,
 		blob.Setup,
-		blobinventorypolicy.Setup,
 		container.Setup,
-		cloudendpoint.Setup,
 		storagesync.Setup,
-		costmanagementexport.Setup,
-		policyexemption.Setup,
-		policyremediation.Setup,
-		networkgatewaynatrule.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
