@@ -11,5 +11,3 @@ spec:
     name: example-Iot-Security-Solution
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

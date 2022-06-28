@@ -14,5 +14,3 @@ spec:
       scope: Container
       storageContainerName: ${azurerm_storage_container.example.name}
     storageAccountId: ${azurerm_storage_account.example.id}
-  providerConfigRef:
-    name: example

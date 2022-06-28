@@ -6,5 +6,3 @@ spec:
   forProvider:
     enabled: true
     targetResourceId: ${azurerm_storage_account.example.id}
-  providerConfigRef:
-    name: example

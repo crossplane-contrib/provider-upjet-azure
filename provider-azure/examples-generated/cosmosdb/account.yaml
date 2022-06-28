@@ -24,5 +24,3 @@ spec:
     offerType: Standard
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

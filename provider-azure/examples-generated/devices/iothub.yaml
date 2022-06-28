@@ -51,5 +51,3 @@ spec:
       name: S1
     tags:
       purpose: testing
-  providerConfigRef:
-    name: example

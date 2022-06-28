@@ -12,5 +12,3 @@ spec:
       id: MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI
     quota: 50
     storageAccountName: ${azurerm_storage_account.example.name}
-  providerConfigRef:
-    name: example

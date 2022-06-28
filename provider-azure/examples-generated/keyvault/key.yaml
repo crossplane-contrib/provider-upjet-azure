@@ -15,5 +15,3 @@ spec:
     keyType: RSA
     keyVaultIdRef:
       name: example
-  providerConfigRef:
-    name: example

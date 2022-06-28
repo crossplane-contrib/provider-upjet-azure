@@ -8,5 +8,3 @@ spec:
     namespaceName: ${azurerm_notification_hub_namespace.example.name}
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

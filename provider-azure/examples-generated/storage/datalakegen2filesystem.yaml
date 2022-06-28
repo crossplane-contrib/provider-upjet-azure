@@ -7,5 +7,3 @@ spec:
     properties:
       hello: aGVsbG8=
     storageAccountId: ${azurerm_storage_account.example.id}
-  providerConfigRef:
-    name: example

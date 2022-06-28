@@ -12,5 +12,3 @@ spec:
     location: West Europe
     nodeCount: 3
     skuName: Standard_DS14_v2
-  providerConfigRef:
-    name: example

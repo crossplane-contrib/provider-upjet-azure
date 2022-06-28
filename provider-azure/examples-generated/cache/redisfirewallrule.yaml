@@ -10,5 +10,3 @@ spec:
     resourceGroupNameRef:
       name: example
     startIp: 1.2.3.4
-  providerConfigRef:
-    name: example

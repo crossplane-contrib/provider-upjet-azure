@@ -12,5 +12,3 @@ spec:
     storageAccountId: ${azurerm_storage_account.test.id}
     virtualNetworkSubnetIds:
     - ${azurerm_subnet.test.id}
-  providerConfigRef:
-    name: example

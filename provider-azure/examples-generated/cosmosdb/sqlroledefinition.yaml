@@ -14,5 +14,3 @@ spec:
     resourceGroupNameRef:
       name: example
     roleDefinitionId: 84cf3a8b-4122-4448-bce2-fa423cfe0a15
-  providerConfigRef:
-    name: example

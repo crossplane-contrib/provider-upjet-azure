@@ -8,5 +8,3 @@ spec:
     - access: rw
       scope: default
     hpcCacheId: ${azurerm_hpc_cache.example.id}
-  providerConfigRef:
-    name: example

@@ -7,5 +7,3 @@ spec:
     displayName: ParentGroup
     subscriptionIds:
     - ${data.azurerm_subscription.current.subscription_id}
-  providerConfigRef:
-    name: example

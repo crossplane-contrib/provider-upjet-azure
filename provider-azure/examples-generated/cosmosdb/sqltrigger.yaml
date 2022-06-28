@@ -9,5 +9,3 @@ spec:
       name: example
     operation: Delete
     type: Post
-  providerConfigRef:
-    name: example

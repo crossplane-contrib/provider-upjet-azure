@@ -12,5 +12,3 @@ spec:
       sizeGb: 30
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

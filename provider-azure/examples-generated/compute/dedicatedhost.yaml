@@ -8,5 +8,3 @@ spec:
     location: West Europe
     platformFaultDomain: 1
     skuName: DSv3-Type1
-  providerConfigRef:
-    name: example

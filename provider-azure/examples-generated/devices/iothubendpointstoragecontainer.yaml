@@ -17,5 +17,3 @@ spec:
     maxChunkSizeInBytes: 10485760
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

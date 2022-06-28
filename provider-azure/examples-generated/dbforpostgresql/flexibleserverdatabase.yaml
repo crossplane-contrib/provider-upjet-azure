@@ -8,5 +8,3 @@ spec:
     collation: en_US.utf8
     serverIdRef:
       name: example
-  providerConfigRef:
-    name: example

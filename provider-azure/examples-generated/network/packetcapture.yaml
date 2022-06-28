@@ -12,5 +12,3 @@ spec:
     - storageAccountIdRef:
         name: example
     targetResourceId: ${azurerm_virtual_machine.example.id}
-  providerConfigRef:
-    name: example

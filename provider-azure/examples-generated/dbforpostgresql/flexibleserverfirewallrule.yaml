@@ -8,5 +8,3 @@ spec:
     serverIdRef:
       name: example
     startIpAddress: 122.122.0.0
-  providerConfigRef:
-    name: example

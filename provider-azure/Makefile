@@ -12,7 +12,6 @@ export TERRAFORM_PROVIDER_VERSION := 3.8.0
 export GOPRIVATE=github.com/upbound
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-azurerm
 export TERRAFORM_DOCS_PATH ?= website/docs/r
-export REPO_DIR ?= $(WORK_DIR)/$(shell basename "${TERRAFORM_PROVIDER_REPO}")
 
 PLATFORMS ?= linux_amd64 linux_arm64
 

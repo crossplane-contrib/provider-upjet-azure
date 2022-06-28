@@ -10,5 +10,3 @@ spec:
     serverNameRef:
       name: example
     startIpAddress: 40.112.8.12
-  providerConfigRef:
-    name: example

@@ -9,5 +9,3 @@ spec:
       name: example
     retentionInDays: 30
     sku: PerGB2018
-  providerConfigRef:
-    name: example

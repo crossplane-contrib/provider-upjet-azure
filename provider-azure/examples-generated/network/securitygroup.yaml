@@ -19,5 +19,3 @@ spec:
       sourcePortRange: '*'
     tags:
       environment: Production
-  providerConfigRef:
-    name: example

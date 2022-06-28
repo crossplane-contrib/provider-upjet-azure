@@ -7,5 +7,3 @@ spec:
     body: function trigger(){}
     containerIdRef:
       name: example
-  providerConfigRef:
-    name: example

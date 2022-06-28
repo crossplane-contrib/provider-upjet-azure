@@ -56,6 +56,9 @@ const (
 var (
 	//go:embed schema.json
 	providerSchema string
+
+	//go:embed provider-metadata.yaml
+	providerMetadata []byte
 )
 
 // These resources cannot be generated because of their suffixes colliding with
@@ -112,7 +115,7 @@ var skipList = []string{
 
 // GetProvider returns provider configuration
 func GetProvider() *tjconfig.Provider {
-	pc := tjconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, "config/provider-metadata.yaml",
+	pc := tjconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, providerMetadata,
 		tjconfig.WithShortName("azure"),
 		tjconfig.WithRootGroup("azure.upbound.io"),
 		tjconfig.WithIncludeList(ResourcesWithExternalNameConfig()),

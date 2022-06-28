@@ -10,5 +10,3 @@ spec:
       name: example
     zones:
     - "1"
-  providerConfigRef:
-    name: example

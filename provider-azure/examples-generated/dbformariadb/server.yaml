@@ -20,5 +20,3 @@ spec:
     sslEnforcementEnabled: true
     storageMb: 5120
     version: "10.2"
-  providerConfigRef:
-    name: example

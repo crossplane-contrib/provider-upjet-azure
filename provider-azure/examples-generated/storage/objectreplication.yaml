@@ -9,5 +9,3 @@ spec:
     - destinationContainerName: ${azurerm_storage_container.dst.name}
       sourceContainerName: ${azurerm_storage_container.src.name}
     sourceStorageAccountId: ${azurerm_storage_account.src.id}
-  providerConfigRef:
-    name: example

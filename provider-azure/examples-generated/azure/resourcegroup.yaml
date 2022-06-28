@@ -5,5 +5,3 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-  providerConfigRef:
-    name: example

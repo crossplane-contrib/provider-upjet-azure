@@ -11,5 +11,3 @@ spec:
     resourceGroupNameRef:
       name: example
     userMetadata: some-meta-data
-  providerConfigRef:
-    name: example

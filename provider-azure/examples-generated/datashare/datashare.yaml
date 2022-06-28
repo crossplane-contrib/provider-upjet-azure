@@ -12,5 +12,3 @@ spec:
       recurrence: Day
       startTime: "2020-04-17T04:47:52.9614956Z"
     terms: example terms
-  providerConfigRef:
-    name: example

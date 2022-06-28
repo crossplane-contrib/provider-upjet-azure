@@ -11,5 +11,3 @@ spec:
     sku: Standard
     tags:
       environment: Production
-  providerConfigRef:
-    name: example

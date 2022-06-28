@@ -5,5 +5,3 @@ metadata:
 spec:
   forProvider:
     storageAccountName: ${azurerm_storage_account.example.name}
-  providerConfigRef:
-    name: example

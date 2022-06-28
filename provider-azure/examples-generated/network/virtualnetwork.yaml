@@ -20,5 +20,3 @@ spec:
       securityGroup: ${azurerm_network_security_group.example.id}
     tags:
       environment: Production
-  providerConfigRef:
-    name: example

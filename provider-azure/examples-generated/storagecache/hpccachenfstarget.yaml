@@ -15,5 +15,3 @@ spec:
       name: example
     targetHostName: ${azurerm_linux_virtual_machine.example.private_ip_address}
     usageModel: READ_HEAVY_INFREQ
-  providerConfigRef:
-    name: example

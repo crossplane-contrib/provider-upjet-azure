@@ -8,5 +8,3 @@ spec:
     serverIdRef:
       name: example
     value: "on"
-  providerConfigRef:
-    name: example

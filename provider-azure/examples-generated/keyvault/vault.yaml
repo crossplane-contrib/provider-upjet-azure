@@ -21,5 +21,3 @@ spec:
     skuName: standard
     softDeleteRetentionDays: 7
     tenantId: ${data.azurerm_client_config.current.tenant_id}
-  providerConfigRef:
-    name: example

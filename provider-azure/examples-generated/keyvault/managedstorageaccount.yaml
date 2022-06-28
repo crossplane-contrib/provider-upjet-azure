@@ -10,5 +10,3 @@ spec:
     storageAccountIdRef:
       name: example
     storageAccountKey: key1
-  providerConfigRef:
-    name: example

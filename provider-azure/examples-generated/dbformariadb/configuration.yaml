@@ -10,5 +10,3 @@ spec:
     serverNameRef:
       name: example
     value: "600"
-  providerConfigRef:
-    name: example
