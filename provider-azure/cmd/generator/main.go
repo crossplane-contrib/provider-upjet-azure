@@ -18,11 +18,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
-
-	"github.com/pkg/errors"
 
 	"github.com/upbound/upjet/pkg/pipeline"
 
@@ -39,36 +36,5 @@ func main() {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", rootDir))
 	}
 
-	// delete API dirs
-	deleteGenDirs(absRootDir+"/apis", map[string]struct{}{
-		"v1alpha1": {},
-		"rconfig":  {},
-	})
-	// delete controller dirs
-	deleteGenDirs(absRootDir+"/internal/controller", map[string]struct{}{
-		"providerconfig": {},
-	})
-
 	pipeline.Run(config.GetProvider(), absRootDir)
-}
-
-// delete API subdirs for a clean start
-func deleteGenDirs(rootDir string, keepMap map[string]struct{}) {
-	files, err := ioutil.ReadDir(rootDir)
-	if err != nil {
-		panic(errors.Wrapf(err, "cannot list files under %s", rootDir))
-	}
-
-	for _, f := range files {
-		if !f.IsDir() {
-			continue
-		}
-		if _, ok := keepMap[f.Name()]; ok {
-			continue
-		}
-		removeDir := filepath.Join(rootDir, f.Name())
-		if err := os.RemoveAll(removeDir); err != nil {
-			panic(errors.Wrapf(err, "cannot remove API dir: %s", removeDir))
-		}
-	}
 }
