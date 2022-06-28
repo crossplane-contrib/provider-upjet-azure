@@ -1,0 +1,14 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSZoneVirtualNetworkLink
+metadata:
+  name: example
+spec:
+  forProvider:
+    privateDnsZoneNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+    virtualNetworkIdRef:
+      name: example
+  providerConfigRef:
+    name: example

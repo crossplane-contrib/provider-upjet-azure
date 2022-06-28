@@ -1,0 +1,61 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Profile
+metadata:
+  name: example
+spec:
+  forProvider:
+    containerNetworkInterface:
+    - ipConfiguration:
+      - name: exampleipconfig
+        subnetIdRef:
+          name: example-subnet-for-network-profile
+      name: examplecnic
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkprofile-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: networkprofile-rg
+spec:
+  forProvider:
+    location: "West Europe"
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn-for-network-profile
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkprofile-rg
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet-for-network-profile
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: networkprofile-rg
+    virtualNetworkNameRef:
+      name: example-vn-for-network-profile
+    addressPrefixes:
+      - "10.0.1.0/24"
+  providerConfigRef:
+    name: example

@@ -1,0 +1,10 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSZone
+metadata:
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

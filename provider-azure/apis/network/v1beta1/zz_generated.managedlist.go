@@ -196,6 +196,87 @@ func (l *NetworkInterfaceSecurityGroupAssociationList) GetItems() []resource.Man
 	return items
 }
 
+// GetItems of this PrivateDNSAAAARecordList.
+func (l *PrivateDNSAAAARecordList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateDNSARecordList.
+func (l *PrivateDNSARecordList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateDNSMXRecordList.
+func (l *PrivateDNSMXRecordList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateDNSPTRRecordList.
+func (l *PrivateDNSPTRRecordList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateDNSSRVRecordList.
+func (l *PrivateDNSSRVRecordList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateDNSTXTRecordList.
+func (l *PrivateDNSTXTRecordList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateDNSZoneList.
+func (l *PrivateDNSZoneList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateDNSZoneVirtualNetworkLinkList.
+func (l *PrivateDNSZoneVirtualNetworkLinkList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ProfileList.
+func (l *ProfileList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this PublicIPList.
 func (l *PublicIPList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -315,6 +396,15 @@ func (l *VirtualNetworkPeeringList) GetItems() []resource.Managed {
 
 // GetItems of this VirtualWANList.
 func (l *VirtualWANList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WatcherFlowLogList.
+func (l *WatcherFlowLogList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
