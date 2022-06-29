@@ -20,12 +20,15 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
+	"github.com/upbound/official-providers/provider-azure/config/compute"
+
+	"github.com/upbound/official-providers/provider-azure/config/insights"
+
 	tjconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-azure/config/apimanagement"
 	"github.com/upbound/official-providers/provider-azure/config/base"
 	"github.com/upbound/official-providers/provider-azure/config/common"
-	"github.com/upbound/official-providers/provider-azure/config/compute"
 	"github.com/upbound/official-providers/provider-azure/config/containerservice"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
@@ -130,6 +133,7 @@ func GetProvider() *tjconfig.Provider {
 			ExternalNameConfigurations(),
 			groupOverrides(),
 			KnownReferences(),
+			UseAsync(),
 		),
 	)
 
@@ -140,6 +144,7 @@ func GetProvider() *tjconfig.Provider {
 		redis.Configure,
 		resource.Configure,
 		containerservice.Configure,
+		compute.Configure,
 		postgresql.Configure,
 		cosmosdb.Configure,
 		sql.Configure,
@@ -149,6 +154,7 @@ func GetProvider() *tjconfig.Provider {
 		apimanagement.Configure,
 		logic.Configure,
 		security.Configure,
+		insights.Configure,
 		base.Configure,
 		datashare.Configure,
 		notificationhubs.Configure,
@@ -156,7 +162,6 @@ func GetProvider() *tjconfig.Provider {
 		keyvault.Configure,
 		eventhub.Configure,
 		mariadb.Configure,
-		compute.Configure,
 	} {
 		configure(pc)
 	}

@@ -26,7 +26,6 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_resource_group_template_deployment", func(r *config.Resource) {
 		r.Kind = "ResourceGroupTemplateDeployment"
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_resource_group_policy_assignment", func(r *config.Resource) {
@@ -35,6 +34,5 @@ func Configure(p *config.Provider) {
 			Type:      rconfig.ResourceGroupReferencePath,
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 }

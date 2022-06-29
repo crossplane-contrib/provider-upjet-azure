@@ -24,8 +24,10 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_data_share", func(r *config.Resource) {
 		r.Kind = "DataShare"
+		r.UseAsync = false
 	})
 	p.AddResourceConfigurator("azurerm_data_share_account", func(r *config.Resource) {
 		r.Kind = "Account"
+		r.UseAsync = false
 	})
 }

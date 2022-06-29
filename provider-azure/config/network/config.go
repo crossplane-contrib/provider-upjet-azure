@@ -25,10 +25,12 @@ import (
 // Configure configures virtual group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_ip_group", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "IPGroup"
 	})
 
 	p.AddResourceConfigurator("azurerm_network_interface", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "NetworkInterface"
 	})
 
@@ -39,7 +41,6 @@ func Configure(p *config.Provider) {
 			Type:      "PublicIP",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_backend_address_pool", func(r *config.Resource) {
@@ -48,7 +49,6 @@ func Configure(p *config.Provider) {
 			Type:      "LoadBalancer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_backend_address_pool_address", func(r *config.Resource) {
@@ -61,7 +61,6 @@ func Configure(p *config.Provider) {
 			Type:      "VirtualNetwork",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_nat_pool", func(r *config.Resource) {
@@ -70,7 +69,6 @@ func Configure(p *config.Provider) {
 			Type:      "LoadBalancer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_nat_rule", func(r *config.Resource) {
@@ -79,7 +77,6 @@ func Configure(p *config.Provider) {
 			Type:      "LoadBalancer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_outbound_rule", func(r *config.Resource) {
@@ -92,7 +89,6 @@ func Configure(p *config.Provider) {
 			Type:      "LoadBalancer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_probe", func(r *config.Resource) {
@@ -101,7 +97,6 @@ func Configure(p *config.Provider) {
 			Type:      "LoadBalancer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_rule", func(r *config.Resource) {
@@ -110,19 +105,9 @@ func Configure(p *config.Provider) {
 			Type:      "LoadBalancer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_local_network_gateway", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_nat_gateway", func(r *config.Resource) {
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_association", func(r *config.Resource) {
-		r.UseAsync = true
 		r.References["nat_gateway_id"] = config.Reference{
 			Type:      "NATGateway",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -134,7 +119,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_prefix_association", func(r *config.Resource) {
-		r.UseAsync = true
 		r.References["nat_gateway_id"] = config.Reference{
 			Type:      "NATGateway",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -146,10 +130,12 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_network_watcher", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "Watcher"
 	})
 
 	p.AddResourceConfigurator("azurerm_network_watcher_flow_log", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["network_watcher_name"] = config.Reference{
 			Type: "Watcher",
 		}
@@ -164,6 +150,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_network_connection_monitor", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "ConnectionMonitor"
 		r.References["network_watcher_id"] = config.Reference{
 			Type:      "Watcher",
@@ -172,10 +159,12 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_network_ddos_protection_plan", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "DDoSProtectionPlan"
 	})
 
 	p.AddResourceConfigurator("azurerm_network_security_rule", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["network_security_group_name"] = config.Reference{
 			Type: "SecurityGroup",
 		}
@@ -183,7 +172,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_interface_application_security_group_association", func(r *config.Resource) {
 		r.Kind = "NetworkInterfaceApplicationSecurityGroupAssociation"
-		r.UseAsync = true
 		r.References["network_interface_id"] = config.Reference{
 			Type:      "NetworkInterface",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -196,7 +184,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_interface_backend_address_pool_association", func(r *config.Resource) {
 		r.Kind = "NetworkInterfaceBackendAddressPoolAssociation"
-		r.UseAsync = true
 		r.References["network_interface_id"] = config.Reference{
 			Type:      "NetworkInterface",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -209,7 +196,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_interface_nat_rule_association", func(r *config.Resource) {
 		r.Kind = "NetworkInterfaceNatRuleAssociation"
-		r.UseAsync = true
 		r.References["network_interface_id"] = config.Reference{
 			Type:      "NetworkInterface",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -222,7 +208,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_interface_security_group_association", func(r *config.Resource) {
 		r.Kind = "NetworkInterfaceSecurityGroupAssociation"
-		r.UseAsync = true
 		r.References["network_interface_id"] = config.Reference{
 			Type:      "NetworkInterface",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -247,7 +232,6 @@ func Configure(p *config.Provider) {
 			Type:      "Subnet",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_peering", func(r *config.Resource) {
@@ -259,10 +243,10 @@ func Configure(p *config.Provider) {
 			Type:      "VirtualNetwork",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_network_profile", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["container_network_interface.ip_configuration.subnet_id"] = config.Reference{
 			Type:      "Subnet",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -270,36 +254,42 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_a_record", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["zone_name"] = config.Reference{
 			Type: "PrivateDNSZone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_aaaa_record", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["zone_name"] = config.Reference{
 			Type: "PrivateDNSZone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_mx_record", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["zone_name"] = config.Reference{
 			Type: "PrivateDNSZone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_ptr_record", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["zone_name"] = config.Reference{
 			Type: "PrivateDNSZone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_srv_record", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["zone_name"] = config.Reference{
 			Type: "PrivateDNSZone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_txt_record", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["zone_name"] = config.Reference{
 			Type: "PrivateDNSZone",
 		}
@@ -313,7 +303,6 @@ func Configure(p *config.Provider) {
 			Type:      "VirtualNetwork",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_private_link_service", func(r *config.Resource) {
@@ -321,7 +310,6 @@ func Configure(p *config.Provider) {
 			Type:      "Subnet",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_private_endpoint", func(r *config.Resource) {
@@ -333,7 +321,6 @@ func Configure(p *config.Provider) {
 			Type:      "PrivateLinkService",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_network_packet_capture", func(r *config.Resource) {
@@ -344,7 +331,6 @@ func Configure(p *config.Provider) {
 			Type:      rconfig.APISPackagePath + "/storage/v1beta1.Account",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
@@ -375,7 +361,6 @@ func Configure(p *config.Provider) {
 			Type:      "VirtualNetworkGateway",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_workspace", func(r *config.Resource) {
@@ -389,10 +374,10 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_wan", func(r *config.Resource) {
 		r.Kind = "VirtualWAN"
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_frontdoor", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "FrontDoor"
 	})
 
@@ -404,7 +389,6 @@ func Configure(p *config.Provider) {
 		r.References["virtual_network_name"] = config.Reference{
 			Type: "VirtualNetwork",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_nat_gateway_association", func(r *config.Resource) {
@@ -413,7 +397,6 @@ func Configure(p *config.Provider) {
 			Type:      "Subnet",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_network_security_group_association", func(r *config.Resource) {
@@ -422,12 +405,10 @@ func Configure(p *config.Provider) {
 			Type:      "Subnet",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_service_endpoint_storage_policy", func(r *config.Resource) {
 		r.Kind = "SubnetServiceEndpointStoragePolicy"
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_route_table_association", func(r *config.Resource) {
@@ -436,6 +417,29 @@ func Configure(p *config.Provider) {
 			Type:      "Subnet",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_application_security_group", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_zone", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_public_ip", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_public_ip_prefix", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_network_security_group", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
+		r.UseAsync = false
 	})
 }

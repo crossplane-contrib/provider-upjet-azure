@@ -61,7 +61,6 @@ func Configure(p *config.Provider) {
 			Type:      rconfig.SubnetReferencePath,
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			if kc, ok := attr["kube_config_raw"].(string); ok {
 				return map[string][]byte{
@@ -87,6 +86,5 @@ func Configure(p *config.Provider) {
 			Type:      rconfig.SubnetReferencePath,
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 }

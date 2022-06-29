@@ -22,10 +22,6 @@ import (
 
 // Configure configures storage group
 func Configure(p *config.Provider) {
-	p.AddResourceConfigurator("azurerm_storage_account", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
 	p.AddResourceConfigurator("azurerm_storage_blob", func(r *config.Resource) {
 		r.References["storage_account_name"] = config.Reference{
 			Type: "Account",
@@ -33,13 +29,11 @@ func Configure(p *config.Provider) {
 		r.References["storage_container_name"] = config.Reference{
 			Type: "Container",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_container", func(r *config.Resource) {
 		r.References["storage_account_name"] = config.Reference{
 			Type: "Account",
 		}
-		r.UseAsync = true
 	})
 }
