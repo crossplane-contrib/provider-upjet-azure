@@ -99,9 +99,8 @@ spec:
                     enum:
                     - None
                     - Secret
-                    - InjectedIdentity
-                    - Environment
-                    - Filesystem
+                    - ManagedSystemAssignedIdentity
+                    - ManagedUserAssignedIdentity
                     type: string
                 required:
                 - source
