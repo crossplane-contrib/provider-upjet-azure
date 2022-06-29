@@ -1,0 +1,16 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PacketCapture
+metadata:
+  name: example
+spec:
+  forProvider:
+    networkWatcherNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+    storageLocation:
+    - storageAccountIdRef:
+        name: example
+    targetResourceId: ${azurerm_virtual_machine.example.id}
+  providerConfigRef:
+    name: example

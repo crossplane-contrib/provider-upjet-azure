@@ -336,6 +336,17 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 
+	p.AddResourceConfigurator("azurerm_network_packet_capture", func(r *config.Resource) {
+		r.References["network_watcher_name"] = config.Reference{
+			Type: "Watcher",
+		}
+		r.References["storage_location.storage_account_id"] = config.Reference{
+			Type:      rconfig.APISPackagePath + "/storage/v1beta1.Account",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.UseAsync = true
+	})
+
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
 		r.References = config.References{
 			"resource_group_name": config.Reference{
@@ -383,10 +394,6 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_frontdoor", func(r *config.Resource) {
 		r.Kind = "FrontDoor"
-	})
-
-	p.AddResourceConfigurator("azurerm_network_packet_capture", func(r *config.Resource) {
-		r.Kind = "NetworkPacketCapture"
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet", func(r *config.Resource) {

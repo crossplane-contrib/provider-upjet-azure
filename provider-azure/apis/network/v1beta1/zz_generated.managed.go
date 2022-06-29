@@ -1393,6 +1393,72 @@ func (mg *NetworkInterfaceSecurityGroupAssociation) SetWriteConnectionSecretToRe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this PacketCapture.
+func (mg *PacketCapture) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PacketCapture.
+func (mg *PacketCapture) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PacketCapture.
+func (mg *PacketCapture) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PacketCapture.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PacketCapture) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PacketCapture.
+func (mg *PacketCapture) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PacketCapture.
+func (mg *PacketCapture) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PacketCapture.
+func (mg *PacketCapture) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PacketCapture.
+func (mg *PacketCapture) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PacketCapture.
+func (mg *PacketCapture) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PacketCapture.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PacketCapture) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PacketCapture.
+func (mg *PacketCapture) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PacketCapture.
+func (mg *PacketCapture) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this PrivateDNSAAAARecord.
 func (mg *PrivateDNSAAAARecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

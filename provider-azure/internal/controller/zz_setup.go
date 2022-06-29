@@ -122,6 +122,7 @@ import (
 	networkinterfacebackendaddresspoolassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacebackendaddresspoolassociation"
 	networkinterfacenatruleassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacenatruleassociation"
 	networkinterfacesecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacesecuritygroupassociation"
+	packetcapture "github.com/upbound/official-providers/provider-azure/internal/controller/network/packetcapture"
 	privatednsaaaarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsaaaarecord"
 	privatednsarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsarecord"
 	privatednsmxrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsmxrecord"
@@ -281,6 +282,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		networkinterfacebackendaddresspoolassociation.Setup,
 		networkinterfacenatruleassociation.Setup,
 		networkinterfacesecuritygroupassociation.Setup,
+		packetcapture.Setup,
 		privatednsaaaarecord.Setup,
 		privatednsarecord.Setup,
 		privatednsmxrecord.Setup,
