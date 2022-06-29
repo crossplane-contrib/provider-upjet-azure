@@ -190,8 +190,16 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
 
-	// +kubebuilder:validation:Required
-	NetworkInterfaceIds []*string `json:"networkInterfaceIds" tf:"network_interface_ids,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIdsRefs []v1.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	OsDisk []LinuxVirtualMachineOsDiskParameters `json:"osDisk" tf:"os_disk,omitempty"`

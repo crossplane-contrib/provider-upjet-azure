@@ -1,0 +1,135 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PacketCapture
+metadata:
+  name: example
+spec:
+  forProvider:
+    networkWatcherNameRef:
+      name: norway-watcher
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    storageLocation:
+    - storageAccountIdRef:
+        name: saflow2962022
+    # Composition required for fully automated example below
+    targetResourceId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/norway-watcher-rg/providers/Microsoft.Compute/virtualMachines/example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Watcher
+metadata:
+  name: norway-watcher
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: norway-watcher-rg
+spec:
+  forProvider:
+    location: Norway East
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: saflow2962022
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    location: Norway East
+    accountTier: "Standard"
+    accountReplicationType: "LRS"
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn-for-network-int-test
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    addressSpace:
+      - "10.0.0.0/16"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet-for-network-interface
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    virtualNetworkNameRef:
+      name: example-vn-for-network-int-test
+    addressPrefixes:
+      - "10.0.1.0/24"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  name: example-nic
+spec:
+  forProvider:
+    ipConfiguration:
+      - name: testconfiguration1
+        privateIpAddressAllocation: Dynamic
+        subnetIdRef:
+          name: example-subnet-for-network-interface
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+  providerConfigRef:
+    name: example
+---
+# AzureNetworkWatcherExtension was manually enabled in Portal to unblock creation of PacketCapture
+# See https://github.com/upbound/official-providers/issues/316
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: LinuxVirtualMachine
+metadata:
+  name: example
+spec:
+  forProvider:
+    adminSshKey:
+    - publicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC1MpQOJL2JAcfp6Z8WVD/iqeIYNrY4+1KYM+IwUt1OS5+rGgk+kkwhK1RqUUjH8YYD5EU75/PXjuBzVqgyH9d9T1QUBLqXwUb0b8keu8Bo3fYbQhoCTroxpX+jUeDA8NczHiqFp5smnbG8y6Ck2jemf399g/4z28PX4V/5h9M4mMvRo4DF8DuSklnnrwqjLWb42cEC8/S88mNGAJfxB25oMI/PEDwWMbI7V7UuYZ96AfZuug0fUkspfIUxEoew63aSir7wEZJzfr6Ypj6H1h0zgplpSjE/BiscgRj0NS137+OKdvXAYMGqL+Sas60hpaujc5Z6kDM7mW2CmxiJM1fT/WEQeRbThaeHraqdV0zWAHoHRdxZOGLa/32fE7F50HeV+ZVmArZBv8CMzqt+TVUKm6lxvv0eFwFK5kvY/b1hsJpiNgsSfaPZEitoPUGXttOVxaj1wKU90se6sXkWNwuXJ4/jHlwoDy/zuMDBzJOL309T+oqTawTHAta/74AaZ28= yury@upbound.io
+      username: adminuser
+    adminUsername: adminuser
+    location: Norway East
+    networkInterfaceIdsRefs:
+    - name: example-nic
+    osDisk:
+    - caching: ReadWrite
+      storageAccountType: Standard_LRS
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    size: Standard_F2
+    sourceImageReference:
+    - offer: UbuntuServer
+      publisher: Canonical
+      sku: 16.04-LTS
+      version: latest
+  providerConfigRef:
+    name: example

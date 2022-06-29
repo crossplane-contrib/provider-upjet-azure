@@ -2430,6 +2430,16 @@ func (in *LinuxVirtualMachineParameters) DeepCopyInto(out *LinuxVirtualMachinePa
 			}
 		}
 	}
+	if in.NetworkInterfaceIdsRefs != nil {
+		in, out := &in.NetworkInterfaceIdsRefs, &out.NetworkInterfaceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		copy(*out, *in)
+	}
+	if in.NetworkInterfaceIdsSelector != nil {
+		in, out := &in.NetworkInterfaceIdsSelector, &out.NetworkInterfaceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.OsDisk != nil {
 		in, out := &in.OsDisk, &out.OsDisk
 		*out = make([]LinuxVirtualMachineOsDiskParameters, len(*in))

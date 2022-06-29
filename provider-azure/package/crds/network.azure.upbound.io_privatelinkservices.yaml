@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: linuxvirtualmachines.compute.azure.upbound.io
+  name: privatelinkservices.network.azure.upbound.io
 spec:
-  group: compute.azure.upbound.io
+  group: network.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: LinuxVirtualMachine
-    listKind: LinuxVirtualMachineList
-    plural: linuxvirtualmachines
-    singular: linuxvirtualmachine
+    kind: PrivateLinkService
+    listKind: PrivateLinkServiceList
+    plural: privatelinkservices
+    singular: privatelinkservice
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LinuxVirtualMachine is the Schema for the LinuxVirtualMachines
+        description: PrivateLinkService is the Schema for the PrivateLinkServices
           API
         properties:
           apiVersion:
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: LinuxVirtualMachineSpec defines the desired state of LinuxVirtualMachine
+            description: PrivateLinkServiceSpec defines the desired state of PrivateLinkService
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,198 +64,60 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  additionalCapabilities:
-                    items:
-                      properties:
-                        ultraSsdEnabled:
-                          type: boolean
-                      type: object
-                    type: array
-                  adminPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  adminSshKey:
-                    items:
-                      properties:
-                        publicKey:
-                          type: string
-                        username:
-                          type: string
-                      required:
-                      - publicKey
-                      - username
-                      type: object
-                    type: array
-                  adminUsername:
-                    type: string
-                  allowExtensionOperations:
-                    type: boolean
-                  availabilitySetId:
-                    type: string
-                  bootDiagnostics:
-                    items:
-                      properties:
-                        storageAccountUri:
-                          type: string
-                      type: object
-                    type: array
-                  computerName:
-                    type: string
-                  customDataSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  dedicatedHostGroupId:
-                    type: string
-                  dedicatedHostId:
-                    type: string
-                  disablePasswordAuthentication:
-                    type: boolean
-                  edgeZone:
-                    type: string
-                  encryptionAtHostEnabled:
-                    type: boolean
-                  evictionPolicy:
-                    type: string
-                  extensionsTimeBudget:
-                    type: string
-                  identity:
-                    items:
-                      properties:
-                        identityIds:
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          type: string
-                      required:
-                      - type
-                      type: object
-                    type: array
-                  licenseType:
-                    type: string
-                  location:
-                    type: string
-                  maxBidPrice:
-                    type: number
-                  networkInterfaceIds:
+                  autoApprovalSubscriptionIds:
                     items:
                       type: string
                     type: array
-                  networkInterfaceIdsRefs:
-                    items:
-                      description: A Reference to a named object.
-                      properties:
-                        name:
-                          description: Name of the referenced object.
-                          type: string
-                      required:
-                      - name
-                      type: object
-                    type: array
-                  networkInterfaceIdsSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                    type: object
-                  osDisk:
-                    items:
-                      properties:
-                        caching:
-                          type: string
-                        diffDiskSettings:
-                          items:
-                            properties:
-                              option:
-                                type: string
-                              placement:
-                                type: string
-                            required:
-                            - option
-                            type: object
-                          type: array
-                        diskEncryptionSetId:
-                          type: string
-                        diskSizeGb:
-                          type: number
-                        name:
-                          type: string
-                        secureVmDiskEncryptionSetId:
-                          type: string
-                        securityEncryptionType:
-                          type: string
-                        storageAccountType:
-                          type: string
-                        writeAcceleratorEnabled:
-                          type: boolean
-                      required:
-                      - caching
-                      - storageAccountType
-                      type: object
-                    type: array
-                  patchMode:
-                    type: string
-                  plan:
-                    items:
-                      properties:
-                        name:
-                          type: string
-                        product:
-                          type: string
-                        publisher:
-                          type: string
-                      required:
-                      - name
-                      - product
-                      - publisher
-                      type: object
-                    type: array
-                  platformFaultDomain:
-                    type: number
-                  priority:
-                    type: string
-                  provisionVmAgent:
+                  enableProxyProtocol:
                     type: boolean
-                  proximityPlacementGroupId:
+                  loadBalancerFrontendIpConfigurationIds:
+                    items:
+                      type: string
+                    type: array
+                  location:
                     type: string
+                  natIpConfiguration:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        primary:
+                          type: boolean
+                        privateIpAddress:
+                          type: string
+                        privateIpAddressVersion:
+                          type: string
+                        subnetId:
+                          type: string
+                        subnetIdRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        subnetIdSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
+                      required:
+                      - name
+                      - primary
+                      type: object
+                    type: array
                   resourceGroupName:
                     type: string
                   resourceGroupNameRef:
@@ -281,77 +143,18 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  secret:
-                    items:
-                      properties:
-                        certificate:
-                          items:
-                            properties:
-                              url:
-                                type: string
-                            required:
-                            - url
-                            type: object
-                          type: array
-                        keyVaultId:
-                          type: string
-                      required:
-                      - certificate
-                      - keyVaultId
-                      type: object
-                    type: array
-                  secureBootEnabled:
-                    type: boolean
-                  size:
-                    type: string
-                  sourceImageId:
-                    type: string
-                  sourceImageReference:
-                    items:
-                      properties:
-                        offer:
-                          type: string
-                        publisher:
-                          type: string
-                        sku:
-                          type: string
-                        version:
-                          type: string
-                      required:
-                      - offer
-                      - publisher
-                      - sku
-                      - version
-                      type: object
-                    type: array
                   tags:
                     additionalProperties:
                       type: string
                     type: object
-                  terminationNotification:
+                  visibilitySubscriptionIds:
                     items:
-                      properties:
-                        enabled:
-                          type: boolean
-                        timeout:
-                          type: string
-                      required:
-                      - enabled
-                      type: object
+                      type: string
                     type: array
-                  userData:
-                    type: string
-                  virtualMachineScaleSetId:
-                    type: string
-                  vtpmEnabled:
-                    type: boolean
-                  zone:
-                    type: string
                 required:
-                - adminUsername
+                - loadBalancerFrontendIpConfigurationIds
                 - location
-                - osDisk
-                - size
+                - natIpConfiguration
                 type: object
               providerConfigRef:
                 default:
@@ -450,34 +253,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: LinuxVirtualMachineStatus defines the observed state of LinuxVirtualMachine.
+            description: PrivateLinkServiceStatus defines the observed state of PrivateLinkService.
             properties:
               atProvider:
                 properties:
+                  alias:
+                    type: string
                   id:
-                    type: string
-                  identity:
-                    items:
-                      properties:
-                        principalId:
-                          type: string
-                        tenantId:
-                          type: string
-                      type: object
-                    type: array
-                  privateIpAddress:
-                    type: string
-                  privateIpAddresses:
-                    items:
-                      type: string
-                    type: array
-                  publicIpAddress:
-                    type: string
-                  publicIpAddresses:
-                    items:
-                      type: string
-                    type: array
-                  virtualMachineId:
                     type: string
                 type: object
               conditions:
