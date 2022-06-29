@@ -205,6 +205,15 @@ func (l *PacketCaptureList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this PointToSiteVPNGatewayList.
+func (l *PointToSiteVPNGatewayList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this PrivateDNSAAAARecordList.
 func (l *PrivateDNSAAAARecordList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -387,6 +396,24 @@ func (l *SubnetRouteTableAssociationList) GetItems() []resource.Managed {
 
 // GetItems of this SubnetServiceEndpointStoragePolicyList.
 func (l *SubnetServiceEndpointStoragePolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPNServerConfigurationList.
+func (l *VPNServerConfigurationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VirtualHubList.
+func (l *VirtualHubList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
