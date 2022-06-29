@@ -1,0 +1,132 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateEndpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    privateServiceConnection:
+    - isManualConnection: false
+      name: example-privateserviceconnection
+      privateConnectionResourceIdRef: # Ref to PrivateLinkService
+        name: example
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    subnetIdRef:
+      name: service
+  providerConfigRef:
+    name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: loadbalancerrg
+spec:
+  forProvider:
+    location: "West Europe"
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn-for-lb
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: service
+spec:
+  forProvider:
+    enforcePrivateLinkServiceNetworkPolicies: true
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    virtualNetworkNameRef:
+      name: example-vn-for-lb
+    addressPrefixes:
+      - "10.0.1.0/24"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: endpoint
+spec:
+  forProvider:
+    enforcePrivateLinkEndpointNetworkPolicies: true
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    virtualNetworkNameRef:
+      name: example-vn-for-lb
+    addressPrefixes:
+      - "10.0.2.0/24"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  name: publicipforlb
+spec:
+  forProvider:
+    sku: Standard
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  name: testloadbalancer
+spec:
+  forProvider:
+    sku: Standard
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    frontendIpConfiguration:
+      - name: publicipaddress
+        publicIpAddressIdRef:
+          name: publicipforlb
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateLinkService
+metadata:
+  name: example
+spec:
+  forProvider:
+    loadBalancerFrontendIpConfigurationIds:
+    # composition required for fully automated example
+    - /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/loadbalancerrg/providers/Microsoft.Network/loadBalancers/testloadbalancer/frontendIPConfigurations/publicipaddress
+    location: West Europe
+    natIpConfiguration:
+    - name: primary
+      primary: true
+      subnetIdRef:
+        name: service
+    resourceGroupNameRef:
+      name: loadbalancerrg
+  providerConfigRef:
+    name: example

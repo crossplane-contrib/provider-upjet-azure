@@ -2529,6 +2529,154 @@ func (tr *PrivateDNSZoneVirtualNetworkLink) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this PrivateEndpoint
+func (mg *PrivateEndpoint) GetTerraformResourceType() string {
+	return "azurerm_private_endpoint"
+}
+
+// GetConnectionDetailsMapping for this PrivateEndpoint
+func (tr *PrivateEndpoint) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateEndpoint
+func (tr *PrivateEndpoint) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateEndpoint
+func (tr *PrivateEndpoint) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateEndpoint
+func (tr *PrivateEndpoint) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateEndpoint
+func (tr *PrivateEndpoint) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateEndpoint
+func (tr *PrivateEndpoint) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateEndpoint using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateEndpoint) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateEndpointParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateEndpoint) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateLinkService
+func (mg *PrivateLinkService) GetTerraformResourceType() string {
+	return "azurerm_private_link_service"
+}
+
+// GetConnectionDetailsMapping for this PrivateLinkService
+func (tr *PrivateLinkService) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateLinkService
+func (tr *PrivateLinkService) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateLinkService
+func (tr *PrivateLinkService) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateLinkService
+func (tr *PrivateLinkService) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateLinkService
+func (tr *PrivateLinkService) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateLinkService
+func (tr *PrivateLinkService) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateLinkService using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateLinkService) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateLinkServiceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateLinkService) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this PublicIP
 func (mg *PublicIP) GetTerraformResourceType() string {
 	return "azurerm_public_ip"

@@ -268,6 +268,24 @@ func (l *PrivateDNSZoneVirtualNetworkLinkList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this PrivateEndpointList.
+func (l *PrivateEndpointList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateLinkServiceList.
+func (l *PrivateLinkServiceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ProfileList.
 func (l *ProfileList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
