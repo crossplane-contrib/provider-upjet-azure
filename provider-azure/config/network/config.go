@@ -316,6 +316,26 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 
+	p.AddResourceConfigurator("azurerm_private_link_service", func(r *config.Resource) {
+		r.References["nat_ip_configuration.subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_private_endpoint", func(r *config.Resource) {
+		r.References["subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["private_service_connection.private_connection_resource_id"] = config.Reference{
+			Type:      "PrivateLinkService",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.UseAsync = true
+	})
+
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
 		r.References = config.References{
 			"resource_group_name": config.Reference{
