@@ -281,6 +281,12 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_private_dns_cname_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_private_dns_mx_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
 			Type: "PrivateDNSZone",

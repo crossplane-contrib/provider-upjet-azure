@@ -1,0 +1,14 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSCNAMERecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    record: example.com
+    resourceGroupNameRef:
+      name: example
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example

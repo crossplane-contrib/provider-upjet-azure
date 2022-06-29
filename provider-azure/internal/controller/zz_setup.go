@@ -125,6 +125,7 @@ import (
 	packetcapture "github.com/upbound/official-providers/provider-azure/internal/controller/network/packetcapture"
 	privatednsaaaarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsaaaarecord"
 	privatednsarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsarecord"
+	privatednscnamerecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednscnamerecord"
 	privatednsmxrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsmxrecord"
 	privatednsptrrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsptrrecord"
 	privatednssrvrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednssrvrecord"
@@ -285,6 +286,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		packetcapture.Setup,
 		privatednsaaaarecord.Setup,
 		privatednsarecord.Setup,
+		privatednscnamerecord.Setup,
 		privatednsmxrecord.Setup,
 		privatednsptrrecord.Setup,
 		privatednssrvrecord.Setup,

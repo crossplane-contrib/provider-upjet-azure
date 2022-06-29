@@ -1591,6 +1591,72 @@ func (mg *PrivateDNSARecord) SetWriteConnectionSecretToReference(r *xpv1.SecretR
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this PrivateDNSCNAMERecord.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *PrivateDNSCNAMERecord) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this PrivateDNSCNAMERecord.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *PrivateDNSCNAMERecord) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this PrivateDNSMXRecord.
 func (mg *PrivateDNSMXRecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
