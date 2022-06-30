@@ -57,6 +57,21 @@ spec:
     name: example
 ---
 apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSCNAMERecord
+metadata:
+  name: example-cname
+spec:
+  forProvider:
+    record: example.com
+    resourceGroupNameRef:
+      name: private-dns-rg
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSMXRecord
 metadata:
   name: example

@@ -123,8 +123,10 @@ import (
 	networkinterfacenatruleassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacenatruleassociation"
 	networkinterfacesecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/networkinterfacesecuritygroupassociation"
 	packetcapture "github.com/upbound/official-providers/provider-azure/internal/controller/network/packetcapture"
+	pointtositevpngateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/pointtositevpngateway"
 	privatednsaaaarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsaaaarecord"
 	privatednsarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsarecord"
+	privatednscnamerecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednscnamerecord"
 	privatednsmxrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsmxrecord"
 	privatednsptrrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednsptrrecord"
 	privatednssrvrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/privatednssrvrecord"
@@ -143,11 +145,13 @@ import (
 	subnetnetworksecuritygroupassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnetnetworksecuritygroupassociation"
 	subnetroutetableassociation "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnetroutetableassociation"
 	subnetserviceendpointstoragepolicy "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnetserviceendpointstoragepolicy"
+	virtualhub "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualhub"
 	virtualnetwork "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetwork"
 	virtualnetworkgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkgateway"
 	virtualnetworkgatewayconnection "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkgatewayconnection"
 	virtualnetworkpeering "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualnetworkpeering"
 	virtualwan "github.com/upbound/official-providers/provider-azure/internal/controller/network/virtualwan"
+	vpnserverconfiguration "github.com/upbound/official-providers/provider-azure/internal/controller/network/vpnserverconfiguration"
 	watcher "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcher"
 	watcherflowlog "github.com/upbound/official-providers/provider-azure/internal/controller/network/watcherflowlog"
 	notificationhub "github.com/upbound/official-providers/provider-azure/internal/controller/notificationhubs/notificationhub"
@@ -283,8 +287,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		networkinterfacenatruleassociation.Setup,
 		networkinterfacesecuritygroupassociation.Setup,
 		packetcapture.Setup,
+		pointtositevpngateway.Setup,
 		privatednsaaaarecord.Setup,
 		privatednsarecord.Setup,
+		privatednscnamerecord.Setup,
 		privatednsmxrecord.Setup,
 		privatednsptrrecord.Setup,
 		privatednssrvrecord.Setup,
@@ -303,11 +309,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetnetworksecuritygroupassociation.Setup,
 		subnetroutetableassociation.Setup,
 		subnetserviceendpointstoragepolicy.Setup,
+		virtualhub.Setup,
 		virtualnetwork.Setup,
 		virtualnetworkgateway.Setup,
 		virtualnetworkgatewayconnection.Setup,
 		virtualnetworkpeering.Setup,
 		virtualwan.Setup,
+		vpnserverconfiguration.Setup,
 		watcher.Setup,
 		watcherflowlog.Setup,
 		notificationhub.Setup,

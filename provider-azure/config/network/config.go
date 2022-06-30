@@ -281,6 +281,12 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_private_dns_cname_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_private_dns_mx_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
 			Type: "PrivateDNSZone",
@@ -347,6 +353,18 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 
+	p.AddResourceConfigurator("azurerm_point_to_site_vpn_gateway", func(r *config.Resource) {
+		r.References["virtual_hub_id"] = config.Reference{
+			Type:      "VirtualHub",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["vpn_server_configuration_id"] = config.Reference{
+			Type:      "VPNServerConfiguration",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.UseAsync = true
+	})
+
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
 		r.References = config.References{
 			"resource_group_name": config.Reference{
@@ -389,6 +407,14 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_wan", func(r *config.Resource) {
 		r.Kind = "VirtualWAN"
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_hub", func(r *config.Resource) {
+		r.References["virtual_wan_id"] = config.Reference{
+			Type:      "VirtualWAN",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
 		r.UseAsync = true
 	})
 

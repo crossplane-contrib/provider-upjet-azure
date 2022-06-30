@@ -836,6 +836,64 @@ func (mg *PacketCapture) ResolveReferences(ctx context.Context, c client.Reader)
 	return nil
 }
 
+// ResolveReferences of this PointToSiteVPNGateway.
+func (mg *PointToSiteVPNGateway) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPNServerConfigurationID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VPNServerConfigurationIDRef,
+		Selector:     mg.Spec.ForProvider.VPNServerConfigurationIDSelector,
+		To: reference.To{
+			List:    &VPNServerConfigurationList{},
+			Managed: &VPNServerConfiguration{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPNServerConfigurationID")
+	}
+	mg.Spec.ForProvider.VPNServerConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPNServerConfigurationIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualHubID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualHubIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualHubIDSelector,
+		To: reference.To{
+			List:    &VirtualHubList{},
+			Managed: &VirtualHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualHubID")
+	}
+	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this PrivateDNSAAAARecord.
 func (mg *PrivateDNSAAAARecord) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -880,6 +938,48 @@ func (mg *PrivateDNSAAAARecord) ResolveReferences(ctx context.Context, c client.
 
 // ResolveReferences of this PrivateDNSARecord.
 func (mg *PrivateDNSARecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &PrivateDNSZoneList{},
+			Managed: &PrivateDNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this PrivateDNSCNAMERecord.
+func (mg *PrivateDNSCNAMERecord) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
@@ -1584,6 +1684,74 @@ func (mg *SubnetServiceEndpointStoragePolicy) ResolveReferences(ctx context.Cont
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VPNServerConfiguration.
+func (mg *VPNServerConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VirtualHub.
+func (mg *VirtualHub) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualWanID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualWanIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualWanIDSelector,
+		To: reference.To{
+			List:    &VirtualWANList{},
+			Managed: &VirtualWAN{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualWanID")
+	}
+	mg.Spec.ForProvider.VirtualWanID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualWanIDRef = rsp.ResolvedReference
 
 	return nil
 }

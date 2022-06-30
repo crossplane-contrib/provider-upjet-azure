@@ -107,7 +107,6 @@ var skipList = []string{
 	"azurerm_sql_virtual_network_rule",
 	"azurerm_virtual_desktop_workspace",
 	"azurerm_data_lake_analytics_account",
-	"azurerm_virtual_hub",
 	"azurerm_log_analytics_storage_insights",
 	"azurerm_virtual_hub_bgp_connection",
 	"azurerm_automation_dsc_configuration",
