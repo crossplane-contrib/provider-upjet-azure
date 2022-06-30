@@ -13,16 +13,16 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type PrivateDNSMXRecordObservation struct {
+type DNSNSRecordObservation struct {
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
-type PrivateDNSMXRecordParameters struct {
+type DNSNSRecordParameters struct {
 
 	// +kubebuilder:validation:Required
-	Record []PrivateDNSMXRecordRecordParameters `json:"record" tf:"record,omitempty"`
+	Records []*string `json:"records" tf:"records,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -40,7 +40,7 @@ type PrivateDNSMXRecordParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// +crossplane:generate:reference:type=PrivateDNSZone
+	// +crossplane:generate:reference:type=DNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 
@@ -51,63 +51,51 @@ type PrivateDNSMXRecordParameters struct {
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
-type PrivateDNSMXRecordRecordObservation struct {
-}
-
-type PrivateDNSMXRecordRecordParameters struct {
-
-	// +kubebuilder:validation:Required
-	Exchange *string `json:"exchange" tf:"exchange,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Preference *float64 `json:"preference" tf:"preference,omitempty"`
-}
-
-// PrivateDNSMXRecordSpec defines the desired state of PrivateDNSMXRecord
-type PrivateDNSMXRecordSpec struct {
+// DNSNSRecordSpec defines the desired state of DNSNSRecord
+type DNSNSRecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     PrivateDNSMXRecordParameters `json:"forProvider"`
+	ForProvider     DNSNSRecordParameters `json:"forProvider"`
 }
 
-// PrivateDNSMXRecordStatus defines the observed state of PrivateDNSMXRecord.
-type PrivateDNSMXRecordStatus struct {
+// DNSNSRecordStatus defines the observed state of DNSNSRecord.
+type DNSNSRecordStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSMXRecordObservation `json:"atProvider,omitempty"`
+	AtProvider        DNSNSRecordObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// PrivateDNSMXRecord is the Schema for the PrivateDNSMXRecords API
+// DNSNSRecord is the Schema for the DNSNSRecords API
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}
-type PrivateDNSMXRecord struct {
+type DNSNSRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrivateDNSMXRecordSpec   `json:"spec"`
-	Status            PrivateDNSMXRecordStatus `json:"status,omitempty"`
+	Spec              DNSNSRecordSpec   `json:"spec"`
+	Status            DNSNSRecordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// PrivateDNSMXRecordList contains a list of PrivateDNSMXRecords
-type PrivateDNSMXRecordList struct {
+// DNSNSRecordList contains a list of DNSNSRecords
+type DNSNSRecordList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []PrivateDNSMXRecord `json:"items"`
+	Items           []DNSNSRecord `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	PrivateDNSMXRecord_Kind             = "PrivateDNSMXRecord"
-	PrivateDNSMXRecord_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: PrivateDNSMXRecord_Kind}.String()
-	PrivateDNSMXRecord_KindAPIVersion   = PrivateDNSMXRecord_Kind + "." + CRDGroupVersion.String()
-	PrivateDNSMXRecord_GroupVersionKind = CRDGroupVersion.WithKind(PrivateDNSMXRecord_Kind)
+	DNSNSRecord_Kind             = "DNSNSRecord"
+	DNSNSRecord_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: DNSNSRecord_Kind}.String()
+	DNSNSRecord_KindAPIVersion   = DNSNSRecord_Kind + "." + CRDGroupVersion.String()
+	DNSNSRecord_GroupVersionKind = CRDGroupVersion.WithKind(DNSNSRecord_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&PrivateDNSMXRecord{}, &PrivateDNSMXRecordList{})
+	SchemeBuilder.Register(&DNSNSRecord{}, &DNSNSRecordList{})
 }

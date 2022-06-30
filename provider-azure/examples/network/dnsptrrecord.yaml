@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSPTRRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    records:
+    - yourdomain.com
+    resourceGroupNameRef:
+      name: example
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example

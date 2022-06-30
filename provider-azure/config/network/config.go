@@ -311,6 +311,60 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_dns_a_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "DNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_dns_aaaa_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "DNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_dns_caa_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "DNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_dns_cname_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "DNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_dns_mx_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "DNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_dns_ns_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "DNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_dns_ptr_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "DNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_dns_srv_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "DNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_dns_txt_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "DNSZone",
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_private_link_service", func(r *config.Resource) {
 		r.References["nat_ip_configuration.subnet_id"] = config.Reference{
 			Type:      "Subnet",

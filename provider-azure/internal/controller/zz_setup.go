@@ -104,6 +104,16 @@ import (
 	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
 	ddosprotectionplan "github.com/upbound/official-providers/provider-azure/internal/controller/network/ddosprotectionplan"
+	dnsaaaarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnsaaaarecord"
+	dnsarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnsarecord"
+	dnscaarecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnscaarecord"
+	dnscnamerecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnscnamerecord"
+	dnsmxrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnsmxrecord"
+	dnsnsrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnsnsrecord"
+	dnsptrrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnsptrrecord"
+	dnssrvrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnssrvrecord"
+	dnstxtrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnstxtrecord"
+	dnszone "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnszone"
 	ipgroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/ipgroup"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
 	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
@@ -282,6 +292,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		applicationsecuritygroup.Setup,
 		connectionmonitor.Setup,
 		ddosprotectionplan.Setup,
+		dnsaaaarecord.Setup,
+		dnsarecord.Setup,
+		dnscaarecord.Setup,
+		dnscnamerecord.Setup,
+		dnsmxrecord.Setup,
+		dnsnsrecord.Setup,
+		dnsptrrecord.Setup,
+		dnssrvrecord.Setup,
+		dnstxtrecord.Setup,
+		dnszone.Setup,
 		ipgroup.Setup,
 		loadbalancer.Setup,
 		loadbalancerbackendaddresspool.Setup,

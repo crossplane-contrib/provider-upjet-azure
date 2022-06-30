@@ -1,0 +1,20 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSSRVRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    record:
+    - port: 8080
+      priority: 1
+      target: target1.contoso.com
+      weight: 5
+    resourceGroupNameRef:
+      name: example
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example

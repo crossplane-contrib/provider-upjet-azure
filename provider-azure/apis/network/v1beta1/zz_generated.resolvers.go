@@ -93,6 +93,410 @@ func (mg *DDoSProtectionPlan) ResolveReferences(ctx context.Context, c client.Re
 	return nil
 }
 
+// ResolveReferences of this DNSAAAARecord.
+func (mg *DNSAAAARecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &DNSZoneList{},
+			Managed: &DNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DNSARecord.
+func (mg *DNSARecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &DNSZoneList{},
+			Managed: &DNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DNSCAARecord.
+func (mg *DNSCAARecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &DNSZoneList{},
+			Managed: &DNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DNSCNAMERecord.
+func (mg *DNSCNAMERecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &DNSZoneList{},
+			Managed: &DNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DNSMXRecord.
+func (mg *DNSMXRecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &DNSZoneList{},
+			Managed: &DNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DNSNSRecord.
+func (mg *DNSNSRecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &DNSZoneList{},
+			Managed: &DNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DNSPTRRecord.
+func (mg *DNSPTRRecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &DNSZoneList{},
+			Managed: &DNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DNSSRVRecord.
+func (mg *DNSSRVRecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &DNSZoneList{},
+			Managed: &DNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DNSTXTRecord.
+func (mg *DNSTXTRecord) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneNameRef,
+		Selector:     mg.Spec.ForProvider.ZoneNameSelector,
+		To: reference.To{
+			List:    &DNSZoneList{},
+			Managed: &DNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneName")
+	}
+	mg.Spec.ForProvider.ZoneName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DNSZone.
+func (mg *DNSZone) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this IPGroup.
 func (mg *IPGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

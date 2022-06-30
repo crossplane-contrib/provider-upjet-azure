@@ -1,0 +1,28 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSCAARecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    record:
+    - flags: 0
+      tag: issue
+      value: example.com
+    - flags: 0
+      tag: issue
+      value: example.net
+    - flags: 0
+      tag: issuewild
+      value: ;
+    - flags: 0
+      tag: iodef
+      value: mailto:terraform@nonexisting.tld
+    resourceGroupNameRef:
+      name: example
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example

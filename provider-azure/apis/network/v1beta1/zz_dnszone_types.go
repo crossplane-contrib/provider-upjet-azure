@@ -13,21 +13,19 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type PrivateDNSZoneObservation struct {
+type DNSZoneObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	MaxNumberOfRecordSets *float64 `json:"maxNumberOfRecordSets,omitempty" tf:"max_number_of_record_sets,omitempty"`
 
-	MaxNumberOfVirtualNetworkLinks *float64 `json:"maxNumberOfVirtualNetworkLinks,omitempty" tf:"max_number_of_virtual_network_links,omitempty"`
-
-	MaxNumberOfVirtualNetworkLinksWithRegistration *float64 `json:"maxNumberOfVirtualNetworkLinksWithRegistration,omitempty" tf:"max_number_of_virtual_network_links_with_registration,omitempty"`
+	NameServers []*string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
 
 	NumberOfRecordSets *float64 `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty"`
 
-	SoaRecord []PrivateDNSZoneSoaRecordObservation `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
+	SoaRecord []SoaRecordObservation `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 }
 
-type PrivateDNSZoneParameters struct {
+type DNSZoneParameters struct {
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -40,27 +38,26 @@ type PrivateDNSZoneParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	SoaRecord []PrivateDNSZoneSoaRecordParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
+	SoaRecord []SoaRecordParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type PrivateDNSZoneSoaRecordObservation struct {
+type SoaRecordObservation struct {
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
-
-	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
-
-	SerialNumber *float64 `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
 }
 
-type PrivateDNSZoneSoaRecordParameters struct {
+type SoaRecordParameters struct {
 
 	// +kubebuilder:validation:Required
 	Email *string `json:"email" tf:"email,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ExpireTime *float64 `json:"expireTime,omitempty" tf:"expire_time,omitempty"`
+
+	// +kubebuilder:validation:Required
+	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	MinimumTTL *float64 `json:"minimumTtl,omitempty" tf:"minimum_ttl,omitempty"`
@@ -72,57 +69,60 @@ type PrivateDNSZoneSoaRecordParameters struct {
 	RetryTime *float64 `json:"retryTime,omitempty" tf:"retry_time,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	SerialNumber *float64 `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-// PrivateDNSZoneSpec defines the desired state of PrivateDNSZone
-type PrivateDNSZoneSpec struct {
+// DNSZoneSpec defines the desired state of DNSZone
+type DNSZoneSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     PrivateDNSZoneParameters `json:"forProvider"`
+	ForProvider     DNSZoneParameters `json:"forProvider"`
 }
 
-// PrivateDNSZoneStatus defines the observed state of PrivateDNSZone.
-type PrivateDNSZoneStatus struct {
+// DNSZoneStatus defines the observed state of DNSZone.
+type DNSZoneStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        PrivateDNSZoneObservation `json:"atProvider,omitempty"`
+	AtProvider        DNSZoneObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// PrivateDNSZone is the Schema for the PrivateDNSZones API
+// DNSZone is the Schema for the DNSZones API
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}
-type PrivateDNSZone struct {
+type DNSZone struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrivateDNSZoneSpec   `json:"spec"`
-	Status            PrivateDNSZoneStatus `json:"status,omitempty"`
+	Spec              DNSZoneSpec   `json:"spec"`
+	Status            DNSZoneStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// PrivateDNSZoneList contains a list of PrivateDNSZones
-type PrivateDNSZoneList struct {
+// DNSZoneList contains a list of DNSZones
+type DNSZoneList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []PrivateDNSZone `json:"items"`
+	Items           []DNSZone `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	PrivateDNSZone_Kind             = "PrivateDNSZone"
-	PrivateDNSZone_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: PrivateDNSZone_Kind}.String()
-	PrivateDNSZone_KindAPIVersion   = PrivateDNSZone_Kind + "." + CRDGroupVersion.String()
-	PrivateDNSZone_GroupVersionKind = CRDGroupVersion.WithKind(PrivateDNSZone_Kind)
+	DNSZone_Kind             = "DNSZone"
+	DNSZone_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: DNSZone_Kind}.String()
+	DNSZone_KindAPIVersion   = DNSZone_Kind + "." + CRDGroupVersion.String()
+	DNSZone_GroupVersionKind = CRDGroupVersion.WithKind(DNSZone_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&PrivateDNSZone{}, &PrivateDNSZoneList{})
+	SchemeBuilder.Register(&DNSZone{}, &DNSZoneList{})
 }
