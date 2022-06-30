@@ -20,15 +20,12 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/upbound/official-providers/provider-azure/config/compute"
-
-	"github.com/upbound/official-providers/provider-azure/config/insights"
-
 	tjconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-azure/config/apimanagement"
 	"github.com/upbound/official-providers/provider-azure/config/base"
 	"github.com/upbound/official-providers/provider-azure/config/common"
+	"github.com/upbound/official-providers/provider-azure/config/compute"
 	"github.com/upbound/official-providers/provider-azure/config/containerservice"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
@@ -77,6 +74,7 @@ var skipList = []string{
 	"azurerm_api_management_group",
 	"azurerm_api_management_product_group",
 	"azurerm_dedicated_host_group",
+	"azurerm_storage_disks_pool",
 	"azurerm_storage_sync_group",
 	"azurerm_virtual_desktop_application_group",
 	// associated with non-generated
@@ -132,7 +130,6 @@ func GetProvider() *tjconfig.Provider {
 			ExternalNameConfigurations(),
 			groupOverrides(),
 			KnownReferences(),
-			UseAsync(),
 		),
 	)
 
@@ -143,7 +140,6 @@ func GetProvider() *tjconfig.Provider {
 		redis.Configure,
 		resource.Configure,
 		containerservice.Configure,
-		compute.Configure,
 		postgresql.Configure,
 		cosmosdb.Configure,
 		sql.Configure,
@@ -153,7 +149,6 @@ func GetProvider() *tjconfig.Provider {
 		apimanagement.Configure,
 		logic.Configure,
 		security.Configure,
-		insights.Configure,
 		base.Configure,
 		datashare.Configure,
 		notificationhubs.Configure,
@@ -161,6 +156,7 @@ func GetProvider() *tjconfig.Provider {
 		keyvault.Configure,
 		eventhub.Configure,
 		mariadb.Configure,
+		compute.Configure,
 	} {
 		configure(pc)
 	}

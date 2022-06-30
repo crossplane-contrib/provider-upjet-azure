@@ -220,9 +220,29 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_mssql_server_transparent_data_encryption": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/encryptionProtector/current"),
 
 	// storage
-	"azurerm_storage_account":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .externalName }}"),
-	"azurerm_storage_blob":      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .parameters.storage_container_name }}/{{ .externalName }}"),
-	"azurerm_storage_container": config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .externalName }}"),
+	"azurerm_hpc_cache_access_policy":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageCache/caches/{{ .hpc_cache_id }}/cacheAccessPolicies/{{ .externalName }}"),
+	"azurerm_hpc_cache_blob_nfs_target": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageCache/caches/{{ .cacheName }}/storageTargets/{{ .externalName }}"),
+	"azurerm_hpc_cache_blob_target":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageCache/caches/{{ .cacheName }}/storageTargets/{{ .externalName }}"),
+	"azurerm_hpc_cache":                 config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageCache/caches/{{ .externalName }}"),
+	"azurerm_hpc_cache_nfs_target":      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageCache/caches/{{ .cacheName }}/storageTargets/{{ .externalName }}"),
+	"azurerm_storage_account":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .externalName }}"),
+	// This resource does not have its own identifier, but rather uses the name of storage account.
+	// Following _Case 6_ from the **Adding a New Resource** guide
+	"azurerm_storage_account_network_rules":     config.IdentifierFromProvider,
+	"azurerm_storage_blob":                      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .parameters.storage_container_name }}/{{ .externalName }}"),
+	"azurerm_storage_blob_inventory_policy":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/inventoryPolicies/Default"),
+	"azurerm_storage_container":                 config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .externalName }}"),
+	"azurerm_storage_data_lake_gen2_filesystem": config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_id_ref.name }}.dfs.core.windows.net/{{ .externalName }}"),
+	"azurerm_storage_encryption_scope":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/encryptionScopes/{{ .externalName }}"),
+	"azurerm_storage_management_policy":         config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/managementPolicies/Default"),
+	// The id of this resource is a concatenation of 2 resource names, but in the terraform documentation
+	// this reasource does not have a name so instead it concatenates destination and target storage account IDs
+	"azurerm_storage_object_replication": config.IdentifierFromProvider,
+	"azurerm_storage_queue":              config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.queue.core.windows.net/{{ .externalName }}"),
+	"azurerm_storage_share":              config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.file.core.windows.net/{{ .externalName }}"),
+	// Table ID comes with an unusual https format there the name attribute is not separated by "/",
+	// but fits this remplate Tables('replace-with-table-name')
+	"azurerm_storage_table": config.IdentifierFromProvider,
 
 	// storagesync
 	"azurerm_storage_sync": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageSync/storageSyncServices/{{ .externalName }}"),

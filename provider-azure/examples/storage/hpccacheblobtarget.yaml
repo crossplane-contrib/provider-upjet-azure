@@ -1,0 +1,11 @@
+apiVersion: storagecache.azure.upbound.io/v1beta1
+kind: HPCCacheBlobTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    cacheName: example2
+    namespacePath: /blob_storage
+    resourceGroupNameRef:
+      name: example-resources
+    storageContainerId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-resources/providers/Microsoft.Storage/storageAccounts/examplestorgaccount/blobServices/default/containers/examplestoragecontainer

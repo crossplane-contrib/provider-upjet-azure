@@ -1,0 +1,8 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Table
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: mysampletable
+    storageAccountName: examplestorgaccount

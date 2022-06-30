@@ -1,0 +1,15 @@
+apiVersion: storagecache.azure.upbound.io/v1beta1
+kind: HPCCache
+metadata:
+  name: example
+spec:
+  forProvider:
+    cacheSizeInGb: 3072
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    skuName: Standard_2G
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

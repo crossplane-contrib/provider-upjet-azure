@@ -1,0 +1,11 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: ObjectReplication
+metadata:
+  name: example
+spec:
+  forProvider:
+    destinationStorageAccountId: /subscriptions/.../resourceGroups/dstResourceGroupName/providers/Microsoft.Storage/storageAccounts/dststorageaccount1111
+    rules:
+    - destinationContainerName: dststrcontainer
+      sourceContainerName: srcstrcontainer
+    sourceStorageAccountId: /subscriptions/.../resourceGroups/srcResourceGroupName/providers/Microsoft.Storage/storageAccounts/srcstorageaccount1111
