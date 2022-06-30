@@ -1,6 +1,13 @@
 package config
 
-import "github.com/upbound/upjet/pkg/config"
+import (
+	"context"
+	"fmt"
+
+	"github.com/pkg/errors"
+
+	"github.com/upbound/upjet/pkg/config"
+)
 
 // ExternalNameConfigs is a map of external name configurations for the whole
 // provider.
@@ -90,7 +97,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_key_vault_managed_storage_account":                      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/storage/{{ .externalName }}"),
 	"azurerm_key_vault_managed_storage_account_sas_token_definition": config.TemplatedStringAsIdentifier("name", "{{ .parameters.managed_storage_account_id }}/sas/{{ .externalName }}"),
 	"azurerm_key_vault_managed_hardware_security_module":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/managedHSMs//{{ .externalName }}"),
-	"azurerm_key_vault_access_policy":                                config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/managedHSMs//{{ .externalName }}"),
+	"azurerm_key_vault_access_policy":                                keyVaultAccessPolicy(),
 
 	// containerservice
 	"azurerm_kubernetes_cluster":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerService/managedClusters/{{ .externalName }}"),
@@ -256,6 +263,48 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// storagesync
 	"azurerm_storage_sync": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageSync/storageSyncServices/{{ .externalName }}"),
+}
+
+func keyVaultAccessPolicy() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		objectID, ok := tfstate["object_id"]
+		if !ok {
+			return "", errors.New("cannot get object_id")
+		}
+		switch {
+		case tfstate["application_id"] != "":
+			applicationID, ok := tfstate["application_id"]
+			if !ok {
+				return "", errors.New("cannot get application_id")
+			}
+			return fmt.Sprintf("%s/%s", objectID, applicationID), nil
+		default:
+			return objectID.(string), nil
+		}
+	}
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		keyVaultID, ok := parameters["key_vault_id"]
+		if !ok {
+			return "", errors.New("cannot get key_vault_id")
+		}
+		objectID, ok := parameters["object_id"]
+		if !ok {
+			return "", errors.New("cannot get object_id")
+		}
+
+		switch {
+		case parameters["application_id"] != nil:
+			applicationID, ok := parameters["application_id"]
+			if !ok {
+				return "", errors.New("cannot get application_id")
+			}
+			return fmt.Sprintf("%s/objectId/%s/applicationId/%s", keyVaultID, objectID, applicationID), nil
+		default:
+			return fmt.Sprintf("%s/objectId/%s", keyVaultID, objectID), nil
+		}
+	}
+	return e
 }
 
 // ExternalNameConfigurations adds all external name configurations from
