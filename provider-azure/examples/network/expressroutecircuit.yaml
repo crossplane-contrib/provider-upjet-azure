@@ -1,0 +1,19 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteCircuit
+metadata:
+  name: example
+spec:
+  forProvider:
+    bandwidthInMbps: 50
+    location: West Europe
+    peeringLocation: Silicon Valley
+    resourceGroupNameRef:
+      name: example
+    serviceProviderName: Equinix
+    sku:
+    - family: MeteredData
+      tier: Standard
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example

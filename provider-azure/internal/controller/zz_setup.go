@@ -114,6 +114,7 @@ import (
 	dnssrvrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnssrvrecord"
 	dnstxtrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnstxtrecord"
 	dnszone "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnszone"
+	expressroutecircuit "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressroutecircuit"
 	ipgroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/ipgroup"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
 	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
@@ -302,6 +303,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		dnssrvrecord.Setup,
 		dnstxtrecord.Setup,
 		dnszone.Setup,
+		expressroutecircuit.Setup,
 		ipgroup.Setup,
 		loadbalancer.Setup,
 		loadbalancerbackendaddresspool.Setup,

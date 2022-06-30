@@ -1,0 +1,31 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-expressroute-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteCircuit
+metadata:
+  name: example
+spec:
+  forProvider:
+    bandwidthInMbps: 50
+    location: West Europe
+    peeringLocation: Silicon Valley
+    resourceGroupNameRef:
+      name: example-expressroute-rg
+    serviceProviderName: Equinix
+    sku:
+    - family: MeteredData
+      tier: Standard
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
