@@ -23,6 +23,7 @@ import (
 // Configure configures notificationhubs group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_notification_hub", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "NotificationHub"
 	})
 }

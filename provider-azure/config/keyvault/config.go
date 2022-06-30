@@ -25,13 +25,11 @@ import (
 // Configure configures keyvault group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_key_vault", func(r *config.Resource) {
-		r.UseAsync = true
 		// Mutually exclusive with azurerm_key_vault_access_policy
 		config.MoveToStatus(r.TerraformResource, "access_policy")
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_secret", func(r *config.Resource) {
-		r.UseAsync = true
 		r.References["key_vault_id"] = config.Reference{
 			Type:      "Vault",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -39,7 +37,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_key", func(r *config.Resource) {
-		r.UseAsync = true
 		r.References["key_vault_id"] = config.Reference{
 			Type:      "Vault",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -47,7 +44,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_certificate", func(r *config.Resource) {
-		r.UseAsync = true
 		r.References["key_vault_id"] = config.Reference{
 			Type:      "Vault",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -55,7 +51,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_certificate_issuer", func(r *config.Resource) {
-		r.UseAsync = true
 		r.References["key_vault_id"] = config.Reference{
 			Type:      "Vault",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -63,7 +58,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_managed_storage_account", func(r *config.Resource) {
-		r.UseAsync = true
 		r.References["key_vault_id"] = config.Reference{
 			Type:      "Vault",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -74,12 +68,7 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("azurerm_key_vault_managed_hardware_security_module", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
 	p.AddResourceConfigurator("azurerm_key_vault_access_policy", func(r *config.Resource) {
-		r.UseAsync = true
 		r.References["key_vault_id"] = config.Reference{
 			Type:      "Vault",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -87,7 +76,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_managed_storage_account_sas_token_definition", func(r *config.Resource) {
-		r.UseAsync = true
 		r.References["managed_storage_account_id"] = config.Reference{
 			Type:      "ManagedStorageAccount",
 			Extractor: rconfig.ExtractResourceIDFuncPath,

@@ -51,7 +51,6 @@ func Configure(p *config.Provider) {
 				Type: rconfig.ContainerReferencePath,
 			},
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_consumer_group", func(r *config.Resource) {
@@ -60,32 +59,24 @@ func Configure(p *config.Provider) {
 				Type: "IOTHub",
 			},
 		}
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_iothub_dps", func(r *config.Resource) {
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_dps_certificate", func(r *config.Resource) {
 		r.References["iot_dps_name"] = config.Reference{
 			Type: "IOTHubDPS",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_dps_shared_access_policy", func(r *config.Resource) {
 		r.References["iot_dps_name"] = config.Reference{
 			Type: "IOTHubDPS",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_shared_access_policy", func(r *config.Resource) {
 		r.References["iot_dps_name"] = config.Reference{
 			Type: "IOTHubDPS",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_endpoint_storage_container", func(r *config.Resource) {
@@ -95,7 +86,6 @@ func Configure(p *config.Provider) {
 		r.References["container_name"] = config.Reference{
 			Type: rconfig.ContainerReferencePath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_fallback_route", func(r *config.Resource) {
@@ -107,13 +97,17 @@ func Configure(p *config.Provider) {
 				Type: "IOTHubEndpointStorageContainer",
 			},
 		}
-		r.UseAsync = true
 	})
 
-	p.AddResourceConfigurator("azurerm_iothub_endpoint_eventhub", func(r *config.Resource) {
-		r.UseAsync = true
+	p.AddResourceConfigurator("azurerm_iothub_endpoint_servicebus_queue", func(r *config.Resource) {
+		r.UseAsync = false
 	})
-	p.AddResourceConfigurator("azurerm_iothub_route", func(r *config.Resource) {
-		r.UseAsync = true
+
+	p.AddResourceConfigurator("azurerm_iothub_endpoint_servicebus_topic", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_iothub_enrichment", func(r *config.Resource) {
+		r.UseAsync = false
 	})
 }

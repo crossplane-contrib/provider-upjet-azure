@@ -24,6 +24,5 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_log_analytics_workspace", func(r *config.Resource) {
 		r.Kind = "Workspace"
-		r.UseAsync = true
 	})
 }

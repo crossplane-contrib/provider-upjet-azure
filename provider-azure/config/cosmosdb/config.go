@@ -28,18 +28,12 @@ func Configure(p *config.Provider) {
 		r.References["database_name"] = config.Reference{
 			Type: "SQLDatabase",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_mongo_collection", func(r *config.Resource) {
 		r.References["database_name"] = config.Reference{
 			Type: "MongoDatabase",
 		}
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_cosmosdb_cassandra_keyspace", func(r *config.Resource) {
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_cassandra_table", func(r *config.Resource) {
@@ -47,14 +41,12 @@ func Configure(p *config.Provider) {
 			Type:      "CassandraKeySpace",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_gremlin_graph", func(r *config.Resource) {
 		r.References["database_name"] = config.Reference{
 			Type: "GremlinDatabase",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_sql_function", func(r *config.Resource) {
@@ -62,7 +54,6 @@ func Configure(p *config.Provider) {
 			Type:      "SQLContainer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_sql_stored_procedure", func(r *config.Resource) {
@@ -72,31 +63,6 @@ func Configure(p *config.Provider) {
 		r.References["container_name"] = config.Reference{
 			Type: "SQLContainer",
 		}
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_cosmosdb_gremlin_database", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_cosmosdb_mongo_database", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_cosmosdb_sql_database", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_cosmosdb_table", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_cosmosdb_account", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_cosmosdb_notebook_workspace", func(r *config.Resource) {
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_sql_trigger", func(r *config.Resource) {
@@ -106,12 +72,11 @@ func Configure(p *config.Provider) {
 				Extractor: rconfig.ExtractResourceIDFuncPath,
 			},
 		}
-		r.UseAsync = true
 	})
-	p.AddResourceConfigurator("azurerm_cosmosdb_cassandra_cluster", func(r *config.Resource) {
-		r.UseAsync = true
+	p.AddResourceConfigurator("azurerm_cosmosdb_sql_role_assignment", func(r *config.Resource) {
+		r.UseAsync = false
 	})
-	p.AddResourceConfigurator("azurerm_cosmosdb_cassandra_datacenter", func(r *config.Resource) {
-		r.UseAsync = true
+	p.AddResourceConfigurator("azurerm_cosmosdb_sql_role_definition", func(r *config.Resource) {
+		r.UseAsync = false
 	})
 }

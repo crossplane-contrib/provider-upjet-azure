@@ -24,7 +24,6 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_eventhub_namespace", func(r *config.Resource) {
 		r.Kind = "EventHubNamespace"
-		r.UseAsync = true
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"network_rulesets"},
 		}
@@ -36,7 +35,6 @@ func Configure(p *config.Provider) {
 				Type: "EventHubNamespace",
 			},
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub_consumer_group", func(r *config.Resource) {
@@ -48,7 +46,6 @@ func Configure(p *config.Provider) {
 				Type: "EventHub",
 			},
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub_authorization_rule", func(r *config.Resource) {
@@ -58,6 +55,5 @@ func Configure(p *config.Provider) {
 		r.References["eventhub_name"] = config.Reference{
 			Type: "EventHub",
 		}
-		r.UseAsync = true
 	})
 }

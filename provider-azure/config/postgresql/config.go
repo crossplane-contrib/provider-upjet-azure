@@ -37,7 +37,6 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"ssl_enforcement", "storage_profile"},
 		}
-		r.UseAsync = true
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			return map[string][]byte{
 				xpv1.ResourceCredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", attr["administrator_login"], attr["name"])),
@@ -49,6 +48,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_configuration", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["server_id"] = config.Reference{
 			Type:      "FlexibleServer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -59,14 +59,12 @@ func Configure(p *config.Provider) {
 		r.References["server_name"] = config.Reference{
 			Type: "Server",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_active_directory_administrator", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
 			Type: "Server",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_database", func(r *config.Resource) {
@@ -74,14 +72,12 @@ func Configure(p *config.Provider) {
 			Type:      "FlexibleServer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_firewall_rule", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
 			Type: "Server",
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_firewall_rule", func(r *config.Resource) {
@@ -89,7 +85,6 @@ func Configure(p *config.Provider) {
 			Type:      "FlexibleServer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server", func(r *config.Resource) {
@@ -100,7 +95,6 @@ func Configure(p *config.Provider) {
 			Type:      rconfig.SubnetReferencePath,
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_virtual_network_rule", func(r *config.Resource) {
@@ -111,7 +105,6 @@ func Configure(p *config.Provider) {
 			Type:      rconfig.SubnetReferencePath,
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_server_key", func(r *config.Resource) {
@@ -123,10 +116,10 @@ func Configure(p *config.Provider) {
 			Type:      rconfig.VaultKeyReferencePath,
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_configuration", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["server_name"] = config.Reference{
 			Type: "Server",
 		}

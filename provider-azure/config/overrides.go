@@ -109,6 +109,13 @@ func KnownReferences() tjconfig.ResourceOption { // nolint:gocyclo
 	}
 }
 
+// UseAsync sets UseAsync parameter to true for given resources.
+func UseAsync() tjconfig.ResourceOption {
+	return func(r *tjconfig.Resource) {
+		r.UseAsync = true
+	}
+}
+
 func init() {
 	name.AddAcronym("iothub", "IOTHub")
 	name.AddAcronym("iot", "IOT")

@@ -59,9 +59,9 @@ func msSQLConnectionDetails(attr map[string]interface{}) (map[string][]byte, err
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mssql_server", func(r *config.Resource) {
 		r.Sensitive.AdditionalConnectionDetailsFn = msSQLConnectionDetails
-		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("azurerm_mssql_server_transparent_data_encryption", func(r *config.Resource) {
+		r.UseAsync = false
 		r.References["server_id"] = config.Reference{
 			Type:      "MSSQLServer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,

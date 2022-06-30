@@ -23,6 +23,7 @@ import (
 // Configure configures logic group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_integration_service_environment", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "IntegrationServiceEnvironment"
 	})
 }

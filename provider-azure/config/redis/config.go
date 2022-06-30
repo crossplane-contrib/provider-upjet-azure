@@ -41,13 +41,11 @@ func Configure(p *config.Provider) {
 				Extractor: rconfig.ExtractResourceIDFuncPath,
 			},
 		}
-		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("azurerm_redis_firewall_rule", func(r *config.Resource) {
 		r.References["redis_cache_name"] = config.Reference{
 			Type: "RedisCache",
 		}
-		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("azurerm_redis_linked_server", func(r *config.Resource) {
 		r.References["linked_redis_cache_id"] = config.Reference{
@@ -57,11 +55,6 @@ func Configure(p *config.Provider) {
 		r.References["target_redis_cache_name"] = config.Reference{
 			Type: "RedisCache",
 		}
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_redis_enterprise_cluster", func(r *config.Resource) {
-		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("azurerm_redis_enterprise_database", func(r *config.Resource) {
@@ -69,7 +62,6 @@ func Configure(p *config.Provider) {
 			Type:      "RedisEnterpriseCluster",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
 		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
 			id, ok := tfstate["id"]

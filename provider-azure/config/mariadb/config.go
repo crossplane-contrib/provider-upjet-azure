@@ -35,7 +35,6 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"ssl_enforcement", "storage_profile"},
 		}
-		r.UseAsync = true
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			return map[string][]byte{
 				xpv1.ResourceCredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", attr["administrator_login"], attr["name"])),
@@ -45,16 +44,7 @@ func Configure(p *config.Provider) {
 			}, nil
 		}
 	})
-
-	p.AddResourceConfigurator("azurerm_mariadb_database", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_mariadb_firewall_rule", func(r *config.Resource) {
-		r.UseAsync = true
-	})
-
-	p.AddResourceConfigurator("azurerm_mariadb_virtual_network_rule", func(r *config.Resource) {
-		r.UseAsync = true
+	p.AddResourceConfigurator("azurerm_mariadb_configuration", func(r *config.Resource) {
+		r.UseAsync = false
 	})
 }
