@@ -26,20 +26,19 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/base"
 	"github.com/upbound/official-providers/provider-azure/config/common"
 	"github.com/upbound/official-providers/provider-azure/config/compute"
+	"github.com/upbound/official-providers/provider-azure/config/containerservice"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
 	"github.com/upbound/official-providers/provider-azure/config/devices"
 	"github.com/upbound/official-providers/provider-azure/config/eventhub"
-	"github.com/upbound/official-providers/provider-azure/config/ip"
+	"github.com/upbound/official-providers/provider-azure/config/insights"
 	"github.com/upbound/official-providers/provider-azure/config/keyvault"
-	"github.com/upbound/official-providers/provider-azure/config/kubernetes"
-	"github.com/upbound/official-providers/provider-azure/config/loganalytics"
 	"github.com/upbound/official-providers/provider-azure/config/logic"
 	"github.com/upbound/official-providers/provider-azure/config/management"
 	"github.com/upbound/official-providers/provider-azure/config/mariadb"
-	"github.com/upbound/official-providers/provider-azure/config/monitor"
 	"github.com/upbound/official-providers/provider-azure/config/network"
 	"github.com/upbound/official-providers/provider-azure/config/notificationhubs"
+	"github.com/upbound/official-providers/provider-azure/config/operationalinsights"
 	"github.com/upbound/official-providers/provider-azure/config/postgresql"
 	"github.com/upbound/official-providers/provider-azure/config/redis"
 	"github.com/upbound/official-providers/provider-azure/config/resource"
@@ -47,7 +46,6 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/sql"
 	"github.com/upbound/official-providers/provider-azure/config/storage"
 	"github.com/upbound/official-providers/provider-azure/config/storagesync"
-	"github.com/upbound/official-providers/provider-azure/config/subnet"
 )
 
 const (
@@ -55,39 +53,10 @@ const (
 	modulePath     = "github.com/upbound/official-providers/provider-azure"
 )
 
-//go:embed schema.json
-var providerSchema string
-
-var includedResources = []string{
-	// "azurerm_.+",
-	"azurerm_virtual_.+",
-	"azurerm_kubernetes_.+",
-	"azurerm_postgresql_.+",
-	"azurerm_cosmosdb_.+",
-	"azurerm_redis_.+",
-	"azurerm_resource_group",
-	"azurerm_subnet",
-	"azurerm_storage_account$",
-	"azurerm_storage_container$",
-	"azurerm_storage_blob$",
-	"azurerm_sql_server",
-	"azurerm_mssql_server$",
-	"azurerm_mssql_server_transparent_data_encryption$",
-	"azurerm_lb$",
-	"azurerm_log_analytics_workspace",
-	"azurerm_iothub.*",
-	"azurerm_monitor_metric_alert",
-	"azurerm_key_vault.*",
-	"azurerm_eventhub_namespace$",
-	"azurerm_eventhub$",
-	"azurerm_eventhub_consumer_group$",
-	"azurerm_eventhub_authorization_rule$",
-	"azurerm_network_interface$",
-	"azurerm_mariadb_.+",
-	"azurerm_public_ip$",
-	"azurerm_disk_encryption_set$",
-	"azurerm_(windows|linux)_virtual_.+",
-}
+var (
+	//go:embed schema.json
+	providerSchema string
+)
 
 // These resources cannot be generated because of their suffixes colliding with
 // kubebuilder-accepted type suffixes.
@@ -106,7 +75,6 @@ var skipList = []string{
 	"azurerm_sentinel_data_connector_microsoft_defender_advanced_threat_protection",
 	// cannot generate a unique name
 	"azurerm_route",
-	"azurerm_network_security_rule",
 	// deprecated
 	"azurerm_virtual_machine_scale_set",
 	"azurerm_virtual_machine_configuration_policy_assignment",
@@ -131,7 +99,6 @@ var skipList = []string{
 	"azurerm_sql_virtual_network_rule",
 	"azurerm_virtual_desktop_workspace",
 	"azurerm_data_lake_analytics_account",
-	"azurerm_virtual_hub",
 	"azurerm_log_analytics_storage_insights",
 	"azurerm_virtual_hub_bgp_connection",
 	"azurerm_automation_dsc_configuration",
@@ -147,37 +114,34 @@ func GetProvider() *tjconfig.Provider {
 	pc := tjconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, "config/provider-metadata.yaml",
 		tjconfig.WithShortName("azure"),
 		tjconfig.WithRootGroup("azure.upbound.io"),
-		tjconfig.WithIncludeList(includedResources),
+		tjconfig.WithIncludeList(ResourcesWithExternalNameConfig()),
 		tjconfig.WithSkipList(skipList),
-		tjconfig.WithDefaultResourceOptions(defaultVersion(), externalNameConfig(), groupOverrides()),
+		tjconfig.WithDefaultResourceOptions(
+			ExternalNameConfigurations(),
+			groupOverrides(),
+			KnownReferences(),
+			UseAsync(),
+		),
 	)
-	// external-name configuration for all resources
-	for name := range pc.Resources {
-		// external-name configuration
-		pc.AddResourceConfigurator(name, func(r *tjconfig.Resource) {
-			r.ExternalName = tjconfig.IdentifierFromProvider
-		})
-	}
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
 		network.Configure,
-		ip.Configure,
 		management.Configure,
 		redis.Configure,
 		resource.Configure,
-		kubernetes.Configure,
+		containerservice.Configure,
+		compute.Configure,
 		postgresql.Configure,
 		cosmosdb.Configure,
 		sql.Configure,
-		subnet.Configure,
 		storage.Configure,
-		loganalytics.Configure,
+		operationalinsights.Configure,
 		devices.Configure,
-		monitor.Configure,
 		apimanagement.Configure,
 		logic.Configure,
 		security.Configure,
+		insights.Configure,
 		base.Configure,
 		datashare.Configure,
 		notificationhubs.Configure,
@@ -185,7 +149,6 @@ func GetProvider() *tjconfig.Provider {
 		keyvault.Configure,
 		eventhub.Configure,
 		mariadb.Configure,
-		compute.Configure,
 	} {
 		configure(pc)
 	}

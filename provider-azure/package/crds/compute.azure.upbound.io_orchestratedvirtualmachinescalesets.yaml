@@ -1,0 +1,723 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: orchestratedvirtualmachinescalesets.compute.azure.upbound.io
+spec:
+  group: compute.azure.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - azure
+    kind: OrchestratedVirtualMachineScaleSet
+    listKind: OrchestratedVirtualMachineScaleSetList
+    plural: orchestratedvirtualmachinescalesets
+    singular: orchestratedvirtualmachinescaleset
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: OrchestratedVirtualMachineScaleSet is the Schema for the OrchestratedVirtualMachineScaleSets
+          API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: OrchestratedVirtualMachineScaleSetSpec defines the desired
+              state of OrchestratedVirtualMachineScaleSet
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  automaticInstanceRepair:
+                    items:
+                      properties:
+                        enabled:
+                          type: boolean
+                        gracePeriod:
+                          type: string
+                      required:
+                      - enabled
+                      type: object
+                    type: array
+                  bootDiagnostics:
+                    items:
+                      properties:
+                        storageAccountUri:
+                          type: string
+                      type: object
+                    type: array
+                  dataDisk:
+                    items:
+                      properties:
+                        caching:
+                          type: string
+                        createOption:
+                          type: string
+                        diskEncryptionSetId:
+                          type: string
+                        diskSizeGb:
+                          type: number
+                        lun:
+                          type: number
+                        storageAccountType:
+                          type: string
+                        ultraSsdDiskIopsReadWrite:
+                          type: number
+                        ultraSsdDiskMbpsReadWrite:
+                          type: number
+                        writeAcceleratorEnabled:
+                          type: boolean
+                      required:
+                      - caching
+                      - diskSizeGb
+                      - lun
+                      - storageAccountType
+                      type: object
+                    type: array
+                  encryptionAtHostEnabled:
+                    type: boolean
+                  evictionPolicy:
+                    type: string
+                  extension:
+                    items:
+                      properties:
+                        autoUpgradeMinorVersionEnabled:
+                          type: boolean
+                        extensionsToProvisionAfterVmCreation:
+                          items:
+                            type: string
+                          type: array
+                        forceExtensionExecutionOnChange:
+                          type: string
+                        name:
+                          type: string
+                        protectedSettingsSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        publisher:
+                          type: string
+                        settings:
+                          type: string
+                        type:
+                          type: string
+                        typeHandlerVersion:
+                          type: string
+                      required:
+                      - name
+                      - publisher
+                      - type
+                      - typeHandlerVersion
+                      type: object
+                    type: array
+                  extensionsTimeBudget:
+                    type: string
+                  identity:
+                    items:
+                      properties:
+                        identityIds:
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          type: string
+                      required:
+                      - identityIds
+                      - type
+                      type: object
+                    type: array
+                  instances:
+                    type: number
+                  licenseType:
+                    type: string
+                  location:
+                    type: string
+                  maxBidPrice:
+                    type: number
+                  networkInterface:
+                    items:
+                      properties:
+                        dnsServers:
+                          items:
+                            type: string
+                          type: array
+                        enableAcceleratedNetworking:
+                          type: boolean
+                        enableIpForwarding:
+                          type: boolean
+                        ipConfiguration:
+                          items:
+                            properties:
+                              applicationGatewayBackendAddressPoolIds:
+                                items:
+                                  type: string
+                                type: array
+                              applicationSecurityGroupIds:
+                                items:
+                                  type: string
+                                type: array
+                              loadBalancerBackendAddressPoolIds:
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                type: string
+                              primary:
+                                type: boolean
+                              publicIpAddress:
+                                items:
+                                  properties:
+                                    domainNameLabel:
+                                      type: string
+                                    idleTimeoutInMinutes:
+                                      type: number
+                                    ipTag:
+                                      items:
+                                        properties:
+                                          tag:
+                                            type: string
+                                          type:
+                                            type: string
+                                        required:
+                                        - tag
+                                        - type
+                                        type: object
+                                      type: array
+                                    name:
+                                      type: string
+                                    publicIpPrefixId:
+                                      type: string
+                                  required:
+                                  - name
+                                  type: object
+                                type: array
+                              subnetId:
+                                type: string
+                              subnetIdRef:
+                                description: A Reference to a named object.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                required:
+                                - name
+                                type: object
+                              subnetIdSelector:
+                                description: A Selector selects an object.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                type: object
+                              version:
+                                type: string
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        name:
+                          type: string
+                        networkSecurityGroupId:
+                          type: string
+                        primary:
+                          type: boolean
+                      required:
+                      - ipConfiguration
+                      - name
+                      type: object
+                    type: array
+                  osDisk:
+                    items:
+                      properties:
+                        caching:
+                          type: string
+                        diffDiskSettings:
+                          items:
+                            properties:
+                              option:
+                                type: string
+                            required:
+                            - option
+                            type: object
+                          type: array
+                        diskEncryptionSetId:
+                          type: string
+                        diskSizeGb:
+                          type: number
+                        storageAccountType:
+                          type: string
+                        writeAcceleratorEnabled:
+                          type: boolean
+                      required:
+                      - caching
+                      - storageAccountType
+                      type: object
+                    type: array
+                  osProfile:
+                    items:
+                      properties:
+                        customDataSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        linuxConfiguration:
+                          items:
+                            properties:
+                              adminPasswordSecretRef:
+                                description: A SecretKeySelector is a reference to
+                                  a secret key in an arbitrary namespace.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              adminSshKey:
+                                items:
+                                  properties:
+                                    publicKey:
+                                      type: string
+                                    username:
+                                      type: string
+                                  required:
+                                  - publicKey
+                                  - username
+                                  type: object
+                                type: array
+                              adminUsername:
+                                type: string
+                              computerNamePrefix:
+                                type: string
+                              disablePasswordAuthentication:
+                                type: boolean
+                              patchMode:
+                                type: string
+                              provisionVmAgent:
+                                type: boolean
+                              secret:
+                                items:
+                                  properties:
+                                    certificate:
+                                      items:
+                                        properties:
+                                          url:
+                                            type: string
+                                        required:
+                                        - url
+                                        type: object
+                                      type: array
+                                    keyVaultId:
+                                      type: string
+                                  required:
+                                  - certificate
+                                  - keyVaultId
+                                  type: object
+                                type: array
+                            required:
+                            - adminUsername
+                            type: object
+                          type: array
+                        windowsConfiguration:
+                          items:
+                            properties:
+                              adminPasswordSecretRef:
+                                description: A SecretKeySelector is a reference to
+                                  a secret key in an arbitrary namespace.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              adminUsername:
+                                type: string
+                              computerNamePrefix:
+                                type: string
+                              enableAutomaticUpdates:
+                                type: boolean
+                              hotpatchingEnabled:
+                                type: boolean
+                              patchMode:
+                                type: string
+                              provisionVmAgent:
+                                type: boolean
+                              secret:
+                                items:
+                                  properties:
+                                    certificate:
+                                      items:
+                                        properties:
+                                          store:
+                                            type: string
+                                          url:
+                                            type: string
+                                        required:
+                                        - store
+                                        - url
+                                        type: object
+                                      type: array
+                                    keyVaultId:
+                                      type: string
+                                  required:
+                                  - certificate
+                                  - keyVaultId
+                                  type: object
+                                type: array
+                              timezone:
+                                type: string
+                              winrmListener:
+                                items:
+                                  properties:
+                                    certificateUrl:
+                                      type: string
+                                    protocol:
+                                      type: string
+                                  required:
+                                  - protocol
+                                  type: object
+                                type: array
+                            required:
+                            - adminPasswordSecretRef
+                            - adminUsername
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  plan:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        product:
+                          type: string
+                        publisher:
+                          type: string
+                      required:
+                      - name
+                      - product
+                      - publisher
+                      type: object
+                    type: array
+                  platformFaultDomainCount:
+                    type: number
+                  priority:
+                    type: string
+                  proximityPlacementGroupId:
+                    type: string
+                  resourceGroupName:
+                    type: string
+                  resourceGroupNameRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  skuName:
+                    type: string
+                  sourceImageId:
+                    type: string
+                  sourceImageReference:
+                    items:
+                      properties:
+                        offer:
+                          type: string
+                        publisher:
+                          type: string
+                        sku:
+                          type: string
+                        version:
+                          type: string
+                      required:
+                      - offer
+                      - publisher
+                      - sku
+                      - version
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  terminationNotification:
+                    items:
+                      properties:
+                        enabled:
+                          type: boolean
+                        timeout:
+                          type: string
+                      required:
+                      - enabled
+                      type: object
+                    type: array
+                  zoneBalance:
+                    type: boolean
+                  zones:
+                    items:
+                      type: string
+                    type: array
+                required:
+                - location
+                - platformFaultDomainCount
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: OrchestratedVirtualMachineScaleSetStatus defines the observed
+              state of OrchestratedVirtualMachineScaleSet.
+            properties:
+              atProvider:
+                properties:
+                  id:
+                    type: string
+                  uniqueId:
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

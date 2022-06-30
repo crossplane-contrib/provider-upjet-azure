@@ -1,0 +1,23 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Watcher
+metadata:
+  name: norway-watcher
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: norway-watcher-rg
+spec:
+  forProvider:
+    location: Norway East
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example

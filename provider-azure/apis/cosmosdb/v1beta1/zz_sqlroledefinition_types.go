@@ -28,14 +28,18 @@ type SQLRoleDefinitionObservation struct {
 
 type SQLRoleDefinitionParameters struct {
 
-	// +kubebuilder:validation:Required
-	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
+	// +crossplane:generate:reference:type=Account
+	// +kubebuilder:validation:Optional
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	AssignableScopes []*string `json:"assignableScopes" tf:"assignable_scopes,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Permissions []PermissionsParameters `json:"permissions" tf:"permissions,omitempty"`

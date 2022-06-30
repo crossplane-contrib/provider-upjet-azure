@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSPTRRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    records:
+    - test.example.com
+    resourceGroupNameRef:
+      name: example
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example

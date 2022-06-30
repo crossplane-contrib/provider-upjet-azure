@@ -1,0 +1,27 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NATGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    idleTimeoutInMinutes: 10
+    location: West Europe
+    resourceGroupNameRef:
+      name: nat-gateway-example-rg
+    skuName: Standard
+    zones:
+    - "1"
+  providerConfigRef:
+    name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: nat-gateway-example-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example

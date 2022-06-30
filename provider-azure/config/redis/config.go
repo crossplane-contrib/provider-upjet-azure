@@ -41,77 +41,36 @@ func Configure(p *config.Provider) {
 				Extractor: rconfig.ExtractResourceIDFuncPath,
 			},
 		}
-		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Cache/Redis/cache1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Cache",
-			"Redis", "name",
-		)
 	})
 	p.AddResourceConfigurator("azurerm_redis_firewall_rule", func(r *config.Resource) {
-		r.References = config.References{
-			"redis_cache_name": config.Reference{
-				Type: "RedisCache",
-			},
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
+		r.References["redis_cache_name"] = config.Reference{
+			Type: "RedisCache",
 		}
-		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Cache/Redis/cache1/firewallRules/rule1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Cache",
-			"Redis", "redis_cache_name",
-			"firewallRules", "name",
-		)
 	})
 	p.AddResourceConfigurator("azurerm_redis_linked_server", func(r *config.Resource) {
-		r.References = config.References{
-			"linked_redis_cache_id": config.Reference{
-				Type:      "RedisCache",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-			"target_redis_cache_name": config.Reference{
-				Type: "RedisCache",
-			},
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
+		r.References["linked_redis_cache_id"] = config.Reference{
+			Type:      "RedisCache",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
-		r.ExternalName = config.IdentifierFromProvider
-	})
-
-	p.AddResourceConfigurator("azurerm_redis_enterprise_cluster", func(r *config.Resource) {
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
+		r.References["target_redis_cache_name"] = config.Reference{
+			Type: "RedisCache",
 		}
-		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Cache/redisEnterprise/cluster1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Cache",
-			"redisEnterprise", "name",
-		)
 	})
 
 	p.AddResourceConfigurator("azurerm_redis_enterprise_database", func(r *config.Resource) {
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-			"cluster_id": config.Reference{
-				Type:      "RedisEnterpriseCluster",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["cluster_id"] = config.Reference{
+			Type:      "RedisEnterpriseCluster",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
 		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
+		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+			id, ok := tfstate["id"]
+			if !ok {
+				return "", errors.New("cannot find id in tfstate")
+			}
+			l := strings.Split(id.(string), "/")
+			return l[len(l)-1], nil
+		}
 		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Cache/redisEnterprise/cluster1/databases/database1
 		r.ExternalName.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, providerConfig map[string]interface{}) (string, error) {
 			subIDStr, err := getStr(providerConfig, "subscription_id")

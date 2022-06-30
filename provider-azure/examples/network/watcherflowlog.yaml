@@ -1,0 +1,77 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: WatcherFlowLog
+metadata:
+  name: example
+spec:
+  forProvider:
+    enabled: true
+    networkSecurityGroupIdRef:
+      name: example
+    networkWatcherNameRef:
+      name: norway-watcher
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    retentionPolicy:
+    - days: 7
+      enabled: true
+    storageAccountIdRef:
+      name: saflow2762022
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Watcher
+metadata:
+  name: norway-watcher
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: norway-watcher-rg
+spec:
+  forProvider:
+    location: Norway East
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: saflow2762022
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    location: Norway East
+    accountTier: "Standard"
+    accountReplicationType: "LRS"
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system

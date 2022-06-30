@@ -9,7 +9,7 @@ export TERRAFORM_PROVIDER_SOURCE ?= hashicorp/azurerm
 export TERRAFORM_VERSION ?= 1.2.1
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-azurerm
 export TERRAFORM_PROVIDER_VERSION := 3.8.0
-export GOPRIVATE="github.com/upbound"
+export GOPRIVATE=github.com/upbound
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
@@ -40,13 +40,12 @@ GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
 GO_SUBDIRS += cmd internal apis
 GO111MODULE = on
-GO_LINT_ARGS ?= --skip-files internal/controller/zz_setup.go --skip-files internal/controller/config/config.go --skip-files cmd/provider/main.go
 -include build/makelib/golang.mk
 
 # ====================================================================================
 # Setup Kubernetes tools
 
-UP_VERSION = v0.12.0-rc.0.32.g17c0ade
+UP_VERSION = v0.12.0-rc.0.36.gc986ff0
 UP_CHANNEL = main
 -include build/makelib/k8s_tools.mk
 

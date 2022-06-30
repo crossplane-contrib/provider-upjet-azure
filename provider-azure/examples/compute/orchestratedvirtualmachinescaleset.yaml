@@ -1,0 +1,14 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: OrchestratedVirtualMachineScaleSet
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    platformFaultDomainCount: 1
+    resourceGroupNameRef:
+      name: example
+    zones:
+    - "1"
+  providerConfigRef:
+    name: example

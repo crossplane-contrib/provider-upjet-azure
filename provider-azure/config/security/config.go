@@ -23,14 +23,17 @@ import (
 // Configure configures security group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_advanced_threat_protection", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "AdvancedThreatProtection"
 	})
 
 	p.AddResourceConfigurator("azurerm_iot_security_device_group", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "IOTSecurityDeviceGroup"
 	})
 
 	p.AddResourceConfigurator("azurerm_iot_security_solution", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "IOTSecuritySolution"
 	})
 }

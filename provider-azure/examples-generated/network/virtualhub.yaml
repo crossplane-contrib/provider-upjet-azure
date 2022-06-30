@@ -1,0 +1,14 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHub
+metadata:
+  name: example
+spec:
+  forProvider:
+    addressPrefix: 10.0.0.0/23
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    virtualWanIdRef:
+      name: example
+  providerConfigRef:
+    name: example

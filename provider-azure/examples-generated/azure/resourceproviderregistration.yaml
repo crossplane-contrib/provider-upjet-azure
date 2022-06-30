@@ -1,0 +1,9 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceProviderRegistration
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: Microsoft.PolicyInsights
+  providerConfigRef:
+    name: example

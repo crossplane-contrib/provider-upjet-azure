@@ -86,3 +86,151 @@ func (tr *ResourceGroup) LateInitialize(attrs []byte) (bool, error) {
 func (tr *ResourceGroup) GetTerraformSchemaVersion() int {
 	return 0
 }
+
+// GetTerraformResourceType returns Terraform resource type for this ResourceProviderRegistration
+func (mg *ResourceProviderRegistration) GetTerraformResourceType() string {
+	return "azurerm_resource_provider_registration"
+}
+
+// GetConnectionDetailsMapping for this ResourceProviderRegistration
+func (tr *ResourceProviderRegistration) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ResourceProviderRegistration
+func (tr *ResourceProviderRegistration) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ResourceProviderRegistration
+func (tr *ResourceProviderRegistration) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ResourceProviderRegistration
+func (tr *ResourceProviderRegistration) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ResourceProviderRegistration
+func (tr *ResourceProviderRegistration) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ResourceProviderRegistration
+func (tr *ResourceProviderRegistration) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ResourceProviderRegistration using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ResourceProviderRegistration) LateInitialize(attrs []byte) (bool, error) {
+	params := &ResourceProviderRegistrationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ResourceProviderRegistration) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this Subscription
+func (mg *Subscription) GetTerraformResourceType() string {
+	return "azurerm_subscription"
+}
+
+// GetConnectionDetailsMapping for this Subscription
+func (tr *Subscription) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this Subscription
+func (tr *Subscription) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this Subscription
+func (tr *Subscription) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this Subscription
+func (tr *Subscription) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this Subscription
+func (tr *Subscription) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this Subscription
+func (tr *Subscription) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this Subscription using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *Subscription) LateInitialize(attrs []byte) (bool, error) {
+	params := &SubscriptionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *Subscription) GetTerraformSchemaVersion() int {
+	return 0
+}

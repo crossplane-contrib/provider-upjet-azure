@@ -1,0 +1,166 @@
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: loadbalancerrg
+spec:
+  forProvider:
+    location: "West Europe"
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  name: publicipforlb
+spec:
+  forProvider:
+    sku: Standard
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  name: testloadbalancer
+spec:
+  forProvider:
+    sku: Standard
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    frontendIpConfiguration:
+      - name: publicipaddress
+        publicIpAddressIdRef:
+          name: publicipforlb
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerNatRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendPort: 3389
+    frontendIpConfigurationName: publicipaddress
+    frontendPort: 3389
+    loadbalancerIdRef:
+      name: testloadbalancer
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: loadbalancerrg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerBackendAddressPool
+metadata:
+  name: example
+spec:
+  forProvider:
+    loadbalancerIdRef:
+      name: testloadbalancer
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn-for-lb
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: loadbalancerrg
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerBackendAddressPoolAddress
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendAddressPoolIdRef:
+      name: example
+    ipAddress: 10.0.0.1
+    virtualNetworkIdRef:
+      name: example-vn-for-lb
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerNatPool
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendPort: 8080
+    frontendIpConfigurationName: publicipaddress
+    frontendPortEnd: 81
+    frontendPortStart: 80
+    loadbalancerIdRef:
+      name: testloadbalancer
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: loadbalancerrg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerOutboundRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendAddressPoolIdRef:
+      name: example
+    frontendIpConfiguration:
+    - name: publicipaddress
+    loadbalancerIdRef:
+      name: testloadbalancer
+    protocol: Tcp
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerProbe
+metadata:
+  name: example
+spec:
+  forProvider:
+    loadbalancerIdRef:
+      name: testloadbalancer
+    port: 22
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerRule
+metadata:
+  name: example-rule
+spec:
+  forProvider:
+    disableOutboundSnat: true
+    backendPort: 3489
+    frontendIpConfigurationName: publicipaddress
+    frontendPort: 3489
+    loadbalancerIdRef:
+      name: testloadbalancer
+    protocol: Tcp
+  providerConfigRef:
+    name: example

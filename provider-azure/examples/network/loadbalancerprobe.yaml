@@ -1,0 +1,11 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerProbe
+metadata:
+  name: example
+spec:
+  forProvider:
+    loadbalancerIdRef:
+      name: example
+    port: 22
+  providerConfigRef:
+    name: example

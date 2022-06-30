@@ -1,0 +1,12 @@
+apiVersion: notificationhubs.azure.upbound.io/v1beta1
+kind: NotificationHub
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    namespaceName: ${azurerm_notification_hub_namespace.example.name}
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

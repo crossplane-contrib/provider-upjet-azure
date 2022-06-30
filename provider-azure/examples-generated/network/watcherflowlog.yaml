@@ -1,0 +1,26 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: WatcherFlowLog
+metadata:
+  name: example
+spec:
+  forProvider:
+    enabled: true
+    networkSecurityGroupIdRef:
+      name: example
+    networkWatcherNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+    retentionPolicy:
+    - days: 7
+      enabled: true
+    storageAccountIdRef:
+      name: example
+    trafficAnalytics:
+    - enabled: true
+      intervalInMinutes: 10
+      workspaceId: ${azurerm_log_analytics_workspace.test.workspace_id}
+      workspaceRegion: West Europe
+      workspaceResourceId: ${azurerm_log_analytics_workspace.test.id}
+  providerConfigRef:
+    name: example

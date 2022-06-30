@@ -22,15 +22,8 @@ type IOTHubSharedAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceConnect *bool `json:"deviceConnect,omitempty" tf:"device_connect,omitempty"`
 
-	// +crossplane:generate:reference:type=IOTHub
-	// +kubebuilder:validation:Optional
-	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	IOTHubNameRef *v1.Reference `json:"iotHubNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	IOTHubNameSelector *v1.Selector `json:"iotHubNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	IOTHubName *string `json:"iothubName" tf:"iothub_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	RegistryRead *bool `json:"registryRead,omitempty" tf:"registry_read,omitempty"`

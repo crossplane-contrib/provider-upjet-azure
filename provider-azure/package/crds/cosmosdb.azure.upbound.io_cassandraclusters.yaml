@@ -108,8 +108,6 @@ spec:
                     type: object
                   location:
                     type: string
-                  name:
-                    type: string
                   resourceGroupName:
                     type: string
                   resourceGroupNameRef:
@@ -142,7 +140,6 @@ spec:
                 required:
                 - defaultAdminPasswordSecretRef
                 - location
-                - name
                 type: object
               providerConfigRef:
                 default:

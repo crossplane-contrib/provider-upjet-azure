@@ -1,0 +1,12 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NATGatewayPublicIPAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    natGatewayIdRef:
+      name: example
+    publicIpAddressIdRef:
+      name: example
+  providerConfigRef:
+    name: example

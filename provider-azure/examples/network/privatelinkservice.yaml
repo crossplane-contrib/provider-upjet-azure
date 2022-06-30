@@ -1,0 +1,30 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateLinkService
+metadata:
+  name: example
+spec:
+  forProvider:
+    autoApprovalSubscriptionIds:
+    - 00000000-0000-0000-0000-000000000000
+    loadBalancerFrontendIpConfigurationIds:
+    - ${azurerm_lb.example.frontend_ip_configuration.0.id}
+    location: West Europe
+    natIpConfiguration:
+    - name: primary
+      primary: true
+      privateIpAddress: 10.5.1.17
+      privateIpAddressVersion: IPv4
+      subnetIdRef:
+        name: example
+    - name: secondary
+      primary: false
+      privateIpAddress: 10.5.1.18
+      privateIpAddressVersion: IPv4
+      subnetIdRef:
+        name: example
+    resourceGroupNameRef:
+      name: example
+    visibilitySubscriptionIds:
+    - 00000000-0000-0000-0000-000000000000
+  providerConfigRef:
+    name: example

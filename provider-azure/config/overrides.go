@@ -19,10 +19,11 @@ package config
 import (
 	"strings"
 
+	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
+
+	"github.com/upbound/upjet/pkg/config"
 	tjconfig "github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/types/name"
-
-	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
 )
 
 var (
@@ -75,15 +76,43 @@ func groupOverrides() tjconfig.ResourceOption {
 	}
 }
 
-func defaultVersion() tjconfig.ResourceOption {
+// KnownReferences adds common and known references.
+func KnownReferences() tjconfig.ResourceOption { // nolint:gocyclo
+	// gocyclo: A bunch of switch cases with no room to reduce.
 	return func(r *tjconfig.Resource) {
-		r.Version = rconfig.VersionV1Beta1
+		for f, s := range r.TerraformResource.Schema {
+			// We shouldn't add referencers for status fields and sensitive fields
+			// since they already have secret referencer.
+			if (s.Computed && !s.Optional) || s.Sensitive {
+				continue
+			}
+			switch {
+			case f == "resource_group_name":
+				r.References["resource_group_name"] = config.Reference{
+					Type: rconfig.ResourceGroupReferencePath,
+				}
+			case r.ShortGroup == "cosmosdb" && f == "account_name":
+				r.References["account_name"] = config.Reference{
+					Type: "Account",
+				}
+			case r.ShortGroup == "dbformariadb" && f == "server_name":
+				r.References["server_name"] = config.Reference{
+					Type: "Server",
+				}
+			case r.ShortGroup == "network" && f == "loadbalancer_id":
+				r.References["loadbalancer_id"] = config.Reference{
+					Type:      "LoadBalancer",
+					Extractor: rconfig.ExtractResourceIDFuncPath,
+				}
+			}
+		}
 	}
 }
 
-func externalNameConfig() tjconfig.ResourceOption {
+// UseAsync sets UseAsync parameter to true for given resources.
+func UseAsync() tjconfig.ResourceOption {
 	return func(r *tjconfig.Resource) {
-		r.ExternalName = tjconfig.IdentifierFromProvider
+		r.UseAsync = true
 	}
 }
 

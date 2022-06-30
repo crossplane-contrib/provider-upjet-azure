@@ -13,16 +13,28 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type IPConfigurationPublicIPAddressObservation struct {
+type IPConfigurationPublicIPAddressIPTagObservation struct {
 }
 
-type IPConfigurationPublicIPAddressParameters struct {
+type IPConfigurationPublicIPAddressIPTagParameters struct {
+
+	// +kubebuilder:validation:Required
+	Tag *string `json:"tag" tf:"tag,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type NetworkInterfaceIPConfigurationPublicIPAddressObservation struct {
+}
+
+type NetworkInterfaceIPConfigurationPublicIPAddressParameters struct {
 
 	// +kubebuilder:validation:Optional
 	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IPTag []PublicIPAddressIPTagParameters `json:"ipTag,omitempty" tf:"ip_tag,omitempty"`
+	IPTag []IPConfigurationPublicIPAddressIPTagParameters `json:"ipTag,omitempty" tf:"ip_tag,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
@@ -32,59 +44,6 @@ type IPConfigurationPublicIPAddressParameters struct {
 
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
-}
-
-type NetworkInterfaceIPConfigurationObservation struct {
-}
-
-type NetworkInterfaceIPConfigurationParameters struct {
-
-	// +kubebuilder:validation:Optional
-	ApplicationGatewayBackendAddressPoolIds []*string `json:"applicationGatewayBackendAddressPoolIds,omitempty" tf:"application_gateway_backend_address_pool_ids,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	LoadBalancerInboundNATRulesIds []*string `json:"loadBalancerInboundNatRulesIds,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PublicIPAddress []IPConfigurationPublicIPAddressParameters `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
-
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-}
-
-type PublicIPAddressIPTagObservation struct {
-}
-
-type PublicIPAddressIPTagParameters struct {
-
-	// +kubebuilder:validation:Required
-	Tag *string `json:"tag" tf:"tag,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetAdditionalCapabilitiesObservation struct {
@@ -225,6 +184,47 @@ type WindowsVirtualMachineScaleSetIdentityParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationObservation struct {
+}
+
+type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters struct {
+
+	// +kubebuilder:validation:Optional
+	ApplicationGatewayBackendAddressPoolIds []*string `json:"applicationGatewayBackendAddressPoolIds,omitempty" tf:"application_gateway_backend_address_pool_ids,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LoadBalancerInboundNATRulesIds []*string `json:"loadBalancerInboundNatRulesIds,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PublicIPAddress []NetworkInterfaceIPConfigurationPublicIPAddressParameters `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
+
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type WindowsVirtualMachineScaleSetNetworkInterfaceObservation struct {
 }
 
@@ -240,7 +240,7 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceParameters struct {
 	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
 
 	// +kubebuilder:validation:Required
-	IPConfiguration []NetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
+	IPConfiguration []WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`

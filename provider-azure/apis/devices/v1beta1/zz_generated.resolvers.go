@@ -194,22 +194,6 @@ func (mg *IOTHubDPSSharedAccessPolicy) ResolveReferences(ctx context.Context, c 
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubDPSName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.IOTHubDPSNameRef,
-		Selector:     mg.Spec.ForProvider.IOTHubDPSNameSelector,
-		To: reference.To{
-			List:    &IOTHubDPSList{},
-			Managed: &IOTHubDPS{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubDPSName")
-	}
-	mg.Spec.ForProvider.IOTHubDPSName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.IOTHubDPSNameRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
@@ -465,22 +449,6 @@ func (mg *IOTHubSharedAccessPolicy) ResolveReferences(ctx context.Context, c cli
 
 	var rsp reference.ResolutionResponse
 	var err error
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.IOTHubNameRef,
-		Selector:     mg.Spec.ForProvider.IOTHubNameSelector,
-		To: reference.To{
-			List:    &IOTHubList{},
-			Managed: &IOTHub{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubName")
-	}
-	mg.Spec.ForProvider.IOTHubName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.IOTHubNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),

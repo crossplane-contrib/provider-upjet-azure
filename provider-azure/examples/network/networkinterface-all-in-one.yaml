@@ -1,0 +1,221 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: networkinterfacetestrg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn-for-network-int-test
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    addressSpace:
+      - "10.0.0.0/16"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet-for-network-interface
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    virtualNetworkNameRef:
+      name: example-vn-for-network-int-test
+    addressPrefixes:
+      - "10.0.1.0/24"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ApplicationSecurityGroup
+metadata:
+  name: example-asg
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    tags:
+      Hello: World
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  name: example-nic
+spec:
+  forProvider:
+    ipConfiguration:
+      - name: testconfiguration1
+        privateIpAddressAllocation: Dynamic
+        subnetIdRef:
+          name: example-subnet-for-network-interface
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterfaceApplicationSecurityGroupAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationSecurityGroupIdRef:
+      name: example-asg
+    networkInterfaceIdRef:
+      name: example-nic
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  name: publicipfornetworkinterface
+spec:
+  forProvider:
+    sku: Standard
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  name: testloadbalancer
+spec:
+  forProvider:
+    sku: Standard
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    frontendIpConfiguration:
+      - name: publicipaddress
+        publicIpAddressIdRef:
+          name: publicipfornetworkinterface
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerBackendAddressPool
+metadata:
+  name: example
+spec:
+  forProvider:
+    loadbalancerIdRef:
+      name: testloadbalancer
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterfaceBackendAddressPoolAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendAddressPoolIdRef:
+      name: example
+    ipConfigurationName: testconfiguration1
+    networkInterfaceIdRef:
+      name: example-nic
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerNatRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendPort: 3389
+    frontendIpConfigurationName: publicipaddress
+    frontendPort: 3389
+    loadbalancerIdRef:
+      name: testloadbalancer
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterfaceNatRuleAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    ipConfigurationName: testconfiguration1
+    natRuleIdRef:
+      name: example
+    networkInterfaceIdRef:
+      name: example-nic
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRange: '*'
+    direction: Outbound
+    networkSecurityGroupNameRef:
+      name: example
+    priority: 100
+    protocol: Tcp
+    resourceGroupNameRef:
+      name: networkinterfacetestrg
+    sourceAddressPrefix: '*'
+    sourcePortRange: '*'
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterfaceSecurityGroupAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    networkInterfaceIdRef:
+      name: example-nic
+    networkSecurityGroupIdRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -6,7 +6,8 @@ spec:
   forProvider:
     frontendIpConfiguration:
     - name: PublicIPAddress
-      publicIpAddressId: ${azurerm_public_ip.example.id}
+      publicIpAddressIdRef:
+        name: example
     location: West Europe
     resourceGroupNameRef:
       name: example

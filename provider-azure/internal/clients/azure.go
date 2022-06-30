@@ -4,14 +4,13 @@ import (
 	"context"
 	"encoding/json"
 
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/upbound/upjet/pkg/terraform"
 
-	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
 	"github.com/upbound/official-providers/provider-azure/apis/v1beta1"
@@ -42,11 +41,16 @@ const (
 	keyClientSecret             = "client_secret"
 )
 
+var (
+	credentialsSourceUserAssignedManagedIdentity   xpv1.CredentialsSource = "UserAssignedManagedIdentity"
+	credentialsSourceSystemAssignedManagedIdentity xpv1.CredentialsSource = "SystemAssignedManagedIdentity"
+)
+
 // TerraformSetupBuilder returns Terraform setup with provider specific
 // configuration like provider credentials used to connect to cloud APIs in the
 // expected form of a Terraform provider.
 func TerraformSetupBuilder(version, providerSource, providerVersion string) terraform.SetupFn { //nolint:gocyclo
-	return func(ctx context.Context, client client.Client, mg resource.Managed) (terraform.Setup, error) {
+	return func(ctx context.Context, client client.Client, mg xpresource.Managed) (terraform.Setup, error) {
 		ps := terraform.Setup{
 			Version: version,
 			Requirement: terraform.ProviderRequirement{
@@ -82,7 +86,9 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 
 		var err error
 		switch pc.Spec.Credentials.Source { //nolint:exhaustive
-		case xpv1.CredentialsSourceInjectedIdentity:
+		case credentialsSourceSystemAssignedManagedIdentity:
+			err = msiAuth(pc, &ps)
+		case credentialsSourceUserAssignedManagedIdentity:
 			err = msiAuth(pc, &ps)
 		default:
 			err = spAuth(ctx, pc, &ps, client)

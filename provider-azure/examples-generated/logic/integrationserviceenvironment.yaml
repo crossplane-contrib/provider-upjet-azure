@@ -1,0 +1,20 @@
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: IntegrationServiceEnvironment
+metadata:
+  name: example
+spec:
+  forProvider:
+    accessEndpointType: Internal
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    skuName: Developer_0
+    tags:
+      environment: development
+    virtualNetworkSubnetIds:
+    - ${azurerm_subnet.isesubnet1.id}
+    - ${azurerm_subnet.isesubnet2.id}
+    - ${azurerm_subnet.isesubnet3.id}
+    - ${azurerm_subnet.isesubnet4.id}
+  providerConfigRef:
+    name: example

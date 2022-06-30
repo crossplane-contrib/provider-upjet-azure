@@ -9,8 +9,8 @@ spec:
       username: adminuser
     adminUsername: adminuser
     location: West Europe
-    networkInterfaceIds:
-    - '...'
+    networkInterfaceIdsRefs:
+    - name: example
     osDisk:
     - caching: ReadWrite
       storageAccountType: Standard_LRS

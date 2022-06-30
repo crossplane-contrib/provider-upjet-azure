@@ -20,98 +20,335 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
-	"github.com/upbound/official-providers/provider-azure/config/common"
 )
-
-const groupNetwork = "network"
 
 // Configure configures virtual group
 func Configure(p *config.Provider) {
+	p.AddResourceConfigurator("azurerm_ip_group", func(r *config.Resource) {
+		r.UseAsync = false
+		r.Kind = "IPGroup"
+	})
+
 	p.AddResourceConfigurator("azurerm_network_interface", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "NetworkInterface"
-		r.ShortGroup = groupNetwork
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network", "networkInterfaces", "name")
 	})
 
 	p.AddResourceConfigurator("azurerm_lb", func(r *config.Resource) {
 		r.Kind = "LoadBalancer"
-		r.ShortGroup = groupNetwork
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
+
+		r.References["frontend_ip_configuration.public_ip_address_id"] = config.Reference{
+			Type:      "PublicIP",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network", "loadBalancers", "name")
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_backend_address_pool", func(r *config.Resource) {
+		r.Kind = "LoadBalancerBackendAddressPool"
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_backend_address_pool_address", func(r *config.Resource) {
+		r.Kind = "LoadBalancerBackendAddressPoolAddress"
+		r.References["backend_address_pool_id"] = config.Reference{
+			Type:      "LoadBalancerBackendAddressPool",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["virtual_network_id"] = config.Reference{
+			Type:      "VirtualNetwork",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_nat_pool", func(r *config.Resource) {
+		r.Kind = "LoadBalancerNatPool"
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_nat_rule", func(r *config.Resource) {
+		r.Kind = "LoadBalancerNatRule"
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_outbound_rule", func(r *config.Resource) {
+		r.Kind = "LoadBalancerOutboundRule"
+		r.References["backend_address_pool_id"] = config.Reference{
+			Type:      "LoadBalancerBackendAddressPool",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_probe", func(r *config.Resource) {
+		r.Kind = "LoadBalancerProbe"
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_lb_rule", func(r *config.Resource) {
+		r.Kind = "LoadBalancerRule"
+		r.References["loadbalancer_id"] = config.Reference{
+			Type:      "LoadBalancer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_association", func(r *config.Resource) {
+		r.References["nat_gateway_id"] = config.Reference{
+			Type:      "NATGateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["public_ip_address_id"] = config.Reference{
+			Type:      "PublicIP",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_prefix_association", func(r *config.Resource) {
+		r.References["nat_gateway_id"] = config.Reference{
+			Type:      "NATGateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["public_ip_prefix_id"] = config.Reference{
+			Type:      "PublicIPPrefix",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_watcher", func(r *config.Resource) {
+		r.UseAsync = false
+		r.Kind = "Watcher"
+	})
+
+	p.AddResourceConfigurator("azurerm_network_watcher_flow_log", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["network_watcher_name"] = config.Reference{
+			Type: "Watcher",
+		}
+		r.References["network_security_group_id"] = config.Reference{
+			Type:      "SecurityGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["storage_account_id"] = config.Reference{
+			Type:      rconfig.APISPackagePath + "/storage/v1beta1.Account",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_connection_monitor", func(r *config.Resource) {
+		r.UseAsync = false
+		r.Kind = "ConnectionMonitor"
+		r.References["network_watcher_id"] = config.Reference{
+			Type:      "Watcher",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_ddos_protection_plan", func(r *config.Resource) {
+		r.UseAsync = false
+		r.Kind = "DDoSProtectionPlan"
+	})
+
+	p.AddResourceConfigurator("azurerm_network_security_rule", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["network_security_group_name"] = config.Reference{
+			Type: "SecurityGroup",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_interface_application_security_group_association", func(r *config.Resource) {
+		r.Kind = "NetworkInterfaceApplicationSecurityGroupAssociation"
+		r.References["network_interface_id"] = config.Reference{
+			Type:      "NetworkInterface",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["application_security_group_id"] = config.Reference{
+			Type:      "ApplicationSecurityGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_interface_backend_address_pool_association", func(r *config.Resource) {
+		r.Kind = "NetworkInterfaceBackendAddressPoolAssociation"
+		r.References["network_interface_id"] = config.Reference{
+			Type:      "NetworkInterface",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["backend_address_pool_id"] = config.Reference{
+			Type:      "LoadBalancerBackendAddressPool",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_interface_nat_rule_association", func(r *config.Resource) {
+		r.Kind = "NetworkInterfaceNatRuleAssociation"
+		r.References["network_interface_id"] = config.Reference{
+			Type:      "NetworkInterface",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["nat_rule_id"] = config.Reference{
+			Type:      "LoadBalancerNatRule",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_interface_security_group_association", func(r *config.Resource) {
+		r.Kind = "NetworkInterfaceSecurityGroupAssociation"
+		r.References["network_interface_id"] = config.Reference{
+			Type:      "NetworkInterface",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["network_security_group_id"] = config.Reference{
+			Type:      "SecurityGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
 		r.Kind = "VirtualNetwork"
-		r.ShortGroup = groupNetwork
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"subnet"},
 		}
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/virtualNetworks/myvnet1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network",
-			"virtualNetworks", "name",
-		)
+		config.MoveToStatus(r.TerraformResource, "subnet")
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkGateway"
-		r.ShortGroup = groupNetwork
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-			"ip_configuration.subnet_id": config.Reference{
-				Type:      "Subnet",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["ip_configuration.subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.Network/virtualNetworkGateways/myGateway1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network",
-			"virtualNetworkGateways", "name",
-		)
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_peering", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkPeering"
-		r.ShortGroup = groupNetwork
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-			"virtual_network_name": config.Reference{
-				Type: "VirtualNetwork",
-			},
-			"remote_virtual_network_id": config.Reference{
-				Type:      "VirtualNetwork",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["virtual_network_name"] = config.Reference{
+			Type: "VirtualNetwork",
+		}
+		r.References["remote_virtual_network_id"] = config.Reference{
+			Type:      "VirtualNetwork",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_profile", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["container_network_interface.ip_configuration.subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_a_record", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_aaaa_record", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_cname_record", func(r *config.Resource) {
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_mx_record", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_ptr_record", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_srv_record", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_txt_record", func(r *config.Resource) {
+		r.UseAsync = false
+		r.References["zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_zone_virtual_network_link", func(r *config.Resource) {
+		r.References["private_dns_zone_name"] = config.Reference{
+			Type: "PrivateDNSZone",
+		}
+		r.References["virtual_network_id"] = config.Reference{
+			Type:      "VirtualNetwork",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_link_service", func(r *config.Resource) {
+		r.References["nat_ip_configuration.subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_endpoint", func(r *config.Resource) {
+		r.References["subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["private_service_connection.private_connection_resource_id"] = config.Reference{
+			Type:      "PrivateLinkService",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_packet_capture", func(r *config.Resource) {
+		r.References["network_watcher_name"] = config.Reference{
+			Type: "Watcher",
+		}
+		r.References["storage_location.storage_account_id"] = config.Reference{
+			Type:      rconfig.APISPackagePath + "/storage/v1beta1.Account",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_point_to_site_vpn_gateway", func(r *config.Resource) {
+		r.References["virtual_hub_id"] = config.Reference{
+			Type:      "VirtualHub",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["vpn_server_configuration_id"] = config.Reference{
+			Type:      "VPNServerConfiguration",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/virtualNetworks/myvnet1/virtualNetworkPeerings/myvnet1peering
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network",
-			"virtualNetworks", "virtual_network_name",
-			"virtualNetworkPeerings", "name",
-		)
 	})
 
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
@@ -134,27 +371,14 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway_connection", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkGatewayConnection"
-		r.ShortGroup = groupNetwork
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-			"virtual_network_gateway_id": config.Reference{
-				Type:      "VirtualNetworkGateway",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-			"peer_virtual_network_gateway_id": config.Reference{
-				Type:      "VirtualNetworkGateway",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["virtual_network_gateway_id"] = config.Reference{
+			Type:      "VirtualNetworkGateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.Network/connections/myConnection1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network",
-			"connections", "name",
-		)
+		r.References["peer_virtual_network_gateway_id"] = config.Reference{
+			Type:      "VirtualNetworkGateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_workspace", func(r *config.Resource) {
@@ -168,33 +392,80 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_wan", func(r *config.Resource) {
 		r.Kind = "VirtualWAN"
-		r.ShortGroup = groupNetwork
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_hub", func(r *config.Resource) {
+		r.References["virtual_wan_id"] = config.Reference{
+			Type:      "VirtualWAN",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualWans/testvwan
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network",
-			"virtualWans", "name",
-		)
 	})
 
 	p.AddResourceConfigurator("azurerm_frontdoor", func(r *config.Resource) {
+		r.UseAsync = false
 		r.Kind = "FrontDoor"
 	})
 
-	p.AddResourceConfigurator("azurerm_network_packet_capture", func(r *config.Resource) {
-		r.Kind = "NetworkPacketCapture"
+	p.AddResourceConfigurator("azurerm_subnet", func(r *config.Resource) {
+		r.Kind = "Subnet"
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"address_prefix"},
+		}
+		r.References["virtual_network_name"] = config.Reference{
+			Type: "VirtualNetwork",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_subnet_nat_gateway_association", func(r *config.Resource) {
+		r.Kind = "SubnetNATGatewayAssociation"
+		r.References["subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_subnet_network_security_group_association", func(r *config.Resource) {
+		r.Kind = "SubnetNetworkSecurityGroupAssociation"
+		r.References["subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_subnet_service_endpoint_storage_policy", func(r *config.Resource) {
+		r.Kind = "SubnetServiceEndpointStoragePolicy"
+	})
+
+	p.AddResourceConfigurator("azurerm_subnet_route_table_association", func(r *config.Resource) {
+		r.Kind = "SubnetRouteTableAssociation"
+		r.References["subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_application_security_group", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_zone", func(r *config.Resource) {
+		r.UseAsync = false
 	})
 
 	p.AddResourceConfigurator("azurerm_public_ip", func(r *config.Resource) {
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/publicIPAddresses/myPublicIpAddress1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Network", "publicIPAddresses", "name")
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_public_ip_prefix", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_network_security_group", func(r *config.Resource) {
+		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
+		r.UseAsync = false
 	})
 }

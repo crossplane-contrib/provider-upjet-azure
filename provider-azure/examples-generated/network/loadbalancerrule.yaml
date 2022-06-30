@@ -1,0 +1,14 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendPort: 3389
+    frontendIpConfigurationName: PublicIPAddress
+    frontendPort: 3389
+    loadbalancerIdRef:
+      name: example
+    protocol: Tcp
+  providerConfigRef:
+    name: example

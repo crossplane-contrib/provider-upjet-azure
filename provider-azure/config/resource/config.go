@@ -20,43 +20,19 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
-	"github.com/upbound/official-providers/provider-azure/config/common"
 )
 
 // Configure configures resource group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_resource_group_template_deployment", func(r *config.Resource) {
 		r.Kind = "ResourceGroupTemplateDeployment"
-		r.ShortGroup = "resources"
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-		}
-		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Resources/deployments/template1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Resources",
-			"deployments", "name",
-		)
 	})
 
 	p.AddResourceConfigurator("azurerm_resource_group_policy_assignment", func(r *config.Resource) {
 		r.Kind = "ResourceGroupPolicyAssignment"
-		r.ShortGroup = "authorization"
-		r.References = config.References{
-			"resource_group_id": config.Reference{
-				Type:      rconfig.ResourceGroupReferencePath,
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["resource_group_id"] = config.Reference{
+			Type:      rconfig.ResourceGroupReferencePath,
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
-		r.ExternalName = config.NameAsIdentifier
-		r.ExternalName.GetExternalNameFn = common.GetNameFromFullyQualifiedID
-		// /subscriptions/00000000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Authorization/policyAssignments/assignment1
-		r.ExternalName.GetIDFn = common.GetFullyQualifiedIDFn("Microsoft.Authorization",
-			"policyAssignments", "name",
-		)
 	})
 }

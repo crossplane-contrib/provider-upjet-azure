@@ -1,0 +1,26 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LocalNetworkGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    gatewayAddress: 12.13.14.15
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-local-network-gw
+  providerConfigRef:
+    name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-local-network-gw
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example

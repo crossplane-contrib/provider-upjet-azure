@@ -95,6 +95,39 @@ type LinuxVirtualMachineObservation struct {
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
 }
 
+type LinuxVirtualMachineOsDiskObservation struct {
+}
+
+type LinuxVirtualMachineOsDiskParameters struct {
+
+	// +kubebuilder:validation:Required
+	Caching *string `json:"caching" tf:"caching,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DiffDiskSettings []DiffDiskSettingsParameters `json:"diffDiskSettings,omitempty" tf:"diff_disk_settings,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SecureVMDiskEncryptionSetID *string `json:"secureVmDiskEncryptionSetId,omitempty" tf:"secure_vm_disk_encryption_set_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SecurityEncryptionType *string `json:"securityEncryptionType,omitempty" tf:"security_encryption_type,omitempty"`
+
+	// +kubebuilder:validation:Required
+	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
+}
+
 type LinuxVirtualMachineParameters struct {
 
 	// +kubebuilder:validation:Optional
@@ -157,11 +190,19 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
 
-	// +kubebuilder:validation:Required
-	NetworkInterfaceIds []*string `json:"networkInterfaceIds" tf:"network_interface_ids,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIdsRefs []v1.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
-	OsDisk []OsDiskParameters `json:"osDisk" tf:"os_disk,omitempty"`
+	OsDisk []LinuxVirtualMachineOsDiskParameters `json:"osDisk" tf:"os_disk,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	PatchMode *string `json:"patchMode,omitempty" tf:"patch_mode,omitempty"`
@@ -223,39 +264,6 @@ type LinuxVirtualMachineParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
-}
-
-type OsDiskObservation struct {
-}
-
-type OsDiskParameters struct {
-
-	// +kubebuilder:validation:Required
-	Caching *string `json:"caching" tf:"caching,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DiffDiskSettings []DiffDiskSettingsParameters `json:"diffDiskSettings,omitempty" tf:"diff_disk_settings,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SecureVMDiskEncryptionSetID *string `json:"secureVmDiskEncryptionSetId,omitempty" tf:"secure_vm_disk_encryption_set_id,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SecurityEncryptionType *string `json:"securityEncryptionType,omitempty" tf:"security_encryption_type,omitempty"`
-
-	// +kubebuilder:validation:Required
-	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
 }
 
 type PlanObservation struct {
