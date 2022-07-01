@@ -1,0 +1,12 @@
+apiVersion: storagecache.azure.upbound.io/v1beta1
+kind: HPCCache
+metadata:
+  name: example2
+spec:
+  forProvider:
+    cacheSizeInGb: 3072
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-resources
+    skuName: Standard_2G
+    subnetId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-resources/providers/Microsoft.Network/virtualNetworks/deletemepls/subnets/default

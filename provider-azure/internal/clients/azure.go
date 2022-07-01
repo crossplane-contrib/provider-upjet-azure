@@ -86,9 +86,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 
 		var err error
 		switch pc.Spec.Credentials.Source { //nolint:exhaustive
-		case credentialsSourceSystemAssignedManagedIdentity:
-			err = msiAuth(pc, &ps)
-		case credentialsSourceUserAssignedManagedIdentity:
+		case credentialsSourceSystemAssignedManagedIdentity, credentialsSourceUserAssignedManagedIdentity:
 			err = msiAuth(pc, &ps)
 		default:
 			err = spAuth(ctx, pc, &ps, client)

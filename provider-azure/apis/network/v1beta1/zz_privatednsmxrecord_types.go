@@ -22,7 +22,7 @@ type PrivateDNSMXRecordObservation struct {
 type PrivateDNSMXRecordParameters struct {
 
 	// +kubebuilder:validation:Required
-	Record []RecordParameters `json:"record" tf:"record,omitempty"`
+	Record []PrivateDNSMXRecordRecordParameters `json:"record" tf:"record,omitempty"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -51,10 +51,10 @@ type PrivateDNSMXRecordParameters struct {
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
-type RecordObservation struct {
+type PrivateDNSMXRecordRecordObservation struct {
 }
 
-type RecordParameters struct {
+type PrivateDNSMXRecordRecordParameters struct {
 
 	// +kubebuilder:validation:Required
 	Exchange *string `json:"exchange" tf:"exchange,omitempty"`

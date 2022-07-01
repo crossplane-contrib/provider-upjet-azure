@@ -31,7 +31,6 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
 	"github.com/upbound/official-providers/provider-azure/config/devices"
 	"github.com/upbound/official-providers/provider-azure/config/eventhub"
-	"github.com/upbound/official-providers/provider-azure/config/insights"
 	"github.com/upbound/official-providers/provider-azure/config/keyvault"
 	"github.com/upbound/official-providers/provider-azure/config/logic"
 	"github.com/upbound/official-providers/provider-azure/config/management"
@@ -66,6 +65,7 @@ var skipList = []string{
 	"azurerm_api_management_group",
 	"azurerm_api_management_product_group",
 	"azurerm_dedicated_host_group",
+	"azurerm_storage_disks_pool",
 	"azurerm_storage_sync_group",
 	"azurerm_virtual_desktop_application_group",
 	// associated with non-generated
@@ -120,7 +120,6 @@ func GetProvider() *tjconfig.Provider {
 			ExternalNameConfigurations(),
 			groupOverrides(),
 			KnownReferences(),
-			UseAsync(),
 		),
 	)
 
@@ -131,7 +130,6 @@ func GetProvider() *tjconfig.Provider {
 		redis.Configure,
 		resource.Configure,
 		containerservice.Configure,
-		compute.Configure,
 		postgresql.Configure,
 		cosmosdb.Configure,
 		sql.Configure,
@@ -141,7 +139,6 @@ func GetProvider() *tjconfig.Provider {
 		apimanagement.Configure,
 		logic.Configure,
 		security.Configure,
-		insights.Configure,
 		base.Configure,
 		datashare.Configure,
 		notificationhubs.Configure,
@@ -149,6 +146,7 @@ func GetProvider() *tjconfig.Provider {
 		keyvault.Configure,
 		eventhub.Configure,
 		mariadb.Configure,
+		compute.Configure,
 	} {
 		configure(pc)
 	}

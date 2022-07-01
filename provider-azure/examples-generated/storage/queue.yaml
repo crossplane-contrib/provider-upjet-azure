@@ -1,0 +1,9 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Queue
+metadata:
+  name: example
+spec:
+  forProvider:
+    storageAccountName: ${azurerm_storage_account.example.name}
+  providerConfigRef:
+    name: example

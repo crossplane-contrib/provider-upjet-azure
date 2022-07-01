@@ -24,7 +24,7 @@ type PrivateDNSZoneObservation struct {
 
 	NumberOfRecordSets *float64 `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty"`
 
-	SoaRecord []SoaRecordObservation `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
+	SoaRecord []PrivateDNSZoneSoaRecordObservation `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 }
 
 type PrivateDNSZoneParameters struct {
@@ -40,13 +40,13 @@ type PrivateDNSZoneParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	SoaRecord []SoaRecordParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
+	SoaRecord []PrivateDNSZoneSoaRecordParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type SoaRecordObservation struct {
+type PrivateDNSZoneSoaRecordObservation struct {
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
@@ -54,7 +54,7 @@ type SoaRecordObservation struct {
 	SerialNumber *float64 `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
 }
 
-type SoaRecordParameters struct {
+type PrivateDNSZoneSoaRecordParameters struct {
 
 	// +kubebuilder:validation:Required
 	Email *string `json:"email" tf:"email,omitempty"`

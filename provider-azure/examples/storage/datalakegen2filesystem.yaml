@@ -1,0 +1,9 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  name: example
+spec:
+  forProvider:
+    properties:
+      hello: aGVsbG8=
+    storageAccountId: /subscriptions/.../resourceGroups/example-resources111/providers/Microsoft.Storage/storageAccounts/examplestorageacc111

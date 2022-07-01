@@ -1,0 +1,19 @@
+apiVersion: storagecache.azure.upbound.io/v1beta1
+kind: HPCCacheNFSTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    cacheName: ${azurerm_hpc_cache.example.name}
+    namespaceJunction:
+    - namespacePath: /nfs/a1
+      nfsExport: /export/a
+      targetPath: "1"
+    - namespacePath: /nfs/b
+      nfsExport: /export/b
+    resourceGroupNameRef:
+      name: example
+    targetHostName: ${azurerm_linux_virtual_machine.example.private_ip_address}
+    usageModel: READ_HEAVY_INFREQ
+  providerConfigRef:
+    name: example

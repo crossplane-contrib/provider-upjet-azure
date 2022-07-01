@@ -1,0 +1,19 @@
+apiVersion: storagecache.azure.upbound.io/v1beta1
+kind: HPCCacheNFSTarget
+metadata:
+  name: example
+spec:
+  forProvider:
+    cacheName: examplehpccache
+    namespaceJunction:
+    - namespacePath: /nfs/a1
+      nfsExport: /export/a
+      targetPath: "1"
+    - namespacePath: /nfs/b
+      nfsExport: /export/b
+    resourceGroupNameRef:
+      name: example-resources
+    targetHostName: 10.0.2.4
+    usageModel: READ_HEAVY_INFREQ
+  providerConfigRef:
+    name: example

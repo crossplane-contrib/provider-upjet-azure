@@ -1,0 +1,9 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: AccountCustomerManagedKey
+metadata:
+  name: example
+spec:
+  forProvider:
+    keyName: testkey
+    keyVaultId: /subscriptions/.../resourceGroups/example-resources/providers/Microsoft.KeyVault/vaults/keyvaultdeleteme
+    storageAccountId: /subscriptions/.../resourceGroups/example-resources/providers/Microsoft.Storage/storageAccounts/storagetestme2

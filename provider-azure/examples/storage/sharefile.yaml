@@ -1,0 +1,10 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: ShareFile
+metadata:
+  name: example
+spec:
+  forProvider:
+    source: some-local-file.zip
+    storageShareId: ${azurerm_storage_share.example.id}
+  providerConfigRef:
+    name: example

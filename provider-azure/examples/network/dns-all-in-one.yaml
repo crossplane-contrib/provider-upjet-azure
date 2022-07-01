@@ -1,0 +1,196 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-dns-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSZone
+metadata:
+  name: example
+  annotations:
+    crossplane.io/external-name: upbound-example.com
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-dns-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSARecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    records:
+    - 10.0.180.17
+    resourceGroupNameRef:
+      name: example-dns-rg
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSAAAARecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    records:
+    - 2001:db8::1:0:0:1
+    resourceGroupNameRef:
+      name: example-dns-rg
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSCAARecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    record:
+    - flags: 0
+      tag: issue
+      value: example.com
+    - flags: 0
+      tag: issue
+      value: example.net
+    - flags: 0
+      tag: issuewild
+      value: ;
+    - flags: 0
+      tag: iodef
+      value: mailto:terraform@nonexisting.tld
+    resourceGroupNameRef:
+      name: example-dns-rg
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSCNAMERecord
+metadata:
+  name: example-cname
+spec:
+  forProvider:
+    record: upbound-example.com
+    resourceGroupNameRef:
+      name: example-dns-rg
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSMXRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    record:
+    - exchange: mail1.upbound-example.com
+      preference: "10"
+    - exchange: mail2.upbound-example.com
+      preference: "20"
+    resourceGroupNameRef:
+      name: example-dns-rg
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSNSRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    records:
+    - ns1.upbound-example.com
+    - ns2.upbound-example.com
+    resourceGroupNameRef:
+      name: example-dns-rg
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSPTRRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    records:
+    - yourdomain.com
+    resourceGroupNameRef:
+      name: example-dns-rg
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSSRVRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    record:
+    - port: 8080
+      priority: 1
+      target: target1.upbound-example.com
+      weight: 5
+    resourceGroupNameRef:
+      name: example-dns-rg
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSTXTRecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    record:
+    - value: google-site-authenticator
+    - value: more site information here
+    resourceGroupNameRef:
+      name: example-dns-rg
+    tags:
+      Environment: Production
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example

@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSAAAARecord
+metadata:
+  name: example
+spec:
+  forProvider:
+    records:
+    - 2001:db8::1:0:0:1
+    resourceGroupNameRef:
+      name: example
+    ttl: 300
+    zoneNameRef:
+      name: example
+  providerConfigRef:
+    name: example

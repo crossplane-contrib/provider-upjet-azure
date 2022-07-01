@@ -36,4 +36,65 @@ func Configure(p *config.Provider) {
 			Type: "Account",
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_hpc_cache", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_hpc_cache_access_policy", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_hpc_cache_blob_target", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_hpc_cache_blob_nfs_target", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_hpc_cache_nfs_target", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_account_network_rules", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_data_lake_gen2_filesystem", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_blob_inventory_policy", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_encryption_scope", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_management_policy", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_object_replication", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_queue", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_share", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_sync", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_table", func(r *config.Resource) {
+		r.UseAsync = true
+	})
+
 }
