@@ -55,15 +55,6 @@ const (
 var (
 	//go:embed schema.json
 	providerSchema string
-
-	// BasePackages contains the non-generated package information for Upjet
-	// to include whenever needed.
-	BasePackages = tjconfig.BasePackages{
-		APIVersion: []string{
-			"apis/v1alpha1",
-		},
-		Controller: tjconfig.DefaultBasePackages.Controller,
-	}
 )
 
 // These resources cannot be generated because of their suffixes colliding with
@@ -125,7 +116,6 @@ func GetProvider() *tjconfig.Provider {
 		tjconfig.WithRootGroup("azure.upbound.io"),
 		tjconfig.WithIncludeList(ResourcesWithExternalNameConfig()),
 		tjconfig.WithSkipList(skipList),
-		tjconfig.WithBasePackages(BasePackages),
 		tjconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),
 			groupOverrides(),

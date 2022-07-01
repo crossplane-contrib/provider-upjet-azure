@@ -4,17 +4,16 @@ import (
 	"context"
 	"encoding/json"
 
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/upbound/upjet/pkg/terraform"
 
-	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	"github.com/upbound/official-providers/provider-azure/apis/v1alpha1"
+	"github.com/upbound/official-providers/provider-azure/apis/v1beta1"
 )
 
 const (
@@ -42,11 +41,16 @@ const (
 	keyClientSecret             = "client_secret"
 )
 
+var (
+	credentialsSourceUserAssignedManagedIdentity   xpv1.CredentialsSource = "UserAssignedManagedIdentity"
+	credentialsSourceSystemAssignedManagedIdentity xpv1.CredentialsSource = "SystemAssignedManagedIdentity"
+)
+
 // TerraformSetupBuilder returns Terraform setup with provider specific
 // configuration like provider credentials used to connect to cloud APIs in the
 // expected form of a Terraform provider.
 func TerraformSetupBuilder(version, providerSource, providerVersion string) terraform.SetupFn { //nolint:gocyclo
-	return func(ctx context.Context, client client.Client, mg resource.Managed) (terraform.Setup, error) {
+	return func(ctx context.Context, client client.Client, mg xpresource.Managed) (terraform.Setup, error) {
 		ps := terraform.Setup{
 			Version: version,
 			Requirement: terraform.ProviderRequirement{
@@ -59,12 +63,12 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if configRef == nil {
 			return ps, errors.New(errNoProviderConfig)
 		}
-		pc := &v1alpha1.ProviderConfig{}
+		pc := &v1beta1.ProviderConfig{}
 		if err := client.Get(ctx, types.NamespacedName{Name: configRef.Name}, pc); err != nil {
 			return ps, errors.Wrap(err, errGetProviderConfig)
 		}
 
-		t := xpresource.NewProviderConfigUsageTracker(client, &v1alpha1.ProviderConfigUsage{})
+		t := xpresource.NewProviderConfigUsageTracker(client, &v1beta1.ProviderConfigUsage{})
 		if err := t.Track(ctx, mg); err != nil {
 			return ps, errors.Wrap(err, errTrackUsage)
 		}
@@ -82,7 +86,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 
 		var err error
 		switch pc.Spec.Credentials.Source { //nolint:exhaustive
-		case xpv1.CredentialsSourceInjectedIdentity:
+		case credentialsSourceSystemAssignedManagedIdentity, credentialsSourceUserAssignedManagedIdentity:
 			err = msiAuth(pc, &ps)
 		default:
 			err = spAuth(ctx, pc, &ps, client)
@@ -91,7 +95,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 	}
 }
 
-func spAuth(ctx context.Context, pc *v1alpha1.ProviderConfig, ps *terraform.Setup, client client.Client) error {
+func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup, client client.Client) error {
 	data, err := xpresource.CommonCredentialExtractor(ctx, pc.Spec.Credentials.Source, client, pc.Spec.Credentials.CommonCredentialSelectors)
 	if err != nil {
 		return errors.Wrap(err, errExtractCredentials)
@@ -108,7 +112,7 @@ func spAuth(ctx context.Context, pc *v1alpha1.ProviderConfig, ps *terraform.Setu
 	return nil
 }
 
-func msiAuth(pc *v1alpha1.ProviderConfig, ps *terraform.Setup) error {
+func msiAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	if pc.Spec.SubscriptionID == nil || len(*pc.Spec.SubscriptionID) == 0 {
 		return errors.New(errSubscriptionIDNotSet)
 	}

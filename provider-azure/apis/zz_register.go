@@ -37,6 +37,7 @@ import (
 	v1beta1storagecache "github.com/upbound/official-providers/provider-azure/apis/storagecache/v1beta1"
 	v1beta1storagesync "github.com/upbound/official-providers/provider-azure/apis/storagesync/v1beta1"
 	v1alpha1 "github.com/upbound/official-providers/provider-azure/apis/v1alpha1"
+	v1beta1apis "github.com/upbound/official-providers/provider-azure/apis/v1beta1"
 )
 
 func init() {
@@ -69,6 +70,7 @@ func init() {
 		v1beta1storagecache.SchemeBuilder.AddToScheme,
 		v1beta1storagesync.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1beta1apis.SchemeBuilder.AddToScheme,
 	)
 }
 

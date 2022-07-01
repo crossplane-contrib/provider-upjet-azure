@@ -9,6 +9,10 @@ metadata:
 spec:
   group: azure.upbound.io
   names:
+    categories:
+    - crossplane
+    - providerconfig
+    - azure
     kind: ProviderConfig
     listKind: ProviderConfigList
     plural: providerconfigs
@@ -23,10 +27,10 @@ spec:
       name: SECRET-NAME
       priority: 1
       type: string
-    name: v1alpha1
+    name: v1beta1
     schema:
       openAPIV3Schema:
-        description: A ProviderConfig configures a Jet Azure provider.
+        description: A ProviderConfig configures the Azure provider.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -95,9 +99,8 @@ spec:
                     enum:
                     - None
                     - Secret
-                    - InjectedIdentity
-                    - Environment
-                    - Filesystem
+                    - UserAssignedManagedIdentity
+                    - SystemAssignedManagedIdentity
                     type: string
                 required:
                 - source

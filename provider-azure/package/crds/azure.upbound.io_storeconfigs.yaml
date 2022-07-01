@@ -48,7 +48,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: A StoreConfigSpec defines the desired state of a ProviderConfig.
+            description: A StoreConfigSpec defines the desired state of a StoreConfig.
             properties:
               defaultScope:
                 description: DefaultScope used for scoping secrets for "cluster-scoped"
