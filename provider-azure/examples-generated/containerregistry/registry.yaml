@@ -16,5 +16,3 @@ spec:
     resourceGroupNameRef:
       name: example
     sku: Premium
-  providerConfigRef:
-    name: example

@@ -32,5 +32,3 @@ spec:
         variable: RequestMethod
       name: overwriteorigin
       priority: 2
-  providerConfigRef:
-    name: example

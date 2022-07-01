@@ -57,5 +57,3 @@ spec:
         sourceAddresses:
         - 10.0.0.1
     priority: 500
-  providerConfigRef:
-    name: example

@@ -8,5 +8,3 @@ spec:
       name: example
     syncTokenIdRef:
       name: example
-  providerConfigRef:
-    name: example

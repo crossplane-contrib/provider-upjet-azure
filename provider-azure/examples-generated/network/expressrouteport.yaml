@@ -10,5 +10,3 @@ spec:
     peeringLocation: Airtel-Chennai-CLS
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example
