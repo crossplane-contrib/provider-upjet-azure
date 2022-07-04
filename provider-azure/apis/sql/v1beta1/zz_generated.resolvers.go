@@ -11,6 +11,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
 	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -79,6 +80,48 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 	}
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLVirtualNetworkRule.
+func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ServerIDRef,
+		Selector:     mg.Spec.ForProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &MSSQLServerList{},
+			Managed: &MSSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
+	}
+	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SubnetIDRef,
+		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
+	}
+	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -26,6 +26,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/base"
 	"github.com/upbound/official-providers/provider-azure/config/common"
 	"github.com/upbound/official-providers/provider-azure/config/compute"
+	"github.com/upbound/official-providers/provider-azure/config/containerregistry"
 	"github.com/upbound/official-providers/provider-azure/config/containerservice"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
@@ -148,6 +149,7 @@ func GetProvider() *tjconfig.Provider {
 		eventhub.Configure,
 		mariadb.Configure,
 		compute.Configure,
+		containerregistry.Configure,
 	} {
 		configure(pc)
 	}

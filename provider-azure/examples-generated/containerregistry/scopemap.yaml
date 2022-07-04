@@ -1,0 +1,14 @@
+apiVersion: containerregistry.azure.upbound.io/v1beta1
+kind: ScopeMap
+metadata:
+  name: example
+spec:
+  forProvider:
+    actions:
+    - repositories/repo1/content/read
+    - repositories/repo1/content/write
+    containerRegistryName: ${azurerm_container_registry.acr.name}
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

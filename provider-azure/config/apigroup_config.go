@@ -173,6 +173,8 @@ var (
 		"azurerm_container_registry_scope_map":                                           "containerregistry",
 		"azurerm_container_registry_token":                                               "containerregistry",
 		"azurerm_container_registry":                                                     "containerregistry",
+		"azurerm_container_registry_agent_pool":                                          "containerregistry",
+		"azurerm_container_connected_registry":                                           "containerregistry",
 		"azurerm_container_registry_webhook":                                             "containerregistry",
 		"azurerm_kubernetes_cluster_node_pool":                                           "containerservice",
 		"azurerm_kubernetes_cluster":                                                     "containerservice",

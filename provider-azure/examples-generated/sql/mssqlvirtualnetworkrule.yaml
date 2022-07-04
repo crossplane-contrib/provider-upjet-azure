@@ -1,0 +1,12 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLVirtualNetworkRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    serverIdRef:
+      name: example
+    subnetIdRef:
+      name: example
+  providerConfigRef:
+    name: example

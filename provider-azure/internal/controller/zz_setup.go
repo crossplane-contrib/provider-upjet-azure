@@ -33,6 +33,12 @@ import (
 	snapshot "github.com/upbound/official-providers/provider-azure/internal/controller/compute/snapshot"
 	windowsvirtualmachine "github.com/upbound/official-providers/provider-azure/internal/controller/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/official-providers/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
+	agentpool "github.com/upbound/official-providers/provider-azure/internal/controller/containerregistry/agentpool"
+	containerconnectedregistry "github.com/upbound/official-providers/provider-azure/internal/controller/containerregistry/containerconnectedregistry"
+	registry "github.com/upbound/official-providers/provider-azure/internal/controller/containerregistry/registry"
+	scopemap "github.com/upbound/official-providers/provider-azure/internal/controller/containerregistry/scopemap"
+	token "github.com/upbound/official-providers/provider-azure/internal/controller/containerregistry/token"
+	webhook "github.com/upbound/official-providers/provider-azure/internal/controller/containerregistry/webhook"
 	kubernetescluster "github.com/upbound/official-providers/provider-azure/internal/controller/containerservice/kubernetescluster"
 	kubernetesclusternodepool "github.com/upbound/official-providers/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
 	account "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/account"
@@ -190,6 +196,7 @@ import (
 	iotsecuritysolution "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritysolution"
 	mssqlserver "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlservertransparentdataencryption "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
+	mssqlvirtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
 	accountstorage "github.com/upbound/official-providers/provider-azure/internal/controller/storage/account"
 	accountnetworkrules "github.com/upbound/official-providers/provider-azure/internal/controller/storage/accountnetworkrules"
 	blob "github.com/upbound/official-providers/provider-azure/internal/controller/storage/blob"
@@ -238,6 +245,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		snapshot.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
+		agentpool.Setup,
+		containerconnectedregistry.Setup,
+		registry.Setup,
+		scopemap.Setup,
+		token.Setup,
+		webhook.Setup,
 		kubernetescluster.Setup,
 		kubernetesclusternodepool.Setup,
 		account.Setup,
@@ -395,6 +408,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iotsecuritysolution.Setup,
 		mssqlserver.Setup,
 		mssqlservertransparentdataencryption.Setup,
+		mssqlvirtualnetworkrule.Setup,
 		accountstorage.Setup,
 		accountnetworkrules.Setup,
 		blob.Setup,

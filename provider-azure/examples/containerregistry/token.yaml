@@ -1,0 +1,11 @@
+apiVersion: containerregistry.azure.upbound.io/v1beta1
+kind: Token
+metadata:
+  name: example
+spec:
+  forProvider:
+    containerRegistryName: example
+    resourceGroupNameRef:
+      name: example
+    scopeMapIdRef:
+      name: example
