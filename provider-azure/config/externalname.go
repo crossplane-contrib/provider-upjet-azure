@@ -272,16 +272,11 @@ func keyVaultAccessPolicy() config.ExternalName {
 		if !ok {
 			return "", errors.New("cannot get object_id")
 		}
-		switch {
-		case tfstate["application_id"] != "":
-			applicationID, ok := tfstate["application_id"]
-			if !ok {
-				return "", errors.New("cannot get application_id")
-			}
-			return fmt.Sprintf("%s/%s", objectID, applicationID), nil
-		default:
+		applicationID := tfstate["application_id"]
+		if applicationID == nil || applicationID == "" {
 			return objectID.(string), nil
 		}
+		return fmt.Sprintf("%s/%s", objectID, applicationID), nil
 	}
 	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
 		keyVaultID, ok := parameters["key_vault_id"]
@@ -293,16 +288,11 @@ func keyVaultAccessPolicy() config.ExternalName {
 			return "", errors.New("cannot get object_id")
 		}
 
-		switch {
-		case parameters["application_id"] != nil:
-			applicationID, ok := parameters["application_id"]
-			if !ok {
-				return "", errors.New("cannot get application_id")
-			}
-			return fmt.Sprintf("%s/objectId/%s/applicationId/%s", keyVaultID, objectID, applicationID), nil
-		default:
+		applicationID := parameters["application_id"]
+		if applicationID == nil || applicationID == "" {
 			return fmt.Sprintf("%s/objectId/%s", keyVaultID, objectID), nil
 		}
+		return fmt.Sprintf("%s/objectId/%s/applicationId/%s", keyVaultID, objectID, applicationID), nil
 	}
 	return e
 }
