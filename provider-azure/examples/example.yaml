@@ -1,0 +1,58 @@
+# This example manifest was generated from this PR:
+# https://github.com/upbound/upjet/pull/15
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    enabledForDiskEncryption: true
+    location: West Europe
+    purgeProtectionEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+  providerConfigRef:
+    name: default
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-user
+  name: example-user
+spec:
+  forProvider:
+    keyPermissions:
+      - Get
+      - Create
+      - Delete
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${data.azurerm_client_config.current.object_id}
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+  providerConfigRef:
+    name: default
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: test-official-providers
+spec:
+  forProvider:
+    location: West Europe
+  providerConfigRef:
+    name: default
