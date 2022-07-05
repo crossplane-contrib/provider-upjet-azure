@@ -120,6 +120,7 @@ func GetProvider() *tjconfig.Provider {
 			ExternalNameConfigurations(),
 			groupOverrides(),
 			KnownReferences(),
+			UseAsync(),
 		),
 	)
 
