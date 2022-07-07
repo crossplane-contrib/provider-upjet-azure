@@ -1,0 +1,26 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallNetworkRuleCollection
+metadata:
+  name: example
+spec:
+  forProvider:
+    action: Allow
+    azureFirewallNameRef:
+      name: example
+    priority: 100
+    resourceGroupNameRef:
+      name: example
+    rule:
+    - destinationAddresses:
+      - 8.8.8.8
+      - 8.8.4.4
+      destinationPorts:
+      - "53"
+      name: testrule
+      protocols:
+      - TCP
+      - UDP
+      sourceAddresses:
+      - 10.0.0.0/16
+  providerConfigRef:
+    name: example

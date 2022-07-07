@@ -1,0 +1,27 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallNATRuleCollection
+metadata:
+  name: example
+spec:
+  forProvider:
+    action: Dnat
+    azureFirewallNameRef:
+      name: example
+    priority: 100
+    resourceGroupNameRef:
+      name: example
+    rule:
+    - destinationAddresses:
+      - ${azurerm_public_ip.example.ip_address}
+      destinationPorts:
+      - "53"
+      name: testrule
+      protocols:
+      - TCP
+      - UDP
+      sourceAddresses:
+      - 10.0.0.0/16
+      translatedAddress: 8.8.8.8
+      translatedPort: "53"
+  providerConfigRef:
+    name: example
