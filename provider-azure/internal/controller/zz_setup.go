@@ -115,6 +115,12 @@ import (
 	dnstxtrecord "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnstxtrecord"
 	dnszone "github.com/upbound/official-providers/provider-azure/internal/controller/network/dnszone"
 	expressroutecircuit "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressroutecircuit"
+	expressroutecircuitauthorization "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressroutecircuitauthorization"
+	expressroutecircuitconnection "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressroutecircuitconnection"
+	expressroutecircuitpeering "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressroutecircuitpeering"
+	expressrouteconnection "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressrouteconnection"
+	expressroutegateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressroutegateway"
+	expressrouteport "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressrouteport"
 	ipgroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/ipgroup"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
 	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
@@ -304,6 +310,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		dnstxtrecord.Setup,
 		dnszone.Setup,
 		expressroutecircuit.Setup,
+		expressroutecircuitauthorization.Setup,
+		expressroutecircuitconnection.Setup,
+		expressroutecircuitpeering.Setup,
+		expressrouteconnection.Setup,
+		expressroutegateway.Setup,
+		expressrouteport.Setup,
 		ipgroup.Setup,
 		loadbalancer.Setup,
 		loadbalancerbackendaddresspool.Setup,

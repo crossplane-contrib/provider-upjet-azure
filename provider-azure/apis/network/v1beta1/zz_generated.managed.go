@@ -931,6 +931,402 @@ func (mg *ExpressRouteCircuit) SetWriteConnectionSecretToReference(r *xpv1.Secre
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ExpressRouteCircuitAuthorization.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ExpressRouteCircuitAuthorization) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ExpressRouteCircuitAuthorization.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ExpressRouteCircuitAuthorization) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ExpressRouteCircuitConnection.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ExpressRouteCircuitConnection) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ExpressRouteCircuitConnection.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ExpressRouteCircuitConnection) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ExpressRouteCircuitPeering.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ExpressRouteCircuitPeering) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ExpressRouteCircuitPeering.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ExpressRouteCircuitPeering) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ExpressRouteConnection.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ExpressRouteConnection) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ExpressRouteConnection.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ExpressRouteConnection) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ExpressRouteGateway.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ExpressRouteGateway) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ExpressRouteGateway.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ExpressRouteGateway) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ExpressRoutePort.
+func (mg *ExpressRoutePort) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ExpressRoutePort.
+func (mg *ExpressRoutePort) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ExpressRoutePort.
+func (mg *ExpressRoutePort) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ExpressRoutePort.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ExpressRoutePort) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ExpressRoutePort.
+func (mg *ExpressRoutePort) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ExpressRoutePort.
+func (mg *ExpressRoutePort) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ExpressRoutePort.
+func (mg *ExpressRoutePort) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ExpressRoutePort.
+func (mg *ExpressRoutePort) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ExpressRoutePort.
+func (mg *ExpressRoutePort) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ExpressRoutePort.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ExpressRoutePort) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ExpressRoutePort.
+func (mg *ExpressRoutePort) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ExpressRoutePort.
+func (mg *ExpressRoutePort) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this IPGroup.
 func (mg *IPGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

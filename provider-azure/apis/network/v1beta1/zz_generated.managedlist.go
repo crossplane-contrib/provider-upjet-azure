@@ -124,8 +124,62 @@ func (l *DNSZoneList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ExpressRouteCircuitAuthorizationList.
+func (l *ExpressRouteCircuitAuthorizationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ExpressRouteCircuitConnectionList.
+func (l *ExpressRouteCircuitConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ExpressRouteCircuitList.
 func (l *ExpressRouteCircuitList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ExpressRouteCircuitPeeringList.
+func (l *ExpressRouteCircuitPeeringList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ExpressRouteConnectionList.
+func (l *ExpressRouteConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ExpressRouteGatewayList.
+func (l *ExpressRouteGatewayList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ExpressRoutePortList.
+func (l *ExpressRoutePortList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

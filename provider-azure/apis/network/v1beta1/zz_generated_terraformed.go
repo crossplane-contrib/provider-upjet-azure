@@ -901,6 +901,450 @@ func (tr *ExpressRouteCircuit) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ExpressRouteCircuitAuthorization
+func (mg *ExpressRouteCircuitAuthorization) GetTerraformResourceType() string {
+	return "azurerm_express_route_circuit_authorization"
+}
+
+// GetConnectionDetailsMapping for this ExpressRouteCircuitAuthorization
+func (tr *ExpressRouteCircuitAuthorization) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"authorization_key": "status.atProvider.authorizationKey"}
+}
+
+// GetObservation of this ExpressRouteCircuitAuthorization
+func (tr *ExpressRouteCircuitAuthorization) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ExpressRouteCircuitAuthorization
+func (tr *ExpressRouteCircuitAuthorization) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ExpressRouteCircuitAuthorization
+func (tr *ExpressRouteCircuitAuthorization) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ExpressRouteCircuitAuthorization
+func (tr *ExpressRouteCircuitAuthorization) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ExpressRouteCircuitAuthorization
+func (tr *ExpressRouteCircuitAuthorization) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ExpressRouteCircuitAuthorization using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ExpressRouteCircuitAuthorization) LateInitialize(attrs []byte) (bool, error) {
+	params := &ExpressRouteCircuitAuthorizationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ExpressRouteCircuitAuthorization) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ExpressRouteCircuitConnection
+func (mg *ExpressRouteCircuitConnection) GetTerraformResourceType() string {
+	return "azurerm_express_route_circuit_connection"
+}
+
+// GetConnectionDetailsMapping for this ExpressRouteCircuitConnection
+func (tr *ExpressRouteCircuitConnection) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"authorization_key": "spec.forProvider.authorizationKeySecretRef"}
+}
+
+// GetObservation of this ExpressRouteCircuitConnection
+func (tr *ExpressRouteCircuitConnection) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ExpressRouteCircuitConnection
+func (tr *ExpressRouteCircuitConnection) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ExpressRouteCircuitConnection
+func (tr *ExpressRouteCircuitConnection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ExpressRouteCircuitConnection
+func (tr *ExpressRouteCircuitConnection) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ExpressRouteCircuitConnection
+func (tr *ExpressRouteCircuitConnection) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ExpressRouteCircuitConnection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ExpressRouteCircuitConnection) LateInitialize(attrs []byte) (bool, error) {
+	params := &ExpressRouteCircuitConnectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ExpressRouteCircuitConnection) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ExpressRouteCircuitPeering
+func (mg *ExpressRouteCircuitPeering) GetTerraformResourceType() string {
+	return "azurerm_express_route_circuit_peering"
+}
+
+// GetConnectionDetailsMapping for this ExpressRouteCircuitPeering
+func (tr *ExpressRouteCircuitPeering) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"shared_key": "spec.forProvider.sharedKeySecretRef"}
+}
+
+// GetObservation of this ExpressRouteCircuitPeering
+func (tr *ExpressRouteCircuitPeering) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ExpressRouteCircuitPeering
+func (tr *ExpressRouteCircuitPeering) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ExpressRouteCircuitPeering
+func (tr *ExpressRouteCircuitPeering) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ExpressRouteCircuitPeering
+func (tr *ExpressRouteCircuitPeering) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ExpressRouteCircuitPeering
+func (tr *ExpressRouteCircuitPeering) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ExpressRouteCircuitPeering using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ExpressRouteCircuitPeering) LateInitialize(attrs []byte) (bool, error) {
+	params := &ExpressRouteCircuitPeeringParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ExpressRouteCircuitPeering) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ExpressRouteConnection
+func (mg *ExpressRouteConnection) GetTerraformResourceType() string {
+	return "azurerm_express_route_connection"
+}
+
+// GetConnectionDetailsMapping for this ExpressRouteConnection
+func (tr *ExpressRouteConnection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ExpressRouteConnection
+func (tr *ExpressRouteConnection) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ExpressRouteConnection
+func (tr *ExpressRouteConnection) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ExpressRouteConnection
+func (tr *ExpressRouteConnection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ExpressRouteConnection
+func (tr *ExpressRouteConnection) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ExpressRouteConnection
+func (tr *ExpressRouteConnection) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ExpressRouteConnection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ExpressRouteConnection) LateInitialize(attrs []byte) (bool, error) {
+	params := &ExpressRouteConnectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ExpressRouteConnection) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ExpressRouteGateway
+func (mg *ExpressRouteGateway) GetTerraformResourceType() string {
+	return "azurerm_express_route_gateway"
+}
+
+// GetConnectionDetailsMapping for this ExpressRouteGateway
+func (tr *ExpressRouteGateway) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ExpressRouteGateway
+func (tr *ExpressRouteGateway) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ExpressRouteGateway
+func (tr *ExpressRouteGateway) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ExpressRouteGateway
+func (tr *ExpressRouteGateway) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ExpressRouteGateway
+func (tr *ExpressRouteGateway) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ExpressRouteGateway
+func (tr *ExpressRouteGateway) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ExpressRouteGateway using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ExpressRouteGateway) LateInitialize(attrs []byte) (bool, error) {
+	params := &ExpressRouteGatewayParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ExpressRouteGateway) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ExpressRoutePort
+func (mg *ExpressRoutePort) GetTerraformResourceType() string {
+	return "azurerm_express_route_port"
+}
+
+// GetConnectionDetailsMapping for this ExpressRoutePort
+func (tr *ExpressRoutePort) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ExpressRoutePort
+func (tr *ExpressRoutePort) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ExpressRoutePort
+func (tr *ExpressRoutePort) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ExpressRoutePort
+func (tr *ExpressRoutePort) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ExpressRoutePort
+func (tr *ExpressRoutePort) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ExpressRoutePort
+func (tr *ExpressRoutePort) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ExpressRoutePort using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ExpressRoutePort) LateInitialize(attrs []byte) (bool, error) {
+	params := &ExpressRoutePortParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ExpressRoutePort) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this IPGroup
 func (mg *IPGroup) GetTerraformResourceType() string {
 	return "azurerm_ip_group"

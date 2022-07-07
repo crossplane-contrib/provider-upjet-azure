@@ -1,0 +1,26 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteCircuitPeering
+metadata:
+  name: example
+spec:
+  forProvider:
+    expressRouteCircuitNameRef:
+      name: example
+    ipv6:
+    - microsoftPeering:
+      - advertisedPublicPrefixes:
+        - 2002:db01::/126
+      primaryPeerAddressPrefix: 2002:db01::/126
+      secondaryPeerAddressPrefix: 2003:db01::/126
+    microsoftPeeringConfig:
+    - advertisedPublicPrefixes:
+      - 123.1.0.0/24
+    peerAsn: 100
+    peeringType: MicrosoftPeering
+    primaryPeerAddressPrefix: 123.0.0.0/30
+    resourceGroupNameRef:
+      name: example
+    secondaryPeerAddressPrefix: 123.0.0.4/30
+    vlanId: 300
+  providerConfigRef:
+    name: example
