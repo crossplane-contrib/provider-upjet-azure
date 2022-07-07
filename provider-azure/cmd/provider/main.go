@@ -45,6 +45,8 @@ import (
 	"github.com/upbound/official-providers/provider-azure/internal/features"
 )
 
+const upboundCTXEnv = "UPBOUND_CONTEXT"
+
 func main() {
 	var (
 		app                = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for Azure").DefaultEnvars()
@@ -60,6 +62,12 @@ func main() {
 		namespace                  = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		enableExternalSecretStores = app.Flag("enable-external-secret-stores", "Enable support for ExternalSecretStores.").Default("false").Envar("ENABLE_EXTERNAL_SECRET_STORES").Bool()
 	)
+
+	// If UPBOUND_CONTEXT is not set, we refuse to run.
+	if _, set := os.LookupEnv(upboundCTXEnv); !set {
+		kingpin.Fatalf("Running this provider outside of an Upbound distribution is prohibited by license. Please contact support for more information.")
+	}
+
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
 	zl := zap.New(zap.UseDevMode(*debug))
