@@ -13,7 +13,7 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuit
 metadata:
-  name: example
+  name: example-circuit
 spec:
   forProvider:
     bandwidthInMbps: 50
@@ -37,7 +37,7 @@ metadata:
 spec:
   forProvider:
     expressRouteCircuitNameRef:
-      name: example
+      name: example-circuit
     resourceGroupNameRef:
       name: example-expressroute-rg
   providerConfigRef:
@@ -52,7 +52,7 @@ metadata:
 spec:
   forProvider:
     expressRouteCircuitNameRef:
-      name: example
+      name: example-circuit
     ipv6:
     - microsoftPeering:
       - advertisedPublicPrefixes:
@@ -70,3 +70,77 @@ spec:
     vlanId: 300
   providerConfigRef:
     name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualWAN
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-expressroute-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHub
+metadata:
+  name: example
+spec:
+  forProvider:
+    addressPrefix: 10.0.0.0/23
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-expressroute-rg
+    virtualWanIdRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-expressroute-rg
+    scaleUnits: 1
+    tags:
+      environment: Production
+    virtualHubIdRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteConnection
+metadata:
+  name: example-route-connection
+spec:
+  forProvider:
+    expressRouteCircuitPeeringIdRef:
+      name: example
+    expressRouteGatewayIdRef:
+      name: example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRoutePort
+metadata:
+  name: example
+spec:
+  forProvider:
+    bandwidthInGbps: 10
+    encapsulation: Dot1Q
+    location: West Europe
+    # example from tf registry failed, I picked location from `az network express-route port location list`
+    peeringLocation: VantageDC-Newport-NGD
+    resourceGroupNameRef:
+      name: example-expressroute-rg
+  providerConfigRef:
+    name: example
+
