@@ -1,0 +1,16 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    scaleUnits: 1
+    tags:
+      environment: Production
+    virtualHubIdRef:
+      name: example
+  providerConfigRef:
+    name: example

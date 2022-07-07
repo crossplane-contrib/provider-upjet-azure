@@ -1,0 +1,17 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteCircuitConnection
+metadata:
+  name: example
+spec:
+  forProvider:
+    addressPrefixIpv4: 192.169.9.0/29
+    authorizationKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    peerPeeringIdRef:
+      name: example
+    peeringIdRef:
+      name: example
+  providerConfigRef:
+    name: example

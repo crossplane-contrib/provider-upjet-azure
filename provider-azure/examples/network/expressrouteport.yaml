@@ -1,0 +1,15 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRoutePort
+metadata:
+  name: example
+spec:
+  forProvider:
+    bandwidthInGbps: 10
+    encapsulation: Dot1Q
+    location: West Europe
+    # example from tf registry failed, I picked location from `az network express-route port location list`
+    peeringLocation: VantageDC-Newport-NGD
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

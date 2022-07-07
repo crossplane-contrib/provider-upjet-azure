@@ -402,7 +402,47 @@ func Configure(p *config.Provider) {
 			Type:      "VPNServerConfiguration",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
-		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("azurerm_express_route_circuit_authorization", func(r *config.Resource) {
+		r.References["express_route_circuit_name"] = config.Reference{
+			Type: "ExpressRouteCircuit",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_express_route_circuit_peering", func(r *config.Resource) {
+		r.References["express_route_circuit_name"] = config.Reference{
+			Type: "ExpressRouteCircuit",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_express_route_circuit_connection", func(r *config.Resource) {
+		r.References["peering_id"] = config.Reference{
+			Type:      "ExpressRouteCircuitPeering",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["peer_peering_id"] = config.Reference{
+			Type:      "ExpressRouteCircuitPeering",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_express_route_gateway", func(r *config.Resource) {
+		r.References["virtual_hub_id"] = config.Reference{
+			Type:      "VirtualHub",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_express_route_connection", func(r *config.Resource) {
+		r.References["express_route_gateway_id"] = config.Reference{
+			Type:      "ExpressRouteGateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["express_route_circuit_peering_id"] = config.Reference{
+			Type:      "ExpressRouteCircuitPeering",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {

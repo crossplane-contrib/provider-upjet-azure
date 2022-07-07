@@ -85,18 +85,6 @@ type PointToSiteVPNGatewayParameters struct {
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
-type PropagatedRouteTableObservation struct {
-}
-
-type PropagatedRouteTableParameters struct {
-
-	// +kubebuilder:validation:Required
-	Ids []*string `json:"ids" tf:"ids,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
-}
-
 type RouteObservation struct {
 }
 
@@ -106,7 +94,19 @@ type RouteParameters struct {
 	AssociatedRouteTableID *string `json:"associatedRouteTableId" tf:"associated_route_table_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	PropagatedRouteTable []PropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+	PropagatedRouteTable []RoutePropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+}
+
+type RoutePropagatedRouteTableObservation struct {
+}
+
+type RoutePropagatedRouteTableParameters struct {
+
+	// +kubebuilder:validation:Required
+	Ids []*string `json:"ids" tf:"ids,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type VPNClientAddressPoolObservation struct {

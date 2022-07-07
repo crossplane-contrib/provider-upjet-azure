@@ -497,6 +497,268 @@ func (mg *DNSZone) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this ExpressRouteCircuit.
+func (mg *ExpressRouteCircuit) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ExpressRouteCircuitAuthorization.
+func (mg *ExpressRouteCircuitAuthorization) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExpressRouteCircuitName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ExpressRouteCircuitNameRef,
+		Selector:     mg.Spec.ForProvider.ExpressRouteCircuitNameSelector,
+		To: reference.To{
+			List:    &ExpressRouteCircuitList{},
+			Managed: &ExpressRouteCircuit{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ExpressRouteCircuitName")
+	}
+	mg.Spec.ForProvider.ExpressRouteCircuitName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ExpressRouteCircuitNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ExpressRouteCircuitConnection.
+func (mg *ExpressRouteCircuitConnection) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeerPeeringID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PeerPeeringIDRef,
+		Selector:     mg.Spec.ForProvider.PeerPeeringIDSelector,
+		To: reference.To{
+			List:    &ExpressRouteCircuitPeeringList{},
+			Managed: &ExpressRouteCircuitPeering{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PeerPeeringID")
+	}
+	mg.Spec.ForProvider.PeerPeeringID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PeerPeeringIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PeeringID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PeeringIDRef,
+		Selector:     mg.Spec.ForProvider.PeeringIDSelector,
+		To: reference.To{
+			List:    &ExpressRouteCircuitPeeringList{},
+			Managed: &ExpressRouteCircuitPeering{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PeeringID")
+	}
+	mg.Spec.ForProvider.PeeringID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PeeringIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ExpressRouteCircuitPeering.
+func (mg *ExpressRouteCircuitPeering) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExpressRouteCircuitName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ExpressRouteCircuitNameRef,
+		Selector:     mg.Spec.ForProvider.ExpressRouteCircuitNameSelector,
+		To: reference.To{
+			List:    &ExpressRouteCircuitList{},
+			Managed: &ExpressRouteCircuit{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ExpressRouteCircuitName")
+	}
+	mg.Spec.ForProvider.ExpressRouteCircuitName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ExpressRouteCircuitNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ExpressRouteConnection.
+func (mg *ExpressRouteConnection) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExpressRouteCircuitPeeringID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ExpressRouteCircuitPeeringIDRef,
+		Selector:     mg.Spec.ForProvider.ExpressRouteCircuitPeeringIDSelector,
+		To: reference.To{
+			List:    &ExpressRouteCircuitPeeringList{},
+			Managed: &ExpressRouteCircuitPeering{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ExpressRouteCircuitPeeringID")
+	}
+	mg.Spec.ForProvider.ExpressRouteCircuitPeeringID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ExpressRouteCircuitPeeringIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExpressRouteGatewayID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ExpressRouteGatewayIDRef,
+		Selector:     mg.Spec.ForProvider.ExpressRouteGatewayIDSelector,
+		To: reference.To{
+			List:    &ExpressRouteGatewayList{},
+			Managed: &ExpressRouteGateway{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ExpressRouteGatewayID")
+	}
+	mg.Spec.ForProvider.ExpressRouteGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ExpressRouteGatewayIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ExpressRouteGateway.
+func (mg *ExpressRouteGateway) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualHubID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualHubIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualHubIDSelector,
+		To: reference.To{
+			List:    &VirtualHubList{},
+			Managed: &VirtualHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualHubID")
+	}
+	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ExpressRoutePort.
+func (mg *ExpressRoutePort) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this IPGroup.
 func (mg *IPGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
