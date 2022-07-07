@@ -445,6 +445,17 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_firewall", func(r *config.Resource) {
+		r.References["ip_configuration.subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["ip_configuration.public_ip_address_id"] = config.Reference{
+			Type:      "PublicIP",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
 		r.References = config.References{
 			"resource_group_name": config.Reference{

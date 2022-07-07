@@ -1,0 +1,78 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-fw-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-fw-rg
+    addressSpace:
+      - "10.0.0.0/16"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet
+  annotations:
+    crossplane.io/external-name: AzureFirewallSubnet
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-fw-rg
+    virtualNetworkNameRef:
+      name: example-vn
+    addressPrefixes:
+      - "10.0.1.0/24"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  name: example
+spec:
+  forProvider:
+    sku: Standard
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-fw-rg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: default
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Firewall
+metadata:
+  name: example
+spec:
+  forProvider:
+    skuName: AZFW_VNet
+    skuTier: Standard
+    ipConfiguration:
+    - name: configuration
+      publicIpAddressIdRef:
+        name: example
+      subnetIdRef:
+        name: example-subnet
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-fw-rg
+  providerConfigRef:
+    name: example

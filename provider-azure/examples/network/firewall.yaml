@@ -1,0 +1,19 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Firewall
+metadata:
+  name: example
+spec:
+  forProvider:
+    skuName: AZFW_VNet
+    skuTier: Standard
+    ipConfiguration:
+    - name: configuration
+      publicIpAddressIdRef:
+        name: example
+      subnetIdRef:
+        name: example
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

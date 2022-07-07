@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type VirtualHubObservation struct {
+type VirtualHubObservation_2 struct {
 	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -23,7 +23,7 @@ type VirtualHubObservation struct {
 	VirtualRouterIps []*string `json:"virtualRouterIps,omitempty" tf:"virtual_router_ips,omitempty"`
 }
 
-type VirtualHubParameters struct {
+type VirtualHubParameters_2 struct {
 
 	// +kubebuilder:validation:Optional
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
@@ -77,13 +77,13 @@ type VirtualHubRouteParameters struct {
 // VirtualHubSpec defines the desired state of VirtualHub
 type VirtualHubSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     VirtualHubParameters `json:"forProvider"`
+	ForProvider     VirtualHubParameters_2 `json:"forProvider"`
 }
 
 // VirtualHubStatus defines the observed state of VirtualHub.
 type VirtualHubStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        VirtualHubObservation `json:"atProvider,omitempty"`
+	AtProvider        VirtualHubObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

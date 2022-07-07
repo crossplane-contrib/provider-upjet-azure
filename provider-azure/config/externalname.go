@@ -187,6 +187,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_express_route_gateway":                     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/expressRouteGateways/{{ .externalName }}"),
 	"azurerm_express_route_circuit_connection":          config.TemplatedStringAsIdentifier("name", "{{ .parameters.peering_id }}/connections/{{ .externalName }}"),
 	"azurerm_express_route_connection":                  config.TemplatedStringAsIdentifier("name", "{{ .parameters.express_route_gateway_id }}/expressRouteConnections/{{ .externalName }}"),
+	"azurerm_firewall":                                  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/azureFirewalls/{{ .externalName }}"),
 	// Made up of arguments.
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/microsoft.network/networkInterfaces/nic1/ipConfigurations/example|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/inboundNatRules/rule1
 	"azurerm_network_interface_security_group_association": config.IdentifierFromProvider,
