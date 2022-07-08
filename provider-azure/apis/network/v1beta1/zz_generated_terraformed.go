@@ -1345,6 +1345,450 @@ func (tr *ExpressRoutePort) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this Firewall
+func (mg *Firewall) GetTerraformResourceType() string {
+	return "azurerm_firewall"
+}
+
+// GetConnectionDetailsMapping for this Firewall
+func (tr *Firewall) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this Firewall
+func (tr *Firewall) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this Firewall
+func (tr *Firewall) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this Firewall
+func (tr *Firewall) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this Firewall
+func (tr *Firewall) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this Firewall
+func (tr *Firewall) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this Firewall using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *Firewall) LateInitialize(attrs []byte) (bool, error) {
+	params := &FirewallParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *Firewall) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this FirewallApplicationRuleCollection
+func (mg *FirewallApplicationRuleCollection) GetTerraformResourceType() string {
+	return "azurerm_firewall_application_rule_collection"
+}
+
+// GetConnectionDetailsMapping for this FirewallApplicationRuleCollection
+func (tr *FirewallApplicationRuleCollection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FirewallApplicationRuleCollection
+func (tr *FirewallApplicationRuleCollection) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FirewallApplicationRuleCollection
+func (tr *FirewallApplicationRuleCollection) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FirewallApplicationRuleCollection
+func (tr *FirewallApplicationRuleCollection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FirewallApplicationRuleCollection
+func (tr *FirewallApplicationRuleCollection) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FirewallApplicationRuleCollection
+func (tr *FirewallApplicationRuleCollection) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this FirewallApplicationRuleCollection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FirewallApplicationRuleCollection) LateInitialize(attrs []byte) (bool, error) {
+	params := &FirewallApplicationRuleCollectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FirewallApplicationRuleCollection) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this FirewallNATRuleCollection
+func (mg *FirewallNATRuleCollection) GetTerraformResourceType() string {
+	return "azurerm_firewall_nat_rule_collection"
+}
+
+// GetConnectionDetailsMapping for this FirewallNATRuleCollection
+func (tr *FirewallNATRuleCollection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FirewallNATRuleCollection
+func (tr *FirewallNATRuleCollection) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FirewallNATRuleCollection
+func (tr *FirewallNATRuleCollection) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FirewallNATRuleCollection
+func (tr *FirewallNATRuleCollection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FirewallNATRuleCollection
+func (tr *FirewallNATRuleCollection) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FirewallNATRuleCollection
+func (tr *FirewallNATRuleCollection) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this FirewallNATRuleCollection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FirewallNATRuleCollection) LateInitialize(attrs []byte) (bool, error) {
+	params := &FirewallNATRuleCollectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FirewallNATRuleCollection) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this FirewallNetworkRuleCollection
+func (mg *FirewallNetworkRuleCollection) GetTerraformResourceType() string {
+	return "azurerm_firewall_network_rule_collection"
+}
+
+// GetConnectionDetailsMapping for this FirewallNetworkRuleCollection
+func (tr *FirewallNetworkRuleCollection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FirewallNetworkRuleCollection
+func (tr *FirewallNetworkRuleCollection) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FirewallNetworkRuleCollection
+func (tr *FirewallNetworkRuleCollection) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FirewallNetworkRuleCollection
+func (tr *FirewallNetworkRuleCollection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FirewallNetworkRuleCollection
+func (tr *FirewallNetworkRuleCollection) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FirewallNetworkRuleCollection
+func (tr *FirewallNetworkRuleCollection) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this FirewallNetworkRuleCollection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FirewallNetworkRuleCollection) LateInitialize(attrs []byte) (bool, error) {
+	params := &FirewallNetworkRuleCollectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FirewallNetworkRuleCollection) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this FirewallPolicy
+func (mg *FirewallPolicy) GetTerraformResourceType() string {
+	return "azurerm_firewall_policy"
+}
+
+// GetConnectionDetailsMapping for this FirewallPolicy
+func (tr *FirewallPolicy) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FirewallPolicy
+func (tr *FirewallPolicy) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FirewallPolicy
+func (tr *FirewallPolicy) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FirewallPolicy
+func (tr *FirewallPolicy) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FirewallPolicy
+func (tr *FirewallPolicy) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FirewallPolicy
+func (tr *FirewallPolicy) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this FirewallPolicy using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FirewallPolicy) LateInitialize(attrs []byte) (bool, error) {
+	params := &FirewallPolicyParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FirewallPolicy) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this FirewallPolicyRuleCollectionGroup
+func (mg *FirewallPolicyRuleCollectionGroup) GetTerraformResourceType() string {
+	return "azurerm_firewall_policy_rule_collection_group"
+}
+
+// GetConnectionDetailsMapping for this FirewallPolicyRuleCollectionGroup
+func (tr *FirewallPolicyRuleCollectionGroup) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FirewallPolicyRuleCollectionGroup
+func (tr *FirewallPolicyRuleCollectionGroup) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FirewallPolicyRuleCollectionGroup
+func (tr *FirewallPolicyRuleCollectionGroup) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FirewallPolicyRuleCollectionGroup
+func (tr *FirewallPolicyRuleCollectionGroup) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FirewallPolicyRuleCollectionGroup
+func (tr *FirewallPolicyRuleCollectionGroup) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FirewallPolicyRuleCollectionGroup
+func (tr *FirewallPolicyRuleCollectionGroup) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this FirewallPolicyRuleCollectionGroup using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FirewallPolicyRuleCollectionGroup) LateInitialize(attrs []byte) (bool, error) {
+	params := &FirewallPolicyRuleCollectionGroupParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FirewallPolicyRuleCollectionGroup) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this IPGroup
 func (mg *IPGroup) GetTerraformResourceType() string {
 	return "azurerm_ip_group"
@@ -4734,7 +5178,7 @@ func (tr *VirtualHub) SetParameters(params map[string]interface{}) error {
 // LateInitialize this VirtualHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *VirtualHub) LateInitialize(attrs []byte) (bool, error) {
-	params := &VirtualHubParameters{}
+	params := &VirtualHubParameters_2{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}

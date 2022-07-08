@@ -1,0 +1,23 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallApplicationRuleCollection
+metadata:
+  name: example
+spec:
+  forProvider:
+    action: Allow
+    azureFirewallNameRef:
+      name: example
+    priority: 100
+    resourceGroupNameRef:
+      name: example
+    rule:
+    - name: testrule
+      protocol:
+      - port: "443"
+        type: Https
+      sourceAddresses:
+      - 10.0.0.0/16
+      targetFqdns:
+      - '*.google.com'
+  providerConfigRef:
+    name: example

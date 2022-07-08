@@ -1,0 +1,60 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallPolicyRuleCollectionGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationRuleCollection:
+    - action: Deny
+      name: app_rule_collection1
+      priority: 500
+      rule:
+      - destinationFqdns:
+        - .microsoft.com
+        name: app_rule_collection1_rule1
+        protocols:
+        - port: 80
+          type: Http
+        - port: 443
+          type: Https
+        sourceAddresses:
+        - 10.0.0.1
+    firewallPolicyIdRef:
+      name: example
+    natRuleCollection:
+    - action: Dnat
+      name: nat_rule_collection1
+      priority: 300
+      rule:
+      - destinationAddress: 192.168.1.1
+        destinationPorts:
+        - "80"
+        name: nat_rule_collection1_rule1
+        protocols:
+        - TCP
+        - UDP
+        sourceAddresses:
+        - 10.0.0.1
+        - 10.0.0.2
+        translatedAddress: 192.168.0.1
+        translatedPort: 8080
+    networkRuleCollection:
+    - action: Deny
+      name: network_rule_collection1
+      priority: 400
+      rule:
+      - destinationAddresses:
+        - 192.168.1.1
+        - 192.168.1.2
+        destinationPorts:
+        - "80"
+        - 1000-2000
+        name: network_rule_collection1_rule1
+        protocols:
+        - TCP
+        - UDP
+        sourceAddresses:
+        - 10.0.0.1
+    priority: 500
+  providerConfigRef:
+    name: example

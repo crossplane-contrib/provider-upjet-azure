@@ -1,0 +1,230 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-fw-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-fw-rg
+    addressSpace:
+      - "10.0.0.0/16"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet
+  annotations:
+    crossplane.io/external-name: AzureFirewallSubnet
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-fw-rg
+    virtualNetworkNameRef:
+      name: example-vn
+    addressPrefixes:
+      - "10.0.1.0/24"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  name: example
+spec:
+  forProvider:
+    sku: Standard
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-fw-rg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: default
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Firewall
+metadata:
+  name: example
+spec:
+  forProvider:
+    skuName: AZFW_VNet
+    skuTier: Standard
+    ipConfiguration:
+    - name: configuration
+      publicIpAddressIdRef:
+        name: example
+      subnetIdRef:
+        name: example-subnet
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-fw-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallApplicationRuleCollection
+metadata:
+  name: example
+spec:
+  forProvider:
+    action: Allow
+    azureFirewallNameRef:
+      name: example
+    priority: 100
+    resourceGroupNameRef:
+      name: example-fw-rg
+    rule:
+    - name: testrule
+      protocol:
+      - port: 443
+        type: Https
+      sourceAddresses:
+      - 10.0.0.0/16
+      targetFqdns:
+      - '*.google.com'
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallNATRuleCollection
+metadata:
+  name: example
+spec:
+  forProvider:
+    action: Dnat
+    azureFirewallNameRef:
+      name: example
+    priority: 100
+    resourceGroupNameRef:
+      name: example-fw-rg
+    rule:
+    - destinationAddresses:
+      - 20.234.229.195 # manually injected, Composition required for the full automation
+      destinationPorts:
+      - "53"
+      name: testrule
+      protocols:
+      - TCP
+      - UDP
+      sourceAddresses:
+      - 10.0.0.0/16
+      translatedAddress: 8.8.8.8
+      translatedPort: "53"
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallNetworkRuleCollection
+metadata:
+  name: example
+spec:
+  forProvider:
+    action: Allow
+    azureFirewallNameRef:
+      name: example
+    priority: 100
+    resourceGroupNameRef:
+      name: example-fw-rg
+    rule:
+    - destinationAddresses:
+      - 8.8.8.8
+      - 8.8.4.4
+      destinationPorts:
+      - "53"
+      name: testrule
+      protocols:
+      - TCP
+      - UDP
+      sourceAddresses:
+      - 10.0.0.0/16
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-fw-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FirewallPolicyRuleCollectionGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    applicationRuleCollection:
+    - action: Deny
+      name: app_rule_collection1
+      priority: 500
+      rule:
+      - destinationFqdns:
+        - test.upbound.io
+        name: app_rule_collection1_rule1
+        protocols:
+        - port: 80
+          type: Http
+        - port: 443
+          type: Https
+        sourceAddresses:
+        - 10.0.0.1
+    firewallPolicyIdRef:
+      name: example
+    natRuleCollection:
+    - action: Dnat
+      name: nat_rule_collection1
+      priority: 300
+      rule:
+      - destinationAddress: 192.168.1.1
+        destinationPorts:
+        - "80"
+        name: nat_rule_collection1_rule1
+        protocols:
+        - TCP
+        - UDP
+        sourceAddresses:
+        - 10.0.0.1
+        - 10.0.0.2
+        translatedAddress: 192.168.0.1
+        translatedPort: 8080
+    networkRuleCollection:
+    - action: Deny
+      name: network_rule_collection1
+      priority: 400
+      rule:
+      - destinationAddresses:
+        - 192.168.1.1
+        - 192.168.1.2
+        destinationPorts:
+        - "80"
+        - 1000-2000
+        name: network_rule_collection1_rule1
+        protocols:
+        - TCP
+        - UDP
+        sourceAddresses:
+        - 10.0.0.1
+    priority: 500
+  providerConfigRef:
+    name: example

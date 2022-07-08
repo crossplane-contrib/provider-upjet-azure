@@ -445,6 +445,42 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_firewall", func(r *config.Resource) {
+		r.References["ip_configuration.subnet_id"] = config.Reference{
+			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["ip_configuration.public_ip_address_id"] = config.Reference{
+			Type:      "PublicIP",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_firewall_application_rule_collection", func(r *config.Resource) {
+		r.References["azure_firewall_name"] = config.Reference{
+			Type: "Firewall",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_firewall_nat_rule_collection", func(r *config.Resource) {
+		r.References["azure_firewall_name"] = config.Reference{
+			Type: "Firewall",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_firewall_network_rule_collection", func(r *config.Resource) {
+		r.References["azure_firewall_name"] = config.Reference{
+			Type: "Firewall",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_firewall_policy_rule_collection_group", func(r *config.Resource) {
+		r.References["firewall_policy_id"] = config.Reference{
+			Type:      "FirewallPolicy",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
 		r.References = config.References{
 			"resource_group_name": config.Reference{

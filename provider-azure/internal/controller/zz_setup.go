@@ -121,6 +121,12 @@ import (
 	expressrouteconnection "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressrouteconnection"
 	expressroutegateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressroutegateway"
 	expressrouteport "github.com/upbound/official-providers/provider-azure/internal/controller/network/expressrouteport"
+	firewall "github.com/upbound/official-providers/provider-azure/internal/controller/network/firewall"
+	firewallapplicationrulecollection "github.com/upbound/official-providers/provider-azure/internal/controller/network/firewallapplicationrulecollection"
+	firewallnatrulecollection "github.com/upbound/official-providers/provider-azure/internal/controller/network/firewallnatrulecollection"
+	firewallnetworkrulecollection "github.com/upbound/official-providers/provider-azure/internal/controller/network/firewallnetworkrulecollection"
+	firewallpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/network/firewallpolicy"
+	firewallpolicyrulecollectiongroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/firewallpolicyrulecollectiongroup"
 	ipgroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/ipgroup"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
 	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
@@ -316,6 +322,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		expressrouteconnection.Setup,
 		expressroutegateway.Setup,
 		expressrouteport.Setup,
+		firewall.Setup,
+		firewallapplicationrulecollection.Setup,
+		firewallnatrulecollection.Setup,
+		firewallnetworkrulecollection.Setup,
+		firewallpolicy.Setup,
+		firewallpolicyrulecollectiongroup.Setup,
 		ipgroup.Setup,
 		loadbalancer.Setup,
 		loadbalancerbackendaddresspool.Setup,
