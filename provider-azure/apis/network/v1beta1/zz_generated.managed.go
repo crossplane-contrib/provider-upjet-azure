@@ -1723,6 +1723,270 @@ func (mg *FirewallPolicyRuleCollectionGroup) SetWriteConnectionSecretToReference
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this FrontDoor.
+func (mg *FrontDoor) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this FrontDoor.
+func (mg *FrontDoor) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this FrontDoor.
+func (mg *FrontDoor) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this FrontDoor.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *FrontDoor) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this FrontDoor.
+func (mg *FrontDoor) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this FrontDoor.
+func (mg *FrontDoor) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this FrontDoor.
+func (mg *FrontDoor) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this FrontDoor.
+func (mg *FrontDoor) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this FrontDoor.
+func (mg *FrontDoor) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this FrontDoor.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *FrontDoor) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this FrontDoor.
+func (mg *FrontDoor) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this FrontDoor.
+func (mg *FrontDoor) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this FrontdoorCustomHTTPSConfiguration.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *FrontdoorCustomHTTPSConfiguration) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this FrontdoorCustomHTTPSConfiguration.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *FrontdoorCustomHTTPSConfiguration) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this FrontdoorFirewallPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *FrontdoorFirewallPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this FrontdoorFirewallPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *FrontdoorFirewallPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this FrontdoorRulesEngine.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *FrontdoorRulesEngine) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this FrontdoorRulesEngine.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *FrontdoorRulesEngine) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this IPGroup.
 func (mg *IPGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

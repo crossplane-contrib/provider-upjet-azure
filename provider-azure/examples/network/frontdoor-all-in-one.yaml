@@ -1,0 +1,178 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-frontdoor-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FrontDoor
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendPool:
+    - backend:
+      - address: test.upbound-providers.io
+        hostHeader: test.upbound-providers.io
+        httpPort: 80
+        httpsPort: 443
+      healthProbeName: exampleHealthProbeSetting1
+      loadBalancingName: exampleLoadBalancingSettings1
+      name: exampleBackendBing
+    backendPoolHealthProbe:
+    - name: exampleHealthProbeSetting1
+    backendPoolLoadBalancing:
+    - name: exampleLoadBalancingSettings1
+    frontendEndpoint:
+    - hostName: example.azurefd.net
+      name: example
+    resourceGroupNameRef:
+      name: example-frontdoor-rg
+    routingRule:
+    - acceptedProtocols:
+      - Http
+      - Https
+      forwardingConfiguration:
+      - backendPoolName: exampleBackendBing
+        forwardingProtocol: MatchRequest
+      frontendEndpoints:
+      - example
+      name: exampleRoutingRule1
+      patternsToMatch:
+      - /*
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FrontdoorCustomHTTPSConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    customHttpsProvisioningEnabled: false
+    frontendEndpointId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-frontdoor-rg/providers/Microsoft.Network/frontDoors/example/frontendEndpoints/example
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FrontdoorFirewallPolicy
+metadata:
+  name: example
+spec:
+  forProvider:
+    customBlockResponseBody: PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==
+    customBlockResponseStatusCode: 403
+    customRule:
+    - action: Block
+      enabled: true
+      matchCondition:
+      - matchValues:
+        - 192.168.1.0/24
+        - 10.0.0.0/24
+        matchVariable: RemoteAddr
+        negationCondition: false
+        operator: IPMatch
+      name: Rule1
+      priority: 1
+      rateLimitDurationInMinutes: 1
+      rateLimitThreshold: 10
+      type: MatchRule
+    - action: Block
+      enabled: true
+      matchCondition:
+      - matchValues:
+        - 192.168.1.0/24
+        matchVariable: RemoteAddr
+        negationCondition: false
+        operator: IPMatch
+      - matchValues:
+        - windows
+        matchVariable: RequestHeader
+        negationCondition: false
+        operator: Contains
+        selector: UserAgent
+        transforms:
+        - Lowercase
+        - Trim
+      name: Rule2
+      priority: 2
+      rateLimitDurationInMinutes: 1
+      rateLimitThreshold: 10
+      type: MatchRule
+    enabled: true
+    managedRule:
+    - exclusion:
+      - matchVariable: QueryStringArgNames
+        operator: Equals
+        selector: not_suspicious
+      override:
+      - rule:
+        - action: Block
+          enabled: false
+          ruleId: "933100"
+        ruleGroupName: PHP
+      - exclusion:
+        - matchVariable: QueryStringArgNames
+          operator: Equals
+          selector: really_not_suspicious
+        rule:
+        - action: Block
+          exclusion:
+          - matchVariable: QueryStringArgNames
+            operator: Equals
+            selector: innocent
+          ruleId: "942200"
+        ruleGroupName: SQLI
+      type: DefaultRuleSet
+      version: "1.0"
+    - type: Microsoft_BotManagerRuleSet
+      version: "1.0"
+    mode: Prevention
+    redirectUrl: https://www.contoso.com
+    resourceGroupNameRef:
+      name: example-frontdoor-rg
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FrontdoorRulesEngine
+metadata:
+  name: example
+spec:
+  forProvider:
+    frontdoorNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example-frontdoor-rg
+    rule:
+    - action:
+      - responseHeader:
+        - headerActionType: Append
+          headerName: X-TEST-HEADER
+          value: Append Header Rule
+      name: debuggingoutput
+      priority: 1
+    - action:
+      - responseHeader:
+        - headerActionType: Overwrite
+          headerName: Access-Control-Allow-Origin
+          value: '*'
+        - headerActionType: Overwrite
+          headerName: Access-Control-Allow-Credentials
+          value: "true"
+      matchCondition:
+      - operator: Equal
+        value:
+        - GET
+        - POST
+        variable: RequestMethod
+      name: overwriteorigin
+      priority: 2
+  providerConfigRef:
+    name: example

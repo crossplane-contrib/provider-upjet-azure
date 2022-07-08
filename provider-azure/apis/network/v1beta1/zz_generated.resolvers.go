@@ -10,8 +10,9 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
-	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -1017,6 +1018,129 @@ func (mg *FirewallPolicyRuleCollectionGroup) ResolveReferences(ctx context.Conte
 	return nil
 }
 
+// ResolveReferences of this FrontDoor.
+func (mg *FrontDoor) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this FrontdoorCustomHTTPSConfiguration.
+func (mg *FrontdoorCustomHTTPSConfiguration) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CustomHTTPSConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomHTTPSConfiguration[i3].AzureKeyVaultCertificateVaultID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.CustomHTTPSConfiguration[i3].AzureKeyVaultCertificateVaultIDRef,
+			Selector:     mg.Spec.ForProvider.CustomHTTPSConfiguration[i3].AzureKeyVaultCertificateVaultIDSelector,
+			To: reference.To{
+				List:    &v1beta11.KeyList{},
+				Managed: &v1beta11.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CustomHTTPSConfiguration[i3].AzureKeyVaultCertificateVaultID")
+		}
+		mg.Spec.ForProvider.CustomHTTPSConfiguration[i3].AzureKeyVaultCertificateVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CustomHTTPSConfiguration[i3].AzureKeyVaultCertificateVaultIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this FrontdoorRulesEngine.
+func (mg *FrontdoorRulesEngine) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FrontdoorName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.FrontdoorNameRef,
+		Selector:     mg.Spec.ForProvider.FrontdoorNameSelector,
+		To: reference.To{
+			List:    &FrontDoorList{},
+			Managed: &FrontDoor{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FrontdoorName")
+	}
+	mg.Spec.ForProvider.FrontdoorName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FrontdoorNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this IPGroup.
 func (mg *IPGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -1745,8 +1869,8 @@ func (mg *PacketCapture) ResolveReferences(ctx context.Context, c client.Reader)
 			Reference:    mg.Spec.ForProvider.StorageLocation[i3].StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageLocation[i3].StorageAccountIDSelector,
 			To: reference.To{
-				List:    &v1beta11.AccountList{},
-				Managed: &v1beta11.Account{},
+				List:    &v1beta12.AccountList{},
+				Managed: &v1beta12.Account{},
 			},
 		})
 		if err != nil {
@@ -2979,8 +3103,8 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 		Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 		Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
 		To: reference.To{
-			List:    &v1beta11.AccountList{},
-			Managed: &v1beta11.Account{},
+			List:    &v1beta12.AccountList{},
+			Managed: &v1beta12.Account{},
 		},
 	})
 	if err != nil {

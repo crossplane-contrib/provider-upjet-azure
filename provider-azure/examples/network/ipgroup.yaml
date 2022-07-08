@@ -1,0 +1,29 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: IPGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    cidrs:
+    - 192.168.0.1
+    - 172.16.240.0/20
+    - 10.48.0.0/12
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-ipgroup-rg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-ipgroup-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+  providerConfigRef:
+    name: example
