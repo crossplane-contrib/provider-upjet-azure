@@ -112,10 +112,22 @@ type HTTPConfigurationParameters struct {
 	PreferHTTPS *bool `json:"preferHttps,omitempty" tf:"prefer_https,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	RequestHeader []RequestHeaderParameters `json:"requestHeader,omitempty" tf:"request_header,omitempty"`
+	RequestHeader []HTTPConfigurationRequestHeaderParameters `json:"requestHeader,omitempty" tf:"request_header,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ValidStatusCodeRanges []*string `json:"validStatusCodeRanges,omitempty" tf:"valid_status_code_ranges,omitempty"`
+}
+
+type HTTPConfigurationRequestHeaderObservation struct {
+}
+
+type HTTPConfigurationRequestHeaderParameters struct {
+
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type IcmpConfigurationObservation struct {
@@ -137,18 +149,6 @@ type ItemParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type RequestHeaderObservation struct {
-}
-
-type RequestHeaderParameters struct {
-
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type SuccessThresholdObservation struct {

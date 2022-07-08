@@ -194,6 +194,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_firewall_policy":                           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/firewallPolicies/{{ .externalName }}"),
 	"azurerm_firewall_policy_rule_collection_group":     config.TemplatedStringAsIdentifier("name", "{{ .parameters.firewall_policy_id }}/ruleCollectionGroups/{{ .externalName }}"),
 	"azurerm_frontdoor":                                 config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/frontDoors/{{ .externalName }}"),
+	"azurerm_frontdoor_firewall_policy":                 config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/{{ .externalName }}"),
+	"azurerm_frontdoor_rules_engine":                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/frontdoors/{{ .parameters.frontdoor_name }}/rulesengines/{{ .externalName }}"),
+	"azurerm_frontdoor_custom_https_configuration":      config.IdentifierFromProvider,
 	// Made up of arguments.
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/microsoft.network/networkInterfaces/nic1/ipConfigurations/example|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/loadBalancers/lb1/inboundNatRules/rule1
 	"azurerm_network_interface_security_group_association": config.IdentifierFromProvider,

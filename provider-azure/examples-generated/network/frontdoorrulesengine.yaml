@@ -1,0 +1,36 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: FrontdoorRulesEngine
+metadata:
+  name: example
+spec:
+  forProvider:
+    frontdoorNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+    rule:
+    - action:
+      - responseHeader:
+        - headerActionType: Append
+          headerName: X-TEST-HEADER
+          value: Append Header Rule
+      name: debuggingoutput
+      priority: 1
+    - action:
+      - responseHeader:
+        - headerActionType: Overwrite
+          headerName: Access-Control-Allow-Origin
+          value: '*'
+        - headerActionType: Overwrite
+          headerName: Access-Control-Allow-Credentials
+          value: "true"
+      matchCondition:
+      - operator: Equal
+        value:
+        - GET
+        - POST
+        variable: RequestMethod
+      name: overwriteorigin
+      priority: 2
+  providerConfigRef:
+    name: example

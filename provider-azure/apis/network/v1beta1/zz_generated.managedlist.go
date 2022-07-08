@@ -250,6 +250,33 @@ func (l *FrontDoorList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this FrontdoorCustomHTTPSConfigurationList.
+func (l *FrontdoorCustomHTTPSConfigurationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this FrontdoorFirewallPolicyList.
+func (l *FrontdoorFirewallPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this FrontdoorRulesEngineList.
+func (l *FrontdoorRulesEngineList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this IPGroupList.
 func (l *IPGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

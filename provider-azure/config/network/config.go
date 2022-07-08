@@ -481,6 +481,19 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_frontdoor_custom_https_configuration", func(r *config.Resource) {
+		r.References["custom_https_configuration.azure_key_vault_certificate_vault_id"] = config.Reference{
+			Type:      rconfig.VaultKeyReferencePath,
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_frontdoor_rules_engine", func(r *config.Resource) {
+		r.References["frontdoor_name"] = config.Reference{
+			Type: "FrontDoor",
+		}
+	})
+
 	/*p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
 		r.References = config.References{
 			"resource_group_name": config.Reference{
