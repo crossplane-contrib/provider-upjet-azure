@@ -15,24 +15,20 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_container_registry_token", func(r *config.Resource) {
-		r.References = config.References{
-			"scope_map_id": config.Reference{
-				Type:      "ScopeMap",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["scope_map_id"] = config.Reference{
+			Type:      "ScopeMap",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_container_connected_registry", func(r *config.Resource) {
-		r.References = config.References{
-			"container_registry_id": config.Reference{
-				Type:      "Registry",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-			"sync_token_id": config.Reference{
-				Type:      "Token",
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
+		r.References["container_registry_id"] = config.Reference{
+			Type:      "Registry",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["sync_token_id"] = config.Reference{
+			Type:      "Token",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }
