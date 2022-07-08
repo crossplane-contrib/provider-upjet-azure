@@ -57,10 +57,11 @@ IMAGES = provider-azure
 -include build/makelib/image.mk
 
 # ====================================================================================
-# Setup Marketplace
+# Setup XPKG
 
-MARKETPLACE_ORG ?= upbound
-MARKETPLACE_REPO ?= $(PROJECT_NAME)-staging
+XPKG_REGISTRY ?= xpkg.upbound.io
+XPKG_ORG ?= upbound
+XPKG_REPO ?= $(PROJECT_NAME)-staging
 
 # ====================================================================================
 # Targets
@@ -122,7 +123,7 @@ xpkg.push: $(UP)
 	@$(UP) xpkg push \
 		--package $(OUTPUT_DIR)/xpkg/linux_amd64/$(PROJECT_NAME)-$(VERSION).xpkg \
 		--package $(OUTPUT_DIR)/xpkg/linux_arm64/$(PROJECT_NAME)-$(VERSION).xpkg \
-		xpkg.upbound.io/$(MARKETPLACE_ORG)/$(MARKETPLACE_REPO):$(VERSION) || $(FAIL)
+		$(XPKG_REGISTRY)/$(XPKG_ORG)/$(XPKG_REPO):$(VERSION) || $(FAIL)
 	@$(OK) Pushed package $(PROJECT_NAME)-$(VERSION).xpkg
 
 xpkg.load: $(UP)
