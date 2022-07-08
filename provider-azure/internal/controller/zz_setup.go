@@ -127,6 +127,7 @@ import (
 	firewallnetworkrulecollection "github.com/upbound/official-providers/provider-azure/internal/controller/network/firewallnetworkrulecollection"
 	firewallpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/network/firewallpolicy"
 	firewallpolicyrulecollectiongroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/firewallpolicyrulecollectiongroup"
+	frontdoor "github.com/upbound/official-providers/provider-azure/internal/controller/network/frontdoor"
 	ipgroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/ipgroup"
 	loadbalancer "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancer"
 	loadbalancerbackendaddresspool "github.com/upbound/official-providers/provider-azure/internal/controller/network/loadbalancerbackendaddresspool"
@@ -328,6 +329,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		firewallnetworkrulecollection.Setup,
 		firewallpolicy.Setup,
 		firewallpolicyrulecollectiongroup.Setup,
+		frontdoor.Setup,
 		ipgroup.Setup,
 		loadbalancer.Setup,
 		loadbalancerbackendaddresspool.Setup,
