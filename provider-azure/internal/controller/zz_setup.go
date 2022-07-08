@@ -107,6 +107,8 @@ import (
 	integrationserviceenvironment "github.com/upbound/official-providers/provider-azure/internal/controller/logic/integrationserviceenvironment"
 	managementgroup "github.com/upbound/official-providers/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/official-providers/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
+	spatialanchorsaccount "github.com/upbound/official-providers/provider-azure/internal/controller/mixedreality/spatialanchorsaccount"
+	applicationgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationgateway"
 	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
 	ddosprotectionplan "github.com/upbound/official-providers/provider-azure/internal/controller/network/ddosprotectionplan"
@@ -319,6 +321,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		integrationserviceenvironment.Setup,
 		managementgroup.Setup,
 		marketplaceagreement.Setup,
+		spatialanchorsaccount.Setup,
+		applicationgateway.Setup,
 		applicationsecuritygroup.Setup,
 		connectionmonitor.Setup,
 		ddosprotectionplan.Setup,

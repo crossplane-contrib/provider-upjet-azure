@@ -252,30 +252,6 @@ type FrontendEndpointParameters struct {
 	WebApplicationFirewallPolicyLinkID *string `json:"webApplicationFirewallPolicyLinkId,omitempty" tf:"web_application_firewall_policy_link_id,omitempty"`
 }
 
-type RedirectConfigurationObservation struct {
-}
-
-type RedirectConfigurationParameters struct {
-
-	// +kubebuilder:validation:Optional
-	CustomFragment *string `json:"customFragment,omitempty" tf:"custom_fragment,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	CustomHost *string `json:"customHost,omitempty" tf:"custom_host,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	CustomPath *string `json:"customPath,omitempty" tf:"custom_path,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	CustomQueryString *string `json:"customQueryString,omitempty" tf:"custom_query_string,omitempty"`
-
-	// +kubebuilder:validation:Required
-	RedirectProtocol *string `json:"redirectProtocol" tf:"redirect_protocol,omitempty"`
-
-	// +kubebuilder:validation:Required
-	RedirectType *string `json:"redirectType" tf:"redirect_type,omitempty"`
-}
-
 type RoutingRuleObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -301,7 +277,31 @@ type RoutingRuleParameters struct {
 	PatternsToMatch []*string `json:"patternsToMatch" tf:"patterns_to_match,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	RedirectConfiguration []RedirectConfigurationParameters `json:"redirectConfiguration,omitempty" tf:"redirect_configuration,omitempty"`
+	RedirectConfiguration []RoutingRuleRedirectConfigurationParameters `json:"redirectConfiguration,omitempty" tf:"redirect_configuration,omitempty"`
+}
+
+type RoutingRuleRedirectConfigurationObservation struct {
+}
+
+type RoutingRuleRedirectConfigurationParameters struct {
+
+	// +kubebuilder:validation:Optional
+	CustomFragment *string `json:"customFragment,omitempty" tf:"custom_fragment,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CustomHost *string `json:"customHost,omitempty" tf:"custom_host,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CustomPath *string `json:"customPath,omitempty" tf:"custom_path,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CustomQueryString *string `json:"customQueryString,omitempty" tf:"custom_query_string,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RedirectProtocol *string `json:"redirectProtocol" tf:"redirect_protocol,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RedirectType *string `json:"redirectType" tf:"redirect_type,omitempty"`
 }
 
 // FrontDoorSpec defines the desired state of FrontDoor

@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type FrontendIPConfigurationObservation struct {
+type LoadBalancerFrontendIPConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	InboundNATRules []*string `json:"inboundNatRules,omitempty" tf:"inbound_nat_rules,omitempty"`
@@ -23,7 +23,7 @@ type FrontendIPConfigurationObservation struct {
 	OutboundRules []*string `json:"outboundRules,omitempty" tf:"outbound_rules,omitempty"`
 }
 
-type FrontendIPConfigurationParameters struct {
+type LoadBalancerFrontendIPConfigurationParameters struct {
 
 	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
@@ -70,7 +70,7 @@ type FrontendIPConfigurationParameters struct {
 }
 
 type LoadBalancerObservation struct {
-	FrontendIPConfiguration []FrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
+	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -85,7 +85,7 @@ type LoadBalancerParameters struct {
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	FrontendIPConfiguration []FrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
+	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`

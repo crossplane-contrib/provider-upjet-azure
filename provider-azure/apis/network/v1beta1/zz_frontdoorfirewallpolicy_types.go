@@ -43,21 +43,6 @@ type CustomRuleParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
-type ExclusionObservation struct {
-}
-
-type ExclusionParameters struct {
-
-	// +kubebuilder:validation:Required
-	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Selector *string `json:"selector" tf:"selector,omitempty"`
-}
-
 type FrontdoorFirewallPolicyObservation struct {
 	FrontendEndpointIds []*string `json:"frontendEndpointIds,omitempty" tf:"frontend_endpoint_ids,omitempty"`
 
@@ -103,13 +88,28 @@ type FrontdoorFirewallPolicyParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ManagedRuleExclusionObservation struct {
+}
+
+type ManagedRuleExclusionParameters struct {
+
+	// +kubebuilder:validation:Required
+	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Operator *string `json:"operator" tf:"operator,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Selector *string `json:"selector" tf:"selector,omitempty"`
+}
+
 type ManagedRuleObservation struct {
 }
 
 type ManagedRuleParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Exclusion []ExclusionParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+	Exclusion []ManagedRuleExclusionParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Override []OverrideParameters `json:"override,omitempty" tf:"override,omitempty"`

@@ -16,6 +16,106 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this ApplicationGateway.
+func (mg *ApplicationGateway) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.FrontendIPConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressIDRef,
+			Selector:     mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressIDSelector,
+			To: reference.To{
+				List:    &PublicIPList{},
+				Managed: &PublicIP{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressID")
+		}
+		mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.FrontendIPConfiguration[i3].PublicIPAddressIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.FrontendIPConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FrontendIPConfiguration[i3].SubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.FrontendIPConfiguration[i3].SubnetIDRef,
+			Selector:     mg.Spec.ForProvider.FrontendIPConfiguration[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &SubnetList{},
+				Managed: &Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.FrontendIPConfiguration[i3].SubnetID")
+		}
+		mg.Spec.ForProvider.FrontendIPConfiguration[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.FrontendIPConfiguration[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.GatewayIPConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GatewayIPConfiguration[i3].SubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.GatewayIPConfiguration[i3].SubnetIDRef,
+			Selector:     mg.Spec.ForProvider.GatewayIPConfiguration[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &SubnetList{},
+				Managed: &Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.GatewayIPConfiguration[i3].SubnetID")
+		}
+		mg.Spec.ForProvider.GatewayIPConfiguration[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.GatewayIPConfiguration[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+				Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &SubnetList{},
+					Managed: &Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ApplicationSecurityGroup.
 func (mg *ApplicationSecurityGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

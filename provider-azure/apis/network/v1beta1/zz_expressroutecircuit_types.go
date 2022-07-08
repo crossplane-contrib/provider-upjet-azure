@@ -53,16 +53,16 @@ type ExpressRouteCircuitParameters struct {
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
 	// +kubebuilder:validation:Required
-	Sku []SkuParameters `json:"sku" tf:"sku,omitempty"`
+	Sku []ExpressRouteCircuitSkuParameters `json:"sku" tf:"sku,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type SkuObservation struct {
+type ExpressRouteCircuitSkuObservation struct {
 }
 
-type SkuParameters struct {
+type ExpressRouteCircuitSkuParameters struct {
 
 	// +kubebuilder:validation:Required
 	Family *string `json:"family" tf:"family,omitempty"`
