@@ -5,7 +5,8 @@ metadata:
 spec:
   forProvider:
     action:
-    - actionGroupId: ${azurerm_monitor_action_group.main.id}
+    - actionGroupIdRef:
+        name: example
     criteria:
     - aggregation: Total
       dimension:
@@ -21,5 +22,5 @@ spec:
       50.
     resourceGroupNameRef:
       name: example
-    scopes:
-    - ${azurerm_storage_account.to_monitor.id}
+    scopesRefs:
+    - name: example

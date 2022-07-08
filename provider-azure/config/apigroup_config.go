@@ -355,6 +355,8 @@ var (
 		"azurerm_application_insights":                                                   "insights",
 		"azurerm_monitor_scheduled_query_rules_alert":                                    "insights",
 		"azurerm_application_insights_web_test":                                          "insights",
+		"azurerm_monitor_private_link_scope":                                             "insights",
+		"azurerm_monitor_private_link_scoped_service":                                    "insights",
 		"azurerm_iotcentral_application":                                                 "iotcentral",
 		"azurerm_key_vault_key":                                                          "keyvault",
 		"azurerm_key_vault_secret":                                                       "keyvault",

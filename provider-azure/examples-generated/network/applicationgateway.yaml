@@ -42,5 +42,3 @@ spec:
     - capacity: 2
       name: Standard_Small
       tier: Standard
-  providerConfigRef:
-    name: example

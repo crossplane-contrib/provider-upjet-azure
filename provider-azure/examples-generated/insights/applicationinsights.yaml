@@ -1,9 +1,10 @@
-apiVersion: mixedreality.azure.upbound.io/v1beta1
-kind: SpatialAnchorsAccount
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
 metadata:
   name: example
 spec:
   forProvider:
+    applicationType: web
     location: West Europe
     resourceGroupNameRef:
       name: example

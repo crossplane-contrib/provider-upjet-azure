@@ -42,8 +42,6 @@ spec:
     - capacity: 2
       name: Standard_Small
       tier: Standard
-  providerConfigRef:
-    name: example
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -54,8 +52,6 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
@@ -71,8 +67,6 @@ spec:
     dnsServers:
       - "10.0.0.4"
       - "10.0.0.5"
-  providerConfigRef:
-    name: example
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
@@ -86,8 +80,6 @@ spec:
       name: example-vn
     addressPrefixes:
       - "10.0.0.0/24"
-  providerConfigRef:
-    name: example
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PublicIP
@@ -101,5 +93,3 @@ spec:
       name: example-app-gw-rg
     tags:
       environment: Production
-  providerConfigRef:
-    name: default

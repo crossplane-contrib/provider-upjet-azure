@@ -1,0 +1,10 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorPrivateLinkScope
+metadata:
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+  providerConfigRef:
+    name: example

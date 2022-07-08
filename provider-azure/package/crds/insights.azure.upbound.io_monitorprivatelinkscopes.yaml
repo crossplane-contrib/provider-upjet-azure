@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: monitormetricalerts.insights.azure.upbound.io
+  name: monitorprivatelinkscopes.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: MonitorMetricAlert
-    listKind: MonitorMetricAlertList
-    plural: monitormetricalerts
-    singular: monitormetricalert
+    kind: MonitorPrivateLinkScope
+    listKind: MonitorPrivateLinkScopeList
+    plural: monitorprivatelinkscopes
+    singular: monitorprivatelinkscope
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: MonitorMetricAlert is the Schema for the MonitorMetricAlerts
+        description: MonitorPrivateLinkScope is the Schema for the MonitorPrivateLinkScopes
           API
         properties:
           apiVersion:
@@ -51,7 +51,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: MonitorMetricAlertSpec defines the desired state of MonitorMetricAlert
+            description: MonitorPrivateLinkScopeSpec defines the desired state of
+              MonitorPrivateLinkScope
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,150 +65,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  action:
-                    items:
-                      properties:
-                        actionGroupId:
-                          type: string
-                        actionGroupIdRef:
-                          description: A Reference to a named object.
-                          properties:
-                            name:
-                              description: Name of the referenced object.
-                              type: string
-                          required:
-                          - name
-                          type: object
-                        actionGroupIdSelector:
-                          description: A Selector selects an object.
-                          properties:
-                            matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
-                              type: boolean
-                            matchLabels:
-                              additionalProperties:
-                                type: string
-                              description: MatchLabels ensures an object with matching
-                                labels is selected.
-                              type: object
-                          type: object
-                        webhookProperties:
-                          additionalProperties:
-                            type: string
-                          type: object
-                      type: object
-                    type: array
-                  applicationInsightsWebTestLocationAvailabilityCriteria:
-                    items:
-                      properties:
-                        componentId:
-                          type: string
-                        failedLocationCount:
-                          type: number
-                        webTestId:
-                          type: string
-                      required:
-                      - componentId
-                      - failedLocationCount
-                      - webTestId
-                      type: object
-                    type: array
-                  autoMitigate:
-                    type: boolean
-                  criteria:
-                    items:
-                      properties:
-                        aggregation:
-                          type: string
-                        dimension:
-                          items:
-                            properties:
-                              name:
-                                type: string
-                              operator:
-                                type: string
-                              values:
-                                items:
-                                  type: string
-                                type: array
-                            required:
-                            - name
-                            - operator
-                            - values
-                            type: object
-                          type: array
-                        metricName:
-                          type: string
-                        metricNamespace:
-                          type: string
-                        operator:
-                          type: string
-                        skipMetricValidation:
-                          type: boolean
-                        threshold:
-                          type: number
-                      required:
-                      - aggregation
-                      - metricName
-                      - metricNamespace
-                      - operator
-                      - threshold
-                      type: object
-                    type: array
-                  description:
-                    type: string
-                  dynamicCriteria:
-                    items:
-                      properties:
-                        aggregation:
-                          type: string
-                        alertSensitivity:
-                          type: string
-                        dimension:
-                          items:
-                            properties:
-                              name:
-                                type: string
-                              operator:
-                                type: string
-                              values:
-                                items:
-                                  type: string
-                                type: array
-                            required:
-                            - name
-                            - operator
-                            - values
-                            type: object
-                          type: array
-                        evaluationFailureCount:
-                          type: number
-                        evaluationTotalCount:
-                          type: number
-                        ignoreDataBefore:
-                          type: string
-                        metricName:
-                          type: string
-                        metricNamespace:
-                          type: string
-                        operator:
-                          type: string
-                        skipMetricValidation:
-                          type: boolean
-                      required:
-                      - aggregation
-                      - alertSensitivity
-                      - metricName
-                      - metricNamespace
-                      - operator
-                      type: object
-                    type: array
-                  enabled:
-                    type: boolean
-                  frequency:
-                    type: string
                   resourceGroupName:
                     type: string
                   resourceGroupNameRef:
@@ -233,52 +90,10 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  scopes:
-                    items:
-                      type: string
-                    type: array
-                  scopesRefs:
-                    items:
-                      description: A Reference to a named object.
-                      properties:
-                        name:
-                          description: Name of the referenced object.
-                          type: string
-                      required:
-                      - name
-                      type: object
-                    type: array
-                  scopesSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                    type: object
-                  severity:
-                    type: number
                   tags:
                     additionalProperties:
                       type: string
                     type: object
-                  targetResourceLocation:
-                    description: The location of the target pluginsdk. Required when
-                      using subscription, resource group scope or multiple scopes.
-                    type: string
-                  targetResourceType:
-                    description: The resource type (e.g. Microsoft.Compute/virtualMachines)
-                      of the target pluginsdk. Required when using subscription, resource
-                      group scope or multiple scopes.
-                    type: string
-                  windowSize:
-                    type: string
                 type: object
               providerConfigRef:
                 default:
@@ -377,7 +192,8 @@ spec:
             - forProvider
             type: object
           status:
-            description: MonitorMetricAlertStatus defines the observed state of MonitorMetricAlert.
+            description: MonitorPrivateLinkScopeStatus defines the observed state
+              of MonitorPrivateLinkScope.
             properties:
               atProvider:
                 properties:

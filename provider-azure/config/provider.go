@@ -32,6 +32,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
 	"github.com/upbound/official-providers/provider-azure/config/devices"
 	"github.com/upbound/official-providers/provider-azure/config/eventhub"
+	"github.com/upbound/official-providers/provider-azure/config/insights"
 	"github.com/upbound/official-providers/provider-azure/config/keyvault"
 	"github.com/upbound/official-providers/provider-azure/config/logic"
 	"github.com/upbound/official-providers/provider-azure/config/management"
@@ -140,6 +141,7 @@ func GetProvider() *tjconfig.Provider {
 		sql.Configure,
 		storage.Configure,
 		operationalinsights.Configure,
+		insights.Configure,
 		devices.Configure,
 		apimanagement.Configure,
 		logic.Configure,

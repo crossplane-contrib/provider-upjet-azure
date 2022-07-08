@@ -94,7 +94,11 @@ import (
 	consumergroup "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/consumergroup"
 	eventhub "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/eventhub"
 	eventhubnamespace "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/eventhubnamespace"
+	applicationinsights "github.com/upbound/official-providers/provider-azure/internal/controller/insights/applicationinsights"
+	monitoractiongroup "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitoractiongroup"
 	monitormetricalert "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitormetricalert"
+	monitorprivatelinkscope "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitorprivatelinkscope"
+	monitorprivatelinkscopedservice "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitorprivatelinkscopedservice"
 	accesspolicy "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/accesspolicy"
 	certificate "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificate"
 	certificateissuer "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificateissuer"
@@ -308,7 +312,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		consumergroup.Setup,
 		eventhub.Setup,
 		eventhubnamespace.Setup,
+		applicationinsights.Setup,
+		monitoractiongroup.Setup,
 		monitormetricalert.Setup,
+		monitorprivatelinkscope.Setup,
+		monitorprivatelinkscopedservice.Setup,
 		accesspolicy.Setup,
 		certificate.Setup,
 		certificateissuer.Setup,
