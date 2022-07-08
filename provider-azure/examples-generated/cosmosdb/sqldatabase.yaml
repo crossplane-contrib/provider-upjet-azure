@@ -9,5 +9,3 @@ spec:
     resourceGroupNameRef:
       name: example
     throughput: 400
-  providerConfigRef:
-    name: example

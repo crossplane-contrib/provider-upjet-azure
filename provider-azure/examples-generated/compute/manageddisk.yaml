@@ -12,5 +12,3 @@ spec:
     storageAccountType: Standard_LRS
     tags:
       environment: staging
-  providerConfigRef:
-    name: example

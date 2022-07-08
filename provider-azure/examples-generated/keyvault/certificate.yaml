@@ -15,5 +15,3 @@ spec:
         namespace: crossplane-system
     keyVaultIdRef:
       name: example
-  providerConfigRef:
-    name: example

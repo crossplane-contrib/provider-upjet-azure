@@ -14,5 +14,3 @@ spec:
     resourceGroupNameRef:
       name: example
     skuName: Standard
-  providerConfigRef:
-    name: example

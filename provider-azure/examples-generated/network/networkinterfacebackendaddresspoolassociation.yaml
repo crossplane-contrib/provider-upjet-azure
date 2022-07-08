@@ -9,5 +9,3 @@ spec:
     ipConfigurationName: testconfiguration1
     networkInterfaceIdRef:
       name: example
-  providerConfigRef:
-    name: example

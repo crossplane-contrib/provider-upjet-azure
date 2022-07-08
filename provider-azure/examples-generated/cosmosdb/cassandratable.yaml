@@ -14,5 +14,3 @@ spec:
         type: int
       partitionKey:
       - name: test1
-  providerConfigRef:
-    name: example

@@ -6,5 +6,3 @@ spec:
   forProvider:
     source: Microsoft.Storage
     storageAccountId: ${azurerm_storage_account.example.id}
-  providerConfigRef:
-    name: example

@@ -12,5 +12,3 @@ spec:
     resourceGroupNameRef:
       name: example
     source: DeviceMessages
-  providerConfigRef:
-    name: example

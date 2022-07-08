@@ -23,5 +23,3 @@ spec:
       name: example
     scopes:
     - ${azurerm_storage_account.to_monitor.id}
-  providerConfigRef:
-    name: example

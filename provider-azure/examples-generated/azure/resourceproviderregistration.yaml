@@ -5,5 +5,3 @@ metadata:
 spec:
   forProvider:
     name: Microsoft.PolicyInsights
-  providerConfigRef:
-    name: example

@@ -13,5 +13,3 @@ spec:
       name: example-secret
       namespace: crossplane-system
     providerName: DigiCert
-  providerConfigRef:
-    name: example

@@ -16,5 +16,3 @@ spec:
     port: 10000
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

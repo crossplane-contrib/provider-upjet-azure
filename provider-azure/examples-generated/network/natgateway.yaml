@@ -15,5 +15,3 @@ spec:
     skuName: Standard
     zones:
     - "1"
-  providerConfigRef:
-    name: example

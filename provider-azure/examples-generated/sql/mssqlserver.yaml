@@ -19,5 +19,3 @@ spec:
     tags:
       environment: production
     version: "12.0"
-  providerConfigRef:
-    name: example

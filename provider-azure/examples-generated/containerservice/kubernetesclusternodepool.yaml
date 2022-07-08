@@ -10,5 +10,3 @@ spec:
     tags:
       Environment: Production
     vmSize: Standard_DS2_v2
-  providerConfigRef:
-    name: example

@@ -10,5 +10,3 @@ spec:
       name: example
     serverNameRef:
       name: example
-  providerConfigRef:
-    name: example

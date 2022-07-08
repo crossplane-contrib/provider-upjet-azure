@@ -13,5 +13,3 @@ spec:
     resourceGroupNameRef:
       name: example
     send: false
-  providerConfigRef:
-    name: example

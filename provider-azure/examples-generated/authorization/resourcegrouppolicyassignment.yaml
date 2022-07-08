@@ -16,5 +16,3 @@ spec:
     policyDefinitionId: ${azurerm_policy_definition.example.id}
     resourceGroupIdRef:
       name: example
-  providerConfigRef:
-    name: example

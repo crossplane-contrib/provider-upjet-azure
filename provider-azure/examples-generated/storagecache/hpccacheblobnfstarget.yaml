@@ -10,5 +10,3 @@ spec:
       name: example
     storageContainerId: ${jsondecode(azurerm_resource_group_template_deployment.storage-containers.output_content).id.value}
     usageModel: READ_HEAVY_INFREQ
-  providerConfigRef:
-    name: example

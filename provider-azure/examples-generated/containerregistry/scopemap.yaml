@@ -10,5 +10,3 @@ spec:
     containerRegistryName: ${azurerm_container_registry.acr.name}
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

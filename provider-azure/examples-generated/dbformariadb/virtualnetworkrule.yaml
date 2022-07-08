@@ -10,5 +10,3 @@ spec:
       name: example
     subnetIdRef:
       name: example
-  providerConfigRef:
-    name: example

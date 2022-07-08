@@ -6,5 +6,3 @@ spec:
   forProvider:
     customHttpsProvisioningEnabled: false
     frontendEndpointId: ${azurerm_frontdoor.example.frontend_endpoints["exampleFrontendEndpoint1"]}
-  providerConfigRef:
-    name: example

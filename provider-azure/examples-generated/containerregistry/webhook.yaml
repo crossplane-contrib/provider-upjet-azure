@@ -15,5 +15,3 @@ spec:
     scope: mytag:*
     serviceUri: https://mywebhookreceiver.example/mytag
     status: enabled
-  providerConfigRef:
-    name: example

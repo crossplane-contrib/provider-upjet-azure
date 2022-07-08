@@ -19,5 +19,3 @@ spec:
     storageMb: 32768
     version: "12"
     zone: "1"
-  providerConfigRef:
-    name: example

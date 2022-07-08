@@ -10,5 +10,3 @@ spec:
     serverNameRef:
       name: example
     value: "on"
-  providerConfigRef:
-    name: example

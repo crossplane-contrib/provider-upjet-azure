@@ -9,5 +9,3 @@ spec:
       name: example
     tags:
       foo: bar
-  providerConfigRef:
-    name: example

@@ -10,5 +10,3 @@ spec:
     resourceGroupNameRef:
       name: example
     skuName: Developer_1
-  providerConfigRef:
-    name: example

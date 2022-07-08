@@ -21,5 +21,3 @@ spec:
       name: example
     secondaryPeerAddressPrefix: 123.0.0.4/30
     vlanId: 300
-  providerConfigRef:
-    name: example

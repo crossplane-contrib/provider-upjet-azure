@@ -16,5 +16,3 @@ spec:
     - ${azurerm_subnet.isesubnet2.id}
     - ${azurerm_subnet.isesubnet3.id}
     - ${azurerm_subnet.isesubnet4.id}
-  providerConfigRef:
-    name: example

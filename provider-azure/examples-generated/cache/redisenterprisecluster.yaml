@@ -8,5 +8,3 @@ spec:
     resourceGroupNameRef:
       name: example
     skuName: EnterpriseFlash_F300-3
-  providerConfigRef:
-    name: example

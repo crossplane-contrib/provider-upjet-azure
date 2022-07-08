@@ -7,5 +7,3 @@ spec:
     networkSecurityGroupId: ${azurerm_network_security_group.example.id}
     subnetIdRef:
       name: example
-  providerConfigRef:
-    name: example

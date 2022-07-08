@@ -75,5 +75,3 @@ spec:
     redirectUrl: https://www.contoso.com
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

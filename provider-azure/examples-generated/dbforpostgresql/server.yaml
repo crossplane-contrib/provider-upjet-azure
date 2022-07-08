@@ -21,5 +21,3 @@ spec:
     sslMinimalTlsVersionEnforced: TLS1_2
     storageMb: 640000
     version: "11"
-  providerConfigRef:
-    name: example

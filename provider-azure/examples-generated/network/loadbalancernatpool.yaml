@@ -13,5 +13,3 @@ spec:
     protocol: Tcp
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

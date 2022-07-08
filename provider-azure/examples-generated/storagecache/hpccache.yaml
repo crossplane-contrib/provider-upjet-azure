@@ -11,5 +11,3 @@ spec:
     skuName: Standard_2G
     subnetIdRef:
       name: example
-  providerConfigRef:
-    name: example

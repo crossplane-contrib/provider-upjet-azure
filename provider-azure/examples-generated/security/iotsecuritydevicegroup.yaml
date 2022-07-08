@@ -13,5 +13,3 @@ spec:
       max: 30
       min: 0
       type: ActiveConnectionsNotInAllowedRange
-  providerConfigRef:
-    name: example

@@ -17,5 +17,3 @@ spec:
       name: example
     shardKey: uniqueKey
     throughput: 400
-  providerConfigRef:
-    name: example

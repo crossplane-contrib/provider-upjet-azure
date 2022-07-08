@@ -9,5 +9,3 @@ spec:
     ipAddress: 10.0.0.1
     virtualNetworkIdRef:
       name: example
-  providerConfigRef:
-    name: example

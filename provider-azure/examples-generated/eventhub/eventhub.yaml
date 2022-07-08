@@ -10,5 +10,3 @@ spec:
     partitionCount: 2
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

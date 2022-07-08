@@ -17,5 +17,3 @@ spec:
       name: example
     virtualNetworkNameRef:
       name: example
-  providerConfigRef:
-    name: example

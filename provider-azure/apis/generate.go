@@ -29,6 +29,9 @@ limitations under the License.
 //go:generate bash -c "find ../internal/controller -type d -empty -delete"
 //go:generate rm -rf ../examples-generated
 
+// Scrape metadata from Terraform registry
+//go:generate go run github.com/upbound/upjet/cmd/scraper -n hashicorp/terraform-provider-azurerm -r ../.work/terraform-provider-azurerm -o ../config/provider-metadata.yaml
+
 // Run Terrajet generator
 //go:generate go run ../cmd/generator/main.go ..
 
@@ -44,4 +47,6 @@ import (
 	_ "sigs.k8s.io/controller-tools/cmd/controller-gen" //nolint:typecheck
 
 	_ "github.com/crossplane/crossplane-tools/cmd/angryjet" //nolint:typecheck
+
+	_ "github.com/upbound/upjet/cmd/scraper"
 )

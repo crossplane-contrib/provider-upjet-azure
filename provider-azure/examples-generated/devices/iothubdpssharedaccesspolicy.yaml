@@ -9,5 +9,3 @@ spec:
     iothubDpsName: ${azurerm_iothub_dps.example.name}
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

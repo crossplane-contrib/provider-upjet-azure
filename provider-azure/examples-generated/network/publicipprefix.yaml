@@ -10,5 +10,3 @@ spec:
       name: example
     tags:
       environment: Production
-  providerConfigRef:
-    name: example

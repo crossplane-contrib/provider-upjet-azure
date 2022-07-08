@@ -10,6 +10,8 @@ export TERRAFORM_VERSION ?= 1.2.1
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-azurerm
 export TERRAFORM_PROVIDER_VERSION := 3.8.0
 export GOPRIVATE=github.com/upbound
+export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-azurerm
+export TERRAFORM_DOCS_PATH ?= website/docs/r
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
@@ -163,6 +165,15 @@ $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM)
 generate.init: $(TERRAFORM_PROVIDER_SCHEMA)
 
 .PHONY: $(TERRAFORM_PROVIDER_SCHEMA)
+
+# ====================================================================================
+# Extract Terraform registry metadata
+metadata:
+	@WORK_DIR=.work ../scripts/scrape_metadata.sh
+
+generate.init: metadata
+
+.PHONY: metadata
 
 # ====================================================================================
 # Special Targets

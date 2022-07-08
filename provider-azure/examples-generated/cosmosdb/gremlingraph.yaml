@@ -26,5 +26,3 @@ spec:
     - paths:
       - /definition/id1
       - /definition/id2
-  providerConfigRef:
-    name: example

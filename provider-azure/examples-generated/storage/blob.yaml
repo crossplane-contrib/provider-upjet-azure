@@ -10,5 +10,3 @@ spec:
     storageContainerNameRef:
       name: example
     type: Block
-  providerConfigRef:
-    name: example

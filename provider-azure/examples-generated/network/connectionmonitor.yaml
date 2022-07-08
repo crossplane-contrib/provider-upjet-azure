@@ -35,5 +35,3 @@ spec:
       - source
       testConfigurationNames:
       - tcpName
-  providerConfigRef:
-    name: example

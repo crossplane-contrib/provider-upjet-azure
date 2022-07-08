@@ -11,5 +11,3 @@ spec:
     iothubId: ${azurerm_iothub.example.id}
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

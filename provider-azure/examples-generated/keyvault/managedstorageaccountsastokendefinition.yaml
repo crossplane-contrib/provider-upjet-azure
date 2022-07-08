@@ -9,5 +9,3 @@ spec:
     sasTemplateUri: ${data.azurerm_storage_account_sas.example.sas}
     sasType: account
     validityPeriod: P1D
-  providerConfigRef:
-    name: example

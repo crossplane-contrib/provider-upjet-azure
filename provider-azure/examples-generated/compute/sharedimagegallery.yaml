@@ -11,5 +11,3 @@ spec:
     tags:
       Hello: There
       World: Example
-  providerConfigRef:
-    name: example

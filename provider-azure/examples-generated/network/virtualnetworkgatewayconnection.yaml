@@ -15,5 +15,3 @@ spec:
     type: IPsec
     virtualNetworkGatewayIdRef:
       name: example
-  providerConfigRef:
-    name: example

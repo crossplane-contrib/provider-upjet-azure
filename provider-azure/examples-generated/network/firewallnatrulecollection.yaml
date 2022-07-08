@@ -23,5 +23,3 @@ spec:
       - 10.0.0.0/16
       translatedAddress: 8.8.8.8
       translatedPort: 53
-  providerConfigRef:
-    name: example

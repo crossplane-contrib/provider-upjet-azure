@@ -15,5 +15,3 @@ spec:
       tier: Standard
     tags:
       environment: Production
-  providerConfigRef:
-    name: example

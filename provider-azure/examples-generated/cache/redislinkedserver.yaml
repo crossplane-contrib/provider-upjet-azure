@@ -12,5 +12,3 @@ spec:
     serverRole: Secondary
     targetRedisCacheNameRef:
       name: example
-  providerConfigRef:
-    name: example

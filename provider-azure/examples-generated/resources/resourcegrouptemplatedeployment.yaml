@@ -48,5 +48,3 @@ spec:
             }
           }
       }
-  providerConfigRef:
-    name: example

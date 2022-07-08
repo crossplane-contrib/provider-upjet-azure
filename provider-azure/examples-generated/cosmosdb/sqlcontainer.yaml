@@ -24,5 +24,3 @@ spec:
     - paths:
       - /definition/idlong
       - /definition/idshort
-  providerConfigRef:
-    name: example

@@ -19,5 +19,3 @@ spec:
       - 10.0.0.0/16
       targetFqdns:
       - '*.google.com'
-  providerConfigRef:
-    name: example
