@@ -1,0 +1,10 @@
+apiVersion: containerregistry.azure.upbound.io/v1beta1
+kind: AgentPool
+metadata:
+  name: example
+spec:
+  forProvider:
+    containerRegistryName: example
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
