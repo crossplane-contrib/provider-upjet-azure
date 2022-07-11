@@ -37,6 +37,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/logic"
 	"github.com/upbound/official-providers/provider-azure/config/management"
 	"github.com/upbound/official-providers/provider-azure/config/mariadb"
+	"github.com/upbound/official-providers/provider-azure/config/media"
 	"github.com/upbound/official-providers/provider-azure/config/network"
 	"github.com/upbound/official-providers/provider-azure/config/notificationhubs"
 	"github.com/upbound/official-providers/provider-azure/config/operationalinsights"
@@ -133,6 +134,7 @@ func GetProvider() *tjconfig.Provider {
 		// add custom config functions
 		network.Configure,
 		management.Configure,
+		media.Configure,
 		redis.Configure,
 		resource.Configure,
 		containerservice.Configure,

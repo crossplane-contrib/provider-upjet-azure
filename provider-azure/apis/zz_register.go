@@ -28,6 +28,7 @@ import (
 	v1beta1logic "github.com/upbound/official-providers/provider-azure/apis/logic/v1beta1"
 	v1beta1management "github.com/upbound/official-providers/provider-azure/apis/management/v1beta1"
 	v1beta1marketplaceordering "github.com/upbound/official-providers/provider-azure/apis/marketplaceordering/v1beta1"
+	v1beta1media "github.com/upbound/official-providers/provider-azure/apis/media/v1beta1"
 	v1beta1mixedreality "github.com/upbound/official-providers/provider-azure/apis/mixedreality/v1beta1"
 	v1beta1network "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	v1beta1notificationhubs "github.com/upbound/official-providers/provider-azure/apis/notificationhubs/v1beta1"
@@ -63,6 +64,7 @@ func init() {
 		v1beta1logic.SchemeBuilder.AddToScheme,
 		v1beta1management.SchemeBuilder.AddToScheme,
 		v1beta1marketplaceordering.SchemeBuilder.AddToScheme,
+		v1beta1media.SchemeBuilder.AddToScheme,
 		v1beta1mixedreality.SchemeBuilder.AddToScheme,
 		v1beta1network.SchemeBuilder.AddToScheme,
 		v1beta1notificationhubs.SchemeBuilder.AddToScheme,
