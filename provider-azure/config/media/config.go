@@ -30,4 +30,10 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_media_live_event", func(r *config.Resource) {
+		r.References["media_services_account_name"] = config.Reference{
+			Type: "ServicesAccount",
+		}
+	})
 }

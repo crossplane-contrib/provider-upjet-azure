@@ -137,6 +137,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// media
 	"azurerm_media_services_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaservices/{{ .externalName }}"),
+	"azurerm_media_live_event":       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaservices/{{ .parameters.media_services_account_name }}/liveevents/{{ .externalName }}"),
 
 	// mixedreality
 	"azurerm_spatial_anchors_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{{ .externalName }}"),
