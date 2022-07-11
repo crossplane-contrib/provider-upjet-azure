@@ -1,0 +1,12 @@
+apiVersion: media.azure.upbound.io/v1beta1
+kind: StreamingEndpoint
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    mediaServicesAccountNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example-media-rg
+    scaleUnits: 2

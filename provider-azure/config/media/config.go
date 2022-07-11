@@ -52,4 +52,31 @@ func Configure(p *config.Provider) {
 			Type: "Asset",
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_media_streaming_endpoint", func(r *config.Resource) {
+		r.References["media_services_account_name"] = config.Reference{
+			Type: "ServicesAccount",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_media_streaming_locator", func(r *config.Resource) {
+		r.References["media_services_account_name"] = config.Reference{
+			Type: "ServicesAccount",
+		}
+		r.References["asset_name"] = config.Reference{
+			Type: "Asset",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_media_streaming_policy", func(r *config.Resource) {
+		r.References["media_services_account_name"] = config.Reference{
+			Type: "ServicesAccount",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_media_transform", func(r *config.Resource) {
+		r.References["media_services_account_name"] = config.Reference{
+			Type: "ServicesAccount",
+		}
+	})
 }

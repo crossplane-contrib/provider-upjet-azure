@@ -1,0 +1,16 @@
+apiVersion: media.azure.upbound.io/v1beta1
+kind: Transform
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: My transform description
+    mediaServicesAccountNameRef:
+      name: example
+    output:
+    - builtinPreset:
+      - presetName: AACGoodQualityAudio
+      onErrorAction: ContinueJob
+      relativePriority: Normal
+    resourceGroupNameRef:
+      name: example-media-rg

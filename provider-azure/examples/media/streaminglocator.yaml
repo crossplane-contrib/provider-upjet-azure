@@ -1,0 +1,13 @@
+apiVersion: media.azure.upbound.io/v1beta1
+kind: StreamingLocator
+metadata:
+  name: example
+spec:
+  forProvider:
+    assetNameRef:
+      name: example
+    mediaServicesAccountNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example-media-rg
+    streamingPolicyName: Predefined_ClearStreamingOnly

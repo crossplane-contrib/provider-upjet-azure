@@ -115,6 +115,10 @@ import (
 	liveevent "github.com/upbound/official-providers/provider-azure/internal/controller/media/liveevent"
 	liveeventoutput "github.com/upbound/official-providers/provider-azure/internal/controller/media/liveeventoutput"
 	servicesaccount "github.com/upbound/official-providers/provider-azure/internal/controller/media/servicesaccount"
+	streamingendpoint "github.com/upbound/official-providers/provider-azure/internal/controller/media/streamingendpoint"
+	streaminglocator "github.com/upbound/official-providers/provider-azure/internal/controller/media/streaminglocator"
+	streamingpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/media/streamingpolicy"
+	transform "github.com/upbound/official-providers/provider-azure/internal/controller/media/transform"
 	spatialanchorsaccount "github.com/upbound/official-providers/provider-azure/internal/controller/mixedreality/spatialanchorsaccount"
 	applicationgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationgateway"
 	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
@@ -337,6 +341,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		liveevent.Setup,
 		liveeventoutput.Setup,
 		servicesaccount.Setup,
+		streamingendpoint.Setup,
+		streaminglocator.Setup,
+		streamingpolicy.Setup,
+		transform.Setup,
 		spatialanchorsaccount.Setup,
 		applicationgateway.Setup,
 		applicationsecuritygroup.Setup,
