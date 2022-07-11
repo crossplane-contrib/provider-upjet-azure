@@ -1,0 +1,11 @@
+apiVersion: media.azure.upbound.io/v1beta1
+kind: Asset
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: Asset description
+    mediaServicesAccountNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example-media-rg

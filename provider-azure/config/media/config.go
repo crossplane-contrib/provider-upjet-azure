@@ -31,9 +31,25 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_media_asset", func(r *config.Resource) {
+		r.References["media_services_account_name"] = config.Reference{
+			Type: "ServicesAccount",
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_media_live_event", func(r *config.Resource) {
 		r.References["media_services_account_name"] = config.Reference{
 			Type: "ServicesAccount",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_media_live_event_output", func(r *config.Resource) {
+		r.References["live_event_id"] = config.Reference{
+			Type:      "LiveEvent",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["asset_name"] = config.Reference{
+			Type: "Asset",
 		}
 	})
 }

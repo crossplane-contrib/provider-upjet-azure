@@ -111,7 +111,9 @@ import (
 	integrationserviceenvironment "github.com/upbound/official-providers/provider-azure/internal/controller/logic/integrationserviceenvironment"
 	managementgroup "github.com/upbound/official-providers/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/official-providers/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
+	asset "github.com/upbound/official-providers/provider-azure/internal/controller/media/asset"
 	liveevent "github.com/upbound/official-providers/provider-azure/internal/controller/media/liveevent"
+	liveeventoutput "github.com/upbound/official-providers/provider-azure/internal/controller/media/liveeventoutput"
 	servicesaccount "github.com/upbound/official-providers/provider-azure/internal/controller/media/servicesaccount"
 	spatialanchorsaccount "github.com/upbound/official-providers/provider-azure/internal/controller/mixedreality/spatialanchorsaccount"
 	applicationgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationgateway"
@@ -331,7 +333,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		integrationserviceenvironment.Setup,
 		managementgroup.Setup,
 		marketplaceagreement.Setup,
+		asset.Setup,
 		liveevent.Setup,
+		liveeventoutput.Setup,
 		servicesaccount.Setup,
 		spatialanchorsaccount.Setup,
 		applicationgateway.Setup,

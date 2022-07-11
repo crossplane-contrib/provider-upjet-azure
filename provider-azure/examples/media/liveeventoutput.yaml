@@ -1,0 +1,15 @@
+apiVersion: media.azure.upbound.io/v1beta1
+kind: LiveEventOutput
+metadata:
+  name: example
+spec:
+  forProvider:
+    archiveWindowDuration: PT5M
+    assetNameRef:
+      name: example
+    description: Test live output 1
+    hlsFragmentsPerTsSegment: 5
+    liveEventIdRef:
+      name: example
+    manifestName: testmanifest
+    outputSnapTimeInSeconds: 0
