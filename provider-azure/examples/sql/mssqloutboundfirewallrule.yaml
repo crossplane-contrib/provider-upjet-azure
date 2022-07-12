@@ -1,0 +1,8 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLOutboundFirewallRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    serverIdRef:
+      name: example-upbound

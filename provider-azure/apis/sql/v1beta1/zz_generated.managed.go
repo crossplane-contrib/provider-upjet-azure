@@ -337,6 +337,72 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetWriteConnectionSecretT
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLOutboundFirewallRule.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLOutboundFirewallRule) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLOutboundFirewallRule.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLOutboundFirewallRule) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MSSQLServer.
 func (mg *MSSQLServer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

@@ -214,6 +214,7 @@ import (
 	mssqlmanagedinstanceactivedirectoryadministrator "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstanceactivedirectoryadministrator"
 	mssqlmanagedinstancefailovergroup "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstancefailovergroup"
 	mssqlmanagedinstancevulnerabilityassessment "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstancevulnerabilityassessment"
+	mssqloutboundfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqloutboundfirewallrule"
 	mssqlserver "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlservertransparentdataencryption "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	mssqlvirtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
@@ -446,6 +447,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mssqlmanagedinstanceactivedirectoryadministrator.Setup,
 		mssqlmanagedinstancefailovergroup.Setup,
 		mssqlmanagedinstancevulnerabilityassessment.Setup,
+		mssqloutboundfirewallrule.Setup,
 		mssqlserver.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		mssqlvirtualnetworkrule.Setup,

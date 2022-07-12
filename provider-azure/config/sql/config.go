@@ -111,4 +111,11 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_mssql_outbound_firewall_rule", func(r *config.Resource) {
+		r.References["server_id"] = config.Reference{
+			Type:      "MSSQLServer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }
