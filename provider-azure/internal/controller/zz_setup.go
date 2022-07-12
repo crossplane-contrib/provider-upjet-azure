@@ -216,6 +216,7 @@ import (
 	mssqlmanagedinstancevulnerabilityassessment "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstancevulnerabilityassessment"
 	mssqloutboundfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqloutboundfirewallrule"
 	mssqlserver "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserver"
+	mssqlserverdnsalias "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserverdnsalias"
 	mssqlservertransparentdataencryption "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	mssqlvirtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
 	accountstorage "github.com/upbound/official-providers/provider-azure/internal/controller/storage/account"
@@ -449,6 +450,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mssqlmanagedinstancevulnerabilityassessment.Setup,
 		mssqloutboundfirewallrule.Setup,
 		mssqlserver.Setup,
+		mssqlserverdnsalias.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		mssqlvirtualnetworkrule.Setup,
 		accountstorage.Setup,

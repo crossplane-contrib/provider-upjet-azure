@@ -118,4 +118,11 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_mssql_server_dns_alias", func(r *config.Resource) {
+		r.References["mssql_server_id"] = config.Reference{
+			Type:      "MSSQLServer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

@@ -230,6 +230,32 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this MSSQLServerDNSAlias.
+func (mg *MSSQLServerDNSAlias) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MSSQLServerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.MSSQLServerIDRef,
+		Selector:     mg.Spec.ForProvider.MSSQLServerIDSelector,
+		To: reference.To{
+			List:    &MSSQLServerList{},
+			Managed: &MSSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MSSQLServerID")
+	}
+	mg.Spec.ForProvider.MSSQLServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MSSQLServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this MSSQLServerTransparentDataEncryption.
 func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
