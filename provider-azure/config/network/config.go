@@ -581,6 +581,10 @@ func Configure(p *config.Provider) {
 			Type:      "Subnet",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		r.References["network_security_group_id"] = config.Reference{
+			Type:      "SecurityGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_service_endpoint_storage_policy", func(r *config.Resource) {
@@ -591,6 +595,10 @@ func Configure(p *config.Provider) {
 		r.Kind = "SubnetRouteTableAssociation"
 		r.References["subnet_id"] = config.Reference{
 			Type:      "Subnet",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["route_table_id"] = config.Reference{
+			Type:      "RouteTable",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})

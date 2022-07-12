@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: subnetnetworksecuritygroupassociations.network.azure.upbound.io
+  name: mssqlmanagedinstances.sql.azure.upbound.io
 spec:
-  group: network.azure.upbound.io
+  group: sql.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: SubnetNetworkSecurityGroupAssociation
-    listKind: SubnetNetworkSecurityGroupAssociationList
-    plural: subnetnetworksecuritygroupassociations
-    singular: subnetnetworksecuritygroupassociation
+    kind: MSSQLManagedInstance
+    listKind: MSSQLManagedInstanceList
+    plural: mssqlmanagedinstances
+    singular: mssqlmanagedinstance
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SubnetNetworkSecurityGroupAssociation is the Schema for the SubnetNetworkSecurityGroupAssociations
+        description: MSSQLManagedInstance is the Schema for the MSSQLManagedInstances
           API
         properties:
           apiVersion:
@@ -51,8 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: SubnetNetworkSecurityGroupAssociationSpec defines the desired
-              state of SubnetNetworkSecurityGroupAssociation
+            description: MSSQLManagedInstanceSpec defines the desired state of MSSQLManagedInstance
             properties:
               deletionPolicy:
                 default: Delete
@@ -65,9 +64,54 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  networkSecurityGroupId:
+                  administratorLogin:
                     type: string
-                  networkSecurityGroupIdRef:
+                  administratorLoginPasswordSecretRef:
+                    description: A SecretKeySelector is a reference to a secret key
+                      in an arbitrary namespace.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  collation:
+                    type: string
+                  dnsZonePartnerId:
+                    type: string
+                  identity:
+                    items:
+                      properties:
+                        type:
+                          type: string
+                      required:
+                      - type
+                      type: object
+                    type: array
+                  licenseType:
+                    type: string
+                  location:
+                    type: string
+                  maintenanceConfigurationName:
+                    type: string
+                  minimumTlsVersion:
+                    type: string
+                  proxyOverride:
+                    type: string
+                  publicDataEndpointEnabled:
+                    type: boolean
+                  resourceGroupName:
+                    type: string
+                  resourceGroupNameRef:
                     description: A Reference to a named object.
                     properties:
                       name:
@@ -76,7 +120,7 @@ spec:
                     required:
                     - name
                     type: object
-                  networkSecurityGroupIdSelector:
+                  resourceGroupNameSelector:
                     description: A Selector selects an object.
                     properties:
                       matchControllerRef:
@@ -90,6 +134,12 @@ spec:
                           is selected.
                         type: object
                     type: object
+                  skuName:
+                    type: string
+                  storageAccountType:
+                    type: string
+                  storageSizeInGb:
+                    type: number
                   subnetId:
                     type: string
                   subnetIdRef:
@@ -115,6 +165,22 @@ spec:
                           is selected.
                         type: object
                     type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  timezoneId:
+                    type: string
+                  vcores:
+                    type: number
+                required:
+                - administratorLogin
+                - administratorLoginPasswordSecretRef
+                - licenseType
+                - location
+                - skuName
+                - storageSizeInGb
+                - vcores
                 type: object
               providerConfigRef:
                 default:
@@ -213,13 +279,24 @@ spec:
             - forProvider
             type: object
           status:
-            description: SubnetNetworkSecurityGroupAssociationStatus defines the observed
-              state of SubnetNetworkSecurityGroupAssociation.
+            description: MSSQLManagedInstanceStatus defines the observed state of
+              MSSQLManagedInstance.
             properties:
               atProvider:
                 properties:
+                  fqdn:
+                    type: string
                   id:
                     type: string
+                  identity:
+                    items:
+                      properties:
+                        principalId:
+                          type: string
+                        tenantId:
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -185,6 +185,7 @@ import (
 	profile "github.com/upbound/official-providers/provider-azure/internal/controller/network/profile"
 	publicip "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicip"
 	publicipprefix "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicipprefix"
+	routetable "github.com/upbound/official-providers/provider-azure/internal/controller/network/routetable"
 	securitygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/securitygroup"
 	securityrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/securityrule"
 	subnet "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnet"
@@ -208,6 +209,7 @@ import (
 	advancedthreatprotection "github.com/upbound/official-providers/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritydevicegroup"
 	iotsecuritysolution "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritysolution"
+	mssqlmanagedinstance "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstance"
 	mssqlserver "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlservertransparentdataencryption "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	mssqlvirtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
@@ -411,6 +413,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		profile.Setup,
 		publicip.Setup,
 		publicipprefix.Setup,
+		routetable.Setup,
 		securitygroup.Setup,
 		securityrule.Setup,
 		subnet.Setup,
@@ -434,6 +437,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,
 		iotsecuritysolution.Setup,
+		mssqlmanagedinstance.Setup,
 		mssqlserver.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		mssqlvirtualnetworkrule.Setup,

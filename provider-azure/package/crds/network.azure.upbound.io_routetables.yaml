@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: subnetnetworksecuritygroupassociations.network.azure.upbound.io
+  name: routetables.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: SubnetNetworkSecurityGroupAssociation
-    listKind: SubnetNetworkSecurityGroupAssociationList
-    plural: subnetnetworksecuritygroupassociations
-    singular: subnetnetworksecuritygroupassociation
+    kind: RouteTable
+    listKind: RouteTableList
+    plural: routetables
+    singular: routetable
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SubnetNetworkSecurityGroupAssociation is the Schema for the SubnetNetworkSecurityGroupAssociations
-          API
+        description: RouteTable is the Schema for the RouteTables API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,8 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: SubnetNetworkSecurityGroupAssociationSpec defines the desired
-              state of SubnetNetworkSecurityGroupAssociation
+            description: RouteTableSpec defines the desired state of RouteTable
             properties:
               deletionPolicy:
                 default: Delete
@@ -65,9 +63,13 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  networkSecurityGroupId:
+                  disableBgpRoutePropagation:
+                    type: boolean
+                  location:
                     type: string
-                  networkSecurityGroupIdRef:
+                  resourceGroupName:
+                    type: string
+                  resourceGroupNameRef:
                     description: A Reference to a named object.
                     properties:
                       name:
@@ -76,7 +78,7 @@ spec:
                     required:
                     - name
                     type: object
-                  networkSecurityGroupIdSelector:
+                  resourceGroupNameSelector:
                     description: A Selector selects an object.
                     properties:
                       matchControllerRef:
@@ -90,31 +92,25 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  subnetId:
-                    type: string
-                  subnetIdRef:
-                    description: A Reference to a named object.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                    required:
-                    - name
-                    type: object
-                  subnetIdSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
+                  route:
+                    items:
+                      properties:
+                        addressPrefix:
                           type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
+                        name:
+                          type: string
+                        nextHopInIpAddress:
+                          type: string
+                        nextHopType:
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
                     type: object
+                required:
+                - location
                 type: object
               providerConfigRef:
                 default:
@@ -213,13 +209,16 @@ spec:
             - forProvider
             type: object
           status:
-            description: SubnetNetworkSecurityGroupAssociationStatus defines the observed
-              state of SubnetNetworkSecurityGroupAssociation.
+            description: RouteTableStatus defines the observed state of RouteTable.
             properties:
               atProvider:
                 properties:
                   id:
                     type: string
+                  subnets:
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -240,6 +240,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_nat_gateway_public_ip_association": config.IdentifierFromProvider,
 	// Made up of arguments.
 	"azurerm_nat_gateway_public_ip_prefix_association": config.IdentifierFromProvider,
+	"azurerm_route_table":                              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/routeTables/{{ .externalName }}"),
 
 	// notification
 	"azurerm_notification_hub": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.NotificationHubs/namespaces/{{ .parameters.namespace_name }}/notificationHubs/{{ .externalName }}"),
@@ -280,6 +281,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_mssql_server":                             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/servers/{{ .externalName }}"),
 	"azurerm_mssql_server_transparent_data_encryption": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/encryptionProtector/current"),
 	"azurerm_mssql_virtual_network_rule":               config.TemplatedStringAsIdentifier("name", "{{ .parameters.server_id }}/virtualNetworkRules/{{ .externalName }}"),
+	"azurerm_mssql_managed_instance":                   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/managedInstances/{{ .externalName }}"),
 
 	// storage
 	"azurerm_hpc_cache_access_policy":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageCache/caches/{{ .hpc_cache_id }}/cacheAccessPolicies/{{ .externalName }}"),

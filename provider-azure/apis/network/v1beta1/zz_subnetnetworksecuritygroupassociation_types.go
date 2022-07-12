@@ -19,8 +19,16 @@ type SubnetNetworkSecurityGroupAssociationObservation struct {
 
 type SubnetNetworkSecurityGroupAssociationParameters struct {
 
-	// +kubebuilder:validation:Required
-	NetworkSecurityGroupID *string `json:"networkSecurityGroupId" tf:"network_security_group_id,omitempty"`
+	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NetworkSecurityGroupIDRef *v1.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()

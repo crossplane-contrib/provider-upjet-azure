@@ -10,11 +10,53 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
-	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1"
-	v1beta12 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this MSSQLManagedInstance.
+func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SubnetIDRef,
+		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
+	}
+	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this MSSQLServer.
 func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -55,8 +97,8 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 		Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
 		To: reference.To{
-			List:    &v1beta11.KeyList{},
-			Managed: &v1beta11.Key{},
+			List:    &v1beta12.KeyList{},
+			Managed: &v1beta12.Key{},
 		},
 	})
 	if err != nil {
@@ -113,8 +155,8 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 		Reference:    mg.Spec.ForProvider.SubnetIDRef,
 		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta12.SubnetList{},
-			Managed: &v1beta12.Subnet{},
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
 		},
 	})
 	if err != nil {

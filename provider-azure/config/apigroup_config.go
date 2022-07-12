@@ -634,6 +634,7 @@ var (
 		"azurerm_sql_managed_database":                                                   "sql",
 		"azurerm_sql_firewall_rule":                                                      "sql",
 		"azurerm_mssql_virtual_network_rule":                                             "sql",
+		"azurerm_mssql_managed_instance":                                                 "sql",
 		"azurerm_mssql_virtual_machine":                                                  "sqlvirtualmachine",
 		"azurerm_storage_blob":                                                           "storage",
 		"azurerm_storage_container":                                                      "storage",

@@ -79,8 +79,6 @@ var skipList = []string{
 	// generated name too long
 	"azurerm_network_interface_application_gateway_backend_address_pool_association",
 	"azurerm_sentinel_data_connector_microsoft_defender_advanced_threat_protection",
-	// cannot generate a unique name
-	"azurerm_route",
 	// deprecated
 	"azurerm_virtual_machine_scale_set",
 	"azurerm_virtual_machine_configuration_policy_assignment",

@@ -1,0 +1,124 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedInstance
+metadata:
+  name: example-sql
+spec:
+  forProvider:
+    administratorLogin: mradministrator
+    administratorLoginPasswordSecretRef:
+      key: password
+      name: example-secret
+      namespace: upbound-system
+    licenseType: BasePrice
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-sql-rg
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdRef:
+      name: example-subnet
+    vcores: 4
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-sql-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-sql-rg
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-sql-rg
+    virtualNetworkNameRef:
+      name: example-vn
+    addressPrefixes:
+      - "10.0.0.0/24"
+    delegation:
+      - name: managedinstancedelegation
+        serviceDelegation:
+          - name: "Microsoft.Sql/managedInstances"
+            actions:
+              - "Microsoft.Network/virtualNetworks/subnets/join/action"
+              - "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"
+              - "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-sql-rg
+    tags:
+      environment: Production
+  providerConfigRef:
+    name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetNetworkSecurityGroupAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    networkSecurityGroupIdRef:
+      name: example
+    subnetIdRef:
+      name: example-subnet
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: example
+spec:
+  forProvider:
+    disableBgpRoutePropagation: false
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-sql-rg
+    tags:
+      environment: Production
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetRouteTableAssociation
+metadata:
+  name: example
+spec:
+  forProvider:
+    routeTableIdRef:
+      name: example
+    subnetIdRef:
+      name: example-subnet
