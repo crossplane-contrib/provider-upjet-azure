@@ -7,6 +7,72 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLManagedDatabase.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLManagedDatabase) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLManagedDatabase.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLManagedDatabase) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MSSQLManagedInstance.
 func (mg *MSSQLManagedInstance) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -70,6 +136,204 @@ func (mg *MSSQLManagedInstance) SetPublishConnectionDetailsTo(r *xpv1.PublishCon
 
 // SetWriteConnectionSecretToReference of this MSSQLManagedInstance.
 func (mg *MSSQLManagedInstance) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLManagedInstanceFailoverGroup.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLManagedInstanceFailoverGroup) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLManagedInstanceFailoverGroup.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLManagedInstanceFailoverGroup) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLManagedInstanceVulnerabilityAssessment.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLManagedInstanceVulnerabilityAssessment.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

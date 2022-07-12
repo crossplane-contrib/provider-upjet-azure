@@ -60,6 +60,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mssql_server", func(r *config.Resource) {
 		r.Sensitive.AdditionalConnectionDetailsFn = msSQLConnectionDetails
 	})
+
 	p.AddResourceConfigurator("azurerm_mssql_server_transparent_data_encryption", func(r *config.Resource) {
 		r.UseAsync = false
 		r.References["server_id"] = config.Reference{
@@ -71,9 +72,42 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
 	p.AddResourceConfigurator("azurerm_mssql_virtual_network_rule", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
 			Type:      "MSSQLServer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_mssql_managed_database", func(r *config.Resource) {
+		r.References["managed_instance_id"] = config.Reference{
+			Type:      "MSSQLManagedInstance",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_mssql_managed_instance_active_directory_administrator", func(r *config.Resource) {
+		r.References["managed_instance_id"] = config.Reference{
+			Type:      "MSSQLManagedInstance",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_mssql_managed_instance_failover_group", func(r *config.Resource) {
+		r.References["managed_instance_id"] = config.Reference{
+			Type:      "MSSQLManagedInstance",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["partner_managed_instance_id"] = config.Reference{
+			Type:      "MSSQLManagedInstance",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_mssql_managed_instance_vulnerability_assessment", func(r *config.Resource) {
+		r.References["managed_instance_id"] = config.Reference{
+			Type:      "MSSQLManagedInstance",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})

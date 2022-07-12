@@ -1,0 +1,15 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedInstanceFailoverGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    managedInstanceIdRef:
+      name: example
+    partnerManagedInstanceIdRef:
+      name: example
+    readWriteEndpointFailoverPolicy:
+    - graceMinutes: 60
+      mode: Automatic
+    resource_group_name: ${azurerm_resource_group.primary.name}

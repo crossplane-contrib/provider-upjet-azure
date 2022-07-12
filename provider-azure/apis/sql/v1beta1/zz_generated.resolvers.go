@@ -16,6 +16,32 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
+		Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
+		To: reference.To{
+			List:    &MSSQLManagedInstanceList{},
+			Managed: &MSSQLManagedInstance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedInstanceID")
+	}
+	mg.Spec.ForProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedInstanceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this MSSQLManagedInstance.
 func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -54,6 +80,100 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
+		Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
+		To: reference.To{
+			List:    &MSSQLManagedInstanceList{},
+			Managed: &MSSQLManagedInstance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedInstanceID")
+	}
+	mg.Spec.ForProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedInstanceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
+		Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
+		To: reference.To{
+			List:    &MSSQLManagedInstanceList{},
+			Managed: &MSSQLManagedInstance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedInstanceID")
+	}
+	mg.Spec.ForProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedInstanceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PartnerManagedInstanceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PartnerManagedInstanceIDRef,
+		Selector:     mg.Spec.ForProvider.PartnerManagedInstanceIDSelector,
+		To: reference.To{
+			List:    &MSSQLManagedInstanceList{},
+			Managed: &MSSQLManagedInstance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PartnerManagedInstanceID")
+	}
+	mg.Spec.ForProvider.PartnerManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PartnerManagedInstanceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagedInstanceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ManagedInstanceIDRef,
+		Selector:     mg.Spec.ForProvider.ManagedInstanceIDSelector,
+		To: reference.To{
+			List:    &MSSQLManagedInstanceList{},
+			Managed: &MSSQLManagedInstance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedInstanceID")
+	}
+	mg.Spec.ForProvider.ManagedInstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagedInstanceIDRef = rsp.ResolvedReference
 
 	return nil
 }

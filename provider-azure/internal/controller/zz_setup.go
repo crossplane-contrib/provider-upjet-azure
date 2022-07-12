@@ -209,7 +209,11 @@ import (
 	advancedthreatprotection "github.com/upbound/official-providers/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritydevicegroup"
 	iotsecuritysolution "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritysolution"
+	mssqlmanageddatabase "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanageddatabase"
 	mssqlmanagedinstance "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstance"
+	mssqlmanagedinstanceactivedirectoryadministrator "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstanceactivedirectoryadministrator"
+	mssqlmanagedinstancefailovergroup "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstancefailovergroup"
+	mssqlmanagedinstancevulnerabilityassessment "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstancevulnerabilityassessment"
 	mssqlserver "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlservertransparentdataencryption "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	mssqlvirtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
@@ -437,7 +441,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,
 		iotsecuritysolution.Setup,
+		mssqlmanageddatabase.Setup,
 		mssqlmanagedinstance.Setup,
+		mssqlmanagedinstanceactivedirectoryadministrator.Setup,
+		mssqlmanagedinstancefailovergroup.Setup,
+		mssqlmanagedinstancevulnerabilityassessment.Setup,
 		mssqlserver.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		mssqlvirtualnetworkrule.Setup,

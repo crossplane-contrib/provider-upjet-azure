@@ -1,0 +1,11 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedInstanceActiveDirectoryAdministrator
+metadata:
+  name: example
+spec:
+  forProvider:
+    loginUsername: msadmin
+    managedInstanceIdRef:
+      name: example
+    objectId: ${azuread_user.admin.object_id}
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
