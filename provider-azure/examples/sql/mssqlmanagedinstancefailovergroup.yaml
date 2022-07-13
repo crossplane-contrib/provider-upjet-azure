@@ -6,10 +6,32 @@ spec:
   forProvider:
     location: West Europe
     managedInstanceIdRef:
-      name: example
+      name: example-sql
     partnerManagedInstanceIdRef:
-      name: example
+      name: example-sql-partner
     readWriteEndpointFailoverPolicy:
     - graceMinutes: 60
       mode: Automatic
-    resource_group_name: ${azurerm_resource_group.primary.name}
+---
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedInstance
+metadata:
+  name: example-sql-partner
+spec:
+  forProvider:
+    administratorLogin: mradministrator
+    administratorLoginPasswordSecretRef:
+      key: password
+      name: example-secret
+      namespace: upbound-system
+    licenseType: BasePrice
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-sql-rg
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdRef:
+      name: example-subnet
+    vcores: 4
+    identity:
+      - type: SystemAssigned

@@ -49,10 +49,22 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 	PartnerManagedInstanceIDSelector *v1.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
-	ReadWriteEndpointFailoverPolicy []ReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy" tf:"read_write_endpoint_failover_policy,omitempty"`
+	ReadWriteEndpointFailoverPolicy []MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy" tf:"read_write_endpoint_failover_policy,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
+}
+
+type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyObservation struct {
+}
+
+type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters struct {
+
+	// +kubebuilder:validation:Optional
+	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 type PartnerRegionObservation struct {
@@ -62,18 +74,6 @@ type PartnerRegionObservation struct {
 }
 
 type PartnerRegionParameters struct {
-}
-
-type ReadWriteEndpointFailoverPolicyObservation struct {
-}
-
-type ReadWriteEndpointFailoverPolicyParameters struct {
-
-	// +kubebuilder:validation:Optional
-	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 // MSSQLManagedInstanceFailoverGroupSpec defines the desired state of MSSQLManagedInstanceFailoverGroup

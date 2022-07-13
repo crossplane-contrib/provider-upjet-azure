@@ -209,6 +209,8 @@ import (
 	advancedthreatprotection "github.com/upbound/official-providers/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritydevicegroup"
 	iotsecuritysolution "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritysolution"
+	mssqldatabase "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqldatabase"
+	mssqlfailovergroup "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlfailovergroup"
 	mssqlmanageddatabase "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanageddatabase"
 	mssqlmanagedinstance "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstance"
 	mssqlmanagedinstanceactivedirectoryadministrator "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstanceactivedirectoryadministrator"
@@ -443,6 +445,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,
 		iotsecuritysolution.Setup,
+		mssqldatabase.Setup,
+		mssqlfailovergroup.Setup,
 		mssqlmanageddatabase.Setup,
 		mssqlmanagedinstance.Setup,
 		mssqlmanagedinstanceactivedirectoryadministrator.Setup,

@@ -1,0 +1,48 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLFailoverGroup
+metadata:
+  name: example-sql-failover
+spec:
+  forProvider:
+    databasesRefs:
+    - name: example
+    partnerServer:
+    - idRef:
+        name: example-upbound-partner
+    readWriteEndpointFailoverPolicy:
+    - graceMinutes: 80
+      mode: Automatic
+    serverIdRef:
+      name: example-upbound
+    tags:
+      database: example
+      environment: prod
+---
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  name: example-upbound-partner
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: password
+      name: example-secret
+      namespace: upbound-system
+    location: North Europe
+    minimumTlsVersion: "1.2"
+    resourceGroupNameRef:
+      name: example-sql-rg-failover
+    tags:
+      environment: production
+    version: "12.0"
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-sql-rg-failover
+spec:
+  forProvider:
+    location: North Europe
+    tags:
+      provisioner: crossplane

@@ -94,6 +94,21 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_mssql_failover_group", func(r *config.Resource) {
+		r.References["server_id"] = config.Reference{
+			Type:      "MSSQLServer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["partner_server.id"] = config.Reference{
+			Type:      "MSSQLServer",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["databases"] = config.Reference{
+			Type:      "MSSQLDatabase",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_mssql_managed_instance_failover_group", func(r *config.Resource) {
 		r.References["managed_instance_id"] = config.Reference{
 			Type:      "MSSQLManagedInstance",
@@ -108,6 +123,13 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mssql_managed_instance_vulnerability_assessment", func(r *config.Resource) {
 		r.References["managed_instance_id"] = config.Reference{
 			Type:      "MSSQLManagedInstance",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_mssql_database", func(r *config.Resource) {
+		r.References["server_id"] = config.Reference{
+			Type:      "MSSQLServer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
