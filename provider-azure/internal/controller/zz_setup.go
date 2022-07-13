@@ -256,6 +256,13 @@ import (
 	hpccacheblobtarget "github.com/upbound/official-providers/provider-azure/internal/controller/storagecache/hpccacheblobtarget"
 	hpccachenfstarget "github.com/upbound/official-providers/provider-azure/internal/controller/storagecache/hpccachenfstarget"
 	storagesync "github.com/upbound/official-providers/provider-azure/internal/controller/storagesync/storagesync"
+	clusterstreamanalytics "github.com/upbound/official-providers/provider-azure/internal/controller/streamanalytics/cluster"
+	functionjavascriptuda "github.com/upbound/official-providers/provider-azure/internal/controller/streamanalytics/functionjavascriptuda"
+	job "github.com/upbound/official-providers/provider-azure/internal/controller/streamanalytics/job"
+	managedprivateendpoint "github.com/upbound/official-providers/provider-azure/internal/controller/streamanalytics/managedprivateendpoint"
+	outputblob "github.com/upbound/official-providers/provider-azure/internal/controller/streamanalytics/outputblob"
+	outputfunction "github.com/upbound/official-providers/provider-azure/internal/controller/streamanalytics/outputfunction"
+	outputsynapse "github.com/upbound/official-providers/provider-azure/internal/controller/streamanalytics/outputsynapse"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -509,6 +516,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		hpccacheblobtarget.Setup,
 		hpccachenfstarget.Setup,
 		storagesync.Setup,
+		clusterstreamanalytics.Setup,
+		functionjavascriptuda.Setup,
+		job.Setup,
+		managedprivateendpoint.Setup,
+		outputblob.Setup,
+		outputfunction.Setup,
+		outputsynapse.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

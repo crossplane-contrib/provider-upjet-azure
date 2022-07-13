@@ -1,0 +1,15 @@
+apiVersion: stream.azure.upbound.io/v1beta1
+kind: AnalyticsOutputFunction
+metadata:
+  name: example
+spec:
+  forProvider:
+    apiKeySecretRef:
+      key: example-key
+      name: example-secret2
+      namespace: crossplane-system
+    functionApp: example-app2
+    functionName: examplefunctionname
+    resourceGroupNameRef:
+      name: example-resources
+    streamAnalyticsJobName: example
