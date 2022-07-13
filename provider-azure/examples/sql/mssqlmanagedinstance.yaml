@@ -18,6 +18,8 @@ spec:
     subnetIdRef:
       name: example-subnet
     vcores: 4
+    identity:
+      - type: SystemAssigned
 ---
 apiVersion: v1
 kind: Secret

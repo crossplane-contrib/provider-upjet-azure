@@ -6,6 +6,9 @@ spec:
   forProvider:
     loginUsername: msadmin
     managedInstanceIdRef:
-      name: example
-    objectId: ${azuread_user.admin.object_id}
-    tenantId: ${data.azurerm_client_config.current.tenant_id}
+      name: example-sql
+    # For own user Ids below can be conveniently retrieved by the following commands
+    # for objectId: $ az ad signed-in-user show| grep id\":
+    # for tenantId: $ az account tenant list | grep tenantId
+    objectId: <object-id>
+    tenantId: <tenant-id>
