@@ -140,3 +140,16 @@ spec:
       name: example-sql-rg
     virtualNetworkNameRef:
       name: example-vn
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetworkPeering
+metadata:
+  name: example-failover
+spec:
+  forProvider:
+    remoteVirtualNetworkIdRef:
+      name: example-vn
+    resourceGroupNameRef:
+      name: example-sql-rg-failover
+    virtualNetworkNameRef:
+      name: example-vn-failover
