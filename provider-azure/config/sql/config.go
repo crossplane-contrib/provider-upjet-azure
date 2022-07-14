@@ -80,6 +80,13 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_mssql_managed_instance", func(r *config.Resource) {
+		r.References["dns_zone_partner_id"] = config.Reference{
+			Type:      "MSSQLManagedInstance",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_mssql_managed_database", func(r *config.Resource) {
 		r.References["managed_instance_id"] = config.Reference{
 			Type:      "MSSQLManagedInstance",

@@ -1286,6 +1286,16 @@ func (in *MSSQLManagedInstanceParameters) DeepCopyInto(out *MSSQLManagedInstance
 		*out = new(string)
 		**out = **in
 	}
+	if in.DNSZonePartnerIDRef != nil {
+		in, out := &in.DNSZonePartnerIDRef, &out.DNSZonePartnerIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.DNSZonePartnerIDSelector != nil {
+		in, out := &in.DNSZonePartnerIDSelector, &out.DNSZonePartnerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = make([]IdentityParameters, len(*in))

@@ -137,6 +137,22 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DNSZonePartnerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DNSZonePartnerIDRef,
+		Selector:     mg.Spec.ForProvider.DNSZonePartnerIDSelector,
+		To: reference.To{
+			List:    &MSSQLManagedInstanceList{},
+			Managed: &MSSQLManagedInstance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DNSZonePartnerID")
+	}
+	mg.Spec.ForProvider.DNSZonePartnerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DNSZonePartnerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,

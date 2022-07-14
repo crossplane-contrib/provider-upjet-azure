@@ -8,7 +8,7 @@ spec:
     managedInstanceIdRef:
       name: example-sql
     partnerManagedInstanceIdRef:
-      name: example-sql-partner
+      name: example-sql-failover-partner
     readWriteEndpointFailoverPolicy:
     - graceMinutes: 60
       mode: Automatic
@@ -16,22 +16,127 @@ spec:
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedInstance
 metadata:
-  name: example-sql-partner
+  name: example-sql-failover-partner
 spec:
   forProvider:
+    dnsZonePartnerIdRef:
+      name: example-sql
     administratorLogin: mradministrator
     administratorLoginPasswordSecretRef:
       key: password
       name: example-secret
       namespace: upbound-system
     licenseType: BasePrice
-    location: West Europe
+    location: North Europe
     resourceGroupNameRef:
-      name: example-sql-rg
+      name: example-sql-rg-failover
     skuName: GP_Gen5
     storageSizeInGb: 32
     subnetIdRef:
-      name: example-subnet
+      name: example-subnet-failover
     vcores: 4
     identity:
       - type: SystemAssigned
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-sql-rg-failover
+spec:
+  forProvider:
+    location: North Europe
+    tags:
+      provisioner: crossplane
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn-failover
+spec:
+  forProvider:
+    location: North Europe
+    resourceGroupNameRef:
+      name: example-sql-rg-failover
+    addressSpace:
+      - "10.1.0.0/16"
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet-failover
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-sql-rg-failover
+    virtualNetworkNameRef:
+      name: example-vn-failover
+    addressPrefixes:
+      - "10.1.0.0/24"
+    delegation:
+      - name: managedinstancedelegation
+        serviceDelegation:
+          - name: "Microsoft.Sql/managedInstances"
+            actions:
+              - "Microsoft.Network/virtualNetworks/subnets/join/action"
+              - "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action"
+              - "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  name: example-failover
+spec:
+  forProvider:
+    location: North Europe
+    resourceGroupNameRef:
+      name: example-sql-rg-failover
+    tags:
+      environment: Production
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetNetworkSecurityGroupAssociation
+metadata:
+  name: example-failover
+spec:
+  forProvider:
+    networkSecurityGroupIdRef:
+      name: example-failover
+    subnetIdRef:
+      name: example-subnet-failover
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: example-failover
+spec:
+  forProvider:
+    disableBgpRoutePropagation: false
+    location: North Europe
+    resourceGroupNameRef:
+      name: example-sql-rg-failover
+    tags:
+      environment: Production
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetRouteTableAssociation
+metadata:
+  name: example-failover
+spec:
+  forProvider:
+    routeTableIdRef:
+      name: example-failover
+    subnetIdRef:
+      name: example-subnet-failover
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetworkPeering
+metadata:
+  name: example
+spec:
+  forProvider:
+    remoteVirtualNetworkIdRef:
+      name: example-vn-failover
+    resourceGroupNameRef:
+      name: example-sql-rg
+    virtualNetworkNameRef:
+      name: example-vn

@@ -44,8 +44,16 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
+	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DNSZonePartnerIDRef *v1.Reference `json:"dnsZonePartnerIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
