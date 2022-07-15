@@ -66,11 +66,12 @@ import (
 	firewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/firewallrule"
 	server "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/server"
 	virtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/virtualnetworkrule"
+	flexibleserver "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserver"
 	activedirectoryadministrator "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/activedirectoryadministrator"
 	configurationdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/configuration"
 	databasedbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/database"
 	firewallruledbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/firewallrule"
-	flexibleserver "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserver"
+	flexibleserverdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserver"
 	flexibleserverconfiguration "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverfirewallrule"
@@ -302,11 +303,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		firewallrule.Setup,
 		server.Setup,
 		virtualnetworkrule.Setup,
+		flexibleserver.Setup,
 		activedirectoryadministrator.Setup,
 		configurationdbforpostgresql.Setup,
 		databasedbforpostgresql.Setup,
 		firewallruledbforpostgresql.Setup,
-		flexibleserver.Setup,
+		flexibleserverdbforpostgresql.Setup,
 		flexibleserverconfiguration.Setup,
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallrule.Setup,

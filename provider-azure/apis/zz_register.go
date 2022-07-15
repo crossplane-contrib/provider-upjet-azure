@@ -20,6 +20,7 @@ import (
 	v1beta1cosmosdb "github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1"
 	v1beta1datashare "github.com/upbound/official-providers/provider-azure/apis/datashare/v1beta1"
 	v1beta1dbformariadb "github.com/upbound/official-providers/provider-azure/apis/dbformariadb/v1beta1"
+	v1beta1dbformysql "github.com/upbound/official-providers/provider-azure/apis/dbformysql/v1beta1"
 	v1beta1dbforpostgresql "github.com/upbound/official-providers/provider-azure/apis/dbforpostgresql/v1beta1"
 	v1beta1devices "github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1"
 	v1beta1eventhub "github.com/upbound/official-providers/provider-azure/apis/eventhub/v1beta1"
@@ -56,6 +57,7 @@ func init() {
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,
 		v1beta1datashare.SchemeBuilder.AddToScheme,
 		v1beta1dbformariadb.SchemeBuilder.AddToScheme,
+		v1beta1dbformysql.SchemeBuilder.AddToScheme,
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,

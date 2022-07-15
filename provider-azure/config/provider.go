@@ -30,6 +30,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/containerservice"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
+	"github.com/upbound/official-providers/provider-azure/config/dbformysql"
 	"github.com/upbound/official-providers/provider-azure/config/devices"
 	"github.com/upbound/official-providers/provider-azure/config/eventhub"
 	"github.com/upbound/official-providers/provider-azure/config/insights"
@@ -155,6 +156,7 @@ func GetProvider() *tjconfig.Provider {
 		mariadb.Configure,
 		compute.Configure,
 		containerregistry.Configure,
+		dbformysql.Configure,
 	} {
 		configure(pc)
 	}
