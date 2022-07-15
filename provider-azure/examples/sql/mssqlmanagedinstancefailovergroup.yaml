@@ -1,14 +1,14 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedInstanceFailoverGroup
 metadata:
-  name: example
+  name: example-sql-managed-failover
 spec:
   forProvider:
     location: West Europe
     managedInstanceIdRef:
       name: example-sql
     partnerManagedInstanceIdRef:
-      name: example-sql-failover-partner
+      name: example-sql-failover-instance
     readWriteEndpointFailoverPolicy:
     - graceMinutes: 60
       mode: Automatic
@@ -16,7 +16,7 @@ spec:
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedInstance
 metadata:
-  name: example-sql-failover-partner
+  name: example-sql-failover-instance
 spec:
   forProvider:
     dnsZonePartnerIdRef:
