@@ -160,3 +160,151 @@ func (tr *FlexibleServer) LateInitialize(attrs []byte) (bool, error) {
 func (tr *FlexibleServer) GetTerraformSchemaVersion() int {
 	return 0
 }
+
+// GetTerraformResourceType returns Terraform resource type for this FlexibleServerConfiguration
+func (mg *FlexibleServerConfiguration) GetTerraformResourceType() string {
+	return "azurerm_mysql_flexible_server_configuration"
+}
+
+// GetConnectionDetailsMapping for this FlexibleServerConfiguration
+func (tr *FlexibleServerConfiguration) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FlexibleServerConfiguration
+func (tr *FlexibleServerConfiguration) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FlexibleServerConfiguration
+func (tr *FlexibleServerConfiguration) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FlexibleServerConfiguration
+func (tr *FlexibleServerConfiguration) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FlexibleServerConfiguration
+func (tr *FlexibleServerConfiguration) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FlexibleServerConfiguration
+func (tr *FlexibleServerConfiguration) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this FlexibleServerConfiguration using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FlexibleServerConfiguration) LateInitialize(attrs []byte) (bool, error) {
+	params := &FlexibleServerConfigurationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FlexibleServerConfiguration) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this FlexibleServerFirewallRule
+func (mg *FlexibleServerFirewallRule) GetTerraformResourceType() string {
+	return "azurerm_mysql_flexible_server_firewall_rule"
+}
+
+// GetConnectionDetailsMapping for this FlexibleServerFirewallRule
+func (tr *FlexibleServerFirewallRule) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FlexibleServerFirewallRule
+func (tr *FlexibleServerFirewallRule) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FlexibleServerFirewallRule
+func (tr *FlexibleServerFirewallRule) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FlexibleServerFirewallRule
+func (tr *FlexibleServerFirewallRule) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FlexibleServerFirewallRule
+func (tr *FlexibleServerFirewallRule) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FlexibleServerFirewallRule
+func (tr *FlexibleServerFirewallRule) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this FlexibleServerFirewallRule using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FlexibleServerFirewallRule) LateInitialize(attrs []byte) (bool, error) {
+	params := &FlexibleServerFirewallRuleParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FlexibleServerFirewallRule) GetTerraformSchemaVersion() int {
+	return 0
+}

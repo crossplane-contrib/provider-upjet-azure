@@ -40,4 +40,16 @@ func Configure(p *config.Provider) {
 			Type: "FlexibleServer",
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_mysql_flexible_server_configuration", func(r *config.Resource) {
+		r.References["server_name"] = config.Reference{
+			Type: "FlexibleServer",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_mysql_flexible_server_firewall_rule", func(r *config.Resource) {
+		r.References["server_name"] = config.Reference{
+			Type: "FlexibleServer",
+		}
+	})
 }

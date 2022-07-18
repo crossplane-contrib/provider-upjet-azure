@@ -1,0 +1,12 @@
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: FlexibleServerFirewallRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example
+    startIpAddress: 40.112.8.12

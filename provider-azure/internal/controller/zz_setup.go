@@ -68,14 +68,16 @@ import (
 	virtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/virtualnetworkrule"
 	flexibledatabase "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibledatabase"
 	flexibleserver "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserver"
+	flexibleserverconfiguration "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserverconfiguration"
+	flexibleserverfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserverfirewallrule"
 	activedirectoryadministrator "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/activedirectoryadministrator"
 	configurationdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/configuration"
 	databasedbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/database"
 	firewallruledbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/firewallrule"
 	flexibleserverdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserver"
-	flexibleserverconfiguration "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverconfiguration"
+	flexibleserverconfigurationdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverdatabase"
-	flexibleserverfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverfirewallrule"
+	flexibleserverfirewallruledbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverfirewallrule"
 	serverdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/server"
 	serverkey "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/serverkey"
 	virtualnetworkruledbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/virtualnetworkrule"
@@ -306,14 +308,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		virtualnetworkrule.Setup,
 		flexibledatabase.Setup,
 		flexibleserver.Setup,
+		flexibleserverconfiguration.Setup,
+		flexibleserverfirewallrule.Setup,
 		activedirectoryadministrator.Setup,
 		configurationdbforpostgresql.Setup,
 		databasedbforpostgresql.Setup,
 		firewallruledbforpostgresql.Setup,
 		flexibleserverdbforpostgresql.Setup,
-		flexibleserverconfiguration.Setup,
+		flexibleserverconfigurationdbforpostgresql.Setup,
 		flexibleserverdatabase.Setup,
-		flexibleserverfirewallrule.Setup,
+		flexibleserverfirewallruledbforpostgresql.Setup,
 		serverdbforpostgresql.Setup,
 		serverkey.Setup,
 		virtualnetworkruledbforpostgresql.Setup,

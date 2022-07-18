@@ -1,0 +1,15 @@
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: FlexibleServerConfiguration
+metadata:
+  name: interactive-timeout
+  annotations:
+    # external-name should be a valid MySQL configuration name.
+    # See https://dev.mysql.com/doc/refman/5.7/en/server-configuration.html
+    crossplane.io/external-name: interactive_timeout
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-rg-dbformysql
+    serverNameRef:
+      name: example-upbound
+    value: "600"

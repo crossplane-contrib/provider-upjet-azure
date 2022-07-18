@@ -16,6 +16,24 @@ func (l *FlexibleDatabaseList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this FlexibleServerConfigurationList.
+func (l *FlexibleServerConfigurationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this FlexibleServerFirewallRuleList.
+func (l *FlexibleServerFirewallRuleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this FlexibleServerList.
 func (l *FlexibleServerList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
