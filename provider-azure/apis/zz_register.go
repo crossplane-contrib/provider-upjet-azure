@@ -20,6 +20,7 @@ import (
 	v1beta1cosmosdb "github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1"
 	v1beta1datashare "github.com/upbound/official-providers/provider-azure/apis/datashare/v1beta1"
 	v1beta1dbformariadb "github.com/upbound/official-providers/provider-azure/apis/dbformariadb/v1beta1"
+	v1beta1dbformysql "github.com/upbound/official-providers/provider-azure/apis/dbformysql/v1beta1"
 	v1beta1dbforpostgresql "github.com/upbound/official-providers/provider-azure/apis/dbforpostgresql/v1beta1"
 	v1beta1devices "github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1"
 	v1beta1eventhub "github.com/upbound/official-providers/provider-azure/apis/eventhub/v1beta1"
@@ -28,6 +29,9 @@ import (
 	v1beta1logic "github.com/upbound/official-providers/provider-azure/apis/logic/v1beta1"
 	v1beta1management "github.com/upbound/official-providers/provider-azure/apis/management/v1beta1"
 	v1beta1marketplaceordering "github.com/upbound/official-providers/provider-azure/apis/marketplaceordering/v1beta1"
+	v1beta1media "github.com/upbound/official-providers/provider-azure/apis/media/v1beta1"
+	v1beta1mixedreality "github.com/upbound/official-providers/provider-azure/apis/mixedreality/v1beta1"
+	v1beta1netapp "github.com/upbound/official-providers/provider-azure/apis/netapp/v1beta1"
 	v1beta1network "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	v1beta1notificationhubs "github.com/upbound/official-providers/provider-azure/apis/notificationhubs/v1beta1"
 	v1beta1operationalinsights "github.com/upbound/official-providers/provider-azure/apis/operationalinsights/v1beta1"
@@ -54,6 +58,7 @@ func init() {
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,
 		v1beta1datashare.SchemeBuilder.AddToScheme,
 		v1beta1dbformariadb.SchemeBuilder.AddToScheme,
+		v1beta1dbformysql.SchemeBuilder.AddToScheme,
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
@@ -62,6 +67,9 @@ func init() {
 		v1beta1logic.SchemeBuilder.AddToScheme,
 		v1beta1management.SchemeBuilder.AddToScheme,
 		v1beta1marketplaceordering.SchemeBuilder.AddToScheme,
+		v1beta1media.SchemeBuilder.AddToScheme,
+		v1beta1mixedreality.SchemeBuilder.AddToScheme,
+		v1beta1netapp.SchemeBuilder.AddToScheme,
 		v1beta1network.SchemeBuilder.AddToScheme,
 		v1beta1notificationhubs.SchemeBuilder.AddToScheme,
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,

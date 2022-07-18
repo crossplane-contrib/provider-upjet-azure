@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExpressRoutePortIdentityObservation struct {
+}
+
+type ExpressRoutePortIdentityParameters struct {
+
+	// +kubebuilder:validation:Required
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type ExpressRoutePortObservation struct {
 	Ethertype *string `json:"ethertype,omitempty" tf:"ethertype,omitempty"`
 
@@ -36,7 +48,7 @@ type ExpressRoutePortParameters struct {
 	Encapsulation *string `json:"encapsulation" tf:"encapsulation,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []ExpressRoutePortIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Link1 []Link1Parameters `json:"link1,omitempty" tf:"link1,omitempty"`
@@ -62,18 +74,6 @@ type ExpressRoutePortParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
-type IdentityObservation struct {
-}
-
-type IdentityParameters struct {
-
-	// +kubebuilder:validation:Required
-	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type Link1Observation struct {

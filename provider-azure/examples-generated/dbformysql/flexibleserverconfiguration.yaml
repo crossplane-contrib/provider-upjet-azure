@@ -1,0 +1,11 @@
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: FlexibleServerConfiguration
+metadata:
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example
+    value: "600"

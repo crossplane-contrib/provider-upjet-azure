@@ -1,0 +1,32 @@
+apiVersion: media.azure.upbound.io/v1beta1
+kind: LiveEvent
+metadata:
+  name: example
+spec:
+  forProvider:
+    description: My Event Description
+    encoding:
+    - keyFrameInterval: PT2S
+      presetName: Default720p
+      stretchMode: AutoFit
+      type: Standard
+    hostnamePrefix: special-event
+    input:
+    - ipAccessControlAllow:
+      - address: 0.0.0.0
+        name: AllowAll
+        subnetPrefixLength: 0
+      streamingProtocol: RTMP
+    location: West Europe
+    mediaServicesAccountNameRef:
+      name: example
+    preview:
+    - ipAccessControlAllow:
+      - address: 0.0.0.0
+        name: AllowAll
+        subnetPrefixLength: 0
+    resourceGroupNameRef:
+      name: example-media-rg
+    transcriptionLanguages:
+    - en-US
+    useStaticHostname: true

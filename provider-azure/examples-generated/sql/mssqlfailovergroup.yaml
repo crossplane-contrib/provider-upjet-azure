@@ -1,0 +1,19 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLFailoverGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    databasesRefs:
+    - name: example
+    partnerServer:
+    - idRef:
+        name: example
+    readWriteEndpointFailoverPolicy:
+    - graceMinutes: 80
+      mode: Automatic
+    serverIdRef:
+      name: example
+    tags:
+      database: example
+      environment: prod

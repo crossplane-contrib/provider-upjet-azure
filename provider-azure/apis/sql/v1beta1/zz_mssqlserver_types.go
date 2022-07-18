@@ -31,13 +31,13 @@ type AzureadAdministratorParameters struct {
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
-type IdentityObservation struct {
+type MSSQLServerIdentityObservation struct {
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
-type IdentityParameters struct {
+type MSSQLServerIdentityParameters struct {
 
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -51,7 +51,7 @@ type MSSQLServerObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []MSSQLServerIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	RestorableDroppedDatabaseIds []*string `json:"restorableDroppedDatabaseIds,omitempty" tf:"restorable_dropped_database_ids,omitempty"`
 }
@@ -71,7 +71,7 @@ type MSSQLServerParameters struct {
 	ConnectionPolicy *string `json:"connectionPolicy,omitempty" tf:"connection_policy,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []MSSQLServerIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`

@@ -1,0 +1,20 @@
+apiVersion: netapp.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: example
+spec:
+  forProvider:
+    activeDirectory:
+    - dnsServers:
+      - 1.2.3.4
+      domain: westcentralus.com
+      organizationalUnit: OU=FirstLevel
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: crossplane-system
+      smbServerName: SMBSERVER
+      username: aduser
+    location: West Europe
+    resourceGroupNameRef:
+      name: example

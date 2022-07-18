@@ -1,0 +1,12 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorPrivateLinkScopedService
+metadata:
+  name: example
+spec:
+  forProvider:
+    linkedResourceIdRef:
+      name: example
+    resourceGroupNameRef:
+      name: example
+    scopeNameRef:
+      name: example

@@ -1,0 +1,8 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedDatabase
+metadata:
+  name: example
+spec:
+  forProvider:
+    managedInstanceIdRef:
+      name: example

@@ -30,12 +30,16 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/containerservice"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
+	"github.com/upbound/official-providers/provider-azure/config/dbformysql"
 	"github.com/upbound/official-providers/provider-azure/config/devices"
 	"github.com/upbound/official-providers/provider-azure/config/eventhub"
+	"github.com/upbound/official-providers/provider-azure/config/insights"
 	"github.com/upbound/official-providers/provider-azure/config/keyvault"
 	"github.com/upbound/official-providers/provider-azure/config/logic"
 	"github.com/upbound/official-providers/provider-azure/config/management"
 	"github.com/upbound/official-providers/provider-azure/config/mariadb"
+	"github.com/upbound/official-providers/provider-azure/config/media"
+	"github.com/upbound/official-providers/provider-azure/config/netapp"
 	"github.com/upbound/official-providers/provider-azure/config/network"
 	"github.com/upbound/official-providers/provider-azure/config/notificationhubs"
 	"github.com/upbound/official-providers/provider-azure/config/operationalinsights"
@@ -77,8 +81,6 @@ var skipList = []string{
 	// generated name too long
 	"azurerm_network_interface_application_gateway_backend_address_pool_association",
 	"azurerm_sentinel_data_connector_microsoft_defender_advanced_threat_protection",
-	// cannot generate a unique name
-	"azurerm_route",
 	// deprecated
 	"azurerm_virtual_machine_scale_set",
 	"azurerm_virtual_machine_configuration_policy_assignment",
@@ -132,6 +134,7 @@ func GetProvider() *tjconfig.Provider {
 		// add custom config functions
 		network.Configure,
 		management.Configure,
+		media.Configure,
 		redis.Configure,
 		resource.Configure,
 		containerservice.Configure,
@@ -140,6 +143,7 @@ func GetProvider() *tjconfig.Provider {
 		sql.Configure,
 		storage.Configure,
 		operationalinsights.Configure,
+		insights.Configure,
 		devices.Configure,
 		apimanagement.Configure,
 		logic.Configure,
@@ -153,6 +157,8 @@ func GetProvider() *tjconfig.Provider {
 		mariadb.Configure,
 		compute.Configure,
 		containerregistry.Configure,
+		dbformysql.Configure,
+		netapp.Configure,
 	} {
 		configure(pc)
 	}

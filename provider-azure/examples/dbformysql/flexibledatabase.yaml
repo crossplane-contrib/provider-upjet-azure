@@ -1,0 +1,12 @@
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: FlexibleDatabase
+metadata:
+  name: example
+spec:
+  forProvider:
+    charset: utf8
+    collation: utf8_unicode_ci
+    resourceGroupNameRef:
+      name: example-rg-dbformysql
+    serverNameRef:
+      name: example-upbound

@@ -66,14 +66,18 @@ import (
 	firewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/firewallrule"
 	server "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/server"
 	virtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/virtualnetworkrule"
+	flexibledatabase "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibledatabase"
+	flexibleserver "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserver"
+	flexibleserverconfiguration "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserverconfiguration"
+	flexibleserverfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserverfirewallrule"
 	activedirectoryadministrator "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/activedirectoryadministrator"
 	configurationdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/configuration"
 	databasedbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/database"
 	firewallruledbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/firewallrule"
-	flexibleserver "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserver"
-	flexibleserverconfiguration "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverconfiguration"
+	flexibleserverdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserver"
+	flexibleserverconfigurationdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverdatabase"
-	flexibleserverfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverfirewallrule"
+	flexibleserverfirewallruledbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/flexibleserverfirewallrule"
 	serverdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/server"
 	serverkey "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/serverkey"
 	virtualnetworkruledbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/virtualnetworkrule"
@@ -94,7 +98,11 @@ import (
 	consumergroup "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/consumergroup"
 	eventhub "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/eventhub"
 	eventhubnamespace "github.com/upbound/official-providers/provider-azure/internal/controller/eventhub/eventhubnamespace"
+	applicationinsights "github.com/upbound/official-providers/provider-azure/internal/controller/insights/applicationinsights"
+	monitoractiongroup "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitoractiongroup"
 	monitormetricalert "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitormetricalert"
+	monitorprivatelinkscope "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitorprivatelinkscope"
+	monitorprivatelinkscopedservice "github.com/upbound/official-providers/provider-azure/internal/controller/insights/monitorprivatelinkscopedservice"
 	accesspolicy "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/accesspolicy"
 	certificate "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificate"
 	certificateissuer "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/certificateissuer"
@@ -107,6 +115,21 @@ import (
 	integrationserviceenvironment "github.com/upbound/official-providers/provider-azure/internal/controller/logic/integrationserviceenvironment"
 	managementgroup "github.com/upbound/official-providers/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/official-providers/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
+	asset "github.com/upbound/official-providers/provider-azure/internal/controller/media/asset"
+	liveevent "github.com/upbound/official-providers/provider-azure/internal/controller/media/liveevent"
+	liveeventoutput "github.com/upbound/official-providers/provider-azure/internal/controller/media/liveeventoutput"
+	servicesaccount "github.com/upbound/official-providers/provider-azure/internal/controller/media/servicesaccount"
+	streamingendpoint "github.com/upbound/official-providers/provider-azure/internal/controller/media/streamingendpoint"
+	streaminglocator "github.com/upbound/official-providers/provider-azure/internal/controller/media/streaminglocator"
+	streamingpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/media/streamingpolicy"
+	transform "github.com/upbound/official-providers/provider-azure/internal/controller/media/transform"
+	spatialanchorsaccount "github.com/upbound/official-providers/provider-azure/internal/controller/mixedreality/spatialanchorsaccount"
+	accountnetapp "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/account"
+	pool "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/pool"
+	snapshotnetapp "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/snapshot"
+	snapshotpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/snapshotpolicy"
+	volume "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/volume"
+	applicationgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationgateway"
 	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
 	ddosprotectionplan "github.com/upbound/official-providers/provider-azure/internal/controller/network/ddosprotectionplan"
@@ -171,6 +194,7 @@ import (
 	profile "github.com/upbound/official-providers/provider-azure/internal/controller/network/profile"
 	publicip "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicip"
 	publicipprefix "github.com/upbound/official-providers/provider-azure/internal/controller/network/publicipprefix"
+	routetable "github.com/upbound/official-providers/provider-azure/internal/controller/network/routetable"
 	securitygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/securitygroup"
 	securityrule "github.com/upbound/official-providers/provider-azure/internal/controller/network/securityrule"
 	subnet "github.com/upbound/official-providers/provider-azure/internal/controller/network/subnet"
@@ -194,7 +218,16 @@ import (
 	advancedthreatprotection "github.com/upbound/official-providers/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritydevicegroup"
 	iotsecuritysolution "github.com/upbound/official-providers/provider-azure/internal/controller/security/iotsecuritysolution"
+	mssqldatabase "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqldatabase"
+	mssqlfailovergroup "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlfailovergroup"
+	mssqlmanageddatabase "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanageddatabase"
+	mssqlmanagedinstance "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstance"
+	mssqlmanagedinstanceactivedirectoryadministrator "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstanceactivedirectoryadministrator"
+	mssqlmanagedinstancefailovergroup "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstancefailovergroup"
+	mssqlmanagedinstancevulnerabilityassessment "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlmanagedinstancevulnerabilityassessment"
+	mssqloutboundfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqloutboundfirewallrule"
 	mssqlserver "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserver"
+	mssqlserverdnsalias "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlserverdnsalias"
 	mssqlservertransparentdataencryption "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	mssqlvirtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
 	accountstorage "github.com/upbound/official-providers/provider-azure/internal/controller/storage/account"
@@ -278,14 +311,18 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		firewallrule.Setup,
 		server.Setup,
 		virtualnetworkrule.Setup,
+		flexibledatabase.Setup,
+		flexibleserver.Setup,
+		flexibleserverconfiguration.Setup,
+		flexibleserverfirewallrule.Setup,
 		activedirectoryadministrator.Setup,
 		configurationdbforpostgresql.Setup,
 		databasedbforpostgresql.Setup,
 		firewallruledbforpostgresql.Setup,
-		flexibleserver.Setup,
-		flexibleserverconfiguration.Setup,
+		flexibleserverdbforpostgresql.Setup,
+		flexibleserverconfigurationdbforpostgresql.Setup,
 		flexibleserverdatabase.Setup,
-		flexibleserverfirewallrule.Setup,
+		flexibleserverfirewallruledbforpostgresql.Setup,
 		serverdbforpostgresql.Setup,
 		serverkey.Setup,
 		virtualnetworkruledbforpostgresql.Setup,
@@ -306,7 +343,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		consumergroup.Setup,
 		eventhub.Setup,
 		eventhubnamespace.Setup,
+		applicationinsights.Setup,
+		monitoractiongroup.Setup,
 		monitormetricalert.Setup,
+		monitorprivatelinkscope.Setup,
+		monitorprivatelinkscopedservice.Setup,
 		accesspolicy.Setup,
 		certificate.Setup,
 		certificateissuer.Setup,
@@ -319,6 +360,21 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		integrationserviceenvironment.Setup,
 		managementgroup.Setup,
 		marketplaceagreement.Setup,
+		asset.Setup,
+		liveevent.Setup,
+		liveeventoutput.Setup,
+		servicesaccount.Setup,
+		streamingendpoint.Setup,
+		streaminglocator.Setup,
+		streamingpolicy.Setup,
+		transform.Setup,
+		spatialanchorsaccount.Setup,
+		accountnetapp.Setup,
+		pool.Setup,
+		snapshotnetapp.Setup,
+		snapshotpolicy.Setup,
+		volume.Setup,
+		applicationgateway.Setup,
 		applicationsecuritygroup.Setup,
 		connectionmonitor.Setup,
 		ddosprotectionplan.Setup,
@@ -383,6 +439,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		profile.Setup,
 		publicip.Setup,
 		publicipprefix.Setup,
+		routetable.Setup,
 		securitygroup.Setup,
 		securityrule.Setup,
 		subnet.Setup,
@@ -406,7 +463,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,
 		iotsecuritysolution.Setup,
+		mssqldatabase.Setup,
+		mssqlfailovergroup.Setup,
+		mssqlmanageddatabase.Setup,
+		mssqlmanagedinstance.Setup,
+		mssqlmanagedinstanceactivedirectoryadministrator.Setup,
+		mssqlmanagedinstancefailovergroup.Setup,
+		mssqlmanagedinstancevulnerabilityassessment.Setup,
+		mssqloutboundfirewallrule.Setup,
 		mssqlserver.Setup,
+		mssqlserverdnsalias.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		mssqlvirtualnetworkrule.Setup,
 		accountstorage.Setup,

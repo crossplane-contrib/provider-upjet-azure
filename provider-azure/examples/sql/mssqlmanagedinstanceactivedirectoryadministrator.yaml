@@ -1,0 +1,14 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedInstanceActiveDirectoryAdministrator
+metadata:
+  name: example
+spec:
+  forProvider:
+    loginUsername: msadmin
+    managedInstanceIdRef:
+      name: example-sql
+    # For own user Ids below can be conveniently retrieved by the following commands
+    # for objectId: $ az ad signed-in-user show| grep id\":
+    # for tenantId: $ az account tenant list | grep tenantId
+    objectId: <object-id>
+    tenantId: <tenant-id>

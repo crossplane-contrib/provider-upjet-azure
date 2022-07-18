@@ -1,0 +1,95 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ApplicationGateway
+metadata:
+  name: example
+spec:
+  forProvider:
+    backendAddressPool:
+    - name: example
+    backendHttpSettings:
+    - cookieBasedAffinity: Disabled
+      name: example
+      path: /path1/
+      port: 80
+      protocol: Http
+      requestTimeout: 60
+    frontendIpConfiguration:
+    - name: example
+      publicIpAddressIdRef:
+        name: example
+    frontendPort:
+    - name: example
+      port: 80
+    gatewayIpConfiguration:
+    - name: my-gateway-ip-configuration
+      subnetIdRef:
+        name: example-subnet
+    httpListener:
+    - frontendIpConfigurationName: example
+      frontendPortName: example
+      name: example
+      protocol: Http
+    location: West Europe
+    requestRoutingRule:
+    - backendAddressPoolName: example
+      backendHttpSettingsName: example
+      httpListenerName: example
+      name: example
+      ruleType: Basic
+    resourceGroupNameRef:
+      name: example-app-gw-rg
+    sku:
+    - capacity: 2
+      name: Standard_Small
+      tier: Standard
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-app-gw-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-app-gw-rg
+    addressSpace:
+      - "10.0.0.0/16"
+    dnsServers:
+      - "10.0.0.4"
+      - "10.0.0.5"
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-app-gw-rg
+    virtualNetworkNameRef:
+      name: example-vn
+    addressPrefixes:
+      - "10.0.0.0/24"
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Dynamic
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-app-gw-rg
+    tags:
+      environment: Production

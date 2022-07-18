@@ -1,24 +1,18 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServer
 metadata:
-  name: mssql-server-example
+  name: example-upbound
 spec:
   forProvider:
-    location: "East US"
-    version: "12.0"
-    administratorLogin: "mssqladminun"
+    administratorLogin: missadministrator
     administratorLoginPasswordSecretRef:
-      name: mssql-password
-      namespace: crossplane-system
       key: password
-    identity:
-      - type: SystemAssigned
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    minimumTlsVersion: "1.2"
     resourceGroupNameRef:
-      name: example
+      name: example-sql-rg
     tags:
-      provisioner: crossplane
-  writeConnectionSecretToRef:
-    name: conn-example-mssqlserver
-    namespace: crossplane-system
-  providerConfigRef:
-    name: example
+      environment: production
+    version: "12.0"

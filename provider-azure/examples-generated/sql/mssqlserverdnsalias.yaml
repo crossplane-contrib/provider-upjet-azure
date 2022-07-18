@@ -1,0 +1,8 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServerDNSAlias
+metadata:
+  name: example
+spec:
+  forProvider:
+    mssqlServerIdRef:
+      name: example

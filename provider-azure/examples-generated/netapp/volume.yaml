@@ -1,0 +1,35 @@
+apiVersion: netapp.azure.upbound.io/v1beta1
+kind: Volume
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example
+    createFromSnapshotResourceIdRef:
+      name: example
+    dataProtectionReplication:
+    - endpointType: dst
+      remoteVolumeLocation: West Europe
+      remoteVolumeResourceIdRef:
+        name: example
+      replicationFrequency: 10minutes
+    dataProtectionSnapshotPolicy:
+    - snapshotPolicyIdRef:
+        name: example
+    lifecycle:
+    - prevent_destroy: true
+    location: West Europe
+    poolNameRef:
+      name: example
+    protocols:
+    - NFSv4.1
+    resourceGroupNameRef:
+      name: example
+    securityStyle: Unix
+    serviceLevel: Premium
+    snapshotDirectoryVisible: false
+    storageQuotaInGb: 100
+    subnetIdRef:
+      name: example
+    volumePath: my-unique-file-path

@@ -69,12 +69,34 @@ spec:
                       properties:
                         actionGroupId:
                           type: string
+                        actionGroupIdRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        actionGroupIdSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
                         webhookProperties:
                           additionalProperties:
                             type: string
                           type: object
-                      required:
-                      - actionGroupId
                       type: object
                     type: array
                   applicationInsightsWebTestLocationAvailabilityCriteria:
@@ -215,6 +237,31 @@ spec:
                     items:
                       type: string
                     type: array
+                  scopesRefs:
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  scopesSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
                   severity:
                     type: number
                   tags:
@@ -232,8 +279,6 @@ spec:
                     type: string
                   windowSize:
                     type: string
-                required:
-                - scopes
                 type: object
               providerConfigRef:
                 default:

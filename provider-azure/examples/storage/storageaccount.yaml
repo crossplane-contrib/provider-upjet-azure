@@ -15,4 +15,4 @@ spec:
       provisioner: crossplane
   writeConnectionSecretToRef:
     name: example-storage-account
-    namespace: crossplane-system
+    namespace: upbound-system
