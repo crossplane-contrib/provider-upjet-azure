@@ -126,6 +126,9 @@ import (
 	spatialanchorsaccount "github.com/upbound/official-providers/provider-azure/internal/controller/mixedreality/spatialanchorsaccount"
 	accountnetapp "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/account"
 	pool "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/pool"
+	snapshotnetapp "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/snapshot"
+	snapshotpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/snapshotpolicy"
+	volume "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/volume"
 	applicationgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationgateway"
 	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
@@ -368,6 +371,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		spatialanchorsaccount.Setup,
 		accountnetapp.Setup,
 		pool.Setup,
+		snapshotnetapp.Setup,
+		snapshotpolicy.Setup,
+		volume.Setup,
 		applicationgateway.Setup,
 		applicationsecuritygroup.Setup,
 		connectionmonitor.Setup,

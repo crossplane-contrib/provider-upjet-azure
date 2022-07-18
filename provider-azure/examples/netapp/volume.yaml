@@ -1,0 +1,55 @@
+apiVersion: netapp.azure.upbound.io/v1beta1
+kind: Volume
+metadata:
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example
+    dataProtectionSnapshotPolicy:
+    - snapshotPolicyIdRef:
+        name: example
+    location: West Europe
+    poolNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example-rg-netapp
+    securityStyle: Unix
+    serviceLevel: Premium
+    snapshotDirectoryVisible: false
+    storageQuotaInGb: 100
+    subnetIdRef:
+      name: example-subnet
+    volumePath: my-unique-file-path
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  name: example-vn
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-netapp
+    addressSpace:
+      - "10.0.0.0/16"
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: example-subnet
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-rg-netapp
+    virtualNetworkNameRef:
+      name: example-vn
+    addressPrefixes:
+      - "10.0.0.0/24"
+    delegation:
+      - name: dbformysqldelegation
+        serviceDelegation:
+          - name: Microsoft.Netapp/volumes
+            actions:
+              - Microsoft.Network/networkinterfaces/*
+              - Microsoft.Network/virtualNetworks/subnets/join/action
