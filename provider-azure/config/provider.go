@@ -39,6 +39,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/management"
 	"github.com/upbound/official-providers/provider-azure/config/mariadb"
 	"github.com/upbound/official-providers/provider-azure/config/media"
+	"github.com/upbound/official-providers/provider-azure/config/netapp"
 	"github.com/upbound/official-providers/provider-azure/config/network"
 	"github.com/upbound/official-providers/provider-azure/config/notificationhubs"
 	"github.com/upbound/official-providers/provider-azure/config/operationalinsights"
@@ -157,6 +158,7 @@ func GetProvider() *tjconfig.Provider {
 		compute.Configure,
 		containerregistry.Configure,
 		dbformysql.Configure,
+		netapp.Configure,
 	} {
 		configure(pc)
 	}

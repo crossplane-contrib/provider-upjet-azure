@@ -124,6 +124,8 @@ import (
 	streamingpolicy "github.com/upbound/official-providers/provider-azure/internal/controller/media/streamingpolicy"
 	transform "github.com/upbound/official-providers/provider-azure/internal/controller/media/transform"
 	spatialanchorsaccount "github.com/upbound/official-providers/provider-azure/internal/controller/mixedreality/spatialanchorsaccount"
+	accountnetapp "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/account"
+	pool "github.com/upbound/official-providers/provider-azure/internal/controller/netapp/pool"
 	applicationgateway "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationgateway"
 	applicationsecuritygroup "github.com/upbound/official-providers/provider-azure/internal/controller/network/applicationsecuritygroup"
 	connectionmonitor "github.com/upbound/official-providers/provider-azure/internal/controller/network/connectionmonitor"
@@ -364,6 +366,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		streamingpolicy.Setup,
 		transform.Setup,
 		spatialanchorsaccount.Setup,
+		accountnetapp.Setup,
+		pool.Setup,
 		applicationgateway.Setup,
 		applicationsecuritygroup.Setup,
 		connectionmonitor.Setup,
