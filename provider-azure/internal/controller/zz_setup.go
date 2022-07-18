@@ -66,6 +66,7 @@ import (
 	firewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/firewallrule"
 	server "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/server"
 	virtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/virtualnetworkrule"
+	flexibledatabase "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibledatabase"
 	flexibleserver "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserver"
 	activedirectoryadministrator "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/activedirectoryadministrator"
 	configurationdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/configuration"
@@ -303,6 +304,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		firewallrule.Setup,
 		server.Setup,
 		virtualnetworkrule.Setup,
+		flexibledatabase.Setup,
 		flexibleserver.Setup,
 		activedirectoryadministrator.Setup,
 		configurationdbforpostgresql.Setup,

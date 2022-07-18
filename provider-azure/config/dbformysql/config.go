@@ -34,4 +34,10 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_mysql_flexible_database", func(r *config.Resource) {
+		r.References["server_name"] = config.Reference{
+			Type: "FlexibleServer",
+		}
+	})
 }
