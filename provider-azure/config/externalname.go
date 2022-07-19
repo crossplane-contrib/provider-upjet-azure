@@ -66,6 +66,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_data_share_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataShare/accounts/{{ .externalName }}"),
 	"azurerm_data_share":         config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}/shares/{{ .externalName }}"),
 
+	// dataprotection
+	"azurerm_data_protection_backup_vault":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataProtection/backupVaults/{{ .externalName }}"),
+	"azurerm_data_protection_backup_policy_blob_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.vault_id }}/backupPolicies/{{ .externalName }}"),
+
 	// devices
 	"azurerm_iothub":                            config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/IotHubs/{{ .externalName }}"),
 	"azurerm_iothub_consumer_group":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/IotHubs/{{ .parameters.iothub_name }}/eventHubEndpoints/{{ .parameters.eventhub_endpoint_name }}/ConsumerGroups/{{ .externalName }}"),

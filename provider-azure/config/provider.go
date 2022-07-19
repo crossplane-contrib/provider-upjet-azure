@@ -29,6 +29,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/containerregistry"
 	"github.com/upbound/official-providers/provider-azure/config/containerservice"
 	"github.com/upbound/official-providers/provider-azure/config/cosmosdb"
+	"github.com/upbound/official-providers/provider-azure/config/dataprotection"
 	"github.com/upbound/official-providers/provider-azure/config/datashare"
 	"github.com/upbound/official-providers/provider-azure/config/dbformysql"
 	"github.com/upbound/official-providers/provider-azure/config/devices"
@@ -159,6 +160,7 @@ func GetProvider() *tjconfig.Provider {
 		containerregistry.Configure,
 		dbformysql.Configure,
 		netapp.Configure,
+		dataprotection.Configure,
 	} {
 		configure(pc)
 	}

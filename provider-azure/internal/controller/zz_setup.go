@@ -59,6 +59,8 @@ import (
 	sqlstoredprocedure "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqlstoredprocedure"
 	sqltrigger "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqltrigger"
 	table "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/table"
+	backuppolicyblobstorage "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
+	backupvault "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/account"
 	datashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datashare"
 	configuration "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/configuration"
@@ -304,6 +306,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sqlstoredprocedure.Setup,
 		sqltrigger.Setup,
 		table.Setup,
+		backuppolicyblobstorage.Setup,
+		backupvault.Setup,
 		accountdatashare.Setup,
 		datashare.Setup,
 		configuration.Setup,
