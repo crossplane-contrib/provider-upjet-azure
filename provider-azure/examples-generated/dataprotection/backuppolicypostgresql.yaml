@@ -1,0 +1,38 @@
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupPolicyPostgreSQL
+metadata:
+  name: example
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+    - R/2021-05-23T02:30:00+00:00/P1W
+    defaultRetentionDuration: P4M
+    resourceGroupNameRef:
+      name: example
+    retentionRule:
+    - criteria:
+      - absoluteCriteria: FirstOfWeek
+      duration: P6M
+      name: weekly
+      priority: 20
+    - criteria:
+      - daysOfWeek:
+        - Thursday
+        scheduledBackupTimes:
+        - "2021-05-23T02:30:00Z"
+      duration: P1W
+      name: thursday
+      priority: 25
+    - criteria:
+      - daysOfWeek:
+        - Tuesday
+        scheduledBackupTimes:
+        - "2021-05-23T02:30:00Z"
+        weeksOfMonth:
+        - First
+        - Last
+      duration: P1D
+      name: monthly
+      priority: 15
+    vaultNameRef:
+      name: example

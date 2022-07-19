@@ -60,6 +60,8 @@ import (
 	sqltrigger "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqltrigger"
 	table "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/table"
 	backuppolicyblobstorage "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
+	backuppolicydisk "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backuppolicydisk"
+	backuppolicypostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backuppolicypostgresql"
 	backupvault "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/account"
 	datashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datashare"
@@ -307,6 +309,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sqltrigger.Setup,
 		table.Setup,
 		backuppolicyblobstorage.Setup,
+		backuppolicydisk.Setup,
+		backuppolicypostgresql.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,
 		datashare.Setup,

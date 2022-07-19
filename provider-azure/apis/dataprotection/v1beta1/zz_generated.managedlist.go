@@ -16,6 +16,24 @@ func (l *BackupPolicyBlobStorageList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this BackupPolicyDiskList.
+func (l *BackupPolicyDiskList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this BackupPolicyPostgreSQLList.
+func (l *BackupPolicyPostgreSQLList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this BackupVaultList.
 func (l *BackupVaultList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

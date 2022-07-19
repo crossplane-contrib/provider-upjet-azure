@@ -69,6 +69,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// dataprotection
 	"azurerm_data_protection_backup_vault":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataProtection/backupVaults/{{ .externalName }}"),
 	"azurerm_data_protection_backup_policy_blob_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.vault_id }}/backupPolicies/{{ .externalName }}"),
+	"azurerm_data_protection_backup_policy_disk":         config.TemplatedStringAsIdentifier("name", "{{ .parameters.vault_id }}/backupPolicies/{{ .externalName }}"),
+	"azurerm_data_protection_backup_policy_postgresql":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataProtection/backupVaults/{{ .parameters.vault_name }}/backupPolicies/{{ .externalName }}"),
 
 	// devices
 	"azurerm_iothub":                            config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/IotHubs/{{ .externalName }}"),
