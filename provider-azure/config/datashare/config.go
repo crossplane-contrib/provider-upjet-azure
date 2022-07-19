@@ -17,17 +17,22 @@ limitations under the License.
 package datashare
 
 import (
+	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
+
 	"github.com/upbound/upjet/pkg/config"
 )
 
 // Configure configures datashare group
 func Configure(p *config.Provider) {
-	p.AddResourceConfigurator("azurerm_data_share", func(r *config.Resource) {
-		r.Kind = "DataShare"
-		r.UseAsync = false
-	})
 	p.AddResourceConfigurator("azurerm_data_share_account", func(r *config.Resource) {
 		r.Kind = "Account"
-		r.UseAsync = false
+	})
+
+	p.AddResourceConfigurator("azurerm_data_share", func(r *config.Resource) {
+		r.Kind = "DataShare"
+		r.References["account_id"] = config.Reference{
+			Type:      "Account",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 }

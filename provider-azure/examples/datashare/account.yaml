@@ -1,0 +1,23 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-datashare
+    tags:
+      foo: bar
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-rg-datashare
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane

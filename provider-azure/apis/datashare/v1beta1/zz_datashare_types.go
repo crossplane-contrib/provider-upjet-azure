@@ -19,8 +19,16 @@ type DataShareObservation struct {
 
 type DataShareParameters struct {
 
-	// +kubebuilder:validation:Required
-	AccountID *string `json:"accountId" tf:"account_id,omitempty"`
+	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
