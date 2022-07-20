@@ -1,0 +1,49 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataSetDataLakeGen2
+metadata:
+  name: example-gen2
+spec:
+  forProvider:
+    filePath: myfile.txt
+    fileSystemNameRef:
+      name: example
+    shareIdRef:
+      name: example
+    storageAccountIdRef:
+      name: example-storage-account-gen2
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: example-storage-account-gen2
+  annotations:
+    crossplane.io/external-name: optestdatagen2190722
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-rg-datashare
+    location: "West Europe"
+    accountTier: "Standard"
+    accountReplicationType: "LRS"
+    accountKind: "BlobStorage"
+    tags:
+      provisioner: crossplane
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  name: example
+spec:
+  forProvider:
+    storageAccountIdRef:
+      name: example-storage-account-gen2
+---
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  name: example-gen2
+spec:
+  forProvider:
+    principalId: 0e1d5ca4-c741-4499-9eb9-dee5b307b24e
+    roleDefinitionName: Storage Blob Data Reader
+    scope: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-rg-datashare/providers/Microsoft.Storage/storageAccounts/optestdatagen2190722 # Compisition required for fully automated test

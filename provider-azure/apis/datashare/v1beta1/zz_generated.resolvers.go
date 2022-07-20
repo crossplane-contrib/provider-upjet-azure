@@ -11,6 +11,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -36,6 +37,143 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DataSetBlobStorage.
+func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ContainerNameRef,
+		Selector:     mg.Spec.ForProvider.ContainerNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ContainerList{},
+			Managed: &v1beta11.Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerName")
+	}
+	mg.Spec.ForProvider.ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataShareID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DataShareIDRef,
+		Selector:     mg.Spec.ForProvider.DataShareIDSelector,
+		To: reference.To{
+			List:    &DataShareList{},
+			Managed: &DataShare{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DataShareID")
+	}
+	mg.Spec.ForProvider.DataShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataShareIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.StorageAccount[i3].NameRef,
+			Selector:     mg.Spec.ForProvider.StorageAccount[i3].NameSelector,
+			To: reference.To{
+				List:    &v1beta11.AccountList{},
+				Managed: &v1beta11.Account{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].Name")
+		}
+		mg.Spec.ForProvider.StorageAccount[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].NameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupNameRef,
+			Selector:     mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupNameSelector,
+			To: reference.To{
+				List:    &v1beta1.ResourceGroupList{},
+				Managed: &v1beta1.ResourceGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupName")
+		}
+		mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupNameRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this DataSetDataLakeGen2.
+func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.FileSystemNameRef,
+		Selector:     mg.Spec.ForProvider.FileSystemNameSelector,
+		To: reference.To{
+			List:    &v1beta11.DataLakeGen2FileSystemList{},
+			Managed: &v1beta11.DataLakeGen2FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FileSystemName")
+	}
+	mg.Spec.ForProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FileSystemNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ShareIDRef,
+		Selector:     mg.Spec.ForProvider.ShareIDSelector,
+		To: reference.To{
+			List:    &DataShareList{},
+			Managed: &DataShare{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ShareID")
+	}
+	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
+	}
+	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	return nil
 }

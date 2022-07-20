@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/pkg/errors"
 
@@ -17,6 +18,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// authorization
 	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Authorization/policyAssignments/{{ .externalName }}"),
+	"azurerm_role_assignment":                  config.IdentifierFromProvider,
 
 	// base group
 	"azurerm_subscription":                   config.TemplatedStringAsIdentifier("alias", "/providers/Microsoft.Subscription/aliases/{{ .externalName }}"),
@@ -63,8 +65,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_cosmosdb_cassandra_datacenter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cassandra_cluster_id }}/dataCenters/{{ .externalName }}"),
 
 	// datashare
-	"azurerm_data_share_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataShare/accounts/{{ .externalName }}"),
-	"azurerm_data_share":         config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}/shares/{{ .externalName }}"),
+	"azurerm_data_share_account":                config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataShare/accounts/{{ .externalName }}"),
+	"azurerm_data_share":                        config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}/shares/{{ .externalName }}"),
+	"azurerm_data_share_dataset_blob_storage":   config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_share_id }}/dataSets/{{ .externalName }}"),
+	"azurerm_data_share_dataset_data_lake_gen2": config.TemplatedStringAsIdentifier("name", "{{ .parameters.share_id }}/dataSets/{{ .externalName }}"),
 
 	// dataprotection
 	"azurerm_data_protection_backup_vault":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataProtection/backupVaults/{{ .externalName }}"),
@@ -323,7 +327,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_storage_blob":                      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .parameters.storage_container_name }}/{{ .externalName }}"),
 	"azurerm_storage_blob_inventory_policy":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/inventoryPolicies/Default"),
 	"azurerm_storage_container":                 config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .externalName }}"),
-	"azurerm_storage_data_lake_gen2_filesystem": config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_id_ref.name }}.dfs.core.windows.net/{{ .externalName }}"),
+	"azurerm_storage_data_lake_gen2_filesystem": storageDataLakeGen2Filesystem(),
 	"azurerm_storage_encryption_scope":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/encryptionScopes/{{ .externalName }}"),
 	"azurerm_storage_management_policy":         config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/managementPolicies/Default"),
 	// The id of this resource is a concatenation of 2 resource names, but in the terraform documentation
@@ -367,6 +371,29 @@ func keyVaultAccessPolicy() config.ExternalName {
 			return fmt.Sprintf("%s/objectId/%s", keyVaultID, objectID), nil
 		}
 		return fmt.Sprintf("%s/objectId/%s/applicationId/%s", keyVaultID, objectID, applicationID), nil
+	}
+	return e
+}
+
+// custom function for azurerm_storage_data_lake_gen2_filesystem
+func storageDataLakeGen2Filesystem() config.ExternalName {
+	e := config.NameAsIdentifier
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		w := strings.Split(id.(string), "/")
+		return w[len(w)-1], nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		storageAccountID, ok := parameters["storage_account_id"]
+		if !ok {
+			return "", errors.New("cannot get storage_account_id")
+		}
+		w := strings.Split(storageAccountID.(string), "/")
+		storageAccountName := w[len(w)-1]
+		return fmt.Sprintf("https://%s.dfs.core.windows.net/%s", storageAccountName, externalName), nil
 	}
 	return e
 }

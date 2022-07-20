@@ -6,4 +6,5 @@ spec:
   forProvider:
     properties:
       hello: aGVsbG8=
-    storageAccountId: /subscriptions/.../resourceGroups/example-resources111/providers/Microsoft.Storage/storageAccounts/examplestorageacc111
+    storageAccountIdRef:
+      name: example

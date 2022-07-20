@@ -6,4 +6,5 @@ spec:
   forProvider:
     properties:
       hello: aGVsbG8=
-    storageAccountId: ${azurerm_storage_account.example.id}
+    storageAccountIdRef:
+      name: example

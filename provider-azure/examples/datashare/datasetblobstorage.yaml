@@ -1,0 +1,56 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataSetBlobStorage
+metadata:
+  name: example
+spec:
+  forProvider:
+    containerNameRef:
+      name: example
+    dataShareIdRef:
+      name: example
+    filePath: myfile.txt
+    storageAccount:
+    - nameRef:
+        name: example-storage-account
+      resourceGroupNameRef:
+        name: example-rg-datashare
+      subscriptionId: 038f2b7c-3265-43b8-8624-c9ad5da610a8
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  name: example-storage-account
+  annotations:
+    crossplane.io/external-name: opdatasharetest190722
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-rg-datashare
+    location: "West Europe"
+    accountTier: "Standard"
+    accountReplicationType: "RAGRS"
+    tags:
+      provisioner: crossplane
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  name: example
+spec:
+  forProvider:
+    containerAccessType: container
+    storageAccountNameRef:
+      name: example-storage-account
+---
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  name: example
+spec:
+  forProvider:
+    principalId: 0e1d5ca4-c741-4499-9eb9-dee5b307b24e
+    roleDefinitionName: Storage Blob Data Reader
+    scope: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-rg-datashare/providers/Microsoft.Storage/storageAccounts/opdatasharetest190722 # Composition required for fully automated test

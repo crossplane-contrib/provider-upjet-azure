@@ -11,6 +11,7 @@ import (
 
 	management "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/management"
 	resourcegrouppolicyassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
+	roleassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/roleassignment"
 	resourcegroup "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourceproviderregistration"
 	subscription "github.com/upbound/official-providers/provider-azure/internal/controller/azure/subscription"
@@ -64,6 +65,8 @@ import (
 	backuppolicypostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backuppolicypostgresql"
 	backupvault "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/account"
+	datasetblobstorage "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetblobstorage"
+	datasetdatalakegen2 "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetdatalakegen2"
 	datashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datashare"
 	configuration "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/configuration"
 	database "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/database"
@@ -260,6 +263,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		management.Setup,
 		resourcegrouppolicyassignment.Setup,
+		roleassignment.Setup,
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
 		subscription.Setup,
@@ -313,6 +317,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		backuppolicypostgresql.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,
+		datasetblobstorage.Setup,
+		datasetdatalakegen2.Setup,
 		datashare.Setup,
 		configuration.Setup,
 		database.Setup,

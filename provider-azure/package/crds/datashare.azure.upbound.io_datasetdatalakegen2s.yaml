@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: datalakegen2filesystems.storage.azure.upbound.io
+  name: datasetdatalakegen2s.datashare.azure.upbound.io
 spec:
-  group: storage.azure.upbound.io
+  group: datashare.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: DataLakeGen2FileSystem
-    listKind: DataLakeGen2FileSystemList
-    plural: datalakegen2filesystems
-    singular: datalakegen2filesystem
+    kind: DataSetDataLakeGen2
+    listKind: DataSetDataLakeGen2List
+    plural: datasetdatalakegen2s
+    singular: datasetdatalakegen2
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataLakeGen2FileSystem is the Schema for the DataLakeGen2FileSystems
+        description: DataSetDataLakeGen2 is the Schema for the DataSetDataLakeGen2s
           API
         properties:
           apiVersion:
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: DataLakeGen2FileSystemSpec defines the desired state of DataLakeGen2FileSystem
+            description: DataSetDataLakeGen2Spec defines the desired state of DataSetDataLakeGen2
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,29 +64,59 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  ace:
-                    items:
-                      properties:
-                        id:
-                          type: string
-                        permissions:
-                          type: string
-                        scope:
-                          type: string
-                        type:
-                          type: string
-                      required:
-                      - permissions
-                      - type
-                      type: object
-                    type: array
-                  group:
+                  filePath:
                     type: string
-                  owner:
+                  fileSystemName:
                     type: string
-                  properties:
-                    additionalProperties:
-                      type: string
+                  fileSystemNameRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  fileSystemNameSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  folderPath:
+                    type: string
+                  shareId:
+                    type: string
+                  shareIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  shareIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
                     type: object
                   storageAccountId:
                     type: string
@@ -211,11 +241,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: DataLakeGen2FileSystemStatus defines the observed state of
-              DataLakeGen2FileSystem.
+            description: DataSetDataLakeGen2Status defines the observed state of DataSetDataLakeGen2.
             properties:
               atProvider:
                 properties:
+                  displayName:
+                    type: string
                   id:
                     type: string
                 type: object

@@ -1,0 +1,17 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataSetBlobStorage
+metadata:
+  name: example
+spec:
+  forProvider:
+    containerNameRef:
+      name: example
+    dataShareIdRef:
+      name: example
+    filePath: myfile.txt
+    storageAccount:
+    - nameRef:
+        name: example
+      resourceGroupNameRef:
+        name: example
+      subscriptionId: 00000000-0000-0000-0000-000000000000

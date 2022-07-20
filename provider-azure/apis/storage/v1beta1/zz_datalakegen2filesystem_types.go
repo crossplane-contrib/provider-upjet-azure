@@ -49,8 +49,16 @@ type DataLakeGen2FileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
-	// +kubebuilder:validation:Required
-	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
+	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 // DataLakeGen2FileSystemSpec defines the desired state of DataLakeGen2FileSystem

@@ -23,6 +23,7 @@ import (
 	tjconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/official-providers/provider-azure/config/apimanagement"
+	"github.com/upbound/official-providers/provider-azure/config/authorization"
 	"github.com/upbound/official-providers/provider-azure/config/base"
 	"github.com/upbound/official-providers/provider-azure/config/common"
 	"github.com/upbound/official-providers/provider-azure/config/compute"
@@ -133,6 +134,7 @@ func GetProvider() *tjconfig.Provider {
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
+		authorization.Configure,
 		network.Configure,
 		management.Configure,
 		media.Configure,

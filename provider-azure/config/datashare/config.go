@@ -35,4 +35,34 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_data_share_dataset_blob_storage", func(r *config.Resource) {
+		r.References["data_share_id"] = config.Reference{
+			Type:      "DataShare",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["container_name"] = config.Reference{
+			Type: rconfig.APISPackagePath + "/storage/v1beta1.Container",
+		}
+		r.References["storage_account.name"] = config.Reference{
+			Type: rconfig.APISPackagePath + "/storage/v1beta1.Account",
+		}
+		r.References["storage_account.resource_group_name"] = config.Reference{
+			Type: rconfig.APISPackagePath + "/azure/v1beta1.ResourceGroup",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_data_share_dataset_data_lake_gen2", func(r *config.Resource) {
+		r.References["share_id"] = config.Reference{
+			Type:      "DataShare",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["storage_account_id"] = config.Reference{
+			Type:      rconfig.StorageAccountReferencePath,
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["file_system_name"] = config.Reference{
+			Type: rconfig.APISPackagePath + "/storage/v1beta1.DataLakeGen2FileSystem",
+		}
+	})
 }

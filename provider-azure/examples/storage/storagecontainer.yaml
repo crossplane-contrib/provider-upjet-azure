@@ -7,5 +7,3 @@ spec:
     containerAccessType: private
     storageAccountNameRef:
       name: example-storage-account
-  providerConfigRef:
-    name: example

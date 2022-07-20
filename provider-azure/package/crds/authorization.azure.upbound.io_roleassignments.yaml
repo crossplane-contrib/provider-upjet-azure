@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: datalakegen2filesystems.storage.azure.upbound.io
+  name: roleassignments.authorization.azure.upbound.io
 spec:
-  group: storage.azure.upbound.io
+  group: authorization.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: DataLakeGen2FileSystem
-    listKind: DataLakeGen2FileSystemList
-    plural: datalakegen2filesystems
-    singular: datalakegen2filesystem
+    kind: RoleAssignment
+    listKind: RoleAssignmentList
+    plural: roleassignments
+    singular: roleassignment
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataLakeGen2FileSystem is the Schema for the DataLakeGen2FileSystems
-          API
+        description: RoleAssignment is the Schema for the RoleAssignments API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: DataLakeGen2FileSystemSpec defines the desired state of DataLakeGen2FileSystem
+            description: RoleAssignmentSpec defines the desired state of RoleAssignment
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,55 +63,29 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  ace:
-                    items:
-                      properties:
-                        id:
-                          type: string
-                        permissions:
-                          type: string
-                        scope:
-                          type: string
-                        type:
-                          type: string
-                      required:
-                      - permissions
-                      - type
-                      type: object
-                    type: array
-                  group:
+                  condition:
                     type: string
-                  owner:
+                  conditionVersion:
                     type: string
-                  properties:
-                    additionalProperties:
-                      type: string
-                    type: object
-                  storageAccountId:
+                  delegatedManagedIdentityResourceId:
                     type: string
-                  storageAccountIdRef:
-                    description: A Reference to a named object.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                    required:
-                    - name
-                    type: object
-                  storageAccountIdSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                    type: object
+                  description:
+                    type: string
+                  name:
+                    type: string
+                  principalId:
+                    type: string
+                  roleDefinitionId:
+                    type: string
+                  roleDefinitionName:
+                    type: string
+                  scope:
+                    type: string
+                  skipServicePrincipalAadCheck:
+                    type: boolean
+                required:
+                - principalId
+                - scope
                 type: object
               providerConfigRef:
                 default:
@@ -211,12 +184,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: DataLakeGen2FileSystemStatus defines the observed state of
-              DataLakeGen2FileSystem.
+            description: RoleAssignmentStatus defines the observed state of RoleAssignment.
             properties:
               atProvider:
                 properties:
                   id:
+                    type: string
+                  principalType:
                     type: string
                 type: object
               conditions:

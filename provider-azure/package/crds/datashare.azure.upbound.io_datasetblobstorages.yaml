@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: datalakegen2filesystems.storage.azure.upbound.io
+  name: datasetblobstorages.datashare.azure.upbound.io
 spec:
-  group: storage.azure.upbound.io
+  group: datashare.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: DataLakeGen2FileSystem
-    listKind: DataLakeGen2FileSystemList
-    plural: datalakegen2filesystems
-    singular: datalakegen2filesystem
+    kind: DataSetBlobStorage
+    listKind: DataSetBlobStorageList
+    plural: datasetblobstorages
+    singular: datasetblobstorage
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataLakeGen2FileSystem is the Schema for the DataLakeGen2FileSystems
+        description: DataSetBlobStorage is the Schema for the DataSetBlobStorages
           API
         properties:
           apiVersion:
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: DataLakeGen2FileSystemSpec defines the desired state of DataLakeGen2FileSystem
+            description: DataSetBlobStorageSpec defines the desired state of DataSetBlobStorage
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,33 +64,9 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  ace:
-                    items:
-                      properties:
-                        id:
-                          type: string
-                        permissions:
-                          type: string
-                        scope:
-                          type: string
-                        type:
-                          type: string
-                      required:
-                      - permissions
-                      - type
-                      type: object
-                    type: array
-                  group:
+                  containerName:
                     type: string
-                  owner:
-                    type: string
-                  properties:
-                    additionalProperties:
-                      type: string
-                    type: object
-                  storageAccountId:
-                    type: string
-                  storageAccountIdRef:
+                  containerNameRef:
                     description: A Reference to a named object.
                     properties:
                       name:
@@ -99,7 +75,7 @@ spec:
                     required:
                     - name
                     type: object
-                  storageAccountIdSelector:
+                  containerNameSelector:
                     description: A Selector selects an object.
                     properties:
                       matchControllerRef:
@@ -113,6 +89,98 @@ spec:
                           is selected.
                         type: object
                     type: object
+                  dataShareId:
+                    type: string
+                  dataShareIdRef:
+                    description: A Reference to a named object.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                    required:
+                    - name
+                    type: object
+                  dataShareIdSelector:
+                    description: A Selector selects an object.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                    type: object
+                  filePath:
+                    type: string
+                  folderPath:
+                    type: string
+                  storageAccount:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        nameRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        nameSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
+                        resourceGroupName:
+                          type: string
+                        resourceGroupNameRef:
+                          description: A Reference to a named object.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                          required:
+                          - name
+                          type: object
+                        resourceGroupNameSelector:
+                          description: A Selector selects an object.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                          type: object
+                        subscriptionId:
+                          type: string
+                      required:
+                      - subscriptionId
+                      type: object
+                    type: array
+                required:
+                - storageAccount
                 type: object
               providerConfigRef:
                 default:
@@ -211,11 +279,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: DataLakeGen2FileSystemStatus defines the observed state of
-              DataLakeGen2FileSystem.
+            description: DataSetBlobStorageStatus defines the observed state of DataSetBlobStorage.
             properties:
               atProvider:
                 properties:
+                  displayName:
+                    type: string
                   id:
                     type: string
                 type: object

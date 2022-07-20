@@ -1,0 +1,13 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataSetDataLakeGen2
+metadata:
+  name: example
+spec:
+  forProvider:
+    filePath: myfile.txt
+    fileSystemNameRef:
+      name: example
+    shareIdRef:
+      name: example
+    storageAccountIdRef:
+      name: example
