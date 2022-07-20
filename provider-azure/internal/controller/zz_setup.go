@@ -119,6 +119,8 @@ import (
 	managedstorageaccountsastokendefinition "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/managedstorageaccountsastokendefinition"
 	secret "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/secret"
 	vault "github.com/upbound/official-providers/provider-azure/internal/controller/keyvault/vault"
+	cluster "github.com/upbound/official-providers/provider-azure/internal/controller/kusto/cluster"
+	databasekusto "github.com/upbound/official-providers/provider-azure/internal/controller/kusto/database"
 	integrationserviceenvironment "github.com/upbound/official-providers/provider-azure/internal/controller/logic/integrationserviceenvironment"
 	managementgroup "github.com/upbound/official-providers/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/official-providers/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
@@ -371,6 +373,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedstorageaccountsastokendefinition.Setup,
 		secret.Setup,
 		vault.Setup,
+		cluster.Setup,
+		databasekusto.Setup,
 		integrationserviceenvironment.Setup,
 		managementgroup.Setup,
 		marketplaceagreement.Setup,

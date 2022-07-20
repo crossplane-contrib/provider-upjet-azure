@@ -1,0 +1,24 @@
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  name: exampleupbound
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-kusto
+    sku:
+    - capacity: 2
+      name: Standard_D13_v2
+    tags:
+      Environment: Production
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-rg-kusto
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane

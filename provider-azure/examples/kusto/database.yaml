@@ -1,0 +1,13 @@
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterNameRef:
+      name: exampleupbound
+    hotCachePeriod: P7D
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-kusto
+    softDeletePeriod: P31D

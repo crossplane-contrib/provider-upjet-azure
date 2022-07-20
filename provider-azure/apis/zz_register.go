@@ -27,6 +27,7 @@ import (
 	v1beta1eventhub "github.com/upbound/official-providers/provider-azure/apis/eventhub/v1beta1"
 	v1beta1insights "github.com/upbound/official-providers/provider-azure/apis/insights/v1beta1"
 	v1beta1keyvault "github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1"
+	v1beta1kusto "github.com/upbound/official-providers/provider-azure/apis/kusto/v1beta1"
 	v1beta1logic "github.com/upbound/official-providers/provider-azure/apis/logic/v1beta1"
 	v1beta1management "github.com/upbound/official-providers/provider-azure/apis/management/v1beta1"
 	v1beta1marketplaceordering "github.com/upbound/official-providers/provider-azure/apis/marketplaceordering/v1beta1"
@@ -66,6 +67,7 @@ func init() {
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
 		v1beta1insights.SchemeBuilder.AddToScheme,
 		v1beta1keyvault.SchemeBuilder.AddToScheme,
+		v1beta1kusto.SchemeBuilder.AddToScheme,
 		v1beta1logic.SchemeBuilder.AddToScheme,
 		v1beta1management.SchemeBuilder.AddToScheme,
 		v1beta1marketplaceordering.SchemeBuilder.AddToScheme,

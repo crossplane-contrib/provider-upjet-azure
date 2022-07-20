@@ -37,6 +37,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/eventhub"
 	"github.com/upbound/official-providers/provider-azure/config/insights"
 	"github.com/upbound/official-providers/provider-azure/config/keyvault"
+	"github.com/upbound/official-providers/provider-azure/config/kusto"
 	"github.com/upbound/official-providers/provider-azure/config/logic"
 	"github.com/upbound/official-providers/provider-azure/config/management"
 	"github.com/upbound/official-providers/provider-azure/config/mariadb"
@@ -163,6 +164,7 @@ func GetProvider() *tjconfig.Provider {
 		dbformysql.Configure,
 		netapp.Configure,
 		dataprotection.Configure,
+		kusto.Configure,
 	} {
 		configure(pc)
 	}
