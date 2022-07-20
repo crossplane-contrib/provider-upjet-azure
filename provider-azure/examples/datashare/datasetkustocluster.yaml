@@ -1,0 +1,33 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataSetKustoCluster
+metadata:
+  name: examplekustocluster
+spec:
+  forProvider:
+    kustoClusterIdRef:
+      name: exampleupbounddataset
+    shareIdRef:
+      name: examplekusto
+---
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  name: exampleupbounddataset
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-datashare
+    sku:
+    - capacity: 1
+      name: Dev(No SLA)_Standard_D11_v2
+---
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataShare
+metadata:
+  name: examplekusto
+spec:
+  forProvider:
+    accountIdRef:
+      name: example
+    kind: InPlace

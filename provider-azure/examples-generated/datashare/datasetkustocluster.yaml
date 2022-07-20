@@ -1,0 +1,10 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataSetKustoCluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    kustoClusterIdRef:
+      name: example
+    shareIdRef:
+      name: example

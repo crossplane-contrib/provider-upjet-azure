@@ -10,6 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-azure/apis/kusto/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
 	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -174,6 +175,90 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KustoClusterID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.KustoClusterIDRef,
+		Selector:     mg.Spec.ForProvider.KustoClusterIDSelector,
+		To: reference.To{
+			List:    &v1beta12.ClusterList{},
+			Managed: &v1beta12.Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KustoClusterID")
+	}
+	mg.Spec.ForProvider.KustoClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KustoClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ShareIDRef,
+		Selector:     mg.Spec.ForProvider.ShareIDSelector,
+		To: reference.To{
+			List:    &DataShareList{},
+			Managed: &DataShare{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ShareID")
+	}
+	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KustoDatabaseID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.KustoDatabaseIDRef,
+		Selector:     mg.Spec.ForProvider.KustoDatabaseIDSelector,
+		To: reference.To{
+			List:    &v1beta12.DatabaseList{},
+			Managed: &v1beta12.Database{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KustoDatabaseID")
+	}
+	mg.Spec.ForProvider.KustoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KustoDatabaseIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ShareIDRef,
+		Selector:     mg.Spec.ForProvider.ShareIDSelector,
+		To: reference.To{
+			List:    &DataShareList{},
+			Managed: &DataShare{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ShareID")
+	}
+	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 
 	return nil
 }

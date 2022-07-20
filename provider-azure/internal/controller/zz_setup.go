@@ -67,6 +67,8 @@ import (
 	accountdatashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/account"
 	datasetblobstorage "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetblobstorage"
 	datasetdatalakegen2 "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetdatalakegen2"
+	datasetkustocluster "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetkustocluster"
+	datasetkustodatabase "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetkustodatabase"
 	datashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datashare"
 	configuration "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/configuration"
 	database "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/database"
@@ -321,6 +323,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accountdatashare.Setup,
 		datasetblobstorage.Setup,
 		datasetdatalakegen2.Setup,
+		datasetkustocluster.Setup,
+		datasetkustodatabase.Setup,
 		datashare.Setup,
 		configuration.Setup,
 		database.Setup,

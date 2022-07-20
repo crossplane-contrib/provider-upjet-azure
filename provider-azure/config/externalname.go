@@ -69,6 +69,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_data_share":                        config.TemplatedStringAsIdentifier("name", "{{ .parameters.account_id }}/shares/{{ .externalName }}"),
 	"azurerm_data_share_dataset_blob_storage":   config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_share_id }}/dataSets/{{ .externalName }}"),
 	"azurerm_data_share_dataset_data_lake_gen2": config.TemplatedStringAsIdentifier("name", "{{ .parameters.share_id }}/dataSets/{{ .externalName }}"),
+	"azurerm_data_share_dataset_kusto_cluster":  config.TemplatedStringAsIdentifier("name", "{{ .parameters.share_id }}/dataSets/{{ .externalName }}"),
+	"azurerm_data_share_dataset_kusto_database": config.TemplatedStringAsIdentifier("name", "{{ .parameters.share_id }}/dataSets/{{ .externalName }}"),
 
 	// dataprotection
 	"azurerm_data_protection_backup_vault":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataProtection/backupVaults/{{ .externalName }}"),
@@ -162,7 +164,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// mixedreality
 	"azurerm_spatial_anchors_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{{ .externalName }}"),
 
-	// DBforMySQL
+	// dbformysql
 	"azurerm_mysql_flexible_server":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMySQL/flexibleServers/{{ .externalName }}"),
 	"azurerm_mysql_flexible_database":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMySQL/flexibleServers/{{ .parameters.server_name }}/databases/{{ .externalName }}"),
 	"azurerm_mysql_flexible_server_configuration": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMySQL/flexibleServers/{{ .parameters.server_name }}/configurations/{{ .externalName }}"),

@@ -308,3 +308,151 @@ func (tr *DataSetDataLakeGen2) LateInitialize(attrs []byte) (bool, error) {
 func (tr *DataSetDataLakeGen2) GetTerraformSchemaVersion() int {
 	return 0
 }
+
+// GetTerraformResourceType returns Terraform resource type for this DataSetKustoCluster
+func (mg *DataSetKustoCluster) GetTerraformResourceType() string {
+	return "azurerm_data_share_dataset_kusto_cluster"
+}
+
+// GetConnectionDetailsMapping for this DataSetKustoCluster
+func (tr *DataSetKustoCluster) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this DataSetKustoCluster
+func (tr *DataSetKustoCluster) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this DataSetKustoCluster
+func (tr *DataSetKustoCluster) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this DataSetKustoCluster
+func (tr *DataSetKustoCluster) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this DataSetKustoCluster
+func (tr *DataSetKustoCluster) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this DataSetKustoCluster
+func (tr *DataSetKustoCluster) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this DataSetKustoCluster using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *DataSetKustoCluster) LateInitialize(attrs []byte) (bool, error) {
+	params := &DataSetKustoClusterParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *DataSetKustoCluster) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this DataSetKustoDatabase
+func (mg *DataSetKustoDatabase) GetTerraformResourceType() string {
+	return "azurerm_data_share_dataset_kusto_database"
+}
+
+// GetConnectionDetailsMapping for this DataSetKustoDatabase
+func (tr *DataSetKustoDatabase) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this DataSetKustoDatabase
+func (tr *DataSetKustoDatabase) GetObservation() (map[string]interface{}, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this DataSetKustoDatabase
+func (tr *DataSetKustoDatabase) SetObservation(obs map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this DataSetKustoDatabase
+func (tr *DataSetKustoDatabase) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this DataSetKustoDatabase
+func (tr *DataSetKustoDatabase) GetParameters() (map[string]interface{}, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]interface{}{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this DataSetKustoDatabase
+func (tr *DataSetKustoDatabase) SetParameters(params map[string]interface{}) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this DataSetKustoDatabase using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *DataSetKustoDatabase) LateInitialize(attrs []byte) (bool, error) {
+	params := &DataSetKustoDatabaseParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *DataSetKustoDatabase) GetTerraformSchemaVersion() int {
+	return 0
+}

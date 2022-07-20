@@ -1,0 +1,32 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataSetKustoDatabase
+metadata:
+  name: examplekustodatabase
+spec:
+  forProvider:
+    kustoDatabaseIdRef:
+      name: example
+    shareIdRef:
+      name: examplekusto
+---
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  name: example
+spec:
+  forProvider:
+    clusterNameRef:
+      name: exampleupbounddataset
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-datashare
+---
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  name: examplekustodatabase
+spec:
+  forProvider:
+    principalId: 0e1d5ca4-c741-4499-9eb9-dee5b307b24e
+    roleDefinitionName: Contributor
+    scope: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-rg-datashare/providers/Microsoft.Kusto/Clusters/exampleupbounddataset # Composition required for fully automated test

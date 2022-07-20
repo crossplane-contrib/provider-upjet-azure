@@ -65,4 +65,26 @@ func Configure(p *config.Provider) {
 			Type: rconfig.APISPackagePath + "/storage/v1beta1.DataLakeGen2FileSystem",
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_data_share_dataset_kusto_cluster", func(r *config.Resource) {
+		r.References["share_id"] = config.Reference{
+			Type:      "DataShare",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["kusto_cluster_id"] = config.Reference{
+			Type:      rconfig.APISPackagePath + "/kusto/v1beta1.Cluster",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_data_share_dataset_kusto_database", func(r *config.Resource) {
+		r.References["share_id"] = config.Reference{
+			Type:      "DataShare",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["kusto_database_id"] = config.Reference{
+			Type:      rconfig.APISPackagePath + "/kusto/v1beta1.Database",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

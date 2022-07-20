@@ -205,6 +205,138 @@ func (mg *DataSetDataLakeGen2) SetWriteConnectionSecretToReference(r *xpv1.Secre
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this DataSetKustoCluster.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *DataSetKustoCluster) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this DataSetKustoCluster.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *DataSetKustoCluster) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this DataSetKustoCluster.
+func (mg *DataSetKustoCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this DataSetKustoDatabase.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *DataSetKustoDatabase) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this DataSetKustoDatabase.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *DataSetKustoDatabase) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this DataSetKustoDatabase.
+func (mg *DataSetKustoDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this DataShare.
 func (mg *DataShare) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

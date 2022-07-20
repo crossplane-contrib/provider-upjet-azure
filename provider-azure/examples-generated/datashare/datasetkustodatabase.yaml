@@ -1,0 +1,10 @@
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataSetKustoDatabase
+metadata:
+  name: example
+spec:
+  forProvider:
+    kustoDatabaseIdRef:
+      name: example
+    shareIdRef:
+      name: example
