@@ -27,6 +27,6 @@ metadata:
   name: examplekustodatabase
 spec:
   forProvider:
-    principalId: 0e1d5ca4-c741-4499-9eb9-dee5b307b24e
+    principalId: ${azurerm_kusto_cluster.example.id}
     roleDefinitionName: Contributor
-    scope: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-rg-datashare/providers/Microsoft.Kusto/Clusters/exampleupbounddataset # Composition required for fully automated test
+    scope: ${azurerm_data_share.example.id}
