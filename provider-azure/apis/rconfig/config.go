@@ -17,6 +17,8 @@ limitations under the License.
 package rconfig
 
 import (
+	"fmt"
+
 	"github.com/upbound/upjet/pkg/resource"
 
 	xpref "github.com/crossplane/crossplane-runtime/pkg/reference"
@@ -35,18 +37,6 @@ const (
 	// VersionV1Beta1 is used to signify that the resource has been tested and external name configured
 	VersionV1Beta1 = "v1beta1"
 
-	// ResourceGroupPath is used as subpackage path for ResourceGroup
-	ResourceGroupPath = "/azure/" + VersionV1Beta1 + ".ResourceGroup"
-
-	// SubnetPath is used as subpackage path for network.Subnet
-	SubnetPath = "/network/" + VersionV1Beta1 + ".Subnet"
-
-	// ResourceGroupReferencePath is used as import path for ResourceGroup
-	ResourceGroupReferencePath = APISPackagePath + ResourceGroupPath
-
-	// SubnetReferencePath is used as import path for network.Subnet
-	SubnetReferencePath = APISPackagePath + SubnetPath
-
 	// StorageAccountReferencePath is used as import path for StorageAccount
 	StorageAccountReferencePath = APISPackagePath + "/storage/" + VersionV1Beta1 + ".Account"
 
@@ -56,6 +46,12 @@ const (
 	// ContainerReferencePath is used as import path for Container
 	ContainerReferencePath = APISPackagePath + "/storage/" + VersionV1Beta1 + ".Container"
 )
+
+// GetDefaultVersionedPath gets the package path from repo root
+// for the specified group and kind name.
+func GetDefaultVersionedPath(group, kindName string) string {
+	return fmt.Sprintf("/%s/%s.%s", group, VersionV1Beta1, kindName)
+}
 
 // ExtractResourceID extracts the value of `spec.atProvider.id`
 // from a Terraformed resource. If mr is not a Terraformed

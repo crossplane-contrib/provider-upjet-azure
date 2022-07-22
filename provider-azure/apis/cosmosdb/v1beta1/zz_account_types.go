@@ -259,8 +259,16 @@ type RestoreParameters struct {
 	// +kubebuilder:validation:Required
 	RestoreTimestampInUtc *string `json:"restoreTimestampInUtc" tf:"restore_timestamp_in_utc,omitempty"`
 
-	// +kubebuilder:validation:Required
-	SourceCosmosDBAccountID *string `json:"sourceCosmosdbAccountId" tf:"source_cosmosdb_account_id,omitempty"`
+	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SourceCosmosDBAccountID *string `json:"sourceCosmosdbAccountId,omitempty" tf:"source_cosmosdb_account_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SourceCosmosDBAccountIDRef *v1.Reference `json:"sourceCosmosDbAccountIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	SourceCosmosDBAccountIDSelector *v1.Selector `json:"sourceCosmosDbAccountIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkRuleObservation struct {

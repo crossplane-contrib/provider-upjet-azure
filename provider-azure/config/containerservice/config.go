@@ -49,18 +49,6 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"kubelet_identity", "private_link_enabled"},
 		}
-		r.References["default_node_pool.pod_subnet_id"] = config.Reference{
-			Type:      rconfig.SubnetReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
-		r.References["default_node_pool.vnet_subnet_id"] = config.Reference{
-			Type:      rconfig.SubnetReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
-		r.References["default_node_pool.ingress_application_gateway"] = config.Reference{
-			Type:      rconfig.SubnetReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			if kc, ok := attr["kube_config_raw"].(string); ok {
 				return map[string][]byte{
@@ -76,14 +64,6 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = "containerservice"
 		r.References["kubernetes_cluster_id"] = config.Reference{
 			Type:      "KubernetesCluster",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
-		r.References["pod_subnet_id"] = config.Reference{
-			Type:      rconfig.SubnetReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
-		r.References["vnet_subnet_id"] = config.Reference{
-			Type:      rconfig.SubnetReferencePath,
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})

@@ -17,11 +17,9 @@ limitations under the License.
 package config
 
 import (
+	"regexp"
 	"strings"
 
-	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
-
-	"github.com/upbound/upjet/pkg/config"
 	tjconfig "github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/types/name"
 )
@@ -44,69 +42,53 @@ var (
 		"cognitiveservices":       2,
 		"notificationhubs":        3,
 	}
+
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/microsoft.botservice/botservices/botservice1
+	// /providers/microsoft.subscription/aliases/subscription1
+	regexMSServiceName = regexp.MustCompile(`.*/microsoft.([^/]+)/.*`)
 )
 
-// default api-group & kind configuration for all resources
-func groupOverrides() tjconfig.ResourceOption {
-	return func(r *tjconfig.Resource) {
-		apiGroup, ok := apiGroupMap[r.Name]
-		if !ok {
-			return
-		}
-
-		r.ShortGroup = apiGroup
-		parts := strings.Split(r.Name, "_")
-		i, ok := kindNameRuleMap[apiGroup]
-		if !ok {
-			i = 1 // by default we drop only the first token (azurerm)
-			// check if group name is a prefix for the resource name
-			for j := 2; j <= len(parts); j++ {
-				// do not include azurerm in comparison
-				if strings.Join(parts[1:j], "") == apiGroup {
-					// if group name is a prefix for resource name,
-					// we do not include it in Kind name
-					i = j
-				}
-			}
-		}
-		if i >= len(parts) {
-			i = len(parts) - 1
-		}
-		r.Kind = name.NewFromSnake(strings.Join(parts[i:], "_")).Camel
+func extractMicrosoftServiceName(r *tjconfig.Resource) string {
+	if r == nil || r.MetaResource == nil || len(r.MetaResource.ImportStatements) < 1 {
+		return ""
 	}
+	groups := regexMSServiceName.FindStringSubmatch(strings.ToLower(r.MetaResource.ImportStatements[0]))
+	if len(groups) < 2 {
+		return ""
+	}
+	return groups[1]
 }
 
-// KnownReferences adds common and known references.
-func KnownReferences() tjconfig.ResourceOption { // nolint:gocyclo
-	// gocyclo: A bunch of switch cases with no room to reduce.
-	return func(r *tjconfig.Resource) {
-		for f, s := range r.TerraformResource.Schema {
-			// We shouldn't add referencers for status fields and sensitive fields
-			// since they already have secret referencer.
-			if (s.Computed && !s.Optional) || s.Sensitive {
-				continue
-			}
-			switch {
-			case f == "resource_group_name":
-				r.References["resource_group_name"] = config.Reference{
-					Type: rconfig.ResourceGroupReferencePath,
-				}
-			case r.ShortGroup == "cosmosdb" && f == "account_name":
-				r.References["account_name"] = config.Reference{
-					Type: "Account",
-				}
-			case r.ShortGroup == "dbformariadb" && f == "server_name":
-				r.References["server_name"] = config.Reference{
-					Type: "Server",
-				}
-			case r.ShortGroup == "network" && f == "loadbalancer_id":
-				r.References["loadbalancer_id"] = config.Reference{
-					Type:      "LoadBalancer",
-					Extractor: rconfig.ExtractResourceIDFuncPath,
-				}
+// default api-group & kind configuration for all resources
+func groupKindOverride(r *tjconfig.Resource) {
+	g := extractMicrosoftServiceName(r)
+	apiGroup, ok := apiGroupMap[r.Name]
+	if !ok {
+		if g == "" {
+			return
+		}
+		apiGroup = g
+	}
+
+	r.ShortGroup = apiGroup
+	parts := strings.Split(r.Name, "_")
+	i, ok := kindNameRuleMap[apiGroup]
+	if !ok {
+		i = 1 // by default we drop only the first token (azurerm)
+		// check if group name is a prefix for the resource name
+		for j := 2; j <= len(parts); j++ {
+			// do not include azurerm in comparison
+			if strings.Join(parts[1:j], "") == apiGroup {
+				// if group name is a prefix for resource name,
+				// we do not include it in Kind name
+				i = j
 			}
 		}
 	}
+	if i >= len(parts) {
+		i = len(parts) - 1
+	}
+	r.Kind = name.NewFromSnake(strings.Join(parts[i:], "_")).Camel
 }
 
 // UseAsync sets UseAsync parameter to true for given resources.

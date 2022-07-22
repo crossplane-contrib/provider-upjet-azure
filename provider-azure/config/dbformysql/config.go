@@ -25,10 +25,6 @@ import (
 // Configure configures dbformysql group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mysql_flexible_server", func(r *config.Resource) {
-		r.References["delegated_subnet_id"] = config.Reference{
-			Type:      rconfig.SubnetReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
 		r.References["private_dns_zone_id"] = config.Reference{
 			Type:      rconfig.APISPackagePath + "/network/v1beta1.PrivateDNSZone",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
