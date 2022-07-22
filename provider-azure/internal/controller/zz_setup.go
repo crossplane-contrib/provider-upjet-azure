@@ -11,7 +11,6 @@ import (
 
 	management "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/management"
 	resourcegrouppolicyassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
-	roleassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/roleassignment"
 	resourcegroup "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourceproviderregistration"
 	subscription "github.com/upbound/official-providers/provider-azure/internal/controller/azure/subscription"
@@ -61,8 +60,6 @@ import (
 	sqltrigger "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqltrigger"
 	table "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/table"
 	backuppolicyblobstorage "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
-	backuppolicydisk "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backuppolicydisk"
-	backuppolicypostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backuppolicypostgresql"
 	backupvault "github.com/upbound/official-providers/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/account"
 	datasetblobstorage "github.com/upbound/official-providers/provider-azure/internal/controller/datashare/datasetblobstorage"
@@ -267,7 +264,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		management.Setup,
 		resourcegrouppolicyassignment.Setup,
-		roleassignment.Setup,
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
 		subscription.Setup,
@@ -317,8 +313,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sqltrigger.Setup,
 		table.Setup,
 		backuppolicyblobstorage.Setup,
-		backuppolicydisk.Setup,
-		backuppolicypostgresql.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,
 		datasetblobstorage.Setup,
