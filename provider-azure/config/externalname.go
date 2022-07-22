@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/pkg/errors"
 
@@ -90,11 +91,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// keyvault
 	"azurerm_key_vault":                                              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/vaults/{{ .externalName }}"),
-	"azurerm_key_vault_secret":                                       config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/secrets/{{ .externalName }}/{{ .parameters.version }}"),
-	"azurerm_key_vault_key":                                          config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/keys/{{ .externalName }}/{{ .parameters.version }}"),
-	"azurerm_key_vault_certificate":                                  config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/certificates/{{ .externalName }}/{{ .parameters.version }}"),
-	"azurerm_key_vault_certificate_issuer":                           config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/certificates/issuers/{{ .externalName }}"),
-	"azurerm_key_vault_managed_storage_account":                      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.key_vault_id }}.vault.azure.net/storage/{{ .externalName }}"),
+	"azurerm_key_vault_secret":                                       keyVaultURLIDConf("secrets"),
+	"azurerm_key_vault_key":                                          keyVaultURLIDConf("keys"),
+	"azurerm_key_vault_certificate":                                  keyVaultURLIDConf("certificates"),
+	"azurerm_key_vault_certificate_issuer":                           keyVaultURLIDWithoutVersionConfFn("certificates/issuers"),
+	"azurerm_key_vault_managed_storage_account":                      keyVaultURLIDWithoutVersionConfFn("storage"),
 	"azurerm_key_vault_managed_storage_account_sas_token_definition": config.TemplatedStringAsIdentifier("name", "{{ .parameters.managed_storage_account_id }}/sas/{{ .externalName }}"),
 	"azurerm_key_vault_managed_hardware_security_module":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/managedHSMs//{{ .externalName }}"),
 	"azurerm_key_vault_access_policy":                                keyVaultAccessPolicy(),
@@ -331,6 +332,66 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// storagesync
 	"azurerm_storage_sync": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageSync/storageSyncServices/{{ .externalName }}"),
+}
+
+func keyVaultURLIDConf(resourceType string) config.ExternalName {
+	e := config.NameAsIdentifier
+	e.GetExternalNameFn = getResourceNameFromIDURLFn(2)
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		keyVaultID, ok := parameters["key_vault_id"]
+		if !ok {
+			return "", errors.New("cannot get key_vault_id")
+		}
+		words := strings.Split(keyVaultID.(string), "/")
+		keyVaultName := words[len(words)-1]
+
+		name, ok := parameters["name"]
+		if !ok {
+			return "", errors.New("cannot get name")
+		}
+
+		version, ok := parameters["version"]
+		if !ok {
+			return "", nil
+		}
+
+		return fmt.Sprintf("https://%s.vault.azure.net/%s/%s/%s",
+			keyVaultName, resourceType, name, version), nil
+	}
+	return e
+}
+
+func keyVaultURLIDWithoutVersionConfFn(resourceType string) config.ExternalName {
+	e := config.NameAsIdentifier
+	e.GetExternalNameFn = getResourceNameFromIDURLFn(1)
+	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		keyVaultID, ok := parameters["key_vault_id"]
+		if !ok {
+			return "", errors.New("cannot get key_vault_id")
+		}
+		words := strings.Split(keyVaultID.(string), "/")
+		keyVaultName := words[len(words)-1]
+
+		name, ok := parameters["name"]
+		if !ok {
+			return "", errors.New("cannot get name")
+		}
+
+		return fmt.Sprintf("https://%s.vault.azure.net/%s/%s",
+			keyVaultName, resourceType, name), nil
+	}
+	return e
+}
+
+func getResourceNameFromIDURLFn(pos int) config.GetExternalNameFn {
+	return func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("cannot get id")
+		}
+		words := strings.Split(id.(string), "/")
+		return words[len(words)-pos], nil
+	}
 }
 
 func keyVaultAccessPolicy() config.ExternalName {
