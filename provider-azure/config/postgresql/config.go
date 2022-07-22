@@ -91,19 +91,11 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"ssl_enforcement", "storage_profile"},
 		}
-		r.References["delegated_subnet_id"] = config.Reference{
-			Type:      rconfig.SubnetReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_virtual_network_rule", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
 			Type: "Server",
-		}
-		r.References["subnet_id"] = config.Reference{
-			Type:      rconfig.SubnetReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 

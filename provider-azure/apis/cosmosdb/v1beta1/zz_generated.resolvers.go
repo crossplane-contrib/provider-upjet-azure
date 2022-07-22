@@ -38,6 +38,25 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Restore); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountIDRef,
+			Selector:     mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountIDSelector,
+			To: reference.To{
+				List:    &AccountList{},
+				Managed: &Account{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountID")
+		}
+		mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Restore[i3].SourceCosmosDBAccountIDRef = rsp.ResolvedReference
+
+	}
+
 	return nil
 }
 

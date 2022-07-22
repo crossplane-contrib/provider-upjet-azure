@@ -635,6 +635,16 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CreationSourceServerIDRef != nil {
+		in, out := &in.CreationSourceServerIDRef, &out.CreationSourceServerIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.CreationSourceServerIDSelector != nil {
+		in, out := &in.CreationSourceServerIDSelector, &out.CreationSourceServerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.GeoRedundantBackupEnabled != nil {
 		in, out := &in.GeoRedundantBackupEnabled, &out.GeoRedundantBackupEnabled
 		*out = new(bool)

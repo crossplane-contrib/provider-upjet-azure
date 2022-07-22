@@ -37,16 +37,27 @@ const (
 	nameReferenceKind = "name"
 	// idReferenceKind represents ID reference kind
 	idReferenceKind = "id"
+	// wildcard group name
+	wildcardGroup = "*"
 )
+
+type refSpecification struct {
+	group          string
+	attributeRegex string
+	packagePath    string
+}
 
 // In the regular expressions used when determining the references, we can observe many rules that have common strings.
 // Some of these may be more special than others. For example, "ex_subnet$" is a more special case than "subnet$".
 // By putting the more specific rules before the general rules in array, processing and capturing the specific
 // rules first will be possible. Since there is no fixed index for key-value pairs in maps, it is not possible to place
 // rules from specific to general. Therefore, array is used here.
-var referenceRules = [][]string{
-	{"resource_group$", rconfig.ResourceGroupPath},
-	{"subnet$", rconfig.SubnetPath},
+var referenceRules = []refSpecification{
+	{wildcardGroup, "resource_group$", rconfig.GetDefaultVersionedPath("azure", "ResourceGroup")},
+	{wildcardGroup, "subnet$", rconfig.GetDefaultVersionedPath("network", "Subnet")},
+	{"cosmosdb", "account$", rconfig.GetDefaultVersionedPath("cosmosdb", "Account")},
+	{"dbformariadb", "server$", rconfig.GetDefaultVersionedPath("dbformariadb", "Server")},
+	{"network", "loadbalancer$", rconfig.GetDefaultVersionedPath("network", "LoadBalancer")},
 }
 
 // AddCommonReferences adds some common reference fields.
@@ -69,20 +80,22 @@ func addCommonReferences(references tjconfig.References, resource *schema.Resour
 
 		referenceName := strings.Join(append(nestedFieldNames, fieldName), ".")
 		referenceNameWithoutKind, referenceKind := splitReferenceKindFromReferenceName(referenceName)
-		if referenceKind != "" {
-			referenceType, err := searchReference(referenceNameWithoutKind)
-			if err != nil {
-				return err
-			}
-			if referenceType != "" {
-				if references == nil {
-					references = make(map[string]tjconfig.Reference)
-				}
-				if _, ok := references[referenceName]; !ok {
-					referenceType = prepareReferenceType(shortGroup, version, referenceType)
-					addReference(references, referenceKind, referenceName, referenceType)
-				}
-			}
+		if referenceKind == "" {
+			continue
+		}
+		referenceType, err := searchReference(shortGroup, referenceNameWithoutKind)
+		if err != nil {
+			return err
+		}
+		if referenceType == "" {
+			continue
+		}
+		if references == nil {
+			references = make(map[string]tjconfig.Reference)
+		}
+		if _, ok := references[referenceName]; !ok {
+			referenceType = prepareReferenceType(shortGroup, version, referenceType)
+			addReference(references, referenceKind, referenceName, referenceType)
 		}
 	}
 	return nil
@@ -96,14 +109,17 @@ func splitReferenceKindFromReferenceName(fieldName string) (string, string) {
 	return strings.Join(p[:len(p)-1], "_"), p[len(p)-1]
 }
 
-func searchReference(fieldName string) (string, error) {
+func searchReference(shortGroup, fieldName string) (string, error) {
 	for _, rule := range referenceRules {
-		r, err := regexp.Compile(rule[0])
+		if rule.group != wildcardGroup && rule.group != shortGroup {
+			continue
+		}
+		r, err := regexp.Compile(rule.attributeRegex)
 		if err != nil {
 			return "", err
 		}
 		if r.MatchString(fieldName) {
-			return rule[1], nil
+			return rule.packagePath, nil
 		}
 	}
 	return "", nil

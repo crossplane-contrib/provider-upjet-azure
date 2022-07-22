@@ -44,9 +44,6 @@ func Configure(p *config.Provider) {
 
 		r.Kind = "IOTHub"
 		r.References = config.References{
-			"endpoint.resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
 			"endpoint.container_name": config.Reference{
 				Type: rconfig.ContainerReferencePath,
 			},

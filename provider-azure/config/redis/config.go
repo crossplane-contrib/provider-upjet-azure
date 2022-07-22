@@ -31,17 +31,6 @@ import (
 
 // Configure configures redis group
 func Configure(p *config.Provider) {
-	p.AddResourceConfigurator("azurerm_redis_cache", func(r *config.Resource) {
-		r.References = config.References{
-			"resource_group_name": config.Reference{
-				Type: rconfig.ResourceGroupReferencePath,
-			},
-			"subnet_id": config.Reference{
-				Type:      rconfig.SubnetReferencePath,
-				Extractor: rconfig.ExtractResourceIDFuncPath,
-			},
-		}
-	})
 	p.AddResourceConfigurator("azurerm_redis_firewall_rule", func(r *config.Resource) {
 		r.References["redis_cache_name"] = config.Reference{
 			Type: "RedisCache",

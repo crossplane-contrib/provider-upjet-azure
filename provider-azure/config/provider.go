@@ -127,11 +127,14 @@ func GetProvider() *tjconfig.Provider {
 		tjconfig.WithSkipList(skipList),
 		tjconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),
-			groupOverrides(),
-			KnownReferences(),
 			UseAsync(),
 		),
 	)
+
+	// API group overrides from Terraform import statements
+	for _, r := range pc.Resources {
+		groupKindOverride(r)
+	}
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
@@ -178,6 +181,5 @@ func GetProvider() *tjconfig.Provider {
 			panic(err)
 		}
 	}
-
 	return pc
 }

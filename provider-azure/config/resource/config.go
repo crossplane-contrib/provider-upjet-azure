@@ -18,8 +18,6 @@ package resource
 
 import (
 	"github.com/upbound/upjet/pkg/config"
-
-	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
 )
 
 // Configure configures resource group
@@ -30,9 +28,5 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_resource_group_policy_assignment", func(r *config.Resource) {
 		r.Kind = "ResourceGroupPolicyAssignment"
-		r.References["resource_group_id"] = config.Reference{
-			Type:      rconfig.ResourceGroupReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
 	})
 }
