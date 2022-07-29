@@ -4,8 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    cacheName: ${azurerm_hpc_cache.example.name}
+    cacheNameRef:
+      name: example
     namespacePath: /blob_storage
     resourceGroupNameRef:
       name: example
-    storageContainerId: ${azurerm_storage_container.example.resource_manager_id}
+    storageContainerIdRef:
+      name: example

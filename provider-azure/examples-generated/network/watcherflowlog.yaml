@@ -19,6 +19,8 @@ spec:
     trafficAnalytics:
     - enabled: true
       intervalInMinutes: 10
-      workspaceId: ${azurerm_log_analytics_workspace.test.workspace_id}
+      workspaceIdRef:
+        name: example
       workspaceRegion: West Europe
-      workspaceResourceId: ${azurerm_log_analytics_workspace.test.id}
+      workspaceResourceIdRef:
+        name: example

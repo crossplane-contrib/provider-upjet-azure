@@ -4,15 +4,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    accessPolicy:
-    - keyPermissions:
-      - Get
-      objectId: ${data.azurerm_client_config.current.object_id}
-      secretPermissions:
-      - Get
-      storagePermissions:
-      - Get
-      tenantId: ${data.azurerm_client_config.current.tenant_id}
     enabledForDiskEncryption: true
     location: West Europe
     purgeProtectionEnabled: false

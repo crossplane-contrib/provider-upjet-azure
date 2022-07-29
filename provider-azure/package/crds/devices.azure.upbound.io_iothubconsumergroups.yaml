@@ -66,7 +66,9 @@ spec:
                 properties:
                   eventhubEndpointName:
                     type: string
-                  iotHubNameRef:
+                  iothubName:
+                    type: string
+                  iothubNameRef:
                     description: A Reference to a named object.
                     properties:
                       name:
@@ -75,7 +77,7 @@ spec:
                     required:
                     - name
                     type: object
-                  iotHubNameSelector:
+                  iothubNameSelector:
                     description: A Selector selects an object.
                     properties:
                       matchControllerRef:
@@ -89,8 +91,6 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  iothubName:
-                    type: string
                   resourceGroupName:
                     type: string
                   resourceGroupNameRef:

@@ -9,9 +9,37 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this IOTSecurityDeviceGroup.
+func (mg *IOTSecurityDeviceGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.IOTHubIDRef,
+		Selector:     mg.Spec.ForProvider.IOTHubIDSelector,
+		To: reference.To{
+			List:    &v1beta1.IOTHubList{},
+			Managed: &v1beta1.IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubID")
+	}
+	mg.Spec.ForProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubIDRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this IOTSecuritySolution.
 func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -26,8 +54,8 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {

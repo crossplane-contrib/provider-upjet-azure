@@ -4,7 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    eventHubNameRef:
+    eventhubNameRef:
       name: example
     namespaceNameRef:
       name: example

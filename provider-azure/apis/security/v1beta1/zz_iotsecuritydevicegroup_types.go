@@ -40,8 +40,16 @@ type IOTSecurityDeviceGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowRule []AllowRuleParameters `json:"allowRule,omitempty" tf:"allow_rule,omitempty"`
 
-	// +kubebuilder:validation:Required
-	IOTHubID *string `json:"iothubId" tf:"iothub_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	RangeRule []RangeRuleParameters `json:"rangeRule,omitempty" tf:"range_rule,omitempty"`

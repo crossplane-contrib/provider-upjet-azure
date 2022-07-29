@@ -44,6 +44,8 @@ func Configure(p *config.Provider) {
 		r.References["target_redis_cache_name"] = config.Reference{
 			Type: "RedisCache",
 		}
+		delete(r.References, "resource_group_name")
+		delete(r.References, "linked_redis_cache_location")
 	})
 
 	p.AddResourceConfigurator("azurerm_redis_enterprise_database", func(r *config.Resource) {

@@ -1306,6 +1306,16 @@ func (in *FlexibleServerParameters) DeepCopyInto(out *FlexibleServerParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrivateDNSZoneIDRef != nil {
+		in, out := &in.PrivateDNSZoneIDRef, &out.PrivateDNSZoneIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.PrivateDNSZoneIDSelector != nil {
+		in, out := &in.PrivateDNSZoneIDSelector, &out.PrivateDNSZoneIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)

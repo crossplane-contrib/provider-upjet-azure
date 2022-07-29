@@ -36,14 +36,30 @@ type TrafficAnalyticsParameters struct {
 	// +kubebuilder:validation:Optional
 	IntervalInMinutes *float64 `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
 
-	// +kubebuilder:validation:Required
-	WorkspaceID *string `json:"workspaceId" tf:"workspace_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("workspaceId",true)
+	// +kubebuilder:validation:Optional
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	WorkspaceRegion *string `json:"workspaceRegion" tf:"workspace_region,omitempty"`
 
-	// +kubebuilder:validation:Required
-	WorkspaceResourceID *string `json:"workspaceResourceId" tf:"workspace_resource_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type WatcherFlowLogObservation struct {

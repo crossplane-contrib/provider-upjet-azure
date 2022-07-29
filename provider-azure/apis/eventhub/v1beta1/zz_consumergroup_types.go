@@ -24,10 +24,10 @@ type ConsumerGroupParameters struct {
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.Reference `json:"eventHubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.Selector `json:"eventHubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=EventHubNamespace
 	// +kubebuilder:validation:Optional

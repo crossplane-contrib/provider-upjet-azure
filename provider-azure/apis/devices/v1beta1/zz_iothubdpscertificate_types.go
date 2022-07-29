@@ -27,10 +27,10 @@ type IOTHubDPSCertificateParameters struct {
 	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IOTDPSNameRef *v1.Reference `json:"iotdpsNameRef,omitempty" tf:"-"`
+	IOTDPSNameRef *v1.Reference `json:"iotDpsNameRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	IOTDPSNameSelector *v1.Selector `json:"iotdpsNameSelector,omitempty" tf:"-"`
+	IOTDPSNameSelector *v1.Selector `json:"iotDpsNameSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional

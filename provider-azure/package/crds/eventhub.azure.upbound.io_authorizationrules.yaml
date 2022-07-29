@@ -63,7 +63,9 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  eventHubNameRef:
+                  eventhubName:
+                    type: string
+                  eventhubNameRef:
                     description: A Reference to a named object.
                     properties:
                       name:
@@ -72,7 +74,7 @@ spec:
                     required:
                     - name
                     type: object
-                  eventHubNameSelector:
+                  eventhubNameSelector:
                     description: A Selector selects an object.
                     properties:
                       matchControllerRef:
@@ -86,8 +88,6 @@ spec:
                           is selected.
                         type: object
                     type: object
-                  eventhubName:
-                    type: string
                   listen:
                     type: boolean
                   manage:

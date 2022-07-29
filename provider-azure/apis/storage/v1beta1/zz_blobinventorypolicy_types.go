@@ -22,8 +22,16 @@ type BlobInventoryPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Rules []RulesParameters `json:"rules" tf:"rules,omitempty"`
 
-	// +kubebuilder:validation:Required
-	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type FilterObservation struct {
@@ -67,8 +75,15 @@ type RulesParameters struct {
 	// +kubebuilder:validation:Required
 	Scope *string `json:"scope" tf:"scope,omitempty"`
 
-	// +kubebuilder:validation:Required
-	StorageContainerName *string `json:"storageContainerName" tf:"storage_container_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
+	// +kubebuilder:validation:Optional
+	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StorageContainerNameRef *v1.Reference `json:"storageContainerNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 }
 
 // BlobInventoryPolicySpec defines the desired state of BlobInventoryPolicy

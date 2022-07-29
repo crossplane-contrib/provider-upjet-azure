@@ -9,6 +9,7 @@ spec:
     defaultAction: Allow
     ipRules:
     - 127.0.0.1
-    storageAccountId: ${azurerm_storage_account.test.id}
+    storageAccountIdRef:
+      name: example
     virtualNetworkSubnetIds:
     - ${azurerm_subnet.test.id}

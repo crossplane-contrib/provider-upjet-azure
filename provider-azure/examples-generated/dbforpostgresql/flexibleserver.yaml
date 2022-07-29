@@ -12,7 +12,8 @@ spec:
     delegatedSubnetIdRef:
       name: example
     location: West Europe
-    privateDnsZoneId: ${azurerm_private_dns_zone.example.id}
+    privateDnsZoneIdRef:
+      name: example
     resourceGroupNameRef:
       name: example
     skuName: GP_Standard_D4s_v3

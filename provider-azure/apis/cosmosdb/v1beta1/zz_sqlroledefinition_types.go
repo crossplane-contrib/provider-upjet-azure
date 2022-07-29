@@ -28,7 +28,7 @@ type SQLRoleDefinitionObservation struct {
 
 type SQLRoleDefinitionParameters struct {
 
-	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 

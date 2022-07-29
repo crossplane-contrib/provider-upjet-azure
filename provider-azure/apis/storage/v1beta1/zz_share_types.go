@@ -65,8 +65,15 @@ type ShareParameters struct {
 	// +kubebuilder:validation:Required
 	Quota *float64 `json:"quota" tf:"quota,omitempty"`
 
-	// +kubebuilder:validation:Required
-	StorageAccountName *string `json:"storageAccountName" tf:"storage_account_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
+	// +kubebuilder:validation:Optional
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 }
 
 // ShareSpec defines the desired state of Share

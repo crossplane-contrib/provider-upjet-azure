@@ -1040,6 +1040,16 @@ func (in *DiskEncryptionSetParameters) DeepCopyInto(out *DiskEncryptionSetParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultKeyIDRef != nil {
+		in, out := &in.KeyVaultKeyIDRef, &out.KeyVaultKeyIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.KeyVaultKeyIDSelector != nil {
+		in, out := &in.KeyVaultKeyIDSelector, &out.KeyVaultKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -3748,6 +3758,16 @@ func (in *ManagedDiskParameters) DeepCopyInto(out *ManagedDiskParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SourceResourceIDRef != nil {
+		in, out := &in.SourceResourceIDRef, &out.SourceResourceIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.SourceResourceIDSelector != nil {
+		in, out := &in.SourceResourceIDSelector, &out.SourceResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SourceURI != nil {
 		in, out := &in.SourceURI, &out.SourceURI
 		*out = new(string)
@@ -5898,6 +5918,16 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 		in, out := &in.SourceURI, &out.SourceURI
 		*out = new(string)
 		**out = **in
+	}
+	if in.SourceURIRef != nil {
+		in, out := &in.SourceURIRef, &out.SourceURIRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.SourceURISelector != nil {
+		in, out := &in.SourceURISelector, &out.SourceURISelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountID != nil {
 		in, out := &in.StorageAccountID, &out.StorageAccountID

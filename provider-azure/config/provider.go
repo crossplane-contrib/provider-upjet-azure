@@ -21,6 +21,7 @@ import (
 	_ "embed"
 
 	tjconfig "github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/registry/reference"
 
 	"github.com/upbound/official-providers/provider-azure/config/apimanagement"
 	"github.com/upbound/official-providers/provider-azure/config/authorization"
@@ -52,6 +53,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/security"
 	"github.com/upbound/official-providers/provider-azure/config/sql"
 	"github.com/upbound/official-providers/provider-azure/config/storage"
+	"github.com/upbound/official-providers/provider-azure/config/storagecache"
 	"github.com/upbound/official-providers/provider-azure/config/storagesync"
 )
 
@@ -129,6 +131,7 @@ func GetProvider() *tjconfig.Provider {
 			ExternalNameConfigurations(),
 			UseAsync(),
 		),
+		tjconfig.WithReferenceInjectors([]tjconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
 	)
 
 	// API group overrides from Terraform import statements
@@ -168,6 +171,7 @@ func GetProvider() *tjconfig.Provider {
 		netapp.Configure,
 		dataprotection.Configure,
 		kusto.Configure,
+		storagecache.Configure,
 	} {
 		configure(pc)
 	}

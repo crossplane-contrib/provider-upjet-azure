@@ -16,32 +16,13 @@ limitations under the License.
 
 package config
 
-// This file is generated
 // nolint:misspell
 var (
 	// provider-azure uses the Microsoft service names extracted
 	// from Terraform import statements, e.g.:
 	// /providers/Microsoft.Subscription/aliases/subscription1 -> subscription
 	// this table holds only overrides for the resources.
-	apiGroupMap = map[string]string{
-		"azurerm_cosmosdb_account":                                       "cosmosdb",
-		"azurerm_cosmosdb_sql_function":                                  "cosmosdb",
-		"azurerm_cosmosdb_mongo_collection":                              "cosmosdb",
-		"azurerm_cosmosdb_mongo_database":                                "cosmosdb",
-		"azurerm_cosmosdb_cassandra_keyspace":                            "cosmosdb",
-		"azurerm_cosmosdb_sql_stored_procedure":                          "cosmosdb",
-		"azurerm_cosmosdb_sql_database":                                  "cosmosdb",
-		"azurerm_cosmosdb_notebook_workspace":                            "cosmosdb",
-		"azurerm_cosmosdb_sql_container":                                 "cosmosdb",
-		"azurerm_cosmosdb_sql_trigger":                                   "cosmosdb",
-		"azurerm_cosmosdb_cassandra_table":                               "cosmosdb",
-		"azurerm_cosmosdb_gremlin_graph":                                 "cosmosdb",
-		"azurerm_cosmosdb_gremlin_database":                              "cosmosdb",
-		"azurerm_cosmosdb_table":                                         "cosmosdb",
-		"azurerm_cosmosdb_cassandra_cluster":                             "cosmosdb",
-		"azurerm_cosmosdb_cassandra_datacenter":                          "cosmosdb",
-		"azurerm_cosmosdb_sql_role_assignment":                           "cosmosdb",
-		"azurerm_cosmosdb_sql_role_definition":                           "cosmosdb",
+	resourceAPIGroupMap = map[string]string{
 		"azurerm_key_vault_certificate":                                  "keyvault",
 		"azurerm_key_vault_certificate_issuer":                           "keyvault",
 		"azurerm_key_vault_key":                                          "keyvault",
@@ -55,5 +36,12 @@ var (
 		"azurerm_storage_queue":                                          "storage",
 		"azurerm_storage_share":                                          "storage",
 		"azurerm_storage_data_lake_gen2_filesystem":                      "storage",
+	}
+
+	// this table holds overrides of Microsoft provider API groups
+	// for example API group extracted from Microsoft provider "DocumentDB"
+	// is overridden as "cosmodb".
+	apiGroupOverrides = map[string]string{
+		"documentdb": "cosmosdb",
 	}
 )

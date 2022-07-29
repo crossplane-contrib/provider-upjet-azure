@@ -28,8 +28,15 @@ type WebhookParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// +kubebuilder:validation:Required
-	RegistryName *string `json:"registryName" tf:"registry_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/containerregistry/v1beta1.Registry
+	// +kubebuilder:validation:Optional
+	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RegistryNameRef *v1.Reference `json:"registryNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RegistryNameSelector *v1.Selector `json:"registryNameSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional

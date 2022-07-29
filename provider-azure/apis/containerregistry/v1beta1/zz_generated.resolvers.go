@@ -23,6 +23,22 @@ func (mg *AgentPool) ResolveReferences(ctx context.Context, c client.Reader) err
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerRegistryName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ContainerRegistryNameRef,
+		Selector:     mg.Spec.ForProvider.ContainerRegistryNameSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerRegistryName")
+	}
+	mg.Spec.ForProvider.ContainerRegistryName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerRegistryNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
@@ -153,6 +169,22 @@ func (mg *ScopeMap) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerRegistryName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ContainerRegistryNameRef,
+		Selector:     mg.Spec.ForProvider.ContainerRegistryNameSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerRegistryName")
+	}
+	mg.Spec.ForProvider.ContainerRegistryName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerRegistryNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
@@ -177,6 +209,22 @@ func (mg *Token) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerRegistryName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ContainerRegistryNameRef,
+		Selector:     mg.Spec.ForProvider.ContainerRegistryNameSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerRegistryName")
+	}
+	mg.Spec.ForProvider.ContainerRegistryName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerRegistryNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
@@ -219,6 +267,22 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RegistryName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RegistryNameRef,
+		Selector:     mg.Spec.ForProvider.RegistryNameSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RegistryName")
+	}
+	mg.Spec.ForProvider.RegistryName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RegistryNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),

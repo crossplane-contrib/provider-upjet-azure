@@ -840,6 +840,16 @@ func (in *CassandraDatacenterParameters) DeepCopyInto(out *CassandraDatacenterPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.CassandraClusterIDRef != nil {
+		in, out := &in.CassandraClusterIDRef, &out.CassandraClusterIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.CassandraClusterIDSelector != nil {
+		in, out := &in.CassandraClusterIDSelector, &out.CassandraClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DelegatedManagementSubnetID != nil {
 		in, out := &in.DelegatedManagementSubnetID, &out.DelegatedManagementSubnetID
 		*out = new(string)
@@ -4203,6 +4213,16 @@ func (in *SQLRoleAssignmentParameters) DeepCopyInto(out *SQLRoleAssignmentParame
 		in, out := &in.RoleDefinitionID, &out.RoleDefinitionID
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleDefinitionIDRef != nil {
+		in, out := &in.RoleDefinitionIDRef, &out.RoleDefinitionIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.RoleDefinitionIDSelector != nil {
+		in, out := &in.RoleDefinitionIDSelector, &out.RoleDefinitionIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Scope != nil {
 		in, out := &in.Scope, &out.Scope

@@ -101,6 +101,16 @@ func (in *AgentPoolParameters) DeepCopyInto(out *AgentPoolParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ContainerRegistryNameRef != nil {
+		in, out := &in.ContainerRegistryNameRef, &out.ContainerRegistryNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ContainerRegistryNameSelector != nil {
+		in, out := &in.ContainerRegistryNameSelector, &out.ContainerRegistryNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.InstanceCount != nil {
 		in, out := &in.InstanceCount, &out.InstanceCount
 		*out = new(float64)
@@ -1123,6 +1133,16 @@ func (in *ScopeMapParameters) DeepCopyInto(out *ScopeMapParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ContainerRegistryNameRef != nil {
+		in, out := &in.ContainerRegistryNameRef, &out.ContainerRegistryNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ContainerRegistryNameSelector != nil {
+		in, out := &in.ContainerRegistryNameSelector, &out.ContainerRegistryNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -1275,6 +1295,16 @@ func (in *TokenParameters) DeepCopyInto(out *TokenParameters) {
 		in, out := &in.ContainerRegistryName, &out.ContainerRegistryName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ContainerRegistryNameRef != nil {
+		in, out := &in.ContainerRegistryNameRef, &out.ContainerRegistryNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.ContainerRegistryNameSelector != nil {
+		in, out := &in.ContainerRegistryNameSelector, &out.ContainerRegistryNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Enabled != nil {
 		in, out := &in.Enabled, &out.Enabled
@@ -1559,6 +1589,16 @@ func (in *WebhookParameters) DeepCopyInto(out *WebhookParameters) {
 		in, out := &in.RegistryName, &out.RegistryName
 		*out = new(string)
 		**out = **in
+	}
+	if in.RegistryNameRef != nil {
+		in, out := &in.RegistryNameRef, &out.RegistryNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.RegistryNameSelector != nil {
+		in, out := &in.RegistryNameSelector, &out.RegistryNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName

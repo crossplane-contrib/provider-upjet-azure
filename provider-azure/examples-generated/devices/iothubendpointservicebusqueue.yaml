@@ -8,6 +8,7 @@ spec:
       key: attribute.primary_connection_string
       name: example-servicebus-queue-authorization-rule
       namespace: crossplane-system
-    iothubId: ${azurerm_iothub.example.id}
+    iothubIdRef:
+      name: example
     resourceGroupNameRef:
       name: example

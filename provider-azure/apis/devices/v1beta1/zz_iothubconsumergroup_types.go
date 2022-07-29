@@ -27,10 +27,10 @@ type IOTHubConsumerGroupParameters struct {
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IOTHubNameRef *v1.Reference `json:"iotHubNameRef,omitempty" tf:"-"`
+	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	IOTHubNameSelector *v1.Selector `json:"iotHubNameSelector,omitempty" tf:"-"`
+	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
