@@ -1,0 +1,24 @@
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: Server
+metadata:
+  name: example
+spec:
+  forProvider:
+    administratorLogin: mysqladminun
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: crossplane-system
+    autoGrowEnabled: true
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: false
+    infrastructureEncryptionEnabled: false
+    location: West Europe
+    publicNetworkAccessEnabled: true
+    resourceGroupNameRef:
+      name: example
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    sslMinimalTlsVersionEnforced: TLS1_2
+    storageMb: 5120
+    version: "5.7"

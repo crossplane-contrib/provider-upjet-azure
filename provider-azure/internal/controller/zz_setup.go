@@ -72,10 +72,14 @@ import (
 	firewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/firewallrule"
 	server "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/server"
 	virtualnetworkrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformariadb/virtualnetworkrule"
+	configurationdbformysql "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/configuration"
+	firewallruledbformysql "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/firewallrule"
 	flexibledatabase "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibledatabase"
 	flexibleserver "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserver"
 	flexibleserverconfiguration "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserverconfiguration"
 	flexibleserverfirewallrule "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/flexibleserverfirewallrule"
+	serverdbformysql "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/server"
+	virtualnetworkruledbformysql "github.com/upbound/official-providers/provider-azure/internal/controller/dbformysql/virtualnetworkrule"
 	activedirectoryadministrator "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/activedirectoryadministrator"
 	configurationdbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/configuration"
 	databasedbforpostgresql "github.com/upbound/official-providers/provider-azure/internal/controller/dbforpostgresql/database"
@@ -325,10 +329,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		firewallrule.Setup,
 		server.Setup,
 		virtualnetworkrule.Setup,
+		configurationdbformysql.Setup,
+		firewallruledbformysql.Setup,
 		flexibledatabase.Setup,
 		flexibleserver.Setup,
 		flexibleserverconfiguration.Setup,
 		flexibleserverfirewallrule.Setup,
+		serverdbformysql.Setup,
+		virtualnetworkruledbformysql.Setup,
 		activedirectoryadministrator.Setup,
 		configurationdbforpostgresql.Setup,
 		databasedbforpostgresql.Setup,
