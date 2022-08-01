@@ -1,0 +1,12 @@
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: Configuration
+metadata:
+  name: example
+spec:
+  forProvider:
+    name: interactive_timeout
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example
+    value: "600"

@@ -1,0 +1,12 @@
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: VirtualNetworkRule
+metadata:
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example
+    serverNameRef:
+      name: example
+    subnetIdRef:
+      name: example
