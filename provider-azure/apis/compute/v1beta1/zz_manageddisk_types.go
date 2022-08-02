@@ -134,8 +134,16 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityType *string `json:"securityType,omitempty" tf:"security_type,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SourceResourceIDRef *v1.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	SourceResourceIDSelector *v1.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`

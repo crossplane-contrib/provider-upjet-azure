@@ -24,10 +24,10 @@ type AuthorizationRuleParameters struct {
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	EventHubNameRef *v1.Reference `json:"eventHubNameRef,omitempty" tf:"-"`
+	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	EventHubNameSelector *v1.Selector `json:"eventHubNameSelector,omitempty" tf:"-"`
+	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`

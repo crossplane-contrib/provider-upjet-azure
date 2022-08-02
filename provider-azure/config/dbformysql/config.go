@@ -20,6 +20,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
 
 	"github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/registry"
 )
 
 // Configure configures dbformysql group
@@ -48,19 +49,7 @@ func Configure(p *config.Provider) {
 			Type: "FlexibleServer",
 		}
 	})
-	p.AddResourceConfigurator("azurerm_mysql_configuration", func(r *config.Resource) {
-		r.References["server_name"] = config.Reference{
-			Type: "Server",
-		}
-	})
-	p.AddResourceConfigurator("azurerm_mysql_firewall_rule", func(r *config.Resource) {
-		r.References["server_name"] = config.Reference{
-			Type: "Server",
-		}
-	})
-	p.AddResourceConfigurator("azurerm_mysql_virtual_network_rule", func(r *config.Resource) {
-		r.References["server_name"] = config.Reference{
-			Type: "Server",
-		}
+	p.AddResourceConfigurator("azurerm_mysql_server", func(r *config.Resource) {
+		r.MetaResource.ExternalName = registry.RandRFC1123Subdomain
 	})
 }

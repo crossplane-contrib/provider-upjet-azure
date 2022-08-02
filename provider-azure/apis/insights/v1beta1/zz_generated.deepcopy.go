@@ -85,7 +85,7 @@ func (in *ActionParameters) DeepCopyInto(out *ActionParameters) {
 	if in.ActionGroupIDRef != nil {
 		in, out := &in.ActionGroupIDRef, &out.ActionGroupIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ActionGroupIDSelector != nil {
 		in, out := &in.ActionGroupIDSelector, &out.ActionGroupIDSelector
@@ -259,7 +259,7 @@ func (in *ApplicationInsightsParameters) DeepCopyInto(out *ApplicationInsightsPa
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -295,6 +295,16 @@ func (in *ApplicationInsightsParameters) DeepCopyInto(out *ApplicationInsightsPa
 		in, out := &in.WorkspaceID, &out.WorkspaceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.WorkspaceIDRef != nil {
+		in, out := &in.WorkspaceIDRef, &out.WorkspaceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.WorkspaceIDSelector != nil {
+		in, out := &in.WorkspaceIDSelector, &out.WorkspaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1194,7 +1204,7 @@ func (in *MonitorActionGroupParameters) DeepCopyInto(out *MonitorActionGroupPara
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1426,7 +1436,7 @@ func (in *MonitorMetricAlertParameters) DeepCopyInto(out *MonitorMetricAlertPara
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1447,7 +1457,9 @@ func (in *MonitorMetricAlertParameters) DeepCopyInto(out *MonitorMetricAlertPara
 	if in.ScopesRefs != nil {
 		in, out := &in.ScopesRefs, &out.ScopesRefs
 		*out = make([]v1.Reference, len(*in))
-		copy(*out, *in)
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.ScopesSelector != nil {
 		in, out := &in.ScopesSelector, &out.ScopesSelector
@@ -1625,7 +1637,7 @@ func (in *MonitorPrivateLinkScopeParameters) DeepCopyInto(out *MonitorPrivateLin
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1783,7 +1795,7 @@ func (in *MonitorPrivateLinkScopedServiceParameters) DeepCopyInto(out *MonitorPr
 	if in.LinkedResourceIDRef != nil {
 		in, out := &in.LinkedResourceIDRef, &out.LinkedResourceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LinkedResourceIDSelector != nil {
 		in, out := &in.LinkedResourceIDSelector, &out.LinkedResourceIDSelector
@@ -1798,7 +1810,7 @@ func (in *MonitorPrivateLinkScopedServiceParameters) DeepCopyInto(out *MonitorPr
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1813,7 +1825,7 @@ func (in *MonitorPrivateLinkScopedServiceParameters) DeepCopyInto(out *MonitorPr
 	if in.ScopeNameRef != nil {
 		in, out := &in.ScopeNameRef, &out.ScopeNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ScopeNameSelector != nil {
 		in, out := &in.ScopeNameSelector, &out.ScopeNameSelector

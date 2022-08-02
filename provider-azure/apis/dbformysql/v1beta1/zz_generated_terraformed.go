@@ -24,17 +24,17 @@ func (tr *Configuration) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Configuration
-func (tr *Configuration) GetObservation() (map[string]interface{}, error) {
+func (tr *Configuration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Configuration
-func (tr *Configuration) SetObservation(obs map[string]interface{}) error {
+func (tr *Configuration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *Configuration) GetID() string {
 }
 
 // GetParameters of this Configuration
-func (tr *Configuration) GetParameters() (map[string]interface{}, error) {
+func (tr *Configuration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Configuration
-func (tr *Configuration) SetParameters(params map[string]interface{}) error {
+func (tr *Configuration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *FirewallRule) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this FirewallRule
-func (tr *FirewallRule) GetObservation() (map[string]interface{}, error) {
+func (tr *FirewallRule) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this FirewallRule
-func (tr *FirewallRule) SetObservation(obs map[string]interface{}) error {
+func (tr *FirewallRule) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *FirewallRule) GetID() string {
 }
 
 // GetParameters of this FirewallRule
-func (tr *FirewallRule) GetParameters() (map[string]interface{}, error) {
+func (tr *FirewallRule) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this FirewallRule
-func (tr *FirewallRule) SetParameters(params map[string]interface{}) error {
+func (tr *FirewallRule) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *FlexibleDatabase) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this FlexibleDatabase
-func (tr *FlexibleDatabase) GetObservation() (map[string]interface{}, error) {
+func (tr *FlexibleDatabase) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this FlexibleDatabase
-func (tr *FlexibleDatabase) SetObservation(obs map[string]interface{}) error {
+func (tr *FlexibleDatabase) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *FlexibleDatabase) GetID() string {
 }
 
 // GetParameters of this FlexibleDatabase
-func (tr *FlexibleDatabase) GetParameters() (map[string]interface{}, error) {
+func (tr *FlexibleDatabase) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this FlexibleDatabase
-func (tr *FlexibleDatabase) SetParameters(params map[string]interface{}) error {
+func (tr *FlexibleDatabase) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -246,17 +246,17 @@ func (tr *FlexibleServer) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this FlexibleServer
-func (tr *FlexibleServer) GetObservation() (map[string]interface{}, error) {
+func (tr *FlexibleServer) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this FlexibleServer
-func (tr *FlexibleServer) SetObservation(obs map[string]interface{}) error {
+func (tr *FlexibleServer) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -273,17 +273,17 @@ func (tr *FlexibleServer) GetID() string {
 }
 
 // GetParameters of this FlexibleServer
-func (tr *FlexibleServer) GetParameters() (map[string]interface{}, error) {
+func (tr *FlexibleServer) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this FlexibleServer
-func (tr *FlexibleServer) SetParameters(params map[string]interface{}) error {
+func (tr *FlexibleServer) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -320,17 +320,17 @@ func (tr *FlexibleServerConfiguration) GetConnectionDetailsMapping() map[string]
 }
 
 // GetObservation of this FlexibleServerConfiguration
-func (tr *FlexibleServerConfiguration) GetObservation() (map[string]interface{}, error) {
+func (tr *FlexibleServerConfiguration) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this FlexibleServerConfiguration
-func (tr *FlexibleServerConfiguration) SetObservation(obs map[string]interface{}) error {
+func (tr *FlexibleServerConfiguration) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -347,17 +347,17 @@ func (tr *FlexibleServerConfiguration) GetID() string {
 }
 
 // GetParameters of this FlexibleServerConfiguration
-func (tr *FlexibleServerConfiguration) GetParameters() (map[string]interface{}, error) {
+func (tr *FlexibleServerConfiguration) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this FlexibleServerConfiguration
-func (tr *FlexibleServerConfiguration) SetParameters(params map[string]interface{}) error {
+func (tr *FlexibleServerConfiguration) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -394,17 +394,17 @@ func (tr *FlexibleServerFirewallRule) GetConnectionDetailsMapping() map[string]s
 }
 
 // GetObservation of this FlexibleServerFirewallRule
-func (tr *FlexibleServerFirewallRule) GetObservation() (map[string]interface{}, error) {
+func (tr *FlexibleServerFirewallRule) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this FlexibleServerFirewallRule
-func (tr *FlexibleServerFirewallRule) SetObservation(obs map[string]interface{}) error {
+func (tr *FlexibleServerFirewallRule) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -421,17 +421,17 @@ func (tr *FlexibleServerFirewallRule) GetID() string {
 }
 
 // GetParameters of this FlexibleServerFirewallRule
-func (tr *FlexibleServerFirewallRule) GetParameters() (map[string]interface{}, error) {
+func (tr *FlexibleServerFirewallRule) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this FlexibleServerFirewallRule
-func (tr *FlexibleServerFirewallRule) SetParameters(params map[string]interface{}) error {
+func (tr *FlexibleServerFirewallRule) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -468,17 +468,17 @@ func (tr *Server) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Server
-func (tr *Server) GetObservation() (map[string]interface{}, error) {
+func (tr *Server) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Server
-func (tr *Server) SetObservation(obs map[string]interface{}) error {
+func (tr *Server) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -495,17 +495,17 @@ func (tr *Server) GetID() string {
 }
 
 // GetParameters of this Server
-func (tr *Server) GetParameters() (map[string]interface{}, error) {
+func (tr *Server) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Server
-func (tr *Server) SetParameters(params map[string]interface{}) error {
+func (tr *Server) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -542,17 +542,17 @@ func (tr *VirtualNetworkRule) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this VirtualNetworkRule
-func (tr *VirtualNetworkRule) GetObservation() (map[string]interface{}, error) {
+func (tr *VirtualNetworkRule) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this VirtualNetworkRule
-func (tr *VirtualNetworkRule) SetObservation(obs map[string]interface{}) error {
+func (tr *VirtualNetworkRule) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -569,17 +569,17 @@ func (tr *VirtualNetworkRule) GetID() string {
 }
 
 // GetParameters of this VirtualNetworkRule
-func (tr *VirtualNetworkRule) GetParameters() (map[string]interface{}, error) {
+func (tr *VirtualNetworkRule) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this VirtualNetworkRule
-func (tr *VirtualNetworkRule) SetParameters(params map[string]interface{}) error {
+func (tr *VirtualNetworkRule) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

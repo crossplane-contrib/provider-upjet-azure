@@ -10,8 +10,10 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/operationalinsights/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
-	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -37,6 +39,22 @@ func (mg *ApplicationInsights) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.WorkspaceList{},
+			Managed: &v1beta11.Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
+	}
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -115,8 +133,8 @@ func (mg *MonitorMetricAlert) ResolveReferences(ctx context.Context, c client.Re
 		References:    mg.Spec.ForProvider.ScopesRefs,
 		Selector:      mg.Spec.ForProvider.ScopesSelector,
 		To: reference.To{
-			List:    &v1beta11.AccountList{},
-			Managed: &v1beta11.Account{},
+			List:    &v1beta12.AccountList{},
+			Managed: &v1beta12.Account{},
 		},
 	})
 	if err != nil {

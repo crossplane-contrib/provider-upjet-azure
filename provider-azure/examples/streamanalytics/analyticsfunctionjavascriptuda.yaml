@@ -1,0 +1,25 @@
+apiVersion: stream.azure.upbound.io/v1beta1
+kind: AnalyticsFunctionJavascriptUda
+metadata:
+  name: example
+spec:
+  forProvider:
+    input:
+    - type: bigint
+    output:
+    - type: bigint
+    script: |
+      function main() {
+          this.init = function () {
+              this.state = 0;
+          }
+
+          this.accumulate = function (value, timestamp) {
+              this.state += value;
+          }
+
+          this.computeResult = function () {
+              return this.state;
+          }
+      }
+    streamAnalyticsJobId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-resources/providers/Microsoft.StreamAnalytics/streamingjobs/example

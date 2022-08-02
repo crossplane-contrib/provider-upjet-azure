@@ -4,6 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    natGatewayId: ${azurerm_nat_gateway.example.id}
+    natGatewayIdRef:
+      name: example
     subnetIdRef:
       name: example

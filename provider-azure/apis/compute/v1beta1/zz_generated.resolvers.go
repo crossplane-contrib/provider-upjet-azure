@@ -10,8 +10,10 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
-	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1"
+	v1beta12 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -75,6 +77,22 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultKeyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
+		Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultKeyID")
+	}
+	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
@@ -133,8 +151,8 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		References:    mg.Spec.ForProvider.NetworkInterfaceIdsRefs,
 		Selector:      mg.Spec.ForProvider.NetworkInterfaceIdsSelector,
 		To: reference.To{
-			List:    &v1beta11.NetworkInterfaceList{},
-			Managed: &v1beta11.NetworkInterface{},
+			List:    &v1beta12.NetworkInterfaceList{},
+			Managed: &v1beta12.NetworkInterface{},
 		},
 	})
 	if err != nil {
@@ -173,12 +191,12 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
-				Extract:      rconfig.ExtractResourceID(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -231,6 +249,22 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SourceResourceIDRef,
+		Selector:     mg.Spec.ForProvider.SourceResourceIDSelector,
+		To: reference.To{
+			List:    &ManagedDiskList{},
+			Managed: &ManagedDisk{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceResourceID")
+	}
+	mg.Spec.ForProvider.SourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -249,8 +283,8 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 				Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -355,6 +389,22 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SourceURI),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SourceURIRef,
+		Selector:     mg.Spec.ForProvider.SourceURISelector,
+		To: reference.To{
+			List:    &ManagedDiskList{},
+			Managed: &ManagedDisk{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceURI")
+	}
+	mg.Spec.ForProvider.SourceURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SourceURIRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -395,12 +445,12 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
-				Extract:      rconfig.ExtractResourceID(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {

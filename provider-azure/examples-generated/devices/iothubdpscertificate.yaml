@@ -8,7 +8,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: crossplane-system
-    iotdpsNameRef:
+    iotDpsNameRef:
       name: example
     resourceGroupNameRef:
       name: example

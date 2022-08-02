@@ -76,8 +76,16 @@ type ManagementPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// +kubebuilder:validation:Required
-	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type MatchBlobIndexTagObservation struct {

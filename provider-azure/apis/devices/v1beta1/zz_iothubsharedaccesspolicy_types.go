@@ -22,8 +22,15 @@ type IOTHubSharedAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	DeviceConnect *bool `json:"deviceConnect,omitempty" tf:"device_connect,omitempty"`
 
-	// +kubebuilder:validation:Required
-	IOTHubName *string `json:"iothubName" tf:"iothub_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
+	// +kubebuilder:validation:Optional
+	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	RegistryRead *bool `json:"registryRead,omitempty" tf:"registry_read,omitempty"`

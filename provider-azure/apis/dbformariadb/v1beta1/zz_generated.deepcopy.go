@@ -109,7 +109,7 @@ func (in *ConfigurationParameters) DeepCopyInto(out *ConfigurationParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -124,7 +124,7 @@ func (in *ConfigurationParameters) DeepCopyInto(out *ConfigurationParameters) {
 	if in.ServerNameRef != nil {
 		in, out := &in.ServerNameRef, &out.ServerNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerNameSelector != nil {
 		in, out := &in.ServerNameSelector, &out.ServerNameSelector
@@ -282,7 +282,7 @@ func (in *DatabaseParameters) DeepCopyInto(out *DatabaseParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -297,7 +297,7 @@ func (in *DatabaseParameters) DeepCopyInto(out *DatabaseParameters) {
 	if in.ServerNameRef != nil {
 		in, out := &in.ServerNameRef, &out.ServerNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerNameSelector != nil {
 		in, out := &in.ServerNameSelector, &out.ServerNameSelector
@@ -445,7 +445,7 @@ func (in *FirewallRuleParameters) DeepCopyInto(out *FirewallRuleParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -460,7 +460,7 @@ func (in *FirewallRuleParameters) DeepCopyInto(out *FirewallRuleParameters) {
 	if in.ServerNameRef != nil {
 		in, out := &in.ServerNameRef, &out.ServerNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerNameSelector != nil {
 		in, out := &in.ServerNameSelector, &out.ServerNameSelector
@@ -638,7 +638,7 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.CreationSourceServerIDRef != nil {
 		in, out := &in.CreationSourceServerIDRef, &out.CreationSourceServerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CreationSourceServerIDSelector != nil {
 		in, out := &in.CreationSourceServerIDSelector, &out.CreationSourceServerIDSelector
@@ -668,7 +668,7 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -851,7 +851,7 @@ func (in *VirtualNetworkRuleParameters) DeepCopyInto(out *VirtualNetworkRulePara
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -866,7 +866,7 @@ func (in *VirtualNetworkRuleParameters) DeepCopyInto(out *VirtualNetworkRulePara
 	if in.ServerNameRef != nil {
 		in, out := &in.ServerNameRef, &out.ServerNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerNameSelector != nil {
 		in, out := &in.ServerNameSelector, &out.ServerNameSelector
@@ -881,7 +881,7 @@ func (in *VirtualNetworkRuleParameters) DeepCopyInto(out *VirtualNetworkRulePara
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector

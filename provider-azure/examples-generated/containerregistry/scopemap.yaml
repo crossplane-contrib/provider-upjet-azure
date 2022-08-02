@@ -7,6 +7,7 @@ spec:
     actions:
     - repositories/repo1/content/read
     - repositories/repo1/content/write
-    containerRegistryName: ${azurerm_container_registry.acr.name}
+    containerRegistryNameRef:
+      name: example
     resourceGroupNameRef:
       name: example

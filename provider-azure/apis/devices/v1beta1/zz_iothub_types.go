@@ -33,6 +33,8 @@ type EndpointObservation struct {
 
 	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
 
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
@@ -47,30 +49,12 @@ type EndpointObservation struct {
 
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EndpointParameters struct {
-
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
-	// +kubebuilder:validation:Optional
-	ContainerName *string `json:"containerName,omitempty" tf:"container_name"`
-
-	// +kubebuilder:validation:Optional
-	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
-
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
-	// +kubebuilder:validation:Optional
-	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name"`
-
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type EnrichmentObservation struct {
@@ -179,9 +163,6 @@ type IOTHubParameters struct {
 
 	// +kubebuilder:validation:Optional
 	CloudToDevice []CloudToDeviceParameters `json:"cloudToDevice,omitempty" tf:"cloud_to_device,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Endpoint []EndpointParameters `json:"endpoint" tf:"endpoint,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EventHubPartitionCount *float64 `json:"eventHubPartitionCount,omitempty" tf:"event_hub_partition_count,omitempty"`

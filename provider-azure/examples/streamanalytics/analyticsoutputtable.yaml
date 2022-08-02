@@ -1,0 +1,18 @@
+apiVersion: stream.azure.upbound.io/v1beta1
+kind: AnalyticsOutputTable
+metadata:
+  name: example
+spec:
+  forProvider:
+    batchSize: 100
+    partitionKey: foo
+    resourceGroupNameRef:
+      name: example-resources
+    rowKey: bar
+    storageAccountKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: crossplane-system
+    storageAccountName: examplestorgaccount
+    streamAnalyticsJobName: example
+    table: mysampletable

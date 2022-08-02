@@ -7,7 +7,8 @@ spec:
     allowRule:
     - connectionToIpsNotAllowed:
       - 10.0.0.0/24
-    iothubId: ${azurerm_iothub.example.id}
+    iothubIdRef:
+      name: example
     rangeRule:
     - duration: PT5M
       max: 30

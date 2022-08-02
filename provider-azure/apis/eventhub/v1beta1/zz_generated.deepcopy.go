@@ -104,7 +104,7 @@ func (in *AuthorizationRuleParameters) DeepCopyInto(out *AuthorizationRuleParame
 	if in.EventHubNameRef != nil {
 		in, out := &in.EventHubNameRef, &out.EventHubNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EventHubNameSelector != nil {
 		in, out := &in.EventHubNameSelector, &out.EventHubNameSelector
@@ -129,7 +129,7 @@ func (in *AuthorizationRuleParameters) DeepCopyInto(out *AuthorizationRuleParame
 	if in.NamespaceNameRef != nil {
 		in, out := &in.NamespaceNameRef, &out.NamespaceNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NamespaceNameSelector != nil {
 		in, out := &in.NamespaceNameSelector, &out.NamespaceNameSelector
@@ -144,7 +144,7 @@ func (in *AuthorizationRuleParameters) DeepCopyInto(out *AuthorizationRuleParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -354,7 +354,7 @@ func (in *ConsumerGroupParameters) DeepCopyInto(out *ConsumerGroupParameters) {
 	if in.EventHubNameRef != nil {
 		in, out := &in.EventHubNameRef, &out.EventHubNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.EventHubNameSelector != nil {
 		in, out := &in.EventHubNameSelector, &out.EventHubNameSelector
@@ -369,7 +369,7 @@ func (in *ConsumerGroupParameters) DeepCopyInto(out *ConsumerGroupParameters) {
 	if in.NamespaceNameRef != nil {
 		in, out := &in.NamespaceNameRef, &out.NamespaceNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NamespaceNameSelector != nil {
 		in, out := &in.NamespaceNameSelector, &out.NamespaceNameSelector
@@ -384,7 +384,7 @@ func (in *ConsumerGroupParameters) DeepCopyInto(out *ConsumerGroupParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -687,7 +687,7 @@ func (in *EventHubNamespaceParameters) DeepCopyInto(out *EventHubNamespaceParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -819,7 +819,7 @@ func (in *EventHubParameters) DeepCopyInto(out *EventHubParameters) {
 	if in.NamespaceNameRef != nil {
 		in, out := &in.NamespaceNameRef, &out.NamespaceNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NamespaceNameSelector != nil {
 		in, out := &in.NamespaceNameSelector, &out.NamespaceNameSelector
@@ -839,7 +839,7 @@ func (in *EventHubParameters) DeepCopyInto(out *EventHubParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1067,7 +1067,7 @@ func (in *VirtualNetworkRuleParameters) DeepCopyInto(out *VirtualNetworkRulePara
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector

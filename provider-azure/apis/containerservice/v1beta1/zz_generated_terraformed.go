@@ -24,17 +24,17 @@ func (tr *KubernetesCluster) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this KubernetesCluster
-func (tr *KubernetesCluster) GetObservation() (map[string]interface{}, error) {
+func (tr *KubernetesCluster) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this KubernetesCluster
-func (tr *KubernetesCluster) SetObservation(obs map[string]interface{}) error {
+func (tr *KubernetesCluster) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *KubernetesCluster) GetID() string {
 }
 
 // GetParameters of this KubernetesCluster
-func (tr *KubernetesCluster) GetParameters() (map[string]interface{}, error) {
+func (tr *KubernetesCluster) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this KubernetesCluster
-func (tr *KubernetesCluster) SetParameters(params map[string]interface{}) error {
+func (tr *KubernetesCluster) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -99,17 +99,17 @@ func (tr *KubernetesClusterNodePool) GetConnectionDetailsMapping() map[string]st
 }
 
 // GetObservation of this KubernetesClusterNodePool
-func (tr *KubernetesClusterNodePool) GetObservation() (map[string]interface{}, error) {
+func (tr *KubernetesClusterNodePool) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this KubernetesClusterNodePool
-func (tr *KubernetesClusterNodePool) SetObservation(obs map[string]interface{}) error {
+func (tr *KubernetesClusterNodePool) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -126,17 +126,17 @@ func (tr *KubernetesClusterNodePool) GetID() string {
 }
 
 // GetParameters of this KubernetesClusterNodePool
-func (tr *KubernetesClusterNodePool) GetParameters() (map[string]interface{}, error) {
+func (tr *KubernetesClusterNodePool) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this KubernetesClusterNodePool
-func (tr *KubernetesClusterNodePool) SetParameters(params map[string]interface{}) error {
+func (tr *KubernetesClusterNodePool) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

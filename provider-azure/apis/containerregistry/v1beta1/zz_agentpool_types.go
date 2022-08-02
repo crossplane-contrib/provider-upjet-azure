@@ -19,8 +19,15 @@ type AgentPoolObservation struct {
 
 type AgentPoolParameters struct {
 
-	// +kubebuilder:validation:Required
-	ContainerRegistryName *string `json:"containerRegistryName" tf:"container_registry_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/containerregistry/v1beta1.Registry
+	// +kubebuilder:validation:Optional
+	ContainerRegistryName *string `json:"containerRegistryName,omitempty" tf:"container_registry_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ContainerRegistryNameRef *v1.Reference `json:"containerRegistryNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ContainerRegistryNameSelector *v1.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`

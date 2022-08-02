@@ -11,7 +11,8 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
 	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
-	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	v1beta12 "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -40,7 +41,7 @@ func (mg *HPCCache) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
-		Extract:      rconfig.ExtractResourceID(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.SubnetIDRef,
 		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
@@ -57,12 +58,54 @@ func (mg *HPCCache) ResolveReferences(ctx context.Context, c client.Reader) erro
 	return nil
 }
 
+// ResolveReferences of this HPCCacheAccessPolicy.
+func (mg *HPCCacheAccessPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.HPCCacheID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.HPCCacheIDRef,
+		Selector:     mg.Spec.ForProvider.HPCCacheIDSelector,
+		To: reference.To{
+			List:    &HPCCacheList{},
+			Managed: &HPCCache{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.HPCCacheID")
+	}
+	mg.Spec.ForProvider.HPCCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.HPCCacheIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this HPCCacheBlobNFSTarget.
 func (mg *HPCCacheBlobNFSTarget) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CacheName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.CacheNameRef,
+		Selector:     mg.Spec.ForProvider.CacheNameSelector,
+		To: reference.To{
+			List:    &HPCCacheList{},
+			Managed: &HPCCache{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CacheName")
+	}
+	mg.Spec.ForProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CacheNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
@@ -91,6 +134,22 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CacheName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.CacheNameRef,
+		Selector:     mg.Spec.ForProvider.CacheNameSelector,
+		To: reference.To{
+			List:    &HPCCacheList{},
+			Managed: &HPCCache{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CacheName")
+	}
+	mg.Spec.ForProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CacheNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
@@ -106,6 +165,22 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerID),
+		Extract:      resource.ExtractParamPath("resourceManagerId", true),
+		Reference:    mg.Spec.ForProvider.StorageContainerIDRef,
+		Selector:     mg.Spec.ForProvider.StorageContainerIDSelector,
+		To: reference.To{
+			List:    &v1beta12.ContainerList{},
+			Managed: &v1beta12.Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageContainerID")
+	}
+	mg.Spec.ForProvider.StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageContainerIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -115,6 +190,22 @@ func (mg *HPCCacheNFSTarget) ResolveReferences(ctx context.Context, c client.Rea
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CacheName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.CacheNameRef,
+		Selector:     mg.Spec.ForProvider.CacheNameSelector,
+		To: reference.To{
+			List:    &HPCCacheList{},
+			Managed: &HPCCache{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CacheName")
+	}
+	mg.Spec.ForProvider.CacheName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CacheNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),

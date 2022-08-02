@@ -25,6 +25,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_advanced_threat_protection", func(r *config.Resource) {
 		r.UseAsync = false
 		r.Kind = "AdvancedThreatProtection"
+		delete(r.References, "target_resource_id")
 	})
 
 	p.AddResourceConfigurator("azurerm_iot_security_device_group", func(r *config.Resource) {

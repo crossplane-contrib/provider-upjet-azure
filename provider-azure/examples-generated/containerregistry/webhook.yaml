@@ -9,7 +9,8 @@ spec:
     customHeaders:
       Content-Type: application/json
     location: West Europe
-    registryName: ${azurerm_container_registry.acr.name}
+    registryNameRef:
+      name: example
     resourceGroupNameRef:
       name: example
     scope: mytag:*

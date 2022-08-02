@@ -1,0 +1,10 @@
+apiVersion: stream.azure.upbound.io/v1beta1
+kind: AnalyticsCluster
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-resources
+    streamingCapacity: 36

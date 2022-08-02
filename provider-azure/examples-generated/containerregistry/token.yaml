@@ -4,7 +4,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    containerRegistryName: ${azurerm_container_registry.acr.name}
+    containerRegistryNameRef:
+      name: example
     resourceGroupNameRef:
       name: example
     scopeMapIdRef:

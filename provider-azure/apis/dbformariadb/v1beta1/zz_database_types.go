@@ -35,7 +35,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/dbformariadb/v1beta1.Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 

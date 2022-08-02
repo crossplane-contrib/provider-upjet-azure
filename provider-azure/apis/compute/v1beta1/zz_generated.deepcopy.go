@@ -320,7 +320,7 @@ func (in *AvailabilitySetParameters) DeepCopyInto(out *AvailabilitySetParameters
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -821,7 +821,7 @@ func (in *DiskAccessParameters) DeepCopyInto(out *DiskAccessParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1040,6 +1040,16 @@ func (in *DiskEncryptionSetParameters) DeepCopyInto(out *DiskEncryptionSetParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyVaultKeyIDRef != nil {
+		in, out := &in.KeyVaultKeyIDRef, &out.KeyVaultKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeyVaultKeyIDSelector != nil {
+		in, out := &in.KeyVaultKeyIDSelector, &out.KeyVaultKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -1053,7 +1063,7 @@ func (in *DiskEncryptionSetParameters) DeepCopyInto(out *DiskEncryptionSetParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1423,7 +1433,7 @@ func (in *IPConfigurationParameters) DeepCopyInto(out *IPConfigurationParameters
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
@@ -1743,7 +1753,7 @@ func (in *ImageParameters) DeepCopyInto(out *ImageParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2433,7 +2443,9 @@ func (in *LinuxVirtualMachineParameters) DeepCopyInto(out *LinuxVirtualMachinePa
 	if in.NetworkInterfaceIdsRefs != nil {
 		in, out := &in.NetworkInterfaceIdsRefs, &out.NetworkInterfaceIdsRefs
 		*out = make([]v1.Reference, len(*in))
-		copy(*out, *in)
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.NetworkInterfaceIdsSelector != nil {
 		in, out := &in.NetworkInterfaceIdsSelector, &out.NetworkInterfaceIdsSelector
@@ -2487,7 +2499,7 @@ func (in *LinuxVirtualMachineParameters) DeepCopyInto(out *LinuxVirtualMachinePa
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -3164,7 +3176,7 @@ func (in *LinuxVirtualMachineScaleSetParameters) DeepCopyInto(out *LinuxVirtualM
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -3726,7 +3738,7 @@ func (in *ManagedDiskParameters) DeepCopyInto(out *ManagedDiskParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -3747,6 +3759,16 @@ func (in *ManagedDiskParameters) DeepCopyInto(out *ManagedDiskParameters) {
 		in, out := &in.SourceResourceID, &out.SourceResourceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SourceResourceIDRef != nil {
+		in, out := &in.SourceResourceIDRef, &out.SourceResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceResourceIDSelector != nil {
+		in, out := &in.SourceResourceIDSelector, &out.SourceResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SourceURI != nil {
 		in, out := &in.SourceURI, &out.SourceURI
@@ -3915,7 +3937,7 @@ func (in *NetworkInterfaceIPConfigurationParameters) DeepCopyInto(out *NetworkIn
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
@@ -4724,7 +4746,7 @@ func (in *OrchestratedVirtualMachineScaleSetParameters) DeepCopyInto(out *Orches
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -5251,7 +5273,7 @@ func (in *ProximityPlacementGroupParameters) DeepCopyInto(out *ProximityPlacemen
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -5648,7 +5670,7 @@ func (in *SharedImageGalleryParameters) DeepCopyInto(out *SharedImageGalleryPara
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -5882,7 +5904,7 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -5898,6 +5920,16 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 		in, out := &in.SourceURI, &out.SourceURI
 		*out = new(string)
 		**out = **in
+	}
+	if in.SourceURIRef != nil {
+		in, out := &in.SourceURIRef, &out.SourceURIRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceURISelector != nil {
+		in, out := &in.SourceURISelector, &out.SourceURISelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountID != nil {
 		in, out := &in.StorageAccountID, &out.StorageAccountID
@@ -6793,7 +6825,7 @@ func (in *WindowsVirtualMachineParameters) DeepCopyInto(out *WindowsVirtualMachi
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -7489,7 +7521,7 @@ func (in *WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
@@ -7909,7 +7941,7 @@ func (in *WindowsVirtualMachineScaleSetParameters) DeepCopyInto(out *WindowsVirt
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector

@@ -10,6 +10,7 @@ Copyright 2022 Upbound Inc.
 package v1beta1
 
 import (
+	"github.com/crossplane/crossplane-runtime/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -104,6 +105,16 @@ func (in *ManagementGroupParameters) DeepCopyInto(out *ManagementGroupParameters
 		in, out := &in.ParentManagementGroupID, &out.ParentManagementGroupID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ParentManagementGroupIDRef != nil {
+		in, out := &in.ParentManagementGroupIDRef, &out.ParentManagementGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ParentManagementGroupIDSelector != nil {
+		in, out := &in.ParentManagementGroupIDSelector, &out.ParentManagementGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubscriptionIds != nil {
 		in, out := &in.SubscriptionIds, &out.SubscriptionIds

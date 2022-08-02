@@ -1,0 +1,22 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: Job
+metadata:
+  name: example
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameRef:
+      name: example-resources
+    streamingUnits: 3
+    tags:
+      environment: example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]

@@ -4,7 +4,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    cacheName: ${azurerm_hpc_cache.example.name}
+    cacheNameRef:
+      name: example
     namespaceJunction:
     - namespacePath: /nfs/a1
       nfsExport: /export/a

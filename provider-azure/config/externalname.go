@@ -352,6 +352,20 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// storagesync
 	"azurerm_storage_sync": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StorageSync/storageSyncServices/{{ .externalName }}"),
+
+	// streamanalytics
+	"azurerm_stream_analytics_cluster":                  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/clusters/{{ .externalName }}"),
+	"azurerm_stream_analytics_function_javascript_uda":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.job_name }}/functions/{{ .externalName }}"),
+	"azurerm_stream_analytics_job":                      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .externalName }}"),
+	"azurerm_stream_analytics_managed_private_endpoint": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/clusters/{{ .parameters.stream_analytics_cluster_name }}/privateEndpoints/{{ .externalName }}"),
+	"azurerm_stream_analytics_output_function":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_id }}/outputs/{{ .externalName }}"),
+	"azurerm_stream_analytics_output_synapse":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .externalName }}"),
+	// "azurerm_stream_analytics_output_table":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .externalName }}"),
+	// "azurerm_stream_analytics_function_javascript_udf": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.job_name }}/outputs/{{ .externalName }}"),
+	// "azurerm_stream_analytics_output_cosmosdb":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_id }}/outputs/{{ .externalName }}"),
+	// Does not work, tracked in https://github.com/upbound/official-providers/issues/368
+	// "azurerm_stream_analytics_output_powerbi": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_id }}/outputs/{{ .externalName }}"),
+	"azurerm_stream_analytics_output_blob": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_id }}/outputs/{{ .externalName }}"),
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {

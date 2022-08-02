@@ -109,8 +109,16 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalAzureIPAddressEnabled *bool `json:"localAzureIpAddressEnabled,omitempty" tf:"local_azure_ip_address_enabled,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.LocalNetworkGateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LocalNetworkGatewayID *string `json:"localNetworkGatewayId,omitempty" tf:"local_network_gateway_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	LocalNetworkGatewayIDRef *v1.Reference `json:"localNetworkGatewayIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	LocalNetworkGatewayIDSelector *v1.Selector `json:"localNetworkGatewayIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`

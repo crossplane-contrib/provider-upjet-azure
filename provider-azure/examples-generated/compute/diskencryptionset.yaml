@@ -6,7 +6,8 @@ spec:
   forProvider:
     identity:
     - type: SystemAssigned
-    keyVaultKeyId: ${azurerm_key_vault_key.example.id}
+    keyVaultKeyIdRef:
+      name: example
     location: West Europe
     resourceGroupNameRef:
       name: example

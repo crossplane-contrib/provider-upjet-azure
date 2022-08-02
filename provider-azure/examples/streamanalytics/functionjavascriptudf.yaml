@@ -1,0 +1,17 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: FunctionJavascriptUDF
+metadata:
+  name: example
+spec:
+  forProvider:
+    input:
+    - type: bigint
+    output:
+    - type: bigint
+    resourceGroupNameRef:
+      name: example-resources
+    script: |
+      function getRandomNumber(in) {
+        return in;
+      }
+    streamAnalyticsJobName: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-resources/providers/Microsoft.StreamAnalytics/streamingjobs/example
