@@ -24,17 +24,17 @@ func (tr *StorageSync) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this StorageSync
-func (tr *StorageSync) GetObservation() (map[string]interface{}, error) {
+func (tr *StorageSync) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this StorageSync
-func (tr *StorageSync) SetObservation(obs map[string]interface{}) error {
+func (tr *StorageSync) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *StorageSync) GetID() string {
 }
 
 // GetParameters of this StorageSync
-func (tr *StorageSync) GetParameters() (map[string]interface{}, error) {
+func (tr *StorageSync) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this StorageSync
-func (tr *StorageSync) SetParameters(params map[string]interface{}) error {
+func (tr *StorageSync) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

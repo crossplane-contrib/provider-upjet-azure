@@ -109,7 +109,7 @@ func (in *ManagementGroupParameters) DeepCopyInto(out *ManagementGroupParameters
 	if in.ParentManagementGroupIDRef != nil {
 		in, out := &in.ParentManagementGroupIDRef, &out.ParentManagementGroupIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ParentManagementGroupIDSelector != nil {
 		in, out := &in.ParentManagementGroupIDSelector, &out.ParentManagementGroupIDSelector

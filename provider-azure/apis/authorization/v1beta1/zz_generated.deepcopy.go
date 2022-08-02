@@ -267,7 +267,7 @@ func (in *ResourceGroupPolicyAssignmentParameters) DeepCopyInto(out *ResourceGro
 	if in.ResourceGroupIDRef != nil {
 		in, out := &in.ResourceGroupIDRef, &out.ResourceGroupIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupIDSelector != nil {
 		in, out := &in.ResourceGroupIDSelector, &out.ResourceGroupIDSelector

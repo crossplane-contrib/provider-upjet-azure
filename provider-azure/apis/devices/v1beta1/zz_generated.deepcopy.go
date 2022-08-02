@@ -496,7 +496,7 @@ func (in *IOTHubConsumerGroupParameters) DeepCopyInto(out *IOTHubConsumerGroupPa
 	if in.IOTHubNameRef != nil {
 		in, out := &in.IOTHubNameRef, &out.IOTHubNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubNameSelector != nil {
 		in, out := &in.IOTHubNameSelector, &out.IOTHubNameSelector
@@ -511,7 +511,7 @@ func (in *IOTHubConsumerGroupParameters) DeepCopyInto(out *IOTHubConsumerGroupPa
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -682,7 +682,7 @@ func (in *IOTHubDPSCertificateParameters) DeepCopyInto(out *IOTHubDPSCertificate
 	if in.IOTDPSNameRef != nil {
 		in, out := &in.IOTDPSNameRef, &out.IOTDPSNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTDPSNameSelector != nil {
 		in, out := &in.IOTDPSNameSelector, &out.IOTDPSNameSelector
@@ -697,7 +697,7 @@ func (in *IOTHubDPSCertificateParameters) DeepCopyInto(out *IOTHubDPSCertificate
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -864,7 +864,7 @@ func (in *IOTHubDPSParameters) DeepCopyInto(out *IOTHubDPSParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1005,7 +1005,7 @@ func (in *IOTHubDPSSharedAccessPolicyParameters) DeepCopyInto(out *IOTHubDPSShar
 	if in.IOTHubDPSNameRef != nil {
 		in, out := &in.IOTHubDPSNameRef, &out.IOTHubDPSNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubDPSNameSelector != nil {
 		in, out := &in.IOTHubDPSNameSelector, &out.IOTHubDPSNameSelector
@@ -1030,7 +1030,7 @@ func (in *IOTHubDPSSharedAccessPolicyParameters) DeepCopyInto(out *IOTHubDPSShar
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1272,7 +1272,7 @@ func (in *IOTHubEndpointEventHubParameters) DeepCopyInto(out *IOTHubEndpointEven
 	if in.IOTHubIDRef != nil {
 		in, out := &in.IOTHubIDRef, &out.IOTHubIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubIDSelector != nil {
 		in, out := &in.IOTHubIDSelector, &out.IOTHubIDSelector
@@ -1292,7 +1292,7 @@ func (in *IOTHubEndpointEventHubParameters) DeepCopyInto(out *IOTHubEndpointEven
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1455,7 +1455,7 @@ func (in *IOTHubEndpointServiceBusQueueParameters) DeepCopyInto(out *IOTHubEndpo
 	if in.IOTHubIDRef != nil {
 		in, out := &in.IOTHubIDRef, &out.IOTHubIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubIDSelector != nil {
 		in, out := &in.IOTHubIDSelector, &out.IOTHubIDSelector
@@ -1475,7 +1475,7 @@ func (in *IOTHubEndpointServiceBusQueueParameters) DeepCopyInto(out *IOTHubEndpo
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1638,7 +1638,7 @@ func (in *IOTHubEndpointServiceBusTopicParameters) DeepCopyInto(out *IOTHubEndpo
 	if in.IOTHubIDRef != nil {
 		in, out := &in.IOTHubIDRef, &out.IOTHubIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubIDSelector != nil {
 		in, out := &in.IOTHubIDSelector, &out.IOTHubIDSelector
@@ -1658,7 +1658,7 @@ func (in *IOTHubEndpointServiceBusTopicParameters) DeepCopyInto(out *IOTHubEndpo
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1816,7 +1816,7 @@ func (in *IOTHubEndpointStorageContainerParameters) DeepCopyInto(out *IOTHubEndp
 	if in.ContainerNameRef != nil {
 		in, out := &in.ContainerNameRef, &out.ContainerNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerNameSelector != nil {
 		in, out := &in.ContainerNameSelector, &out.ContainerNameSelector
@@ -1846,7 +1846,7 @@ func (in *IOTHubEndpointStorageContainerParameters) DeepCopyInto(out *IOTHubEndp
 	if in.IOTHubIDRef != nil {
 		in, out := &in.IOTHubIDRef, &out.IOTHubIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubIDSelector != nil {
 		in, out := &in.IOTHubIDSelector, &out.IOTHubIDSelector
@@ -1871,7 +1871,7 @@ func (in *IOTHubEndpointStorageContainerParameters) DeepCopyInto(out *IOTHubEndp
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2025,7 +2025,7 @@ func (in *IOTHubEnrichmentParameters) DeepCopyInto(out *IOTHubEnrichmentParamete
 	if in.IOTHubNameRef != nil {
 		in, out := &in.IOTHubNameRef, &out.IOTHubNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubNameSelector != nil {
 		in, out := &in.IOTHubNameSelector, &out.IOTHubNameSelector
@@ -2045,7 +2045,7 @@ func (in *IOTHubEnrichmentParameters) DeepCopyInto(out *IOTHubEnrichmentParamete
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2209,7 +2209,9 @@ func (in *IOTHubFallbackRouteParameters) DeepCopyInto(out *IOTHubFallbackRoutePa
 	if in.EndpointNamesRefs != nil {
 		in, out := &in.EndpointNamesRefs, &out.EndpointNamesRefs
 		*out = make([]v1.Reference, len(*in))
-		copy(*out, *in)
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.EndpointNamesSelector != nil {
 		in, out := &in.EndpointNamesSelector, &out.EndpointNamesSelector
@@ -2224,7 +2226,7 @@ func (in *IOTHubFallbackRouteParameters) DeepCopyInto(out *IOTHubFallbackRoutePa
 	if in.IOTHubNameRef != nil {
 		in, out := &in.IOTHubNameRef, &out.IOTHubNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubNameSelector != nil {
 		in, out := &in.IOTHubNameSelector, &out.IOTHubNameSelector
@@ -2239,7 +2241,7 @@ func (in *IOTHubFallbackRouteParameters) DeepCopyInto(out *IOTHubFallbackRoutePa
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2490,7 +2492,7 @@ func (in *IOTHubParameters) DeepCopyInto(out *IOTHubParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2642,7 +2644,7 @@ func (in *IOTHubRouteParameters) DeepCopyInto(out *IOTHubRouteParameters) {
 	if in.IOTHubNameRef != nil {
 		in, out := &in.IOTHubNameRef, &out.IOTHubNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubNameSelector != nil {
 		in, out := &in.IOTHubNameSelector, &out.IOTHubNameSelector
@@ -2657,7 +2659,7 @@ func (in *IOTHubRouteParameters) DeepCopyInto(out *IOTHubRouteParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2810,7 +2812,7 @@ func (in *IOTHubSharedAccessPolicyParameters) DeepCopyInto(out *IOTHubSharedAcce
 	if in.IOTHubNameRef != nil {
 		in, out := &in.IOTHubNameRef, &out.IOTHubNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubNameSelector != nil {
 		in, out := &in.IOTHubNameSelector, &out.IOTHubNameSelector
@@ -2835,7 +2837,7 @@ func (in *IOTHubSharedAccessPolicyParameters) DeepCopyInto(out *IOTHubSharedAcce
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector

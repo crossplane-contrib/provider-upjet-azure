@@ -24,17 +24,17 @@ func (tr *IntegrationServiceEnvironment) GetConnectionDetailsMapping() map[strin
 }
 
 // GetObservation of this IntegrationServiceEnvironment
-func (tr *IntegrationServiceEnvironment) GetObservation() (map[string]interface{}, error) {
+func (tr *IntegrationServiceEnvironment) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this IntegrationServiceEnvironment
-func (tr *IntegrationServiceEnvironment) SetObservation(obs map[string]interface{}) error {
+func (tr *IntegrationServiceEnvironment) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *IntegrationServiceEnvironment) GetID() string {
 }
 
 // GetParameters of this IntegrationServiceEnvironment
-func (tr *IntegrationServiceEnvironment) GetParameters() (map[string]interface{}, error) {
+func (tr *IntegrationServiceEnvironment) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this IntegrationServiceEnvironment
-func (tr *IntegrationServiceEnvironment) SetParameters(params map[string]interface{}) error {
+func (tr *IntegrationServiceEnvironment) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

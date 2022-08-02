@@ -24,17 +24,17 @@ func (tr *ContainerConnectedRegistry) GetConnectionDetailsMapping() map[string]s
 }
 
 // GetObservation of this ContainerConnectedRegistry
-func (tr *ContainerConnectedRegistry) GetObservation() (map[string]interface{}, error) {
+func (tr *ContainerConnectedRegistry) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ContainerConnectedRegistry
-func (tr *ContainerConnectedRegistry) SetObservation(obs map[string]interface{}) error {
+func (tr *ContainerConnectedRegistry) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *ContainerConnectedRegistry) GetID() string {
 }
 
 // GetParameters of this ContainerConnectedRegistry
-func (tr *ContainerConnectedRegistry) GetParameters() (map[string]interface{}, error) {
+func (tr *ContainerConnectedRegistry) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ContainerConnectedRegistry
-func (tr *ContainerConnectedRegistry) SetParameters(params map[string]interface{}) error {
+func (tr *ContainerConnectedRegistry) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *Registry) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Registry
-func (tr *Registry) GetObservation() (map[string]interface{}, error) {
+func (tr *Registry) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Registry
-func (tr *Registry) SetObservation(obs map[string]interface{}) error {
+func (tr *Registry) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *Registry) GetID() string {
 }
 
 // GetParameters of this Registry
-func (tr *Registry) GetParameters() (map[string]interface{}, error) {
+func (tr *Registry) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Registry
-func (tr *Registry) SetParameters(params map[string]interface{}) error {
+func (tr *Registry) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -173,17 +173,17 @@ func (tr *AgentPool) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this AgentPool
-func (tr *AgentPool) GetObservation() (map[string]interface{}, error) {
+func (tr *AgentPool) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this AgentPool
-func (tr *AgentPool) SetObservation(obs map[string]interface{}) error {
+func (tr *AgentPool) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -200,17 +200,17 @@ func (tr *AgentPool) GetID() string {
 }
 
 // GetParameters of this AgentPool
-func (tr *AgentPool) GetParameters() (map[string]interface{}, error) {
+func (tr *AgentPool) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this AgentPool
-func (tr *AgentPool) SetParameters(params map[string]interface{}) error {
+func (tr *AgentPool) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -247,17 +247,17 @@ func (tr *ScopeMap) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this ScopeMap
-func (tr *ScopeMap) GetObservation() (map[string]interface{}, error) {
+func (tr *ScopeMap) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ScopeMap
-func (tr *ScopeMap) SetObservation(obs map[string]interface{}) error {
+func (tr *ScopeMap) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -274,17 +274,17 @@ func (tr *ScopeMap) GetID() string {
 }
 
 // GetParameters of this ScopeMap
-func (tr *ScopeMap) GetParameters() (map[string]interface{}, error) {
+func (tr *ScopeMap) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ScopeMap
-func (tr *ScopeMap) SetParameters(params map[string]interface{}) error {
+func (tr *ScopeMap) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -321,17 +321,17 @@ func (tr *Token) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Token
-func (tr *Token) GetObservation() (map[string]interface{}, error) {
+func (tr *Token) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Token
-func (tr *Token) SetObservation(obs map[string]interface{}) error {
+func (tr *Token) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -348,17 +348,17 @@ func (tr *Token) GetID() string {
 }
 
 // GetParameters of this Token
-func (tr *Token) GetParameters() (map[string]interface{}, error) {
+func (tr *Token) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Token
-func (tr *Token) SetParameters(params map[string]interface{}) error {
+func (tr *Token) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -395,17 +395,17 @@ func (tr *Webhook) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Webhook
-func (tr *Webhook) GetObservation() (map[string]interface{}, error) {
+func (tr *Webhook) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Webhook
-func (tr *Webhook) SetObservation(obs map[string]interface{}) error {
+func (tr *Webhook) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -422,17 +422,17 @@ func (tr *Webhook) GetID() string {
 }
 
 // GetParameters of this Webhook
-func (tr *Webhook) GetParameters() (map[string]interface{}, error) {
+func (tr *Webhook) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Webhook
-func (tr *Webhook) SetParameters(params map[string]interface{}) error {
+func (tr *Webhook) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

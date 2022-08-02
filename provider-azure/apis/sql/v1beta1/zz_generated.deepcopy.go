@@ -336,7 +336,7 @@ func (in *MSSQLDatabaseParameters) DeepCopyInto(out *MSSQLDatabaseParameters) {
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
@@ -541,7 +541,9 @@ func (in *MSSQLFailoverGroupParameters) DeepCopyInto(out *MSSQLFailoverGroupPara
 	if in.DatabasesRefs != nil {
 		in, out := &in.DatabasesRefs, &out.DatabasesRefs
 		*out = make([]v1.Reference, len(*in))
-		copy(*out, *in)
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.DatabasesSelector != nil {
 		in, out := &in.DatabasesSelector, &out.DatabasesSelector
@@ -575,7 +577,7 @@ func (in *MSSQLFailoverGroupParameters) DeepCopyInto(out *MSSQLFailoverGroupPara
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
@@ -733,7 +735,7 @@ func (in *MSSQLManagedDatabaseParameters) DeepCopyInto(out *MSSQLManagedDatabase
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
@@ -913,7 +915,7 @@ func (in *MSSQLManagedInstanceActiveDirectoryAdministratorParameters) DeepCopyIn
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
@@ -1083,7 +1085,7 @@ func (in *MSSQLManagedInstanceFailoverGroupParameters) DeepCopyInto(out *MSSQLMa
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
@@ -1098,7 +1100,7 @@ func (in *MSSQLManagedInstanceFailoverGroupParameters) DeepCopyInto(out *MSSQLMa
 	if in.PartnerManagedInstanceIDRef != nil {
 		in, out := &in.PartnerManagedInstanceIDRef, &out.PartnerManagedInstanceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PartnerManagedInstanceIDSelector != nil {
 		in, out := &in.PartnerManagedInstanceIDSelector, &out.PartnerManagedInstanceIDSelector
@@ -1289,7 +1291,7 @@ func (in *MSSQLManagedInstanceParameters) DeepCopyInto(out *MSSQLManagedInstance
 	if in.DNSZonePartnerIDRef != nil {
 		in, out := &in.DNSZonePartnerIDRef, &out.DNSZonePartnerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DNSZonePartnerIDSelector != nil {
 		in, out := &in.DNSZonePartnerIDSelector, &out.DNSZonePartnerIDSelector
@@ -1341,7 +1343,7 @@ func (in *MSSQLManagedInstanceParameters) DeepCopyInto(out *MSSQLManagedInstance
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1371,7 +1373,7 @@ func (in *MSSQLManagedInstanceParameters) DeepCopyInto(out *MSSQLManagedInstance
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
@@ -1539,7 +1541,7 @@ func (in *MSSQLManagedInstanceVulnerabilityAssessmentParameters) DeepCopyInto(ou
 	if in.ManagedInstanceIDRef != nil {
 		in, out := &in.ManagedInstanceIDRef, &out.ManagedInstanceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ManagedInstanceIDSelector != nil {
 		in, out := &in.ManagedInstanceIDSelector, &out.ManagedInstanceIDSelector
@@ -1704,7 +1706,7 @@ func (in *MSSQLOutboundFirewallRuleParameters) DeepCopyInto(out *MSSQLOutboundFi
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
@@ -1879,7 +1881,7 @@ func (in *MSSQLServerDNSAliasParameters) DeepCopyInto(out *MSSQLServerDNSAliasPa
 	if in.MSSQLServerIDRef != nil {
 		in, out := &in.MSSQLServerIDRef, &out.MSSQLServerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MSSQLServerIDSelector != nil {
 		in, out := &in.MSSQLServerIDSelector, &out.MSSQLServerIDSelector
@@ -2128,7 +2130,7 @@ func (in *MSSQLServerParameters) DeepCopyInto(out *MSSQLServerParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2291,7 +2293,7 @@ func (in *MSSQLServerTransparentDataEncryptionParameters) DeepCopyInto(out *MSSQ
 	if in.KeyVaultKeyIDRef != nil {
 		in, out := &in.KeyVaultKeyIDRef, &out.KeyVaultKeyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KeyVaultKeyIDSelector != nil {
 		in, out := &in.KeyVaultKeyIDSelector, &out.KeyVaultKeyIDSelector
@@ -2306,7 +2308,7 @@ func (in *MSSQLServerTransparentDataEncryptionParameters) DeepCopyInto(out *MSSQ
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
@@ -2454,7 +2456,7 @@ func (in *MSSQLVirtualNetworkRuleParameters) DeepCopyInto(out *MSSQLVirtualNetwo
 	if in.ServerIDRef != nil {
 		in, out := &in.ServerIDRef, &out.ServerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ServerIDSelector != nil {
 		in, out := &in.ServerIDSelector, &out.ServerIDSelector
@@ -2469,7 +2471,7 @@ func (in *MSSQLVirtualNetworkRuleParameters) DeepCopyInto(out *MSSQLVirtualNetwo
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
@@ -2598,7 +2600,7 @@ func (in *PartnerServerParameters) DeepCopyInto(out *PartnerServerParameters) {
 	if in.IDRef != nil {
 		in, out := &in.IDRef, &out.IDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IDSelector != nil {
 		in, out := &in.IDSelector, &out.IDSelector

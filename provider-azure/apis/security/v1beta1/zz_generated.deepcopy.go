@@ -369,7 +369,7 @@ func (in *IOTSecurityDeviceGroupParameters) DeepCopyInto(out *IOTSecurityDeviceG
 	if in.IOTHubIDRef != nil {
 		in, out := &in.IOTHubIDRef, &out.IOTHubIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubIDSelector != nil {
 		in, out := &in.IOTHubIDSelector, &out.IOTHubIDSelector
@@ -612,7 +612,7 @@ func (in *IOTSecuritySolutionParameters) DeepCopyInto(out *IOTSecuritySolutionPa
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector

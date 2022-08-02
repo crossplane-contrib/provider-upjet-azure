@@ -24,17 +24,17 @@ func (tr *RedisCache) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this RedisCache
-func (tr *RedisCache) GetObservation() (map[string]interface{}, error) {
+func (tr *RedisCache) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this RedisCache
-func (tr *RedisCache) SetObservation(obs map[string]interface{}) error {
+func (tr *RedisCache) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *RedisCache) GetID() string {
 }
 
 // GetParameters of this RedisCache
-func (tr *RedisCache) GetParameters() (map[string]interface{}, error) {
+func (tr *RedisCache) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this RedisCache
-func (tr *RedisCache) SetParameters(params map[string]interface{}) error {
+func (tr *RedisCache) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *RedisEnterpriseCluster) GetConnectionDetailsMapping() map[string]strin
 }
 
 // GetObservation of this RedisEnterpriseCluster
-func (tr *RedisEnterpriseCluster) GetObservation() (map[string]interface{}, error) {
+func (tr *RedisEnterpriseCluster) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this RedisEnterpriseCluster
-func (tr *RedisEnterpriseCluster) SetObservation(obs map[string]interface{}) error {
+func (tr *RedisEnterpriseCluster) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *RedisEnterpriseCluster) GetID() string {
 }
 
 // GetParameters of this RedisEnterpriseCluster
-func (tr *RedisEnterpriseCluster) GetParameters() (map[string]interface{}, error) {
+func (tr *RedisEnterpriseCluster) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this RedisEnterpriseCluster
-func (tr *RedisEnterpriseCluster) SetParameters(params map[string]interface{}) error {
+func (tr *RedisEnterpriseCluster) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *RedisEnterpriseDatabase) GetConnectionDetailsMapping() map[string]stri
 }
 
 // GetObservation of this RedisEnterpriseDatabase
-func (tr *RedisEnterpriseDatabase) GetObservation() (map[string]interface{}, error) {
+func (tr *RedisEnterpriseDatabase) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this RedisEnterpriseDatabase
-func (tr *RedisEnterpriseDatabase) SetObservation(obs map[string]interface{}) error {
+func (tr *RedisEnterpriseDatabase) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *RedisEnterpriseDatabase) GetID() string {
 }
 
 // GetParameters of this RedisEnterpriseDatabase
-func (tr *RedisEnterpriseDatabase) GetParameters() (map[string]interface{}, error) {
+func (tr *RedisEnterpriseDatabase) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this RedisEnterpriseDatabase
-func (tr *RedisEnterpriseDatabase) SetParameters(params map[string]interface{}) error {
+func (tr *RedisEnterpriseDatabase) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -246,17 +246,17 @@ func (tr *RedisFirewallRule) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this RedisFirewallRule
-func (tr *RedisFirewallRule) GetObservation() (map[string]interface{}, error) {
+func (tr *RedisFirewallRule) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this RedisFirewallRule
-func (tr *RedisFirewallRule) SetObservation(obs map[string]interface{}) error {
+func (tr *RedisFirewallRule) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -273,17 +273,17 @@ func (tr *RedisFirewallRule) GetID() string {
 }
 
 // GetParameters of this RedisFirewallRule
-func (tr *RedisFirewallRule) GetParameters() (map[string]interface{}, error) {
+func (tr *RedisFirewallRule) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this RedisFirewallRule
-func (tr *RedisFirewallRule) SetParameters(params map[string]interface{}) error {
+func (tr *RedisFirewallRule) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -320,17 +320,17 @@ func (tr *RedisLinkedServer) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this RedisLinkedServer
-func (tr *RedisLinkedServer) GetObservation() (map[string]interface{}, error) {
+func (tr *RedisLinkedServer) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this RedisLinkedServer
-func (tr *RedisLinkedServer) SetObservation(obs map[string]interface{}) error {
+func (tr *RedisLinkedServer) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -347,17 +347,17 @@ func (tr *RedisLinkedServer) GetID() string {
 }
 
 // GetParameters of this RedisLinkedServer
-func (tr *RedisLinkedServer) GetParameters() (map[string]interface{}, error) {
+func (tr *RedisLinkedServer) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this RedisLinkedServer
-func (tr *RedisLinkedServer) SetParameters(params map[string]interface{}) error {
+func (tr *RedisLinkedServer) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

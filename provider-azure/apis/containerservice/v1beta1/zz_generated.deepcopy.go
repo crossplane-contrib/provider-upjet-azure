@@ -40,7 +40,7 @@ func (in *AciConnectorLinuxParameters) DeepCopyInto(out *AciConnectorLinuxParame
 	if in.SubnetNameRef != nil {
 		in, out := &in.SubnetNameRef, &out.SubnetNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetNameSelector != nil {
 		in, out := &in.SubnetNameSelector, &out.SubnetNameSelector
@@ -437,7 +437,7 @@ func (in *DefaultNodePoolParameters) DeepCopyInto(out *DefaultNodePoolParameters
 	if in.PodSubnetIDRef != nil {
 		in, out := &in.PodSubnetIDRef, &out.PodSubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PodSubnetIDSelector != nil {
 		in, out := &in.PodSubnetIDSelector, &out.PodSubnetIDSelector
@@ -494,7 +494,7 @@ func (in *DefaultNodePoolParameters) DeepCopyInto(out *DefaultNodePoolParameters
 	if in.VnetSubnetIDRef != nil {
 		in, out := &in.VnetSubnetIDRef, &out.VnetSubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VnetSubnetIDSelector != nil {
 		in, out := &in.VnetSubnetIDSelector, &out.VnetSubnetIDSelector
@@ -734,7 +734,7 @@ func (in *IngressApplicationGatewayParameters) DeepCopyInto(out *IngressApplicat
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
@@ -1335,7 +1335,7 @@ func (in *KubernetesClusterNodePoolParameters) DeepCopyInto(out *KubernetesClust
 	if in.KubernetesClusterIDRef != nil {
 		in, out := &in.KubernetesClusterIDRef, &out.KubernetesClusterIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KubernetesClusterIDSelector != nil {
 		in, out := &in.KubernetesClusterIDSelector, &out.KubernetesClusterIDSelector
@@ -1438,7 +1438,7 @@ func (in *KubernetesClusterNodePoolParameters) DeepCopyInto(out *KubernetesClust
 	if in.PodSubnetIDRef != nil {
 		in, out := &in.PodSubnetIDRef, &out.PodSubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PodSubnetIDSelector != nil {
 		in, out := &in.PodSubnetIDSelector, &out.PodSubnetIDSelector
@@ -1505,7 +1505,7 @@ func (in *KubernetesClusterNodePoolParameters) DeepCopyInto(out *KubernetesClust
 	if in.VnetSubnetIDRef != nil {
 		in, out := &in.VnetSubnetIDRef, &out.VnetSubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VnetSubnetIDSelector != nil {
 		in, out := &in.VnetSubnetIDSelector, &out.VnetSubnetIDSelector
@@ -1894,7 +1894,7 @@ func (in *KubernetesClusterParameters) DeepCopyInto(out *KubernetesClusterParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
