@@ -25,19 +25,12 @@ import (
 // Configure configures cosmodb group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_cosmosdb_account", func(r *config.Resource) {
-		/*r.References["restore.source_cosmosdb_account_id"] = config.Reference{
-			Type:              "Account",
-			RefFieldName:      "SourceCosmosDbAccountIdRef",
-			SelectorFieldName: "SourceCosmosDbAccountIdSelector",
-			Extractor:         rconfig.ExtractResourceIDFuncPath,
-		}*/
 		delete(r.References, "geo_location.location")
 	})
 	p.AddResourceConfigurator("azurerm_cosmosdb_sql_container", func(r *config.Resource) {
 		r.References["database_name"] = config.Reference{
 			Type: "SQLDatabase",
 		}
-		delete(r.References, "resource_group_name")
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_mongo_collection", func(r *config.Resource) {
@@ -49,9 +42,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_cosmosdb_cassandra_table", func(r *config.Resource) {
 		delete(r.References, "cassandra_keyspace_id")
 		r.References["cassandra_keyspace_id"] = config.Reference{
-			Type: "CassandraKeySpace",
-			/*RefFieldName:      "CassandraKeySpaceIdRef",
-			SelectorFieldName: "CassandraKeySpaceIdSelector",*/
+			Type:      "CassandraKeySpace",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
@@ -60,7 +51,6 @@ func Configure(p *config.Provider) {
 		r.References["database_name"] = config.Reference{
 			Type: "GremlinDatabase",
 		}
-		delete(r.References, "resource_group_name")
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_sql_function", func(r *config.Resource) {
@@ -77,7 +67,6 @@ func Configure(p *config.Provider) {
 		r.References["container_name"] = config.Reference{
 			Type: "SQLContainer",
 		}
-		delete(r.References, "resource_group_name")
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_sql_trigger", func(r *config.Resource) {
@@ -93,8 +82,5 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_cosmosdb_sql_role_definition", func(r *config.Resource) {
 		r.UseAsync = false
-	})
-	p.AddResourceConfigurator("azurerm_cosmosdb_notebook_workspace", func(r *config.Resource) {
-		delete(r.References, "resource_group_name")
 	})
 }

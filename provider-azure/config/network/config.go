@@ -493,7 +493,6 @@ func Configure(p *config.Provider) {
 		r.References["frontdoor_name"] = config.Reference{
 			Type: "FrontDoor",
 		}
-		delete(r.References, "resource_group_name")
 	})
 
 	p.AddResourceConfigurator("azurerm_application_gateway", func(r *config.Resource) {

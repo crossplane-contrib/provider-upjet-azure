@@ -51,16 +51,12 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_iothub_consumer_group", func(r *config.Resource) {
 		r.References["iothub_name"] = config.Reference{
 			Type: "IOTHub",
-			/*RefFieldName:      "IOTHubNameRef",
-			SelectorFieldName: "IOTHubNameSelector",*/
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_dps_certificate", func(r *config.Resource) {
 		r.References["iot_dps_name"] = config.Reference{
 			Type: "IOTHubDPS",
-			/*RefFieldName:      "IotdpsNameRef",
-			SelectorFieldName: "IotdpsNameSelector",*/
 		}
 	})
 
@@ -88,8 +84,6 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_iothub_fallback_route", func(r *config.Resource) {
 		r.References["iothub_name"] = config.Reference{
 			Type: "IOTHub",
-			/*RefFieldName:      "IOTHubNameRef",
-			SelectorFieldName: "IOTHubNameSelector",*/
 		}
 		r.References["endpoint_names"] = config.Reference{
 			Type: "IOTHubEndpointStorageContainer",

@@ -181,6 +181,7 @@ func GetProvider() *tjconfig.Provider {
 	// This function runs after the special configurations were applied. However, if some references were configured in
 	// the configuration files, the reference generator does not override them.
 	for _, r := range pc.Resources {
+		delete(r.References, "resource_group_name")
 		if err := common.AddCommonReferences(r); err != nil {
 			panic(err)
 		}

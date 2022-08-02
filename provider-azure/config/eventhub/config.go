@@ -41,8 +41,6 @@ func Configure(p *config.Provider) {
 		}
 		r.References["eventhub_name"] = config.Reference{
 			Type: "EventHub",
-			/*RefFieldName:      "EventHubNameRef",
-			SelectorFieldName: "EventHubNameSelector",*/
 		}
 	})
 
@@ -52,8 +50,6 @@ func Configure(p *config.Provider) {
 		}
 		r.References["eventhub_name"] = config.Reference{
 			Type: "EventHub",
-			/*RefFieldName:      "EventHubNameRef",
-			SelectorFieldName: "EventHubNameSelector",*/
 		}
 	})
 }
