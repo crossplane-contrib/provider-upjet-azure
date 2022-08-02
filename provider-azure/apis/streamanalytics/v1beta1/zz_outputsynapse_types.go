@@ -38,8 +38,15 @@ type OutputSynapseParameters struct {
 	// +kubebuilder:validation:Required
 	Server *string `json:"server" tf:"server,omitempty"`
 
-	// +kubebuilder:validation:Required
-	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/streamanalytics/v1beta1.Job
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Table *string `json:"table" tf:"table,omitempty"`

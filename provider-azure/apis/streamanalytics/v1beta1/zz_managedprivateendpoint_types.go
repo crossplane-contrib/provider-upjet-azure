@@ -29,14 +29,29 @@ type ManagedPrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	StreamAnalyticsClusterName *string `json:"streamAnalyticsClusterName" tf:"stream_analytics_cluster_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/streamanalytics/v1beta1.Cluster
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsClusterName *string `json:"streamAnalyticsClusterName,omitempty" tf:"stream_analytics_cluster_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsClusterNameRef *v1.Reference `json:"streamAnalyticsClusterNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsClusterNameSelector *v1.Selector `json:"streamAnalyticsClusterNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	SubresourceName *string `json:"subresourceName" tf:"subresource_name,omitempty"`
 
-	// +kubebuilder:validation:Required
-	TargetResourceID *string `json:"targetResourceId" tf:"target_resource_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 // ManagedPrivateEndpointSpec defines the desired state of ManagedPrivateEndpoint
