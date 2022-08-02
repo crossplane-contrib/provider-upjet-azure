@@ -24,17 +24,17 @@ func (tr *ResourceGroupPolicyAssignment) GetConnectionDetailsMapping() map[strin
 }
 
 // GetObservation of this ResourceGroupPolicyAssignment
-func (tr *ResourceGroupPolicyAssignment) GetObservation() (map[string]interface{}, error) {
+func (tr *ResourceGroupPolicyAssignment) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ResourceGroupPolicyAssignment
-func (tr *ResourceGroupPolicyAssignment) SetObservation(obs map[string]interface{}) error {
+func (tr *ResourceGroupPolicyAssignment) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *ResourceGroupPolicyAssignment) GetID() string {
 }
 
 // GetParameters of this ResourceGroupPolicyAssignment
-func (tr *ResourceGroupPolicyAssignment) GetParameters() (map[string]interface{}, error) {
+func (tr *ResourceGroupPolicyAssignment) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ResourceGroupPolicyAssignment
-func (tr *ResourceGroupPolicyAssignment) SetParameters(params map[string]interface{}) error {
+func (tr *ResourceGroupPolicyAssignment) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

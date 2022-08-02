@@ -116,7 +116,7 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -327,7 +327,7 @@ func (in *DataProtectionReplicationParameters) DeepCopyInto(out *DataProtectionR
 	if in.RemoteVolumeResourceIDRef != nil {
 		in, out := &in.RemoteVolumeResourceIDRef, &out.RemoteVolumeResourceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RemoteVolumeResourceIDSelector != nil {
 		in, out := &in.RemoteVolumeResourceIDSelector, &out.RemoteVolumeResourceIDSelector
@@ -377,7 +377,7 @@ func (in *DataProtectionSnapshotPolicyParameters) DeepCopyInto(out *DataProtecti
 	if in.SnapshotPolicyIDRef != nil {
 		in, out := &in.SnapshotPolicyIDRef, &out.SnapshotPolicyIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SnapshotPolicyIDSelector != nil {
 		in, out := &in.SnapshotPolicyIDSelector, &out.SnapshotPolicyIDSelector
@@ -654,7 +654,7 @@ func (in *PoolParameters) DeepCopyInto(out *PoolParameters) {
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -679,7 +679,7 @@ func (in *PoolParameters) DeepCopyInto(out *PoolParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -847,7 +847,7 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -867,7 +867,7 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 	if in.PoolNameRef != nil {
 		in, out := &in.PoolNameRef, &out.PoolNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PoolNameSelector != nil {
 		in, out := &in.PoolNameSelector, &out.PoolNameSelector
@@ -882,7 +882,7 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -897,7 +897,7 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 	if in.VolumeNameRef != nil {
 		in, out := &in.VolumeNameRef, &out.VolumeNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VolumeNameSelector != nil {
 		in, out := &in.VolumeNameSelector, &out.VolumeNameSelector
@@ -1006,7 +1006,7 @@ func (in *SnapshotPolicyParameters) DeepCopyInto(out *SnapshotPolicyParameters) 
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -1052,7 +1052,7 @@ func (in *SnapshotPolicyParameters) DeepCopyInto(out *SnapshotPolicyParameters) 
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1262,7 +1262,7 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -1277,7 +1277,7 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 	if in.CreateFromSnapshotResourceIDRef != nil {
 		in, out := &in.CreateFromSnapshotResourceIDRef, &out.CreateFromSnapshotResourceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CreateFromSnapshotResourceIDSelector != nil {
 		in, out := &in.CreateFromSnapshotResourceIDSelector, &out.CreateFromSnapshotResourceIDSelector
@@ -1318,7 +1318,7 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 	if in.PoolNameRef != nil {
 		in, out := &in.PoolNameRef, &out.PoolNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PoolNameSelector != nil {
 		in, out := &in.PoolNameSelector, &out.PoolNameSelector
@@ -1344,7 +1344,7 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1379,7 +1379,7 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector

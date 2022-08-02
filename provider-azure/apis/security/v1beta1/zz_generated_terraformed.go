@@ -24,17 +24,17 @@ func (tr *AdvancedThreatProtection) GetConnectionDetailsMapping() map[string]str
 }
 
 // GetObservation of this AdvancedThreatProtection
-func (tr *AdvancedThreatProtection) GetObservation() (map[string]interface{}, error) {
+func (tr *AdvancedThreatProtection) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this AdvancedThreatProtection
-func (tr *AdvancedThreatProtection) SetObservation(obs map[string]interface{}) error {
+func (tr *AdvancedThreatProtection) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *AdvancedThreatProtection) GetID() string {
 }
 
 // GetParameters of this AdvancedThreatProtection
-func (tr *AdvancedThreatProtection) GetParameters() (map[string]interface{}, error) {
+func (tr *AdvancedThreatProtection) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this AdvancedThreatProtection
-func (tr *AdvancedThreatProtection) SetParameters(params map[string]interface{}) error {
+func (tr *AdvancedThreatProtection) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *IOTSecurityDeviceGroup) GetConnectionDetailsMapping() map[string]strin
 }
 
 // GetObservation of this IOTSecurityDeviceGroup
-func (tr *IOTSecurityDeviceGroup) GetObservation() (map[string]interface{}, error) {
+func (tr *IOTSecurityDeviceGroup) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this IOTSecurityDeviceGroup
-func (tr *IOTSecurityDeviceGroup) SetObservation(obs map[string]interface{}) error {
+func (tr *IOTSecurityDeviceGroup) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *IOTSecurityDeviceGroup) GetID() string {
 }
 
 // GetParameters of this IOTSecurityDeviceGroup
-func (tr *IOTSecurityDeviceGroup) GetParameters() (map[string]interface{}, error) {
+func (tr *IOTSecurityDeviceGroup) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this IOTSecurityDeviceGroup
-func (tr *IOTSecurityDeviceGroup) SetParameters(params map[string]interface{}) error {
+func (tr *IOTSecurityDeviceGroup) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *IOTSecuritySolution) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this IOTSecuritySolution
-func (tr *IOTSecuritySolution) GetObservation() (map[string]interface{}, error) {
+func (tr *IOTSecuritySolution) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this IOTSecuritySolution
-func (tr *IOTSecuritySolution) SetObservation(obs map[string]interface{}) error {
+func (tr *IOTSecuritySolution) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *IOTSecuritySolution) GetID() string {
 }
 
 // GetParameters of this IOTSecuritySolution
-func (tr *IOTSecuritySolution) GetParameters() (map[string]interface{}, error) {
+func (tr *IOTSecuritySolution) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this IOTSecuritySolution
-func (tr *IOTSecuritySolution) SetParameters(params map[string]interface{}) error {
+func (tr *IOTSecuritySolution) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

@@ -109,7 +109,7 @@ func (in *BackupPolicyBlobStorageParameters) DeepCopyInto(out *BackupPolicyBlobS
 	if in.VaultIDRef != nil {
 		in, out := &in.VaultIDRef, &out.VaultIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VaultIDSelector != nil {
 		in, out := &in.VaultIDSelector, &out.VaultIDSelector
@@ -281,7 +281,7 @@ func (in *BackupVaultParameters) DeepCopyInto(out *BackupVaultParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector

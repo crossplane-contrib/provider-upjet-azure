@@ -24,17 +24,17 @@ func (tr *DataShare) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this DataShare
-func (tr *DataShare) GetObservation() (map[string]interface{}, error) {
+func (tr *DataShare) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this DataShare
-func (tr *DataShare) SetObservation(obs map[string]interface{}) error {
+func (tr *DataShare) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *DataShare) GetID() string {
 }
 
 // GetParameters of this DataShare
-func (tr *DataShare) GetParameters() (map[string]interface{}, error) {
+func (tr *DataShare) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this DataShare
-func (tr *DataShare) SetParameters(params map[string]interface{}) error {
+func (tr *DataShare) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *Account) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this Account
-func (tr *Account) GetObservation() (map[string]interface{}, error) {
+func (tr *Account) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this Account
-func (tr *Account) SetObservation(obs map[string]interface{}) error {
+func (tr *Account) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *Account) GetID() string {
 }
 
 // GetParameters of this Account
-func (tr *Account) GetParameters() (map[string]interface{}, error) {
+func (tr *Account) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this Account
-func (tr *Account) SetParameters(params map[string]interface{}) error {
+func (tr *Account) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *DataSetBlobStorage) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this DataSetBlobStorage
-func (tr *DataSetBlobStorage) GetObservation() (map[string]interface{}, error) {
+func (tr *DataSetBlobStorage) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this DataSetBlobStorage
-func (tr *DataSetBlobStorage) SetObservation(obs map[string]interface{}) error {
+func (tr *DataSetBlobStorage) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *DataSetBlobStorage) GetID() string {
 }
 
 // GetParameters of this DataSetBlobStorage
-func (tr *DataSetBlobStorage) GetParameters() (map[string]interface{}, error) {
+func (tr *DataSetBlobStorage) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this DataSetBlobStorage
-func (tr *DataSetBlobStorage) SetParameters(params map[string]interface{}) error {
+func (tr *DataSetBlobStorage) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -246,17 +246,17 @@ func (tr *DataSetDataLakeGen2) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this DataSetDataLakeGen2
-func (tr *DataSetDataLakeGen2) GetObservation() (map[string]interface{}, error) {
+func (tr *DataSetDataLakeGen2) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this DataSetDataLakeGen2
-func (tr *DataSetDataLakeGen2) SetObservation(obs map[string]interface{}) error {
+func (tr *DataSetDataLakeGen2) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -273,17 +273,17 @@ func (tr *DataSetDataLakeGen2) GetID() string {
 }
 
 // GetParameters of this DataSetDataLakeGen2
-func (tr *DataSetDataLakeGen2) GetParameters() (map[string]interface{}, error) {
+func (tr *DataSetDataLakeGen2) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this DataSetDataLakeGen2
-func (tr *DataSetDataLakeGen2) SetParameters(params map[string]interface{}) error {
+func (tr *DataSetDataLakeGen2) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -320,17 +320,17 @@ func (tr *DataSetKustoCluster) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this DataSetKustoCluster
-func (tr *DataSetKustoCluster) GetObservation() (map[string]interface{}, error) {
+func (tr *DataSetKustoCluster) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this DataSetKustoCluster
-func (tr *DataSetKustoCluster) SetObservation(obs map[string]interface{}) error {
+func (tr *DataSetKustoCluster) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -347,17 +347,17 @@ func (tr *DataSetKustoCluster) GetID() string {
 }
 
 // GetParameters of this DataSetKustoCluster
-func (tr *DataSetKustoCluster) GetParameters() (map[string]interface{}, error) {
+func (tr *DataSetKustoCluster) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this DataSetKustoCluster
-func (tr *DataSetKustoCluster) SetParameters(params map[string]interface{}) error {
+func (tr *DataSetKustoCluster) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -394,17 +394,17 @@ func (tr *DataSetKustoDatabase) GetConnectionDetailsMapping() map[string]string 
 }
 
 // GetObservation of this DataSetKustoDatabase
-func (tr *DataSetKustoDatabase) GetObservation() (map[string]interface{}, error) {
+func (tr *DataSetKustoDatabase) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this DataSetKustoDatabase
-func (tr *DataSetKustoDatabase) SetObservation(obs map[string]interface{}) error {
+func (tr *DataSetKustoDatabase) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -421,17 +421,17 @@ func (tr *DataSetKustoDatabase) GetID() string {
 }
 
 // GetParameters of this DataSetKustoDatabase
-func (tr *DataSetKustoDatabase) GetParameters() (map[string]interface{}, error) {
+func (tr *DataSetKustoDatabase) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this DataSetKustoDatabase
-func (tr *DataSetKustoDatabase) SetParameters(params map[string]interface{}) error {
+func (tr *DataSetKustoDatabase) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

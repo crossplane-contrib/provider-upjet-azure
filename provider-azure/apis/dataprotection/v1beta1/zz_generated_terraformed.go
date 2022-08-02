@@ -24,17 +24,17 @@ func (tr *BackupPolicyBlobStorage) GetConnectionDetailsMapping() map[string]stri
 }
 
 // GetObservation of this BackupPolicyBlobStorage
-func (tr *BackupPolicyBlobStorage) GetObservation() (map[string]interface{}, error) {
+func (tr *BackupPolicyBlobStorage) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BackupPolicyBlobStorage
-func (tr *BackupPolicyBlobStorage) SetObservation(obs map[string]interface{}) error {
+func (tr *BackupPolicyBlobStorage) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *BackupPolicyBlobStorage) GetID() string {
 }
 
 // GetParameters of this BackupPolicyBlobStorage
-func (tr *BackupPolicyBlobStorage) GetParameters() (map[string]interface{}, error) {
+func (tr *BackupPolicyBlobStorage) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BackupPolicyBlobStorage
-func (tr *BackupPolicyBlobStorage) SetParameters(params map[string]interface{}) error {
+func (tr *BackupPolicyBlobStorage) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *BackupVault) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this BackupVault
-func (tr *BackupVault) GetObservation() (map[string]interface{}, error) {
+func (tr *BackupVault) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this BackupVault
-func (tr *BackupVault) SetObservation(obs map[string]interface{}) error {
+func (tr *BackupVault) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *BackupVault) GetID() string {
 }
 
 // GetParameters of this BackupVault
-func (tr *BackupVault) GetParameters() (map[string]interface{}, error) {
+func (tr *BackupVault) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this BackupVault
-func (tr *BackupVault) SetParameters(params map[string]interface{}) error {
+func (tr *BackupVault) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

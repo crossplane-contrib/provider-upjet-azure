@@ -104,7 +104,7 @@ func (in *AgentPoolParameters) DeepCopyInto(out *AgentPoolParameters) {
 	if in.ContainerRegistryNameRef != nil {
 		in, out := &in.ContainerRegistryNameRef, &out.ContainerRegistryNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryNameSelector != nil {
 		in, out := &in.ContainerRegistryNameSelector, &out.ContainerRegistryNameSelector
@@ -129,7 +129,7 @@ func (in *AgentPoolParameters) DeepCopyInto(out *AgentPoolParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -164,7 +164,7 @@ func (in *AgentPoolParameters) DeepCopyInto(out *AgentPoolParameters) {
 	if in.VirtualNetworkSubnetIDRef != nil {
 		in, out := &in.VirtualNetworkSubnetIDRef, &out.VirtualNetworkSubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VirtualNetworkSubnetIDSelector != nil {
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
@@ -323,7 +323,7 @@ func (in *ContainerConnectedRegistryParameters) DeepCopyInto(out *ContainerConne
 	if in.ContainerRegistryIDRef != nil {
 		in, out := &in.ContainerRegistryIDRef, &out.ContainerRegistryIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryIDSelector != nil {
 		in, out := &in.ContainerRegistryIDSelector, &out.ContainerRegistryIDSelector
@@ -370,7 +370,7 @@ func (in *ContainerConnectedRegistryParameters) DeepCopyInto(out *ContainerConne
 	if in.SyncTokenIDRef != nil {
 		in, out := &in.SyncTokenIDRef, &out.SyncTokenIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SyncTokenIDSelector != nil {
 		in, out := &in.SyncTokenIDSelector, &out.SyncTokenIDSelector
@@ -903,7 +903,7 @@ func (in *RegistryParameters) DeepCopyInto(out *RegistryParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1136,7 +1136,7 @@ func (in *ScopeMapParameters) DeepCopyInto(out *ScopeMapParameters) {
 	if in.ContainerRegistryNameRef != nil {
 		in, out := &in.ContainerRegistryNameRef, &out.ContainerRegistryNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryNameSelector != nil {
 		in, out := &in.ContainerRegistryNameSelector, &out.ContainerRegistryNameSelector
@@ -1156,7 +1156,7 @@ func (in *ScopeMapParameters) DeepCopyInto(out *ScopeMapParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1299,7 +1299,7 @@ func (in *TokenParameters) DeepCopyInto(out *TokenParameters) {
 	if in.ContainerRegistryNameRef != nil {
 		in, out := &in.ContainerRegistryNameRef, &out.ContainerRegistryNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerRegistryNameSelector != nil {
 		in, out := &in.ContainerRegistryNameSelector, &out.ContainerRegistryNameSelector
@@ -1319,7 +1319,7 @@ func (in *TokenParameters) DeepCopyInto(out *TokenParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1334,7 +1334,7 @@ func (in *TokenParameters) DeepCopyInto(out *TokenParameters) {
 	if in.ScopeMapIDRef != nil {
 		in, out := &in.ScopeMapIDRef, &out.ScopeMapIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ScopeMapIDSelector != nil {
 		in, out := &in.ScopeMapIDSelector, &out.ScopeMapIDSelector
@@ -1453,7 +1453,7 @@ func (in *VirtualNetworkParameters) DeepCopyInto(out *VirtualNetworkParameters) 
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
@@ -1593,7 +1593,7 @@ func (in *WebhookParameters) DeepCopyInto(out *WebhookParameters) {
 	if in.RegistryNameRef != nil {
 		in, out := &in.RegistryNameRef, &out.RegistryNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RegistryNameSelector != nil {
 		in, out := &in.RegistryNameSelector, &out.RegistryNameSelector
@@ -1608,7 +1608,7 @@ func (in *WebhookParameters) DeepCopyInto(out *WebhookParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector

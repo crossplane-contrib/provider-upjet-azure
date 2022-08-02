@@ -24,17 +24,17 @@ func (tr *HPCCache) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this HPCCache
-func (tr *HPCCache) GetObservation() (map[string]interface{}, error) {
+func (tr *HPCCache) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this HPCCache
-func (tr *HPCCache) SetObservation(obs map[string]interface{}) error {
+func (tr *HPCCache) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *HPCCache) GetID() string {
 }
 
 // GetParameters of this HPCCache
-func (tr *HPCCache) GetParameters() (map[string]interface{}, error) {
+func (tr *HPCCache) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this HPCCache
-func (tr *HPCCache) SetParameters(params map[string]interface{}) error {
+func (tr *HPCCache) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *HPCCacheAccessPolicy) GetConnectionDetailsMapping() map[string]string 
 }
 
 // GetObservation of this HPCCacheAccessPolicy
-func (tr *HPCCacheAccessPolicy) GetObservation() (map[string]interface{}, error) {
+func (tr *HPCCacheAccessPolicy) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this HPCCacheAccessPolicy
-func (tr *HPCCacheAccessPolicy) SetObservation(obs map[string]interface{}) error {
+func (tr *HPCCacheAccessPolicy) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *HPCCacheAccessPolicy) GetID() string {
 }
 
 // GetParameters of this HPCCacheAccessPolicy
-func (tr *HPCCacheAccessPolicy) GetParameters() (map[string]interface{}, error) {
+func (tr *HPCCacheAccessPolicy) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this HPCCacheAccessPolicy
-func (tr *HPCCacheAccessPolicy) SetParameters(params map[string]interface{}) error {
+func (tr *HPCCacheAccessPolicy) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *HPCCacheBlobNFSTarget) GetConnectionDetailsMapping() map[string]string
 }
 
 // GetObservation of this HPCCacheBlobNFSTarget
-func (tr *HPCCacheBlobNFSTarget) GetObservation() (map[string]interface{}, error) {
+func (tr *HPCCacheBlobNFSTarget) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this HPCCacheBlobNFSTarget
-func (tr *HPCCacheBlobNFSTarget) SetObservation(obs map[string]interface{}) error {
+func (tr *HPCCacheBlobNFSTarget) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *HPCCacheBlobNFSTarget) GetID() string {
 }
 
 // GetParameters of this HPCCacheBlobNFSTarget
-func (tr *HPCCacheBlobNFSTarget) GetParameters() (map[string]interface{}, error) {
+func (tr *HPCCacheBlobNFSTarget) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this HPCCacheBlobNFSTarget
-func (tr *HPCCacheBlobNFSTarget) SetParameters(params map[string]interface{}) error {
+func (tr *HPCCacheBlobNFSTarget) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -246,17 +246,17 @@ func (tr *HPCCacheBlobTarget) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this HPCCacheBlobTarget
-func (tr *HPCCacheBlobTarget) GetObservation() (map[string]interface{}, error) {
+func (tr *HPCCacheBlobTarget) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this HPCCacheBlobTarget
-func (tr *HPCCacheBlobTarget) SetObservation(obs map[string]interface{}) error {
+func (tr *HPCCacheBlobTarget) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -273,17 +273,17 @@ func (tr *HPCCacheBlobTarget) GetID() string {
 }
 
 // GetParameters of this HPCCacheBlobTarget
-func (tr *HPCCacheBlobTarget) GetParameters() (map[string]interface{}, error) {
+func (tr *HPCCacheBlobTarget) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this HPCCacheBlobTarget
-func (tr *HPCCacheBlobTarget) SetParameters(params map[string]interface{}) error {
+func (tr *HPCCacheBlobTarget) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -320,17 +320,17 @@ func (tr *HPCCacheNFSTarget) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this HPCCacheNFSTarget
-func (tr *HPCCacheNFSTarget) GetObservation() (map[string]interface{}, error) {
+func (tr *HPCCacheNFSTarget) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this HPCCacheNFSTarget
-func (tr *HPCCacheNFSTarget) SetObservation(obs map[string]interface{}) error {
+func (tr *HPCCacheNFSTarget) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -347,17 +347,17 @@ func (tr *HPCCacheNFSTarget) GetID() string {
 }
 
 // GetParameters of this HPCCacheNFSTarget
-func (tr *HPCCacheNFSTarget) GetParameters() (map[string]interface{}, error) {
+func (tr *HPCCacheNFSTarget) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this HPCCacheNFSTarget
-func (tr *HPCCacheNFSTarget) SetParameters(params map[string]interface{}) error {
+func (tr *HPCCacheNFSTarget) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

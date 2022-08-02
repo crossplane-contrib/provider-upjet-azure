@@ -297,7 +297,7 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -660,7 +660,7 @@ func (in *CassandraClusterParameters) DeepCopyInto(out *CassandraClusterParamete
 	if in.DelegatedManagementSubnetIDRef != nil {
 		in, out := &in.DelegatedManagementSubnetIDRef, &out.DelegatedManagementSubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DelegatedManagementSubnetIDSelector != nil {
 		in, out := &in.DelegatedManagementSubnetIDSelector, &out.DelegatedManagementSubnetIDSelector
@@ -680,7 +680,7 @@ func (in *CassandraClusterParameters) DeepCopyInto(out *CassandraClusterParamete
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -843,7 +843,7 @@ func (in *CassandraDatacenterParameters) DeepCopyInto(out *CassandraDatacenterPa
 	if in.CassandraClusterIDRef != nil {
 		in, out := &in.CassandraClusterIDRef, &out.CassandraClusterIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CassandraClusterIDSelector != nil {
 		in, out := &in.CassandraClusterIDSelector, &out.CassandraClusterIDSelector
@@ -858,7 +858,7 @@ func (in *CassandraDatacenterParameters) DeepCopyInto(out *CassandraDatacenterPa
 	if in.DelegatedManagementSubnetIDRef != nil {
 		in, out := &in.DelegatedManagementSubnetIDRef, &out.DelegatedManagementSubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DelegatedManagementSubnetIDSelector != nil {
 		in, out := &in.DelegatedManagementSubnetIDSelector, &out.DelegatedManagementSubnetIDSelector
@@ -1021,7 +1021,7 @@ func (in *CassandraKeySpaceParameters) DeepCopyInto(out *CassandraKeySpaceParame
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -1043,7 +1043,7 @@ func (in *CassandraKeySpaceParameters) DeepCopyInto(out *CassandraKeySpaceParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1238,7 +1238,7 @@ func (in *CassandraTableParameters) DeepCopyInto(out *CassandraTableParameters) 
 	if in.CassandraKeySpaceIDRef != nil {
 		in, out := &in.CassandraKeySpaceIDRef, &out.CassandraKeySpaceIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CassandraKeySpaceIDSelector != nil {
 		in, out := &in.CassandraKeySpaceIDSelector, &out.CassandraKeySpaceIDSelector
@@ -1890,7 +1890,7 @@ func (in *GremlinDatabaseParameters) DeepCopyInto(out *GremlinDatabaseParameters
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -1912,7 +1912,7 @@ func (in *GremlinDatabaseParameters) DeepCopyInto(out *GremlinDatabaseParameters
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2102,7 +2102,7 @@ func (in *GremlinGraphParameters) DeepCopyInto(out *GremlinGraphParameters) {
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -2131,7 +2131,7 @@ func (in *GremlinGraphParameters) DeepCopyInto(out *GremlinGraphParameters) {
 	if in.DatabaseNameRef != nil {
 		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseNameSelector != nil {
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
@@ -2168,7 +2168,7 @@ func (in *GremlinGraphParameters) DeepCopyInto(out *GremlinGraphParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2767,7 +2767,7 @@ func (in *MongoCollectionParameters) DeepCopyInto(out *MongoCollectionParameters
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -2794,7 +2794,7 @@ func (in *MongoCollectionParameters) DeepCopyInto(out *MongoCollectionParameters
 	if in.DatabaseNameRef != nil {
 		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseNameSelector != nil {
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
@@ -2821,7 +2821,7 @@ func (in *MongoCollectionParameters) DeepCopyInto(out *MongoCollectionParameters
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -3009,7 +3009,7 @@ func (in *MongoDatabaseParameters) DeepCopyInto(out *MongoDatabaseParameters) {
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -3031,7 +3031,7 @@ func (in *MongoDatabaseParameters) DeepCopyInto(out *MongoDatabaseParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -3184,7 +3184,7 @@ func (in *NotebookWorkspaceParameters) DeepCopyInto(out *NotebookWorkspaceParame
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -3199,7 +3199,7 @@ func (in *NotebookWorkspaceParameters) DeepCopyInto(out *NotebookWorkspaceParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -3366,7 +3366,7 @@ func (in *RestoreParameters) DeepCopyInto(out *RestoreParameters) {
 	if in.SourceCosmosDBAccountIDRef != nil {
 		in, out := &in.SourceCosmosDBAccountIDRef, &out.SourceCosmosDBAccountIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SourceCosmosDBAccountIDSelector != nil {
 		in, out := &in.SourceCosmosDBAccountIDSelector, &out.SourceCosmosDBAccountIDSelector
@@ -3562,7 +3562,7 @@ func (in *SQLContainerParameters) DeepCopyInto(out *SQLContainerParameters) {
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -3596,7 +3596,7 @@ func (in *SQLContainerParameters) DeepCopyInto(out *SQLContainerParameters) {
 	if in.DatabaseNameRef != nil {
 		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseNameSelector != nil {
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
@@ -3633,7 +3633,7 @@ func (in *SQLContainerParameters) DeepCopyInto(out *SQLContainerParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -3864,7 +3864,7 @@ func (in *SQLDatabaseParameters) DeepCopyInto(out *SQLDatabaseParameters) {
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -3886,7 +3886,7 @@ func (in *SQLDatabaseParameters) DeepCopyInto(out *SQLDatabaseParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -4039,7 +4039,7 @@ func (in *SQLFunctionParameters) DeepCopyInto(out *SQLFunctionParameters) {
 	if in.ContainerIDRef != nil {
 		in, out := &in.ContainerIDRef, &out.ContainerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerIDSelector != nil {
 		in, out := &in.ContainerIDSelector, &out.ContainerIDSelector
@@ -4182,7 +4182,7 @@ func (in *SQLRoleAssignmentParameters) DeepCopyInto(out *SQLRoleAssignmentParame
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -4202,7 +4202,7 @@ func (in *SQLRoleAssignmentParameters) DeepCopyInto(out *SQLRoleAssignmentParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -4217,7 +4217,7 @@ func (in *SQLRoleAssignmentParameters) DeepCopyInto(out *SQLRoleAssignmentParame
 	if in.RoleDefinitionIDRef != nil {
 		in, out := &in.RoleDefinitionIDRef, &out.RoleDefinitionIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.RoleDefinitionIDSelector != nil {
 		in, out := &in.RoleDefinitionIDSelector, &out.RoleDefinitionIDSelector
@@ -4365,7 +4365,7 @@ func (in *SQLRoleDefinitionParameters) DeepCopyInto(out *SQLRoleDefinitionParame
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -4398,7 +4398,7 @@ func (in *SQLRoleDefinitionParameters) DeepCopyInto(out *SQLRoleDefinitionParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -4551,7 +4551,7 @@ func (in *SQLStoredProcedureParameters) DeepCopyInto(out *SQLStoredProcedurePara
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -4571,7 +4571,7 @@ func (in *SQLStoredProcedureParameters) DeepCopyInto(out *SQLStoredProcedurePara
 	if in.ContainerNameRef != nil {
 		in, out := &in.ContainerNameRef, &out.ContainerNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerNameSelector != nil {
 		in, out := &in.ContainerNameSelector, &out.ContainerNameSelector
@@ -4586,7 +4586,7 @@ func (in *SQLStoredProcedureParameters) DeepCopyInto(out *SQLStoredProcedurePara
 	if in.DatabaseNameRef != nil {
 		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DatabaseNameSelector != nil {
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
@@ -4601,7 +4601,7 @@ func (in *SQLStoredProcedureParameters) DeepCopyInto(out *SQLStoredProcedurePara
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -4749,7 +4749,7 @@ func (in *SQLTriggerParameters) DeepCopyInto(out *SQLTriggerParameters) {
 	if in.ContainerIDRef != nil {
 		in, out := &in.ContainerIDRef, &out.ContainerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerIDSelector != nil {
 		in, out := &in.ContainerIDSelector, &out.ContainerIDSelector
@@ -5080,7 +5080,7 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 	if in.AccountNameRef != nil {
 		in, out := &in.AccountNameRef, &out.AccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountNameSelector != nil {
 		in, out := &in.AccountNameSelector, &out.AccountNameSelector
@@ -5102,7 +5102,7 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector

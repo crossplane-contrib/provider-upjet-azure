@@ -208,7 +208,7 @@ func (in *AssetParameters) DeepCopyInto(out *AssetParameters) {
 	if in.MediaServicesAccountNameRef != nil {
 		in, out := &in.MediaServicesAccountNameRef, &out.MediaServicesAccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaServicesAccountNameSelector != nil {
 		in, out := &in.MediaServicesAccountNameSelector, &out.MediaServicesAccountNameSelector
@@ -223,7 +223,7 @@ func (in *AssetParameters) DeepCopyInto(out *AssetParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1371,7 +1371,7 @@ func (in *LiveEventOutputParameters) DeepCopyInto(out *LiveEventOutputParameters
 	if in.AssetNameRef != nil {
 		in, out := &in.AssetNameRef, &out.AssetNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AssetNameSelector != nil {
 		in, out := &in.AssetNameSelector, &out.AssetNameSelector
@@ -1396,7 +1396,7 @@ func (in *LiveEventOutputParameters) DeepCopyInto(out *LiveEventOutputParameters
 	if in.LiveEventIDRef != nil {
 		in, out := &in.LiveEventIDRef, &out.LiveEventIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LiveEventIDSelector != nil {
 		in, out := &in.LiveEventIDSelector, &out.LiveEventIDSelector
@@ -1511,7 +1511,7 @@ func (in *LiveEventParameters) DeepCopyInto(out *LiveEventParameters) {
 	if in.MediaServicesAccountNameRef != nil {
 		in, out := &in.MediaServicesAccountNameRef, &out.MediaServicesAccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaServicesAccountNameSelector != nil {
 		in, out := &in.MediaServicesAccountNameSelector, &out.MediaServicesAccountNameSelector
@@ -1533,7 +1533,7 @@ func (in *LiveEventParameters) DeepCopyInto(out *LiveEventParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1995,7 +1995,7 @@ func (in *ServicesAccountParameters) DeepCopyInto(out *ServicesAccountParameters
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2101,7 +2101,7 @@ func (in *StorageAccountParameters) DeepCopyInto(out *StorageAccountParameters) 
 	if in.IDRef != nil {
 		in, out := &in.IDRef, &out.IDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IDSelector != nil {
 		in, out := &in.IDSelector, &out.IDSelector
@@ -2320,7 +2320,7 @@ func (in *StreamingEndpointParameters) DeepCopyInto(out *StreamingEndpointParame
 	if in.MediaServicesAccountNameRef != nil {
 		in, out := &in.MediaServicesAccountNameRef, &out.MediaServicesAccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaServicesAccountNameSelector != nil {
 		in, out := &in.MediaServicesAccountNameSelector, &out.MediaServicesAccountNameSelector
@@ -2335,7 +2335,7 @@ func (in *StreamingEndpointParameters) DeepCopyInto(out *StreamingEndpointParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2503,7 +2503,7 @@ func (in *StreamingLocatorParameters) DeepCopyInto(out *StreamingLocatorParamete
 	if in.AssetNameRef != nil {
 		in, out := &in.AssetNameRef, &out.AssetNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AssetNameSelector != nil {
 		in, out := &in.AssetNameSelector, &out.AssetNameSelector
@@ -2535,7 +2535,7 @@ func (in *StreamingLocatorParameters) DeepCopyInto(out *StreamingLocatorParamete
 	if in.MediaServicesAccountNameRef != nil {
 		in, out := &in.MediaServicesAccountNameRef, &out.MediaServicesAccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaServicesAccountNameSelector != nil {
 		in, out := &in.MediaServicesAccountNameSelector, &out.MediaServicesAccountNameSelector
@@ -2550,7 +2550,7 @@ func (in *StreamingLocatorParameters) DeepCopyInto(out *StreamingLocatorParamete
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2727,7 +2727,7 @@ func (in *StreamingPolicyParameters) DeepCopyInto(out *StreamingPolicyParameters
 	if in.MediaServicesAccountNameRef != nil {
 		in, out := &in.MediaServicesAccountNameRef, &out.MediaServicesAccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaServicesAccountNameSelector != nil {
 		in, out := &in.MediaServicesAccountNameSelector, &out.MediaServicesAccountNameSelector
@@ -2749,7 +2749,7 @@ func (in *StreamingPolicyParameters) DeepCopyInto(out *StreamingPolicyParameters
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -2897,7 +2897,7 @@ func (in *TransformParameters) DeepCopyInto(out *TransformParameters) {
 	if in.MediaServicesAccountNameRef != nil {
 		in, out := &in.MediaServicesAccountNameRef, &out.MediaServicesAccountNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaServicesAccountNameSelector != nil {
 		in, out := &in.MediaServicesAccountNameSelector, &out.MediaServicesAccountNameSelector
@@ -2919,7 +2919,7 @@ func (in *TransformParameters) DeepCopyInto(out *TransformParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector

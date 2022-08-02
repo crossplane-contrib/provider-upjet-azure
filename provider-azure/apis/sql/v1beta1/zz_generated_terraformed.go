@@ -24,17 +24,17 @@ func (tr *MSSQLDatabase) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this MSSQLDatabase
-func (tr *MSSQLDatabase) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLDatabase) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLDatabase
-func (tr *MSSQLDatabase) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLDatabase) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *MSSQLDatabase) GetID() string {
 }
 
 // GetParameters of this MSSQLDatabase
-func (tr *MSSQLDatabase) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLDatabase) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLDatabase
-func (tr *MSSQLDatabase) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLDatabase) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -98,17 +98,17 @@ func (tr *MSSQLFailoverGroup) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this MSSQLFailoverGroup
-func (tr *MSSQLFailoverGroup) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLFailoverGroup) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLFailoverGroup
-func (tr *MSSQLFailoverGroup) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLFailoverGroup) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -125,17 +125,17 @@ func (tr *MSSQLFailoverGroup) GetID() string {
 }
 
 // GetParameters of this MSSQLFailoverGroup
-func (tr *MSSQLFailoverGroup) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLFailoverGroup) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLFailoverGroup
-func (tr *MSSQLFailoverGroup) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLFailoverGroup) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -172,17 +172,17 @@ func (tr *MSSQLManagedDatabase) GetConnectionDetailsMapping() map[string]string 
 }
 
 // GetObservation of this MSSQLManagedDatabase
-func (tr *MSSQLManagedDatabase) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLManagedDatabase) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLManagedDatabase
-func (tr *MSSQLManagedDatabase) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLManagedDatabase) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -199,17 +199,17 @@ func (tr *MSSQLManagedDatabase) GetID() string {
 }
 
 // GetParameters of this MSSQLManagedDatabase
-func (tr *MSSQLManagedDatabase) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLManagedDatabase) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLManagedDatabase
-func (tr *MSSQLManagedDatabase) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLManagedDatabase) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -246,17 +246,17 @@ func (tr *MSSQLManagedInstance) GetConnectionDetailsMapping() map[string]string 
 }
 
 // GetObservation of this MSSQLManagedInstance
-func (tr *MSSQLManagedInstance) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLManagedInstance) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLManagedInstance
-func (tr *MSSQLManagedInstance) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLManagedInstance) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -273,17 +273,17 @@ func (tr *MSSQLManagedInstance) GetID() string {
 }
 
 // GetParameters of this MSSQLManagedInstance
-func (tr *MSSQLManagedInstance) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLManagedInstance) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLManagedInstance
-func (tr *MSSQLManagedInstance) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLManagedInstance) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -320,17 +320,17 @@ func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) GetConnectionDetails
 }
 
 // GetObservation of this MSSQLManagedInstanceActiveDirectoryAdministrator
-func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLManagedInstanceActiveDirectoryAdministrator
-func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -347,17 +347,17 @@ func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) GetID() string {
 }
 
 // GetParameters of this MSSQLManagedInstanceActiveDirectoryAdministrator
-func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLManagedInstanceActiveDirectoryAdministrator
-func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -394,17 +394,17 @@ func (tr *MSSQLManagedInstanceFailoverGroup) GetConnectionDetailsMapping() map[s
 }
 
 // GetObservation of this MSSQLManagedInstanceFailoverGroup
-func (tr *MSSQLManagedInstanceFailoverGroup) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLManagedInstanceFailoverGroup) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLManagedInstanceFailoverGroup
-func (tr *MSSQLManagedInstanceFailoverGroup) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLManagedInstanceFailoverGroup) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -421,17 +421,17 @@ func (tr *MSSQLManagedInstanceFailoverGroup) GetID() string {
 }
 
 // GetParameters of this MSSQLManagedInstanceFailoverGroup
-func (tr *MSSQLManagedInstanceFailoverGroup) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLManagedInstanceFailoverGroup) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLManagedInstanceFailoverGroup
-func (tr *MSSQLManagedInstanceFailoverGroup) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLManagedInstanceFailoverGroup) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -468,17 +468,17 @@ func (tr *MSSQLManagedInstanceVulnerabilityAssessment) GetConnectionDetailsMappi
 }
 
 // GetObservation of this MSSQLManagedInstanceVulnerabilityAssessment
-func (tr *MSSQLManagedInstanceVulnerabilityAssessment) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLManagedInstanceVulnerabilityAssessment) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLManagedInstanceVulnerabilityAssessment
-func (tr *MSSQLManagedInstanceVulnerabilityAssessment) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLManagedInstanceVulnerabilityAssessment) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -495,17 +495,17 @@ func (tr *MSSQLManagedInstanceVulnerabilityAssessment) GetID() string {
 }
 
 // GetParameters of this MSSQLManagedInstanceVulnerabilityAssessment
-func (tr *MSSQLManagedInstanceVulnerabilityAssessment) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLManagedInstanceVulnerabilityAssessment) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLManagedInstanceVulnerabilityAssessment
-func (tr *MSSQLManagedInstanceVulnerabilityAssessment) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLManagedInstanceVulnerabilityAssessment) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -542,17 +542,17 @@ func (tr *MSSQLOutboundFirewallRule) GetConnectionDetailsMapping() map[string]st
 }
 
 // GetObservation of this MSSQLOutboundFirewallRule
-func (tr *MSSQLOutboundFirewallRule) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLOutboundFirewallRule) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLOutboundFirewallRule
-func (tr *MSSQLOutboundFirewallRule) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLOutboundFirewallRule) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -569,17 +569,17 @@ func (tr *MSSQLOutboundFirewallRule) GetID() string {
 }
 
 // GetParameters of this MSSQLOutboundFirewallRule
-func (tr *MSSQLOutboundFirewallRule) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLOutboundFirewallRule) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLOutboundFirewallRule
-func (tr *MSSQLOutboundFirewallRule) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLOutboundFirewallRule) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -616,17 +616,17 @@ func (tr *MSSQLServer) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this MSSQLServer
-func (tr *MSSQLServer) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLServer) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLServer
-func (tr *MSSQLServer) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLServer) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -643,17 +643,17 @@ func (tr *MSSQLServer) GetID() string {
 }
 
 // GetParameters of this MSSQLServer
-func (tr *MSSQLServer) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLServer) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLServer
-func (tr *MSSQLServer) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLServer) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -690,17 +690,17 @@ func (tr *MSSQLServerDNSAlias) GetConnectionDetailsMapping() map[string]string {
 }
 
 // GetObservation of this MSSQLServerDNSAlias
-func (tr *MSSQLServerDNSAlias) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLServerDNSAlias) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLServerDNSAlias
-func (tr *MSSQLServerDNSAlias) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLServerDNSAlias) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -717,17 +717,17 @@ func (tr *MSSQLServerDNSAlias) GetID() string {
 }
 
 // GetParameters of this MSSQLServerDNSAlias
-func (tr *MSSQLServerDNSAlias) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLServerDNSAlias) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLServerDNSAlias
-func (tr *MSSQLServerDNSAlias) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLServerDNSAlias) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -764,17 +764,17 @@ func (tr *MSSQLServerTransparentDataEncryption) GetConnectionDetailsMapping() ma
 }
 
 // GetObservation of this MSSQLServerTransparentDataEncryption
-func (tr *MSSQLServerTransparentDataEncryption) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLServerTransparentDataEncryption) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLServerTransparentDataEncryption
-func (tr *MSSQLServerTransparentDataEncryption) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLServerTransparentDataEncryption) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -791,17 +791,17 @@ func (tr *MSSQLServerTransparentDataEncryption) GetID() string {
 }
 
 // GetParameters of this MSSQLServerTransparentDataEncryption
-func (tr *MSSQLServerTransparentDataEncryption) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLServerTransparentDataEncryption) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLServerTransparentDataEncryption
-func (tr *MSSQLServerTransparentDataEncryption) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLServerTransparentDataEncryption) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -838,17 +838,17 @@ func (tr *MSSQLVirtualNetworkRule) GetConnectionDetailsMapping() map[string]stri
 }
 
 // GetObservation of this MSSQLVirtualNetworkRule
-func (tr *MSSQLVirtualNetworkRule) GetObservation() (map[string]interface{}, error) {
+func (tr *MSSQLVirtualNetworkRule) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this MSSQLVirtualNetworkRule
-func (tr *MSSQLVirtualNetworkRule) SetObservation(obs map[string]interface{}) error {
+func (tr *MSSQLVirtualNetworkRule) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -865,17 +865,17 @@ func (tr *MSSQLVirtualNetworkRule) GetID() string {
 }
 
 // GetParameters of this MSSQLVirtualNetworkRule
-func (tr *MSSQLVirtualNetworkRule) GetParameters() (map[string]interface{}, error) {
+func (tr *MSSQLVirtualNetworkRule) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this MSSQLVirtualNetworkRule
-func (tr *MSSQLVirtualNetworkRule) SetParameters(params map[string]interface{}) error {
+func (tr *MSSQLVirtualNetworkRule) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

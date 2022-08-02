@@ -123,7 +123,7 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -286,7 +286,7 @@ func (in *DataSetBlobStorageParameters) DeepCopyInto(out *DataSetBlobStoragePara
 	if in.ContainerNameRef != nil {
 		in, out := &in.ContainerNameRef, &out.ContainerNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContainerNameSelector != nil {
 		in, out := &in.ContainerNameSelector, &out.ContainerNameSelector
@@ -301,7 +301,7 @@ func (in *DataSetBlobStorageParameters) DeepCopyInto(out *DataSetBlobStoragePara
 	if in.DataShareIDRef != nil {
 		in, out := &in.DataShareIDRef, &out.DataShareIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DataShareIDSelector != nil {
 		in, out := &in.DataShareIDSelector, &out.DataShareIDSelector
@@ -471,7 +471,7 @@ func (in *DataSetDataLakeGen2Parameters) DeepCopyInto(out *DataSetDataLakeGen2Pa
 	if in.FileSystemNameRef != nil {
 		in, out := &in.FileSystemNameRef, &out.FileSystemNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.FileSystemNameSelector != nil {
 		in, out := &in.FileSystemNameSelector, &out.FileSystemNameSelector
@@ -491,7 +491,7 @@ func (in *DataSetDataLakeGen2Parameters) DeepCopyInto(out *DataSetDataLakeGen2Pa
 	if in.ShareIDRef != nil {
 		in, out := &in.ShareIDRef, &out.ShareIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ShareIDSelector != nil {
 		in, out := &in.ShareIDSelector, &out.ShareIDSelector
@@ -506,7 +506,7 @@ func (in *DataSetDataLakeGen2Parameters) DeepCopyInto(out *DataSetDataLakeGen2Pa
 	if in.StorageAccountIDRef != nil {
 		in, out := &in.StorageAccountIDRef, &out.StorageAccountIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageAccountIDSelector != nil {
 		in, out := &in.StorageAccountIDSelector, &out.StorageAccountIDSelector
@@ -659,7 +659,7 @@ func (in *DataSetKustoClusterParameters) DeepCopyInto(out *DataSetKustoClusterPa
 	if in.KustoClusterIDRef != nil {
 		in, out := &in.KustoClusterIDRef, &out.KustoClusterIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KustoClusterIDSelector != nil {
 		in, out := &in.KustoClusterIDSelector, &out.KustoClusterIDSelector
@@ -674,7 +674,7 @@ func (in *DataSetKustoClusterParameters) DeepCopyInto(out *DataSetKustoClusterPa
 	if in.ShareIDRef != nil {
 		in, out := &in.ShareIDRef, &out.ShareIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ShareIDSelector != nil {
 		in, out := &in.ShareIDSelector, &out.ShareIDSelector
@@ -827,7 +827,7 @@ func (in *DataSetKustoDatabaseParameters) DeepCopyInto(out *DataSetKustoDatabase
 	if in.KustoDatabaseIDRef != nil {
 		in, out := &in.KustoDatabaseIDRef, &out.KustoDatabaseIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.KustoDatabaseIDSelector != nil {
 		in, out := &in.KustoDatabaseIDSelector, &out.KustoDatabaseIDSelector
@@ -842,7 +842,7 @@ func (in *DataSetKustoDatabaseParameters) DeepCopyInto(out *DataSetKustoDatabase
 	if in.ShareIDRef != nil {
 		in, out := &in.ShareIDRef, &out.ShareIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ShareIDSelector != nil {
 		in, out := &in.ShareIDSelector, &out.ShareIDSelector
@@ -985,7 +985,7 @@ func (in *DataShareParameters) DeepCopyInto(out *DataShareParameters) {
 	if in.AccountIDRef != nil {
 		in, out := &in.AccountIDRef, &out.AccountIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AccountIDSelector != nil {
 		in, out := &in.AccountIDSelector, &out.AccountIDSelector
@@ -1176,7 +1176,7 @@ func (in *StorageAccountParameters) DeepCopyInto(out *StorageAccountParameters) 
 	if in.NameRef != nil {
 		in, out := &in.NameRef, &out.NameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NameSelector != nil {
 		in, out := &in.NameSelector, &out.NameSelector
@@ -1191,7 +1191,7 @@ func (in *StorageAccountParameters) DeepCopyInto(out *StorageAccountParameters) 
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector

@@ -24,17 +24,17 @@ func (tr *ResourceGroupTemplateDeployment) GetConnectionDetailsMapping() map[str
 }
 
 // GetObservation of this ResourceGroupTemplateDeployment
-func (tr *ResourceGroupTemplateDeployment) GetObservation() (map[string]interface{}, error) {
+func (tr *ResourceGroupTemplateDeployment) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
 // SetObservation for this ResourceGroupTemplateDeployment
-func (tr *ResourceGroupTemplateDeployment) SetObservation(obs map[string]interface{}) error {
+func (tr *ResourceGroupTemplateDeployment) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -51,17 +51,17 @@ func (tr *ResourceGroupTemplateDeployment) GetID() string {
 }
 
 // GetParameters of this ResourceGroupTemplateDeployment
-func (tr *ResourceGroupTemplateDeployment) GetParameters() (map[string]interface{}, error) {
+func (tr *ResourceGroupTemplateDeployment) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
 	}
-	base := map[string]interface{}{}
+	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // SetParameters for this ResourceGroupTemplateDeployment
-func (tr *ResourceGroupTemplateDeployment) SetParameters(params map[string]interface{}) error {
+func (tr *ResourceGroupTemplateDeployment) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err

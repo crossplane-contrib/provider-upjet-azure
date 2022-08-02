@@ -560,7 +560,7 @@ func (in *HPCCacheAccessPolicyParameters) DeepCopyInto(out *HPCCacheAccessPolicy
 	if in.HPCCacheIDRef != nil {
 		in, out := &in.HPCCacheIDRef, &out.HPCCacheIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.HPCCacheIDSelector != nil {
 		in, out := &in.HPCCacheIDSelector, &out.HPCCacheIDSelector
@@ -708,7 +708,7 @@ func (in *HPCCacheBlobNFSTargetParameters) DeepCopyInto(out *HPCCacheBlobNFSTarg
 	if in.CacheNameRef != nil {
 		in, out := &in.CacheNameRef, &out.CacheNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CacheNameSelector != nil {
 		in, out := &in.CacheNameSelector, &out.CacheNameSelector
@@ -728,7 +728,7 @@ func (in *HPCCacheBlobNFSTargetParameters) DeepCopyInto(out *HPCCacheBlobNFSTarg
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -886,7 +886,7 @@ func (in *HPCCacheBlobTargetParameters) DeepCopyInto(out *HPCCacheBlobTargetPara
 	if in.CacheNameRef != nil {
 		in, out := &in.CacheNameRef, &out.CacheNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CacheNameSelector != nil {
 		in, out := &in.CacheNameSelector, &out.CacheNameSelector
@@ -906,7 +906,7 @@ func (in *HPCCacheBlobTargetParameters) DeepCopyInto(out *HPCCacheBlobTargetPara
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -921,7 +921,7 @@ func (in *HPCCacheBlobTargetParameters) DeepCopyInto(out *HPCCacheBlobTargetPara
 	if in.StorageContainerIDRef != nil {
 		in, out := &in.StorageContainerIDRef, &out.StorageContainerIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageContainerIDSelector != nil {
 		in, out := &in.StorageContainerIDSelector, &out.StorageContainerIDSelector
@@ -1096,7 +1096,7 @@ func (in *HPCCacheNFSTargetParameters) DeepCopyInto(out *HPCCacheNFSTargetParame
 	if in.CacheNameRef != nil {
 		in, out := &in.CacheNameRef, &out.CacheNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CacheNameSelector != nil {
 		in, out := &in.CacheNameSelector, &out.CacheNameSelector
@@ -1118,7 +1118,7 @@ func (in *HPCCacheNFSTargetParameters) DeepCopyInto(out *HPCCacheNFSTargetParame
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1278,7 +1278,7 @@ func (in *HPCCacheParameters) DeepCopyInto(out *HPCCacheParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1298,7 +1298,7 @@ func (in *HPCCacheParameters) DeepCopyInto(out *HPCCacheParameters) {
 	if in.SubnetIDRef != nil {
 		in, out := &in.SubnetIDRef, &out.SubnetIDRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetIDSelector != nil {
 		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
