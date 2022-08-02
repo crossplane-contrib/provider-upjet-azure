@@ -22,8 +22,15 @@ type HPCCacheBlobTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
-	// +kubebuilder:validation:Required
-	CacheName *string `json:"cacheName" tf:"cache_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storagecache/v1beta1.HPCCache
+	// +kubebuilder:validation:Optional
+	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CacheNameRef *v1.Reference `json:"cacheNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	NamespacePath *string `json:"namespacePath" tf:"namespace_path,omitempty"`
@@ -38,8 +45,16 @@ type HPCCacheBlobTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	StorageContainerID *string `json:"storageContainerId" tf:"storage_container_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("resourceManagerId",true)
+	// +kubebuilder:validation:Optional
+	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	StorageContainerIDRef *v1.Reference `json:"storageContainerIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	StorageContainerIDSelector *v1.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 }
 
 // HPCCacheBlobTargetSpec defines the desired state of HPCCacheBlobTarget

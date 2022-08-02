@@ -14,27 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package security
+package storagecache
 
 import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure configures security group
+// Configure configures storagesync group
 func Configure(p *config.Provider) {
-	p.AddResourceConfigurator("azurerm_advanced_threat_protection", func(r *config.Resource) {
-		r.UseAsync = false
-		r.Kind = "AdvancedThreatProtection"
-		delete(r.References, "target_resource_id")
-	})
-
-	p.AddResourceConfigurator("azurerm_iot_security_device_group", func(r *config.Resource) {
-		r.UseAsync = false
-		r.Kind = "IOTSecurityDeviceGroup"
-	})
-
-	p.AddResourceConfigurator("azurerm_iot_security_solution", func(r *config.Resource) {
-		r.UseAsync = false
-		r.Kind = "IOTSecuritySolution"
+	p.AddResourceConfigurator("azurerm_hpc_cache_nfs_target", func(r *config.Resource) {
+		delete(r.References, "target_host_name")
 	})
 }

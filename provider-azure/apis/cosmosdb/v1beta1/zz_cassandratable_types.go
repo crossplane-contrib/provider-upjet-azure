@@ -40,10 +40,10 @@ type CassandraTableParameters struct {
 	CassandraKeySpaceID *string `json:"cassandraKeyspaceId,omitempty" tf:"cassandra_keyspace_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	CassandraKeySpaceIDRef *v1.Reference `json:"cassandraKeySpaceIdRef,omitempty" tf:"-"`
+	CassandraKeySpaceIDRef *v1.Reference `json:"cassandraKeyspaceIdRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	CassandraKeySpaceIDSelector *v1.Selector `json:"cassandraKeySpaceIdSelector,omitempty" tf:"-"`
+	CassandraKeySpaceIDSelector *v1.Selector `json:"cassandraKeyspaceIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`

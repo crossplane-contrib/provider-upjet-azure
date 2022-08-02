@@ -9,8 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
-	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
+	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -21,50 +22,14 @@ func (mg *IOTHub) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Endpoint); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Endpoint[i3].ContainerName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.Endpoint[i3].ContainerNameRef,
-			Selector:     mg.Spec.ForProvider.Endpoint[i3].ContainerNameSelector,
-			To: reference.To{
-				List:    &v1beta1.ContainerList{},
-				Managed: &v1beta1.Container{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Endpoint[i3].ContainerName")
-		}
-		mg.Spec.ForProvider.Endpoint[i3].ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Endpoint[i3].ContainerNameRef = rsp.ResolvedReference
-
-	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Endpoint); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Endpoint[i3].ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.Endpoint[i3].ResourceGroupNameRef,
-			Selector:     mg.Spec.ForProvider.Endpoint[i3].ResourceGroupNameSelector,
-			To: reference.To{
-				List:    &v1beta11.ResourceGroupList{},
-				Managed: &v1beta11.ResourceGroup{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Endpoint[i3].ResourceGroupName")
-		}
-		mg.Spec.ForProvider.Endpoint[i3].ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Endpoint[i3].ResourceGroupNameRef = rsp.ResolvedReference
-
-	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -105,8 +70,8 @@ func (mg *IOTHubConsumerGroup) ResolveReferences(ctx context.Context, c client.R
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -131,8 +96,8 @@ func (mg *IOTHubDPS) ResolveReferences(ctx context.Context, c client.Reader) err
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -173,8 +138,8 @@ func (mg *IOTHubDPSCertificate) ResolveReferences(ctx context.Context, c client.
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -194,13 +159,29 @@ func (mg *IOTHubDPSSharedAccessPolicy) ResolveReferences(ctx context.Context, c 
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubDPSName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.IOTHubDPSNameRef,
+		Selector:     mg.Spec.ForProvider.IOTHubDPSNameSelector,
+		To: reference.To{
+			List:    &IOTHubDPSList{},
+			Managed: &IOTHubDPS{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubDPSName")
+	}
+	mg.Spec.ForProvider.IOTHubDPSName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubDPSNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -220,13 +201,29 @@ func (mg *IOTHubEndpointEventHub) ResolveReferences(ctx context.Context, c clien
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.IOTHubIDRef,
+		Selector:     mg.Spec.ForProvider.IOTHubIDSelector,
+		To: reference.To{
+			List:    &IOTHubList{},
+			Managed: &IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubID")
+	}
+	mg.Spec.ForProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -246,13 +243,29 @@ func (mg *IOTHubEndpointServiceBusQueue) ResolveReferences(ctx context.Context, 
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.IOTHubIDRef,
+		Selector:     mg.Spec.ForProvider.IOTHubIDSelector,
+		To: reference.To{
+			List:    &IOTHubList{},
+			Managed: &IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubID")
+	}
+	mg.Spec.ForProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -272,13 +285,29 @@ func (mg *IOTHubEndpointServiceBusTopic) ResolveReferences(ctx context.Context, 
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.IOTHubIDRef,
+		Selector:     mg.Spec.ForProvider.IOTHubIDSelector,
+		To: reference.To{
+			List:    &IOTHubList{},
+			Managed: &IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubID")
+	}
+	mg.Spec.ForProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -303,8 +332,8 @@ func (mg *IOTHubEndpointStorageContainer) ResolveReferences(ctx context.Context,
 		Reference:    mg.Spec.ForProvider.ContainerNameRef,
 		Selector:     mg.Spec.ForProvider.ContainerNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ContainerList{},
-			Managed: &v1beta1.Container{},
+			List:    &v1beta11.ContainerList{},
+			Managed: &v1beta11.Container{},
 		},
 	})
 	if err != nil {
@@ -314,13 +343,29 @@ func (mg *IOTHubEndpointStorageContainer) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.ContainerNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.IOTHubIDRef,
+		Selector:     mg.Spec.ForProvider.IOTHubIDSelector,
+		To: reference.To{
+			List:    &IOTHubList{},
+			Managed: &IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubID")
+	}
+	mg.Spec.ForProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -340,13 +385,29 @@ func (mg *IOTHubEnrichment) ResolveReferences(ctx context.Context, c client.Read
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.IOTHubNameRef,
+		Selector:     mg.Spec.ForProvider.IOTHubNameSelector,
+		To: reference.To{
+			List:    &IOTHubList{},
+			Managed: &IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubName")
+	}
+	mg.Spec.ForProvider.IOTHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -404,8 +465,8 @@ func (mg *IOTHubFallbackRoute) ResolveReferences(ctx context.Context, c client.R
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -425,13 +486,29 @@ func (mg *IOTHubRoute) ResolveReferences(ctx context.Context, c client.Reader) e
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.IOTHubNameRef,
+		Selector:     mg.Spec.ForProvider.IOTHubNameSelector,
+		To: reference.To{
+			List:    &IOTHubList{},
+			Managed: &IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubName")
+	}
+	mg.Spec.ForProvider.IOTHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -451,13 +528,29 @@ func (mg *IOTHubSharedAccessPolicy) ResolveReferences(ctx context.Context, c cli
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.IOTHubNameRef,
+		Selector:     mg.Spec.ForProvider.IOTHubNameSelector,
+		To: reference.To{
+			List:    &IOTHubList{},
+			Managed: &IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubName")
+	}
+	mg.Spec.ForProvider.IOTHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
 		},
 	})
 	if err != nil {

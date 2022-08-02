@@ -19,7 +19,7 @@ type SQLRoleAssignmentObservation struct {
 
 type SQLRoleAssignmentParameters struct {
 
-	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -42,8 +42,16 @@ type SQLRoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// +kubebuilder:validation:Required
-	RoleDefinitionID *string `json:"roleDefinitionId" tf:"role_definition_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.SQLRoleDefinition
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RoleDefinitionIDRef *v1.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Scope *string `json:"scope" tf:"scope,omitempty"`

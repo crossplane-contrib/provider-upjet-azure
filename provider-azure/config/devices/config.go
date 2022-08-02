@@ -43,18 +43,14 @@ func Configure(p *config.Provider) {
 		config.MoveToStatus(r.TerraformResource, "endpoint", "route", "enrichment", "fallback_route")
 
 		r.Kind = "IOTHub"
-		r.References = config.References{
-			"endpoint.container_name": config.Reference{
-				Type: rconfig.ContainerReferencePath,
-			},
+		r.References["endpoint.container_name"] = config.Reference{
+			Type: rconfig.ContainerReferencePath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_consumer_group", func(r *config.Resource) {
-		r.References = config.References{
-			"iothub_name": config.Reference{
-				Type: "IOTHub",
-			},
+		r.References["iothub_name"] = config.Reference{
+			Type: "IOTHub",
 		}
 	})
 
@@ -86,13 +82,11 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_fallback_route", func(r *config.Resource) {
-		r.References = config.References{
-			"iothub_name": config.Reference{
-				Type: "IOTHub",
-			},
-			"endpoint_names": config.Reference{
-				Type: "IOTHubEndpointStorageContainer",
-			},
+		r.References["iothub_name"] = config.Reference{
+			Type: "IOTHub",
+		}
+		r.References["endpoint_names"] = config.Reference{
+			Type: "IOTHubEndpointStorageContainer",
 		}
 	})
 

@@ -2754,6 +2754,16 @@ func (in *DNSAAAARecordParameters) DeepCopyInto(out *DNSAAAARecordParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.TargetResourceIDRef != nil {
+		in, out := &in.TargetResourceIDRef, &out.TargetResourceIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.TargetResourceIDSelector != nil {
+		in, out := &in.TargetResourceIDSelector, &out.TargetResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ZoneName != nil {
 		in, out := &in.ZoneName, &out.ZoneName
 		*out = new(string)
@@ -2952,6 +2962,16 @@ func (in *DNSARecordParameters) DeepCopyInto(out *DNSARecordParameters) {
 		in, out := &in.TargetResourceID, &out.TargetResourceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.TargetResourceIDRef != nil {
+		in, out := &in.TargetResourceIDRef, &out.TargetResourceIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.TargetResourceIDSelector != nil {
+		in, out := &in.TargetResourceIDSelector, &out.TargetResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneName != nil {
 		in, out := &in.ZoneName, &out.ZoneName
@@ -3335,6 +3355,16 @@ func (in *DNSCNAMERecordParameters) DeepCopyInto(out *DNSCNAMERecordParameters) 
 		in, out := &in.TargetResourceID, &out.TargetResourceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.TargetResourceIDRef != nil {
+		in, out := &in.TargetResourceIDRef, &out.TargetResourceIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.TargetResourceIDSelector != nil {
+		in, out := &in.TargetResourceIDSelector, &out.TargetResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneName != nil {
 		in, out := &in.ZoneName, &out.ZoneName
@@ -21733,6 +21763,16 @@ func (in *SubnetNATGatewayAssociationParameters) DeepCopyInto(out *SubnetNATGate
 		*out = new(string)
 		**out = **in
 	}
+	if in.NATGatewayIDRef != nil {
+		in, out := &in.NATGatewayIDRef, &out.NATGatewayIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.NATGatewayIDSelector != nil {
+		in, out := &in.NATGatewayIDSelector, &out.NATGatewayIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
@@ -22790,6 +22830,16 @@ func (in *TrafficAnalyticsParameters) DeepCopyInto(out *TrafficAnalyticsParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.WorkspaceIDRef != nil {
+		in, out := &in.WorkspaceIDRef, &out.WorkspaceIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.WorkspaceIDSelector != nil {
+		in, out := &in.WorkspaceIDSelector, &out.WorkspaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.WorkspaceRegion != nil {
 		in, out := &in.WorkspaceRegion, &out.WorkspaceRegion
 		*out = new(string)
@@ -22799,6 +22849,16 @@ func (in *TrafficAnalyticsParameters) DeepCopyInto(out *TrafficAnalyticsParamete
 		in, out := &in.WorkspaceResourceID, &out.WorkspaceResourceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.WorkspaceResourceIDRef != nil {
+		in, out := &in.WorkspaceResourceIDRef, &out.WorkspaceResourceIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.WorkspaceResourceIDSelector != nil {
+		in, out := &in.WorkspaceResourceIDSelector, &out.WorkspaceResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -24266,6 +24326,16 @@ func (in *VirtualNetworkGatewayConnectionParameters) DeepCopyInto(out *VirtualNe
 		*out = new(string)
 		**out = **in
 	}
+	if in.LocalNetworkGatewayIDRef != nil {
+		in, out := &in.LocalNetworkGatewayIDRef, &out.LocalNetworkGatewayIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.LocalNetworkGatewayIDSelector != nil {
+		in, out := &in.LocalNetworkGatewayIDSelector, &out.LocalNetworkGatewayIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -24436,6 +24506,16 @@ func (in *VirtualNetworkGatewayIPConfigurationParameters) DeepCopyInto(out *Virt
 		in, out := &in.PublicIPAddressID, &out.PublicIPAddressID
 		*out = new(string)
 		**out = **in
+	}
+	if in.PublicIPAddressIDRef != nil {
+		in, out := &in.PublicIPAddressIDRef, &out.PublicIPAddressIDRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.PublicIPAddressIDSelector != nil {
+		in, out := &in.PublicIPAddressIDSelector, &out.PublicIPAddressIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID

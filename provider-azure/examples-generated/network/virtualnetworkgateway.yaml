@@ -9,7 +9,8 @@ spec:
     ipConfiguration:
     - name: vnetGatewayConfig
       privateIpAddressAllocation: Dynamic
-      publicIpAddressId: ${azurerm_public_ip.example.id}
+      publicIpAddressIdRef:
+        name: example
       subnetIdRef:
         name: example
     location: West Europe

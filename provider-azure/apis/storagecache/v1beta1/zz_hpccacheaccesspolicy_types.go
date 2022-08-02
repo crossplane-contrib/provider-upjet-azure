@@ -52,8 +52,16 @@ type HPCCacheAccessPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	AccessRule []HPCCacheAccessPolicyAccessRuleParameters `json:"accessRule" tf:"access_rule,omitempty"`
 
-	// +kubebuilder:validation:Required
-	HPCCacheID *string `json:"hpcCacheId" tf:"hpc_cache_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	HPCCacheID *string `json:"hpcCacheId,omitempty" tf:"hpc_cache_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	HPCCacheIDRef *v1.Reference `json:"hpcCacheIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	HPCCacheIDSelector *v1.Selector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
 }
 
 // HPCCacheAccessPolicySpec defines the desired state of HPCCacheAccessPolicy

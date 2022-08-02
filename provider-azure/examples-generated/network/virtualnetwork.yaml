@@ -12,11 +12,5 @@ spec:
     location: West Europe
     resourceGroupNameRef:
       name: example
-    subnet:
-    - addressPrefix: 10.0.1.0/24
-      name: subnet1
-    - addressPrefix: 10.0.2.0/24
-      name: subnet2
-      securityGroup: ${azurerm_network_security_group.example.id}
     tags:
       environment: Production

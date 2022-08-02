@@ -85,8 +85,16 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SourceURIRef *v1.Reference `json:"sourceUriRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	SourceURISelector *v1.Selector `json:"sourceUriSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

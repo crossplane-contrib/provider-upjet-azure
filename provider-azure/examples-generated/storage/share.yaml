@@ -11,4 +11,5 @@ spec:
         start: "2019-07-02T09:38:21.0000000Z"
       id: MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI
     quota: 50
-    storageAccountName: ${azurerm_storage_account.example.name}
+    storageAccountNameRef:
+      name: example

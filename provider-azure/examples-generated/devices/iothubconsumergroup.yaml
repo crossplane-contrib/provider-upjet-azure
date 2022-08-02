@@ -5,7 +5,7 @@ metadata:
 spec:
   forProvider:
     eventhubEndpointName: events
-    iotHubNameRef:
+    iothubNameRef:
       name: example
     resourceGroupNameRef:
       name: example

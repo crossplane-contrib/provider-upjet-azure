@@ -9,5 +9,6 @@ spec:
     principalId: ${data.azurerm_client_config.current.object_id}
     resourceGroupNameRef:
       name: example
-    roleDefinitionId: ${azurerm_cosmosdb_sql_role_definition.example.id}
+    roleDefinitionIdRef:
+      name: example
     scope: /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}

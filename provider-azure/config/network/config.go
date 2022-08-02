@@ -147,6 +147,7 @@ func Configure(p *config.Provider) {
 			Type:      rconfig.APISPackagePath + "/storage/v1beta1.Account",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		delete(r.References, "traffic_analytics.workspace_region")
 	})
 
 	p.AddResourceConfigurator("azurerm_network_connection_monitor", func(r *config.Resource) {

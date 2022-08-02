@@ -30,21 +30,17 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub", func(r *config.Resource) {
-		r.References = config.References{
-			"namespace_name": config.Reference{
-				Type: "EventHubNamespace",
-			},
+		r.References["namespace_name"] = config.Reference{
+			Type: "EventHubNamespace",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub_consumer_group", func(r *config.Resource) {
-		r.References = config.References{
-			"namespace_name": config.Reference{
-				Type: "EventHubNamespace",
-			},
-			"eventhub_name": config.Reference{
-				Type: "EventHub",
-			},
+		r.References["namespace_name"] = config.Reference{
+			Type: "EventHubNamespace",
+		}
+		r.References["eventhub_name"] = config.Reference{
+			Type: "EventHub",
 		}
 	})
 

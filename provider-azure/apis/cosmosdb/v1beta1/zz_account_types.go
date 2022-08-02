@@ -265,10 +265,10 @@ type RestoreParameters struct {
 	SourceCosmosDBAccountID *string `json:"sourceCosmosdbAccountId,omitempty" tf:"source_cosmosdb_account_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	SourceCosmosDBAccountIDRef *v1.Reference `json:"sourceCosmosDbAccountIdRef,omitempty" tf:"-"`
+	SourceCosmosDBAccountIDRef *v1.Reference `json:"sourceCosmosdbAccountIdRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
-	SourceCosmosDBAccountIDSelector *v1.Selector `json:"sourceCosmosDbAccountIdSelector,omitempty" tf:"-"`
+	SourceCosmosDBAccountIDSelector *v1.Selector `json:"sourceCosmosdbAccountIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkRuleObservation struct {

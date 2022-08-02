@@ -29,7 +29,7 @@ type VirtualNetworkRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/dbformariadb/v1beta1.Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
@@ -40,7 +40,7 @@ type VirtualNetworkRuleParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

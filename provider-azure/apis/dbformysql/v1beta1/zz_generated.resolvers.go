@@ -12,6 +12,7 @@ import (
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
 	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -150,7 +151,7 @@ func (mg *FlexibleServer) ResolveReferences(ctx context.Context, c client.Reader
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedSubnetID),
-		Extract:      rconfig.ExtractResourceID(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.DelegatedSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.DelegatedSubnetIDSelector,
 		To: reference.To{
@@ -350,7 +351,7 @@ func (mg *VirtualNetworkRule) ResolveReferences(ctx context.Context, c client.Re
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
-		Extract:      rconfig.ExtractResourceID(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.SubnetIDRef,
 		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{

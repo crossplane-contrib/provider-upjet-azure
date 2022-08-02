@@ -44,4 +44,5 @@ spec:
         - container2/prefix1
         - container2/prefix2
       name: rule2
-    storageAccountId: ${azurerm_storage_account.example.id}
+    storageAccountIdRef:
+      name: example

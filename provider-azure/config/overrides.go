@@ -62,7 +62,10 @@ func extractMicrosoftServiceName(r *tjconfig.Resource) string {
 // default api-group & kind configuration for all resources
 func groupKindOverride(r *tjconfig.Resource) {
 	g := extractMicrosoftServiceName(r)
-	apiGroup, ok := apiGroupMap[r.Name]
+	if apiGroup, ok := apiGroupOverrides[g]; ok {
+		g = apiGroup
+	}
+	apiGroup, ok := resourceAPIGroupMap[r.Name]
 	if !ok {
 		if g == "" {
 			return

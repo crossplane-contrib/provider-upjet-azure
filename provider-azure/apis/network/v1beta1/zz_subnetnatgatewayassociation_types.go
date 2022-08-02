@@ -19,8 +19,16 @@ type SubnetNATGatewayAssociationObservation struct {
 
 type SubnetNATGatewayAssociationParameters struct {
 
-	// +kubebuilder:validation:Required
-	NATGatewayID *string `json:"natGatewayId" tf:"nat_gateway_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.NATGateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()

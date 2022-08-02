@@ -22,11 +22,19 @@ type CassandraDatacenterParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZonesEnabled *bool `json:"availabilityZonesEnabled,omitempty" tf:"availability_zones_enabled,omitempty"`
 
-	// +kubebuilder:validation:Required
-	CassandraClusterID *string `json:"cassandraClusterId" tf:"cassandra_cluster_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.CassandraCluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	CassandraClusterID *string `json:"cassandraClusterId,omitempty" tf:"cassandra_cluster_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CassandraClusterIDRef *v1.Reference `json:"cassandraClusterIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	CassandraClusterIDSelector *v1.Selector `json:"cassandraClusterIdSelector,omitempty" tf:"-"`
 
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
 

@@ -12,6 +12,7 @@ import (
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
 	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -69,7 +70,7 @@ func (mg *CassandraCluster) ResolveReferences(ctx context.Context, c client.Read
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedManagementSubnetID),
-		Extract:      rconfig.ExtractResourceID(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.DelegatedManagementSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.DelegatedManagementSubnetIDSelector,
 		To: reference.To{
@@ -110,8 +111,24 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CassandraClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.CassandraClusterIDRef,
+		Selector:     mg.Spec.ForProvider.CassandraClusterIDSelector,
+		To: reference.To{
+			List:    &CassandraClusterList{},
+			Managed: &CassandraCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CassandraClusterID")
+	}
+	mg.Spec.ForProvider.CassandraClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CassandraClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DelegatedManagementSubnetID),
-		Extract:      rconfig.ExtractResourceID(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.DelegatedManagementSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.DelegatedManagementSubnetIDSelector,
 		To: reference.To{
@@ -602,6 +619,22 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleDefinitionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RoleDefinitionIDRef,
+		Selector:     mg.Spec.ForProvider.RoleDefinitionIDSelector,
+		To: reference.To{
+			List:    &SQLRoleDefinitionList{},
+			Managed: &SQLRoleDefinition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RoleDefinitionID")
+	}
+	mg.Spec.ForProvider.RoleDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RoleDefinitionIDRef = rsp.ResolvedReference
 
 	return nil
 }

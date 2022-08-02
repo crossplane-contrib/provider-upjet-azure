@@ -19,8 +19,15 @@ type HPCCacheNFSTargetObservation struct {
 
 type HPCCacheNFSTargetParameters struct {
 
-	// +kubebuilder:validation:Required
-	CacheName *string `json:"cacheName" tf:"cache_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storagecache/v1beta1.HPCCache
+	// +kubebuilder:validation:Optional
+	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CacheNameRef *v1.Reference `json:"cacheNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	NamespaceJunction []NamespaceJunctionParameters `json:"namespaceJunction" tf:"namespace_junction,omitempty"`

@@ -6,7 +6,8 @@ spec:
   forProvider:
     endpointNames:
     - ${azurerm_iothub_endpoint_storage_container.example.name}
-    iothubName: ${azurerm_iothub.example.name}
+    iothubNameRef:
+      name: example
     key: example
     resourceGroupNameRef:
       name: example

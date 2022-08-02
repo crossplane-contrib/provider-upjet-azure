@@ -30,8 +30,16 @@ type DiskEncryptionSetParameters struct {
 	// +kubebuilder:validation:Required
 	Identity []IdentityParameters `json:"identity" tf:"identity,omitempty"`
 
-	// +kubebuilder:validation:Required
-	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`

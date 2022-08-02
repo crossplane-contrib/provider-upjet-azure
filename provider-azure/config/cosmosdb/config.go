@@ -24,6 +24,9 @@ import (
 
 // Configure configures cosmodb group
 func Configure(p *config.Provider) {
+	p.AddResourceConfigurator("azurerm_cosmosdb_account", func(r *config.Resource) {
+		delete(r.References, "geo_location.location")
+	})
 	p.AddResourceConfigurator("azurerm_cosmosdb_sql_container", func(r *config.Resource) {
 		r.References["database_name"] = config.Reference{
 			Type: "SQLDatabase",
@@ -37,6 +40,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_cassandra_table", func(r *config.Resource) {
+		delete(r.References, "cassandra_keyspace_id")
 		r.References["cassandra_keyspace_id"] = config.Reference{
 			Type:      "CassandraKeySpace",
 			Extractor: rconfig.ExtractResourceIDFuncPath,

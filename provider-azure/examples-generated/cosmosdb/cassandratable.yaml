@@ -4,7 +4,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    cassandraKeySpaceIdRef:
+    cassandraKeyspaceIdRef:
       name: example
     schema:
     - column:

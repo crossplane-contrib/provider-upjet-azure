@@ -67,5 +67,6 @@ func Configure(p *config.Provider) {
 			Type:      "Snapshot",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		delete(r.References, "data_protection_replication.remote_volume_location")
 	})
 }

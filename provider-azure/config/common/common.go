@@ -63,6 +63,7 @@ var referenceRules = []refSpecification{
 // AddCommonReferences adds some common reference fields.
 // This is a part of resource generation pipeline.
 func AddCommonReferences(r *tjconfig.Resource) error {
+	delete(r.References, "location")
 	return addCommonReferences(r.References, r.TerraformResource, r.ShortGroup, r.Version, []string{})
 }
 

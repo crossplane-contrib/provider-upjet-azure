@@ -7,4 +7,5 @@ spec:
     accessRule:
     - access: rw
       scope: default
-    hpcCacheId: ${azurerm_hpc_cache.example.id}
+    hpcCacheIdRef:
+      name: example

@@ -84,7 +84,7 @@ spec:
                     type: object
                   iotDpsName:
                     type: string
-                  iotdpsNameRef:
+                  iotDpsNameRef:
                     description: A Reference to a named object.
                     properties:
                       name:
@@ -93,7 +93,7 @@ spec:
                     required:
                     - name
                     type: object
-                  iotdpsNameSelector:
+                  iotDpsNameSelector:
                     description: A Selector selects an object.
                     properties:
                       matchControllerRef:

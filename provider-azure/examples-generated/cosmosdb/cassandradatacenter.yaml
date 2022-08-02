@@ -5,7 +5,8 @@ metadata:
 spec:
   forProvider:
     availabilityZonesEnabled: false
-    cassandraClusterId: ${azurerm_cosmosdb_cassandra_cluster.example.id}
+    cassandraClusterIdRef:
+      name: example
     delegatedManagementSubnetIdRef:
       name: example
     diskCount: 4

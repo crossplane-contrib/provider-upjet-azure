@@ -25,14 +25,30 @@ type ObjectReplicationObservation struct {
 
 type ObjectReplicationParameters struct {
 
-	// +kubebuilder:validation:Required
-	DestinationStorageAccountID *string `json:"destinationStorageAccountId" tf:"destination_storage_account_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	DestinationStorageAccountID *string `json:"destinationStorageAccountId,omitempty" tf:"destination_storage_account_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DestinationStorageAccountIDRef *v1.Reference `json:"destinationStorageAccountIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DestinationStorageAccountIDSelector *v1.Selector `json:"destinationStorageAccountIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Required
 	Rules []ObjectReplicationRulesParameters `json:"rules" tf:"rules,omitempty"`
 
-	// +kubebuilder:validation:Required
-	SourceStorageAccountID *string `json:"sourceStorageAccountId" tf:"source_storage_account_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SourceStorageAccountIDRef *v1.Reference `json:"sourceStorageAccountIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	SourceStorageAccountIDSelector *v1.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type ObjectReplicationRulesObservation struct {
@@ -44,14 +60,28 @@ type ObjectReplicationRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
 
-	// +kubebuilder:validation:Required
-	DestinationContainerName *string `json:"destinationContainerName" tf:"destination_container_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
+	// +kubebuilder:validation:Optional
+	DestinationContainerName *string `json:"destinationContainerName,omitempty" tf:"destination_container_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DestinationContainerNameRef *v1.Reference `json:"destinationContainerNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	DestinationContainerNameSelector *v1.Selector `json:"destinationContainerNameSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	FilterOutBlobsWithPrefix []*string `json:"filterOutBlobsWithPrefix,omitempty" tf:"filter_out_blobs_with_prefix,omitempty"`
 
-	// +kubebuilder:validation:Required
-	SourceContainerName *string `json:"sourceContainerName" tf:"source_container_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
+	// +kubebuilder:validation:Optional
+	SourceContainerName *string `json:"sourceContainerName,omitempty" tf:"source_container_name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SourceContainerNameRef *v1.Reference `json:"sourceContainerNameRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	SourceContainerNameSelector *v1.Selector `json:"sourceContainerNameSelector,omitempty" tf:"-"`
 }
 
 // ObjectReplicationSpec defines the desired state of ObjectReplication

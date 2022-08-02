@@ -4,7 +4,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    localNetworkGatewayId: ${azurerm_local_network_gateway.onpremise.id}
+    localNetworkGatewayIdRef:
+      name: example
     location: West Europe
     resourceGroupNameRef:
       name: example

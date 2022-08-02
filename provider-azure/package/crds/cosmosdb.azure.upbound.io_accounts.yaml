@@ -251,7 +251,9 @@ spec:
                           type: array
                         restoreTimestampInUtc:
                           type: string
-                        sourceCosmosDbAccountIdRef:
+                        sourceCosmosdbAccountId:
+                          type: string
+                        sourceCosmosdbAccountIdRef:
                           description: A Reference to a named object.
                           properties:
                             name:
@@ -260,7 +262,7 @@ spec:
                           required:
                           - name
                           type: object
-                        sourceCosmosDbAccountIdSelector:
+                        sourceCosmosdbAccountIdSelector:
                           description: A Selector selects an object.
                           properties:
                             matchControllerRef:
@@ -275,8 +277,6 @@ spec:
                                 labels is selected.
                               type: object
                           type: object
-                        sourceCosmosdbAccountId:
-                          type: string
                       required:
                       - restoreTimestampInUtc
                       type: object

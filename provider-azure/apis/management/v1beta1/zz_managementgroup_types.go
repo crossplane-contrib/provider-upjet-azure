@@ -22,8 +22,16 @@ type ManagementGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ParentManagementGroupID *string `json:"parentManagementGroupId,omitempty" tf:"parent_management_group_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ParentManagementGroupIDRef *v1.Reference `json:"parentManagementGroupIdRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	ParentManagementGroupIDSelector *v1.Selector `json:"parentManagementGroupIdSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
