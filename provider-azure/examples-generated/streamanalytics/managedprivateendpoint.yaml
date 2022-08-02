@@ -6,6 +6,8 @@ spec:
   forProvider:
     resourceGroupNameRef:
       name: example
-    streamAnalyticsClusterName: ${azurerm_stream_analytics_cluster.example.name}
+    streamAnalyticsClusterNameRef:
+      name: example
     subresourceName: blob
-    targetResourceId: ${azurerm_storage_account.example.id}
+    targetResourceIdRef:
+      name: example

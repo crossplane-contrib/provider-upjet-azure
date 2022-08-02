@@ -109,7 +109,7 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -563,7 +563,7 @@ func (in *JobParameters) DeepCopyInto(out *JobParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -741,7 +741,7 @@ func (in *ManagedPrivateEndpointParameters) DeepCopyInto(out *ManagedPrivateEndp
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -753,6 +753,16 @@ func (in *ManagedPrivateEndpointParameters) DeepCopyInto(out *ManagedPrivateEndp
 		*out = new(string)
 		**out = **in
 	}
+	if in.StreamAnalyticsClusterNameRef != nil {
+		in, out := &in.StreamAnalyticsClusterNameRef, &out.StreamAnalyticsClusterNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StreamAnalyticsClusterNameSelector != nil {
+		in, out := &in.StreamAnalyticsClusterNameSelector, &out.StreamAnalyticsClusterNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubresourceName != nil {
 		in, out := &in.SubresourceName, &out.SubresourceName
 		*out = new(string)
@@ -762,6 +772,16 @@ func (in *ManagedPrivateEndpointParameters) DeepCopyInto(out *ManagedPrivateEndp
 		in, out := &in.TargetResourceID, &out.TargetResourceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.TargetResourceIDRef != nil {
+		in, out := &in.TargetResourceIDRef, &out.TargetResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetResourceIDSelector != nil {
+		in, out := &in.TargetResourceIDSelector, &out.TargetResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -919,7 +939,7 @@ func (in *OutputBlobParameters) DeepCopyInto(out *OutputBlobParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -939,10 +959,30 @@ func (in *OutputBlobParameters) DeepCopyInto(out *OutputBlobParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.StorageAccountNameRef != nil {
+		in, out := &in.StorageAccountNameRef, &out.StorageAccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageAccountNameSelector != nil {
+		in, out := &in.StorageAccountNameSelector, &out.StorageAccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageContainerName != nil {
 		in, out := &in.StorageContainerName, &out.StorageContainerName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StorageContainerNameRef != nil {
+		in, out := &in.StorageContainerNameRef, &out.StorageContainerNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageContainerNameSelector != nil {
+		in, out := &in.StorageContainerNameSelector, &out.StorageContainerNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StreamAnalyticsJobName != nil {
 		in, out := &in.StreamAnalyticsJobName, &out.StreamAnalyticsJobName
@@ -1111,7 +1151,7 @@ func (in *OutputFunctionParameters) DeepCopyInto(out *OutputFunctionParameters) 
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1122,6 +1162,16 @@ func (in *OutputFunctionParameters) DeepCopyInto(out *OutputFunctionParameters) 
 		in, out := &in.StreamAnalyticsJobName, &out.StreamAnalyticsJobName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StreamAnalyticsJobNameRef != nil {
+		in, out := &in.StreamAnalyticsJobNameRef, &out.StreamAnalyticsJobNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StreamAnalyticsJobNameSelector != nil {
+		in, out := &in.StreamAnalyticsJobNameSelector, &out.StreamAnalyticsJobNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1300,7 +1350,7 @@ func (in *OutputSynapseParameters) DeepCopyInto(out *OutputSynapseParameters) {
 	if in.ResourceGroupNameRef != nil {
 		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
 		*out = new(v1.Reference)
-		**out = **in
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ResourceGroupNameSelector != nil {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
@@ -1316,6 +1366,16 @@ func (in *OutputSynapseParameters) DeepCopyInto(out *OutputSynapseParameters) {
 		in, out := &in.StreamAnalyticsJobName, &out.StreamAnalyticsJobName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StreamAnalyticsJobNameRef != nil {
+		in, out := &in.StreamAnalyticsJobNameRef, &out.StreamAnalyticsJobNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StreamAnalyticsJobNameSelector != nil {
+		in, out := &in.StreamAnalyticsJobNameSelector, &out.StreamAnalyticsJobNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Table != nil {
 		in, out := &in.Table, &out.Table
