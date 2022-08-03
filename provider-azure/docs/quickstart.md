@@ -1,6 +1,6 @@
 The Upbound Azure Provider is the officially supported provider for the Microsoft Azure Cloud.
 
-View the [Azure Provider Documentation]("provider") for details and configuration options. 
+View the [Azure Provider Documentation](configuration) for details and configuration options. 
 
 ## Quickstart
 This guide walks through the process to create an Upbound managed control plane and install the Azure official provider.
@@ -35,7 +35,7 @@ Authentication to an Upbound managed control plane requires a unique user authen
 
 Generate a user token through the [Upbound Universal Console](https://cloud.upbound.io/).
 
-![Create an API Token](/images/upbound/create-api-token.gif)
+![Create an API Token](images/create-api-token.gif)
 
 To generate a user token in the Upbound Universal Console:
 *<!-- vale Microsoft.FirstPerson = NO -->*
