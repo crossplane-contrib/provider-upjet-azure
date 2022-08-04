@@ -35,7 +35,7 @@ NAME             INSTALLED   HEALTHY   PACKAGE                                  
 provider-azure   True        True      xpkg.upbound.io/upbound/provider-azure:v0.5.1   11m
 ```
 
-View the [Provider CRD definition](https://doc.crds.dev/github.com/crossplane-contrib/provider-jet-azure@v0.11.0) to view all available `Provider` options.
+View the [Provider CRD definition](https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/Provider/v1) to view all available `Provider` options.
 
 ## Configure the provider
 The Azure provider requires credentials for authentication to Azure Cloud. The Azure provider consumes the credentials from a Kubernetes secret object.
