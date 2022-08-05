@@ -1,6 +1,8 @@
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: DedicatedHost
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,3 +10,18 @@ spec:
     location: West Europe
     platformFaultDomain: 1
     skuName: DSv3-Type1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

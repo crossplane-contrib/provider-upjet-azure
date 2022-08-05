@@ -1,12 +1,52 @@
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: ActiveDirectoryAdministrator
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     objectId: ${data.azurerm_client_config.current.object_id}
-    resourceGroupNameRef:
-      name: example
-    serverNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: Server
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    version: "9.6"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

@@ -3374,7 +3374,7 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.TrafficAnalytics); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TrafficAnalytics[i3].WorkspaceID),
-			Extract:      resource.ExtractParamPath("workspaceId", true),
+			Extract:      resource.ExtractParamPath("workspace_id", true),
 			Reference:    mg.Spec.ForProvider.TrafficAnalytics[i3].WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.TrafficAnalytics[i3].WorkspaceIDSelector,
 			To: reference.To{

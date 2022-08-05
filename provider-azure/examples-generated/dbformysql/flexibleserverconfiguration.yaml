@@ -1,11 +1,51 @@
 apiVersion: dbformysql.azure.upbound.io/v1beta1
 kind: FlexibleServerConfiguration
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    resourceGroupNameRef:
-      name: example
-    serverNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     value: "600"
+
+---
+
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: FlexibleServer
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: adminTerraform
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: ${azurerm_resource_group.test.location}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    skuName: GP_Standard_D2ds_v4
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

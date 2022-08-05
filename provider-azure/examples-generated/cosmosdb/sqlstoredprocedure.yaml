@@ -1,16 +1,64 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLStoredProcedure
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    accountNameRef:
-      name: example
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     body: "  \tfunction () { var context = getContext(); var response = context.getResponse();
       response.setBody('Hello, World'); }\n"
-    containerNameRef:
-      name: example
-    databaseNameRef:
-      name: example
-    resourceGroupNameRef:
-      name: example
+    containerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: SQLContainer
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionKeyPath: /id
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: SQLDatabase
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    throughput: 400
+
+---
+

@@ -1,14 +1,49 @@
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     keyPermissions:
     - Get
-    keyVaultIdRef:
-      name: example
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     objectId: ${data.azurerm_client_config.current.object_id}
     secretPermissions:
     - Get
     tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

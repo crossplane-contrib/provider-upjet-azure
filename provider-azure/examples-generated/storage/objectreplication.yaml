@@ -1,15 +1,118 @@
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: ObjectReplication
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    destinationStorageAccountIdRef:
-      name: example
+    destinationStorageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dst
     rules:
-    - destinationContainerNameRef:
-        name: example
-      sourceContainerNameRef:
-        name: example
-    sourceStorageAccountIdRef:
-      name: example
+    - destinationContainerNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: dst
+      sourceContainerNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: src
+    sourceStorageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: src
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: dst
+  name: dst
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: src
+  name: src
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: dst
+  name: dst
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    blobProperties:
+    - changeFeedEnabled: true
+      versioningEnabled: true
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: src
+  name: src
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    blobProperties:
+    - changeFeedEnabled: true
+      versioningEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  labels:
+    testing.upbound.io/example-name: dst
+  name: dst
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  labels:
+    testing.upbound.io/example-name: src
+  name: src
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

@@ -1,16 +1,57 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLRoleDefinition
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    accountNameRef:
-      name: example
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     assignableScopes:
     - /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}/dbs/sales
     permissions:
     - dataActions:
       - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     roleDefinitionId: 84cf3a8b-4122-4448-bce2-fa423cfe0a15
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: Strong
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

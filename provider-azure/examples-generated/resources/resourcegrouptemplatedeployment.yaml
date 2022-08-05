@@ -1,6 +1,8 @@
 apiVersion: resources.azure.upbound.io/v1beta1
 kind: ResourceGroupTemplateDeployment
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -11,8 +13,9 @@ spec:
             value = local.vnet_name
           }
         })}
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     templateContent: |
       {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
@@ -48,3 +51,6 @@ spec:
             }
           }
       }
+
+---
+

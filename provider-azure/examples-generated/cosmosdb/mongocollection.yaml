@@ -1,19 +1,44 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: MongoCollection
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    accountNameRef:
-      name: example
-    databaseNameRef:
-      name: example
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     defaultTtlSeconds: "777"
     index:
     - keys:
       - _id
       unique: true
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
     shardKey: uniqueKey
     throughput: 400
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: MongoDatabase
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+
+---
+

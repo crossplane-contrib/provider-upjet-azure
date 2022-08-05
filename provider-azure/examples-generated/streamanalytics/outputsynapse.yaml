@@ -1,6 +1,8 @@
 apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: OutputSynapse
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,11 +10,61 @@ spec:
     passwordSecretRef:
       key: attribute.sql_administrator_login_password
       name: example-synapse-workspace
-      namespace: crossplane-system
-    resourceGroupNameRef:
-      name: example
+      namespace: upbound-system
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     server: ${azurerm_synapse_workspace.test.connectivity_endpoints["sqlOnDemand"]}
-    streamAnalyticsJobNameRef:
-      name: example
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     table: ExampleTable
     user: ${azurerm_synapse_workspace.test.sql_administrator_login}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: "true"
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

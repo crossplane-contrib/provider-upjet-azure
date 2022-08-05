@@ -1,13 +1,17 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: FrontdoorRulesEngine
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: example_rules_engine
+  name: example-rules-engine
 spec:
   forProvider:
-    frontdoorNameRef:
-      name: example
-    resourceGroupNameRef:
-      name: example
+    frontdoorNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     rule:
     - action:
       - responseHeader:
@@ -32,3 +36,6 @@ spec:
         variable: RequestMethod
       name: overwriteorigin
       priority: 2
+
+---
+

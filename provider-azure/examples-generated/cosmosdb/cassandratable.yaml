@@ -1,11 +1,14 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: CassandraTable
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    cassandraKeyspaceIdRef:
-      name: example
+    cassandraKeyspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     schema:
     - column:
       - name: test1
@@ -14,3 +17,59 @@ spec:
         type: int
       partitionKey:
       - name: test1
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capabilities:
+    - name: EnableCassandra
+    consistencyPolicy:
+    - consistencyLevel: Strong
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: CassandraKeySpace
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    throughput: 400
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

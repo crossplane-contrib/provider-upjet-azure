@@ -1,7 +1,9 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: Account
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: db
+  name: db
 spec:
   forProvider:
     capabilities:
@@ -22,5 +24,21 @@ spec:
     kind: MongoDB
     location: West Europe
     offerType: Standard
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: ${var.resource_group_location}
+
+---
+

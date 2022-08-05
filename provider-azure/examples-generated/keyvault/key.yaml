@@ -1,7 +1,9 @@
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Key
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: generated
+  name: generated
 spec:
   forProvider:
     keyOpts:
@@ -13,5 +15,39 @@ spec:
     - wrapKey
     keySize: 2048
     keyType: RSA
-    keyVaultIdRef:
-      name: example
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    softDeleteRetentionDays: 7
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

@@ -1,8 +1,13 @@
 apiVersion: azure.upbound.io/v1beta1
 kind: Subscription
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     billingScopeId: ${data.azurerm_billing_enrollment_account_scope.example.id}
     subscriptionName: My Example EA Subscription
+
+---
+

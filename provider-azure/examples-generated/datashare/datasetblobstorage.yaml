@@ -1,17 +1,102 @@
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: DataSetBlobStorage
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    containerNameRef:
-      name: example
-    dataShareIdRef:
-      name: example
+    containerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dataShareIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     filePath: myfile.txt
     storageAccount:
-    - nameRef:
-        name: example
-      resourceGroupNameRef:
-        name: example
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      resourceGroupNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
       subscriptionId: 00000000-0000-0000-0000-000000000000
+
+---
+
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: DataShare
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    kind: CopyBased
+
+---
+
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: RAGRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAccessType: container
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

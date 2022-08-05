@@ -1,13 +1,17 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLContainer
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    accountNameRef:
-      name: example
-    databaseNameRef:
-      name: example
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     indexingPolicy:
     - excludedPath:
       - path: /excluded/?
@@ -17,10 +21,14 @@ spec:
       indexingMode: Consistent
     partitionKeyPath: /definition/id
     partitionKeyVersion: 1
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     throughput: 400
     uniqueKey:
     - paths:
       - /definition/idlong
       - /definition/idshort
+
+---
+

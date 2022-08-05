@@ -1,6 +1,8 @@
 apiVersion: insights.azure.upbound.io/v1beta1
 kind: MonitorActionGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -46,8 +48,9 @@ spec:
       name: logicappaction
       resourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-logicapp/providers/Microsoft.Logic/workflows/logicapp
       useCommonAlertSchema: true
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     shortName: p0action
     smsReceiver:
     - countryCode: "1"
@@ -61,3 +64,18 @@ spec:
     - name: callmyapiaswell
       serviceUri: http://example.com/alert
       useCommonAlertSchema: true
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

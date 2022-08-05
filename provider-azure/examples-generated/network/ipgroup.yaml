@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: IPGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -9,7 +11,23 @@ spec:
     - 172.16.240.0/20
     - 10.48.0.0/12
     location: West Europe
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     tags:
       environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

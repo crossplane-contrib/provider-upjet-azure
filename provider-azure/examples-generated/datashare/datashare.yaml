@@ -1,11 +1,14 @@
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: DataShare
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    accountIdRef:
-      name: example
+    accountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     description: example desc
     kind: CopyBased
     snapshotSchedule:
@@ -13,3 +16,35 @@ spec:
       recurrence: Day
       startTime: "2020-04-17T04:47:52.9614956Z"
     terms: example terms
+
+---
+
+apiVersion: datashare.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      foo: bar
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: FrontDoor
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -20,8 +22,9 @@ spec:
     frontendEndpoint:
     - hostName: example-FrontDoor.azurefd.net
       name: exampleFrontendEndpoint1
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     routingRule:
     - acceptedProtocols:
       - Http
@@ -34,3 +37,18 @@ spec:
       name: exampleRoutingRule1
       patternsToMatch:
       - /*
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

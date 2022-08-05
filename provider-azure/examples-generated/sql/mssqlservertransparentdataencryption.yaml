@@ -1,8 +1,58 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServerTransparentDataEncryption
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    serverIdRef:
-      name: example
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    azureadAdministrator:
+    - loginUsername: AzureAD Admin
+      objectId: 00000000-0000-0000-0000-000000000000
+    extended_auditing_policy:
+    - retention_in_days: 6
+      storage_account_access_key: ${azurerm_storage_account.example.primary_access_key}
+      storage_account_access_key_is_secondary: true
+      storage_endpoint: ${azurerm_storage_account.example.primary_blob_endpoint}
+    location: EastUs
+    minimumTlsVersion: "1.2"
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      environment: production
+    version: "12.0"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: EastUs
+
+---
+
