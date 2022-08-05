@@ -1,19 +1,97 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLFailoverGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     databasesRefs:
     - name: example
     partnerServer:
-    - idRef:
-        name: example
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: secondary
     readWriteEndpointFailoverPolicy:
     - graceMinutes: 80
       mode: Automatic
-    serverIdRef:
-      name: example
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
     tags:
       database: example
       environment: prod
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLDatabase
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    maxSizeGb: "200"
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    skuName: S1
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    version: "12.0"
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    version: "12.0"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

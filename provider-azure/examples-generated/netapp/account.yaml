@@ -1,6 +1,8 @@
 apiVersion: netapp.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -12,9 +14,25 @@ spec:
       passwordSecretRef:
         key: example-key
         name: example-secret
-        namespace: crossplane-system
+        namespace: upbound-system
       smbServerName: SMBSERVER
       username: aduser
     location: West Europe
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

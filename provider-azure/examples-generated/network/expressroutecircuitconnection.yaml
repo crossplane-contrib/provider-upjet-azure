@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuitConnection
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,8 +10,151 @@ spec:
     authorizationKeySecretRef:
       key: example-key
       name: example-secret
-      namespace: crossplane-system
-    peerPeeringIdRef:
-      name: example
-    peeringIdRef:
-      name: example
+      namespace: upbound-system
+    peerPeeringIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example2
+    peeringIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteCircuit
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bandwidthInGbps: 5
+    expressRoutePortId: ${azurerm_express_route_port.example.id}
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - family: MeteredData
+      tier: Standard
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteCircuit
+metadata:
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    bandwidthInGbps: 5
+    expressRoutePortId: ${azurerm_express_route_port.example2.id}
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - family: MeteredData
+      tier: Standard
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteCircuitPeering
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    expressRouteCircuitNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    peerAsn: 100
+    primaryPeerAddressPrefix: 192.168.1.0/30
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    secondaryPeerAddressPrefix: 192.168.1.0/30
+    sharedKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    vlanId: 100
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRouteCircuitPeering
+metadata:
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    expressRouteCircuitNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    peerAsn: 100
+    primaryPeerAddressPrefix: 192.168.1.0/30
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    secondaryPeerAddressPrefix: 192.168.1.0/30
+    sharedKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    vlanId: 100
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRoutePort
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bandwidthInGbps: 10
+    encapsulation: Dot1Q
+    location: West Europe
+    peeringLocation: Equinix-Seattle-SE2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ExpressRoutePort
+metadata:
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    bandwidthInGbps: 10
+    encapsulation: Dot1Q
+    location: West Europe
+    peeringLocation: Allied-Toronto-King-West
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

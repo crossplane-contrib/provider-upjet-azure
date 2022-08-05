@@ -1,15 +1,80 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedInstanceFailoverGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     location: West Europe
-    managedInstanceIdRef:
-      name: example
-    partnerManagedInstanceIdRef:
-      name: example
+    managedInstanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    partnerManagedInstanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
     readWriteEndpointFailoverPolicy:
     - graceMinutes: 60
       mode: Automatic
     resource_group_name: ${azurerm_resource_group.primary.name}
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedInstance
+metadata:
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider:
+    administratorLogin: mradministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    licenseType: BasePrice
+    location: ${azurerm_resource_group.primary.location}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    tags:
+      environment: prod
+    vcores: 4
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedInstance
+metadata:
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: secondary
+spec:
+  forProvider:
+    administratorLogin: mradministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    licenseType: BasePrice
+    location: ${azurerm_resource_group.secondary.location}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    tags:
+      environment: prod
+    vcores: 4
+
+---
+

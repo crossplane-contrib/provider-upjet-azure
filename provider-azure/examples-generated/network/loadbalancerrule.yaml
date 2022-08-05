@@ -1,12 +1,66 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerRule
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     backendPort: 3389
     frontendIpConfigurationName: PublicIPAddress
     frontendPort: 3389
-    loadbalancerIdRef:
-      name: example
+    loadbalancerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     protocol: Tcp
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancer
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    frontendIpConfiguration:
+    - name: PublicIPAddress
+      publicIpAddressIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Static
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

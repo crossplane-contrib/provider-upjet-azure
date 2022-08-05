@@ -1,7 +1,9 @@
 apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: Registry
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: acr
+  name: acr
 spec:
   forProvider:
     adminEnabled: false
@@ -13,6 +15,22 @@ spec:
       tags: {}
       zoneRedundancyEnabled: true
     location: West Europe
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     sku: Premium
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

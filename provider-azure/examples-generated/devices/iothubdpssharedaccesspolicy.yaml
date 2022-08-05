@@ -1,12 +1,49 @@
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHubDPSSharedAccessPolicy
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     enrollmentRead: true
     enrollmentWrite: true
-    iothubDpsNameRef:
-      name: example
-    resourceGroupNameRef:
-      name: example
+    iothubDpsNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubDPS
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: "1"
+      name: S1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

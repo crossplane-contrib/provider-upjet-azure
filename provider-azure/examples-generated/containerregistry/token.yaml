@@ -1,12 +1,72 @@
 apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: Token
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    containerRegistryNameRef:
-      name: example
-    resourceGroupNameRef:
-      name: example
-    scopeMapIdRef:
-      name: example
+    containerRegistryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: acr
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scopeMapIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: map
+
+---
+
+apiVersion: containerregistry.azure.upbound.io/v1beta1
+kind: Registry
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adminEnabled: false
+    georeplications:
+    - East US
+    - West Europe
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Premium
+
+---
+
+apiVersion: containerregistry.azure.upbound.io/v1beta1
+kind: ScopeMap
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    actions:
+    - repositories/repo1/content/read
+    - repositories/repo1/content/write
+    containerRegistryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: acr
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

@@ -1,16 +1,71 @@
 apiVersion: security.azure.upbound.io/v1beta1
 kind: IOTSecurityDeviceGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     allowRule:
     - connectionToIpsNotAllowed:
       - 10.0.0.0/24
-    iothubIdRef:
-      name: example
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     rangeRule:
     - duration: PT5M
       max: 30
       min: 0
       type: ActiveConnectionsNotInAllowedRange
+
+---
+
+apiVersion: security.azure.upbound.io/v1beta1
+kind: IOTSecuritySolution
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: Iot Security Solution
+    iothubIds:
+    - ${azurerm_iothub.example.id}
+    location: West Europe
+    name: example-Iot-Security-Solution
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: "1"
+      name: S1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

@@ -1,6 +1,8 @@
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: Server
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,16 +10,32 @@ spec:
     administratorLoginPasswordSecretRef:
       key: example-key
       name: example-secret
-      namespace: crossplane-system
+      namespace: upbound-system
     autoGrowEnabled: true
     backupRetentionDays: 7
     geoRedundantBackupEnabled: true
     location: West Europe
     publicNetworkAccessEnabled: false
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: GP_Gen5_4
     sslEnforcementEnabled: true
     sslMinimalTlsVersionEnforced: TLS1_2
     storageMb: 640000
     version: "11"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

@@ -1,10 +1,63 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NATGatewayPublicIPPrefixAssociation
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    natGatewayIdRef:
-      name: example
-    publicIpPrefixIdRef:
-      name: example
+    natGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    publicIpPrefixIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NATGateway
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIPPrefix
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    prefixLength: 30
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    zones:
+    - "1"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

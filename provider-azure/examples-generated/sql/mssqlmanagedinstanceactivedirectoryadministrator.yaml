@@ -1,11 +1,58 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedInstanceActiveDirectoryAdministrator
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     loginUsername: msadmin
-    managedInstanceIdRef:
-      name: example
+    managedInstanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     objectId: ${azuread_user.admin.object_id}
     tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLManagedInstance
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: msadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    identity:
+    - type: SystemAssigned
+    licenseType: BasePrice
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vcores: 4
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

@@ -1,6 +1,8 @@
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Certificate
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -8,10 +10,43 @@ spec:
     - contentsSecretRef:
         key: example-key
         name: example-secret
-        namespace: crossplane-system
+        namespace: upbound-system
       passwordSecretRef:
         key: example-key
         name: example-secret
-        namespace: crossplane-system
-    keyVaultIdRef:
-      name: example
+        namespace: upbound-system
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

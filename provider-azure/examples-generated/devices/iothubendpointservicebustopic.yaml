@@ -1,14 +1,53 @@
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHubEndpointServiceBusTopic
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     connectionStringSecretRef:
       key: attribute.primary_connection_string
       name: example-servicebus-topic-authorization-rule
-      namespace: crossplane-system
-    iothubIdRef:
-      name: example
-    resourceGroupNameRef:
-      name: example
+      namespace: upbound-system
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: "1"
+      name: B1
+    tags:
+      purpose: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

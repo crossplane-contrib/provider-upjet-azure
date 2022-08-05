@@ -1,14 +1,92 @@
 apiVersion: cache.azure.upbound.io/v1beta1
 kind: RedisLinkedServer
 metadata:
-  name: example
+  labels:
+    testing.upbound.io/example-name: example-link
+  name: example-link
 spec:
   forProvider:
-    linkedRedisCacheIdRef:
-      name: example
+    linkedRedisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-secondary
     linkedRedisCacheLocation: West Europe
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-primary
     serverRole: Secondary
-    targetRedisCacheNameRef:
-      name: example
+    targetRedisCacheNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-primary
+
+---
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-primary
+  name: example-primary
+spec:
+  forProvider:
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: East US
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Premium
+
+---
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-secondary
+  name: example-secondary
+spec:
+  forProvider:
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: West US
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Premium
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-primary
+  name: example-primary
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-secondary
+  name: example-secondary
+spec:
+  forProvider:
+    location: West US
+
+---
+

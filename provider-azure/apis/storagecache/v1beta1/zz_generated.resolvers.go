@@ -167,7 +167,7 @@ func (mg *HPCCacheBlobTarget) ResolveReferences(ctx context.Context, c client.Re
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerID),
-		Extract:      resource.ExtractParamPath("resourceManagerId", true),
+		Extract:      resource.ExtractParamPath("resource_manager_id", true),
 		Reference:    mg.Spec.ForProvider.StorageContainerIDRef,
 		Selector:     mg.Spec.ForProvider.StorageContainerIDSelector,
 		To: reference.To{

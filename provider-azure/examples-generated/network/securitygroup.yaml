@@ -1,12 +1,15 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     location: West Europe
-    resourceGroupNameRef:
-      name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     securityRule:
     - access: Allow
       destinationAddressPrefix: '*'
@@ -19,3 +22,18 @@ spec:
       sourcePortRange: '*'
     tags:
       environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

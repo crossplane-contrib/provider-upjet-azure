@@ -1,8 +1,14 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedDatabase
 metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    managedInstanceIdRef:
-      name: example
+    managedInstanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

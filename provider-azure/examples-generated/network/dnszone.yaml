@@ -1,8 +1,26 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSZone
 metadata:
+  labels:
+    testing.upbound.io/example-name: example-public
+  name: example-public
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    resourceGroupNameRef:
-      name: example
+    location: West Europe
+
+---
+
