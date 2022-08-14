@@ -14,14 +14,18 @@ import (
 )
 
 type SQLFunctionObservation struct {
+
+	// The ID of the SQL User Defined Function.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SQLFunctionParameters struct {
 
+	// Body of the User Defined Function.
 	// +kubebuilder:validation:Required
 	Body *string `json:"body" tf:"body,omitempty"`
 
+	// The id of the Cosmos DB SQL Container to create the SQL User Defined Function within. Changing this forces a new SQL User Defined Function to be created.
 	// +crossplane:generate:reference:type=SQLContainer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -48,7 +52,7 @@ type SQLFunctionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SQLFunction is the Schema for the SQLFunctions API
+// SQLFunction is the Schema for the SQLFunctions API. Manages an SQL User Defined Function.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

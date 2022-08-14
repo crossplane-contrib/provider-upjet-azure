@@ -14,26 +14,34 @@ import (
 )
 
 type AvailabilitySetObservation struct {
+
+	// The ID of the Availability Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AvailabilitySetParameters struct {
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Specifies whether the availability set is managed or not. Possible values are true  or false . Default is true.
 	// +kubebuilder:validation:Optional
 	Managed *bool `json:"managed,omitempty" tf:"managed,omitempty"`
 
+	// Specifies the number of fault domains that are used. Defaults to 3. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PlatformFaultDomainCount *float64 `json:"platformFaultDomainCount,omitempty" tf:"platform_fault_domain_count,omitempty"`
 
+	// Specifies the number of update domains that are used. Defaults to 5. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PlatformUpdateDomainCount *float64 `json:"platformUpdateDomainCount,omitempty" tf:"platform_update_domain_count,omitempty"`
 
+	// The ID of the Proximity Placement Group to which this Virtual Machine should be assigned. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
+	// The name of the resource group in which to create the availability set. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -44,6 +52,7 @@ type AvailabilitySetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -62,7 +71,7 @@ type AvailabilitySetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AvailabilitySet is the Schema for the AvailabilitySets API
+// AvailabilitySet is the Schema for the AvailabilitySets API. Manages an Availability Set for Virtual Machines.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

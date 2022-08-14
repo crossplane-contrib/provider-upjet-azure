@@ -14,16 +14,21 @@ import (
 )
 
 type DataSetDataLakeGen2Observation struct {
+
+	// The name of the Data Share Dataset.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// The resource ID of the Data Share Data Lake Gen2 Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DataSetDataLakeGen2Parameters struct {
 
+	// The path of the file in the data lake file system to be shared with the receiver. Conflicts with folder_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
 	// +kubebuilder:validation:Optional
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
 
+	// The name of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.DataLakeGen2FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemName *string `json:"fileSystemName,omitempty" tf:"file_system_name,omitempty"`
@@ -34,9 +39,11 @@ type DataSetDataLakeGen2Parameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemNameSelector *v1.Selector `json:"fileSystemNameSelector,omitempty" tf:"-"`
 
+	// The folder path in the data lake file system to be shared with the receiver. Conflicts with file_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
 	// +kubebuilder:validation:Optional
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
 
+	// The resource ID of the Data Share where this Data Share Data Lake Gen2 Dataset should be created. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
 	// +crossplane:generate:reference:type=DataShare
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -48,6 +55,7 @@ type DataSetDataLakeGen2Parameters struct {
 	// +kubebuilder:validation:Optional
 	ShareIDSelector *v1.Selector `json:"shareIdSelector,omitempty" tf:"-"`
 
+	// The resource id of the storage account of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -74,7 +82,7 @@ type DataSetDataLakeGen2Status struct {
 
 // +kubebuilder:object:root=true
 
-// DataSetDataLakeGen2 is the Schema for the DataSetDataLakeGen2s API
+// DataSetDataLakeGen2 is the Schema for the DataSetDataLakeGen2s API. Manages a Data Share Data Lake Gen2 Dataset.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

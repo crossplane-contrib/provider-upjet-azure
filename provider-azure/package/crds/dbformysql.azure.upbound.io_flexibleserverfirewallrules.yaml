@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FlexibleServerFirewallRule is the Schema for the FlexibleServerFirewallRules
-          API
+          API. Manages a Firewall Rule for a MySQL Flexible Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,13 @@ spec:
               forProvider:
                 properties:
                   endIpAddress:
+                    description: Specifies the End IP Address associated with this
+                      Firewall Rule. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which the MySQL
+                      Flexible Server exists. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -143,6 +148,8 @@ spec:
                         type: object
                     type: object
                   serverName:
+                    description: Specifies the name of the MySQL Flexible Server.
+                      Changing this forces a new resource to be created.
                     type: string
                   serverNameRef:
                     description: A Reference to a named object.
@@ -218,6 +225,8 @@ spec:
                         type: object
                     type: object
                   startIpAddress:
+                    description: Specifies the Start IP Address associated with this
+                      Firewall Rule. Changing this forces a new resource to be created.
                     type: string
                 required:
                 - endIpAddress
@@ -401,6 +410,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the MySQL Firewall Rule.
                     type: string
                 type: object
               conditions:

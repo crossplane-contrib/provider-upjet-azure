@@ -18,6 +18,7 @@ type MongoCollectionAutoscaleSettingsObservation struct {
 
 type MongoCollectionAutoscaleSettingsParameters struct {
 
+	// The maximum throughput of the MongoDB collection . Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
@@ -35,8 +36,11 @@ type MongoCollectionIndexParameters struct {
 }
 
 type MongoCollectionObservation struct {
+
+	// The ID of the Cosmos DB Mongo Collection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// One or more system_indexes blocks as defined below.
 	SystemIndexes []SystemIndexesObservation `json:"systemIndexes,omitempty" tf:"system_indexes,omitempty"`
 }
 
@@ -52,12 +56,15 @@ type MongoCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// The default time to live of Analytical Storage for this Mongo Collection. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
 	// +kubebuilder:validation:Optional
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
+	// An autoscale_settings block as defined below. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []MongoCollectionAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
+	// The name of the Cosmos DB Mongo Database in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MongoDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -68,12 +75,15 @@ type MongoCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
+	// The default Time To Live in seconds. If the value is -1, items are not automatically expired.
 	// +kubebuilder:validation:Optional
 	DefaultTTLSeconds *float64 `json:"defaultTtlSeconds,omitempty" tf:"default_ttl_seconds,omitempty"`
 
+	// One or more index blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Index []MongoCollectionIndexParameters `json:"index,omitempty" tf:"index,omitempty"`
 
+	// The name of the resource group in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -84,9 +94,11 @@ type MongoCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the key to partition on for sharding. There must not be any other unique index keys.
 	// +kubebuilder:validation:Optional
 	ShardKey *string `json:"shardKey,omitempty" tf:"shard_key,omitempty"`
 
+	// The throughput of the MongoDB collection . Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
@@ -114,7 +126,7 @@ type MongoCollectionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MongoCollection is the Schema for the MongoCollections API
+// MongoCollection is the Schema for the MongoCollections API. Manages a Mongo Collection within a Cosmos DB Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

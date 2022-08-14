@@ -14,14 +14,18 @@ import (
 )
 
 type SQLTriggerObservation struct {
+
+	// The ID of the SQL Trigger.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SQLTriggerParameters struct {
 
+	// Body of the Trigger.
 	// +kubebuilder:validation:Required
 	Body *string `json:"body" tf:"body,omitempty"`
 
+	// The id of the Cosmos DB SQL Container to create the SQL Trigger within. Changing this forces a new SQL Trigger to be created.
 	// +crossplane:generate:reference:type=SQLContainer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -33,9 +37,11 @@ type SQLTriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
+	// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
 	// +kubebuilder:validation:Required
 	Operation *string `json:"operation" tf:"operation,omitempty"`
 
+	// Type of the Trigger. Possible values are Pre and Post.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -54,7 +60,7 @@ type SQLTriggerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SQLTrigger is the Schema for the SQLTriggers API
+// SQLTrigger is the Schema for the SQLTriggers API. Manages an SQL Trigger.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

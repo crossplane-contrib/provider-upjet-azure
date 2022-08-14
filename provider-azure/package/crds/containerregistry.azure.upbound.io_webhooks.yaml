@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Webhook is the Schema for the Webhooks API
+        description: Webhook is the Schema for the Webhooks API. Manages an Azure
+          Container Registry Webhook.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,25 @@ spec:
               forProvider:
                 properties:
                   actions:
+                    description: 'A list of actions that trigger the Webhook to post
+                      notifications. At least one action needs to be specified. Valid
+                      values are: push, delete, quarantine, chart_push, chart_delete'
                     items:
                       type: string
                     type: array
                   customHeaders:
                     additionalProperties:
                       type: string
+                    description: Custom headers that will be added to the webhook
+                      notifications request.
                     type: object
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   registryName:
+                    description: The Name of Container registry this Webhook belongs
+                      to. Changing this forces a new resource to be created.
                     type: string
                   registryNameRef:
                     description: A Reference to a named object.
@@ -149,6 +159,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Container Registry Webhook. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -224,10 +237,18 @@ spec:
                         type: object
                     type: object
                   scope:
+                    description: Specifies the scope of repositories that can trigger
+                      an event. For example, foo:* means events for all tags under
+                      repository foo. foo:bar means events for 'foo:bar' only. foo
+                      is equivalent to foo:latest. Empty means all events.
                     type: string
                   serviceUri:
+                    description: Specifies the service URI for the Webhook to post
+                      notifications.
                     type: string
                   status:
+                    description: 'Specifies if this Webhook triggers notifications
+                      or not. Valid values: enabled and disabled. Default is enabled.'
                     type: string
                   tags:
                     additionalProperties:
@@ -415,6 +436,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Container Registry Webhook.
                     type: string
                 type: object
               conditions:

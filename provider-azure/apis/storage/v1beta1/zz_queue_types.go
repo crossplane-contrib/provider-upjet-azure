@@ -14,14 +14,18 @@ import (
 )
 
 type QueueObservation struct {
+
+	// The ID of the Storage Queue.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type QueueParameters struct {
 
+	// A mapping of MetaData which should be assigned to this Storage Queue.
 	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
+	// Specifies the Storage Account in which the Storage Queue should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
@@ -47,7 +51,7 @@ type QueueStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Queue is the Schema for the Queues API
+// Queue is the Schema for the Queues API. Manages a Queue within an Azure Storage Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

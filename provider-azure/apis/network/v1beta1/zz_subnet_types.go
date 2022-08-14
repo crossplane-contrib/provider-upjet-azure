@@ -21,6 +21,7 @@ type DelegationParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// A service_delegation block as defined below.
 	// +kubebuilder:validation:Required
 	ServiceDelegation []ServiceDelegationParameters `json:"serviceDelegation" tf:"service_delegation,omitempty"`
 }
@@ -30,6 +31,7 @@ type ServiceDelegationObservation struct {
 
 type ServiceDelegationParameters struct {
 
+	// A list of Actions which should be delegated. This list is specific to the service to delegate to. Possible values include Microsoft.Network/networkinterfaces/*, Microsoft.Network/virtualNetworks/subnets/action, Microsoft.Network/virtualNetworks/subnets/join/action, Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action and Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action.
 	// +kubebuilder:validation:Optional
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
@@ -38,6 +40,8 @@ type ServiceDelegationParameters struct {
 }
 
 type SubnetObservation struct {
+
+	// The subnet ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -46,12 +50,15 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Required
 	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
 
+	// One or more delegation blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Delegation []DelegationParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
 
+	// Enable or Disable network policies for the private link endpoint on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false.
 	// +kubebuilder:validation:Optional
 	EnforcePrivateLinkEndpointNetworkPolicies *bool `json:"enforcePrivateLinkEndpointNetworkPolicies,omitempty" tf:"enforce_private_link_endpoint_network_policies,omitempty"`
 
+	// Enable or Disable network policies for the private link service on the subnet. Setting this to true will Disable the policy and setting this to false will Enable the policy. Default value is false.
 	// +kubebuilder:validation:Optional
 	EnforcePrivateLinkServiceNetworkPolicies *bool `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
 
@@ -65,9 +72,11 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The list of IDs of Service Endpoint Policies to associate with the subnet.
 	// +kubebuilder:validation:Optional
 	ServiceEndpointPolicyIds []*string `json:"serviceEndpointPolicyIds,omitempty" tf:"service_endpoint_policy_ids,omitempty"`
 
+	// The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage and Microsoft.Web.
 	// +kubebuilder:validation:Optional
 	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
 
@@ -96,7 +105,7 @@ type SubnetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Subnet is the Schema for the Subnets API
+// Subnet is the Schema for the Subnets API. Manages a subnet. Subnets represent network segments within the IP space defined by the virtual network.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

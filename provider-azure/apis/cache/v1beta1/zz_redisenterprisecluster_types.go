@@ -14,19 +14,25 @@ import (
 )
 
 type RedisEnterpriseClusterObservation struct {
+
+	// DNS name of the cluster endpoint.
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
+	// The ID of the Redis Enterprise Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type RedisEnterpriseClusterParameters struct {
 
+	// The Azure Region where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The minimum TLS version.  Defaults to 1.2. Changing this forces a new Redis Enterprise Cluster to be created.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
+	// The name of the Resource Group where the Redis Enterprise Cluster should exist. Changing this forces a new Redis Enterprise Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -37,12 +43,15 @@ type RedisEnterpriseClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The sku_name is comprised of two segments separated by a hyphen . The first segment of the sku_name defines the name of the SKU, possible values are Enterprise_E10, Enterprise_E20", Enterprise_E50, Enterprise_E100, EnterpriseFlash_F300, EnterpriseFlash_F700 or EnterpriseFlash_F1500. The second segment defines the capacity of the sku_name, possible values for Enteprise SKUs are . Possible values for EnterpriseFlash SKUs are . Changing this forces a new Redis Enterprise Cluster to be created.
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 
+	// A mapping of tags which should be assigned to the Redis Enterprise Cluster.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies a list of Availability Zones in which this Redis Enterprise Cluster should be located. Changing this forces a new Redis Enterprise Cluster to be created.
 	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -61,7 +70,7 @@ type RedisEnterpriseClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RedisEnterpriseCluster is the Schema for the RedisEnterpriseClusters API
+// RedisEnterpriseCluster is the Schema for the RedisEnterpriseClusters API. Manages a Redis Enterprise Cluster.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,14 +14,18 @@ import (
 )
 
 type IOTHubSharedAccessPolicyObservation struct {
+
+	// The ID of the IoTHub Shared Access Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IOTHubSharedAccessPolicyParameters struct {
 
+	// Adds DeviceConnect permission to this Shared Access Account. It allows sending and receiving on the device-side endpoints.
 	// +kubebuilder:validation:Optional
 	DeviceConnect *bool `json:"deviceConnect,omitempty" tf:"device_connect,omitempty"`
 
+	// The name of the IoTHub to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
@@ -32,12 +36,15 @@ type IOTHubSharedAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
+	// Adds RegistryRead permission to this Shared Access Account. It allows read access to the identity registry.
 	// +kubebuilder:validation:Optional
 	RegistryRead *bool `json:"registryRead,omitempty" tf:"registry_read,omitempty"`
 
+	// Adds RegistryWrite permission to this Shared Access Account. It allows write access to the identity registry.
 	// +kubebuilder:validation:Optional
 	RegistryWrite *bool `json:"registryWrite,omitempty" tf:"registry_write,omitempty"`
 
+	// The name of the resource group under which the IotHub Shared Access Policy resource has to be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -48,6 +55,7 @@ type IOTHubSharedAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Adds ServiceConnect permission to this Shared Access Account. It allows sending and receiving on the cloud-side endpoints.
 	// +kubebuilder:validation:Optional
 	ServiceConnect *bool `json:"serviceConnect,omitempty" tf:"service_connect,omitempty"`
 }
@@ -66,7 +74,7 @@ type IOTHubSharedAccessPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IOTHubSharedAccessPolicy is the Schema for the IOTHubSharedAccessPolicys API
+// IOTHubSharedAccessPolicy is the Schema for the IOTHubSharedAccessPolicys API. Manages an IotHub Shared Access Policy
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

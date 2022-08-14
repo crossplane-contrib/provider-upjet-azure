@@ -21,6 +21,7 @@ type CommonEncryptionCbcsParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultContentKey []DefaultContentKeyParameters `json:"defaultContentKey,omitempty" tf:"default_content_key,omitempty"`
 
+	// A drm_fairplay block as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	DrmFairplay []DrmFairplayParameters `json:"drmFairplay,omitempty" tf:"drm_fairplay,omitempty"`
 
@@ -33,9 +34,11 @@ type CommonEncryptionCencDefaultContentKeyObservation struct {
 
 type CommonEncryptionCencDefaultContentKeyParameters struct {
 
+	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
+	// Policy used by Default Key. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 }
@@ -66,9 +69,11 @@ type CommonEncryptionCencParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultContentKey []CommonEncryptionCencDefaultContentKeyParameters `json:"defaultContentKey,omitempty" tf:"default_content_key,omitempty"`
 
+	// A drm_playready block as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	DrmPlayready []DrmPlayreadyParameters `json:"drmPlayready,omitempty" tf:"drm_playready,omitempty"`
 
+	// Template for the URL of the custom service delivering licenses to end user players. Not required when using Azure Media Services for issuing licenses. The template supports replaceable tokens that the service will update at runtime with the value specific to the request. The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	DrmWidevineCustomLicenseAcquisitionURLTemplate *string `json:"drmWidevineCustomLicenseAcquisitionUrlTemplate,omitempty" tf:"drm_widevine_custom_license_acquisition_url_template,omitempty"`
 
@@ -81,9 +86,11 @@ type DefaultContentKeyObservation struct {
 
 type DefaultContentKeyParameters struct {
 
+	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
+	// Policy used by Default Key. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 }
@@ -93,6 +100,7 @@ type DrmFairplayObservation struct {
 
 type DrmFairplayParameters struct {
 
+	// All license to be persistent or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	AllowPersistentLicense *bool `json:"allowPersistentLicense,omitempty" tf:"allow_persistent_license,omitempty"`
 
@@ -105,6 +113,7 @@ type DrmPlayreadyObservation struct {
 
 type DrmPlayreadyParameters struct {
 
+	// Custom attributes for PlayReady. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	CustomAttributes *string `json:"customAttributes,omitempty" tf:"custom_attributes,omitempty"`
 
@@ -149,20 +158,26 @@ type NoEncryptionEnabledProtocolsParameters struct {
 }
 
 type StreamingPolicyObservation struct {
+
+	// The ID of the Streaming Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type StreamingPolicyParameters struct {
 
+	// A common_encryption_cbcs block as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	CommonEncryptionCbcs []CommonEncryptionCbcsParameters `json:"commonEncryptionCbcs,omitempty" tf:"common_encryption_cbcs,omitempty"`
 
+	// A common_encryption_cenc block as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	CommonEncryptionCenc []CommonEncryptionCencParameters `json:"commonEncryptionCenc,omitempty" tf:"common_encryption_cenc,omitempty"`
 
+	// Default Content Key used by current Streaming Policy. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	DefaultContentKeyPolicyName *string `json:"defaultContentKeyPolicyName,omitempty" tf:"default_content_key_policy_name,omitempty"`
 
+	// The Media Services account name. Changing this forces a new Streaming Policy to be created.
 	// +crossplane:generate:reference:type=ServicesAccount
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountName *string `json:"mediaServicesAccountName,omitempty" tf:"media_services_account_name,omitempty"`
@@ -173,9 +188,11 @@ type StreamingPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountNameSelector *v1.Selector `json:"mediaServicesAccountNameSelector,omitempty" tf:"-"`
 
+	// A no_encryption_enabled_protocols block as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	NoEncryptionEnabledProtocols []NoEncryptionEnabledProtocolsParameters `json:"noEncryptionEnabledProtocols,omitempty" tf:"no_encryption_enabled_protocols,omitempty"`
 
+	// The name of the Resource Group where the Streaming Policy should exist. Changing this forces a new Streaming Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -201,7 +218,7 @@ type StreamingPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// StreamingPolicy is the Schema for the StreamingPolicys API
+// StreamingPolicy is the Schema for the StreamingPolicys API. Manages a Streaming Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

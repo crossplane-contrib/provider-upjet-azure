@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ManagedStorageAccount is the Schema for the ManagedStorageAccounts
-          API
+          API. Manages a Key Vault Managed Storage Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   keyVaultId:
+                    description: The ID of the Key Vault where the Managed Storage
+                      Account should be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   keyVaultIdRef:
                     description: A Reference to a named object.
@@ -140,10 +143,15 @@ spec:
                         type: object
                     type: object
                   regenerateKeyAutomatically:
+                    description: Should Storage Account access key be regenerated
+                      periodically?
                     type: boolean
                   regenerationPeriod:
+                    description: How often Storage Account access key should be regenerated.
+                      Value needs to be in ISO 8601 duration format.
                     type: string
                   storageAccountId:
+                    description: The ID of the Storage Account.
                     type: string
                   storageAccountIdRef:
                     description: A Reference to a named object.
@@ -219,10 +227,14 @@ spec:
                         type: object
                     type: object
                   storageAccountKey:
+                    description: Which Storage Account access key that is managed
+                      by Key Vault. Possible values are key1 and key2.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Key Vault Managed Storage Account.
                     type: object
                 required:
                 - storageAccountKey
@@ -405,6 +417,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Key Vault Managed Storage Account.
                     type: string
                 type: object
               conditions:

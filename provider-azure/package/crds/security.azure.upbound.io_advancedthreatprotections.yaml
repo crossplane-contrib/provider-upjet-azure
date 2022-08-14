@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: AdvancedThreatProtection is the Schema for the AdvancedThreatProtections
-          API
+          API. Manages a resources Advanced Threat Protection setting.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,13 @@ spec:
               forProvider:
                 properties:
                   enabled:
+                    description: Should Advanced Threat Protection be enabled on this
+                      resource?
                     type: boolean
                   targetResourceId:
+                    description: The ID of the Azure Resource which to enable Advanced
+                      Threat Protection on. Changing this forces a new resource to
+                      be created.
                     type: string
                 required:
                 - enabled
@@ -251,6 +256,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Advanced Threat Protection resource.
                     type: string
                 type: object
               conditions:

@@ -14,11 +14,14 @@ import (
 )
 
 type SnapshotObservation struct {
+
+	// The ID of the NetApp Snapshot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SnapshotParameters struct {
 
+	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -29,9 +32,11 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Pool
 	// +kubebuilder:validation:Optional
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
@@ -42,6 +47,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	PoolNameSelector *v1.Selector `json:"poolNameSelector,omitempty" tf:"-"`
 
+	// The name of the resource group where the NetApp Snapshot should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -52,6 +58,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the NetApp volume in which the NetApp Snapshot should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Volume
 	// +kubebuilder:validation:Optional
 	VolumeName *string `json:"volumeName,omitempty" tf:"volume_name,omitempty"`
@@ -77,7 +84,7 @@ type SnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Snapshot is the Schema for the Snapshots API
+// Snapshot is the Schema for the Snapshots API. Manages a NetApp Snapshot.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

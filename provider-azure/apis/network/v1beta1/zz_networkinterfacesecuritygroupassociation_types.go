@@ -14,11 +14,14 @@ import (
 )
 
 type NetworkInterfaceSecurityGroupAssociationObservation struct {
+
+	// The  ID of the Association between the Network Interface and the Network Interface.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type NetworkInterfaceSecurityGroupAssociationParameters struct {
 
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +33,7 @@ type NetworkInterfaceSecurityGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// The ID of the Network Security Group which should be attached to the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,7 +60,7 @@ type NetworkInterfaceSecurityGroupAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NetworkInterfaceSecurityGroupAssociation is the Schema for the NetworkInterfaceSecurityGroupAssociations API
+// NetworkInterfaceSecurityGroupAssociation is the Schema for the NetworkInterfaceSecurityGroupAssociations API. Manages the association between a Network Interface and a Network Security Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

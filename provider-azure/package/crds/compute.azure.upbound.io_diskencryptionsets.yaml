@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DiskEncryptionSet is the Schema for the DiskEncryptionSets API
+        description: DiskEncryptionSet is the Schema for the DiskEncryptionSets API.
+          Manages a Disk Encryption Set.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,19 +65,30 @@ spec:
               forProvider:
                 properties:
                   autoKeyRotationEnabled:
+                    description: Boolean flag to specify whether Azure Disk Encryption
+                      Set automatically rotates encryption Key to latest version.
+                      Defaults to false.
                     type: boolean
                   encryptionType:
+                    description: The type of key used to encrypt the data of the disk.
+                      Possible values are EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys
+                      and ConfidentialVmEncryptedWithCustomerKey. Defaults to EncryptionAtRestWithCustomerKey.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         type:
+                          description: The type of Managed Service Identity that is
+                            configured on this Disk Encryption Set. The only possible
+                            value is SystemAssigned.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   keyVaultKeyId:
+                    description: Specifies the URL to a Key Vault Key .
                     type: string
                   keyVaultKeyIdRef:
                     description: A Reference to a named object.
@@ -152,8 +164,13 @@ spec:
                         type: object
                     type: object
                   location:
+                    description: Specifies the Azure Region where the Disk Encryption
+                      Set exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: Specifies the name of the Resource Group where the
+                      Disk Encryption Set should exist. Changing this forces a new
+                      resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -231,6 +248,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the Disk Encryption
+                      Set.
                     type: object
                 required:
                 - identity
@@ -413,13 +432,18 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Disk Encryption Set.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:
+                          description: The  ID of the Service Principal.
                           type: string
                         tenantId:
+                          description: The ID of the Tenant the Service Principal
+                            is assigned in.
                           type: string
                       type: object
                     type: array

@@ -14,13 +14,17 @@ import (
 )
 
 type NotebookWorkspaceObservation struct {
+
+	// The ID of the SQL Notebook Workspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the endpoint of Notebook server.
 	ServerEndpoint *string `json:"serverEndpoint,omitempty" tf:"server_endpoint,omitempty"`
 }
 
 type NotebookWorkspaceParameters struct {
 
+	// The name of the Cosmos DB Account to create the SQL Notebook Workspace within. Changing this forces a new SQL Notebook Workspace to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -31,6 +35,7 @@ type NotebookWorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// The name of the Resource Group where the SQL Notebook Workspace should exist. Changing this forces a new SQL Notebook Workspace to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -56,7 +61,7 @@ type NotebookWorkspaceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NotebookWorkspace is the Schema for the NotebookWorkspaces API
+// NotebookWorkspace is the Schema for the NotebookWorkspaces API. Manages an SQL Notebook Workspace.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

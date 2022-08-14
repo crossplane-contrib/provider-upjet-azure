@@ -14,20 +14,27 @@ import (
 )
 
 type AccessPolicyObservation_2 struct {
+
+	// Key Vault Access Policy ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AccessPolicyParameters_2 struct {
 
+	// The object ID of an Application in Azure Active Directory.
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
+	// List of certificate permissions, must be one or more from the following: Backup, Create, Delete, DeleteIssuers, Get, GetIssuers, Import, List, ListIssuers, ManageContacts, ManageIssuers, Purge, Recover, Restore, SetIssuers and Update.
 	// +kubebuilder:validation:Optional
 	CertificatePermissions []*string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty"`
 
+	// List of key permissions, must be one or more from the following: Backup, Create, Decrypt, Delete, Encrypt, Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update, Verify and WrapKey.
 	// +kubebuilder:validation:Optional
 	KeyPermissions []*string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
 
+	// Specifies the id of the Key Vault resource. Changing this
+	// forces a new resource to be created.
 	// +crossplane:generate:reference:type=Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -39,15 +46,24 @@ type AccessPolicyParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
+	// The object ID of a user, service principal or security
+	// group in the Azure Active Directory tenant for the vault. The object ID must
+	// be unique for the list of access policies. Changing this forces a new resource
+	// to be created.
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
+	// List of secret permissions, must be one or more from the following: Backup, Delete, Get, List, Purge, Recover, Restore and Set.
 	// +kubebuilder:validation:Optional
 	SecretPermissions []*string `json:"secretPermissions,omitempty" tf:"secret_permissions,omitempty"`
 
+	// List of storage permissions, must be one or more from the following: Backup, Delete, DeleteSAS, Get, GetSAS, List, ListSAS, Purge, Recover, RegenerateKey, Restore, Set, SetSAS and Update.
 	// +kubebuilder:validation:Optional
 	StoragePermissions []*string `json:"storagePermissions,omitempty" tf:"storage_permissions,omitempty"`
 
+	// The Azure Active Directory tenant ID that should be used
+	// for authenticating requests to the key vault. Changing this forces a new resource
+	// to be created.
 	// +kubebuilder:validation:Required
 	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
 }
@@ -66,7 +82,7 @@ type AccessPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AccessPolicy is the Schema for the AccessPolicys API
+// AccessPolicy is the Schema for the AccessPolicys API. Manages a Key Vault Access Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

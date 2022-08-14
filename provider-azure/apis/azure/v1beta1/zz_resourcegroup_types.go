@@ -14,14 +14,18 @@ import (
 )
 
 type ResourceGroupObservation struct {
+
+	// The ID of the Resource Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ResourceGroupParameters struct {
 
+	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// A mapping of tags which should be assigned to the Resource Group.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -40,7 +44,7 @@ type ResourceGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ResourceGroup is the Schema for the ResourceGroups API
+// ResourceGroup is the Schema for the ResourceGroups API. Manages a Resource Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

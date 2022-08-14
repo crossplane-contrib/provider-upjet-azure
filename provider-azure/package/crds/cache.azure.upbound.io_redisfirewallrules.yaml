@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RedisFirewallRule is the Schema for the RedisFirewallRules API
+        description: RedisFirewallRule is the Schema for the RedisFirewallRules API.
+          Manages a Firewall Rule associated with a Redis Cache.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,11 @@ spec:
               forProvider:
                 properties:
                   endIp:
+                    description: The highest IP address included in the range.
                     type: string
                   redisCacheName:
+                    description: The name of the Redis Cache. Changing this forces
+                      a new resource to be created.
                     type: string
                   redisCacheNameRef:
                     description: A Reference to a named object.
@@ -141,6 +145,8 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group in which this Redis
+                      Cache exists.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -216,6 +222,7 @@ spec:
                         type: object
                     type: object
                   startIp:
+                    description: The lowest IP address included in the range
                     type: string
                 required:
                 - endIp
@@ -398,6 +405,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Redis Firewall Rule.
                     type: string
                 type: object
               conditions:

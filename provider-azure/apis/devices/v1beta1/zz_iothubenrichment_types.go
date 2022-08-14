@@ -14,11 +14,14 @@ import (
 )
 
 type IOTHubEnrichmentObservation struct {
+
+	// The ID of the IoTHub Enrichment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IOTHubEnrichmentParameters struct {
 
+	// The list of endpoints which will be enriched.
 	// +kubebuilder:validation:Required
 	EndpointNames []*string `json:"endpointNames" tf:"endpoint_names,omitempty"`
 
@@ -32,6 +35,7 @@ type IOTHubEnrichmentParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
+	// The key of the enrichment.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
@@ -45,6 +49,7 @@ type IOTHubEnrichmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The value of the enrichment. Value can be any static string, the name of the IoT hub sending the message  or information from the device twin
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -63,7 +68,7 @@ type IOTHubEnrichmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IOTHubEnrichment is the Schema for the IOTHubEnrichments API
+// IOTHubEnrichment is the Schema for the IOTHubEnrichments API. Manages an IotHub Enrichment
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

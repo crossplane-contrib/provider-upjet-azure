@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MSSQLManagedDatabase is the Schema for the MSSQLManagedDatabases
-          API
+          API. Manages an Azure SQL Azure Managed Database.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   managedInstanceId:
+                    description: The ID of the Azure SQL Managed Instance on which
+                      to create this Managed Database. Changing this forces a new
+                      resource to be created.
                     type: string
                   managedInstanceIdRef:
                     description: A Reference to a named object.
@@ -318,6 +321,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The Azure SQL Managed Database ID.
                     type: string
                 type: object
               conditions:

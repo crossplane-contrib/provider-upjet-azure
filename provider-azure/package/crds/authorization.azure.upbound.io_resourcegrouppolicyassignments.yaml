@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ResourceGroupPolicyAssignment is the Schema for the ResourceGroupPolicyAssignments
-          API
+          API. Manages a Resource Group Policy Assignment.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,48 +66,78 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: A description which should be used for this Policy
+                      Assignment.
                     type: string
                   displayName:
+                    description: The Display Name for this Policy Assignment.
                     type: string
                   enforce:
+                    description: Specifies if this Policy should be enforced or not?
                     type: boolean
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
+                          description: A list of User Managed Identity IDs which should
+                            be assigned to the Policy Definition.
                           items:
                             type: string
                           type: array
                         type:
+                          description: The Type of Managed Identity which should be
+                            added to this Policy Definition. Possible values are SystemAssigned
+                            and UserAssigned.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   location:
+                    description: The Azure Region where the Policy Assignment should
+                      exist. Changing this forces a new Policy Assignment to be created.
                     type: string
                   metadata:
+                    description: A JSON mapping of any Metadata for this Policy.
                     type: string
                   nonComplianceMessage:
+                    description: One or more non_compliance_message blocks as defined
+                      below.
                     items:
                       properties:
                         content:
+                          description: The non-compliance message text. When assigning
+                            policy sets , unless policy_definition_reference_id is
+                            specified then this message will be the default for all
+                            policies.
                           type: string
                         policyDefinitionReferenceId:
+                          description: When assigning policy sets , this is the ID
+                            of the policy definition that the non-compliance message
+                            applies to.
                           type: string
                       required:
                       - content
                       type: object
                     type: array
                   notScopes:
+                    description: Specifies a list of Resource Scopes  within this
+                      Management Group which are excluded from this Policy.
                     items:
                       type: string
                     type: array
                   parameters:
+                    description: A JSON mapping of any Parameters for this Policy.
                     type: string
                   policyDefinitionId:
+                    description: The ID of the Policy Definition or Policy Definition
+                      Set. Changing this forces a new Policy Assignment to be created.
                     type: string
                   resourceGroupId:
+                    description: The ID of the Resource Group where this Policy Assignment
+                      should be created. Changing this forces a new Policy Assignment
+                      to be created.
                     type: string
                   resourceGroupIdRef:
                     description: A Reference to a named object.
@@ -363,13 +393,19 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Resource Group Policy Assignment.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID of the Policy Assignment for
+                            this Resource Group.
                           type: string
                         tenantId:
+                          description: The Tenant ID of the Policy Assignment for
+                            this Resource Group.
                           type: string
                       type: object
                     type: array

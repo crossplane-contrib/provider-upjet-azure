@@ -14,15 +14,20 @@ import (
 )
 
 type DataSetKustoClusterObservation struct {
+
+	// The name of the Data Share Dataset.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// The resource ID of the Data Share Kusto Cluster Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The location of the Kusto Cluster.
 	KustoClusterLocation *string `json:"kustoClusterLocation,omitempty" tf:"kusto_cluster_location,omitempty"`
 }
 
 type DataSetKustoClusterParameters struct {
 
+	// The resource ID of the Kusto Cluster to be shared with the receiver. Changing this forces a new Data Share Kusto Cluster Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/kusto/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -34,6 +39,7 @@ type DataSetKustoClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KustoClusterIDSelector *v1.Selector `json:"kustoClusterIdSelector,omitempty" tf:"-"`
 
+	// The resource ID of the Data Share where this Data Share Kusto Cluster Dataset should be created. Changing this forces a new Data Share Kusto Cluster Dataset to be created.
 	// +crossplane:generate:reference:type=DataShare
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -60,7 +66,7 @@ type DataSetKustoClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DataSetKustoCluster is the Schema for the DataSetKustoClusters API
+// DataSetKustoCluster is the Schema for the DataSetKustoClusters API. Manages a Data Share Kusto Cluster Dataset.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

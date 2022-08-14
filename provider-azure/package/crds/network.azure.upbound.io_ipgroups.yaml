@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: IPGroup is the Schema for the IPGroups API
+        description: IPGroup is the Schema for the IPGroups API. Manages an IP group
+          which contains a list of CIDRs and/or IP addresses.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,17 @@ spec:
               forProvider:
                 properties:
                   cidrs:
+                    description: A list of CIDRs or IP addresses.
                     items:
                       type: string
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the IP group. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -147,6 +153,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -328,6 +335,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the IP Group.
                     type: string
                 type: object
               conditions:

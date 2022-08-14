@@ -14,14 +14,18 @@ import (
 )
 
 type FirewallRuleObservation struct {
+
+	// The ID of the PostgreSQL Firewall Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FirewallRuleParameters struct {
 
+	// Specifies the End IP Address associated with this Firewall Rule. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	EndIPAddress *string `json:"endIpAddress" tf:"end_ip_address,omitempty"`
 
+	// The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -32,6 +36,7 @@ type FirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
@@ -42,6 +47,7 @@ type FirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
+	// Specifies the Start IP Address associated with this Firewall Rule. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	StartIPAddress *string `json:"startIpAddress" tf:"start_ip_address,omitempty"`
 }
@@ -60,7 +66,7 @@ type FirewallRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FirewallRule is the Schema for the FirewallRules API
+// FirewallRule is the Schema for the FirewallRules API. Manages a Firewall Rule for a PostgreSQL Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,22 +14,29 @@ import (
 )
 
 type PublicIPPrefixObservation struct {
+
+	// The Public IP Prefix ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The IP address prefix value that was allocated.
 	IPPrefix *string `json:"ipPrefix,omitempty" tf:"ip_prefix,omitempty"`
 }
 
 type PublicIPPrefixParameters struct {
 
+	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Default is IPv4.
 	// +kubebuilder:validation:Optional
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Specifies the number of bits of the prefix. The value can be set between 0  and 31 . Defaults to 28. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrefixLength *float64 `json:"prefixLength,omitempty" tf:"prefix_length,omitempty"`
 
+	// The name of the resource group in which to create the Public IP Prefix.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -40,12 +47,15 @@ type PublicIPPrefixParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The SKU of the Public IP Prefix. Accepted values are Standard. Defaults to Standard. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies a list of Availability Zones in which this Public IP Prefix should be located. Changing this forces a new Public IP Prefix to be created.
 	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -64,7 +74,7 @@ type PublicIPPrefixStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PublicIPPrefix is the Schema for the PublicIPPrefixs API
+// PublicIPPrefix is the Schema for the PublicIPPrefixs API. Manages a Public IP Prefix.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

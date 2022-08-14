@@ -18,6 +18,7 @@ type DDOSProtectionPlanObservation struct {
 
 type DDOSProtectionPlanParameters struct {
 
+	// Enable/disable DDoS Protection Plan on Virtual Network.
 	// +kubebuilder:validation:Required
 	Enable *bool `json:"enable" tf:"enable,omitempty"`
 
@@ -26,6 +27,8 @@ type DDOSProtectionPlanParameters struct {
 }
 
 type VirtualNetworkObservation struct {
+
+	// The GUID of the virtual network.
 	GUID *string `json:"guid,omitempty" tf:"guid,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -38,18 +41,23 @@ type VirtualNetworkParameters struct {
 	// +kubebuilder:validation:Required
 	AddressSpace []*string `json:"addressSpace" tf:"address_space,omitempty"`
 
+	// The BGP community attribute in format <as-number>:<community-value>.
 	// +kubebuilder:validation:Optional
 	BGPCommunity *string `json:"bgpCommunity,omitempty" tf:"bgp_community,omitempty"`
 
+	// A ddos_protection_plan block as documented below.
 	// +kubebuilder:validation:Optional
 	DDOSProtectionPlan []DDOSProtectionPlanParameters `json:"ddosProtectionPlan,omitempty" tf:"ddos_protection_plan,omitempty"`
 
+	// List of IP addresses of DNS servers
 	// +kubebuilder:validation:Optional
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
+	// Specifies the Edge Zone within the Azure Region where this Virtual Network should exist. Changing this forces a new Virtual Network to be created.
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
+	// The flow timeout in minutes for the Virtual Network, which is used to enable connection tracking for intra-VM flows. Possible values are between 4 and 30 minutes.
 	// +kubebuilder:validation:Optional
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
 
@@ -66,17 +74,21 @@ type VirtualNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VirtualNetworkSubnetObservation struct {
+
+	// The address prefix to use for the subnet.
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The Network Security Group to associate with the subnet.
 	SecurityGroup *string `json:"securityGroup,omitempty" tf:"security_group,omitempty"`
 }
 
@@ -97,7 +109,7 @@ type VirtualNetworkStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VirtualNetwork is the Schema for the VirtualNetworks API
+// VirtualNetwork is the Schema for the VirtualNetworks API. Manages a virtual network including any configured subnets. Each subnet can optionally be configured with a security group to be associated with the subnet.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

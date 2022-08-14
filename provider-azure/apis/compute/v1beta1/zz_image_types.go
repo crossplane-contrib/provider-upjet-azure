@@ -24,6 +24,7 @@ type DataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
+	// Specifies the logical unit number of the data disk.
 	// +kubebuilder:validation:Optional
 	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
 
@@ -35,23 +36,32 @@ type DataDiskParameters struct {
 }
 
 type ImageObservation struct {
+
+	// The ID of the Image.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ImageParameters struct {
 
+	// One or more data_disk elements as defined below.
 	// +kubebuilder:validation:Optional
 	DataDisk []DataDiskParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
+	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. The default is V1.
 	// +kubebuilder:validation:Optional
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
+	// Specified the supported Azure location where the resource exists.
+	// Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// One or more os_disk elements as defined below.
 	// +kubebuilder:validation:Optional
 	OsDisk []OsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
+	// The name of the resource group in which to create
+	// the image. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -62,12 +72,15 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The Virtual Machine ID from which to create the image.
 	// +kubebuilder:validation:Optional
 	SourceVirtualMachineID *string `json:"sourceVirtualMachineId,omitempty" tf:"source_virtual_machine_id,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Is zone resiliency enabled?  Defaults to false.  Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ZoneResilient *bool `json:"zoneResilient,omitempty" tf:"zone_resilient,omitempty"`
 }
@@ -86,9 +99,11 @@ type OsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
+	// Specifies the state of the operating system contained in the blob. Currently, the only value is Generalized.
 	// +kubebuilder:validation:Optional
 	OsState *string `json:"osState,omitempty" tf:"os_state,omitempty"`
 
+	// Specifies the type of operating system contained in the virtual machine image. Possible values are: Windows or Linux.
 	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
@@ -110,7 +125,7 @@ type ImageStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Image is the Schema for the Images API
+// Image is the Schema for the Images API. Manages a custom virtual machine image that can be used to create virtual machines.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,26 +14,34 @@ import (
 )
 
 type OutputFunctionObservation struct {
+
+	// The ID of the Stream Analytics Output Function.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type OutputFunctionParameters struct {
 
+	// The API key for the Function.
 	// +kubebuilder:validation:Required
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
+	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
 	// +kubebuilder:validation:Optional
 	BatchMaxCount *float64 `json:"batchMaxCount,omitempty" tf:"batch_max_count,omitempty"`
 
+	// The maximum batch size in bytes that's sent to the function. Defaults to 262144 .
 	// +kubebuilder:validation:Optional
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
+	// The name of the Function App.
 	// +kubebuilder:validation:Required
 	FunctionApp *string `json:"functionApp" tf:"function_app,omitempty"`
 
+	// The name of the function in the Function App.
 	// +kubebuilder:validation:Required
 	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
 
+	// The name of the Resource Group where the Stream Analytics Output should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -44,6 +52,7 @@ type OutputFunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/streamanalytics/v1beta1.Job
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
@@ -69,7 +78,7 @@ type OutputFunctionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// OutputFunction is the Schema for the OutputFunctions API
+// OutputFunction is the Schema for the OutputFunctions API. Manages a Stream Analytics Output Function.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

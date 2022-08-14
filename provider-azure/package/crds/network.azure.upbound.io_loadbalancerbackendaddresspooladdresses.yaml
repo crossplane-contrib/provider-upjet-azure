@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: LoadBalancerBackendAddressPoolAddress is the Schema for the LoadBalancerBackendAddressPoolAddresss
-          API
+          API. Manages a Backend Address within a Backend Address Pool.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   backendAddressPoolId:
+                    description: The ID of the Backend Address Pool. Changing this
+                      forces a new Backend Address Pool Address to be created.
                     type: string
                   backendAddressPoolIdRef:
                     description: A Reference to a named object.
@@ -141,8 +143,12 @@ spec:
                         type: object
                     type: object
                   ipAddress:
+                    description: The Static IP Address which should be allocated to
+                      this Backend Address Pool.
                     type: string
                   virtualNetworkId:
+                    description: The ID of the Virtual Network within which the Backend
+                      Address Pool should exist.
                     type: string
                   virtualNetworkIdRef:
                     description: A Reference to a named object.
@@ -398,6 +404,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Backend Address Pool Address.
                     type: string
                 type: object
               conditions:

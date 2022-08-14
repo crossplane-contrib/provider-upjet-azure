@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MSSQLServerTransparentDataEncryption is the Schema for the MSSQLServerTransparentDataEncryptions
-          API
+          API. Manages the transparent data encryption configuration for a MSSQL Server
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,9 @@ spec:
               forProvider:
                 properties:
                   keyVaultKeyId:
+                    description: To use customer managed keys from Azure Key Vault,
+                      provide the AKV Key ID. To use service managed keys, omit this
+                      field.
                     type: string
                   keyVaultKeyIdRef:
                     description: A Reference to a named object.
@@ -141,6 +144,7 @@ spec:
                         type: object
                     type: object
                   serverId:
+                    description: Specifies the name of the MS SQL Server.
                     type: string
                   serverIdRef:
                     description: A Reference to a named object.
@@ -394,6 +398,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the MSSQL encryption protector
                     type: string
                 type: object
               conditions:

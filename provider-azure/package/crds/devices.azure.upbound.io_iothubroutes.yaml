@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: IOTHubRoute is the Schema for the IOTHubRoutes API
+        description: IOTHubRoute is the Schema for the IOTHubRoutes API. Manages an
+          IotHub Route
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,22 @@ spec:
               forProvider:
                 properties:
                   condition:
+                    description: 'The condition that is evaluated to apply the routing
+                      rule. If no condition is provided, it evaluates to true by default.
+                      For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.'
                     type: string
                   enabled:
+                    description: Specifies whether a route is enabled.
                     type: boolean
                   endpointNames:
+                    description: The list of endpoints to which messages that satisfy
+                      the condition are routed. Currently only one endpoint is allowed.
                     items:
                       type: string
                     type: array
                   iothubName:
+                    description: The name of the IoTHub to which this Route belongs.
+                      Changing this forces a new resource to be created.
                     type: string
                   iothubNameRef:
                     description: A Reference to a named object.
@@ -147,6 +156,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group under which the IotHub
+                      Route resource has to be created. Changing this forces a new
+                      resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -222,6 +234,10 @@ spec:
                         type: object
                     type: object
                   source:
+                    description: 'The source that the routing rule is to be applied
+                      to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents,
+                      DeviceLifecycleEvents, DeviceMessages, Invalid, TwinChangeEvents.
+                      Defaults to DeviceMessages.'
                     type: string
                 required:
                 - enabled
@@ -405,6 +421,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the IoTHub Route.
                     type: string
                 type: object
               conditions:

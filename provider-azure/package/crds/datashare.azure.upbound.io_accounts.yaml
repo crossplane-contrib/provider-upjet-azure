@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Account is the Schema for the Accounts API
+        description: Account is the Schema for the Accounts API. Manages a Data Share
+          Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,17 +65,27 @@ spec:
               forProvider:
                 properties:
                   identity:
+                    description: An identity block as defined below. Changing this
+                      forces a new resource to be created.
                     items:
                       properties:
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Data Share Account.
+                            The only possible value is SystemAssigned.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   location:
+                    description: The Azure Region where the Data Share Account should
+                      exist. Changing this forces a new Data Share Account to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Data Share
+                      Account should exist. Changing this forces a new Data Share
+                      Account to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -152,6 +163,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Data Share Account.
                     type: object
                 required:
                 - identity
@@ -334,13 +347,20 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Data Share Account.
                     type: string
                   identity:
+                    description: An identity block as defined below. Changing this
+                      forces a new resource to be created.
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID for the Service Principal
+                            associated with the Identity of this Data Share Account.
                           type: string
                         tenantId:
+                          description: The Tenant ID for the Service Principal associated
+                            with the Identity of this Data Share Account.
                           type: string
                       type: object
                     type: array

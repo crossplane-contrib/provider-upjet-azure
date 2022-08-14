@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Database is the Schema for the Databases API
+        description: Database is the Schema for the Databases API. Manages a MariaDB
+          Database within a MariaDB Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,18 @@ spec:
               forProvider:
                 properties:
                   charset:
+                    description: Specifies the Charset for the MariaDB Database, which
+                      needs to be a valid MariaDB Charset. Changing this forces a
+                      new resource to be created.
                     type: string
                   collation:
+                    description: Specifies the Collation for the MariaDB Database,
+                      which needs to be a valid MariaDB Collation. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which the MariaDB
+                      Server exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -143,6 +152,8 @@ spec:
                         type: object
                     type: object
                   serverName:
+                    description: Specifies the name of the MariaDB Server. Changing
+                      this forces a new resource to be created.
                     type: string
                   serverNameRef:
                     description: A Reference to a named object.
@@ -398,6 +409,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the MariaDB Database.
                     type: string
                 type: object
               conditions:

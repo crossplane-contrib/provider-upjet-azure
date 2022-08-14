@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: StreamingPolicy is the Schema for the StreamingPolicys API
+        description: StreamingPolicy is the Schema for the StreamingPolicys API. Manages
+          a Streaming Policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,21 +65,33 @@ spec:
               forProvider:
                 properties:
                   commonEncryptionCbcs:
+                    description: A common_encryption_cbcs block as defined below.
+                      Changing this forces a new Streaming Policy to be created.
                     items:
                       properties:
                         defaultContentKey:
                           items:
                             properties:
                               label:
+                                description: Label can be used to specify Content
+                                  Key when creating a Streaming Locator. Changing
+                                  this forces a new Streaming Policy to be created.
                                 type: string
                               policyName:
+                                description: Policy used by Default Key. Changing
+                                  this forces a new Streaming Policy to be created.
                                 type: string
                             type: object
                           type: array
                         drmFairplay:
+                          description: A drm_fairplay block as defined below. Changing
+                            this forces a new Streaming Policy to be created.
                           items:
                             properties:
                               allowPersistentLicense:
+                                description: All license to be persistent or not.
+                                  Changing this forces a new Streaming Policy to be
+                                  created.
                                 type: boolean
                               customLicenseAcquisitionUrlTemplate:
                                 type: string
@@ -100,27 +113,48 @@ spec:
                       type: object
                     type: array
                   commonEncryptionCenc:
+                    description: A common_encryption_cenc block as defined below.
+                      Changing this forces a new Streaming Policy to be created.
                     items:
                       properties:
                         defaultContentKey:
                           items:
                             properties:
                               label:
+                                description: Label can be used to specify Content
+                                  Key when creating a Streaming Locator. Changing
+                                  this forces a new Streaming Policy to be created.
                                 type: string
                               policyName:
+                                description: Policy used by Default Key. Changing
+                                  this forces a new Streaming Policy to be created.
                                 type: string
                             type: object
                           type: array
                         drmPlayready:
+                          description: A drm_playready block as defined below. Changing
+                            this forces a new Streaming Policy to be created.
                           items:
                             properties:
                               customAttributes:
+                                description: Custom attributes for PlayReady. Changing
+                                  this forces a new Streaming Policy to be created.
                                 type: string
                               customLicenseAcquisitionUrlTemplate:
                                 type: string
                             type: object
                           type: array
                         drmWidevineCustomLicenseAcquisitionUrlTemplate:
+                          description: Template for the URL of the custom service
+                            delivering licenses to end user players. Not required
+                            when using Azure Media Services for issuing licenses.
+                            The template supports replaceable tokens that the service
+                            will update at runtime with the value specific to the
+                            request. The currently supported token values are {AlternativeMediaId},
+                            which is replaced with the value of StreamingLocatorId.AlternativeMediaId,
+                            and {ContentKeyId}, which is replaced with the value of
+                            identifier of the key being requested. Changing this forces
+                            a new Streaming Policy to be created.
                           type: string
                         enabledProtocols:
                           items:
@@ -138,8 +172,12 @@ spec:
                       type: object
                     type: array
                   defaultContentKeyPolicyName:
+                    description: Default Content Key used by current Streaming Policy.
+                      Changing this forces a new Streaming Policy to be created.
                     type: string
                   mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Streaming Policy to be created.
                     type: string
                   mediaServicesAccountNameRef:
                     description: A Reference to a named object.
@@ -215,6 +253,8 @@ spec:
                         type: object
                     type: object
                   noEncryptionEnabledProtocols:
+                    description: A no_encryption_enabled_protocols block as defined
+                      below. Changing this forces a new Streaming Policy to be created.
                     items:
                       properties:
                         dash:
@@ -228,6 +268,9 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the Resource Group where the Streaming
+                      Policy should exist. Changing this forces a new Streaming Policy
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -480,6 +523,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Streaming Policy.
                     type: string
                 type: object
               conditions:

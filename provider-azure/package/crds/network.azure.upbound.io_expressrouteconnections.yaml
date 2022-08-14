@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ExpressRouteConnection is the Schema for the ExpressRouteConnections
-          API
+          API. Manages an Express Route Connection.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,17 @@ spec:
               forProvider:
                 properties:
                   authorizationKey:
+                    description: The authorization key to establish the Express Route
+                      Connection.
                     type: string
                   enableInternetSecurity:
+                    description: Is Internet security enabled for this Express Route
+                      Connection?
                     type: boolean
                   expressRouteCircuitPeeringId:
+                    description: The ID of the Express Route Circuit Peering that
+                      this Express Route Connection connects with. Changing this forces
+                      a new resource to be created.
                     type: string
                   expressRouteCircuitPeeringIdRef:
                     description: A Reference to a named object.
@@ -144,6 +151,9 @@ spec:
                         type: object
                     type: object
                   expressRouteGatewayId:
+                    description: The ID of the Express Route Gateway that this Express
+                      Route Connection connects with. Changing this forces a new resource
+                      to be created.
                     type: string
                   expressRouteGatewayIdRef:
                     description: A Reference to a named object.
@@ -219,18 +229,27 @@ spec:
                         type: object
                     type: object
                   routing:
+                    description: A routing block as defined below.
                     items:
                       properties:
                         associatedRouteTableId:
+                          description: The ID of the Virtual Hub Route Table associated
+                            with this Express Route Connection.
                           type: string
                         propagatedRouteTable:
+                          description: A propagated_route_table block as defined below.
                           items:
                             properties:
                               labels:
+                                description: The list of labels to logically group
+                                  route tables.
                                 items:
                                   type: string
                                 type: array
                               routeTableIds:
+                                description: A list of IDs of the Virtual Hub Route
+                                  Table to propagate routes from Express Route Connection
+                                  to the route table.
                                 items:
                                   type: string
                                 type: array
@@ -239,6 +258,9 @@ spec:
                       type: object
                     type: array
                   routingWeight:
+                    description: The routing weight associated to the Express Route
+                      Connection. Possible value is between 0 and 32000. Defaults
+                      to 0.
                     type: number
                 type: object
               providerConfigRef:
@@ -419,6 +441,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Express Route Connection.
                     type: string
                 type: object
               conditions:

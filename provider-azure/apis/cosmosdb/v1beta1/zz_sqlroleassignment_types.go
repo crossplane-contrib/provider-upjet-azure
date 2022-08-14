@@ -14,11 +14,14 @@ import (
 )
 
 type SQLRoleAssignmentObservation struct {
+
+	// The ID of the Cosmos DB SQL Role Assignment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SQLRoleAssignmentParameters struct {
 
+	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -29,9 +32,11 @@ type SQLRoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// The ID of the Principal  in Azure Active Directory. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
 
+	// The name of the Resource Group in which the Cosmos DB SQL Role Assignment is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -42,6 +47,7 @@ type SQLRoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The resource ID of the Cosmos DB SQL Role Definition.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.SQLRoleDefinition
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -53,6 +59,7 @@ type SQLRoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
+	// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Scope *string `json:"scope" tf:"scope,omitempty"`
 }
@@ -71,7 +78,7 @@ type SQLRoleAssignmentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SQLRoleAssignment is the Schema for the SQLRoleAssignments API
+// SQLRoleAssignment is the Schema for the SQLRoleAssignments API. Manages a Cosmos DB SQL Role Assignment.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

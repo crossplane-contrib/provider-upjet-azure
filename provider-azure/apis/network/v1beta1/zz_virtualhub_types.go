@@ -14,23 +14,31 @@ import (
 )
 
 type VirtualHubObservation_2 struct {
+
+	// The ID of the default Route Table in the Virtual Hub.
 	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
 
+	// The ID of the Virtual Hub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Autonomous System Number of the Virtual Hub BGP router.
 	VirtualRouterAsn *float64 `json:"virtualRouterAsn,omitempty" tf:"virtual_router_asn,omitempty"`
 
+	// The IP addresses of the Virtual Hub BGP router.
 	VirtualRouterIps []*string `json:"virtualRouterIps,omitempty" tf:"virtual_router_ips,omitempty"`
 }
 
 type VirtualHubParameters_2 struct {
 
+	// The Address Prefix which should be used for this Virtual Hub. Changing this forces a new resource to be created. The address prefix subnet cannot be smaller than a .
 	// +kubebuilder:validation:Optional
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
 
+	// Specifies the supported Azure location where the Virtual Hub should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Specifies the name of the Resource Group where the Virtual Hub should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -41,15 +49,19 @@ type VirtualHubParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// One or more route blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Route []VirtualHubRouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
+	// The SKU of the Virtual Hub. Possible values are Basic and Standard. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
+	// A mapping of tags to assign to the Virtual Hub.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualWAN
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -67,9 +79,11 @@ type VirtualHubRouteObservation struct {
 
 type VirtualHubRouteParameters struct {
 
+	// A list of Address Prefixes.
 	// +kubebuilder:validation:Required
 	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
 
+	// The IP Address that Packets should be forwarded to as the Next Hop.
 	// +kubebuilder:validation:Required
 	NextHopIPAddress *string `json:"nextHopIpAddress" tf:"next_hop_ip_address,omitempty"`
 }
@@ -88,7 +102,7 @@ type VirtualHubStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VirtualHub is the Schema for the VirtualHubs API
+// VirtualHub is the Schema for the VirtualHubs API. Manages a Virtual Hub within a Virtual WAN.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

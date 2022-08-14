@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: IOTHubEndpointEventHub is the Schema for the IOTHubEndpointEventHubs
-          API
+          API. Manages an IotHub EventHub Endpoint
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,14 @@ spec:
               forProvider:
                 properties:
                   authenticationType:
+                    description: Type used to authenticate against the Event Hub endpoint.
+                      Possible values are keyBased and identityBased. Defaults to
+                      keyBased.
                     type: string
                   connectionStringSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The connection string for the endpoint. This attribute
+                      can only be specified and is mandatory when authentication_type
+                      is keyBased.
                     properties:
                       key:
                         description: The key to select.
@@ -85,12 +89,20 @@ spec:
                     - namespace
                     type: object
                   endpointUri:
+                    description: URI of the Event Hubs Namespace endpoint. This attribute
+                      can only be specified and is mandatory when authentication_type
+                      is identityBased.
                     type: string
                   entityPath:
+                    description: Name of the Event Hub. This attribute can only be
+                      specified and is mandatory when authentication_type is identityBased.
                     type: string
                   identityId:
+                    description: ID of the User Managed Identity used to authenticate
+                      against the Event Hub endpoint.
                     type: string
                   iothubId:
+                    description: The IoTHub ID for the endpoint.
                     type: string
                   iothubIdRef:
                     description: A Reference to a named object.
@@ -166,6 +178,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group under which the Event
+                      Hub has been created. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -419,6 +434,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the IoTHub EventHub Endpoint.
                     type: string
                 type: object
               conditions:

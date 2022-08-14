@@ -14,14 +14,18 @@ import (
 )
 
 type BlobInventoryPolicyObservation struct {
+
+	// The ID of the Storage Blob Inventory Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BlobInventoryPolicyParameters struct {
 
+	// One or more rules blocks as defined below.
 	// +kubebuilder:validation:Required
 	Rules []RulesParameters `json:"rules" tf:"rules,omitempty"`
 
+	// The ID of the storage account to apply this Blob Inventory Policy to. Changing this forces a new Storage Blob Inventory Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -39,15 +43,19 @@ type FilterObservation struct {
 
 type FilterParameters struct {
 
+	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
 	// +kubebuilder:validation:Required
 	BlobTypes []*string `json:"blobTypes" tf:"blob_types,omitempty"`
 
+	// Includes blob versions in blob inventory or not? Defaults to false.
 	// +kubebuilder:validation:Optional
 	IncludeBlobVersions *bool `json:"includeBlobVersions,omitempty" tf:"include_blob_versions,omitempty"`
 
+	// Includes blob snapshots in blob inventory or not? Defaults to false.
 	// +kubebuilder:validation:Optional
 	IncludeSnapshots *bool `json:"includeSnapshots,omitempty" tf:"include_snapshots,omitempty"`
 
+	// A set of strings for blob prefixes to be matched.
 	// +kubebuilder:validation:Optional
 	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 }
@@ -57,24 +65,31 @@ type RulesObservation struct {
 
 type RulesParameters struct {
 
+	// A filter block as defined above. Can only be set when the scope is Blob.
 	// +kubebuilder:validation:Optional
 	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
+	// The format of the inventory files. Possible values are Csv and Parquet.
 	// +kubebuilder:validation:Required
 	Format *string `json:"format" tf:"format,omitempty"`
 
+	// The name which should be used for this Blob Inventory Policy Rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The inventory schedule applied by this rule. Possible values are Daily and Weekly.
 	// +kubebuilder:validation:Required
 	Schedule *string `json:"schedule" tf:"schedule,omitempty"`
 
+	// A list of fields to be included in the inventory. See the Azure API reference for all the supported fields.
 	// +kubebuilder:validation:Required
 	SchemaFields []*string `json:"schemaFields" tf:"schema_fields,omitempty"`
 
+	// The scope of the inventory for this rule. Possible values are Blob and Container.
 	// +kubebuilder:validation:Required
 	Scope *string `json:"scope" tf:"scope,omitempty"`
 
+	// The storage container name to store the blob inventory files for this rule.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
@@ -100,7 +115,7 @@ type BlobInventoryPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BlobInventoryPolicy is the Schema for the BlobInventoryPolicys API
+// BlobInventoryPolicy is the Schema for the BlobInventoryPolicys API. Manages a Storage Blob Inventory Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

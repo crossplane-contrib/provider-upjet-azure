@@ -18,37 +18,54 @@ type BGPSettingsObservation struct {
 
 type BGPSettingsParameters struct {
 
+	// The BGP speaker's ASN.
 	// +kubebuilder:validation:Required
 	Asn *float64 `json:"asn" tf:"asn,omitempty"`
 
+	// The BGP peering address and BGP identifier
+	// of this BGP speaker.
 	// +kubebuilder:validation:Required
 	BGPPeeringAddress *string `json:"bgpPeeringAddress" tf:"bgp_peering_address,omitempty"`
 
+	// The weight added to routes learned from this
+	// BGP speaker.
 	// +kubebuilder:validation:Optional
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 }
 
 type LocalNetworkGatewayObservation struct {
+
+	// The ID of the Local Network Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type LocalNetworkGatewayParameters struct {
 
+	// The list of string CIDRs representing the
+	// address spaces the gateway exposes.
 	// +kubebuilder:validation:Optional
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
+	// A bgp_settings block as defined below containing the
+	// Local Network Gateway's BGP speaker settings.
 	// +kubebuilder:validation:Optional
 	BGPSettings []BGPSettingsParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 
+	// The gateway IP address to connect with.
 	// +kubebuilder:validation:Optional
 	GatewayAddress *string `json:"gatewayAddress,omitempty" tf:"gateway_address,omitempty"`
 
+	// The gateway FQDN to connect with.
 	// +kubebuilder:validation:Optional
 	GatewayFqdn *string `json:"gatewayFqdn,omitempty" tf:"gateway_fqdn,omitempty"`
 
+	// The location/region where the local network gateway is
+	// created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to
+	// create the local network gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -59,6 +76,7 @@ type LocalNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -77,7 +95,7 @@ type LocalNetworkGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LocalNetworkGateway is the Schema for the LocalNetworkGateways API
+// LocalNetworkGateway is the Schema for the LocalNetworkGateways API. Manages a local network gateway connection over which specific connections can be configured.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

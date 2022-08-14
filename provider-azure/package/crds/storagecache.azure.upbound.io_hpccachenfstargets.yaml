@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: HPCCacheNFSTarget is the Schema for the HPCCacheNFSTargets API
+        description: HPCCacheNFSTarget is the Schema for the HPCCacheNFSTargets API.
+          Manages a NFS Target within a HPC Cache.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   cacheName:
+                    description: The name HPC Cache, which the HPC Cache NFS Target
+                      will be added to. Changing this forces a new resource to be
+                      created.
                     type: string
                   cacheNameRef:
                     description: A Reference to a named object.
@@ -139,15 +143,27 @@ spec:
                         type: object
                     type: object
                   namespaceJunction:
+                    description: Can be specified multiple times to define multiple
+                      namespace_junction. Each namespace_juntion block supports fields
+                      documented below.
                     items:
                       properties:
                         accessPolicyName:
+                          description: The name of the access policy applied to this
+                            target. Defaults to default.
                           type: string
                         namespacePath:
+                          description: The client-facing file path of this NFS target
+                            within the HPC Cache NFS Target.
                           type: string
                         nfsExport:
+                          description: The NFS export of this NFS target within the
+                            HPC Cache NFS Target.
                           type: string
                         targetPath:
+                          description: The relative subdirectory path from the nfs_export
+                            to map to the namespace_path. Defaults to "", in which
+                            case the whole nfs_export is exported.
                           type: string
                       required:
                       - namespacePath
@@ -155,6 +171,9 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the Resource Group in which to create
+                      the HPC Cache NFS Target. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -230,8 +249,15 @@ spec:
                         type: object
                     type: object
                   targetHostName:
+                    description: The IP address or fully qualified domain name  of
+                      the HPC Cache NFS target. Changing this forces a new resource
+                      to be created.
                     type: string
                   usageModel:
+                    description: 'The type of usage of the HPC Cache NFS Target. Possible
+                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15,
+                      WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
+                      and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
                 required:
                 - namespaceJunction
@@ -415,6 +441,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the HPC Cache NFS Target.
                     type: string
                 type: object
               conditions:

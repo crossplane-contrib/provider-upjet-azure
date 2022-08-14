@@ -14,11 +14,14 @@ import (
 )
 
 type AuthorizationRuleObservation struct {
+
+	// The EventHub ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AuthorizationRuleParameters struct {
 
+	// Specifies the name of the EventHub. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=EventHub
 	// +kubebuilder:validation:Optional
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
@@ -29,12 +32,15 @@ type AuthorizationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
+	// Does this Authorization Rule have permissions to Listen to the Event Hub? Defaults to false.
 	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
+	// Does this Authorization Rule have permissions to Manage to the Event Hub? When this property is true - both listen and send must be too. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
+	// Specifies the name of the grandparent EventHub Namespace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=EventHubNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
@@ -45,6 +51,7 @@ type AuthorizationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
+	// The name of the resource group in which the EventHub Namespace exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -55,6 +62,7 @@ type AuthorizationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Does this Authorization Rule have permissions to Send to the Event Hub? Defaults to false.
 	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
@@ -73,7 +81,7 @@ type AuthorizationRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AuthorizationRule is the Schema for the AuthorizationRules API
+// AuthorizationRule is the Schema for the AuthorizationRules API. Manages a Event Hubs authorization Rule within an Event Hub.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

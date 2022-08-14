@@ -14,11 +14,14 @@ import (
 )
 
 type NetworkInterfaceApplicationSecurityGroupAssociationObservation struct {
+
+	// The  ID of the Association between the Network Interface and the Application Security Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type NetworkInterfaceApplicationSecurityGroupAssociationParameters struct {
 
+	// The ID of the Application Security Group which this Network Interface which should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ApplicationSecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +33,7 @@ type NetworkInterfaceApplicationSecurityGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationSecurityGroupIDSelector *v1.Selector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
 
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,7 +60,7 @@ type NetworkInterfaceApplicationSecurityGroupAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NetworkInterfaceApplicationSecurityGroupAssociation is the Schema for the NetworkInterfaceApplicationSecurityGroupAssociations API
+// NetworkInterfaceApplicationSecurityGroupAssociation is the Schema for the NetworkInterfaceApplicationSecurityGroupAssociations API. Manages the association between a Network Interface and a Application Security Group
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

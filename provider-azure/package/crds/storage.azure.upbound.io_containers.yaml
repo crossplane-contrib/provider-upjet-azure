@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Container is the Schema for the Containers API
+        description: Container is the Schema for the Containers API. Manages a Container
+          within an Azure Storage Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,18 @@ spec:
               forProvider:
                 properties:
                   containerAccessType:
+                    description: The Access Level configured for this Container. Possible
+                      values are blob, container or private. Defaults to private.
                     type: string
                   metadata:
                     additionalProperties:
                       type: string
+                    description: A mapping of MetaData for this Container. All metadata
+                      keys should be lowercase.
                     type: object
                   storageAccountName:
+                    description: The name of the Storage Account where the Container
+                      should be created.
                     type: string
                   storageAccountNameRef:
                     description: A Reference to a named object.
@@ -322,12 +329,18 @@ spec:
               atProvider:
                 properties:
                   hasImmutabilityPolicy:
+                    description: Is there an Immutability Policy configured on this
+                      Storage Container?
                     type: boolean
                   hasLegalHold:
+                    description: Is there a Legal Hold configured on this Storage
+                      Container?
                     type: boolean
                   id:
+                    description: The ID of the Storage Container.
                     type: string
                   resourceManagerId:
+                    description: The Resource Manager ID of this Storage Container.
                     type: string
                 type: object
               conditions:

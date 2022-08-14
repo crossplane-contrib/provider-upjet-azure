@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ScopeMap is the Schema for the ScopeMaps API
+        description: ScopeMap is the Schema for the ScopeMaps API. Manages an Azure
+          Container Registry scope map.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,13 @@ spec:
               forProvider:
                 properties:
                   actions:
+                    description: A list of actions to attach to the scope map .
                     items:
                       type: string
                     type: array
                   containerRegistryName:
+                    description: The name of the Container Registry. Changing this
+                      forces a new resource to be created.
                     type: string
                   containerRegistryNameRef:
                     description: A Reference to a named object.
@@ -145,6 +149,9 @@ spec:
                   description:
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Container Registry token. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -399,6 +406,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Container Registry scope map.
                     type: string
                 type: object
               conditions:

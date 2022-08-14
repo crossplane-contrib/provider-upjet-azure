@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ExpressRouteCircuitAuthorization is the Schema for the ExpressRouteCircuitAuthorizations
-          API
+          API. Manages an ExpressRoute Circuit Authorization.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   expressRouteCircuitName:
+                    description: The name of the Express Route Circuit in which to
+                      create the Authorization.
                     type: string
                   expressRouteCircuitNameRef:
                     description: A Reference to a named object.
@@ -141,6 +143,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the ExpressRoute circuit. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -394,8 +399,10 @@ spec:
               atProvider:
                 properties:
                   authorizationUseStatus:
+                    description: The authorization use status.
                     type: string
                   id:
+                    description: The ID of the ExpressRoute Circuit Authorization.
                     type: string
                 type: object
               conditions:

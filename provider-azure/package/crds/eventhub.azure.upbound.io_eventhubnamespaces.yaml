@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: EventHubNamespace is the Schema for the EventHubNamespaces API
+        description: EventHubNamespace is the Schema for the EventHubNamespaces API.
+          Manages an EventHub Namespace.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,46 +65,75 @@ spec:
               forProvider:
                 properties:
                   autoInflateEnabled:
+                    description: Is Auto Inflate enabled for the EventHub Namespace?
                     type: boolean
                   capacity:
+                    description: Specifies the Capacity / Throughput Units for a Standard
+                      SKU namespace. Default capacity has a maximum of 2, but can
+                      be increased in blocks of 2 on a committed purchase basis.
                     type: number
                   dedicatedClusterId:
+                    description: Specifies the ID of the EventHub Dedicated Cluster
+                      where this Namespace should created. Changing this forces a
+                      new resource to be created.
                     type: string
                   identity:
                     items:
                       properties:
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Event Hub Namespace.
+                            The only possible value is SystemAssigned.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   maximumThroughputUnits:
+                    description: Specifies the maximum number of throughput units
+                      when Auto Inflate is Enabled. Valid values range from 1 - 20.
                     type: number
                   networkRulesets:
+                    description: A network_rulesets block as defined below.
                     items:
                       properties:
                         defaultAction:
+                          description: The default action to take when a rule is not
+                            matched. Possible values are Allow and Deny. Defaults
+                            to Deny.
                           type: string
                         ipRule:
+                          description: One or more ip_rule blocks as defined below.
                           items:
                             properties:
                               action:
+                                description: The action to take when the rule is matched.
+                                  Possible values are Allow.
                                 type: string
                               ipMask:
+                                description: The IP mask to match on.
                                 type: string
                             type: object
                           type: array
                         trustedServiceAccessEnabled:
+                          description: Whether Trusted Microsoft Services are allowed
+                            to bypass firewall.
                           type: boolean
                         virtualNetworkRule:
+                          description: One or more virtual_network_rule blocks as
+                            defined below.
                           items:
                             properties:
                               ignoreMissingVirtualNetworkServiceEndpoint:
+                                description: Are missing virtual network service endpoints
+                                  ignored? Defaults to false.
                                 type: boolean
                               subnetId:
+                                description: The id of the subnet to match on.
                                 type: string
                               subnetIdRef:
                                 description: A Reference to a named object.
@@ -188,6 +218,8 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the namespace. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -263,12 +295,20 @@ spec:
                         type: object
                     type: object
                   sku:
+                    description: Defines which tier to use. Valid options are Basic,
+                      Standard, and Premium. Please note that setting this field to
+                      Premium will force the creation of a new resource and also requires
+                      setting zone_redundant to true.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   zoneRedundant:
+                    description: Specifies if the EventHub Namespace should be Zone
+                      Redundant . Changing this forces a new resource to be created.
+                      Defaults to false.
                     type: boolean
                 required:
                 - location
@@ -451,13 +491,18 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The EventHub Namespace ID.
                     type: string
                   identity:
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID associated with this Managed
+                            Service Identity.
                           type: string
                         tenantId:
+                          description: The Tenant ID associated with this Managed
+                            Service Identity.
                           type: string
                       type: object
                     type: array

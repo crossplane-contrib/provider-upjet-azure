@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: IOTSecurityDeviceGroup is the Schema for the IOTSecurityDeviceGroups
-          API
+          API. Manages a Iot Security Device Group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,27 +65,38 @@ spec:
               forProvider:
                 properties:
                   allowRule:
+                    description: an allow_rule blocks as defined below.
                     items:
                       properties:
                         connectionFromIpsNotAllowed:
+                          description: Specifies which IP is not allowed to be connected
+                            to in current device group for inbound connection.
                           items:
                             type: string
                           type: array
                         connectionToIpsNotAllowed:
+                          description: Specifies which IP is not allowed to be connected
+                            to in current device group for outbound connection.
                           items:
                             type: string
                           type: array
                         localUsersNotAllowed:
+                          description: Specifies which local user is not allowed to
+                            login in current device group.
                           items:
                             type: string
                           type: array
                         processesNotAllowed:
+                          description: Specifies which process is not allowed to be
+                            executed in current device group.
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   iothubId:
+                    description: The ID of the IoT Hub which to link the Security
+                      Device Group to. Changing this forces a new resource to be created.
                     type: string
                   iothubIdRef:
                     description: A Reference to a named object.
@@ -161,15 +172,29 @@ spec:
                         type: object
                     type: object
                   rangeRule:
+                    description: One or more range_rule blocks as defined below.
                     items:
                       properties:
                         duration:
+                          description: Specifies the time range. represented in ISO
+                            8601 duration format.
                           type: string
                         max:
+                          description: The maximum threshold in the given time window.
                           type: number
                         min:
+                          description: The minimum threshold in the given time window.
                           type: number
                         type:
+                          description: The type of supported rule type. Possible Values
+                            are ActiveConnectionsNotInAllowedRange, AmqpC2DMessagesNotInAllowedRange,
+                            MqttC2DMessagesNotInAllowedRange, HttpC2DMessagesNotInAllowedRange,
+                            AmqpC2DRejectedMessagesNotInAllowedRange, MqttC2DRejectedMessagesNotInAllowedRange,
+                            HttpC2DRejectedMessagesNotInAllowedRange, AmqpD2CMessagesNotInAllowedRange,
+                            MqttD2CMessagesNotInAllowedRange, HttpD2CMessagesNotInAllowedRange,
+                            DirectMethodInvokesNotInAllowedRange, FailedLocalLoginsNotInAllowedRange,
+                            FileUploadsNotInAllowedRange, QueuePurgesNotInAllowedRange,
+                            TwinUpdatesNotInAllowedRange and UnauthorizedOperationsNotInAllowedRange.
                           type: string
                       required:
                       - duration
@@ -357,6 +382,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Iot Security Device Group resource.
                     type: string
                 type: object
               conditions:

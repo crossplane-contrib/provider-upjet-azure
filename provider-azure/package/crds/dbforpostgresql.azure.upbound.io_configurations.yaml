@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Configuration is the Schema for the Configurations API
+        description: Configuration is the Schema for the Configurations API. Sets
+          a PostgreSQL Configuration value on a PostgreSQL Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,13 @@ spec:
               forProvider:
                 properties:
                   name:
+                    description: Specifies the name of the PostgreSQL Configuration,
+                      which needs to be a valid PostgreSQL configuration name. Changing
+                      this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which the PostgreSQL
+                      Server exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -141,6 +147,8 @@ spec:
                         type: object
                     type: object
                   serverName:
+                    description: Specifies the name of the PostgreSQL Server. Changing
+                      this forces a new resource to be created.
                     type: string
                   serverNameRef:
                     description: A Reference to a named object.
@@ -216,6 +224,8 @@ spec:
                         type: object
                     type: object
                   value:
+                    description: Specifies the value of the PostgreSQL Configuration.
+                      See the PostgreSQL documentation for valid values.
                     type: string
                 required:
                 - name
@@ -398,6 +408,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the PostgreSQL Configuration.
                     type: string
                 type: object
               conditions:

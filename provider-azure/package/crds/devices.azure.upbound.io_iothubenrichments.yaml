@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: IOTHubEnrichment is the Schema for the IOTHubEnrichments API
+        description: IOTHubEnrichment is the Schema for the IOTHubEnrichments API.
+          Manages an IotHub Enrichment
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   endpointNames:
+                    description: The list of endpoints which will be enriched.
                     items:
                       type: string
                     type: array
@@ -143,6 +145,7 @@ spec:
                         type: object
                     type: object
                   key:
+                    description: The key of the enrichment.
                     type: string
                   resourceGroupName:
                     type: string
@@ -220,6 +223,9 @@ spec:
                         type: object
                     type: object
                   value:
+                    description: The value of the enrichment. Value can be any static
+                      string, the name of the IoT hub sending the message  or information
+                      from the device twin
                     type: string
                 required:
                 - endpointNames
@@ -403,6 +409,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the IoTHub Enrichment.
                     type: string
                 type: object
               conditions:

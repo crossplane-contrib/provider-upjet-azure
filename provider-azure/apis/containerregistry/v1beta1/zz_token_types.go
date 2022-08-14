@@ -14,11 +14,14 @@ import (
 )
 
 type TokenObservation struct {
+
+	// The ID of the Container Registry token.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type TokenParameters struct {
 
+	// The name of the Container Registry. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/containerregistry/v1beta1.Registry
 	// +kubebuilder:validation:Optional
 	ContainerRegistryName *string `json:"containerRegistryName,omitempty" tf:"container_registry_name,omitempty"`
@@ -29,9 +32,11 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerRegistryNameSelector *v1.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
 
+	// Should the Container Registry token be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The name of the resource group in which to create the Container Registry token. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -42,6 +47,7 @@ type TokenParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The ID of the Container Registry Scope Map associated with the token.
 	// +crossplane:generate:reference:type=ScopeMap
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -68,7 +74,7 @@ type TokenStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Token is the Schema for the Tokens API
+// Token is the Schema for the Tokens API. Manages an Azure Container Registry token.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

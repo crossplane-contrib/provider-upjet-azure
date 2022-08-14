@@ -18,12 +18,15 @@ type DataProtectionReplicationObservation struct {
 
 type DataProtectionReplicationParameters struct {
 
+	// The endpoint type, default value is dst for destination.
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
+	// Location of the primary volume.
 	// +kubebuilder:validation:Required
 	RemoteVolumeLocation *string `json:"remoteVolumeLocation" tf:"remote_volume_location,omitempty"`
 
+	// Resource ID of the primary volume.
 	// +crossplane:generate:reference:type=Volume
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,6 +38,7 @@ type DataProtectionReplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteVolumeResourceIDSelector *v1.Selector `json:"remoteVolumeResourceIdSelector,omitempty" tf:"-"`
 
+	// Replication frequency, supported values are '10minutes', 'hourly', 'daily', values are case sensitive.
 	// +kubebuilder:validation:Required
 	ReplicationFrequency *string `json:"replicationFrequency" tf:"replication_frequency,omitempty"`
 }
@@ -44,6 +48,7 @@ type DataProtectionSnapshotPolicyObservation struct {
 
 type DataProtectionSnapshotPolicyParameters struct {
 
+	// Resource ID of the snapshot policy to apply to the volume.
 	// +crossplane:generate:reference:type=SnapshotPolicy
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -61,33 +66,43 @@ type ExportPolicyRuleObservation struct {
 
 type ExportPolicyRuleParameters struct {
 
+	// A list of allowed clients IPv4 addresses.
 	// +kubebuilder:validation:Required
 	AllowedClients []*string `json:"allowedClients" tf:"allowed_clients,omitempty"`
 
+	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
 	// +kubebuilder:validation:Optional
 	ProtocolsEnabled []*string `json:"protocolsEnabled,omitempty" tf:"protocols_enabled,omitempty"`
 
+	// Is root access permitted to this volume?
 	// +kubebuilder:validation:Optional
 	RootAccessEnabled *bool `json:"rootAccessEnabled,omitempty" tf:"root_access_enabled,omitempty"`
 
+	// The index number of the rule.
 	// +kubebuilder:validation:Required
 	RuleIndex *float64 `json:"ruleIndex" tf:"rule_index,omitempty"`
 
+	// Is the file system on unix read only?
 	// +kubebuilder:validation:Optional
 	UnixReadOnly *bool `json:"unixReadOnly,omitempty" tf:"unix_read_only,omitempty"`
 
+	// Is the file system on unix read and write?
 	// +kubebuilder:validation:Optional
 	UnixReadWrite *bool `json:"unixReadWrite,omitempty" tf:"unix_read_write,omitempty"`
 }
 
 type VolumeObservation struct {
+
+	// The ID of the NetApp Volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A list of IPv4 Addresses which should be used to mount the volume.
 	MountIPAddresses []*string `json:"mountIpAddresses,omitempty" tf:"mount_ip_addresses,omitempty"`
 }
 
 type VolumeParameters struct {
 
+	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -98,6 +113,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name, account_name and pool_name.
 	// +crossplane:generate:reference:type=Snapshot
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -109,18 +125,23 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateFromSnapshotResourceIDSelector *v1.Selector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
 
+	// A data_protection_replication block as defined below.
 	// +kubebuilder:validation:Optional
 	DataProtectionReplication []DataProtectionReplicationParameters `json:"dataProtectionReplication,omitempty" tf:"data_protection_replication,omitempty"`
 
+	// A data_protection_snapshot_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	DataProtectionSnapshotPolicy []DataProtectionSnapshotPolicyParameters `json:"dataProtectionSnapshotPolicy,omitempty" tf:"data_protection_snapshot_policy,omitempty"`
 
+	// One or more export_policy_rule block defined below.
 	// +kubebuilder:validation:Optional
 	ExportPolicyRule []ExportPolicyRuleParameters `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Pool
 	// +kubebuilder:validation:Optional
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
@@ -131,9 +152,11 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	PoolNameSelector *v1.Selector `json:"poolNameSelector,omitempty" tf:"-"`
 
+	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Changing this forces a new resource to be created and data will be lost. Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
 	// +kubebuilder:validation:Optional
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
+	// The name of the resource group where the NetApp Volume should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -144,18 +167,23 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Volume security style, accepted values are Unix or Ntfs. If not provided, single-protocol volume is created defaulting to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to Ntfs. In a dual-protocol volume, if not provided, its value will be Ntfs.
 	// +kubebuilder:validation:Optional
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
+	// The target performance of the file system. Valid values include Premium, Standard, or Ultra.
 	// +kubebuilder:validation:Required
 	ServiceLevel *string `json:"serviceLevel" tf:"service_level,omitempty"`
 
+	// Specifies whether the .snapshot  or ~snapshot  path of a volume is visible, default value is true.
 	// +kubebuilder:validation:Optional
 	SnapshotDirectoryVisible *bool `json:"snapshotDirectoryVisible,omitempty" tf:"snapshot_directory_visible,omitempty"`
 
+	// The maximum Storage Quota allowed for a file system in Gigabytes.
 	// +kubebuilder:validation:Required
 	StorageQuotaInGb *float64 `json:"storageQuotaInGb" tf:"storage_quota_in_gb,omitempty"`
 
+	// The ID of the Subnet the NetApp Volume resides in, which must have the Microsoft.NetApp/volumes delegation. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -167,12 +195,15 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Throughput of this volume in Mibps.
 	// +kubebuilder:validation:Optional
 	ThroughputInMibps *float64 `json:"throughputInMibps,omitempty" tf:"throughput_in_mibps,omitempty"`
 
+	// A unique file path for the volume. Used when creating mount targets. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	VolumePath *string `json:"volumePath" tf:"volume_path,omitempty"`
 }
@@ -191,7 +222,7 @@ type VolumeStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Volume is the Schema for the Volumes API
+// Volume is the Schema for the Volumes API. Manages a NetApp Volume.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

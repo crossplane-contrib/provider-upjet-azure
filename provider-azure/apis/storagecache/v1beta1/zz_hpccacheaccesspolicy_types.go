@@ -18,40 +18,52 @@ type HPCCacheAccessPolicyAccessRuleObservation struct {
 
 type HPCCacheAccessPolicyAccessRuleParameters struct {
 
+	// The access level for this rule. Possible values are: rw, ro, no.
 	// +kubebuilder:validation:Required
 	Access *string `json:"access" tf:"access,omitempty"`
 
+	// The anonymous GID used when root_squash_enabled is true.
 	// +kubebuilder:validation:Optional
 	AnonymousGID *float64 `json:"anonymousGid,omitempty" tf:"anonymous_gid,omitempty"`
 
+	// The anonymous UID used when root_squash_enabled is true.
 	// +kubebuilder:validation:Optional
 	AnonymousUID *float64 `json:"anonymousUid,omitempty" tf:"anonymous_uid,omitempty"`
 
+	// The filter applied to the scope for this rule. The filter's format depends on its scope: default scope matches all clients and has no filter value; network scope takes a CIDR format; host takes an IP address or fully qualified domain name. If a client does not match any filter rule and there is no default rule, access is denied.
 	// +kubebuilder:validation:Optional
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
 
+	// Whether to enable root squash? Defaults to false.
 	// +kubebuilder:validation:Optional
 	RootSquashEnabled *bool `json:"rootSquashEnabled,omitempty" tf:"root_squash_enabled,omitempty"`
 
+	// The scope of this rule. The scope and  the filter determine which clients match the rule. Possible values are: default, network, host.
 	// +kubebuilder:validation:Required
 	Scope *string `json:"scope" tf:"scope,omitempty"`
 
+	// Whether allow access to subdirectories under the root export? Defaults to false.
 	// +kubebuilder:validation:Optional
 	SubmountAccessEnabled *bool `json:"submountAccessEnabled,omitempty" tf:"submount_access_enabled,omitempty"`
 
+	// Whether SUID is allowed? Defaults to false.
 	// +kubebuilder:validation:Optional
 	SuidEnabled *bool `json:"suidEnabled,omitempty" tf:"suid_enabled,omitempty"`
 }
 
 type HPCCacheAccessPolicyObservation struct {
+
+	// The ID of the HPC Cache Access Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type HPCCacheAccessPolicyParameters struct {
 
+	// Up to three access_rule blocks as defined below.
 	// +kubebuilder:validation:Required
 	AccessRule []HPCCacheAccessPolicyAccessRuleParameters `json:"accessRule" tf:"access_rule,omitempty"`
 
+	// The ID of the HPC Cache that this HPC Cache Access Policy resides in. Changing this forces a new HPC Cache Access Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storagecache/v1beta1.HPCCache
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -78,7 +90,7 @@ type HPCCacheAccessPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// HPCCacheAccessPolicy is the Schema for the HPCCacheAccessPolicys API
+// HPCCacheAccessPolicy is the Schema for the HPCCacheAccessPolicys API. Manages a HPC Cache Access Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

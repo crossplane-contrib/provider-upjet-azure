@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: VirtualWAN is the Schema for the VirtualWANs API
+        description: VirtualWAN is the Schema for the VirtualWANs API. Manages a Virtual
+          WAN.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,25 @@ spec:
               forProvider:
                 properties:
                   allowBranchToBranchTraffic:
+                    description: Boolean flag to specify whether branch to branch
+                      traffic is allowed. Defaults to true.
                     type: boolean
                   disableVpnEncryption:
+                    description: Boolean flag to specify whether VPN encryption is
+                      disabled. Defaults to false.
                     type: boolean
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   office365LocalBreakoutCategory:
+                    description: 'Specifies the Office365 local breakout category.
+                      Possible values include: Optimize, OptimizeAndAllow, All, None.
+                      Defaults to None.'
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Virtual WAN. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -149,8 +161,11 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the Virtual WAN.
                     type: object
                   type:
+                    description: 'Specifies the Virtual WAN type. Possible Values
+                      include: Basic and Standard. Defaults to Standard.'
                     type: string
                 required:
                 - location
@@ -332,6 +347,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Virtual WAN.
                     type: string
                 type: object
               conditions:

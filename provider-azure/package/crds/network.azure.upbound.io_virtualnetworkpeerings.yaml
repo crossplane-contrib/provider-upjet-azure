@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: VirtualNetworkPeering is the Schema for the VirtualNetworkPeerings
-          API
+          API. Manages a virtual network peering which allows resources to access
+          other resources in the linked virtual network.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,12 +66,20 @@ spec:
               forProvider:
                 properties:
                   allowForwardedTraffic:
+                    description: Controls if forwarded traffic from  VMs in the remote
+                      virtual network is allowed. Defaults to false.
                     type: boolean
                   allowGatewayTransit:
+                    description: Controls gatewayLinks can be used in the remote virtual
+                      network’s link to the local virtual network.
                     type: boolean
                   allowVirtualNetworkAccess:
+                    description: Controls if the VMs in the remote virtual network
+                      can access VMs in the local virtual network. Defaults to true.
                     type: boolean
                   remoteVirtualNetworkId:
+                    description: The full Azure resource ID of the remote virtual
+                      network.  Changing this forces a new resource to be created.
                     type: string
                   remoteVirtualNetworkIdRef:
                     description: A Reference to a named object.
@@ -146,6 +155,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the virtual network peering. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -221,8 +233,16 @@ spec:
                         type: object
                     type: object
                   useRemoteGateways:
+                    description: Controls if remote gateways can be used on the local
+                      virtual network. If the flag is set to true, and allow_gateway_transit
+                      on the remote peering is also true, virtual network will use
+                      gateways of remote virtual network for transit. Only one peering
+                      can have this flag set to true. This flag cannot be set if virtual
+                      network already has a gateway. Defaults to false.
                     type: boolean
                   virtualNetworkName:
+                    description: The name of the virtual network. Changing this forces
+                      a new resource to be created.
                     type: string
                   virtualNetworkNameRef:
                     description: A Reference to a named object.
@@ -476,6 +496,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Virtual Network Peering.
                     type: string
                 type: object
               conditions:

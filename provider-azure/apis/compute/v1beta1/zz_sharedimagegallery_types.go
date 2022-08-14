@@ -14,19 +14,25 @@ import (
 )
 
 type SharedImageGalleryObservation struct {
+
+	// The ID of the Shared Image Gallery.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Unique Name for this Shared Image Gallery.
 	UniqueName *string `json:"uniqueName,omitempty" tf:"unique_name,omitempty"`
 }
 
 type SharedImageGalleryParameters struct {
 
+	// A description for this Shared Image Gallery.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the Shared Image Gallery. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -37,6 +43,7 @@ type SharedImageGalleryParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the Shared Image Gallery.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -55,7 +62,7 @@ type SharedImageGalleryStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SharedImageGallery is the Schema for the SharedImageGallerys API
+// SharedImageGallery is the Schema for the SharedImageGallerys API. Manages a Shared Image Gallery.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: SubnetNetworkSecurityGroupAssociation is the Schema for the SubnetNetworkSecurityGroupAssociations
-          API
+          API. Associates a
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,9 @@ spec:
               forProvider:
                 properties:
                   networkSecurityGroupId:
+                    description: The ID of the Network Security Group which should
+                      be associated with the Subnet. Changing this forces a new resource
+                      to be created.
                     type: string
                   networkSecurityGroupIdRef:
                     description: A Reference to a named object.
@@ -141,6 +144,8 @@ spec:
                         type: object
                     type: object
                   subnetId:
+                    description: The ID of the Subnet. Changing this forces a new
+                      resource to be created.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -394,6 +399,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Subnet.
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SQLRoleAssignment is the Schema for the SQLRoleAssignments API
+        description: SQLRoleAssignment is the Schema for the SQLRoleAssignments API.
+          Manages a Cosmos DB SQL Role Assignment.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   accountName:
+                    description: The name of the Cosmos DB Account. Changing this
+                      forces a new resource to be created.
                     type: string
                   accountNameRef:
                     description: A Reference to a named object.
@@ -139,8 +142,13 @@ spec:
                         type: object
                     type: object
                   principalId:
+                    description: The ID of the Principal  in Azure Active Directory.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group in which the Cosmos
+                      DB SQL Role Assignment is created. Changing this forces a new
+                      resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -216,6 +224,7 @@ spec:
                         type: object
                     type: object
                   roleDefinitionId:
+                    description: The resource ID of the Cosmos DB SQL Role Definition.
                     type: string
                   roleDefinitionIdRef:
                     description: A Reference to a named object.
@@ -291,6 +300,9 @@ spec:
                         type: object
                     type: object
                   scope:
+                    description: The data plane resource path for which access is
+                      being granted through this Cosmos DB SQL Role Assignment. Changing
+                      this forces a new resource to be created.
                     type: string
                 required:
                 - principalId
@@ -473,6 +485,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Cosmos DB SQL Role Assignment.
                     type: string
                 type: object
               conditions:

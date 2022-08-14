@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Key is the Schema for the Keys API
+        description: Key is the Schema for the Keys API. Manages a Key Vault Key.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,18 +64,36 @@ spec:
               forProvider:
                 properties:
                   curve:
+                    description: Specifies the curve to use when creating an EC key.
+                      Possible values are P-256, P-256K, P-384, and P-521. This field
+                      will be required in a future release if key_type is EC or EC-HSM.
+                      The API will default to P-256 if nothing is specified. Changing
+                      this forces a new resource to be created.
                     type: string
                   expirationDate:
+                    description: Expiration UTC datetime .
                     type: string
                   keyOpts:
+                    description: 'A list of JSON web key operations. Possible values
+                      include: decrypt, encrypt, sign, unwrapKey, verify and wrapKey.
+                      Please note these values are case sensitive.'
                     items:
                       type: string
                     type: array
                   keySize:
+                    description: 'Specifies the Size of the RSA key to create in bytes.
+                      For example, 1024 or 2048. Note: This field is required if key_type
+                      is RSA or RSA-HSM. Changing this forces a new resource to be
+                      created.'
                     type: number
                   keyType:
+                    description: Specifies the Key Type to use for this Key Vault
+                      Key. Possible values are EC , EC-HSM, Oct , RSA and RSA-HSM.
+                      Changing this forces a new resource to be created.
                     type: string
                   keyVaultId:
+                    description: The ID of the Key Vault where the Key should be created.
+                      Changing this forces a new resource to be created.
                     type: string
                   keyVaultIdRef:
                     description: A Reference to a named object.
@@ -151,10 +169,12 @@ spec:
                         type: object
                     type: object
                   notBeforeDate:
+                    description: Key not usable before the provided UTC datetime .
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - keyOpts
@@ -337,22 +357,32 @@ spec:
               atProvider:
                 properties:
                   e:
+                    description: The RSA public exponent of this Key Vault Key.
                     type: string
                   id:
+                    description: The Key Vault Key ID.
                     type: string
                   "n":
+                    description: The RSA modulus of this Key Vault Key.
                     type: string
                   publicKeyOpenssh:
+                    description: The OpenSSH encoded public key of this Key Vault
+                      Key.
                     type: string
                   publicKeyPem:
+                    description: The PEM encoded public key of this Key Vault Key.
                     type: string
                   version:
+                    description: The current version of the Key Vault Key.
                     type: string
                   versionlessId:
+                    description: The Base ID of the Key Vault Key.
                     type: string
                   x:
+                    description: The EC X component of this Key Vault Key.
                     type: string
                   "y":
+                    description: The EC Y component of this Key Vault Key.
                     type: string
                 type: object
               conditions:

@@ -18,28 +18,36 @@ type AllowRuleObservation struct {
 
 type AllowRuleParameters struct {
 
+	// Specifies which IP is not allowed to be connected to in current device group for inbound connection.
 	// +kubebuilder:validation:Optional
 	ConnectionFromIpsNotAllowed []*string `json:"connectionFromIpsNotAllowed,omitempty" tf:"connection_from_ips_not_allowed,omitempty"`
 
+	// Specifies which IP is not allowed to be connected to in current device group for outbound connection.
 	// +kubebuilder:validation:Optional
 	ConnectionToIpsNotAllowed []*string `json:"connectionToIpsNotAllowed,omitempty" tf:"connection_to_ips_not_allowed,omitempty"`
 
+	// Specifies which local user is not allowed to login in current device group.
 	// +kubebuilder:validation:Optional
 	LocalUsersNotAllowed []*string `json:"localUsersNotAllowed,omitempty" tf:"local_users_not_allowed,omitempty"`
 
+	// Specifies which process is not allowed to be executed in current device group.
 	// +kubebuilder:validation:Optional
 	ProcessesNotAllowed []*string `json:"processesNotAllowed,omitempty" tf:"processes_not_allowed,omitempty"`
 }
 
 type IOTSecurityDeviceGroupObservation struct {
+
+	// The ID of the Iot Security Device Group resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IOTSecurityDeviceGroupParameters struct {
 
+	// an allow_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	AllowRule []AllowRuleParameters `json:"allowRule,omitempty" tf:"allow_rule,omitempty"`
 
+	// The ID of the IoT Hub which to link the Security Device Group to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -51,6 +59,7 @@ type IOTSecurityDeviceGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
+	// One or more range_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	RangeRule []RangeRuleParameters `json:"rangeRule,omitempty" tf:"range_rule,omitempty"`
 }
@@ -60,15 +69,19 @@ type RangeRuleObservation struct {
 
 type RangeRuleParameters struct {
 
+	// Specifies the time range. represented in ISO 8601 duration format.
 	// +kubebuilder:validation:Required
 	Duration *string `json:"duration" tf:"duration,omitempty"`
 
+	// The maximum threshold in the given time window.
 	// +kubebuilder:validation:Required
 	Max *float64 `json:"max" tf:"max,omitempty"`
 
+	// The minimum threshold in the given time window.
 	// +kubebuilder:validation:Required
 	Min *float64 `json:"min" tf:"min,omitempty"`
 
+	// The type of supported rule type. Possible Values are ActiveConnectionsNotInAllowedRange, AmqpC2DMessagesNotInAllowedRange, MqttC2DMessagesNotInAllowedRange, HttpC2DMessagesNotInAllowedRange, AmqpC2DRejectedMessagesNotInAllowedRange, MqttC2DRejectedMessagesNotInAllowedRange, HttpC2DRejectedMessagesNotInAllowedRange, AmqpD2CMessagesNotInAllowedRange, MqttD2CMessagesNotInAllowedRange, HttpD2CMessagesNotInAllowedRange, DirectMethodInvokesNotInAllowedRange, FailedLocalLoginsNotInAllowedRange, FileUploadsNotInAllowedRange, QueuePurgesNotInAllowedRange, TwinUpdatesNotInAllowedRange and UnauthorizedOperationsNotInAllowedRange.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -87,7 +100,7 @@ type IOTSecurityDeviceGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IOTSecurityDeviceGroup is the Schema for the IOTSecurityDeviceGroups API
+// IOTSecurityDeviceGroup is the Schema for the IOTSecurityDeviceGroups API. Manages a Iot Security Device Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

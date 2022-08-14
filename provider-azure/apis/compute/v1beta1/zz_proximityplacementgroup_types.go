@@ -14,14 +14,18 @@ import (
 )
 
 type ProximityPlacementGroupObservation struct {
+
+	// The ID of the Proximity Placement Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ProximityPlacementGroupParameters struct {
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the availability set. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -32,6 +36,7 @@ type ProximityPlacementGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -50,7 +55,7 @@ type ProximityPlacementGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ProximityPlacementGroup is the Schema for the ProximityPlacementGroups API
+// ProximityPlacementGroup is the Schema for the ProximityPlacementGroups API. Manages a proximity placement group for virtual machines, virtual machine scale sets and availability sets.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

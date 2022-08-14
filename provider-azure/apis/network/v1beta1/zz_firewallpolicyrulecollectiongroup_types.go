@@ -36,18 +36,21 @@ type ApplicationRuleCollectionRuleObservation struct {
 
 type ApplicationRuleCollectionRuleParameters struct {
 
+	// The description which should be used for this rule.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
+	// Specifies a list of destination FQDN tags.
 	// +kubebuilder:validation:Optional
 	DestinationFqdnTags []*string `json:"destinationFqdnTags,omitempty" tf:"destination_fqdn_tags,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DestinationFqdns []*string `json:"destinationFqdns,omitempty" tf:"destination_fqdns,omitempty"`
 
+	// Specifies a list of destination URLs for which policy should hold. Needs Premium SKU for Firewall Policy. Conflicts with destination_fqdns.
 	// +kubebuilder:validation:Optional
 	DestinationUrls []*string `json:"destinationUrls,omitempty" tf:"destination_urls,omitempty"`
 
@@ -63,22 +66,28 @@ type ApplicationRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 
+	// Boolean specifying if TLS shall be terminated  or not . Must be  true when using destination_urls. Needs Premium SKU for Firewall Policy.
 	// +kubebuilder:validation:Optional
 	TerminateTLS *bool `json:"terminateTls,omitempty" tf:"terminate_tls,omitempty"`
 
+	// Specifies a list of web categories to which access is denied or allowed depending on the value of action above. Needs Premium SKU for Firewall Policy.
 	// +kubebuilder:validation:Optional
 	WebCategories []*string `json:"webCategories,omitempty" tf:"web_categories,omitempty"`
 }
 
 type FirewallPolicyRuleCollectionGroupObservation struct {
+
+	// The ID of the Firewall Policy Rule Collection Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FirewallPolicyRuleCollectionGroupParameters struct {
 
+	// One or more application_rule_collection blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ApplicationRuleCollection []ApplicationRuleCollectionParameters `json:"applicationRuleCollection,omitempty" tf:"application_rule_collection,omitempty"`
 
+	// The ID of the Firewall Policy where the Firewall Policy Rule Collection Group should exist. Changing this forces a new Firewall Policy Rule Collection Group to be created.
 	// +crossplane:generate:reference:type=FirewallPolicy
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -90,9 +99,11 @@ type FirewallPolicyRuleCollectionGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallPolicyIDSelector *v1.Selector `json:"firewallPolicyIdSelector,omitempty" tf:"-"`
 
+	// One or more nat_rule_collection blocks as defined below.
 	// +kubebuilder:validation:Optional
 	NATRuleCollection []NATRuleCollectionParameters `json:"natRuleCollection,omitempty" tf:"nat_rule_collection,omitempty"`
 
+	// One or more network_rule_collection blocks as defined below.
 	// +kubebuilder:validation:Optional
 	NetworkRuleCollection []NetworkRuleCollectionParameters `json:"networkRuleCollection,omitempty" tf:"network_rule_collection,omitempty"`
 
@@ -123,6 +134,7 @@ type NATRuleCollectionRuleObservation struct {
 
 type NATRuleCollectionRuleParameters struct {
 
+	// The destination IP address .
 	// +kubebuilder:validation:Optional
 	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
 
@@ -141,12 +153,15 @@ type NATRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 
+	// Specifies the translated address.
 	// +kubebuilder:validation:Optional
 	TranslatedAddress *string `json:"translatedAddress,omitempty" tf:"translated_address,omitempty"`
 
+	// Specifies the translated FQDN.
 	// +kubebuilder:validation:Optional
 	TranslatedFqdn *string `json:"translatedFqdn,omitempty" tf:"translated_fqdn,omitempty"`
 
+	// Specifies the translated port.
 	// +kubebuilder:validation:Required
 	TranslatedPort *float64 `json:"translatedPort" tf:"translated_port,omitempty"`
 }
@@ -180,6 +195,7 @@ type NetworkRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationFqdns []*string `json:"destinationFqdns,omitempty" tf:"destination_fqdns,omitempty"`
 
+	// Specifies a list of destination IP groups.
 	// +kubebuilder:validation:Optional
 	DestinationIPGroups []*string `json:"destinationIpGroups,omitempty" tf:"destination_ip_groups,omitempty"`
 
@@ -204,9 +220,11 @@ type ProtocolsObservation struct {
 
 type ProtocolsParameters struct {
 
+	// Port number of the protocol. Range is 0-64000.
 	// +kubebuilder:validation:Required
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
+	// Protocol type. Possible values are Http and Https.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -225,7 +243,7 @@ type FirewallPolicyRuleCollectionGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FirewallPolicyRuleCollectionGroup is the Schema for the FirewallPolicyRuleCollectionGroups API
+// FirewallPolicyRuleCollectionGroup is the Schema for the FirewallPolicyRuleCollectionGroups API. Manages a Firewall Policy Rule Collection Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

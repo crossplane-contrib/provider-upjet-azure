@@ -18,9 +18,11 @@ type AADAuthObservation struct {
 
 type AADAuthParameters struct {
 
+	// The identifier URI for AAD auth.
 	// +kubebuilder:validation:Optional
 	IdentifierURI *string `json:"identifierUri,omitempty" tf:"identifier_uri,omitempty"`
 
+	// The webhook application object Id for AAD auth.
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
@@ -36,6 +38,7 @@ type ArmRoleReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The arm role id.
 	// +kubebuilder:validation:Required
 	RoleID *string `json:"roleId" tf:"role_id,omitempty"`
 
@@ -48,15 +51,18 @@ type AutomationRunBookReceiverObservation struct {
 
 type AutomationRunBookReceiverParameters struct {
 
+	// The automation account ID which holds this runbook and authenticates to Azure resources.
 	// +kubebuilder:validation:Required
 	AutomationAccountID *string `json:"automationAccountId" tf:"automation_account_id,omitempty"`
 
+	// Indicates whether this instance is global runbook.
 	// +kubebuilder:validation:Required
 	IsGlobalRunBook *bool `json:"isGlobalRunbook" tf:"is_global_runbook,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The name for this runbook.
 	// +kubebuilder:validation:Required
 	RunBookName *string `json:"runbookName" tf:"runbook_name,omitempty"`
 
@@ -66,6 +72,7 @@ type AutomationRunBookReceiverParameters struct {
 	// +kubebuilder:validation:Optional
 	UseCommonAlertSchema *bool `json:"useCommonAlertSchema,omitempty" tf:"use_common_alert_schema,omitempty"`
 
+	// The resource id for webhook linked to this runbook.
 	// +kubebuilder:validation:Required
 	WebhookResourceID *string `json:"webhookResourceId" tf:"webhook_resource_id,omitempty"`
 }
@@ -87,12 +94,15 @@ type AzureFunctionReceiverObservation struct {
 
 type AzureFunctionReceiverParameters struct {
 
+	// The Azure resource ID of the function app.
 	// +kubebuilder:validation:Required
 	FunctionAppResourceID *string `json:"functionAppResourceId" tf:"function_app_resource_id,omitempty"`
 
+	// The function name in the function app.
 	// +kubebuilder:validation:Required
 	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
 
+	// The HTTP trigger url where HTTP request sent to.
 	// +kubebuilder:validation:Required
 	HTTPTriggerURL *string `json:"httpTriggerUrl" tf:"http_trigger_url,omitempty"`
 
@@ -123,6 +133,7 @@ type EventHubReceiverObservation struct {
 
 type EventHubReceiverParameters struct {
 
+	// The resource ID of the respective Event Hub.
 	// +kubebuilder:validation:Required
 	EventHubID *string `json:"eventHubId" tf:"event_hub_id,omitempty"`
 
@@ -141,18 +152,22 @@ type ItsmReceiverObservation struct {
 
 type ItsmReceiverParameters struct {
 
+	// The unique connection identifier of the ITSM connection.
 	// +kubebuilder:validation:Required
 	ConnectionID *string `json:"connectionId" tf:"connection_id,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The region of the workspace.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
+	// A JSON blob for the configurations of the ITSM action. CreateMultipleWorkItems option will be part of this blob as well.
 	// +kubebuilder:validation:Required
 	TicketConfiguration *string `json:"ticketConfiguration" tf:"ticket_configuration,omitempty"`
 
+	// The Azure Log Analytics workspace ID where this connection is defined. Format is <subscription id>|<workspace id>, for example 00000000-0000-0000-0000-000000000000|00000000-0000-0000-0000-000000000000.
 	// +kubebuilder:validation:Required
 	WorkspaceID *string `json:"workspaceId" tf:"workspace_id,omitempty"`
 }
@@ -162,12 +177,14 @@ type LogicAppReceiverObservation struct {
 
 type LogicAppReceiverParameters struct {
 
+	// The callback url where HTTP request sent to.
 	// +kubebuilder:validation:Required
 	CallbackURL *string `json:"callbackUrl" tf:"callback_url,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The Azure resource ID of the logic app.
 	// +kubebuilder:validation:Required
 	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
 
@@ -176,38 +193,50 @@ type LogicAppReceiverParameters struct {
 }
 
 type MonitorActionGroupObservation struct {
+
+	// The ID of the Action Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MonitorActionGroupParameters struct {
 
+	// One or more arm_role_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ArmRoleReceiver []ArmRoleReceiverParameters `json:"armRoleReceiver,omitempty" tf:"arm_role_receiver,omitempty"`
 
+	// One or more automation_runbook_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	AutomationRunBookReceiver []AutomationRunBookReceiverParameters `json:"automationRunbookReceiver,omitempty" tf:"automation_runbook_receiver,omitempty"`
 
+	// One or more azure_app_push_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	AzureAppPushReceiver []AzureAppPushReceiverParameters `json:"azureAppPushReceiver,omitempty" tf:"azure_app_push_receiver,omitempty"`
 
+	// One or more azure_function_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	AzureFunctionReceiver []AzureFunctionReceiverParameters `json:"azureFunctionReceiver,omitempty" tf:"azure_function_receiver,omitempty"`
 
+	// One or more email_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	EmailReceiver []EmailReceiverParameters `json:"emailReceiver,omitempty" tf:"email_receiver,omitempty"`
 
+	// Whether this action group is enabled. If an action group is not enabled, then none of its receivers will receive communications. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// One or more event_hub_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	EventHubReceiver []EventHubReceiverParameters `json:"eventHubReceiver,omitempty" tf:"event_hub_receiver,omitempty"`
 
+	// One or more itsm_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ItsmReceiver []ItsmReceiverParameters `json:"itsmReceiver,omitempty" tf:"itsm_receiver,omitempty"`
 
+	// One or more logic_app_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	LogicAppReceiver []LogicAppReceiverParameters `json:"logicAppReceiver,omitempty" tf:"logic_app_receiver,omitempty"`
 
+	// The name of the resource group in which to create the Action Group instance.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -218,18 +247,23 @@ type MonitorActionGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// One or more sms_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	SMSReceiver []SMSReceiverParameters `json:"smsReceiver,omitempty" tf:"sms_receiver,omitempty"`
 
+	// The short name of the action group. This will be used in SMS messages.
 	// +kubebuilder:validation:Required
 	ShortName *string `json:"shortName" tf:"short_name,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// One or more voice_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	VoiceReceiver []VoiceReceiverParameters `json:"voiceReceiver,omitempty" tf:"voice_receiver,omitempty"`
 
+	// One or more webhook_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	WebhookReceiver []WebhookReceiverParameters `json:"webhookReceiver,omitempty" tf:"webhook_receiver,omitempty"`
 }
@@ -269,6 +303,7 @@ type WebhookReceiverObservation struct {
 
 type WebhookReceiverParameters struct {
 
+	// The aad_auth block as defined below
 	// +kubebuilder:validation:Optional
 	AADAuth []AADAuthParameters `json:"aadAuth,omitempty" tf:"aad_auth,omitempty"`
 
@@ -296,7 +331,7 @@ type MonitorActionGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MonitorActionGroup is the Schema for the MonitorActionGroups API
+// MonitorActionGroup is the Schema for the MonitorActionGroups API. Manages an Action Group within Azure Monitor
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

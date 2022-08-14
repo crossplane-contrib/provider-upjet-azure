@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: OutputFunction is the Schema for the OutputFunctions API
+        description: OutputFunction is the Schema for the OutputFunctions API. Manages
+          a Stream Analytics Output Function.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,7 @@ spec:
               forProvider:
                 properties:
                   apiKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The API key for the Function.
                     properties:
                       key:
                         description: The key to select.
@@ -82,14 +82,23 @@ spec:
                     - namespace
                     type: object
                   batchMaxCount:
+                    description: The maximum number of events in each batch that's
+                      sent to the function. Defaults to 100.
                     type: number
                   batchMaxInBytes:
+                    description: The maximum batch size in bytes that's sent to the
+                      function. Defaults to 262144 .
                     type: number
                   functionApp:
+                    description: The name of the Function App.
                     type: string
                   functionName:
+                    description: The name of the function in the Function App.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Stream Analytics
+                      Output should exist. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -165,6 +174,8 @@ spec:
                         type: object
                     type: object
                   streamAnalyticsJobName:
+                    description: The name of the Stream Analytics Job. Changing this
+                      forces a new resource to be created.
                     type: string
                   streamAnalyticsJobNameRef:
                     description: A Reference to a named object.
@@ -421,6 +432,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Stream Analytics Output Function.
                     type: string
                 type: object
               conditions:

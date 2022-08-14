@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Server is the Schema for the Servers API
+        description: Server is the Schema for the Servers API. Manages a MariaDB Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +64,12 @@ spec:
               forProvider:
                 properties:
                   administratorLogin:
+                    description: The Administrator login for the MariaDB Server. Changing
+                      this forces a new resource to be created.
                     type: string
                   administratorLoginPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The Password associated with the administrator_login
+                      for the MariaDB Server.
                     properties:
                       key:
                         description: The key to select.
@@ -84,12 +86,24 @@ spec:
                     - namespace
                     type: object
                   autoGrowEnabled:
+                    description: Enable/Disable auto-growing of the storage. Storage
+                      auto-grow prevents your server from running out of storage and
+                      becoming read-only. If storage auto grow is enabled, the storage
+                      automatically grows without impacting the workload. The default
+                      value if not explicitly specified is true.
                     type: boolean
                   backupRetentionDays:
+                    description: Backup retention days for the server, supported values
+                      are between 7 and 35 days.
                     type: number
                   createMode:
+                    description: The creation mode. Can be used to restore or replicate
+                      existing servers. Possible values are Default, Replica, GeoRestore,
+                      and PointInTimeRestore. Defaults to Default.
                     type: string
                   creationSourceServerId:
+                    description: For creation modes other than Default, the source
+                      server ID to use.
                     type: string
                   creationSourceServerIdRef:
                     description: A Reference to a named object.
@@ -165,12 +179,28 @@ spec:
                         type: object
                     type: object
                   geoRedundantBackupEnabled:
+                    description: Turn Geo-redundant server backups on/off. This allows
+                      you to choose between locally redundant or geo-redundant backup
+                      storage in the General Purpose and Memory Optimized tiers. When
+                      the backups are stored in geo-redundant backup storage, they
+                      are not only stored within the region in which your server is
+                      hosted, but are also replicated to a paired data center. This
+                      provides better protection and ability to restore your server
+                      in a different region in the event of a disaster. This is not
+                      supported for the Basic tier.
                     type: boolean
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   publicNetworkAccessEnabled:
+                    description: Whether or not public network access is allowed for
+                      this server. Defaults to true.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the MariaDB Server. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -246,18 +276,33 @@ spec:
                         type: object
                     type: object
                   restorePointInTime:
+                    description: When create_mode is PointInTimeRestore, specifies
+                      the point in time to restore from creation_source_server_id.
                     type: string
                   skuName:
+                    description: Specifies the SKU Name for this MariaDB Server. The
+                      name of the SKU, follows the tier + family + cores pattern .
+                      For more information see the product documentation.
                     type: string
                   sslEnforcementEnabled:
+                    description: Specifies if SSL should be enforced on connections.
+                      Possible values are true and false.
                     type: boolean
                   storageMb:
+                    description: Max storage allowed for a server. Possible values
+                      are between 5120 MB  and 1024000MB  for the Basic SKU and between
+                      5120 MB  and 4096000 MB  for General Purpose/Memory Optimized
+                      SKUs. For more information see the product documentation.
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   version:
+                    description: Specifies the version of MariaDB to use. Possible
+                      values are 10.2 and 10.3. Changing this forces a new resource
+                      to be created.
                     type: string
                 required:
                 - location
@@ -442,8 +487,10 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the MariaDB Server.
                     type: string
                   id:
+                    description: The ID of the MariaDB Server.
                     type: string
                 type: object
               conditions:

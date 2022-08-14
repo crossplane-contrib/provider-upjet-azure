@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: IOTHubDPS is the Schema for the IOTHubDPSs API
+        description: IOTHubDPS is the Schema for the IOTHubDPSs API. Manages an IoT
+          Device Provisioning Service.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,17 +65,26 @@ spec:
               forProvider:
                 properties:
                   allocationPolicy:
+                    description: The allocation policy of the IoT Device Provisioning
+                      Service . Defaults to Hashed.
                     type: string
                   ipFilterRule:
+                    description: An ip_filter_rule block as defined below.
                     items:
                       properties:
                         action:
+                          description: The desired action for requests captured by
+                            this rule. Possible values are  Accept, Reject
                           type: string
                         ipMask:
+                          description: The IP address range in CIDR notation for the
+                            rule.
                           type: string
                         name:
                           type: string
                         target:
+                          description: Target for requests captured by this rule.
+                            Possible values are All, DeviceApi and ServiceApi.
                           type: string
                       required:
                       - action
@@ -83,15 +93,20 @@ spec:
                       type: object
                     type: array
                   linkedHub:
+                    description: A linked_hub block as defined below.
                     items:
                       properties:
                         allocationWeight:
+                          description: The weight applied to the IoT Hub. Defaults
+                            to 0.
                           type: number
                         applyAllocationPolicy:
+                          description: Determines whether to apply allocation policies
+                            to the IoT Hub. Defaults to true.
                           type: boolean
                         connectionStringSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: The connection string to connect to the IoT
+                            Hub.
                           properties:
                             key:
                               description: The key to select.
@@ -117,8 +132,13 @@ spec:
                   location:
                     type: string
                   publicNetworkAccessEnabled:
+                    description: Whether requests from Public Network are allowed.
+                      Defaults to true.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group under which the Iot
+                      Device Provisioning Service resource has to be created. Changing
+                      this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -194,9 +214,12 @@ spec:
                         type: object
                     type: object
                   sku:
+                    description: A sku block as defined below.
                     items:
                       properties:
                         capacity:
+                          description: The number of provisioned IoT Device Provisioning
+                            Service units.
                           type: number
                         name:
                           type: string
@@ -208,6 +231,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -390,19 +414,28 @@ spec:
               atProvider:
                 properties:
                   deviceProvisioningHostName:
+                    description: The device endpoint of the IoT Device Provisioning
+                      Service.
                     type: string
                   id:
+                    description: The ID of the IoT Device Provisioning Service.
                     type: string
                   idScope:
+                    description: The unique identifier of the IoT Device Provisioning
+                      Service.
                     type: string
                   linkedHub:
+                    description: A linked_hub block as defined below.
                     items:
                       properties:
                         hostname:
+                          description: The IoT Hub hostname.
                           type: string
                       type: object
                     type: array
                   serviceOperationsHostName:
+                    description: The service endpoint of the IoT Device Provisioning
+                      Service.
                     type: string
                 type: object
               conditions:

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ResourceGroupTemplateDeployment is the Schema for the ResourceGroupTemplateDeployments
-          API
+          API. Manages a Resource Group Template Deployment.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,12 +66,22 @@ spec:
               forProvider:
                 properties:
                   debugLevel:
+                    description: The Debug Level which should be used for this Resource
+                      Group Template Deployment. Possible values are none, requestContent,
+                      responseContent and requestContent, responseContent.
                     type: string
                   deploymentMode:
+                    description: The Deployment Mode for this Resource Group Template
+                      Deployment. Possible values are Complete  and Incremental .
                     type: string
                   parametersContent:
+                    description: The contents of the ARM Template parameters file
+                      - containing a JSON list of parameters.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Resource
+                      Group Template Deployment should exist. Changing this forces
+                      a new Resource Group Template Deployment to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -149,10 +159,17 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Resource Group Template Deployment.
                     type: object
                   templateContent:
+                    description: The contents of the ARM Template which should be
+                      deployed into this Resource Group. Cannot be specified with
+                      template_spec_version_id.
                     type: string
                   templateSpecVersionId:
+                    description: The ID of the Template Spec Version to deploy. Cannot
+                      be specified with template_content.
                     type: string
                 required:
                 - deploymentMode
@@ -335,8 +352,11 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Resource Group Template Deployment.
                     type: string
                   outputContent:
+                    description: The JSON Content of the Outputs of the ARM Template
+                      Deployment.
                     type: string
                 type: object
               conditions:

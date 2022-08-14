@@ -14,22 +14,29 @@ import (
 )
 
 type ManagedHardwareSecurityModuleObservation struct {
+
+	// The URI of the Key Vault Managed Hardware Security Module, used for performing operations on keys.
 	HSMURI *string `json:"hsmUri,omitempty" tf:"hsm_uri,omitempty"`
 
+	// The Key Vault Secret Managed Hardware Security Module ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ManagedHardwareSecurityModuleParameters struct {
 
+	// Specifies a list of administrators object IDs for the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	AdminObjectIds []*string `json:"adminObjectIds" tf:"admin_object_ids,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Is Purge Protection enabled for this Key Vault Managed Hardware Security Module? Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
+	// The name of the resource group in which to create the Key Vault Managed Hardware Security Module. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -40,15 +47,19 @@ type ManagedHardwareSecurityModuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The Name of the SKU used for this Key Vault Managed Hardware Security Module. Possible value is Standard_B1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 
+	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 days. Defaults to 90. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
+	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The Azure Active Directory Tenant ID that should be used for authenticating requests to the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
 }
@@ -67,7 +78,7 @@ type ManagedHardwareSecurityModuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ManagedHardwareSecurityModule is the Schema for the ManagedHardwareSecurityModules API
+// ManagedHardwareSecurityModule is the Schema for the ManagedHardwareSecurityModules API. Manages a Key Vault Managed Hardware Security Module.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,11 +14,14 @@ import (
 )
 
 type FlexibleServerConfigurationObservation struct {
+
+	// The ID of the MySQL Flexible Server Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FlexibleServerConfigurationParameters struct {
 
+	// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -29,6 +32,7 @@ type FlexibleServerConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=FlexibleServer
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
@@ -39,6 +43,7 @@ type FlexibleServerConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
+	// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -57,7 +62,7 @@ type FlexibleServerConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FlexibleServerConfiguration is the Schema for the FlexibleServerConfigurations API
+// FlexibleServerConfiguration is the Schema for the FlexibleServerConfigurations API. Sets a MySQL Flexible Server Configuration value on a MySQL Flexible Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

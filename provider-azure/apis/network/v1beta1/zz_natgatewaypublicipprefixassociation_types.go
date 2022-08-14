@@ -14,11 +14,14 @@ import (
 )
 
 type NATGatewayPublicIPPrefixAssociationObservation struct {
+
+	// The  ID of the Association between the NAT Gateway and the Public IP Prefix.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type NATGatewayPublicIPPrefixAssociationParameters struct {
 
+	// The ID of the NAT Gateway. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=NATGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +33,7 @@ type NATGatewayPublicIPPrefixAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
+	// The ID of the Public IP Prefix which this NAT Gateway which should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=PublicIPPrefix
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,7 +60,7 @@ type NATGatewayPublicIPPrefixAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NATGatewayPublicIPPrefixAssociation is the Schema for the NATGatewayPublicIPPrefixAssociations API
+// NATGatewayPublicIPPrefixAssociation is the Schema for the NATGatewayPublicIPPrefixAssociations API. Manages the association between a NAT Gateway and a Public IP Prefix.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

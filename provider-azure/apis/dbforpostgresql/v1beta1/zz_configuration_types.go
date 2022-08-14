@@ -14,14 +14,18 @@ import (
 )
 
 type ConfigurationObservation struct {
+
+	// The ID of the PostgreSQL Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ConfigurationParameters struct {
 
+	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -32,6 +36,7 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
@@ -42,6 +47,7 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
+	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -60,7 +66,7 @@ type ConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Configuration is the Schema for the Configurations API
+// Configuration is the Schema for the Configurations API. Sets a PostgreSQL Configuration value on a PostgreSQL Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

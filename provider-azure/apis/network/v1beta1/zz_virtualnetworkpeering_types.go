@@ -14,20 +14,31 @@ import (
 )
 
 type VirtualNetworkPeeringObservation struct {
+
+	// The ID of the Virtual Network Peering.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type VirtualNetworkPeeringParameters struct {
 
+	// Controls if forwarded traffic from  VMs
+	// in the remote virtual network is allowed. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AllowForwardedTraffic *bool `json:"allowForwardedTraffic,omitempty" tf:"allow_forwarded_traffic,omitempty"`
 
+	// Controls gatewayLinks can be used in the
+	// remote virtual network’s link to the local virtual network.
 	// +kubebuilder:validation:Optional
 	AllowGatewayTransit *bool `json:"allowGatewayTransit,omitempty" tf:"allow_gateway_transit,omitempty"`
 
+	// Controls if the VMs in the remote
+	// virtual network can access VMs in the local virtual network. Defaults to
+	// true.
 	// +kubebuilder:validation:Optional
 	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
 
+	// The full Azure resource ID of the
+	// remote virtual network.  Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -39,6 +50,9 @@ type VirtualNetworkPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteVirtualNetworkIDSelector *v1.Selector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
 
+	// The name of the resource group in which to
+	// create the virtual network peering. Changing this forces a new resource to be
+	// created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -49,9 +63,17 @@ type VirtualNetworkPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Controls if remote gateways can be used on
+	// the local virtual network. If the flag is set to true, and
+	// allow_gateway_transit on the remote peering is also true, virtual network will
+	// use gateways of remote virtual network for transit. Only one peering can
+	// have this flag set to true. This flag cannot be set if virtual network
+	// already has a gateway. Defaults to false.
 	// +kubebuilder:validation:Optional
 	UseRemoteGateways *bool `json:"useRemoteGateways,omitempty" tf:"use_remote_gateways,omitempty"`
 
+	// The name of the virtual network. Changing
+	// this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetwork
 	// +kubebuilder:validation:Optional
 	VirtualNetworkName *string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`
@@ -77,7 +99,7 @@ type VirtualNetworkPeeringStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VirtualNetworkPeering is the Schema for the VirtualNetworkPeerings API
+// VirtualNetworkPeering is the Schema for the VirtualNetworkPeerings API. Manages a virtual network peering which allows resources to access other resources in the linked virtual network.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: HPCCacheAccessPolicy is the Schema for the HPCCacheAccessPolicys
-          API
+          API. Manages a HPC Cache Access Policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,23 +65,44 @@ spec:
               forProvider:
                 properties:
                   accessRule:
+                    description: Up to three access_rule blocks as defined below.
                     items:
                       properties:
                         access:
+                          description: 'The access level for this rule. Possible values
+                            are: rw, ro, no.'
                           type: string
                         anonymousGid:
+                          description: The anonymous GID used when root_squash_enabled
+                            is true.
                           type: number
                         anonymousUid:
+                          description: The anonymous UID used when root_squash_enabled
+                            is true.
                           type: number
                         filter:
+                          description: 'The filter applied to the scope for this rule.
+                            The filter''s format depends on its scope: default scope
+                            matches all clients and has no filter value; network scope
+                            takes a CIDR format; host takes an IP address or fully
+                            qualified domain name. If a client does not match any
+                            filter rule and there is no default rule, access is denied.'
                           type: string
                         rootSquashEnabled:
+                          description: Whether to enable root squash? Defaults to
+                            false.
                           type: boolean
                         scope:
+                          description: 'The scope of this rule. The scope and  the
+                            filter determine which clients match the rule. Possible
+                            values are: default, network, host.'
                           type: string
                         submountAccessEnabled:
+                          description: Whether allow access to subdirectories under
+                            the root export? Defaults to false.
                           type: boolean
                         suidEnabled:
+                          description: Whether SUID is allowed? Defaults to false.
                           type: boolean
                       required:
                       - access
@@ -89,6 +110,9 @@ spec:
                       type: object
                     type: array
                   hpcCacheId:
+                    description: The ID of the HPC Cache that this HPC Cache Access
+                      Policy resides in. Changing this forces a new HPC Cache Access
+                      Policy to be created.
                     type: string
                   hpcCacheIdRef:
                     description: A Reference to a named object.
@@ -344,6 +368,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the HPC Cache Access Policy.
                     type: string
                 type: object
               conditions:

@@ -14,20 +14,26 @@ import (
 )
 
 type EncryptionScopeObservation struct {
+
+	// The ID of the Storage Encryption Scope.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type EncryptionScopeParameters struct {
 
+	// Is a secondary layer of encryption with Platform Managed Keys for data applied?
 	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionRequired *bool `json:"infrastructureEncryptionRequired,omitempty" tf:"infrastructure_encryption_required,omitempty"`
 
+	// The ID of the Key Vault Key. Required when source is Microsoft.KeyVault.
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
+	// The source of the Storage Encryption Scope. Possible values are Microsoft.KeyVault and Microsoft.Storage.
 	// +kubebuilder:validation:Required
 	Source *string `json:"source" tf:"source,omitempty"`
 
+	// The ID of the Storage Account where this Storage Encryption Scope is created. Changing this forces a new Storage Encryption Scope to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -54,7 +60,7 @@ type EncryptionScopeStatus struct {
 
 // +kubebuilder:object:root=true
 
-// EncryptionScope is the Schema for the EncryptionScopes API
+// EncryptionScope is the Schema for the EncryptionScopes API. Manages a Storage Encryption Scope.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
