@@ -462,10 +462,15 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   targetResourceLocation:
-                    description: The location of the target resource.
+                    description: The location of the target resource. The location
+                      of the target pluginsdk. Required when using subscription, resource
+                      group scope or multiple scopes.
                     type: string
                   targetResourceType:
-                    description: The resource type  of the target resource.
+                    description: The resource type  of the target resource. The resource
+                      type (e.g. Microsoft.Compute/virtualMachines) of the target
+                      pluginsdk. Required when using subscription, resource group
+                      scope or multiple scopes.
                     type: string
                   windowSize:
                     description: The period of time that is used to monitor alert

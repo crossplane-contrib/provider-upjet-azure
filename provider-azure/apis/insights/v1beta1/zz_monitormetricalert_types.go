@@ -225,10 +225,12 @@ type MonitorMetricAlertParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The location of the target resource.
+	// The location of the target pluginsdk. Required when using subscription, resource group scope or multiple scopes.
 	// +kubebuilder:validation:Optional
 	TargetResourceLocation *string `json:"targetResourceLocation,omitempty" tf:"target_resource_location,omitempty"`
 
 	// The resource type  of the target resource.
+	// The resource type (e.g. Microsoft.Compute/virtualMachines) of the target pluginsdk. Required when using subscription, resource group scope or multiple scopes.
 	// +kubebuilder:validation:Optional
 	TargetResourceType *string `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 
