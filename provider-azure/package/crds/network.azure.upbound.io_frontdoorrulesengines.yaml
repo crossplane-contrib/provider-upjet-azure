@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FrontdoorRulesEngine is the Schema for the FrontdoorRulesEngines
-          API
+          API. Manages an Azure Front Door Rules Engine configuration and rules.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -67,6 +67,8 @@ spec:
                   enabled:
                     type: boolean
                   frontdoorName:
+                    description: The name of the Front Door instance. Changing this
+                      forces a new resource to be created.
                     type: string
                   frontdoorNameRef:
                     description: A Reference to a named object.
@@ -142,6 +144,8 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -217,15 +221,20 @@ spec:
                         type: object
                     type: object
                   rule:
+                    description: A rule block as defined below.
                     items:
                       properties:
                         action:
+                          description: A rule_action block as defined below.
                           items:
                             properties:
                               requestHeader:
+                                description: A request_header block as defined below.
                                 items:
                                   properties:
                                     headerActionType:
+                                      description: can be set to Overwrite, Append
+                                        or Delete.
                                       type: string
                                     headerName:
                                       type: string
@@ -234,9 +243,12 @@ spec:
                                   type: object
                                 type: array
                               responseHeader:
+                                description: A response_header block as defined below.
                                 items:
                                   properties:
                                     headerActionType:
+                                      description: can be set to Overwrite, Append
+                                        or Delete.
                                       type: string
                                     headerName:
                                       type: string
@@ -247,15 +259,29 @@ spec:
                             type: object
                           type: array
                         matchCondition:
+                          description: One or more match_condition block as defined
+                            below.
                           items:
                             properties:
                               negateCondition:
+                                description: can be set to true or false to negate
+                                  the given condition. Defaults to true.
                                 type: boolean
                               operator:
+                                description: can be set to Any, IPMatch, GeoMatch,
+                                  Equal, Contains, LessThan, GreaterThan, LessThanOrEqual,
+                                  GreaterThanOrEqual, BeginsWith or EndsWith
                                 type: string
                               selector:
+                                description: match against a specific key when variable
+                                  is set to PostArgs or RequestHeader. It cannot be
+                                  used with QueryString and RequestMethod. Defaults
+                                  to null.
                                 type: string
                               transform:
+                                description: can be set to one or more values out
+                                  of Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                  and UrlEncode
                                 items:
                                   type: string
                                 type: array
@@ -264,6 +290,10 @@ spec:
                                   type: string
                                 type: array
                               variable:
+                                description: can be set to IsMobile, RemoteAddr, RequestMethod,
+                                  QueryString, PostArgs, RequestURI, RequestPath,
+                                  RequestFilename, RequestFilenameExtension,RequestHeader,RequestBody
+                                  or RequestScheme.
                                 type: string
                             required:
                             - operator
@@ -272,6 +302,8 @@ spec:
                         name:
                           type: string
                         priority:
+                          description: Priority of the rule, must be unique per rules
+                            engine definition.
                           type: number
                       required:
                       - name

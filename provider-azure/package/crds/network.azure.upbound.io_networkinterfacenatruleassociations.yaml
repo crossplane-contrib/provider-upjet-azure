@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: NetworkInterfaceNatRuleAssociation is the Schema for the NetworkInterfaceNatRuleAssociations
-          API
+          API. Manages the association between a Network Interface and a Load Balancer's
+          NAT Rule.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +67,14 @@ spec:
               forProvider:
                 properties:
                   ipConfigurationName:
+                    description: The Name of the IP Configuration within the Network
+                      Interface which should be connected to the NAT Rule. Changing
+                      this forces a new resource to be created.
                     type: string
                   natRuleId:
+                    description: The ID of the Load Balancer NAT Rule which this Network
+                      Interface which should be connected to. Changing this forces
+                      a new resource to be created.
                     type: string
                   natRuleIdRef:
                     description: A Reference to a named object.
@@ -143,6 +150,8 @@ spec:
                         type: object
                     type: object
                   networkInterfaceId:
+                    description: The ID of the Network Interface. Changing this forces
+                      a new resource to be created.
                     type: string
                   networkInterfaceIdRef:
                     description: A Reference to a named object.
@@ -398,6 +407,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The  ID of the Association between the Network Interface
+                      and the Load Balancers NAT Rule.
                     type: string
                 type: object
               conditions:

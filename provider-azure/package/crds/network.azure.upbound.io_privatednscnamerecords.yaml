@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: PrivateDNSCNAMERecord is the Schema for the PrivateDNSCNAMERecords
-          API
+          API. Manages a Private DNS CNAME Record.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,11 @@ spec:
               forProvider:
                 properties:
                   record:
+                    description: The target of the CNAME.
                     type: string
                   resourceGroupName:
+                    description: Specifies the resource group where the resource exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -144,10 +147,14 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   ttl:
+                    description: The Time To Live  of the DNS record in seconds.
                     type: number
                   zoneName:
+                    description: Specifies the Private DNS Zone where the resource
+                      exists. Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
                     description: A Reference to a named object.
@@ -404,8 +411,10 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the DNS CNAME Record.
                     type: string
                   id:
+                    description: The Private DNS CNAME Record ID.
                     type: string
                 type: object
               conditions:

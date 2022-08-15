@@ -14,13 +14,17 @@ import (
 )
 
 type DatabaseObservation struct {
+
+	// The Kusto Cluster ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The size of the database in bytes.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 }
 
 type DatabaseParameters struct {
 
+	// Specifies the name of the Kusto Cluster this database will be added to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -31,12 +35,15 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
+	// The time the data that should be kept in cache for fast queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
 	// +kubebuilder:validation:Optional
 	HotCachePeriod *string `json:"hotCachePeriod,omitempty" tf:"hot_cache_period,omitempty"`
 
+	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -47,6 +54,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The time the data should be kept before it stops being accessible to queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
 	// +kubebuilder:validation:Optional
 	SoftDeletePeriod *string `json:"softDeletePeriod,omitempty" tf:"soft_delete_period,omitempty"`
 }
@@ -65,7 +73,7 @@ type DatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Database is the Schema for the Databases API
+// Database is the Schema for the Databases API. Manages Kusto / Data Explorer Database
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

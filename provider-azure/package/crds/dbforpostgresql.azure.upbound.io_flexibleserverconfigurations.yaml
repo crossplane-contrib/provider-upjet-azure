@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: FlexibleServerConfiguration is the Schema for the FlexibleServerConfigurations
-          API
+          API. Sets a PostgreSQL Configuration value on a Azure PostgreSQL Flexible
+          Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +67,14 @@ spec:
               forProvider:
                 properties:
                   name:
+                    description: Specifies the name of the PostgreSQL Configuration,
+                      which needs to be a valid PostgreSQL configuration name. Changing
+                      this forces a new resource to be created.
                     type: string
                   serverId:
+                    description: The ID of the PostgreSQL Flexible Server where we
+                      want to change configuration. Changing this forces a new PostgreSQL
+                      Flexible Server Configuration resource.
                     type: string
                   serverIdRef:
                     description: A Reference to a named object.
@@ -143,6 +150,8 @@ spec:
                         type: object
                     type: object
                   value:
+                    description: Specifies the value of the PostgreSQL Configuration.
+                      See the PostgreSQL documentation for valid values.
                     type: string
                 required:
                 - name
@@ -326,6 +335,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the PostgreSQL Configuration.
                     type: string
                 type: object
               conditions:

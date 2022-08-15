@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LoadBalancerRule is the Schema for the LoadBalancerRules API
+        description: LoadBalancerRule is the Schema for the LoadBalancerRules API.
+          Manages a Load Balancer Rule.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,26 +65,56 @@ spec:
               forProvider:
                 properties:
                   backendAddressPoolIds:
+                    description: A list of reference to a Backend Address Pool over
+                      which this Load Balancing Rule operates.
                     items:
                       type: string
                     type: array
                   backendPort:
+                    description: The port used for internal connections on the endpoint.
+                      Possible values range between 0 and 65535, inclusive.
                     type: number
                   disableOutboundSnat:
+                    description: Is snat enabled for this Load Balancer Rule? Default
+                      false.
                     type: boolean
                   enableFloatingIp:
+                    description: Are the Floating IPs enabled for this Load Balncer
+                      Rule? A "floating” IP is reassigned to a secondary server in
+                      case the primary server fails. Required to configure a SQL AlwaysOn
+                      Availability Group. Defaults to false.
                     type: boolean
                   enableTcpReset:
+                    description: Is TCP Reset enabled for this Load Balancer Rule?
+                      Defaults to false.
                     type: boolean
                   frontendIpConfigurationName:
+                    description: The name of the frontend IP configuration to which
+                      the rule is associated.
                     type: string
                   frontendPort:
+                    description: The port for the external endpoint. Port numbers
+                      for each Rule must be unique within the Load Balancer. Possible
+                      values range between 0 and 65534, inclusive.
                     type: number
                   idleTimeoutInMinutes:
+                    description: Specifies the idle timeout in minutes for TCP connections.
+                      Valid values are between 4 and 30 minutes. Defaults to 4 minutes.
                     type: number
                   loadDistribution:
+                    description: 'Specifies the load balancing distribution type to
+                      be used by the Load Balancer. Possible values are: Default –
+                      The load balancer is configured to use a 5 tuple hash to map
+                      traffic to available servers. SourceIP – The load balancer is
+                      configured to use a 2 tuple hash to map traffic to available
+                      servers. SourceIPProtocol – The load balancer is configured
+                      to use a 3 tuple hash to map traffic to available servers. Also
+                      known as Session Persistence, where  the options are called
+                      None, Client IP and Client IP and Protocol respectively.'
                     type: string
                   loadbalancerId:
+                    description: The ID of the Load Balancer in which to create the
+                      Rule.
                     type: string
                   loadbalancerIdRef:
                     description: A Reference to a named object.
@@ -159,8 +190,12 @@ spec:
                         type: object
                     type: object
                   probeId:
+                    description: A reference to a Probe used by this Load Balancing
+                      Rule.
                     type: string
                   protocol:
+                    description: The transport protocol for the external endpoint.
+                      Possible values are Tcp, Udp or All.
                     type: string
                 required:
                 - backendPort
@@ -347,6 +382,7 @@ spec:
                   frontendIpConfigurationId:
                     type: string
                   id:
+                    description: The ID of the Load Balancer Rule.
                     type: string
                 type: object
               conditions:

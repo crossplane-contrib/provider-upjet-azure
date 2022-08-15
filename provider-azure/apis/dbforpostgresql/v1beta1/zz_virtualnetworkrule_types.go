@@ -14,14 +14,18 @@ import (
 )
 
 type VirtualNetworkRuleObservation struct {
+
+	// The ID of the PostgreSQL Virtual Network Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type VirtualNetworkRuleParameters struct {
 
+	// Should the Virtual Network Rule be created before the Subnet has the Virtual Network Service Endpoint enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
+	// The name of the resource group where the PostgreSQL server resides. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -32,6 +36,7 @@ type VirtualNetworkRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the SQL Server to which this PostgreSQL virtual network rule will be applied to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
@@ -42,6 +47,7 @@ type VirtualNetworkRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
+	// The ID of the subnet that the PostgreSQL server will be connected to.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -68,7 +74,7 @@ type VirtualNetworkRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VirtualNetworkRule is the Schema for the VirtualNetworkRules API
+// VirtualNetworkRule is the Schema for the VirtualNetworkRules API. Manages a PostgreSQL Virtual Network Rule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

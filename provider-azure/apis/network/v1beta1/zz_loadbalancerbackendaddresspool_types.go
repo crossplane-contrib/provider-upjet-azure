@@ -14,17 +14,23 @@ import (
 )
 
 type LoadBalancerBackendAddressPoolObservation struct {
+
+	// The Backend IP Configurations associated with this Backend Address Pool.
 	BackendIPConfigurations []*string `json:"backendIpConfigurations,omitempty" tf:"backend_ip_configurations,omitempty"`
 
+	// The ID of the Backend Address Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Load Balancing Rules associated with this Backend Address Pool.
 	LoadBalancingRules []*string `json:"loadBalancingRules,omitempty" tf:"load_balancing_rules,omitempty"`
 
+	// An array of the Load Balancing Outbound Rules associated with this Backend Address Pool.
 	OutboundRules []*string `json:"outboundRules,omitempty" tf:"outbound_rules,omitempty"`
 }
 
 type LoadBalancerBackendAddressPoolParameters struct {
 
+	// The ID of the Load Balancer in which to create the Backend Address Pool.
 	// +crossplane:generate:reference:type=LoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -36,6 +42,7 @@ type LoadBalancerBackendAddressPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
+	// One or more tunnel_interface blocks as defined below.
 	// +kubebuilder:validation:Optional
 	TunnelInterface []TunnelInterfaceParameters `json:"tunnelInterface,omitempty" tf:"tunnel_interface,omitempty"`
 }
@@ -45,15 +52,19 @@ type TunnelInterfaceObservation struct {
 
 type TunnelInterfaceParameters struct {
 
+	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
 	// +kubebuilder:validation:Required
 	Identifier *float64 `json:"identifier" tf:"identifier,omitempty"`
 
+	// The port number that this Gateway Lodbalancer Tunnel Interface listens to.
 	// +kubebuilder:validation:Required
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
+	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are Native and VXLAN.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
+	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are Internal and External.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -72,7 +83,7 @@ type LoadBalancerBackendAddressPoolStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LoadBalancerBackendAddressPool is the Schema for the LoadBalancerBackendAddressPools API
+// LoadBalancerBackendAddressPool is the Schema for the LoadBalancerBackendAddressPools API. Manages a Load Balancer Backend Address Pool.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

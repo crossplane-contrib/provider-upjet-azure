@@ -59,6 +59,8 @@ type MonthlyScheduleParameters struct {
 }
 
 type SnapshotPolicyObservation struct {
+
+	// The ID of the NetApp Snapshot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -111,6 +113,7 @@ type WeeklyScheduleObservation struct {
 
 type WeeklyScheduleParameters struct {
 
+	// List of the week days using English names when the snapshots will be created.
 	// +kubebuilder:validation:Required
 	DaysOfWeek []*string `json:"daysOfWeek" tf:"days_of_week,omitempty"`
 
@@ -138,7 +141,7 @@ type SnapshotPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SnapshotPolicy is the Schema for the SnapshotPolicys API
+// SnapshotPolicy is the Schema for the SnapshotPolicys API. Manages a NetApp Snapshot Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

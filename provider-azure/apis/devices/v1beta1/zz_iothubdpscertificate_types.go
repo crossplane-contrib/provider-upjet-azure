@@ -14,14 +14,18 @@ import (
 )
 
 type IOTHubDPSCertificateObservation struct {
+
+	// The ID of the IoTHub Device Provisioning Service Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IOTHubDPSCertificateParameters struct {
 
+	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
 	// +kubebuilder:validation:Required
 	CertificateContentSecretRef v1.SecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
+	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=IOTHubDPS
 	// +kubebuilder:validation:Optional
 	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
@@ -32,6 +36,7 @@ type IOTHubDPSCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTDPSNameSelector *v1.Selector `json:"iotDpsNameSelector,omitempty" tf:"-"`
 
+	// The name of the resource group under which the Iot Device Provisioning Service Certificate resource has to be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -57,7 +62,7 @@ type IOTHubDPSCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IOTHubDPSCertificate is the Schema for the IOTHubDPSCertificates API
+// IOTHubDPSCertificate is the Schema for the IOTHubDPSCertificates API. Manages an IoT Device Provisioning Service Certificate.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

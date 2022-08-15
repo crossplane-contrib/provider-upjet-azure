@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MonitorPrivateLinkScope is the Schema for the MonitorPrivateLinkScopes
-          API
+          API. Manages an Azure Monitor Private Link Scope
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,9 @@ spec:
               forProvider:
                 properties:
                   resourceGroupName:
+                    description: The name of the Resource Group where the Azure Monitor
+                      Private Link Scope should exist. Changing this forces a new
+                      resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -143,6 +146,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Azure Monitor Private Link Scope.
                     type: object
                 type: object
               providerConfigRef:
@@ -323,6 +328,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Azure Monitor Private Link Scope.
                     type: string
                 type: object
               conditions:

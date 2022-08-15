@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ExpressRouteCircuit is the Schema for the ExpressRouteCircuits
-          API
+          API. Manages an ExpressRoute circuit.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,18 +65,34 @@ spec:
               forProvider:
                 properties:
                   allowClassicOperations:
+                    description: Allow the circuit to interact with classic  resources.
+                      Defaults to false.
                     type: boolean
                   bandwidthInGbps:
+                    description: The bandwidth in Gbps of the circuit being created
+                      on the Express Route Port.
                     type: number
                   bandwidthInMbps:
+                    description: The bandwidth in Mbps of the circuit being created
+                      on the Service Provider.
                     type: number
                   expressRoutePortId:
+                    description: The ID of the Express Route Port this Express Route
+                      Circuit is based on.
                     type: string
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   peeringLocation:
+                    description: The name of the peering location and not the Azure
+                      resource location. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the ExpressRoute circuit. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -152,13 +168,21 @@ spec:
                         type: object
                     type: object
                   serviceProviderName:
+                    description: The name of the ExpressRoute Service Provider. Changing
+                      this forces a new resource to be created.
                     type: string
                   sku:
+                    description: A sku block for the ExpressRoute circuit as documented
+                      below.
                     items:
                       properties:
                         family:
+                          description: The billing mode for bandwidth. Possible values
+                            are MeteredData or UnlimitedData.
                           type: string
                         tier:
+                          description: The service tier. Possible values are Basic,
+                            Local, Standard or Premium.
                           type: string
                       required:
                       - family
@@ -168,6 +192,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -350,8 +375,12 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the ExpressRoute circuit.
                     type: string
                   serviceProviderProvisioningState:
+                    description: The ExpressRoute circuit provisioning state from
+                      your chosen service provider. Possible values are NotProvisioned,
+                      Provisioning, Provisioned, and Deprovisioning.
                     type: string
                 type: object
               conditions:

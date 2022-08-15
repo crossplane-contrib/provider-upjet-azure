@@ -14,11 +14,14 @@ import (
 )
 
 type PrivateDNSZoneVirtualNetworkLinkObservation struct {
+
+	// The ID of the Private DNS Zone Virtual Network Link.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 
+	// The name of the Private DNS zone . Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=PrivateDNSZone
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneName *string `json:"privateDnsZoneName,omitempty" tf:"private_dns_zone_name,omitempty"`
@@ -29,9 +32,11 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneNameSelector *v1.Selector `json:"privateDnsZoneNameSelector,omitempty" tf:"-"`
 
+	// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
 
+	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -42,9 +47,11 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -71,7 +78,7 @@ type PrivateDNSZoneVirtualNetworkLinkStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PrivateDNSZoneVirtualNetworkLink is the Schema for the PrivateDNSZoneVirtualNetworkLinks API
+// PrivateDNSZoneVirtualNetworkLink is the Schema for the PrivateDNSZoneVirtualNetworkLinks API. Manages a Private DNS Zone Virtual Network Link.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

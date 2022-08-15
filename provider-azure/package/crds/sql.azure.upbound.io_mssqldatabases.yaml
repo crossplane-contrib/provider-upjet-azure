@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: MSSQLDatabase is the Schema for the MSSQLDatabases API
+        description: MSSQLDatabase is the Schema for the MSSQLDatabases API. Manages
+          a MS SQL Database.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,51 +65,109 @@ spec:
               forProvider:
                 properties:
                   autoPauseDelayInMinutes:
+                    description: Time in minutes after which database is automatically
+                      paused. A value of -1 means that automatic pause is disabled.
+                      This property is only settable for General Purpose Serverless
+                      databases.
                     type: number
                   collation:
+                    description: Specifies the collation of the database. Changing
+                      this forces a new resource to be created.
                     type: string
                   createMode:
+                    description: The create mode of the database. Possible values
+                      are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery,
+                      Restore, RestoreExternalBackup, RestoreExternalBackupSecondary,
+                      RestoreLongTermRetentionBackup and Secondary.
                     type: string
                   creationSourceDatabaseId:
+                    description: The ID of the source database from which to create
+                      the new database. This should only be used for databases with
+                      create_mode values that use another database as reference. Changing
+                      this forces a new resource to be created.
                     type: string
                   elasticPoolId:
+                    description: Specifies the ID of the elastic pool containing this
+                      database.
                     type: string
                   geoBackupEnabled:
+                    description: A boolean that specifies if the Geo Backup Policy
+                      is enabled.
                     type: boolean
                   ledgerEnabled:
+                    description: A boolean that specifies if this is a ledger database.
+                      Defaults to false. Changing this forces a new resource to be
+                      created.
                     type: boolean
                   licenseType:
+                    description: Specifies the license type applied to this database.
+                      Possible values are LicenseIncluded and BasePrice.
                     type: string
                   longTermRetentionPolicy:
+                    description: A long_term_retention_policy block as defined below.
                     items:
                       properties:
                         monthlyRetention:
+                          description: The monthly retention policy for an LTR backup
+                            in an ISO 8601 format. Valid value is between 1 to 120
+                            months. e.g. P1Y, P1M, P4W or P30D.
                           type: string
                         weekOfYear:
+                          description: The week of year to take the yearly backup.
+                            Value has to be between 1 and 52.
                           type: number
                         weeklyRetention:
+                          description: The weekly retention policy for an LTR backup
+                            in an ISO 8601 format. Valid value is between 1 to 520
+                            weeks. e.g. P1Y, P1M, P1W or P7D.
                           type: string
                         yearlyRetention:
+                          description: The yearly retention policy for an LTR backup
+                            in an ISO 8601 format. Valid value is between 1 to 10
+                            years. e.g. P1Y, P12M, P52W or P365D.
                           type: string
                       type: object
                     type: array
                   maxSizeGb:
+                    description: The max size of the database in gigabytes.
                     type: number
                   minCapacity:
+                    description: Minimal capacity that database will always have allocated,
+                      if not paused. This property is only settable for General Purpose
+                      Serverless databases.
                     type: number
                   readReplicaCount:
+                    description: The number of readonly secondary replicas associated
+                      with the database to which readonly application intent connections
+                      may be routed. This property is only settable for Hyperscale
+                      edition databases.
                     type: number
                   readScale:
+                    description: If enabled, connections that have application intent
+                      set to readonly in their connection string may be routed to
+                      a readonly secondary replica. This property is only settable
+                      for Premium and Business Critical databases.
                     type: boolean
                   recoverDatabaseId:
+                    description: The ID of the database to be recovered. This property
+                      is only applicable when the create_mode is Recovery.
                     type: string
                   restoreDroppedDatabaseId:
+                    description: The ID of the database to be restored. This property
+                      is only applicable when the create_mode is Restore.
                     type: string
                   restorePointInTime:
+                    description: Specifies the point in time  of the source database
+                      that will be restored to create the new database. This property
+                      is only settable for create_mode= PointInTimeRestore  databases.
                     type: string
                   sampleName:
+                    description: Specifies the name of the sample schema to apply
+                      when creating this database. Possible value is AdventureWorksLT.
                     type: string
                   serverId:
+                    description: The id of the MS SQL Server on which to create the
+                      database. Changing this forces a new resource to be created.
                     type: string
                   serverIdRef:
                     description: A Reference to a named object.
@@ -184,9 +243,13 @@ spec:
                         type: object
                     type: object
                   shortTermRetentionPolicy:
+                    description: A short_term_retention_policy block as defined below.
                     items:
                       properties:
                         backupIntervalInHours:
+                          description: The hours between each differential backup.
+                            This is only applicable to live databases but not dropped
+                            databases. Value has to be 12 or 24. Defaults to 12 hours.
                           type: number
                         retentionDays:
                           type: number
@@ -195,29 +258,49 @@ spec:
                       type: object
                     type: array
                   skuName:
+                    description: Specifies the name of the SKU used by the database.
+                      For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0,
+                      P2 ,DW100c, DS100. Changing this from the HyperScale service
+                      tier to another service tier will force a new resource to be
+                      created.
                     type: string
                   storageAccountType:
+                    description: Specifies the storage account type used to store
+                      backups for this database. Possible values are Geo, GeoZone,
+                      Local and Zone.  The default value is Geo.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   threatDetectionPolicy:
+                    description: Threat detection policy configuration. The threat_detection_policy
+                      block supports fields documented below.
                     items:
                       properties:
                         disabledAlerts:
+                          description: Specifies a list of alerts which should be
+                            disabled. Possible values include Access_Anomaly, Sql_Injection
+                            and Sql_Injection_Vulnerability.
                           items:
                             type: string
                           type: array
                         emailAccountAdmins:
+                          description: Should the account administrators be emailed
+                            when this alert is triggered?
                           type: string
                         emailAddresses:
+                          description: A list of email addresses which alerts should
+                            be sent to.
                           items:
                             type: string
                           type: array
                         retentionDays:
                           type: number
                         state:
+                          description: The State of the Policy. Possible values are
+                            Enabled, Disabled or New.
                           type: string
                         storageAccountAccessKeySecretRef:
                           description: A SecretKeySelector is a reference to a secret
@@ -242,8 +325,14 @@ spec:
                       type: object
                     type: array
                   transparentDataEncryptionEnabled:
+                    description: If set to true, Transparent Data Encryption will
+                      be enabled on the database. Defaults to true.
                     type: boolean
                   zoneRedundant:
+                    description: Whether or not this database is zone redundant, which
+                      means the replicas of this database will be spread across multiple
+                      availability zones. This property is only settable for Premium
+                      and Business Critical databases.
                     type: boolean
                 type: object
               providerConfigRef:
@@ -423,6 +512,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the MS SQL Database.
                     type: string
                 type: object
               conditions:

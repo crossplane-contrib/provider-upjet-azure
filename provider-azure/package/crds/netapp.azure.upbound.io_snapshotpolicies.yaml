@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SnapshotPolicy is the Schema for the SnapshotPolicys API
+        description: SnapshotPolicy is the Schema for the SnapshotPolicys API. Manages
+          a NetApp Snapshot Policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -272,6 +273,8 @@ spec:
                     items:
                       properties:
                         daysOfWeek:
+                          description: List of the week days using English names when
+                            the snapshots will be created.
                           items:
                             type: string
                           type: array
@@ -469,6 +472,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the NetApp Snapshot.
                     type: string
                 type: object
               conditions:

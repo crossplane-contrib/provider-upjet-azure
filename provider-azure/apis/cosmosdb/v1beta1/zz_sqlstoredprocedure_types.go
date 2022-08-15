@@ -14,11 +14,14 @@ import (
 )
 
 type SQLStoredProcedureObservation struct {
+
+	// The ID of the Cosmos DB SQL Stored Procedure.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SQLStoredProcedureParameters struct {
 
+	// The name of the Cosmos DB Account to create the stored procedure within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -29,9 +32,11 @@ type SQLStoredProcedureParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// The body of the stored procedure.
 	// +kubebuilder:validation:Required
 	Body *string `json:"body" tf:"body,omitempty"`
 
+	// The name of the Cosmos DB SQL Container to create the stored procedure within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=SQLContainer
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
@@ -42,6 +47,7 @@ type SQLStoredProcedureParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
+	// The name of the Cosmos DB SQL Database to create the stored procedure within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=SQLDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
@@ -52,6 +58,7 @@ type SQLStoredProcedureParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
+	// The name of the resource group in which the Cosmos DB SQL Database is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -77,7 +84,7 @@ type SQLStoredProcedureStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SQLStoredProcedure is the Schema for the SQLStoredProcedures API
+// SQLStoredProcedure is the Schema for the SQLStoredProcedures API. Manages a SQL Stored Procedure within a Cosmos DB Account SQL Database.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -18,12 +18,15 @@ type AzureadAdministratorObservation struct {
 
 type AzureadAdministratorParameters struct {
 
+	// Specifies whether only AD Users and administrators  can be used to login, or also local database users . When true, the administrator_login and administrator_login_password properties can be omitted.
 	// +kubebuilder:validation:Optional
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
+	// The login username of the Azure AD Administrator of this SQL Server.
 	// +kubebuilder:validation:Required
 	LoginUsername *string `json:"loginUsername" tf:"login_username,omitempty"`
 
+	// The object id of the Azure AD Administrator of this SQL Server.
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
@@ -32,6 +35,8 @@ type AzureadAdministratorParameters struct {
 }
 
 type MSSQLServerIdentityObservation struct {
+
+	// The Principal ID for the Service Principal associated with the Identity of this SQL Server.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
@@ -39,55 +44,74 @@ type MSSQLServerIdentityObservation struct {
 
 type MSSQLServerIdentityParameters struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this API Management Service.
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Possible values are SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MSSQLServerObservation struct {
+
+	// The fully qualified domain name of the Azure SQL Server
 	FullyQualifiedDomainName *string `json:"fullyQualifiedDomainName,omitempty" tf:"fully_qualified_domain_name,omitempty"`
 
+	// the Microsoft SQL Server ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []MSSQLServerIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// A list of dropped restorable database IDs on the server.
 	RestorableDroppedDatabaseIds []*string `json:"restorableDroppedDatabaseIds,omitempty" tf:"restorable_dropped_database_ids,omitempty"`
 }
 
 type MSSQLServerParameters struct {
 
+	// The administrator login name for the new server. Required unless azuread_authentication_only in the azuread_administrator block is true. When omitted, Azure will generate a default username which cannot be subsequently changed. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy. Required unless azuread_authentication_only in the azuread_administrator block is true.
 	// +kubebuilder:validation:Optional
 	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
 
+	// An azuread_administrator block as defined below.
 	// +kubebuilder:validation:Optional
 	AzureadAdministrator []AzureadAdministratorParameters `json:"azureadAdministrator,omitempty" tf:"azuread_administrator,omitempty"`
 
+	// The connection policy the server will use. Possible values are Default, Proxy, and Redirect. Defaults to Default.
 	// +kubebuilder:validation:Optional
 	ConnectionPolicy *string `json:"connectionPolicy,omitempty" tf:"connection_policy,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []MSSQLServerIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The Minimum TLS Version for all SQL Database and SQL Data Warehouse databases associated with the server. Valid values are: 1.0, 1.1 and 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
+	// Whether outbound network traffic is restricted for this server. Defaults to false.
 	// +kubebuilder:validation:Optional
 	OutboundNetworkRestrictionEnabled *bool `json:"outboundNetworkRestrictionEnabled,omitempty" tf:"outbound_network_restriction_enabled,omitempty"`
 
+	// Specifies the primary user managed identity id. Required if type is UserAssigned and should be combined with user_assigned_identity_ids.
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 
+	// Whether public network access is allowed for this server. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// The name of the resource group in which to create the Microsoft SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -98,9 +122,11 @@ type MSSQLServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The version for the new server. Valid values are: 2.0  and 12.0 .
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -119,7 +145,7 @@ type MSSQLServerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MSSQLServer is the Schema for the MSSQLServers API
+// MSSQLServer is the Schema for the MSSQLServers API. Manages a Microsoft SQL Azure Database Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

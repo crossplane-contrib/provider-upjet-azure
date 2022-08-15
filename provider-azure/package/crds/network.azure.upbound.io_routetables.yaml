@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RouteTable is the Schema for the RouteTables API
+        description: RouteTable is the Schema for the RouteTables API. Manages a Route
+          Table
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,16 @@ spec:
               forProvider:
                 properties:
                   disableBgpRoutePropagation:
+                    description: Boolean flag which controls propagation of routes
+                      learned by BGP on that route table. True means disable.
                     type: boolean
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the route table. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -143,21 +150,32 @@ spec:
                         type: object
                     type: object
                   route:
+                    description: List of objects representing routes. Each object
+                      accepts the arguments documented below.
                     items:
                       properties:
                         addressPrefix:
+                          description: The destination to which the route applies.
+                            Can be CIDR  or Azure Service Tag  format.
                           type: string
                         name:
                           type: string
                         nextHopInIpAddress:
+                          description: Contains the IP address packets should be forwarded
+                            to. Next hop values are only allowed in routes where the
+                            next hop type is VirtualAppliance.
                           type: string
                         nextHopType:
+                          description: The type of Azure hop the packet should be
+                            sent to. Possible values are VirtualNetworkGateway, VnetLocal,
+                            Internet, VirtualAppliance and None.
                           type: string
                       type: object
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -339,8 +357,11 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The Route Table ID.
                     type: string
                   subnets:
+                    description: The collection of Subnets associated with this route
+                      table.
                     items:
                       type: string
                     type: array

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DiskAccess is the Schema for the DiskAccesss API
+        description: DiskAccess is the Schema for the DiskAccesss API. Manages a Disk
+          Access.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,12 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: The Azure Region where the Disk Access should exist.
+                      Changing this forces a new Disk to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Disk Access
+                      should exist. Changing this forces a new Disk Access to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -143,6 +148,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Disk Access.
                     type: object
                 required:
                 - location
@@ -324,6 +331,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Disk Access resource.
                     type: string
                 type: object
               conditions:

@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: ProximityPlacementGroup is the Schema for the ProximityPlacementGroups
-          API
+          API. Manages a proximity placement group for virtual machines, virtual machine
+          scale sets and availability sets.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +67,13 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the availability set. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -145,6 +151,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -327,6 +334,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Proximity Placement Group.
                     type: string
                 type: object
               conditions:

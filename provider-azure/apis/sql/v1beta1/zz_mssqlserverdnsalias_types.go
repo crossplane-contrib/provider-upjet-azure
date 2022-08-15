@@ -14,13 +14,17 @@ import (
 )
 
 type MSSQLServerDNSAliasObservation struct {
+
+	// The fully qualified DNS record for alias.
 	DNSRecord *string `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
 
+	// The ID of the MSSQL Server DNS Alias.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MSSQLServerDNSAliasParameters struct {
 
+	// The ID of the mssql server. Changing this forces a new MSSQL Server DNS Alias to be created.
 	// +crossplane:generate:reference:type=MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -47,7 +51,7 @@ type MSSQLServerDNSAliasStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MSSQLServerDNSAlias is the Schema for the MSSQLServerDNSAliass API
+// MSSQLServerDNSAlias is the Schema for the MSSQLServerDNSAliass API. Manages a MS SQL Server DNS Alias.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

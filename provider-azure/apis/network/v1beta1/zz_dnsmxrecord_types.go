@@ -14,16 +14,21 @@ import (
 )
 
 type DNSMXRecordObservation struct {
+
+	// The FQDN of the DNS MX Record.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// The DNS MX Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DNSMXRecordParameters struct {
 
+	// A list of values that make up the MX record. Each record block supports fields documented below.
 	// +kubebuilder:validation:Required
 	Record []DNSMXRecordRecordParameters `json:"record" tf:"record,omitempty"`
 
+	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -34,12 +39,15 @@ type DNSMXRecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The Time To Live  of the DNS record in seconds.
 	// +kubebuilder:validation:Required
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies the DNS Zone where the DNS Zone  exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=DNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
@@ -56,9 +64,11 @@ type DNSMXRecordRecordObservation struct {
 
 type DNSMXRecordRecordParameters struct {
 
+	// The mail server responsible for the domain covered by the MX record.
 	// +kubebuilder:validation:Required
 	Exchange *string `json:"exchange" tf:"exchange,omitempty"`
 
+	// String representing the "preference” value of the MX records. Records with lower preference value take priority.
 	// +kubebuilder:validation:Required
 	Preference *string `json:"preference" tf:"preference,omitempty"`
 }
@@ -77,7 +87,7 @@ type DNSMXRecordStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DNSMXRecord is the Schema for the DNSMXRecords API
+// DNSMXRecord is the Schema for the DNSMXRecords API. Manages a DNS MX Record.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

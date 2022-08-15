@@ -14,23 +14,31 @@ import (
 )
 
 type ContainerObservation struct {
+
+	// Is there an Immutability Policy configured on this Storage Container?
 	HasImmutabilityPolicy *bool `json:"hasImmutabilityPolicy,omitempty" tf:"has_immutability_policy,omitempty"`
 
+	// Is there a Legal Hold configured on this Storage Container?
 	HasLegalHold *bool `json:"hasLegalHold,omitempty" tf:"has_legal_hold,omitempty"`
 
+	// The ID of the Storage Container.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Resource Manager ID of this Storage Container.
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
 }
 
 type ContainerParameters struct {
 
+	// The Access Level configured for this Container. Possible values are blob, container or private. Defaults to private.
 	// +kubebuilder:validation:Optional
 	ContainerAccessType *string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty"`
 
+	// A mapping of MetaData for this Container. All metadata keys should be lowercase.
 	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
+	// The name of the Storage Account where the Container should be created.
 	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
@@ -56,7 +64,7 @@ type ContainerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Container is the Schema for the Containers API
+// Container is the Schema for the Containers API. Manages a Container within an Azure Storage Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

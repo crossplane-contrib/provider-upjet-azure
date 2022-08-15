@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NotebookWorkspace is the Schema for the NotebookWorkspaces API
+        description: NotebookWorkspace is the Schema for the NotebookWorkspaces API.
+          Manages an SQL Notebook Workspace.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   accountName:
+                    description: The name of the Cosmos DB Account to create the SQL
+                      Notebook Workspace within. Changing this forces a new SQL Notebook
+                      Workspace to be created.
                     type: string
                   accountNameRef:
                     description: A Reference to a named object.
@@ -139,6 +143,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the Resource Group where the SQL Notebook
+                      Workspace should exist. Changing this forces a new SQL Notebook
+                      Workspace to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -391,8 +398,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the SQL Notebook Workspace.
                     type: string
                   serverEndpoint:
+                    description: Specifies the endpoint of Notebook server.
                     type: string
                 type: object
               conditions:

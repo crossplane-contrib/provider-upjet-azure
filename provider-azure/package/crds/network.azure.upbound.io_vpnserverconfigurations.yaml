@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VPNServerConfiguration is the Schema for the VPNServerConfigurations
-          API
+          API. Manages a VPN Server Configuration.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,13 +65,18 @@ spec:
               forProvider:
                 properties:
                   azureActiveDirectoryAuthentication:
+                    description: A azure_active_directory_authentication block as
+                      defined below.
                     items:
                       properties:
                         audience:
+                          description: The Audience which should be used for authentication.
                           type: string
                         issuer:
+                          description: The Issuer which should be used for authentication.
                           type: string
                         tenant:
+                          description: The Tenant which should be used for authentication.
                           type: string
                       required:
                       - audience
@@ -80,6 +85,8 @@ spec:
                       type: object
                     type: array
                   clientRevokedCertificate:
+                    description: One or more client_revoked_certificate blocks as
+                      defined below.
                     items:
                       properties:
                         name:
@@ -104,23 +111,46 @@ spec:
                       type: object
                     type: array
                   ipsecPolicy:
+                    description: A ipsec_policy block as defined below.
                     items:
                       properties:
                         dhGroup:
+                          description: The DH Group, used in IKE Phase 1. Possible
+                            values include DHGroup1, DHGroup2, DHGroup14, DHGroup24,
+                            DHGroup2048, ECP256, ECP384 and None.
                           type: string
                         ikeEncryption:
+                          description: The IKE encryption algorithm, used for IKE
+                            Phase 2. Possible values include AES128, AES192, AES256,
+                            DES, DES3, GCMAES128 and GCMAES256.
                           type: string
                         ikeIntegrity:
+                          description: The IKE encryption integrity algorithm, used
+                            for IKE Phase 2. Possible values include GCMAES128, GCMAES256,
+                            MD5, SHA1, SHA256 and SHA384.
                           type: string
                         ipsecEncryption:
+                          description: The IPSec encryption algorithm, used for IKE
+                            phase 1. Possible values include AES128, AES192, AES256,
+                            DES, DES3, GCMAES128, GCMAES192, GCMAES256 and None.
                           type: string
                         ipsecIntegrity:
+                          description: The IPSec integrity algorithm, used for IKE
+                            phase 1. Possible values include GCMAES128, GCMAES192,
+                            GCMAES256, MD5, SHA1 and SHA256.
                           type: string
                         pfsGroup:
+                          description: The Pfs Group, used in IKE Phase 2. Possible
+                            values include ECP256, ECP384, PFS1, PFS2, PFS14, PFS24,
+                            PFS2048, PFSMM and None.
                           type: string
                         saDataSizeKilobytes:
+                          description: The IPSec Security Association payload size
+                            in KB for a Site-to-Site VPN tunnel.
                           type: number
                         saLifetimeSeconds:
+                          description: The IPSec Security Association lifetime in
+                            seconds for a Site-to-Site VPN tunnel.
                           type: number
                       required:
                       - dhGroup
@@ -134,8 +164,12 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: The Azure location where this VPN Server Configuration
+                      should be created. Changing this forces a new resource to be
+                      created.
                     type: string
                   radius:
+                    description: A radius block as defined below.
                     items:
                       properties:
                         clientRootCertificate:
@@ -151,11 +185,14 @@ spec:
                             type: object
                           type: array
                         server:
+                          description: One or more server blocks as defined below.
                           items:
                             properties:
                               address:
                                 type: string
                               score:
+                                description: The Score of the Radius Server determines
+                                  the priority of the server. Ranges from 1 to 30.
                                 type: number
                               secretSecretRef:
                                 description: A SecretKeySelector is a reference to
@@ -196,6 +233,9 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The Name of the Resource Group in which this VPN
+                      Server Configuration should be created. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -273,12 +313,18 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   vpnAuthenticationTypes:
+                    description: A list of Authentication Types applicable for this
+                      VPN Server Configuration. Possible values are AAD , Certificate
+                      and Radius.
                     items:
                       type: string
                     type: array
                   vpnProtocols:
+                    description: A list of VPN Protocols to use for this Server Configuration.
+                      Possible values are IkeV2 and OpenVPN.
                     items:
                       type: string
                     type: array
@@ -464,6 +510,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the VPN Server Configuration.
                     type: string
                 type: object
               conditions:

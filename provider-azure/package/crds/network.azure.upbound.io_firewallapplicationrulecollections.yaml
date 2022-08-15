@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FirewallApplicationRuleCollection is the Schema for the FirewallApplicationRuleCollections
-          API
+          API. Manages an Application Rule Collection within an Azure Firewall.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,13 @@ spec:
               forProvider:
                 properties:
                   action:
+                    description: Specifies the action the rule will apply to matching
+                      traffic. Possible values are Allow and Deny.
                     type: string
                   azureFirewallName:
+                    description: Specifies the name of the Firewall in which the Application
+                      Rule Collection should be created. Changing this forces a new
+                      resource to be created.
                     type: string
                   azureFirewallNameRef:
                     description: A Reference to a named object.
@@ -143,8 +148,13 @@ spec:
                         type: object
                     type: object
                   priority:
+                    description: Specifies the priority of the rule collection. Possible
+                      values are between 100 - 65000.
                     type: number
                   resourceGroupName:
+                    description: Specifies the name of the Resource Group in which
+                      the Firewall exists. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -220,22 +230,31 @@ spec:
                         type: object
                     type: object
                   rule:
+                    description: One or more rule blocks as defined below.
                     items:
                       properties:
                         description:
+                          description: Specifies a description for the rule.
                           type: string
                         fqdnTags:
+                          description: A list of FQDN tags. Possible values are AppServiceEnvironment,
+                            AzureBackup, AzureKubernetesService, HDInsight, MicrosoftActiveProtectionService,
+                            WindowsDiagnostics, WindowsUpdate and WindowsVirtualDesktop.
                           items:
                             type: string
                           type: array
                         name:
                           type: string
                         protocol:
+                          description: One or more protocol blocks as defined below.
                           items:
                             properties:
                               port:
+                                description: Specify a port for the connection.
                                 type: number
                               type:
+                                description: Specifies the type of connection. Possible
+                                  values are Http, Https and Mssql.
                                 type: string
                             required:
                             - port
@@ -243,14 +262,17 @@ spec:
                             type: object
                           type: array
                         sourceAddresses:
+                          description: A list of source IP addresses and/or IP ranges.
                           items:
                             type: string
                           type: array
                         sourceIpGroups:
+                          description: A list of source IP Group IDs for the rule.
                           items:
                             type: string
                           type: array
                         targetFqdns:
+                          description: A list of FQDNs.
                           items:
                             type: string
                           type: array

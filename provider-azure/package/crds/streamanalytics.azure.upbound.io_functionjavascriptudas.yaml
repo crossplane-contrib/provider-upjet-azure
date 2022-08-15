@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: FunctionJavascriptUda is the Schema for the FunctionJavascriptUdas
-          API
+          API. Manages a JavaScript UDA Function within a Stream Analytics Streaming
+          Job.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,9 +66,12 @@ spec:
               forProvider:
                 properties:
                   input:
+                    description: One or more input blocks as defined below.
                     items:
                       properties:
                         configurationParameter:
+                          description: Is this input parameter a configuration parameter?
+                            Defaults to false.
                           type: boolean
                         type:
                           type: string
@@ -76,6 +80,7 @@ spec:
                       type: object
                     type: array
                   output:
+                    description: An output block as defined below.
                     items:
                       properties:
                         type:
@@ -85,8 +90,12 @@ spec:
                       type: object
                     type: array
                   script:
+                    description: The JavaScript of this UDA Function.
                     type: string
                   streamAnalyticsJobId:
+                    description: The resource ID of the Stream Analytics Job where
+                      this Function should be created. Changing this forces a new
+                      resource to be created.
                     type: string
                 required:
                 - input
@@ -272,6 +281,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Stream Analytics JavaScript UDA Function.
                     type: string
                 type: object
               conditions:

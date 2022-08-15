@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Transform is the Schema for the Transforms API
+        description: Transform is the Schema for the Transforms API. Manages a Transform.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +64,11 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: An optional verbose description of the Transform.
                     type: string
                   mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Transform to be created.
                     type: string
                   mediaServicesAccountNameRef:
                     description: A Reference to a named object.
@@ -141,9 +144,12 @@ spec:
                         type: object
                     type: object
                   output:
+                    description: One or more output blocks as defined below. At least
+                      one output must be defined.
                     items:
                       properties:
                         audioAnalyzerPreset:
+                          description: A audio_analyzer_preset block as defined below.
                           items:
                             properties:
                               audioAnalysisMode:
@@ -153,24 +159,59 @@ spec:
                             type: object
                           type: array
                         builtinPreset:
+                          description: A builtin_preset block as defined below.
                           items:
                             properties:
                               presetName:
+                                description: The built-in preset to be used for encoding
+                                  videos. The allowed values are AACGoodQualityAudio,
+                                  AdaptiveStreaming,ContentAwareEncoding, ContentAwareEncodingExperimental,CopyAllBitrateNonInterleaved,
+                                  H264MultipleBitrate1080p,H264MultipleBitrate720p,
+                                  H264MultipleBitrateSD,H264SingleBitrate1080p, H264SingleBitrate720p
+                                  and H264SingleBitrateSD.
                                 type: string
                             type: object
                           type: array
                         faceDetectorPreset:
+                          description: A face_detector_preset block as defined below.
                           items:
                             properties:
                               analysisResolution:
+                                description: Possibles value are SourceResolution
+                                  or StandardDefinition. Specifies the maximum resolution
+                                  at which your video is analyzed. The default behavior
+                                  is SourceResolution which will keep the input video
+                                  at its original resolution when analyzed. Using
+                                  StandardDefinition will resize input videos to standard
+                                  definition while preserving the appropriate aspect
+                                  ratio. It will only resize if the video is of higher
+                                  resolution. For example, a 1920x1080 input would
+                                  be scaled to 640x360 before processing. Switching
+                                  to StandardDefinition will reduce the time it takes
+                                  to process high resolution video. It may also reduce
+                                  the cost of using this component . However, faces
+                                  that end up being too small in the resized video
+                                  may not be detected.
                                 type: string
                             type: object
                           type: array
                         onErrorAction:
+                          description: A Transform can define more than one outputs.
+                            This property defines what the service should do when
+                            one output fails - either continue to produce other outputs,
+                            or, stop the other outputs. The overall Job state will
+                            not reflect failures of outputs that are specified with
+                            ContinueJob. Possibles value are StopProcessingJob or
+                            ContinueJob.
                           type: string
                         relativePriority:
+                          description: Sets the relative priority of the TransformOutputs
+                            within a Transform. This sets the priority that the service
+                            uses for processing Transform Outputs. Possibles value
+                            are High, Normal or Low.
                           type: string
                         videoAnalyzerPreset:
+                          description: A video_analyzer_preset block as defined below.
                           items:
                             properties:
                               audioAnalysisMode:
@@ -178,12 +219,25 @@ spec:
                               audioLanguage:
                                 type: string
                               insightsType:
+                                description: Defines the type of insights that you
+                                  want the service to generate. The allowed values
+                                  are AudioInsightsOnly, VideoInsightsOnly, and AllInsights.
+                                  If you set this to AllInsights and the input is
+                                  audio only, then only audio insights are generated.
+                                  Similarly if the input is video only, then only
+                                  video insights are generated. It is recommended
+                                  that you not use AudioInsightsOnly if you expect
+                                  some of your inputs to be video only; or use VideoInsightsOnly
+                                  if you expect some of your inputs to be audio only.
+                                  Your Jobs in such conditions would error out.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the Resource Group where the Transform
+                      should exist. Changing this forces a new Transform to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -436,6 +490,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Transform.
                     type: string
                 type: object
               conditions:

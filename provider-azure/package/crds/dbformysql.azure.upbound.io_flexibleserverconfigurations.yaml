@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: FlexibleServerConfiguration is the Schema for the FlexibleServerConfigurations
-          API
+          API. Sets a MySQL Flexible Server Configuration value on a MySQL Flexible
+          Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +67,9 @@ spec:
               forProvider:
                 properties:
                   resourceGroupName:
+                    description: The name of the resource group in which the MySQL
+                      Flexible Server exists. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -141,6 +145,8 @@ spec:
                         type: object
                     type: object
                   serverName:
+                    description: Specifies the name of the MySQL Flexible Server.
+                      Changing this forces a new resource to be created.
                     type: string
                   serverNameRef:
                     description: A Reference to a named object.
@@ -216,6 +222,8 @@ spec:
                         type: object
                     type: object
                   value:
+                    description: Specifies the value of the MySQL Flexible Server
+                      Configuration. See the MySQL documentation for valid values.
                     type: string
                 required:
                 - value
@@ -398,6 +406,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the MySQL Flexible Server Configuration.
                     type: string
                 type: object
               conditions:

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ExpressRouteCircuitPeering is the Schema for the ExpressRouteCircuitPeerings
-          API
+          API. Manages an ExpressRoute Circuit Peering.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   expressRouteCircuitName:
+                    description: The name of the ExpressRoute Circuit in which to
+                      create the Peering.
                     type: string
                   expressRouteCircuitNameRef:
                     description: A Reference to a named object.
@@ -141,9 +143,11 @@ spec:
                         type: object
                     type: object
                   ipv6:
+                    description: A ipv6 block as defined below.
                     items:
                       properties:
                         microsoftPeering:
+                          description: A microsoft_peering block as defined below.
                           items:
                             properties:
                               advertisedPublicPrefixes:
@@ -169,6 +173,8 @@ spec:
                       type: object
                     type: array
                   microsoftPeeringConfig:
+                    description: A microsoft_peering_config block as defined below.
+                      Required when peering_type is set to MicrosoftPeering.
                     items:
                       properties:
                         advertisedPublicPrefixes:
@@ -184,10 +190,15 @@ spec:
                       type: object
                     type: array
                   peerAsn:
+                    description: The Either a 16-bit or a 32-bit ASN. Can either be
+                      public or private.
                     type: number
                   primaryPeerAddressPrefix:
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Express Route Circuit Peering. Changing this forces a new
+                      resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -267,8 +278,7 @@ spec:
                   secondaryPeerAddressPrefix:
                     type: string
                   sharedKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The shared key. Can be a maximum of 25 characters.
                     properties:
                       key:
                         description: The key to select.
@@ -285,6 +295,7 @@ spec:
                     - namespace
                     type: object
                   vlanId:
+                    description: A valid VLAN ID to establish this peering on.
                     type: number
                 required:
                 - primaryPeerAddressPrefix
@@ -469,12 +480,16 @@ spec:
               atProvider:
                 properties:
                   azureAsn:
+                    description: The ASN used by Azure.
                     type: number
                   id:
+                    description: The ID of the ExpressRoute Circuit Peering.
                     type: string
                   primaryAzurePort:
+                    description: The Primary Port used by Azure for this Peering.
                     type: string
                   secondaryAzurePort:
+                    description: The Secondary Port used by Azure for this Peering.
                     type: string
                 type: object
               conditions:

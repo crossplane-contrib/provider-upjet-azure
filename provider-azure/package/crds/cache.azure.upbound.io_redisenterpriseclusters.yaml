@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: RedisEnterpriseCluster is the Schema for the RedisEnterpriseClusters
-          API
+          API. Manages a Redis Enterprise Cluster.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,18 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: The Azure Region where the Redis Enterprise Cluster
+                      should exist. Changing this forces a new Redis Enterprise Cluster
+                      to be created.
                     type: string
                   minimumTlsVersion:
+                    description: The minimum TLS version.  Defaults to 1.2. Changing
+                      this forces a new Redis Enterprise Cluster to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Redis Enterprise
+                      Cluster should exist. Changing this forces a new Redis Enterprise
+                      Cluster to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -144,12 +152,25 @@ spec:
                         type: object
                     type: object
                   skuName:
+                    description: The sku_name is comprised of two segments separated
+                      by a hyphen . The first segment of the sku_name defines the
+                      name of the SKU, possible values are Enterprise_E10, Enterprise_E20",
+                      Enterprise_E50, Enterprise_E100, EnterpriseFlash_F300, EnterpriseFlash_F700
+                      or EnterpriseFlash_F1500. The second segment defines the capacity
+                      of the sku_name, possible values for Enteprise SKUs are . Possible
+                      values for EnterpriseFlash SKUs are . Changing this forces a
+                      new Redis Enterprise Cluster to be created.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Redis Enterprise Cluster.
                     type: object
                   zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Redis Enterprise Cluster should be located. Changing this forces
+                      a new Redis Enterprise Cluster to be created.
                     items:
                       type: string
                     type: array
@@ -335,8 +356,10 @@ spec:
               atProvider:
                 properties:
                   hostname:
+                    description: DNS name of the cluster endpoint.
                     type: string
                   id:
+                    description: The ID of the Redis Enterprise Cluster.
                     type: string
                 type: object
               conditions:

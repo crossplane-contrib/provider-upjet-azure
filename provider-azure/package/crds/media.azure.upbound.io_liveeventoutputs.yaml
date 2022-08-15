@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LiveEventOutput is the Schema for the LiveEventOutputs API
+        description: LiveEventOutput is the Schema for the LiveEventOutputs API. Manages
+          an Azure Media Live Event Output.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,16 @@ spec:
               forProvider:
                 properties:
                   archiveWindowDuration:
+                    description: ISO 8601 time between 1 minute to 25 hours to indicate
+                      the maximum content length that can be archived in the asset
+                      for this live output. This also sets the maximum content length
+                      for the rewind window. For example, use PT1H30M to indicate
+                      1 hour and 30 minutes of archive window. Changing this forces
+                      a new Live Output to be created.
                     type: string
                   assetName:
+                    description: The asset that the live output will write to. Changing
+                      this forces a new Live Output to be created.
                     type: string
                   assetNameRef:
                     description: A Reference to a named object.
@@ -141,10 +150,18 @@ spec:
                         type: object
                     type: object
                   description:
+                    description: The description of the live output. Changing this
+                      forces a new Live Output to be created.
                     type: string
                   hlsFragmentsPerTsSegment:
+                    description: The number of fragments in an HTTP Live Streaming  TS
+                      segment in the output of the live event. This value does not
+                      affect the packing ratio for HLS CMAF output. Changing this
+                      forces a new Live Output to be created.
                     type: number
                   liveEventId:
+                    description: The id of the live event. Changing this forces a
+                      new Live Output to be created.
                     type: string
                   liveEventIdRef:
                     description: A Reference to a named object.
@@ -220,6 +237,9 @@ spec:
                         type: object
                     type: object
                   manifestName:
+                    description: The manifest file name. If not provided, the service
+                      will generate one automatically. Changing this forces a new
+                      Live Output to be created.
                     type: string
                   outputSnapTimeInSeconds:
                     type: number
@@ -403,6 +423,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Live Output.
                     type: string
                 type: object
               conditions:

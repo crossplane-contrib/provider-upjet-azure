@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: WatcherFlowLog is the Schema for the WatcherFlowLogs API
+        description: WatcherFlowLog is the Schema for the WatcherFlowLogs API. Manages
+          a Network Watcher Flow Log.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +67,14 @@ spec:
                   enabled:
                     type: boolean
                   location:
+                    description: The location where the Network Watcher Flow Log resides.
+                      Changing this forces a new resource to be created. Defaults
+                      to the location of the Network Watcher.
                     type: string
                   networkSecurityGroupId:
+                    description: The ID of the Network Security Group for which to
+                      enable flow logs for. Changing this forces a new resource to
+                      be created.
                     type: string
                   networkSecurityGroupIdRef:
                     description: A Reference to a named object.
@@ -143,6 +150,8 @@ spec:
                         type: object
                     type: object
                   networkWatcherName:
+                    description: The name of the Network Watcher. Changing this forces
+                      a new resource to be created.
                     type: string
                   networkWatcherNameRef:
                     description: A Reference to a named object.
@@ -218,6 +227,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group in which the Network
+                      Watcher was deployed. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -296,6 +308,7 @@ spec:
                     items:
                       properties:
                         days:
+                          description: The number of days to retain flow log records.
                           type: number
                         enabled:
                           type: boolean
@@ -305,6 +318,8 @@ spec:
                       type: object
                     type: array
                   storageAccountId:
+                    description: The ID of the Storage Account where flow logs are
+                      stored.
                     type: string
                   storageAccountIdRef:
                     description: A Reference to a named object.
@@ -382,6 +397,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Network Watcher Flow Log.
                     type: object
                   trafficAnalytics:
                     items:
@@ -389,8 +406,11 @@ spec:
                         enabled:
                           type: boolean
                         intervalInMinutes:
+                          description: How frequently service should do flow analytics
+                            in minutes.
                           type: number
                         workspaceId:
+                          description: The resource GUID of the attached workspace.
                           type: string
                         workspaceIdRef:
                           description: A Reference to a named object.
@@ -469,8 +489,10 @@ spec:
                               type: object
                           type: object
                         workspaceRegion:
+                          description: The location of the attached workspace.
                           type: string
                         workspaceResourceId:
+                          description: The resource ID of the attached workspace.
                           type: string
                         workspaceResourceIdRef:
                           description: A Reference to a named object.
@@ -554,6 +576,8 @@ spec:
                       type: object
                     type: array
                   version:
+                    description: The version  of the flow log. Possible values are
+                      1 and 2.
                     type: number
                 required:
                 - enabled
@@ -736,6 +760,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Network Watcher.
                     type: string
                 type: object
               conditions:

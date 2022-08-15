@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: MSSQLServer is the Schema for the MSSQLServers API
+        description: MSSQLServer is the Schema for the MSSQLServers API. Manages a
+          Microsoft SQL Azure Database Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,17 @@ spec:
               forProvider:
                 properties:
                   administratorLogin:
+                    description: The administrator login name for the new server.
+                      Required unless azuread_authentication_only in the azuread_administrator
+                      block is true. When omitted, Azure will generate a default username
+                      which cannot be subsequently changed. Changing this forces a
+                      new resource to be created.
                     type: string
                   administratorLoginPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The password associated with the administrator_login
+                      user. Needs to comply with Azure's Password Policy. Required
+                      unless azuread_authentication_only in the azuread_administrator
+                      block is true.
                     properties:
                       key:
                         description: The key to select.
@@ -84,13 +92,22 @@ spec:
                     - namespace
                     type: object
                   azureadAdministrator:
+                    description: An azuread_administrator block as defined below.
                     items:
                       properties:
                         azureadAuthenticationOnly:
+                          description: Specifies whether only AD Users and administrators  can
+                            be used to login, or also local database users . When
+                            true, the administrator_login and administrator_login_password
+                            properties can be omitted.
                           type: boolean
                         loginUsername:
+                          description: The login username of the Azure AD Administrator
+                            of this SQL Server.
                           type: string
                         objectId:
+                          description: The object id of the Azure AD Administrator
+                            of this SQL Server.
                           type: string
                         tenantId:
                           type: string
@@ -100,31 +117,52 @@ spec:
                       type: object
                     type: array
                   connectionPolicy:
+                    description: The connection policy the server will use. Possible
+                      values are Default, Proxy, and Redirect. Defaults to Default.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this API Management Service.
                           items:
                             type: string
                           type: array
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this API Management Service.
+                            Possible values are SystemAssigned, UserAssigned.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   minimumTlsVersion:
+                    description: 'The Minimum TLS Version for all SQL Database and
+                      SQL Data Warehouse databases associated with the server. Valid
+                      values are: 1.0, 1.1 and 1.2.'
                     type: string
                   outboundNetworkRestrictionEnabled:
+                    description: Whether outbound network traffic is restricted for
+                      this server. Defaults to false.
                     type: boolean
                   primaryUserAssignedIdentityId:
+                    description: Specifies the primary user managed identity id. Required
+                      if type is UserAssigned and should be combined with user_assigned_identity_ids.
                     type: string
                   publicNetworkAccessEnabled:
+                    description: Whether public network access is allowed for this
+                      server. Defaults to true.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Microsoft SQL Server.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -202,8 +240,11 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   version:
+                    description: 'The version for the new server. Valid values are:
+                      2.0  and 12.0 .'
                     type: string
                 required:
                 - location
@@ -386,19 +427,27 @@ spec:
               atProvider:
                 properties:
                   fullyQualifiedDomainName:
+                    description: The fully qualified domain name of the Azure SQL
+                      Server
                     type: string
                   id:
+                    description: the Microsoft SQL Server ID.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID for the Service Principal
+                            associated with the Identity of this SQL Server.
                           type: string
                         tenantId:
                           type: string
                       type: object
                     type: array
                   restorableDroppedDatabaseIds:
+                    description: A list of dropped restorable database IDs on the
+                      server.
                     items:
                       type: string
                     type: array

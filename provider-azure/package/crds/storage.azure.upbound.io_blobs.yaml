@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Blob is the Schema for the Blobs API
+        description: Blob is the Schema for the Blobs API. Manages a Blob within a
+          Storage Container.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,28 +65,57 @@ spec:
               forProvider:
                 properties:
                   accessTier:
+                    description: The access tier of the storage blob. Possible values
+                      are Archive, Cool and Hot.
                     type: string
                   cacheControl:
+                    description: Controls the cache control header content of the
+                      response when blob is requested .
                     type: string
                   contentMd5:
+                    description: The MD5 sum of the blob contents. Cannot be defined
+                      if source_uri is defined, or if blob type is Append or Page.
+                      Changing this forces a new resource to be created.
                     type: string
                   contentType:
+                    description: The content type of the storage blob. Cannot be defined
+                      if source_uri is defined. Defaults to application/octet-stream.
                     type: string
                   metadata:
                     additionalProperties:
                       type: string
+                    description: A map of custom blob metadata.
                     type: object
                   parallelism:
+                    description: The number of workers per CPU core to run for concurrent
+                      uploads. Defaults to 8.
                     type: number
                   size:
+                    description: Used only for page blobs to specify the size in bytes
+                      of the blob to be created. Must be a multiple of 512. Defaults
+                      to 0.
                     type: number
                   source:
+                    description: An absolute path to a file on the local system. This
+                      field cannot be specified for Append blobs and cannot be specified
+                      if source_content or source_uri is specified.
                     type: string
                   sourceContent:
+                    description: The content for this blob which should be defined
+                      inline. This field can only be specified for Block blobs and
+                      cannot be specified if source or source_uri is specified.
                     type: string
                   sourceUri:
+                    description: The URI of an existing blob, or a file in the Azure
+                      File service, to use as the source contents for the blob to
+                      be created. Changing this forces a new resource to be created.
+                      This field cannot be specified for Append blobs and cannot be
+                      specified if source or source_content is specified.
                     type: string
                   storageAccountName:
+                    description: Specifies the storage account in which to create
+                      the storage container. Changing this forces a new resource to
+                      be created.
                     type: string
                   storageAccountNameRef:
                     description: A Reference to a named object.
@@ -161,6 +191,8 @@ spec:
                         type: object
                     type: object
                   storageContainerName:
+                    description: The name of the storage container in which this blob
+                      should be created.
                     type: string
                   storageContainerNameRef:
                     description: A Reference to a named object.
@@ -236,6 +268,9 @@ spec:
                         type: object
                     type: object
                   type:
+                    description: The type of the storage blob to be created. Possible
+                      values are Append, Block or Page. Changing this forces a new
+                      resource to be created.
                     type: string
                 required:
                 - type
@@ -417,8 +452,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Storage Blob.
                     type: string
                   url:
+                    description: The URL of the blob
                     type: string
                 type: object
               conditions:

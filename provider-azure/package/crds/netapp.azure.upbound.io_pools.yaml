@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Pool is the Schema for the Pools API
+        description: Pool is the Schema for the Pools API. Manages a Pool within a
+          NetApp Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   accountName:
+                    description: The name of the NetApp account in which the NetApp
+                      Pool should be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   accountNameRef:
                     description: A Reference to a named object.
@@ -139,10 +143,17 @@ spec:
                         type: object
                     type: object
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   qosType:
+                    description: QoS Type of the pool. Valid values include Auto or
+                      Manual.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group where the NetApp Pool
+                      should be created. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -218,12 +229,18 @@ spec:
                         type: object
                     type: object
                   serviceLevel:
+                    description: The service level of the file system. Valid values
+                      include Premium, Standard, or Ultra. Changing this forces a
+                      new resource to be created.
                     type: string
                   sizeInTb:
+                    description: Provisioned size of the pool in TB. Value must be
+                      between 4 and 500.
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -407,6 +424,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the NetApp Pool.
                     type: string
                 type: object
               conditions:

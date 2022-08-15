@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: OutputSynapse is the Schema for the OutputSynapses API
+        description: OutputSynapse is the Schema for the OutputSynapses API. Manages
+          a Stream Analytics Output to an Azure Synapse Analytics Workspace.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,13 @@ spec:
               forProvider:
                 properties:
                   database:
+                    description: The name of the Azure SQL database. Changing this
+                      forces a new resource to be created.
                     type: string
                   passwordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The password that will be used to connect to the
+                      Azure SQL database. Changing this forces a new resource to be
+                      created.
                     properties:
                       key:
                         description: The key to select.
@@ -84,6 +88,8 @@ spec:
                     - namespace
                     type: object
                   resourceGroupName:
+                    description: The name of the Resource Group where the Stream Analytics
+                      Job exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -159,8 +165,12 @@ spec:
                         type: object
                     type: object
                   server:
+                    description: The name of the SQL server containing the Azure SQL
+                      database. Changing this forces a new resource to be created.
                     type: string
                   streamAnalyticsJobName:
+                    description: The name of the Stream Analytics Job. Changing this
+                      forces a new resource to be created.
                     type: string
                   streamAnalyticsJobNameRef:
                     description: A Reference to a named object.
@@ -236,8 +246,13 @@ spec:
                         type: object
                     type: object
                   table:
+                    description: The name of the table in the Azure SQL database.
+                      Changing this forces a new resource to be created.
                     type: string
                   user:
+                    description: The user name that will be used to connect to the
+                      Azure SQL database. Changing this forces a new resource to be
+                      created.
                     type: string
                 required:
                 - database
@@ -423,6 +438,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Stream Analytics Output to an Azure
+                      Synapse Analytics Workspace.
                     type: string
                 type: object
               conditions:

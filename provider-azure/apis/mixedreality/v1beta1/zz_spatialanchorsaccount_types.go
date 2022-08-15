@@ -14,18 +14,24 @@ import (
 )
 
 type SpatialAnchorsAccountObservation struct {
+
+	// The domain of the Spatial Anchors Account.
 	AccountDomain *string `json:"accountDomain,omitempty" tf:"account_domain,omitempty"`
 
+	// The account ID of the Spatial Anchors Account.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
+	// The ID of the Spatial Anchors Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SpatialAnchorsAccountParameters struct {
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the Spatial Anchors Account.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -36,6 +42,7 @@ type SpatialAnchorsAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -54,7 +61,7 @@ type SpatialAnchorsAccountStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SpatialAnchorsAccount is the Schema for the SpatialAnchorsAccounts API
+// SpatialAnchorsAccount is the Schema for the SpatialAnchorsAccounts API. Manages an Azure Spatial Anchors Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

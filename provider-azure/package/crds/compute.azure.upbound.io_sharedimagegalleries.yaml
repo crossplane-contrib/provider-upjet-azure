@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: SharedImageGallery is the Schema for the SharedImageGallerys
-          API
+          API. Manages a Shared Image Gallery.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,16 @@ spec:
               forProvider:
                 properties:
                   description:
+                    description: A description for this Shared Image Gallery.
                     type: string
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Shared Image Gallery. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -146,6 +152,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the Shared Image Gallery.
                     type: object
                 required:
                 - location
@@ -327,8 +334,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Shared Image Gallery.
                     type: string
                   uniqueName:
+                    description: The Unique Name for this Shared Image Gallery.
                     type: string
                 type: object
               conditions:

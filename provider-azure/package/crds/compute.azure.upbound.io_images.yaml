@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Image is the Schema for the Images API
+        description: Image is the Schema for the Images API. Manages a custom virtual
+          machine image that can be used to create virtual machines.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   dataDisk:
+                    description: One or more data_disk elements as defined below.
                     items:
                       properties:
                         blobUri:
@@ -71,6 +73,8 @@ spec:
                         caching:
                           type: string
                         lun:
+                          description: Specifies the logical unit number of the data
+                            disk.
                           type: number
                         managedDiskId:
                           type: string
@@ -79,10 +83,15 @@ spec:
                       type: object
                     type: array
                   hyperVGeneration:
+                    description: The HyperVGenerationType of the VirtualMachine created
+                      from the image as V1, V2. The default is V1.
                     type: string
                   location:
+                    description: Specified the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   osDisk:
+                    description: One or more os_disk elements as defined below.
                     items:
                       properties:
                         blobUri:
@@ -92,14 +101,21 @@ spec:
                         managedDiskId:
                           type: string
                         osState:
+                          description: Specifies the state of the operating system
+                            contained in the blob. Currently, the only value is Generalized.
                           type: string
                         osType:
+                          description: 'Specifies the type of operating system contained
+                            in the virtual machine image. Possible values are: Windows
+                            or Linux.'
                           type: string
                         sizeGb:
                           type: number
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the image. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -175,12 +191,16 @@ spec:
                         type: object
                     type: object
                   sourceVirtualMachineId:
+                    description: The Virtual Machine ID from which to create the image.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   zoneResilient:
+                    description: Is zone resiliency enabled?  Defaults to false.  Changing
+                      this forces a new resource to be created.
                     type: boolean
                 required:
                 - location
@@ -362,6 +382,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Image.
                     type: string
                 type: object
               conditions:

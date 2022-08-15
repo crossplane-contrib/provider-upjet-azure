@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Asset is the Schema for the Assets API
+        description: Asset is the Schema for the Assets API. Manages a Media Asset.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +64,18 @@ spec:
               forProvider:
                 properties:
                   alternateId:
+                    description: The alternate ID of the Asset.
                     type: string
                   container:
+                    description: The name of the asset blob container. Changing this
+                      forces a new Media Asset to be created.
                     type: string
                   description:
+                    description: The Asset description.
                     type: string
                   mediaServicesAccountName:
+                    description: Specifies the name of the Media Services Account.
+                      Changing this forces a new Media Asset to be created.
                     type: string
                   mediaServicesAccountNameRef:
                     description: A Reference to a named object.
@@ -145,6 +151,8 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the Resource Group where the Media Asset
+                      should exist. Changing this forces a new Media Asset to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -220,6 +228,8 @@ spec:
                         type: object
                     type: object
                   storageAccountName:
+                    description: The name of the storage account where to store the
+                      media asset. Changing this forces a new Media Asset to be created.
                     type: string
                 type: object
               providerConfigRef:
@@ -399,6 +409,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Media Asset.
                     type: string
                 type: object
               conditions:

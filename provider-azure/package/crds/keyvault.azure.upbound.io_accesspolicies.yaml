@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: AccessPolicy is the Schema for the AccessPolicys API
+        description: AccessPolicy is the Schema for the AccessPolicys API. Manages
+          a Key Vault Access Policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,27 @@ spec:
               forProvider:
                 properties:
                   applicationId:
+                    description: The object ID of an Application in Azure Active Directory.
                     type: string
                   certificatePermissions:
+                    description: 'List of certificate permissions, must be one or
+                      more from the following: Backup, Create, Delete, DeleteIssuers,
+                      Get, GetIssuers, Import, List, ListIssuers, ManageContacts,
+                      ManageIssuers, Purge, Recover, Restore, SetIssuers and Update.'
                     items:
                       type: string
                     type: array
                   keyPermissions:
+                    description: 'List of key permissions, must be one or more from
+                      the following: Backup, Create, Decrypt, Delete, Encrypt, Get,
+                      Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update,
+                      Verify and WrapKey.'
                     items:
                       type: string
                     type: array
                   keyVaultId:
+                    description: Specifies the id of the Key Vault resource. Changing
+                      this forces a new resource to be created.
                     type: string
                   keyVaultIdRef:
                     description: A Reference to a named object.
@@ -149,16 +161,30 @@ spec:
                         type: object
                     type: object
                   objectId:
+                    description: The object ID of a user, service principal or security
+                      group in the Azure Active Directory tenant for the vault. The
+                      object ID must be unique for the list of access policies. Changing
+                      this forces a new resource to be created.
                     type: string
                   secretPermissions:
+                    description: 'List of secret permissions, must be one or more
+                      from the following: Backup, Delete, Get, List, Purge, Recover,
+                      Restore and Set.'
                     items:
                       type: string
                     type: array
                   storagePermissions:
+                    description: 'List of storage permissions, must be one or more
+                      from the following: Backup, Delete, DeleteSAS, Get, GetSAS,
+                      List, ListSAS, Purge, Recover, RegenerateKey, Restore, Set,
+                      SetSAS and Update.'
                     items:
                       type: string
                     type: array
                   tenantId:
+                    description: The Azure Active Directory tenant ID that should
+                      be used for authenticating requests to the key vault. Changing
+                      this forces a new resource to be created.
                     type: string
                 required:
                 - objectId
@@ -341,6 +367,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: Key Vault Access Policy ID.
                     type: string
                 type: object
               conditions:

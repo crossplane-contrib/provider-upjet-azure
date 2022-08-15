@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ExpressRoutePort is the Schema for the ExpressRoutePorts API
+        description: ExpressRoutePort is the Schema for the ExpressRoutePorts API.
+          Manages a Express Route Port.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,17 +65,27 @@ spec:
               forProvider:
                 properties:
                   bandwidthInGbps:
+                    description: Bandwidth of the Express Route Port in Gbps. Changing
+                      this forces a new Express Route Port to be created.
                     type: number
                   encapsulation:
+                    description: 'The encapsulation method used for the Express Route
+                      Port. Changing this forces a new Express Route Port to be created.
+                      Possible values are: Dot1Q, QinQ.'
                     type: string
                   identity:
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Express Route Port.
                           items:
                             type: string
                           type: array
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Express Route Port.
+                            Only possible value is UserAssigned.
                           type: string
                       required:
                       - identityIds
@@ -82,36 +93,64 @@ spec:
                       type: object
                     type: array
                   link1:
+                    description: A list of link blocks as defined below.
                     items:
                       properties:
                         adminEnabled:
+                          description: Whether enable administration state on the
+                            Express Route Port Link? Defaults to false.
                           type: boolean
                         macsecCakKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the Mac security CAK key for this Express Route Port Link.
                           type: string
                         macsecCipher:
+                          description: The MACSec cipher used for this Express Route
+                            Port Link. Possible values are GcmAes128 and GcmAes256.
+                            Defaults to GcmAes128.
                           type: string
                         macsecCknKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the MACSec CKN key for this Express Route Port Link.
                           type: string
                       type: object
                     type: array
                   link2:
+                    description: A list of link blocks as defined below.
                     items:
                       properties:
                         adminEnabled:
+                          description: Whether enable administration state on the
+                            Express Route Port Link? Defaults to false.
                           type: boolean
                         macsecCakKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the Mac security CAK key for this Express Route Port Link.
                           type: string
                         macsecCipher:
+                          description: The MACSec cipher used for this Express Route
+                            Port Link. Possible values are GcmAes128 and GcmAes256.
+                            Defaults to GcmAes128.
                           type: string
                         macsecCknKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the MACSec CKN key for this Express Route Port Link.
                           type: string
                       type: object
                     type: array
                   location:
+                    description: The Azure Region where the Express Route Port should
+                      exist. Changing this forces a new Express Route Port to be created.
                     type: string
                   peeringLocation:
+                    description: The name of the peering location that this Express
+                      Route Port is physically mapped to. Changing this forces a new
+                      Express Route Port to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Express
+                      Route Port should exist. Changing this forces a new Express
+                      Route Port to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -189,6 +228,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Express Route Port.
                     type: object
                 required:
                 - bandwidthInGbps
@@ -373,46 +414,72 @@ spec:
               atProvider:
                 properties:
                   ethertype:
+                    description: The EtherType of the Express Route Port.
                     type: string
                   guid:
+                    description: The resource GUID of the Express Route Port.
                     type: string
                   id:
                     type: string
                   link1:
+                    description: A list of link blocks as defined below.
                     items:
                       properties:
                         connectorType:
+                          description: The connector type of the Express Route Port
+                            Link.
                           type: string
                         id:
                           type: string
                         interfaceName:
+                          description: The interface name of the Azure router associated
+                            with the Express Route Port Link.
                           type: string
                         patchPanelId:
+                          description: The ID that maps from the Express Route Port
+                            Link to the patch panel port.
                           type: string
                         rackId:
+                          description: The ID that maps from the patch panel port
+                            to the rack.
                           type: string
                         routerName:
+                          description: The name of the Azure router associated with
+                            the Express Route Port Link.
                           type: string
                       type: object
                     type: array
                   link2:
+                    description: A list of link blocks as defined below.
                     items:
                       properties:
                         connectorType:
+                          description: The connector type of the Express Route Port
+                            Link.
                           type: string
                         id:
                           type: string
                         interfaceName:
+                          description: The interface name of the Azure router associated
+                            with the Express Route Port Link.
                           type: string
                         patchPanelId:
+                          description: The ID that maps from the Express Route Port
+                            Link to the patch panel port.
                           type: string
                         rackId:
+                          description: The ID that maps from the patch panel port
+                            to the rack.
                           type: string
                         routerName:
+                          description: The name of the Azure router associated with
+                            the Express Route Port Link.
                           type: string
                       type: object
                     type: array
                   mtu:
+                    description: The maximum transmission unit of the Express Route
+                      Port.
                     type: string
                 type: object
               conditions:

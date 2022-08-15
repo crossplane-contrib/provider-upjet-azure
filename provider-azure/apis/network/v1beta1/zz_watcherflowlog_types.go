@@ -18,6 +18,7 @@ type RetentionPolicyObservation struct {
 
 type RetentionPolicyParameters struct {
 
+	// The number of days to retain flow log records.
 	// +kubebuilder:validation:Required
 	Days *float64 `json:"days" tf:"days,omitempty"`
 
@@ -33,9 +34,11 @@ type TrafficAnalyticsParameters struct {
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// How frequently service should do flow analytics in minutes.
 	// +kubebuilder:validation:Optional
 	IntervalInMinutes *float64 `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
 
+	// The resource GUID of the attached workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/operationalinsights/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("workspace_id",true)
 	// +kubebuilder:validation:Optional
@@ -47,9 +50,11 @@ type TrafficAnalyticsParameters struct {
 	// +kubebuilder:validation:Optional
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
+	// The location of the attached workspace.
 	// +kubebuilder:validation:Required
 	WorkspaceRegion *string `json:"workspaceRegion" tf:"workspace_region,omitempty"`
 
+	// The resource ID of the attached workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/operationalinsights/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -63,6 +68,8 @@ type TrafficAnalyticsParameters struct {
 }
 
 type WatcherFlowLogObservation struct {
+
+	// The ID of the Network Watcher.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -71,9 +78,11 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the location of the Network Watcher.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The ID of the Network Security Group for which to enable flow logs for. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -85,6 +94,7 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
 
+	// The name of the Network Watcher. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Watcher
 	// +kubebuilder:validation:Optional
 	NetworkWatcherName *string `json:"networkWatcherName,omitempty" tf:"network_watcher_name,omitempty"`
@@ -95,6 +105,7 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkWatcherNameSelector *v1.Selector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
 
+	// The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -108,6 +119,7 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Required
 	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy" tf:"retention_policy,omitempty"`
 
+	// The ID of the Storage Account where flow logs are stored.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -119,12 +131,14 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
+	// A mapping of tags which should be assigned to the Network Watcher Flow Log.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	TrafficAnalytics []TrafficAnalyticsParameters `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
 
+	// The version  of the flow log. Possible values are 1 and 2.
 	// +kubebuilder:validation:Optional
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -143,7 +157,7 @@ type WatcherFlowLogStatus struct {
 
 // +kubebuilder:object:root=true
 
-// WatcherFlowLog is the Schema for the WatcherFlowLogs API
+// WatcherFlowLog is the Schema for the WatcherFlowLogs API. Manages a Network Watcher Flow Log.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

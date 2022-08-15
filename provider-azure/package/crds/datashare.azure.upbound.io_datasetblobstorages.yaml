@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: DataSetBlobStorage is the Schema for the DataSetBlobStorages
-          API
+          API. Manages a Data Share Blob Storage Dataset.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   containerName:
+                    description: The name of the storage account container to be shared
+                      with the receiver. Changing this forces a new Data Share Blob
+                      Storage Dataset to be created.
                     type: string
                   containerNameRef:
                     description: A Reference to a named object.
@@ -140,6 +143,9 @@ spec:
                         type: object
                     type: object
                   dataShareId:
+                    description: The ID of the Data Share in which this Data Share
+                      Blob Storage Dataset should be created. Changing this forces
+                      a new Data Share Blob Storage Dataset to be created.
                     type: string
                   dataShareIdRef:
                     description: A Reference to a named object.
@@ -215,10 +221,17 @@ spec:
                         type: object
                     type: object
                   filePath:
+                    description: The path of the file in the storage container to
+                      be shared with the receiver. Changing this forces a new Data
+                      Share Blob Storage Dataset to be created.
                     type: string
                   folderPath:
+                    description: The path of the folder in the storage container to
+                      be shared with the receiver. Changing this forces a new Data
+                      Share Blob Storage Dataset to be created.
                     type: string
                   storageAccount:
+                    description: A storage_account block as defined below.
                     items:
                       properties:
                         name:
@@ -300,6 +313,9 @@ spec:
                               type: object
                           type: object
                         resourceGroupName:
+                          description: The resource group name of the storage account
+                            to be shared with the receiver. Changing this forces a
+                            new Data Share Blob Storage Dataset to be created.
                           type: string
                         resourceGroupNameRef:
                           description: A Reference to a named object.
@@ -378,6 +394,9 @@ spec:
                               type: object
                           type: object
                         subscriptionId:
+                          description: The subscription id of the storage account
+                            to be shared with the receiver. Changing this forces a
+                            new Data Share Blob Storage Dataset to be created.
                           type: string
                       required:
                       - subscriptionId
@@ -563,8 +582,10 @@ spec:
               atProvider:
                 properties:
                   displayName:
+                    description: The name of the Data Share Dataset.
                     type: string
                   id:
+                    description: The ID of the Data Share Blob Storage Dataset.
                     type: string
                 type: object
               conditions:

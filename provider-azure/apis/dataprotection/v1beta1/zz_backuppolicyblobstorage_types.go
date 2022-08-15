@@ -14,14 +14,18 @@ import (
 )
 
 type BackupPolicyBlobStorageObservation struct {
+
+	// The ID of the Backup Policy Blob Storage.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BackupPolicyBlobStorageParameters struct {
 
+	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +kubebuilder:validation:Required
 	RetentionDuration *string `json:"retentionDuration" tf:"retention_duration,omitempty"`
 
+	// The ID of the Backup Vault within which the Backup Policy Blob Storage should exist. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +crossplane:generate:reference:type=BackupVault
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -48,7 +52,7 @@ type BackupPolicyBlobStorageStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BackupPolicyBlobStorage is the Schema for the BackupPolicyBlobStorages API
+// BackupPolicyBlobStorage is the Schema for the BackupPolicyBlobStorages API. Manages a Backup Policy Blob Storage.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

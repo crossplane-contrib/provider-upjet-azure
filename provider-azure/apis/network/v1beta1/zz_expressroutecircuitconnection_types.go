@@ -14,20 +14,26 @@ import (
 )
 
 type ExpressRouteCircuitConnectionObservation struct {
+
+	// The ID of the Express Route Circuit Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ExpressRouteCircuitConnectionParameters struct {
 
+	// The IPv4 address space from which to allocate customer address for global reach. Changing this forces a new Express Route Circuit Connection to be created.
 	// +kubebuilder:validation:Required
 	AddressPrefixIPv4 *string `json:"addressPrefixIpv4" tf:"address_prefix_ipv4,omitempty"`
 
+	// The IPv6 address space from which to allocate customer addresses for global reach.
 	// +kubebuilder:validation:Optional
 	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
 
+	// The authorization key which is associated with the Express Route Circuit Connection.
 	// +kubebuilder:validation:Optional
 	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
+	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
 	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -39,6 +45,7 @@ type ExpressRouteCircuitConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerPeeringIDSelector *v1.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
 
+	// The ID of the Express Route Circuit Private Peering that this Express Route Circuit Connection connects with. Changing this forces a new Express Route Circuit Connection to be created.
 	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -65,7 +72,7 @@ type ExpressRouteCircuitConnectionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ExpressRouteCircuitConnection is the Schema for the ExpressRouteCircuitConnections API
+// ExpressRouteCircuitConnection is the Schema for the ExpressRouteCircuitConnections API. Manages an Express Route Circuit Connection.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

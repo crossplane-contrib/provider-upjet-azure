@@ -14,14 +14,18 @@ import (
 )
 
 type ManagementGroupObservation struct {
+
+	// The ID of the Management Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ManagementGroupParameters struct {
 
+	// A friendly name for this Management Group. If not specified, this will be the same as the name.
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// The ID of the Parent Management Group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -33,6 +37,7 @@ type ManagementGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ParentManagementGroupIDSelector *v1.Selector `json:"parentManagementGroupIdSelector,omitempty" tf:"-"`
 
+	// A list of Subscription GUIDs which should be assigned to the Management Group.
 	// +kubebuilder:validation:Optional
 	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
 }
@@ -51,7 +56,7 @@ type ManagementGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ManagementGroup is the Schema for the ManagementGroups API
+// ManagementGroup is the Schema for the ManagementGroups API. Manages a Management Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

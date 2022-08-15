@@ -14,20 +14,26 @@ import (
 )
 
 type AssetObservation struct {
+
+	// The ID of the Media Asset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AssetParameters struct {
 
+	// The alternate ID of the Asset.
 	// +kubebuilder:validation:Optional
 	AlternateID *string `json:"alternateId,omitempty" tf:"alternate_id,omitempty"`
 
+	// The name of the asset blob container. Changing this forces a new Media Asset to be created.
 	// +kubebuilder:validation:Optional
 	Container *string `json:"container,omitempty" tf:"container,omitempty"`
 
+	// The Asset description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the name of the Media Services Account. Changing this forces a new Media Asset to be created.
 	// +crossplane:generate:reference:type=ServicesAccount
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountName *string `json:"mediaServicesAccountName,omitempty" tf:"media_services_account_name,omitempty"`
@@ -38,6 +44,7 @@ type AssetParameters struct {
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountNameSelector *v1.Selector `json:"mediaServicesAccountNameSelector,omitempty" tf:"-"`
 
+	// The name of the Resource Group where the Media Asset should exist. Changing this forces a new Media Asset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -48,6 +55,7 @@ type AssetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the storage account where to store the media asset. Changing this forces a new Media Asset to be created.
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
@@ -66,7 +74,7 @@ type AssetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Asset is the Schema for the Assets API
+// Asset is the Schema for the Assets API. Manages a Media Asset.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

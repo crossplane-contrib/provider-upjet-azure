@@ -14,11 +14,14 @@ import (
 )
 
 type SubnetNATGatewayAssociationObservation struct {
+
+	// The ID of the Subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SubnetNATGatewayAssociationParameters struct {
 
+	// The ID of the NAT Gateway which should be associated with the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.NATGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +33,7 @@ type SubnetNATGatewayAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
+	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,7 +60,7 @@ type SubnetNATGatewayAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SubnetNATGatewayAssociation is the Schema for the SubnetNATGatewayAssociations API
+// SubnetNATGatewayAssociation is the Schema for the SubnetNATGatewayAssociations API. Associates a
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: EncryptionScope is the Schema for the EncryptionScopes API
+        description: EncryptionScope is the Schema for the EncryptionScopes API. Manages
+          a Storage Encryption Scope.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,12 +65,21 @@ spec:
               forProvider:
                 properties:
                   infrastructureEncryptionRequired:
+                    description: Is a secondary layer of encryption with Platform
+                      Managed Keys for data applied?
                     type: boolean
                   keyVaultKeyId:
+                    description: The ID of the Key Vault Key. Required when source
+                      is Microsoft.KeyVault.
                     type: string
                   source:
+                    description: The source of the Storage Encryption Scope. Possible
+                      values are Microsoft.KeyVault and Microsoft.Storage.
                     type: string
                   storageAccountId:
+                    description: The ID of the Storage Account where this Storage
+                      Encryption Scope is created. Changing this forces a new Storage
+                      Encryption Scope to be created.
                     type: string
                   storageAccountIdRef:
                     description: A Reference to a named object.
@@ -324,6 +334,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Storage Encryption Scope.
                     type: string
                 type: object
               conditions:

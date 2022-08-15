@@ -14,23 +14,30 @@ import (
 )
 
 type OutputBlobObservation struct {
+
+	// The ID of the Stream Analytics Output Blob Storage.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type OutputBlobParameters struct {
 
+	// The maximum wait time per batch in hh:mm:ss e.g. 00:02:00 for two minutes.
 	// +kubebuilder:validation:Optional
 	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
 
+	// The minimum number of rows per batch .
 	// +kubebuilder:validation:Optional
 	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
 
+	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	// +kubebuilder:validation:Required
 	DateFormat *string `json:"dateFormat" tf:"date_format,omitempty"`
 
+	// The blob path pattern. Not a regular expression. It represents a pattern against which blob names will be matched to determine whether or not they should be included as input or output to the job.
 	// +kubebuilder:validation:Required
 	PathPattern *string `json:"pathPattern" tf:"path_pattern,omitempty"`
 
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -41,12 +48,15 @@ type OutputBlobParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A serialization block as defined below.
 	// +kubebuilder:validation:Required
 	Serialization []SerializationParameters `json:"serialization" tf:"serialization,omitempty"`
 
+	// The Access Key which should be used to connect to this Storage Account.
 	// +kubebuilder:validation:Required
 	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
+	// The name of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
@@ -57,6 +67,7 @@ type OutputBlobParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
+	// The name of the Container within the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
@@ -67,9 +78,11 @@ type OutputBlobParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name,omitempty"`
 
+	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
 	// +kubebuilder:validation:Required
 	TimeFormat *string `json:"timeFormat" tf:"time_format,omitempty"`
 }
@@ -79,15 +92,19 @@ type SerializationObservation struct {
 
 type SerializationParameters struct {
 
+	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
 	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
+	// The delimiter that will be used to separate comma-separated value  records. Possible values are   , , ,     , |  and ;.
 	// +kubebuilder:validation:Optional
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 
+	// Specifies the format of the JSON the output will be written in. Possible values are Array and LineSeparated.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
+	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -106,7 +123,7 @@ type OutputBlobStatus struct {
 
 // +kubebuilder:object:root=true
 
-// OutputBlob is the Schema for the OutputBlobs API
+// OutputBlob is the Schema for the OutputBlobs API. Manages a Stream Analytics Output to Blob Storage.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

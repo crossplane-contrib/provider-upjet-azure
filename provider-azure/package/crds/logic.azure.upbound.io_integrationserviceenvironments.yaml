@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: IntegrationServiceEnvironment is the Schema for the IntegrationServiceEnvironments
-          API
+          API. Manages private and isolated Logic App instances within an Azure virtual
+          network.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,10 +67,20 @@ spec:
               forProvider:
                 properties:
                   accessEndpointType:
+                    description: The type of access endpoint to use for the Integration
+                      Service Environment. Possible Values are Internal and External.
+                      Changing this forces a new Integration Service Environment to
+                      be created.
                     type: string
                   location:
+                    description: The Azure Region where the Integration Service Environment
+                      should exist. Changing this forces a new Integration Service
+                      Environment to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Integration
+                      Service Environment should exist. Changing this forces a new
+                      Integration Service Environment to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -145,12 +156,25 @@ spec:
                         type: object
                     type: object
                   skuName:
+                    description: The SKU name and capacity of the Integration Service
+                      Environment. Possible Values for sku element are Developer and
+                      Premium and possible values for the capacity element are from
+                      0 to 10.  Defaults to sku of Developer with a Capacity of 0
+                      . Changing this forces a new Integration Service Environment
+                      to be created when sku element is not the same with existing
+                      one.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Integration Service Environment.
                     type: object
                   virtualNetworkSubnetIds:
+                    description: A list of virtual network subnet ids to be used by
+                      Integration Service Environment. Exactly four distinct ids to
+                      subnets must be provided. Changing this forces a new Integration
+                      Service Environment to be created.
                     items:
                       type: string
                     type: array
@@ -337,20 +361,25 @@ spec:
               atProvider:
                 properties:
                   connectorEndpointIpAddresses:
+                    description: The list of access endpoint IP addresses of connector.
                     items:
                       type: string
                     type: array
                   connectorOutboundIpAddresses:
+                    description: The list of outgoing IP addresses of connector.
                     items:
                       type: string
                     type: array
                   id:
+                    description: The ID of the Integration Service Environment.
                     type: string
                   workflowEndpointIpAddresses:
+                    description: The list of access endpoint IP addresses of workflow.
                     items:
                       type: string
                     type: array
                   workflowOutboundIpAddresses:
+                    description: The list of outgoing IP addresses of workflow.
                     items:
                       type: string
                     type: array

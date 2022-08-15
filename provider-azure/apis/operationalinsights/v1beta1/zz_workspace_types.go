@@ -14,28 +14,36 @@ import (
 )
 
 type WorkspaceObservation struct {
+
+	// The Log Analytics Workspace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Workspace  ID for the Log Analytics Workspace.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceParameters struct {
 
+	// The workspace daily quota for ingestion in GB.  Defaults to -1  if omitted.
 	// +kubebuilder:validation:Optional
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
 
+	// Should the Log Analytics Workflow support querying over the Public Internet? Defaults to true.
 	// +kubebuilder:validation:Optional
 	InternetQueryEnabled *bool `json:"internetQueryEnabled,omitempty" tf:"internet_query_enabled,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The capacity reservation level in GB for this workspace.  Must be in increments of 100  between 100 and 5000.
 	// +kubebuilder:validation:Optional
 	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
 
+	// The name of the resource group in which the Log Analytics workspace is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -46,12 +54,15 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The workspace data retention in days. Possible values are either 7  or range between 30 and 730.
 	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
+	// Specifies the SKU of the Log Analytics Workspace. Possible values are Free, PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, and PerGB2018 . Defaults to PerGB2018.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -70,7 +81,7 @@ type WorkspaceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Workspace is the Schema for the Workspaces API
+// Workspace is the Schema for the Workspaces API. Manages a Log Analytics (formally Operational Insights) Workspace.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

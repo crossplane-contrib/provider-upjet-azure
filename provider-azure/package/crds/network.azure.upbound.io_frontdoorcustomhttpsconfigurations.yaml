@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: FrontdoorCustomHTTPSConfiguration is the Schema for the FrontdoorCustomHTTPSConfigurations
-          API
+          API. Manages the Custom Https Configuration for an Azure Front Door Frontend
+          Endpoint.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -69,10 +70,16 @@ spec:
                     items:
                       properties:
                         azureKeyVaultCertificateSecretName:
+                          description: The name of the Key Vault secret representing
+                            the full certificate PFX.
                           type: string
                         azureKeyVaultCertificateSecretVersion:
+                          description: The version of the Key Vault secret representing
+                            the full certificate PFX. Defaults to Latest.
                           type: string
                         azureKeyVaultCertificateVaultId:
+                          description: The ID of the Key Vault containing the SSL
+                            certificate.
                           type: string
                         azureKeyVaultCertificateVaultIdRef:
                           description: A Reference to a named object.
@@ -151,12 +158,19 @@ spec:
                               type: object
                           type: object
                         certificateSource:
+                          description: Certificate source to encrypted HTTPS traffic
+                            with. Allowed values are FrontDoor or AzureKeyVault. Defaults
+                            to FrontDoor.
                           type: string
                       type: object
                     type: array
                   customHttpsProvisioningEnabled:
+                    description: Should the HTTPS protocol be enabled for this custom
+                      domain associated with the Front Door?
                     type: boolean
                   frontendEndpointId:
+                    description: The ID of the FrontDoor Frontend Endpoint which this
+                      configuration refers to.
                     type: string
                 required:
                 - customHttpsProvisioningEnabled
@@ -343,6 +357,7 @@ spec:
                     items:
                       properties:
                         minimumTlsVersion:
+                          description: Minimum client TLS version supported.
                           type: string
                         provisioningState:
                           type: string
@@ -351,6 +366,7 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: The ID of the Azure Front Door Custom HTTPS Configuration.
                     type: string
                 type: object
               conditions:

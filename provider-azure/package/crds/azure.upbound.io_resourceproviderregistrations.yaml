@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ResourceProviderRegistration is the Schema for the ResourceProviderRegistrations
-          API
+          API. Manages the Registration of a Resource Provider.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,11 +66,13 @@ spec:
               forProvider:
                 properties:
                   feature:
+                    description: A list of feature blocks as defined below.
                     items:
                       properties:
                         name:
                           type: string
                         registered:
+                          description: Should this feature be Registered or Unregistered?
                           type: boolean
                       required:
                       - name

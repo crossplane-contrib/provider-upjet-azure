@@ -23,8 +23,6 @@ spec:
     - snapshotPolicyIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
-    lifecycle:
-    - prevent_destroy: true
     location: West Europe
     poolNameSelector:
       matchLabels:

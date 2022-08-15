@@ -14,14 +14,18 @@ import (
 )
 
 type CassandraClusterObservation struct {
+
+	// The ID of the Cassandra Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type CassandraClusterParameters struct {
 
+	// The initial admin password for this Cassandra Cluster.
 	// +kubebuilder:validation:Required
 	DefaultAdminPasswordSecretRef v1.SecretKeySelector `json:"defaultAdminPasswordSecretRef" tf:"-"`
 
+	// The ID of the delegated management subnet for this Cassandra Cluster. Changing this forces a new Cassandra Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -33,9 +37,11 @@ type CassandraClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 
+	// The Azure Region where the Cassandra Cluster should exist. Changing this forces a new Cassandra Cluster to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the Resource Group where the Cassandra Cluster should exist. Changing this forces a new Cassandra Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -46,6 +52,7 @@ type CassandraClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags assigned to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -64,7 +71,7 @@ type CassandraClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CassandraCluster is the Schema for the CassandraClusters API
+// CassandraCluster is the Schema for the CassandraClusters API. Manages a Cassandra Cluster.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

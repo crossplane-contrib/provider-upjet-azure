@@ -14,131 +14,183 @@ import (
 )
 
 type AccountObservation struct {
+
+	// The ID of the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// The endpoint URL for blob storage in the primary location.
 	PrimaryBlobEndpoint *string `json:"primaryBlobEndpoint,omitempty" tf:"primary_blob_endpoint,omitempty"`
 
+	// The hostname with port if applicable for blob storage in the primary location.
 	PrimaryBlobHost *string `json:"primaryBlobHost,omitempty" tf:"primary_blob_host,omitempty"`
 
+	// The endpoint URL for DFS storage in the primary location.
 	PrimaryDfsEndpoint *string `json:"primaryDfsEndpoint,omitempty" tf:"primary_dfs_endpoint,omitempty"`
 
+	// The hostname with port if applicable for DFS storage in the primary location.
 	PrimaryDfsHost *string `json:"primaryDfsHost,omitempty" tf:"primary_dfs_host,omitempty"`
 
+	// The endpoint URL for file storage in the primary location.
 	PrimaryFileEndpoint *string `json:"primaryFileEndpoint,omitempty" tf:"primary_file_endpoint,omitempty"`
 
+	// The hostname with port if applicable for file storage in the primary location.
 	PrimaryFileHost *string `json:"primaryFileHost,omitempty" tf:"primary_file_host,omitempty"`
 
+	// The primary location of the storage account.
 	PrimaryLocation *string `json:"primaryLocation,omitempty" tf:"primary_location,omitempty"`
 
+	// The endpoint URL for queue storage in the primary location.
 	PrimaryQueueEndpoint *string `json:"primaryQueueEndpoint,omitempty" tf:"primary_queue_endpoint,omitempty"`
 
+	// The hostname with port if applicable for queue storage in the primary location.
 	PrimaryQueueHost *string `json:"primaryQueueHost,omitempty" tf:"primary_queue_host,omitempty"`
 
+	// The endpoint URL for table storage in the primary location.
 	PrimaryTableEndpoint *string `json:"primaryTableEndpoint,omitempty" tf:"primary_table_endpoint,omitempty"`
 
+	// The hostname with port if applicable for table storage in the primary location.
 	PrimaryTableHost *string `json:"primaryTableHost,omitempty" tf:"primary_table_host,omitempty"`
 
+	// The endpoint URL for web storage in the primary location.
 	PrimaryWebEndpoint *string `json:"primaryWebEndpoint,omitempty" tf:"primary_web_endpoint,omitempty"`
 
+	// The hostname with port if applicable for web storage in the primary location.
 	PrimaryWebHost *string `json:"primaryWebHost,omitempty" tf:"primary_web_host,omitempty"`
 
+	// The endpoint URL for blob storage in the secondary location.
 	SecondaryBlobEndpoint *string `json:"secondaryBlobEndpoint,omitempty" tf:"secondary_blob_endpoint,omitempty"`
 
+	// The hostname with port if applicable for blob storage in the secondary location.
 	SecondaryBlobHost *string `json:"secondaryBlobHost,omitempty" tf:"secondary_blob_host,omitempty"`
 
+	// The endpoint URL for DFS storage in the secondary location.
 	SecondaryDfsEndpoint *string `json:"secondaryDfsEndpoint,omitempty" tf:"secondary_dfs_endpoint,omitempty"`
 
+	// The hostname with port if applicable for DFS storage in the secondary location.
 	SecondaryDfsHost *string `json:"secondaryDfsHost,omitempty" tf:"secondary_dfs_host,omitempty"`
 
+	// The endpoint URL for file storage in the secondary location.
 	SecondaryFileEndpoint *string `json:"secondaryFileEndpoint,omitempty" tf:"secondary_file_endpoint,omitempty"`
 
+	// The hostname with port if applicable for file storage in the secondary location.
 	SecondaryFileHost *string `json:"secondaryFileHost,omitempty" tf:"secondary_file_host,omitempty"`
 
+	// The secondary location of the storage account.
 	SecondaryLocation *string `json:"secondaryLocation,omitempty" tf:"secondary_location,omitempty"`
 
+	// The endpoint URL for queue storage in the secondary location.
 	SecondaryQueueEndpoint *string `json:"secondaryQueueEndpoint,omitempty" tf:"secondary_queue_endpoint,omitempty"`
 
+	// The hostname with port if applicable for queue storage in the secondary location.
 	SecondaryQueueHost *string `json:"secondaryQueueHost,omitempty" tf:"secondary_queue_host,omitempty"`
 
+	// The endpoint URL for table storage in the secondary location.
 	SecondaryTableEndpoint *string `json:"secondaryTableEndpoint,omitempty" tf:"secondary_table_endpoint,omitempty"`
 
+	// The hostname with port if applicable for table storage in the secondary location.
 	SecondaryTableHost *string `json:"secondaryTableHost,omitempty" tf:"secondary_table_host,omitempty"`
 
+	// The endpoint URL for web storage in the secondary location.
 	SecondaryWebEndpoint *string `json:"secondaryWebEndpoint,omitempty" tf:"secondary_web_endpoint,omitempty"`
 
+	// The hostname with port if applicable for web storage in the secondary location.
 	SecondaryWebHost *string `json:"secondaryWebHost,omitempty" tf:"secondary_web_host,omitempty"`
 }
 
 type AccountParameters struct {
 
+	// Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot and Cool, defaults to Hot.
 	// +kubebuilder:validation:Optional
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
+	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Changing this forces a new resource to be created. Defaults to StorageV2.
 	// +kubebuilder:validation:Optional
 	AccountKind *string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
 
+	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS. Changing this forces a new resource to be created when types LRS, GRS and RAGRS are changed to ZRS, GZRS or RAGZRS and vice versa.
 	// +kubebuilder:validation:Required
 	AccountReplicationType *string `json:"accountReplicationType" tf:"account_replication_type,omitempty"`
 
+	// Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	AccountTier *string `json:"accountTier" tf:"account_tier,omitempty"`
 
+	// Allow or disallow nested items within this Account to opt into being public. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowNestedItemsToBePublic *bool `json:"allowNestedItemsToBePublic,omitempty" tf:"allow_nested_items_to_be_public,omitempty"`
 
+	// A azure_files_authentication block as defined below.
 	// +kubebuilder:validation:Optional
 	AzureFilesAuthentication []AzureFilesAuthenticationParameters `json:"azureFilesAuthentication,omitempty" tf:"azure_files_authentication,omitempty"`
 
+	// A blob_properties block as defined below.
 	// +kubebuilder:validation:Optional
 	BlobProperties []BlobPropertiesParameters `json:"blobProperties,omitempty" tf:"blob_properties,omitempty"`
 
+	// Should cross Tenant replication be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	CrossTenantReplicationEnabled *bool `json:"crossTenantReplicationEnabled,omitempty" tf:"cross_tenant_replication_enabled,omitempty"`
 
+	// A custom_domain block as documented below.
 	// +kubebuilder:validation:Optional
 	CustomDomain []CustomDomainParameters `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
 
+	// A customer_managed_key block as documented below.
 	// +kubebuilder:validation:Optional
 	CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
+	// Specifies the Edge Zone within the Azure Region where this Storage Account should exist. Changing this forces a new Storage Account to be created.
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
+	// Boolean flag which forces HTTPS if enabled, see here
+	// for more information. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// Is infrastructure encryption enabled? Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
+	// Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 . Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
 
+	// Is Large File Share Enabled?
 	// +kubebuilder:validation:Optional
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults to TLS1_2 for new storage accounts.
 	// +kubebuilder:validation:Optional
 	MinTLSVersion *string `json:"minTlsVersion,omitempty" tf:"min_tls_version,omitempty"`
 
+	// A network_rules block as documented below.
 	// +kubebuilder:validation:Optional
 	NetworkRules []NetworkRulesParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
 
+	// Is NFSv3 protocol enabled? Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Nfsv3Enabled *bool `json:"nfsv3Enabled,omitempty" tf:"nfsv3_enabled,omitempty"`
 
+	// The encryption type of the queue service. Possible values are Service and Account. Changing this forces a new resource to be created. Default value is Service.
 	// +kubebuilder:validation:Optional
 	QueueEncryptionKeyType *string `json:"queueEncryptionKeyType,omitempty" tf:"queue_encryption_key_type,omitempty"`
 
+	// A queue_properties block as defined below.
 	// +kubebuilder:validation:Optional
 	QueueProperties []QueuePropertiesParameters `json:"queueProperties,omitempty" tf:"queue_properties,omitempty"`
 
+	// The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -149,21 +201,27 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A routing block as defined below.
 	// +kubebuilder:validation:Optional
 	Routing []RoutingParameters `json:"routing,omitempty" tf:"routing,omitempty"`
 
+	// A share_properties block as defined below.
 	// +kubebuilder:validation:Optional
 	ShareProperties []SharePropertiesParameters `json:"shareProperties,omitempty" tf:"share_properties,omitempty"`
 
+	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory . The default value is true.
 	// +kubebuilder:validation:Optional
 	SharedAccessKeyEnabled *bool `json:"sharedAccessKeyEnabled,omitempty" tf:"shared_access_key_enabled,omitempty"`
 
+	// A static_website block as defined below.
 	// +kubebuilder:validation:Optional
 	StaticWebsite []StaticWebsiteParameters `json:"staticWebsite,omitempty" tf:"static_website,omitempty"`
 
+	// The encryption type of the table service. Possible values are Service and Account. Changing this forces a new resource to be created. Default value is Service.
 	// +kubebuilder:validation:Optional
 	TableEncryptionKeyType *string `json:"tableEncryptionKeyType,omitempty" tf:"table_encryption_key_type,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -173,21 +231,27 @@ type ActiveDirectoryObservation struct {
 
 type ActiveDirectoryParameters struct {
 
+	// Specifies the domain GUID.
 	// +kubebuilder:validation:Required
 	DomainGUID *string `json:"domainGuid" tf:"domain_guid,omitempty"`
 
+	// Specifies the primary domain that the AD DNS server is authoritative for.
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
+	// Specifies the security identifier .
 	// +kubebuilder:validation:Required
 	DomainSid *string `json:"domainSid" tf:"domain_sid,omitempty"`
 
+	// Specifies the Active Directory forest.
 	// +kubebuilder:validation:Required
 	ForestName *string `json:"forestName" tf:"forest_name,omitempty"`
 
+	// Specifies the NetBIOS domain name.
 	// +kubebuilder:validation:Required
 	NetbiosDomainName *string `json:"netbiosDomainName" tf:"netbios_domain_name,omitempty"`
 
+	// Specifies the security identifier  for Azure Storage.
 	// +kubebuilder:validation:Required
 	StorageSid *string `json:"storageSid" tf:"storage_sid,omitempty"`
 }
@@ -197,9 +261,11 @@ type AzureFilesAuthenticationObservation struct {
 
 type AzureFilesAuthenticationParameters struct {
 
+	// A active_directory block as defined below. Required when directory_type is AD.
 	// +kubebuilder:validation:Optional
 	ActiveDirectory []ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
+	// Specifies the directory service used. Possible values are AADDS and AD.
 	// +kubebuilder:validation:Required
 	DirectoryType *string `json:"directoryType" tf:"directory_type,omitempty"`
 }
@@ -209,24 +275,30 @@ type BlobPropertiesObservation struct {
 
 type BlobPropertiesParameters struct {
 
+	// Is the blob service properties for change feed events enabled? Default to false.
 	// +kubebuilder:validation:Optional
 	ChangeFeedEnabled *bool `json:"changeFeedEnabled,omitempty" tf:"change_feed_enabled,omitempty"`
 
+	// A container_delete_retention_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	ContainerDeleteRetentionPolicy []ContainerDeleteRetentionPolicyParameters `json:"containerDeleteRetentionPolicy,omitempty" tf:"container_delete_retention_policy,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CorsRule []CorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
+	// The API Version which should be used by default for requests to the Data Plane API if an incoming request doesn't specify an API Version. Defaults to 2020-06-12.
 	// +kubebuilder:validation:Optional
 	DefaultServiceVersion *string `json:"defaultServiceVersion,omitempty" tf:"default_service_version,omitempty"`
 
+	// A delete_retention_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	DeleteRetentionPolicy []DeleteRetentionPolicyParameters `json:"deleteRetentionPolicy,omitempty" tf:"delete_retention_policy,omitempty"`
 
+	// Is the last access time based tracking enabled? Default to false.
 	// +kubebuilder:validation:Optional
 	LastAccessTimeEnabled *bool `json:"lastAccessTimeEnabled,omitempty" tf:"last_access_time_enabled,omitempty"`
 
+	// Is versioning enabled? Default to false.
 	// +kubebuilder:validation:Optional
 	VersioningEnabled *bool `json:"versioningEnabled,omitempty" tf:"versioning_enabled,omitempty"`
 }
@@ -245,18 +317,24 @@ type CorsRuleObservation struct {
 
 type CorsRuleParameters struct {
 
+	// A list of headers that are allowed to be a part of the cross-origin request.
 	// +kubebuilder:validation:Required
 	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
+	// A list of HTTP methods that are allowed to be executed by the origin. Valid options are
+	// DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
 	// +kubebuilder:validation:Required
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
+	// A list of origin domains that will be allowed by CORS.
 	// +kubebuilder:validation:Required
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
+	// A list of response headers that are exposed to CORS clients.
 	// +kubebuilder:validation:Required
 	ExposedHeaders []*string `json:"exposedHeaders" tf:"exposed_headers,omitempty"`
 
+	// The number of seconds the client should cache a preflight response.
 	// +kubebuilder:validation:Required
 	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds" tf:"max_age_in_seconds,omitempty"`
 }
@@ -269,6 +347,7 @@ type CustomDomainParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Should the Custom Domain Name be validated by using indirect CNAME validation?
 	// +kubebuilder:validation:Optional
 	UseSubdomain *bool `json:"useSubdomain,omitempty" tf:"use_subdomain,omitempty"`
 }
@@ -278,9 +357,11 @@ type CustomerManagedKeyObservation struct {
 
 type CustomerManagedKeyParameters struct {
 
+	// The ID of the Key Vault Key, supplying a version-less key ID will enable auto-rotation of this key.
 	// +kubebuilder:validation:Required
 	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
 
+	// The ID of a user assigned identity.
 	// +kubebuilder:validation:Required
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId" tf:"user_assigned_identity_id,omitempty"`
 }
@@ -313,16 +394,21 @@ type HourMetricsParameters struct {
 }
 
 type IdentityObservation struct {
+
+	// The Principal ID for the Service Principal associated with the Identity of this Storage Account.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// The Tenant ID for the Service Principal associated with the Identity of this Storage Account.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type IdentityParameters struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Storage Account.
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// Specifies the type of Managed Service Identity that should be configured on this Storage Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned .
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -344,6 +430,7 @@ type LoggingParameters struct {
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 
+	// Indicates whether all write requests should be logged. Changing this forces a new resource.
 	// +kubebuilder:validation:Required
 	Write *bool `json:"write" tf:"write,omitempty"`
 }
@@ -371,18 +458,24 @@ type NetworkRulesObservation struct {
 
 type NetworkRulesParameters struct {
 
+	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are
+	// any combination of Logging, Metrics, AzureServices, or None.
 	// +kubebuilder:validation:Optional
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
+	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	// +kubebuilder:validation:Required
 	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges  are not allowed.
 	// +kubebuilder:validation:Optional
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
+	// One or More private_link_access block as defined below.
 	// +kubebuilder:validation:Optional
 	PrivateLinkAccess []PrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
+	// A list of resource ids for subnets.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
@@ -392,9 +485,11 @@ type PrivateLinkAccessObservation struct {
 
 type PrivateLinkAccessParameters struct {
 
+	// The resource id of the resource access rule to be granted access.
 	// +kubebuilder:validation:Required
 	EndpointResourceID *string `json:"endpointResourceId" tf:"endpoint_resource_id,omitempty"`
 
+	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
 	// +kubebuilder:validation:Optional
 	EndpointTenantID *string `json:"endpointTenantId,omitempty" tf:"endpoint_tenant_id,omitempty"`
 }
@@ -404,18 +499,24 @@ type QueuePropertiesCorsRuleObservation struct {
 
 type QueuePropertiesCorsRuleParameters struct {
 
+	// A list of headers that are allowed to be a part of the cross-origin request.
 	// +kubebuilder:validation:Required
 	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
+	// A list of HTTP methods that are allowed to be executed by the origin. Valid options are
+	// DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
 	// +kubebuilder:validation:Required
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
+	// A list of origin domains that will be allowed by CORS.
 	// +kubebuilder:validation:Required
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
+	// A list of response headers that are exposed to CORS clients.
 	// +kubebuilder:validation:Required
 	ExposedHeaders []*string `json:"exposedHeaders" tf:"exposed_headers,omitempty"`
 
+	// The number of seconds the client should cache a preflight response.
 	// +kubebuilder:validation:Required
 	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds" tf:"max_age_in_seconds,omitempty"`
 }
@@ -428,12 +529,15 @@ type QueuePropertiesParameters struct {
 	// +kubebuilder:validation:Optional
 	CorsRule []QueuePropertiesCorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
+	// A hour_metrics block as defined below.
 	// +kubebuilder:validation:Optional
 	HourMetrics []HourMetricsParameters `json:"hourMetrics,omitempty" tf:"hour_metrics,omitempty"`
 
+	// A logging block as defined below.
 	// +kubebuilder:validation:Optional
 	Logging []LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
+	// A minute_metrics block as defined below.
 	// +kubebuilder:validation:Optional
 	MinuteMetrics []MinuteMetricsParameters `json:"minuteMetrics,omitempty" tf:"minute_metrics,omitempty"`
 }
@@ -452,12 +556,15 @@ type RoutingObservation struct {
 
 type RoutingParameters struct {
 
+	// Specifies the kind of network routing opted by the user. Possible values are InternetRouting and MicrosoftRouting. Defaults to MicrosoftRouting.
 	// +kubebuilder:validation:Optional
 	Choice *string `json:"choice,omitempty" tf:"choice,omitempty"`
 
+	// Should internet routing storage endpoints be published? Defaults to false.
 	// +kubebuilder:validation:Optional
 	PublishInternetEndpoints *bool `json:"publishInternetEndpoints,omitempty" tf:"publish_internet_endpoints,omitempty"`
 
+	// Should Microsoft routing storage endpoints be published? Defaults to false.
 	// +kubebuilder:validation:Optional
 	PublishMicrosoftEndpoints *bool `json:"publishMicrosoftEndpoints,omitempty" tf:"publish_microsoft_endpoints,omitempty"`
 }
@@ -467,15 +574,19 @@ type SMBObservation struct {
 
 type SMBParameters struct {
 
+	// A set of SMB authentication methods. Possible values are NTLMv2, and Kerberos.
 	// +kubebuilder:validation:Optional
 	AuthenticationTypes []*string `json:"authenticationTypes,omitempty" tf:"authentication_types,omitempty"`
 
+	// A set of SMB channel encryption. Possible values are AES-128-CCM, AES-128-GCM, and AES-256-GCM.
 	// +kubebuilder:validation:Optional
 	ChannelEncryptionType []*string `json:"channelEncryptionType,omitempty" tf:"channel_encryption_type,omitempty"`
 
+	// A set of Kerberos ticket encryption. Possible values are RC4-HMAC, and AES-256.
 	// +kubebuilder:validation:Optional
 	KerberosTicketEncryptionType []*string `json:"kerberosTicketEncryptionType,omitempty" tf:"kerberos_ticket_encryption_type,omitempty"`
 
+	// A set of SMB protocol versions. Possible values are SMB2.1, SMB3.0, and SMB3.1.1.
 	// +kubebuilder:validation:Optional
 	Versions []*string `json:"versions,omitempty" tf:"versions,omitempty"`
 }
@@ -485,18 +596,24 @@ type SharePropertiesCorsRuleObservation struct {
 
 type SharePropertiesCorsRuleParameters struct {
 
+	// A list of headers that are allowed to be a part of the cross-origin request.
 	// +kubebuilder:validation:Required
 	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
+	// A list of HTTP methods that are allowed to be executed by the origin. Valid options are
+	// DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
 	// +kubebuilder:validation:Required
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
+	// A list of origin domains that will be allowed by CORS.
 	// +kubebuilder:validation:Required
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
+	// A list of response headers that are exposed to CORS clients.
 	// +kubebuilder:validation:Required
 	ExposedHeaders []*string `json:"exposedHeaders" tf:"exposed_headers,omitempty"`
 
+	// The number of seconds the client should cache a preflight response.
 	// +kubebuilder:validation:Required
 	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds" tf:"max_age_in_seconds,omitempty"`
 }
@@ -509,9 +626,11 @@ type SharePropertiesParameters struct {
 	// +kubebuilder:validation:Optional
 	CorsRule []SharePropertiesCorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
+	// A retention_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
+	// A smb block as defined below.
 	// +kubebuilder:validation:Optional
 	SMB []SMBParameters `json:"smb,omitempty" tf:"smb,omitempty"`
 }
@@ -521,9 +640,11 @@ type StaticWebsiteObservation struct {
 
 type StaticWebsiteParameters struct {
 
+	// The absolute path to a custom webpage that should be used when a request is made which does not correspond to an existing file.
 	// +kubebuilder:validation:Optional
 	Error404Document *string `json:"error404Document,omitempty" tf:"error_404_document,omitempty"`
 
+	// The webpage that Azure Storage serves for requests to the root of a website or any subfolder. For example, index.html. The value is case-sensitive.
 	// +kubebuilder:validation:Optional
 	IndexDocument *string `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
 }
@@ -542,7 +663,7 @@ type AccountStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Account is the Schema for the Accounts API
+// Account is the Schema for the Accounts API. Manages a Azure Storage Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

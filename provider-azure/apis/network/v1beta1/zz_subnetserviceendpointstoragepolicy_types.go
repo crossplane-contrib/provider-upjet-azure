@@ -18,28 +18,35 @@ type DefinitionObservation struct {
 
 type DefinitionParameters struct {
 
+	// The description of this Subnet Service Endpoint Storage Policy Definition.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Specifies a list of resources that this Subnet Service Endpoint Storage Policy Definition applies to.
 	// +kubebuilder:validation:Required
 	ServiceResources []*string `json:"serviceResources" tf:"service_resources,omitempty"`
 }
 
 type SubnetServiceEndpointStoragePolicyObservation struct {
+
+	// The ID of the Subnet Service Endpoint Storage Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SubnetServiceEndpointStoragePolicyParameters struct {
 
+	// A definition block as defined below
 	// +kubebuilder:validation:Optional
 	Definition []DefinitionParameters `json:"definition,omitempty" tf:"definition,omitempty"`
 
+	// The Azure Region where the Subnet Service Endpoint Storage Policy should exist. Changing this forces a new Subnet Service Endpoint Storage Policy to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the Resource Group where the Subnet Service Endpoint Storage Policy should exist. Changing this forces a new Subnet Service Endpoint Storage Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -50,6 +57,7 @@ type SubnetServiceEndpointStoragePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags which should be assigned to the Subnet Service Endpoint Storage Policy.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -68,7 +76,7 @@ type SubnetServiceEndpointStoragePolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SubnetServiceEndpointStoragePolicy is the Schema for the SubnetServiceEndpointStoragePolicys API
+// SubnetServiceEndpointStoragePolicy is the Schema for the SubnetServiceEndpointStoragePolicys API. Manages a Subnet Service Endpoint Storage Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

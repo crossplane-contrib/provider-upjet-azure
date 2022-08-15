@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: AvailabilitySet is the Schema for the AvailabilitySets API
+        description: AvailabilitySet is the Schema for the AvailabilitySets API. Manages
+          an Availability Set for Virtual Machines.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,30 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   managed:
+                    description: Specifies whether the availability set is managed
+                      or not. Possible values are true  or false . Default is true.
                     type: boolean
                   platformFaultDomainCount:
+                    description: Specifies the number of fault domains that are used.
+                      Defaults to 3. Changing this forces a new resource to be created.
                     type: number
                   platformUpdateDomainCount:
+                    description: Specifies the number of update domains that are used.
+                      Defaults to 5. Changing this forces a new resource to be created.
                     type: number
                   proximityPlacementGroupId:
+                    description: The ID of the Proximity Placement Group to which
+                      this Virtual Machine should be assigned. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the availability set. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -151,6 +166,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -332,6 +348,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Availability Set.
                     type: string
                 type: object
               conditions:

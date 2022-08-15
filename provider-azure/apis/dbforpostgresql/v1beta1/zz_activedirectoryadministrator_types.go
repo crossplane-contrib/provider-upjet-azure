@@ -14,14 +14,18 @@ import (
 )
 
 type ActiveDirectoryAdministratorObservation struct {
+
+	// The ID of the PostgreSQL Active Directory Administrator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ActiveDirectoryAdministratorParameters struct {
 
+	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
+	// The name of the resource group for the PostgreSQL server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -32,6 +36,7 @@ type ActiveDirectoryAdministratorParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the PostgreSQL Server on which to set the administrator. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
@@ -42,6 +47,7 @@ type ActiveDirectoryAdministratorParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
+	// The Azure Tenant ID
 	// +kubebuilder:validation:Required
 	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
 }
@@ -60,7 +66,7 @@ type ActiveDirectoryAdministratorStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ActiveDirectoryAdministrator is the Schema for the ActiveDirectoryAdministrators API
+// ActiveDirectoryAdministrator is the Schema for the ActiveDirectoryAdministrators API. Manages an Active Directory administrator on a PostgreSQL server
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,14 +14,18 @@ import (
 )
 
 type HPCCacheBlobNFSTargetObservation struct {
+
+	// The ID of the HPC Cache Blob NFS Target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type HPCCacheBlobNFSTargetParameters struct {
 
+	// The name of the access policy applied to this target. Defaults to default.
 	// +kubebuilder:validation:Optional
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
+	// The name of the HPC Cache, which the HPC Cache Blob NFS Target will be added to. Changing this forces a new HPC Cache Blob NFS Target to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storagecache/v1beta1.HPCCache
 	// +kubebuilder:validation:Optional
 	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
@@ -32,9 +36,11 @@ type HPCCacheBlobNFSTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
+	// The client-facing file path of the HPC Cache Blob NFS Target.
 	// +kubebuilder:validation:Required
 	NamespacePath *string `json:"namespacePath" tf:"namespace_path,omitempty"`
 
+	// The name of the Resource Group where the HPC Cache Blob NFS Target should exist. Changing this forces a new HPC Cache Blob NFS Target to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -45,9 +51,11 @@ type HPCCacheBlobNFSTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob NFS Target. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	StorageContainerID *string `json:"storageContainerId" tf:"storage_container_id,omitempty"`
 
+	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	// +kubebuilder:validation:Required
 	UsageModel *string `json:"usageModel" tf:"usage_model,omitempty"`
 }
@@ -66,7 +74,7 @@ type HPCCacheBlobNFSTargetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// HPCCacheBlobNFSTarget is the Schema for the HPCCacheBlobNFSTargets API
+// HPCCacheBlobNFSTarget is the Schema for the HPCCacheBlobNFSTargets API. Manages a Blob NFSv3 Target within a HPC Cache.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

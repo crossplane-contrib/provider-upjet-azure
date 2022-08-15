@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MSSQLManagedInstance is the Schema for the MSSQLManagedInstances
-          API
+          API. Manages a Microsoft SQL Azure Managed Instance.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,12 @@ spec:
               forProvider:
                 properties:
                   administratorLogin:
+                    description: The administrator login name for the new SQL Managed
+                      Instance. Changing this forces a new resource to be created.
                     type: string
                   administratorLoginPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The password associated with the administrator_login
+                      user. Needs to comply with Azure's Password Policy
                     properties:
                       key:
                         description: The key to select.
@@ -85,8 +87,14 @@ spec:
                     - namespace
                     type: object
                   collation:
+                    description: Specifies how the SQL Managed Instance will be collated.
+                      Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
+                      forces a new resource to be created.
                     type: string
                   dnsZonePartnerId:
+                    description: The ID of the SQL Managed Instance which will share
+                      the DNS zone. This is a prerequisite for creating an azurerm_managed_instance_failover_group.
+                      Setting this after creation forces a new resource to be created.
                     type: string
                   dnsZonePartnerIdRef:
                     description: A Reference to a named object.
@@ -162,27 +170,73 @@ spec:
                         type: object
                     type: object
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         type:
+                          description: The identity type of the SQL Managed Instance.
+                            The only possible value is SystemAssigned.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   licenseType:
+                    description: What type of license the Managed Instance will use.
+                      Valid values include can be PriceIncluded or BasePrice.
                     type: string
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   maintenanceConfigurationName:
+                    description: The name of the Public Maintenance Configuration
+                      window to apply to the SQL Managed Instance. Valid values include
+                      SQL_Default, SQL_EastUS_MI_1, SQL_EastUS2_MI_1, SQL_WestUS2_MI_1,
+                      SQL_SoutheastAsia_MI_1, SQL_AustraliaEast_MI_1, SQL_NorthEurope_MI_1,
+                      SQL_SouthCentralUS_MI_1, SQL_UKSouth_MI_1, SQL_WestEurope_MI_1,
+                      SQL_EastUS_MI_2, SQL_EastUS2_MI_2, SQL_WestUS2_MI_2, SQL_SoutheastAsia_MI_2,
+                      SQL_NorthEurope_MI_2, SQL_SouthCentralUS_MI_2, SQL_UKSouth_MI_2,
+                      SQL_WestEurope_MI_2, SQL_AustraliaSoutheast_MI_1, SQL_BrazilSouth_MI_1,
+                      SQL_CanadaCentral_MI_1, SQL_CanadaEast_MI_1, SQL_CentralUS_MI_1,
+                      SQL_EastAsia_MI_1, SQL_FranceCentral_MI_1, SQL_GermanyWestCentral_MI_1,
+                      SQL_CentralIndia_MI_1, SQL_JapanEast_MI_1, SQL_JapanWest_MI_1,
+                      SQL_NorthCentralUS_MI_1, SQL_UKWest_MI_1, SQL_WestUS_MI_1, SQL_AustraliaSoutheast_MI_2,
+                      SQL_BrazilSouth_MI_2, SQL_CanadaCentral_MI_2, SQL_CanadaEast_MI_2,
+                      SQL_CentralUS_MI_2, SQL_EastAsia_MI_2, SQL_FranceCentral_MI_2,
+                      SQL_GermanyWestCentral_MI_2, SQL_CentralIndia_MI_2, SQL_JapanEast_MI_2,
+                      SQL_JapanWest_MI_2, SQL_NorthCentralUS_MI_2, SQL_UKWest_MI_2,
+                      SQL_WestUS_MI_2, SQL_KoreaCentral_MI_1, SQL_KoreaCentral_MI_2,
+                      SQL_WestCentralUS_MI_1, SQL_WestCentralUS_MI_2, SQL_UAENorth_MI_1,
+                      SQL_SwitzerlandWest_MI_1, SQL_SwitzerlandNorth_MI_1, SQL_UAENorth_MI_2,
+                      SQL_SwitzerlandWest_MI_2, SQL_SwitzerlandNorth_MI_2, SQL_FranceSouth_MI_1,
+                      SQL_FranceSouth_MI_2, SQL_SouthAfricaNorth_MI_1, SQL_KoreaSouth_MI_1,
+                      SQL_UAECentral_MI_1, SQL_SouthAfricaNorth_MI_2, SQL_KoreaSouth_MI_2,
+                      SQL_UAECentral_MI_2, SQL_SouthIndia_MI_1, SQL_SouthIndia_MI_2,
+                      SQL_AustraliaCentral_MI_1, SQL_AustraliaCentral2_MI_1, SQL_AustraliaCentral_MI_2,
+                      SQL_AustraliaCentral2_MI_2, SQL_WestIndia_MI_1, SQL_WestIndia_MI_2,
+                      SQL_SouthAfricaWest_MI_1, SQL_SouthAfricaWest_MI_2, SQL_GermanyNorth_MI_1,
+                      SQL_GermanyNorth_MI_2, SQL_NorwayEast_MI_1, SQL_BrazilSoutheast_MI_1,
+                      SQL_NorwayWest_MI_1, SQL_WestUS3_MI_1, SQL_NorwayEast_MI_2,
+                      SQL_BrazilSoutheast_MI_2, SQL_NorwayWest_MI_2, SQL_WestUS3_MI_2.
+                      Defaults to SQL_Default.
                     type: string
                   minimumTlsVersion:
+                    description: The Minimum TLS Version. Default value is 1.2 Valid
+                      values include 1.0, 1.1, 1.2.
                     type: string
                   proxyOverride:
+                    description: Specifies how the SQL Managed Instance will be accessed.
+                      Default value is Default. Valid values include Default, Proxy,
+                      and Redirect.
                     type: string
                   publicDataEndpointEnabled:
+                    description: Is the public data endpoint enabled? Default value
+                      is false.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the SQL Managed Instance.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -258,12 +312,23 @@ spec:
                         type: object
                     type: object
                   skuName:
+                    description: Specifies the SKU Name for the SQL Managed Instance.
+                      Valid values include GP_Gen4, GP_Gen5, GP_G8IM, GP_G8IH, BC_Gen4,
+                      BC_Gen5, BC_G8IM or BC_G8IH.
                     type: string
                   storageAccountType:
+                    description: Specifies the storage account type used to store
+                      backups for this database. Changing this forces a new resource
+                      to be created. Possible values are GRS, LRS and ZRS. The default
+                      value is GRS.
                     type: string
                   storageSizeInGb:
+                    description: Maximum storage space for the SQL Managed instance.
+                      This should be a multiple of 32 .
                     type: number
                   subnetId:
+                    description: The subnet resource id that the SQL Managed Instance
+                      will be associated with.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -341,10 +406,17 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   timezoneId:
+                    description: The TimeZone ID that the SQL Managed Instance will
+                      be operating in. Default value is UTC. Changing this forces
+                      a new resource to be created.
                     type: string
                   vcores:
+                    description: Number of cores that should be assigned to the SQL
+                      Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs,
+                      or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
                     type: number
                 required:
                 - administratorLogin
@@ -533,15 +605,23 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The fully qualified domain name of the Azure Managed
+                      SQL Instance
                     type: string
                   id:
+                    description: The SQL Managed Instance ID.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID for the Service Principal
+                            associated with the Identity of this SQL Managed Instance.
                           type: string
                         tenantId:
+                          description: The Tenant ID for the Service Principal associated
+                            with the Identity of this SQL Managed Instance.
                           type: string
                       type: object
                     type: array

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MSSQLFailoverGroup is the Schema for the MSSQLFailoverGroups
-          API
+          API. Manages a Microsoft Azure SQL Failover Group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   databases:
+                    description: A set of database names to include in the failover
+                      group.
                     items:
                       type: string
                     type: array
@@ -227,19 +229,32 @@ spec:
                       type: object
                     type: array
                   readWriteEndpointFailoverPolicy:
+                    description: A read_write_endpoint_failover_policy block as defined
+                      below.
                     items:
                       properties:
                         graceMinutes:
+                          description: The grace period in minutes, before failover
+                            with data loss is attempted for the read-write endpoint.
+                            Required when mode is Automatic.
                           type: number
                         mode:
+                          description: The failover policy of the read-write endpoint
+                            for the failover group. Possible values are Automatic
+                            or Manual.
                           type: string
                       required:
                       - mode
                       type: object
                     type: array
                   readonlyEndpointFailoverPolicyEnabled:
+                    description: Whether failover is enabled for the readonly endpoint.
+                      Defaults to false.
                     type: boolean
                   serverId:
+                    description: The ID of the primary SQL Server on which to create
+                      the failover group. Changing this forces a new resource to be
+                      created.
                     type: string
                   serverIdRef:
                     description: A Reference to a named object.
@@ -317,6 +332,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - partnerServer
@@ -504,8 +520,11 @@ spec:
                     items:
                       properties:
                         location:
+                          description: The location of the partner server.
                           type: string
                         role:
+                          description: The replication role of the partner server.
+                            Possible values include Primary or Secondary.
                           type: string
                       type: object
                     type: array

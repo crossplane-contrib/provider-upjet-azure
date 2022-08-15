@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: IOTHub is the Schema for the IOTHubs API
+        description: IOTHub is the Schema for the IOTHubs API. Manages an IotHub
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,11 +64,13 @@ spec:
               forProvider:
                 properties:
                   cloudToDevice:
+                    description: A cloud_to_device block as defined below.
                     items:
                       properties:
                         defaultTtl:
                           type: string
                         feedback:
+                          description: A feedback block as defined below.
                           items:
                             properties:
                               lockDuration:
@@ -76,6 +78,10 @@ spec:
                               maxDeliveryCount:
                                 type: number
                               timeToLive:
+                                description: The retention time for service-bound
+                                  feedback messages, specified as an ISO 8601 timespan
+                                  duration. This value must be between 1 minute and
+                                  48 hours. Defaults to PT1H.
                                 type: string
                             type: object
                           type: array
@@ -84,10 +90,15 @@ spec:
                       type: object
                     type: array
                   eventHubPartitionCount:
+                    description: The number of device-to-cloud partitions used by
+                      backing event hubs. Must be between 2 and 128.
                     type: number
                   eventHubRetentionInDays:
+                    description: The event hub retention to use in days. Must be between
+                      1 and 7.
                     type: number
                   fileUpload:
+                    description: A file_upload block as defined below.
                     items:
                       properties:
                         authenticationType:
@@ -121,8 +132,14 @@ spec:
                         maxDeliveryCount:
                           type: number
                         notifications:
+                          description: Used to specify whether file notifications
+                            are sent to IoT Hub on upload. Defaults to false.
                           type: boolean
                         sasTtl:
+                          description: The period of time for which the SAS URI generated
+                            by IoT Hub for file upload is valid, specified as an ISO
+                            8601 timespan duration. This value must be between 1 minute
+                            and 24 hours. Defaults to PT1H.
                           type: string
                       required:
                       - connectionStringSecretRef
@@ -133,6 +150,8 @@ spec:
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this IoT Hub.
                           items:
                             type: string
                           type: array
@@ -143,22 +162,40 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource has to be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   minTlsVersion:
+                    description: Specifies the minimum TLS version to support for
+                      this hub. The only valid value is 1.2. Changing this forces
+                      a new resource to be created.
                     type: string
                   networkRuleSet:
+                    description: A network_rule_set block as defined below.
                     items:
                       properties:
                         applyToBuiltinEventhubEndpoint:
+                          description: Determines if Network Rule Set is also applied
+                            to the BuiltIn EventHub EndPoint of the IotHub. Defaults
+                            to false.
                           type: boolean
                         defaultAction:
+                          description: Default Action for Network Rule Set. Possible
+                            values are Deny, Allow. Defaults to Deny.
                           type: string
                         ipRule:
+                          description: One or more ip_rule blocks as defined below.
                           items:
                             properties:
                               action:
+                                description: The desired action for requests captured
+                                  by this rule. Possible values are Allow. Defaults
+                                  to Allow.
                                 type: string
                               ipMask:
+                                description: The IP address range in CIDR notation
+                                  for the IP rule.
                                 type: string
                               name:
                                 type: string
@@ -170,6 +207,7 @@ spec:
                       type: object
                     type: array
                   publicNetworkAccessEnabled:
+                    description: Is the IotHub resource accessible from a public network?
                     type: boolean
                   resourceGroupName:
                     type: string
@@ -247,9 +285,11 @@ spec:
                         type: object
                     type: object
                   sku:
+                    description: A sku block as defined below.
                     items:
                       properties:
                         capacity:
+                          description: The number of provisioned IoT Hub units.
                           type: number
                         name:
                           type: string
@@ -261,6 +301,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -443,25 +484,53 @@ spec:
               atProvider:
                 properties:
                   endpoint:
+                    description: An endpoint block as defined below.
                     items:
                       properties:
                         authenticationType:
                           type: string
                         batchFrequencyInSeconds:
+                          description: Time interval at which blobs are written to
+                            storage. Value should be between 60 and 720 seconds. Default
+                            value is 300 seconds. This attribute is applicable for
+                            endpoint type AzureIotHub.StorageContainer.
                           type: number
                         containerName:
                           type: string
                         encoding:
+                          description: Encoding that is used to serialize messages
+                            to blobs. Supported values are Avro, AvroDeflate and JSON.
+                            Default value is Avro. This attribute is applicable for
+                            endpoint type AzureIotHub.StorageContainer. Changing this
+                            forces a new resource to be created.
                           type: string
                         endpointUri:
+                          description: URI of the Service Bus or Event Hubs Namespace
+                            endpoint. This attribute can only be specified and is
+                            mandatory when authentication_type is identityBased for
+                            endpoint type AzureIotHub.ServiceBusQueue, AzureIotHub.ServiceBusTopic
+                            or AzureIotHub.EventHub.
                           type: string
                         entityPath:
+                          description: Name of the Service Bus Queue/Topic or Event
+                            Hub. This attribute can only be specified and is mandatory
+                            when authentication_type is identityBased for endpoint
+                            type AzureIotHub.ServiceBusQueue, AzureIotHub.ServiceBusTopic
+                            or AzureIotHub.EventHub.
                           type: string
                         fileNameFormat:
+                          description: File name format for the blob. Default format
+                            is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All
+                            parameters are mandatory but can be reordered. This attribute
+                            is applicable for endpoint type AzureIotHub.StorageContainer.
                           type: string
                         identityId:
                           type: string
                         maxChunkSizeInBytes:
+                          description: Maximum number of bytes for each blob written
+                            to storage. Value should be between 10485760 and 524288000.
+                            Default value is 314572800. This attribute is applicable
+                            for endpoint type AzureIotHub.StorageContainer.
                           type: number
                         name:
                           type: string
@@ -472,6 +541,7 @@ spec:
                       type: object
                     type: array
                   enrichment:
+                    description: A enrichment block as defined below.
                     items:
                       properties:
                         endpointNames:
@@ -479,22 +549,35 @@ spec:
                             type: string
                           type: array
                         key:
+                          description: The key of the enrichment.
                           type: string
                         value:
+                          description: The value of the enrichment. Value can be any
+                            static string, the name of the IoT Hub sending the message  or
+                            information from the device twin
                           type: string
                       type: object
                     type: array
                   eventHubEventsEndpoint:
+                    description: The EventHub compatible endpoint for events data
                     type: string
                   eventHubEventsNamespace:
+                    description: The EventHub namespace for events data
                     type: string
                   eventHubEventsPath:
+                    description: The EventHub compatible path for events data
                     type: string
                   eventHubOperationsEndpoint:
+                    description: The EventHub compatible endpoint for operational
+                      data
                     type: string
                   eventHubOperationsPath:
+                    description: The EventHub compatible path for operational data
                     type: string
                   fallbackRoute:
+                    description: A fallback_route block as defined below. If the fallback
+                      route is enabled, messages that don't match any of the supplied
+                      routes are automatically sent to this route. Defaults to messages/events.
                     items:
                       properties:
                         condition:
@@ -510,19 +593,26 @@ spec:
                       type: object
                     type: array
                   hostname:
+                    description: The hostname of the IotHub Resource.
                     type: string
                   id:
+                    description: The ID of the IoTHub.
                     type: string
                   identity:
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID associated with this Managed
+                            Service Identity.
                           type: string
                         tenantId:
+                          description: The Tenant ID associated with this Managed
+                            Service Identity.
                           type: string
                       type: object
                     type: array
                   route:
+                    description: A route block as defined below.
                     items:
                       properties:
                         condition:
@@ -540,11 +630,16 @@ spec:
                       type: object
                     type: array
                   sharedAccessPolicy:
+                    description: One or more shared_access_policy blocks as defined
+                      below.
                     items:
                       properties:
                         keyName:
+                          description: The name of the shared access policy.
                           type: string
                         permissions:
+                          description: The permissions assigned to the shared access
+                            policy.
                           type: string
                       type: object
                     type: array

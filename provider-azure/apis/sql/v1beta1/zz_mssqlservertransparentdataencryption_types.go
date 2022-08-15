@@ -14,11 +14,14 @@ import (
 )
 
 type MSSQLServerTransparentDataEncryptionObservation struct {
+
+	// The ID of the MSSQL encryption protector
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MSSQLServerTransparentDataEncryptionParameters struct {
 
+	// To use customer managed keys from Azure Key Vault, provide the AKV Key ID. To use service managed keys, omit this field.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +33,7 @@ type MSSQLServerTransparentDataEncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
+	// Specifies the name of the MS SQL Server.
 	// +crossplane:generate:reference:type=MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,7 +60,7 @@ type MSSQLServerTransparentDataEncryptionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MSSQLServerTransparentDataEncryption is the Schema for the MSSQLServerTransparentDataEncryptions API
+// MSSQLServerTransparentDataEncryption is the Schema for the MSSQLServerTransparentDataEncryptions API. Manages the transparent data encryption configuration for a MSSQL Server
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

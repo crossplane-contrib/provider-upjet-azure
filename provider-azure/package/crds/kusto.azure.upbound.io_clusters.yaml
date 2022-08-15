@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API
+        description: Cluster is the Schema for the Clusters API. Manages Kusto (also
+          known as Azure Data Explorer) Cluster
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,38 +65,60 @@ spec:
               forProvider:
                 properties:
                   autoStopEnabled:
+                    description: Specifies if the cluster could be automatically stopped
+                      .
                     type: boolean
                   diskEncryptionEnabled:
+                    description: Specifies if the cluster's disks are encrypted.
                     type: boolean
                   doubleEncryptionEnabled:
+                    description: Is the cluster's double encryption enabled? Defaults
+                      to false. Changing this forces a new resource to be created.
                     type: boolean
                   engine:
+                    description: . The engine type that should be used. Possible values
+                      are V2 and V3. Defaults to V2.
                     type: string
                   identity:
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Kusto Cluster.
                           items:
                             type: string
                           type: array
                         type:
+                          description: 'Specifies the type of Managed Service Identity
+                            that is configured on this Kusto Cluster. Possible values
+                            are: SystemAssigned, UserAssigned and SystemAssigned,
+                            UserAssigned.'
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   languageExtensions:
+                    description: 'An list of language_extensions to enable. Valid
+                      values are: PYTHON and R.'
                     items:
                       type: string
                     type: array
                   location:
+                    description: The location where the Kusto Cluster should be created.
+                      Changing this forces a new resource to be created.
                     type: string
                   optimizedAutoScale:
+                    description: An optimized_auto_scale block as defined below.
                     items:
                       properties:
                         maximumInstances:
+                          description: The maximum number of allowed instances. Must
+                            between 0 and 1000.
                           type: number
                         minimumInstances:
+                          description: The minimum number of allowed instances. Must
+                            between 0 and 1000.
                           type: number
                       required:
                       - maximumInstances
@@ -103,10 +126,15 @@ spec:
                       type: object
                     type: array
                   publicNetworkAccessEnabled:
+                    description: Is the public network access enabled? Defaults to
+                      true.
                     type: boolean
                   purgeEnabled:
+                    description: Specifies if the purge operations are enabled.
                     type: boolean
                   resourceGroupName:
+                    description: Specifies the Resource Group where the Kusto Cluster
+                      should exist. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -182,9 +210,12 @@ spec:
                         type: object
                     type: object
                   sku:
+                    description: A sku block as defined below.
                     items:
                       properties:
                         capacity:
+                          description: Specifies the node count for the cluster. Boundaries
+                            depend on the SKU name.
                           type: number
                         name:
                           type: string
@@ -193,23 +224,37 @@ spec:
                       type: object
                     type: array
                   streamingIngestionEnabled:
+                    description: Specifies if the streaming ingest is enabled.
                     type: boolean
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   trustedExternalTenants:
+                    description: Specifies a list of tenant IDs that are trusted by
+                      the cluster. Default setting trusts all other tenants. Use trusted_external_tenants
+                      = ["*"] to explicitly allow all other tenants, trusted_external_tenants
+                      = ["MyTenantOnly"] for only your tenant or trusted_external_tenants
+                      = ["<tenantId1>", "<tenantIdx>"] to allow specific other tenants.
                     items:
                       type: string
                     type: array
                   virtualNetworkConfiguration:
+                    description: A virtual_network_configuration block as defined
+                      below. Changing this forces a new resource to be created.
                     items:
                       properties:
                         dataManagementPublicIpId:
+                          description: Data management's service public IP address
+                            resource id.
                           type: string
                         enginePublicIpId:
+                          description: Engine service's public IP address resource
+                            id.
                           type: string
                         subnetId:
+                          description: The subnet resource id.
                           type: string
                         subnetIdRef:
                           description: A Reference to a named object.
@@ -293,6 +338,9 @@ spec:
                       type: object
                     type: array
                   zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Kusto Cluster should be located. Changing this forces a new
+                      Kusto Cluster to be created.
                     items:
                       type: string
                     type: array
@@ -477,19 +525,26 @@ spec:
               atProvider:
                 properties:
                   dataIngestionUri:
+                    description: The Kusto Cluster URI to be used for data ingestion.
                     type: string
                   id:
+                    description: The Kusto Cluster ID.
                     type: string
                   identity:
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID associated with this System
+                            Assigned Managed Service Identity.
                           type: string
                         tenantId:
+                          description: The Tenant ID associated with this System Assigned
+                            Managed Service Identity.
                           type: string
                       type: object
                     type: array
                   uri:
+                    description: The FQDN of the Azure Kusto Cluster.
                     type: string
                 type: object
               conditions:

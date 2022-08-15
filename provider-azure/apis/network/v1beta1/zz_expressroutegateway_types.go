@@ -14,14 +14,18 @@ import (
 )
 
 type ExpressRouteGatewayObservation struct {
+
+	// The ID of the ExpressRoute gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ExpressRouteGatewayParameters struct {
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the ExpressRoute gateway. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -32,12 +36,15 @@ type ExpressRouteGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The number of scale units with which to provision the ExpressRoute gateway. Each scale unit is equal to 2Gbps, with support for up to 10 scale units .
 	// +kubebuilder:validation:Required
 	ScaleUnits *float64 `json:"scaleUnits" tf:"scale_units,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The ID of a Virtual HUB within which the ExpressRoute gateway should be created.
 	// +crossplane:generate:reference:type=VirtualHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -64,7 +71,7 @@ type ExpressRouteGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ExpressRouteGateway is the Schema for the ExpressRouteGateways API
+// ExpressRouteGateway is the Schema for the ExpressRouteGateways API. Manages an ExpressRoute gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

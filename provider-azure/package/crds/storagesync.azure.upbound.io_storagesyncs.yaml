@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: StorageSync is the Schema for the StorageSyncs API
+        description: StorageSync is the Schema for the StorageSyncs API. Manages a
+          Storage Sync.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,17 @@ spec:
               forProvider:
                 properties:
                   incomingTrafficPolicy:
+                    description: Incoming traffic policy. Possible values are AllowAllTraffic
+                      and AllowVirtualNetworksOnly.
                     type: string
                   location:
+                    description: The Azure Region where the Storage Sync should exist.
+                      Changing this forces a new Storage Sync to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Storage
+                      Sync should exist. Changing this forces a new Storage Sync to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -145,6 +153,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Storage Sync.
                     type: object
                 required:
                 - location
@@ -326,6 +336,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Storage Sync.
                     type: string
                 type: object
               conditions:

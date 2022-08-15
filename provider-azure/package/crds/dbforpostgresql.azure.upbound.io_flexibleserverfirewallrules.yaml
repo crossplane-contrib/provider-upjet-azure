@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FlexibleServerFirewallRule is the Schema for the FlexibleServerFirewallRules
-          API
+          API. Manages a PostgreSQL Flexible Server Firewall Rule.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,14 @@ spec:
               forProvider:
                 properties:
                   endIpAddress:
+                    description: The End IP Address associated with this PostgreSQL
+                      Flexible Server Firewall Rule.
                     type: string
                   serverId:
+                    description: The ID of the PostgreSQL Flexible Server from which
+                      to create this PostgreSQL Flexible Server Firewall Rule. Changing
+                      this forces a new PostgreSQL Flexible Server Firewall Rule to
+                      be created.
                     type: string
                   serverIdRef:
                     description: A Reference to a named object.
@@ -143,6 +149,8 @@ spec:
                         type: object
                     type: object
                   startIpAddress:
+                    description: The Start IP Address associated with this PostgreSQL
+                      Flexible Server Firewall Rule.
                     type: string
                 required:
                 - endIpAddress
@@ -326,6 +334,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the PostgreSQL Flexible Server Firewall
+                      Rule.
                     type: string
                 type: object
               conditions:

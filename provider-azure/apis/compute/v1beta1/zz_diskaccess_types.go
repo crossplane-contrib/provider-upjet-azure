@@ -14,14 +14,18 @@ import (
 )
 
 type DiskAccessObservation struct {
+
+	// The ID of the Disk Access resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DiskAccessParameters struct {
 
+	// The Azure Region where the Disk Access should exist. Changing this forces a new Disk to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the Resource Group where the Disk Access should exist. Changing this forces a new Disk Access to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -32,6 +36,7 @@ type DiskAccessParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags which should be assigned to the Disk Access.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -50,7 +55,7 @@ type DiskAccessStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DiskAccess is the Schema for the DiskAccesss API
+// DiskAccess is the Schema for the DiskAccesss API. Manages a Disk Access.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

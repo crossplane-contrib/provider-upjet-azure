@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: LoadBalancerNatPool is the Schema for the LoadBalancerNatPools
-          API
+          API. Manages a Load Balancer NAT Pool.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,18 +65,38 @@ spec:
               forProvider:
                 properties:
                   backendPort:
+                    description: The port used for the internal endpoint. Possible
+                      values range between 1 and 65535, inclusive.
                     type: number
                   floatingIpEnabled:
+                    description: Are the floating IPs enabled for this Load Balancer
+                      Rule? A floating IP is reassigned to a secondary server in case
+                      the primary server fails. Required to configure a SQL AlwaysOn
+                      Availability Group. Defaults to false.
                     type: boolean
                   frontendIpConfigurationName:
+                    description: The name of the frontend IP configuration exposing
+                      this rule.
                     type: string
                   frontendPortEnd:
+                    description: The last port number in the range of external ports
+                      that will be used to provide Inbound NAT to NICs associated
+                      with this Load Balancer. Possible values range between 1 and
+                      65534, inclusive.
                     type: number
                   frontendPortStart:
+                    description: The first port number in the range of external ports
+                      that will be used to provide Inbound NAT to NICs associated
+                      with this Load Balancer. Possible values range between 1 and
+                      65534, inclusive.
                     type: number
                   idleTimeoutInMinutes:
+                    description: Specifies the idle timeout in minutes for TCP connections.
+                      Valid values are between 4 and 30. Defaults to 4.
                     type: number
                   loadbalancerId:
+                    description: The ID of the Load Balancer in which to create the
+                      NAT pool.
                     type: string
                   loadbalancerIdRef:
                     description: A Reference to a named object.
@@ -152,8 +172,12 @@ spec:
                         type: object
                     type: object
                   protocol:
+                    description: The transport protocol for the external endpoint.
+                      Possible values are Udp or Tcp.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the resource.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -229,6 +253,8 @@ spec:
                         type: object
                     type: object
                   tcpResetEnabled:
+                    description: Is TCP Reset enabled for this Load Balancer Rule?
+                      Defaults to false.
                     type: boolean
                 required:
                 - backendPort
@@ -416,6 +442,7 @@ spec:
                   frontendIpConfigurationId:
                     type: string
                   id:
+                    description: The ID of the Load Balancer NAT pool.
                     type: string
                 type: object
               conditions:

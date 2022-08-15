@@ -21,6 +21,7 @@ type FeatureParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Should this feature be Registered or Unregistered?
 	// +kubebuilder:validation:Required
 	Registered *bool `json:"registered" tf:"registered,omitempty"`
 }
@@ -31,6 +32,7 @@ type ResourceProviderRegistrationObservation struct {
 
 type ResourceProviderRegistrationParameters struct {
 
+	// A list of feature blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Feature []FeatureParameters `json:"feature,omitempty" tf:"feature,omitempty"`
 
@@ -52,7 +54,7 @@ type ResourceProviderRegistrationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ResourceProviderRegistration is the Schema for the ResourceProviderRegistrations API
+// ResourceProviderRegistration is the Schema for the ResourceProviderRegistrations API. Manages the Registration of a Resource Provider.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

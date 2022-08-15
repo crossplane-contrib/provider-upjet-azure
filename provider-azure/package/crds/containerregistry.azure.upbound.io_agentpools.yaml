@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: AgentPool is the Schema for the AgentPools API
+        description: AgentPool is the Schema for the AgentPools API. Manages an Azure
+          Container Registry Agent Pool.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   containerRegistryName:
+                    description: Name of Azure Container Registry to create an Agent
+                      Pool for. Changing this forces a new Azure Container Registry
+                      Agent Pool to be created.
                     type: string
                   containerRegistryNameRef:
                     description: A Reference to a named object.
@@ -139,10 +143,17 @@ spec:
                         type: object
                     type: object
                   instanceCount:
+                    description: VMSS instance count. Defaults to 1.
                     type: number
                   location:
+                    description: The Azure Region where the Azure Container Registry
+                      Agent Pool should exist. Changing this forces a new Azure Container
+                      Registry Agent Pool to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Azure Container
+                      Registry Agent Pool should exist. Changing this forces a new
+                      Azure Container Registry Agent Pool to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -220,10 +231,18 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Azure Container Registry Agent Pool.
                     type: object
                   tier:
+                    description: 'Sets the VM your agent pool will run on. Valid values
+                      are: S1 , S2 , S3  or I6 . Defaults to S1. Changing this forces
+                      a new Azure Container Registry Agent Pool to be created.'
                     type: string
                   virtualNetworkSubnetId:
+                    description: The ID of the Virtual Network Subnet Resource where
+                      the agent machines will be running. Changing this forces a new
+                      Azure Container Registry Agent Pool to be created.
                     type: string
                   virtualNetworkSubnetIdRef:
                     description: A Reference to a named object.
@@ -478,6 +497,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Azure Container Registry Agent Pool.
                     type: string
                 type: object
               conditions:

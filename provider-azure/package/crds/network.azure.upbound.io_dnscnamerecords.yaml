@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DNSCNAMERecord is the Schema for the DNSCNAMERecords API
+        description: DNSCNAMERecord is the Schema for the DNSCNAMERecords API. Manages
+          a DNS CNAME Record.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,11 @@ spec:
               forProvider:
                 properties:
                   record:
+                    description: The target of the CNAME.
                     type: string
                   resourceGroupName:
+                    description: Specifies the resource group where the DNS Zone  exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -143,8 +147,11 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   targetResourceId:
+                    description: The Azure resource id of the target object. Conflicts
+                      with records
                     type: string
                   targetResourceIdRef:
                     description: A Reference to a named object.
@@ -222,6 +229,8 @@ spec:
                   ttl:
                     type: number
                   zoneName:
+                    description: Specifies the DNS Zone where the resource exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
                     description: A Reference to a named object.
@@ -476,8 +485,10 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the DNS CName Record.
                     type: string
                   id:
+                    description: The DNS CName Record ID.
                     type: string
                 type: object
               conditions:

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MarketplaceAgreement is the Schema for the MarketplaceAgreements
-          API
+          API. Allows accepting the Legal Terms for a Marketplace Image.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,16 @@ spec:
               forProvider:
                 properties:
                   offer:
+                    description: The Offer of the Marketplace Image. Changing this
+                      forces a new resource to be created.
                     type: string
                   plan:
+                    description: The Plan of the Marketplace Image. Changing this
+                      forces a new resource to be created.
                     type: string
                   publisher:
+                    description: The Publisher of the Marketplace Image. Changing
+                      this forces a new resource to be created.
                     type: string
                 required:
                 - offer
@@ -253,6 +259,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Marketplace Agreement.
                     type: string
                   licenseTextLink:
                     type: string

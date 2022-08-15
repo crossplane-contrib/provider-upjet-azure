@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: DataSetDataLakeGen2 is the Schema for the DataSetDataLakeGen2s
-          API
+          API. Manages a Data Share Data Lake Gen2 Dataset.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,14 @@ spec:
               forProvider:
                 properties:
                   filePath:
+                    description: The path of the file in the data lake file system
+                      to be shared with the receiver. Conflicts with folder_path Changing
+                      this forces a new Data Share Data Lake Gen2 Dataset to be created.
                     type: string
                   fileSystemName:
+                    description: The name of the data lake file system to be shared
+                      with the receiver. Changing this forces a new Data Share Data
+                      Lake Gen2 Dataset to be created.
                     type: string
                   fileSystemNameRef:
                     description: A Reference to a named object.
@@ -142,8 +148,14 @@ spec:
                         type: object
                     type: object
                   folderPath:
+                    description: The folder path in the data lake file system to be
+                      shared with the receiver. Conflicts with file_path Changing
+                      this forces a new Data Share Data Lake Gen2 Dataset to be created.
                     type: string
                   shareId:
+                    description: The resource ID of the Data Share where this Data
+                      Share Data Lake Gen2 Dataset should be created. Changing this
+                      forces a new Data Share Data Lake Gen2 Dataset to be created.
                     type: string
                   shareIdRef:
                     description: A Reference to a named object.
@@ -219,6 +231,9 @@ spec:
                         type: object
                     type: object
                   storageAccountId:
+                    description: The resource id of the storage account of the data
+                      lake file system to be shared with the receiver. Changing this
+                      forces a new Data Share Data Lake Gen2 Dataset to be created.
                     type: string
                   storageAccountIdRef:
                     description: A Reference to a named object.
@@ -471,8 +486,11 @@ spec:
               atProvider:
                 properties:
                   displayName:
+                    description: The name of the Data Share Dataset.
                     type: string
                   id:
+                    description: The resource ID of the Data Share Data Lake Gen2
+                      Dataset.
                     type: string
                 type: object
               conditions:

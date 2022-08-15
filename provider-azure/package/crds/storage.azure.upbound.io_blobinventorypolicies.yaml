@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BlobInventoryPolicy is the Schema for the BlobInventoryPolicys
-          API
+          API. Manages a Storage Blob Inventory Policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,20 +65,33 @@ spec:
               forProvider:
                 properties:
                   rules:
+                    description: One or more rules blocks as defined below.
                     items:
                       properties:
                         filter:
+                          description: A filter block as defined above. Can only be
+                            set when the scope is Blob.
                           items:
                             properties:
                               blobTypes:
+                                description: A set of blob types. Possible values
+                                  are blockBlob, appendBlob, and pageBlob. The storage
+                                  account with is_hns_enabled is true doesn't support
+                                  pageBlob.
                                 items:
                                   type: string
                                 type: array
                               includeBlobVersions:
+                                description: Includes blob versions in blob inventory
+                                  or not? Defaults to false.
                                 type: boolean
                               includeSnapshots:
+                                description: Includes blob snapshots in blob inventory
+                                  or not? Defaults to false.
                                 type: boolean
                               prefixMatch:
+                                description: A set of strings for blob prefixes to
+                                  be matched.
                                 items:
                                   type: string
                                 type: array
@@ -87,18 +100,30 @@ spec:
                             type: object
                           type: array
                         format:
+                          description: The format of the inventory files. Possible
+                            values are Csv and Parquet.
                           type: string
                         name:
+                          description: The name which should be used for this Blob
+                            Inventory Policy Rule.
                           type: string
                         schedule:
+                          description: The inventory schedule applied by this rule.
+                            Possible values are Daily and Weekly.
                           type: string
                         schemaFields:
+                          description: A list of fields to be included in the inventory.
+                            See the Azure API reference for all the supported fields.
                           items:
                             type: string
                           type: array
                         scope:
+                          description: The scope of the inventory for this rule. Possible
+                            values are Blob and Container.
                           type: string
                         storageContainerName:
+                          description: The storage container name to store the blob
+                            inventory files for this rule.
                           type: string
                         storageContainerNameRef:
                           description: A Reference to a named object.
@@ -185,6 +210,9 @@ spec:
                       type: object
                     type: array
                   storageAccountId:
+                    description: The ID of the storage account to apply this Blob
+                      Inventory Policy to. Changing this forces a new Storage Blob
+                      Inventory Policy to be created.
                     type: string
                   storageAccountIdRef:
                     description: A Reference to a named object.
@@ -439,6 +467,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Storage Blob Inventory Policy.
                     type: string
                 type: object
               conditions:

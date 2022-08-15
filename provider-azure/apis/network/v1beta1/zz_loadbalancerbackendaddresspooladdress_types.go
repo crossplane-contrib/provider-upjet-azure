@@ -14,11 +14,14 @@ import (
 )
 
 type LoadBalancerBackendAddressPoolAddressObservation struct {
+
+	// The ID of the Backend Address Pool Address.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type LoadBalancerBackendAddressPoolAddressParameters struct {
 
+	// The ID of the Backend Address Pool. Changing this forces a new Backend Address Pool Address to be created.
 	// +crossplane:generate:reference:type=LoadBalancerBackendAddressPool
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,9 +33,11 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
+	// The Static IP Address which should be allocated to this Backend Address Pool.
 	// +kubebuilder:validation:Required
 	IPAddress *string `json:"ipAddress" tf:"ip_address,omitempty"`
 
+	// The ID of the Virtual Network within which the Backend Address Pool should exist.
 	// +crossplane:generate:reference:type=VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -59,7 +64,7 @@ type LoadBalancerBackendAddressPoolAddressStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LoadBalancerBackendAddressPoolAddress is the Schema for the LoadBalancerBackendAddressPoolAddresss API
+// LoadBalancerBackendAddressPoolAddress is the Schema for the LoadBalancerBackendAddressPoolAddresss API. Manages a Backend Address within a Backend Address Pool.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

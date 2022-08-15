@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: PrivateDNSTXTRecord is the Schema for the PrivateDNSTXTRecords
-          API
+          API. Manages a Private DNS TXT Record.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,15 +65,20 @@ spec:
               forProvider:
                 properties:
                   record:
+                    description: One or more record blocks as defined below.
                     items:
                       properties:
                         value:
+                          description: 'The value of the TXT record. Max length: 1024
+                            characters'
                           type: string
                       required:
                       - value
                       type: object
                     type: array
                   resourceGroupName:
+                    description: Specifies the resource group where the resource exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -151,10 +156,13 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   ttl:
                     type: number
                   zoneName:
+                    description: Specifies the Private DNS Zone where the resource
+                      exists. Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
                     description: A Reference to a named object.
@@ -410,8 +418,10 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the DNS TXT Record.
                     type: string
                   id:
+                    description: The Private DNS TXT Record ID.
                     type: string
                 type: object
               conditions:

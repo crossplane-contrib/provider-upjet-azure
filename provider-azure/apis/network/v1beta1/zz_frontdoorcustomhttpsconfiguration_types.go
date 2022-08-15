@@ -14,6 +14,8 @@ import (
 )
 
 type CustomHTTPSConfigurationObservation struct {
+
+	// Minimum client TLS version supported.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	ProvisioningState *string `json:"provisioningState,omitempty" tf:"provisioning_state,omitempty"`
@@ -23,12 +25,15 @@ type CustomHTTPSConfigurationObservation struct {
 
 type CustomHTTPSConfigurationParameters struct {
 
+	// The name of the Key Vault secret representing the full certificate PFX.
 	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateSecretName *string `json:"azureKeyVaultCertificateSecretName,omitempty" tf:"azure_key_vault_certificate_secret_name,omitempty"`
 
+	// The version of the Key Vault secret representing the full certificate PFX. Defaults to Latest.
 	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateSecretVersion *string `json:"azureKeyVaultCertificateSecretVersion,omitempty" tf:"azure_key_vault_certificate_secret_version,omitempty"`
 
+	// The ID of the Key Vault containing the SSL certificate.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -40,13 +45,17 @@ type CustomHTTPSConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateVaultIDSelector *v1.Selector `json:"azureKeyVaultCertificateVaultIdSelector,omitempty" tf:"-"`
 
+	// Certificate source to encrypted HTTPS traffic with. Allowed values are FrontDoor or AzureKeyVault. Defaults to FrontDoor.
 	// +kubebuilder:validation:Optional
 	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
 }
 
 type FrontdoorCustomHTTPSConfigurationObservation struct {
+
+	// +kubebuilder:validation:Optional
 	CustomHTTPSConfiguration []CustomHTTPSConfigurationObservation `json:"customHttpsConfiguration,omitempty" tf:"custom_https_configuration,omitempty"`
 
+	// The ID of the Azure Front Door Custom HTTPS Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -55,9 +64,11 @@ type FrontdoorCustomHTTPSConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomHTTPSConfiguration []CustomHTTPSConfigurationParameters `json:"customHttpsConfiguration,omitempty" tf:"custom_https_configuration,omitempty"`
 
+	// Should the HTTPS protocol be enabled for this custom domain associated with the Front Door?
 	// +kubebuilder:validation:Required
 	CustomHTTPSProvisioningEnabled *bool `json:"customHttpsProvisioningEnabled" tf:"custom_https_provisioning_enabled,omitempty"`
 
+	// The ID of the FrontDoor Frontend Endpoint which this configuration refers to.
 	// +kubebuilder:validation:Required
 	FrontendEndpointID *string `json:"frontendEndpointId" tf:"frontend_endpoint_id,omitempty"`
 }
@@ -76,7 +87,7 @@ type FrontdoorCustomHTTPSConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FrontdoorCustomHTTPSConfiguration is the Schema for the FrontdoorCustomHTTPSConfigurations API
+// FrontdoorCustomHTTPSConfiguration is the Schema for the FrontdoorCustomHTTPSConfigurations API. Manages the Custom Https Configuration for an Azure Front Door Frontend Endpoint.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

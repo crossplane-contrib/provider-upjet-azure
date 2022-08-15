@@ -18,16 +18,20 @@ type MongoDatabaseAutoscaleSettingsObservation struct {
 
 type MongoDatabaseAutoscaleSettingsParameters struct {
 
+	// The maximum throughput of the MongoDB database . Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
 type MongoDatabaseObservation struct {
+
+	// The ID of the Cosmos DB Mongo Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MongoDatabaseParameters struct {
 
+	// The name of the Cosmos DB Mongo Database to create the table within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -38,9 +42,11 @@ type MongoDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// An autoscale_settings block as defined below. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []MongoDatabaseAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
+	// The name of the resource group in which the Cosmos DB Mongo Database is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -51,6 +57,7 @@ type MongoDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The throughput of the MongoDB database . Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
@@ -69,7 +76,7 @@ type MongoDatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MongoDatabase is the Schema for the MongoDatabases API
+// MongoDatabase is the Schema for the MongoDatabases API. Manages a Mongo Database within a Cosmos DB Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
