@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Queue is the Schema for the Queues API
+        description: Queue is the Schema for the Queues API. Manages a Queue within
+          an Azure Storage Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +67,13 @@ spec:
                   metadata:
                     additionalProperties:
                       type: string
+                    description: A mapping of MetaData which should be assigned to
+                      this Storage Queue.
                     type: object
                   storageAccountName:
+                    description: Specifies the Storage Account in which the Storage
+                      Queue should exist. Changing this forces a new resource to be
+                      created.
                     type: string
                   storageAccountNameRef:
                     description: A Reference to a named object.
@@ -320,6 +326,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Storage Queue.
                     type: string
                 type: object
               conditions:

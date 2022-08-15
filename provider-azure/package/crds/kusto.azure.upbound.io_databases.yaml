@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Database is the Schema for the Databases API
+        description: Database is the Schema for the Databases API. Manages Kusto /
+          Data Explorer Database
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   clusterName:
+                    description: Specifies the name of the Kusto Cluster this database
+                      will be added to. Changing this forces a new resource to be
+                      created.
                     type: string
                   clusterNameRef:
                     description: A Reference to a named object.
@@ -139,10 +143,17 @@ spec:
                         type: object
                     type: object
                   hotCachePeriod:
+                    description: 'The time the data that should be kept in cache for
+                      fast queries as ISO 8601 timespan. Default is unlimited. For
+                      more information see: ISO 8601 Timespan'
                     type: string
                   location:
+                    description: The location where the Kusto Database should be created.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: Specifies the Resource Group where the Kusto Database
+                      should exist. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -218,6 +229,9 @@ spec:
                         type: object
                     type: object
                   softDeletePeriod:
+                    description: 'The time the data should be kept before it stops
+                      being accessible to queries as ISO 8601 timespan. Default is
+                      unlimited. For more information see: ISO 8601 Timespan'
                     type: string
                 required:
                 - location
@@ -399,8 +413,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The Kusto Cluster ID.
                     type: string
                   size:
+                    description: The size of the database in bytes.
                     type: number
                 type: object
               conditions:

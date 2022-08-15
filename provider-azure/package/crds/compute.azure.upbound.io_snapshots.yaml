@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Snapshot is the Schema for the Snapshots API
+        description: Snapshot is the Schema for the Snapshots API. Manages a Disk
+          Snapshot.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   createOption:
+                    description: Indicates how the snapshot is to be created. Possible
+                      values are Copy or Import. Changing this forces a new resource
+                      to be created.
                     type: string
                   diskSizeGb:
                     type: number
@@ -101,8 +105,12 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Snapshot. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -178,8 +186,13 @@ spec:
                         type: object
                     type: object
                   sourceResourceId:
+                    description: Specifies a reference to an existing snapshot, when
+                      create_option is Copy. Changing this forces a new resource to
+                      be created.
                     type: string
                   sourceUri:
+                    description: Specifies the URI to a Managed or Unmanaged Disk.
+                      Changing this forces a new resource to be created.
                     type: string
                   sourceUriRef:
                     description: A Reference to a named object.
@@ -255,10 +268,15 @@ spec:
                         type: object
                     type: object
                   storageAccountId:
+                    description: Specifies the ID of an storage account. Used with
+                      source_uri to allow authorization during import of unmanaged
+                      blobs from a different subscription. Changing this forces a
+                      new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - createOption
@@ -441,8 +459,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The Snapshot ID.
                     type: string
                   trustedLaunchEnabled:
+                    description: Whether Trusted Launch is enabled for the Snapshot.
                     type: boolean
                 type: object
               conditions:

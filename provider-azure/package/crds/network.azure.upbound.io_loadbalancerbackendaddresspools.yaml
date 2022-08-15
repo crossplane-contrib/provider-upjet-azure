@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: LoadBalancerBackendAddressPool is the Schema for the LoadBalancerBackendAddressPools
-          API
+          API. Manages a Load Balancer Backend Address Pool.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   loadbalancerId:
+                    description: The ID of the Load Balancer in which to create the
+                      Backend Address Pool.
                     type: string
                   loadbalancerIdRef:
                     description: A Reference to a named object.
@@ -141,15 +143,24 @@ spec:
                         type: object
                     type: object
                   tunnelInterface:
+                    description: One or more tunnel_interface blocks as defined below.
                     items:
                       properties:
                         identifier:
+                          description: The unique identifier of this Gateway Lodbalancer
+                            Tunnel Interface.
                           type: number
                         port:
+                          description: The port number that this Gateway Lodbalancer
+                            Tunnel Interface listens to.
                           type: number
                         protocol:
+                          description: The protocol used for this Gateway Lodbalancer
+                            Tunnel Interface. Possible values are Native and VXLAN.
                           type: string
                         type:
+                          description: The traffic type of this Gateway Lodbalancer
+                            Tunnel Interface. Possible values are Internal and External.
                           type: string
                       required:
                       - identifier
@@ -337,16 +348,23 @@ spec:
               atProvider:
                 properties:
                   backendIpConfigurations:
+                    description: The Backend IP Configurations associated with this
+                      Backend Address Pool.
                     items:
                       type: string
                     type: array
                   id:
+                    description: The ID of the Backend Address Pool.
                     type: string
                   loadBalancingRules:
+                    description: The Load Balancing Rules associated with this Backend
+                      Address Pool.
                     items:
                       type: string
                     type: array
                   outboundRules:
+                    description: An array of the Load Balancing Outbound Rules associated
+                      with this Backend Address Pool.
                     items:
                       type: string
                     type: array

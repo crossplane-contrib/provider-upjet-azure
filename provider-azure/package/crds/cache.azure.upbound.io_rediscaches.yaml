@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RedisCache is the Schema for the RedisCaches API
+        description: RedisCache is the Schema for the RedisCaches API. Manages a Redis
+          Cache
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,40 +65,64 @@ spec:
               forProvider:
                 properties:
                   capacity:
+                    description: The size of the Redis cache to deploy. Valid values
+                      for a SKU family of C  are 0, 1, 2, 3, 4, 5, 6, and for P  family
+                      are 1, 2, 3, 4.
                     type: number
                   enableNonSslPort:
+                    description: Enable the non-SSL port  - disabled by default.
                     type: boolean
                   family:
+                    description: The SKU family/pricing group to use. Valid values
+                      are C  and P
                     type: string
                   location:
+                    description: The location of the resource group.
                     type: string
                   minimumTlsVersion:
+                    description: The minimum TLS version.  Defaults to 1.0.
                     type: string
                   patchSchedule:
+                    description: A list of patch_schedule blocks as defined below.
                     items:
                       properties:
                         dayOfWeek:
+                          description: possible values include Monday, Tuesday, Wednesday
+                            etc.
                           type: string
                         maintenanceWindow:
+                          description: The ISO 8601 timespan which specifies the amount
+                            of time the Redis Cache can be updated. Defaults to PT5H.
                           type: string
                         startHourUtc:
+                          description: the Start Hour for maintenance in UTC - possible
+                            values range from 0 - 23.
                           type: number
                       required:
                       - dayOfWeek
                       type: object
                     type: array
                   privateStaticIpAddress:
+                    description: The Static IP Address to assign to the Redis Cache
+                      when hosted inside the Virtual Network. Changing this forces
+                      a new resource to be created.
                     type: string
                   publicNetworkAccessEnabled:
+                    description: Whether or not public network access is allowed for
+                      this Redis Cache. true means this resource could be accessed
+                      by both public and private endpoint. false means only private
+                      endpoint access is allowed. Defaults to true.
                     type: boolean
                   redisConfiguration:
                     items:
                       properties:
                         aofBackupEnabled:
+                          description: Enable or disable AOF persistence for this
+                            Redis Cache.
                           type: boolean
                         aofStorageConnectionString0SecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: First Storage Account connection string for
+                            AOF persistence.
                           properties:
                             key:
                               description: The key to select.
@@ -114,8 +139,8 @@ spec:
                           - namespace
                           type: object
                         aofStorageConnectionString1SecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: Second Storage Account connection string for
+                            AOF persistence.
                           properties:
                             key:
                               description: The key to select.
@@ -132,26 +157,46 @@ spec:
                           - namespace
                           type: object
                         enableAuthentication:
+                          description: If set to false, the Redis instance will be
+                            accessible without authentication. Defaults to true.
                           type: boolean
                         maxfragmentationmemoryReserved:
+                          description: Value in megabytes reserved to accommodate
+                            for memory fragmentation. Defaults are shown below.
                           type: number
                         maxmemoryDelta:
+                          description: The max-memory delta for this Redis instance.
+                            Defaults are shown below.
                           type: number
                         maxmemoryPolicy:
+                          description: How Redis will select what to remove when maxmemory
+                            is reached. Defaults are shown below.
                           type: string
                         maxmemoryReserved:
+                          description: Value in megabytes reserved for non-cache usage
+                            e.g. failover. Defaults are shown below.
                           type: number
                         notifyKeyspaceEvents:
+                          description: Keyspace notifications allows clients to subscribe
+                            to Pub/Sub channels in order to receive events affecting
+                            the Redis data set in some way. Reference
                           type: string
                         rdbBackupEnabled:
+                          description: Is Backup Enabled? Only supported on Premium
+                            SKUs.
                           type: boolean
                         rdbBackupFrequency:
+                          description: 'The Backup Frequency in Minutes. Only supported
+                            on Premium SKUs. Possible values are: 15, 30, 60, 360,
+                            720 and 1440.'
                           type: number
                         rdbBackupMaxSnapshotCount:
+                          description: The maximum number of snapshots to create as
+                            a backup. Only supported for Premium SKUs.
                           type: number
                         rdbStorageConnectionStringSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: 'The Connection String to the Storage Account.
+                            Only supported for Premium SKUs. In the format: DefaultEndpointsProtocol=https;BlobEndpoint=${azurerm_storage_account.example.primary_blob_endpoint};AccountName=${azurerm_storage_account.example.name};AccountKey=${azurerm_storage_account.example.primary_access_key}.'
                           properties:
                             key:
                               description: The key to select.
@@ -170,12 +215,21 @@ spec:
                       type: object
                     type: array
                   redisVersion:
+                    description: 'Redis version. Only major version needed. Valid
+                      values: 4, 6.'
                     type: string
                   replicasPerMaster:
+                    description: Amount of replicas to create per master for this
+                      Redis Cache.
                     type: number
                   replicasPerPrimary:
+                    description: Amount of replicas to create per primary for this
+                      Redis Cache. If both replicas_per_primary and replicas_per_master
+                      are set, they need to be equal.
                     type: number
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Redis instance.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -251,10 +305,19 @@ spec:
                         type: object
                     type: object
                   shardCount:
+                    description: Only available when using the Premium SKU The number
+                      of Shards to create on the Redis Cluster.
                     type: number
                   skuName:
+                    description: The SKU of Redis to use. Possible values are Basic,
+                      Standard and Premium.
                     type: string
                   subnetId:
+                    description: Only available when using the Premium SKU The ID
+                      of the Subnet within which the Redis Cache should be deployed.
+                      This Subnet must only contain Azure Cache for Redis instances
+                      without any other type of resources. Changing this forces a
+                      new resource to be created.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -332,12 +395,17 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   tenantSettings:
                     additionalProperties:
                       type: string
+                    description: A mapping of tenant settings to assign to the resource.
                     type: object
                   zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Redis Cache should be located. Changing this forces a new Redis
+                      Cache to be created.
                     items:
                       type: string
                     type: array
@@ -524,19 +592,25 @@ spec:
               atProvider:
                 properties:
                   hostname:
+                    description: The Hostname of the Redis Instance
                     type: string
                   id:
+                    description: The Route ID.
                     type: string
                   port:
+                    description: The non-SSL Port of the Redis Instance
                     type: number
                   redisConfiguration:
                     items:
                       properties:
                         maxclients:
+                          description: Returns the max number of connected clients
+                            at the same time.
                           type: number
                       type: object
                     type: array
                   sslPort:
+                    description: The SSL Port of the Redis Instance
                     type: number
                 type: object
               conditions:

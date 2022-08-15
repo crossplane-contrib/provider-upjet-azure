@@ -14,20 +14,26 @@ import (
 )
 
 type WebhookObservation struct {
+
+	// The ID of the Container Registry Webhook.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type WebhookParameters struct {
 
+	// A list of actions that trigger the Webhook to post notifications. At least one action needs to be specified. Valid values are: push, delete, quarantine, chart_push, chart_delete
 	// +kubebuilder:validation:Required
 	Actions []*string `json:"actions" tf:"actions,omitempty"`
 
+	// Custom headers that will be added to the webhook notifications request.
 	// +kubebuilder:validation:Optional
 	CustomHeaders map[string]*string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The Name of Container registry this Webhook belongs to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/containerregistry/v1beta1.Registry
 	// +kubebuilder:validation:Optional
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
@@ -38,6 +44,7 @@ type WebhookParameters struct {
 	// +kubebuilder:validation:Optional
 	RegistryNameSelector *v1.Selector `json:"registryNameSelector,omitempty" tf:"-"`
 
+	// The name of the resource group in which to create the Container Registry Webhook. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -48,12 +55,15 @@ type WebhookParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Specifies the scope of repositories that can trigger an event. For example, foo:* means events for all tags under repository foo. foo:bar means events for 'foo:bar' only. foo is equivalent to foo:latest. Empty means all events.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// Specifies the service URI for the Webhook to post notifications.
 	// +kubebuilder:validation:Required
 	ServiceURI *string `json:"serviceUri" tf:"service_uri,omitempty"`
 
+	// Specifies if this Webhook triggers notifications or not. Valid values: enabled and disabled. Default is enabled.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
@@ -75,7 +85,7 @@ type WebhookStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Webhook is the Schema for the Webhooks API
+// Webhook is the Schema for the Webhooks API. Manages an Azure Container Registry Webhook.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

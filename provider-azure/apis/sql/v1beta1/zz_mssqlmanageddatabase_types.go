@@ -14,11 +14,14 @@ import (
 )
 
 type MSSQLManagedDatabaseObservation struct {
+
+	// The Azure SQL Managed Database ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MSSQLManagedDatabaseParameters struct {
 
+	// The ID of the Azure SQL Managed Instance on which to create this Managed Database. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -45,7 +48,7 @@ type MSSQLManagedDatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MSSQLManagedDatabase is the Schema for the MSSQLManagedDatabases API
+// MSSQLManagedDatabase is the Schema for the MSSQLManagedDatabases API. Manages an Azure SQL Azure Managed Database.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

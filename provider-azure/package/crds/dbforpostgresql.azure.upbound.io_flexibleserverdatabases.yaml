@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FlexibleServerDatabase is the Schema for the FlexibleServerDatabases
-          API
+          API. Manages a PostgreSQL Flexible Server Database.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,22 @@ spec:
               forProvider:
                 properties:
                   charset:
+                    description: Specifies the Charset for the Azure PostgreSQL Flexible
+                      Server Database, which needs to be a valid PostgreSQL Charset.
+                      Defaults to UTF8. Changing this forces a new Azure PostgreSQL
+                      Flexible Server Database to be created.
                     type: string
                   collation:
+                    description: Specifies the Collation for the Azure PostgreSQL
+                      Flexible Server Database, which needs to be a valid PostgreSQL
+                      Collation. Defaults to en_US.utf8. Changing this forces a new
+                      Azure PostgreSQL Flexible Server Database to be created.
                     type: string
                   serverId:
+                    description: The ID of the Azure PostgreSQL Flexible Server from
+                      which to create this PostgreSQL Flexible Server Database. Changing
+                      this forces a new Azure PostgreSQL Flexible Server Database
+                      to be created.
                     type: string
                   serverIdRef:
                     description: A Reference to a named object.
@@ -322,6 +334,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Azure PostgreSQL Flexible Server Database.
                     type: string
                 type: object
               conditions:

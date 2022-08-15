@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Workspace is the Schema for the Workspaces API
+        description: Workspace is the Schema for the Workspaces API. Manages a Log
+          Analytics (formally Operational Insights) Workspace.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,27 @@ spec:
               forProvider:
                 properties:
                   dailyQuotaGb:
+                    description: The workspace daily quota for ingestion in GB.  Defaults
+                      to -1  if omitted.
                     type: number
                   internetIngestionEnabled:
                     type: boolean
                   internetQueryEnabled:
+                    description: Should the Log Analytics Workflow support querying
+                      over the Public Internet? Defaults to true.
                     type: boolean
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   reservationCapacityInGbPerDay:
+                    description: The capacity reservation level in GB for this workspace.  Must
+                      be in increments of 100  between 100 and 5000.
                     type: number
                   resourceGroupName:
+                    description: The name of the resource group in which the Log Analytics
+                      workspace is created. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -149,12 +161,19 @@ spec:
                         type: object
                     type: object
                   retentionInDays:
+                    description: The workspace data retention in days. Possible values
+                      are either 7  or range between 30 and 730.
                     type: number
                   sku:
+                    description: Specifies the SKU of the Log Analytics Workspace.
+                      Possible values are Free, PerNode, Premium, Standard, Standalone,
+                      Unlimited, CapacityReservation, and PerGB2018 . Defaults to
+                      PerGB2018.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -336,8 +355,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The Log Analytics Workspace ID.
                     type: string
                   workspaceId:
+                    description: The Workspace  ID for the Log Analytics Workspace.
                     type: string
                 type: object
               conditions:

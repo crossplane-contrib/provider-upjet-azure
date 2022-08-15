@@ -14,14 +14,18 @@ import (
 )
 
 type MSSQLVirtualNetworkRuleObservation struct {
+
+	// The ID of the SQL virtual network rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MSSQLVirtualNetworkRuleParameters struct {
 
+	// Create the virtual network rule before the subnet has the virtual network service endpoint enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
+	// The resource ID of the SQL Server to which this SQL virtual network rule will be applied. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -33,6 +37,7 @@ type MSSQLVirtualNetworkRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
+	// The ID of the subnet from which the SQL server will accept communications.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -59,7 +64,7 @@ type MSSQLVirtualNetworkRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MSSQLVirtualNetworkRule is the Schema for the MSSQLVirtualNetworkRules API
+// MSSQLVirtualNetworkRule is the Schema for the MSSQLVirtualNetworkRules API. Manages an Azure SQL Virtual Network Rule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

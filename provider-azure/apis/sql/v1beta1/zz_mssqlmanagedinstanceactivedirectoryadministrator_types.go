@@ -14,17 +14,22 @@ import (
 )
 
 type MSSQLManagedInstanceActiveDirectoryAdministratorObservation struct {
+
+	// The ID of the SQL Managed Instance Active Directory Administrator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 
+	// When true, only permit logins from AAD users and administrators. When false, also allow local database users. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
+	// The login name of the principal to set as the Managed Instance Administrator.
 	// +kubebuilder:validation:Required
 	LoginUsername *string `json:"loginUsername" tf:"login_username,omitempty"`
 
+	// The ID of the Azure SQL Managed Instance for which to set the administrator. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -36,9 +41,11 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
+	// The Object ID of the principal to set as the Managed Instance Administrator.
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
+	// The Azure Active Directory Tenant ID.
 	// +kubebuilder:validation:Required
 	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
 }
@@ -57,7 +64,7 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MSSQLManagedInstanceActiveDirectoryAdministrator is the Schema for the MSSQLManagedInstanceActiveDirectoryAdministrators API
+// MSSQLManagedInstanceActiveDirectoryAdministrator is the Schema for the MSSQLManagedInstanceActiveDirectoryAdministrators API. Manages an Active Directory Administrator on a Microsoft Azure SQL Managed Instance
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

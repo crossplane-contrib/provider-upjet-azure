@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: OutputBlob is the Schema for the OutputBlobs API
+        description: OutputBlob is the Schema for the OutputBlobs API. Manages a Stream
+          Analytics Output to Blob Storage.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,25 @@ spec:
               forProvider:
                 properties:
                   batchMaxWaitTime:
+                    description: The maximum wait time per batch in hh:mm:ss e.g.
+                      00:02:00 for two minutes.
                     type: string
                   batchMinRows:
+                    description: The minimum number of rows per batch .
                     type: number
                   dateFormat:
+                    description: The date format. Wherever {date} appears in path_pattern,
+                      the value of this property is used as the date format instead.
                     type: string
                   pathPattern:
+                    description: The blob path pattern. Not a regular expression.
+                      It represents a pattern against which blob names will be matched
+                      to determine whether or not they should be included as input
+                      or output to the job.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Stream Analytics
+                      Job exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -147,23 +159,35 @@ spec:
                         type: object
                     type: object
                   serialization:
+                    description: A serialization block as defined below.
                     items:
                       properties:
                         encoding:
+                          description: The encoding of the incoming data in the case
+                            of input and the encoding of outgoing data in the case
+                            of output. It currently can only be set to UTF8.
                           type: string
                         fieldDelimiter:
+                          description: The delimiter that will be used to separate
+                            comma-separated value  records. Possible values are   ,
+                            , ,     , |  and ;.
                           type: string
                         format:
+                          description: Specifies the format of the JSON the output
+                            will be written in. Possible values are Array and LineSeparated.
                           type: string
                         type:
+                          description: The serialization format used for outgoing
+                            data streams. Possible values are Avro, Csv, Json and
+                            Parquet.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   storageAccountKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The Access Key which should be used to connect to
+                      this Storage Account.
                     properties:
                       key:
                         description: The key to select.
@@ -180,6 +204,7 @@ spec:
                     - namespace
                     type: object
                   storageAccountName:
+                    description: The name of the Storage Account.
                     type: string
                   storageAccountNameRef:
                     description: A Reference to a named object.
@@ -255,6 +280,7 @@ spec:
                         type: object
                     type: object
                   storageContainerName:
+                    description: The name of the Container within the Storage Account.
                     type: string
                   storageContainerNameRef:
                     description: A Reference to a named object.
@@ -330,8 +356,12 @@ spec:
                         type: object
                     type: object
                   streamAnalyticsJobName:
+                    description: The name of the Stream Analytics Job. Changing this
+                      forces a new resource to be created.
                     type: string
                   timeFormat:
+                    description: The time format. Wherever {time} appears in path_pattern,
+                      the value of this property is used as the time format instead.
                     type: string
                 required:
                 - dateFormat
@@ -518,6 +548,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Stream Analytics Output Blob Storage.
                     type: string
                 type: object
               conditions:

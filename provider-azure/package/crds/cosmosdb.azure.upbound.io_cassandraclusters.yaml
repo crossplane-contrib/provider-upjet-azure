@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: CassandraCluster is the Schema for the CassandraClusters API
+        description: CassandraCluster is the Schema for the CassandraClusters API.
+          Manages a Cassandra Cluster.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,7 @@ spec:
               forProvider:
                 properties:
                   defaultAdminPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The initial admin password for this Cassandra Cluster.
                     properties:
                       key:
                         description: The key to select.
@@ -82,6 +82,9 @@ spec:
                     - namespace
                     type: object
                   delegatedManagementSubnetId:
+                    description: The ID of the delegated management subnet for this
+                      Cassandra Cluster. Changing this forces a new Cassandra Cluster
+                      to be created.
                     type: string
                   delegatedManagementSubnetIdRef:
                     description: A Reference to a named object.
@@ -157,8 +160,13 @@ spec:
                         type: object
                     type: object
                   location:
+                    description: The Azure Region where the Cassandra Cluster should
+                      exist. Changing this forces a new Cassandra Cluster to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Cassandra
+                      Cluster should exist. Changing this forces a new Cassandra Cluster
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -236,6 +244,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags assigned to the resource.
                     type: object
                 required:
                 - defaultAdminPasswordSecretRef
@@ -418,6 +427,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Cassandra Cluster.
                     type: string
                 type: object
               conditions:

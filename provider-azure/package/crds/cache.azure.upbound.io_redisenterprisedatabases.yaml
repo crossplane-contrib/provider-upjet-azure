@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: RedisEnterpriseDatabase is the Schema for the RedisEnterpriseDatabases
-          API
+          API. Manages a Redis Enterprise Database.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,15 @@ spec:
               forProvider:
                 properties:
                   clientProtocol:
+                    description: Specifies whether redis clients can connect using
+                      TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.
+                      Possible values are Encrypted and Plaintext. Defaults to Encrypted.
+                      Changing this forces a new Redis Enterprise Database to be created.
                     type: string
                   clusterId:
+                    description: The resource id of the Redis Enterprise Cluster to
+                      deploy this Redis Enterprise Database. Changing this forces
+                      a new Redis Enterprise Database to be created.
                     type: string
                   clusterIdRef:
                     description: A Reference to a named object.
@@ -143,19 +150,33 @@ spec:
                         type: object
                     type: object
                   clusteringPolicy:
+                    description: Clustering policy - default is OSSCluster. Specified
+                      at create time. Possible values are EnterpriseCluster and OSSCluster.
+                      Defaults to OSSCluster. Changing this forces a new Redis Enterprise
+                      Database to be created.
                     type: string
                   evictionPolicy:
+                    description: Redis eviction policy - default is VolatileLRU. Possible
+                      values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU,
+                      VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing
+                      this forces a new Redis Enterprise Database to be created.
                     type: string
                   linkedDatabaseGroupNickname:
+                    description: Nickname of the group of linked databases. Changing
+                      this force a new Redis Enterprise Geo Database to be created.
                     type: string
                   linkedDatabaseId:
+                    description: A list of database resources to link with this database
+                      with a maximum of 5.
                     items:
                       type: string
                     type: array
                   module:
+                    description: A module block as defined below.
                     items:
                       properties:
                         args:
+                          description: Configuration options for the module .
                           type: string
                         name:
                           type: string
@@ -164,8 +185,14 @@ spec:
                       type: object
                     type: array
                   port:
+                    description: TCP port of the database endpoint. Specified at create
+                      time. Defaults to an available port. Changing this forces a
+                      new Redis Enterprise Database to be created.
                     type: number
                   resourceGroupName:
+                    description: The name of the Resource Group where the Redis Enterprise
+                      Database should exist. Changing this forces a new Redis Enterprise
+                      Database to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -419,8 +446,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Redis Enterprise Database.
                     type: string
                   module:
+                    description: A module block as defined below.
                     items:
                       properties:
                         version:

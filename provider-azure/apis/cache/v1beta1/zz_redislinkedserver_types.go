@@ -14,13 +14,17 @@ import (
 )
 
 type RedisLinkedServerObservation struct {
+
+	// The ID of the Redis.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the linked server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type RedisLinkedServerParameters struct {
 
+	// The ID of the linked Redis cache. Changing this forces a new Redis to be created.
 	// +crossplane:generate:reference:type=RedisCache
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -32,9 +36,11 @@ type RedisLinkedServerParameters struct {
 	// +kubebuilder:validation:Optional
 	LinkedRedisCacheIDSelector *v1.Selector `json:"linkedRedisCacheIdSelector,omitempty" tf:"-"`
 
+	// The location of the linked Redis cache. Changing this forces a new Redis to be created.
 	// +kubebuilder:validation:Required
 	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation" tf:"linked_redis_cache_location,omitempty"`
 
+	// The name of the Resource Group where the Redis caches exists. Changing this forces a new Redis to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -45,9 +51,11 @@ type RedisLinkedServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The role of the linked Redis cache . Changing this forces a new Redis to be created.
 	// +kubebuilder:validation:Required
 	ServerRole *string `json:"serverRole" tf:"server_role,omitempty"`
 
+	// The name of Redis cache to link with. Changing this forces a new Redis to be created.
 	// +crossplane:generate:reference:type=RedisCache
 	// +kubebuilder:validation:Optional
 	TargetRedisCacheName *string `json:"targetRedisCacheName,omitempty" tf:"target_redis_cache_name,omitempty"`
@@ -73,7 +81,7 @@ type RedisLinkedServerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RedisLinkedServer is the Schema for the RedisLinkedServers API
+// RedisLinkedServer is the Schema for the RedisLinkedServers API. Manages a Redis Linked Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

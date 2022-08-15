@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MonitorActionGroup is the Schema for the MonitorActionGroups
-          API
+          API. Manages an Action Group within Azure Monitor
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,11 +65,13 @@ spec:
               forProvider:
                 properties:
                   armRoleReceiver:
+                    description: One or more arm_role_receiver blocks as defined below.
                     items:
                       properties:
                         name:
                           type: string
                         roleId:
+                          description: The arm role id.
                           type: string
                         useCommonAlertSchema:
                           type: boolean
@@ -79,21 +81,29 @@ spec:
                       type: object
                     type: array
                   automationRunbookReceiver:
+                    description: One or more automation_runbook_receiver blocks as
+                      defined below.
                     items:
                       properties:
                         automationAccountId:
+                          description: The automation account ID which holds this
+                            runbook and authenticates to Azure resources.
                           type: string
                         isGlobalRunbook:
+                          description: Indicates whether this instance is global runbook.
                           type: boolean
                         name:
                           type: string
                         runbookName:
+                          description: The name for this runbook.
                           type: string
                         serviceUri:
                           type: string
                         useCommonAlertSchema:
                           type: boolean
                         webhookResourceId:
+                          description: The resource id for webhook linked to this
+                            runbook.
                           type: string
                       required:
                       - automationAccountId
@@ -105,6 +115,8 @@ spec:
                       type: object
                     type: array
                   azureAppPushReceiver:
+                    description: One or more azure_app_push_receiver blocks as defined
+                      below.
                     items:
                       properties:
                         emailAddress:
@@ -117,13 +129,19 @@ spec:
                       type: object
                     type: array
                   azureFunctionReceiver:
+                    description: One or more azure_function_receiver blocks as defined
+                      below.
                     items:
                       properties:
                         functionAppResourceId:
+                          description: The Azure resource ID of the function app.
                           type: string
                         functionName:
+                          description: The function name in the function app.
                           type: string
                         httpTriggerUrl:
+                          description: The HTTP trigger url where HTTP request sent
+                            to.
                           type: string
                         name:
                           type: string
@@ -137,6 +155,7 @@ spec:
                       type: object
                     type: array
                   emailReceiver:
+                    description: One or more email_receiver blocks as defined below.
                     items:
                       properties:
                         emailAddress:
@@ -151,11 +170,17 @@ spec:
                       type: object
                     type: array
                   enabled:
+                    description: Whether this action group is enabled. If an action
+                      group is not enabled, then none of its receivers will receive
+                      communications. Defaults to true.
                     type: boolean
                   eventHubReceiver:
+                    description: One or more event_hub_receiver blocks as defined
+                      below.
                     items:
                       properties:
                         eventHubId:
+                          description: The resource ID of the respective Event Hub.
                           type: string
                         name:
                           type: string
@@ -169,17 +194,27 @@ spec:
                       type: object
                     type: array
                   itsmReceiver:
+                    description: One or more itsm_receiver blocks as defined below.
                     items:
                       properties:
                         connectionId:
+                          description: The unique connection identifier of the ITSM
+                            connection.
                           type: string
                         name:
                           type: string
                         region:
+                          description: The region of the workspace.
                           type: string
                         ticketConfiguration:
+                          description: A JSON blob for the configurations of the ITSM
+                            action. CreateMultipleWorkItems option will be part of
+                            this blob as well.
                           type: string
                         workspaceId:
+                          description: The Azure Log Analytics workspace ID where
+                            this connection is defined. Format is <subscription id>|<workspace
+                            id>, for example 00000000-0000-0000-0000-000000000000|00000000-0000-0000-0000-000000000000.
                           type: string
                       required:
                       - connectionId
@@ -190,13 +225,17 @@ spec:
                       type: object
                     type: array
                   logicAppReceiver:
+                    description: One or more logic_app_receiver blocks as defined
+                      below.
                     items:
                       properties:
                         callbackUrl:
+                          description: The callback url where HTTP request sent to.
                           type: string
                         name:
                           type: string
                         resourceId:
+                          description: The Azure resource ID of the logic app.
                           type: string
                         useCommonAlertSchema:
                           type: boolean
@@ -207,6 +246,8 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Action Group instance.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -282,8 +323,11 @@ spec:
                         type: object
                     type: object
                   shortName:
+                    description: The short name of the action group. This will be
+                      used in SMS messages.
                     type: string
                   smsReceiver:
+                    description: One or more sms_receiver blocks as defined below.
                     items:
                       properties:
                         countryCode:
@@ -301,8 +345,10 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   voiceReceiver:
+                    description: One or more voice_receiver blocks as defined below.
                     items:
                       properties:
                         countryCode:
@@ -318,14 +364,19 @@ spec:
                       type: object
                     type: array
                   webhookReceiver:
+                    description: One or more webhook_receiver blocks as defined below.
                     items:
                       properties:
                         aadAuth:
+                          description: The aad_auth block as defined below
                           items:
                             properties:
                               identifierUri:
+                                description: The identifier URI for AAD auth.
                                 type: string
                               objectId:
+                                description: The webhook application object Id for
+                                  AAD auth.
                                 type: string
                               tenantId:
                                 type: string
@@ -524,6 +575,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Action Group.
                     type: string
                 type: object
               conditions:

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MonitorPrivateLinkScopedService is the Schema for the MonitorPrivateLinkScopedServices
-          API
+          API. Manages an Azure Monitor Private Link Scoped Service
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,9 @@ spec:
               forProvider:
                 properties:
                   linkedResourceId:
+                    description: The ID of the linked resource. It must be the Log
+                      Analytics Workspace or the Application Insights component. Changing
+                      this forces a new resource to be created.
                     type: string
                   linkedResourceIdRef:
                     description: A Reference to a named object.
@@ -141,6 +144,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the Resource Group where the Azure Monitor
+                      Private Link Scoped Service should exist. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -216,6 +222,8 @@ spec:
                         type: object
                     type: object
                   scopeName:
+                    description: The name of the Azure Monitor Private Link Scope.
+                      Changing this forces a new resource to be created.
                     type: string
                   scopeNameRef:
                     description: A Reference to a named object.
@@ -469,6 +477,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Azure Monitor Private Link Scoped Service.
                     type: string
                 type: object
               conditions:

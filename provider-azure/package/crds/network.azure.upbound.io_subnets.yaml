@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Subnet is the Schema for the Subnets API
+        description: Subnet is the Schema for the Subnets API. Manages a subnet. Subnets
+          represent network segments within the IP space defined by the virtual network.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -68,14 +69,23 @@ spec:
                       type: string
                     type: array
                   delegation:
+                    description: One or more delegation blocks as defined below.
                     items:
                       properties:
                         name:
                           type: string
                         serviceDelegation:
+                          description: A service_delegation block as defined below.
                           items:
                             properties:
                               actions:
+                                description: A list of Actions which should be delegated.
+                                  This list is specific to the service to delegate
+                                  to. Possible values include Microsoft.Network/networkinterfaces/*,
+                                  Microsoft.Network/virtualNetworks/subnets/action,
+                                  Microsoft.Network/virtualNetworks/subnets/join/action,
+                                  Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
+                                  and Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action.
                                 items:
                                   type: string
                                 type: array
@@ -91,8 +101,16 @@ spec:
                       type: object
                     type: array
                   enforcePrivateLinkEndpointNetworkPolicies:
+                    description: Enable or Disable network policies for the private
+                      link endpoint on the subnet. Setting this to true will Disable
+                      the policy and setting this to false will Enable the policy.
+                      Default value is false.
                     type: boolean
                   enforcePrivateLinkServiceNetworkPolicies:
+                    description: Enable or Disable network policies for the private
+                      link service on the subnet. Setting this to true will Disable
+                      the policy and setting this to false will Enable the policy.
+                      Default value is false.
                     type: boolean
                   resourceGroupName:
                     type: string
@@ -170,10 +188,17 @@ spec:
                         type: object
                     type: object
                   serviceEndpointPolicyIds:
+                    description: The list of IDs of Service Endpoint Policies to associate
+                      with the subnet.
                     items:
                       type: string
                     type: array
                   serviceEndpoints:
+                    description: 'The list of Service endpoints to associate with
+                      the subnet. Possible values include: Microsoft.AzureActiveDirectory,
+                      Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub,
+                      Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage
+                      and Microsoft.Web.'
                     items:
                       type: string
                     type: array
@@ -432,6 +457,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The subnet ID.
                     type: string
                 type: object
               conditions:

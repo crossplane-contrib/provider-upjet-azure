@@ -18,16 +18,20 @@ type PermissionsObservation struct {
 
 type PermissionsParameters struct {
 
+	// A list of data actions that are allowed for the Cosmos DB SQL Role Definition.
 	// +kubebuilder:validation:Required
 	DataActions []*string `json:"dataActions" tf:"data_actions,omitempty"`
 }
 
 type SQLRoleDefinitionObservation struct {
+
+	// The ID of the Cosmos DB SQL Role Definition.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SQLRoleDefinitionParameters struct {
 
+	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -38,12 +42,15 @@ type SQLRoleDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// A list of fully qualified scopes at or below which Role Assignments may be created using this Cosmos DB SQL Role Definition. It will allow application of this Cosmos DB SQL Role Definition on the entire Database Account or any underlying Database/Collection. Scopes higher than Database Account are not enforceable as assignable scopes.
 	// +kubebuilder:validation:Required
 	AssignableScopes []*string `json:"assignableScopes" tf:"assignable_scopes,omitempty"`
 
+	// A permissions block as defined below.
 	// +kubebuilder:validation:Required
 	Permissions []PermissionsParameters `json:"permissions" tf:"permissions,omitempty"`
 
+	// The name of the Resource Group in which the Cosmos DB SQL Role Definition is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -54,9 +61,11 @@ type SQLRoleDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The GUID as the name of the Cosmos DB SQL Role Definition - one will be generated if not specified. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
+	// The type of the Cosmos DB SQL Role Definition. Possible values are BuiltInRole and CustomRole. Defaults to CustomRole. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -75,7 +84,7 @@ type SQLRoleDefinitionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SQLRoleDefinition is the Schema for the SQLRoleDefinitions API
+// SQLRoleDefinition is the Schema for the SQLRoleDefinitions API. Manages a Cosmos DB SQL Role Definition.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

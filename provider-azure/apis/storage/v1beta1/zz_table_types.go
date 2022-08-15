@@ -18,12 +18,15 @@ type ACLAccessPolicyObservation struct {
 
 type ACLAccessPolicyParameters struct {
 
+	// The ISO8061 UTC time at which this Access Policy should be valid until.
 	// +kubebuilder:validation:Required
 	Expiry *string `json:"expiry" tf:"expiry,omitempty"`
 
+	// The permissions which should associated with this Shared Identifier.
 	// +kubebuilder:validation:Required
 	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 
+	// The ISO8061 UTC time at which this Access Policy should be valid from.
 	// +kubebuilder:validation:Required
 	Start *string `json:"start" tf:"start,omitempty"`
 }
@@ -33,6 +36,7 @@ type TableACLObservation struct {
 
 type TableACLParameters struct {
 
+	// An access_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	AccessPolicy []ACLAccessPolicyParameters `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
@@ -46,12 +50,16 @@ type TableObservation struct {
 
 type TableParameters struct {
 
+	// One or more acl blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ACL []TableACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// The name of the storage table. Must be unique within the storage account the table is located.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Specifies the storage account in which to create the storage table.
+	// Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
@@ -77,7 +85,7 @@ type TableStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Table is the Schema for the Tables API
+// Table is the Schema for the Tables API. Manages a Table within an Azure Storage Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

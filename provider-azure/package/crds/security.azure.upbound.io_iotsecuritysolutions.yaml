@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: IOTSecuritySolution is the Schema for the IOTSecuritySolutions
-          API
+          API. Manages an iot security solution.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,13 +65,17 @@ spec:
               forProvider:
                 properties:
                   additionalWorkspace:
+                    description: A additional_workspace block as defined below.
                     items:
                       properties:
                         dataTypes:
+                          description: A list of data types which sent to workspace.
+                            Possible values are Alerts and RawEvents.
                           items:
                             type: string
                           type: array
                         workspaceId:
+                          description: The resource ID of the Log Analytics Workspace.
                           type: string
                       required:
                       - dataTypes
@@ -79,73 +83,132 @@ spec:
                       type: object
                     type: array
                   disabledDataSources:
+                    description: A list of disabled data sources for the Iot Security
+                      Solution. Possible value is TwinData.
                     items:
                       type: string
                     type: array
                   displayName:
+                    description: Specifies the Display Name for this Iot Security
+                      Solution.
                     type: string
                   enabled:
+                    description: Is the Iot Security Solution enabled? Defaults to
+                      true.
                     type: boolean
                   eventsToExport:
+                    description: A list of data which is to exported to analytic workspace.
+                      Valid values include RawEvents.
                     items:
                       type: string
                     type: array
                   iothubIds:
+                    description: Specifies the IoT Hub resource IDs to which this
+                      Iot Security Solution is applied.
                     items:
                       type: string
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   logAnalyticsWorkspaceId:
+                    description: Specifies the Log Analytics Workspace ID to which
+                      the security data will be sent.
                     type: string
                   logUnmaskedIpsEnabled:
+                    description: Should IP addressed be unmasked in the log? Defaults
+                      to false.
                     type: boolean
                   name:
+                    description: Specifies the name of the Iot Security Solution.
+                      Changing this forces a new resource to be created.
                     type: string
                   queryForResources:
+                    description: An Azure Resource Graph query used to set the resources
+                      monitored.
                     type: string
                   querySubscriptionIds:
+                    description: A list of subscription Ids on which the user defined
+                      resources query should be executed.
                     items:
                       type: string
                     type: array
                   recommendationsEnabled:
+                    description: A recommendations_enabled block of options to enable
+                      or disable as defined below.
                     items:
                       properties:
                         acrAuthentication:
+                          description: Is Principal Authentication enabled for the
+                            ACR repository? Defaults to true.
                           type: boolean
                         agentSendUnutilizedMsg:
+                          description: Is Agent send underutilized messages enabled?
+                            Defaults to true.
                           type: boolean
                         baseline:
+                          description: Is Security related system configuration issues
+                            identified? Defaults to true.
                           type: boolean
                         edgeHubMemOptimize:
+                          description: Is IoT Edge Hub memory optimized? Defaults
+                            to true.
                           type: boolean
                         edgeLoggingOption:
+                          description: Is logging configured for IoT Edge module?
+                            Defaults to true.
                           type: boolean
                         inconsistentModuleSettings:
+                          description: Is inconsistent module settings enabled for
+                            SecurityGroup? Defaults to true.
                           type: boolean
                         installAgent:
+                          description: is Azure IoT Security agent installed? Defaults
+                            to true.
                           type: boolean
                         ipFilterDenyAll:
+                          description: Is Default IP filter policy denied? Defaults
+                            to true.
                           type: boolean
                         ipFilterPermissiveRule:
+                          description: Is IP filter rule source allowable IP range
+                            too large? Defaults to true.
                           type: boolean
                         openPorts:
+                          description: Is any ports open on the device? Defaults to
+                            true.
                           type: boolean
                         permissiveFirewallPolicy:
+                          description: Does firewall policy exist which allow necessary
+                            communication to/from the device? Defaults to true.
                           type: boolean
                         permissiveInputFirewallRules:
+                          description: Is only necessary addresses or ports are permitted
+                            in? Defaults to true.
                           type: boolean
                         permissiveOutputFirewallRules:
+                          description: Is only necessary addresses or ports are permitted
+                            out? Defaults to true.
                           type: boolean
                         privilegedDockerOptions:
+                          description: Is high level permissions are needed for the
+                            module? Defaults to true.
                           type: boolean
                         sharedCredentials:
+                          description: Is any credentials shared among devices? Defaults
+                            to true.
                           type: boolean
                         vulnerableTlsCipherSuite:
+                          description: Does TLS cipher suite need to be updated? Defaults
+                            to true.
                           type: boolean
                       type: object
                     type: array
                   resourceGroupName:
+                    description: Specifies the name of the resource group in which
+                      to create the Iot Security Solution. Changing this forces a
+                      new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -223,6 +286,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - displayName
@@ -407,6 +471,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Iot Security Solution resource.
                     type: string
                 type: object
               conditions:

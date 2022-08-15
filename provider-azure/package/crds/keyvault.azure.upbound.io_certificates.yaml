@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Certificate is the Schema for the Certificates API
+        description: Certificate is the Schema for the Certificates API. Manages a
+          Key Vault Certificate.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,11 +65,13 @@ spec:
               forProvider:
                 properties:
                   certificate:
+                    description: A certificate block as defined below, used to Import
+                      an existing certificate.
                     items:
                       properties:
                         contentsSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: The base64-encoded certificate contents. Changing
+                            this forces a new resource to be created.
                           properties:
                             key:
                               description: The key to select.
@@ -85,8 +88,8 @@ spec:
                           - namespace
                           type: object
                         passwordSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: The password associated with the certificate.
+                            Changing this forces a new resource to be created.
                           properties:
                             key:
                               description: The key to select.
@@ -107,9 +110,11 @@ spec:
                       type: object
                     type: array
                   certificatePolicy:
+                    description: A certificate_policy block as defined below.
                     items:
                       properties:
                         issuerParameters:
+                          description: A issuer_parameters block as defined below.
                           items:
                             properties:
                               name:
@@ -119,17 +124,35 @@ spec:
                             type: object
                           type: array
                         keyProperties:
+                          description: A key_properties block as defined below.
                           items:
                             properties:
                               curve:
+                                description: Specifies the curve to use when creating
+                                  an EC key. Possible values are P-256, P-256K, P-384,
+                                  and P-521. This field will be required in a future
+                                  release if key_type is EC or EC-HSM. Changing this
+                                  forces a new resource to be created.
                                 type: string
                               exportable:
+                                description: Is this certificate exportable? Changing
+                                  this forces a new resource to be created.
                                 type: boolean
                               keySize:
+                                description: The size of the key used in the certificate.
+                                  Possible values include 2048, 3072, and 4096 for
+                                  RSA keys, or 256, 384, and 521 for EC keys. This
+                                  property is required when using RSA keys. Changing
+                                  this forces a new resource to be created.
                                 type: number
                               keyType:
+                                description: Specifies the type of key, such as RSA
+                                  or EC. Changing this forces a new resource to be
+                                  created.
                                 type: string
                               reuseKey:
+                                description: Is the key reusable? Changing this forces
+                                  a new resource to be created.
                                 type: boolean
                             required:
                             - exportable
@@ -138,23 +161,41 @@ spec:
                             type: object
                           type: array
                         lifetimeAction:
+                          description: A lifetime_action block as defined below.
                           items:
                             properties:
                               action:
+                                description: A action block as defined below.
                                 items:
                                   properties:
                                     actionType:
+                                      description: The Type of action to be performed
+                                        when the lifetime trigger is triggerec. Possible
+                                        values include AutoRenew and EmailContacts.
+                                        Changing this forces a new resource to be
+                                        created.
                                       type: string
                                   required:
                                   - actionType
                                   type: object
                                 type: array
                               trigger:
+                                description: A trigger block as defined below.
                                 items:
                                   properties:
                                     daysBeforeExpiry:
+                                      description: The number of days before the Certificate
+                                        expires that the action associated with this
+                                        Trigger should run. Changing this forces a
+                                        new resource to be created. Conflicts with
+                                        lifetime_percentage.
                                       type: number
                                     lifetimePercentage:
+                                      description: The percentage at which during
+                                        the Certificates Lifetime the action associated
+                                        with this Trigger should run. Changing this
+                                        forces a new resource to be created. Conflicts
+                                        with days_before_expiry.
                                       type: number
                                   type: object
                                 type: array
@@ -164,45 +205,75 @@ spec:
                             type: object
                           type: array
                         secretProperties:
+                          description: A secret_properties block as defined below.
                           items:
                             properties:
                               contentType:
+                                description: The Content-Type of the Certificate,
+                                  such as application/x-pkcs12 for a PFX or application/x-pem-file
+                                  for a PEM. Changing this forces a new resource to
+                                  be created.
                                 type: string
                             required:
                             - contentType
                             type: object
                           type: array
                         x509CertificateProperties:
+                          description: A x509_certificate_properties block as defined
+                            below. Required when certificate block is not specified.
                           items:
                             properties:
                               extendedKeyUsage:
+                                description: A list of Extended/Enhanced Key Usages.
+                                  Changing this forces a new resource to be created.
                                 items:
                                   type: string
                                 type: array
                               keyUsage:
+                                description: A list of uses associated with this Key.
+                                  Possible values include cRLSign, dataEncipherment,
+                                  decipherOnly, digitalSignature, encipherOnly, keyAgreement,
+                                  keyCertSign, keyEncipherment and nonRepudiation
+                                  and are case-sensitive. Changing this forces a new
+                                  resource to be created.
                                 items:
                                   type: string
                                 type: array
                               subject:
+                                description: The Certificate's Subject. Changing this
+                                  forces a new resource to be created.
                                 type: string
                               subjectAlternativeNames:
+                                description: A subject_alternative_names block as
+                                  defined below.
                                 items:
                                   properties:
                                     dnsNames:
+                                      description: A list of alternative DNS names  identified
+                                        by the Certificate. Changing this forces a
+                                        new resource to be created.
                                       items:
                                         type: string
                                       type: array
                                     emails:
+                                      description: A list of email addresses identified
+                                        by this Certificate. Changing this forces
+                                        a new resource to be created.
                                       items:
                                         type: string
                                       type: array
                                     upns:
+                                      description: A list of User Principal Names
+                                        identified by the Certificate. Changing this
+                                        forces a new resource to be created.
                                       items:
                                         type: string
                                       type: array
                                   type: object
                                 type: array
                               validityInMonths:
+                                description: The Certificates Validity Period in Months.
+                                  Changing this forces a new resource to be created.
                                 type: number
                             required:
                             - keyUsage
@@ -217,6 +288,8 @@ spec:
                       type: object
                     type: array
                   keyVaultId:
+                    description: The ID of the Key Vault where the Certificate should
+                      be created.
                     type: string
                   keyVaultIdRef:
                     description: A Reference to a named object.
@@ -294,6 +367,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
               providerConfigRef:
@@ -473,37 +547,56 @@ spec:
               atProvider:
                 properties:
                   certificateAttribute:
+                    description: A certificate_attribute block as defined below.
                     items:
                       properties:
                         created:
+                          description: The create time of the Key Vault Certificate.
                           type: string
                         enabled:
+                          description: whether the Key Vault Certificate is enabled.
                           type: boolean
                         expires:
+                          description: The expires time of the Key Vault Certificate.
                           type: string
                         notBefore:
+                          description: The not before valid time of the Key Vault
+                            Certificate.
                           type: string
                         recoveryLevel:
+                          description: The deletion recovery level of the Key Vault
+                            Certificate.
                           type: string
                         updated:
+                          description: The recent update time of the Key Vault Certificate.
                           type: string
                       type: object
                     type: array
                   certificateData:
+                    description: The raw Key Vault Certificate data represented as
+                      a hexadecimal string.
                     type: string
                   certificateDataBase64:
+                    description: The Base64 encoded Key Vault Certificate data.
                     type: string
                   id:
+                    description: The Key Vault Certificate ID.
                     type: string
                   secretId:
+                    description: The ID of the associated Key Vault Secret.
                     type: string
                   thumbprint:
+                    description: The X509 Thumbprint of the Key Vault Certificate
+                      represented as a hexadecimal string.
                     type: string
                   version:
+                    description: The current version of the Key Vault Certificate.
                     type: string
                   versionlessId:
+                    description: The Base ID of the Key Vault Certificate.
                     type: string
                   versionlessSecretId:
+                    description: The Base ID of the Key Vault Secret.
                     type: string
                 type: object
               conditions:

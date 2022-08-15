@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VirtualNetworkGatewayConnection is the Schema for the VirtualNetworkGatewayConnections
-          API
+          API. Manages a connection in an existing Virtual Network Gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,9 @@ spec:
               forProvider:
                 properties:
                   authorizationKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The authorization key associated with the Express
+                      Route Circuit. This field is required only if the type is an
+                      ExpressRoute connection.
                     properties:
                       key:
                         description: The key to select.
@@ -84,15 +85,30 @@ spec:
                     - namespace
                     type: object
                   connectionMode:
+                    description: Connection mode to use. Possible values are Default,
+                      InitiatorOnly and ResponderOnly. Defaults to Default. Changing
+                      this value will force a resource to be created.
                     type: string
                   connectionProtocol:
+                    description: 'The IKE protocol version to use. Possible values
+                      are IKEv1 and IKEv2. Defaults to IKEv2. Changing this value
+                      will force a resource to be created. -> Note: Only valid for
+                      IPSec connections on virtual network gateways with SKU VpnGw1,
+                      VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.'
                     type: string
                   customBgpAddresses:
+                    description: A custom_bgp_addresses  block which is documented
+                      below. The block can only be used on IPSec / activeactive connections,
+                      For details about see the relevant section in the Azure documentation.
                     items:
                       properties:
                         primary:
+                          description: single IP address that is part of the azurerm_virtual_network_gateway
+                            ip_configuration
                           type: string
                         secondary:
+                          description: single IP address that is part of the azurerm_virtual_network_gateway
+                            ip_configuration
                           type: string
                       required:
                       - primary
@@ -100,39 +116,73 @@ spec:
                       type: object
                     type: array
                   dpdTimeoutSeconds:
+                    description: The dead peer detection timeout of this connection
+                      in seconds. Changing this forces a new resource to be created.
                     type: number
                   egressNatRuleIds:
+                    description: A list of the egress NAT Rule Ids.
                     items:
                       type: string
                     type: array
                   enableBgp:
+                    description: If true, BGP  is enabled for this connection. Defaults
+                      to false.
                     type: boolean
                   expressRouteCircuitId:
+                    description: The ID of the Express Route Circuit when creating
+                      an ExpressRoute connection . The Express Route Circuit can be
+                      in the same or in a different subscription.
                     type: string
                   expressRouteGatewayBypass:
+                    description: If true, data packets will bypass ExpressRoute Gateway
+                      for data forwarding This is only valid for ExpressRoute connections.
                     type: boolean
                   ingressNatRuleIds:
+                    description: A list of the ingress NAT Rule Ids.
                     items:
                       type: string
                     type: array
                   ipsecPolicy:
+                    description: A ipsec_policy block which is documented below. Only
+                      a single policy can be defined for a connection. For details
+                      on custom policies refer to the relevant section in the Azure
+                      documentation.
                     items:
                       properties:
                         dhGroup:
+                          description: The DH group used in IKE phase 1 for initial
+                            SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048,
+                            DHGroup24, ECP256, ECP384, or None.
                           type: string
                         ikeEncryption:
+                          description: The IKE encryption algorithm. Valid options
+                            are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
                           type: string
                         ikeIntegrity:
+                          description: The IKE integrity algorithm. Valid options
+                            are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
                           type: string
                         ipsecEncryption:
+                          description: The IPSec encryption algorithm. Valid options
+                            are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192,
+                            GCMAES256, or None.
                           type: string
                         ipsecIntegrity:
+                          description: The IPSec integrity algorithm. Valid options
+                            are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
                           type: string
                         pfsGroup:
+                          description: The DH group used in IKE phase 2 for new child
+                            SA. Valid options are ECP256, ECP384, PFS1, PFS14, PFS2,
+                            PFS2048, PFS24, PFSMM, or None.
                           type: string
                         saDatasize:
+                          description: The IPSec SA payload size in KB. Must be at
+                            least 1024 KB. Defaults to 102400000 KB.
                           type: number
                         saLifetime:
+                          description: The IPSec SA lifetime in seconds. Must be at
+                            least 300 seconds. Defaults to 27000 seconds.
                           type: number
                       required:
                       - dhGroup
@@ -144,8 +194,12 @@ spec:
                       type: object
                     type: array
                   localAzureIpAddressEnabled:
+                    description: Use private local Azure IP for the connection. Changing
+                      this forces a new resource to be created.
                     type: boolean
                   localNetworkGatewayId:
+                    description: The ID of the local network gateway when creating
+                      Site-to-Site connection .
                     type: string
                   localNetworkGatewayIdRef:
                     description: A Reference to a named object.
@@ -221,8 +275,13 @@ spec:
                         type: object
                     type: object
                   location:
+                    description: The location/region where the connection is located.
+                      Changing this forces a new resource to be created.
                     type: string
                   peerVirtualNetworkGatewayId:
+                    description: The ID of the peer virtual network gateway when creating
+                      a VNet-to-VNet connection . The peer Virtual Network Gateway
+                      can be in the same or in a different subscription.
                     type: string
                   peerVirtualNetworkGatewayIdRef:
                     description: A Reference to a named object.
@@ -298,6 +357,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the connection Changing the name forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -373,10 +435,11 @@ spec:
                         type: object
                     type: object
                   routingWeight:
+                    description: The routing weight. Defaults to 10.
                     type: number
                   sharedKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The shared IPSec key. A key could be provided if
+                      a Site-to-Site, VNet-to-VNet or ExpressRoute connection is created.
                     properties:
                       key:
                         description: The key to select.
@@ -395,15 +458,23 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   trafficSelectorPolicy:
+                    description: One or more traffic_selector_policy blocks which
+                      are documented below. A traffic_selector_policy allows to specify
+                      a traffic selector policy proposal to be used in a virtual network
+                      gateway connection. For details about traffic selectors refer
+                      to the relevant section in the Azure documentation.
                     items:
                       properties:
                         localAddressCidrs:
+                          description: List of local CIDRs.
                           items:
                             type: string
                           type: array
                         remoteAddressCidrs:
+                          description: List of remote CIDRs.
                           items:
                             type: string
                           type: array
@@ -413,10 +484,20 @@ spec:
                       type: object
                     type: array
                   type:
+                    description: The type of connection. Valid options are IPsec ,
+                      ExpressRoute , and Vnet2Vnet . Each connection type requires
+                      different mandatory arguments . Changing the connection type
+                      will force a new connection to be created.
                     type: string
                   usePolicyBasedTrafficSelectors:
+                    description: If true, policy-based traffic selectors are enabled
+                      for this connection. Enabling policy-based traffic selectors
+                      requires an ipsec_policy block. Defaults to false.
                     type: boolean
                   virtualNetworkGatewayId:
+                    description: The ID of the Virtual Network Gateway in which the
+                      connection will be created. Changing the gateway forces a new
+                      resource to be created.
                     type: string
                   virtualNetworkGatewayIdRef:
                     description: A Reference to a named object.
@@ -673,6 +754,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Virtual Network Gateway Connection.
                     type: string
                 type: object
               conditions:

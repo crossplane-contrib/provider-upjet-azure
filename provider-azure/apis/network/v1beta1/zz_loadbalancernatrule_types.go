@@ -18,29 +18,37 @@ type LoadBalancerNatRuleObservation struct {
 
 	FrontendIPConfigurationID *string `json:"frontendIpConfigurationId,omitempty" tf:"frontend_ip_configuration_id,omitempty"`
 
+	// The ID of the Load Balancer NAT Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type LoadBalancerNatRuleParameters struct {
 
+	// The port used for internal connections on the endpoint. Possible values range between 0 and 65535, inclusive.
 	// +kubebuilder:validation:Required
 	BackendPort *float64 `json:"backendPort" tf:"backend_port,omitempty"`
 
+	// Are the Floating IPs enabled for this Load Balancer Rule? A "floating” IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableFloatingIP *bool `json:"enableFloatingIp,omitempty" tf:"enable_floating_ip,omitempty"`
 
+	// Is TCP Reset enabled for this Load Balancer Rule? Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
+	// The name of the frontend IP configuration exposing this rule.
 	// +kubebuilder:validation:Required
 	FrontendIPConfigurationName *string `json:"frontendIpConfigurationName" tf:"frontend_ip_configuration_name,omitempty"`
 
+	// The port for the external endpoint. Port numbers for each Rule must be unique within the Load Balancer. Possible values range between 0 and 65534, inclusive.
 	// +kubebuilder:validation:Required
 	FrontendPort *float64 `json:"frontendPort" tf:"frontend_port,omitempty"`
 
+	// Specifies the idle timeout in minutes for TCP connections. Valid values are between 4 and 30 minutes. Defaults to 4 minutes.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
+	// The ID of the Load Balancer in which to create the NAT Rule.
 	// +crossplane:generate:reference:type=LoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -52,9 +60,11 @@ type LoadBalancerNatRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
+	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
+	// The name of the resource group in which to create the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -80,7 +90,7 @@ type LoadBalancerNatRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LoadBalancerNatRule is the Schema for the LoadBalancerNatRules API
+// LoadBalancerNatRule is the Schema for the LoadBalancerNatRules API. Manages a Load Balancer NAT Rule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -18,50 +18,67 @@ type ExpressRoutePortIdentityObservation struct {
 
 type ExpressRoutePortIdentityParameters struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Express Route Port.
 	// +kubebuilder:validation:Required
 	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
+	// Specifies the type of Managed Service Identity that should be configured on this Express Route Port. Only possible value is UserAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ExpressRoutePortObservation struct {
+
+	// The EtherType of the Express Route Port.
 	Ethertype *string `json:"ethertype,omitempty" tf:"ethertype,omitempty"`
 
+	// The resource GUID of the Express Route Port.
 	GUID *string `json:"guid,omitempty" tf:"guid,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A list of link blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Link1 []Link1Observation `json:"link1,omitempty" tf:"link1,omitempty"`
 
+	// A list of link blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Link2 []Link2Observation `json:"link2,omitempty" tf:"link2,omitempty"`
 
+	// The maximum transmission unit of the Express Route Port.
 	Mtu *string `json:"mtu,omitempty" tf:"mtu,omitempty"`
 }
 
 type ExpressRoutePortParameters struct {
 
+	// Bandwidth of the Express Route Port in Gbps. Changing this forces a new Express Route Port to be created.
 	// +kubebuilder:validation:Required
 	BandwidthInGbps *float64 `json:"bandwidthInGbps" tf:"bandwidth_in_gbps,omitempty"`
 
+	// The encapsulation method used for the Express Route Port. Changing this forces a new Express Route Port to be created. Possible values are: Dot1Q, QinQ.
 	// +kubebuilder:validation:Required
 	Encapsulation *string `json:"encapsulation" tf:"encapsulation,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Identity []ExpressRoutePortIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// A list of link blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Link1 []Link1Parameters `json:"link1,omitempty" tf:"link1,omitempty"`
 
+	// A list of link blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Link2 []Link2Parameters `json:"link2,omitempty" tf:"link2,omitempty"`
 
+	// The Azure Region where the Express Route Port should exist. Changing this forces a new Express Route Port to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the peering location that this Express Route Port is physically mapped to. Changing this forces a new Express Route Port to be created.
 	// +kubebuilder:validation:Required
 	PeeringLocation *string `json:"peeringLocation" tf:"peering_location,omitempty"`
 
+	// The name of the Resource Group where the Express Route Port should exist. Changing this forces a new Express Route Port to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -72,64 +89,85 @@ type ExpressRoutePortParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags which should be assigned to the Express Route Port.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type Link1Observation struct {
+
+	// The connector type of the Express Route Port Link.
 	ConnectorType *string `json:"connectorType,omitempty" tf:"connector_type,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The interface name of the Azure router associated with the Express Route Port Link.
 	InterfaceName *string `json:"interfaceName,omitempty" tf:"interface_name,omitempty"`
 
+	// The ID that maps from the Express Route Port Link to the patch panel port.
 	PatchPanelID *string `json:"patchPanelId,omitempty" tf:"patch_panel_id,omitempty"`
 
+	// The ID that maps from the patch panel port to the rack.
 	RackID *string `json:"rackId,omitempty" tf:"rack_id,omitempty"`
 
+	// The name of the Azure router associated with the Express Route Port Link.
 	RouterName *string `json:"routerName,omitempty" tf:"router_name,omitempty"`
 }
 
 type Link1Parameters struct {
 
+	// Whether enable administration state on the Express Route Port Link? Defaults to false.
 	// +kubebuilder:validation:Optional
 	AdminEnabled *bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
 
+	// The ID of the Key Vault Secret that contains the Mac security CAK key for this Express Route Port Link.
 	// +kubebuilder:validation:Optional
 	MacsecCakKeyvaultSecretID *string `json:"macsecCakKeyvaultSecretId,omitempty" tf:"macsec_cak_keyvault_secret_id,omitempty"`
 
+	// The MACSec cipher used for this Express Route Port Link. Possible values are GcmAes128 and GcmAes256. Defaults to GcmAes128.
 	// +kubebuilder:validation:Optional
 	MacsecCipher *string `json:"macsecCipher,omitempty" tf:"macsec_cipher,omitempty"`
 
+	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	// +kubebuilder:validation:Optional
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
 }
 
 type Link2Observation struct {
+
+	// The connector type of the Express Route Port Link.
 	ConnectorType *string `json:"connectorType,omitempty" tf:"connector_type,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The interface name of the Azure router associated with the Express Route Port Link.
 	InterfaceName *string `json:"interfaceName,omitempty" tf:"interface_name,omitempty"`
 
+	// The ID that maps from the Express Route Port Link to the patch panel port.
 	PatchPanelID *string `json:"patchPanelId,omitempty" tf:"patch_panel_id,omitempty"`
 
+	// The ID that maps from the patch panel port to the rack.
 	RackID *string `json:"rackId,omitempty" tf:"rack_id,omitempty"`
 
+	// The name of the Azure router associated with the Express Route Port Link.
 	RouterName *string `json:"routerName,omitempty" tf:"router_name,omitempty"`
 }
 
 type Link2Parameters struct {
 
+	// Whether enable administration state on the Express Route Port Link? Defaults to false.
 	// +kubebuilder:validation:Optional
 	AdminEnabled *bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
 
+	// The ID of the Key Vault Secret that contains the Mac security CAK key for this Express Route Port Link.
 	// +kubebuilder:validation:Optional
 	MacsecCakKeyvaultSecretID *string `json:"macsecCakKeyvaultSecretId,omitempty" tf:"macsec_cak_keyvault_secret_id,omitempty"`
 
+	// The MACSec cipher used for this Express Route Port Link. Possible values are GcmAes128 and GcmAes256. Defaults to GcmAes128.
 	// +kubebuilder:validation:Optional
 	MacsecCipher *string `json:"macsecCipher,omitempty" tf:"macsec_cipher,omitempty"`
 
+	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	// +kubebuilder:validation:Optional
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
 }
@@ -148,7 +186,7 @@ type ExpressRoutePortStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ExpressRoutePort is the Schema for the ExpressRoutePorts API
+// ExpressRoutePort is the Schema for the ExpressRoutePorts API. Manages a Express Route Port.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

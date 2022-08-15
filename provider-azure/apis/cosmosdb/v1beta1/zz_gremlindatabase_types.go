@@ -18,16 +18,20 @@ type GremlinDatabaseAutoscaleSettingsObservation struct {
 
 type GremlinDatabaseAutoscaleSettingsParameters struct {
 
+	// The maximum throughput of the Gremlin database . Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
 type GremlinDatabaseObservation struct {
+
+	// The ID of the CosmosDB Gremlin Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type GremlinDatabaseParameters struct {
 
+	// The name of the CosmosDB Account to create the Gremlin Database within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -38,9 +42,11 @@ type GremlinDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// An autoscale_settings block as defined below. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []GremlinDatabaseAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
+	// The name of the resource group in which the Cosmos DB Gremlin Database is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -51,6 +57,7 @@ type GremlinDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The throughput of the Gremlin database . Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
@@ -69,7 +76,7 @@ type GremlinDatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// GremlinDatabase is the Schema for the GremlinDatabases API
+// GremlinDatabase is the Schema for the GremlinDatabases API. Manages a Gremlin Database within a Cosmos DB Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

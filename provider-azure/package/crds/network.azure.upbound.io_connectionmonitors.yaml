@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ConnectionMonitor is the Schema for the ConnectionMonitors API
+        description: ConnectionMonitor is the Schema for the ConnectionMonitors API.
+          Manages a Network Connection Monitor.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,20 +65,29 @@ spec:
               forProvider:
                 properties:
                   endpoint:
+                    description: A endpoint block as defined below.
                     items:
                       properties:
                         address:
                           type: string
                         coverageLevel:
+                          description: The test coverage for the Network Connection
+                            Monitor endpoint. Possible values are AboveAverage, Average,
+                            BelowAverage, Default, Full and Low.
                           type: string
                         excludedIpAddresses:
+                          description: A list of IPv4/IPv6 subnet masks or IPv4/IPv6
+                            IP addresses to be excluded to the Network Connection
+                            Monitor endpoint.
                           items:
                             type: string
                           type: array
                         filter:
+                          description: A filter block as defined below.
                           items:
                             properties:
                               item:
+                                description: A item block as defined below.
                                 items:
                                   properties:
                                     address:
@@ -91,22 +101,34 @@ spec:
                             type: object
                           type: array
                         includedIpAddresses:
+                          description: A list of IPv4/IPv6 subnet masks or IPv4/IPv6
+                            IP addresses to be included to the Network Connection
+                            Monitor endpoint.
                           items:
                             type: string
                           type: array
                         name:
                           type: string
                         targetResourceId:
+                          description: The resource ID which is used as the endpoint
+                            by the Network Connection Monitor.
                           type: string
                         targetResourceType:
+                          description: The endpoint type of the Network Connection
+                            Monitor. Possible values are AzureSubnet, AzureVM, AzureVNet,
+                            ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
                           type: string
                       required:
                       - name
                       type: object
                     type: array
                   location:
+                    description: The Azure Region where the Network Connection Monitor
+                      should exist. Changing this forces a new resource to be created.
                     type: string
                   networkWatcherId:
+                    description: The ID of the Network Watcher. Changing this forces
+                      a new resource to be created.
                     type: string
                   networkWatcherIdRef:
                     description: A Reference to a named object.
@@ -182,35 +204,51 @@ spec:
                         type: object
                     type: object
                   notes:
+                    description: The description of the Network Connection Monitor.
                     type: string
                   outputWorkspaceResourceIds:
+                    description: A list of IDs of the Log Analytics Workspace which
+                      will accept the output from the Network Connection Monitor.
                     items:
                       type: string
                     type: array
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Network Connection Monitor.
                     type: object
                   testConfiguration:
+                    description: A test_configuration block as defined below.
                     items:
                       properties:
                         httpConfiguration:
+                          description: A http_configuration block as defined below.
                           items:
                             properties:
                               method:
+                                description: The HTTP method for the HTTP request.
+                                  Possible values are Get and Post. Defaults to Get.
                                 type: string
                               path:
+                                description: The path component of the URI. It only
+                                  accepts the absolute path.
                                 type: string
                               port:
                                 type: number
                               preferHttps:
+                                description: Should HTTPS be preferred over HTTP in
+                                  cases where the choice is not explicit? Defaults
+                                  to false.
                                 type: boolean
                               requestHeader:
+                                description: A request_header block as defined below.
                                 items:
                                   properties:
                                     name:
                                       type: string
                                     value:
+                                      description: The value of the HTTP header.
                                       type: string
                                   required:
                                   - name
@@ -218,12 +256,15 @@ spec:
                                   type: object
                                 type: array
                               validStatusCodeRanges:
+                                description: The HTTP status codes to consider successful.
+                                  For instance, 2xx, 301-304 and 418.
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
                         icmpConfiguration:
+                          description: A icmp_configuration block as defined below.
                           items:
                             properties:
                               traceRouteEnabled:
@@ -233,22 +274,34 @@ spec:
                         name:
                           type: string
                         preferredIpVersion:
+                          description: The preferred IP version which is used in the
+                            test evaluation. Possible values are IPv4 and IPv6.
                           type: string
                         protocol:
+                          description: The protocol used to evaluate tests. Possible
+                            values are Tcp, Http and Icmp.
                           type: string
                         successThreshold:
+                          description: A success_threshold block as defined below.
                           items:
                             properties:
                               checksFailedPercent:
+                                description: The maximum percentage of failed checks
+                                  permitted for a test to be successful.
                                 type: number
                               roundTripTimeMs:
+                                description: The maximum round-trip time in milliseconds
+                                  permitted for a test to be successful.
                                 type: number
                             type: object
                           type: array
                         tcpConfiguration:
+                          description: A tcp_configuration block as defined below.
                           items:
                             properties:
                               destinationPortBehavior:
+                                description: The destination port behavior for the
+                                  TCP connection. Possible values are None and ListenIfAvailable.
                                 type: string
                               port:
                                 type: number
@@ -259,6 +312,8 @@ spec:
                             type: object
                           type: array
                         testFrequencyInSeconds:
+                          description: The time interval in seconds at which the test
+                            evaluation will happen. Defaults to 60.
                           type: number
                       required:
                       - name
@@ -266,21 +321,27 @@ spec:
                       type: object
                     type: array
                   testGroup:
+                    description: A test_group block as defined below.
                     items:
                       properties:
                         destinationEndpoints:
+                          description: A list of destination endpoint names.
                           items:
                             type: string
                           type: array
                         enabled:
+                          description: Should the test group be enabled? Defaults
+                            to true.
                           type: boolean
                         name:
                           type: string
                         sourceEndpoints:
+                          description: A list of source endpoint names.
                           items:
                             type: string
                           type: array
                         testConfigurationNames:
+                          description: A list of test configuration names.
                           items:
                             type: string
                           type: array
@@ -474,6 +535,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Network Connection Monitor.
                     type: string
                 type: object
               conditions:

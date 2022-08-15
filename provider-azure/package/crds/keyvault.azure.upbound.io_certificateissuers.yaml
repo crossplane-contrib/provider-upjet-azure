@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: CertificateIssuer is the Schema for the CertificateIssuers API
+        description: CertificateIssuer is the Schema for the CertificateIssuers API.
+          Manages a Key Vault Certificate Issuer.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,23 +65,32 @@ spec:
               forProvider:
                 properties:
                   accountId:
+                    description: The account number with the third-party Certificate
+                      Issuer.
                     type: string
                   admin:
+                    description: One or more admin blocks as defined below.
                     items:
                       properties:
                         emailAddress:
+                          description: E-mail address of the admin.
                           type: string
                         firstName:
+                          description: First name of the admin.
                           type: string
                         lastName:
+                          description: Last name of the admin.
                           type: string
                         phone:
+                          description: Phone number of the admin.
                           type: string
                       required:
                       - emailAddress
                       type: object
                     type: array
                   keyVaultId:
+                    description: The ID of the Key Vault in which to create the Certificate
+                      Issuer.
                     type: string
                   keyVaultIdRef:
                     description: A Reference to a named object.
@@ -156,10 +166,12 @@ spec:
                         type: object
                     type: object
                   orgId:
+                    description: The ID of the organization as provided to the issuer.
                     type: string
                   passwordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The password associated with the account and organization
+                      ID at the third-party Certificate Issuer. If not specified,
+                      will not overwrite any previous value.
                     properties:
                       key:
                         description: The key to select.
@@ -176,6 +188,9 @@ spec:
                     - namespace
                     type: object
                   providerName:
+                    description: 'The name of the third-party Certificate Issuer.
+                      Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA,
+                      OneCertV2-PublicCA and SslAdminV2.'
                     type: string
                 required:
                 - providerName
@@ -357,6 +372,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Key Vault Certificate Issuer.
                     type: string
                 type: object
               conditions:

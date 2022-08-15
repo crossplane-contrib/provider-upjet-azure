@@ -14,11 +14,14 @@ import (
 )
 
 type MSSQLOutboundFirewallRuleObservation struct {
+
+	// The SQL Outbound Firewall Rule ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MSSQLOutboundFirewallRuleParameters struct {
 
+	// The resource ID of the SQL Server on which to create the Outbound Firewall Rule.
 	// +crossplane:generate:reference:type=MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -45,7 +48,7 @@ type MSSQLOutboundFirewallRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MSSQLOutboundFirewallRule is the Schema for the MSSQLOutboundFirewallRules API
+// MSSQLOutboundFirewallRule is the Schema for the MSSQLOutboundFirewallRules API. Manages an Azure SQL Outbound Firewall Rule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

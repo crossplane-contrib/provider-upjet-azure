@@ -14,17 +14,22 @@ import (
 )
 
 type IPGroupObservation struct {
+
+	// The ID of the IP Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IPGroupParameters struct {
 
+	// A list of CIDRs or IP addresses.
 	// +kubebuilder:validation:Optional
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the IP group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -35,6 +40,7 @@ type IPGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -53,7 +59,7 @@ type IPGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IPGroup is the Schema for the IPGroups API
+// IPGroup is the Schema for the IPGroups API. Manages an IP group which contains a list of CIDRs and/or IP addresses.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

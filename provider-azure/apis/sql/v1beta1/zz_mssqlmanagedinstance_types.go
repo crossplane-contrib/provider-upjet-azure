@@ -14,36 +14,49 @@ import (
 )
 
 type IdentityObservation struct {
+
+	// The Principal ID for the Service Principal associated with the Identity of this SQL Managed Instance.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// The Tenant ID for the Service Principal associated with the Identity of this SQL Managed Instance.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type IdentityParameters struct {
 
+	// The identity type of the SQL Managed Instance. The only possible value is SystemAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MSSQLManagedInstanceObservation struct {
+
+	// The fully qualified domain name of the Azure Managed SQL Instance
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// The SQL Managed Instance ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
 
 type MSSQLManagedInstanceParameters struct {
 
+	// The administrator login name for the new SQL Managed Instance. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	AdministratorLogin *string `json:"administratorLogin" tf:"administrator_login,omitempty"`
 
+	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy
 	// +kubebuilder:validation:Required
 	AdministratorLoginPasswordSecretRef v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
 
+	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
+	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -55,27 +68,35 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// What type of license the Managed Instance will use. Valid values include can be PriceIncluded or BasePrice.
 	// +kubebuilder:validation:Required
 	LicenseType *string `json:"licenseType" tf:"license_type,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the Public Maintenance Configuration window to apply to the SQL Managed Instance. Valid values include SQL_Default, SQL_EastUS_MI_1, SQL_EastUS2_MI_1, SQL_WestUS2_MI_1, SQL_SoutheastAsia_MI_1, SQL_AustraliaEast_MI_1, SQL_NorthEurope_MI_1, SQL_SouthCentralUS_MI_1, SQL_UKSouth_MI_1, SQL_WestEurope_MI_1, SQL_EastUS_MI_2, SQL_EastUS2_MI_2, SQL_WestUS2_MI_2, SQL_SoutheastAsia_MI_2, SQL_NorthEurope_MI_2, SQL_SouthCentralUS_MI_2, SQL_UKSouth_MI_2, SQL_WestEurope_MI_2, SQL_AustraliaSoutheast_MI_1, SQL_BrazilSouth_MI_1, SQL_CanadaCentral_MI_1, SQL_CanadaEast_MI_1, SQL_CentralUS_MI_1, SQL_EastAsia_MI_1, SQL_FranceCentral_MI_1, SQL_GermanyWestCentral_MI_1, SQL_CentralIndia_MI_1, SQL_JapanEast_MI_1, SQL_JapanWest_MI_1, SQL_NorthCentralUS_MI_1, SQL_UKWest_MI_1, SQL_WestUS_MI_1, SQL_AustraliaSoutheast_MI_2, SQL_BrazilSouth_MI_2, SQL_CanadaCentral_MI_2, SQL_CanadaEast_MI_2, SQL_CentralUS_MI_2, SQL_EastAsia_MI_2, SQL_FranceCentral_MI_2, SQL_GermanyWestCentral_MI_2, SQL_CentralIndia_MI_2, SQL_JapanEast_MI_2, SQL_JapanWest_MI_2, SQL_NorthCentralUS_MI_2, SQL_UKWest_MI_2, SQL_WestUS_MI_2, SQL_KoreaCentral_MI_1, SQL_KoreaCentral_MI_2, SQL_WestCentralUS_MI_1, SQL_WestCentralUS_MI_2, SQL_UAENorth_MI_1, SQL_SwitzerlandWest_MI_1, SQL_SwitzerlandNorth_MI_1, SQL_UAENorth_MI_2, SQL_SwitzerlandWest_MI_2, SQL_SwitzerlandNorth_MI_2, SQL_FranceSouth_MI_1, SQL_FranceSouth_MI_2, SQL_SouthAfricaNorth_MI_1, SQL_KoreaSouth_MI_1, SQL_UAECentral_MI_1, SQL_SouthAfricaNorth_MI_2, SQL_KoreaSouth_MI_2, SQL_UAECentral_MI_2, SQL_SouthIndia_MI_1, SQL_SouthIndia_MI_2, SQL_AustraliaCentral_MI_1, SQL_AustraliaCentral2_MI_1, SQL_AustraliaCentral_MI_2, SQL_AustraliaCentral2_MI_2, SQL_WestIndia_MI_1, SQL_WestIndia_MI_2, SQL_SouthAfricaWest_MI_1, SQL_SouthAfricaWest_MI_2, SQL_GermanyNorth_MI_1, SQL_GermanyNorth_MI_2, SQL_NorwayEast_MI_1, SQL_BrazilSoutheast_MI_1, SQL_NorwayWest_MI_1, SQL_WestUS3_MI_1, SQL_NorwayEast_MI_2, SQL_BrazilSoutheast_MI_2, SQL_NorwayWest_MI_2, SQL_WestUS3_MI_2. Defaults to SQL_Default.
 	// +kubebuilder:validation:Optional
 	MaintenanceConfigurationName *string `json:"maintenanceConfigurationName,omitempty" tf:"maintenance_configuration_name,omitempty"`
 
+	// The Minimum TLS Version. Default value is 1.2 Valid values include 1.0, 1.1, 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
+	// Specifies how the SQL Managed Instance will be accessed. Default value is Default. Valid values include Default, Proxy, and Redirect.
 	// +kubebuilder:validation:Optional
 	ProxyOverride *string `json:"proxyOverride,omitempty" tf:"proxy_override,omitempty"`
 
+	// Is the public data endpoint enabled? Default value is false.
 	// +kubebuilder:validation:Optional
 	PublicDataEndpointEnabled *bool `json:"publicDataEndpointEnabled,omitempty" tf:"public_data_endpoint_enabled,omitempty"`
 
+	// The name of the resource group in which to create the SQL Managed Instance.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -86,15 +107,19 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_G8IM, GP_G8IH, BC_Gen4, BC_Gen5, BC_G8IM or BC_G8IH.
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 
+	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. The default value is GRS.
 	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
+	// Maximum storage space for the SQL Managed instance. This should be a multiple of 32 .
 	// +kubebuilder:validation:Required
 	StorageSizeInGb *float64 `json:"storageSizeInGb" tf:"storage_size_in_gb,omitempty"`
 
+	// The subnet resource id that the SQL Managed Instance will be associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -106,12 +131,15 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The TimeZone ID that the SQL Managed Instance will be operating in. Default value is UTC. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TimezoneID *string `json:"timezoneId,omitempty" tf:"timezone_id,omitempty"`
 
+	// Number of cores that should be assigned to the SQL Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs, or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
 	// +kubebuilder:validation:Required
 	Vcores *float64 `json:"vcores" tf:"vcores,omitempty"`
 }
@@ -130,7 +158,7 @@ type MSSQLManagedInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MSSQLManagedInstance is the Schema for the MSSQLManagedInstances API
+// MSSQLManagedInstance is the Schema for the MSSQLManagedInstances API. Manages a Microsoft SQL Azure Managed Instance.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

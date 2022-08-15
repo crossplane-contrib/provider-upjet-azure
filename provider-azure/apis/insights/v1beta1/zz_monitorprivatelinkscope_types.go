@@ -14,11 +14,14 @@ import (
 )
 
 type MonitorPrivateLinkScopeObservation struct {
+
+	// The ID of the Azure Monitor Private Link Scope.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MonitorPrivateLinkScopeParameters struct {
 
+	// The name of the Resource Group where the Azure Monitor Private Link Scope should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -29,6 +32,7 @@ type MonitorPrivateLinkScopeParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags which should be assigned to the Azure Monitor Private Link Scope.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -47,7 +51,7 @@ type MonitorPrivateLinkScopeStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MonitorPrivateLinkScope is the Schema for the MonitorPrivateLinkScopes API
+// MonitorPrivateLinkScope is the Schema for the MonitorPrivateLinkScopes API. Manages an Azure Monitor Private Link Scope
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

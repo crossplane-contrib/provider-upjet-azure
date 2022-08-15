@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FirewallPolicyRuleCollectionGroup is the Schema for the FirewallPolicyRuleCollectionGroups
-          API
+          API. Manages a Firewall Policy Rule Collection Group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   applicationRuleCollection:
+                    description: One or more application_rule_collection blocks as
+                      defined below.
                     items:
                       properties:
                         action:
@@ -78,12 +80,16 @@ spec:
                           items:
                             properties:
                               description:
+                                description: The description which should be used
+                                  for this rule.
                                 type: string
                               destinationAddresses:
                                 items:
                                   type: string
                                 type: array
                               destinationFqdnTags:
+                                description: Specifies a list of destination FQDN
+                                  tags.
                                 items:
                                   type: string
                                 type: array
@@ -92,6 +98,9 @@ spec:
                                   type: string
                                 type: array
                               destinationUrls:
+                                description: Specifies a list of destination URLs
+                                  for which policy should hold. Needs Premium SKU
+                                  for Firewall Policy. Conflicts with destination_fqdns.
                                 items:
                                   type: string
                                 type: array
@@ -101,8 +110,12 @@ spec:
                                 items:
                                   properties:
                                     port:
+                                      description: Port number of the protocol. Range
+                                        is 0-64000.
                                       type: number
                                     type:
+                                      description: Protocol type. Possible values
+                                        are Http and Https.
                                       type: string
                                   required:
                                   - port
@@ -118,8 +131,15 @@ spec:
                                   type: string
                                 type: array
                               terminateTls:
+                                description: Boolean specifying if TLS shall be terminated  or
+                                  not . Must be  true when using destination_urls.
+                                  Needs Premium SKU for Firewall Policy.
                                 type: boolean
                               webCategories:
+                                description: Specifies a list of web categories to
+                                  which access is denied or allowed depending on the
+                                  value of action above. Needs Premium SKU for Firewall
+                                  Policy.
                                 items:
                                   type: string
                                 type: array
@@ -135,6 +155,9 @@ spec:
                       type: object
                     type: array
                   firewallPolicyId:
+                    description: The ID of the Firewall Policy where the Firewall
+                      Policy Rule Collection Group should exist. Changing this forces
+                      a new Firewall Policy Rule Collection Group to be created.
                     type: string
                   firewallPolicyIdRef:
                     description: A Reference to a named object.
@@ -210,6 +233,8 @@ spec:
                         type: object
                     type: object
                   natRuleCollection:
+                    description: One or more nat_rule_collection blocks as defined
+                      below.
                     items:
                       properties:
                         action:
@@ -222,6 +247,7 @@ spec:
                           items:
                             properties:
                               destinationAddress:
+                                description: The destination IP address .
                                 type: string
                               destinationPorts:
                                 items:
@@ -242,10 +268,13 @@ spec:
                                   type: string
                                 type: array
                               translatedAddress:
+                                description: Specifies the translated address.
                                 type: string
                               translatedFqdn:
+                                description: Specifies the translated FQDN.
                                 type: string
                               translatedPort:
+                                description: Specifies the translated port.
                                 type: number
                             required:
                             - name
@@ -261,6 +290,8 @@ spec:
                       type: object
                     type: array
                   networkRuleCollection:
+                    description: One or more network_rule_collection blocks as defined
+                      below.
                     items:
                       properties:
                         action:
@@ -281,6 +312,7 @@ spec:
                                   type: string
                                 type: array
                               destinationIpGroups:
+                                description: Specifies a list of destination IP groups.
                                 items:
                                   type: string
                                 type: array
@@ -498,6 +530,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Firewall Policy Rule Collection Group.
                     type: string
                 type: object
               conditions:

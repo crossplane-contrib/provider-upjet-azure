@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: NetworkInterfaceApplicationSecurityGroupAssociation is the Schema
-          for the NetworkInterfaceApplicationSecurityGroupAssociations API
+          for the NetworkInterfaceApplicationSecurityGroupAssociations API. Manages
+          the association between a Network Interface and a Application Security Group
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +67,9 @@ spec:
               forProvider:
                 properties:
                   applicationSecurityGroupId:
+                    description: The ID of the Application Security Group which this
+                      Network Interface which should be connected to. Changing this
+                      forces a new resource to be created.
                     type: string
                   applicationSecurityGroupIdRef:
                     description: A Reference to a named object.
@@ -141,6 +145,8 @@ spec:
                         type: object
                     type: object
                   networkInterfaceId:
+                    description: The ID of the Network Interface. Changing this forces
+                      a new resource to be created.
                     type: string
                   networkInterfaceIdRef:
                     description: A Reference to a named object.
@@ -394,6 +400,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The  ID of the Association between the Network Interface
+                      and the Application Security Group.
                     type: string
                 type: object
               conditions:

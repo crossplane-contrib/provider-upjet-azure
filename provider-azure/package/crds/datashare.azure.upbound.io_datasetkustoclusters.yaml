@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: DataSetKustoCluster is the Schema for the DataSetKustoClusters
-          API
+          API. Manages a Data Share Kusto Cluster Dataset.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   kustoClusterId:
+                    description: The resource ID of the Kusto Cluster to be shared
+                      with the receiver. Changing this forces a new Data Share Kusto
+                      Cluster Dataset to be created.
                     type: string
                   kustoClusterIdRef:
                     description: A Reference to a named object.
@@ -140,6 +143,9 @@ spec:
                         type: object
                     type: object
                   shareId:
+                    description: The resource ID of the Data Share where this Data
+                      Share Kusto Cluster Dataset should be created. Changing this
+                      forces a new Data Share Kusto Cluster Dataset to be created.
                     type: string
                   shareIdRef:
                     description: A Reference to a named object.
@@ -392,10 +398,13 @@ spec:
               atProvider:
                 properties:
                   displayName:
+                    description: The name of the Data Share Dataset.
                     type: string
                   id:
+                    description: The resource ID of the Data Share Kusto Cluster Dataset.
                     type: string
                   kustoClusterLocation:
+                    description: The location of the Kusto Cluster.
                     type: string
                 type: object
               conditions:

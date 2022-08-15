@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: FirewallPolicy is the Schema for the FirewallPolicys API
+        description: FirewallPolicy is the Schema for the FirewallPolicys API. Manages
+          a Firewall Policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,26 +65,37 @@ spec:
               forProvider:
                 properties:
                   basePolicyId:
+                    description: The ID of the base Firewall Policy.
                     type: string
                   dns:
+                    description: A dns block as defined below.
                     items:
                       properties:
                         proxyEnabled:
+                          description: Whether to enable DNS proxy on Firewalls attached
+                            to this Firewall Policy? Defaults to false.
                           type: boolean
                         servers:
+                          description: A list of custom DNS servers' IP addresses.
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Firewall Policy.
                           items:
                             type: string
                           type: array
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Firewall Policy. Only
+                            possible value is UserAssigned.
                           type: string
                       required:
                       - identityIds
@@ -91,16 +103,28 @@ spec:
                       type: object
                     type: array
                   insights:
+                    description: An insights block as defined below.
                     items:
                       properties:
                         defaultLogAnalyticsWorkspaceId:
+                          description: The ID of the default Log Analytics Workspace
+                            that the Firewalls associated with this Firewall Policy
+                            will send their logs to, when there is no location matches
+                            in the log_analytics_workspace.
                           type: string
                         enabled:
+                          description: Whether the insights functionality is enabled
+                            for this Firewall Policy.
                           type: boolean
                         logAnalyticsWorkspace:
+                          description: A list of log_analytics_workspace block as
+                            defined below.
                           items:
                             properties:
                               firewallLocation:
+                                description: The location of the Firewalls, that when
+                                  matches this Log Analytics Workspace will be used
+                                  to consume their logs.
                                 type: string
                               id:
                                 type: string
@@ -110,6 +134,7 @@ spec:
                             type: object
                           type: array
                         retentionInDays:
+                          description: The log retention period in days.
                           type: number
                       required:
                       - defaultLogAnalyticsWorkspaceId
@@ -117,45 +142,67 @@ spec:
                       type: object
                     type: array
                   intrusionDetection:
+                    description: A intrusion_detection block as defined below.
                     items:
                       properties:
                         mode:
+                          description: 'In which mode you want to run intrusion detection:
+                            Off, Alert or Deny.'
                           type: string
                         signatureOverrides:
+                          description: One or more signature_overrides blocks as defined
+                            below.
                           items:
                             properties:
                               id:
                                 type: string
                               state:
+                                description: state can be any of Off, Alert or Deny.
                                 type: string
                             type: object
                           type: array
                         trafficBypass:
+                          description: One or more traffic_bypass blocks as defined
+                            below.
                           items:
                             properties:
                               description:
+                                description: The description for this bypass traffic
+                                  setting.
                                 type: string
                               destinationAddresses:
+                                description: Specifies a list of destination IP addresses
+                                  that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
                               destinationIpGroups:
+                                description: Specifies a list of destination IP groups
+                                  that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
                               destinationPorts:
+                                description: Specifies a list of destination IP ports
+                                  that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
                               name:
                                 type: string
                               protocol:
+                                description: The protocols any of ANY, TCP, ICMP,
+                                  UDP that shall be bypassed by intrusion detection.
                                 type: string
                               sourceAddresses:
+                                description: Specifies a list of source addresses
+                                  that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
                               sourceIpGroups:
+                                description: Specifies a list of source IP groups
+                                  that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
@@ -167,12 +214,19 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: The Azure Region where the Firewall Policy should
+                      exist. Changing this forces a new Firewall Policy to be created.
                     type: string
                   privateIpRanges:
+                    description: A list of private IP ranges to which traffic will
+                      not be SNAT.
                     items:
                       type: string
                     type: array
                   resourceGroupName:
+                    description: The name of the Resource Group where the Firewall
+                      Policy should exist. Changing this forces a new Firewall Policy
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -248,30 +302,46 @@ spec:
                         type: object
                     type: object
                   sku:
+                    description: The SKU Tier of the Firewall Policy. Possible values
+                      are Standard, Premium. Changing this forces a new Firewall Policy
+                      to be created.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Firewall Policy.
                     type: object
                   threatIntelligenceAllowlist:
+                    description: A threat_intelligence_allowlist block as defined
+                      below.
                     items:
                       properties:
                         fqdns:
+                          description: A list of FQDNs that will be skipped for threat
+                            detection.
                           items:
                             type: string
                           type: array
                         ipAddresses:
+                          description: A list of IP addresses or CIDR ranges that
+                            will be skipped for threat detection.
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   threatIntelligenceMode:
+                    description: The operation mode for Threat Intelligence. Possible
+                      values are Alert, Deny and Off. Defaults to Alert.
                     type: string
                   tlsCertificate:
+                    description: A tls_certificate block as defined below.
                     items:
                       properties:
                         keyVaultSecretId:
+                          description: The ID of the Key Vault, where the secret or
+                            certificate is stored.
                           type: string
                         name:
                           type: string
@@ -460,16 +530,22 @@ spec:
               atProvider:
                 properties:
                   childPolicies:
+                    description: A list of reference to child Firewall Policies of
+                      this Firewall Policy.
                     items:
                       type: string
                     type: array
                   firewalls:
+                    description: A list of references to Azure Firewalls that this
+                      Firewall Policy is associated with.
                     items:
                       type: string
                     type: array
                   id:
                     type: string
                   ruleCollectionGroups:
+                    description: A list of references to Firewall Policy Rule Collection
+                      Groups that belongs to this Firewall Policy.
                     items:
                       type: string
                     type: array

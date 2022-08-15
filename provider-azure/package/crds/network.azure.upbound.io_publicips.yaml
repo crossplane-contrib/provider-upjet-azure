@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: PublicIP is the Schema for the PublicIPs API
+        description: PublicIP is the Schema for the PublicIPs API. Manages a Public
+          IP Address.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,24 +65,44 @@ spec:
               forProvider:
                 properties:
                   allocationMethod:
+                    description: Defines the allocation method for this IP address.
+                      Possible values are Static or Dynamic.
                     type: string
                   domainNameLabel:
+                    description: Label for the Domain Name. Will be used to make up
+                      the FQDN.  If a domain name label is specified, an A DNS record
+                      is created for the public IP in the Microsoft Azure DNS system.
                     type: string
                   edgeZone:
+                    description: Specifies the Edge Zone within the Azure Region where
+                      this Public IP should exist. Changing this forces a new Public
+                      IP to be created.
                     type: string
                   idleTimeoutInMinutes:
+                    description: Specifies the timeout for the TCP idle connection.
+                      The value can be set between 4 and 30 minutes.
                     type: number
                   ipTags:
                     additionalProperties:
                       type: string
+                    description: A mapping of IP tags to assign to the public IP.
                     type: object
                   ipVersion:
+                    description: The IP Version to use, IPv6 or IPv4.
                     type: string
                   location:
+                    description: Specifies the supported Azure location where the
+                      Public IP should exist. Changing this forces a new resource
+                      to be created.
                     type: string
                   publicIpPrefixId:
+                    description: If specified then public IP address allocated will
+                      be provided from the public IP prefix resource.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where this Public
+                      IP should exist. Changing this forces a new Public IP to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -157,16 +178,27 @@ spec:
                         type: object
                     type: object
                   reverseFqdn:
+                    description: A fully qualified domain name that resolves to this
+                      public IP address. If the reverseFqdn is specified, then a PTR
+                      DNS record is created pointing from the IP address in the in-addr.arpa
+                      domain to the reverse FQDN.
                     type: string
                   sku:
+                    description: The SKU of the Public IP. Accepted values are Basic
+                      and Standard. Defaults to Basic.
                     type: string
                   skuTier:
+                    description: The SKU Tier that should be used for the Public IP.
+                      Possible values are Regional and Global. Defaults to Regional.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   zones:
+                    description: A collection containing the availability zone to
+                      allocate the Public IP in.
                     items:
                       type: string
                     type: array
@@ -351,10 +383,16 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: Fully qualified domain name of the A DNS record associated
+                      with the public IP. domain_name_label must be specified to get
+                      the fqdn. This is the concatenation of the domain_name_label
+                      and the regionalized DNS zone
                     type: string
                   id:
+                    description: The ID of this Public IP.
                     type: string
                   ipAddress:
+                    description: The IP address value that was allocated.
                     type: string
                 type: object
               conditions:

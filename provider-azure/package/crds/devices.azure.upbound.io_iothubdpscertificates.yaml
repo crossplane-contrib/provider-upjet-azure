@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: IOTHubDPSCertificate is the Schema for the IOTHubDPSCertificates
-          API
+          API. Manages an IoT Device Provisioning Service Certificate.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   certificateContentSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The Base-64 representation of the X509 leaf certificate
+                      .cer file or just a .pem file content.
                     properties:
                       key:
                         description: The key to select.
@@ -83,6 +83,9 @@ spec:
                     - namespace
                     type: object
                   iotDpsName:
+                    description: The name of the IoT Device Provisioning Service that
+                      this certificate will be attached to. Changing this forces a
+                      new resource to be created.
                     type: string
                   iotDpsNameRef:
                     description: A Reference to a named object.
@@ -158,6 +161,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group under which the Iot
+                      Device Provisioning Service Certificate resource has to be created.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -413,6 +419,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the IoTHub Device Provisioning Service
+                      Certificate.
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DNSPTRRecord is the Schema for the DNSPTRRecords API
+        description: DNSPTRRecord is the Schema for the DNSPTRRecords API. Manages
+          a DNS PTR Record.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,13 @@ spec:
               forProvider:
                 properties:
                   records:
+                    description: List of Fully Qualified Domain Names.
                     items:
                       type: string
                     type: array
                   resourceGroupName:
+                    description: Specifies the resource group where the resource exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -145,10 +149,14 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   ttl:
+                    description: The Time To Live  of the DNS record in seconds.
                     type: number
                   zoneName:
+                    description: Specifies the DNS Zone where the DNS Zone  exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
                     description: A Reference to a named object.
@@ -404,8 +412,10 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the DNS PTR Record.
                     type: string
                   id:
+                    description: The DNS PTR Record ID.
                     type: string
                 type: object
               conditions:

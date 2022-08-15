@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: SpatialAnchorsAccount is the Schema for the SpatialAnchorsAccounts
-          API
+          API. Manages an Azure Spatial Anchors Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,12 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Spatial Anchors Account.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -144,6 +148,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -326,10 +331,13 @@ spec:
               atProvider:
                 properties:
                   accountDomain:
+                    description: The domain of the Spatial Anchors Account.
                     type: string
                   accountId:
+                    description: The account ID of the Spatial Anchors Account.
                     type: string
                   id:
+                    description: The ID of the Spatial Anchors Account.
                     type: string
                 type: object
               conditions:

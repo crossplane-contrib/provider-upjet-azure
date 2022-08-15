@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FirewallNetworkRuleCollection is the Schema for the FirewallNetworkRuleCollections
-          API
+          API. Manages a Network Rule Collection within an Azure Firewall.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,13 @@ spec:
               forProvider:
                 properties:
                   action:
+                    description: Specifies the action the rule will apply to matching
+                      traffic. Possible values are Allow and Deny.
                     type: string
                   azureFirewallName:
+                    description: Specifies the name of the Firewall in which the Network
+                      Rule Collection should be created. Changing this forces a new
+                      resource to be created.
                     type: string
                   azureFirewallNameRef:
                     description: A Reference to a named object.
@@ -143,8 +148,13 @@ spec:
                         type: object
                     type: object
                   priority:
+                    description: Specifies the priority of the rule collection. Possible
+                      values are between 100 - 65000.
                     type: number
                   resourceGroupName:
+                    description: Specifies the name of the Resource Group in which
+                      the Firewall exists. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -220,37 +230,49 @@ spec:
                         type: object
                     type: object
                   rule:
+                    description: One or more rule blocks as defined below.
                     items:
                       properties:
                         description:
+                          description: Specifies a description for the rule.
                           type: string
                         destinationAddresses:
+                          description: Either a list of destination IP addresses and/or
+                            IP ranges, or a list of destination Service Tags.
                           items:
                             type: string
                           type: array
                         destinationFqdns:
+                          description: A list of destination FQDNS for the rule.
                           items:
                             type: string
                           type: array
                         destinationIpGroups:
+                          description: A list of destination IP Group IDs for the
+                            rule.
                           items:
                             type: string
                           type: array
                         destinationPorts:
+                          description: A list of destination ports.
                           items:
                             type: string
                           type: array
                         name:
                           type: string
                         protocols:
+                          description: A list of protocols. Possible values are Any,
+                            ICMP, TCP and UDP.
                           items:
                             type: string
                           type: array
                         sourceAddresses:
+                          description: A list of source IP addresses and/or IP ranges.
                           items:
                             type: string
                           type: array
                         sourceIpGroups:
+                          description: A list of IP Group IDs for the rule.
                           items:
                             type: string
                           type: array

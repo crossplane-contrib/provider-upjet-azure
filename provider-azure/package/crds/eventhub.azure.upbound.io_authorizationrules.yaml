@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: AuthorizationRule is the Schema for the AuthorizationRules API
+        description: AuthorizationRule is the Schema for the AuthorizationRules API.
+          Manages a Event Hubs authorization Rule within an Event Hub.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   eventhubName:
+                    description: Specifies the name of the EventHub. Changing this
+                      forces a new resource to be created.
                     type: string
                   eventhubNameRef:
                     description: A Reference to a named object.
@@ -139,10 +142,17 @@ spec:
                         type: object
                     type: object
                   listen:
+                    description: Does this Authorization Rule have permissions to
+                      Listen to the Event Hub? Defaults to false.
                     type: boolean
                   manage:
+                    description: Does this Authorization Rule have permissions to
+                      Manage to the Event Hub? When this property is true - both listen
+                      and send must be too. Defaults to false.
                     type: boolean
                   namespaceName:
+                    description: Specifies the name of the grandparent EventHub Namespace.
+                      Changing this forces a new resource to be created.
                     type: string
                   namespaceNameRef:
                     description: A Reference to a named object.
@@ -218,6 +228,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group in which the EventHub
+                      Namespace exists. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -293,6 +306,8 @@ spec:
                         type: object
                     type: object
                   send:
+                    description: Does this Authorization Rule have permissions to
+                      Send to the Event Hub? Defaults to false.
                     type: boolean
                 type: object
               providerConfigRef:
@@ -472,6 +487,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The EventHub ID.
                     type: string
                 type: object
               conditions:

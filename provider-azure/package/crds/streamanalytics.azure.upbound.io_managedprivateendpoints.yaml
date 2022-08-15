@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ManagedPrivateEndpoint is the Schema for the ManagedPrivateEndpoints
-          API
+          API. Manages a Stream Analytics Managed Private Endpoint.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   resourceGroupName:
+                    description: The name of the Resource Group where the Stream Analytics
+                      Managed Private Endpoint should exist. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -140,6 +143,9 @@ spec:
                         type: object
                     type: object
                   streamAnalyticsClusterName:
+                    description: The name of the Stream Analytics Cluster where the
+                      Managed Private Endpoint should be created. Changing this forces
+                      a new resource to be created.
                     type: string
                   streamAnalyticsClusterNameRef:
                     description: A Reference to a named object.
@@ -215,8 +221,14 @@ spec:
                         type: object
                     type: object
                   subresourceName:
+                    description: Specifies the sub resource name which the Stream
+                      Analytics Private Endpoint is able to connect to. Changing this
+                      forces a new resource to be created.
                     type: string
                   targetResourceId:
+                    description: The ID of the Private Link Enabled Remote Resource
+                      which this Stream Analytics Private endpoint should be connected
+                      to. Changing this forces a new resource to be created.
                     type: string
                   targetResourceIdRef:
                     description: A Reference to a named object.
@@ -472,6 +484,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Stream Analytics.
                     type: string
                 type: object
               conditions:

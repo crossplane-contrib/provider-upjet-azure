@@ -14,11 +14,14 @@ import (
 )
 
 type ManagedPrivateEndpointObservation struct {
+
+	// The ID of the Stream Analytics.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ManagedPrivateEndpointParameters struct {
 
+	// The name of the Resource Group where the Stream Analytics Managed Private Endpoint should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -29,6 +32,7 @@ type ManagedPrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the Stream Analytics Cluster where the Managed Private Endpoint should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/streamanalytics/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsClusterName *string `json:"streamAnalyticsClusterName,omitempty" tf:"stream_analytics_cluster_name,omitempty"`
@@ -39,9 +43,11 @@ type ManagedPrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsClusterNameSelector *v1.Selector `json:"streamAnalyticsClusterNameSelector,omitempty" tf:"-"`
 
+	// Specifies the sub resource name which the Stream Analytics Private Endpoint is able to connect to. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	SubresourceName *string `json:"subresourceName" tf:"subresource_name,omitempty"`
 
+	// The ID of the Private Link Enabled Remote Resource which this Stream Analytics Private endpoint should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -68,7 +74,7 @@ type ManagedPrivateEndpointStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ManagedPrivateEndpoint is the Schema for the ManagedPrivateEndpoints API
+// ManagedPrivateEndpoint is the Schema for the ManagedPrivateEndpoints API. Manages a Stream Analytics Managed Private Endpoint.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MSSQLManagedInstanceFailoverGroup is the Schema for the MSSQLManagedInstanceFailoverGroups
-          API
+          API. Manages an Azure SQL Managed Instance Failover Group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -68,6 +68,9 @@ spec:
                   location:
                     type: string
                   managedInstanceId:
+                    description: The ID of the Azure SQL Managed Instance which will
+                      be replicated using a Managed Instance Failover Group. Changing
+                      this forces a new resource to be created.
                     type: string
                   managedInstanceIdRef:
                     description: A Reference to a named object.
@@ -143,6 +146,9 @@ spec:
                         type: object
                     type: object
                   partnerManagedInstanceId:
+                    description: The ID of the Azure SQL Managed Instance which will
+                      be replicated to. Changing this forces a new resource to be
+                      created.
                     type: string
                   partnerManagedInstanceIdRef:
                     description: A Reference to a named object.
@@ -218,17 +224,25 @@ spec:
                         type: object
                     type: object
                   readWriteEndpointFailoverPolicy:
+                    description: A read_write_endpoint_failover_policy block as defined
+                      below.
                     items:
                       properties:
                         graceMinutes:
+                          description: Applies only if mode is Automatic. The grace
+                            period in minutes before failover with data loss is attempted.
                           type: number
                         mode:
+                          description: The failover mode. Possible values are Automatic
+                            or Manual.
                           type: string
                       required:
                       - mode
                       type: object
                     type: array
                   readonlyEndpointFailoverPolicyEnabled:
+                    description: Failover policy for the read-only endpoint. Defaults
+                      to false.
                     type: boolean
                 required:
                 - location
@@ -412,8 +426,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Managed Instance Failover Group.
                     type: string
                   partnerRegion:
+                    description: A partner_region block as defined below.
                     items:
                       properties:
                         location:

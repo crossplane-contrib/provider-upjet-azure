@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FrontdoorFirewallPolicy is the Schema for the FrontdoorFirewallPolicys
-          API
+          API. Manages an Azure Front Door Web Application Firewall Policy instance.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,10 +66,16 @@ spec:
               forProvider:
                 properties:
                   customBlockResponseBody:
+                    description: If a custom_rule block's action type is block, this
+                      is the response body. The body must be specified in base64 encoding.
                     type: string
                   customBlockResponseStatusCode:
+                    description: If a custom_rule block's action type is block, this
+                      is the response status code. Possible values are 200, 403, 405,
+                      406, or 429.
                     type: number
                   customRule:
+                    description: One or more custom_rule blocks as defined below.
                     items:
                       properties:
                         action:
@@ -77,21 +83,32 @@ spec:
                         enabled:
                           type: boolean
                         matchCondition:
+                          description: One or more match_condition block defined below.
+                            Can support up to 10 match_condition blocks.
                           items:
                             properties:
                               matchValues:
+                                description: Up to 600 possible values to match. Limit
+                                  is in total across all match_condition blocks and
+                                  match_values arguments. String value itself can
+                                  be up to 256 characters long.
                                 items:
                                   type: string
                                 type: array
                               matchVariable:
                                 type: string
                               negationCondition:
+                                description: Should the result of the condition be
+                                  negated.
                                 type: boolean
                               operator:
                                 type: string
                               selector:
                                 type: string
                               transforms:
+                                description: Up to 5 transforms to apply. Possible
+                                  values are Lowercase, RemoveNulls, Trim, Uppercase,
+                                  URLDecode orURLEncode.
                                 items:
                                   type: string
                                 type: array
@@ -104,10 +121,16 @@ spec:
                         name:
                           type: string
                         priority:
+                          description: The priority of the rule. Rules with a lower
+                            value will be evaluated before rules with a higher value.
+                            Defaults to 1.
                           type: number
                         rateLimitDurationInMinutes:
+                          description: The rate limit duration in minutes. Defaults
+                            to 1.
                           type: number
                         rateLimitThreshold:
+                          description: The rate limit threshold. Defaults to 10.
                           type: number
                         type:
                           type: string
@@ -120,6 +143,7 @@ spec:
                   enabled:
                     type: boolean
                   managedRule:
+                    description: One or more managed_rule blocks as defined below.
                     items:
                       properties:
                         exclusion:
@@ -138,6 +162,7 @@ spec:
                             type: object
                           type: array
                         override:
+                          description: One or more override blocks as defined below.
                           items:
                             properties:
                               exclusion:
@@ -156,6 +181,9 @@ spec:
                                   type: object
                                 type: array
                               rule:
+                                description: One or more rule blocks as defined below.
+                                  If none are specified, all of the rules in the group
+                                  will be disabled.
                                 items:
                                   properties:
                                     action:
@@ -178,6 +206,7 @@ spec:
                                         type: object
                                       type: array
                                     ruleId:
+                                      description: Identifier for the managed rule.
                                       type: string
                                   required:
                                   - action
@@ -185,6 +214,7 @@ spec:
                                   type: object
                                 type: array
                               ruleGroupName:
+                                description: The managed rule group to override.
                                 type: string
                             required:
                             - ruleGroupName
@@ -193,6 +223,8 @@ spec:
                         type:
                           type: string
                         version:
+                          description: The version on the managed rule to use with
+                            this resource.
                           type: string
                       required:
                       - type
@@ -200,10 +232,16 @@ spec:
                       type: object
                     type: array
                   mode:
+                    description: The firewall policy mode. Possible values are Detection,
+                      Prevention and defaults to Prevention.
                     type: string
                   redirectUrl:
+                    description: If action type is redirect, this field represents
+                      redirect URL for the client.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -281,6 +319,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the Web Application
+                      Firewall Policy.
                     type: object
                 type: object
               providerConfigRef:
@@ -461,12 +501,17 @@ spec:
               atProvider:
                 properties:
                   frontendEndpointIds:
+                    description: The Frontend Endpoints associated with this Front
+                      Door Web Application Firewall policy.
                     items:
                       type: string
                     type: array
                   id:
+                    description: The ID of the FrontDoor Firewall Policy.
                     type: string
                   location:
+                    description: The Azure Region where this FrontDoor Firewall Policy
+                      exists.
                     type: string
                 type: object
               conditions:

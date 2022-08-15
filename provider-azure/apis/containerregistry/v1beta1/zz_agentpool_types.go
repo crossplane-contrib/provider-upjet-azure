@@ -14,11 +14,14 @@ import (
 )
 
 type AgentPoolObservation struct {
+
+	// The ID of the Azure Container Registry Agent Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AgentPoolParameters struct {
 
+	// Name of Azure Container Registry to create an Agent Pool for. Changing this forces a new Azure Container Registry Agent Pool to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/containerregistry/v1beta1.Registry
 	// +kubebuilder:validation:Optional
 	ContainerRegistryName *string `json:"containerRegistryName,omitempty" tf:"container_registry_name,omitempty"`
@@ -29,12 +32,15 @@ type AgentPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerRegistryNameSelector *v1.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
 
+	// VMSS instance count. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
+	// The Azure Region where the Azure Container Registry Agent Pool should exist. Changing this forces a new Azure Container Registry Agent Pool to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the Resource Group where the Azure Container Registry Agent Pool should exist. Changing this forces a new Azure Container Registry Agent Pool to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -45,12 +51,15 @@ type AgentPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags which should be assigned to the Azure Container Registry Agent Pool.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Sets the VM your agent pool will run on. Valid values are: S1 , S2 , S3  or I6 . Defaults to S1. Changing this forces a new Azure Container Registry Agent Pool to be created.
 	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
+	// The ID of the Virtual Network Subnet Resource where the agent machines will be running. Changing this forces a new Azure Container Registry Agent Pool to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -77,7 +86,7 @@ type AgentPoolStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AgentPool is the Schema for the AgentPools API
+// AgentPool is the Schema for the AgentPools API. Manages an Azure Container Registry Agent Pool.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

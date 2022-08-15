@@ -16,11 +16,13 @@ import (
 type MSSQLFailoverGroupObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// +kubebuilder:validation:Required
 	PartnerServer []PartnerServerObservation `json:"partnerServer,omitempty" tf:"partner_server,omitempty"`
 }
 
 type MSSQLFailoverGroupParameters struct {
 
+	// A set of database names to include in the failover group.
 	// +crossplane:generate:reference:type=MSSQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,12 +37,15 @@ type MSSQLFailoverGroupParameters struct {
 	// +kubebuilder:validation:Required
 	PartnerServer []PartnerServerParameters `json:"partnerServer" tf:"partner_server,omitempty"`
 
+	// A read_write_endpoint_failover_policy block as defined below.
 	// +kubebuilder:validation:Required
 	ReadWriteEndpointFailoverPolicy []ReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy" tf:"read_write_endpoint_failover_policy,omitempty"`
 
+	// Whether failover is enabled for the readonly endpoint. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
 
+	// The ID of the primary SQL Server on which to create the failover group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -52,13 +57,17 @@ type MSSQLFailoverGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PartnerServerObservation struct {
+
+	// The location of the partner server.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The replication role of the partner server. Possible values include Primary or Secondary.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
@@ -81,9 +90,11 @@ type ReadWriteEndpointFailoverPolicyObservation struct {
 
 type ReadWriteEndpointFailoverPolicyParameters struct {
 
+	// The grace period in minutes, before failover with data loss is attempted for the read-write endpoint. Required when mode is Automatic.
 	// +kubebuilder:validation:Optional
 	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
 
+	// The failover policy of the read-write endpoint for the failover group. Possible values are Automatic or Manual.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
@@ -102,7 +113,7 @@ type MSSQLFailoverGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MSSQLFailoverGroup is the Schema for the MSSQLFailoverGroups API
+// MSSQLFailoverGroup is the Schema for the MSSQLFailoverGroups API. Manages a Microsoft Azure SQL Failover Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

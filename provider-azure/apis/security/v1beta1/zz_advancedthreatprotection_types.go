@@ -14,14 +14,18 @@ import (
 )
 
 type AdvancedThreatProtectionObservation struct {
+
+	// The ID of the Advanced Threat Protection resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AdvancedThreatProtectionParameters struct {
 
+	// Should Advanced Threat Protection be enabled on this resource?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// The ID of the Azure Resource which to enable Advanced Threat Protection on. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	TargetResourceID *string `json:"targetResourceId" tf:"target_resource_id,omitempty"`
 }
@@ -40,7 +44,7 @@ type AdvancedThreatProtectionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AdvancedThreatProtection is the Schema for the AdvancedThreatProtections API
+// AdvancedThreatProtection is the Schema for the AdvancedThreatProtections API. Manages a resources Advanced Threat Protection setting.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,17 +14,22 @@ import (
 )
 
 type ExpressRouteConnectionObservation struct {
+
+	// The ID of the Express Route Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ExpressRouteConnectionParameters struct {
 
+	// The authorization key to establish the Express Route Connection.
 	// +kubebuilder:validation:Optional
 	AuthorizationKey *string `json:"authorizationKey,omitempty" tf:"authorization_key,omitempty"`
 
+	// Is Internet security enabled for this Express Route Connection?
 	// +kubebuilder:validation:Optional
 	EnableInternetSecurity *bool `json:"enableInternetSecurity,omitempty" tf:"enable_internet_security,omitempty"`
 
+	// The ID of the Express Route Circuit Peering that this Express Route Connection connects with. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -36,6 +41,7 @@ type ExpressRouteConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitPeeringIDSelector *v1.Selector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
 
+	// The ID of the Express Route Gateway that this Express Route Connection connects with. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ExpressRouteGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -47,9 +53,11 @@ type ExpressRouteConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpressRouteGatewayIDSelector *v1.Selector `json:"expressRouteGatewayIdSelector,omitempty" tf:"-"`
 
+	// A routing block as defined below.
 	// +kubebuilder:validation:Optional
 	Routing []RoutingParameters `json:"routing,omitempty" tf:"routing,omitempty"`
 
+	// The routing weight associated to the Express Route Connection. Possible value is between 0 and 32000. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
 }
@@ -59,9 +67,11 @@ type PropagatedRouteTableObservation struct {
 
 type PropagatedRouteTableParameters struct {
 
+	// The list of labels to logically group route tables.
 	// +kubebuilder:validation:Optional
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// A list of IDs of the Virtual Hub Route Table to propagate routes from Express Route Connection to the route table.
 	// +kubebuilder:validation:Optional
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 }
@@ -71,9 +81,11 @@ type RoutingObservation struct {
 
 type RoutingParameters struct {
 
+	// The ID of the Virtual Hub Route Table associated with this Express Route Connection.
 	// +kubebuilder:validation:Optional
 	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
 
+	// A propagated_route_table block as defined below.
 	// +kubebuilder:validation:Optional
 	PropagatedRouteTable []PropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
 }
@@ -92,7 +104,7 @@ type ExpressRouteConnectionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ExpressRouteConnection is the Schema for the ExpressRouteConnections API
+// ExpressRouteConnection is the Schema for the ExpressRouteConnections API. Manages an Express Route Connection.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

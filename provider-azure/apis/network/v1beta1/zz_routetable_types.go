@@ -14,19 +14,25 @@ import (
 )
 
 type RouteTableObservation struct {
+
+	// The Route Table ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The collection of Subnets associated with this route table.
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type RouteTableParameters struct {
 
+	// Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
 	// +kubebuilder:validation:Optional
 	DisableBGPRoutePropagation *bool `json:"disableBgpRoutePropagation,omitempty" tf:"disable_bgp_route_propagation,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the route table. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -37,9 +43,11 @@ type RouteTableParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// List of objects representing routes. Each object accepts the arguments documented below.
 	// +kubebuilder:validation:Optional
 	Route []RouteTableRouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -49,15 +57,18 @@ type RouteTableRouteObservation struct {
 
 type RouteTableRouteParameters struct {
 
+	// The destination to which the route applies. Can be CIDR  or Azure Service Tag  format.
 	// +kubebuilder:validation:Optional
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix"`
 
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name"`
 
+	// Contains the IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
 	// +kubebuilder:validation:Optional
 	NextHopInIPAddress *string `json:"nextHopInIpAddress,omitempty" tf:"next_hop_in_ip_address"`
 
+	// The type of Azure hop the packet should be sent to. Possible values are VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None.
 	// +kubebuilder:validation:Optional
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type"`
 }
@@ -76,7 +87,7 @@ type RouteTableStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RouteTable is the Schema for the RouteTables API
+// RouteTable is the Schema for the RouteTables API. Manages a Route Table
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

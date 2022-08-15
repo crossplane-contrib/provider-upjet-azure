@@ -14,16 +14,21 @@ import (
 )
 
 type PrivateDNSMXRecordObservation struct {
+
+	// The FQDN of the DNS MX Record.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// The Private DNS MX Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type PrivateDNSMXRecordParameters struct {
 
+	// One or more record blocks as defined below.
 	// +kubebuilder:validation:Required
 	Record []PrivateDNSMXRecordRecordParameters `json:"record" tf:"record,omitempty"`
 
+	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -37,9 +42,11 @@ type PrivateDNSMXRecordParameters struct {
 	// +kubebuilder:validation:Required
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=PrivateDNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
@@ -56,9 +63,11 @@ type PrivateDNSMXRecordRecordObservation struct {
 
 type PrivateDNSMXRecordRecordParameters struct {
 
+	// The FQDN of the exchange to MX record points to.
 	// +kubebuilder:validation:Required
 	Exchange *string `json:"exchange" tf:"exchange,omitempty"`
 
+	// The preference of the MX record.
 	// +kubebuilder:validation:Required
 	Preference *float64 `json:"preference" tf:"preference,omitempty"`
 }
@@ -77,7 +86,7 @@ type PrivateDNSMXRecordStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PrivateDNSMXRecord is the Schema for the PrivateDNSMXRecords API
+// PrivateDNSMXRecord is the Schema for the PrivateDNSMXRecords API. Manages a Private DNS MX Record.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

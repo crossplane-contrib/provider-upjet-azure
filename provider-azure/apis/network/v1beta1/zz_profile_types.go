@@ -21,6 +21,7 @@ type ContainerNetworkInterfaceIPConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Reference to the subnet associated with the IP Configuration.
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -38,6 +39,7 @@ type ContainerNetworkInterfaceObservation struct {
 
 type ContainerNetworkInterfaceParameters struct {
 
+	// One or more ip_configuration blocks as documented below.
 	// +kubebuilder:validation:Required
 	IPConfiguration []ContainerNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
@@ -46,19 +48,25 @@ type ContainerNetworkInterfaceParameters struct {
 }
 
 type ProfileObservation struct {
+
+	// A list of Container Network Interface IDs.
 	ContainerNetworkInterfaceIds []*string `json:"containerNetworkInterfaceIds,omitempty" tf:"container_network_interface_ids,omitempty"`
 
+	// The ID of the Network Profile.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ProfileParameters struct {
 
+	// A container_network_interface block as documented below.
 	// +kubebuilder:validation:Required
 	ContainerNetworkInterface []ContainerNetworkInterfaceParameters `json:"containerNetworkInterface" tf:"container_network_interface,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -69,6 +77,7 @@ type ProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -87,7 +96,7 @@ type ProfileStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Profile is the Schema for the Profiles API
+// Profile is the Schema for the Profiles API. Manages a Network Profile.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

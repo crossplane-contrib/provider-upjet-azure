@@ -14,17 +14,22 @@ import (
 )
 
 type StorageSyncObservation struct {
+
+	// The ID of the Storage Sync.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type StorageSyncParameters struct {
 
+	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly.
 	// +kubebuilder:validation:Optional
 	IncomingTrafficPolicy *string `json:"incomingTrafficPolicy,omitempty" tf:"incoming_traffic_policy,omitempty"`
 
+	// The Azure Region where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the Resource Group where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -35,6 +40,7 @@ type StorageSyncParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags which should be assigned to the Storage Sync.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -53,7 +59,7 @@ type StorageSyncStatus struct {
 
 // +kubebuilder:object:root=true
 
-// StorageSync is the Schema for the StorageSyncs API
+// StorageSync is the Schema for the StorageSyncs API. Manages a Storage Sync.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

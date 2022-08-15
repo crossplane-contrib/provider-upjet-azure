@@ -18,6 +18,7 @@ type ACLObservation struct {
 
 type ACLParameters struct {
 
+	// An access_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	AccessPolicy []AccessPolicyParameters `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
@@ -30,12 +31,15 @@ type AccessPolicyObservation struct {
 
 type AccessPolicyParameters struct {
 
+	// The time at which this Access Policy should be valid until, in ISO8601 format.
 	// +kubebuilder:validation:Optional
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
+	// The permissions which should be associated with this Shared Identifier. Possible value is combination of r , w , d , and l .
 	// +kubebuilder:validation:Required
 	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 
+	// The time at which this Access Policy should be valid from, in ISO8601 format.
 	// +kubebuilder:validation:Optional
 	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
@@ -43,28 +47,36 @@ type AccessPolicyParameters struct {
 type ShareObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Resource Manager ID of this File Share.
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
 
+	// The URL of the File Share
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type ShareParameters struct {
 
+	// One or more acl blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ACL []ACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
+	// The protocol used for the share. Possible values are SMB and NFS. The SBM indicates the share can be accessed by SMBv3.0, SMBv2.1 and REST. The NFS indicates the share can be accessed by NFSv4.1. Defaults to SMB. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnabledProtocol *string `json:"enabledProtocol,omitempty" tf:"enabled_protocol,omitempty"`
 
+	// A mapping of MetaData for this File Share.
 	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
+	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB  and at most 5120 GB . For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB .
 	// +kubebuilder:validation:Required
 	Quota *float64 `json:"quota" tf:"quota,omitempty"`
 
+	// Specifies the storage account in which to create the share.
+	// Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
@@ -90,7 +102,7 @@ type ShareStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Share is the Schema for the Shares API
+// Share is the Schema for the Shares API. Manages a File Share within Azure Storage.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

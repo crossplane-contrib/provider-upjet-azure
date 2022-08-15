@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VirtualNetworkRule is the Schema for the VirtualNetworkRules
-          API
+          API. Manages a PostgreSQL Virtual Network Rule.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,13 @@ spec:
               forProvider:
                 properties:
                   ignoreMissingVnetServiceEndpoint:
+                    description: Should the Virtual Network Rule be created before
+                      the Subnet has the Virtual Network Service Endpoint enabled?
+                      Defaults to false.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group where the PostgreSQL
+                      server resides. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -142,6 +147,9 @@ spec:
                         type: object
                     type: object
                   serverName:
+                    description: The name of the SQL Server to which this PostgreSQL
+                      virtual network rule will be applied to. Changing this forces
+                      a new resource to be created.
                     type: string
                   serverNameRef:
                     description: A Reference to a named object.
@@ -217,6 +225,8 @@ spec:
                         type: object
                     type: object
                   subnetId:
+                    description: The ID of the subnet that the PostgreSQL server will
+                      be connected to.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -469,6 +479,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the PostgreSQL Virtual Network Rule.
                     type: string
                 type: object
               conditions:

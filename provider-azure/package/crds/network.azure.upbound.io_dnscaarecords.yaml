@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DNSCAARecord is the Schema for the DNSCAARecords API
+        description: DNSCAARecord is the Schema for the DNSCAARecords API. Manages
+          a DNS CAA Record.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,13 +65,20 @@ spec:
               forProvider:
                 properties:
                   record:
+                    description: A list of values that make up the CAA record. Each
+                      record block supports fields documented below.
                     items:
                       properties:
                         flags:
+                          description: Extensible CAA flags, currently only 1 is implemented
+                            to set the issuer critical flag.
                           type: number
                         tag:
+                          description: A property tag, options are issue, issuewild
+                            and iodef.
                           type: string
                         value:
+                          description: A property value such as a registrar domain.
                           type: string
                       required:
                       - flags
@@ -79,6 +87,8 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: Specifies the resource group where the DNS Zone  exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -156,10 +166,14 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   ttl:
+                    description: The Time To Live  of the DNS record in seconds.
                     type: number
                   zoneName:
+                    description: Specifies the DNS Zone where the resource exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
                     description: A Reference to a named object.
@@ -415,8 +429,10 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the DNS CAA Record.
                     type: string
                   id:
+                    description: The DNS CAA Record ID.
                     type: string
                 type: object
               conditions:

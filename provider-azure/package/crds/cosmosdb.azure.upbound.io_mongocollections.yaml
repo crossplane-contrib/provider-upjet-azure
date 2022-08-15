@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: MongoCollection is the Schema for the MongoCollections API
+        description: MongoCollection is the Schema for the MongoCollections API. Manages
+          a Mongo Collection within a Cosmos DB Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -139,15 +140,29 @@ spec:
                         type: object
                     type: object
                   analyticalStorageTtl:
+                    description: The default time to live of Analytical Storage for
+                      this Mongo Collection. If present and the value is set to -1,
+                      it is equal to infinity, and items don’t expire by default.
+                      If present and the value is set to some number n – items will
+                      expire n seconds after their last modified time.
                     type: number
                   autoscaleSettings:
+                    description: An autoscale_settings block as defined below. This
+                      must be set upon database creation otherwise it cannot be updated
+                      without a manual terraform destroy-apply.
                     items:
                       properties:
                         maxThroughput:
+                          description: The maximum throughput of the MongoDB collection
+                            . Must be between 1,000 and 1,000,000. Must be set in
+                            increments of 1,000. Conflicts with throughput.
                           type: number
                       type: object
                     type: array
                   databaseName:
+                    description: The name of the Cosmos DB Mongo Database in which
+                      the Cosmos DB Mongo Collection is created. Changing this forces
+                      a new resource to be created.
                     type: string
                   databaseNameRef:
                     description: A Reference to a named object.
@@ -223,8 +238,11 @@ spec:
                         type: object
                     type: object
                   defaultTtlSeconds:
+                    description: The default Time To Live in seconds. If the value
+                      is -1, items are not automatically expired.
                     type: number
                   index:
+                    description: One or more index blocks as defined below.
                     items:
                       properties:
                         keys:
@@ -238,6 +256,9 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the resource group in which the Cosmos
+                      DB Mongo Collection is created. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -313,8 +334,14 @@ spec:
                         type: object
                     type: object
                   shardKey:
+                    description: The name of the key to partition on for sharding.
+                      There must not be any other unique index keys.
                     type: string
                   throughput:
+                    description: The throughput of the MongoDB collection . Must be
+                      set in increments of 100. The minimum value is 400. This must
+                      be set upon database creation otherwise it cannot be updated
+                      without a manual terraform destroy-apply.
                     type: number
                 type: object
               providerConfigRef:
@@ -494,8 +521,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Cosmos DB Mongo Collection.
                     type: string
                   systemIndexes:
+                    description: One or more system_indexes blocks as defined below.
                     items:
                       properties:
                         keys:

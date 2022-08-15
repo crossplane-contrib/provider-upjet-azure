@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ApplicationSecurityGroup is the Schema for the ApplicationSecurityGroups
-          API
+          API. Manages an Application Security Group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,12 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Application Security Group.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -145,6 +149,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -327,6 +332,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Application Security Group.
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Table is the Schema for the Tables API
+        description: Table is the Schema for the Tables API. Manages a Table within
+          an Azure Storage Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,16 +65,24 @@ spec:
               forProvider:
                 properties:
                   acl:
+                    description: One or more acl blocks as defined below.
                     items:
                       properties:
                         accessPolicy:
+                          description: An access_policy block as defined below.
                           items:
                             properties:
                               expiry:
+                                description: The ISO8061 UTC time at which this Access
+                                  Policy should be valid until.
                                 type: string
                               permissions:
+                                description: The permissions which should associated
+                                  with this Shared Identifier.
                                 type: string
                               start:
+                                description: The ISO8061 UTC time at which this Access
+                                  Policy should be valid from.
                                 type: string
                             required:
                             - expiry
@@ -88,8 +97,13 @@ spec:
                       type: object
                     type: array
                   name:
+                    description: The name of the storage table. Must be unique within
+                      the storage account the table is located.
                     type: string
                   storageAccountName:
+                    description: Specifies the storage account in which to create
+                      the storage table. Changing this forces a new resource to be
+                      created.
                     type: string
                   storageAccountNameRef:
                     description: A Reference to a named object.

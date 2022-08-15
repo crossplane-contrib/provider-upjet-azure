@@ -14,14 +14,18 @@ import (
 )
 
 type FlexibleServerConfigurationObservation struct {
+
+	// The ID of the PostgreSQL Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FlexibleServerConfigurationParameters struct {
 
+	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The ID of the PostgreSQL Flexible Server where we want to change configuration. Changing this forces a new PostgreSQL Flexible Server Configuration resource.
 	// +crossplane:generate:reference:type=FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -33,6 +37,7 @@ type FlexibleServerConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
+	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -51,7 +56,7 @@ type FlexibleServerConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FlexibleServerConfiguration is the Schema for the FlexibleServerConfigurations API
+// FlexibleServerConfiguration is the Schema for the FlexibleServerConfigurations API. Sets a PostgreSQL Configuration value on a Azure PostgreSQL Flexible Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -14,20 +14,26 @@ import (
 )
 
 type IOTHubEndpointStorageContainerObservation struct {
+
+	// The ID of the IoTHub Storage Container Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IOTHubEndpointStorageContainerParameters struct {
 
+	// Type used to authenticate against the storage endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
+	// Time interval at which blobs are written to storage. Value should be between 60 and 720 seconds. Default value is 300 seconds.
 	// +kubebuilder:validation:Optional
 	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
 
+	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
 	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
+	// The name of storage container in the storage account.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
@@ -38,15 +44,19 @@ type IOTHubEndpointStorageContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
+	// Encoding that is used to serialize messages to blobs. Supported values are Avro, AvroDeflate and JSON. Default value is Avro. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
+	// URI of the Storage Container endpoint. This corresponds to the primary_blob_endpoint of the parent storage account. This attribute can only be specified and is mandatory when authentication_type is identityBased.
 	// +kubebuilder:validation:Optional
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
+	// File name format for the blob. Default format is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters are mandatory but can be reordered.
 	// +kubebuilder:validation:Optional
 	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
 
+	// The IoTHub ID for the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -58,12 +68,15 @@ type IOTHubEndpointStorageContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
+	// ID of the User Managed Identity used to authenticate against the storage endpoint.
 	// +kubebuilder:validation:Optional
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
+	// Maximum number of bytes for each blob written to storage. Value should be between 10485760 and 524288000. Default value is 314572800.
 	// +kubebuilder:validation:Optional
 	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
 
+	// The name of the resource group under which the Storage Container has been created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -89,7 +102,7 @@ type IOTHubEndpointStorageContainerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IOTHubEndpointStorageContainer is the Schema for the IOTHubEndpointStorageContainers API
+// IOTHubEndpointStorageContainer is the Schema for the IOTHubEndpointStorageContainers API. Manages an IotHub Storage Container Endpoint
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

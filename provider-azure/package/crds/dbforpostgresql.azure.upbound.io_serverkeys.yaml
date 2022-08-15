@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ServerKey is the Schema for the ServerKeys API
+        description: ServerKey is the Schema for the ServerKeys API. Manages a PostgreSQL
+          Server Key.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   keyVaultKeyId:
+                    description: The URL to a Key Vault Key.
                     type: string
                   keyVaultKeyIdRef:
                     description: A Reference to a named object.
@@ -139,6 +141,8 @@ spec:
                         type: object
                     type: object
                   serverId:
+                    description: The ID of the PostgreSQL Server. Changing this forces
+                      a new resource to be created.
                     type: string
                   serverIdRef:
                     description: A Reference to a named object.
@@ -391,6 +395,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the PostgreSQL Server Key.
                     type: string
                 type: object
               conditions:

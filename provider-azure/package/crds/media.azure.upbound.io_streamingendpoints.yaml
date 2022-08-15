@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: StreamingEndpoint is the Schema for the StreamingEndpoints API
+        description: StreamingEndpoint is the Schema for the StreamingEndpoints API.
+          Manages a Streaming Endpoint.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,60 +65,87 @@ spec:
               forProvider:
                 properties:
                   accessControl:
+                    description: A access_control block as defined below.
                     items:
                       properties:
                         akamaiSignatureHeaderAuthenticationKey:
+                          description: One or more akamai_signature_header_authentication_key
+                            blocks as defined below.
                           items:
                             properties:
                               base64Key:
+                                description: Authentication key.
                                 type: string
                               expiration:
+                                description: The expiration time of the authentication
+                                  key.
                                 type: string
                               identifier:
+                                description: Identifier of the key.
                                 type: string
                             type: object
                           type: array
                         ipAllow:
+                          description: A ip block as defined below.
                           items:
                             properties:
                               address:
+                                description: The IP address to allow.
                                 type: string
                               name:
                                 type: string
                               subnetPrefixLength:
+                                description: The subnet mask prefix length .
                                 type: number
                             type: object
                           type: array
                       type: object
                     type: array
                   autoStartEnabled:
+                    description: The flag indicates if the resource should be automatically
+                      started on creation.
                     type: boolean
                   cdnEnabled:
+                    description: The CDN enabled flag.
                     type: boolean
                   cdnProfile:
+                    description: The CDN profile name.
                     type: string
                   cdnProvider:
+                    description: The CDN provider name. Supported value are StandardVerizon,PremiumVerizon
+                      and StandardAkamai
                     type: string
                   crossSiteAccessPolicy:
+                    description: A cross_site_access_policy block as defined below.
                     items:
                       properties:
                         clientAccessPolicy:
+                          description: The content of clientaccesspolicy.xml used
+                            by Silverlight.
                           type: string
                         crossDomainPolicy:
+                          description: The content of crossdomain.xml used by Silverlight.
                           type: string
                       type: object
                     type: array
                   customHostNames:
+                    description: The custom host names of the streaming endpoint.
                     items:
                       type: string
                     type: array
                   description:
+                    description: The streaming endpoint description.
                     type: string
                   location:
+                    description: The Azure Region where the Streaming Endpoint should
+                      exist. Changing this forces a new Streaming Endpoint to be created.
                     type: string
                   maxCacheAgeSeconds:
+                    description: Max cache age in seconds.
                     type: number
                   mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Streaming Endpoint to be created.
                     type: string
                   mediaServicesAccountNameRef:
                     description: A Reference to a named object.
@@ -193,6 +221,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the Resource Group where the Streaming
+                      Endpoint should exist. Changing this forces a new Streaming
+                      Endpoint to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -268,10 +299,15 @@ spec:
                         type: object
                     type: object
                   scaleUnits:
+                    description: The number of scale units. To create a Standard Streaming
+                      Endpoint set 0. For Premium Streaming Endpoint valid values
+                      are between 1 and 10.
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Streaming Endpoint.
                     type: object
                 required:
                 - location
@@ -454,8 +490,10 @@ spec:
               atProvider:
                 properties:
                   hostName:
+                    description: The host name of the Streaming Endpoint.
                     type: string
                   id:
+                    description: The ID of the Streaming Endpoint.
                     type: string
                 type: object
               conditions:

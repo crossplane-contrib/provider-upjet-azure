@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: AccountNetworkRules is the Schema for the AccountNetworkRuless
-          API
+          API. Manages network rules inside of a Azure Storage Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,27 +65,44 @@ spec:
               forProvider:
                 properties:
                   bypass:
+                    description: Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.
+                      Valid options are any combination of Logging, Metrics, AzureServices,
+                      or None.
                     items:
                       type: string
                     type: array
                   defaultAction:
+                    description: Specifies the default action of allow or deny when
+                      no other rules match. Valid options are Deny or Allow.
                     type: string
                   ipRules:
+                    description: List of public IP or IP ranges in CIDR Format. Only
+                      IPv4 addresses are allowed. Private IP address ranges  are not
+                      allowed.
                     items:
                       type: string
                     type: array
                   privateLinkAccess:
+                    description: One or More private_link_access block as defined
+                      below.
                     items:
                       properties:
                         endpointResourceId:
+                          description: The resource id of the resource access rule
+                            to be granted access.
                           type: string
                         endpointTenantId:
+                          description: The tenant id of the resource of the resource
+                            access rule to be granted access. Defaults to the current
+                            tenant id.
                           type: string
                       required:
                       - endpointResourceId
                       type: object
                     type: array
                   storageAccountId:
+                    description: Specifies the ID of the storage account. Changing
+                      this forces a new resource to be created.
                     type: string
                   storageAccountIdRef:
                     description: A Reference to a named object.
@@ -161,6 +178,8 @@ spec:
                         type: object
                     type: object
                   virtualNetworkSubnetIds:
+                    description: A list of virtual network subnet ids to to secure
+                      the storage account.
                     items:
                       type: string
                     type: array
@@ -344,6 +363,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Storage Account.
                     type: string
                 type: object
               conditions:

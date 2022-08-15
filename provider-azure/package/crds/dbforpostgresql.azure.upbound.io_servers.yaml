@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Server is the Schema for the Servers API
+        description: Server is the Schema for the Servers API. Manages a PostgreSQL
+          Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,13 @@ spec:
               forProvider:
                 properties:
                   administratorLogin:
+                    description: The Administrator login for the PostgreSQL Server.
+                      Required when create_mode is Default. Changing this forces a
+                      new resource to be created.
                     type: string
                   administratorLoginPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The Password associated with the administrator_login
+                      for the PostgreSQL Server. Required when create_mode is Default.
                     properties:
                       key:
                         description: The key to select.
@@ -84,31 +88,66 @@ spec:
                     - namespace
                     type: object
                   autoGrowEnabled:
+                    description: Enable/Disable auto-growing of the storage. Storage
+                      auto-grow prevents your server from running out of storage and
+                      becoming read-only. If storage auto grow is enabled, the storage
+                      automatically grows without impacting the workload. The default
+                      value if not explicitly specified is true.
                     type: boolean
                   backupRetentionDays:
+                    description: Backup retention days for the server, supported values
+                      are between 7 and 35 days.
                     type: number
                   createMode:
+                    description: The creation mode. Can be used to restore or replicate
+                      existing servers. Possible values are Default, Replica, GeoRestore,
+                      and PointInTimeRestore. Defaults to Default.
                     type: string
                   creationSourceServerId:
+                    description: For creation modes other than Default, the source
+                      server ID to use.
                     type: string
                   geoRedundantBackupEnabled:
+                    description: Turn Geo-redundant server backups on/off. This allows
+                      you to choose between locally redundant or geo-redundant backup
+                      storage in the General Purpose and Memory Optimized tiers. When
+                      the backups are stored in geo-redundant backup storage, they
+                      are not only stored within the region in which your server is
+                      hosted, but are also replicated to a paired data center. This
+                      provides better protection and ability to restore your server
+                      in a different region in the event of a disaster. This is not
+                      support for the Basic tier. Changing this forces a new resource
+                      to be created.
                     type: boolean
                   identity:
                     items:
                       properties:
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this PostgreSQL Server. The
+                            only possible value is SystemAssigned.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   infrastructureEncryptionEnabled:
+                    description: Whether or not infrastructure is encrypted for this
+                      server. Defaults to false. Changing this forces a new resource
+                      to be created.
                     type: boolean
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   publicNetworkAccessEnabled:
+                    description: Whether or not public network access is allowed for
+                      this server. Defaults to true.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the PostgreSQL Server. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -184,39 +223,67 @@ spec:
                         type: object
                     type: object
                   restorePointInTime:
+                    description: When create_mode is PointInTimeRestore the point
+                      in time to restore from creation_source_server_id.
                     type: string
                   skuName:
+                    description: Specifies the SKU Name for this PostgreSQL Server.
+                      The name of the SKU, follows the tier + family + cores pattern
+                      . For more information see the product documentation.
                     type: string
                   sslEnforcementEnabled:
+                    description: Specifies if SSL should be enforced on connections.
+                      Possible values are true and false.
                     type: boolean
                   sslMinimalTlsVersionEnforced:
+                    description: The minimum TLS version to support on the sever.
+                      Possible values are TLSEnforcementDisabled, TLS1_0, TLS1_1,
+                      and TLS1_2. Defaults to TLSEnforcementDisabled.
                     type: string
                   storageMb:
+                    description: Max storage allowed for a server. Possible values
+                      are between 5120 MB and 1048576 MB for the Basic SKU and between
+                      5120 MB and 16777216 MB for General Purpose/Memory Optimized
+                      SKUs. For more information see the product documentation.
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   threatDetectionPolicy:
+                    description: Threat detection policy configuration, known in the
+                      API as Server Security Alerts Policy. The threat_detection_policy
+                      block supports fields documented below.
                     items:
                       properties:
                         disabledAlerts:
+                          description: Specifies a list of alerts which should be
+                            disabled. Possible values include Access_Anomaly, Sql_Injection
+                            and Sql_Injection_Vulnerability.
                           items:
                             type: string
                           type: array
                         emailAccountAdmins:
+                          description: Should the account administrators be emailed
+                            when this alert is triggered?
                           type: boolean
                         emailAddresses:
+                          description: A list of email addresses which alerts should
+                            be sent to.
                           items:
                             type: string
                           type: array
                         enabled:
+                          description: Is the policy enabled?
                           type: boolean
                         retentionDays:
+                          description: Specifies the number of days to keep in the
+                            Threat Detection audit logs.
                           type: number
                         storageAccountAccessKeySecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: Specifies the identifier key of the Threat
+                            Detection audit storage account.
                           properties:
                             key:
                               description: The key to select.
@@ -233,10 +300,15 @@ spec:
                           - namespace
                           type: object
                         storageEndpoint:
+                          description: Specifies the blob storage endpoint . This
+                            blob storage will hold all Threat Detection audit logs.
                           type: string
                       type: object
                     type: array
                   version:
+                    description: Specifies the version of PostgreSQL to use. Valid
+                      values are 9.5, 9.6, 10, 10.0, and 11. Changing this forces
+                      a new resource to be created.
                     type: string
                 required:
                 - location
@@ -421,15 +493,21 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the PostgreSQL Server.
                     type: string
                   id:
+                    description: The ID of the PostgreSQL Server.
                     type: string
                   identity:
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID associated with this Managed
+                            Service Identity.
                           type: string
                         tenantId:
+                          description: The Tenant ID associated with this Managed
+                            Service Identity.
                           type: string
                       type: object
                     type: array

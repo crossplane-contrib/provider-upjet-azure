@@ -53,13 +53,17 @@ type SnapshotEncryptionSettingsParameters struct {
 }
 
 type SnapshotObservation struct {
+
+	// The Snapshot ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Whether Trusted Launch is enabled for the Snapshot.
 	TrustedLaunchEnabled *bool `json:"trustedLaunchEnabled,omitempty" tf:"trusted_launch_enabled,omitempty"`
 }
 
 type SnapshotParameters struct {
 
+	// Indicates how the snapshot is to be created. Possible values are Copy or Import. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	CreateOption *string `json:"createOption" tf:"create_option,omitempty"`
 
@@ -69,9 +73,11 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionSettings []SnapshotEncryptionSettingsParameters `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the Snapshot. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -82,9 +88,11 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Specifies a reference to an existing snapshot, when create_option is Copy. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 
+	// Specifies the URI to a Managed or Unmanaged Disk. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/compute/v1beta1.ManagedDisk
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -96,9 +104,11 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceURISelector *v1.Selector `json:"sourceUriSelector,omitempty" tf:"-"`
 
+	// Specifies the ID of an storage account. Used with source_uri to allow authorization during import of unmanaged blobs from a different subscription. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -117,7 +127,7 @@ type SnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Snapshot is the Schema for the Snapshots API
+// Snapshot is the Schema for the Snapshots API. Manages a Disk Snapshot.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

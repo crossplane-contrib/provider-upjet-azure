@@ -14,17 +14,22 @@ import (
 )
 
 type DatabaseObservation struct {
+
+	// The ID of the PostgreSQL Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DatabaseParameters struct {
 
+	// Specifies the Charset for the PostgreSQL Database, which needs to be a valid PostgreSQL Charset. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Charset *string `json:"charset" tf:"charset,omitempty"`
 
+	// Specifies the Collation for the PostgreSQL Database, which needs to be a valid PostgreSQL Collation. Note that Microsoft uses different notation - en-US instead of en_US. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Collation *string `json:"collation" tf:"collation,omitempty"`
 
+	// The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -35,6 +40,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
@@ -60,7 +66,7 @@ type DatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Database is the Schema for the Databases API
+// Database is the Schema for the Databases API. Manages a PostgreSQL Database within a PostgreSQL Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MonitorMetricAlert is the Schema for the MonitorMetricAlerts
-          API
+          API. Manages a Metric Alert within Azure Monitor
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,9 +65,12 @@ spec:
               forProvider:
                 properties:
                   action:
+                    description: One or more action blocks as defined below.
                     items:
                       properties:
                         actionGroupId:
+                          description: The ID of the Action Group can be sourced from
+                            the
                           type: string
                         actionGroupIdRef:
                           description: A Reference to a named object.
@@ -148,17 +151,25 @@ spec:
                         webhookProperties:
                           additionalProperties:
                             type: string
+                          description: The map of custom string properties to include
+                            with the post operation. These data are appended to the
+                            webhook payload.
                           type: object
                       type: object
                     type: array
                   applicationInsightsWebTestLocationAvailabilityCriteria:
+                    description: A application_insights_web_test_location_availability_criteria
+                      block as defined below.
                     items:
                       properties:
                         componentId:
+                          description: The ID of the Application Insights Resource.
                           type: string
                         failedLocationCount:
+                          description: The number of failed locations.
                           type: number
                         webTestId:
+                          description: The ID of the Application Insights Web Test.
                           type: string
                       required:
                       - componentId
@@ -167,8 +178,11 @@ spec:
                       type: object
                     type: array
                   autoMitigate:
+                    description: Should the alerts in this Metric Alert be auto resolved?
+                      Defaults to true.
                     type: boolean
                   criteria:
+                    description: One or more  criteria blocks as defined below.
                     items:
                       properties:
                         aggregation:
@@ -181,6 +195,7 @@ spec:
                               operator:
                                 type: string
                               values:
+                                description: The list of dimension values.
                                 items:
                                   type: string
                                 type: array
@@ -199,6 +214,8 @@ spec:
                         skipMetricValidation:
                           type: boolean
                         threshold:
+                          description: The criteria threshold value that activates
+                            the alert.
                           type: number
                       required:
                       - aggregation
@@ -209,13 +226,17 @@ spec:
                       type: object
                     type: array
                   description:
+                    description: The description of this Metric Alert.
                     type: string
                   dynamicCriteria:
+                    description: A dynamic_criteria block as defined below.
                     items:
                       properties:
                         aggregation:
                           type: string
                         alertSensitivity:
+                          description: The extent of deviation required to trigger
+                            an alert. Possible values are Low, Medium and High.
                           type: string
                         dimension:
                           items:
@@ -225,6 +246,7 @@ spec:
                               operator:
                                 type: string
                               values:
+                                description: The list of dimension values.
                                 items:
                                   type: string
                                 type: array
@@ -235,10 +257,17 @@ spec:
                             type: object
                           type: array
                         evaluationFailureCount:
+                          description: The number of violations to trigger an alert.
+                            Should be smaller or equal to evaluation_total_count.
                           type: number
                         evaluationTotalCount:
+                          description: The number of aggregated lookback points. The
+                            lookback time window is calculated based on the aggregation
+                            granularity  and the selected number of aggregated points.
                           type: number
                         ignoreDataBefore:
+                          description: The ISO8601 date from which to start learning
+                            the metric historical data and calculate the dynamic thresholds.
                           type: string
                         metricName:
                           type: string
@@ -257,10 +286,17 @@ spec:
                       type: object
                     type: array
                   enabled:
+                    description: Should this Metric Alert be enabled? Defaults to
+                      true.
                     type: boolean
                   frequency:
+                    description: The evaluation frequency of this Metric Alert, represented
+                      in ISO 8601 duration format. Possible values are PT1M, PT5M,
+                      PT15M, PT30M and PT1H. Defaults to PT1M.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Metric Alert instance.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -336,6 +372,8 @@ spec:
                         type: object
                     type: object
                   scopes:
+                    description: A set of strings of resource IDs at which the metric
+                      criteria should be applied.
                     items:
                       type: string
                     type: array
@@ -415,21 +453,25 @@ spec:
                         type: object
                     type: object
                   severity:
+                    description: The severity of this Metric Alert. Possible values
+                      are 0, 1, 2, 3 and 4. Defaults to 3.
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   targetResourceLocation:
-                    description: The location of the target pluginsdk. Required when
-                      using subscription, resource group scope or multiple scopes.
+                    description: The location of the target resource.
                     type: string
                   targetResourceType:
-                    description: The resource type (e.g. Microsoft.Compute/virtualMachines)
-                      of the target pluginsdk. Required when using subscription, resource
-                      group scope or multiple scopes.
+                    description: The resource type  of the target resource.
                     type: string
                   windowSize:
+                    description: The period of time that is used to monitor alert
+                      activity, represented in ISO 8601 duration format. This value
+                      must be greater than frequency. Possible values are PT1M, PT5M,
+                      PT15M, PT30M, PT1H, PT6H, PT12H and P1D. Defaults to PT5M.
                     type: string
                 type: object
               providerConfigRef:
@@ -609,6 +651,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the metric alert.
                     type: string
                 type: object
               conditions:

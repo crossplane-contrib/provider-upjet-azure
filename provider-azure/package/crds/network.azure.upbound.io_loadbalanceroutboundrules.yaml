@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: LoadBalancerOutboundRule is the Schema for the LoadBalancerOutboundRules
-          API
+          API. Manages a Load Balancer Outbound Rule.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,12 @@ spec:
               forProvider:
                 properties:
                   allocatedOutboundPorts:
+                    description: The number of outbound ports to be used for NAT.
+                      Defaults to 1024.
                     type: number
                   backendAddressPoolId:
+                    description: The ID of the Backend Address Pool. Outbound traffic
+                      is randomly load balanced across IPs in the backend IPs.
                     type: string
                   backendAddressPoolIdRef:
                     description: A Reference to a named object.
@@ -143,8 +147,13 @@ spec:
                         type: object
                     type: object
                   enableTcpReset:
+                    description: Receive bidirectional TCP Reset on TCP flow idle
+                      timeout or unexpected connection termination. This element is
+                      only used when the protocol is set to TCP.
                     type: boolean
                   frontendIpConfiguration:
+                    description: One or more frontend_ip_configuration blocks as defined
+                      below.
                     items:
                       properties:
                         name:
@@ -154,8 +163,11 @@ spec:
                       type: object
                     type: array
                   idleTimeoutInMinutes:
+                    description: The timeout for the TCP idle connection
                     type: number
                   loadbalancerId:
+                    description: The ID of the Load Balancer in which to create the
+                      Outbound Rule. Changing this forces a new resource to be created.
                     type: string
                   loadbalancerIdRef:
                     description: A Reference to a named object.
@@ -231,6 +243,8 @@ spec:
                         type: object
                     type: object
                   protocol:
+                    description: The transport protocol for the external endpoint.
+                      Possible values are Udp, Tcp or All.
                     type: string
                 required:
                 - protocol
@@ -413,13 +427,17 @@ spec:
               atProvider:
                 properties:
                   frontendIpConfiguration:
+                    description: One or more frontend_ip_configuration blocks as defined
+                      below.
                     items:
                       properties:
                         id:
+                          description: The ID of the Load Balancer Outbound Rule.
                           type: string
                       type: object
                     type: array
                   id:
+                    description: The ID of the Load Balancer Outbound Rule.
                     type: string
                 type: object
               conditions:

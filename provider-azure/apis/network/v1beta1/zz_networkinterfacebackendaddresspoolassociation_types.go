@@ -14,11 +14,14 @@ import (
 )
 
 type NetworkInterfaceBackendAddressPoolAssociationObservation struct {
+
+	// The  ID of the Association between the Network Interface and the Load Balancers Backend Address Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 
+	// The ID of the Load Balancer Backend Address Pool which this Network Interface should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=LoadBalancerBackendAddressPool
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,9 +33,11 @@ type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
+	// The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	IPConfigurationName *string `json:"ipConfigurationName" tf:"ip_configuration_name,omitempty"`
 
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -59,7 +64,7 @@ type NetworkInterfaceBackendAddressPoolAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NetworkInterfaceBackendAddressPoolAssociation is the Schema for the NetworkInterfaceBackendAddressPoolAssociations API
+// NetworkInterfaceBackendAddressPoolAssociation is the Schema for the NetworkInterfaceBackendAddressPoolAssociations API. Manages the association between a Network Interface and a Load Balancer's Backend Address Pool.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

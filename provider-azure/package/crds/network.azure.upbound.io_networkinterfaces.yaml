@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NetworkInterface is the Schema for the NetworkInterfaces API
+        description: NetworkInterface is the Schema for the NetworkInterfaces API.
+          Manages a Network Interface.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,33 +65,55 @@ spec:
               forProvider:
                 properties:
                   dnsServers:
+                    description: A list of IP Addresses defining the DNS Servers which
+                      should be used for this Network Interface.
                     items:
                       type: string
                     type: array
                   edgeZone:
+                    description: Specifies the Edge Zone within the Azure Region where
+                      this Network Interface should exist. Changing this forces a
+                      new Network Interface to be created.
                     type: string
                   enableAcceleratedNetworking:
+                    description: Should Accelerated Networking be enabled? Defaults
+                      to false.
                     type: boolean
                   enableIpForwarding:
+                    description: Should IP Forwarding be enabled? Defaults to false.
                     type: boolean
                   internalDnsNameLabel:
+                    description: The  DNS Name used for internal communications between
+                      Virtual Machines in the same Virtual Network.
                     type: string
                   ipConfiguration:
+                    description: One or more ip_configuration blocks as defined below.
                     items:
                       properties:
                         gatewayLoadBalancerFrontendIpConfigurationId:
+                          description: The Frontend IP Configuration ID of a Gateway
+                            SKU Load Balancer.
                           type: string
                         name:
                           type: string
                         primary:
+                          description: Is this the Primary IP Configuration? Must
+                            be true for the first ip_configuration when multiple are
+                            specified. Defaults to false.
                           type: boolean
                         privateIpAddress:
                           type: string
                         privateIpAddressAllocation:
+                          description: The allocation method used for the Private
+                            IP Address. Possible values are Dynamic and Static.
                           type: string
                         privateIpAddressVersion:
+                          description: The IP Version to use. Possible values are
+                            IPv4 or IPv6. Defaults to IPv4.
                           type: string
                         publicIpAddressId:
+                          description: Reference to a Public IP Address to associate
+                            with this NIC
                           type: string
                         subnetId:
                           type: string
@@ -176,8 +199,13 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: The location where the Network Interface should exist.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group in which to create
+                      the Network Interface. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -255,6 +283,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - ipConfiguration
@@ -437,22 +466,36 @@ spec:
               atProvider:
                 properties:
                   appliedDnsServers:
+                    description: If the Virtual Machine using this Network Interface
+                      is part of an Availability Set, then this list will have the
+                      union of all DNS servers from all Network Interfaces that are
+                      part of the Availability Set.
                     items:
                       type: string
                     type: array
                   id:
+                    description: The ID of the Network Interface.
                     type: string
                   internalDomainNameSuffix:
+                    description: Even if internal_dns_name_label is not specified,
+                      a DNS entry is created for the primary NIC of the VM. This DNS
+                      name can be constructed by concatenating the VM name with the
+                      value of internal_domain_name_suffix.
                     type: string
                   macAddress:
+                    description: The Media Access Control  Address of the Network
+                      Interface.
                     type: string
                   privateIpAddress:
                     type: string
                   privateIpAddresses:
+                    description: The private IP addresses of the network interface.
                     items:
                       type: string
                     type: array
                   virtualMachineId:
+                    description: The ID of the Virtual Machine which this Network
+                      Interface is connected to.
                     type: string
                 type: object
               conditions:

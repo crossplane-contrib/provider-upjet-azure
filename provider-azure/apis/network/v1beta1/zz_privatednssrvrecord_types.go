@@ -14,16 +14,21 @@ import (
 )
 
 type PrivateDNSSRVRecordObservation struct {
+
+	// The FQDN of the DNS SRV Record.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// The Private DNS SRV Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type PrivateDNSSRVRecordParameters struct {
 
+	// One or more record blocks as defined below.
 	// +kubebuilder:validation:Required
 	Record []PrivateDNSSRVRecordRecordParameters `json:"record" tf:"record,omitempty"`
 
+	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -37,9 +42,11 @@ type PrivateDNSSRVRecordParameters struct {
 	// +kubebuilder:validation:Required
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=PrivateDNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
@@ -56,15 +63,19 @@ type PrivateDNSSRVRecordRecordObservation struct {
 
 type PrivateDNSSRVRecordRecordParameters struct {
 
+	// The Port the service is listening on.
 	// +kubebuilder:validation:Required
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
+	// The priority of the SRV record.
 	// +kubebuilder:validation:Required
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
+	// The FQDN of the service.
 	// +kubebuilder:validation:Required
 	Target *string `json:"target" tf:"target,omitempty"`
 
+	// The Weight of the SRV record.
 	// +kubebuilder:validation:Required
 	Weight *float64 `json:"weight" tf:"weight,omitempty"`
 }
@@ -83,7 +94,7 @@ type PrivateDNSSRVRecordStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PrivateDNSSRVRecord is the Schema for the PrivateDNSSRVRecords API
+// PrivateDNSSRVRecord is the Schema for the PrivateDNSSRVRecords API. Manages a Private DNS SRV Record.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

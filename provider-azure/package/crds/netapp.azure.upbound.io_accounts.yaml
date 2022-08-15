@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Account is the Schema for the Accounts API
+        description: Account is the Schema for the Accounts API. Manages a NetApp
+          Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,19 +65,24 @@ spec:
               forProvider:
                 properties:
                   activeDirectory:
+                    description: A active_directory block as defined below.
                     items:
                       properties:
                         dnsServers:
+                          description: A list of DNS server IP addresses for the Active
+                            Directory domain. Only allows IPv4 address.
                           items:
                             type: string
                           type: array
                         domain:
+                          description: The name of the Active Directory domain.
                           type: string
                         organizationalUnit:
+                          description: The Organizational Unit  within the Active
+                            Directory Domain.
                           type: string
                         passwordSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: The password associated with the username.
                           properties:
                             key:
                               description: The key to select.
@@ -93,8 +99,12 @@ spec:
                           - namespace
                           type: object
                         smbServerName:
+                          description: The NetBIOS name which should be used for the
+                            NetApp SMB Server, which will be registered as a computer
+                            account in the AD and used to mount volumes.
                           type: string
                         username:
+                          description: The Username of Active Directory Domain Administrator.
                           type: string
                       required:
                       - dnsServers
@@ -105,8 +115,13 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group where the NetApp Account
+                      should be created. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -184,6 +199,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -365,6 +381,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the NetApp Account.
                     type: string
                 type: object
               conditions:

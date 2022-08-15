@@ -14,11 +14,14 @@ import (
 )
 
 type DataShareObservation struct {
+
+	// The ID of the Data Share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DataShareParameters struct {
 
+	// The ID of the Data Share account in which the Data Share is created. Changing this forces a new Data Share to be created.
 	// +crossplane:generate:reference:type=Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,15 +33,19 @@ type DataShareParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
+	// The Data Share's description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The kind of the Data Share. Possible values are CopyBased and InPlace. Changing this forces a new Data Share to be created.
 	// +kubebuilder:validation:Required
 	Kind *string `json:"kind" tf:"kind,omitempty"`
 
+	// A snapshot_schedule block as defined below.
 	// +kubebuilder:validation:Optional
 	SnapshotSchedule []SnapshotScheduleParameters `json:"snapshotSchedule,omitempty" tf:"snapshot_schedule,omitempty"`
 
+	// The terms of the Data Share.
 	// +kubebuilder:validation:Optional
 	Terms *string `json:"terms,omitempty" tf:"terms,omitempty"`
 }
@@ -51,9 +58,11 @@ type SnapshotScheduleParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The interval of the synchronization with the source data. Possible values are Hour and Day.
 	// +kubebuilder:validation:Required
 	Recurrence *string `json:"recurrence" tf:"recurrence,omitempty"`
 
+	// The synchronization with the source data's start time.
 	// +kubebuilder:validation:Required
 	StartTime *string `json:"startTime" tf:"start_time,omitempty"`
 }
@@ -72,7 +81,7 @@ type DataShareStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DataShare is the Schema for the DataShares API
+// DataShare is the Schema for the DataShares API. Manages a Data Share.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

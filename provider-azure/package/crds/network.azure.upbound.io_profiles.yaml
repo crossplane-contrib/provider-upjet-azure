@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Profile is the Schema for the Profiles API
+        description: Profile is the Schema for the Profiles API. Manages a Network
+          Profile.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,14 +65,20 @@ spec:
               forProvider:
                 properties:
                   containerNetworkInterface:
+                    description: A container_network_interface block as documented
+                      below.
                     items:
                       properties:
                         ipConfiguration:
+                          description: One or more ip_configuration blocks as documented
+                            below.
                           items:
                             properties:
                               name:
                                 type: string
                               subnetId:
+                                description: Reference to the subnet associated with
+                                  the IP Configuration.
                                 type: string
                               subnetIdRef:
                                 description: A Reference to a named object.
@@ -163,8 +170,12 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the resource. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -242,6 +253,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - containerNetworkInterface
@@ -424,10 +436,12 @@ spec:
               atProvider:
                 properties:
                   containerNetworkInterfaceIds:
+                    description: A list of Container Network Interface IDs.
                     items:
                       type: string
                     type: array
                   id:
+                    description: The ID of the Network Profile.
                     type: string
                 type: object
               conditions:

@@ -14,13 +14,17 @@ import (
 )
 
 type ExpressRouteCircuitAuthorizationObservation struct {
+
+	// The authorization use status.
 	AuthorizationUseStatus *string `json:"authorizationUseStatus,omitempty" tf:"authorization_use_status,omitempty"`
 
+	// The ID of the ExpressRoute Circuit Authorization.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ExpressRouteCircuitAuthorizationParameters struct {
 
+	// The name of the Express Route Circuit in which to create the Authorization.
 	// +crossplane:generate:reference:type=ExpressRouteCircuit
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitName *string `json:"expressRouteCircuitName,omitempty" tf:"express_route_circuit_name,omitempty"`
@@ -31,6 +35,8 @@ type ExpressRouteCircuitAuthorizationParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitNameSelector *v1.Selector `json:"expressRouteCircuitNameSelector,omitempty" tf:"-"`
 
+	// The name of the resource group in which to
+	// create the ExpressRoute circuit. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -56,7 +62,7 @@ type ExpressRouteCircuitAuthorizationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ExpressRouteCircuitAuthorization is the Schema for the ExpressRouteCircuitAuthorizations API
+// ExpressRouteCircuitAuthorization is the Schema for the ExpressRouteCircuitAuthorizations API. Manages an ExpressRoute Circuit Authorization.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

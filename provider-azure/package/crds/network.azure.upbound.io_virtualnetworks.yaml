@@ -35,7 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: VirtualNetwork is the Schema for the VirtualNetworks API
+        description: VirtualNetwork is the Schema for the VirtualNetworks API. Manages
+          a virtual network including any configured subnets. Each subnet can optionally
+          be configured with a security group to be associated with the subnet.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -68,11 +70,15 @@ spec:
                       type: string
                     type: array
                   bgpCommunity:
+                    description: The BGP community attribute in format <as-number>:<community-value>.
                     type: string
                   ddosProtectionPlan:
+                    description: A ddos_protection_plan block as documented below.
                     items:
                       properties:
                         enable:
+                          description: Enable/disable DDoS Protection Plan on Virtual
+                            Network.
                           type: boolean
                         id:
                           type: string
@@ -82,12 +88,19 @@ spec:
                       type: object
                     type: array
                   dnsServers:
+                    description: List of IP addresses of DNS servers
                     items:
                       type: string
                     type: array
                   edgeZone:
+                    description: Specifies the Edge Zone within the Azure Region where
+                      this Virtual Network should exist. Changing this forces a new
+                      Virtual Network to be created.
                     type: string
                   flowTimeoutInMinutes:
+                    description: The flow timeout in minutes for the Virtual Network,
+                      which is used to enable connection tracking for intra-VM flows.
+                      Possible values are between 4 and 30 minutes.
                     type: number
                   location:
                     type: string
@@ -169,6 +182,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - addressSpace
@@ -351,6 +365,7 @@ spec:
               atProvider:
                 properties:
                   guid:
+                    description: The GUID of the virtual network.
                     type: string
                   id:
                     type: string
@@ -358,12 +373,15 @@ spec:
                     items:
                       properties:
                         addressPrefix:
+                          description: The address prefix to use for the subnet.
                           type: string
                         id:
                           type: string
                         name:
                           type: string
                         securityGroup:
+                          description: The Network Security Group to associate with
+                            the subnet.
                           type: string
                       type: object
                     type: array

@@ -14,15 +14,20 @@ import (
 )
 
 type DataSetKustoDatabaseObservation struct {
+
+	// The name of the Data Share Dataset.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// The resource ID of the Data Share Kusto Database Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The location of the Kusto Cluster.
 	KustoClusterLocation *string `json:"kustoClusterLocation,omitempty" tf:"kusto_cluster_location,omitempty"`
 }
 
 type DataSetKustoDatabaseParameters struct {
 
+	// The resource ID of the Kusto Cluster Database to be shared with the receiver. Changing this forces a new Data Share Kusto Database Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/kusto/v1beta1.Database
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -34,6 +39,7 @@ type DataSetKustoDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	KustoDatabaseIDSelector *v1.Selector `json:"kustoDatabaseIdSelector,omitempty" tf:"-"`
 
+	// The resource ID of the Data Share where this Data Share Kusto Database Dataset should be created. Changing this forces a new Data Share Kusto Database Dataset to be created.
 	// +crossplane:generate:reference:type=DataShare
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -60,7 +66,7 @@ type DataSetKustoDatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DataSetKustoDatabase is the Schema for the DataSetKustoDatabases API
+// DataSetKustoDatabase is the Schema for the DataSetKustoDatabases API. Manages a Data Share Kusto Database Dataset.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

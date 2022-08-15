@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RedisLinkedServer is the Schema for the RedisLinkedServers API
+        description: RedisLinkedServer is the Schema for the RedisLinkedServers API.
+          Manages a Redis Linked Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   linkedRedisCacheId:
+                    description: The ID of the linked Redis cache. Changing this forces
+                      a new Redis to be created.
                     type: string
                   linkedRedisCacheIdRef:
                     description: A Reference to a named object.
@@ -139,8 +142,12 @@ spec:
                         type: object
                     type: object
                   linkedRedisCacheLocation:
+                    description: The location of the linked Redis cache. Changing
+                      this forces a new Redis to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Redis caches
+                      exists. Changing this forces a new Redis to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -216,8 +223,12 @@ spec:
                         type: object
                     type: object
                   serverRole:
+                    description: The role of the linked Redis cache . Changing this
+                      forces a new Redis to be created.
                     type: string
                   targetRedisCacheName:
+                    description: The name of Redis cache to link with. Changing this
+                      forces a new Redis to be created.
                     type: string
                   targetRedisCacheNameRef:
                     description: A Reference to a named object.
@@ -473,8 +484,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Redis.
                     type: string
                   name:
+                    description: The name of the linked server.
                     type: string
                 type: object
               conditions:

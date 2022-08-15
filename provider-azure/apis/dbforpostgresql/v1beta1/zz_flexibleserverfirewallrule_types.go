@@ -14,14 +14,18 @@ import (
 )
 
 type FlexibleServerFirewallRuleObservation struct {
+
+	// The ID of the PostgreSQL Flexible Server Firewall Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FlexibleServerFirewallRuleParameters struct {
 
+	// The End IP Address associated with this PostgreSQL Flexible Server Firewall Rule.
 	// +kubebuilder:validation:Required
 	EndIPAddress *string `json:"endIpAddress" tf:"end_ip_address,omitempty"`
 
+	// The ID of the PostgreSQL Flexible Server from which to create this PostgreSQL Flexible Server Firewall Rule. Changing this forces a new PostgreSQL Flexible Server Firewall Rule to be created.
 	// +crossplane:generate:reference:type=FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -33,6 +37,7 @@ type FlexibleServerFirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
+	// The Start IP Address associated with this PostgreSQL Flexible Server Firewall Rule.
 	// +kubebuilder:validation:Required
 	StartIPAddress *string `json:"startIpAddress" tf:"start_ip_address,omitempty"`
 }
@@ -51,7 +56,7 @@ type FlexibleServerFirewallRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FlexibleServerFirewallRule is the Schema for the FlexibleServerFirewallRules API
+// FlexibleServerFirewallRule is the Schema for the FlexibleServerFirewallRules API. Manages a PostgreSQL Flexible Server Firewall Rule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

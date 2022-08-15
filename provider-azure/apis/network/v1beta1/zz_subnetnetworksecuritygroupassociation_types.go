@@ -14,11 +14,14 @@ import (
 )
 
 type SubnetNetworkSecurityGroupAssociationObservation struct {
+
+	// The ID of the Subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type SubnetNetworkSecurityGroupAssociationParameters struct {
 
+	// The ID of the Network Security Group which should be associated with the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +33,7 @@ type SubnetNetworkSecurityGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
 
+	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,7 +60,7 @@ type SubnetNetworkSecurityGroupAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// SubnetNetworkSecurityGroupAssociation is the Schema for the SubnetNetworkSecurityGroupAssociations API
+// SubnetNetworkSecurityGroupAssociation is the Schema for the SubnetNetworkSecurityGroupAssociations API. Associates a
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: HPCCacheBlobTarget is the Schema for the HPCCacheBlobTargets
-          API
+          API. Manages a Blob Target within a HPC Cache.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,13 @@ spec:
               forProvider:
                 properties:
                   accessPolicyName:
+                    description: The name of the access policy applied to this target.
+                      Defaults to default.
                     type: string
                   cacheName:
+                    description: The name HPC Cache, which the HPC Cache Blob Target
+                      will be added to. Changing this forces a new resource to be
+                      created.
                     type: string
                   cacheNameRef:
                     description: A Reference to a named object.
@@ -142,8 +147,13 @@ spec:
                         type: object
                     type: object
                   namespacePath:
+                    description: The client-facing file path of the HPC Cache Blob
+                      Target.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group in which to create
+                      the HPC Cache Blob Target. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -219,6 +229,9 @@ spec:
                         type: object
                     type: object
                   storageContainerId:
+                    description: The Resource Manager ID of the Storage Container
+                      used as the HPC Cache Blob Target. Changing this forces a new
+                      resource to be created.
                     type: string
                   storageContainerIdRef:
                     description: A Reference to a named object.
@@ -473,6 +486,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the HPC Cache Blob Target.
                     type: string
                 type: object
               conditions:

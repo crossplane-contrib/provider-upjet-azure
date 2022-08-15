@@ -14,11 +14,14 @@ import (
 )
 
 type ServerKeyObservation struct {
+
+	// The ID of the PostgreSQL Server Key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ServerKeyParameters struct {
 
+	// The URL to a Key Vault Key.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +33,7 @@ type ServerKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
+	// The ID of the PostgreSQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Server
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -56,7 +60,7 @@ type ServerKeyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ServerKey is the Schema for the ServerKeys API
+// ServerKey is the Schema for the ServerKeys API. Manages a PostgreSQL Server Key.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

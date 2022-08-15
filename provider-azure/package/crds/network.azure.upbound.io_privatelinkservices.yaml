@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: PrivateLinkService is the Schema for the PrivateLinkServices
-          API
+          API. Manages a Private Link Service.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,29 +65,50 @@ spec:
               forProvider:
                 properties:
                   autoApprovalSubscriptionIds:
+                    description: A list of Subscription UUID/GUID's that will be automatically
+                      be able to use this Private Link Service.
                     items:
                       type: string
                     type: array
                   enableProxyProtocol:
+                    description: Should the Private Link Service support the Proxy
+                      Protocol? Defaults to false.
                     type: boolean
                   loadBalancerFrontendIpConfigurationIds:
+                    description: A list of Frontend IP Configuration IDs from a Standard
+                      Load Balancer, where traffic from the Private Link Service should
+                      be routed. You can use Load Balancer Rules to direct this traffic
+                      to appropriate backend pools where your applications are running.
                     items:
                       type: string
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   natIpConfiguration:
+                    description: One or more  nat_ip_configuration block as defined
+                      below.
                     items:
                       properties:
                         name:
                           type: string
                         primary:
+                          description: Is this is the Primary IP Configuration? Changing
+                            this forces a new resource to be created.
                           type: boolean
                         privateIpAddress:
+                          description: Specifies a Private Static IP Address for this
+                            IP Configuration.
                           type: string
                         privateIpAddressVersion:
+                          description: The version of the IP Protocol which should
+                            be used. At this time the only supported value is IPv4.
+                            Defaults to IPv4.
                           type: string
                         subnetId:
+                          description: Specifies the ID of the Subnet which should
+                            be used for the Private Link Service.
                           type: string
                         subnetIdRef:
                           description: A Reference to a named object.
@@ -171,6 +192,9 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the Resource Group where the Private
+                      Link Service should exist. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -248,8 +272,12 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource. Changing
+                      this forces a new resource to be created.
                     type: object
                   visibilitySubscriptionIds:
+                    description: A list of Subscription UUID/GUID's that will be able
+                      to see this Private Link Service.
                     items:
                       type: string
                     type: array
@@ -435,6 +463,9 @@ spec:
               atProvider:
                 properties:
                   alias:
+                    description: A globally unique DNS Name for your Private Link
+                      Service. You can use this alias to request a connection to your
+                      Private Link Service.
                     type: string
                   id:
                     type: string

@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: LocalNetworkGateway is the Schema for the LocalNetworkGateways
-          API
+          API. Manages a local network gateway connection over which specific connections
+          can be configured.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,17 +66,26 @@ spec:
               forProvider:
                 properties:
                   addressSpace:
+                    description: The list of string CIDRs representing the address
+                      spaces the gateway exposes.
                     items:
                       type: string
                     type: array
                   bgpSettings:
+                    description: A bgp_settings block as defined below containing
+                      the Local Network Gateway's BGP speaker settings.
                     items:
                       properties:
                         asn:
+                          description: The BGP speaker's ASN.
                           type: number
                         bgpPeeringAddress:
+                          description: The BGP peering address and BGP identifier
+                            of this BGP speaker.
                           type: string
                         peerWeight:
+                          description: The weight added to routes learned from this
+                            BGP speaker.
                           type: number
                       required:
                       - asn
@@ -83,12 +93,18 @@ spec:
                       type: object
                     type: array
                   gatewayAddress:
+                    description: The gateway IP address to connect with.
                     type: string
                   gatewayFqdn:
+                    description: The gateway FQDN to connect with.
                     type: string
                   location:
+                    description: The location/region where the local network gateway
+                      is created. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the local network gateway.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -166,6 +182,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -347,6 +364,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Local Network Gateway.
                     type: string
                 type: object
               conditions:

@@ -14,17 +14,22 @@ import (
 )
 
 type FlexibleServerDatabaseObservation struct {
+
+	// The ID of the Azure PostgreSQL Flexible Server Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FlexibleServerDatabaseParameters struct {
 
+	// Specifies the Charset for the Azure PostgreSQL Flexible Server Database, which needs to be a valid PostgreSQL Charset. Defaults to UTF8. Changing this forces a new Azure PostgreSQL Flexible Server Database to be created.
 	// +kubebuilder:validation:Optional
 	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
+	// Specifies the Collation for the Azure PostgreSQL Flexible Server Database, which needs to be a valid PostgreSQL Collation. Defaults to en_US.utf8. Changing this forces a new Azure PostgreSQL Flexible Server Database to be created.
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
+	// The ID of the Azure PostgreSQL Flexible Server from which to create this PostgreSQL Flexible Server Database. Changing this forces a new Azure PostgreSQL Flexible Server Database to be created.
 	// +crossplane:generate:reference:type=FlexibleServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -51,7 +56,7 @@ type FlexibleServerDatabaseStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FlexibleServerDatabase is the Schema for the FlexibleServerDatabases API
+// FlexibleServerDatabase is the Schema for the FlexibleServerDatabases API. Manages a PostgreSQL Flexible Server Database.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

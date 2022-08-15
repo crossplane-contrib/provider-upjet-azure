@@ -27,8 +27,10 @@ type PrivateDNSZoneConfigsObservation struct {
 
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// A list of IP Addresses
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 
+	// A record_sets block as defined below.
 	RecordSets []RecordSetsObservation `json:"recordSets,omitempty" tf:"record_sets,omitempty"`
 }
 
@@ -44,6 +46,7 @@ type PrivateDNSZoneGroupParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Specifies the list of Private DNS Zones to include within the private_dns_zone_group.
 	// +kubebuilder:validation:Required
 	PrivateDNSZoneIds []*string `json:"privateDnsZoneIds" tf:"private_dns_zone_ids,omitempty"`
 }
@@ -66,22 +69,30 @@ type PrivateEndpointObservation struct {
 
 	PrivateDNSZoneConfigs []PrivateDNSZoneConfigsObservation `json:"privateDnsZoneConfigs,omitempty" tf:"private_dns_zone_configs,omitempty"`
 
+	// A private_dns_zone_group block as defined below.
+	// +kubebuilder:validation:Optional
 	PrivateDNSZoneGroup []PrivateDNSZoneGroupObservation `json:"privateDnsZoneGroup,omitempty" tf:"private_dns_zone_group,omitempty"`
 
+	// A private_service_connection block as defined below.
+	// +kubebuilder:validation:Required
 	PrivateServiceConnection []PrivateServiceConnectionObservation `json:"privateServiceConnection,omitempty" tf:"private_service_connection,omitempty"`
 }
 
 type PrivateEndpointParameters struct {
 
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// A private_dns_zone_group block as defined below.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneGroup []PrivateDNSZoneGroupParameters `json:"privateDnsZoneGroup,omitempty" tf:"private_dns_zone_group,omitempty"`
 
+	// A private_service_connection block as defined below.
 	// +kubebuilder:validation:Required
 	PrivateServiceConnection []PrivateServiceConnectionParameters `json:"privateServiceConnection" tf:"private_service_connection,omitempty"`
 
+	// Specifies the Name of the Resource Group within which the Private Endpoint should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -92,6 +103,7 @@ type PrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -103,25 +115,31 @@ type PrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PrivateServiceConnectionObservation struct {
+
+	// The private IP address associated with the private endpoint, note that you will have a private IP address assigned to the private endpoint even if the connection request was Rejected.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 }
 
 type PrivateServiceConnectionParameters struct {
 
+	// Does the Private Endpoint require Manual Approval from the remote resource owner? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	IsManualConnection *bool `json:"isManualConnection" tf:"is_manual_connection,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The Service Alias of the Private Link Enabled Remote Resource which this Private Endpoint should be connected to. One of private_connection_resource_id or private_connection_resource_alias must be specified. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateConnectionResourceAlias *string `json:"privateConnectionResourceAlias,omitempty" tf:"private_connection_resource_alias,omitempty"`
 
+	// The ID of the Private Link Enabled Remote Resource which this Private Endpoint should be connected to. One of private_connection_resource_id or private_connection_resource_alias must be specified. Changing this forces a new resource to be created. For a web app or function app slot, the parent web app should be used in this field instead of a reference to the slot itself.
 	// +crossplane:generate:reference:type=PrivateLinkService
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -133,9 +151,11 @@ type PrivateServiceConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateConnectionResourceIDSelector *v1.Selector `json:"privateConnectionResourceIdSelector,omitempty" tf:"-"`
 
+	// A message passed to the owner of the remote resource when the private endpoint attempts to establish the connection to the remote resource. The request message can be a maximum of 140 characters in length. Only valid if is_manual_connection is set to true.
 	// +kubebuilder:validation:Optional
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
+	// A list of subresource names which the Private Endpoint is able to connect to. subresource_names corresponds to group_id. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SubresourceNames []*string `json:"subresourceNames,omitempty" tf:"subresource_names,omitempty"`
 }
@@ -147,8 +167,10 @@ type RecordSetsObservation struct {
 
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The time to live for each connection to the private_dns_zone.
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
+	// The type of DNS record.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -169,7 +191,7 @@ type PrivateEndpointStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PrivateEndpoint is the Schema for the PrivateEndpoints API
+// PrivateEndpoint is the Schema for the PrivateEndpoints API. Manages a Private Endpoint.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
