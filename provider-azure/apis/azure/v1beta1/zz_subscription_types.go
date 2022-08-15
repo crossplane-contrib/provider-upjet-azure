@@ -19,6 +19,7 @@ type SubscriptionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the Tenant to which the subscription belongs.
+	// The Tenant ID to which the subscription belongs
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
@@ -29,10 +30,12 @@ type SubscriptionParameters struct {
 	BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
 	// The ID of the Subscription. Changing this forces a new Subscription to be created.
+	// The GUID of the Subscription.
 	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The Name of the Subscription. This is the Display Name in the portal.
+	// The Display Name for the Subscription.
 	// +kubebuilder:validation:Required
 	SubscriptionName *string `json:"subscriptionName" tf:"subscription_name,omitempty"`
 
@@ -41,6 +44,7 @@ type SubscriptionParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The workload type of the Subscription.  Possible values are Production  and DevTest. Changing this forces a new Subscription to be created.
+	// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
 	// +kubebuilder:validation:Optional
 	Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
 }
