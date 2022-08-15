@@ -71,11 +71,11 @@ spec:
                     type: string
                   subscriptionId:
                     description: The ID of the Subscription. Changing this forces
-                      a new Subscription to be created.
+                      a new Subscription to be created. The GUID of the Subscription.
                     type: string
                   subscriptionName:
                     description: The Name of the Subscription. This is the Display
-                      Name in the portal.
+                      Name in the portal. The Display Name for the Subscription.
                     type: string
                   tags:
                     additionalProperties:
@@ -85,7 +85,8 @@ spec:
                   workload:
                     description: The workload type of the Subscription.  Possible
                       values are Production  and DevTest. Changing this forces a new
-                      Subscription to be created.
+                      Subscription to be created. The workload type for the Subscription.
+                      Possible values are `Production` (default) and `DevTest`.
                     type: string
                 required:
                 - subscriptionName
@@ -271,6 +272,7 @@ spec:
                     type: string
                   tenantId:
                     description: The ID of the Tenant to which the subscription belongs.
+                      The Tenant ID to which the subscription belongs
                     type: string
                 type: object
               conditions:
