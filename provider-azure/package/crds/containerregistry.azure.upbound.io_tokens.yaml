@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Token is the Schema for the Tokens API
+        description: Token is the Schema for the Tokens API. Manages an Azure Container
+          Registry token.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   containerRegistryName:
+                    description: The name of the Container Registry. Changing this
+                      forces a new resource to be created.
                     type: string
                   containerRegistryNameRef:
                     description: A Reference to a named object.
@@ -139,8 +142,13 @@ spec:
                         type: object
                     type: object
                   enabled:
+                    description: Should the Container Registry token be enabled? Defaults
+                      to true.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Container Registry token. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -216,6 +224,8 @@ spec:
                         type: object
                     type: object
                   scopeMapId:
+                    description: The ID of the Container Registry Scope Map associated
+                      with the token.
                     type: string
                   scopeMapIdRef:
                     description: A Reference to a named object.
@@ -468,6 +478,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Container Registry token.
                     type: string
                 type: object
               conditions:

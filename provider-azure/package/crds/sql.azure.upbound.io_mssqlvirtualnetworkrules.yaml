@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MSSQLVirtualNetworkRule is the Schema for the MSSQLVirtualNetworkRules
-          API
+          API. Manages an Azure SQL Virtual Network Rule.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,14 @@ spec:
               forProvider:
                 properties:
                   ignoreMissingVnetServiceEndpoint:
+                    description: Create the virtual network rule before the subnet
+                      has the virtual network service endpoint enabled. Defaults to
+                      false.
                     type: boolean
                   serverId:
+                    description: The resource ID of the SQL Server to which this SQL
+                      virtual network rule will be applied. Changing this forces a
+                      new resource to be created.
                     type: string
                   serverIdRef:
                     description: A Reference to a named object.
@@ -143,6 +149,8 @@ spec:
                         type: object
                     type: object
                   subnetId:
+                    description: The ID of the subnet from which the SQL server will
+                      accept communications.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -396,6 +404,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the SQL virtual network rule.
                     type: string
                 type: object
               conditions:

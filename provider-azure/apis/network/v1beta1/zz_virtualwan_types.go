@@ -14,23 +14,30 @@ import (
 )
 
 type VirtualWANObservation struct {
+
+	// The ID of the Virtual WAN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type VirtualWANParameters struct {
 
+	// Boolean flag to specify whether branch to branch traffic is allowed. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowBranchToBranchTraffic *bool `json:"allowBranchToBranchTraffic,omitempty" tf:"allow_branch_to_branch_traffic,omitempty"`
 
+	// Boolean flag to specify whether VPN encryption is disabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	DisableVPNEncryption *bool `json:"disableVpnEncryption,omitempty" tf:"disable_vpn_encryption,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Specifies the Office365 local breakout category. Possible values include: Optimize, OptimizeAndAllow, All, None. Defaults to None.
 	// +kubebuilder:validation:Optional
 	Office365LocalBreakoutCategory *string `json:"office365LocalBreakoutCategory,omitempty" tf:"office365_local_breakout_category,omitempty"`
 
+	// The name of the resource group in which to create the Virtual WAN. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -41,9 +48,11 @@ type VirtualWANParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the Virtual WAN.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies the Virtual WAN type. Possible Values include: Basic and Standard. Defaults to Standard.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -62,7 +71,7 @@ type VirtualWANStatus struct {
 
 // +kubebuilder:object:root=true
 
-// VirtualWAN is the Schema for the VirtualWANs API
+// VirtualWAN is the Schema for the VirtualWANs API. Manages a Virtual WAN.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

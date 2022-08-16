@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: PrivateDNSARecord is the Schema for the PrivateDNSARecords API
+        description: PrivateDNSARecord is the Schema for the PrivateDNSARecords API.
+          Manages a Private DNS A Record.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,13 @@ spec:
               forProvider:
                 properties:
                   records:
+                    description: List of IPv4 Addresses.
                     items:
                       type: string
                     type: array
                   resourceGroupName:
+                    description: Specifies the resource group where the Private DNS
+                      Zone exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -145,10 +149,13 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   ttl:
                     type: number
                   zoneName:
+                    description: Specifies the Private DNS Zone where the resource
+                      exists. Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
                     description: A Reference to a named object.
@@ -404,8 +411,10 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the DNS A Record.
                     type: string
                   id:
+                    description: The Private DNS A Record ID.
                     type: string
                 type: object
               conditions:

@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: VirtualNetworkRule is the Schema for the VirtualNetworkRules
-          API
+          API. Manages a MySQL Virtual Network Rule.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   resourceGroupName:
+                    description: The name of the resource group where the MySQL server
+                      resides. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -140,6 +142,9 @@ spec:
                         type: object
                     type: object
                   serverName:
+                    description: The name of the SQL Server to which this MySQL virtual
+                      network rule will be applied to. Changing this forces a new
+                      resource to be created.
                     type: string
                   serverNameRef:
                     description: A Reference to a named object.
@@ -215,6 +220,8 @@ spec:
                         type: object
                     type: object
                   subnetId:
+                    description: The ID of the subnet that the MySQL server will be
+                      connected to.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -467,6 +474,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the MySQL Virtual Network Rule.
                     type: string
                 type: object
               conditions:

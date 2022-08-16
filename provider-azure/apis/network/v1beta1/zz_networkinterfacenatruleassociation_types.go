@@ -14,14 +14,18 @@ import (
 )
 
 type NetworkInterfaceNatRuleAssociationObservation struct {
+
+	// The  ID of the Association between the Network Interface and the Load Balancers NAT Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type NetworkInterfaceNatRuleAssociationParameters struct {
 
+	// The Name of the IP Configuration within the Network Interface which should be connected to the NAT Rule. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	IPConfigurationName *string `json:"ipConfigurationName" tf:"ip_configuration_name,omitempty"`
 
+	// The ID of the Load Balancer NAT Rule which this Network Interface which should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=LoadBalancerNatRule
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -33,6 +37,7 @@ type NetworkInterfaceNatRuleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NATRuleIDSelector *v1.Selector `json:"natRuleIdSelector,omitempty" tf:"-"`
 
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -59,7 +64,7 @@ type NetworkInterfaceNatRuleAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// NetworkInterfaceNatRuleAssociation is the Schema for the NetworkInterfaceNatRuleAssociations API
+// NetworkInterfaceNatRuleAssociation is the Schema for the NetworkInterfaceNatRuleAssociations API. Manages the association between a Network Interface and a Load Balancer's NAT Rule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

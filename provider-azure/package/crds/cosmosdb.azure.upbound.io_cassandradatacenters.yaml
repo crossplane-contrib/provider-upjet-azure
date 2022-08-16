@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: CassandraDatacenter is the Schema for the CassandraDatacenters
-          API
+          API. Manages a Cassandra Datacenter.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,12 @@ spec:
               forProvider:
                 properties:
                   availabilityZonesEnabled:
+                    description: Determines whether availability zones are enabled.
+                      Defaults to true.
                     type: boolean
                   cassandraClusterId:
+                    description: The ID of the Cassandra Cluster. Changing this forces
+                      a new Cassandra Datacenter to be created.
                     type: string
                   cassandraClusterIdRef:
                     description: A Reference to a named object.
@@ -142,6 +146,9 @@ spec:
                         type: object
                     type: object
                   delegatedManagementSubnetId:
+                    description: The ID of the delegated management subnet for this
+                      Cassandra Datacenter. Changing this forces a new Cassandra Datacenter
+                      to be created.
                     type: string
                   delegatedManagementSubnetIdRef:
                     description: A Reference to a named object.
@@ -217,12 +224,21 @@ spec:
                         type: object
                     type: object
                   diskCount:
+                    description: Determines the number of p30 disks that are attached
+                      to each node. Defaults to 4.
                     type: number
                   location:
+                    description: The Azure Region where the Cassandra Datacenter should
+                      exist. Changing this forces a new Cassandra Datacenter to be
+                      created.
                     type: string
                   nodeCount:
+                    description: The number of nodes the Cassandra Datacenter should
+                      have. The number should be equal or greater than 3. Defaults
+                      to 3.
                     type: number
                   skuName:
+                    description: Determines the selected sku. Defaults to Standard_DS14_v2.
                     type: string
                 required:
                 - location
@@ -404,6 +420,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Cassandra Datacenter.
                     type: string
                 type: object
               conditions:

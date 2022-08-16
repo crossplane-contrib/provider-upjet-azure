@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: IOTHubConsumerGroup is the Schema for the IOTHubConsumerGroups
-          API
+          API. Manages a Consumer Group within an IotHub
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,12 @@ spec:
               forProvider:
                 properties:
                   eventhubEndpointName:
+                    description: The name of the Event Hub-compatible endpoint in
+                      the IoT hub. Changing this forces a new resource to be created.
                     type: string
                   iothubName:
+                    description: The name of the IoT Hub. Changing this forces a new
+                      resource to be created.
                     type: string
                   iothubNameRef:
                     description: A Reference to a named object.
@@ -142,6 +146,8 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group that contains the
+                      IoT hub. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -396,6 +402,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the IoTHub Consumer Group.
                     type: string
                 type: object
               conditions:

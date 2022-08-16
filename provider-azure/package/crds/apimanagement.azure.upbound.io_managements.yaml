@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Management is the Schema for the Managements API
+        description: Management is the Schema for the Managements API. Manages an
+          API Management Service.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -67,6 +68,8 @@ spec:
                     items:
                       properties:
                         capacity:
+                          description: The number of compute units in this region.
+                            Defaults to the capacity of the main region.
                           type: number
                         location:
                           type: string
@@ -76,6 +79,8 @@ spec:
                           items:
                             properties:
                               subnetId:
+                                description: The id of the subnet that will be used
+                                  for the API Management.
                                 type: string
                               subnetIdRef:
                                 description: A Reference to a named object.
@@ -187,8 +192,8 @@ spec:
                           - namespace
                           type: object
                         encodedCertificateSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: The Base64 Encoded PFX or Base64 Encoded X.509
+                            Certificate.
                           properties:
                             key:
                               description: The key to select.
@@ -205,6 +210,9 @@ spec:
                           - namespace
                           type: object
                         storeName:
+                          description: The name of the Certificate Store where this
+                            certificate should be stored. Possible values are CertificateAuthority
+                            and Root.
                           type: string
                       required:
                       - encodedCertificateSecretRef
@@ -212,17 +220,28 @@ spec:
                       type: object
                     type: array
                   clientCertificateEnabled:
+                    description: Enforce a client certificate to be presented on each
+                      request to the gateway? This is only supported when SKU type
+                      is Consumption.
                     type: boolean
                   gatewayDisabled:
+                    description: Disable the gateway in main region? This is only
+                      supported when additional_location is set.
                     type: boolean
                   identity:
                     items:
                       properties:
                         identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this API Management Service.
                           items:
                             type: string
                           type: array
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this API Management Service.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned .
                           type: string
                       required:
                       - type
@@ -231,34 +250,53 @@ spec:
                   location:
                     type: string
                   minApiVersion:
+                    description: The version which the control plane API calls to
+                      API Management service are limited with version equal to or
+                      newer than.
                     type: string
                   notificationSenderEmail:
+                    description: Email address from which the notification will be
+                      sent.
                     type: string
                   policy:
+                    description: A policy block as defined below.
                     items:
                       properties:
                         xmlContent:
+                          description: The XML Content for this Policy.
                           type: string
                         xmlLink:
+                          description: A link to an API Management Policy XML Document,
+                            which must be publicly available.
                           type: string
                       type: object
                     type: array
                   protocols:
+                    description: A protocols block as defined below.
                     items:
                       properties:
                         enableHttp2:
+                          description: Should HTTP/2 be supported by the API Management
+                            Service? Defaults to false.
                           type: boolean
                       type: object
                     type: array
                   publicIpAddressId:
                     type: string
                   publicNetworkAccessEnabled:
+                    description: Is public access to the service allowed?. Defaults
+                      to true
                     type: boolean
                   publisherEmail:
+                    description: The email of publisher/company.
                     type: string
                   publisherName:
+                    description: The name of publisher/company.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group in which the API Management
+                      Service should be exist. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -334,43 +372,73 @@ spec:
                         type: object
                     type: object
                   security:
+                    description: A security block as defined below.
                     items:
                       properties:
                         enableBackendSsl30:
+                          description: Should SSL 3.0 be enabled on the backend of
+                            the gateway? Defaults to false.
                           type: boolean
                         enableBackendTls10:
+                          description: Should TLS 1.0 be enabled on the backend of
+                            the gateway? Defaults to false.
                           type: boolean
                         enableBackendTls11:
+                          description: Should TLS 1.1 be enabled on the backend of
+                            the gateway? Defaults to false.
                           type: boolean
                         enableFrontendSsl30:
+                          description: Should SSL 3.0 be enabled on the frontend of
+                            the gateway? Defaults to false.
                           type: boolean
                         enableFrontendTls10:
+                          description: Should TLS 1.0 be enabled on the frontend of
+                            the gateway? Defaults to false.
                           type: boolean
                         enableFrontendTls11:
+                          description: Should TLS 1.1 be enabled on the frontend of
+                            the gateway? Defaults to false.
                           type: boolean
                         tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                            cipher be enabled? Defaults to false.
                           type: boolean
                         tlsEcdheEcdsaWithAes256CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                            cipher be enabled? Defaults to false.
                           type: boolean
                         tlsEcdheRsaWithAes128CbcShaCiphersEnabled:
                           type: boolean
                         tlsEcdheRsaWithAes256CbcShaCiphersEnabled:
                           type: boolean
                         tlsRsaWithAes128CbcSha256CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_128_CBC_SHA256
+                            cipher be enabled? Defaults to false.
                           type: boolean
                         tlsRsaWithAes128CbcShaCiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_128_CBC_SHA cipher
+                            be enabled? Defaults to false.
                           type: boolean
                         tlsRsaWithAes128GcmSha256CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_128_GCM_SHA256
+                            cipher be enabled? Defaults to false.
                           type: boolean
                         tlsRsaWithAes256CbcSha256CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_256_CBC_SHA256
+                            cipher be enabled? Defaults to false.
                           type: boolean
                         tlsRsaWithAes256CbcShaCiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_256_CBC_SHA cipher
+                            be enabled? Defaults to false.
                           type: boolean
                         tripleDesCiphersEnabled:
+                          description: Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher
+                            be enabled for alL TLS versions ? Defaults to false.
                           type: boolean
                       type: object
                     type: array
                   signIn:
+                    description: A sign_in block as defined below.
                     items:
                       properties:
                         enabled:
@@ -380,18 +448,24 @@ spec:
                       type: object
                     type: array
                   signUp:
+                    description: A sign_up block as defined below.
                     items:
                       properties:
                         enabled:
                           type: boolean
                         termsOfService:
+                          description: A terms_of_service block as defined below.
                           items:
                             properties:
                               consentRequired:
+                                description: Should the user be asked for consent
+                                  during sign up?
                                 type: boolean
                               enabled:
                                 type: boolean
                               text:
+                                description: The Terms of Service which users are
+                                  required to agree to in order to sign up.
                                 type: string
                             required:
                             - consentRequired
@@ -404,10 +478,15 @@ spec:
                       type: object
                     type: array
                   skuName:
+                    description: 'sku_name is a string consisting of two parts separated
+                      by an underscore. The first part is the name, valid values include:
+                      Consumption, Developer, Basic, Standard and Premium. The second
+                      part is the capacity , which must be a positive integer .'
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags assigned to the resource.
                     type: object
                   tenantAccess:
                     items:
@@ -422,6 +501,8 @@ spec:
                     items:
                       properties:
                         subnetId:
+                          description: The id of the subnet that will be used for
+                            the API Management.
                           type: string
                         subnetIdRef:
                           description: A Reference to a named object.
@@ -502,6 +583,8 @@ spec:
                       type: object
                     type: array
                   virtualNetworkType:
+                    description: 'The type of virtual network you want to use, valid
+                      values include: None, External, Internal.'
                     type: string
                   zones:
                     items:
@@ -716,15 +799,21 @@ spec:
                       type: object
                     type: array
                   developerPortalUrl:
+                    description: The URL for the Developer Portal associated with
+                      this API Management service.
                     type: string
                   gatewayRegionalUrl:
                     type: string
                   gatewayUrl:
+                    description: The URL of the Gateway for the API Management Service.
                     type: string
                   hostnameConfiguration:
+                    description: A hostname_configuration block as defined below.
                     items:
                       properties:
                         developerPortal:
+                          description: One or more developer_portal blocks as documented
+                            below.
                           items:
                             properties:
                               expiry:
@@ -744,6 +833,8 @@ spec:
                             type: object
                           type: array
                         management:
+                          description: One or more management blocks as documented
+                            below.
                           items:
                             properties:
                               expiry:
@@ -763,6 +854,7 @@ spec:
                             type: object
                           type: array
                         portal:
+                          description: One or more portal blocks as documented below.
                           items:
                             properties:
                               expiry:
@@ -782,9 +874,14 @@ spec:
                             type: object
                           type: array
                         proxy:
+                          description: One or more proxy blocks as documented below.
                           items:
                             properties:
                               defaultSslBinding:
+                                description: Is the certificate associated with this
+                                  Hostname the Default SSL Certificate? This is used
+                                  when an SNI header isn't specified by a client.
+                                  Defaults to false.
                                 type: boolean
                               expiry:
                                 type: string
@@ -803,6 +900,7 @@ spec:
                             type: object
                           type: array
                         scm:
+                          description: One or more scm blocks as documented below.
                           items:
                             properties:
                               expiry:
@@ -824,19 +922,26 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: The ID of the API Management Service.
                     type: string
                   identity:
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID associated with this Managed
+                            Service Identity.
                           type: string
                         tenantId:
                           type: string
                       type: object
                     type: array
                   managementApiUrl:
+                    description: The URL for the Management API associated with this
+                      API Management service.
                     type: string
                   portalUrl:
+                    description: The URL for the Publisher Portal associated with
+                      this API Management service.
                     type: string
                   privateIpAddresses:
                     items:
@@ -847,6 +952,8 @@ spec:
                       type: string
                     type: array
                   scmUrl:
+                    description: The URL for the SCM  Endpoint associated with this
+                      API Management service.
                     type: string
                   tenantAccess:
                     items:

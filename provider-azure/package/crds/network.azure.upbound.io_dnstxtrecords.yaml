@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DNSTXTRecord is the Schema for the DNSTXTRecords API
+        description: DNSTXTRecord is the Schema for the DNSTXTRecords API. Manages
+          a DNS TXT Record.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,15 +65,21 @@ spec:
               forProvider:
                 properties:
                   record:
+                    description: A list of values that make up the txt record. Each
+                      record block supports fields documented below.
                     items:
                       properties:
                         value:
+                          description: 'The value of the record. Max length: 1024
+                            characters'
                           type: string
                       required:
                       - value
                       type: object
                     type: array
                   resourceGroupName:
+                    description: Specifies the resource group where the resource exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -150,10 +157,14 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   ttl:
+                    description: The Time To Live  of the DNS record in seconds.
                     type: number
                   zoneName:
+                    description: Specifies the DNS Zone where the DNS Zone  exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
                     description: A Reference to a named object.
@@ -409,8 +420,10 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the DNS TXT Record.
                     type: string
                   id:
+                    description: The DNS TXT Record ID.
                     type: string
                 type: object
               conditions:

@@ -14,17 +14,22 @@ import (
 )
 
 type IOTHubDPSSharedAccessPolicyObservation struct {
+
+	// The ID of the IoTHub Device Provisioning Service Shared Access Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IOTHubDPSSharedAccessPolicyParameters struct {
 
+	// Adds EnrollmentRead permission to this Shared Access Account. It allows read access to enrollment data.
 	// +kubebuilder:validation:Optional
 	EnrollmentRead *bool `json:"enrollmentRead,omitempty" tf:"enrollment_read,omitempty"`
 
+	// Adds EnrollmentWrite permission to this Shared Access Account. It allows write access to enrollment data.
 	// +kubebuilder:validation:Optional
 	EnrollmentWrite *bool `json:"enrollmentWrite,omitempty" tf:"enrollment_write,omitempty"`
 
+	// The name of the IoT Hub Device Provisioning service to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHubDPS
 	// +kubebuilder:validation:Optional
 	IOTHubDPSName *string `json:"iothubDpsName,omitempty" tf:"iothub_dps_name,omitempty"`
@@ -35,12 +40,15 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubDPSNameSelector *v1.Selector `json:"iothubDpsNameSelector,omitempty" tf:"-"`
 
+	// Adds RegistrationStatusRead permission to this Shared Access Account. It allows read access to device registrations.
 	// +kubebuilder:validation:Optional
 	RegistrationRead *bool `json:"registrationRead,omitempty" tf:"registration_read,omitempty"`
 
+	// Adds RegistrationStatusWrite permission to this Shared Access Account. It allows write access to device registrations.
 	// +kubebuilder:validation:Optional
 	RegistrationWrite *bool `json:"registrationWrite,omitempty" tf:"registration_write,omitempty"`
 
+	// The name of the resource group under which the IotHub Shared Access Policy resource has to be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -51,6 +59,7 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Adds ServiceConfig permission to this Shared Access Account. It allows configuration of the Device Provisioning Service.
 	// +kubebuilder:validation:Optional
 	ServiceConfig *bool `json:"serviceConfig,omitempty" tf:"service_config,omitempty"`
 }
@@ -69,7 +78,7 @@ type IOTHubDPSSharedAccessPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IOTHubDPSSharedAccessPolicy is the Schema for the IOTHubDPSSharedAccessPolicys API
+// IOTHubDPSSharedAccessPolicy is the Schema for the IOTHubDPSSharedAccessPolicys API. Manages an IotHub Device Provisioning Service Shared Access Policy
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

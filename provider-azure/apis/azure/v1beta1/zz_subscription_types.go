@@ -14,27 +14,36 @@ import (
 )
 
 type SubscriptionObservation struct {
+
+	// The Resource ID of the Alias.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the Tenant to which the subscription belongs.
+	// The Tenant ID to which the subscription belongs
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type SubscriptionParameters struct {
 
+	// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
 	// +kubebuilder:validation:Optional
 	BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
+	// The ID of the Subscription. Changing this forces a new Subscription to be created.
 	// The GUID of the Subscription.
 	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
+	// The Name of the Subscription. This is the Display Name in the portal.
 	// The Display Name for the Subscription.
 	// +kubebuilder:validation:Required
 	SubscriptionName *string `json:"subscriptionName" tf:"subscription_name,omitempty"`
 
+	// A mapping of tags to assign to the Subscription.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The workload type of the Subscription.  Possible values are Production  and DevTest. Changing this forces a new Subscription to be created.
 	// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
 	// +kubebuilder:validation:Optional
 	Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
@@ -54,7 +63,7 @@ type SubscriptionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Subscription is the Schema for the Subscriptions API
+// Subscription is the Schema for the Subscriptions API. Manages a Subscription.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

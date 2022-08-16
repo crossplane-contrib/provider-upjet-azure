@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: LoadBalancer is the Schema for the LoadBalancers API
+        description: LoadBalancer is the Schema for the LoadBalancers API. Manages
+          a Load Balancer Resource.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   edgeZone:
+                    description: Specifies the Edge Zone within the Azure Region where
+                      this Load Balancer should exist. Changing this forces a new
+                      Load Balancer to be created.
                     type: string
                   frontendIpConfiguration:
                     items:
@@ -77,6 +81,8 @@ spec:
                         privateIpAddressAllocation:
                           type: string
                         privateIpAddressVersion:
+                          description: The version of IP that the Private IP Address
+                            is. Possible values are IPv4 or IPv6.
                           type: string
                         publicIpAddressId:
                           type: string
@@ -237,6 +243,9 @@ spec:
                               type: object
                           type: object
                         zones:
+                          description: Specifies a list of Availability Zones in which
+                            the IP Address for this Load Balancer should be located.
+                            Changing this forces a new Load Balancer to be created.
                           items:
                             type: string
                           type: array
@@ -245,8 +254,12 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure Region where the Load
+                      Balancer should be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group in which to create
+                      the Load Balancer.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -322,12 +335,18 @@ spec:
                         type: object
                     type: object
                   sku:
+                    description: The SKU of the Azure Load Balancer. Accepted values
+                      are Basic, Standard and Gateway. Defaults to Basic.
                     type: string
                   skuTier:
+                    description: sku_tier -  The SKU tier of this Load Balancer. Possible
+                      values are Global and Regional. Defaults to Regional. Changing
+                      this forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -514,14 +533,20 @@ spec:
                         id:
                           type: string
                         inboundNatRules:
+                          description: The list of IDs of inbound rules that use this
+                            frontend IP.
                           items:
                             type: string
                           type: array
                         loadBalancerRules:
+                          description: The list of IDs of load balancing rules that
+                            use this frontend IP.
                           items:
                             type: string
                           type: array
                         outboundRules:
+                          description: The list of IDs outbound rules that use this
+                            frontend IP.
                           items:
                             type: string
                           type: array
@@ -532,6 +557,8 @@ spec:
                   privateIpAddress:
                     type: string
                   privateIpAddresses:
+                    description: The list of private IP address assigned to the load
+                      balancer in frontend_ip_configuration blocks, if any.
                     items:
                       type: string
                     type: array

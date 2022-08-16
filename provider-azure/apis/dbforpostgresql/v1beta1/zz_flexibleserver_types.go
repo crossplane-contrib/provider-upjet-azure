@@ -14,27 +14,36 @@ import (
 )
 
 type FlexibleServerObservation struct {
+
+	// The FQDN of the PostgreSQL Flexible Server.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// The ID of the PostgreSQL Flexible Server.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Is public network access enabled?
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 }
 
 type FlexibleServerParameters struct {
 
+	// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default.
 	// +kubebuilder:validation:Optional
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
+	// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
 	// +kubebuilder:validation:Optional
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
+	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default and PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
+	// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -46,21 +55,27 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegatedSubnetIDSelector *v1.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
 
+	// Is Geo-Redundant backup enabled on the PostgreSQL Flexible Server. Defaults to false. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
 
+	// A high_availability block as defined below.
 	// +kubebuilder:validation:Optional
 	HighAvailability []HighAvailabilityParameters `json:"highAvailability,omitempty" tf:"high_availability,omitempty"`
 
+	// The Azure Region where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// A maintenance_window block as defined below.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
+	// The point in time to restore from creation_source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
+	// The ID of the private DNS zone to create the PostgreSQL Flexible Server. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.PrivateDNSZone
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -72,6 +87,7 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
+	// The name of the Resource Group where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -82,21 +98,27 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The SKU Name for the PostgreSQL Flexible Server. The name of the SKU, follows the tier + name pattern .
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
+	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
+	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, and 33554432.
 	// +kubebuilder:validation:Optional
 	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
 
+	// A mapping of tags which should be assigned to the PostgreSQL Flexible Server.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The version of PostgreSQL Flexible Server to use. Possible values are 11,12 and 13. Required when create_mode is Default. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
+	// Specifies the Availability Zone in which the PostgreSQL Flexible Server should be located.
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -106,9 +128,11 @@ type HighAvailabilityObservation struct {
 
 type HighAvailabilityParameters struct {
 
+	// The high availability mode for the PostgreSQL Flexible Server. The only possible value is ZoneRedundant.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
+	// Specifies the Availability Zone in which the standby Flexible Server should be located.
 	// +kubebuilder:validation:Optional
 	StandbyAvailabilityZone *string `json:"standbyAvailabilityZone,omitempty" tf:"standby_availability_zone,omitempty"`
 }
@@ -118,12 +142,15 @@ type MaintenanceWindowObservation struct {
 
 type MaintenanceWindowParameters struct {
 
+	// The day of week for maintenance window, where the week starts on a Sunday, i.e. Sunday = 0, Monday = 1. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	DayOfWeek *float64 `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
+	// The start hour for maintenance window. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	StartHour *float64 `json:"startHour,omitempty" tf:"start_hour,omitempty"`
 
+	// The start minute for maintenance window. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	StartMinute *float64 `json:"startMinute,omitempty" tf:"start_minute,omitempty"`
 }
@@ -142,7 +169,7 @@ type FlexibleServerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FlexibleServer is the Schema for the FlexibleServers API
+// FlexibleServer is the Schema for the FlexibleServers API. Manages a PostgreSQL Flexible Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

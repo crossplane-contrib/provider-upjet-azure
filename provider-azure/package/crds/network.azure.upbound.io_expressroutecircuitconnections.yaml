@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ExpressRouteCircuitConnection is the Schema for the ExpressRouteCircuitConnections
-          API
+          API. Manages an Express Route Circuit Connection.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,12 +66,17 @@ spec:
               forProvider:
                 properties:
                   addressPrefixIpv4:
+                    description: The IPv4 address space from which to allocate customer
+                      address for global reach. Changing this forces a new Express
+                      Route Circuit Connection to be created.
                     type: string
                   addressPrefixIpv6:
+                    description: The IPv6 address space from which to allocate customer
+                      addresses for global reach.
                     type: string
                   authorizationKeySecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The authorization key which is associated with the
+                      Express Route Circuit Connection.
                     properties:
                       key:
                         description: The key to select.
@@ -88,6 +93,9 @@ spec:
                     - namespace
                     type: object
                   peerPeeringId:
+                    description: The ID of the peered Express Route Circuit Private
+                      Peering. Changing this forces a new Express Route Circuit Connection
+                      to be created.
                     type: string
                   peerPeeringIdRef:
                     description: A Reference to a named object.
@@ -163,6 +171,9 @@ spec:
                         type: object
                     type: object
                   peeringId:
+                    description: The ID of the Express Route Circuit Private Peering
+                      that this Express Route Circuit Connection connects with. Changing
+                      this forces a new Express Route Circuit Connection to be created.
                     type: string
                   peeringIdRef:
                     description: A Reference to a named object.
@@ -418,6 +429,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Express Route Circuit Connection.
                     type: string
                 type: object
               conditions:

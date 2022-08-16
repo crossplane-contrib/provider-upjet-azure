@@ -14,13 +14,17 @@ import (
 )
 
 type DataSetBlobStorageObservation struct {
+
+	// The name of the Data Share Dataset.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// The ID of the Data Share Blob Storage Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DataSetBlobStorageParameters struct {
 
+	// The name of the storage account container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
@@ -31,6 +35,7 @@ type DataSetBlobStorageParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
+	// The ID of the Data Share in which this Data Share Blob Storage Dataset should be created. Changing this forces a new Data Share Blob Storage Dataset to be created.
 	// +crossplane:generate:reference:type=DataShare
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -42,12 +47,15 @@ type DataSetBlobStorageParameters struct {
 	// +kubebuilder:validation:Optional
 	DataShareIDSelector *v1.Selector `json:"dataShareIdSelector,omitempty" tf:"-"`
 
+	// The path of the file in the storage container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
 	// +kubebuilder:validation:Optional
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
 
+	// The path of the folder in the storage container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
 	// +kubebuilder:validation:Optional
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
 
+	// A storage_account block as defined below.
 	// +kubebuilder:validation:Required
 	StorageAccount []StorageAccountParameters `json:"storageAccount" tf:"storage_account,omitempty"`
 }
@@ -67,6 +75,7 @@ type StorageAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
+	// The resource group name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -77,6 +86,7 @@ type StorageAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The subscription id of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
 	// +kubebuilder:validation:Required
 	SubscriptionID *string `json:"subscriptionId" tf:"subscription_id,omitempty"`
 }
@@ -95,7 +105,7 @@ type DataSetBlobStorageStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DataSetBlobStorage is the Schema for the DataSetBlobStorages API
+// DataSetBlobStorage is the Schema for the DataSetBlobStorages API. Manages a Data Share Blob Storage Dataset.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

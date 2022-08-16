@@ -14,23 +14,30 @@ import (
 )
 
 type AccountNetworkRulesObservation struct {
+
+	// The ID of the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type AccountNetworkRulesParameters struct {
 
+	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
 	// +kubebuilder:validation:Optional
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
+	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	// +kubebuilder:validation:Required
 	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges  are not allowed.
 	// +kubebuilder:validation:Optional
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
+	// One or More private_link_access block as defined below.
 	// +kubebuilder:validation:Optional
 	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
+	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -42,6 +49,7 @@ type AccountNetworkRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
+	// A list of virtual network subnet ids to to secure the storage account.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
@@ -51,9 +59,11 @@ type AccountNetworkRulesPrivateLinkAccessObservation struct {
 
 type AccountNetworkRulesPrivateLinkAccessParameters struct {
 
+	// The resource id of the resource access rule to be granted access.
 	// +kubebuilder:validation:Required
 	EndpointResourceID *string `json:"endpointResourceId" tf:"endpoint_resource_id,omitempty"`
 
+	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
 	// +kubebuilder:validation:Optional
 	EndpointTenantID *string `json:"endpointTenantId,omitempty" tf:"endpoint_tenant_id,omitempty"`
 }
@@ -72,7 +82,7 @@ type AccountNetworkRulesStatus struct {
 
 // +kubebuilder:object:root=true
 
-// AccountNetworkRules is the Schema for the AccountNetworkRuless API
+// AccountNetworkRules is the Schema for the AccountNetworkRuless API. Manages network rules inside of a Azure Storage Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

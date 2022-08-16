@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: MSSQLManagedInstanceActiveDirectoryAdministrator is the Schema
-          for the MSSQLManagedInstanceActiveDirectoryAdministrators API
+          for the MSSQLManagedInstanceActiveDirectoryAdministrators API. Manages an
+          Active Directory Administrator on a Microsoft Azure SQL Managed Instance
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,10 +67,18 @@ spec:
               forProvider:
                 properties:
                   azureadAuthenticationOnly:
+                    description: When true, only permit logins from AAD users and
+                      administrators. When false, also allow local database users.
+                      Defaults to false.
                     type: boolean
                   loginUsername:
+                    description: The login name of the principal to set as the Managed
+                      Instance Administrator.
                     type: string
                   managedInstanceId:
+                    description: The ID of the Azure SQL Managed Instance for which
+                      to set the administrator. Changing this forces a new resource
+                      to be created.
                     type: string
                   managedInstanceIdRef:
                     description: A Reference to a named object.
@@ -145,8 +154,11 @@ spec:
                         type: object
                     type: object
                   objectId:
+                    description: The Object ID of the principal to set as the Managed
+                      Instance Administrator.
                     type: string
                   tenantId:
+                    description: The Azure Active Directory Tenant ID.
                     type: string
                 required:
                 - loginUsername
@@ -331,6 +343,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the SQL Managed Instance Active Directory
+                      Administrator.
                     type: string
                 type: object
               conditions:

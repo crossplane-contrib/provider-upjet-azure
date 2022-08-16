@@ -14,14 +14,18 @@ import (
 )
 
 type CassandraDatacenterObservation struct {
+
+	// The ID of the Cassandra Datacenter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type CassandraDatacenterParameters struct {
 
+	// Determines whether availability zones are enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AvailabilityZonesEnabled *bool `json:"availabilityZonesEnabled,omitempty" tf:"availability_zones_enabled,omitempty"`
 
+	// The ID of the Cassandra Cluster. Changing this forces a new Cassandra Datacenter to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cosmosdb/v1beta1.CassandraCluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -33,6 +37,7 @@ type CassandraDatacenterParameters struct {
 	// +kubebuilder:validation:Optional
 	CassandraClusterIDSelector *v1.Selector `json:"cassandraClusterIdSelector,omitempty" tf:"-"`
 
+	// The ID of the delegated management subnet for this Cassandra Datacenter. Changing this forces a new Cassandra Datacenter to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -44,15 +49,19 @@ type CassandraDatacenterParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 
+	// Determines the number of p30 disks that are attached to each node. Defaults to 4.
 	// +kubebuilder:validation:Optional
 	DiskCount *float64 `json:"diskCount,omitempty" tf:"disk_count,omitempty"`
 
+	// The Azure Region where the Cassandra Datacenter should exist. Changing this forces a new Cassandra Datacenter to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The number of nodes the Cassandra Datacenter should have. The number should be equal or greater than 3. Defaults to 3.
 	// +kubebuilder:validation:Optional
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
+	// Determines the selected sku. Defaults to Standard_DS14_v2.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 }
@@ -71,7 +80,7 @@ type CassandraDatacenterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CassandraDatacenter is the Schema for the CassandraDatacenters API
+// CassandraDatacenter is the Schema for the CassandraDatacenters API. Manages a Cassandra Datacenter.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

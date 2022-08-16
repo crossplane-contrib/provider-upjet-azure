@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataShare is the Schema for the DataShares API
+        description: DataShare is the Schema for the DataShares API. Manages a Data
+          Share.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   accountId:
+                    description: The ID of the Data Share account in which the Data
+                      Share is created. Changing this forces a new Data Share to be
+                      created.
                     type: string
                   accountIdRef:
                     description: A Reference to a named object.
@@ -139,17 +143,25 @@ spec:
                         type: object
                     type: object
                   description:
+                    description: The Data Share's description.
                     type: string
                   kind:
+                    description: The kind of the Data Share. Possible values are CopyBased
+                      and InPlace. Changing this forces a new Data Share to be created.
                     type: string
                   snapshotSchedule:
+                    description: A snapshot_schedule block as defined below.
                     items:
                       properties:
                         name:
                           type: string
                         recurrence:
+                          description: The interval of the synchronization with the
+                            source data. Possible values are Hour and Day.
                           type: string
                         startTime:
+                          description: The synchronization with the source data's
+                            start time.
                           type: string
                       required:
                       - name
@@ -158,6 +170,7 @@ spec:
                       type: object
                     type: array
                   terms:
+                    description: The terms of the Data Share.
                     type: string
                 required:
                 - kind
@@ -339,6 +352,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Data Share.
                     type: string
                 type: object
               conditions:

@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: CassandraTable is the Schema for the CassandraTables API
+        description: CassandraTable is the Schema for the CassandraTables API. Manages
+          a Cassandra Table within a Cosmos DB Cassandra Keyspace.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,15 +65,27 @@ spec:
               forProvider:
                 properties:
                   analyticalStorageTtl:
+                    description: Time to live of the Analytical Storage. Possible
+                      values are at least -1. -1 means the Analytical Storage never
+                      expires. Changing this forces a new resource to be created.
                     type: number
                   autoscaleSettings:
+                    description: An autoscale_settings block as defined below. This
+                      must be set upon database creation otherwise it cannot be updated
+                      without a manual terraform destroy-apply.
                     items:
                       properties:
                         maxThroughput:
+                          description: The maximum throughput of the Cassandra Table
+                            . Must be between 1,000 and 1,000,000. Must be set in
+                            increments of 1,000. Conflicts with throughput.
                           type: number
                       type: object
                     type: array
                   cassandraKeyspaceId:
+                    description: The ID of the Cosmos DB Cassandra Keyspace to create
+                      the table within. Changing this forces a new resource to be
+                      created.
                     type: string
                   cassandraKeyspaceIdRef:
                     description: A Reference to a named object.
@@ -148,16 +161,23 @@ spec:
                         type: object
                     type: object
                   defaultTtl:
+                    description: Time to live of the Cosmos DB Cassandra table. Possible
+                      values are at least -1. -1 means the Cassandra table never expires.
                     type: number
                   schema:
+                    description: A schema block as defined below. Changing this forces
+                      a new resource to be created.
                     items:
                       properties:
                         clusterKey:
+                          description: One or more cluster_key blocks as defined below.
                           items:
                             properties:
                               name:
                                 type: string
                               orderBy:
+                                description: Order of the key. Currently supported
+                                  values are Asc and Desc.
                                 type: string
                             required:
                             - name
@@ -165,11 +185,13 @@ spec:
                             type: object
                           type: array
                         column:
+                          description: One or more column blocks as defined below.
                           items:
                             properties:
                               name:
                                 type: string
                               type:
+                                description: Type of the column to be created.
                                 type: string
                             required:
                             - name
@@ -177,6 +199,8 @@ spec:
                             type: object
                           type: array
                         partitionKey:
+                          description: One or more partition_key blocks as defined
+                            below.
                           items:
                             properties:
                               name:
@@ -191,6 +215,10 @@ spec:
                       type: object
                     type: array
                   throughput:
+                    description: The throughput of Cassandra KeySpace . Must be set
+                      in increments of 100. The minimum value is 400. This must be
+                      set upon database creation otherwise it cannot be updated without
+                      a manual terraform destroy-apply.
                     type: number
                 required:
                 - schema
@@ -372,6 +400,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: the ID of the CosmosDB Cassandra Table.
                     type: string
                 type: object
               conditions:

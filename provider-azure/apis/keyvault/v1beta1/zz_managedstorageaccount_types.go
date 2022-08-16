@@ -14,11 +14,14 @@ import (
 )
 
 type ManagedStorageAccountObservation struct {
+
+	// The ID of the Key Vault Managed Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ManagedStorageAccountParameters struct {
 
+	// The ID of the Key Vault where the Managed Storage Account should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,12 +33,15 @@ type ManagedStorageAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
+	// Should Storage Account access key be regenerated periodically?
 	// +kubebuilder:validation:Optional
 	RegenerateKeyAutomatically *bool `json:"regenerateKeyAutomatically,omitempty" tf:"regenerate_key_automatically,omitempty"`
 
+	// How often Storage Account access key should be regenerated. Value needs to be in ISO 8601 duration format.
 	// +kubebuilder:validation:Optional
 	RegenerationPeriod *string `json:"regenerationPeriod,omitempty" tf:"regeneration_period,omitempty"`
 
+	// The ID of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -47,9 +53,11 @@ type ManagedStorageAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
+	// Which Storage Account access key that is managed by Key Vault. Possible values are key1 and key2.
 	// +kubebuilder:validation:Required
 	StorageAccountKey *string `json:"storageAccountKey" tf:"storage_account_key,omitempty"`
 
+	// A mapping of tags which should be assigned to the Key Vault Managed Storage Account.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -68,7 +76,7 @@ type ManagedStorageAccountStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ManagedStorageAccount is the Schema for the ManagedStorageAccounts API
+// ManagedStorageAccount is the Schema for the ManagedStorageAccounts API. Manages a Key Vault Managed Storage Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

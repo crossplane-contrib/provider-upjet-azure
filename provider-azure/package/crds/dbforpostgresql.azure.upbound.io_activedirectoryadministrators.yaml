@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ActiveDirectoryAdministrator is the Schema for the ActiveDirectoryAdministrators
-          API
+          API. Manages an Active Directory administrator on a PostgreSQL server
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,12 @@ spec:
               forProvider:
                 properties:
                   objectId:
+                    description: The ID of the principal to set as the server administrator.
+                      For a managed identity this should be the Client ID of the identity.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group for the PostgreSQL
+                      server. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -143,6 +147,9 @@ spec:
                         type: object
                     type: object
                   serverName:
+                    description: The name of the PostgreSQL Server on which to set
+                      the administrator. Changing this forces a new resource to be
+                      created.
                     type: string
                   serverNameRef:
                     description: A Reference to a named object.
@@ -218,6 +225,7 @@ spec:
                         type: object
                     type: object
                   tenantId:
+                    description: The Azure Tenant ID
                     type: string
                 required:
                 - objectId
@@ -401,6 +409,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the PostgreSQL Active Directory Administrator.
                     type: string
                 type: object
               conditions:

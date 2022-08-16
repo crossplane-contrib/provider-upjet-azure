@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: ManagedStorageAccountSASTokenDefinition is the Schema for the
-          ManagedStorageAccountSASTokenDefinitions API
+          ManagedStorageAccountSASTokenDefinitions API. Manages a Key Vault Managed
+          Storage Account SAS Definition.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +67,7 @@ spec:
               forProvider:
                 properties:
                   managedStorageAccountId:
+                    description: The ID of the Managed Storage Account.
                     type: string
                   managedStorageAccountIdRef:
                     description: A Reference to a named object.
@@ -141,14 +143,24 @@ spec:
                         type: object
                     type: object
                   sasTemplateUri:
+                    description: The SAS definition token template signed with an
+                      arbitrary key. Tokens created according to the SAS definition
+                      will have the same properties as the template, but regenerated
+                      with a new validity period.
                     type: string
                   sasType:
+                    description: The type of SAS token the SAS definition will create.
+                      Possible values are account and service.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      SAS Definition.
                     type: object
                   validityPeriod:
+                    description: Validity period of SAS token. Value needs to be in
+                      ISO 8601 duration format.
                     type: string
                 required:
                 - sasTemplateUri
@@ -333,8 +345,11 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Managed Storage Account SAS Definition.
                     type: string
                   secretId:
+                    description: The ID of the Secret that is created by Managed Storage
+                      Account SAS Definition.
                     type: string
                 type: object
               conditions:

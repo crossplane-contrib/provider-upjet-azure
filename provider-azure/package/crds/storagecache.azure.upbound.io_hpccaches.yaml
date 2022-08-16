@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: HPCCache is the Schema for the HPCCaches API
+        description: HPCCache is the Schema for the HPCCaches API. Manages a HPC Cache.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,28 +64,56 @@ spec:
               forProvider:
                 properties:
                   cacheSizeInGb:
+                    description: The size of the HPC Cache, in GB. Possible values
+                      are 3072, 6144, 12288, 21623, 24576, 43246, 49152 and 86491.
+                      Changing this forces a new resource to be created.
                     type: number
                   defaultAccessPolicy:
+                    description: A default_access_policy block as defined below.
                     items:
                       properties:
                         accessRule:
+                          description: One to three access_rule blocks as defined
+                            above.
                           items:
                             properties:
                               access:
+                                description: 'The access level for this rule. Possible
+                                  values are: rw, ro, no.'
                                 type: string
                               anonymousGid:
+                                description: The anonymous GID used when root_squash_enabled
+                                  is true.
                                 type: number
                               anonymousUid:
+                                description: The anonymous UID used when root_squash_enabled
+                                  is true.
                                 type: number
                               filter:
+                                description: 'The filter applied to the scope for
+                                  this rule. The filter''s format depends on its scope:
+                                  default scope matches all clients and has no filter
+                                  value; network scope takes a CIDR format; host takes
+                                  an IP address or fully qualified domain name. If
+                                  a client does not match any filter rule and there
+                                  is no default rule, access is denied.'
                                 type: string
                               rootSquashEnabled:
+                                description: Whether to enable root squash? Defaults
+                                  to false.
                                 type: boolean
                               scope:
+                                description: 'The scope of this rule. The scope and  the
+                                  filter determine which clients match the rule. Possible
+                                  values are: default, network, host.'
                                 type: string
                               submountAccessEnabled:
+                                description: Whether allow access to subdirectories
+                                  under the root export? Defaults to false.
                                 type: boolean
                               suidEnabled:
+                                description: Whether SUID is allowed? Defaults to
+                                  false.
                                 type: boolean
                             required:
                             - access
@@ -97,17 +125,27 @@ spec:
                       type: object
                     type: array
                   directoryActiveDirectory:
+                    description: A directory_active_directory block as defined below.
                     items:
                       properties:
                         cacheNetbiosName:
+                          description: The NetBIOS name to assign to the HPC Cache
+                            when it joins the Active Directory domain as a server.
                           type: string
                         dnsPrimaryIp:
+                          description: The primary DNS IP address used to resolve
+                            the Active Directory domain controller's FQDN.
                           type: string
                         dnsSecondaryIp:
+                          description: The secondary DNS IP address used to resolve
+                            the Active Directory domain controller's FQDN.
                           type: string
                         domainName:
+                          description: The fully qualified domain name of the Active
+                            Directory domain controller.
                           type: string
                         domainNetbiosName:
+                          description: The Active Directory domain's NetBIOS name.
                           type: string
                         passwordSecretRef:
                           description: A SecretKeySelector is a reference to a secret
@@ -128,6 +166,8 @@ spec:
                           - namespace
                           type: object
                         username:
+                          description: The username of the Active Directory domain
+                            administrator.
                           type: string
                       required:
                       - cacheNetbiosName
@@ -139,11 +179,16 @@ spec:
                       type: object
                     type: array
                   directoryFlatFile:
+                    description: A directory_flat_file block as defined below.
                     items:
                       properties:
                         groupFileUri:
+                          description: The URI of the file containing group information
+                            .
                           type: string
                         passwordFileUri:
+                          description: The URI of the file containing user information
+                            .
                           type: string
                       required:
                       - groupFileUri
@@ -151,14 +196,19 @@ spec:
                       type: object
                     type: array
                   directoryLdap:
+                    description: A directory_ldap block as defined below.
                     items:
                       properties:
                         baseDn:
+                          description: The base distinguished name  for the LDAP domain.
                           type: string
                         bind:
+                          description: A bind block as defined above.
                           items:
                             properties:
                               dn:
+                                description: The Bind Distinguished Name  identity
+                                  to be used in the secure LDAP connection.
                                 type: string
                               passwordSecretRef:
                                 description: A SecretKeySelector is a reference to
@@ -184,12 +234,20 @@ spec:
                             type: object
                           type: array
                         certificateValidationUri:
+                          description: The URI of the CA certificate to validate the
+                            LDAP secure connection.
                           type: string
                         downloadCertificateAutomatically:
+                          description: Whether the certificate should be automatically
+                            downloaded. This can be set to true only when certificate_validation_uri
+                            is provided. Defaults to false.
                           type: boolean
                         encrypted:
+                          description: Whether the LDAP connection should be encrypted?
+                            Defaults to false.
                           type: boolean
                         server:
+                          description: The FQDN or IP address of the LDAP server.
                           type: string
                       required:
                       - baseDn
@@ -197,11 +255,15 @@ spec:
                       type: object
                     type: array
                   dns:
+                    description: A dns block as defined below.
                     items:
                       properties:
                         searchDomain:
+                          description: The DNS search domain for the HPC Cache.
                           type: string
                         servers:
+                          description: A list of DNS servers for the HPC Cache. At
+                            most three IP are allowed to set.
                           items:
                             type: string
                           type: array
@@ -210,12 +272,22 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure Region where the HPC
+                      Cache should be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   mtu:
+                    description: The IPv4 maximum transmission unit configured for
+                      the subnet of the HPC Cache. Possible values range from 576
+                      - 1500. Defaults to 1500.
                     type: number
                   ntpServer:
+                    description: The NTP server IP Address or FQDN for the HPC Cache.
+                      Defaults to time.windows.com.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group in which to create
+                      the HPC Cache. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -291,8 +363,14 @@ spec:
                         type: object
                     type: object
                   skuName:
+                    description: The SKU of HPC Cache to use. Possible values are  -
+                      Standard_2G, Standard_4G Standard_8G or  - Standard_L4_5G, Standard_L9G,
+                      and Standard_L16G. Changing this forces a new resource to be
+                      created.
                     type: string
                   subnetId:
+                    description: The ID of the Subnet for the HPC Cache. Changing
+                      this forces a new resource to be created.
                     type: string
                   subnetIdRef:
                     description: A Reference to a named object.
@@ -370,6 +448,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the HPC Cache.
                     type: object
                 required:
                 - cacheSizeInGb
@@ -553,8 +632,11 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The id of the HPC Cache.
                     type: string
                   mountAddresses:
+                    description: A list of IP Addresses where the HPC Cache can be
+                      mounted.
                     items:
                       type: string
                     type: array

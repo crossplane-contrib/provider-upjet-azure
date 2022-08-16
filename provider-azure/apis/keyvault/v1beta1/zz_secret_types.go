@@ -14,21 +14,28 @@ import (
 )
 
 type SecretObservation struct {
+
+	// The Key Vault Secret ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The current version of the Key Vault Secret.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
+	// The Base ID of the Key Vault Secret.
 	VersionlessID *string `json:"versionlessId,omitempty" tf:"versionless_id,omitempty"`
 }
 
 type SecretParameters struct {
 
+	// Specifies the content type for the Key Vault Secret.
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
+	// Expiration UTC datetime .
 	// +kubebuilder:validation:Optional
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
+	// The ID of the Key Vault where the Secret should be created.
 	// +crossplane:generate:reference:type=Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -40,12 +47,15 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
+	// Key not usable before the provided UTC datetime .
 	// +kubebuilder:validation:Optional
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies the value of the Key Vault Secret.
 	// +kubebuilder:validation:Required
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
@@ -64,7 +74,7 @@ type SecretStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Secret is the Schema for the Secrets API
+// Secret is the Schema for the Secrets API. Manages a Key Vault Secret.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

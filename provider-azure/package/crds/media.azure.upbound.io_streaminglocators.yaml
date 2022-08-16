@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: StreamingLocator is the Schema for the StreamingLocators API
+        description: StreamingLocator is the Schema for the StreamingLocators API.
+          Manages a Media Streaming Locator.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,12 @@ spec:
               forProvider:
                 properties:
                   alternativeMediaId:
+                    description: Alternative Media ID of this Streaming Locator. Changing
+                      this forces a new Streaming Locator to be created.
                     type: string
                   assetName:
+                    description: Asset Name. Changing this forces a new Streaming
+                      Locator to be created.
                     type: string
                   assetNameRef:
                     description: A Reference to a named object.
@@ -141,25 +146,46 @@ spec:
                         type: object
                     type: object
                   contentKey:
+                    description: One or more content_key blocks as defined below.
+                      Changing this forces a new Streaming Locator to be created.
                     items:
                       properties:
                         contentKeyId:
+                          description: ID of Content Key. Changing this forces a new
+                            Streaming Locator to be created.
                           type: string
                         labelReferenceInStreamingPolicy:
+                          description: Label of Content Key as specified in the Streaming
+                            Policy. Changing this forces a new Streaming Locator to
+                            be created.
                           type: string
                         policyName:
+                          description: Content Key Policy used by Content Key. Changing
+                            this forces a new Streaming Locator to be created.
                           type: string
                         type:
+                          description: Encryption type of Content Key. Supported values
+                            are CommonEncryptionCbcs, CommonEncryptionCenc or EnvelopeEncryption.
+                            Changing this forces a new Streaming Locator to be created.
                           type: string
                         value:
+                          description: Value of Content Key. Changing this forces
+                            a new Streaming Locator to be created.
                           type: string
                       type: object
                     type: array
                   defaultContentKeyPolicyName:
+                    description: Name of the default Content Key Policy used by this
+                      Streaming Locator.Changing this forces a new Streaming Locator
+                      to be created.
                     type: string
                   endTime:
+                    description: The end time of the Streaming Locator. Changing this
+                      forces a new Streaming Locator to be created.
                     type: string
                   mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Streaming Locator to be created.
                     type: string
                   mediaServicesAccountNameRef:
                     description: A Reference to a named object.
@@ -235,6 +261,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the Resource Group where the Streaming
+                      Locator should exist. Changing this forces a new Streaming Locator
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -310,10 +339,21 @@ spec:
                         type: object
                     type: object
                   startTime:
+                    description: The start time of the Streaming Locator. Changing
+                      this forces a new Streaming Locator to be created.
                     type: string
                   streamingLocatorId:
+                    description: The ID of the Streaming Locator. Changing this forces
+                      a new Streaming Locator to be created.
                     type: string
                   streamingPolicyName:
+                    description: 'Name of the Streaming Policy used by this Streaming
+                      Locator. Either specify the name of Streaming Policy you created
+                      or use one of the predefined Streaming Policies. The predefined
+                      Streaming Policies available are: Predefined_DownloadOnly, Predefined_ClearStreamingOnly,
+                      Predefined_DownloadAndClearStreaming, Predefined_ClearKey, Predefined_MultiDrmCencStreaming
+                      and Predefined_MultiDrmStreaming. Changing this forces a new
+                      Streaming Locator to be created.'
                     type: string
                 required:
                 - streamingPolicyName
@@ -495,6 +535,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Streaming Locator.
                     type: string
                 type: object
               conditions:

@@ -18,6 +18,7 @@ type ActionObservation struct {
 
 type ActionParameters struct {
 
+	// The ID of the Action Group can be sourced from the
 	// +crossplane:generate:reference:type=MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -29,6 +30,7 @@ type ActionParameters struct {
 	// +kubebuilder:validation:Optional
 	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
+	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
 	// +kubebuilder:validation:Optional
 	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
 }
@@ -38,12 +40,15 @@ type ApplicationInsightsWebTestLocationAvailabilityCriteriaObservation struct {
 
 type ApplicationInsightsWebTestLocationAvailabilityCriteriaParameters struct {
 
+	// The ID of the Application Insights Resource.
 	// +kubebuilder:validation:Required
 	ComponentID *string `json:"componentId" tf:"component_id,omitempty"`
 
+	// The number of failed locations.
 	// +kubebuilder:validation:Required
 	FailedLocationCount *float64 `json:"failedLocationCount" tf:"failed_location_count,omitempty"`
 
+	// The ID of the Application Insights Web Test.
 	// +kubebuilder:validation:Required
 	WebTestID *string `json:"webTestId" tf:"web_test_id,omitempty"`
 }
@@ -71,6 +76,7 @@ type CriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipMetricValidation *bool `json:"skipMetricValidation,omitempty" tf:"skip_metric_validation,omitempty"`
 
+	// The criteria threshold value that activates the alert.
 	// +kubebuilder:validation:Required
 	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 }
@@ -86,6 +92,7 @@ type DimensionParameters struct {
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
+	// The list of dimension values.
 	// +kubebuilder:validation:Required
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
@@ -101,6 +108,7 @@ type DynamicCriteriaDimensionParameters struct {
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
+	// The list of dimension values.
 	// +kubebuilder:validation:Required
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
@@ -113,18 +121,22 @@ type DynamicCriteriaParameters struct {
 	// +kubebuilder:validation:Required
 	Aggregation *string `json:"aggregation" tf:"aggregation,omitempty"`
 
+	// The extent of deviation required to trigger an alert. Possible values are Low, Medium and High.
 	// +kubebuilder:validation:Required
 	AlertSensitivity *string `json:"alertSensitivity" tf:"alert_sensitivity,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Dimension []DynamicCriteriaDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
+	// The number of violations to trigger an alert. Should be smaller or equal to evaluation_total_count.
 	// +kubebuilder:validation:Optional
 	EvaluationFailureCount *float64 `json:"evaluationFailureCount,omitempty" tf:"evaluation_failure_count,omitempty"`
 
+	// The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity  and the selected number of aggregated points.
 	// +kubebuilder:validation:Optional
 	EvaluationTotalCount *float64 `json:"evaluationTotalCount,omitempty" tf:"evaluation_total_count,omitempty"`
 
+	// The ISO8601 date from which to start learning the metric historical data and calculate the dynamic thresholds.
 	// +kubebuilder:validation:Optional
 	IgnoreDataBefore *string `json:"ignoreDataBefore,omitempty" tf:"ignore_data_before,omitempty"`
 
@@ -142,35 +154,46 @@ type DynamicCriteriaParameters struct {
 }
 
 type MonitorMetricAlertObservation struct {
+
+	// The ID of the metric alert.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MonitorMetricAlertParameters struct {
 
+	// One or more action blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
+	// A application_insights_web_test_location_availability_criteria block as defined below.
 	// +kubebuilder:validation:Optional
 	ApplicationInsightsWebTestLocationAvailabilityCriteria []ApplicationInsightsWebTestLocationAvailabilityCriteriaParameters `json:"applicationInsightsWebTestLocationAvailabilityCriteria,omitempty" tf:"application_insights_web_test_location_availability_criteria,omitempty"`
 
+	// Should the alerts in this Metric Alert be auto resolved? Defaults to true.
 	// +kubebuilder:validation:Optional
 	AutoMitigate *bool `json:"autoMitigate,omitempty" tf:"auto_mitigate,omitempty"`
 
+	// One or more  criteria blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Criteria []CriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
+	// The description of this Metric Alert.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// A dynamic_criteria block as defined below.
 	// +kubebuilder:validation:Optional
 	DynamicCriteria []DynamicCriteriaParameters `json:"dynamicCriteria,omitempty" tf:"dynamic_criteria,omitempty"`
 
+	// Should this Metric Alert be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The evaluation frequency of this Metric Alert, represented in ISO 8601 duration format. Possible values are PT1M, PT5M, PT15M, PT30M and PT1H. Defaults to PT1M.
 	// +kubebuilder:validation:Optional
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
+	// The name of the resource group in which to create the Metric Alert instance.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -181,6 +204,7 @@ type MonitorMetricAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A set of strings of resource IDs at which the metric criteria should be applied.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -192,20 +216,25 @@ type MonitorMetricAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
 
+	// The severity of this Metric Alert. Possible values are 0, 1, 2, 3 and 4. Defaults to 3.
 	// +kubebuilder:validation:Optional
 	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The location of the target resource.
 	// The location of the target pluginsdk. Required when using subscription, resource group scope or multiple scopes.
 	// +kubebuilder:validation:Optional
 	TargetResourceLocation *string `json:"targetResourceLocation,omitempty" tf:"target_resource_location,omitempty"`
 
+	// The resource type  of the target resource.
 	// The resource type (e.g. Microsoft.Compute/virtualMachines) of the target pluginsdk. Required when using subscription, resource group scope or multiple scopes.
 	// +kubebuilder:validation:Optional
 	TargetResourceType *string `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 
+	// The period of time that is used to monitor alert activity, represented in ISO 8601 duration format. This value must be greater than frequency. Possible values are PT1M, PT5M, PT15M, PT30M, PT1H, PT6H, PT12H and P1D. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
 	WindowSize *string `json:"windowSize,omitempty" tf:"window_size,omitempty"`
 }
@@ -224,7 +253,7 @@ type MonitorMetricAlertStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MonitorMetricAlert is the Schema for the MonitorMetricAlerts API
+// MonitorMetricAlert is the Schema for the MonitorMetricAlerts API. Manages a Metric Alert within Azure Monitor
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

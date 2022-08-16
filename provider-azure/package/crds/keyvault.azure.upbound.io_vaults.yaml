@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Vault is the Schema for the Vaults API
+        description: Vault is the Schema for the Vaults API. Manages a Key Vault.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,40 +64,67 @@ spec:
               forProvider:
                 properties:
                   contact:
+                    description: One or more contact block as defined below.
                     items:
                       properties:
                         email:
+                          description: E-mail address of the contact.
                           type: string
                         name:
                           type: string
                         phone:
+                          description: Phone number of the contact.
                           type: string
                       required:
                       - email
                       type: object
                     type: array
                   enableRbacAuthorization:
+                    description: Boolean flag to specify whether Azure Key Vault uses
+                      Role Based Access Control  for authorization of data actions.
+                      Defaults to false.
                     type: boolean
                   enabledForDeployment:
+                    description: Boolean flag to specify whether Azure Virtual Machines
+                      are permitted to retrieve certificates stored as secrets from
+                      the key vault. Defaults to false.
                     type: boolean
                   enabledForDiskEncryption:
+                    description: Boolean flag to specify whether Azure Disk Encryption
+                      is permitted to retrieve secrets from the vault and unwrap keys.
+                      Defaults to false.
                     type: boolean
                   enabledForTemplateDeployment:
+                    description: Boolean flag to specify whether Azure Resource Manager
+                      is permitted to retrieve secrets from the key vault. Defaults
+                      to false.
                     type: boolean
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   networkAcls:
+                    description: A network_acls block as defined below.
                     items:
                       properties:
                         bypass:
+                          description: Specifies which traffic can bypass the network
+                            rules. Possible values are AzureServices and None.
                           type: string
                         defaultAction:
+                          description: The Default Action to use when no rules match
+                            from ip_rules / virtual_network_subnet_ids. Possible values
+                            are Allow and Deny.
                           type: string
                         ipRules:
+                          description: One or more IP Addresses, or CIDR Blocks which
+                            should be able to access the Key Vault.
                           items:
                             type: string
                           type: array
                         virtualNetworkSubnetIds:
+                          description: One or more Subnet IDs which should be able
+                            to access this Key Vault.
                           items:
                             type: string
                           type: array
@@ -107,8 +134,12 @@ spec:
                       type: object
                     type: array
                   purgeProtectionEnabled:
+                    description: Is Purge Protection enabled for this Key Vault? Defaults
+                      to false.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Key Vault. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -184,12 +215,17 @@ spec:
                         type: object
                     type: object
                   skuName:
+                    description: The Name of the SKU used for this Key Vault. Possible
+                      values are standard and premium.
                     type: string
                   softDeleteRetentionDays:
+                    description: The number of days that items should be retained
+                      for once soft-deleted. This value can be between 7 and 90  days.
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   tenantId:
                     type: string
@@ -375,25 +411,49 @@ spec:
               atProvider:
                 properties:
                   accessPolicy:
+                    description: A list of up to 16 objects describing access policies,
+                      as described below.
                     items:
                       properties:
                         applicationId:
+                          description: The object ID of an Application in Azure Active
+                            Directory.
                           type: string
                         certificatePermissions:
+                          description: 'List of certificate permissions, must be one
+                            or more from the following: Backup, Create, Delete, DeleteIssuers,
+                            Get, GetIssuers, Import, List, ListIssuers, ManageContacts,
+                            ManageIssuers, Purge, Recover, Restore, SetIssuers and
+                            Update.'
                           items:
                             type: string
                           type: array
                         keyPermissions:
+                          description: 'List of key permissions, must be one or more
+                            from the following: Backup, Create, Decrypt, Delete, Encrypt,
+                            Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey,
+                            Update, Verify and WrapKey.'
                           items:
                             type: string
                           type: array
                         objectId:
+                          description: The object ID of a user, service principal
+                            or security group in the Azure Active Directory tenant
+                            for the vault. The object ID must be unique for the list
+                            of access policies.
                           type: string
                         secretPermissions:
+                          description: 'List of secret permissions, must be one or
+                            more from the following: Backup, Delete, Get, List, Purge,
+                            Recover, Restore and Set.'
                           items:
                             type: string
                           type: array
                         storagePermissions:
+                          description: 'List of storage permissions, must be one or
+                            more from the following: Backup, Delete, DeleteSAS, Get,
+                            GetSAS, List, ListSAS, Purge, Recover, RegenerateKey,
+                            Restore, Set, SetSAS and Update.'
                           items:
                             type: string
                           type: array
@@ -402,8 +462,11 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: The ID of the Key Vault.
                     type: string
                   vaultUri:
+                    description: The URI of the Key Vault, used for performing operations
+                      on keys and secrets.
                     type: string
                 type: object
               conditions:

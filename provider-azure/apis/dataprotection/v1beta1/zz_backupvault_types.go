@@ -14,25 +14,32 @@ import (
 )
 
 type BackupVaultObservation struct {
+
+	// The ID of the Backup Vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
 
 type BackupVaultParameters struct {
 
+	// Specifies the type of the data store. Possible values are ArchiveStore, SnapshotStore and VaultStore.
 	// +kubebuilder:validation:Required
 	DatastoreType *string `json:"datastoreType" tf:"datastore_type,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Specifies the backup storage redundancy. Possible values are GeoRedundant and LocallyRedundant. Changing this forces a new Backup Vault to be created.
 	// +kubebuilder:validation:Required
 	Redundancy *string `json:"redundancy" tf:"redundancy,omitempty"`
 
+	// The name of the Resource Group where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -43,18 +50,23 @@ type BackupVaultParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags which should be assigned to the Backup Vault.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type IdentityObservation struct {
+
+	// The Principal ID for the Service Principal associated with the Identity of this Backup Vault.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// The Tenant ID for the Service Principal associated with the Identity of this Backup Vault.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type IdentityParameters struct {
 
+	// Specifies the type of Managed Service Identity that should be configured on this Backup Vault. The only possible value is SystemAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -73,7 +85,7 @@ type BackupVaultStatus struct {
 
 // +kubebuilder:object:root=true
 
-// BackupVault is the Schema for the BackupVaults API
+// BackupVault is the Schema for the BackupVaults API. Manages a Backup Vault.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

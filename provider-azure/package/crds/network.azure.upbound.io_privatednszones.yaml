@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: PrivateDNSZone is the Schema for the PrivateDNSZones API
+        description: PrivateDNSZone is the Schema for the PrivateDNSZones API. Manages
+          a Private DNS Zone.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   resourceGroupName:
+                    description: Specifies the resource group where the resource exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -142,20 +145,32 @@ spec:
                     items:
                       properties:
                         email:
+                          description: The email contact for the SOA record.
                           type: string
                         expireTime:
+                          description: The expire time for the SOA record. Defaults
+                            to 2419200.
                           type: number
                         minimumTtl:
+                          description: The minimum Time To Live for the SOA record.
+                            By convention, it is used to determine the negative caching
+                            duration. Defaults to 10.
                           type: number
                         refreshTime:
+                          description: The refresh time for the SOA record. Defaults
+                            to 3600.
                           type: number
                         retryTime:
+                          description: The retry time for the SOA record. Defaults
+                            to 300.
                           type: number
                         tags:
                           additionalProperties:
                             type: string
                           type: object
                         ttl:
+                          description: The Time To Live of the SOA Record in seconds.
+                            Defaults to 3600.
                           type: number
                       required:
                       - email
@@ -343,23 +358,37 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The Private DNS Zone ID.
                     type: string
                   maxNumberOfRecordSets:
+                    description: The maximum number of record sets that can be created
+                      in this Private DNS zone.
                     type: number
                   maxNumberOfVirtualNetworkLinks:
+                    description: The maximum number of virtual networks that can be
+                      linked to this Private DNS zone.
                     type: number
                   maxNumberOfVirtualNetworkLinksWithRegistration:
+                    description: The maximum number of virtual networks that can be
+                      linked to this Private DNS zone with registration enabled.
                     type: number
                   numberOfRecordSets:
+                    description: The current number of record sets in this Private
+                      DNS zone.
                     type: number
                   soaRecord:
                     items:
                       properties:
                         fqdn:
+                          description: The fully qualified domain name of the Record
+                            Set.
                           type: string
                         hostName:
+                          description: The domain name of the authoritative name server
+                            for the SOA record.
                           type: string
                         serialNumber:
+                          description: The serial number for the SOA record.
                           type: number
                       type: object
                     type: array

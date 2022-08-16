@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: NATGatewayPublicIPAssociation is the Schema for the NATGatewayPublicIPAssociations
-          API
+          API. Manages the association between a NAT Gateway and a Public IP.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   natGatewayId:
+                    description: The ID of the NAT Gateway. Changing this forces a
+                      new resource to be created.
                     type: string
                   natGatewayIdRef:
                     description: A Reference to a named object.
@@ -141,6 +143,9 @@ spec:
                         type: object
                     type: object
                   publicIpAddressId:
+                    description: The ID of the Public IP which this NAT Gateway which
+                      should be connected to. Changing this forces a new resource
+                      to be created.
                     type: string
                   publicIpAddressIdRef:
                     description: A Reference to a named object.
@@ -394,6 +399,8 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The  ID of the Association between the NAT Gateway
+                      and the Public IP.
                     type: string
                 type: object
               conditions:

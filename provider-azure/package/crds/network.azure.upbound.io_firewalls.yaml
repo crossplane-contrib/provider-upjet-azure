@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Firewall is the Schema for the Firewalls API
+        description: Firewall is the Schema for the Firewalls API. Manages an Azure
+          Firewall.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,13 @@ spec:
               forProvider:
                 properties:
                   dnsServers:
+                    description: A list of DNS servers that the Azure Firewall will
+                      direct DNS traffic to the for name resolution.
                     items:
                       type: string
                     type: array
                   firewallPolicyId:
+                    description: The ID of the Firewall Policy applied to this Firewall.
                     type: string
                   ipConfiguration:
                     items:
@@ -235,8 +239,14 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   managementIpConfiguration:
+                    description: A management_ip_configuration block as documented
+                      below, which allows force-tunnelling of traffic to be performed
+                      by the firewall. Adding or removing this block or changing the
+                      subnet_id in an existing block forces a new resource to be created.
                     items:
                       properties:
                         name:
@@ -327,10 +337,16 @@ spec:
                       type: object
                     type: array
                   privateIpRanges:
+                    description: A list of SNAT private CIDR IP ranges, or the special
+                      string IANAPrivateRanges, which indicates Azure Firewall does
+                      not SNAT when the destination IP address is a private range
+                      per IANA RFC 1918.
                     items:
                       type: string
                     type: array
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the resource. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -406,27 +422,42 @@ spec:
                         type: object
                     type: object
                   skuName:
+                    description: SKU name of the Firewall. Possible values are AZFW_Hub
+                      and AZFW_VNet.  Changing this forces a new resource to be created.
                     type: string
                   skuTier:
+                    description: SKU tier of the Firewall. Possible values are Premium
+                      and Standard.  Changing this forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   threatIntelMode:
+                    description: 'The operation mode for threat intelligence-based
+                      filtering. Possible values are: Off, Alert,Deny and "". Defaults
+                      to Alert.'
                     type: string
                   virtualHub:
                     items:
                       properties:
                         publicIpCount:
+                          description: Specifies the number of public IPs to assign
+                            to the Firewall. Defaults to 1.
                           type: number
                         virtualHubId:
+                          description: Specifies the ID of the Virtual Hub where the
+                            Firewall resides in.
                           type: string
                       required:
                       - virtualHubId
                       type: object
                     type: array
                   zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Azure Firewall should be located. Changing this forces a new
+                      Azure Firewall to be created.
                     items:
                       type: string
                     type: array
@@ -612,6 +643,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Azure Firewall.
                     type: string
                   ipConfiguration:
                     items:
@@ -621,6 +653,10 @@ spec:
                       type: object
                     type: array
                   managementIpConfiguration:
+                    description: A management_ip_configuration block as documented
+                      below, which allows force-tunnelling of traffic to be performed
+                      by the firewall. Adding or removing this block or changing the
+                      subnet_id in an existing block forces a new resource to be created.
                     items:
                       properties:
                         privateIpAddress:
@@ -633,6 +669,8 @@ spec:
                         privateIpAddress:
                           type: string
                         publicIpAddresses:
+                          description: The list of public IP addresses associated
+                            with the Firewall.
                           items:
                             type: string
                           type: array

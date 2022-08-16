@@ -14,6 +14,8 @@ import (
 )
 
 type MarketplaceAgreementObservation struct {
+
+	// The ID of the Marketplace Agreement.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	LicenseTextLink *string `json:"licenseTextLink,omitempty" tf:"license_text_link,omitempty"`
@@ -23,12 +25,15 @@ type MarketplaceAgreementObservation struct {
 
 type MarketplaceAgreementParameters struct {
 
+	// The Offer of the Marketplace Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Offer *string `json:"offer" tf:"offer,omitempty"`
 
+	// The Plan of the Marketplace Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Plan *string `json:"plan" tf:"plan,omitempty"`
 
+	// The Publisher of the Marketplace Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 }
@@ -47,7 +52,7 @@ type MarketplaceAgreementStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MarketplaceAgreement is the Schema for the MarketplaceAgreements API
+// MarketplaceAgreement is the Schema for the MarketplaceAgreements API. Allows accepting the Legal Terms for a Marketplace Image.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

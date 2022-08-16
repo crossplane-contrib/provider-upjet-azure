@@ -14,22 +14,29 @@ import (
 )
 
 type ResourceGroupTemplateDeploymentObservation struct {
+
+	// The ID of the Resource Group Template Deployment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The JSON Content of the Outputs of the ARM Template Deployment.
 	OutputContent *string `json:"outputContent,omitempty" tf:"output_content,omitempty"`
 }
 
 type ResourceGroupTemplateDeploymentParameters struct {
 
+	// The Debug Level which should be used for this Resource Group Template Deployment. Possible values are none, requestContent, responseContent and requestContent, responseContent.
 	// +kubebuilder:validation:Optional
 	DebugLevel *string `json:"debugLevel,omitempty" tf:"debug_level,omitempty"`
 
+	// The Deployment Mode for this Resource Group Template Deployment. Possible values are Complete  and Incremental .
 	// +kubebuilder:validation:Required
 	DeploymentMode *string `json:"deploymentMode" tf:"deployment_mode,omitempty"`
 
+	// The contents of the ARM Template parameters file - containing a JSON list of parameters.
 	// +kubebuilder:validation:Optional
 	ParametersContent *string `json:"parametersContent,omitempty" tf:"parameters_content,omitempty"`
 
+	// The name of the Resource Group where the Resource Group Template Deployment should exist. Changing this forces a new Resource Group Template Deployment to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -40,12 +47,15 @@ type ResourceGroupTemplateDeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags which should be assigned to the Resource Group Template Deployment.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The contents of the ARM Template which should be deployed into this Resource Group. Cannot be specified with template_spec_version_id.
 	// +kubebuilder:validation:Optional
 	TemplateContent *string `json:"templateContent,omitempty" tf:"template_content,omitempty"`
 
+	// The ID of the Template Spec Version to deploy. Cannot be specified with template_content.
 	// +kubebuilder:validation:Optional
 	TemplateSpecVersionID *string `json:"templateSpecVersionId,omitempty" tf:"template_spec_version_id,omitempty"`
 }
@@ -64,7 +74,7 @@ type ResourceGroupTemplateDeploymentStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ResourceGroupTemplateDeployment is the Schema for the ResourceGroupTemplateDeployments API
+// ResourceGroupTemplateDeployment is the Schema for the ResourceGroupTemplateDeployments API. Manages a Resource Group Template Deployment.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

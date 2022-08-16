@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: FirewallRule is the Schema for the FirewallRules API
+        description: FirewallRule is the Schema for the FirewallRules API. Manages
+          a Firewall Rule for a PostgreSQL Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,12 @@ spec:
               forProvider:
                 properties:
                   endIpAddress:
+                    description: Specifies the End IP Address associated with this
+                      Firewall Rule. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which the PostgreSQL
+                      Server exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -141,6 +146,8 @@ spec:
                         type: object
                     type: object
                   serverName:
+                    description: Specifies the name of the PostgreSQL Server. Changing
+                      this forces a new resource to be created.
                     type: string
                   serverNameRef:
                     description: A Reference to a named object.
@@ -216,6 +223,8 @@ spec:
                         type: object
                     type: object
                   startIpAddress:
+                    description: Specifies the Start IP Address associated with this
+                      Firewall Rule. Changing this forces a new resource to be created.
                     type: string
                 required:
                 - endIpAddress
@@ -398,6 +407,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the PostgreSQL Firewall Rule.
                     type: string
                 type: object
               conditions:

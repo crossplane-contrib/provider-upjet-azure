@@ -14,20 +14,26 @@ import (
 )
 
 type FunctionJavascriptUdaObservation struct {
+
+	// The ID of the Stream Analytics JavaScript UDA Function.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type FunctionJavascriptUdaParameters struct {
 
+	// One or more input blocks as defined below.
 	// +kubebuilder:validation:Required
 	Input []InputParameters `json:"input" tf:"input,omitempty"`
 
+	// An output block as defined below.
 	// +kubebuilder:validation:Required
 	Output []OutputParameters `json:"output" tf:"output,omitempty"`
 
+	// The JavaScript of this UDA Function.
 	// +kubebuilder:validation:Required
 	Script *string `json:"script" tf:"script,omitempty"`
 
+	// The resource ID of the Stream Analytics Job where this Function should be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId" tf:"stream_analytics_job_id,omitempty"`
 }
@@ -37,6 +43,7 @@ type InputObservation struct {
 
 type InputParameters struct {
 
+	// Is this input parameter a configuration parameter? Defaults to false.
 	// +kubebuilder:validation:Optional
 	ConfigurationParameter *bool `json:"configurationParameter,omitempty" tf:"configuration_parameter,omitempty"`
 
@@ -67,7 +74,7 @@ type FunctionJavascriptUdaStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FunctionJavascriptUda is the Schema for the FunctionJavascriptUdas API
+// FunctionJavascriptUda is the Schema for the FunctionJavascriptUdas API. Manages a JavaScript UDA Function within a Stream Analytics Streaming Job.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

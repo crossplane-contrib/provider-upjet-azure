@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SQLFunction is the Schema for the SQLFunctions API
+        description: SQLFunction is the Schema for the SQLFunctions API. Manages an
+          SQL User Defined Function.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,12 @@ spec:
               forProvider:
                 properties:
                   body:
+                    description: Body of the User Defined Function.
                     type: string
                   containerId:
+                    description: The id of the Cosmos DB SQL Container to create the
+                      SQL User Defined Function within. Changing this forces a new
+                      SQL User Defined Function to be created.
                     type: string
                   containerIdRef:
                     description: A Reference to a named object.
@@ -320,6 +325,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the SQL User Defined Function.
                     type: string
                 type: object
               conditions:

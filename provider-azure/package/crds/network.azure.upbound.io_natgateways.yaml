@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NATGateway is the Schema for the NATGateways API
+        description: NATGateway is the Schema for the NATGateways API. Manages a Azure
+          NAT Gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,10 +65,18 @@ spec:
               forProvider:
                 properties:
                   idleTimeoutInMinutes:
+                    description: The idle timeout which should be used in minutes.
+                      Defaults to 4.
                     type: number
                   location:
+                    description: Specifies the supported Azure location where the
+                      NAT Gateway should exist. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupName:
+                    description: Specifies the name of the Resource Group in which
+                      the NAT Gateway should exist. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -143,12 +152,19 @@ spec:
                         type: object
                     type: object
                   skuName:
+                    description: The SKU which should be used. At this time the only
+                      supported value is Standard. Defaults to Standard.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource. Changing
+                      this forces a new resource to be created.
                     type: object
                   zones:
+                    description: Specifies a list of Availability Zones in which this
+                      NAT Gateway should be located. Changing this forces a new NAT
+                      Gateway to be created.
                     items:
                       type: string
                     type: array
@@ -332,8 +348,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the NAT Gateway.
                     type: string
                   resourceGuid:
+                    description: The resource GUID property of the NAT Gateway.
                     type: string
                 type: object
               conditions:

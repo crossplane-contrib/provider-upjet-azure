@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Subscription is the Schema for the Subscriptions API
+        description: Subscription is the Schema for the Subscriptions API. Manages
+          a Subscription.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,20 +65,28 @@ spec:
               forProvider:
                 properties:
                   billingScopeId:
+                    description: The Azure Billing Scope ID. Can be a Microsoft Customer
+                      Account Billing Scope ID, a Microsoft Partner Account Billing
+                      Scope ID or an Enrollment Billing Scope ID.
                     type: string
                   subscriptionId:
-                    description: The GUID of the Subscription.
+                    description: The ID of the Subscription. Changing this forces
+                      a new Subscription to be created. The GUID of the Subscription.
                     type: string
                   subscriptionName:
-                    description: The Display Name for the Subscription.
+                    description: The Name of the Subscription. This is the Display
+                      Name in the portal. The Display Name for the Subscription.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the Subscription.
                     type: object
                   workload:
-                    description: The workload type for the Subscription. Possible
-                      values are `Production` (default) and `DevTest`.
+                    description: The workload type of the Subscription.  Possible
+                      values are Production  and DevTest. Changing this forces a new
+                      Subscription to be created. The workload type for the Subscription.
+                      Possible values are `Production` (default) and `DevTest`.
                     type: string
                 required:
                 - subscriptionName
@@ -259,8 +268,11 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The Resource ID of the Alias.
                     type: string
                   tenantId:
+                    description: The ID of the Tenant to which the subscription belongs.
+                      The Tenant ID to which the subscription belongs
                     type: string
                 type: object
               conditions:

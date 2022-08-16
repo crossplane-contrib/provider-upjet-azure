@@ -14,23 +14,30 @@ import (
 )
 
 type IOTHubEndpointServiceBusTopicObservation struct {
+
+	// The ID of the IoTHub ServiceBus Topic Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IOTHubEndpointServiceBusTopicParameters struct {
 
+	// Type used to authenticate against the Service Bus Topic endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
+	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
 	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
+	// URI of the Service Bus endpoint. This attribute can only be specified and is mandatory when authentication_type is identityBased.
 	// +kubebuilder:validation:Optional
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
+	// Name of the Service Bus Topic. This attribute can only be specified and is mandatory when authentication_type is identityBased.
 	// +kubebuilder:validation:Optional
 	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path,omitempty"`
 
+	// The IoTHub ID for the endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -42,9 +49,11 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
+	// ID of the User Managed Identity used to authenticate against the Service Bus Topic endpoint.
 	// +kubebuilder:validation:Optional
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
+	// The name of the resource group under which the Service Bus Topic has been created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -70,7 +79,7 @@ type IOTHubEndpointServiceBusTopicStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IOTHubEndpointServiceBusTopic is the Schema for the IOTHubEndpointServiceBusTopics API
+// IOTHubEndpointServiceBusTopic is the Schema for the IOTHubEndpointServiceBusTopics API. Manages an IotHub ServiceBus Topic Endpoint
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

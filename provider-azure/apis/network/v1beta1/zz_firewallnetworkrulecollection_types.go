@@ -19,9 +19,11 @@ type FirewallNetworkRuleCollectionObservation struct {
 
 type FirewallNetworkRuleCollectionParameters struct {
 
+	// Specifies the action the rule will apply to matching traffic. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
+	// Specifies the name of the Firewall in which the Network Rule Collection should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Firewall
 	// +kubebuilder:validation:Optional
 	AzureFirewallName *string `json:"azureFirewallName,omitempty" tf:"azure_firewall_name,omitempty"`
@@ -32,9 +34,11 @@ type FirewallNetworkRuleCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureFirewallNameSelector *v1.Selector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
 
+	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
 	// +kubebuilder:validation:Required
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
+	// Specifies the name of the Resource Group in which the Firewall exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -45,6 +49,7 @@ type FirewallNetworkRuleCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// One or more rule blocks as defined below.
 	// +kubebuilder:validation:Required
 	Rule []FirewallNetworkRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -54,30 +59,38 @@ type FirewallNetworkRuleCollectionRuleObservation struct {
 
 type FirewallNetworkRuleCollectionRuleParameters struct {
 
+	// Specifies a description for the rule.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Either a list of destination IP addresses and/or IP ranges, or a list of destination Service Tags.
 	// +kubebuilder:validation:Optional
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
+	// A list of destination FQDNS for the rule.
 	// +kubebuilder:validation:Optional
 	DestinationFqdns []*string `json:"destinationFqdns,omitempty" tf:"destination_fqdns,omitempty"`
 
+	// A list of destination IP Group IDs for the rule.
 	// +kubebuilder:validation:Optional
 	DestinationIPGroups []*string `json:"destinationIpGroups,omitempty" tf:"destination_ip_groups,omitempty"`
 
+	// A list of destination ports.
 	// +kubebuilder:validation:Required
 	DestinationPorts []*string `json:"destinationPorts" tf:"destination_ports,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// A list of protocols. Possible values are Any, ICMP, TCP and UDP.
 	// +kubebuilder:validation:Required
 	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
+	// A list of source IP addresses and/or IP ranges.
 	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
+	// A list of IP Group IDs for the rule.
 	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 }
@@ -96,7 +109,7 @@ type FirewallNetworkRuleCollectionStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FirewallNetworkRuleCollection is the Schema for the FirewallNetworkRuleCollections API
+// FirewallNetworkRuleCollection is the Schema for the FirewallNetworkRuleCollections API. Manages a Network Rule Collection within an Azure Firewall.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

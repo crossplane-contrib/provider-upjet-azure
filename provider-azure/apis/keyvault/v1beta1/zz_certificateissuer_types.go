@@ -18,31 +18,40 @@ type AdminObservation struct {
 
 type AdminParameters struct {
 
+	// E-mail address of the admin.
 	// +kubebuilder:validation:Required
 	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
+	// First name of the admin.
 	// +kubebuilder:validation:Optional
 	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
+	// Last name of the admin.
 	// +kubebuilder:validation:Optional
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
+	// Phone number of the admin.
 	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 
 type CertificateIssuerObservation struct {
+
+	// The ID of the Key Vault Certificate Issuer.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type CertificateIssuerParameters struct {
 
+	// The account number with the third-party Certificate Issuer.
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
+	// One or more admin blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Admin []AdminParameters `json:"admin,omitempty" tf:"admin,omitempty"`
 
+	// The ID of the Key Vault in which to create the Certificate Issuer.
 	// +crossplane:generate:reference:type=Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -54,12 +63,15 @@ type CertificateIssuerParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
+	// The ID of the organization as provided to the issuer.
 	// +kubebuilder:validation:Optional
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
+	// The password associated with the account and organization ID at the third-party Certificate Issuer. If not specified, will not overwrite any previous value.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
+	// The name of the third-party Certificate Issuer. Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA, OneCertV2-PublicCA and SslAdminV2.
 	// +kubebuilder:validation:Required
 	ProviderName *string `json:"providerName" tf:"provider_name,omitempty"`
 }
@@ -78,7 +90,7 @@ type CertificateIssuerStatus struct {
 
 // +kubebuilder:object:root=true
 
-// CertificateIssuer is the Schema for the CertificateIssuers API
+// CertificateIssuer is the Schema for the CertificateIssuers API. Manages a Key Vault Certificate Issuer.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

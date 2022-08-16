@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BackupVault is the Schema for the BackupVaults API
+        description: BackupVault is the Schema for the BackupVaults API. Manages a
+          Backup Vault.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,21 +65,34 @@ spec:
               forProvider:
                 properties:
                   datastoreType:
+                    description: Specifies the type of the data store. Possible values
+                      are ArchiveStore, SnapshotStore and VaultStore.
                     type: string
                   identity:
                     items:
                       properties:
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Backup Vault. The only
+                            possible value is SystemAssigned.
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   location:
+                    description: The Azure Region where the Backup Vault should exist.
+                      Changing this forces a new Backup Vault to be created.
                     type: string
                   redundancy:
+                    description: Specifies the backup storage redundancy. Possible
+                      values are GeoRedundant and LocallyRedundant. Changing this
+                      forces a new Backup Vault to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the Resource Group where the Backup Vault
+                      should exist. Changing this forces a new Backup Vault to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -156,6 +170,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags which should be assigned to the
+                      Backup Vault.
                     type: object
                 required:
                 - datastoreType
@@ -339,13 +355,18 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Backup Vault.
                     type: string
                   identity:
                     items:
                       properties:
                         principalId:
+                          description: The Principal ID for the Service Principal
+                            associated with the Identity of this Backup Vault.
                           type: string
                         tenantId:
+                          description: The Tenant ID for the Service Principal associated
+                            with the Identity of this Backup Vault.
                           type: string
                       type: object
                     type: array

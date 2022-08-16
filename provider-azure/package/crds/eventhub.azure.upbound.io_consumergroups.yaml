@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ConsumerGroup is the Schema for the ConsumerGroups API
+        description: ConsumerGroup is the Schema for the ConsumerGroups API. Manages
+          a Event Hubs Consumer Group as a nested resource within an Event Hub.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   eventhubName:
+                    description: Specifies the name of the EventHub. Changing this
+                      forces a new resource to be created.
                     type: string
                   eventhubNameRef:
                     description: A Reference to a named object.
@@ -139,6 +142,8 @@ spec:
                         type: object
                     type: object
                   namespaceName:
+                    description: Specifies the name of the grandparent EventHub Namespace.
+                      Changing this forces a new resource to be created.
                     type: string
                   namespaceNameRef:
                     description: A Reference to a named object.
@@ -214,6 +219,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group in which the EventHub
+                      Consumer Group's grandparent Namespace exists. Changing this
+                      forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -289,6 +297,7 @@ spec:
                         type: object
                     type: object
                   userMetadata:
+                    description: Specifies the user metadata.
                     type: string
                 type: object
               providerConfigRef:
@@ -468,6 +477,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the EventHub Consumer Group.
                     type: string
                 type: object
               conditions:

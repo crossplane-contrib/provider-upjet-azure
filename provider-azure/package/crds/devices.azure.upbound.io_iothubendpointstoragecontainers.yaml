@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: IOTHubEndpointStorageContainer is the Schema for the IOTHubEndpointStorageContainers
-          API
+          API. Manages an IotHub Storage Container Endpoint
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,12 +66,19 @@ spec:
               forProvider:
                 properties:
                   authenticationType:
+                    description: Type used to authenticate against the storage endpoint.
+                      Possible values are keyBased and identityBased. Defaults to
+                      keyBased.
                     type: string
                   batchFrequencyInSeconds:
+                    description: Time interval at which blobs are written to storage.
+                      Value should be between 60 and 720 seconds. Default value is
+                      300 seconds.
                     type: number
                   connectionStringSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The connection string for the endpoint. This attribute
+                      can only be specified and is mandatory when authentication_type
+                      is keyBased.
                     properties:
                       key:
                         description: The key to select.
@@ -88,6 +95,7 @@ spec:
                     - namespace
                     type: object
                   containerName:
+                    description: The name of storage container in the storage account.
                     type: string
                   containerNameRef:
                     description: A Reference to a named object.
@@ -163,14 +171,27 @@ spec:
                         type: object
                     type: object
                   encoding:
+                    description: Encoding that is used to serialize messages to blobs.
+                      Supported values are Avro, AvroDeflate and JSON. Default value
+                      is Avro. Changing this forces a new resource to be created.
                     type: string
                   endpointUri:
+                    description: URI of the Storage Container endpoint. This corresponds
+                      to the primary_blob_endpoint of the parent storage account.
+                      This attribute can only be specified and is mandatory when authentication_type
+                      is identityBased.
                     type: string
                   fileNameFormat:
+                    description: File name format for the blob. Default format is
+                      {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters
+                      are mandatory but can be reordered.
                     type: string
                   identityId:
+                    description: ID of the User Managed Identity used to authenticate
+                      against the storage endpoint.
                     type: string
                   iothubId:
+                    description: The IoTHub ID for the endpoint.
                     type: string
                   iothubIdRef:
                     description: A Reference to a named object.
@@ -246,8 +267,14 @@ spec:
                         type: object
                     type: object
                   maxChunkSizeInBytes:
+                    description: Maximum number of bytes for each blob written to
+                      storage. Value should be between 10485760 and 524288000. Default
+                      value is 314572800.
                     type: number
                   resourceGroupName:
+                    description: The name of the resource group under which the Storage
+                      Container has been created. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -501,6 +528,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the IoTHub Storage Container Endpoint.
                     type: string
                 type: object
               conditions:

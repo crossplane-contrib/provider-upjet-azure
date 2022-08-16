@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ExpressRouteGateway is the Schema for the ExpressRouteGateways
-          API
+          API. Manages an ExpressRoute gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,8 +65,13 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the ExpressRoute gateway. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -142,12 +147,18 @@ spec:
                         type: object
                     type: object
                   scaleUnits:
+                    description: The number of scale units with which to provision
+                      the ExpressRoute gateway. Each scale unit is equal to 2Gbps,
+                      with support for up to 10 scale units .
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   virtualHubId:
+                    description: The ID of a Virtual HUB within which the ExpressRoute
+                      gateway should be created.
                     type: string
                   virtualHubIdRef:
                     description: A Reference to a named object.
@@ -403,6 +414,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the ExpressRoute gateway.
                     type: string
                 type: object
               conditions:

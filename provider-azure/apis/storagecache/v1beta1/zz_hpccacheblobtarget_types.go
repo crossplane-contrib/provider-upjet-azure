@@ -14,14 +14,18 @@ import (
 )
 
 type HPCCacheBlobTargetObservation struct {
+
+	// The ID of the HPC Cache Blob Target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type HPCCacheBlobTargetParameters struct {
 
+	// The name of the access policy applied to this target. Defaults to default.
 	// +kubebuilder:validation:Optional
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
+	// The name HPC Cache, which the HPC Cache Blob Target will be added to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storagecache/v1beta1.HPCCache
 	// +kubebuilder:validation:Optional
 	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
@@ -32,9 +36,11 @@ type HPCCacheBlobTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
+	// The client-facing file path of the HPC Cache Blob Target.
 	// +kubebuilder:validation:Required
 	NamespacePath *string `json:"namespacePath" tf:"namespace_path,omitempty"`
 
+	// The name of the Resource Group in which to create the HPC Cache Blob Target. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -45,6 +51,7 @@ type HPCCacheBlobTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob Target. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
 	// +kubebuilder:validation:Optional
@@ -71,7 +78,7 @@ type HPCCacheBlobTargetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// HPCCacheBlobTarget is the Schema for the HPCCacheBlobTargets API
+// HPCCacheBlobTarget is the Schema for the HPCCacheBlobTargets API. Manages a Blob Target within a HPC Cache.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

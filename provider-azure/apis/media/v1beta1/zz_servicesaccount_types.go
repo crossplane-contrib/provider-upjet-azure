@@ -14,13 +14,17 @@ import (
 )
 
 type IdentityObservation struct {
+
+	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type IdentityParameters struct {
 
+	// Specifies the type of Managed Service Identity that should be configured on this Media Services Account. Possible value is  SystemAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -30,9 +34,11 @@ type KeyDeliveryAccessControlObservation struct {
 
 type KeyDeliveryAccessControlParameters struct {
 
+	// The Default Action to use when no rules match from ip_allow_list. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Delivery.
 	// +kubebuilder:validation:Optional
 	IPAllowList []*string `json:"ipAllowList,omitempty" tf:"ip_allow_list,omitempty"`
 }
@@ -40,6 +46,7 @@ type KeyDeliveryAccessControlParameters struct {
 type ServicesAccountObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
 
@@ -48,12 +55,15 @@ type ServicesAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// A key_delivery_access_control block as defined below.
 	// +kubebuilder:validation:Optional
 	KeyDeliveryAccessControl []KeyDeliveryAccessControlParameters `json:"keyDeliveryAccessControl,omitempty" tf:"key_delivery_access_control,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the Media Services Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -64,12 +74,16 @@ type ServicesAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// One or more storage_account blocks as defined below.
 	// +kubebuilder:validation:Required
 	StorageAccount []StorageAccountParameters `json:"storageAccount" tf:"storage_account,omitempty"`
 
+	// Specifies the storage authentication type.
+	// Possible value is  ManagedIdentity or System.
 	// +kubebuilder:validation:Optional
 	StorageAuthenticationType *string `json:"storageAuthenticationType,omitempty" tf:"storage_authentication_type,omitempty"`
 
+	// A mapping of tags assigned to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -90,6 +104,7 @@ type StorageAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 
+	// Specifies whether the storage account should be the primary account or not. Defaults to false.
 	// +kubebuilder:validation:Optional
 	IsPrimary *bool `json:"isPrimary,omitempty" tf:"is_primary,omitempty"`
 }
@@ -108,7 +123,7 @@ type ServicesAccountStatus struct {
 
 // +kubebuilder:object:root=true
 
-// ServicesAccount is the Schema for the ServicesAccounts API
+// ServicesAccount is the Schema for the ServicesAccounts API. Manages a Media Services Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

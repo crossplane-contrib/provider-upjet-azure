@@ -14,11 +14,14 @@ import (
 )
 
 type MonitorPrivateLinkScopedServiceObservation struct {
+
+	// The ID of the Azure Monitor Private Link Scoped Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type MonitorPrivateLinkScopedServiceParameters struct {
 
+	// The ID of the linked resource. It must be the Log Analytics Workspace or the Application Insights component. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -30,6 +33,7 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	LinkedResourceIDSelector *v1.Selector `json:"linkedResourceIdSelector,omitempty" tf:"-"`
 
+	// The name of the Resource Group where the Azure Monitor Private Link Scoped Service should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -40,6 +44,7 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The name of the Azure Monitor Private Link Scope. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MonitorPrivateLinkScope
 	// +kubebuilder:validation:Optional
 	ScopeName *string `json:"scopeName,omitempty" tf:"scope_name,omitempty"`
@@ -65,7 +70,7 @@ type MonitorPrivateLinkScopedServiceStatus struct {
 
 // +kubebuilder:object:root=true
 
-// MonitorPrivateLinkScopedService is the Schema for the MonitorPrivateLinkScopedServices API
+// MonitorPrivateLinkScopedService is the Schema for the MonitorPrivateLinkScopedServices API. Manages an Azure Monitor Private Link Scoped Service
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

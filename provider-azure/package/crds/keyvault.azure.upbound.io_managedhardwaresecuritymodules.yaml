@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ManagedHardwareSecurityModule is the Schema for the ManagedHardwareSecurityModules
-          API
+          API. Manages a Key Vault Managed Hardware Security Module.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,14 +66,25 @@ spec:
               forProvider:
                 properties:
                   adminObjectIds:
+                    description: Specifies a list of administrators object IDs for
+                      the key vault Managed Hardware Security Module. Changing this
+                      forces a new resource to be created.
                     items:
                       type: string
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   purgeProtectionEnabled:
+                    description: Is Purge Protection enabled for this Key Vault Managed
+                      Hardware Security Module? Defaults to false. Changing this forces
+                      a new resource to be created.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Key Vault Managed Hardware Security Module. Changing this
+                      forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -149,14 +160,26 @@ spec:
                         type: object
                     type: object
                   skuName:
+                    description: The Name of the SKU used for this Key Vault Managed
+                      Hardware Security Module. Possible value is Standard_B1. Changing
+                      this forces a new resource to be created.
                     type: string
                   softDeleteRetentionDays:
+                    description: The number of days that items should be retained
+                      for once soft-deleted. This value can be between 7 and 90 days.
+                      Defaults to 90. Changing this forces a new resource to be created.
                     type: number
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource. Changing
+                      this forces a new resource to be created.
                     type: object
                   tenantId:
+                    description: The Azure Active Directory Tenant ID that should
+                      be used for authenticating requests to the key vault Managed
+                      Hardware Security Module. Changing this forces a new resource
+                      to be created.
                     type: string
                 required:
                 - adminObjectIds
@@ -342,8 +365,12 @@ spec:
               atProvider:
                 properties:
                   hsmUri:
+                    description: The URI of the Key Vault Managed Hardware Security
+                      Module, used for performing operations on keys.
                     type: string
                   id:
+                    description: The Key Vault Secret Managed Hardware Security Module
+                      ID.
                     type: string
                 type: object
               conditions:

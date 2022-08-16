@@ -14,14 +14,18 @@ import (
 )
 
 type RedisFirewallRuleObservation struct {
+
+	// The ID of the Redis Firewall Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type RedisFirewallRuleParameters struct {
 
+	// The highest IP address included in the range.
 	// +kubebuilder:validation:Required
 	EndIP *string `json:"endIp" tf:"end_ip,omitempty"`
 
+	// The name of the Redis Cache. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=RedisCache
 	// +kubebuilder:validation:Optional
 	RedisCacheName *string `json:"redisCacheName,omitempty" tf:"redis_cache_name,omitempty"`
@@ -32,6 +36,7 @@ type RedisFirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	RedisCacheNameSelector *v1.Selector `json:"redisCacheNameSelector,omitempty" tf:"-"`
 
+	// The name of the resource group in which this Redis Cache exists.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -42,6 +47,7 @@ type RedisFirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The lowest IP address included in the range
 	// +kubebuilder:validation:Required
 	StartIP *string `json:"startIp" tf:"start_ip,omitempty"`
 }
@@ -60,7 +66,7 @@ type RedisFirewallRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// RedisFirewallRule is the Schema for the RedisFirewallRules API
+// RedisFirewallRule is the Schema for the RedisFirewallRules API. Manages a Firewall Rule associated with a Redis Cache.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

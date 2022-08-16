@@ -14,14 +14,18 @@ import (
 )
 
 type ClusterObservation struct {
+
+	// The ID of the Stream Analytics.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ClusterParameters struct {
 
+	// The Azure Region where the Stream Analytics Cluster should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the Resource Group where the Stream Analytics Cluster should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -32,9 +36,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The number of streaming units supported by the Cluster. Accepted values are multiples of 36 in the range of 36 to 216.
 	// +kubebuilder:validation:Required
 	StreamingCapacity *float64 `json:"streamingCapacity" tf:"streaming_capacity,omitempty"`
 
+	// A mapping of tags which should be assigned to the Stream Analytics.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -53,7 +59,7 @@ type ClusterStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Cluster is the Schema for the Clusters API
+// Cluster is the Schema for the Clusters API. Manages a Stream Analytics Cluster.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

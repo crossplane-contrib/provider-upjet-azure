@@ -14,6 +14,8 @@ import (
 )
 
 type LoadBalancerOutboundRuleFrontendIPConfigurationObservation struct {
+
+	// The ID of the Load Balancer Outbound Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -24,16 +26,22 @@ type LoadBalancerOutboundRuleFrontendIPConfigurationParameters struct {
 }
 
 type LoadBalancerOutboundRuleObservation struct {
+
+	// One or more frontend_ip_configuration blocks as defined below.
+	// +kubebuilder:validation:Optional
 	FrontendIPConfiguration []LoadBalancerOutboundRuleFrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
+	// The ID of the Load Balancer Outbound Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type LoadBalancerOutboundRuleParameters struct {
 
+	// The number of outbound ports to be used for NAT. Defaults to 1024.
 	// +kubebuilder:validation:Optional
 	AllocatedOutboundPorts *float64 `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty"`
 
+	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
 	// +crossplane:generate:reference:type=LoadBalancerBackendAddressPool
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -45,15 +53,19 @@ type LoadBalancerOutboundRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
+	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
 	// +kubebuilder:validation:Optional
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
+	// One or more frontend_ip_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
 	FrontendIPConfiguration []LoadBalancerOutboundRuleFrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
+	// The timeout for the TCP idle connection
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
+	// The ID of the Load Balancer in which to create the Outbound Rule. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=LoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -65,6 +77,7 @@ type LoadBalancerOutboundRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
+	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }
@@ -83,7 +96,7 @@ type LoadBalancerOutboundRuleStatus struct {
 
 // +kubebuilder:object:root=true
 
-// LoadBalancerOutboundRule is the Schema for the LoadBalancerOutboundRules API
+// LoadBalancerOutboundRule is the Schema for the LoadBalancerOutboundRules API. Manages a Load Balancer Outbound Rule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

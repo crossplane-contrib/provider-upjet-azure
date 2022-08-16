@@ -14,16 +14,21 @@ import (
 )
 
 type PrivateDNSCNAMERecordObservation struct {
+
+	// The FQDN of the DNS CNAME Record.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// The Private DNS CNAME Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type PrivateDNSCNAMERecordParameters struct {
 
+	// The target of the CNAME.
 	// +kubebuilder:validation:Required
 	Record *string `json:"record" tf:"record,omitempty"`
 
+	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -34,12 +39,15 @@ type PrivateDNSCNAMERecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The Time To Live  of the DNS record in seconds.
 	// +kubebuilder:validation:Required
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=PrivateDNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
@@ -65,7 +73,7 @@ type PrivateDNSCNAMERecordStatus struct {
 
 // +kubebuilder:object:root=true
 
-// PrivateDNSCNAMERecord is the Schema for the PrivateDNSCNAMERecords API
+// PrivateDNSCNAMERecord is the Schema for the PrivateDNSCNAMERecords API. Manages a Private DNS CNAME Record.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

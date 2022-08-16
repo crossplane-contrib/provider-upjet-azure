@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ObjectReplication is the Schema for the ObjectReplications API
+        description: ObjectReplication is the Schema for the ObjectReplications API.
+          Copy Block Blobs between a source storage account and a destination account
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   destinationStorageAccountId:
+                    description: The ID of the destination storage account. Changing
+                      this forces a new Storage Object Replication to be created.
                     type: string
                   destinationStorageAccountIdRef:
                     description: A Reference to a named object.
@@ -139,11 +142,18 @@ spec:
                         type: object
                     type: object
                   rules:
+                    description: One or more rules blocks as defined below.
                     items:
                       properties:
                         copyBlobsCreatedAfter:
+                          description: 'The time after which the Block Blobs created
+                            will be copies to the destination. Possible values are
+                            OnlyNewObjects, Everything and time in RFC3339 format:
+                            2006-01-02T15:04:00Z.'
                           type: string
                         destinationContainerName:
+                          description: The destination storage container name. Changing
+                            this forces a new Storage Object Replication to be created.
                           type: string
                         destinationContainerNameRef:
                           description: A Reference to a named object.
@@ -222,10 +232,14 @@ spec:
                               type: object
                           type: object
                         filterOutBlobsWithPrefix:
+                          description: Specifies a list of filters prefixes, the blobs
+                            whose names begin with which will be replicated.
                           items:
                             type: string
                           type: array
                         sourceContainerName:
+                          description: The source storage container name. Changing
+                            this forces a new Storage Object Replication to be created.
                           type: string
                         sourceContainerNameRef:
                           description: A Reference to a named object.
@@ -306,6 +320,8 @@ spec:
                       type: object
                     type: array
                   sourceStorageAccountId:
+                    description: The ID of the source storage account. Changing this
+                      forces a new Storage Object Replication to be created.
                     type: string
                   sourceStorageAccountIdRef:
                     description: A Reference to a named object.
@@ -560,10 +576,15 @@ spec:
               atProvider:
                 properties:
                   destinationObjectReplicationId:
+                    description: The ID of the Object Replication in the destination
+                      storage account.
                     type: string
                   id:
+                    description: The ID of the Storage Object Replication in the destination
+                      storage account. It's composed as format source_object_replication_id;destination_object_replication_id.
                     type: string
                   rules:
+                    description: One or more rules blocks as defined below.
                     items:
                       properties:
                         name:
@@ -571,6 +592,8 @@ spec:
                       type: object
                     type: array
                   sourceObjectReplicationId:
+                    description: The ID of the Object Replication in the source storage
+                      account.
                     type: string
                 type: object
               conditions:

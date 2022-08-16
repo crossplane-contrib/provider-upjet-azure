@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SQLContainer is the Schema for the SQLContainers API
+        description: SQLContainer is the Schema for the SQLContainers API. Manages
+          a SQL Container within a Cosmos DB Account.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   accountName:
+                    description: The name of the Cosmos DB Account to create the container
+                      within. Changing this forces a new resource to be created.
                     type: string
                   accountNameRef:
                     description: A Reference to a named object.
@@ -139,28 +142,52 @@ spec:
                         type: object
                     type: object
                   analyticalStorageTtl:
+                    description: The default time to live of Analytical Storage for
+                      this SQL container. If present and the value is set to -1, it
+                      is equal to infinity, and items don’t expire by default. If
+                      present and the value is set to some number n – items will expire
+                      n seconds after their last modified time. Changing this forces
+                      a new Cosmos DB SQL Container to be created when removing analytical_storage_ttl
+                      on an existing Cosmos DB SQL Container.
                     type: number
                   autoscaleSettings:
+                    description: An autoscale_settings block as defined below. This
+                      must be set upon database creation otherwise it cannot be updated
+                      without a manual terraform destroy-apply. Requires partition_key_path
+                      to be set.
                     items:
                       properties:
                         maxThroughput:
+                          description: The maximum throughput of the SQL container
+                            . Must be between 1,000 and 1,000,000. Must be set in
+                            increments of 1,000. Conflicts with throughput.
                           type: number
                       type: object
                     type: array
                   conflictResolutionPolicy:
+                    description: A conflict_resolution_policy blocks as defined below.
                     items:
                       properties:
                         conflictResolutionPath:
+                          description: The conflict resolution path in the case of
+                            LastWriterWins mode.
                           type: string
                         conflictResolutionProcedure:
+                          description: The procedure to resolve conflicts in the case
+                            of Custom mode.
                           type: string
                         mode:
+                          description: 'Indicates the conflict resolution mode. Possible
+                            values include: LastWriterWins, Custom.'
                           type: string
                       required:
                       - mode
                       type: object
                     type: array
                   databaseName:
+                    description: The name of the Cosmos DB SQL Database to create
+                      the container within. Changing this forces a new resource to
+                      be created.
                     type: string
                   databaseNameRef:
                     description: A Reference to a named object.
@@ -236,17 +263,28 @@ spec:
                         type: object
                     type: object
                   defaultTtl:
+                    description: The default time to live of SQL container. If missing,
+                      items are not expired automatically. If present and the value
+                      is set to -1, it is equal to infinity, and items don’t expire
+                      by default. If present and the value is set to some number n
+                      – items will expire n seconds after their last modified time.
                     type: number
                   indexingPolicy:
+                    description: An indexing_policy block as defined below.
                     items:
                       properties:
                         compositeIndex:
+                          description: One or more composite_index blocks as defined
+                            below.
                           items:
                             properties:
                               index:
+                                description: One or more index blocks as defined below.
                                 items:
                                   properties:
                                     order:
+                                      description: Order of the index. Possible values
+                                        are Ascending or Descending.
                                       type: string
                                     path:
                                       type: string
@@ -260,6 +298,9 @@ spec:
                             type: object
                           type: array
                         excludedPath:
+                          description: One or more excluded_path blocks as defined
+                            below. Either included_path or excluded_path must contain
+                            the path /*
                           items:
                             properties:
                               path:
@@ -269,6 +310,9 @@ spec:
                             type: object
                           type: array
                         includedPath:
+                          description: One or more included_path blocks as defined
+                            below. Either included_path or excluded_path must contain
+                            the path /*
                           items:
                             properties:
                               path:
@@ -278,8 +322,12 @@ spec:
                             type: object
                           type: array
                         indexingMode:
+                          description: 'Indicates the indexing mode. Possible values
+                            include: Consistent and None. Defaults to Consistent.'
                           type: string
                         spatialIndex:
+                          description: One or more spatial_index blocks as defined
+                            below.
                           items:
                             properties:
                               path:
@@ -291,10 +339,18 @@ spec:
                       type: object
                     type: array
                   partitionKeyPath:
+                    description: Define a partition key. Changing this forces a new
+                      resource to be created.
                     type: string
                   partitionKeyVersion:
+                    description: Define a partition key version. Changing this forces
+                      a new resource to be created. Possible values are 1 and 2. This
+                      should be set to 2 in order to use large partition keys.
                     type: number
                   resourceGroupName:
+                    description: The name of the resource group in which the Cosmos
+                      DB SQL Container is created. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -370,11 +426,18 @@ spec:
                         type: object
                     type: object
                   throughput:
+                    description: The throughput of SQL container . Must be set in
+                      increments of 100. The minimum value is 400. This must be set
+                      upon container creation otherwise it cannot be updated without
+                      a manual terraform destroy-apply.
                     type: number
                   uniqueKey:
+                    description: One or more unique_key blocks as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         paths:
+                          description: A list of paths to use for this unique key.
                           items:
                             type: string
                           type: array
@@ -562,14 +625,19 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the CosmosDB SQL Container.
                     type: string
                   indexingPolicy:
+                    description: An indexing_policy block as defined below.
                     items:
                       properties:
                         spatialIndex:
+                          description: One or more spatial_index blocks as defined
+                            below.
                           items:
                             properties:
                               types:
+                                description: A set of spatial types of the path.
                                 items:
                                   type: string
                                 type: array

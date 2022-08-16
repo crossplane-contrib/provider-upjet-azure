@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: IOTHubFallbackRoute is the Schema for the IOTHubFallbackRoutes
-          API
+          API. Manages an IotHub Fallback Route
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,10 +65,16 @@ spec:
               forProvider:
                 properties:
                   condition:
+                    description: 'The condition that is evaluated to apply the routing
+                      rule. If no condition is provided, it evaluates to true by default.
+                      For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.'
                     type: string
                   enabled:
+                    description: Used to specify whether the fallback route is enabled.
                     type: boolean
                   endpointNames:
+                    description: The endpoints to which messages that satisfy the
+                      condition are routed. Currently only 1 endpoint is allowed.
                     items:
                       type: string
                     type: array
@@ -148,6 +154,8 @@ spec:
                         type: object
                     type: object
                   iothubName:
+                    description: The name of the IoTHub to which this Fallback Route
+                      belongs. Changing this forces a new resource to be created.
                     type: string
                   iothubNameRef:
                     description: A Reference to a named object.
@@ -223,6 +231,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
+                    description: The name of the resource group under which the IotHub
+                      Storage Container Endpoint resource has to be created. Changing
+                      this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -298,6 +309,9 @@ spec:
                         type: object
                     type: object
                   source:
+                    description: 'The source that the routing rule is to be applied
+                      to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents,
+                      DeviceLifecycleEvents, DeviceMessages, Invalid, TwinChangeEvents.'
                     type: string
                 required:
                 - enabled
@@ -479,6 +493,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the IoTHub Fallback Route.
                     type: string
                 type: object
               conditions:

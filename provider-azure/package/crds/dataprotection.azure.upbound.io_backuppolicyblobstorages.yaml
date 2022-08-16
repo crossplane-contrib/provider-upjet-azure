@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: BackupPolicyBlobStorage is the Schema for the BackupPolicyBlobStorages
-          API
+          API. Manages a Backup Policy Blob Storage.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -66,8 +66,14 @@ spec:
               forProvider:
                 properties:
                   retentionDuration:
+                    description: Duration of deletion after given timespan. It should
+                      follow ISO 8601 duration format. Changing this forces a new
+                      Backup Policy Blob Storage to be created.
                     type: string
                   vaultId:
+                    description: The ID of the Backup Vault within which the Backup
+                      Policy Blob Storage should exist. Changing this forces a new
+                      Backup Policy Blob Storage to be created.
                     type: string
                   vaultIdRef:
                     description: A Reference to a named object.
@@ -323,6 +329,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Backup Policy Blob Storage.
                     type: string
                 type: object
               conditions:

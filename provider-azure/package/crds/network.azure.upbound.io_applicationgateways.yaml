@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: ApplicationGateway is the Schema for the ApplicationGateways
-          API
+          API. Manages an Application Gateway.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -93,11 +93,16 @@ spec:
                       type: object
                     type: array
                   autoscaleConfiguration:
+                    description: A autoscale_configuration block as defined below.
                     items:
                       properties:
                         maxCapacity:
+                          description: Maximum capacity for autoscaling. Accepted
+                            values are in the range 2 to 125.
                           type: number
                         minCapacity:
+                          description: Minimum capacity for autoscaling. Accepted
+                            values are in the range 0 to 100.
                           type: number
                       required:
                       - minCapacity
@@ -107,10 +112,14 @@ spec:
                     items:
                       properties:
                         fqdns:
+                          description: A list of FQDN's which should be part of the
+                            Backend Address Pool.
                           items:
                             type: string
                           type: array
                         ipAddresses:
+                          description: A list of IP Addresses which should be part
+                            of the Backend Address Pool.
                           items:
                             type: string
                           type: array
@@ -124,6 +133,7 @@ spec:
                     items:
                       properties:
                         affinityCookieName:
+                          description: The name of the affinity cookie.
                           type: string
                         authenticationCertificate:
                           items:
@@ -135,9 +145,13 @@ spec:
                             type: object
                           type: array
                         connectionDraining:
+                          description: A connection_draining block as defined below.
                           items:
                             properties:
                               drainTimeoutSec:
+                                description: The number of seconds connection draining
+                                  is active. Acceptable values are from 1 second to
+                                  3600 seconds.
                                 type: number
                               enabled:
                                 type: boolean
@@ -147,6 +161,8 @@ spec:
                             type: object
                           type: array
                         cookieBasedAffinity:
+                          description: Is Cookie-Based Affinity enabled? Possible
+                            values are Enabled and Disabled.
                           type: string
                         hostName:
                           type: string
@@ -155,16 +171,22 @@ spec:
                         path:
                           type: string
                         pickHostNameFromBackendAddress:
+                          description: Whether host header should be picked from the
+                            host name of the backend server. Defaults to false.
                           type: boolean
                         port:
                           type: number
                         probeName:
+                          description: The name of an associated HTTP Probe.
                           type: string
                         protocol:
                           type: string
                         requestTimeout:
+                          description: The request timeout in seconds, which must
+                            be between 1 and 86400 seconds.
                           type: number
                         trustedRootCertificateNames:
+                          description: A list of trusted_root_certificate names.
                           items:
                             type: string
                           type: array
@@ -179,6 +201,8 @@ spec:
                     items:
                       properties:
                         customErrorPageUrl:
+                          description: Error page URL of the application gateway customer
+                            error.
                           type: string
                         statusCode:
                           type: string
@@ -190,10 +214,13 @@ spec:
                   enableHttp2:
                     type: boolean
                   fipsEnabled:
+                    description: Is FIPS enabled on the Application Gateway?
                     type: boolean
                   firewallPolicyId:
                     type: string
                   forceFirewallPolicyAssociation:
+                    description: Is the Firewall Policy associated with the Application
+                      Gateway?
                     type: boolean
                   frontendIpConfiguration:
                     items:
@@ -205,8 +232,15 @@ spec:
                         privateIpAddressAllocation:
                           type: string
                         privateLinkConfigurationName:
+                          description: The name of the private link configuration
+                            to use for this frontend IP configuration.
                           type: string
                         publicIpAddressId:
+                          description: The ID of a Public IP Address which the Application
+                            Gateway should use. The allocation method for the Public
+                            IP Address depends on the sku of this Application Gateway.
+                            Please refer to the Azure documentation for public IP
+                            addresses for details.
                           type: string
                         publicIpAddressIdRef:
                           description: A Reference to a named object.
@@ -472,6 +506,8 @@ spec:
                           items:
                             properties:
                               customErrorPageUrl:
+                                description: Error page URL of the application gateway
+                                  customer error.
                                 type: string
                               statusCode:
                                 type: string
@@ -483,12 +519,18 @@ spec:
                         firewallPolicyId:
                           type: string
                         frontendIpConfigurationName:
+                          description: The Name of the Frontend IP Configuration used
+                            for this HTTP Listener.
                           type: string
                         frontendPortName:
+                          description: The Name of the Frontend Port use for this
+                            HTTP Listener.
                           type: string
                         hostName:
                           type: string
                         hostNames:
+                          description: A list of Hostname should be used for this
+                            HTTP Listener. It allows special wildcard characters.
                           items:
                             type: string
                           type: array
@@ -497,10 +539,16 @@ spec:
                         protocol:
                           type: string
                         requireSni:
+                          description: Should Server Name Indication be Required?
+                            Defaults to false.
                           type: boolean
                         sslCertificateName:
+                          description: The name of the associated SSL Certificate
+                            which should be used for this HTTP Listener.
                           type: string
                         sslProfileName:
+                          description: The name of the associated SSL Profile which
+                            should be used for this HTTP Listener.
                           type: string
                       required:
                       - frontendIpConfigurationName
@@ -510,13 +558,19 @@ spec:
                       type: object
                     type: array
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Application Gateway.
                           items:
                             type: string
                           type: array
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Application Gateway.
+                            Only possible value is UserAssigned.
                           type: string
                       required:
                       - identityIds
@@ -524,16 +578,21 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: The Azure region where the Application Gateway should
+                      exist. Changing this forces a new resource to be created.
                     type: string
                   privateLinkConfiguration:
                     items:
                       properties:
                         ipConfiguration:
+                          description: One or more ip_configuration blocks as defined
+                            below.
                           items:
                             properties:
                               name:
                                 type: string
                               primary:
+                                description: Is this the Primary IP Configuration?
                                 type: boolean
                               privateIpAddress:
                                 type: string
@@ -636,13 +695,24 @@ spec:
                     items:
                       properties:
                         host:
+                          description: The Hostname used for this Probe. If the Application
+                            Gateway is configured for a single site, by default the
+                            Host name should be specified as ‘127.0.0.1’, unless otherwise
+                            configured in custom probe. Cannot be set if pick_host_name_from_backend_http_settings
+                            is set to true.
                           type: string
                         interval:
+                          description: The Interval between two consecutive probes
+                            in seconds. Possible values range from 1 second to a maximum
+                            of 86,400 seconds.
                           type: number
                         match:
+                          description: A match block as defined above.
                           items:
                             properties:
                               body:
+                                description: A snippet from the Response Body which
+                                  must be present in the Response.
                                 type: string
                               statusCode:
                                 items:
@@ -654,20 +724,31 @@ spec:
                             type: object
                           type: array
                         minimumServers:
+                          description: The minimum number of servers that are always
+                            marked as healthy. Defaults to 0.
                           type: number
                         name:
                           type: string
                         path:
                           type: string
                         pickHostNameFromBackendHttpSettings:
+                          description: Whether the host header should be picked from
+                            the backend HTTP settings. Defaults to false.
                           type: boolean
                         port:
                           type: number
                         protocol:
                           type: string
                         timeout:
+                          description: The Timeout used for this Probe, which indicates
+                            when a probe becomes unhealthy. Possible values range
+                            from 1 second to a maximum of 86,400 seconds.
                           type: number
                         unhealthyThreshold:
+                          description: The Unhealthy Threshold for this Probe, which
+                            indicates the amount of retries which should be attempted
+                            before a node is deemed unhealthy. Possible values are
+                            from 1 - 20 seconds.
                           type: number
                       required:
                       - interval
@@ -682,16 +763,26 @@ spec:
                     items:
                       properties:
                         includePath:
+                          description: Whether or not to include the path in the redirected
+                            Url. Defaults to false
                           type: boolean
                         includeQueryString:
+                          description: Whether or not to include the query string
+                            in the redirected Url. Default to false
                           type: boolean
                         name:
                           type: string
                         redirectType:
+                          description: The type of redirect. Possible values are Permanent,
+                            Temporary, Found and SeeOther
                           type: string
                         targetListenerName:
+                          description: The name of the listener to redirect to. Cannot
+                            be set if target_url is set.
                           type: string
                         targetUrl:
+                          description: The Url to redirect the request to. Cannot
+                            be set if target_listener_name is set.
                           type: string
                       required:
                       - name
@@ -706,18 +797,27 @@ spec:
                         backendHttpSettingsName:
                           type: string
                         httpListenerName:
+                          description: The Name of the HTTP Listener which should
+                            be used for this Routing Rule.
                           type: string
                         name:
                           type: string
                         priority:
+                          description: Rule evaluation order can be dictated by specifying
+                            an integer value from 1 to 20000 with 1 being the highest
+                            priority and 20000 being the lowest priority.
                           type: number
                         redirectConfigurationName:
                           type: string
                         rewriteRuleSetName:
                           type: string
                         ruleType:
+                          description: The Type of Routing that should be used for
+                            this Rule. Possible values are Basic and PathBasedRouting.
                           type: string
                         urlPathMapName:
+                          description: The Name of the URL Path Map which should be
+                            associated with this Routing Rule.
                           type: string
                       required:
                       - httpListenerName
@@ -726,6 +826,9 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the resource group in which to the Application
+                      Gateway should exist. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -801,23 +904,37 @@ spec:
                         type: object
                     type: object
                   rewriteRuleSet:
+                    description: One or more rewrite_rule_set blocks as defined below.
+                      Only valid for v2 SKUs.
                     items:
                       properties:
                         name:
                           type: string
                         rewriteRule:
+                          description: One or more rewrite_rule blocks as defined
+                            above.
                           items:
                             properties:
                               condition:
+                                description: One or more condition blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     ignoreCase:
+                                      description: Perform a case in-sensitive comparison.
+                                        Defaults to false
                                       type: boolean
                                     negate:
+                                      description: Negate the result of the condition
+                                        evaluation. Defaults to false
                                       type: boolean
                                     pattern:
+                                      description: The pattern, either fixed string
+                                        or regular expression, that evaluates the
+                                        truthfulness of the condition.
                                       type: string
                                     variable:
+                                      description: The variable of the condition.
                                       type: string
                                   required:
                                   - pattern
@@ -827,6 +944,8 @@ spec:
                               name:
                                 type: string
                               requestHeaderConfiguration:
+                                description: One or more request_header_configuration
+                                  blocks as defined above.
                                 items:
                                   properties:
                                     headerName:
@@ -839,6 +958,8 @@ spec:
                                   type: object
                                 type: array
                               responseHeaderConfiguration:
+                                description: One or more response_header_configuration
+                                  blocks as defined above.
                                 items:
                                   properties:
                                     headerName:
@@ -851,15 +972,22 @@ spec:
                                   type: object
                                 type: array
                               ruleSequence:
+                                description: Rule sequence of the rewrite rule that
+                                  determines the order of execution in a set.
                                 type: number
                               url:
+                                description: One url block as defined above
                                 items:
                                   properties:
                                     path:
                                       type: string
                                     queryString:
+                                      description: The query string to rewrite.
                                       type: string
                                     reroute:
+                                      description: Whether the URL path map should
+                                        be reevaluated after this rewrite has been
+                                        applied. More info on rewrite configutation
                                       type: boolean
                                   type: object
                                 type: array
@@ -873,13 +1001,21 @@ spec:
                       type: object
                     type: array
                   sku:
+                    description: A sku block as defined below.
                     items:
                       properties:
                         capacity:
+                          description: The Capacity of the SKU to use for this Application
+                            Gateway. When using a V1 SKU this value must be between
+                            1 and 32, and 1 to 125 for a V2 SKU. This property is
+                            optional if autoscale_configuration is set.
                           type: number
                         name:
                           type: string
                         tier:
+                          description: The Tier of the SKU to use for this Application
+                            Gateway. Possible values are Standard, Standard_v2, WAF
+                            and WAF_v2.
                           type: string
                       required:
                       - name
@@ -912,8 +1048,8 @@ spec:
                         name:
                           type: string
                         passwordSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: Password for the pfx file specified in data.  Required
+                            if data is set.
                           properties:
                             key:
                               description: The key to select.
@@ -937,22 +1073,48 @@ spec:
                     items:
                       properties:
                         cipherSuites:
+                          description: 'A List of accepted cipher suites. Possible
+                            values are: TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,
+                            TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,
+                            TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
+                            TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
+                            TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+                            TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
+                            TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+                            TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+                            TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+                            TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA,
+                            TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256,
+                            TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256
+                            and TLS_RSA_WITH_AES_256_GCM_SHA384.'
                           items:
                             type: string
                           type: array
                         disabledProtocols:
+                          description: A list of SSL Protocols which should be disabled
+                            on this Application Gateway. Possible values are TLSv1_0,
+                            TLSv1_1 and TLSv1_2.
                           items:
                             type: string
                           type: array
                         minProtocolVersion:
+                          description: The minimal TLS version. Possible values are
+                            TLSv1_0, TLSv1_1 and TLSv1_2.
                           type: string
                         policyName:
+                          description: The Name of the Policy e.g AppGwSslPolicy20170401S.
+                            Required if policy_type is set to Predefined. Possible
+                            values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview.
+                            Not compatible with disabled_protocols.
                           type: string
                         policyType:
+                          description: The Type of the Policy. Possible values are
+                            Predefined and Custom.
                           type: string
                       type: object
                     type: array
                   sslProfile:
+                    description: One or more ssl_profile blocks as defined below.
                     items:
                       properties:
                         name:
@@ -961,26 +1123,56 @@ spec:
                           items:
                             properties:
                               cipherSuites:
+                                description: 'A List of accepted cipher suites. Possible
+                                  values are: TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,
+                                  TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,
+                                  TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
+                                  TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
+                                  TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+                                  TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
+                                  TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+                                  TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+                                  TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+                                  TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA,
+                                  TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256,
+                                  TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256
+                                  and TLS_RSA_WITH_AES_256_GCM_SHA384.'
                                 items:
                                   type: string
                                 type: array
                               disabledProtocols:
+                                description: A list of SSL Protocols which should
+                                  be disabled on this Application Gateway. Possible
+                                  values are TLSv1_0, TLSv1_1 and TLSv1_2.
                                 items:
                                   type: string
                                 type: array
                               minProtocolVersion:
+                                description: The minimal TLS version. Possible values
+                                  are TLSv1_0, TLSv1_1 and TLSv1_2.
                                 type: string
                               policyName:
+                                description: The Name of the Policy e.g AppGwSslPolicy20170401S.
+                                  Required if policy_type is set to Predefined. Possible
+                                  values can change over time and are published here
+                                  https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview.
+                                  Not compatible with disabled_protocols.
                                 type: string
                               policyType:
+                                description: The Type of the Policy. Possible values
+                                  are Predefined and Custom.
                                 type: string
                             type: object
                           type: array
                         trustedClientCertificateNames:
+                          description: The name of the Trusted Client Certificate
+                            that will be used to authenticate requests from clients.
                           items:
                             type: string
                           type: array
                         verifyClientCertIssuerDn:
+                          description: Should client certificate issuer DN be verified?  Defaults
+                            to false.
                           type: boolean
                       required:
                       - name
@@ -989,8 +1181,11 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   trustedClientCertificate:
+                    description: One or more trusted_client_certificate blocks as
+                      defined below.
                     items:
                       properties:
                         dataSecretRef:
@@ -1019,6 +1214,8 @@ spec:
                       type: object
                     type: array
                   trustedRootCertificate:
+                    description: One or more trusted_root_certificate blocks as defined
+                      below.
                     items:
                       properties:
                         dataSecretRef:
@@ -1051,12 +1248,26 @@ spec:
                     items:
                       properties:
                         defaultBackendAddressPoolName:
+                          description: The Name of the Default Backend Address Pool
+                            which should be used for this URL Path Map. Cannot be
+                            set if default_redirect_configuration_name is set.
                           type: string
                         defaultBackendHttpSettingsName:
+                          description: The Name of the Default Backend HTTP Settings
+                            Collection which should be used for this URL Path Map.
+                            Cannot be set if default_redirect_configuration_name is
+                            set.
                           type: string
                         defaultRedirectConfigurationName:
+                          description: The Name of the Default Redirect Configuration
+                            which should be used for this URL Path Map. Cannot be
+                            set if either default_backend_address_pool_name or default_backend_http_settings_name
+                            is set.
                           type: string
                         defaultRewriteRuleSetName:
+                          description: The Name of the Default Rewrite Rule Set which
+                            should be used for this URL Path Map. Only valid for v2
+                            SKUs.
                           type: string
                         name:
                           type: string
@@ -1072,6 +1283,7 @@ spec:
                               name:
                                 type: string
                               paths:
+                                description: A list of Paths used in this Path Rule.
                                 items:
                                   type: string
                                 type: array
@@ -1090,14 +1302,32 @@ spec:
                       type: object
                     type: array
                   wafConfiguration:
+                    description: A waf_configuration block as defined below.
                     items:
                       properties:
                         disabledRuleGroup:
+                          description: one or more disabled_rule_group blocks as defined
+                            below.
                           items:
                             properties:
                               ruleGroupName:
+                                description: 'The rule group where specific rules
+                                  should be disabled. Accepted values are:  crs_20_protocol_violations,
+                                  crs_21_protocol_anomalies, crs_23_request_limits,
+                                  crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks,
+                                  crs_41_sql_injection_attacks, crs_41_xss_attacks,
+                                  crs_42_tight_security, crs_45_trojans, General,
+                                  REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION,
+                                  REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK,
+                                  REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI,
+                                  REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP,
+                                  REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI,
+                                  REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION'
                                 type: string
                               rules:
+                                description: A list of rules which should be disabled
+                                  in that group. Disables all rules in the specified
+                                  group if rules is not specified.
                                 items:
                                   type: number
                                 type: array
@@ -1108,29 +1338,55 @@ spec:
                         enabled:
                           type: boolean
                         exclusion:
+                          description: one or more exclusion blocks as defined below.
                           items:
                             properties:
                               matchVariable:
+                                description: Match variable of the exclusion rule
+                                  to exclude header, cookie or GET arguments. Possible
+                                  values are RequestHeaderNames, RequestArgNames and
+                                  RequestCookieNames
                                 type: string
                               selector:
+                                description: String value which will be used for the
+                                  filter operation. If empty will exclude all traffic
+                                  on this match_variable
                                 type: string
                               selectorMatchOperator:
+                                description: Operator which will be used to search
+                                  in the variable content. Possible values are Equals,
+                                  StartsWith, EndsWith, Contains. If empty will exclude
+                                  all traffic on this match_variable
                                 type: string
                             required:
                             - matchVariable
                             type: object
                           type: array
                         fileUploadLimitMb:
+                          description: The File Upload Limit in MB. Accepted values
+                            are in the range 1MB to 750MB for the WAF_v2 SKU, and
+                            1MB to 500MB for all other SKUs. Defaults to 100MB.
                           type: number
                         firewallMode:
+                          description: The Web Application Firewall Mode. Possible
+                            values are Detection and Prevention.
                           type: string
                         maxRequestBodySizeKb:
+                          description: The Maximum Request Body Size in KB.  Accepted
+                            values are in the range 1KB to 128KB.  Defaults to 128KB.
                           type: number
                         requestBodyCheck:
+                          description: Is Request Body Inspection enabled?  Defaults
+                            to true.
                           type: boolean
                         ruleSetType:
+                          description: The Type of the Rule Set used for this Web
+                            Application Firewall. Currently, only OWASP is supported.
                           type: string
                         ruleSetVersion:
+                          description: The Version of the Rule Set used for this Web
+                            Application Firewall. Possible values are 2.2.9, 3.0,
+                            3.1,  and 3.2.
                           type: string
                       required:
                       - enabled
@@ -1139,6 +1395,9 @@ spec:
                       type: object
                     type: array
                   zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Application Gateway should be located. Changing this forces
+                      a new Application Gateway to be created.
                     items:
                       type: string
                     type: array
@@ -1356,6 +1615,7 @@ spec:
                         id:
                           type: string
                         probeId:
+                          description: The ID of the associated Probe.
                           type: string
                       type: object
                     type: array
@@ -1372,6 +1632,7 @@ spec:
                         id:
                           type: string
                         privateLinkConfigurationId:
+                          description: The ID of the associated private link configuration.
                           type: string
                       type: object
                     type: array
@@ -1400,20 +1661,26 @@ spec:
                             type: object
                           type: array
                         frontendIpConfigurationId:
+                          description: The ID of the associated Frontend Configuration.
                           type: string
                         frontendPortId:
+                          description: The ID of the associated Frontend Port.
                           type: string
                         id:
                           type: string
                         sslCertificateId:
+                          description: The ID of the associated SSL Certificate.
                           type: string
                         sslProfileId:
+                          description: The ID of the associated SSL Certificate.
                           type: string
                       type: object
                     type: array
                   id:
                     type: string
                   privateEndpointConnection:
+                    description: A list of private_endpoint_connection blocks as defined
+                      below.
                     items:
                       properties:
                         id:
@@ -1453,6 +1720,7 @@ spec:
                         backendHttpSettingsId:
                           type: string
                         httpListenerId:
+                          description: The ID of the associated HTTP Listener.
                           type: string
                         id:
                           type: string
@@ -1461,10 +1729,13 @@ spec:
                         rewriteRuleSetId:
                           type: string
                         urlPathMapId:
+                          description: The ID of the associated URL Path Map.
                           type: string
                       type: object
                     type: array
                   rewriteRuleSet:
+                    description: One or more rewrite_rule_set blocks as defined below.
+                      Only valid for v2 SKUs.
                     items:
                       properties:
                         id:
@@ -1477,10 +1748,13 @@ spec:
                         id:
                           type: string
                         publicCertData:
+                          description: The Public Certificate Data associated with
+                            the SSL Certificate.
                           type: string
                       type: object
                     type: array
                   sslProfile:
+                    description: One or more ssl_profile blocks as defined below.
                     items:
                       properties:
                         id:
@@ -1488,6 +1762,8 @@ spec:
                       type: object
                     type: array
                   trustedClientCertificate:
+                    description: One or more trusted_client_certificate blocks as
+                      defined below.
                     items:
                       properties:
                         id:
@@ -1495,6 +1771,8 @@ spec:
                       type: object
                     type: array
                   trustedRootCertificate:
+                    description: One or more trusted_root_certificate blocks as defined
+                      below.
                     items:
                       properties:
                         id:
@@ -1505,10 +1783,14 @@ spec:
                     items:
                       properties:
                         defaultBackendAddressPoolId:
+                          description: The ID of the Default Backend Address Pool.
                           type: string
                         defaultBackendHttpSettingsId:
+                          description: The ID of the Default Backend HTTP Settings
+                            Collection.
                           type: string
                         defaultRedirectConfigurationId:
+                          description: The ID of the Default Redirect Configuration.
                           type: string
                         defaultRewriteRuleSetId:
                           type: string

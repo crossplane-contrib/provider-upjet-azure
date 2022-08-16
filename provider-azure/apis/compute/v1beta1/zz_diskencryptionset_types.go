@@ -14,22 +14,30 @@ import (
 )
 
 type DiskEncryptionSetObservation struct {
+
+	// The ID of the Disk Encryption Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
+	// +kubebuilder:validation:Required
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
 
 type DiskEncryptionSetParameters struct {
 
+	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates encryption Key to latest version. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AutoKeyRotationEnabled *bool `json:"autoKeyRotationEnabled,omitempty" tf:"auto_key_rotation_enabled,omitempty"`
 
+	// The type of key used to encrypt the data of the disk. Possible values are EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys and ConfidentialVmEncryptedWithCustomerKey. Defaults to EncryptionAtRestWithCustomerKey.
 	// +kubebuilder:validation:Optional
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Required
 	Identity []IdentityParameters `json:"identity" tf:"identity,omitempty"`
 
+	// Specifies the URL to a Key Vault Key .
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -41,9 +49,11 @@ type DiskEncryptionSetParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
+	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Specifies the name of the Resource Group where the Disk Encryption Set should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -54,18 +64,23 @@ type DiskEncryptionSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the Disk Encryption Set.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type IdentityObservation struct {
+
+	// The  ID of the Service Principal.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// The ID of the Tenant the Service Principal is assigned in.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type IdentityParameters struct {
 
+	// The type of Managed Service Identity that is configured on this Disk Encryption Set. The only possible value is SystemAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -84,7 +99,7 @@ type DiskEncryptionSetStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DiskEncryptionSet is the Schema for the DiskEncryptionSets API
+// DiskEncryptionSet is the Schema for the DiskEncryptionSets API. Manages a Disk Encryption Set.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

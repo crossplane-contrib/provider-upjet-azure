@@ -21,9 +21,11 @@ type EncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 
+	// Required) The client ID of the managed identity associated with the encryption key.
 	// +kubebuilder:validation:Optional
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id"`
 
+	// The ID of the Key Vault Key.
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id"`
 }
@@ -36,6 +38,7 @@ type GeoreplicationsParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Whether regional endpoint is enabled for this Container Registry? Defaults to false.
 	// +kubebuilder:validation:Optional
 	RegionalEndpointEnabled *bool `json:"regionalEndpointEnabled,omitempty" tf:"regional_endpoint_enabled,omitempty"`
 
@@ -54,21 +57,27 @@ type IPRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
+	// The CIDR block from which requests will match the rule.
 	// +kubebuilder:validation:Optional
 	IPRange *string `json:"ipRange,omitempty" tf:"ip_range"`
 }
 
 type IdentityObservation struct {
+
+	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type IdentityParameters struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Container Registry.
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// Specifies the type of Managed Service Identity that should be configured on this Container Registry. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned .
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -78,43 +87,57 @@ type NetworkRuleSetObservation struct {
 
 type NetworkRuleSetParameters struct {
 
+	// The behaviour for requests matching no rules. Either Allow or Deny. Defaults to Allow
 	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action"`
 
+	// One or more ip_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	IPRule []IPRuleParameters `json:"ipRule,omitempty" tf:"ip_rule"`
 
+	// One or more virtual_network blocks as defined below.
 	// +kubebuilder:validation:Optional
 	VirtualNetwork []VirtualNetworkParameters `json:"virtualNetwork,omitempty" tf:"virtual_network"`
 }
 
 type RegistryObservation struct {
+
+	// The Username associated with the Container Registry Admin account - if the admin account is enabled.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
+	// The ID of the Container Registry.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// The URL that can be used to log into the container registry.
 	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
 }
 
 type RegistryParameters struct {
 
+	// Specifies whether the admin user is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AdminEnabled *bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
 
+	// Whether allows anonymous  pull access to this Container Registry? Defaults to false. This is only supported on resources with the Standard or Premium SKU.
 	// +kubebuilder:validation:Optional
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
 
+	// Whether to enable dedicated data endpoints for this Container Registry? Defaults to false. This is only supported on resources with the Premium SKU.
 	// +kubebuilder:validation:Optional
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
 
+	// An encryption block as documented below.
 	// +kubebuilder:validation:Optional
 	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
+	// Boolean value that indicates whether export policy is enabled. Defaults to true. In order to set it to false, make sure the public_network_access_enabled is also set to false.
 	// +kubebuilder:validation:Optional
 	ExportPolicyEnabled *bool `json:"exportPolicyEnabled,omitempty" tf:"export_policy_enabled,omitempty"`
 
+	// A georeplications block as documented below.
 	// +kubebuilder:validation:Optional
 	Georeplications []GeoreplicationsParameters `json:"georeplications,omitempty" tf:"georeplications,omitempty"`
 
@@ -124,18 +147,22 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
 	// +kubebuilder:validation:Optional
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
+	// A network_rule_set block as documented below.
 	// +kubebuilder:validation:Optional
 	NetworkRuleSet []NetworkRuleSetParameters `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
 
+	// Whether public network access is allowed for the container registry. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 
+	// The name of the resource group in which to create the Container Registry. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -146,15 +173,18 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A retention_policy block as documented below.
 	// +kubebuilder:validation:Optional
 	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
+	// The SKU name of the container registry. Possible values are  Basic, Standard and Premium.
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// A trust_policy block as documented below.
 	// +kubebuilder:validation:Optional
 	TrustPolicy []TrustPolicyParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
 
@@ -167,6 +197,7 @@ type RetentionPolicyObservation struct {
 
 type RetentionPolicyParameters struct {
 
+	// The number of days to retain an untagged manifest after which it gets purged. Default is 7.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days"`
 
@@ -191,6 +222,7 @@ type VirtualNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
+	// The subnet id from which requests will match the rule.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -217,7 +249,7 @@ type RegistryStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Registry is the Schema for the Registrys API
+// Registry is the Schema for the Registrys API. Manages an Azure Container Registry.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

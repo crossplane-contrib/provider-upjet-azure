@@ -14,16 +14,21 @@ import (
 )
 
 type DNSCNAMERecordObservation struct {
+
+	// The FQDN of the DNS CName Record.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// The DNS CName Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DNSCNAMERecordParameters struct {
 
+	// The target of the CNAME.
 	// +kubebuilder:validation:Optional
 	Record *string `json:"record,omitempty" tf:"record,omitempty"`
 
+	// Specifies the resource group where the DNS Zone  exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -37,9 +42,11 @@ type DNSCNAMERecordParameters struct {
 	// +kubebuilder:validation:Required
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The Azure resource id of the target object. Conflicts with records
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.DNSCNAMERecord
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -51,6 +58,7 @@ type DNSCNAMERecordParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
+	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=DNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
@@ -76,7 +84,7 @@ type DNSCNAMERecordStatus struct {
 
 // +kubebuilder:object:root=true
 
-// DNSCNAMERecord is the Schema for the DNSCNAMERecords API
+// DNSCNAMERecord is the Schema for the DNSCNAMERecords API. Manages a DNS CNAME Record.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

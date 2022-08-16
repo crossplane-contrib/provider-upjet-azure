@@ -14,14 +14,18 @@ import (
 )
 
 type IOTHubConsumerGroupObservation struct {
+
+	// The ID of the IoTHub Consumer Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type IOTHubConsumerGroupParameters struct {
 
+	// The name of the Event Hub-compatible endpoint in the IoT hub. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	EventHubEndpointName *string `json:"eventhubEndpointName" tf:"eventhub_endpoint_name,omitempty"`
 
+	// The name of the IoT Hub. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
@@ -32,6 +36,7 @@ type IOTHubConsumerGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
+	// The name of the resource group that contains the IoT hub. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -57,7 +62,7 @@ type IOTHubConsumerGroupStatus struct {
 
 // +kubebuilder:object:root=true
 
-// IOTHubConsumerGroup is the Schema for the IOTHubConsumerGroups API
+// IOTHubConsumerGroup is the Schema for the IOTHubConsumerGroups API. Manages a Consumer Group within an IotHub
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

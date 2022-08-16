@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ManagementPolicy is the Schema for the ManagementPolicys API
+        description: ManagementPolicy is the Schema for the ManagementPolicys API.
+          Manages an Azure Storage Account Management Policy.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -67,26 +68,51 @@ spec:
                     items:
                       properties:
                         actions:
+                          description: An actions block as documented below.
                           items:
                             properties:
                               baseBlob:
+                                description: A base_blob block as documented below.
                                 items:
                                   properties:
                                     deleteAfterDaysSinceLastAccessTimeGreaterThan:
+                                      description: The age in days after last access
+                                        time to delete the blob. Must be between 0
+                                        and 99999.
                                       type: number
                                     deleteAfterDaysSinceModificationGreaterThan:
+                                      description: The age in days after last modification
+                                        to delete the blob. Must be between 0 and
+                                        99999.
                                       type: number
                                     tierToArchiveAfterDaysSinceLastAccessTimeGreaterThan:
+                                      description: The age in days after last access
+                                        time to tier blobs to archive storage. Supports
+                                        blob currently at Hot or Cool tier. Must be
+                                        between 0 and 99999`.
                                       type: number
                                     tierToArchiveAfterDaysSinceModificationGreaterThan:
+                                      description: The age in days after last modification
+                                        to tier blobs to archive storage. Supports
+                                        blob currently at Hot or Cool tier. Must be
+                                        between 0 and 99999.
                                       type: number
                                     tierToCoolAfterDaysSinceLastAccessTimeGreaterThan:
+                                      description: The age in days after last access
+                                        time to tier blobs to cool storage. Supports
+                                        blob currently at Hot tier. Must be between
+                                        0 and 99999.
                                       type: number
                                     tierToCoolAfterDaysSinceModificationGreaterThan:
+                                      description: The age in days after last modification
+                                        to tier blobs to cool storage. Supports blob
+                                        currently at Hot tier. Must be between 0 and
+                                        99999.
                                       type: number
                                   type: object
                                 type: array
                               snapshot:
+                                description: A snapshot block as documented below.
                                 items:
                                   properties:
                                     changeTierToArchiveAfterDaysSinceCreation:
@@ -94,10 +120,14 @@ spec:
                                     changeTierToCoolAfterDaysSinceCreation:
                                       type: number
                                     deleteAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to delete the blob snapshot. Must be between
+                                        0 and 99999.
                                       type: number
                                   type: object
                                 type: array
                               version:
+                                description: A version block as documented below.
                                 items:
                                   properties:
                                     changeTierToArchiveAfterDaysSinceCreation:
@@ -105,28 +135,43 @@ spec:
                                     changeTierToCoolAfterDaysSinceCreation:
                                       type: number
                                     deleteAfterDaysSinceCreation:
+                                      description: The age in days after creation
+                                        to delete the blob version. Must be between
+                                        0 and 99999.
                                       type: number
                                   type: object
                                 type: array
                             type: object
                           type: array
                         enabled:
+                          description: Boolean to specify whether the rule is enabled.
                           type: boolean
                         filters:
+                          description: A filter block as documented below.
                           items:
                             properties:
                               blobTypes:
+                                description: An array of predefined values. Valid
+                                  options are blockBlob and appendBlob.
                                 items:
                                   type: string
                                 type: array
                               matchBlobIndexTag:
+                                description: A match_blob_index_tag block as defined
+                                  below. The block defines the blob index tag based
+                                  filtering for blob objects.
                                 items:
                                   properties:
                                     name:
                                       type: string
                                     operation:
+                                      description: The comparison operator which is
+                                        used for object comparison and filtering.
+                                        Possible value is ==. Defaults to ==.
                                       type: string
                                     value:
+                                      description: The filter tag value used for tag
+                                        based filtering for blob objects.
                                       type: string
                                   required:
                                   - name
@@ -134,6 +179,8 @@ spec:
                                   type: object
                                 type: array
                               prefixMatch:
+                                description: An array of strings for prefixes to be
+                                  matched.
                                 items:
                                   type: string
                                 type: array
@@ -150,6 +197,8 @@ spec:
                       type: object
                     type: array
                   storageAccountId:
+                    description: Specifies the id of the storage account to apply
+                      the management policy to.
                     type: string
                   storageAccountIdRef:
                     description: A Reference to a named object.
@@ -402,6 +451,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Storage Account Management Policy.
                     type: string
                 type: object
               conditions:

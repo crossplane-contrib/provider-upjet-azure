@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DNSSRVRecord is the Schema for the DNSSRVRecords API
+        description: DNSSRVRecord is the Schema for the DNSSRVRecords API. Manages
+          a DNS SRV Record.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,15 +65,21 @@ spec:
               forProvider:
                 properties:
                   record:
+                    description: A list of values that make up the SRV record. Each
+                      record block supports fields documented below.
                     items:
                       properties:
                         port:
+                          description: Port the service is listening on.
                           type: number
                         priority:
+                          description: Priority of the SRV record.
                           type: number
                         target:
+                          description: FQDN of the service.
                           type: string
                         weight:
+                          description: Weight of the SRV record.
                           type: number
                       required:
                       - port
@@ -82,6 +89,8 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: Specifies the resource group where the resource exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -159,10 +168,14 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   ttl:
+                    description: The Time To Live  of the DNS record in seconds.
                     type: number
                   zoneName:
+                    description: Specifies the DNS Zone where the DNS Zone  exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
                     description: A Reference to a named object.
@@ -418,8 +431,10 @@ spec:
               atProvider:
                 properties:
                   fqdn:
+                    description: The FQDN of the DNS SRV Record.
                     type: string
                   id:
+                    description: The DNS SRV Record ID.
                     type: string
                 type: object
               conditions:

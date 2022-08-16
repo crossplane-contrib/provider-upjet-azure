@@ -35,7 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Watcher is the Schema for the Watchers API
+        description: Watcher is the Schema for the Watchers API. Manages a Network
+          Watcher.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -64,8 +65,13 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Network Watcher. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: A Reference to a named object.
@@ -143,6 +149,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 required:
                 - location
@@ -324,6 +331,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Network Watcher.
                     type: string
                 type: object
               conditions:
