@@ -27,6 +27,27 @@ spec:
 ---
 
 apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubFallbackRoute
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    condition: "true"
+    enabled: true
+    endpointNamesRefs:
+    - name: example
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHub
 metadata:
   labels:
@@ -41,6 +62,36 @@ spec:
     sku:
     - capacity: 1
       name: S1
+    tags:
+      purpose: testing
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubEndpointStorageContainer
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    batchFrequencyInSeconds: 60
+    connectionStringSecretRef:
+      key: attribute.primary_blob_connection_string
+      name: example-storage-account
+      namespace: upbound-system
+    containerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    encoding: Avro
+    fileNameFormat: '{iothub}/{partition}_{YYYY}_{MM}_{DD}_{HH}_{mm}'
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    maxChunkSizeInBytes: 10485760
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -49,7 +100,7 @@ kind: ResourceGroup
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-iothub
 spec:
   forProvider:
     location: West Europe
