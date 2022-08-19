@@ -1,28 +1,41 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: Account
 metadata:
-  name: example-account
+  labels:
+    testing.upbound.io/example-name: db
+  name: example-cosmodb
 spec:
   forProvider:
-    kind: MongoDB
-    location:  "East US"
-    offerType: Standard
-    mongoServerVersion: "4.0"
-    backup:
-    - type: Continuous
-    consistencyPolicy:
-    - consistencyLevel: Session
-    resourceGroupNameRef:
-      name: example
-    geoLocation:
-    - failoverPriority: 0
-      location: "East US"
-      zoneRedundant: False
     capabilities:
+    - name: EnableAggregationPipeline
+    - name: mongoEnableDocLevelTTL
+    - name: MongoDBv3.4
     - name: EnableMongo
-    - name: DisableRateLimitingResponses
-  providerConfigRef:
-    name: example
-  writeConnectionSecretToRef:
-    name: conn-example-cosmos
-    namespace: crossplane-system 
+    consistencyPolicy:
+    - consistencyLevel: BoundedStaleness
+      maxIntervalInSeconds: 300
+      maxStalenessPrefix: 100000
+    enableAutomaticFailover: true
+    geoLocation:
+    - failoverPriority: 1
+      location: North Europe
+    - failoverPriority: 0
+      location: West Europe
+    kind: MongoDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
