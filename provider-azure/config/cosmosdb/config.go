@@ -77,10 +77,4 @@ func Configure(p *config.Provider) {
 			},
 		}
 	})
-	p.AddResourceConfigurator("azurerm_cosmosdb_sql_role_assignment", func(r *config.Resource) {
-		r.UseAsync = false
-	})
-	p.AddResourceConfigurator("azurerm_cosmosdb_sql_role_definition", func(r *config.Resource) {
-		r.UseAsync = false
-	})
 }

@@ -73,9 +73,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_endpoint_storage_container", func(r *config.Resource) {
-		r.References["iothub_name"] = config.Reference{
-			Type: "IOTHub",
-		}
 		r.References["container_name"] = config.Reference{
 			Type: rconfig.ContainerReferencePath,
 		}
@@ -88,17 +85,5 @@ func Configure(p *config.Provider) {
 		r.References["endpoint_names"] = config.Reference{
 			Type: "IOTHubEndpointStorageContainer",
 		}
-	})
-
-	p.AddResourceConfigurator("azurerm_iothub_endpoint_servicebus_queue", func(r *config.Resource) {
-		r.UseAsync = false
-	})
-
-	p.AddResourceConfigurator("azurerm_iothub_endpoint_servicebus_topic", func(r *config.Resource) {
-		r.UseAsync = false
-	})
-
-	p.AddResourceConfigurator("azurerm_iothub_enrichment", func(r *config.Resource) {
-		r.UseAsync = false
 	})
 }
