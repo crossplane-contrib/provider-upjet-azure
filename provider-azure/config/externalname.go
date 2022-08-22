@@ -17,8 +17,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_api_management": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .external_name }}"),
 
 	// authorization
-	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
-	// "azurerm_role_assignment":                  config.IdentifierFromProvider,
+	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Authorization/policyAssignments/{{ .externalName }}"),
+	"azurerm_role_assignment":                  config.IdentifierFromProvider,
 
 	// base group
 	"azurerm_subscription":                   config.TemplatedStringAsIdentifier("alias", "/providers/Microsoft.Subscription/aliases/{{ .external_name }}"),
@@ -106,8 +106,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_key_vault_certificate":                                  keyVaultURLIDConf("certificates"),
 	"azurerm_key_vault_certificate_issuer":                           keyVaultURLIDWithoutVersionConfFn("certificates/issuers"),
 	"azurerm_key_vault_managed_storage_account":                      keyVaultURLIDWithoutVersionConfFn("storage"),
-	"azurerm_key_vault_managed_storage_account_sas_token_definition": config.TemplatedStringAsIdentifier("name", "{{ .parameters.managed_storage_account_id }}/sas/{{ .external_name }}"),
-	"azurerm_key_vault_managed_hardware_security_module":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/managedHSMs//{{ .external_name }}"),
+	"azurerm_key_vault_managed_storage_account_sas_token_definition": config.TemplatedStringAsIdentifier("name", "{{ .parameters.managed_storage_account_id }}/sas/{{ .externalName }}"),
+	"azurerm_key_vault_managed_hardware_security_module":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .terraformProviderConfig.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/managedHSMs/{{ .externalName }}"),
 	"azurerm_key_vault_access_policy":                                keyVaultAccessPolicy(),
 
 	// kusto

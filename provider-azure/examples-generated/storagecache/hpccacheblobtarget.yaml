@@ -57,6 +57,34 @@ spec:
 
 ---
 
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  labels:
+    testing.upbound.io/example-name: example_storage_account_contrib
+  name: example-storage-account-contrib
+spec:
+  forProvider:
+    principalId: ${data.azuread_service_principal.example.object_id}
+    roleDefinitionName: Storage Account Contributor
+    scope: ${azurerm_storage_account.example.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  labels:
+    testing.upbound.io/example-name: example_storage_blob_data_contrib
+  name: example-storage-blob-data-contrib
+spec:
+  forProvider:
+    principalId: ${data.azuread_service_principal.example.object_id}
+    roleDefinitionName: Storage Blob Data Contributor
+    scope: ${azurerm_storage_account.example.id}
+
+---
+
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
