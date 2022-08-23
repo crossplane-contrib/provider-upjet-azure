@@ -22,7 +22,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   annotations:
-      upjet.upbound.io/manual-intervention: "requires manual value specification, also see https://docs.microsoft.com/en-us/answers/questions/830448/creation-of-hsm-keyvault-failed-with-serviceunavai.html"
+      upjet.upbound.io/manual-intervention: "region specific, see https://docs.microsoft.com/en-us/answers/questions/830448/creation-of-hsm-keyvault-failed-with-serviceunavai.html"
   name: example
 spec:
   forProvider:
@@ -90,6 +90,8 @@ kind: Certificate
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+      upjet.upbound.io/manual-intervention: "Observe issues see https://github.com/upbound/official-providers/issues/593"
   name: example-upbound-pem-cert
 spec:
   forProvider:
@@ -162,8 +164,6 @@ kind: Vault
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  annotations:
-      upjet.upbound.io/manual-intervention: "tenantId has to be manually provided"
   name: example-upbound
 spec:
   forProvider:
@@ -181,8 +181,6 @@ kind: ManagedStorageAccount
 metadata:
   labels:
     testing.upbound.io/example-name: test
-  annotations:
-      upjet.upbound.io/manual-intervention: "depends on Vault which requires manual value specification"
   name: test
 spec:
   forProvider:
@@ -232,8 +230,6 @@ kind: AccessPolicy
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  annotations:
-      upjet.upbound.io/manual-intervention: "tenantId and objectId have to be manually provided"
   name: example
 spec:
   forProvider:
