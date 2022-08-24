@@ -10,6 +10,7 @@ import (
 	"github.com/upbound/upjet/pkg/controller"
 
 	management "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/management"
+	policydefinition "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	resourcegroup "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourceproviderregistration"
@@ -274,6 +275,7 @@ import (
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		management.Setup,
+		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,

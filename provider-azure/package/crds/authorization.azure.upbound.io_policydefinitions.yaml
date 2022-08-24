@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: resourcegrouppolicyassignments.authorization.azure.upbound.io
+  name: policydefinitions.authorization.azure.upbound.io
 spec:
   group: authorization.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: ResourceGroupPolicyAssignment
-    listKind: ResourceGroupPolicyAssignmentList
-    plural: resourcegrouppolicyassignments
-    singular: resourcegrouppolicyassignment
+    kind: PolicyDefinition
+    listKind: PolicyDefinitionList
+    plural: policydefinitions
+    singular: policydefinition
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ResourceGroupPolicyAssignment is the Schema for the ResourceGroupPolicyAssignments
-          API. Manages a Resource Group Policy Assignment.
+        description: PolicyDefinition is the Schema for the PolicyDefinitions API.
+          Manages a policy rule definition. Policy definitions do not take effect
+          until they are assigned to a scope using a Policy Assignment.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,8 +52,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ResourceGroupPolicyAssignmentSpec defines the desired state
-              of ResourceGroupPolicyAssignment
+            description: PolicyDefinitionSpec defines the desired state of PolicyDefinition
             properties:
               deletionPolicy:
                 default: Delete
@@ -66,225 +66,48 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: A description which should be used for this Policy
-                      Assignment.
+                    description: The description of the policy definition.
                     type: string
                   displayName:
-                    description: The Display Name for this Policy Assignment.
+                    description: The display name of the policy definition.
                     type: string
-                  enforce:
-                    description: Specifies if this Policy should be enforced or not?
-                    type: boolean
-                  identity:
-                    description: An identity block as defined below.
-                    items:
-                      properties:
-                        identityIds:
-                          description: A list of User Managed Identity IDs which should
-                            be assigned to the Policy Definition.
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          description: The Type of Managed Identity which should be
-                            added to this Policy Definition. Possible values are SystemAssigned
-                            and UserAssigned.
-                          type: string
-                      required:
-                      - type
-                      type: object
-                    type: array
-                  location:
-                    description: The Azure Region where the Policy Assignment should
-                      exist. Changing this forces a new Policy Assignment to be created.
+                  managementGroupId:
+                    description: The id of the Management Group where this policy
+                      should be defined. Changing this forces a new resource to be
+                      created.
                     type: string
                   metadata:
-                    description: A JSON mapping of any Metadata for this Policy.
+                    description: The metadata for the policy definition. This is a
+                      JSON string representing additional metadata that should be
+                      stored with the policy definition.
                     type: string
-                  nonComplianceMessage:
-                    description: One or more non_compliance_message blocks as defined
-                      below.
-                    items:
-                      properties:
-                        content:
-                          description: The non-compliance message text. When assigning
-                            policy sets , unless policy_definition_reference_id is
-                            specified then this message will be the default for all
-                            policies.
-                          type: string
-                        policyDefinitionReferenceId:
-                          description: When assigning policy sets , this is the ID
-                            of the policy definition that the non-compliance message
-                            applies to.
-                          type: string
-                      required:
-                      - content
-                      type: object
-                    type: array
-                  notScopes:
-                    description: Specifies a list of Resource Scopes  within this
-                      Management Group which are excluded from this Policy.
-                    items:
-                      type: string
-                    type: array
+                  mode:
+                    description: The policy mode that allows you to specify which
+                      resource types will be evaluated. Possible values are All, Indexed,
+                      Microsoft.ContainerService.Data, Microsoft.CustomerLockbox.Data,
+                      Microsoft.DataCatalog.Data, Microsoft.KeyVault.Data, Microsoft.Kubernetes.Data,
+                      Microsoft.MachineLearningServices.Data, Microsoft.Network.Data
+                      and Microsoft.Synapse.Data.
+                    type: string
                   parameters:
-                    description: A JSON mapping of any Parameters for this Policy.
+                    description: Parameters for the policy definition. This field
+                      is a JSON string that allows you to parameterize your policy
+                      definition.
                     type: string
-                  policyDefinitionId:
-                    description: The ID of the Policy Definition or Policy Definition
-                      Set. Changing this forces a new Policy Assignment to be created.
+                  policyRule:
+                    description: The policy rule for the policy definition. This is
+                      a JSON string representing the rule that contains an if and
+                      a then block.
                     type: string
-                  policyDefinitionIdRef:
-                    description: A Reference to a named object.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  policyDefinitionIdSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  resourceGroupId:
-                    description: The ID of the Resource Group where this Policy Assignment
-                      should be created. Changing this forces a new Policy Assignment
-                      to be created.
+                  policyType:
+                    description: The policy type. Possible values are BuiltIn, Custom
+                      and NotSpecified. Changing this forces a new resource to be
+                      created.
                     type: string
-                  resourceGroupIdRef:
-                    description: A Reference to a named object.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  resourceGroupIdSelector:
-                    description: A Selector selects an object.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
+                required:
+                - displayName
+                - mode
+                - policyType
                 type: object
               providerConfigRef:
                 default:
@@ -458,28 +281,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: ResourceGroupPolicyAssignmentStatus defines the observed
-              state of ResourceGroupPolicyAssignment.
+            description: PolicyDefinitionStatus defines the observed state of PolicyDefinition.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Resource Group Policy Assignment.
+                    description: The ID of the Policy Definition.
                     type: string
-                  identity:
-                    description: An identity block as defined below.
-                    items:
-                      properties:
-                        principalId:
-                          description: The Principal ID of the Policy Assignment for
-                            this Resource Group.
-                          type: string
-                        tenantId:
-                          description: The Tenant ID of the Policy Assignment for
-                            this Resource Group.
-                          type: string
-                      type: object
-                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

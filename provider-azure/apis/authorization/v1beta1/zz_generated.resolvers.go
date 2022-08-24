@@ -22,6 +22,22 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, 
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyDefinitionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PolicyDefinitionIDRef,
+		Selector:     mg.Spec.ForProvider.PolicyDefinitionIDSelector,
+		To: reference.To{
+			List:    &PolicyDefinitionList{},
+			Managed: &PolicyDefinition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyDefinitionID")
+	}
+	mg.Spec.ForProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupID),
 		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupIDRef,

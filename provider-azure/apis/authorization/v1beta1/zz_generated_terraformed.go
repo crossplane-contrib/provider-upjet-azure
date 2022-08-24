@@ -13,6 +13,80 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this PolicyDefinition
+func (mg *PolicyDefinition) GetTerraformResourceType() string {
+	return "azurerm_policy_definition"
+}
+
+// GetConnectionDetailsMapping for this PolicyDefinition
+func (tr *PolicyDefinition) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PolicyDefinition
+func (tr *PolicyDefinition) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PolicyDefinition
+func (tr *PolicyDefinition) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PolicyDefinition
+func (tr *PolicyDefinition) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PolicyDefinition
+func (tr *PolicyDefinition) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PolicyDefinition
+func (tr *PolicyDefinition) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PolicyDefinition using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PolicyDefinition) LateInitialize(attrs []byte) (bool, error) {
+	params := &PolicyDefinitionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PolicyDefinition) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this ResourceGroupPolicyAssignment
 func (mg *ResourceGroupPolicyAssignment) GetTerraformResourceType() string {
 	return "azurerm_resource_group_policy_assignment"

@@ -6,15 +6,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    parameters: |2
-          {
-            "tagName": {
-              "value": "Business Unit"
-            },
-            "tagValue": {
-              "value": "BU"
-            }
-          }
     policyDefinitionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -32,6 +23,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    displayName: my-policy-definition
     mode: All
     policyRule: "\t{\n    \"if\": {\n      \"not\": {\n        \"field\": \"location\",\n
       \       \"equals\": \"westeurope\"\n      }\n    },\n    \"then\": {\n      \"effect\":
@@ -49,6 +41,3 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-
----
-
