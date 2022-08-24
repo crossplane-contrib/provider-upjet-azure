@@ -74,7 +74,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    sku: Basic
+    sku: Standard
     tags:
       environment: Production
 
