@@ -1,6 +1,8 @@
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: DiskEncryptionSet
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:
@@ -9,6 +11,4 @@ spec:
     keyVaultKeyId: https://yyy-example-keyvault.vault.azure.net/keys/yyppdd-example-key/0cdfea4ef85045b0a3a8ca539f6a311c
     location: West Europe
     resourceGroupNameRef:
-      name: example
-  providerConfigRef:
-    name: example
+      name: example-compute

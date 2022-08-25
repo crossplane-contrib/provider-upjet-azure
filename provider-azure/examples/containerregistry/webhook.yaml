@@ -11,7 +11,7 @@ spec:
     location: East US
     registryName: example
     resourceGroupNameRef:
-      name: example
+      name: example-containerreg
     scope: mytag:*
     serviceUri: https://mywebhookreceiver.example/mytag
     status: enabled

@@ -1,13 +1,13 @@
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: Snapshot
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-snapshot
 spec:
   forProvider:
     createOption: Copy
     location: West Europe
     resourceGroupNameRef:
-      name: example
+      name: example-compute
     sourceUri: ...
-  providerConfigRef:
-    name: example

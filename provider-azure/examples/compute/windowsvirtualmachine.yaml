@@ -1,6 +1,8 @@
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: WindowsVirtualMachine
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:
@@ -16,7 +18,7 @@ spec:
     - caching: ReadWrite
       storageAccountType: Standard_LRS
     resourceGroupNameRef:
-      name: example
+      name: example-compute
     size: Standard_F2
     sourceImageReference:
     - offer: WindowsServer

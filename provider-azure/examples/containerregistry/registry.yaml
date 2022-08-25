@@ -11,5 +11,5 @@ spec:
       zoneRedundancyEnabled: true
     location: West Europe
     resourceGroupNameRef:
-      name: example
+      name: example-containerreg
     sku: Premium

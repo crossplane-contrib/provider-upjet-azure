@@ -7,9 +7,7 @@ spec:
     description: Shared images and things.
     location: West Europe
     resourceGroupNameRef:
-      name: example
+      name: example-compute
     tags:
       Hello: There
       World: Example
-  providerConfigRef:
-    name: example

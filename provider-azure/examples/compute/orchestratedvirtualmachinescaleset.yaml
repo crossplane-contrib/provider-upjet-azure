@@ -7,8 +7,6 @@ spec:
     location: West Europe
     platformFaultDomainCount: 1
     resourceGroupNameRef:
-      name: example
+      name: example-compute
     zones:
     - "1"
-  providerConfigRef:
-    name: example

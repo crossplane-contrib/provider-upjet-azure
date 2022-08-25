@@ -1,6 +1,8 @@
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: LinuxVirtualMachine
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs a valid public key."
   name: example
 spec:
   forProvider:
@@ -15,12 +17,10 @@ spec:
     - caching: ReadWrite
       storageAccountType: Standard_LRS
     resourceGroupNameRef:
-      name: example
+      name: example-compute
     size: Standard_F2
     sourceImageReference:
     - offer: UbuntuServer
       publisher: Canonical
       sku: 16.04-LTS
       version: latest
-  providerConfigRef:
-    name: example

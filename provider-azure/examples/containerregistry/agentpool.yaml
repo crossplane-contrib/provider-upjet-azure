@@ -8,3 +8,16 @@ spec:
     location: West Europe
     resourceGroupNameRef:
       name: example
+
+---
+
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-containerreg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane

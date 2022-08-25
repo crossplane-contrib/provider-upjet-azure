@@ -9,4 +9,4 @@ spec:
     - repositories/repo1/content/write
     containerRegistryName: example
     resourceGroupNameRef:
-      name: example
+      name: example-containerreg

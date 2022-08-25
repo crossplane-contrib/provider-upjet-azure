@@ -6,6 +6,6 @@ spec:
   forProvider:
     containerRegistryName: example
     resourceGroupNameRef:
-      name: example
+      name: example-containerreg
     scopeMapIdRef:
       name: example
