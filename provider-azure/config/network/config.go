@@ -374,14 +374,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_endpoint", func(r *config.Resource) {
-		r.References["subnet_id"] = config.Reference{
-			Type:      "Subnet",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
-		r.References["private_service_connection.private_connection_resource_id"] = config.Reference{
-			Type:      "PrivateLinkService",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
+		delete(r.References, "private_service_connection.private_connection_resource_id")
 	})
 
 	p.AddResourceConfigurator("azurerm_network_packet_capture", func(r *config.Resource) {

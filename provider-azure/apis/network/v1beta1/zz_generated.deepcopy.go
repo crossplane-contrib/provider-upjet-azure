@@ -18023,16 +18023,6 @@ func (in *PrivateServiceConnectionParameters) DeepCopyInto(out *PrivateServiceCo
 		*out = new(string)
 		**out = **in
 	}
-	if in.PrivateConnectionResourceIDRef != nil {
-		in, out := &in.PrivateConnectionResourceIDRef, &out.PrivateConnectionResourceIDRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.PrivateConnectionResourceIDSelector != nil {
-		in, out := &in.PrivateConnectionResourceIDSelector, &out.PrivateConnectionResourceIDSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.RequestMessage != nil {
 		in, out := &in.RequestMessage, &out.RequestMessage
 		*out = new(string)

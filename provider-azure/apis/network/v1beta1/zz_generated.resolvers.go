@@ -2477,24 +2477,6 @@ func (mg *PrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateServiceConnection); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateServiceConnection[i3].PrivateConnectionResourceID),
-			Extract:      rconfig.ExtractResourceID(),
-			Reference:    mg.Spec.ForProvider.PrivateServiceConnection[i3].PrivateConnectionResourceIDRef,
-			Selector:     mg.Spec.ForProvider.PrivateServiceConnection[i3].PrivateConnectionResourceIDSelector,
-			To: reference.To{
-				List:    &PrivateLinkServiceList{},
-				Managed: &PrivateLinkService{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.PrivateServiceConnection[i3].PrivateConnectionResourceID")
-		}
-		mg.Spec.ForProvider.PrivateServiceConnection[i3].PrivateConnectionResourceID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.PrivateServiceConnection[i3].PrivateConnectionResourceIDRef = rsp.ResolvedReference
-
-	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
@@ -2513,7 +2495,7 @@ func (mg *PrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
-		Extract:      rconfig.ExtractResourceID(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.SubnetIDRef,
 		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
