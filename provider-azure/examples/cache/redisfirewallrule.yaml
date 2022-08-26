@@ -1,0 +1,52 @@
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisFirewallRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIp: 2.3.4.5
+    redisCacheNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startIp: 1.2.3.4
+
+---
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    redisVersion: "6"
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: West Europe
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Premium
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-redis-firewall-rule
+spec:
+  forProvider:
+    location: West Europe
