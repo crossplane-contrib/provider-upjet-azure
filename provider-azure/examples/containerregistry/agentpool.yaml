@@ -4,10 +4,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    containerRegistryName: example
+    containerRegistryName: upbound
     location: West Europe
     resourceGroupNameRef:
-      name: example
+      name: example-containerreg
 
 ---
 

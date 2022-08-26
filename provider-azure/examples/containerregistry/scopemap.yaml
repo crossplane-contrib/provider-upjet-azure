@@ -6,7 +6,14 @@ spec:
   forProvider:
     actions:
     - repositories/repo1/content/read
+    - repositories/repo1/content/delete
     - repositories/repo1/content/write
-    containerRegistryName: example
+    - repositories/repo1/metadata/read
+    - repositories/repo1/metadata/write
+    - gateway/examplecr/config/read
+    - gateway/examplecr/config/write
+    - gateway/examplecr/message/read
+    - gateway/examplecr/message/write
+    containerRegistryName: upbound
     resourceGroupNameRef:
       name: example-containerreg

@@ -9,7 +9,7 @@ spec:
     customHeaders:
       Content-Type: application/json
     location: East US
-    registryName: example
+    registryName: upbound
     resourceGroupNameRef:
       name: example-containerreg
     scope: mytag:*
