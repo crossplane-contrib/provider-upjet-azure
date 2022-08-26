@@ -1,6 +1,8 @@
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: DataSetKustoDatabase
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: examplekustodatabase
 spec:
   forProvider:
@@ -12,6 +14,8 @@ spec:
 apiVersion: kusto.azure.upbound.io/v1beta1
 kind: Database
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:
@@ -24,6 +28,8 @@ spec:
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: RoleAssignment
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: examplekustodatabase
 spec:
   forProvider:

@@ -1,10 +1,22 @@
-apiVersion: stream.azure.upbound.io/v1beta1
-kind: AnalyticsCluster
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: Cluster
 metadata:
+  annotations:
+    upjet.upbound.io/timeout: "3600"
   name: example
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameRef:
-      name: example-resources
+      name: example-stream
     streamingCapacity: 36
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-stream
+spec:
+  forProvider:
+    location: West Europe

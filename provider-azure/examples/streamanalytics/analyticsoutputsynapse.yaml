@@ -1,5 +1,5 @@
-apiVersion: stream.azure.upbound.io/v1beta1
-kind: AnalyticsOutputSynapse
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: OutputSynapse
 metadata:
   name: example
   annotations:

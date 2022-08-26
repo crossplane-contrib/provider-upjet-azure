@@ -1,6 +1,8 @@
 apiVersion: netapp.azure.upbound.io/v1beta1
 kind: SnapshotPolicy
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:

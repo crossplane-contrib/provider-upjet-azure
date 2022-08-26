@@ -1,6 +1,8 @@
 apiVersion: dbformysql.azure.upbound.io/v1beta1
 kind: Server
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource needs valid kubernetes secret."
   name: example
 spec:
   forProvider:

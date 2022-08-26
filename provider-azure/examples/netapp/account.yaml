@@ -1,6 +1,8 @@
 apiVersion: netapp.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:
@@ -22,6 +24,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-rg-netapp
 spec:
   forProvider:
@@ -32,6 +36,8 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-secret
   namespace: upbound-system
 type: Opaque

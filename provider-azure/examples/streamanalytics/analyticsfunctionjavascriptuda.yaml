@@ -1,6 +1,8 @@
-apiVersion: stream.azure.upbound.io/v1beta1
-kind: AnalyticsFunctionJavascriptUda
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: FunctionJavascriptUda
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:
@@ -22,4 +24,4 @@ spec:
               return this.state;
           }
       }
-    streamAnalyticsJobId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-resources/providers/Microsoft.StreamAnalytics/streamingjobs/example
+    streamAnalyticsJobId: <steramanalyticsjobid>

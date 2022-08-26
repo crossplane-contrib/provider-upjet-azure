@@ -1,6 +1,8 @@
 apiVersion: insights.azure.upbound.io/v1beta1
 kind: MonitorMetricAlert
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource depends on a ActionGroup and it needs manual intervention."
   name: example
 spec:
   forProvider:

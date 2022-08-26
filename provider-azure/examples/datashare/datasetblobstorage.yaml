@@ -1,6 +1,8 @@
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: DataSetBlobStorage
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:
@@ -21,6 +23,7 @@ kind: Account
 metadata:
   name: example-storage-account
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
     crossplane.io/external-name: opdatasharetest190722
 spec:
   forProvider:
@@ -38,6 +41,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Container
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:
@@ -48,6 +53,8 @@ spec:
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: RoleAssignment
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:

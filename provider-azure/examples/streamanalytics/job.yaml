@@ -12,7 +12,7 @@ spec:
     location: West Europe
     outputErrorPolicy: Drop
     resourceGroupNameRef:
-      name: example-resources
+      name: example-stream
     streamingUnits: 3
     tags:
       environment: example

@@ -7,6 +7,4 @@ spec:
     applicationType: web
     location: West Europe
     resourceGroupNameRef:
-      name: example
-  providerConfigRef:
-    name: example
+      name: example-insights-rg

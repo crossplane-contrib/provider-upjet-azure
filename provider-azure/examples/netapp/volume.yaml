@@ -1,6 +1,8 @@
 apiVersion: netapp.azure.upbound.io/v1beta1
 kind: Volume
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:
@@ -25,6 +27,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-vn
 spec:
   forProvider:
@@ -37,6 +41,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-subnet
 spec:
   forProvider:

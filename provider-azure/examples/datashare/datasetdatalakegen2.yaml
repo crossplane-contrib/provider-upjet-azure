@@ -1,6 +1,8 @@
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: DataSetDataLakeGen2
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-gen2
 spec:
   forProvider:
@@ -17,6 +19,7 @@ kind: Account
 metadata:
   name: example-storage-account-gen2
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
     crossplane.io/external-name: optestdatagen2190722
 spec:
   forProvider:
@@ -32,6 +35,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: DataLakeGen2FileSystem
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example
 spec:
   forProvider:
@@ -41,6 +46,8 @@ spec:
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: RoleAssignment
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-gen2
 spec:
   forProvider:

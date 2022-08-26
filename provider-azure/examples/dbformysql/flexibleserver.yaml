@@ -1,6 +1,8 @@
 apiVersion: dbformysql.azure.upbound.io/v1beta1
 kind: FlexibleServer
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-upbound
 spec:
   forProvider:
@@ -25,6 +27,8 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-secret
   namespace: upbound-system
 type: Opaque
@@ -34,6 +38,8 @@ data:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-rg-dbformysql
 spec:
   forProvider:
@@ -44,6 +50,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-vn-dbformysql
 spec:
   forProvider:
@@ -59,6 +67,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-subnet-dbformysql
 spec:
   forProvider:
@@ -80,6 +90,7 @@ kind: PrivateDNSZone
 metadata:
   name: example-upbound
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
     # https://docs.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-vnet#using-private-dns-zone
     crossplane.io/external-name: example-upbound.mysql.database.azure.com
 spec:
@@ -90,6 +101,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSZoneVirtualNetworkLink
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
   name: example-upbound
 spec:
   forProvider:

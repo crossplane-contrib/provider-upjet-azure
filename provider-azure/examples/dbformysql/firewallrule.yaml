@@ -1,6 +1,8 @@
 apiVersion: dbformysql.azure.upbound.io/v1beta1
 kind: FirewallRule
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:

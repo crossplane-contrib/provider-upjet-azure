@@ -9,7 +9,9 @@ spec:
     redundancy: LocallyRedundant
     resourceGroupNameRef:
       name: example-rg-dataprotection
+
 ---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:

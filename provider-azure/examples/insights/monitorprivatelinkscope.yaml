@@ -5,6 +5,4 @@ metadata:
 spec:
   forProvider:
     resourceGroupNameRef:
-      name: example
-  providerConfigRef:
-    name: example
+      name: example-insights-rg
