@@ -3,7 +3,7 @@ kind: RedisEnterpriseDatabase
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: default
 spec:
   forProvider:
     clientProtocol: Encrypted
