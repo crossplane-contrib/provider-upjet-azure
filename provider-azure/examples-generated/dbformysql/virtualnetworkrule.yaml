@@ -25,6 +25,7 @@ kind: Server
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: dbformysql/v1beta1/virtualnetworkrule
   labels:
     testing.upbound.io/example-name: example
   name: example
