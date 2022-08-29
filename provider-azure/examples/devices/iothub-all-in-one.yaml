@@ -4,7 +4,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   annotations:
-      upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/608"
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/608"
   name: example
 spec:
   forProvider:
@@ -34,7 +34,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   annotations:
-      upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/608"
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/608"
   name: example
 spec:
   forProvider:

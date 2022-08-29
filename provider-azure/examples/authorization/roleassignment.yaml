@@ -2,7 +2,7 @@ apiVersion: authorization.azure.upbound.io/v1beta1
 kind: RoleAssignment
 metadata:
   annotations:
-      upjet.upbound.io/manual-intervention: "scope is generic and context specific"
+    upjet.upbound.io/manual-intervention: "scope is generic and context specific"
   name: example
 spec:
   forProvider:

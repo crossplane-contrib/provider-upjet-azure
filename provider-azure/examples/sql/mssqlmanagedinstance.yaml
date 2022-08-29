@@ -2,6 +2,8 @@ apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedInstance
 metadata:
   name: example-sql
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
 spec:
   forProvider:
     administratorLogin: mradministrator

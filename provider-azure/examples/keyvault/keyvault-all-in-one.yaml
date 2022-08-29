@@ -22,7 +22,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   annotations:
-      upjet.upbound.io/manual-intervention: "region specific, see https://docs.microsoft.com/en-us/answers/questions/830448/creation-of-hsm-keyvault-failed-with-serviceunavai.html"
+    upjet.upbound.io/manual-intervention: "region specific, see https://docs.microsoft.com/en-us/answers/questions/830448/creation-of-hsm-keyvault-failed-with-serviceunavai.html"
   name: example
 spec:
   forProvider:
@@ -91,7 +91,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   annotations:
-      upjet.upbound.io/manual-intervention: "Observe issues see https://github.com/upbound/official-providers/issues/593"
+    upjet.upbound.io/manual-intervention: "Observe issues see https://github.com/upbound/official-providers/issues/593"
   name: example-upbound-pem-cert
 spec:
   forProvider:
@@ -146,7 +146,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example
   annotations:
-      upjet.upbound.io/manual-intervention: "requires manual value specification"
+    upjet.upbound.io/manual-intervention: "requires manual value specification"
   name: example
 spec:
   forProvider:
