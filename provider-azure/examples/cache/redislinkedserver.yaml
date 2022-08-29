@@ -3,6 +3,8 @@ kind: RedisLinkedServer
 metadata:
   labels:
     testing.upbound.io/example-name: example-link
+  annotations:
+      upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
   name: example-link
 spec:
   forProvider:
@@ -25,6 +27,8 @@ kind: RedisCache
 metadata:
   labels:
     testing.upbound.io/example-name: example-primary
+  annotations:
+      upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/629"
   name: example-primary
 spec:
   forProvider:
@@ -49,6 +53,8 @@ kind: RedisCache
 metadata:
   labels:
     testing.upbound.io/example-name: example-secondary
+  annotations:
+      upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/629"
   name: example-secondary
 spec:
   forProvider:

@@ -3,6 +3,8 @@ kind: IOTHubEndpointStorageContainer
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+      upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/608"
   name: example
 spec:
   forProvider:
@@ -31,6 +33,8 @@ kind: IOTHubFallbackRoute
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+      upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/608"
   name: example
 spec:
   forProvider:
