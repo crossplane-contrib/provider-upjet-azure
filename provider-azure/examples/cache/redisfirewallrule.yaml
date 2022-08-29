@@ -3,6 +3,8 @@ kind: RedisFirewallRule
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "depends on RedisCache which has https://github.com/upbound/official-providers/issues/629"
   name: example
 spec:
   forProvider:
