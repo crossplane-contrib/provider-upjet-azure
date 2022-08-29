@@ -10,9 +10,7 @@ spec:
     privateServiceConnection:
     - isManualConnection: false
       name: example-privateserviceconnection
-      privateConnectionResourceIdSelector:
-        matchLabels:
-          testing.upbound.io/example-name: example
+      privateConnectionResourceId: ${azurerm_private_link_service.example.id}
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

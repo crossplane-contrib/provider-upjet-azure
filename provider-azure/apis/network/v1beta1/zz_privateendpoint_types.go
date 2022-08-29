@@ -104,8 +104,8 @@ type PrivateEndpointParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -140,16 +140,8 @@ type PrivateServiceConnectionParameters struct {
 	PrivateConnectionResourceAlias *string `json:"privateConnectionResourceAlias,omitempty" tf:"private_connection_resource_alias,omitempty"`
 
 	// The ID of the Private Link Enabled Remote Resource which this Private Endpoint should be connected to. One of private_connection_resource_id or private_connection_resource_alias must be specified. Changing this forces a new resource to be created. For a web app or function app slot, the parent web app should be used in this field instead of a reference to the slot itself.
-	// +crossplane:generate:reference:type=PrivateLinkService
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateConnectionResourceID *string `json:"privateConnectionResourceId,omitempty" tf:"private_connection_resource_id,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PrivateConnectionResourceIDRef *v1.Reference `json:"privateConnectionResourceIdRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	PrivateConnectionResourceIDSelector *v1.Selector `json:"privateConnectionResourceIdSelector,omitempty" tf:"-"`
 
 	// A message passed to the owner of the remote resource when the private endpoint attempts to establish the connection to the remote resource. The request message can be a maximum of 140 characters in length. Only valid if is_manual_connection is set to true.
 	// +kubebuilder:validation:Optional
