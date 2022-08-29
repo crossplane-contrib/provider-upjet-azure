@@ -60,6 +60,8 @@ spec:
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: RoleAssignment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobtarget
   labels:
     testing.upbound.io/example-name: example_storage_account_contrib
   name: example-storage-account-contrib
@@ -74,6 +76,8 @@ spec:
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: RoleAssignment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobtarget
   labels:
     testing.upbound.io/example-name: example_storage_blob_data_contrib
   name: example-storage-blob-data-contrib
