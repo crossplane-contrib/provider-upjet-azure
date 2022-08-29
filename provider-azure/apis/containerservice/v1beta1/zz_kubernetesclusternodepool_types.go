@@ -123,9 +123,11 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	KubernetesClusterID *string `json:"kubernetesClusterId,omitempty" tf:"kubernetes_cluster_id,omitempty"`
 
+	// Reference to a KubernetesCluster to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
 	KubernetesClusterIDRef *v1.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
 
+	// Selector for a KubernetesCluster to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
 	KubernetesClusterIDSelector *v1.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
 
@@ -190,9 +192,11 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	PodSubnetID *string `json:"podSubnetId,omitempty" tf:"pod_subnet_id,omitempty"`
 
+	// Reference to a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
 	PodSubnetIDRef *v1.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
 	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
 
@@ -234,9 +238,11 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	VnetSubnetID *string `json:"vnetSubnetId,omitempty" tf:"vnet_subnet_id,omitempty"`
 
+	// Reference to a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
 	VnetSubnetIDRef *v1.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
 	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 

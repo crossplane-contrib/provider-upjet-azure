@@ -38,9 +38,11 @@ type IOTHubEndpointStorageContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
+	// Reference to a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
 	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
 
+	// Selector for a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
@@ -62,9 +64,11 @@ type IOTHubEndpointStorageContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
 
+	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
 	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
 
+	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
@@ -81,9 +85,11 @@ type IOTHubEndpointStorageContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }

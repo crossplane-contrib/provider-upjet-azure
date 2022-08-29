@@ -1,6 +1,8 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLStoredProcedure
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlstoredprocedure
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -26,6 +28,8 @@ spec:
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLContainer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlstoredprocedure
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -47,6 +51,8 @@ spec:
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlstoredprocedure
   labels:
     testing.upbound.io/example-name: example
   name: example

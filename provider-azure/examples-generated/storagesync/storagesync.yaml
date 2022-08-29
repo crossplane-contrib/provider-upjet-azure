@@ -1,6 +1,8 @@
 apiVersion: storagesync.azure.upbound.io/v1beta1
 kind: StorageSync
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagesync/v1beta1/storagesync
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -18,6 +20,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagesync/v1beta1/storagesync
   labels:
     testing.upbound.io/example-name: example
   name: example

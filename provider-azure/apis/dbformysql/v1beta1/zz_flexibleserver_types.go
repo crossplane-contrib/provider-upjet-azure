@@ -52,9 +52,11 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
 
+	// Reference to a Subnet in network to populate delegatedSubnetId.
 	// +kubebuilder:validation:Optional
 	DelegatedSubnetIDRef *v1.Reference `json:"delegatedSubnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate delegatedSubnetId.
 	// +kubebuilder:validation:Optional
 	DelegatedSubnetIDSelector *v1.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
 
@@ -84,9 +86,11 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 
+	// Reference to a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDRef *v1.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
 
+	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
@@ -99,9 +103,11 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

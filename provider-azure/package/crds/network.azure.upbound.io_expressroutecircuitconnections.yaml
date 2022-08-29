@@ -98,7 +98,8 @@ spec:
                       to be created.
                     type: string
                   peerPeeringIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ExpressRouteCircuitPeering to populate
+                      peerPeeringId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -132,7 +133,8 @@ spec:
                     - name
                     type: object
                   peerPeeringIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ExpressRouteCircuitPeering to populate
+                      peerPeeringId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -176,7 +178,8 @@ spec:
                       this forces a new Express Route Circuit Connection to be created.
                     type: string
                   peeringIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ExpressRouteCircuitPeering to populate
+                      peeringId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -210,7 +213,8 @@ spec:
                     - name
                     type: object
                   peeringIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ExpressRouteCircuitPeering to populate
+                      peeringId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

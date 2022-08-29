@@ -33,9 +33,11 @@ type DNSCNAMERecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -52,9 +54,11 @@ type DNSCNAMERecordParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
+	// Reference to a DNSCNAMERecord in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a DNSCNAMERecord in network to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
@@ -63,9 +67,11 @@ type DNSCNAMERecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 
+	// Reference to a DNSZone to populate zoneName.
 	// +kubebuilder:validation:Optional
 	ZoneNameRef *v1.Reference `json:"zoneNameRef,omitempty" tf:"-"`
 
+	// Selector for a DNSZone to populate zoneName.
 	// +kubebuilder:validation:Optional
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }

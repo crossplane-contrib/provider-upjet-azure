@@ -1,6 +1,8 @@
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: DataSetDataLakeGen2
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetdatalakegen2
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,8 @@ spec:
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: DataShare
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetdatalakegen2
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -37,6 +41,8 @@ spec:
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetdatalakegen2
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -54,6 +60,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetdatalakegen2
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -66,6 +74,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetdatalakegen2
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -84,6 +94,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: DataLakeGen2FileSystem
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetdatalakegen2
   labels:
     testing.upbound.io/example-name: example
   name: example

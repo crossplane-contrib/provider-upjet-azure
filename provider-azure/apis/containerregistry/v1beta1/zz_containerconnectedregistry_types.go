@@ -35,9 +35,11 @@ type ContainerConnectedRegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
 
+	// Reference to a Registry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
 	ContainerRegistryIDRef *v1.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
 
+	// Selector for a Registry to populate containerRegistryId.
 	// +kubebuilder:validation:Optional
 	ContainerRegistryIDSelector *v1.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
 
@@ -71,9 +73,11 @@ type ContainerConnectedRegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	SyncTokenID *string `json:"syncTokenId,omitempty" tf:"sync_token_id,omitempty"`
 
+	// Reference to a Token to populate syncTokenId.
 	// +kubebuilder:validation:Optional
 	SyncTokenIDRef *v1.Reference `json:"syncTokenIdRef,omitempty" tf:"-"`
 
+	// Selector for a Token to populate syncTokenId.
 	// +kubebuilder:validation:Optional
 	SyncTokenIDSelector *v1.Selector `json:"syncTokenIdSelector,omitempty" tf:"-"`
 

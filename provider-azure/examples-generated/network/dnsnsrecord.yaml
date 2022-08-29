@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSNSRecord
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/dnsnsrecord
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -24,6 +26,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSZone
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/dnsnsrecord
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -38,6 +42,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/dnsnsrecord
   labels:
     testing.upbound.io/example-name: example
   name: example

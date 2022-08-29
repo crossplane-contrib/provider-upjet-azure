@@ -69,7 +69,7 @@ spec:
                       this forces a new Storage Object Replication to be created.
                     type: string
                   destinationStorageAccountIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Account in storage to populate destinationStorageAccountId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -103,7 +103,7 @@ spec:
                     - name
                     type: object
                   destinationStorageAccountIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Account in storage to populate destinationStorageAccountId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -156,7 +156,8 @@ spec:
                             this forces a new Storage Object Replication to be created.
                           type: string
                         destinationContainerNameRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Container in storage to populate
+                            destinationContainerName.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -191,7 +192,8 @@ spec:
                           - name
                           type: object
                         destinationContainerNameSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Container in storage to populate
+                            destinationContainerName.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -242,7 +244,8 @@ spec:
                             this forces a new Storage Object Replication to be created.
                           type: string
                         sourceContainerNameRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Container in storage to populate
+                            sourceContainerName.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -277,7 +280,8 @@ spec:
                           - name
                           type: object
                         sourceContainerNameSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Container in storage to populate
+                            sourceContainerName.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -324,7 +328,7 @@ spec:
                       forces a new Storage Object Replication to be created.
                     type: string
                   sourceStorageAccountIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Account in storage to populate sourceStorageAccountId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -358,7 +362,7 @@ spec:
                     - name
                     type: object
                   sourceStorageAccountIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Account in storage to populate sourceStorageAccountId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -1,6 +1,8 @@
 apiVersion: logic.azure.upbound.io/v1beta1
 kind: IntegrationServiceEnvironment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -25,6 +27,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -37,6 +41,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: isesubnet1
   name: isesubnet1
@@ -60,6 +66,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: isesubnet2
   name: isesubnet2
@@ -79,6 +87,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: isesubnet3
   name: isesubnet3
@@ -98,6 +108,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: isesubnet4
   name: isesubnet4
@@ -117,6 +129,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: example
   name: example

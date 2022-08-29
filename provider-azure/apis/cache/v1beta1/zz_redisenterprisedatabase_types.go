@@ -49,9 +49,11 @@ type RedisEnterpriseDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
+	// Reference to a RedisEnterpriseCluster to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
 
+	// Selector for a RedisEnterpriseCluster to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
@@ -84,9 +86,11 @@ type RedisEnterpriseDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }

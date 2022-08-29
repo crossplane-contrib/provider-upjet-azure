@@ -96,9 +96,11 @@ type ManagementPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
+	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
 	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
+	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }

@@ -27,9 +27,11 @@ type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
+	// Reference to a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDRef *v1.Reference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
 
+	// Selector for a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
@@ -43,9 +45,11 @@ type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// Reference to a NetworkInterface to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
+	// Selector for a NetworkInterface to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }

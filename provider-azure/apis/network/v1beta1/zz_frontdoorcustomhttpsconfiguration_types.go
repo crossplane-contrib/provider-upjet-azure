@@ -39,9 +39,11 @@ type CustomHTTPSConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateVaultID *string `json:"azureKeyVaultCertificateVaultId,omitempty" tf:"azure_key_vault_certificate_vault_id,omitempty"`
 
+	// Reference to a Key in keyvault to populate azureKeyVaultCertificateVaultId.
 	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateVaultIDRef *v1.Reference `json:"azureKeyVaultCertificateVaultIdRef,omitempty" tf:"-"`
 
+	// Selector for a Key in keyvault to populate azureKeyVaultCertificateVaultId.
 	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateVaultIDSelector *v1.Selector `json:"azureKeyVaultCertificateVaultIdSelector,omitempty" tf:"-"`
 

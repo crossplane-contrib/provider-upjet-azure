@@ -71,9 +71,11 @@ type BlobParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
+	// Reference to a Account to populate storageAccountName.
 	// +kubebuilder:validation:Optional
 	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
+	// Selector for a Account to populate storageAccountName.
 	// +kubebuilder:validation:Optional
 	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
@@ -82,9 +84,11 @@ type BlobParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 
+	// Reference to a Container to populate storageContainerName.
 	// +kubebuilder:validation:Optional
 	StorageContainerNameRef *v1.Reference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
+	// Selector for a Container to populate storageContainerName.
 	// +kubebuilder:validation:Optional
 	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 

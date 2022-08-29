@@ -1,6 +1,8 @@
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: DiskEncryptionSet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/diskencryptionset
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -21,6 +23,8 @@ spec:
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Vault
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/diskencryptionset
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -40,6 +44,8 @@ spec:
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/diskencryptionset
   labels:
     testing.upbound.io/example-name: example-disk
   name: example-disk
@@ -60,6 +66,8 @@ spec:
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/diskencryptionset
   labels:
     testing.upbound.io/example-name: example-user
   name: example-user
@@ -80,6 +88,8 @@ spec:
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Key
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/diskencryptionset
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -103,6 +113,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/diskencryptionset
   labels:
     testing.upbound.io/example-name: example
   name: example

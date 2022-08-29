@@ -166,9 +166,11 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalNetworkGatewayID *string `json:"localNetworkGatewayId,omitempty" tf:"local_network_gateway_id,omitempty"`
 
+	// Reference to a LocalNetworkGateway in network to populate localNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	LocalNetworkGatewayIDRef *v1.Reference `json:"localNetworkGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a LocalNetworkGateway in network to populate localNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	LocalNetworkGatewayIDSelector *v1.Selector `json:"localNetworkGatewayIdSelector,omitempty" tf:"-"`
 
@@ -185,9 +187,11 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayID *string `json:"peerVirtualNetworkGatewayId,omitempty" tf:"peer_virtual_network_gateway_id,omitempty"`
 
+	// Reference to a VirtualNetworkGateway to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayIDRef *v1.Reference `json:"peerVirtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a VirtualNetworkGateway to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayIDSelector *v1.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 
@@ -197,9 +201,11 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -243,9 +249,11 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkGatewayID *string `json:"virtualNetworkGatewayId,omitempty" tf:"virtual_network_gateway_id,omitempty"`
 
+	// Reference to a VirtualNetworkGateway to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkGatewayIDRef *v1.Reference `json:"virtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a VirtualNetworkGateway to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkGatewayIDSelector *v1.Selector `json:"virtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 }

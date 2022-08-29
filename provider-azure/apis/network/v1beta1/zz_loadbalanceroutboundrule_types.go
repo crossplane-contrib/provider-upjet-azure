@@ -47,9 +47,11 @@ type LoadBalancerOutboundRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
+	// Reference to a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDRef *v1.Reference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
 
+	// Selector for a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
@@ -71,9 +73,11 @@ type LoadBalancerOutboundRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 
+	// Reference to a LoadBalancer to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDRef *v1.Reference `json:"loadbalancerIdRef,omitempty" tf:"-"`
 
+	// Selector for a LoadBalancer to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 

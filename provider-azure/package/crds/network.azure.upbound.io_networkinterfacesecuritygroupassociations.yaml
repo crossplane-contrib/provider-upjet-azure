@@ -71,7 +71,7 @@ spec:
                       a new resource to be created.
                     type: string
                   networkInterfaceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a NetworkInterface to populate networkInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -105,7 +105,7 @@ spec:
                     - name
                     type: object
                   networkInterfaceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a NetworkInterface to populate networkInterfaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -149,7 +149,7 @@ spec:
                       new resource to be created.
                     type: string
                   networkSecurityGroupIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SecurityGroup to populate networkSecurityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -183,7 +183,7 @@ spec:
                     - name
                     type: object
                   networkSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SecurityGroup to populate networkSecurityGroupId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

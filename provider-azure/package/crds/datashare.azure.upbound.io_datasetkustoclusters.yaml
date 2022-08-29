@@ -70,7 +70,7 @@ spec:
                       Cluster Dataset to be created.
                     type: string
                   kustoClusterIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster in kusto to populate kustoClusterId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +104,7 @@ spec:
                     - name
                     type: object
                   kustoClusterIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster in kusto to populate kustoClusterId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +148,7 @@ spec:
                       forces a new Data Share Kusto Cluster Dataset to be created.
                     type: string
                   shareIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a DataShare to populate shareId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +182,7 @@ spec:
                     - name
                     type: object
                   shareIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a DataShare to populate shareId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

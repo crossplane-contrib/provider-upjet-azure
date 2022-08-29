@@ -77,7 +77,7 @@ spec:
                       this forces a new Live Output to be created.
                     type: string
                   assetNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Asset to populate assetName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   assetNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Asset to populate assetName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -164,7 +164,7 @@ spec:
                       new Live Output to be created.
                     type: string
                   liveEventIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a LiveEvent to populate liveEventId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -198,7 +198,7 @@ spec:
                     - name
                     type: object
                   liveEventIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a LiveEvent to populate liveEventId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

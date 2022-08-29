@@ -37,9 +37,11 @@ type ObjectReplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationStorageAccountID *string `json:"destinationStorageAccountId,omitempty" tf:"destination_storage_account_id,omitempty"`
 
+	// Reference to a Account in storage to populate destinationStorageAccountId.
 	// +kubebuilder:validation:Optional
 	DestinationStorageAccountIDRef *v1.Reference `json:"destinationStorageAccountIdRef,omitempty" tf:"-"`
 
+	// Selector for a Account in storage to populate destinationStorageAccountId.
 	// +kubebuilder:validation:Optional
 	DestinationStorageAccountIDSelector *v1.Selector `json:"destinationStorageAccountIdSelector,omitempty" tf:"-"`
 
@@ -53,9 +55,11 @@ type ObjectReplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
 
+	// Reference to a Account in storage to populate sourceStorageAccountId.
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountIDRef *v1.Reference `json:"sourceStorageAccountIdRef,omitempty" tf:"-"`
 
+	// Selector for a Account in storage to populate sourceStorageAccountId.
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountIDSelector *v1.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
 }
@@ -75,9 +79,11 @@ type ObjectReplicationRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationContainerName *string `json:"destinationContainerName,omitempty" tf:"destination_container_name,omitempty"`
 
+	// Reference to a Container in storage to populate destinationContainerName.
 	// +kubebuilder:validation:Optional
 	DestinationContainerNameRef *v1.Reference `json:"destinationContainerNameRef,omitempty" tf:"-"`
 
+	// Selector for a Container in storage to populate destinationContainerName.
 	// +kubebuilder:validation:Optional
 	DestinationContainerNameSelector *v1.Selector `json:"destinationContainerNameSelector,omitempty" tf:"-"`
 
@@ -90,9 +96,11 @@ type ObjectReplicationRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceContainerName *string `json:"sourceContainerName,omitempty" tf:"source_container_name,omitempty"`
 
+	// Reference to a Container in storage to populate sourceContainerName.
 	// +kubebuilder:validation:Optional
 	SourceContainerNameRef *v1.Reference `json:"sourceContainerNameRef,omitempty" tf:"-"`
 
+	// Selector for a Container in storage to populate sourceContainerName.
 	// +kubebuilder:validation:Optional
 	SourceContainerNameSelector *v1.Selector `json:"sourceContainerNameSelector,omitempty" tf:"-"`
 }

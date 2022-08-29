@@ -31,9 +31,11 @@ type ManagementGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ParentManagementGroupID *string `json:"parentManagementGroupId,omitempty" tf:"parent_management_group_id,omitempty"`
 
+	// Reference to a ManagementGroup in management to populate parentManagementGroupId.
 	// +kubebuilder:validation:Optional
 	ParentManagementGroupIDRef *v1.Reference `json:"parentManagementGroupIdRef,omitempty" tf:"-"`
 
+	// Selector for a ManagementGroup in management to populate parentManagementGroupId.
 	// +kubebuilder:validation:Optional
 	ParentManagementGroupIDSelector *v1.Selector `json:"parentManagementGroupIdSelector,omitempty" tf:"-"`
 

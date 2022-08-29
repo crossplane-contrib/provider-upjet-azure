@@ -33,9 +33,11 @@ type DataSetKustoClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KustoClusterID *string `json:"kustoClusterId,omitempty" tf:"kusto_cluster_id,omitempty"`
 
+	// Reference to a Cluster in kusto to populate kustoClusterId.
 	// +kubebuilder:validation:Optional
 	KustoClusterIDRef *v1.Reference `json:"kustoClusterIdRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster in kusto to populate kustoClusterId.
 	// +kubebuilder:validation:Optional
 	KustoClusterIDSelector *v1.Selector `json:"kustoClusterIdSelector,omitempty" tf:"-"`
 
@@ -45,9 +47,11 @@ type DataSetKustoClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`
 
+	// Reference to a DataShare to populate shareId.
 	// +kubebuilder:validation:Optional
 	ShareIDRef *v1.Reference `json:"shareIdRef,omitempty" tf:"-"`
 
+	// Selector for a DataShare to populate shareId.
 	// +kubebuilder:validation:Optional
 	ShareIDSelector *v1.Selector `json:"shareIdSelector,omitempty" tf:"-"`
 }

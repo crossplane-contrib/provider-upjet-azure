@@ -1,6 +1,8 @@
 apiVersion: storagecache.azure.upbound.io/v1beta1
 kind: HPCCacheBlobTarget
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobtarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,8 @@ spec:
 apiVersion: storagecache.azure.upbound.io/v1beta1
 kind: HPCCache
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobtarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -42,6 +46,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobtarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -54,6 +60,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobtarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -71,6 +79,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Container
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobtarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -85,6 +95,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobtarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -104,6 +116,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccacheblobtarget
   labels:
     testing.upbound.io/example-name: example
   name: example

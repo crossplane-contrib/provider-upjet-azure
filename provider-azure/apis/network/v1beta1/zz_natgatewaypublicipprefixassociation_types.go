@@ -27,9 +27,11 @@ type NATGatewayPublicIPPrefixAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
 
+	// Reference to a NATGateway to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a NATGateway to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
@@ -39,9 +41,11 @@ type NATGatewayPublicIPPrefixAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
 
+	// Reference to a PublicIPPrefix to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixIDRef *v1.Reference `json:"publicIpPrefixIdRef,omitempty" tf:"-"`
 
+	// Selector for a PublicIPPrefix to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixIDSelector *v1.Selector `json:"publicIpPrefixIdSelector,omitempty" tf:"-"`
 }

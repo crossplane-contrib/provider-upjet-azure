@@ -1,6 +1,8 @@
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHubEndpointEventHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,8 @@ spec:
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: EventHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -41,6 +45,8 @@ spec:
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: AuthorizationRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -64,6 +70,8 @@ spec:
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: EventHubNamespace
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -80,6 +88,8 @@ spec:
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -100,6 +110,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -33,9 +33,11 @@ type DataSetDataLakeGen2Parameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemName *string `json:"fileSystemName,omitempty" tf:"file_system_name,omitempty"`
 
+	// Reference to a DataLakeGen2FileSystem in storage to populate fileSystemName.
 	// +kubebuilder:validation:Optional
 	FileSystemNameRef *v1.Reference `json:"fileSystemNameRef,omitempty" tf:"-"`
 
+	// Selector for a DataLakeGen2FileSystem in storage to populate fileSystemName.
 	// +kubebuilder:validation:Optional
 	FileSystemNameSelector *v1.Selector `json:"fileSystemNameSelector,omitempty" tf:"-"`
 
@@ -49,9 +51,11 @@ type DataSetDataLakeGen2Parameters struct {
 	// +kubebuilder:validation:Optional
 	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`
 
+	// Reference to a DataShare to populate shareId.
 	// +kubebuilder:validation:Optional
 	ShareIDRef *v1.Reference `json:"shareIdRef,omitempty" tf:"-"`
 
+	// Selector for a DataShare to populate shareId.
 	// +kubebuilder:validation:Optional
 	ShareIDSelector *v1.Selector `json:"shareIdSelector,omitempty" tf:"-"`
 
@@ -61,9 +65,11 @@ type DataSetDataLakeGen2Parameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
+	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
 	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
+	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }

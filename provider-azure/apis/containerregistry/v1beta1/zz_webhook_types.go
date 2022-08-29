@@ -38,9 +38,11 @@ type WebhookParameters struct {
 	// +kubebuilder:validation:Optional
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
 
+	// Reference to a Registry in containerregistry to populate registryName.
 	// +kubebuilder:validation:Optional
 	RegistryNameRef *v1.Reference `json:"registryNameRef,omitempty" tf:"-"`
 
+	// Selector for a Registry in containerregistry to populate registryName.
 	// +kubebuilder:validation:Optional
 	RegistryNameSelector *v1.Selector `json:"registryNameSelector,omitempty" tf:"-"`
 
@@ -49,9 +51,11 @@ type WebhookParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

@@ -69,7 +69,7 @@ spec:
                       to be created.
                     type: string
                   accountNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Account to populate accountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -103,7 +103,7 @@ spec:
                     - name
                     type: object
                   accountNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Account to populate accountName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +148,7 @@ spec:
                       account_name and pool_name.'
                     type: string
                   createFromSnapshotResourceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Snapshot to populate createFromSnapshotResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +182,7 @@ spec:
                     - name
                     type: object
                   createFromSnapshotResourceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Snapshot to populate createFromSnapshotResourceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -235,7 +235,7 @@ spec:
                           description: Resource ID of the primary volume.
                           type: string
                         remoteVolumeResourceIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Volume to populate remoteVolumeResourceId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -270,7 +270,7 @@ spec:
                           - name
                           type: object
                         remoteVolumeResourceIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Volume to populate remoteVolumeResourceId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -329,7 +329,7 @@ spec:
                             to the volume.
                           type: string
                         snapshotPolicyIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a SnapshotPolicy to populate snapshotPolicyId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -364,7 +364,7 @@ spec:
                           - name
                           type: object
                         snapshotPolicyIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a SnapshotPolicy to populate snapshotPolicyId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -450,7 +450,7 @@ spec:
                       created.
                     type: string
                   poolNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Pool to populate poolName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -484,7 +484,7 @@ spec:
                     - name
                     type: object
                   poolNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Pool to populate poolName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -539,7 +539,8 @@ spec:
                       created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -573,7 +574,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -636,7 +638,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet in network to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -670,7 +672,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet in network to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

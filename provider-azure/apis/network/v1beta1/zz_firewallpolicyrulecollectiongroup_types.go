@@ -93,9 +93,11 @@ type FirewallPolicyRuleCollectionGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
+	// Reference to a FirewallPolicy to populate firewallPolicyId.
 	// +kubebuilder:validation:Optional
 	FirewallPolicyIDRef *v1.Reference `json:"firewallPolicyIdRef,omitempty" tf:"-"`
 
+	// Selector for a FirewallPolicy to populate firewallPolicyId.
 	// +kubebuilder:validation:Optional
 	FirewallPolicyIDSelector *v1.Selector `json:"firewallPolicyIdSelector,omitempty" tf:"-"`
 

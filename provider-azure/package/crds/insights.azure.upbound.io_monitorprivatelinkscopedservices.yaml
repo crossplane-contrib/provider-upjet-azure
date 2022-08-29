@@ -71,7 +71,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   linkedResourceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ApplicationInsights to populate linkedResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -105,7 +105,7 @@ spec:
                     - name
                     type: object
                   linkedResourceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ApplicationInsights to populate linkedResourceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -149,7 +149,8 @@ spec:
                       a new resource to be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -183,7 +184,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -226,7 +228,8 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   scopeNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a MonitorPrivateLinkScope to populate
+                      scopeName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -260,7 +263,8 @@ spec:
                     - name
                     type: object
                   scopeNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a MonitorPrivateLinkScope to populate
+                      scopeName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

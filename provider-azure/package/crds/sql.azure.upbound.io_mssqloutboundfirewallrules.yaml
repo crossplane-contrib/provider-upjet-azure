@@ -70,7 +70,7 @@ spec:
                       the Outbound Firewall Rule.
                     type: string
                   serverIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a MSSQLServer to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +104,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a MSSQLServer to populate serverId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

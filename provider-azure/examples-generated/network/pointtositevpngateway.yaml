@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PointToSiteVPNGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/pointtositevpngateway
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -28,6 +30,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/pointtositevpngateway
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -40,6 +44,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/pointtositevpngateway
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -59,6 +65,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualWAN
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/pointtositevpngateway
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -74,6 +82,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VPNServerConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/pointtositevpngateway
   labels:
     testing.upbound.io/example-name: example
   name: example

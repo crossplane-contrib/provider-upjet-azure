@@ -73,7 +73,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   managedInstanceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a MSSQLManagedInstance to populate managedInstanceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -107,7 +107,7 @@ spec:
                     - name
                     type: object
                   managedInstanceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a MSSQLManagedInstance to populate managedInstanceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -151,7 +151,7 @@ spec:
                       created.
                     type: string
                   partnerManagedInstanceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a MSSQLManagedInstance to populate partnerManagedInstanceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -185,7 +185,7 @@ spec:
                     - name
                     type: object
                   partnerManagedInstanceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a MSSQLManagedInstance to populate partnerManagedInstanceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

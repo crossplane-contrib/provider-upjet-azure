@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ApplicationGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/applicationgateway
   labels:
     testing.upbound.io/example-name: network
   name: network
@@ -53,6 +55,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PublicIP
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/applicationgateway
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -69,6 +73,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/applicationgateway
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -81,6 +87,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/applicationgateway
   labels:
     testing.upbound.io/example-name: backend
   name: backend
@@ -100,6 +108,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/applicationgateway
   labels:
     testing.upbound.io/example-name: frontend
   name: frontend
@@ -119,6 +129,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/applicationgateway
   labels:
     testing.upbound.io/example-name: example
   name: example

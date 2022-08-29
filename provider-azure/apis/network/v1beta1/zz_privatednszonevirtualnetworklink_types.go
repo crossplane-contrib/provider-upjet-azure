@@ -26,9 +26,11 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneName *string `json:"privateDnsZoneName,omitempty" tf:"private_dns_zone_name,omitempty"`
 
+	// Reference to a PrivateDNSZone to populate privateDnsZoneName.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneNameRef *v1.Reference `json:"privateDnsZoneNameRef,omitempty" tf:"-"`
 
+	// Selector for a PrivateDNSZone to populate privateDnsZoneName.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneNameSelector *v1.Selector `json:"privateDnsZoneNameSelector,omitempty" tf:"-"`
 
@@ -41,9 +43,11 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -57,9 +61,11 @@ type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 
+	// Reference to a VirtualNetwork to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkIDRef *v1.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
 
+	// Selector for a VirtualNetwork to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkIDSelector *v1.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }

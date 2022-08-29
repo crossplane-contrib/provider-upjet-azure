@@ -88,9 +88,11 @@ type EventHubParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
+	// Reference to a EventHubNamespace to populate namespaceName.
 	// +kubebuilder:validation:Optional
 	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
 
+	// Selector for a EventHubNamespace to populate namespaceName.
 	// +kubebuilder:validation:Optional
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
@@ -103,9 +105,11 @@ type EventHubParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

@@ -71,9 +71,11 @@ type PacketCaptureParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkWatcherName *string `json:"networkWatcherName,omitempty" tf:"network_watcher_name,omitempty"`
 
+	// Reference to a Watcher to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherNameRef *v1.Reference `json:"networkWatcherNameRef,omitempty" tf:"-"`
 
+	// Selector for a Watcher to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherNameSelector *v1.Selector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
 
@@ -82,9 +84,11 @@ type PacketCaptureParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -114,9 +118,11 @@ type StorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
+	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
 	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
+	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }

@@ -77,7 +77,7 @@ spec:
                       be created.
                     type: string
                   networkSecurityGroupIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SecurityGroup to populate networkSecurityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   networkSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SecurityGroup to populate networkSecurityGroupId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -154,7 +154,7 @@ spec:
                       a new resource to be created.
                     type: string
                   networkWatcherNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Watcher to populate networkWatcherName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -188,7 +188,7 @@ spec:
                     - name
                     type: object
                   networkWatcherNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Watcher to populate networkWatcherName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -232,7 +232,8 @@ spec:
                       be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -266,7 +267,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -322,7 +324,7 @@ spec:
                       stored.
                     type: string
                   storageAccountIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Account in storage to populate storageAccountId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -356,7 +358,7 @@ spec:
                     - name
                     type: object
                   storageAccountIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Account in storage to populate storageAccountId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -413,7 +415,8 @@ spec:
                           description: The resource GUID of the attached workspace.
                           type: string
                         workspaceIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Workspace in operationalinsights
+                            to populate workspaceId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -448,7 +451,8 @@ spec:
                           - name
                           type: object
                         workspaceIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Workspace in operationalinsights
+                            to populate workspaceId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -495,7 +499,8 @@ spec:
                           description: The resource ID of the attached workspace.
                           type: string
                         workspaceResourceIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Workspace in operationalinsights
+                            to populate workspaceResourceId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -530,7 +535,8 @@ spec:
                           - name
                           type: object
                         workspaceResourceIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Workspace in operationalinsights
+                            to populate workspaceResourceId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with

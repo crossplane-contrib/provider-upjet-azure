@@ -1,6 +1,8 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLRoleAssignment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -23,6 +25,8 @@ spec:
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -45,6 +49,8 @@ spec:
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLRoleDefinition
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -68,6 +74,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetworkGatewayConnection
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
   labels:
     testing.upbound.io/example-name: onpremise
   name: onpremise
@@ -27,6 +29,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LocalNetworkGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
   labels:
     testing.upbound.io/example-name: onpremise
   name: onpremise
@@ -45,6 +49,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PublicIP
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -61,6 +67,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -73,6 +81,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -92,6 +102,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -109,6 +121,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetworkGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
   labels:
     testing.upbound.io/example-name: example
   name: example

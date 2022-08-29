@@ -62,9 +62,11 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
 
+	// Reference to a MSSQLManagedInstance to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerIDRef *v1.Reference `json:"dnsZonePartnerIdRef,omitempty" tf:"-"`
 
+	// Selector for a MSSQLManagedInstance to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
 
@@ -101,9 +103,11 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -125,9 +129,11 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 

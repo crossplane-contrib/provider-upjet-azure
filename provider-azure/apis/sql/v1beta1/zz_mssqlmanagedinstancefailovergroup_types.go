@@ -35,9 +35,11 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
+	// Reference to a MSSQLManagedInstance to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
+	// Selector for a MSSQLManagedInstance to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
@@ -47,9 +49,11 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	PartnerManagedInstanceID *string `json:"partnerManagedInstanceId,omitempty" tf:"partner_managed_instance_id,omitempty"`
 
+	// Reference to a MSSQLManagedInstance to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
 	PartnerManagedInstanceIDRef *v1.Reference `json:"partnerManagedInstanceIdRef,omitempty" tf:"-"`
 
+	// Selector for a MSSQLManagedInstance to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
 	PartnerManagedInstanceIDSelector *v1.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
 

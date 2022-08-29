@@ -30,9 +30,11 @@ type ManagedStorageAccountSASTokenDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedStorageAccountID *string `json:"managedStorageAccountId,omitempty" tf:"managed_storage_account_id,omitempty"`
 
+	// Reference to a ManagedStorageAccount to populate managedStorageAccountId.
 	// +kubebuilder:validation:Optional
 	ManagedStorageAccountIDRef *v1.Reference `json:"managedStorageAccountIdRef,omitempty" tf:"-"`
 
+	// Selector for a ManagedStorageAccount to populate managedStorageAccountId.
 	// +kubebuilder:validation:Optional
 	ManagedStorageAccountIDSelector *v1.Selector `json:"managedStorageAccountIdSelector,omitempty" tf:"-"`
 

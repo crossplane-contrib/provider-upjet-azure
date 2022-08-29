@@ -35,9 +35,11 @@ type ConnectionMonitorParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkWatcherID *string `json:"networkWatcherId,omitempty" tf:"network_watcher_id,omitempty"`
 
+	// Reference to a Watcher to populate networkWatcherId.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherIDRef *v1.Reference `json:"networkWatcherIdRef,omitempty" tf:"-"`
 
+	// Selector for a Watcher to populate networkWatcherId.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherIDSelector *v1.Selector `json:"networkWatcherIdSelector,omitempty" tf:"-"`
 

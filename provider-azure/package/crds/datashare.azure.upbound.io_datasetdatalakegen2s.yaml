@@ -75,7 +75,8 @@ spec:
                       Lake Gen2 Dataset to be created.
                     type: string
                   fileSystemNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a DataLakeGen2FileSystem in storage
+                      to populate fileSystemName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,7 +110,8 @@ spec:
                     - name
                     type: object
                   fileSystemNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a DataLakeGen2FileSystem in storage
+                      to populate fileSystemName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -158,7 +160,7 @@ spec:
                       forces a new Data Share Data Lake Gen2 Dataset to be created.
                     type: string
                   shareIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a DataShare to populate shareId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -192,7 +194,7 @@ spec:
                     - name
                     type: object
                   shareIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a DataShare to populate shareId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -236,7 +238,7 @@ spec:
                       forces a new Data Share Data Lake Gen2 Dataset to be created.
                     type: string
                   storageAccountIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Account in storage to populate storageAccountId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -270,7 +272,7 @@ spec:
                     - name
                     type: object
                   storageAccountIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Account in storage to populate storageAccountId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

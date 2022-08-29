@@ -1,6 +1,8 @@
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: ManagedStorageAccount
 metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedstorageaccount
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -20,6 +22,8 @@ spec:
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Vault
 metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedstorageaccount
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -37,6 +41,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedstorageaccount
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -49,6 +55,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedstorageaccount
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -1,6 +1,8 @@
 apiVersion: dataprotection.azure.upbound.io/v1beta1
 kind: BackupPolicyBlobStorage
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicyblobstorage
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -16,6 +18,8 @@ spec:
 apiVersion: dataprotection.azure.upbound.io/v1beta1
 kind: BackupVault
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicyblobstorage
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -33,6 +37,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicyblobstorage
   labels:
     testing.upbound.io/example-name: example
   name: example

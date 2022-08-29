@@ -26,9 +26,11 @@ type SQLStoredProcedureParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
+	// Reference to a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
+	// Selector for a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
@@ -41,9 +43,11 @@ type SQLStoredProcedureParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
+	// Reference to a SQLContainer to populate containerName.
 	// +kubebuilder:validation:Optional
 	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
 
+	// Selector for a SQLContainer to populate containerName.
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
@@ -52,9 +56,11 @@ type SQLStoredProcedureParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
+	// Reference to a SQLDatabase to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
+	// Selector for a SQLDatabase to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
@@ -63,9 +69,11 @@ type SQLStoredProcedureParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }

@@ -27,9 +27,11 @@ type SubnetNATGatewayAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
 
+	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
+	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
@@ -39,9 +41,11 @@ type SubnetNATGatewayAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Reference to a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }

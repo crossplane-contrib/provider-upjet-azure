@@ -27,9 +27,11 @@ type SubnetNetworkSecurityGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
 
+	// Reference to a SecurityGroup to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDRef *v1.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
 
+	// Selector for a SecurityGroup to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
 
@@ -39,9 +41,11 @@ type SubnetNetworkSecurityGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Reference to a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }

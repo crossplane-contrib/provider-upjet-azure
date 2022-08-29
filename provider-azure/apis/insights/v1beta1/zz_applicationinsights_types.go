@@ -65,9 +65,11 @@ type ApplicationInsightsParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -89,9 +91,11 @@ type ApplicationInsightsParameters struct {
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
+	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }

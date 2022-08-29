@@ -71,7 +71,7 @@ spec:
                       field.
                     type: string
                   keyVaultKeyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Key in keyvault to populate keyVaultKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -105,7 +105,7 @@ spec:
                     - name
                     type: object
                   keyVaultKeyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Key in keyvault to populate keyVaultKeyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -147,7 +147,7 @@ spec:
                     description: Specifies the name of the MS SQL Server.
                     type: string
                   serverIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a MSSQLServer to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -181,7 +181,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a MSSQLServer to populate serverId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

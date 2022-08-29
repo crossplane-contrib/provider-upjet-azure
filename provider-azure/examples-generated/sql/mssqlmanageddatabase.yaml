@@ -1,6 +1,8 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanageddatabase
   labels:
     testing.upbound.io/example-name: example
   name: example

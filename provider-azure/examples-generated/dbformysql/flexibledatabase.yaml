@@ -1,6 +1,8 @@
 apiVersion: dbformysql.azure.upbound.io/v1beta1
 kind: FlexibleDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibledatabase
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -20,6 +22,8 @@ spec:
 apiVersion: dbformysql.azure.upbound.io/v1beta1
 kind: FlexibleServer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibledatabase
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -41,6 +45,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/flexibledatabase
   labels:
     testing.upbound.io/example-name: example
   name: example

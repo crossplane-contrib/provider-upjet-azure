@@ -1,6 +1,8 @@
 apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: Registry
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/registry
   labels:
     testing.upbound.io/example-name: acr
   name: acr
@@ -25,6 +27,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/registry
   labels:
     testing.upbound.io/example-name: example
   name: example

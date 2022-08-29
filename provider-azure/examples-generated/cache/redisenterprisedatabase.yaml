@@ -1,6 +1,8 @@
 apiVersion: cache.azure.upbound.io/v1beta1
 kind: RedisEnterpriseDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/redisenterprisedatabase
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -26,6 +28,8 @@ spec:
 apiVersion: cache.azure.upbound.io/v1beta1
 kind: RedisEnterpriseCluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/redisenterprisedatabase
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -42,6 +46,8 @@ spec:
 apiVersion: cache.azure.upbound.io/v1beta1
 kind: RedisEnterpriseCluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/redisenterprisedatabase
   labels:
     testing.upbound.io/example-name: example1
   name: example1
@@ -58,6 +64,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/redisenterprisedatabase
   labels:
     testing.upbound.io/example-name: example
   name: example

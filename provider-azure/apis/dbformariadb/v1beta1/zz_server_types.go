@@ -50,9 +50,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	CreationSourceServerID *string `json:"creationSourceServerId,omitempty" tf:"creation_source_server_id,omitempty"`
 
+	// Reference to a Server to populate creationSourceServerId.
 	// +kubebuilder:validation:Optional
 	CreationSourceServerIDRef *v1.Reference `json:"creationSourceServerIdRef,omitempty" tf:"-"`
 
+	// Selector for a Server to populate creationSourceServerId.
 	// +kubebuilder:validation:Optional
 	CreationSourceServerIDSelector *v1.Selector `json:"creationSourceServerIdSelector,omitempty" tf:"-"`
 
@@ -73,9 +75,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

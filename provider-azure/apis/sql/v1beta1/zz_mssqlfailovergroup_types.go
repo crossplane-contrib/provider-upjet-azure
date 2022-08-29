@@ -28,9 +28,11 @@ type MSSQLFailoverGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Databases []*string `json:"databases,omitempty" tf:"databases,omitempty"`
 
+	// References to MSSQLDatabase to populate databases.
 	// +kubebuilder:validation:Optional
 	DatabasesRefs []v1.Reference `json:"databasesRefs,omitempty" tf:"-"`
 
+	// Selector for a list of MSSQLDatabase to populate databases.
 	// +kubebuilder:validation:Optional
 	DatabasesSelector *v1.Selector `json:"databasesSelector,omitempty" tf:"-"`
 
@@ -51,9 +53,11 @@ type MSSQLFailoverGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
+	// Reference to a MSSQLServer to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
+	// Selector for a MSSQLServer to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
@@ -78,9 +82,11 @@ type PartnerServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Reference to a MSSQLServer to populate id.
 	// +kubebuilder:validation:Optional
 	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
 
+	// Selector for a MSSQLServer to populate id.
 	// +kubebuilder:validation:Optional
 	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 }

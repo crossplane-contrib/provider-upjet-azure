@@ -28,9 +28,11 @@ type FirewallNetworkRuleCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureFirewallName *string `json:"azureFirewallName,omitempty" tf:"azure_firewall_name,omitempty"`
 
+	// Reference to a Firewall to populate azureFirewallName.
 	// +kubebuilder:validation:Optional
 	AzureFirewallNameRef *v1.Reference `json:"azureFirewallNameRef,omitempty" tf:"-"`
 
+	// Selector for a Firewall to populate azureFirewallName.
 	// +kubebuilder:validation:Optional
 	AzureFirewallNameSelector *v1.Selector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
 
@@ -43,9 +45,11 @@ type FirewallNetworkRuleCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

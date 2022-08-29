@@ -1,6 +1,8 @@
 apiVersion: netapp.azure.upbound.io/v1beta1
 kind: Pool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta1/pool
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -21,6 +23,8 @@ spec:
 apiVersion: netapp.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta1/pool
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -36,6 +40,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta1/pool
   labels:
     testing.upbound.io/example-name: example
   name: example

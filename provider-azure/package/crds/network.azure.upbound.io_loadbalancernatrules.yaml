@@ -96,7 +96,7 @@ spec:
                       NAT Rule.
                     type: string
                   loadbalancerIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a LoadBalancer to populate loadbalancerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -130,7 +130,7 @@ spec:
                     - name
                     type: object
                   loadbalancerIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a LoadBalancer to populate loadbalancerId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -177,7 +177,8 @@ spec:
                       the resource.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -211,7 +212,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

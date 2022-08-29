@@ -34,9 +34,11 @@ type IOTHubFallbackRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
+	// References to IOTHubEndpointStorageContainer to populate endpointNames.
 	// +kubebuilder:validation:Optional
 	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
 
+	// Selector for a list of IOTHubEndpointStorageContainer to populate endpointNames.
 	// +kubebuilder:validation:Optional
 	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
@@ -45,9 +47,11 @@ type IOTHubFallbackRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
+	// Reference to a IOTHub to populate iothubName.
 	// +kubebuilder:validation:Optional
 	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
 
+	// Selector for a IOTHub to populate iothubName.
 	// +kubebuilder:validation:Optional
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
@@ -56,9 +60,11 @@ type IOTHubFallbackRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

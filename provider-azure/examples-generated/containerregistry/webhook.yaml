@@ -1,6 +1,8 @@
 apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: Webhook
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/webhook
   labels:
     testing.upbound.io/example-name: webhook
   name: webhook
@@ -26,6 +28,8 @@ spec:
 apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: Registry
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/webhook
   labels:
     testing.upbound.io/example-name: acr
   name: acr
@@ -43,6 +47,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/webhook
   labels:
     testing.upbound.io/example-name: example
   name: example

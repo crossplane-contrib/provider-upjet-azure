@@ -35,9 +35,11 @@ type FlexibleServerDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
+	// Reference to a FlexibleServer to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
+	// Selector for a FlexibleServer to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }

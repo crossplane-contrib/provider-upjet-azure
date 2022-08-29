@@ -70,7 +70,8 @@ spec:
                       Agent Pool to be created.
                     type: string
                   containerRegistryNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Registry in containerregistry to populate
+                      containerRegistryName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +105,8 @@ spec:
                     - name
                     type: object
                   containerRegistryNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Registry in containerregistry to populate
+                      containerRegistryName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -156,7 +158,8 @@ spec:
                       Azure Container Registry Agent Pool to be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -190,7 +193,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -245,7 +249,7 @@ spec:
                       Azure Container Registry Agent Pool to be created.
                     type: string
                   virtualNetworkSubnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet in network to populate virtualNetworkSubnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -279,7 +283,7 @@ spec:
                     - name
                     type: object
                   virtualNetworkSubnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet in network to populate virtualNetworkSubnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -1,6 +1,8 @@
 apiVersion: dbformysql.azure.upbound.io/v1beta1
 kind: FirewallRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/firewallrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,7 @@ kind: Server
 metadata:
   annotations:
     crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: dbformysql/v1beta1/firewallrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -33,6 +36,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/firewallrule
   labels:
     testing.upbound.io/example-name: example
   name: example

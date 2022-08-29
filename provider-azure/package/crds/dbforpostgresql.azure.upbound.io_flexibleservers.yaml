@@ -107,7 +107,7 @@ spec:
                       created.
                     type: string
                   delegatedSubnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet in network to populate delegatedSubnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -141,7 +141,7 @@ spec:
                     - name
                     type: object
                   delegatedSubnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet in network to populate delegatedSubnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -235,7 +235,8 @@ spec:
                       Server to be created.
                     type: string
                   privateDnsZoneIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a PrivateDNSZone in network to populate
+                      privateDnsZoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -269,7 +270,8 @@ spec:
                     - name
                     type: object
                   privateDnsZoneIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a PrivateDNSZone in network to populate
+                      privateDnsZoneId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -313,7 +315,8 @@ spec:
                       Flexible Server to be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -347,7 +350,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

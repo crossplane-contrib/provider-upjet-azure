@@ -73,7 +73,8 @@ spec:
                             the
                           type: string
                         actionGroupIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a MonitorActionGroup to populate
+                            actionGroupId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -108,7 +109,8 @@ spec:
                           - name
                           type: object
                         actionGroupIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a MonitorActionGroup to populate
+                            actionGroupId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -299,7 +301,8 @@ spec:
                       the Metric Alert instance.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -333,7 +336,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -378,6 +382,7 @@ spec:
                       type: string
                     type: array
                   scopesRefs:
+                    description: References to Account in storage to populate scopes.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -414,7 +419,8 @@ spec:
                       type: object
                     type: array
                   scopesSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of Account in storage to populate
+                      scopes.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

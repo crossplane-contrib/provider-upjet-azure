@@ -30,9 +30,11 @@ type RedisLinkedServerParameters struct {
 	// +kubebuilder:validation:Optional
 	LinkedRedisCacheID *string `json:"linkedRedisCacheId,omitempty" tf:"linked_redis_cache_id,omitempty"`
 
+	// Reference to a RedisCache to populate linkedRedisCacheId.
 	// +kubebuilder:validation:Optional
 	LinkedRedisCacheIDRef *v1.Reference `json:"linkedRedisCacheIdRef,omitempty" tf:"-"`
 
+	// Selector for a RedisCache to populate linkedRedisCacheId.
 	// +kubebuilder:validation:Optional
 	LinkedRedisCacheIDSelector *v1.Selector `json:"linkedRedisCacheIdSelector,omitempty" tf:"-"`
 
@@ -45,9 +47,11 @@ type RedisLinkedServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -60,9 +64,11 @@ type RedisLinkedServerParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetRedisCacheName *string `json:"targetRedisCacheName,omitempty" tf:"target_redis_cache_name,omitempty"`
 
+	// Reference to a RedisCache to populate targetRedisCacheName.
 	// +kubebuilder:validation:Optional
 	TargetRedisCacheNameRef *v1.Reference `json:"targetRedisCacheNameRef,omitempty" tf:"-"`
 
+	// Selector for a RedisCache to populate targetRedisCacheName.
 	// +kubebuilder:validation:Optional
 	TargetRedisCacheNameSelector *v1.Selector `json:"targetRedisCacheNameSelector,omitempty" tf:"-"`
 }

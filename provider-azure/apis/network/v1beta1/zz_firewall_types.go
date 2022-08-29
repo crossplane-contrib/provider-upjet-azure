@@ -27,9 +27,11 @@ type FirewallIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
+	// Reference to a PublicIP to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
 	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
+	// Selector for a PublicIP to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
 	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
@@ -38,9 +40,11 @@ type FirewallIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Reference to a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
@@ -91,9 +95,11 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -138,9 +144,11 @@ type ManagementIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Reference to a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }

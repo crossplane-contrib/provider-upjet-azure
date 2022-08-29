@@ -24,9 +24,11 @@ type ActionParameters struct {
 	// +kubebuilder:validation:Optional
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
+	// Reference to a MonitorActionGroup to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
+	// Selector for a MonitorActionGroup to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
@@ -198,9 +200,11 @@ type MonitorMetricAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -210,9 +214,11 @@ type MonitorMetricAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
+	// References to Account in storage to populate scopes.
 	// +kubebuilder:validation:Optional
 	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
 
+	// Selector for a list of Account in storage to populate scopes.
 	// +kubebuilder:validation:Optional
 	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
 

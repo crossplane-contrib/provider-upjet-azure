@@ -44,9 +44,11 @@ type TrafficAnalyticsParameters struct {
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
+	// Reference to a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Workspace in operationalinsights to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
@@ -60,9 +62,11 @@ type TrafficAnalyticsParameters struct {
 	// +kubebuilder:validation:Optional
 	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 
+	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
@@ -88,9 +92,11 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
 
+	// Reference to a SecurityGroup to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDRef *v1.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
 
+	// Selector for a SecurityGroup to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
 
@@ -99,9 +105,11 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkWatcherName *string `json:"networkWatcherName,omitempty" tf:"network_watcher_name,omitempty"`
 
+	// Reference to a Watcher to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherNameRef *v1.Reference `json:"networkWatcherNameRef,omitempty" tf:"-"`
 
+	// Selector for a Watcher to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherNameSelector *v1.Selector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
 
@@ -110,9 +118,11 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -125,9 +135,11 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
+	// Reference to a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
 	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
 
+	// Selector for a Account in storage to populate storageAccountId.
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 

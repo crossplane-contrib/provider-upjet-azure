@@ -1,6 +1,8 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLFailoverGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -27,6 +29,8 @@ spec:
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -44,6 +48,8 @@ spec:
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
   labels:
     testing.upbound.io/example-name: primary
   name: primary
@@ -65,6 +71,8 @@ spec:
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
   labels:
     testing.upbound.io/example-name: secondary
   name: secondary
@@ -86,6 +94,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
   labels:
     testing.upbound.io/example-name: example
   name: example

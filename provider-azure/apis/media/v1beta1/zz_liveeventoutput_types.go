@@ -30,9 +30,11 @@ type LiveEventOutputParameters struct {
 	// +kubebuilder:validation:Optional
 	AssetName *string `json:"assetName,omitempty" tf:"asset_name,omitempty"`
 
+	// Reference to a Asset to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameRef *v1.Reference `json:"assetNameRef,omitempty" tf:"-"`
 
+	// Selector for a Asset to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameSelector *v1.Selector `json:"assetNameSelector,omitempty" tf:"-"`
 
@@ -50,9 +52,11 @@ type LiveEventOutputParameters struct {
 	// +kubebuilder:validation:Optional
 	LiveEventID *string `json:"liveEventId,omitempty" tf:"live_event_id,omitempty"`
 
+	// Reference to a LiveEvent to populate liveEventId.
 	// +kubebuilder:validation:Optional
 	LiveEventIDRef *v1.Reference `json:"liveEventIdRef,omitempty" tf:"-"`
 
+	// Selector for a LiveEvent to populate liveEventId.
 	// +kubebuilder:validation:Optional
 	LiveEventIDSelector *v1.Selector `json:"liveEventIdSelector,omitempty" tf:"-"`
 

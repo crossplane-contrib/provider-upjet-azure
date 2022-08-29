@@ -26,9 +26,11 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
+	// Reference to a Account to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
+	// Selector for a Account to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
@@ -41,9 +43,11 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
 
+	// Reference to a Pool to populate poolName.
 	// +kubebuilder:validation:Optional
 	PoolNameRef *v1.Reference `json:"poolNameRef,omitempty" tf:"-"`
 
+	// Selector for a Pool to populate poolName.
 	// +kubebuilder:validation:Optional
 	PoolNameSelector *v1.Selector `json:"poolNameSelector,omitempty" tf:"-"`
 
@@ -52,9 +56,11 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -63,9 +69,11 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeName *string `json:"volumeName,omitempty" tf:"volume_name,omitempty"`
 
+	// Reference to a Volume to populate volumeName.
 	// +kubebuilder:validation:Optional
 	VolumeNameRef *v1.Reference `json:"volumeNameRef,omitempty" tf:"-"`
 
+	// Selector for a Volume to populate volumeName.
 	// +kubebuilder:validation:Optional
 	VolumeNameSelector *v1.Selector `json:"volumeNameSelector,omitempty" tf:"-"`
 }

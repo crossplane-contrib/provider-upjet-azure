@@ -97,7 +97,7 @@ spec:
                       Setting this after creation forces a new resource to be created.
                     type: string
                   dnsZonePartnerIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a MSSQLManagedInstance to populate dnsZonePartnerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -131,7 +131,7 @@ spec:
                     - name
                     type: object
                   dnsZonePartnerIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a MSSQLManagedInstance to populate dnsZonePartnerId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -239,7 +239,8 @@ spec:
                       the SQL Managed Instance.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -273,7 +274,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -331,7 +333,7 @@ spec:
                       will be associated with.
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet in network to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -365,7 +367,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet in network to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

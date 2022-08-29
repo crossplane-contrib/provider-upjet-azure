@@ -30,9 +30,11 @@ type IOTHubDPSCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
 
+	// Reference to a IOTHubDPS to populate iotDpsName.
 	// +kubebuilder:validation:Optional
 	IOTDPSNameRef *v1.Reference `json:"iotDpsNameRef,omitempty" tf:"-"`
 
+	// Selector for a IOTHubDPS to populate iotDpsName.
 	// +kubebuilder:validation:Optional
 	IOTDPSNameSelector *v1.Selector `json:"iotDpsNameSelector,omitempty" tf:"-"`
 
@@ -41,9 +43,11 @@ type IOTHubDPSCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }

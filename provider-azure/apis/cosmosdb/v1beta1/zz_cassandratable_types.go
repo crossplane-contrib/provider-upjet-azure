@@ -45,9 +45,11 @@ type CassandraTableParameters struct {
 	// +kubebuilder:validation:Optional
 	CassandraKeySpaceID *string `json:"cassandraKeyspaceId,omitempty" tf:"cassandra_keyspace_id,omitempty"`
 
+	// Reference to a CassandraKeySpace to populate cassandraKeyspaceId.
 	// +kubebuilder:validation:Optional
 	CassandraKeySpaceIDRef *v1.Reference `json:"cassandraKeyspaceIdRef,omitempty" tf:"-"`
 
+	// Selector for a CassandraKeySpace to populate cassandraKeyspaceId.
 	// +kubebuilder:validation:Optional
 	CassandraKeySpaceIDSelector *v1.Selector `json:"cassandraKeyspaceIdSelector,omitempty" tf:"-"`
 
