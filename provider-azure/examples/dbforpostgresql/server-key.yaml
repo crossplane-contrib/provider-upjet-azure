@@ -3,6 +3,8 @@ kind: ServerKey
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -70,6 +72,8 @@ kind: AccessPolicy
 metadata:
   labels:
     testing.upbound.io/example-name: server
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: server
 spec:
   forProvider:

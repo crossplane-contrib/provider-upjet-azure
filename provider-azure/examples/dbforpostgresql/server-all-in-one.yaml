@@ -3,6 +3,8 @@ kind: ActiveDirectoryAdministrator
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -23,6 +25,8 @@ kind: FirewallRule
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -42,6 +46,8 @@ kind: Configuration
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -61,6 +67,8 @@ kind: Database
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -80,6 +88,8 @@ kind: VirtualNetworkRule
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -101,6 +111,8 @@ kind: Server
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/638"
   name: example-upbound-pg-single-server
 spec:
   forProvider:
