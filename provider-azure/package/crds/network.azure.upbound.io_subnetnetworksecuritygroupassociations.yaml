@@ -71,7 +71,7 @@ spec:
                       to be created.
                     type: string
                   networkSecurityGroupIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SecurityGroup to populate networkSecurityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -105,7 +105,7 @@ spec:
                     - name
                     type: object
                   networkSecurityGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SecurityGroup to populate networkSecurityGroupId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +148,7 @@ spec:
                       resource to be created.
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +182,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

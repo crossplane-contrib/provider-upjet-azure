@@ -1,6 +1,8 @@
 apiVersion: marketplaceordering.azure.upbound.io/v1beta1
 kind: MarketplaceAgreement
 metadata:
+  annotations:
+    meta.upbound.io/example-id: marketplaceordering/v1beta1/marketplaceagreement
   labels:
     testing.upbound.io/example-name: barracuda
   name: barracuda

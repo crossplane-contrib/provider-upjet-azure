@@ -1,6 +1,8 @@
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: OrchestratedVirtualMachineScaleSet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/orchestratedvirtualmachinescaleset
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -19,6 +21,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/orchestratedvirtualmachinescaleset
   labels:
     testing.upbound.io/example-name: example
   name: example

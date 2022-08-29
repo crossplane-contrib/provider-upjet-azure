@@ -1,6 +1,8 @@
 apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: FunctionJavascriptUda
 metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/functionjavascriptuda
   labels:
     testing.upbound.io/example-name: example
   name: example

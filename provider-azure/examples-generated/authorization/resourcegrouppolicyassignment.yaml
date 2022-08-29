@@ -1,6 +1,8 @@
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: ResourceGroupPolicyAssignment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/resourcegrouppolicyassignment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -27,6 +29,8 @@ spec:
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: PolicyDefinition
 metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/resourcegrouppolicyassignment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -43,6 +47,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/resourcegrouppolicyassignment
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -34,9 +34,11 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubDPSName *string `json:"iothubDpsName,omitempty" tf:"iothub_dps_name,omitempty"`
 
+	// Reference to a IOTHubDPS in devices to populate iothubDpsName.
 	// +kubebuilder:validation:Optional
 	IOTHubDPSNameRef *v1.Reference `json:"iothubDpsNameRef,omitempty" tf:"-"`
 
+	// Selector for a IOTHubDPS in devices to populate iothubDpsName.
 	// +kubebuilder:validation:Optional
 	IOTHubDPSNameSelector *v1.Selector `json:"iothubDpsNameSelector,omitempty" tf:"-"`
 
@@ -53,9 +55,11 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

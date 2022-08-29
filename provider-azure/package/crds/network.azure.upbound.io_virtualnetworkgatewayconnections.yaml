@@ -202,7 +202,8 @@ spec:
                       Site-to-Site connection .
                     type: string
                   localNetworkGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a LocalNetworkGateway in network to
+                      populate localNetworkGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -236,7 +237,8 @@ spec:
                     - name
                     type: object
                   localNetworkGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a LocalNetworkGateway in network to
+                      populate localNetworkGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -284,7 +286,8 @@ spec:
                       can be in the same or in a different subscription.
                     type: string
                   peerVirtualNetworkGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VirtualNetworkGateway to populate
+                      peerVirtualNetworkGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -318,7 +321,8 @@ spec:
                     - name
                     type: object
                   peerVirtualNetworkGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VirtualNetworkGateway to populate
+                      peerVirtualNetworkGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -362,7 +366,8 @@ spec:
                       created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -396,7 +401,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -500,7 +506,8 @@ spec:
                       resource to be created.
                     type: string
                   virtualNetworkGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a VirtualNetworkGateway to populate
+                      virtualNetworkGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -534,7 +541,8 @@ spec:
                     - name
                     type: object
                   virtualNetworkGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a VirtualNetworkGateway to populate
+                      virtualNetworkGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

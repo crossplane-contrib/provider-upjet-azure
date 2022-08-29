@@ -35,9 +35,11 @@ type ExpressRouteCircuitPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitName *string `json:"expressRouteCircuitName,omitempty" tf:"express_route_circuit_name,omitempty"`
 
+	// Reference to a ExpressRouteCircuit to populate expressRouteCircuitName.
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitNameRef *v1.Reference `json:"expressRouteCircuitNameRef,omitempty" tf:"-"`
 
+	// Selector for a ExpressRouteCircuit to populate expressRouteCircuitName.
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitNameSelector *v1.Selector `json:"expressRouteCircuitNameSelector,omitempty" tf:"-"`
 
@@ -61,9 +63,11 @@ type ExpressRouteCircuitPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

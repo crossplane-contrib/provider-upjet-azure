@@ -71,6 +71,7 @@ spec:
                       type: string
                     type: array
                   databasesRefs:
+                    description: References to MSSQLDatabase to populate databases.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -107,7 +108,8 @@ spec:
                       type: object
                     type: array
                   databasesSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of MSSQLDatabase to populate
+                      databases.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -151,7 +153,7 @@ spec:
                         id:
                           type: string
                         idRef:
-                          description: A Reference to a named object.
+                          description: Reference to a MSSQLServer to populate id.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -186,7 +188,7 @@ spec:
                           - name
                           type: object
                         idSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a MSSQLServer to populate id.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -257,7 +259,7 @@ spec:
                       created.
                     type: string
                   serverIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a MSSQLServer to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -291,7 +293,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a MSSQLServer to populate serverId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

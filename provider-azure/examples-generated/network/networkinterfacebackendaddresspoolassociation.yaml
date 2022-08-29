@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterfaceBackendAddressPoolAssociation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/networkinterfacebackendaddresspoolassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -19,6 +21,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/networkinterfacebackendaddresspoolassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -39,6 +43,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerBackendAddressPool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/networkinterfacebackendaddresspoolassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -54,6 +60,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterface
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/networkinterfacebackendaddresspoolassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -75,6 +83,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PublicIP
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/networkinterfacebackendaddresspoolassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -91,6 +101,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/networkinterfacebackendaddresspoolassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -103,6 +115,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/networkinterfacebackendaddresspoolassociation
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -122,6 +136,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/networkinterfacebackendaddresspoolassociation
   labels:
     testing.upbound.io/example-name: example
   name: example

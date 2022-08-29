@@ -70,7 +70,7 @@ spec:
                       new resource to be created.
                     type: string
                   natGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a NATGateway to populate natGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +104,7 @@ spec:
                     - name
                     type: object
                   natGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a NATGateway to populate natGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +148,7 @@ spec:
                       to be created.
                     type: string
                   publicIpPrefixIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a PublicIPPrefix to populate publicIpPrefixId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +182,7 @@ spec:
                     - name
                     type: object
                   publicIpPrefixIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a PublicIPPrefix to populate publicIpPrefixId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

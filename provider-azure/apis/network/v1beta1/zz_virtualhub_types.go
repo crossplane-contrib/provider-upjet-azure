@@ -43,9 +43,11 @@ type VirtualHubParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -67,9 +69,11 @@ type VirtualHubParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 
+	// Reference to a VirtualWAN to populate virtualWanId.
 	// +kubebuilder:validation:Optional
 	VirtualWanIDRef *v1.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
 
+	// Selector for a VirtualWAN to populate virtualWanId.
 	// +kubebuilder:validation:Optional
 	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }

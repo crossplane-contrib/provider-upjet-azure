@@ -29,9 +29,11 @@ type DataSetBlobStorageParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
+	// Reference to a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
 	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
 
+	// Selector for a Container in storage to populate containerName.
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
@@ -41,9 +43,11 @@ type DataSetBlobStorageParameters struct {
 	// +kubebuilder:validation:Optional
 	DataShareID *string `json:"dataShareId,omitempty" tf:"data_share_id,omitempty"`
 
+	// Reference to a DataShare to populate dataShareId.
 	// +kubebuilder:validation:Optional
 	DataShareIDRef *v1.Reference `json:"dataShareIdRef,omitempty" tf:"-"`
 
+	// Selector for a DataShare to populate dataShareId.
 	// +kubebuilder:validation:Optional
 	DataShareIDSelector *v1.Selector `json:"dataShareIdSelector,omitempty" tf:"-"`
 
@@ -69,9 +73,11 @@ type StorageAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Reference to a Account in storage to populate name.
 	// +kubebuilder:validation:Optional
 	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
 
+	// Selector for a Account in storage to populate name.
 	// +kubebuilder:validation:Optional
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
@@ -80,9 +86,11 @@ type StorageAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

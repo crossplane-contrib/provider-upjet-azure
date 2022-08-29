@@ -30,9 +30,11 @@ type MSSQLServerDNSAliasParameters struct {
 	// +kubebuilder:validation:Optional
 	MSSQLServerID *string `json:"mssqlServerId,omitempty" tf:"mssql_server_id,omitempty"`
 
+	// Reference to a MSSQLServer to populate mssqlServerId.
 	// +kubebuilder:validation:Optional
 	MSSQLServerIDRef *v1.Reference `json:"mssqlServerIdRef,omitempty" tf:"-"`
 
+	// Selector for a MSSQLServer to populate mssqlServerId.
 	// +kubebuilder:validation:Optional
 	MSSQLServerIDSelector *v1.Selector `json:"mssqlServerIdSelector,omitempty" tf:"-"`
 }

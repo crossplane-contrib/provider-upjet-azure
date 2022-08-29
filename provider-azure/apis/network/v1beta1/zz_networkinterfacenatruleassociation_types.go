@@ -31,9 +31,11 @@ type NetworkInterfaceNatRuleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NATRuleID *string `json:"natRuleId,omitempty" tf:"nat_rule_id,omitempty"`
 
+	// Reference to a LoadBalancerNatRule to populate natRuleId.
 	// +kubebuilder:validation:Optional
 	NATRuleIDRef *v1.Reference `json:"natRuleIdRef,omitempty" tf:"-"`
 
+	// Selector for a LoadBalancerNatRule to populate natRuleId.
 	// +kubebuilder:validation:Optional
 	NATRuleIDSelector *v1.Selector `json:"natRuleIdSelector,omitempty" tf:"-"`
 
@@ -43,9 +45,11 @@ type NetworkInterfaceNatRuleAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// Reference to a NetworkInterface to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
+	// Selector for a NetworkInterface to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }

@@ -152,7 +152,7 @@ spec:
                       created.
                     type: string
                   kubernetesClusterIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a KubernetesCluster to populate kubernetesClusterId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -186,7 +186,7 @@ spec:
                     - name
                     type: object
                   kubernetesClusterIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a KubernetesCluster to populate kubernetesClusterId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -466,7 +466,7 @@ spec:
                       should exist. Changing this forces a new resource to be created.
                     type: string
                   podSubnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet in network to populate podSubnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -500,7 +500,7 @@ spec:
                     - name
                     type: object
                   podSubnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet in network to populate podSubnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -592,7 +592,7 @@ spec:
                       exist.
                     type: string
                   vnetSubnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet in network to populate vnetSubnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -626,7 +626,7 @@ spec:
                     - name
                     type: object
                   vnetSubnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet in network to populate vnetSubnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

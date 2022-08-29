@@ -31,9 +31,11 @@ type CassandraDatacenterParameters struct {
 	// +kubebuilder:validation:Optional
 	CassandraClusterID *string `json:"cassandraClusterId,omitempty" tf:"cassandra_cluster_id,omitempty"`
 
+	// Reference to a CassandraCluster in cosmosdb to populate cassandraClusterId.
 	// +kubebuilder:validation:Optional
 	CassandraClusterIDRef *v1.Reference `json:"cassandraClusterIdRef,omitempty" tf:"-"`
 
+	// Selector for a CassandraCluster in cosmosdb to populate cassandraClusterId.
 	// +kubebuilder:validation:Optional
 	CassandraClusterIDSelector *v1.Selector `json:"cassandraClusterIdSelector,omitempty" tf:"-"`
 
@@ -43,9 +45,11 @@ type CassandraDatacenterParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
 
+	// Reference to a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetIDRef *v1.Reference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate delegatedManagementSubnetId.
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 

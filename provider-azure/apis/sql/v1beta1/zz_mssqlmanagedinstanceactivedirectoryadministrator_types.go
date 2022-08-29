@@ -35,9 +35,11 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
+	// Reference to a MSSQLManagedInstance to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
+	// Selector for a MSSQLManagedInstance to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 

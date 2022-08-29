@@ -73,7 +73,8 @@ spec:
                       forces a new resource to be created.
                     type: string
                   parentManagementGroupIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ManagementGroup in management to populate
+                      parentManagementGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -107,7 +108,8 @@ spec:
                     - name
                     type: object
                   parentManagementGroupIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ManagementGroup in management to populate
+                      parentManagementGroupId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

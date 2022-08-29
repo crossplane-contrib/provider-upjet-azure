@@ -27,9 +27,11 @@ type NetworkInterfaceApplicationSecurityGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationSecurityGroupID *string `json:"applicationSecurityGroupId,omitempty" tf:"application_security_group_id,omitempty"`
 
+	// Reference to a ApplicationSecurityGroup to populate applicationSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	ApplicationSecurityGroupIDRef *v1.Reference `json:"applicationSecurityGroupIdRef,omitempty" tf:"-"`
 
+	// Selector for a ApplicationSecurityGroup to populate applicationSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	ApplicationSecurityGroupIDSelector *v1.Selector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
 
@@ -39,9 +41,11 @@ type NetworkInterfaceApplicationSecurityGroupAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// Reference to a NetworkInterface to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
+	// Selector for a NetworkInterface to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }

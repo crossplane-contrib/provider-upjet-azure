@@ -1,6 +1,8 @@
 apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: OutputFunction
 metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -24,6 +26,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -35,6 +39,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -52,6 +58,8 @@ spec:
 apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: Job
 metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -150,9 +150,11 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -170,9 +172,11 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 
+	// Reference to a ManagedDisk in compute to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
 	SourceResourceIDRef *v1.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a ManagedDisk in compute to populate sourceResourceId.
 	// +kubebuilder:validation:Optional
 	SourceResourceIDSelector *v1.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 

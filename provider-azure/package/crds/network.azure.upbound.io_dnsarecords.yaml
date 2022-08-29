@@ -74,7 +74,8 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -108,7 +109,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -156,7 +158,7 @@ spec:
                       with records
                     type: string
                   targetResourceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a PublicIP in network to populate targetResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -190,7 +192,7 @@ spec:
                     - name
                     type: object
                   targetResourceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a PublicIP in network to populate targetResourceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -235,7 +237,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a DNSZone to populate zoneName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -269,7 +271,7 @@ spec:
                     - name
                     type: object
                   zoneNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a DNSZone to populate zoneName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

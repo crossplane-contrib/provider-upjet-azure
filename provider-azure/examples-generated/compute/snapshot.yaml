@@ -1,6 +1,8 @@
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: Snapshot
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/snapshot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -20,6 +22,8 @@ spec:
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: ManagedDisk
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/snapshot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -38,6 +42,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/snapshot
   labels:
     testing.upbound.io/example-name: example
   name: example

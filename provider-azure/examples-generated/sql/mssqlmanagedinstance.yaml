@@ -1,6 +1,8 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedInstance
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -28,6 +30,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -43,6 +47,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: allow_health_probe_inbound
   name: allow-health-probe-inbound
@@ -68,6 +74,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: allow_management_inbound
   name: allow-management-inbound
@@ -98,6 +106,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: allow_management_outbound
   name: allow-management-outbound
@@ -126,6 +136,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: allow_misubnet_inbound
   name: allow-misubnet-inbound
@@ -151,6 +163,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: allow_misubnet_outbound
   name: allow-misubnet-outbound
@@ -176,6 +190,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: allow_tds_inbound
   name: allow-tds-inbound
@@ -201,6 +217,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: deny_all_inbound
   name: deny-all-inbound
@@ -226,6 +244,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: deny_all_outbound
   name: deny-all-outbound
@@ -251,6 +271,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -263,6 +285,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: RouteTable
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -279,6 +303,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -306,6 +332,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SubnetNetworkSecurityGroupAssociation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -323,6 +351,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SubnetRouteTableAssociation
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -340,6 +370,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstance
   labels:
     testing.upbound.io/example-name: example
   name: example

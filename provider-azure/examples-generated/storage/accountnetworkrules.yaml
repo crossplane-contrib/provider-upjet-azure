@@ -1,6 +1,8 @@
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: AccountNetworkRules
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/accountnetworkrules
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -22,6 +24,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/accountnetworkrules
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -34,6 +38,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/accountnetworkrules
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -53,6 +59,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/accountnetworkrules
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -74,6 +82,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/accountnetworkrules
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -30,9 +30,11 @@ type HPCCacheBlobTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
 
+	// Reference to a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
 	CacheNameRef *v1.Reference `json:"cacheNameRef,omitempty" tf:"-"`
 
+	// Selector for a HPCCache in storagecache to populate cacheName.
 	// +kubebuilder:validation:Optional
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
@@ -45,9 +47,11 @@ type HPCCacheBlobTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -57,9 +61,11 @@ type HPCCacheBlobTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
+	// Reference to a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
 	StorageContainerIDRef *v1.Reference `json:"storageContainerIdRef,omitempty" tf:"-"`
 
+	// Selector for a Container in storage to populate storageContainerId.
 	// +kubebuilder:validation:Optional
 	StorageContainerIDSelector *v1.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 }

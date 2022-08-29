@@ -69,9 +69,11 @@ type HPCCacheAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	HPCCacheID *string `json:"hpcCacheId,omitempty" tf:"hpc_cache_id,omitempty"`
 
+	// Reference to a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
 	HPCCacheIDRef *v1.Reference `json:"hpcCacheIdRef,omitempty" tf:"-"`
 
+	// Selector for a HPCCache in storagecache to populate hpcCacheId.
 	// +kubebuilder:validation:Optional
 	HPCCacheIDSelector *v1.Selector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
 }

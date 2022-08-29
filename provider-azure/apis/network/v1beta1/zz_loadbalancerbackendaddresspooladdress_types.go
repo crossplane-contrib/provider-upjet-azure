@@ -27,9 +27,11 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
+	// Reference to a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDRef *v1.Reference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
 
+	// Selector for a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
@@ -43,9 +45,11 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 
+	// Reference to a VirtualNetwork to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkIDRef *v1.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
 
+	// Selector for a VirtualNetwork to populate virtualNetworkId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkIDSelector *v1.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }

@@ -1,6 +1,8 @@
 apiVersion: insights.azure.upbound.io/v1beta1
 kind: MonitorActionGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitoractiongroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -70,6 +72,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitoractiongroup
   labels:
     testing.upbound.io/example-name: example
   name: example

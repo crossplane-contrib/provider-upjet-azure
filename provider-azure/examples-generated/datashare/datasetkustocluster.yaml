@@ -1,6 +1,8 @@
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: DataSetKustoCluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -18,6 +20,8 @@ spec:
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: DataShare
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -33,6 +37,8 @@ spec:
 apiVersion: datashare.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -50,6 +56,8 @@ spec:
 apiVersion: kusto.azure.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -68,6 +76,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetkustocluster
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -70,7 +70,7 @@ spec:
                       Backend Address Pool.
                     type: string
                   loadbalancerIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a LoadBalancer to populate loadbalancerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +104,7 @@ spec:
                     - name
                     type: object
                   loadbalancerIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a LoadBalancer to populate loadbalancerId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

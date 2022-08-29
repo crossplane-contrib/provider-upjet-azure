@@ -1,6 +1,8 @@
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHubEnrichment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubenrichment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,8 @@ spec:
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubenrichment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -42,6 +46,8 @@ spec:
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHubEndpointStorageContainer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubenrichment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -70,6 +76,8 @@ spec:
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHubRoute
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubenrichment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -92,6 +100,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubenrichment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -104,6 +114,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubenrichment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -121,6 +133,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Container
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubenrichment
   labels:
     testing.upbound.io/example-name: example
   name: example

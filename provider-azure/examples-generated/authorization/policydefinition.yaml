@@ -1,6 +1,8 @@
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: PolicyDefinition
 metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/policydefinition
   labels:
     testing.upbound.io/example-name: policy
   name: policy

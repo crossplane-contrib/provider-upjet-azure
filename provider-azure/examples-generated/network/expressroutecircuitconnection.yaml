@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuitConnection
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressroutecircuitconnection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -23,6 +25,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuit
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressroutecircuitconnection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -43,6 +47,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuit
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressroutecircuitconnection
   labels:
     testing.upbound.io/example-name: example2
   name: example2
@@ -63,6 +69,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuitPeering
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressroutecircuitconnection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -88,6 +96,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuitPeering
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressroutecircuitconnection
   labels:
     testing.upbound.io/example-name: example2
   name: example2
@@ -113,6 +123,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRoutePort
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressroutecircuitconnection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -131,6 +143,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRoutePort
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressroutecircuitconnection
   labels:
     testing.upbound.io/example-name: example2
   name: example2
@@ -149,6 +163,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/expressroutecircuitconnection
   labels:
     testing.upbound.io/example-name: example
   name: example

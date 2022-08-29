@@ -107,7 +107,7 @@ spec:
                     description: The IoTHub ID for the endpoint.
                     type: string
                   iothubIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a IOTHub in devices to populate iothubId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -141,7 +141,7 @@ spec:
                     - name
                     type: object
                   iothubIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a IOTHub in devices to populate iothubId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -185,7 +185,8 @@ spec:
                       to be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -219,7 +220,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

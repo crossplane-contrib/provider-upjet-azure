@@ -1,6 +1,8 @@
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: MongoCollection
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/mongocollection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -28,6 +30,8 @@ spec:
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: MongoDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/mongocollection
   labels:
     testing.upbound.io/example-name: example
   name: example

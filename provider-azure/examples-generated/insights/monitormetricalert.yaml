@@ -1,6 +1,8 @@
 apiVersion: insights.azure.upbound.io/v1beta1
 kind: MonitorMetricAlert
 metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitormetricalert
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -34,6 +36,8 @@ spec:
 apiVersion: insights.azure.upbound.io/v1beta1
 kind: MonitorActionGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitormetricalert
   labels:
     testing.upbound.io/example-name: main
   name: main
@@ -52,6 +56,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitormetricalert
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -64,6 +70,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitormetricalert
   labels:
     testing.upbound.io/example-name: to_monitor
   name: to-monitor

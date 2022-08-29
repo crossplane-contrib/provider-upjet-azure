@@ -1,6 +1,8 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlserver
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -28,6 +30,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlserver
   labels:
     testing.upbound.io/example-name: example
   name: example

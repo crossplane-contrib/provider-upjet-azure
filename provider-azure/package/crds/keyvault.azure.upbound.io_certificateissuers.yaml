@@ -93,7 +93,7 @@ spec:
                       Issuer.
                     type: string
                   keyVaultIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Vault to populate keyVaultId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -127,7 +127,7 @@ spec:
                     - name
                     type: object
                   keyVaultIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Vault to populate keyVaultId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

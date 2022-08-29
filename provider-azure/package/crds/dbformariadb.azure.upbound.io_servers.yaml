@@ -106,7 +106,7 @@ spec:
                       server ID to use.
                     type: string
                   creationSourceServerIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Server to populate creationSourceServerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -140,7 +140,7 @@ spec:
                     - name
                     type: object
                   creationSourceServerIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Server to populate creationSourceServerId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -203,7 +203,8 @@ spec:
                       created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -237,7 +238,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -1,6 +1,8 @@
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: VirtualNetworkRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/virtualnetworkrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,8 @@ spec:
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: Server
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/virtualnetworkrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -48,6 +52,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/virtualnetworkrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -60,6 +66,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/virtualnetworkrule
   labels:
     testing.upbound.io/example-name: internal
   name: internal
@@ -81,6 +89,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/virtualnetworkrule
   labels:
     testing.upbound.io/example-name: example
   name: example

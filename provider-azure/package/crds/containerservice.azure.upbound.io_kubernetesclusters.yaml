@@ -75,7 +75,8 @@ spec:
                           description: The subnet name for the virtual nodes to run.
                           type: string
                         subnetNameRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Subnet in network to populate
+                            subnetName.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -110,7 +111,8 @@ spec:
                           - name
                           type: object
                         subnetNameSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Subnet in network to populate
+                            subnetName.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -633,7 +635,8 @@ spec:
                             new resource to be created.
                           type: string
                         podSubnetIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Subnet in network to populate
+                            podSubnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -668,7 +671,8 @@ spec:
                           - name
                           type: object
                         podSubnetIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Subnet in network to populate
+                            podSubnetId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -744,7 +748,8 @@ spec:
                             to be created.
                           type: string
                         vnetSubnetIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Subnet in network to populate
+                            vnetSubnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -779,7 +784,8 @@ spec:
                           - name
                           type: object
                         vnetSubnetIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Subnet in network to populate
+                            vnetSubnetId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -932,7 +938,8 @@ spec:
                             See this page for further details.
                           type: string
                         subnetIdRef:
-                          description: A Reference to a named object.
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -967,7 +974,8 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: A Selector selects an object.
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -1282,7 +1290,8 @@ spec:
                       be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1316,7 +1325,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

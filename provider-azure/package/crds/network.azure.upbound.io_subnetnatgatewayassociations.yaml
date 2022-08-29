@@ -70,7 +70,8 @@ spec:
                       with the Subnet. Changing this forces a new resource to be created.
                     type: string
                   natGatewayIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a NATGateway in network to populate
+                      natGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +105,8 @@ spec:
                     - name
                     type: object
                   natGatewayIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a NATGateway in network to populate
+                      natGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -147,7 +149,7 @@ spec:
                       resource to be created.
                     type: string
                   subnetIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Subnet to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -181,7 +183,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Subnet to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

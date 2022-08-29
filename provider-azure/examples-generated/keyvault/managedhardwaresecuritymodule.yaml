@@ -1,6 +1,8 @@
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: ManagedHardwareSecurityModule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedhardwaresecuritymodule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -24,6 +26,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/managedhardwaresecuritymodule
   labels:
     testing.upbound.io/example-name: example
   name: example

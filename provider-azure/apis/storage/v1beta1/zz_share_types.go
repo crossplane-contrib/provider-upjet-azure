@@ -81,9 +81,11 @@ type ShareParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
+	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
 	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
+	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
 	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 }

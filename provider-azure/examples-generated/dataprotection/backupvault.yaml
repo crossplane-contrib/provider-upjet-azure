@@ -1,6 +1,8 @@
 apiVersion: dataprotection.azure.upbound.io/v1beta1
 kind: BackupVault
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupvault
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -18,6 +20,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupvault
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -1,6 +1,8 @@
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: ConsumerGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/consumergroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,6 +24,8 @@ spec:
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: EventHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/consumergroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -41,6 +45,8 @@ spec:
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: EventHubNamespace
 metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/consumergroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -60,6 +66,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/consumergroup
   labels:
     testing.upbound.io/example-name: example
   name: example

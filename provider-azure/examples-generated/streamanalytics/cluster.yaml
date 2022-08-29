@@ -1,6 +1,8 @@
 apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: Cluster
 metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -17,6 +19,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example
   name: example

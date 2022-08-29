@@ -31,9 +31,11 @@ type BackupPolicyBlobStorageParameters struct {
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
+	// Reference to a BackupVault to populate vaultId.
 	// +kubebuilder:validation:Optional
 	VaultIDRef *v1.Reference `json:"vaultIdRef,omitempty" tf:"-"`
 
+	// Selector for a BackupVault to populate vaultId.
 	// +kubebuilder:validation:Optional
 	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }

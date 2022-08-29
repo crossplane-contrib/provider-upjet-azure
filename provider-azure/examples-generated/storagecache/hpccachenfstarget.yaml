@@ -1,6 +1,8 @@
 apiVersion: storagecache.azure.upbound.io/v1beta1
 kind: HPCCacheNFSTarget
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccachenfstarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -26,6 +28,8 @@ spec:
 apiVersion: storagecache.azure.upbound.io/v1beta1
 kind: HPCCache
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccachenfstarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -46,6 +50,8 @@ spec:
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: LinuxVirtualMachine
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccachenfstarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -80,6 +86,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterface
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccachenfstarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -101,6 +109,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccachenfstarget
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -113,6 +123,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccachenfstarget
   labels:
     testing.upbound.io/example-name: example_hpc
   name: example-hpc
@@ -132,6 +144,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccachenfstarget
   labels:
     testing.upbound.io/example-name: example_vm
   name: example-vm
@@ -151,6 +165,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccachenfstarget
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -31,9 +31,11 @@ type SQLFunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
+	// Reference to a SQLContainer to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
 
+	// Selector for a SQLContainer to populate containerId.
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 }

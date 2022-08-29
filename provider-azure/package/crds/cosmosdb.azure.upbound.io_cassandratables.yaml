@@ -88,7 +88,7 @@ spec:
                       created.
                     type: string
                   cassandraKeyspaceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a CassandraKeySpace to populate cassandraKeyspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -122,7 +122,7 @@ spec:
                     - name
                     type: object
                   cassandraKeyspaceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a CassandraKeySpace to populate cassandraKeyspaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

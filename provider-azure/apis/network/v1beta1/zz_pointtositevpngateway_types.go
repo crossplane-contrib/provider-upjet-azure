@@ -59,9 +59,11 @@ type PointToSiteVPNGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -79,9 +81,11 @@ type PointToSiteVPNGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	VPNServerConfigurationID *string `json:"vpnServerConfigurationId,omitempty" tf:"vpn_server_configuration_id,omitempty"`
 
+	// Reference to a VPNServerConfiguration to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
 	VPNServerConfigurationIDRef *v1.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
 
+	// Selector for a VPNServerConfiguration to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
 	VPNServerConfigurationIDSelector *v1.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
 
@@ -91,9 +95,11 @@ type PointToSiteVPNGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 
+	// Reference to a VirtualHub to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
+	// Selector for a VirtualHub to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }

@@ -33,6 +33,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/server
   labels:
     testing.upbound.io/example-name: example
   name: example

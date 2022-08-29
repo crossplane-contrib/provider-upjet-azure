@@ -160,7 +160,7 @@ spec:
                       a new Firewall Policy Rule Collection Group to be created.
                     type: string
                   firewallPolicyIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a FirewallPolicy to populate firewallPolicyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -194,7 +194,7 @@ spec:
                     - name
                     type: object
                   firewallPolicyIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a FirewallPolicy to populate firewallPolicyId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -1,6 +1,8 @@
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: ActiveDirectoryAdministrator
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/activedirectoryadministrator
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -20,6 +22,8 @@ spec:
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: Server
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/activedirectoryadministrator
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -41,6 +45,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/activedirectoryadministrator
   labels:
     testing.upbound.io/example-name: example
   name: example

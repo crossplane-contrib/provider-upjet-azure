@@ -1,6 +1,8 @@
 apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: ContainerConnectedRegistry
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -18,6 +20,8 @@ spec:
 apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: Registry
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -35,6 +39,8 @@ spec:
 apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: ScopeMap
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -62,6 +68,8 @@ spec:
 apiVersion: containerregistry.azure.upbound.io/v1beta1
 kind: Token
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -82,6 +90,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: containerregistry/v1beta1/containerconnectedregistry
   labels:
     testing.upbound.io/example-name: example
   name: example

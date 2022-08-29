@@ -58,9 +58,11 @@ type SecurityRuleParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupName *string `json:"networkSecurityGroupName,omitempty" tf:"network_security_group_name,omitempty"`
 
+	// Reference to a SecurityGroup to populate networkSecurityGroupName.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupNameRef *v1.Reference `json:"networkSecurityGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a SecurityGroup to populate networkSecurityGroupName.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupNameSelector *v1.Selector `json:"networkSecurityGroupNameSelector,omitempty" tf:"-"`
 
@@ -77,9 +79,11 @@ type SecurityRuleParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

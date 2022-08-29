@@ -23,9 +23,11 @@ type AciConnectorLinuxParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
 
+	// Reference to a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
 	SubnetNameRef *v1.Reference `json:"subnetNameRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate subnetName.
 	// +kubebuilder:validation:Optional
 	SubnetNameSelector *v1.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
 }
@@ -239,9 +241,11 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	PodSubnetID *string `json:"podSubnetId,omitempty" tf:"pod_subnet_id,omitempty"`
 
+	// Reference to a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
 	PodSubnetIDRef *v1.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate podSubnetId.
 	// +kubebuilder:validation:Optional
 	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
 
@@ -272,9 +276,11 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	VnetSubnetID *string `json:"vnetSubnetId,omitempty" tf:"vnet_subnet_id,omitempty"`
 
+	// Reference to a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
 	VnetSubnetIDRef *v1.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
 	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 
@@ -363,9 +369,11 @@ type IngressApplicationGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
@@ -645,9 +653,11 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

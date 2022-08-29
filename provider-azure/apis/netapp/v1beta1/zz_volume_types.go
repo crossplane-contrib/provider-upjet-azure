@@ -32,9 +32,11 @@ type DataProtectionReplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteVolumeResourceID *string `json:"remoteVolumeResourceId,omitempty" tf:"remote_volume_resource_id,omitempty"`
 
+	// Reference to a Volume to populate remoteVolumeResourceId.
 	// +kubebuilder:validation:Optional
 	RemoteVolumeResourceIDRef *v1.Reference `json:"remoteVolumeResourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Volume to populate remoteVolumeResourceId.
 	// +kubebuilder:validation:Optional
 	RemoteVolumeResourceIDSelector *v1.Selector `json:"remoteVolumeResourceIdSelector,omitempty" tf:"-"`
 
@@ -54,9 +56,11 @@ type DataProtectionSnapshotPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotPolicyID *string `json:"snapshotPolicyId,omitempty" tf:"snapshot_policy_id,omitempty"`
 
+	// Reference to a SnapshotPolicy to populate snapshotPolicyId.
 	// +kubebuilder:validation:Optional
 	SnapshotPolicyIDRef *v1.Reference `json:"snapshotPolicyIdRef,omitempty" tf:"-"`
 
+	// Selector for a SnapshotPolicy to populate snapshotPolicyId.
 	// +kubebuilder:validation:Optional
 	SnapshotPolicyIDSelector *v1.Selector `json:"snapshotPolicyIdSelector,omitempty" tf:"-"`
 }
@@ -107,9 +111,11 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
+	// Reference to a Account to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
+	// Selector for a Account to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
@@ -119,9 +125,11 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateFromSnapshotResourceID *string `json:"createFromSnapshotResourceId,omitempty" tf:"create_from_snapshot_resource_id,omitempty"`
 
+	// Reference to a Snapshot to populate createFromSnapshotResourceId.
 	// +kubebuilder:validation:Optional
 	CreateFromSnapshotResourceIDRef *v1.Reference `json:"createFromSnapshotResourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Snapshot to populate createFromSnapshotResourceId.
 	// +kubebuilder:validation:Optional
 	CreateFromSnapshotResourceIDSelector *v1.Selector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
 
@@ -146,9 +154,11 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
 
+	// Reference to a Pool to populate poolName.
 	// +kubebuilder:validation:Optional
 	PoolNameRef *v1.Reference `json:"poolNameRef,omitempty" tf:"-"`
 
+	// Selector for a Pool to populate poolName.
 	// +kubebuilder:validation:Optional
 	PoolNameSelector *v1.Selector `json:"poolNameSelector,omitempty" tf:"-"`
 
@@ -161,9 +171,11 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -189,9 +201,11 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
+	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 

@@ -70,7 +70,8 @@ spec:
                       a new resource to be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +105,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +150,8 @@ spec:
                       a new resource to be created.
                     type: string
                   streamAnalyticsClusterNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Cluster in streamanalytics to populate
+                      streamAnalyticsClusterName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +185,8 @@ spec:
                     - name
                     type: object
                   streamAnalyticsClusterNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Cluster in streamanalytics to populate
+                      streamAnalyticsClusterName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -231,7 +235,7 @@ spec:
                       to. Changing this forces a new resource to be created.
                     type: string
                   targetResourceIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Account in storage to populate targetResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -265,7 +269,7 @@ spec:
                     - name
                     type: object
                   targetResourceIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Account in storage to populate targetResourceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

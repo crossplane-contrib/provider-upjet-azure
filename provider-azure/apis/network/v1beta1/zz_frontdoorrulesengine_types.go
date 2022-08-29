@@ -43,9 +43,11 @@ type FrontdoorRulesEngineParameters struct {
 	// +kubebuilder:validation:Optional
 	FrontdoorName *string `json:"frontdoorName,omitempty" tf:"frontdoor_name,omitempty"`
 
+	// Reference to a FrontDoor to populate frontdoorName.
 	// +kubebuilder:validation:Optional
 	FrontdoorNameRef *v1.Reference `json:"frontdoorNameRef,omitempty" tf:"-"`
 
+	// Selector for a FrontDoor to populate frontdoorName.
 	// +kubebuilder:validation:Optional
 	FrontdoorNameSelector *v1.Selector `json:"frontdoorNameSelector,omitempty" tf:"-"`
 
@@ -54,9 +56,11 @@ type FrontdoorRulesEngineParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 

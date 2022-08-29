@@ -1,6 +1,8 @@
 apiVersion: security.azure.upbound.io/v1beta1
 kind: IOTSecurityDeviceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -23,6 +25,8 @@ spec:
 apiVersion: security.azure.upbound.io/v1beta1
 kind: IOTSecuritySolution
 metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -42,6 +46,8 @@ spec:
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -60,6 +66,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
   labels:
     testing.upbound.io/example-name: example
   name: example

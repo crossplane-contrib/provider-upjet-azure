@@ -27,9 +27,11 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	LinkedResourceID *string `json:"linkedResourceId,omitempty" tf:"linked_resource_id,omitempty"`
 
+	// Reference to a ApplicationInsights to populate linkedResourceId.
 	// +kubebuilder:validation:Optional
 	LinkedResourceIDRef *v1.Reference `json:"linkedResourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a ApplicationInsights to populate linkedResourceId.
 	// +kubebuilder:validation:Optional
 	LinkedResourceIDSelector *v1.Selector `json:"linkedResourceIdSelector,omitempty" tf:"-"`
 
@@ -38,9 +40,11 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -49,9 +53,11 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ScopeName *string `json:"scopeName,omitempty" tf:"scope_name,omitempty"`
 
+	// Reference to a MonitorPrivateLinkScope to populate scopeName.
 	// +kubebuilder:validation:Optional
 	ScopeNameRef *v1.Reference `json:"scopeNameRef,omitempty" tf:"-"`
 
+	// Selector for a MonitorPrivateLinkScope to populate scopeName.
 	// +kubebuilder:validation:Optional
 	ScopeNameSelector *v1.Selector `json:"scopeNameSelector,omitempty" tf:"-"`
 }

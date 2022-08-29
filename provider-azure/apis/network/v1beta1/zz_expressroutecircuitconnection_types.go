@@ -39,9 +39,11 @@ type ExpressRouteCircuitConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerPeeringID *string `json:"peerPeeringId,omitempty" tf:"peer_peering_id,omitempty"`
 
+	// Reference to a ExpressRouteCircuitPeering to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
 	PeerPeeringIDRef *v1.Reference `json:"peerPeeringIdRef,omitempty" tf:"-"`
 
+	// Selector for a ExpressRouteCircuitPeering to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
 	PeerPeeringIDSelector *v1.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
 
@@ -51,9 +53,11 @@ type ExpressRouteCircuitConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	PeeringID *string `json:"peeringId,omitempty" tf:"peering_id,omitempty"`
 
+	// Reference to a ExpressRouteCircuitPeering to populate peeringId.
 	// +kubebuilder:validation:Optional
 	PeeringIDRef *v1.Reference `json:"peeringIdRef,omitempty" tf:"-"`
 
+	// Selector for a ExpressRouteCircuitPeering to populate peeringId.
 	// +kubebuilder:validation:Optional
 	PeeringIDSelector *v1.Selector `json:"peeringIdSelector,omitempty" tf:"-"`
 }

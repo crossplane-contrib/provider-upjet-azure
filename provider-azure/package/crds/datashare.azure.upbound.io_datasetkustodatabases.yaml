@@ -70,7 +70,7 @@ spec:
                       Share Kusto Database Dataset to be created.
                     type: string
                   kustoDatabaseIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a Database in kusto to populate kustoDatabaseId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -104,7 +104,7 @@ spec:
                     - name
                     type: object
                   kustoDatabaseIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a Database in kusto to populate kustoDatabaseId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -148,7 +148,7 @@ spec:
                       forces a new Data Share Kusto Database Dataset to be created.
                     type: string
                   shareIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a DataShare to populate shareId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -182,7 +182,7 @@ spec:
                     - name
                     type: object
                   shareIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a DataShare to populate shareId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

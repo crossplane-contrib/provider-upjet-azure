@@ -26,9 +26,11 @@ type ManagedPrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
@@ -37,9 +39,11 @@ type ManagedPrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsClusterName *string `json:"streamAnalyticsClusterName,omitempty" tf:"stream_analytics_cluster_name,omitempty"`
 
+	// Reference to a Cluster in streamanalytics to populate streamAnalyticsClusterName.
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsClusterNameRef *v1.Reference `json:"streamAnalyticsClusterNameRef,omitempty" tf:"-"`
 
+	// Selector for a Cluster in streamanalytics to populate streamAnalyticsClusterName.
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsClusterNameSelector *v1.Selector `json:"streamAnalyticsClusterNameSelector,omitempty" tf:"-"`
 
@@ -53,9 +57,11 @@ type ManagedPrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
+	// Reference to a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
 
+	// Selector for a Account in storage to populate targetResourceId.
 	// +kubebuilder:validation:Optional
 	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }

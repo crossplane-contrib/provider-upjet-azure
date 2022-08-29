@@ -1,6 +1,8 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/management
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -19,6 +21,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/management
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -1,6 +1,8 @@
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: ServerKey
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -18,6 +20,8 @@ spec:
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Vault
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -36,6 +40,8 @@ spec:
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
   labels:
     testing.upbound.io/example-name: client
   name: client
@@ -68,6 +74,8 @@ spec:
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
   labels:
     testing.upbound.io/example-name: server
   name: server
@@ -90,6 +98,8 @@ spec:
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Key
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -113,6 +123,8 @@ spec:
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: Server
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -139,6 +151,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/serverkey
   labels:
     testing.upbound.io/example-name: example
   name: example

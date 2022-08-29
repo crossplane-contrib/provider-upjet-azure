@@ -73,7 +73,7 @@ spec:
                       SQL User Defined Function to be created.
                     type: string
                   containerIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a SQLContainer to populate containerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -107,7 +107,7 @@ spec:
                     - name
                     type: object
                   containerIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a SQLContainer to populate containerId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -64,9 +64,11 @@ type LoadBalancerRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 
+	// Reference to a LoadBalancer to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDRef *v1.Reference `json:"loadbalancerIdRef,omitempty" tf:"-"`
 
+	// Selector for a LoadBalancer to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 

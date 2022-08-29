@@ -79,6 +79,8 @@ spec:
                       type: string
                     type: array
                   endpointNamesRefs:
+                    description: References to IOTHubEndpointStorageContainer to populate
+                      endpointNames.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -115,7 +117,8 @@ spec:
                       type: object
                     type: array
                   endpointNamesSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a list of IOTHubEndpointStorageContainer
+                      to populate endpointNames.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -158,7 +161,7 @@ spec:
                       belongs. Changing this forces a new resource to be created.
                     type: string
                   iothubNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a IOTHub to populate iothubName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -192,7 +195,7 @@ spec:
                     - name
                     type: object
                   iothubNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a IOTHub to populate iothubName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -236,7 +239,8 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -270,7 +274,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

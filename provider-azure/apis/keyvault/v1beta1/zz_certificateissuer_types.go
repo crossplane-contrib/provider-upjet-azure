@@ -57,9 +57,11 @@ type CertificateIssuerParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
+	// Reference to a Vault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
 	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
+	// Selector for a Vault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 

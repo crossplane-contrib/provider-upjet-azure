@@ -1,6 +1,8 @@
 apiVersion: cache.azure.upbound.io/v1beta1
 kind: RedisLinkedServer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/redislinkedserver
   labels:
     testing.upbound.io/example-name: example-link
   name: example-link
@@ -23,6 +25,8 @@ spec:
 apiVersion: cache.azure.upbound.io/v1beta1
 kind: RedisCache
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/redislinkedserver
   labels:
     testing.upbound.io/example-name: example-primary
   name: example-primary
@@ -46,6 +50,8 @@ spec:
 apiVersion: cache.azure.upbound.io/v1beta1
 kind: RedisCache
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/redislinkedserver
   labels:
     testing.upbound.io/example-name: example-secondary
   name: example-secondary
@@ -69,6 +75,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/redislinkedserver
   labels:
     testing.upbound.io/example-name: example-primary
   name: example-primary
@@ -81,6 +89,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/redislinkedserver
   labels:
     testing.upbound.io/example-name: example-secondary
   name: example-secondary

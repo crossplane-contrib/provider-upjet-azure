@@ -43,9 +43,11 @@ type IOTHubEndpointServiceBusQueueParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
 
+	// Reference to a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
 	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
 
+	// Selector for a IOTHub in devices to populate iothubId.
 	// +kubebuilder:validation:Optional
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
@@ -58,9 +60,11 @@ type IOTHubEndpointServiceBusQueueParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }

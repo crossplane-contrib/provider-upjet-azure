@@ -1,6 +1,8 @@
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetworkPeering
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkpeering
   labels:
     testing.upbound.io/example-name: example-1
   name: example-1
@@ -21,6 +23,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkpeering
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -33,6 +37,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkpeering
   labels:
     testing.upbound.io/example-name: example-1
   name: example-1
@@ -50,6 +56,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkpeering
   labels:
     testing.upbound.io/example-name: example-2
   name: example-2

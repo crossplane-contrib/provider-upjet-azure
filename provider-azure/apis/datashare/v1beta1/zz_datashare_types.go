@@ -27,9 +27,11 @@ type DataShareParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
+	// Reference to a Account to populate accountId.
 	// +kubebuilder:validation:Optional
 	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
 
+	// Selector for a Account to populate accountId.
 	// +kubebuilder:validation:Optional
 	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 

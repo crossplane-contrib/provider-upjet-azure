@@ -101,9 +101,11 @@ type ResourceGroupPolicyAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
 
+	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionIDRef *v1.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
 
+	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
@@ -113,9 +115,11 @@ type ResourceGroupPolicyAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`
 
+	// Reference to a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
 	ResourceGroupIDRef *v1.Reference `json:"resourceGroupIdRef,omitempty" tf:"-"`
 
+	// Selector for a ResourceGroup in azure to populate resourceGroupId.
 	// +kubebuilder:validation:Optional
 	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 }

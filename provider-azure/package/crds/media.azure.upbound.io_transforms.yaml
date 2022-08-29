@@ -71,7 +71,7 @@ spec:
                       a new Transform to be created.
                     type: string
                   mediaServicesAccountNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ServicesAccount to populate mediaServicesAccountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -105,7 +105,7 @@ spec:
                     - name
                     type: object
                   mediaServicesAccountNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ServicesAccount to populate mediaServicesAccountName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -240,7 +240,8 @@ spec:
                       should exist. Changing this forces a new Transform to be created.
                     type: string
                   resourceGroupNameRef:
-                    description: A Reference to a named object.
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -274,7 +275,8 @@ spec:
                     - name
                     type: object
                   resourceGroupNameSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -1,6 +1,8 @@
 apiVersion: notificationhubs.azure.upbound.io/v1beta1
 kind: NotificationHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -17,6 +19,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhub
   labels:
     testing.upbound.io/example-name: example
   name: example

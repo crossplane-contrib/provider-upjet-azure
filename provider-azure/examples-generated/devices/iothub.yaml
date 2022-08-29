@@ -1,6 +1,8 @@
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -28,6 +30,8 @@ spec:
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: EventHub
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -47,6 +51,8 @@ spec:
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: AuthorizationRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -68,6 +74,8 @@ spec:
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: EventHubNamespace
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -84,6 +92,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -96,6 +106,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothub
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -113,6 +125,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Container
 metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothub
   labels:
     testing.upbound.io/example-name: example
   name: example

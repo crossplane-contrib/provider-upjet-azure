@@ -115,7 +115,8 @@ spec:
                       Policy to be created.
                     type: string
                   hpcCacheIdRef:
-                    description: A Reference to a named object.
+                    description: Reference to a HPCCache in storagecache to populate
+                      hpcCacheId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -149,7 +150,8 @@ spec:
                     - name
                     type: object
                   hpcCacheIdSelector:
-                    description: A Selector selects an object.
+                    description: Selector for a HPCCache in storagecache to populate
+                      hpcCacheId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

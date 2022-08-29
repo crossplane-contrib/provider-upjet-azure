@@ -1,6 +1,8 @@
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceProviderRegistration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: azure/v1beta1/resourceproviderregistration
   labels:
     testing.upbound.io/example-name: example
   name: example
