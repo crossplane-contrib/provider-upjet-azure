@@ -22,6 +22,8 @@ kind: Vault
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example-upbound
 spec:
   forProvider:
@@ -40,6 +42,8 @@ kind: AccessPolicy
 metadata:
   labels:
     testing.upbound.io/example-name: client
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: client
 spec:
   forProvider:
@@ -96,6 +100,8 @@ kind: Key
 metadata:
   labels:
     testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
