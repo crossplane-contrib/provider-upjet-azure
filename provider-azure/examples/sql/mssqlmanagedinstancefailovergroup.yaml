@@ -136,6 +136,8 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetworkPeering
 metadata:
   name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstanceFailoverGroup takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
 spec:
   forProvider:
     remoteVirtualNetworkIdRef:
