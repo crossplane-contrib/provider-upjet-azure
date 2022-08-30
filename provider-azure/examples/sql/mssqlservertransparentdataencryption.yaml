@@ -7,6 +7,6 @@ spec:
     serverIdRef:
       name: mssql-server-example
     keyVaultKeyIdRef:
-      name: transparent-encryption 
+      name: transparent-encryption
   providerConfigRef:
     name: example
