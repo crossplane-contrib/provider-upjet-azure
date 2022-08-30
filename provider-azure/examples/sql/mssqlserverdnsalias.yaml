@@ -1,6 +1,8 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServerDNSAlias
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "temporary disable for centralized uptest"
   name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
