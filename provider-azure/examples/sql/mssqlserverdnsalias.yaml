@@ -1,7 +1,7 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServerDNSAlias
 metadata:
-  name: example-dns-alias
+  name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     mssqlServerIdRef:
