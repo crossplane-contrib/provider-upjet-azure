@@ -164,7 +164,7 @@ kind: Vault
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  name: example-upbound
+  name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
