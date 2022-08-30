@@ -119,10 +119,10 @@ uxp-ca                                       Opaque                           3 
 xgql-tls                                     Opaque                           3      21m
 ```
 
-## Install the official Azure provider in to the managed control plane
+## Install the official Azure provider
 <!-- Use the marketplace button -->
 
-Install the official provider into the managed control plane with a Kubernetes configuration file. 
+Install the official provider into the Kubernetes cluster with a Kubernetes configuration file. 
 
 ```yaml
 apiVersion: pkg.crossplane.io/v1
@@ -202,7 +202,7 @@ The command generates a JSON file like this:
 Save this output as `azure-credentials.json`.
 
 ### Create a Kubernetes secret with the Azure credentials JSON file
-Use `kubectl create secret -n upbound-system` to generate the Kubernetes secret object inside the managed control plane.
+Use `kubectl create secret -n upbound-system` to generate the Kubernetes secret object inside the Kubernetes cluster.
 
 `kubectl create secret generic azure-secret -n upbound-system --from-file=creds=./azure-credentials.json`
 
