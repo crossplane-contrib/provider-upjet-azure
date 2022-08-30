@@ -1,6 +1,8 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLManagedInstanceFailoverGroup
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-sql-managed-failover
 spec:
   forProvider:
