@@ -1,7 +1,7 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLDatabase
 metadata:
-  name: example
+  name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     collation: SQL_Latin1_General_CP1_CI_AS
