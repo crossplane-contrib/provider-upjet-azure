@@ -35,6 +35,8 @@ data:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation takes of MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-sql-rg
 spec:
   forProvider:
@@ -45,6 +47,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-vn
 spec:
   forProvider:
@@ -60,6 +64,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-subnet
 spec:
   forProvider:
@@ -81,6 +87,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example
 spec:
   forProvider:
@@ -95,6 +103,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SubnetNetworkSecurityGroupAssociation
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example
 spec:
   forProvider:
@@ -106,6 +116,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: RouteTable
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example
 spec:
   forProvider:
@@ -119,6 +131,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SubnetRouteTableAssociation
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstance takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example
 spec:
   forProvider:

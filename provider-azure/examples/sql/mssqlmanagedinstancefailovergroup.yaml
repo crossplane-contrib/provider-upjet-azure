@@ -46,6 +46,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   name: example-sql-rg-failover
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstanceFailoverGroup takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
 spec:
   forProvider:
     location: North Europe
@@ -56,6 +58,8 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
   name: example-vn-failover
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstanceFailoverGroup takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
 spec:
   forProvider:
     location: North Europe
@@ -67,6 +71,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstanceFailoverGroup takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-subnet-failover
 spec:
   forProvider:
@@ -88,6 +94,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstanceFailoverGroup takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-failover
 spec:
   forProvider:
@@ -100,6 +108,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SubnetNetworkSecurityGroupAssociation
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstanceFailoverGroup takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-failover
 spec:
   forProvider:
@@ -111,6 +121,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: RouteTable
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstanceFailoverGroup takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-failover
 spec:
   forProvider:
@@ -124,6 +136,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SubnetRouteTableAssociation
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstanceFailoverGroup takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-failover
 spec:
   forProvider:
@@ -150,6 +164,8 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetworkPeering
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation MSSQLManagedInstanceFailoverGroup takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration"
   name: example-failover
 spec:
   forProvider:
