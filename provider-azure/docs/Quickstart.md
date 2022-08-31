@@ -1,8 +1,5 @@
-The Upbound Azure Provider is the officially supported provider for the Microsoft Azure Cloud.
+# Quickstart
 
-View the Azure Provider Documentation for details and configuration options. 
-
-## Quickstart
 This guide walks through the process to install Upbound Universal Crossplane and install the Azure official provider.
 
 To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfig`, and create a *managed resource* in Azure via Kubernetes.
