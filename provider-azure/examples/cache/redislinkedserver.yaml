@@ -28,7 +28,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-primary
   annotations:
-    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/629"
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
   name: example-primary
 spec:
   forProvider:
@@ -54,7 +54,7 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-secondary
   annotations:
-    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/629"
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
   name: example-secondary
 spec:
   forProvider:
@@ -79,6 +79,8 @@ kind: ResourceGroup
 metadata:
   labels:
     testing.upbound.io/example-name: example-primary
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
   name: example-primary
 spec:
   forProvider:
@@ -91,6 +93,8 @@ kind: ResourceGroup
 metadata:
   labels:
     testing.upbound.io/example-name: example-secondary
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
   name: example-secondary
 spec:
   forProvider:
