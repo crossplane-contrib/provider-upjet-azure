@@ -11,7 +11,7 @@ spec:
         testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-insights
     scopeNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -28,7 +28,7 @@ spec:
   forProvider:
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-insights
 
 ---
 
@@ -59,7 +59,7 @@ spec:
       50.
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-insights
     scopesRefs:
     - name: tomonitor
 
@@ -75,7 +75,7 @@ spec:
   forProvider:
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-insights
     shortName: exampleact
     webhookReceiver:
     - name: callmyapi
@@ -95,7 +95,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-insights
 
 ---
 
@@ -103,8 +103,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-insights
+    testing.upbound.io/example-name: example-insights
+  name: example-insights-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -124,5 +124,5 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-insights
 

@@ -32,7 +32,7 @@ spec:
     purgeProtectionEnabled: false
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-keyvault
     skuName: Standard_B1
     softDeleteRetentionDays: 90
     tags:
@@ -170,7 +170,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-keyvault
     skuName: standard
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
@@ -200,8 +200,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-keyvault
+    testing.upbound.io/example-name: example-keyvault
+  name: example-keyvault-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -221,7 +221,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-keyvault
 
 ---
 

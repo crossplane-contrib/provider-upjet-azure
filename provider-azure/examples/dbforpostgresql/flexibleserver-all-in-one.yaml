@@ -62,7 +62,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-flexible-server-pg
     skuName: GP_Standard_D4s_v3
     storageMb: 32768
     version: "12"
@@ -73,8 +73,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-flexible-server-pg
+    testing.upbound.io/example-name: example-flexible-server-pg
+  name: example-flexible-server-pg-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

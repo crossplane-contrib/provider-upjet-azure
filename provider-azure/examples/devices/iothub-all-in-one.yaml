@@ -24,7 +24,7 @@ spec:
     maxChunkSizeInBytes: 10485760
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-iothub
 
 ---
 
@@ -47,7 +47,7 @@ spec:
         testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-iothub
 
 ---
 
@@ -62,7 +62,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-iothub
     sku:
     - capacity: 1
       name: S1
@@ -95,7 +95,7 @@ spec:
     maxChunkSizeInBytes: 10485760
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-iothub
 
 ---
 
@@ -103,8 +103,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-iothub
+    testing.upbound.io/example-name: example-iothub
+  name: example-iothub-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -124,7 +124,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-iothub
 
 ---
 

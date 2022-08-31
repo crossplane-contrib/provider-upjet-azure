@@ -3,7 +3,7 @@ kind: Account
 metadata:
   labels:
     testing.upbound.io/example-name: db
-  name: example-cosmodb
+  name: example-cosmosdb-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     capabilities:
@@ -26,7 +26,7 @@ spec:
     offerType: Standard
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-cosmosdb
 
 ---
 
@@ -34,8 +34,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-cosmosdb
+  name: example-cosmodb-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

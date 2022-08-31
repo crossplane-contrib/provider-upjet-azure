@@ -11,7 +11,7 @@ spec:
     objectId: ${data.azurerm_client_config.current.object_id}
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbforpostgresql
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -33,7 +33,7 @@ spec:
     endIpAddress: 40.112.8.12
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbforpostgresql
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -54,7 +54,7 @@ spec:
     name: backslash_quote
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbforpostgresql
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -76,7 +76,7 @@ spec:
     collation: English_United States.1252
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbforpostgresql
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -96,7 +96,7 @@ spec:
     ignoreMissingVnetServiceEndpoint: true
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbforpostgresql
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -124,7 +124,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbforpostgresql
     skuName: GP_Gen5_2
     sslEnforcementEnabled: true
     storageMb: 5120
@@ -142,8 +142,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-dbforpostgresql
+    testing.upbound.io/example-name: example-dbforpostgresql
+  name: example-dbforpostgresql-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -162,7 +162,7 @@ spec:
     - 10.7.29.0/29
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbforpostgresql
     serviceEndpoints:
     - Microsoft.Sql
     virtualNetworkNameSelector:
@@ -184,7 +184,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbforpostgresql
 
 ---
 

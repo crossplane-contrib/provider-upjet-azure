@@ -25,8 +25,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/blob
   labels:
-    testing.upbound.io/example-name: example
-  name: example-storage-blob
+    testing.upbound.io/example-name: example-storage-blob
+  name: example-storage-blob-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -48,7 +48,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-storage-blob
 
 ---
 

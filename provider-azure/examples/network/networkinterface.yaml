@@ -15,7 +15,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-network-interface
 
 ---
 
@@ -23,8 +23,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-network-interface
+    testing.upbound.io/example-name: example-network-interface
+  name: example-network-interface-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -43,7 +43,7 @@ spec:
     - 10.0.2.0/24
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-network-interface
     virtualNetworkNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -63,4 +63,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-network-interface

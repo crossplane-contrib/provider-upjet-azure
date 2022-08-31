@@ -16,7 +16,7 @@ spec:
         testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-eventhub
     send: false
 
 ---
@@ -37,7 +37,7 @@ spec:
         testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-eventhub
     userMetadata: some-meta-data
 
 ---
@@ -57,7 +57,7 @@ spec:
     partitionCount: 2
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-eventhub
 
 ---
 
@@ -73,7 +73,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-eventhub
     sku: Standard
     tags:
       environment: Production
@@ -84,8 +84,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-eventhub
+    testing.upbound.io/example-name: example-eventhub
+  name: example-eventhub-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

@@ -34,7 +34,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-containerservice
     tags:
       Environment: Production
 
@@ -44,8 +44,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-containerservice
+    testing.upbound.io/example-name: example-containerservice
+  name: example-containerservice-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

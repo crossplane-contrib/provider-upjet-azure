@@ -129,7 +129,7 @@ metadata:
     meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
   labels:
     testing.upbound.io/example-name: example-sql-failover-secondary
-  name: example-sql-failover-secondary
+  name: example-sql-failover-secondary-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: North Europe
@@ -143,7 +143,7 @@ metadata:
     meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
   labels:
     testing.upbound.io/example-name: example-sql-failover-primary
-  name: example-sql-failover-primary
+  name: example-sql-failover-primary-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: North Europe

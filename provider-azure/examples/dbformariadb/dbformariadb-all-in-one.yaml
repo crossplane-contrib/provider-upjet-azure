@@ -8,7 +8,7 @@ spec:
   forProvider:
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbformariadb
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -29,7 +29,7 @@ spec:
     name: interactive_timeout
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbformariadb
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -48,7 +48,7 @@ spec:
     endIpAddress: 40.112.8.12
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbformariadb
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -68,7 +68,7 @@ spec:
     collation: utf8_general_ci
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbformariadb
     serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -93,7 +93,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbformariadb
     skuName: GP_Gen5_2
     sslEnforcementEnabled: true
     storageMb: 51200
@@ -105,8 +105,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example-dbformariadb
+    testing.upbound.io/example-name: example-dbformariadb
+  name: example-dbformariadb-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -125,7 +125,7 @@ spec:
     - 10.7.29.0/29
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbformariadb
     serviceEndpoints:
     - Microsoft.Sql
     virtualNetworkNameSelector:
@@ -147,7 +147,7 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-dbformariadb
 
 ---
 
