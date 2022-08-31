@@ -1,3 +1,5 @@
+# Configuration
+
 Install official provider on self-hosted control planes using Universal Crossplane (`UXP`).
 
 ## Install the provider
@@ -95,5 +97,3 @@ spec:
 ```
 
 **Note:** the `spec.credentials.secretRef.name` must match the `name` in the `kubectl create secret generic <name>` command.
-
-View the [ProviderConfig CRD definition](resources/azure.upbound.io/ProviderConfig/v1beta1) to view all available `ProviderConfig` options.
