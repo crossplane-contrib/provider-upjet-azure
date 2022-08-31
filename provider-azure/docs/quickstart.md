@@ -5,7 +5,7 @@ View the Azure Provider Documentation for details and configuration options.
 ## Quickstart
 This guide walks through the process to install Upbound Universal Crossplane and install the Azure official provider.
 
-To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfiguration`, and create a *managed resource* in Azure via Kubernetes.
+To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfig`, and create a *managed resource* in Azure via Kubernetes.
 
 ## Create an Upbound.io user account
 Create an account on [Upbound.io](https://accounts.upbound.io/register). 
@@ -130,7 +130,7 @@ kind: Provider
 metadata:
   name: provider-azure
 spec:
-  package: xpkg.upbound.io/upbound/provider-azure:v0.5.1
+  package: xpkg.upbound.io/upbound/provider-azure:latest
   packagePullSecrets:
     - name: my-secret
 ```
@@ -144,7 +144,7 @@ After installing the provider, verify the install with `kubectl get providers`.
 ```shell
 $ kubectl get provider
 NAME             INSTALLED   HEALTHY   PACKAGE                                         AGE
-provider-azure   True        True      xpkg.upbound.io/upbound/provider-azure:v0.5.1   58s
+provider-azure   True        True      xpkg.upbound.io/upbound/provider-azure:latest   58s
 ```
 
 It may take up to 5 minutes to report `HEALTHY`.
@@ -239,7 +239,7 @@ spec:
 
 Apply this configuration with `kubectl apply -f`.
 
-**Note:** the `Providerconfig` value `spec.secretRef.name` must match the `name` of the secret in `kubectl get secrets -n upbound-system` and `spec.SecretRef.key` must match the value in the `Data` section of the secret.
+**Note:** the `Providerconfig` value `spec.secretRef.name` must match the `name` of the secret in `kubectl get secrets -n upbound-system` and `spec.secretRef.key` must match the value in the `Data` section of the secret.
 
 Verify the `ProviderConfig` with `kubectl describe providerconfigs`. 
 
