@@ -129,7 +129,6 @@ func GetProvider() *tjconfig.Provider {
 		tjconfig.WithSkipList(skipList),
 		tjconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),
-			UseAsync(),
 		),
 		tjconfig.WithReferenceInjectors([]tjconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
 	)

@@ -94,13 +94,6 @@ func groupKindOverride(r *tjconfig.Resource) {
 	r.Kind = name.NewFromSnake(strings.Join(parts[i:], "_")).Camel
 }
 
-// UseAsync sets UseAsync parameter to true for given resources.
-func UseAsync() tjconfig.ResourceOption {
-	return func(r *tjconfig.Resource) {
-		r.UseAsync = true
-	}
-}
-
 func init() {
 	name.AddAcronym("iothub", "IOTHub")
 	name.AddAcronym("iot", "IOT")
