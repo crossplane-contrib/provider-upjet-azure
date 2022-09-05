@@ -11,7 +11,7 @@ spec:
         testing.upbound.io/example-name: example
     resourceGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-auth
 
 ---
 
@@ -19,7 +19,7 @@ apiVersion: authorization.azure.upbound.io/v1beta1
 kind: PolicyDefinition
 metadata:
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: example-auth
   name: example
 spec:
   forProvider:
@@ -36,8 +36,8 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-auth
+  name: example-auth-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

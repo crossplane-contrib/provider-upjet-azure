@@ -1,10 +1,95 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLVirtualNetworkRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    serverIdRef:
-      name: example
-    subnetIdRef:
-      name: sample-subnet1
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-vn-rule
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example-vn-rule
+  name: example-vn-rule
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-vn-rule
+    version: "12.0"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example-sql-vn-rule
+  name: example-sql-vn-rule-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.7.29.0/29
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-vn-rule
+    serviceEndpoints:
+    - Microsoft.Sql
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlvirtualnetworkrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.7.29.0/29
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-vn-rule

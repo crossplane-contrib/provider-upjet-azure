@@ -1,0 +1,68 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Blob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/blob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    sourceContent: inline content for this blob
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageContainerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: Block
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/blob
+  labels:
+    testing.upbound.io/example-name: example-storage-blob
+  name: example-storage-blob-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/blob
+  labels:
+    testing.upbound.io/example-name: example
+  name: upteststorageacc
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-storage-blob
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/blob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

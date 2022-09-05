@@ -1,0 +1,16 @@
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/roleassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    principalId: ${data.azurerm_client_config.example.object_id}
+    roleDefinitionName: Reader
+    scope: ${data.azurerm_subscription.primary.id}
+
+---
+

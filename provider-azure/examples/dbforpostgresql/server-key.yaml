@@ -1,0 +1,119 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: ServerKey
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+spec:
+  forProvider:
+    keyVaultKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example-upbound
+spec:
+  forProvider:
+    location: West Europe
+    purgeProtectionEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  labels:
+    testing.upbound.io/example-name: client
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: client
+spec:
+  forProvider:
+    keyPermissions:
+    - Get
+    - Create
+    - Delete
+    - List
+    - Restore
+    - Recover
+    - UnwrapKey
+    - WrapKey
+    - Purge
+    - Encrypt
+    - Decrypt
+    - Sign
+    - Verify
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${data.azurerm_client_config.current.object_id}
+    secretPermissions:
+    - Get
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  labels:
+    testing.upbound.io/example-name: server
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: server
+spec:
+  forProvider:
+    keyPermissions:
+    - Get
+    - UnwrapKey
+    - WrapKey
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${azurerm_postgresql_server.example.identity.0.principal_id}
+    secretPermissions:
+    - get
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+spec:
+  forProvider:
+    keyOpts:
+    - decrypt
+    - encrypt
+    - sign
+    - unwrapKey
+    - verify
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

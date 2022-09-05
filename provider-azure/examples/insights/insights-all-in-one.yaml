@@ -1,0 +1,128 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorPrivateLinkScopedService
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    linkedResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-insights
+    scopeNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorPrivateLinkScope
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-insights
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorMetricAlert
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    action:
+    - actionGroupIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: main
+    criteria:
+    - aggregation: Total
+      dimension:
+      - name: ApiName
+        operator: Include
+        values:
+        - '*'
+      metricName: Transactions
+      metricNamespace: Microsoft.Storage/storageAccounts
+      operator: GreaterThan
+      threshold: 50
+    description: Action will be triggered when Transactions count is greater than
+      50.
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-insights
+    scopesRefs:
+    - name: tomonitor
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorActionGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-insights
+    shortName: exampleact
+    webhookReceiver:
+    - name: callmyapi
+      serviceUri: http://example.com/alert
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-insights
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-insights
+  name: example-insights-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: to_monitor
+  name: tomonitor
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-insights
+

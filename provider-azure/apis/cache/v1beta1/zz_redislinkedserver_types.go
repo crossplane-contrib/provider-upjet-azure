@@ -17,9 +17,6 @@ type RedisLinkedServerObservation struct {
 
 	// The ID of the Redis.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// The name of the linked server.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type RedisLinkedServerParameters struct {

@@ -1,0 +1,283 @@
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Secret
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    valueSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: ManagedHardwareSecurityModule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "region specific, see https://docs.microsoft.com/en-us/answers/questions/830448/creation-of-hsm-keyvault-failed-with-serviceunavai.html"
+  name: example
+spec:
+  forProvider:
+    adminObjectIds:
+      - ${data.azurerm_client_config.current.object_id}
+    location: West Europe
+    purgeProtectionEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-keyvault
+    skuName: Standard_B1
+    softDeleteRetentionDays: 90
+    tags:
+      Env: Test
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Key
+metadata:
+  labels:
+    testing.upbound.io/example-name: generated
+  name: generated
+spec:
+  forProvider:
+    keyOpts:
+    - decrypt
+    - encrypt
+    - sign
+    - unwrapKey
+    - verify
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: CertificateIssuer
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountId: "0000"
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    orgId: ExampleOrgName
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    providerName: DigiCert
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "Observe issues see https://github.com/upbound/official-providers/issues/593"
+  name: example-upbound-pem-cert
+spec:
+  forProvider:
+    certificate:
+    - contentsSecretRef:
+        key: cert.pem # https://docs.microsoft.com/en-us/answers/questions/258583/import-certificate-api-for-azure-key-vault.html
+        name: example-cert
+        namespace: upbound-system
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    certificatePolicy:
+    - issuerParameters:
+      - name: Self
+      keyProperties:
+      - exportable: true
+        keySize: 4096
+        keyType: RSA
+        reuseKey: true
+      secretProperties:
+      - contentType: application/x-pem-file
+      lifetimeAction:
+      - action:
+        - actionType: AutoRenew
+        trigger:
+        - daysBeforeExpiry: 30
+      x509CertificateProperties:
+      - extendedKeyUsage:
+        - "1.3.6.1.5.5.7.3.1"
+        keyUsage:
+        - cRLSign
+        - dataEncipherment
+        - digitalSignature
+        - keyAgreement
+        - keyCertSign
+        - keyEncipherment
+        subjectAlternativeNames:
+        - dnsNames:
+          - upboumd.io
+        subject: CN=upbound
+        validityInMonths: 12
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: ManagedStorageAccountSASTokenDefinition
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "requires manual value specification"
+  name: example
+spec:
+  forProvider:
+    managedStorageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    sasTemplateUri: ${data.azurerm_storage_account_sas.example.sas}
+    sasType: account
+    validityPeriod: P1D
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-keyvault
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: ManagedStorageAccount
+metadata:
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    regenerateKeyAutomatically: false
+    regenerationPeriod: P1D
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountKey: key1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-keyvault
+  name: example-keyvault-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: examplekeyvault
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-keyvault
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    keyPermissions:
+    - Get
+    - Create
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${data.azurerm_client_config.current.object_id}
+    secretPermissions:
+    - Get
+    - Set
+    - Delete
+    storagePermissions:
+    - Get
+    - List
+    - Set
+    - SetSAS
+    - GetSAS
+    - DeleteSAS
+    - Update
+    - RegenerateKey
+    certificatePermissions:
+    - Get
+    - GetIssuers
+    - SetIssuers
+    - Import
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBib3VuZHJvY2tz
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+
+---
+
+apiVersion: v1
+data:
+  cert.pem: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVsakNDQW40Q0NRQ01GZjB6YUVtakh6QU5CZ2txaGtpRzl3MEJBUXNGQURBTk1Rc3dDUVlEVlFRR0V3SmoKZWpBZUZ3MHlNakE0TWpJeE1qUTRORE5hRncweU16QTRNakl4TWpRNE5ETmFNQTB4Q3pBSkJnTlZCQVlUQW1ONgpNSUlDSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQWc4QU1JSUNDZ0tDQWdFQTF0YU91d1o0RUx4ck1FZEt3OHZoCmsyUExKNThJeVB4NDZ1WVRJZEFJTngyZ2QrRUVDSm5aNmlTRDB6NHpTVmpPVnNUdnNvam9uVEY0NWJtQ0JoNFIKd0ZyK1g4c2cxcGpvZG9wMHcveDFLZnhQZ05qVFRLVWlxYWNtWmpIZEVreDU2enpqbkRpNzM5TGh5T1RwRU1Bbword3hvOGpJaHA4YU5jdVhIZS9FYUY0SjBoRElYK3ZqMVppRUJpejNuVDh3K2lzeXltVlpSekhWUTNlTHlsS1V5ClpRL09KbDd6REpheVUrMmYzNHZEWFBxRWpRL2tMUlZGWUo3Mlh3Vk1FbnBjZmNMQVo5QnJmMFdERVNIQlpvQVYKWEJQc0Ird29DTGNTamdHR0FzT0JwaldPSnJKY1dtclViaGJaV3dlOWJSN0pmSURKWHpyRzlCVmU1SFVxTkoydgpCNWVOYzZpbWQ3ZHF2UC96K0RIQnBwQUpDNHRaTDJJN25ha2VJNS9xd25GalVGcmMxWVFpN0tvNkdmNk83M3dZCitJTExCc1VVRzIzOEgxc2xIdWJXS1ZrNFRhNlFYRGMrYW1sY29KTEp4MEFNWnpZUGs3N2hmYVRkQ0IvcEpPQUIKSUllU2lUSXBQSDl0NXlGQno5cDNlN2FmaUY1MFl5TlpmVDZrYmh3eEZBUVllMXovSjlKaEJHMXVNSG9xREVibQpXODBjcDdjMEZ5cUdkUXFYU0hjOExqYnNidmZOTkR0ZWZmTGRaelNSdWp6dGcxOFllRXZOQmZMTE1xTnlncmszCkZrZ205VEdObFB3RE5OSFlXVEpBeWw5TWlvRkpucUdlSVZ5RUVNVEpWOFoyM0RxZUMxcS9DcFR4SStzQXhYSGkKMkRvRFdLUGJzT2U1Ylo1WGVidnd3eTBDQXdFQUFUQU5CZ2txaGtpRzl3MEJBUXNGQUFPQ0FnRUFPQzdPUW84bQprR2x3aFZmbm4zamkrc2IzSTROaEFuZTZ6cjhLOXlwMVpRdU42WkFLZVBLelI2NlZqY3VycHRmRkl5YlVYRFNICmtLRXo4VDBxVVZMem5SRmFxK244bW0zSmd3VFVyRGFkRzNMeDA4dTQ2bXdxcWJHbWttQnpRWTdpc3FUNitwVTUKaEhhRk5YUlgvNVZrQzRIUmM3bmNPTndMU2VSaFd4VlRRVjBIRjVFeW1rR25LRkRLN3NvaW1CQUJsc1VrRXNJMAp4dnRJKzdkOTZuNy95MUE2YmdBbkRZZGV3dGVPblNkd21vYzBiOGV6S2RmR1VYc3dmYXRuMnFLNXZZLzFnbG9FCjZIUWtWRFRSUU8ybmFIU2czU1U2RUh5Yzl1VVdmcDBZK0EzSHNlZWhzSEt4SHFNVHdWS0Q4WmQ1enNtZlRpZlAKTnJ3ZWx6SE4zVWdkdW1HMEcrRmo4SS9ReHc5Q1lDSEthSTBlalRFOHlPVFNuQ05ZZFJISk5MM21pcGJRcjZIYwoyYmtIVkNScng4RVZ0N09yZUJscVAxenA4VDZXTU1lYVhsL0c3Y09UZTA1Z1kxQUNFT20zamlMblY2THVNYzlSCjJ6Ri9kNG1XMlJHeU0xaU9ySU1aQzVsckx4MnFVMUM3KzlRMDh4cWZEUXBHTEo4WURORW1ERW1oSDhSUnRrS0gKcFdFQU16UlVLMnR2SEw3dHVLWE93M1cySFVzUDNwVVRhdHpBb2R5Vy9kKzRJREh2VUxZcVRBL3liRXIydXZseAp0TGpobmF3a3JJSzNuTEd5cTlCRUVwNm5pY0x0MXQvdkdYWSs5YnZ6SDI4TTFxZ3FLbWlMNDJEejN3M0krNGpNCitNL1AvcWVzVHZPc0RUenBMVGl5VHF6c2cwOW9RclBxVzlnPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCi0tLS0tQkVHSU4gRU5DUllQVEVEIFBSSVZBVEUgS0VZLS0tLS0KTUlJSm56QkpCZ2txaGtpRzl3MEJCUTB3UERBYkJna3Foa2lHOXcwQkJRd3dEZ1FJYW0ydVNFdGpzdjhDQWdnQQpNQjBHQ1dDR1NBRmxBd1FCS2dRUXNUODBiVlNNQTVvdHcrMSswZVU4ZEFTQ0NWQVhtbW9lSGZwL1pRTGdkMXB4ClhiMHg5ZFZmZEtDV3JvQnVSQ1Y0L0FqQmdXNnMxRi95L3EzVnFpd0xQOXBoODVFUlZpUzkvZnZFRVp2Vm9vbVMKVmZQUUxFYTlyck1DNEtZUDMraGRXNkpTWUgwRFR5YjJlT2g2eVNxMVZIMEdabTFqUUR5VFF5REdPUmx3dkY1dgpQQTFYbzI1U25YZkVMRStIYWNXRTJ0WlpSKzIwbm5KdkxEV3ErZDl5clU2c3owNi9EbUk3YnhKZ3RFMzB5QXFuCldKNFlUVmgyT2pSaVFtNHhzaFN6K0JVZ0YwVE5laE9VcXduQVNpNm14QUpqOC9RZ20wVE42bHJ6ZVpkZ3V2emMKd1F5ZEgrWGl0N201M2VjcGREdXpSYnlnQm4xUVJ3TEVmTDFNclZySXVCci9XSnJxR0V6UkFTMXlIeXprbDhDWgpHcy9mem1VRHVUaGlhRWdIWGtSYWFCcDM2NUpxR3pkMnNKWDJOZGtWbzBaNlVLVTg2ellnayt1MWNONUNBZlBGCmZCMTI0UkVXTUg0eFFBWi9GLzVHSnFEUmdBSUwwKzRVdGg5NFNtS3pHYU5CSGh6ZTBLbkFmWGkwaXFnWlpnYmYKV1N3MUVPUGdiUHFlVW5yVHNVUTdPMkQ5WTN0SStFSEtwbStDY3IvcTB3TFFxUjd0VDU1SXhoZkdVeWdBNXBOMQpobnFQV2ZMT2tqUjZVVXJNUFQ2N1kzcTQxaTBXWlFtMTZLTlVCMUNwM2pwRkg2eUlvelVpanFucnM4QzNjWFdQCi9OejFLRExvVDdpdzFVdTNYTWkrN1Z2WjVtcm9lb1dsUHU5em9WU1NEUjk2bnM2TnA3NjVqT28zZnpZL3EvK2MKTUg5VExzWjJnMmY0eE5NUnorN043YU53K2d6bFhkdVNneGE4b3VXRGd3aHpKbUFlRnVUd0tzSFdLTU55MWRnbgpycXpkMWpycUNGNjJEa3FxRlRoSTlyZjVtNTNUTlIwSzZ2ZzB5bGZQaEVRemtoZEtqMHpaRTFITzRiM0NlTU0wCmcvb0RncTZDZWxkOXdPb29vSFphVmhVMVVpOVI3NC9VclhWVzNwSmo5V0JORFBDNGhKOHhZMThSYWNKZXhzYzcKSjhyN3F1K3BzWEtSeWRqVUhnQnkwQkJkbkxRYzVXcTFTM1pZeXc1VTVNdFkyUCtrZGxsQ0RIRi81ek9ldFdvYgpjZVB6ZDlPRjV2MEJld0FUcUswYVpQaDBwZTRiME5oblRyQndHQmh1a2RqYWpDZkJuRzBST2h2c0VwbVJ3LytuClpqT1VJVTZDVXRaRW1lMVdGK1BUdGZha2xueG11aTVac1FHRmt6ZkZDYjZrRGxCeURodElJR0pKR0tGaktnTSsKN3R4V08rMUE3RklWa1hUMTVyRnJqNmZ6aWVHMVExUUthQzFEUE85aXlkUXBsdFdDTkhVT3NSU25MZTEwUUh4Ygoyc1c1UFVOMFFBK3cvQ0FZdnBmVlY2dWF0Y0tGR21XTkNQS0VqMW5GQU1iSEFHSHVJM2U1bUNZcmthVnZZSDVpCjhpeENOUnYvV21qS0pyaTczMm4yUnZnMUtaZU40RXRJTHZHdkJiRXJYaTFFeFZ0MXN2azMwYXErNTd5ZmQzWnEKTmF1eG5DTDYvRVd0V3RYT1I0RWRDVEpJczlVTDNIbkhMd2sxRXExVFFJN2RzRmR4ZjFIbEVUTjhSUHNDUktyNApWeXZqSXVoMyswR25CaGswS2tBNHVpdHlld2FoL1hiM2lUaUhPUFJiKzdpOFpyS0NlRzZqNG5JY3Q2U2NaRVBHCjRCdlRqTG5wR0ROWWhLUUFyQ3B3QzlwMy9zT2pnVytPQWgyQkpZZkg5c3EvQUJpMFlNellsOXYrYm5QeU9UTjcKdXFZQzdya2svMXpCSjVKZERUN1VWSXFERXcxZ01Rb1E5VUpzNS9SbDZ5bk5ZSjRqMzdKQUg3ZTduUDZuRzZSawptT3R3M3FqUUovZTBXUWJpNEwyMXd3RG5NRDdjc1d6dlZidnVMTzVlRmg3UlZxQXJZOWdIZTlncllqNUVCRENhCnNDSGpXcy9HZ0lwVlcwZk14WGs4Yzlqd0JtSFUvRExOUWJUWmlmVGhoaE1BcGs0WXdvV0hyTlEzZGRQUFc3KzcKQkEzRTNXL0o5WlJPUHNXeXdtWFJ2QlJQSklZOTVvZFg1V3RjcWZSajhOWEFqM2NEMG8veE9XREUyNkkwVVphTQoyeTRrSmYyU0pwUTZmSTI2cDdmVkt4MllkUW5WTXRvUmtjTXp0cEg1ZVh5NjJST0hPTUIySUhuQzRvdEV3dUxWCnllV1pBZ2VXcEVlVUgxRWlockFRL3RIT1lLRjNNaGNUUHFVazlaSDFFMTBRQ2ZRZ0dFaS9weEJCWHJMb1liTmkKaTNHdmUwbVpHb3FpTEFrZ3ZjZGFxcnZRYXJ0eU5HcWhFenkveEJmRk9UM3JxTEtpZFVGOHpGU254bHdUd3FTbgp4bjFJa3JDSGpmbkxpK3RlWDRKaWg1alArYWRZV1MwL21DS1hDTW5VZEE3SDUxSmVlWEdlTG01Rk5tY0ZCZWU5Cis4R3kzT3dIQVRYWnVxMkNHUXVCZWZvdmNGUVhSS3RKd2E4OXZzdTBQcmxxVURwRmFvVlUveWtJcEVXMW16cmgKTk5WdVp1aUxnZmNFS2xKbVBsYi9rYUczNHB4RGlSSlIyYzFKcXBIZTNkTTdIR3Q5alJmTlVKVXVRYk1JZCt5ZQp3VDZKT29ZRVBscGRTZkdncFUwZ0U4cGFmT25la1QxREw5SmFMVHVFaUQvck5PaHJEeUROSXVJSmFNcE1EZkw1CldTc1BQTm5mSUhESFB3NWtYUlh4eWJvNGV6anVDMyswbkF4dmI4YlVYanFEZkVMU2UrWW81cy9ySFEvRlIyWVkKRi92bVNGaktya0RnK3R6NW4wRlpuem9jais0dFVJWTFCZ04vcndqdGliMjFFYktRWWI0ZWtGY0JjYlJhczZlMwpyVjB3dGdpZlgrRlBwSTJ0Y01EZWhhd1ZaaHBDRlovTVBpL2JpS2pjazNiZ0dmUndrRUIyRnRObG9HSU5MN2FiCmNKa0pIa2xGSmVUT0labmVndWhPZTVtQWQ0bHNsQndrRHVYa2pZZnBDR1ZxaTVzZ1c3Tnc4dmgrdVdlMDRBcU8KcXJEcEs0UXRTZW1pcWhYVjFtSU5ad05JaU1TWmZEd3hZS0lLWVVZMUpwS0VIaU5hdDdyRzdPdHNMQ3U5SkZHQgpXVC9Da0dLSEc5TTcrVW9NdDBySXhLS2dKeE03enlUc0lWWi9NMDVlcDFTU2xHV25pbWJpa2UrdThWUnF1bDlGCnJqMVlpendDQndKR09IVnZxaWRoVGhNK3hiS1BoL2dYbWkzYVVQVm92VHJINTJlNWgveVlJRzBORDdRMklLNE4KV2tRTk9Vc1kvUVZZbHJPOWdBOWF2K2FOcHZSZFdWWVYrS2JBOGY4eldCY2FjdUk0SGkwSEJKSUFmSG9xWFhJYQpUZFUvbExIT0RkMGFVTEFVVjY5ZllLaCtNRnZtRXc2emNvYmkrVFBHRGNscXVFazA2Q04vU1hjaTc1ckZ2c1dWCm4reGdsd0JvV3lFb2E2Qk9wUWcwY1Bzc1J2cE1xbkpQVGRvM3MwQXV2TTl6MXRTZVdUaXlHOVVkNVhuQld2QVoKQkZuSHpxNFh1b2VqaGxRblVJMVZrM09wMG16eUFaYlE5cEkybThDcGpLYlppQUFDQm9tTUxOejU3cTk5UmRSMgpaTUk2QUtwcUpxRWhhaXI3bmRQS3RJNk1pOXRDemRTSDZDYnRId2tkbFUySHp0UE4xUkZIUUg0UlF1UU1qMm1mCmdxYTI5Q0tZUVZnOVZiTHVyTkQ1S0RMTnlNcHlDT3ROeUx3N0lJTE5NWE9ibzdhNDg2N1BVL0JtMkV3NHl1dzMKaGNmSTdVSlR4S1RsaStPZVlYWktiWnpvb1FxM2FRcTlmNDh4cXY4U0RGUVplaWJmQ2IrVlhEWWlZMXY4aWxDUgpTNko3Njd1cm9KVE0yQkZWdzRNamFZbzFLd3RVVHA5WGpUaEpua1hNbnJtZXdXeVlhbmdaVHZ5OE9sNThUc3NMCnhUajl6TmlwcTEzeHZCTHp5VlU0Y3YzaTFCZmIyRlNiU3hBME5jNHFKa1g2ZHQ1SUlpUVJIYUVUaFRMMUN2T1oKSUVvM2NOaW4yVGxFNVNHaWtkK2habjkyT2c9PQotLS0tLUVORCBFTkNSWVBURUQgUFJJVkFURSBLRVktLS0tLQo=
+kind: Secret
+metadata:
+  name: example-cert
+  namespace: upbound-system
+type: Opaque

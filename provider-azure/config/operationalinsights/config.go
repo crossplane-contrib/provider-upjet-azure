@@ -20,7 +20,7 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
-// Configure configures loganalytics group
+// Configure configures operationalinsights group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_log_analytics_workspace", func(r *config.Resource) {
 		r.Kind = "Workspace"

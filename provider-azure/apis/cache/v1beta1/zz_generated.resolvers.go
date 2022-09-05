@@ -12,6 +12,7 @@ import (
 	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
 	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -92,7 +93,7 @@ func (mg *RedisEnterpriseDatabase) ResolveReferences(ctx context.Context, c clie
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
-		Extract:      rconfig.ExtractResourceID(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.ClusterIDRef,
 		Selector:     mg.Spec.ForProvider.ClusterIDSelector,
 		To: reference.To{

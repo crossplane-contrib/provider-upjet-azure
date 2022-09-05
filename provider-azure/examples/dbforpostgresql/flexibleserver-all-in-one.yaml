@@ -1,0 +1,91 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServerConfiguration
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: backslash_quote
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    value: "on"
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServerDatabase
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    charset: utf8
+    collation: en_US.utf8
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServerFirewallRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 122.122.0.0
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startIpAddress: 122.122.0.0
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServer
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-flexible-server-pg
+    skuName: GP_Standard_D4s_v3
+    storageMb: 32768
+    version: "12"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-flexible-server-pg
+  name: example-flexible-server-pg-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

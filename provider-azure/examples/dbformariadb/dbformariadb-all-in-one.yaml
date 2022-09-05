@@ -1,0 +1,161 @@
+apiVersion: dbformariadb.azure.upbound.io/v1beta1
+kind: VirtualNetworkRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbformariadb
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: internal
+
+---
+
+apiVersion: dbformariadb.azure.upbound.io/v1beta1
+kind: Configuration
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: interactive_timeout
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbformariadb
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    value: "600"
+
+---
+
+apiVersion: dbformariadb.azure.upbound.io/v1beta1
+kind: FirewallRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbformariadb
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startIpAddress: 40.112.8.12
+
+---
+
+apiVersion: dbformariadb.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    charset: utf8
+    collation: utf8_general_ci
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbformariadb
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbformariadb.azure.upbound.io/v1beta1
+kind: Server
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-upbound-gp
+spec:
+  forProvider:
+    administratorLogin: acctestun
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: false
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbformariadb
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 51200
+    version: "10.2"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-dbformariadb
+  name: example-dbformariadb-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: internal
+  name: internal
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.7.29.0/29
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbformariadb
+    serviceEndpoints:
+    - Microsoft.Sql
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.7.29.0/29
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbformariadb
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

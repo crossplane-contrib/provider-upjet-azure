@@ -1,0 +1,101 @@
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisLinkedServer
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-link
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
+  name: example-link
+spec:
+  forProvider:
+    linkedRedisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-secondary
+    linkedRedisCacheLocation: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-primary
+    serverRole: Secondary
+    targetRedisCacheNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-primary
+
+---
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-primary
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
+  name: example-primary
+spec:
+  forProvider:
+    redisVersion: "6"
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: East US
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-primary
+    skuName: Premium
+
+---
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-secondary
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
+  name: example-secondary
+spec:
+  forProvider:
+    redisVersion: "6"
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: West US
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-secondary
+    skuName: Premium
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-primary
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
+  name: example-primary
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-secondary
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/625"
+  name: example-secondary
+spec:
+  forProvider:
+    location: West US

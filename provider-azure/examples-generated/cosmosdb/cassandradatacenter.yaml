@@ -60,6 +60,22 @@ spec:
 
 ---
 
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/cassandradatacenter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    principalId: ${data.azuread_service_principal.example.object_id}
+    roleDefinitionName: Network Contributor
+    scope: ${azurerm_virtual_network.example.id}
+
+---
+
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:

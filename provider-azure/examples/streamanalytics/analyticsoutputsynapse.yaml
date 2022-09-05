@@ -3,7 +3,7 @@ kind: OutputSynapse
 metadata:
   name: example
   annotations:
-      upjet.upbound.io/manual-intervention: "Testing this requires creating reference resources that take long time to spin up"
+    upjet.upbound.io/manual-intervention: "Testing this requires creating reference resources that take long time to spin up"
 spec:
   forProvider:
     database: master

@@ -12,6 +12,7 @@ import (
 	management "github.com/upbound/official-providers/provider-azure/internal/controller/apimanagement/management"
 	policydefinition "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
+	roleassignment "github.com/upbound/official-providers/provider-azure/internal/controller/authorization/roleassignment"
 	resourcegroup "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/official-providers/provider-azure/internal/controller/azure/resourceproviderregistration"
 	subscription "github.com/upbound/official-providers/provider-azure/internal/controller/azure/subscription"
@@ -277,6 +278,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		management.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
+		roleassignment.Setup,
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
 		subscription.Setup,

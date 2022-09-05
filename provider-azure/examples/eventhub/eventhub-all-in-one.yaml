@@ -1,0 +1,91 @@
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: AuthorizationRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    listen: true
+    manage: false
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-eventhub
+    send: false
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: ConsumerGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-eventhub
+    userMetadata: some-meta-data
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHub
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionCount: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-eventhub
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-eventhub-ns-upbound
+spec:
+  forProvider:
+    capacity: 2
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-eventhub
+    sku: Standard
+    tags:
+      environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-eventhub
+  name: example-eventhub-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

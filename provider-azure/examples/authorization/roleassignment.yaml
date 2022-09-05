@@ -1,0 +1,11 @@
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "scope is generic and context specific"
+  name: example
+spec:
+  forProvider:
+    principalId: ${data.azurerm_client_config.example.object_id}
+    roleDefinitionName: Reader
+    scope: ${data.azurerm_subscription.primary.id}

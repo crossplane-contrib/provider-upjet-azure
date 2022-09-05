@@ -1,48 +1,160 @@
 apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLOutboundFirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqloutboundfirewallrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+
+---
+
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServerDNSAlias
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Creation fails, see https://github.com/upbound/official-providers/issues/364"
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    mssqlServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLFailoverGroup
 metadata:
-  name: example-sql-failover
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     databasesRefs:
-    - name: example
+    - name: example-failover
     partnerServer:
-    - idRef:
-        name: example-upbound-partner
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: secondary
     readWriteEndpointFailoverPolicy:
     - graceMinutes: 80
       mode: Automatic
-    serverIdRef:
-      name: example-upbound
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
     tags:
       database: example
       environment: prod
+
 ---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example-failover
+  name: example-failover
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    maxSizeGb: 200
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    skuName: S1
+
+---
+
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServer
 metadata:
-  name: example-upbound-partner
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: primary
+  name: ${Rand.RFC1123Subdomain}-primary
 spec:
   forProvider:
     administratorLogin: missadministrator
     administratorLoginPasswordSecretRef:
-      key: password
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-failover-primary
+    version: "12.0"
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: ${Rand.RFC1123Subdomain}-secondary
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
       name: example-secret
       namespace: upbound-system
     location: North Europe
-    minimumTlsVersion: "1.2"
-    resourceGroupNameRef:
-      name: example-sql-rg-failover
-    tags:
-      environment: production
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-failover-secondary
     version: "12.0"
+
 ---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
-  name: example-sql-rg-failover
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example-sql-failover-secondary
+  name: example-sql-failover-secondary-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: North Europe
-    tags:
-      provisioner: crossplane
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example-sql-failover-primary
+  name: example-sql-failover-primary-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: North Europe
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

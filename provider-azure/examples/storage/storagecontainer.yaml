@@ -1,9 +1,0 @@
-apiVersion: storage.azure.upbound.io/v1beta1
-kind: Container
-metadata:
-  name: example-content
-spec:
-  forProvider:
-    containerAccessType: private
-    storageAccountNameRef:
-      name: example-storage-account

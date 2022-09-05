@@ -1,0 +1,94 @@
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisFirewallRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/629"
+  name: example
+spec:
+  forProvider:
+    endIp: 2.3.4.5
+    redisCacheNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startIp: 1.2.3.4
+
+---
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/629"
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    redisVersion: "6"
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: West Europe
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Premium
+
+---
+
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisEnterpriseDatabase
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: default
+spec:
+  forProvider:
+    clientProtocol: Encrypted
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    clusteringPolicy: EnterpriseCluster
+    evictionPolicy: NoEviction
+    port: 10000
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisEnterpriseCluster
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-redis-ent-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Enterprise_E10-2
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-redis-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

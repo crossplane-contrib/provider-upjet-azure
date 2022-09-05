@@ -1,0 +1,26 @@
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-operationalinsights
+    retentionInDays: 30
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-operationalinsights
+  name: example-operationalinsights-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

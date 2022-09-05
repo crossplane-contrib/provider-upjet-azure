@@ -71,6 +71,22 @@ spec:
 
 ---
 
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta1/datasetdatalakegen2
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    principalId: ${data.azuread_service_principal.example.object_id}
+    roleDefinitionName: Storage Blob Data Reader
+    scope: ${azurerm_storage_account.example.id}
+
+---
+
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:

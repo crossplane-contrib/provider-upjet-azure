@@ -1,0 +1,198 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: ActiveDirectoryAdministrator
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+spec:
+  forProvider:
+    objectId: ${data.azurerm_client_config.current.object_id}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FirewallRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 40.112.8.12
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startIpAddress: 40.112.8.12
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: Configuration
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+spec:
+  forProvider:
+    name: backslash_quote
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    value: "on"
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+spec:
+  forProvider:
+    charset: UTF8
+    collation: English_United States.1252
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: VirtualNetworkRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
+  name: example
+spec:
+  forProvider:
+    ignoreMissingVnetServiceEndpoint: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: internal
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: Server
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/638"
+  name: example-upbound-pg-single-server
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 5120
+    geoRedundantBackupEnabled: false
+    version: "11"
+    identity:
+    - type: SystemAssigned
+  writeConnectionSecretToRef:
+    name: example-connection-postgresqlserver
+    namespace: upbound-system
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-dbforpostgresql
+  name: example-dbforpostgresql-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: internal
+  name: internal
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.7.29.0/29
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serviceEndpoints:
+    - Microsoft.Sql
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.7.29.0/29
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

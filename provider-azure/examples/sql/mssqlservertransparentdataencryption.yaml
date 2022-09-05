@@ -1,12 +1,53 @@
 apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServerTransparentDataEncryption
 metadata:
-  name: transparent-encryption-example
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlservertransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    serverIdRef:
-      name: mssql-server-example
-    keyVaultKeyIdRef:
-      name: transparent-encryption 
-  providerConfigRef:
-    name: example
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlservertransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example
+  name: ${Rand.RFC1123Subdomain}-trans-enc
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: EastUs
+    minimumTlsVersion: "1.2"
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-sql-trans-enc
+    tags:
+      environment: production
+    version: "12.0"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlservertransparentdataencryption
+  labels:
+    testing.upbound.io/example-name: example-sql-trans-enc
+  name: example-sql-trans-enc-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: EastUs
