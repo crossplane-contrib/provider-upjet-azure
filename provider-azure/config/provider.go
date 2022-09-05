@@ -26,6 +26,7 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/apimanagement"
 	"github.com/upbound/official-providers/provider-azure/config/authorization"
 	"github.com/upbound/official-providers/provider-azure/config/base"
+	"github.com/upbound/official-providers/provider-azure/config/cache"
 	"github.com/upbound/official-providers/provider-azure/config/common"
 	"github.com/upbound/official-providers/provider-azure/config/compute"
 	"github.com/upbound/official-providers/provider-azure/config/containerregistry"
@@ -48,7 +49,6 @@ import (
 	"github.com/upbound/official-providers/provider-azure/config/notificationhubs"
 	"github.com/upbound/official-providers/provider-azure/config/operationalinsights"
 	"github.com/upbound/official-providers/provider-azure/config/postgresql"
-	"github.com/upbound/official-providers/provider-azure/config/redis"
 	"github.com/upbound/official-providers/provider-azure/config/resource"
 	"github.com/upbound/official-providers/provider-azure/config/security"
 	"github.com/upbound/official-providers/provider-azure/config/sql"
@@ -145,7 +145,7 @@ func GetProvider() *tjconfig.Provider {
 		network.Configure,
 		management.Configure,
 		media.Configure,
-		redis.Configure,
+		cache.Configure,
 		resource.Configure,
 		containerservice.Configure,
 		postgresql.Configure,

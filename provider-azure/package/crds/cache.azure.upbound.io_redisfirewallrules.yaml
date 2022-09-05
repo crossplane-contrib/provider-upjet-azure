@@ -72,7 +72,7 @@ spec:
                       a new resource to be created.
                     type: string
                   redisCacheNameRef:
-                    description: Reference to a RedisCache to populate redisCacheName.
+                    description: Reference to a RedisCache in cache to populate redisCacheName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -106,7 +106,7 @@ spec:
                     - name
                     type: object
                   redisCacheNameSelector:
-                    description: Selector for a RedisCache to populate redisCacheName.
+                    description: Selector for a RedisCache in cache to populate redisCacheName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

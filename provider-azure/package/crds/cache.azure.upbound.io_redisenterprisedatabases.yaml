@@ -77,8 +77,8 @@ spec:
                       a new Redis Enterprise Database to be created.
                     type: string
                   clusterIdRef:
-                    description: Reference to a RedisEnterpriseCluster to populate
-                      clusterId.
+                    description: Reference to a RedisEnterpriseCluster in cache to
+                      populate clusterId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,8 +112,8 @@ spec:
                     - name
                     type: object
                   clusterIdSelector:
-                    description: Selector for a RedisEnterpriseCluster to populate
-                      clusterId.
+                    description: Selector for a RedisEnterpriseCluster in cache to
+                      populate clusterId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
