@@ -2475,8 +2475,27 @@ func (mg *PrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateDNSZoneGroup); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PrivateDNSZoneGroup[i3].PrivateDNSZoneIds),
+			Extract:       rconfig.ExtractResourceID(),
+			References:    mg.Spec.ForProvider.PrivateDNSZoneGroup[i3].PrivateDNSZoneIdsRefs,
+			Selector:      mg.Spec.ForProvider.PrivateDNSZoneGroup[i3].PrivateDNSZoneIdsSelector,
+			To: reference.To{
+				List:    &PrivateDNSZoneList{},
+				Managed: &PrivateDNSZone{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PrivateDNSZoneGroup[i3].PrivateDNSZoneIds")
+		}
+		mg.Spec.ForProvider.PrivateDNSZoneGroup[i3].PrivateDNSZoneIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.PrivateDNSZoneGroup[i3].PrivateDNSZoneIdsRefs = mrsp.ResolvedReferences
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),

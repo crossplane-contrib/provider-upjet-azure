@@ -47,8 +47,18 @@ type PrivateDNSZoneGroupParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the list of Private DNS Zones to include within the private_dns_zone_group.
-	// +kubebuilder:validation:Required
-	PrivateDNSZoneIds []*string `json:"privateDnsZoneIds" tf:"private_dns_zone_ids,omitempty"`
+	// +crossplane:generate:reference:type=PrivateDNSZone
+	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	PrivateDNSZoneIds []*string `json:"privateDnsZoneIds,omitempty" tf:"private_dns_zone_ids,omitempty"`
+
+	// References to PrivateDNSZone to populate privateDnsZoneIds.
+	// +kubebuilder:validation:Optional
+	PrivateDNSZoneIdsRefs []v1.Reference `json:"privateDnsZoneIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of PrivateDNSZone to populate privateDnsZoneIds.
+	// +kubebuilder:validation:Optional
+	PrivateDNSZoneIdsSelector *v1.Selector `json:"privateDnsZoneIdsSelector,omitempty" tf:"-"`
 }
 
 type PrivateEndpointNetworkInterfaceObservation struct {

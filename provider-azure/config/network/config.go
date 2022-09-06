@@ -374,6 +374,10 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_private_endpoint", func(r *config.Resource) {
+		r.References["private_dns_zone_group.private_dns_zone_ids"] = config.Reference{
+			Type:      "PrivateDNSZone",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
 		delete(r.References, "private_service_connection.private_connection_resource_id")
 	})
 
