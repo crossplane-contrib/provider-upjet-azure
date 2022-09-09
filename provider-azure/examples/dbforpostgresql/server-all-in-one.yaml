@@ -106,13 +106,55 @@ spec:
 
 ---
 
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is on the dependency tree of the VirtualNetworkRule.dbforpostgresql resource, which is skipped."
+  labels:
+    testing.upbound.io/example-name: internal
+  name: internal
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.7.29.0/29
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+    serviceEndpoints:
+      - Microsoft.Sql
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is on the dependency tree of the VirtualNetworkRule.dbforpostgresql resource, which is skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+      - 10.7.29.0/29
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbforpostgresql
+
+---
+
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: Server
 metadata:
+  annotations:
+    crossplane.io/external-name: example-server-${Rand.RFC1123Subdomain}
   labels:
     testing.upbound.io/example-name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/638"
   name: example-upbound-pg-single-server
 spec:
   forProvider:
@@ -132,6 +174,8 @@ spec:
     version: "11"
     identity:
     - type: SystemAssigned
+    # due to: https://github.com/Azure/azure-rest-api-specs/issues/9571
+    infrastructureEncryptionEnabled: false
   writeConnectionSecretToRef:
     name: example-connection-postgresqlserver
     namespace: upbound-system
@@ -150,47 +194,9 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
-kind: Subnet
-metadata:
-  labels:
-    testing.upbound.io/example-name: internal
-  name: internal
-spec:
-  forProvider:
-    addressPrefixes:
-    - 10.7.29.0/29
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example-dbforpostgresql
-    serviceEndpoints:
-    - Microsoft.Sql
-    virtualNetworkNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
-kind: VirtualNetwork
-metadata:
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    addressSpace:
-    - 10.7.29.0/29
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example-dbforpostgresql
-
----
-
 apiVersion: v1
 data:
-  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3
 kind: Secret
 metadata:
   name: example-secret
