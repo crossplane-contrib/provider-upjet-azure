@@ -3,8 +3,6 @@ kind: ActiveDirectoryAdministrator
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -25,8 +23,6 @@ kind: FirewallRule
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -46,8 +42,6 @@ kind: Configuration
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -67,8 +61,6 @@ kind: Database
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -88,8 +80,6 @@ kind: VirtualNetworkRule
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "The resource depends on a Server and it needs a manual intervention."
   name: example
 spec:
   forProvider:
@@ -109,8 +99,6 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
-  annotations:
-    upjet.upbound.io/manual-intervention: "This resource is on the dependency tree of the VirtualNetworkRule.dbforpostgresql resource, which is skipped."
   labels:
     testing.upbound.io/example-name: internal
   name: internal
@@ -132,8 +120,6 @@ spec:
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
-  annotations:
-    upjet.upbound.io/manual-intervention: "This resource is on the dependency tree of the VirtualNetworkRule.dbforpostgresql resource, which is skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
