@@ -18,13 +18,13 @@ type WorkspaceObservation struct {
 	// The Log Analytics Workspace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Workspace  ID for the Log Analytics Workspace.
+	// The Workspace (or Customer) ID for the Log Analytics Workspace.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceParameters struct {
 
-	// The workspace daily quota for ingestion in GB.  Defaults to -1  if omitted.
+	// The workspace daily quota for ingestion in GB.  Defaults to -1 (unlimited) if omitted.
 	// +kubebuilder:validation:Optional
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
 
@@ -56,11 +56,11 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The workspace data retention in days. Possible values are either 7  or range between 30 and 730.
+	// The workspace data retention in days. Possible values are either 7 (Free Tier only) or range between 30 and 730.
 	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
-	// Specifies the SKU of the Log Analytics Workspace. Possible values are Free, PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, and PerGB2018 . Defaults to PerGB2018.
+	// Specifies the SKU of the Log Analytics Workspace. Possible values are Free, PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, and PerGB2018 (new SKU as of 2018-04-03). Defaults to PerGB2018.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 

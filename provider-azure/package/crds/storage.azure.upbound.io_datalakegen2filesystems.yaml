@@ -91,13 +91,13 @@ spec:
                     type: array
                   group:
                     description: Specifies the Object ID of the Azure Active Directory
-                      Group to make the owning group of the root path . Possible values
-                      also include $superuser.
+                      Group to make the owning group of the root path (i.e. /). Possible
+                      values also include $superuser.
                     type: string
                   owner:
                     description: Specifies the Object ID of the Azure Active Directory
-                      User to make the owning user of the root path . Possible values
-                      also include $superuser.
+                      User to make the owning user of the root path (i.e. /). Possible
+                      values also include $superuser.
                     type: string
                   properties:
                     additionalProperties:

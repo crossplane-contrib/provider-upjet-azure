@@ -59,6 +59,7 @@ type ExpressRoutePortParameters struct {
 	// +kubebuilder:validation:Required
 	Encapsulation *string `json:"encapsulation" tf:"encapsulation,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []ExpressRoutePortIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -103,7 +104,7 @@ type Link1Observation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The interface name of the Azure router associated with the Express Route Port Link.
+	// The name which should be used for this Express Route Port. Changing this forces a new Express Route Port to be created.
 	InterfaceName *string `json:"interfaceName,omitempty" tf:"interface_name,omitempty"`
 
 	// The ID that maps from the Express Route Port Link to the patch panel port.
@@ -112,7 +113,7 @@ type Link1Observation struct {
 	// The ID that maps from the patch panel port to the rack.
 	RackID *string `json:"rackId,omitempty" tf:"rack_id,omitempty"`
 
-	// The name of the Azure router associated with the Express Route Port Link.
+	// The name which should be used for this Express Route Port. Changing this forces a new Express Route Port to be created.
 	RouterName *string `json:"routerName,omitempty" tf:"router_name,omitempty"`
 }
 
@@ -142,7 +143,7 @@ type Link2Observation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The interface name of the Azure router associated with the Express Route Port Link.
+	// The name which should be used for this Express Route Port. Changing this forces a new Express Route Port to be created.
 	InterfaceName *string `json:"interfaceName,omitempty" tf:"interface_name,omitempty"`
 
 	// The ID that maps from the Express Route Port Link to the patch panel port.
@@ -151,7 +152,7 @@ type Link2Observation struct {
 	// The ID that maps from the patch panel port to the rack.
 	RackID *string `json:"rackId,omitempty" tf:"rack_id,omitempty"`
 
-	// The name of the Azure router associated with the Express Route Port Link.
+	// The name which should be used for this Express Route Port. Changing this forces a new Express Route Port to be created.
 	RouterName *string `json:"routerName,omitempty" tf:"router_name,omitempty"`
 }
 

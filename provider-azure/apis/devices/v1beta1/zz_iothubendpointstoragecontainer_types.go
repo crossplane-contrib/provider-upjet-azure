@@ -76,7 +76,7 @@ type IOTHubEndpointStorageContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
-	// Maximum number of bytes for each blob written to storage. Value should be between 10485760 and 524288000. Default value is 314572800.
+	// Maximum number of bytes for each blob written to storage. Value should be between 10485760(10MB) and 524288000(500MB). Default value is 314572800(300MB).
 	// +kubebuilder:validation:Optional
 	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
 

@@ -28,7 +28,7 @@ type ResourceGroupTemplateDeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	DebugLevel *string `json:"debugLevel,omitempty" tf:"debug_level,omitempty"`
 
-	// The Deployment Mode for this Resource Group Template Deployment. Possible values are Complete  and Incremental .
+	// The Deployment Mode for this Resource Group Template Deployment. Possible values are Complete (where resources in the Resource Group not specified in the ARM Template will be destroyed) and Incremental (where resources are additive only).
 	// +kubebuilder:validation:Required
 	DeploymentMode *string `json:"deploymentMode" tf:"deployment_mode,omitempty"`
 

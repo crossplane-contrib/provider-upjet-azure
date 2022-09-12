@@ -24,6 +24,7 @@ type IdentityObservation struct {
 
 type IdentityParameters struct {
 
+	// Specifies the type of Managed Service Identity that should be configured on this Stream Analytics Job. The only possible value is SystemAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -33,6 +34,7 @@ type JobObservation struct {
 	// The ID of the Stream Analytics Job.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -50,11 +52,11 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1  to 1814399 .  Default is 0.
+	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s).  Default is 0.
 	// +kubebuilder:validation:Optional
 	EventsLateArrivalMaxDelayInSeconds *float64 `json:"eventsLateArrivalMaxDelayInSeconds,omitempty" tf:"events_late_arrival_max_delay_in_seconds,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 . Default is 5.
+	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 5.
 	// +kubebuilder:validation:Optional
 	EventsOutOfOrderMaxDelayInSeconds *float64 `json:"eventsOutOfOrderMaxDelayInSeconds,omitempty" tf:"events_out_of_order_max_delay_in_seconds,omitempty"`
 
@@ -62,6 +64,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	EventsOutOfOrderPolicy *string `json:"eventsOutOfOrderPolicy,omitempty" tf:"events_out_of_order_policy,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -69,7 +72,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// Specifies the policy which should be applied to events which arrive at the output and cannot be written to the external storage due to being malformed . Possible values are Drop and Stop.  Default is Drop.
+	// Specifies the policy which should be applied to events which arrive at the output and cannot be written to the external storage due to being malformed (such as missing column values, column values of wrong type or size). Possible values are Drop and Stop.  Default is Drop.
 	// +kubebuilder:validation:Optional
 	OutputErrorPolicy *string `json:"outputErrorPolicy,omitempty" tf:"output_error_policy,omitempty"`
 
@@ -98,10 +101,11 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the query that will be run in the streaming job, written in Stream Analytics Query Language .
+	// Specifies the query that will be run in the streaming job, written in Stream Analytics Query Language (SAQL).
 	// +kubebuilder:validation:Required
 	TransformationQuery *string `json:"transformationQuery" tf:"transformation_query,omitempty"`
 
+	// The type of the Stream Analytics Job. Possible values are Cloud and Edge. Defaults to Cloud. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

@@ -84,9 +84,10 @@ spec:
                     type: object
                   workload:
                     description: The workload type of the Subscription.  Possible
-                      values are Production  and DevTest. Changing this forces a new
-                      Subscription to be created. The workload type for the Subscription.
-                      Possible values are `Production` (default) and `DevTest`.
+                      values are Production (default) and DevTest. Changing this forces
+                      a new Subscription to be created. The workload type for the
+                      Subscription. Possible values are `Production` (default) and
+                      `DevTest`.
                     type: string
                 required:
                 - subscriptionName

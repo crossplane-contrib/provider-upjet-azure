@@ -69,56 +69,65 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Should the automatic instance repair be enabled
+                            on this Orchestrated Virtual Machine Scale Set? Possible
+                            values are true and false. Defaults to false.
                           type: boolean
                         gracePeriod:
-                          description: ptional) Amount of time for which automatic
-                            repairs will be delayed. The grace period starts right
-                            after the VM is found unhealthy. Possible values are between
-                            30 and 90 minutes. Defaults to 30 minutes. The time duration
-                            should be specified in ISO 8601 format .
+                          description: Amount of time for which automatic repairs
+                            will be delayed. The grace period starts right after the
+                            VM is found unhealthy. Possible values are between 30
+                            and 90 minutes. Defaults to 30 minutes. The time duration
+                            should be specified in ISO 8601 format (e.g. PT30M to
+                            PT90M).
                           type: string
                       required:
                       - enabled
                       type: object
                     type: array
                   bootDiagnostics:
-                    description: ptional) A boot_diagnostics block as defined below.
+                    description: A boot_diagnostics block as defined below.
                     items:
                       properties:
                         storageAccountUri:
-                          description: ptional) The Primary/Secondary Endpoint for
-                            the Azure Storage Account which should be used to store
-                            Boot Diagnostics, including Console Output and Screenshots
-                            from the Hypervisor. By including a boot_diagnostics block
-                            without passing the storage_account_uri field will cause
-                            the API to utilize a Managed Storage Account to store
-                            the Boot Diagnostics output.
+                          description: The Primary/Secondary Endpoint for the Azure
+                            Storage Account which should be used to store Boot Diagnostics,
+                            including Console Output and Screenshots from the Hypervisor.
+                            By including a boot_diagnostics block without passing
+                            the storage_account_uri field will cause the API to utilize
+                            a Managed Storage Account to store the Boot Diagnostics
+                            output.
                           type: string
                       type: object
                     type: array
                   dataDisk:
-                    description: ptional) One or more data_disk blocks as defined
-                      below.
+                    description: One or more data_disk blocks as defined below.
                     items:
                       properties:
                         caching:
+                          description: The type of Caching which should be used for
+                            this Data Disk. Possible values are None, ReadOnly and ReadWrite.
                           type: string
                         createOption:
-                          description: ptional) The create option which should be
-                            used for this Data Disk. Possible values are Empty and FromImage.
-                            Defaults to Empty. .
+                          description: The create option which should be used for
+                            this Data Disk. Possible values are Empty and FromImage.
+                            Defaults to Empty. (FromImage should only be used if the
+                            source image includes data disks).
                           type: string
                         diskEncryptionSetId:
-                          description: ptional) The ID of the Disk Encryption Set
-                            which should be used to encrypt this OS Disk.
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this OS Disk.
                           type: string
                         diskSizeGb:
+                          description: The size of the Data Disk which should be created.
                           type: number
                         lun:
-                          description: equired) The Logical Unit Number of the Data
-                            Disk, which must be unique within the Virtual Machine.
+                          description: The Logical Unit Number of the Data Disk, which
+                            must be unique within the Virtual Machine.
                           type: number
                         storageAccountType:
+                          description: The Type of Storage Account which should back
+                            this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, Premium_LRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
                           type: number
@@ -136,17 +145,16 @@ spec:
                   encryptionAtHostEnabled:
                     type: boolean
                   evictionPolicy:
-                    description: ptional) The Policy which should be used Virtual
-                      Machines are Evicted from the Scale Set. Changing this forces
-                      a new resource to be created.
+                    description: The Policy which should be used Virtual Machines
+                      are Evicted from the Scale Set. Changing this forces a new resource
+                      to be created.
                     type: string
                   extension:
-                    description: ptional) One or more extension blocks as defined
-                      below
+                    description: One or more extension blocks as defined below
                     items:
                       properties:
                         autoUpgradeMinorVersionEnabled:
-                          description: ptional) Should the latest version of the Extension
+                          description: Should the latest version of the Extension
                             be used at Deployment Time, if one is available? This
                             won't auto-update the extension on existing installation.
                             Defaults to true.
@@ -158,15 +166,17 @@ spec:
                             type: string
                           type: array
                         forceExtensionExecutionOnChange:
-                          description: ptional) A value which, when different to the
-                            previous value can be used to force-run the Extension
-                            even if the Extension Configuration hasn't changed.
+                          description: A value which, when different to the previous
+                            value can be used to force-run the Extension even if the
+                            Extension Configuration hasn't changed.
                           type: string
                         name:
+                          description: The name for the Virtual Machine Scale Set
+                            Extension.
                           type: string
                         protectedSettingsSecretRef:
-                          description: ptional) A JSON String which specifies Sensitive
-                            Settings  for the Extension.
+                          description: A JSON String which specifies Sensitive Settings
+                            (such as Passwords) for the Extension.
                           properties:
                             key:
                               description: The key to select.
@@ -183,15 +193,16 @@ spec:
                           - namespace
                           type: object
                         publisher:
+                          description: Specifies the Publisher of the Extension.
                           type: string
                         settings:
                           type: string
                         type:
+                          description: Specifies the Type of the Extension.
                           type: string
                         typeHandlerVersion:
-                          description: equired) Specifies the version of the extension
-                            to use, available versions can be found using the Azure
-                            CLI.
+                          description: Specifies the version of the extension to use,
+                            available versions can be found using the Azure CLI.
                           type: string
                       required:
                       - name
@@ -203,21 +214,24 @@ spec:
                   extensionsTimeBudget:
                     description: Specifies the time alloted for all extensions to
                       start. The time duration should be between 15 minutes and 120
-                      minutes  and should be specified in ISO 8601 format. The default
-                      value is 90 minutes .
+                      minutes (inclusive) and should be specified in ISO 8601 format.
+                      The default value is 90 minutes (PT1H30M).
                     type: string
                   identity:
-                    description: ptional) A identity block as defined below.
+                    description: A identity block as defined below.
                     items:
                       properties:
                         identityIds:
-                          description: equired) Specifies a list of User Managed Identity
-                            IDs to be assigned to this Orchestrated Windows Virtual
-                            Machine Scale Set.
+                          description: Specifies a list of User Managed Identity IDs
+                            to be assigned to this Orchestrated Windows Virtual Machine
+                            Scale Set.
                           items:
                             type: string
                           type: array
                         type:
+                          description: The type of Managed Identity that should be
+                            configured on this Orchestrated Windows Virtual Machine
+                            Scale Set. Only possible value is UserAssigned.
                           type: string
                       required:
                       - identityIds
@@ -229,9 +243,9 @@ spec:
                       Virtual Machine Scale Set.
                     type: number
                   licenseType:
-                    description: ptional) Specifies the type of on-premise license  which
-                      should be used for this Orchestrated Virtual Machine Scale Set.
-                      Possible values are None, Windows_Client and Windows_Server.
+                    description: Specifies the type of on-premise license (also known
+                      as Azure Hybrid Use Benefit) which should be used for this Orchestrated
+                      Virtual Machine Scale Set. Possible values are None, Windows_Client and Windows_Server.
                       Changing this forces a new resource to be created.
                     type: string
                   location:
@@ -240,97 +254,101 @@ spec:
                       to be created.
                     type: string
                   maxBidPrice:
-                    description: ptional) The maximum price you're willing to pay
-                      for each Orchestrated Virtual Machine in this Scale Set, in
-                      US Dollars; which must be greater than the current spot price.
-                      If this bid price falls below the current spot price the Virtual
-                      Machines in the Scale Set will be evicted using the eviction_policy.
+                    description: The maximum price you're willing to pay for each
+                      Orchestrated Virtual Machine in this Scale Set, in US Dollars;
+                      which must be greater than the current spot price. If this bid
+                      price falls below the current spot price the Virtual Machines
+                      in the Scale Set will be evicted using the eviction_policy.
                       Defaults to -1, which means that each Virtual Machine in the
                       Orchestrated Scale Set should not be evicted for price reasons.
                     type: number
                   networkInterface:
-                    description: ptional) One or more network_interface blocks as
-                      defined below.
+                    description: One or more network_interface blocks as defined below.
                     items:
                       properties:
                         dnsServers:
-                          description: ptional) A list of IP Addresses of DNS Servers
-                            which should be assigned to the Network Interface.
+                          description: A list of IP Addresses of DNS Servers which
+                            should be assigned to the Network Interface.
                           items:
                             type: string
                           type: array
                         enableAcceleratedNetworking:
-                          description: ptional) Does this Network Interface support
-                            Accelerated Networking? Possible values are true and false.
-                            Defaults to false.
-                          type: boolean
-                        enableIpForwarding:
-                          description: ptional) Does this Network Interface support
-                            IP Forwarding? Possible values are true and false. Defaults
+                          description: Does this Network Interface support Accelerated
+                            Networking? Possible values are true and false. Defaults
                             to false.
                           type: boolean
+                        enableIpForwarding:
+                          description: Does this Network Interface support IP Forwarding?
+                            Possible values are true and false. Defaults to false.
+                          type: boolean
                         ipConfiguration:
-                          description: equired) One or more ip_configuration blocks
-                            as defined above.
+                          description: One or more ip_configuration blocks as defined
+                            above.
                           items:
                             properties:
                               applicationGatewayBackendAddressPoolIds:
-                                description: ptional) A list of Backend Address Pools
-                                  IDs from a Application Gateway which this Orchestrated
-                                  Virtual Machine Scale Set should be connected to.
+                                description: A list of Backend Address Pools IDs from
+                                  a Application Gateway which this Orchestrated Virtual
+                                  Machine Scale Set should be connected to.
                                 items:
                                   type: string
                                 type: array
                               applicationSecurityGroupIds:
-                                description: ptional) A list of Application Security
-                                  Group IDs which this Orchestrated Virtual Machine
-                                  Scale Set should be connected to.
+                                description: A list of Application Security Group
+                                  IDs which this Orchestrated Virtual Machine Scale
+                                  Set should be connected to.
                                 items:
                                   type: string
                                 type: array
                               loadBalancerBackendAddressPoolIds:
-                                description: ptional) A list of Backend Address Pools
-                                  IDs from a Load Balancer which this Orchestrated
-                                  Virtual Machine Scale Set should be connected to.
+                                description: A list of Backend Address Pools IDs from
+                                  a Load Balancer which this Orchestrated Virtual
+                                  Machine Scale Set should be connected to.
                                 items:
                                   type: string
                                 type: array
                               name:
+                                description: The Name which should be used for this
+                                  IP Configuration.
                                 type: string
                               primary:
+                                description: Is this the Primary IP Configuration
+                                  for this Network Interface? Possible values are
+                                  true and false. Defaults to false.
                                 type: boolean
                               publicIpAddress:
-                                description: ptional) A public_ip_address block as
-                                  defined below.
+                                description: A public_ip_address block as defined
+                                  below.
                                 items:
                                   properties:
                                     domainNameLabel:
-                                      description: ptional) The Prefix which should
-                                        be used for the Domain Name Label for each
-                                        Virtual Machine Instance. Azure concatenates
-                                        the Domain Name Label and Virtual Machine
-                                        Index to create a unique Domain Name Label
-                                        for each Virtual Machine. Valid values must
-                                        be between 1 and 26 characters long, start
-                                        with a lower case letter, end with a lower
-                                        case letter or number and contains only a-z,
-                                        0-9 and hyphens.
+                                      description: The Prefix which should be used
+                                        for the Domain Name Label for each Virtual
+                                        Machine Instance. Azure concatenates the Domain
+                                        Name Label and Virtual Machine Index to create
+                                        a unique Domain Name Label for each Virtual
+                                        Machine. Valid values must be between 1 and
+                                        26 characters long, start with a lower case
+                                        letter, end with a lower case letter or number
+                                        and contains only a-z, 0-9 and hyphens.
                                       type: string
                                     idleTimeoutInMinutes:
-                                      description: ptional) The Idle Timeout in Minutes
-                                        for the Public IP Address. Possible values
-                                        are in the range 4 to 32.
+                                      description: The Idle Timeout in Minutes for
+                                        the Public IP Address. Possible values are
+                                        in the range 4 to 32.
                                       type: number
                                     ipTag:
-                                      description: ptional) One or more ip_tag blocks
-                                        as defined above.
+                                      description: One or more ip_tag blocks as defined
+                                        above.
                                       items:
                                         properties:
                                           tag:
-                                            description: e IP Tag associated with
+                                            description: The IP Tag associated with
                                               the Public IP, such as SQL or Storage.
                                             type: string
                                           type:
+                                            description: The Type of IP Tag, such
+                                              as FirstPartyUsage.
                                             type: string
                                         required:
                                         - tag
@@ -338,20 +356,22 @@ spec:
                                         type: object
                                       type: array
                                     name:
+                                      description: The Name of the Public IP Address
+                                        Configuration.
                                       type: string
                                     publicIpPrefixId:
-                                      description: ptional) The ID of the Public IP
-                                        Address Prefix from where Public IP Addresses
-                                        should be allocated. Changing this forces
-                                        a new resource to be created.
+                                      description: The ID of the Public IP Address
+                                        Prefix from where Public IP Addresses should
+                                        be allocated. Changing this forces a new resource
+                                        to be created.
                                       type: string
                                   required:
                                   - name
                                   type: object
                                 type: array
                               subnetId:
-                                description: ptional) The ID of the Subnet which this
-                                  IP Configuration should be connected to.
+                                description: The ID of the Subnet which this IP Configuration
+                                  should be connected to.
                                 type: string
                               subnetIdRef:
                                 description: Reference to a Subnet in network to populate
@@ -434,18 +454,25 @@ spec:
                                     type: object
                                 type: object
                               version:
+                                description: The Internet Protocol Version which should
+                                  be used for this IP Configuration. Possible values
+                                  are IPv4 and IPv6. Defaults to IPv4.
                                 type: string
                             required:
                             - name
                             type: object
                           type: array
                         name:
+                          description: The Name which should be used for this Network
+                            Interface. Changing this forces a new resource to be created.
                           type: string
                         networkSecurityGroupId:
-                          description: ptional) The ID of a Network Security Group
-                            which should be assigned to this Network Interface.
+                          description: The ID of a Network Security Group which should
+                            be assigned to this Network Interface.
                           type: string
                         primary:
+                          description: Is this the Primary IP Configuration? Possible
+                            values are true and false. Defaults to false.
                           type: boolean
                       required:
                       - ipConfiguration
@@ -453,14 +480,15 @@ spec:
                       type: object
                     type: array
                   osDisk:
-                    description: ptional) An os_disk block as defined below.
+                    description: An os_disk block as defined below.
                     items:
                       properties:
                         caching:
+                          description: The Type of Caching which should be used for
+                            the Internal OS Disk. Possible values are None, ReadOnly and ReadWrite.
                           type: string
                         diffDiskSettings:
-                          description: ptional) A diff_disk_settings block as defined
-                            above.
+                          description: A diff_disk_settings block as defined above.
                           items:
                             properties:
                               option:
@@ -474,12 +502,17 @@ spec:
                             type: object
                           type: array
                         diskEncryptionSetId:
-                          description: ptional) The ID of the Disk Encryption Set
-                            which should be used to encrypt this OS Disk.
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this OS Disk.
                           type: string
                         diskSizeGb:
+                          description: The Size of the Internal OS Disk in GB, if
+                            you wish to vary from the size used in the image this
+                            Virtual Machine Scale Set is sourced from.
                           type: number
                         storageAccountType:
+                          description: The Type of Storage Account which should back
+                            this the Internal OS Disk. Possible values include Standard_LRS, StandardSSD_LRS and Premium_LRS.
                           type: string
                         writeAcceleratorEnabled:
                           type: boolean
@@ -489,13 +522,12 @@ spec:
                       type: object
                     type: array
                   osProfile:
-                    description: ptional) An os_profile block as defined below.
+                    description: An os_profile block as defined below.
                     items:
                       properties:
                         customDataSecretRef:
-                          description: ptional) The Base64-Encoded Custom Data which
-                            should be used for this Orchestrated Virtual Machine Scale
-                            Set.
+                          description: The Base64-Encoded Custom Data which should
+                            be used for this Orchestrated Virtual Machine Scale Set.
                           properties:
                             key:
                               description: The key to select.
@@ -512,13 +544,13 @@ spec:
                           - namespace
                           type: object
                         linuxConfiguration:
-                          description: ptional) A linux_configuration block as documented
-                            below.
+                          description: A linux_configuration block as documented below.
                           items:
                             properties:
                               adminPasswordSecretRef:
-                                description: A SecretKeySelector is a reference to
-                                  a secret key in an arbitrary namespace.
+                                description: The Password which should be used for
+                                  the local-administrator on this Virtual Machine.
+                                  Changing this forces a new resource to be created.
                                 properties:
                                   key:
                                     description: The key to select.
@@ -535,8 +567,7 @@ spec:
                                 - namespace
                                 type: object
                               adminSshKey:
-                                description: ptional) A admin_ssh_key block as documented
-                                  below.
+                                description: A admin_ssh_key block as documented below.
                                 items:
                                   properties:
                                     publicKey:
@@ -556,34 +587,55 @@ spec:
                                   type: object
                                 type: array
                               adminUsername:
+                                description: The username of the local administrator
+                                  on each Orchestrated Virtual Machine Scale Set instance.
+                                  Changing this forces a new resource to be created.
                                 type: string
                               computerNamePrefix:
+                                description: The prefix which should be used for the
+                                  name of the Virtual Machines in this Scale Set.
+                                  If unspecified this defaults to the value for the name field.
+                                  If the value of the name field is not a valid computer_name_prefix,
+                                  then you must specify computer_name_prefix.
                                 type: string
                               disablePasswordAuthentication:
                                 description: When an admin_password is specified disable_password_authentication
                                   must be set to false. Defaults to true.
                                 type: boolean
                               patchMode:
+                                description: Specifies the mode of in-guest patching
+                                  of this Windows Virtual Machine. Possible values
+                                  are ImageDefault or AutomaticByPlatform. Defaults
+                                  to ImageDefault. For more information on patch modes
+                                  please see the product documentation.
                                 type: string
                               provisionVmAgent:
+                                description: Should the Azure VM Agent be provisioned
+                                  on each Virtual Machine in the Scale Set? Defaults
+                                  to true. Changing this value forces a new resource
+                                  to be created.
                                 type: boolean
                               secret:
+                                description: One or more secret blocks as defined
+                                  below.
                                 items:
                                   properties:
                                     certificate:
-                                      description: equired) One or more certificate blocks
+                                      description: One or more certificate blocks
                                         as defined below.
                                       items:
                                         properties:
                                           url:
+                                            description: The Secret URL of a Key Vault
+                                              Certificate.
                                             type: string
                                         required:
                                         - url
                                         type: object
                                       type: array
                                     keyVaultId:
-                                      description: equired) The ID of the Key Vault
-                                        from which all Secrets should be sourced.
+                                      description: The ID of the Key Vault from which
+                                        all Secrets should be sourced.
                                       type: string
                                   required:
                                   - certificate
@@ -595,13 +647,14 @@ spec:
                             type: object
                           type: array
                         windowsConfiguration:
-                          description: ptional) A windows_configuration block as documented
+                          description: A windows_configuration block as documented
                             below.
                           items:
                             properties:
                               adminPasswordSecretRef:
-                                description: A SecretKeySelector is a reference to
-                                  a secret key in an arbitrary namespace.
+                                description: The Password which should be used for
+                                  the local-administrator on this Virtual Machine.
+                                  Changing this forces a new resource to be created.
                                 properties:
                                   key:
                                     description: The key to select.
@@ -618,12 +671,20 @@ spec:
                                 - namespace
                                 type: object
                               adminUsername:
+                                description: The username of the local administrator
+                                  on each Orchestrated Virtual Machine Scale Set instance.
+                                  Changing this forces a new resource to be created.
                                 type: string
                               computerNamePrefix:
+                                description: The prefix which should be used for the
+                                  name of the Virtual Machines in this Scale Set.
+                                  If unspecified this defaults to the value for the name field.
+                                  If the value of the name field is not a valid computer_name_prefix,
+                                  then you must specify computer_name_prefix.
                                 type: string
                               enableAutomaticUpdates:
-                                description: ptional) Are automatic updates enabled
-                                  for this Virtual Machine? Defaults to true.
+                                description: Are automatic updates enabled for this
+                                  Virtual Machine? Defaults to true.
                                 type: boolean
                               hotpatchingEnabled:
                                 description: Should the VM be patched without requiring
@@ -632,20 +693,36 @@ spec:
                                   please see the product documentation.
                                 type: boolean
                               patchMode:
+                                description: Specifies the mode of in-guest patching
+                                  of this Windows Virtual Machine. Possible values
+                                  are Manual, AutomaticByOS and AutomaticByPlatform.
+                                  Defaults to AutomaticByOS. For more information
+                                  on patch modes please see the product documentation.
                                 type: string
                               provisionVmAgent:
+                                description: Should the Azure VM Agent be provisioned
+                                  on each Virtual Machine in the Scale Set? Defaults
+                                  to true. Changing this value forces a new resource
+                                  to be created.
                                 type: boolean
                               secret:
+                                description: One or more secret blocks as defined
+                                  below.
                                 items:
                                   properties:
                                     certificate:
-                                      description: equired) One or more certificate blocks
+                                      description: One or more certificate blocks
                                         as defined below.
                                       items:
                                         properties:
                                           store:
+                                            description: The certificate store on
+                                              the Virtual Machine where the certificate
+                                              should be added.
                                             type: string
                                           url:
+                                            description: The Secret URL of a Key Vault
+                                              Certificate.
                                             type: string
                                         required:
                                         - store
@@ -653,8 +730,8 @@ spec:
                                         type: object
                                       type: array
                                     keyVaultId:
-                                      description: equired) The ID of the Key Vault
-                                        from which all Secrets should be sourced.
+                                      description: The ID of the Key Vault from which
+                                        all Secrets should be sourced.
                                       type: string
                                   required:
                                   - certificate
@@ -662,19 +739,18 @@ spec:
                                   type: object
                                 type: array
                               timezone:
-                                description: ptional) Specifies the time zone of the
-                                  virtual machine, the possible values are defined
-                                  here.
+                                description: Specifies the time zone of the virtual
+                                  machine, the possible values are defined here.
                                 type: string
                               winrmListener:
-                                description: ptional) One or more winrm_listener blocks
-                                  as defined below.
+                                description: One or more winrm_listener blocks as
+                                  defined below.
                                 items:
                                   properties:
                                     certificateUrl:
-                                      description: ptional) The Secret URL of a Key
-                                        Vault Certificate, which must be specified
-                                        when protocol is set to Https.
+                                      description: The Secret URL of a Key Vault Certificate,
+                                        which must be specified when protocol is set
+                                        to Https.
                                       type: string
                                     protocol:
                                       type: string
@@ -690,17 +766,21 @@ spec:
                       type: object
                     type: array
                   plan:
-                    description: ptional) A plan block as documented below.
+                    description: A plan block as documented below.
                     items:
                       properties:
                         name:
+                          description: Specifies the name of the image from the marketplace.
+                            Changing this forces a new resource to be created.
                           type: string
                         product:
-                          description: equired) Specifies the product of the image
-                            from the marketplace. Changing this forces a new resource
-                            to be created.
+                          description: Specifies the product of the image from the
+                            marketplace. Changing this forces a new resource to be
+                            created.
                           type: string
                         publisher:
+                          description: Specifies the publisher of the image. Changing
+                            this forces a new resource to be created.
                           type: string
                       required:
                       - name
@@ -714,9 +794,9 @@ spec:
                       forces a new resource to be created.
                     type: number
                   priority:
-                    description: ptional) The Priority of this Orchestrated Virtual
-                      Machine Scale Set. Possible values are Regular and Spot. Defaults
-                      to Regular. Changing this value forces a new resource.
+                    description: The Priority of this Orchestrated Virtual Machine
+                      Scale Set. Possible values are Regular and Spot. Defaults to Regular.
+                      Changing this value forces a new resource.
                     type: string
                   proximityPlacementGroupId:
                     description: The ID of the Proximity Placement Group which the
@@ -804,31 +884,35 @@ spec:
                         type: object
                     type: object
                   skuName:
-                    description: 'ptional) The name of the SKU to be used by this
-                      Orcestrated Virtual Machine Scale Set. Valid values include:
-                      any of the General purpose, Compute optimized, Memory optimized,
-                      Storage optimized, GPU optimized, FPGA optimized, High performance,
+                    description: 'The name of the SKU to be used by this Orcestrated
+                      Virtual Machine Scale Set. Valid values include: any of the
+                      General purpose, Compute optimized, Memory optimized, Storage
+                      optimized, GPU optimized, FPGA optimized, High performance,
                       or Previous generation virtual machine SKUs.'
                     type: string
                   sourceImageId:
-                    description: ptional) The ID of an Image which each Virtual Machine
-                      in this Scale Set should be based on.
+                    description: The ID of an Image which each Virtual Machine in
+                      this Scale Set should be based on.
                     type: string
                   sourceImageReference:
                     description: A source_image_reference block as defined below.
                     items:
                       properties:
                         offer:
-                          description: ptional) Specifies the offer of the image used
-                            to create the virtual machines.
+                          description: Specifies the offer of the image used to create
+                            the virtual machines.
                           type: string
                         publisher:
+                          description: Specifies the publisher of the image used to
+                            create the virtual machines.
                           type: string
                         sku:
-                          description: ptional) Specifies the SKU of the image used
-                            to create the virtual machines.
+                          description: Specifies the SKU of the image used to create
+                            the virtual machines.
                           type: string
                         version:
+                          description: Specifies the version of the image used to
+                            create the virtual machines.
                           type: string
                       required:
                       - offer
@@ -844,17 +928,19 @@ spec:
                       Orchestrated Virtual Machine Scale Set.
                     type: object
                   terminationNotification:
-                    description: ptional) A termination_notification block as defined
-                      below.
+                    description: A termination_notification block as defined below.
                     items:
                       properties:
                         enabled:
+                          description: Should the termination notification be enabled
+                            on this Virtual Machine Scale Set? Possible values true
+                            or false Defaults to false.
                           type: boolean
                         timeout:
-                          description: ptional) Length of time  a notification to
-                            be sent to the VM on the instance metadata server till
-                            the VM gets deleted. The time duration should be specified
-                            in ISO 8601 format. Defaults to PT5M.
+                          description: Length of time (in minutes, between 5 and 15)
+                            a notification to be sent to the VM on the instance metadata
+                            server till the VM gets deleted. The time duration should
+                            be specified in ISO 8601 format. Defaults to PT5M.
                           type: string
                       required:
                       - enabled

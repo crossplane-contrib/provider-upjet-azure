@@ -75,6 +75,7 @@ spec:
                           items:
                             properties:
                               name:
+                                description: Specifies the name of the IP Configuration.
                                 type: string
                               subnetId:
                                 description: Reference to the subnet associated with
@@ -163,6 +164,7 @@ spec:
                             type: object
                           type: array
                         name:
+                          description: Specifies the name of the IP Configuration.
                           type: string
                       required:
                       - ipConfiguration

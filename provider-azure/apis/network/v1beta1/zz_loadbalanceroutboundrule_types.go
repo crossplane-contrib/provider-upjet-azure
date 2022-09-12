@@ -21,6 +21,7 @@ type LoadBalancerOutboundRuleFrontendIPConfigurationObservation struct {
 
 type LoadBalancerOutboundRuleFrontendIPConfigurationParameters struct {
 
+	// The name of the Frontend IP Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }

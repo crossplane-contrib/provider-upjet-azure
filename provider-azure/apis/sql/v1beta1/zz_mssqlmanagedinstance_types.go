@@ -119,7 +119,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
-	// Maximum storage space for the SQL Managed instance. This should be a multiple of 32 .
+	// Maximum storage space for the SQL Managed instance. This should be a multiple of 32 (GB).
 	// +kubebuilder:validation:Required
 	StorageSizeInGb *float64 `json:"storageSizeInGb" tf:"storage_size_in_gb,omitempty"`
 

@@ -14,6 +14,8 @@ import (
 )
 
 type LoadBalancerNatPoolObservation struct {
+
+	// The ID of the Load Balancer NAT pool.
 	FrontendIPConfigurationID *string `json:"frontendIpConfigurationId,omitempty" tf:"frontend_ip_configuration_id,omitempty"`
 
 	// The ID of the Load Balancer NAT pool.

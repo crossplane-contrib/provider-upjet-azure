@@ -108,7 +108,7 @@ spec:
                                   AD DNS server is authoritative for.
                                 type: string
                               domainSid:
-                                description: Specifies the security identifier .
+                                description: Specifies the security identifier (SID).
                                 type: string
                               forestName:
                                 description: Specifies the Active Directory forest.
@@ -117,8 +117,8 @@ spec:
                                 description: Specifies the NetBIOS domain name.
                                 type: string
                               storageSid:
-                                description: Specifies the security identifier  for
-                                  Azure Storage.
+                                description: Specifies the security identifier (SID)
+                                  for Azure Storage.
                                 type: string
                             required:
                             - domainGuid
@@ -151,10 +151,14 @@ spec:
                           items:
                             properties:
                               days:
+                                description: Specifies the number of days that the
+                                  container should be retained, between 1 and 365
+                                  days. Defaults to 7.
                                 type: number
                             type: object
                           type: array
                         corsRule:
+                          description: A cors_rule block as defined below.
                           items:
                             properties:
                               allowedHeaders:
@@ -206,6 +210,9 @@ spec:
                           items:
                             properties:
                               days:
+                                description: Specifies the number of days that the
+                                  blob should be retained, between 1 and 365 days.
+                                  Defaults to 7.
                                 type: number
                             type: object
                           type: array
@@ -227,6 +234,8 @@ spec:
                     items:
                       properties:
                         name:
+                          description: The Custom Domain Name to use for the Storage
+                            Account, which will be validated by Azure.
                           type: string
                         useSubdomain:
                           description: Should the Custom Domain Name be validated
@@ -262,6 +271,7 @@ spec:
                       for more information. Defaults to true.
                     type: boolean
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
@@ -274,7 +284,7 @@ spec:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Storage Account. Possible
                             values are SystemAssigned, UserAssigned, SystemAssigned,
-                            UserAssigned .
+                            UserAssigned (to enable both).
                           type: string
                       required:
                       - type
@@ -286,8 +296,8 @@ spec:
                     type: boolean
                   isHnsEnabled:
                     description: Is Hierarchical Namespace enabled? This can be used
-                      with Azure Data Lake Storage Gen 2 . Changing this forces a
-                      new resource to be created.
+                      with Azure Data Lake Storage Gen 2 (see here for more information).
+                      Changing this forces a new resource to be created.
                     type: boolean
                   largeFileShareEnabled:
                     description: Is Large File Share Enabled?
@@ -318,8 +328,8 @@ spec:
                           type: string
                         ipRules:
                           description: List of public IP or IP ranges in CIDR Format.
-                            Only IPv4 addresses are allowed. Private IP address ranges  are
-                            not allowed.
+                            Only IPv4 addresses are allowed. Private IP address ranges
+                            (as defined in RFC 1918) are not allowed.
                           items:
                             type: string
                           type: array
@@ -364,6 +374,7 @@ spec:
                     items:
                       properties:
                         corsRule:
+                          description: A cors_rule block as defined above.
                           items:
                             properties:
                               allowedHeaders:
@@ -409,12 +420,21 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Indicates whether hour metrics are enabled
+                                  for the Queue service. Changing this forces a new
+                                  resource.
                                 type: boolean
                               includeApis:
+                                description: Indicates whether metrics should generate
+                                  summary statistics for called API operations.
                                 type: boolean
                               retentionPolicyDays:
+                                description: Specifies the number of days that logs
+                                  will be retained. Changing this forces a new resource.
                                 type: number
                               version:
+                                description: The version of storage analytics to configure.
+                                  Changing this forces a new resource.
                                 type: string
                             required:
                             - enabled
@@ -426,12 +446,20 @@ spec:
                           items:
                             properties:
                               delete:
+                                description: Indicates whether all delete requests
+                                  should be logged. Changing this forces a new resource.
                                 type: boolean
                               read:
+                                description: Indicates whether all read requests should
+                                  be logged. Changing this forces a new resource.
                                 type: boolean
                               retentionPolicyDays:
+                                description: Specifies the number of days that logs
+                                  will be retained. Changing this forces a new resource.
                                 type: number
                               version:
+                                description: The version of storage analytics to configure.
+                                  Changing this forces a new resource.
                                 type: string
                               write:
                                 description: Indicates whether all write requests
@@ -449,12 +477,21 @@ spec:
                           items:
                             properties:
                               enabled:
+                                description: Indicates whether minute metrics are
+                                  enabled for the Queue service. Changing this forces
+                                  a new resource.
                                 type: boolean
                               includeApis:
+                                description: Indicates whether metrics should generate
+                                  summary statistics for called API operations.
                                 type: boolean
                               retentionPolicyDays:
+                                description: Specifies the number of days that logs
+                                  will be retained. Changing this forces a new resource.
                                 type: number
                               version:
+                                description: The version of storage analytics to configure.
+                                  Changing this forces a new resource.
                                 type: string
                             required:
                             - enabled
@@ -567,6 +604,7 @@ spec:
                     items:
                       properties:
                         corsRule:
+                          description: A cors_rule block as defined below.
                           items:
                             properties:
                               allowedHeaders:
@@ -612,6 +650,9 @@ spec:
                           items:
                             properties:
                               days:
+                                description: Specifies the number of days that the
+                                  azurerm_storage_share should be retained, between
+                                  1 and 365 days. Defaults to 7.
                                 type: number
                             type: object
                           type: array
@@ -651,8 +692,8 @@ spec:
                     description: Indicates whether the storage account permits requests
                       to be authorized with the account access key via Shared Key.
                       If false, then all requests, including shared access signatures,
-                      must be authorized with Azure Active Directory . The default
-                      value is true.
+                      must be authorized with Azure Active Directory (Azure AD). The
+                      default value is true.
                     type: boolean
                   staticWebsite:
                     description: A static_website block as defined below.
@@ -865,6 +906,7 @@ spec:
                     description: The ID of the Storage Account.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:
@@ -901,7 +943,8 @@ spec:
                       in the primary location.
                     type: string
                   primaryLocation:
-                    description: The primary location of the storage account.
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   primaryQueueEndpoint:
                     description: The endpoint URL for queue storage in the primary
@@ -951,7 +994,8 @@ spec:
                       in the secondary location.
                     type: string
                   secondaryLocation:
-                    description: The secondary location of the storage account.
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   secondaryQueueEndpoint:
                     description: The endpoint URL for queue storage in the secondary

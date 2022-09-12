@@ -41,7 +41,7 @@ type PrivateDNSCNAMERecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The Time To Live  of the DNS record in seconds.
+	// The Time To Live (TTL) of the DNS record in seconds.
 	// +kubebuilder:validation:Required
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 

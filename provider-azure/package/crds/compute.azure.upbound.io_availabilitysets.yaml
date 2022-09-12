@@ -70,7 +70,8 @@ spec:
                     type: string
                   managed:
                     description: Specifies whether the availability set is managed
-                      or not. Possible values are true  or false . Default is true.
+                      or not. Possible values are true (to specify aligned) or false
+                      (to specify classic). Default is true.
                     type: boolean
                   platformFaultDomainCount:
                     description: Specifies the number of fault domains that are used.

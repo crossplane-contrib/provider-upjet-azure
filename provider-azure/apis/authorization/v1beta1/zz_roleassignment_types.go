@@ -44,7 +44,7 @@ type RoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the Principal  to assign the Role Definition to. Changing this forces a new resource to be created.
+	// The ID of the Principal (User, Group or Service Principal) to assign the Role Definition to. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
 

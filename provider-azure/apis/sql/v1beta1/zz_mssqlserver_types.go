@@ -18,7 +18,7 @@ type AzureadAdministratorObservation struct {
 
 type AzureadAdministratorParameters struct {
 
-	// Specifies whether only AD Users and administrators  can be used to login, or also local database users . When true, the administrator_login and administrator_login_password properties can be omitted.
+	// Specifies whether only AD Users and administrators (like azuread_administrator.0.login_username) can be used to login, or also local database users (like administrator_login). When true, the administrator_login and administrator_login_password properties can be omitted.
 	// +kubebuilder:validation:Optional
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
@@ -55,7 +55,7 @@ type MSSQLServerIdentityParameters struct {
 
 type MSSQLServerObservation struct {
 
-	// The fully qualified domain name of the Azure SQL Server
+	// The name of the Microsoft SQL Server. This needs to be globally unique within Azure.
 	FullyQualifiedDomainName *string `json:"fullyQualifiedDomainName,omitempty" tf:"fully_qualified_domain_name,omitempty"`
 
 	// the Microsoft SQL Server ID.
@@ -128,7 +128,7 @@ type MSSQLServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version for the new server. Valid values are: 2.0  and 12.0 .
+	// The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server).
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }

@@ -67,6 +67,7 @@ spec:
               forProvider:
                 properties:
                   customHttpsConfiguration:
+                    description: A custom_https_configuration block as defined above.
                     items:
                       properties:
                         azureKeyVaultCertificateSecretName:
@@ -356,6 +357,7 @@ spec:
               atProvider:
                 properties:
                   customHttpsConfiguration:
+                    description: A custom_https_configuration block as defined above.
                     items:
                       properties:
                         minimumTlsVersion:

@@ -25,7 +25,7 @@ type AvailabilitySetParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// Specifies whether the availability set is managed or not. Possible values are true  or false . Default is true.
+	// Specifies whether the availability set is managed or not. Possible values are true (to specify aligned) or false (to specify classic). Default is true.
 	// +kubebuilder:validation:Optional
 	Managed *bool `json:"managed,omitempty" tf:"managed,omitempty"`
 

@@ -54,10 +54,11 @@ type IPAllowParameters struct {
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// The friendly name for the IP address range.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The subnet mask prefix length .
+	// The subnet mask prefix length (see CIDR notation).
 	// +kubebuilder:validation:Optional
 	SubnetPrefixLength *float64 `json:"subnetPrefixLength,omitempty" tf:"subnet_prefix_length,omitempty"`
 }
@@ -78,7 +79,7 @@ type StreamingEndpointCrossSiteAccessPolicyParameters struct {
 
 type StreamingEndpointObservation struct {
 
-	// The host name of the Streaming Endpoint.
+	// The name which should be used for this Streaming Endpoint maximum length is 24. Changing this forces a new Streaming Endpoint to be created.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The ID of the Streaming Endpoint.

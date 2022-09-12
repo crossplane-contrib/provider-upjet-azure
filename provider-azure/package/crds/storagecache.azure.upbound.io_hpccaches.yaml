@@ -103,9 +103,10 @@ spec:
                                   to false.
                                 type: boolean
                               scope:
-                                description: 'The scope of this rule. The scope and  the
-                                  filter determine which clients match the rule. Possible
-                                  values are: default, network, host.'
+                                description: 'The scope of this rule. The scope and
+                                  (potentially) the filter determine which clients
+                                  match the rule. Possible values are: default, network,
+                                  host.'
                                 type: string
                               submountAccessEnabled:
                                 description: Whether allow access to subdirectories
@@ -184,11 +185,11 @@ spec:
                       properties:
                         groupFileUri:
                           description: The URI of the file containing group information
-                            .
+                            (/etc/group file format in Unix-like OS).
                           type: string
                         passwordFileUri:
                           description: The URI of the file containing user information
-                            .
+                            (/etc/passwd file format in Unix-like OS).
                           type: string
                       required:
                       - groupFileUri
@@ -200,14 +201,15 @@ spec:
                     items:
                       properties:
                         baseDn:
-                          description: The base distinguished name  for the LDAP domain.
+                          description: The base distinguished name (DN) for the LDAP
+                            domain.
                           type: string
                         bind:
                           description: A bind block as defined above.
                           items:
                             properties:
                               dn:
-                                description: The Bind Distinguished Name  identity
+                                description: The Bind Distinguished Name (DN) identity
                                   to be used in the secure LDAP connection.
                                 type: string
                               passwordSecretRef:
@@ -263,7 +265,7 @@ spec:
                           type: string
                         servers:
                           description: A list of DNS servers for the HPC Cache. At
-                            most three IP are allowed to set.
+                            most three IP(s) are allowed to set.
                           items:
                             type: string
                           type: array
@@ -365,10 +367,10 @@ spec:
                         type: object
                     type: object
                   skuName:
-                    description: The SKU of HPC Cache to use. Possible values are  -
-                      Standard_2G, Standard_4G Standard_8G or  - Standard_L4_5G, Standard_L9G,
-                      and Standard_L16G. Changing this forces a new resource to be
-                      created.
+                    description: The SKU of HPC Cache to use. Possible values are
+                      (ReadWrite) - Standard_2G, Standard_4G Standard_8G or (ReadOnly)
+                      - Standard_L4_5G, Standard_L9G, and Standard_L16G. Changing
+                      this forces a new resource to be created.
                     type: string
                   subnetId:
                     description: The ID of the Subnet for the HPC Cache. Changing

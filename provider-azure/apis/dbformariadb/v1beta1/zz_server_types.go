@@ -91,11 +91,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Required
 	SSLEnforcementEnabled *bool `json:"sslEnforcementEnabled" tf:"ssl_enforcement_enabled,omitempty"`
 
-	// Specifies the SKU Name for this MariaDB Server. The name of the SKU, follows the tier + family + cores pattern . For more information see the product documentation.
+	// Specifies the SKU Name for this MariaDB Server. The name of the SKU, follows the tier + family + cores pattern (e.g. B_Gen4_1, GP_Gen5_8). For more information see the product documentation.
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 
-	// Max storage allowed for a server. Possible values are between 5120 MB  and 1024000MB  for the Basic SKU and between 5120 MB  and 4096000 MB  for General Purpose/Memory Optimized SKUs. For more information see the product documentation.
+	// Max storage allowed for a server. Possible values are between 5120 MB (5GB) and 1024000MB (1TB) for the Basic SKU and between 5120 MB (5GB) and 4096000 MB (4TB) for General Purpose/Memory Optimized SKUs. For more information see the product documentation.
 	// +kubebuilder:validation:Optional
 	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
 

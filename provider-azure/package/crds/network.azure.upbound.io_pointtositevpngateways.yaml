@@ -74,6 +74,8 @@ spec:
                             to be created. Defaults to false.
                           type: boolean
                         name:
+                          description: The Name which should be used for this Connection
+                            Configuration.
                           type: string
                         route:
                           description: A route block as defined below.

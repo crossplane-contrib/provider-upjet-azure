@@ -18,6 +18,7 @@ type CommonEncryptionCbcsObservation struct {
 
 type CommonEncryptionCbcsParameters struct {
 
+	// A default_content_key block as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	DefaultContentKey []DefaultContentKeyParameters `json:"defaultContentKey,omitempty" tf:"default_content_key,omitempty"`
 
@@ -25,6 +26,7 @@ type CommonEncryptionCbcsParameters struct {
 	// +kubebuilder:validation:Optional
 	DrmFairplay []DrmFairplayParameters `json:"drmFairplay,omitempty" tf:"drm_fairplay,omitempty"`
 
+	// A enabled_protocols block as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	EnabledProtocols []EnabledProtocolsParameters `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
 }
@@ -48,15 +50,19 @@ type CommonEncryptionCencEnabledProtocolsObservation struct {
 
 type CommonEncryptionCencEnabledProtocolsParameters struct {
 
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
 
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
 
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
 
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
@@ -66,6 +72,7 @@ type CommonEncryptionCencObservation struct {
 
 type CommonEncryptionCencParameters struct {
 
+	// A default_content_key block as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	DefaultContentKey []CommonEncryptionCencDefaultContentKeyParameters `json:"defaultContentKey,omitempty" tf:"default_content_key,omitempty"`
 
@@ -77,6 +84,7 @@ type CommonEncryptionCencParameters struct {
 	// +kubebuilder:validation:Optional
 	DrmWidevineCustomLicenseAcquisitionURLTemplate *string `json:"drmWidevineCustomLicenseAcquisitionUrlTemplate,omitempty" tf:"drm_widevine_custom_license_acquisition_url_template,omitempty"`
 
+	// A enabled_protocols block as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	EnabledProtocols []CommonEncryptionCencEnabledProtocolsParameters `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
 }
@@ -104,6 +112,7 @@ type DrmFairplayParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowPersistentLicense *bool `json:"allowPersistentLicense,omitempty" tf:"allow_persistent_license,omitempty"`
 
+	// Template for the URL of the custom service delivering licenses to end user players. Not required when using Azure Media Services for issuing licenses. The template supports replaceable tokens that the service will update at runtime with the value specific to the request. The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	CustomLicenseAcquisitionURLTemplate *string `json:"customLicenseAcquisitionUrlTemplate,omitempty" tf:"custom_license_acquisition_url_template,omitempty"`
 }
@@ -117,6 +126,7 @@ type DrmPlayreadyParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomAttributes *string `json:"customAttributes,omitempty" tf:"custom_attributes,omitempty"`
 
+	// Template for the URL of the custom service delivering licenses to end user players. Not required when using Azure Media Services for issuing licenses. The template supports replaceable tokens that the service will update at runtime with the value specific to the request. The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	CustomLicenseAcquisitionURLTemplate *string `json:"customLicenseAcquisitionUrlTemplate,omitempty" tf:"custom_license_acquisition_url_template,omitempty"`
 }
@@ -126,15 +136,19 @@ type EnabledProtocolsObservation struct {
 
 type EnabledProtocolsParameters struct {
 
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
 
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
 
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
 
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
@@ -144,15 +158,19 @@ type NoEncryptionEnabledProtocolsObservation struct {
 
 type NoEncryptionEnabledProtocolsParameters struct {
 
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
 
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
 
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
 
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }

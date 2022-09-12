@@ -625,8 +625,9 @@ spec:
                       values include Premium, Standard, or Ultra.
                     type: string
                   snapshotDirectoryVisible:
-                    description: Specifies whether the .snapshot  or ~snapshot  path
-                      of a volume is visible, default value is true.
+                    description: Specifies whether the .snapshot (NFS clients) or
+                      ~snapshot (SMB clients) path of a volume is visible, default
+                      value is true.
                     type: boolean
                   storageQuotaInGb:
                     description: The maximum Storage Quota allowed for a file system

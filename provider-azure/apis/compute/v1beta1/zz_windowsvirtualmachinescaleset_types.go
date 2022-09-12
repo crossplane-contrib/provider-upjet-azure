@@ -22,6 +22,7 @@ type IPConfigurationPublicIPAddressIPTagParameters struct {
 	// +kubebuilder:validation:Required
 	Tag *string `json:"tag" tf:"tag,omitempty"`
 
+	// The Type of IP Tag, such as FirstPartyUsage.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -43,6 +44,7 @@ type NetworkInterfaceIPConfigurationPublicIPAddressParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
+	// The Name of the Public IP Address Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -80,10 +82,11 @@ type WindowsVirtualMachineScaleSetAutomaticInstanceRepairObservation struct {
 
 type WindowsVirtualMachineScaleSetAutomaticInstanceRepairParameters struct {
 
+	// Should the automatic instance repair be enabled on this Virtual Machine Scale Set?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Amount of time  for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format.
+	// Amount of time (in minutes, between 30 and 90, defaults to 30 minutes) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format.
 	// +kubebuilder:validation:Optional
 	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 }
@@ -117,16 +120,19 @@ type WindowsVirtualMachineScaleSetDataDiskObservation struct {
 
 type WindowsVirtualMachineScaleSetDataDiskParameters struct {
 
+	// The type of Caching which should be used for this Data Disk. Possible values are None, ReadOnly and ReadWrite.
 	// +kubebuilder:validation:Required
 	Caching *string `json:"caching" tf:"caching,omitempty"`
 
-	// The create option which should be used for this Data Disk. Possible values are Empty and FromImage. Defaults to Empty. .
+	// The create option which should be used for this Data Disk. Possible values are Empty and FromImage. Defaults to Empty. (FromImage should only be used if the source image includes data disks).
 	// +kubebuilder:validation:Optional
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
+	// The ID of the Disk Encryption Set which should be used to encrypt this Data Disk.
 	// +kubebuilder:validation:Optional
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
+	// The size of the Data Disk which should be created.
 	// +kubebuilder:validation:Required
 	DiskSizeGb *float64 `json:"diskSizeGb" tf:"disk_size_gb,omitempty"`
 
@@ -134,6 +140,7 @@ type WindowsVirtualMachineScaleSetDataDiskParameters struct {
 	// +kubebuilder:validation:Required
 	Lun *float64 `json:"lun" tf:"lun,omitempty"`
 
+	// The Type of Storage Account which should back this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, Premium_LRS and UltraSSD_LRS.
 	// +kubebuilder:validation:Required
 	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
@@ -143,6 +150,7 @@ type WindowsVirtualMachineScaleSetDataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
 
+	// Should Write Accelerator be enabled for this Data Disk? Defaults to false.
 	// +kubebuilder:validation:Optional
 	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
 }
@@ -164,10 +172,11 @@ type WindowsVirtualMachineScaleSetExtensionParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceUpdateTag *string `json:"forceUpdateTag,omitempty" tf:"force_update_tag,omitempty"`
 
+	// The name for the Virtual Machine Scale Set Extension.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// A JSON String which specifies Sensitive Settings  for the Extension.
+	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
 	// +kubebuilder:validation:Optional
 	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
 
@@ -175,6 +184,7 @@ type WindowsVirtualMachineScaleSetExtensionParameters struct {
 	// +kubebuilder:validation:Optional
 	ProvisionAfterExtensions []*string `json:"provisionAfterExtensions,omitempty" tf:"provision_after_extensions,omitempty"`
 
+	// Specifies the Publisher of the Extension.
 	// +kubebuilder:validation:Required
 	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
@@ -182,6 +192,7 @@ type WindowsVirtualMachineScaleSetExtensionParameters struct {
 	// +kubebuilder:validation:Optional
 	Settings *string `json:"settings,omitempty" tf:"settings,omitempty"`
 
+	// Specifies the Type of the Extension.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
@@ -205,6 +216,7 @@ type WindowsVirtualMachineScaleSetIdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// Specifies the type of Managed Service Identity that should be configured on this Windows Virtual Machine Scale Set. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -230,9 +242,11 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters stru
 	// +kubebuilder:validation:Optional
 	LoadBalancerInboundNATRulesIds []*string `json:"loadBalancerInboundNatRulesIds,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty"`
 
+	// The Name which should be used for this IP Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Is this the Primary IP Configuration for this Network Interface? Defaults to false.
 	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
 
@@ -254,6 +268,7 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters stru
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// The Internet Protocol Version which should be used for this IP Configuration. Possible values are IPv4 and IPv6. Defaults to IPv4.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -279,6 +294,7 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceParameters struct {
 	// +kubebuilder:validation:Required
 	IPConfiguration []WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
+	// The Name which should be used for this Network Interface. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -286,6 +302,7 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
 
+	// Is this the Primary IP Configuration?
 	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
 }
@@ -295,6 +312,7 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	// The ID of the Windows Virtual Machine Scale Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []WindowsVirtualMachineScaleSetIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -316,6 +334,7 @@ type WindowsVirtualMachineScaleSetOsDiskObservation struct {
 
 type WindowsVirtualMachineScaleSetOsDiskParameters struct {
 
+	// The Type of Caching which should be used for the Internal OS Disk. Possible values are None, ReadOnly and ReadWrite.
 	// +kubebuilder:validation:Required
 	Caching *string `json:"caching" tf:"caching,omitempty"`
 
@@ -323,9 +342,11 @@ type WindowsVirtualMachineScaleSetOsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	DiffDiskSettings []WindowsVirtualMachineScaleSetOsDiskDiffDiskSettingsParameters `json:"diffDiskSettings,omitempty" tf:"diff_disk_settings,omitempty"`
 
+	// The ID of the Disk Encryption Set which should be used to encrypt this OS Disk. Conflicts with secure_vm_disk_encryption_set_id.
 	// +kubebuilder:validation:Optional
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
+	// The Size of the Internal OS Disk in GB, if you wish to vary from the size used in the image this Virtual Machine Scale Set is sourced from.
 	// +kubebuilder:validation:Optional
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
 
@@ -337,9 +358,11 @@ type WindowsVirtualMachineScaleSetOsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityEncryptionType *string `json:"securityEncryptionType,omitempty" tf:"security_encryption_type,omitempty"`
 
+	// The Type of Storage Account which should back this the Internal OS Disk. Possible values include Standard_LRS, StandardSSD_LRS and Premium_LRS.
 	// +kubebuilder:validation:Required
 	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
+	// Should Write Accelerator be Enabled for this OS Disk? Defaults to false.
 	// +kubebuilder:validation:Optional
 	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
 }
@@ -398,7 +421,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableAutomaticUpdates *bool `json:"enableAutomaticUpdates,omitempty" tf:"enable_automatic_updates,omitempty"`
 
-	// Should all of the disks  attached to this Virtual Machine be encrypted by enabling Encryption at Host?
+	// Should all of the disks (including the temp disk) attached to this Virtual Machine be encrypted by enabling Encryption at Host?
 	// +kubebuilder:validation:Optional
 	EncryptionAtHostEnabled *bool `json:"encryptionAtHostEnabled,omitempty" tf:"encryption_at_host_enabled,omitempty"`
 
@@ -410,7 +433,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Extension []WindowsVirtualMachineScaleSetExtensionParameters `json:"extension,omitempty" tf:"extension,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes  and should be specified in ISO 8601 format. Defaults to 90 minutes .
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
@@ -418,6 +441,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthProbeID *string `json:"healthProbeId,omitempty" tf:"health_probe_id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []WindowsVirtualMachineScaleSetIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -425,7 +449,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Required
 	Instances *float64 `json:"instances" tf:"instances,omitempty"`
 
-	// Specifies the type of on-premise license  which should be used for this Virtual Machine Scale Set. Possible values are None, Windows_Client and Windows_Server.
+	// Specifies the type of on-premise license (also known as Azure Hybrid Use Benefit) which should be used for this Virtual Machine Scale Set. Possible values are None, Windows_Client and Windows_Server.
 	// +kubebuilder:validation:Optional
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
@@ -502,6 +526,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	SinglePlacementGroup *bool `json:"singlePlacementGroup,omitempty" tf:"single_placement_group,omitempty"`
 
+	// The Virtual Machine SKU for the Scale Set, such as Standard_F2.
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 
@@ -529,7 +554,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
-	// Specifies how Upgrades  should be performed to Virtual Machine Instances. Possible values are Automatic, Manual and Rolling. Defaults to Manual.
+	// Specifies how Upgrades (e.g. changing the Image/SKU) should be performed to Virtual Machine Instances. Possible values are Automatic, Manual and Rolling. Defaults to Manual.
 	// +kubebuilder:validation:Optional
 	UpgradeMode *string `json:"upgradeMode,omitempty" tf:"upgrade_mode,omitempty"`
 
@@ -537,7 +562,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Specifies if vTPM  and Trusted Launch is enabled for the Virtual Machine. Changing this forces a new resource to be created.
+	// Specifies if vTPM (Virtual Trusted Platform Module) and Trusted Launch is enabled for the Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	VtpmEnabled *bool `json:"vtpmEnabled,omitempty" tf:"vtpm_enabled,omitempty"`
 
@@ -559,6 +584,7 @@ type WindowsVirtualMachineScaleSetPlanObservation struct {
 
 type WindowsVirtualMachineScaleSetPlanParameters struct {
 
+	// Specifies the name of the image from the marketplace. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -566,6 +592,7 @@ type WindowsVirtualMachineScaleSetPlanParameters struct {
 	// +kubebuilder:validation:Required
 	Product *string `json:"product" tf:"product,omitempty"`
 
+	// Specifies the publisher of the image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 }
@@ -629,12 +656,15 @@ type WindowsVirtualMachineScaleSetSourceImageReferenceParameters struct {
 	// +kubebuilder:validation:Required
 	Offer *string `json:"offer" tf:"offer,omitempty"`
 
+	// Specifies the publisher of the image used to create the virtual machines.
 	// +kubebuilder:validation:Required
 	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
+	// The Virtual Machine SKU for the Scale Set, such as Standard_F2.
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 
+	// Specifies the version of the image used to create the virtual machines.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -644,9 +674,11 @@ type WindowsVirtualMachineScaleSetTerminateNotificationObservation struct {
 
 type WindowsVirtualMachineScaleSetTerminateNotificationParameters struct {
 
+	// Should the terminate notification be enabled on this Virtual Machine Scale Set? Defaults to false.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -656,9 +688,11 @@ type WindowsVirtualMachineScaleSetTerminationNotificationObservation struct {
 
 type WindowsVirtualMachineScaleSetTerminationNotificationParameters struct {
 
+	// Should the termination notification be enabled on this Virtual Machine Scale Set? Defaults to false.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }

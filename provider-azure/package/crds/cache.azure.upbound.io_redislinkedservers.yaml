@@ -225,12 +225,12 @@ spec:
                         type: object
                     type: object
                   serverRole:
-                    description: The role of the linked Redis cache . Changing this
-                      forces a new Redis to be created.
+                    description: The role of the linked Redis cache (eg "Secondary").
+                      Changing this forces a new Redis to be created.
                     type: string
                   targetRedisCacheName:
                     description: The name of Redis cache to link with. Changing this
-                      forces a new Redis to be created.
+                      forces a new Redis to be created. (eg The primary role)
                     type: string
                   targetRedisCacheNameRef:
                     description: Reference to a RedisCache to populate targetRedisCacheName.

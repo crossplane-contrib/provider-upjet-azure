@@ -153,8 +153,28 @@ spec:
                           items:
                             properties:
                               audioAnalysisMode:
+                                description: Possibles value are Basic or Standard.
+                                  Determines the set of audio analysis operations
+                                  to be performed.
                                 type: string
                               audioLanguage:
+                                description: 'The language for the audio payload in
+                                  the input using the BCP-47 format of ''language
+                                  tag-region'' (e.g: ''en-US''). If you know the language
+                                  of your content, it is recommended that you specify
+                                  it. The language must be specified explicitly for
+                                  AudioAnalysisMode:Basic, since automatic language
+                                  detection is not included in basic mode. If the
+                                  language isn''t specified, automatic language detection
+                                  will choose the first language detected and process
+                                  with the selected language for the duration of the
+                                  file. It does not currently support dynamically
+                                  switching between languages after the first language
+                                  is detected. The automatic detection works best
+                                  with audio recordings with clearly discernible speech.
+                                  If automatic detection fails to find the language,
+                                  transcription would fallback to ''en-US''." The
+                                  list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.'
                                 type: string
                             type: object
                           type: array
@@ -189,9 +209,9 @@ spec:
                                   be scaled to 640x360 before processing. Switching
                                   to StandardDefinition will reduce the time it takes
                                   to process high resolution video. It may also reduce
-                                  the cost of using this component . However, faces
-                                  that end up being too small in the resized video
-                                  may not be detected.
+                                  the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics
+                                  for details). However, faces that end up being too
+                                  small in the resized video may not be detected.
                                 type: string
                             type: object
                           type: array
@@ -215,8 +235,28 @@ spec:
                           items:
                             properties:
                               audioAnalysisMode:
+                                description: Possibles value are Basic or Standard.
+                                  Determines the set of audio analysis operations
+                                  to be performed.
                                 type: string
                               audioLanguage:
+                                description: 'The language for the audio payload in
+                                  the input using the BCP-47 format of ''language
+                                  tag-region'' (e.g: ''en-US''). If you know the language
+                                  of your content, it is recommended that you specify
+                                  it. The language must be specified explicitly for
+                                  AudioAnalysisMode:Basic, since automatic language
+                                  detection is not included in basic mode. If the
+                                  language isn''t specified, automatic language detection
+                                  will choose the first language detected and process
+                                  with the selected language for the duration of the
+                                  file. It does not currently support dynamically
+                                  switching between languages after the first language
+                                  is detected. The automatic detection works best
+                                  with audio recordings with clearly discernible speech.
+                                  If automatic detection fails to find the language,
+                                  transcription would fallback to ''en-US''." The
+                                  list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.'
                                 type: string
                               insightsType:
                                 description: Defines the type of insights that you

@@ -70,8 +70,9 @@ spec:
                       type: string
                     type: array
                   resourceGroupName:
-                    description: Specifies the resource group where the DNS Zone  exists.
-                      Changing this forces a new resource to be created.
+                    description: Specifies the resource group where the DNS Zone (parent
+                      resource) exists. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate

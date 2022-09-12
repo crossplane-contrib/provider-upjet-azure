@@ -78,7 +78,8 @@ spec:
                             to send push notifications for, such as com.hashicorp.example.
                           type: string
                         keyId:
-                          description: The Apple Push Notifications Service  Key.
+                          description: The Apple Push Notifications Service (APNS)
+                            Key.
                           type: string
                         teamId:
                           description: The ID of the team the Token.

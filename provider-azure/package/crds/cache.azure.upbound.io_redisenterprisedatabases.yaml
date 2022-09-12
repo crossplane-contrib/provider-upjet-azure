@@ -178,7 +178,8 @@ spec:
                     items:
                       properties:
                         args:
-                          description: Configuration options for the module .
+                          description: Configuration options for the module (e.g.
+                            ERROR_RATE 0.00 INITIAL_SIZE 400).
                           type: string
                         name:
                           type: string

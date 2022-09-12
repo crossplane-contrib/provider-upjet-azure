@@ -51,7 +51,7 @@ type HPCCacheNFSTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The IP address or fully qualified domain name  of the HPC Cache NFS target. Changing this forces a new resource to be created.
+	// The IP address or fully qualified domain name (FQDN) of the HPC Cache NFS target. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	TargetHostName *string `json:"targetHostName" tf:"target_host_name,omitempty"`
 

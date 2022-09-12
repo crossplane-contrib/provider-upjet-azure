@@ -71,12 +71,20 @@ spec:
                     items:
                       properties:
                         action:
+                          description: The action to take for the application rules
+                            in this collection. Possible values are Allow and Deny.
                           type: string
                         name:
+                          description: The name which should be used for this application
+                            rule collection.
                           type: string
                         priority:
+                          description: The priority of the application rule collection.
+                            The range is 100 - 65000.
                           type: number
                         rule:
+                          description: One or more rule (application rule) blocks
+                            as defined below.
                           items:
                             properties:
                               description:
@@ -105,6 +113,8 @@ spec:
                                   type: string
                                 type: array
                               name:
+                                description: The name which should be used for this
+                                  rule.
                                 type: string
                               protocols:
                                 items:
@@ -123,17 +133,21 @@ spec:
                                   type: object
                                 type: array
                               sourceAddresses:
+                                description: Specifies a list of source IP addresses
+                                  (including CIDR and *).
                                 items:
                                   type: string
                                 type: array
                               sourceIpGroups:
+                                description: Specifies a list of source IP groups.
                                 items:
                                   type: string
                                 type: array
                               terminateTls:
-                                description: Boolean specifying if TLS shall be terminated  or
-                                  not . Must be  true when using destination_urls.
-                                  Needs Premium SKU for Firewall Policy.
+                                description: Boolean specifying if TLS shall be terminated
+                                  (true) or not (false). Must be  true when using
+                                  destination_urls. Needs Premium SKU for Firewall
+                                  Policy.
                                 type: boolean
                               webCategories:
                                 description: Specifies a list of web categories to
@@ -238,32 +252,45 @@ spec:
                     items:
                       properties:
                         action:
+                          description: The action to take for the NAT rules in this
+                            collection. Currently, the only possible value is Dnat.
                           type: string
                         name:
+                          description: The name which should be used for this NAT
+                            rule collection.
                           type: string
                         priority:
+                          description: The priority of the NAT rule collection. The
+                            range is 100 - 65000.
                           type: number
                         rule:
+                          description: A rule (NAT rule) block as defined above.
                           items:
                             properties:
                               destinationAddress:
-                                description: The destination IP address .
+                                description: The destination IP address (including
+                                  CIDR).
                                 type: string
                               destinationPorts:
                                 items:
                                   type: string
                                 type: array
                               name:
+                                description: The name which should be used for this
+                                  rule.
                                 type: string
                               protocols:
                                 items:
                                   type: string
                                 type: array
                               sourceAddresses:
+                                description: Specifies a list of source IP addresses
+                                  (including CIDR and *).
                                 items:
                                   type: string
                                 type: array
                               sourceIpGroups:
+                                description: Specifies a list of source IP groups.
                                 items:
                                   type: string
                                 type: array
@@ -295,12 +322,20 @@ spec:
                     items:
                       properties:
                         action:
+                          description: The action to take for the network rules in
+                            this collection. Possible values are Allow and Deny.
                           type: string
                         name:
+                          description: The name which should be used for this network
+                            rule collection.
                           type: string
                         priority:
+                          description: The priority of the network rule collection.
+                            The range is 100 - 65000.
                           type: number
                         rule:
+                          description: One or more rule (network rule) blocks as defined
+                            above.
                           items:
                             properties:
                               destinationAddresses:
@@ -321,16 +356,21 @@ spec:
                                   type: string
                                 type: array
                               name:
+                                description: The name which should be used for this
+                                  rule.
                                 type: string
                               protocols:
                                 items:
                                   type: string
                                 type: array
                               sourceAddresses:
+                                description: Specifies a list of source IP addresses
+                                  (including CIDR and *).
                                 items:
                                   type: string
                                 type: array
                               sourceIpGroups:
+                                description: Specifies a list of source IP groups.
                                 items:
                                   type: string
                                 type: array
@@ -348,6 +388,8 @@ spec:
                       type: object
                     type: array
                   priority:
+                    description: The priority of the Firewall Policy Rule Collection
+                      Group. The range is 100-65000.
                     type: number
                 required:
                 - priority

@@ -143,15 +143,13 @@ spec:
                         type: object
                     type: object
                   autoscaleSettings:
-                    description: An autoscale_settings block as defined below. This
-                      must be set upon database creation otherwise it cannot be updated
-                      without a manual terraform destroy-apply.
+                    description: An autoscale_settings block as defined below.
                     items:
                       properties:
                         maxThroughput:
                           description: The maximum throughput of the SQL database
-                            . Must be between 1,000 and 1,000,000. Must be set in
-                            increments of 1,000. Conflicts with throughput.
+                            (RU/s). Must be between 1,000 and 1,000,000. Must be set
+                            in increments of 1,000. Conflicts with throughput.
                           type: number
                       type: object
                     type: array
@@ -236,11 +234,10 @@ spec:
                         type: object
                     type: object
                   throughput:
-                    description: The throughput of SQL database . Must be set in increments
-                      of 100. The minimum value is 400. This must be set upon database
-                      creation otherwise it cannot be updated without a manual terraform
-                      destroy-apply.  Do not set when azurerm_cosmosdb_account is
-                      configured with EnableServerless capability.
+                    description: The throughput of SQL database (RU/s). Must be set
+                      in increments of 100. The minimum value is 400.  Do not set
+                      when azurerm_cosmosdb_account is configured with EnableServerless
+                      capability.
                     type: number
                 type: object
               providerConfigRef:

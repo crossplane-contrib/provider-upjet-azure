@@ -19,7 +19,7 @@ type ModuleObservation struct {
 
 type ModuleParameters struct {
 
-	// Configuration options for the module .
+	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400).
 	// +kubebuilder:validation:Optional
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 

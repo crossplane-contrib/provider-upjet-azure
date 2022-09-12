@@ -22,6 +22,7 @@ type DefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The name which should be used for this Subnet Service Endpoint Storage Policy Definition.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

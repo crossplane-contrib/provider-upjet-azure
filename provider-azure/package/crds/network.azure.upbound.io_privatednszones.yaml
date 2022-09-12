@@ -144,6 +144,8 @@ spec:
                         type: object
                     type: object
                   soaRecord:
+                    description: An soa_record block as defined below. Changing this
+                      forces a new resource to be created.
                     items:
                       properties:
                         email:
@@ -169,6 +171,7 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: A mapping of tags to assign to the Record Set.
                           type: object
                         ttl:
                           description: The Time To Live of the SOA Record in seconds.
@@ -181,6 +184,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
               providerConfigRef:
@@ -379,6 +383,8 @@ spec:
                       DNS zone.
                     type: number
                   soaRecord:
+                    description: An soa_record block as defined below. Changing this
+                      forces a new resource to be created.
                     items:
                       properties:
                         fqdn:

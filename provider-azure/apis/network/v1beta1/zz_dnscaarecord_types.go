@@ -28,7 +28,7 @@ type DNSCAARecordParameters struct {
 	// +kubebuilder:validation:Required
 	Record []RecordParameters `json:"record" tf:"record,omitempty"`
 
-	// Specifies the resource group where the DNS Zone  exists. Changing this forces a new resource to be created.
+	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -41,7 +41,7 @@ type DNSCAARecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The Time To Live  of the DNS record in seconds.
+	// The Time To Live (TTL) of the DNS record in seconds.
 	// +kubebuilder:validation:Required
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 

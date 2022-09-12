@@ -178,6 +178,7 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: A mapping of tags to assign to the Record Set.
                           type: object
                         ttl:
                           description: The Time To Live of the SOA Record in seconds.
@@ -191,6 +192,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
               providerConfigRef:

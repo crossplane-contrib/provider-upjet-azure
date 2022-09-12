@@ -151,10 +151,12 @@ spec:
                           items:
                             properties:
                               advertisedPublicPrefixes:
+                                description: A list of Advertised Public Prefixes.
                                 items:
                                   type: string
                                 type: array
                               customerAsn:
+                                description: The CustomerASN of the peering.
                                 type: number
                               routingRegistryName:
                                 type: string
@@ -163,6 +165,8 @@ spec:
                         primaryPeerAddressPrefix:
                           type: string
                         routeFilterId:
+                          description: The ID of the Route Filter. Only available
+                            when peering_type is set to MicrosoftPeering.
                           type: string
                         secondaryPeerAddressPrefix:
                           type: string
@@ -178,10 +182,12 @@ spec:
                     items:
                       properties:
                         advertisedPublicPrefixes:
+                          description: A list of Advertised Public Prefixes.
                           items:
                             type: string
                           type: array
                         customerAsn:
+                          description: The CustomerASN of the peering.
                           type: number
                         routingRegistryName:
                           type: string
@@ -276,6 +282,8 @@ spec:
                         type: object
                     type: object
                   routeFilterId:
+                    description: The ID of the Route Filter. Only available when peering_type
+                      is set to MicrosoftPeering.
                     type: string
                   secondaryPeerAddressPrefix:
                     type: string

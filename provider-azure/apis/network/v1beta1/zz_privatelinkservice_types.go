@@ -18,6 +18,7 @@ type NATIPConfigurationObservation struct {
 
 type NATIPConfigurationParameters struct {
 
+	// Specifies the name which should be used for the NAT IP Configuration. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -74,7 +75,7 @@ type PrivateLinkServiceParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// One or more  nat_ip_configuration block as defined below.
+	// One or more (up to 8) nat_ip_configuration block as defined below.
 	// +kubebuilder:validation:Required
 	NATIPConfiguration []NATIPConfigurationParameters `json:"natIpConfiguration" tf:"nat_ip_configuration,omitempty"`
 

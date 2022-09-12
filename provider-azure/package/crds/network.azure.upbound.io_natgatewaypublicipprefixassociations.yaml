@@ -399,8 +399,6 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The  ID of the Association between the NAT Gateway
-                      and the Public IP Prefix.
                     type: string
                 type: object
               conditions:

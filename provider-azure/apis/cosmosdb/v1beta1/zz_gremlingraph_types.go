@@ -46,7 +46,7 @@ type GremlinGraphAutoscaleSettingsObservation struct {
 
 type GremlinGraphAutoscaleSettingsParameters struct {
 
-	// The maximum throughput of the Gremlin graph . Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	// The maximum throughput of the Gremlin graph (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
@@ -76,7 +76,7 @@ type GremlinGraphParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
-	// An autoscale_settings block as defined below. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply. Requires partition_key_path to be set.
+	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []GremlinGraphAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
@@ -97,7 +97,7 @@ type GremlinGraphParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// The default time to live  of the Gremlin graph. If the value is missing or set to "-1", items don’t expire.
+	// The default time to live (TTL) of the Gremlin graph. If the value is missing or set to "-1", items don’t expire.
 	// +kubebuilder:validation:Optional
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
@@ -126,7 +126,7 @@ type GremlinGraphParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The throughput of the Gremlin graph . Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
+	// The throughput of the Gremlin graph (RU/s). Must be set in increments of 100. The minimum value is 400.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
@@ -144,6 +144,7 @@ type IndexParameters struct {
 	// +kubebuilder:validation:Required
 	Order *string `json:"order" tf:"order,omitempty"`
 
+	// Path for which the indexing behaviour applies to.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 }
@@ -188,6 +189,7 @@ type SpatialIndexObservation struct {
 
 type SpatialIndexParameters struct {
 
+	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 }

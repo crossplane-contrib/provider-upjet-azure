@@ -402,8 +402,6 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The  ID of the Association between the Network Interface
-                      and the Application Security Group.
                     type: string
                 type: object
               conditions:

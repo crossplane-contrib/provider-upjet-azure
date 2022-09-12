@@ -237,7 +237,8 @@ spec:
                           type: boolean
                         skipNodesWithSystemPods:
                           description: If true cluster autoscaler will never delete
-                            nodes with pods from kube-system . Defaults to true.
+                            nodes with pods from kube-system (except for DaemonSet
+                            or mirror pods). Defaults to true.
                           type: boolean
                       type: object
                     type: array
@@ -293,6 +294,9 @@ spec:
                           - namespace
                           type: object
                         tenantId:
+                          description: The Tenant ID used for Azure Active Directory
+                            Application. If this isn't specified the Tenant ID of
+                            the current Subscription is used.
                           type: string
                       type: object
                     type: array
@@ -329,8 +333,8 @@ spec:
                             properties:
                               allowedUnsafeSysctls:
                                 description: Specifies the allow list of unsafe sysctls
-                                  command or patterns . Changing this forces a new
-                                  resource to be created.
+                                  command or patterns (ending in *). Changing this
+                                  forces a new resource to be created.
                                 items:
                                   type: string
                                 type: array
@@ -341,9 +345,9 @@ spec:
                                   to be created.
                                 type: number
                               containerLogMaxSizeMb:
-                                description: Specifies the maximum size  of container
-                                  log file before it is rotated. Changing this forces
-                                  a new resource to be created.
+                                description: Specifies the maximum size (e.g. 10MB)
+                                  of container log file before it is rotated. Changing
+                                  this forces a new resource to be created.
                                 type: number
                               cpuCfsQuotaEnabled:
                                 description: Is CPU CFS quota enforcement for containers
@@ -581,6 +585,9 @@ spec:
                             and 1000.
                           type: number
                         name:
+                          description: The name which should be used for the default
+                            Kubernetes Node Pool. Changing this forces a new resource
+                            to be created.
                           type: string
                         nodeCount:
                           type: number
@@ -610,7 +617,7 @@ spec:
                             If not specified, the default node pool will be created
                             with the version specified by kubernetes_version. If both
                             are unspecified, the latest recommended version will be
-                            used at provisioning time
+                            used at provisioning time (but won't auto-upgrade)
                           type: string
                         osDiskSizeGb:
                           description: The size of the OS Disk which should be used
@@ -717,8 +724,12 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: A mapping of tags to assign to the Node Pool.
                           type: object
                         type:
+                          description: The type of Node Pool which should be created.
+                            Possible values are AvailabilitySet and VirtualMachineScaleSets.
+                            Defaults to VirtualMachineScaleSets.
                           type: string
                         ultraSsdEnabled:
                           description: Used to specify whether the UltraSSD is enabled
@@ -905,6 +916,10 @@ spec:
                             type: string
                           type: array
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Kubernetes Cluster.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       required:
                       - type
@@ -1039,23 +1054,34 @@ spec:
                     items:
                       properties:
                         clientId:
+                          description: The Client ID of the user-defined Managed Identity
+                            to be assigned to the Kubelets. If not specified a Managed
+                            Identity is created automatically.
                           type: string
                         objectId:
+                          description: The Object ID of the user-defined Managed Identity
+                            assigned to the Kubelets.If not specified a Managed Identity
+                            is created automatically.
                           type: string
                         userAssignedIdentityId:
+                          description: The ID of the User Assigned Identity assigned
+                            to the Kubelets. If not specified a Managed Identity is
+                            created automatically.
                           type: string
                       type: object
                     type: array
                   kubernetesVersion:
                     description: Version of Kubernetes specified when creating the
                       AKS managed cluster. If not specified, the latest recommended
-                      version will be used at provisioning time .
+                      version will be used at provisioning time (but won't auto-upgrade).
                     type: string
                   linuxProfile:
                     description: A linux_profile block as defined below.
                     items:
                       properties:
                         adminUsername:
+                          description: The Admin Username for the Cluster. Changing
+                            this forces a new resource to be created.
                           type: string
                         sshKey:
                           description: An ssh_key block. Only one is currently allowed.
@@ -1136,6 +1162,9 @@ spec:
                     items:
                       properties:
                         logAnalyticsWorkspaceId:
+                          description: Specifies the ID of the Log Analytics Workspace
+                            where the audit logs collected by Microsoft Defender should
+                            be sent to.
                           type: string
                       required:
                       - logAnalyticsWorkspaceId
@@ -1147,12 +1176,13 @@ spec:
                       properties:
                         dnsServiceIp:
                           description: IP address within the Kubernetes service address
-                            range that will be used by cluster service discovery .
+                            range that will be used by cluster service discovery (kube-dns).
                             Changing this forces a new resource to be created.
                           type: string
                         dockerBridgeCidr:
-                          description: IP address  used as the Docker bridge IP address
-                            on nodes. Changing this forces a new resource to be created.
+                          description: IP address (in CIDR notation) used as the Docker
+                            bridge IP address on nodes. Changing this forces a new
+                            resource to be created.
                           type: string
                         ipVersions:
                           description: Specifies a list of IP versions the Kubernetes
@@ -1169,8 +1199,14 @@ spec:
                           items:
                             properties:
                               idleTimeoutInMinutes:
+                                description: Desired outbound flow idle timeout in
+                                  minutes for the cluster load balancer. Must be between
+                                  4 and 120 inclusive. Defaults to 30.
                                 type: number
                               managedOutboundIpCount:
+                                description: Count of desired managed outbound IPs
+                                  for the cluster load balancer. Must be between 1
+                                  and 100 inclusive.
                                 type: number
                               outboundIpAddressIds:
                                 description: The ID of the Public IP Addresses which
@@ -1205,8 +1241,14 @@ spec:
                           items:
                             properties:
                               idleTimeoutInMinutes:
+                                description: Desired outbound flow idle timeout in
+                                  minutes for the cluster load balancer. Must be between
+                                  4 and 120 inclusive. Defaults to 4.
                                 type: number
                               managedOutboundIpCount:
+                                description: Count of desired managed outbound IPs
+                                  for the cluster load balancer. Must be between 1
+                                  and 100 inclusive.
                                 type: number
                             type: object
                           type: array
@@ -1227,10 +1269,10 @@ spec:
                             azure. Changing this forces a new resource to be created.
                           type: string
                         outboundType:
-                          description: The outbound  routing method which should be
-                            used for this Kubernetes Cluster. Possible values are
-                            loadBalancer, userDefinedRouting, managedNATGateway and
-                            userAssignedNATGateway. Defaults to loadBalancer.
+                          description: The outbound (egress) routing method which
+                            should be used for this Kubernetes Cluster. Possible values
+                            are loadBalancer, userDefinedRouting, managedNATGateway
+                            and userAssignedNATGateway. Defaults to loadBalancer.
                           type: string
                         podCidr:
                           description: The CIDR to use for pod IP addresses. This
@@ -1246,6 +1288,9 @@ spec:
                       type: object
                     type: array
                   nodeResourceGroup:
+                    description: The name of the Resource Group where the Kubernetes
+                      Nodes should exist. Changing this forces a new resource to be
+                      created.
                     type: string
                   oidcIssuerEnabled:
                     description: Enable or Disable the OIDC issuer URL
@@ -1255,6 +1300,8 @@ spec:
                     items:
                       properties:
                         logAnalyticsWorkspaceId:
+                          description: The ID of the Log Analytics Workspace which
+                            the OMS Agent should send data to.
                           type: string
                       required:
                       - logAnalyticsWorkspaceId
@@ -1379,6 +1426,7 @@ spec:
                     items:
                       properties:
                         clientId:
+                          description: The Client ID for the Service Principal.
                           type: string
                         clientSecretSecretRef:
                           description: The Client Secret for the Service Principal.
@@ -1404,11 +1452,13 @@ spec:
                     type: array
                   skuTier:
                     description: The SKU Tier that should be used for this Kubernetes
-                      Cluster. Possible values are Free and Paid . Defaults to Free.
+                      Cluster. Possible values are Free and Paid (which includes the
+                      Uptime SLA). Defaults to Free.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   windowsProfile:
                     description: A windows_profile block as defined below.
@@ -1433,6 +1483,7 @@ spec:
                           - namespace
                           type: object
                         adminUsername:
+                          description: The Admin Username for Windows VMs.
                           type: string
                         license:
                           description: Specifies the type of on-premise license which
@@ -1627,7 +1678,8 @@ spec:
                     description: The FQDN of the Azure Kubernetes Managed Cluster.
                     type: string
                   httpApplicationRoutingZoneName:
-                    description: The Zone Name of the HTTP Application Routing.
+                    description: The name of the Managed Kubernetes Cluster to create.
+                      Changing this forces a new resource to be created.
                     type: string
                   id:
                     description: The Kubernetes Managed Cluster ID.
@@ -1642,6 +1694,8 @@ spec:
                             Service Identity.
                           type: string
                         tenantId:
+                          description: The Tenant ID associated with this Managed
+                            Service Identity.
                           type: string
                       type: object
                     type: array
@@ -1655,15 +1709,22 @@ spec:
                             Cluster.
                           type: string
                         ingressApplicationGatewayIdentity:
-                          description: An ingress_application_gateway_identity block
-                            is exported. The exported attributes are defined below.
+                          description: An identity block as defined below. One of
+                            either identity or service_principal must be specified.
                           items:
                             properties:
                               clientId:
+                                description: The Client ID for the Service Principal.
                                 type: string
                               objectId:
+                                description: The Object ID of the user-defined Managed
+                                  Identity assigned to the Kubelets.If not specified
+                                  a Managed Identity is created automatically.
                                 type: string
                               userAssignedIdentityId:
+                                description: The ID of the User Assigned Identity
+                                  assigned to the Kubelets. If not specified a Managed
+                                  Identity is created automatically.
                                 type: string
                             type: object
                           type: array
@@ -1676,15 +1737,22 @@ spec:
                     items:
                       properties:
                         secretIdentity:
-                          description: An secret_identity block is exported. The exported
-                            attributes are defined below.
+                          description: An identity block as defined below. One of
+                            either identity or service_principal must be specified.
                           items:
                             properties:
                               clientId:
+                                description: The Client ID for the Service Principal.
                                 type: string
                               objectId:
+                                description: The Object ID of the user-defined Managed
+                                  Identity assigned to the Kubelets.If not specified
+                                  a Managed Identity is created automatically.
                                 type: string
                               userAssignedIdentityId:
+                                description: The ID of the User Assigned Identity
+                                  assigned to the Kubelets. If not specified a Managed
+                                  Identity is created automatically.
                                 type: string
                             type: object
                           type: array
@@ -1700,6 +1768,8 @@ spec:
                           items:
                             properties:
                               effectiveOutboundIps:
+                                description: The outcome (resource IDs) of the specified
+                                  arguments.
                                 items:
                                   type: string
                                 type: array
@@ -1712,6 +1782,8 @@ spec:
                           items:
                             properties:
                               effectiveOutboundIps:
+                                description: The outcome (resource IDs) of the specified
+                                  arguments.
                                 items:
                                   type: string
                                 type: array
@@ -1727,15 +1799,22 @@ spec:
                     items:
                       properties:
                         omsAgentIdentity:
-                          description: An oms_agent_identity block is exported. The
-                            exported attributes are defined below.
+                          description: An identity block as defined below. One of
+                            either identity or service_principal must be specified.
                           items:
                             properties:
                               clientId:
+                                description: The Client ID for the Service Principal.
                                 type: string
                               objectId:
+                                description: The Object ID of the user-defined Managed
+                                  Identity assigned to the Kubelets.If not specified
+                                  a Managed Identity is created automatically.
                                 type: string
                               userAssignedIdentityId:
+                                description: The ID of the User Assigned Identity
+                                  assigned to the Kubelets. If not specified a Managed
+                                  Identity is created automatically.
                                 type: string
                             type: object
                           type: array

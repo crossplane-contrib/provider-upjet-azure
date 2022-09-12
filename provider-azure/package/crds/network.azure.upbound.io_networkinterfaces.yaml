@@ -83,8 +83,8 @@ spec:
                     description: Should IP Forwarding be enabled? Defaults to false.
                     type: boolean
                   internalDnsNameLabel:
-                    description: The  DNS Name used for internal communications between
-                      Virtual Machines in the same Virtual Network.
+                    description: The (relative) DNS Name used for internal communications
+                      between Virtual Machines in the same Virtual Network.
                     type: string
                   ipConfiguration:
                     description: One or more ip_configuration blocks as defined below.
@@ -95,6 +95,7 @@ spec:
                             SKU Load Balancer.
                           type: string
                         name:
+                          description: A name used for this IP Configuration.
                           type: string
                         primary:
                           description: Is this the Primary IP Configuration? Must
@@ -470,10 +471,8 @@ spec:
               atProvider:
                 properties:
                   appliedDnsServers:
-                    description: If the Virtual Machine using this Network Interface
-                      is part of an Availability Set, then this list will have the
-                      union of all DNS servers from all Network Interfaces that are
-                      part of the Availability Set.
+                    description: A list of IP Addresses defining the DNS Servers which
+                      should be used for this Network Interface.
                     items:
                       type: string
                     type: array
@@ -487,7 +486,7 @@ spec:
                       value of internal_domain_name_suffix.
                     type: string
                   macAddress:
-                    description: The Media Access Control  Address of the Network
+                    description: The Media Access Control (MAC) Address of the Network
                       Interface.
                     type: string
                   privateIpAddress:

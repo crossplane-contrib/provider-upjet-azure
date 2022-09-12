@@ -208,7 +208,8 @@ spec:
                           type: number
                         protocol:
                           description: Network protocol this rule applies to. Possible
-                            values include Tcp, Udp, Icmp, Esp, Ah or * .
+                            values include Tcp, Udp, Icmp, Esp, Ah or * (which matches
+                            all).
                           type: string
                         sourceAddressPrefix:
                           description: CIDR or source IP range or * to match any IP.

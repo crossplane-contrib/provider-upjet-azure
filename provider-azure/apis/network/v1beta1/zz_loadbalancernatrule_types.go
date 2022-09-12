@@ -14,8 +14,11 @@ import (
 )
 
 type LoadBalancerNatRuleObservation struct {
+
+	// The ID of the Load Balancer NAT Rule.
 	BackendIPConfigurationID *string `json:"backendIpConfigurationId,omitempty" tf:"backend_ip_configuration_id,omitempty"`
 
+	// The ID of the Load Balancer NAT Rule.
 	FrontendIPConfigurationID *string `json:"frontendIpConfigurationId,omitempty" tf:"frontend_ip_configuration_id,omitempty"`
 
 	// The ID of the Load Balancer NAT Rule.

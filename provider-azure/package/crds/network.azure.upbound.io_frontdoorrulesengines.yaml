@@ -239,8 +239,10 @@ spec:
                                         or Delete.
                                       type: string
                                     headerName:
+                                      description: header name (string).
                                       type: string
                                     value:
+                                      description: value name (string).
                                       type: string
                                   type: object
                                 type: array
@@ -253,8 +255,10 @@ spec:
                                         or Delete.
                                       type: string
                                     headerName:
+                                      description: header name (string).
                                       type: string
                                     value:
+                                      description: value name (string).
                                       type: string
                                   type: object
                                 type: array
@@ -288,6 +292,7 @@ spec:
                                   type: string
                                 type: array
                               value:
+                                description: (array) can contain one or more strings.
                                 items:
                                   type: string
                                 type: array
@@ -302,6 +307,7 @@ spec:
                             type: object
                           type: array
                         name:
+                          description: The name of the rule.
                           type: string
                         priority:
                           description: Priority of the rule, must be unique per rules

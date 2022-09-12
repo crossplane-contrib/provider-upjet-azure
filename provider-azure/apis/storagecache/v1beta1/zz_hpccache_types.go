@@ -38,7 +38,7 @@ type AccessRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	RootSquashEnabled *bool `json:"rootSquashEnabled,omitempty" tf:"root_squash_enabled,omitempty"`
 
-	// The scope of this rule. The scope and  the filter determine which clients match the rule. Possible values are: default, network, host.
+	// The scope of this rule. The scope and (potentially) the filter determine which clients match the rule. Possible values are: default, network, host.
 	// +kubebuilder:validation:Required
 	Scope *string `json:"scope" tf:"scope,omitempty"`
 
@@ -56,7 +56,7 @@ type BindObservation struct {
 
 type BindParameters struct {
 
-	// The Bind Distinguished Name  identity to be used in the secure LDAP connection.
+	// The Bind Distinguished Name (DN) identity to be used in the secure LDAP connection.
 	// +kubebuilder:validation:Required
 	Dn *string `json:"dn" tf:"dn,omitempty"`
 
@@ -73,7 +73,7 @@ type DNSParameters struct {
 	// +kubebuilder:validation:Optional
 	SearchDomain *string `json:"searchDomain,omitempty" tf:"search_domain,omitempty"`
 
-	// A list of DNS servers for the HPC Cache. At most three IP are allowed to set.
+	// A list of DNS servers for the HPC Cache. At most three IP(s) are allowed to set.
 	// +kubebuilder:validation:Required
 	Servers []*string `json:"servers" tf:"servers,omitempty"`
 }
@@ -126,11 +126,11 @@ type DirectoryFlatFileObservation struct {
 
 type DirectoryFlatFileParameters struct {
 
-	// The URI of the file containing group information .
+	// The URI of the file containing group information (/etc/group file format in Unix-like OS).
 	// +kubebuilder:validation:Required
 	GroupFileURI *string `json:"groupFileUri" tf:"group_file_uri,omitempty"`
 
-	// The URI of the file containing user information .
+	// The URI of the file containing user information (/etc/passwd file format in Unix-like OS).
 	// +kubebuilder:validation:Required
 	PasswordFileURI *string `json:"passwordFileUri" tf:"password_file_uri,omitempty"`
 }
@@ -140,7 +140,7 @@ type DirectoryLdapObservation struct {
 
 type DirectoryLdapParameters struct {
 
-	// The base distinguished name  for the LDAP domain.
+	// The base distinguished name (DN) for the LDAP domain.
 	// +kubebuilder:validation:Required
 	BaseDn *string `json:"baseDn" tf:"base_dn,omitempty"`
 
@@ -225,7 +225,7 @@ type HPCCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The SKU of HPC Cache to use. Possible values are  - Standard_2G, Standard_4G Standard_8G or  - Standard_L4_5G, Standard_L9G, and Standard_L16G. Changing this forces a new resource to be created.
+	// The SKU of HPC Cache to use. Possible values are (ReadWrite) - Standard_2G, Standard_4G Standard_8G or (ReadOnly) - Standard_L4_5G, Standard_L9G, and Standard_L16G. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 

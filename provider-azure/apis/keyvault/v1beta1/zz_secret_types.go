@@ -31,7 +31,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
-	// Expiration UTC datetime .
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
 	// +kubebuilder:validation:Optional
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
@@ -49,7 +49,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
-	// Key not usable before the provided UTC datetime .
+	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
 	// +kubebuilder:validation:Optional
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 

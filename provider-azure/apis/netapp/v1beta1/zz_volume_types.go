@@ -187,7 +187,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Required
 	ServiceLevel *string `json:"serviceLevel" tf:"service_level,omitempty"`
 
-	// Specifies whether the .snapshot  or ~snapshot  path of a volume is visible, default value is true.
+	// Specifies whether the .snapshot (NFS clients) or ~snapshot (SMB clients) path of a volume is visible, default value is true.
 	// +kubebuilder:validation:Optional
 	SnapshotDirectoryVisible *bool `json:"snapshotDirectoryVisible,omitempty" tf:"snapshot_directory_visible,omitempty"`
 

@@ -18,6 +18,7 @@ type EventHubNamespaceObservation struct {
 	// The EventHub Namespace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
@@ -36,6 +37,7 @@ type EventHubNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	DedicatedClusterID *string `json:"dedicatedClusterId,omitempty" tf:"dedicated_cluster_id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -72,7 +74,7 @@ type EventHubNamespaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies if the EventHub Namespace should be Zone Redundant . Changing this forces a new resource to be created. Defaults to false.
+	// Specifies if the EventHub Namespace should be Zone Redundant (created across Availability Zones). Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }

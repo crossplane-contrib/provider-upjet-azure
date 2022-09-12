@@ -34,7 +34,7 @@ type SQLRoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
-	// The ID of the Principal  in Azure Active Directory. Changing this forces a new resource to be created.
+	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
 

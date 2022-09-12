@@ -26,7 +26,7 @@ type APNSCredentialParameters struct {
 	// +kubebuilder:validation:Required
 	BundleID *string `json:"bundleId" tf:"bundle_id,omitempty"`
 
-	// The Apple Push Notifications Service  Key.
+	// The Apple Push Notifications Service (APNS) Key.
 	// +kubebuilder:validation:Required
 	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 

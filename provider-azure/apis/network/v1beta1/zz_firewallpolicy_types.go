@@ -49,6 +49,7 @@ type FirewallPolicyObservation struct {
 	// A list of references to Azure Firewalls that this Firewall Policy is associated with.
 	Firewalls []*string `json:"firewalls,omitempty" tf:"firewalls,omitempty"`
 
+	// The ID of the Firewall Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of references to Firewall Policy Rule Collection Groups that belongs to this Firewall Policy.
@@ -168,6 +169,7 @@ type LogAnalyticsWorkspaceParameters struct {
 	// +kubebuilder:validation:Required
 	FirewallLocation *string `json:"firewallLocation" tf:"firewall_location,omitempty"`
 
+	// The ID of the Log Analytics Workspace that the Firewalls associated with this Firewall Policy will send their logs to when their locations match the firewall_location.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 }
@@ -177,6 +179,7 @@ type SignatureOverridesObservation struct {
 
 type SignatureOverridesParameters struct {
 
+	// 12-digit number (id) which identifies your signature.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -194,6 +197,7 @@ type TLSCertificateParameters struct {
 	// +kubebuilder:validation:Required
 	KeyVaultSecretID *string `json:"keyVaultSecretId" tf:"key_vault_secret_id,omitempty"`
 
+	// The name of the certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -233,6 +237,7 @@ type TrafficBypassParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
 
+	// The name which should be used for this bypass traffic setting.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

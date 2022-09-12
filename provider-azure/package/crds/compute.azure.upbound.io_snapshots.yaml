@@ -80,6 +80,7 @@ spec:
                               secretUrl:
                                 type: string
                               sourceVaultId:
+                                description: The Snapshot ID.
                                 type: string
                             required:
                             - secretUrl
@@ -94,6 +95,7 @@ spec:
                               keyUrl:
                                 type: string
                               sourceVaultId:
+                                description: The Snapshot ID.
                                 type: string
                             required:
                             - keyUrl

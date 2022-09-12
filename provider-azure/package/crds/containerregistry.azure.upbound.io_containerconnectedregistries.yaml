@@ -169,13 +169,15 @@ spec:
                         action:
                           description: The action of the artifact that wants to be
                             subscribed for the Connected Registry. Possible values
-                            are push, delete and * .
+                            are push, delete and * (i.e. any).
                           type: string
                         digest:
                           description: The digest of the artifact that wants to be
                             subscribed for the Connected Registry.
                           type: string
                         name:
+                          description: The name of the artifact that wants to be subscribed
+                            for the Connected Registry.
                           type: string
                         tag:
                           description: The tag of the artifact that wants to be subscribed
@@ -192,8 +194,9 @@ spec:
                       this forces a new Container Connected Registry to be created.
                     type: string
                   syncMessageTtl:
-                    description: The period of time  for which a message is available
-                      to sync before it is expired. Allowed range is from P1D to P90D.
+                    description: The period of time (in form of ISO8601) for which
+                      a message is available to sync before it is expired. Allowed
+                      range is from P1D to P90D.
                     type: string
                   syncSchedule:
                     description: The cron expression indicating the schedule that
@@ -278,8 +281,9 @@ spec:
                         type: object
                     type: object
                   syncWindow:
-                    description: The time window  during which sync is enabled for
-                      each schedule occurrence. Allowed range is from PT3H to P7D.
+                    description: The time window (in form of ISO8601) during which
+                      sync is enabled for each schedule occurrence. Allowed range
+                      is from PT3H to P7D.
                     type: string
                 type: object
               providerConfigRef:

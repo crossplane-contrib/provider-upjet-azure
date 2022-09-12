@@ -127,6 +127,10 @@ spec:
                                   to consume their logs.
                                 type: string
                               id:
+                                description: The ID of the Log Analytics Workspace
+                                  that the Firewalls associated with this Firewall
+                                  Policy will send their logs to when their locations
+                                  match the firewall_location.
                                 type: string
                             required:
                             - firewallLocation
@@ -155,6 +159,8 @@ spec:
                           items:
                             properties:
                               id:
+                                description: 12-digit number (id) which identifies
+                                  your signature.
                                 type: string
                               state:
                                 description: state can be any of Off, Alert or Deny.
@@ -189,6 +195,8 @@ spec:
                                   type: string
                                 type: array
                               name:
+                                description: The name which should be used for this
+                                  bypass traffic setting.
                                 type: string
                               protocol:
                                 description: The protocols any of ANY, TCP, ICMP,
@@ -346,6 +354,7 @@ spec:
                             certificate is stored.
                           type: string
                         name:
+                          description: The name of the certificate.
                           type: string
                       required:
                       - keyVaultSecretId
@@ -544,6 +553,7 @@ spec:
                       type: string
                     type: array
                   id:
+                    description: The ID of the Firewall Policy.
                     type: string
                   ruleCollectionGroups:
                     description: A list of references to Firewall Policy Rule Collection

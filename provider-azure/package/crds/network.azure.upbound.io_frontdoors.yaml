@@ -73,9 +73,13 @@ spec:
                           items:
                             properties:
                               address:
-                                description: Location of the backend
+                                description: Location of the backend (IP address or
+                                  FQDN)
                                 type: string
                               enabled:
+                                description: Specifies if the backend is enabled or
+                                  not. Valid options are true or false. Defaults to
+                                  true.
                                 type: boolean
                               hostHeader:
                                 description: The value to use as the host header sent
@@ -115,6 +119,7 @@ spec:
                             block within this resource to use for this Backend Pool.
                           type: string
                         name:
+                          description: Specifies the name of the Backend Pool.
                           type: string
                       required:
                       - backend
@@ -128,12 +133,14 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Is this health probe enabled? Defaults to true.
                           type: boolean
                         intervalInSeconds:
                           description: The number of seconds between each Health Probe.
                             Defaults to 120.
                           type: number
                         name:
+                          description: Specifies the name of the Health Probe.
                           type: string
                         path:
                           description: The path to use for the Health Probe. Default
@@ -162,6 +169,7 @@ spec:
                             to 0.
                           type: number
                         name:
+                          description: Specifies the name of the Load Balancer.
                           type: string
                         sampleSize:
                           description: The number of samples to consider for load
@@ -206,6 +214,7 @@ spec:
                             domain, the name value must match the Front Door name.
                           type: string
                         name:
+                          description: Specifies the name of the frontend_endpoint.
                           type: string
                         sessionAffinityEnabled:
                           description: Whether to allow session affinity on this host.
@@ -319,6 +328,9 @@ spec:
                             type: string
                           type: array
                         enabled:
+                          description: Enable or Disable use of this Backend Routing
+                            Rule. Permitted values are true or false. Defaults to
+                            true.
                           type: boolean
                         forwardingConfiguration:
                           description: A forwarding_configuration block as defined
@@ -330,7 +342,8 @@ spec:
                                   to forward the incoming traffic to.
                                 type: string
                               cacheDuration:
-                                description: Specify the caching duration . Needs
+                                description: Specify the caching duration (in ISO8601
+                                  notation e.g. P1DT2H for 1 day and 2 hours). Needs
                                   to be greater than 0 and smaller than 365 days.
                                   cache_duration works only in combination with cache_enabled
                                   set to true.
@@ -347,8 +360,8 @@ spec:
                                   to StripAll.
                                 type: string
                               cacheQueryParameters:
-                                description: Specify query parameters . Works only
-                                  in combination with cache_query_parameter_strip_directive
+                                description: Specify query parameters (array). Works
+                                  only in combination with cache_query_parameter_strip_directive
                                   set to StripAllExcept or StripOnly.
                                 items:
                                   type: string
@@ -373,10 +386,13 @@ spec:
                             type: object
                           type: array
                         frontendEndpoints:
+                          description: The names of the frontend_endpoint blocks within
+                            this resource to associate with this routing_rule.
                           items:
                             type: string
                           type: array
                         name:
+                          description: Specifies the name of the Routing Rule.
                           type: string
                         patternsToMatch:
                           description: The route patterns for the Backend Routing
@@ -385,8 +401,7 @@ spec:
                             type: string
                           type: array
                         redirectConfiguration:
-                          description: ptional) A redirect_configuration block as
-                            defined below.
+                          description: A redirect_configuration block as defined below.
                           items:
                             properties:
                               customFragment:
@@ -633,8 +648,8 @@ spec:
                   backendPoolHealthProbes:
                     additionalProperties:
                       type: string
-                    description: A map/dictionary of Backend Pool Health Probe Names  to
-                      the Backend Pool Health Probe ID
+                    description: A map/dictionary of Backend Pool Health Probe Names
+                      (key) to the Backend Pool Health Probe ID (value)
                     type: object
                   backendPoolLoadBalancing:
                     description: A backend_pool_load_balancing block as defined below.
@@ -648,16 +663,18 @@ spec:
                     additionalProperties:
                       type: string
                     description: A map/dictionary of Backend Pool Load Balancing Setting
-                      Names  to the Backend Pool Load Balancing Setting ID
+                      Names (key) to the Backend Pool Load Balancing Setting ID (value)
                     type: object
                   backendPools:
                     additionalProperties:
                       type: string
-                    description: A map/dictionary of Backend Pool Names  to the Backend
-                      Pool ID
+                    description: A map/dictionary of Backend Pool Names (key) to the
+                      Backend Pool ID (value)
                     type: object
                   cname:
-                    description: The host that each frontendEndpoint must CNAME to.
+                    description: Specifies the name of the Front Door service. Must
+                      be globally unique. Changing this forces a new resource to be
+                      created.
                     type: string
                   explicitResourceOrder:
                     items:
@@ -695,6 +712,8 @@ spec:
                   frontendEndpoints:
                     additionalProperties:
                       type: string
+                    description: The names of the frontend_endpoint blocks within
+                      this resource to associate with this routing_rule.
                     type: object
                   headerFrontdoorId:
                     description: The unique ID of the Front Door which is embedded
@@ -714,8 +733,8 @@ spec:
                   routingRules:
                     additionalProperties:
                       type: string
-                    description: A map/dictionary of Routing Rule Names  to the Routing
-                      Rule ID
+                    description: A map/dictionary of Routing Rule Names (key) to the
+                      Routing Rule ID (value)
                     type: object
                 type: object
               conditions:

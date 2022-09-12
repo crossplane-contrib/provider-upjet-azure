@@ -18,6 +18,7 @@ type AccountObservation struct {
 	// The ID of the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -39,7 +40,7 @@ type AccountObservation struct {
 	// The hostname with port if applicable for file storage in the primary location.
 	PrimaryFileHost *string `json:"primaryFileHost,omitempty" tf:"primary_file_host,omitempty"`
 
-	// The primary location of the storage account.
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	PrimaryLocation *string `json:"primaryLocation,omitempty" tf:"primary_location,omitempty"`
 
 	// The endpoint URL for queue storage in the primary location.
@@ -78,7 +79,7 @@ type AccountObservation struct {
 	// The hostname with port if applicable for file storage in the secondary location.
 	SecondaryFileHost *string `json:"secondaryFileHost,omitempty" tf:"secondary_file_host,omitempty"`
 
-	// The secondary location of the storage account.
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	SecondaryLocation *string `json:"secondaryLocation,omitempty" tf:"secondary_location,omitempty"`
 
 	// The endpoint URL for queue storage in the secondary location.
@@ -151,6 +152,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -158,7 +160,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
-	// Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 . Changing this forces a new resource to be created.
+	// Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
 
@@ -211,7 +213,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ShareProperties []SharePropertiesParameters `json:"shareProperties,omitempty" tf:"share_properties,omitempty"`
 
-	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory . The default value is true.
+	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is true.
 	// +kubebuilder:validation:Optional
 	SharedAccessKeyEnabled *bool `json:"sharedAccessKeyEnabled,omitempty" tf:"shared_access_key_enabled,omitempty"`
 
@@ -241,7 +243,7 @@ type ActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Required
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
-	// Specifies the security identifier .
+	// Specifies the security identifier (SID).
 	// +kubebuilder:validation:Required
 	DomainSid *string `json:"domainSid" tf:"domain_sid,omitempty"`
 
@@ -253,7 +255,7 @@ type ActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Required
 	NetbiosDomainName *string `json:"netbiosDomainName" tf:"netbios_domain_name,omitempty"`
 
-	// Specifies the security identifier  for Azure Storage.
+	// Specifies the security identifier (SID) for Azure Storage.
 	// +kubebuilder:validation:Required
 	StorageSid *string `json:"storageSid" tf:"storage_sid,omitempty"`
 }
@@ -285,6 +287,7 @@ type BlobPropertiesParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerDeleteRetentionPolicy []ContainerDeleteRetentionPolicyParameters `json:"containerDeleteRetentionPolicy,omitempty" tf:"container_delete_retention_policy,omitempty"`
 
+	// A cors_rule block as defined below.
 	// +kubebuilder:validation:Optional
 	CorsRule []CorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
@@ -310,6 +313,7 @@ type ContainerDeleteRetentionPolicyObservation struct {
 
 type ContainerDeleteRetentionPolicyParameters struct {
 
+	// Specifies the number of days that the container should be retained, between 1 and 365 days. Defaults to 7.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
@@ -346,6 +350,7 @@ type CustomDomainObservation struct {
 
 type CustomDomainParameters struct {
 
+	// The Custom Domain Name to use for the Storage Account, which will be validated by Azure.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -373,6 +378,7 @@ type DeleteRetentionPolicyObservation struct {
 
 type DeleteRetentionPolicyParameters struct {
 
+	// Specifies the number of days that the blob should be retained, between 1 and 365 days. Defaults to 7.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
@@ -382,15 +388,19 @@ type HourMetricsObservation struct {
 
 type HourMetricsParameters struct {
 
+	// Indicates whether hour metrics are enabled for the Queue service. Changing this forces a new resource.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// Indicates whether metrics should generate summary statistics for called API operations.
 	// +kubebuilder:validation:Optional
 	IncludeApis *bool `json:"includeApis,omitempty" tf:"include_apis,omitempty"`
 
+	// Specifies the number of days that logs will be retained. Changing this forces a new resource.
 	// +kubebuilder:validation:Optional
 	RetentionPolicyDays *float64 `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
 
+	// The version of storage analytics to configure. Changing this forces a new resource.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -410,7 +420,7 @@ type IdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this Storage Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned .
+	// Specifies the type of Managed Service Identity that should be configured on this Storage Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -420,15 +430,19 @@ type LoggingObservation struct {
 
 type LoggingParameters struct {
 
+	// Indicates whether all delete requests should be logged. Changing this forces a new resource.
 	// +kubebuilder:validation:Required
 	Delete *bool `json:"delete" tf:"delete,omitempty"`
 
+	// Indicates whether all read requests should be logged. Changing this forces a new resource.
 	// +kubebuilder:validation:Required
 	Read *bool `json:"read" tf:"read,omitempty"`
 
+	// Specifies the number of days that logs will be retained. Changing this forces a new resource.
 	// +kubebuilder:validation:Optional
 	RetentionPolicyDays *float64 `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
 
+	// The version of storage analytics to configure. Changing this forces a new resource.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 
@@ -442,15 +456,19 @@ type MinuteMetricsObservation struct {
 
 type MinuteMetricsParameters struct {
 
+	// Indicates whether minute metrics are enabled for the Queue service. Changing this forces a new resource.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// Indicates whether metrics should generate summary statistics for called API operations.
 	// +kubebuilder:validation:Optional
 	IncludeApis *bool `json:"includeApis,omitempty" tf:"include_apis,omitempty"`
 
+	// Specifies the number of days that logs will be retained. Changing this forces a new resource.
 	// +kubebuilder:validation:Optional
 	RetentionPolicyDays *float64 `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
 
+	// The version of storage analytics to configure. Changing this forces a new resource.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -469,7 +487,7 @@ type NetworkRulesParameters struct {
 	// +kubebuilder:validation:Required
 	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
-	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges  are not allowed.
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
 	// +kubebuilder:validation:Optional
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
@@ -528,6 +546,7 @@ type QueuePropertiesObservation struct {
 
 type QueuePropertiesParameters struct {
 
+	// A cors_rule block as defined above.
 	// +kubebuilder:validation:Optional
 	CorsRule []QueuePropertiesCorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
@@ -549,6 +568,7 @@ type RetentionPolicyObservation struct {
 
 type RetentionPolicyParameters struct {
 
+	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
@@ -625,6 +645,7 @@ type SharePropertiesObservation struct {
 
 type SharePropertiesParameters struct {
 
+	// A cors_rule block as defined below.
 	// +kubebuilder:validation:Optional
 	CorsRule []SharePropertiesCorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 

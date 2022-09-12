@@ -69,6 +69,7 @@ type EndpointObservation struct {
 
 type EndpointParameters struct {
 
+	// The IP address or domain name of the Network Connection Monitor endpoint.
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
@@ -88,6 +89,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludedIPAddresses []*string `json:"includedIpAddresses,omitempty" tf:"included_ip_addresses,omitempty"`
 
+	// The name of the endpoint for the Network Connection Monitor .
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -109,6 +111,7 @@ type FilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Item []ItemParameters `json:"item,omitempty" tf:"item,omitempty"`
 
+	// The behaviour type of this endpoint filter. Currently the only allowed value is Include. Defaults to Include.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -126,6 +129,7 @@ type HTTPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
+	// The port for the HTTP connection.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -147,6 +151,7 @@ type HTTPConfigurationRequestHeaderObservation struct {
 
 type HTTPConfigurationRequestHeaderParameters struct {
 
+	// The name of the HTTP header.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -160,6 +165,7 @@ type IcmpConfigurationObservation struct {
 
 type IcmpConfigurationParameters struct {
 
+	// Should path evaluation with trace route be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	TraceRouteEnabled *bool `json:"traceRouteEnabled,omitempty" tf:"trace_route_enabled,omitempty"`
 }
@@ -169,9 +175,11 @@ type ItemObservation struct {
 
 type ItemParameters struct {
 
+	// The address of the filter item.
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// The type of items included in the filter. Possible values are AgentAddress. Defaults to AgentAddress.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -199,9 +207,11 @@ type TCPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationPortBehavior *string `json:"destinationPortBehavior,omitempty" tf:"destination_port_behavior,omitempty"`
 
+	// The port for the TCP connection.
 	// +kubebuilder:validation:Required
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
+	// Should path evaluation with trace route be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	TraceRouteEnabled *bool `json:"traceRouteEnabled,omitempty" tf:"trace_route_enabled,omitempty"`
 }
@@ -219,6 +229,7 @@ type TestConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	IcmpConfiguration []IcmpConfigurationParameters `json:"icmpConfiguration,omitempty" tf:"icmp_configuration,omitempty"`
 
+	// The name of test configuration for the Network Connection Monitor.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -256,6 +267,7 @@ type TestGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The name of the test group for the Network Connection Monitor.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

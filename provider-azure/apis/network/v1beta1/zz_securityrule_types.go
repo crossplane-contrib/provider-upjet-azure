@@ -70,7 +70,7 @@ type SecurityRuleParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
-	// Network protocol this rule applies to. Possible values include Tcp, Udp, Icmp, Esp, Ah or * .
+	// Network protocol this rule applies to. Possible values include Tcp, Udp, Icmp, Esp, Ah or * (which matches all).
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 

@@ -22,6 +22,7 @@ type ACLParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPolicy []AccessPolicyParameters `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
+	// The ID which should be used for this Shared Identifier.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 }
@@ -35,7 +36,7 @@ type AccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
-	// The permissions which should be associated with this Shared Identifier. Possible value is combination of r , w , d , and l .
+	// The permissions which should be associated with this Shared Identifier. Possible value is combination of r (read), w (write), d (delete), and l (list).
 	// +kubebuilder:validation:Required
 	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 
@@ -45,6 +46,8 @@ type AccessPolicyParameters struct {
 }
 
 type ShareObservation struct {
+
+	// The ID which should be used for this Shared Identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Resource Manager ID of this File Share.
@@ -71,7 +74,7 @@ type ShareParameters struct {
 	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB  and at most 5120 GB . For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB .
+	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
 	// +kubebuilder:validation:Required
 	Quota *float64 `json:"quota" tf:"quota,omitempty"`
 

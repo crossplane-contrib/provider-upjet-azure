@@ -18,6 +18,7 @@ type ContainerNetworkInterfaceIPConfigurationObservation struct {
 
 type ContainerNetworkInterfaceIPConfigurationParameters struct {
 
+	// Specifies the name of the IP Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -45,6 +46,7 @@ type ContainerNetworkInterfaceParameters struct {
 	// +kubebuilder:validation:Required
 	IPConfiguration []ContainerNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
+	// Specifies the name of the IP Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }

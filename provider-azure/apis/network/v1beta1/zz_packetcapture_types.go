@@ -54,15 +54,15 @@ type PacketCaptureParameters struct {
 	// +kubebuilder:validation:Optional
 	Filter []PacketCaptureFilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// The number of bytes captured per packet. The remaining bytes are truncated. Defaults to 0 . Changing this forces a new resource to be created.
+	// The number of bytes captured per packet. The remaining bytes are truncated. Defaults to 0 (Entire Packet Captured). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	MaximumBytesPerPacket *float64 `json:"maximumBytesPerPacket,omitempty" tf:"maximum_bytes_per_packet,omitempty"`
 
-	// Maximum size of the capture in Bytes. Defaults to 1073741824 . Changing this forces a new resource to be created.
+	// Maximum size of the capture in Bytes. Defaults to 1073741824 (1GB). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	MaximumBytesPerSession *float64 `json:"maximumBytesPerSession,omitempty" tf:"maximum_bytes_per_session,omitempty"`
 
-	// The maximum duration of the capture session in seconds. Defaults to 18000 . Changing this forces a new resource to be created.
+	// The maximum duration of the capture session in seconds. Defaults to 18000 (5 hours). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	MaximumCaptureDuration *float64 `json:"maximumCaptureDuration,omitempty" tf:"maximum_capture_duration,omitempty"`
 
@@ -108,7 +108,7 @@ type StorageLocationObservation struct {
 
 type StorageLocationParameters struct {
 
-	// A valid local path on the targeting VM. Must include the name of the capture file . For Linux virtual machine it must start with /var/captures.
+	// A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For Linux virtual machine it must start with /var/captures.
 	// +kubebuilder:validation:Optional
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
 

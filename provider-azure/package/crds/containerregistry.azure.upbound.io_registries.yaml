@@ -69,9 +69,9 @@ spec:
                       to false.
                     type: boolean
                   anonymousPullEnabled:
-                    description: Whether allows anonymous  pull access to this Container
-                      Registry? Defaults to false. This is only supported on resources
-                      with the Standard or Premium SKU.
+                    description: Whether allows anonymous (unauthenticated) pull access
+                      to this Container Registry? Defaults to false. This is only
+                      supported on resources with the Standard or Premium SKU.
                     type: boolean
                   dataEndpointEnabled:
                     description: Whether to enable dedicated data endpoints for this
@@ -83,10 +83,12 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Boolean value that indicates whether the policy
+                            is enabled.
                           type: boolean
                         identityClientId:
-                          description: Required) The client ID of the managed identity
-                            associated with the encryption key.
+                          description: The client ID of the managed identity associated
+                            with the encryption key.
                           type: string
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key.
@@ -113,12 +115,15 @@ spec:
                             type: string
                           type: object
                         zoneRedundancyEnabled:
+                          description: Boolean value that indicates whether the policy
+                            is enabled.
                           type: boolean
                       required:
                       - location
                       type: object
                     type: array
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
@@ -131,7 +136,7 @@ spec:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Container Registry.
                             Possible values are SystemAssigned, UserAssigned, SystemAssigned,
-                            UserAssigned .
+                            UserAssigned (to enable both).
                           type: string
                       required:
                       - type
@@ -157,6 +162,8 @@ spec:
                           items:
                             properties:
                               action:
+                                description: The behaviour for requests matching this
+                                  rule. At this time the only supported value is Allow
                                 type: string
                               ipRange:
                                 description: The CIDR block from which requests will
@@ -170,6 +177,8 @@ spec:
                           items:
                             properties:
                               action:
+                                description: The behaviour for requests matching this
+                                  rule. At this time the only supported value is Allow
                                 type: string
                               subnetId:
                                 description: The subnet id from which requests will
@@ -264,6 +273,8 @@ spec:
                       container registry. Defaults to true.
                     type: boolean
                   quarantinePolicyEnabled:
+                    description: Boolean value that indicates whether the policy is
+                      enabled.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -354,6 +365,8 @@ spec:
                             after which it gets purged. Default is 7.
                           type: number
                         enabled:
+                          description: Boolean value that indicates whether the policy
+                            is enabled.
                           type: boolean
                       type: object
                     type: array
@@ -370,10 +383,14 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Boolean value that indicates whether the policy
+                            is enabled.
                           type: boolean
                       type: object
                     type: array
                   zoneRedundancyEnabled:
+                    description: Boolean value that indicates whether the policy is
+                      enabled.
                     type: boolean
                 required:
                 - location
@@ -556,13 +573,14 @@ spec:
               atProvider:
                 properties:
                   adminUsername:
-                    description: The Username associated with the Container Registry
-                      Admin account - if the admin account is enabled.
+                    description: Specifies the name of the Container Registry. Changing
+                      this forces a new resource to be created.
                     type: string
                   id:
                     description: The ID of the Container Registry.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:

@@ -66,6 +66,9 @@ spec:
               forProvider:
                 properties:
                   location:
+                    description: The Azure Region where the Managed Instance Failover
+                      Group should exist. Changing this forces a new resource to be
+                      created.
                     type: string
                   managedInstanceId:
                     description: The ID of the Azure SQL Managed Instance which will
@@ -433,6 +436,9 @@ spec:
                     items:
                       properties:
                         location:
+                          description: The Azure Region where the Managed Instance
+                            Failover Group should exist. Changing this forces a new
+                            resource to be created.
                           type: string
                         role:
                           type: string

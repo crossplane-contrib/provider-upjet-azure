@@ -210,7 +210,7 @@ type SubjectAlternativeNamesObservation struct {
 
 type SubjectAlternativeNamesParameters struct {
 
-	// A list of alternative DNS names  identified by the Certificate. Changing this forces a new resource to be created.
+	// A list of alternative DNS names (FQDNs) identified by the Certificate. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DNSNames []*string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
 

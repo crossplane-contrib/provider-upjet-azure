@@ -15,7 +15,7 @@ import (
 
 type IOTHubDPSObservation struct {
 
-	// The device endpoint of the IoT Device Provisioning Service.
+	// Specifies the name of the Iot Device Provisioning Service resource. Changing this forces a new resource to be created.
 	DeviceProvisioningHostName *string `json:"deviceProvisioningHostName,omitempty" tf:"device_provisioning_host_name,omitempty"`
 
 	// The ID of the IoT Device Provisioning Service.
@@ -28,13 +28,13 @@ type IOTHubDPSObservation struct {
 	// +kubebuilder:validation:Optional
 	LinkedHub []LinkedHubObservation `json:"linkedHub,omitempty" tf:"linked_hub,omitempty"`
 
-	// The service endpoint of the IoT Device Provisioning Service.
+	// Specifies the name of the Iot Device Provisioning Service resource. Changing this forces a new resource to be created.
 	ServiceOperationsHostName *string `json:"serviceOperationsHostName,omitempty" tf:"service_operations_host_name,omitempty"`
 }
 
 type IOTHubDPSParameters struct {
 
-	// The allocation policy of the IoT Device Provisioning Service . Defaults to Hashed.
+	// The allocation policy of the IoT Device Provisioning Service (Hashed, GeoLatency or Static). Defaults to Hashed.
 	// +kubebuilder:validation:Optional
 	AllocationPolicy *string `json:"allocationPolicy,omitempty" tf:"allocation_policy,omitempty"`
 
@@ -46,6 +46,7 @@ type IOTHubDPSParameters struct {
 	// +kubebuilder:validation:Optional
 	LinkedHub []LinkedHubParameters `json:"linkedHub,omitempty" tf:"linked_hub,omitempty"`
 
+	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
@@ -84,6 +85,7 @@ type IOTHubDPSSkuParameters struct {
 	// +kubebuilder:validation:Required
 	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
+	// The name of the sku. Currently can only be set to S1.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -101,6 +103,7 @@ type IPFilterRuleParameters struct {
 	// +kubebuilder:validation:Required
 	IPMask *string `json:"ipMask" tf:"ip_mask,omitempty"`
 
+	// The name of the filter.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -111,7 +114,7 @@ type IPFilterRuleParameters struct {
 
 type LinkedHubObservation struct {
 
-	// The IoT Hub hostname.
+	// (Computed) The IoT Hub hostname.
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 }
 
@@ -129,6 +132,7 @@ type LinkedHubParameters struct {
 	// +kubebuilder:validation:Required
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
+	// The location of the IoT hub.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 }

@@ -37,7 +37,7 @@ type DiskEncryptionSetParameters struct {
 	// +kubebuilder:validation:Required
 	Identity []IdentityParameters `json:"identity" tf:"identity,omitempty"`
 
-	// Specifies the URL to a Key Vault Key .
+	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret).
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -75,7 +75,7 @@ type DiskEncryptionSetParameters struct {
 
 type IdentityObservation struct {
 
-	// The  ID of the Service Principal.
+	// The (Client) ID of the Service Principal.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The ID of the Tenant the Service Principal is assigned in.

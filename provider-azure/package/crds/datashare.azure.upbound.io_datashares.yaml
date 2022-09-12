@@ -154,6 +154,7 @@ spec:
                     items:
                       properties:
                         name:
+                          description: The name of the snapshot schedule.
                           type: string
                         recurrence:
                           description: The interval of the synchronization with the

@@ -65,8 +65,9 @@ spec:
               forProvider:
                 properties:
                   accessKeyMetadataWritesEnabled:
-                    description: Is write operations on metadata resources  via account
-                      keys enabled? Defaults to true.
+                    description: Is write operations on metadata resources (databases,
+                      containers, throughput) via account keys enabled? Defaults to
+                      true.
                     type: boolean
                   analyticalStorage:
                     description: An analytical_storage block as defined below.
@@ -106,6 +107,10 @@ spec:
                             type is Periodic. Possible values are Geo, Local and Zone.
                           type: string
                         type:
+                          description: The type of the backup. Possible values are
+                            Continuous and Periodic. Defaults to Periodic. Migration
+                            of Periodic to Continuous is one-way, changing Continuous
+                            to Periodic forces a new resource to be created.
                           type: string
                       required:
                       - type
@@ -118,6 +123,8 @@ spec:
                     items:
                       properties:
                         name:
+                          description: The database name for the restore request.
+                            Changing this forces a new resource to be created.
                           type: string
                       required:
                       - name
@@ -129,8 +136,8 @@ spec:
                       properties:
                         totalThroughputLimit:
                           description: The total throughput limit imposed on this
-                            Cosmos DB account . Possible values are at least -1. -1
-                            means no limit.
+                            Cosmos DB account (RU/s). Possible values are at least
+                            -1. -1 means no limit.
                           type: number
                       required:
                       - totalThroughputLimit
@@ -148,9 +155,10 @@ spec:
                           type: string
                         maxIntervalInSeconds:
                           description: When used with the Bounded Staleness consistency
-                            level, this value represents the time amount of staleness  tolerated.
-                            Accepted range for this value is 5 - 86400 . Defaults
-                            to 5. Required when consistency_level is set to BoundedStaleness.
+                            level, this value represents the time amount of staleness
+                            (in seconds) tolerated. Accepted range for this value
+                            is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level
+                            is set to BoundedStaleness.
                           type: number
                         maxStalenessPrefix:
                           description: When used with the Bounded Staleness consistency
@@ -236,11 +244,11 @@ spec:
                         failoverPriority:
                           description: The failover priority of the region. A failover
                             priority of 0 indicates a write region. The maximum value
-                            for a failover priority = . Failover priority values must
-                            be unique for each of the regions in which the database
-                            account exists. Changing this causes the location to be
-                            re-provisioned and cannot be changed for the location
-                            with failover priority 0.
+                            for a failover priority = (total number of regions - 1).
+                            Failover priority values must be unique for each of the
+                            regions in which the database account exists. Changing
+                            this causes the location to be re-provisioned and cannot
+                            be changed for the location with failover priority 0.
                           type: number
                         location:
                           type: string
@@ -258,6 +266,9 @@ spec:
                     items:
                       properties:
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Cosmos Account. The
+                            only possible value is SystemAssigned.
                           type: string
                       required:
                       - type
@@ -408,6 +419,8 @@ spec:
                                   type: string
                                 type: array
                               name:
+                                description: The database name for the restore request.
+                                  Changing this forces a new resource to be created.
                                 type: string
                             required:
                             - name
@@ -415,7 +428,8 @@ spec:
                           type: array
                         restoreTimestampInUtc:
                           description: The creation time of the database or the collection
-                            . Changing this forces a new resource to be created.
+                            (Datetime Format RFC 3339). Changing this forces a new
+                            resource to be created.
                           type: string
                         sourceCosmosdbAccountId:
                           description: The resource ID of the restorable database
@@ -515,6 +529,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the virtual network subnet.
                           type: string
                         ignoreMissingVnetServiceEndpoint:
                           description: If set to true, the specified subnet will be
@@ -718,22 +733,22 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the virtual network subnet.
                           type: string
                       type: object
                     type: array
                   id:
+                    description: The ID of the virtual network subnet.
                     type: string
                   identity:
                     description: An identity block as defined below.
                     items:
                       properties:
                         principalId:
-                          description: The Principal ID associated with this Managed
-                            Service Identity.
+                          description: The ID of the virtual network subnet.
                           type: string
                         tenantId:
-                          description: The Tenant ID associated with this Managed
-                            Service Identity.
+                          description: The ID of the virtual network subnet.
                           type: string
                       type: object
                     type: array

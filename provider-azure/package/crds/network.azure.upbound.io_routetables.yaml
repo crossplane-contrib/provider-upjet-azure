@@ -158,7 +158,8 @@ spec:
                       properties:
                         addressPrefix:
                           description: The destination to which the route applies.
-                            Can be CIDR  or Azure Service Tag  format.
+                            Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag
+                            (such as ApiManagement, AzureBackup or AzureMonitor) format.
                           type: string
                         name:
                           type: string

@@ -184,17 +184,24 @@ spec:
                       Defaults to true.
                     type: boolean
                   criteria:
-                    description: One or more  criteria blocks as defined below.
+                    description: One or more (static) criteria blocks as defined below.
                     items:
                       properties:
                         aggregation:
+                          description: The statistic that runs over the metric values.
+                            Possible values are Average, Count, Minimum, Maximum and
+                            Total.
                           type: string
                         dimension:
+                          description: One or more dimension blocks as defined below.
                           items:
                             properties:
                               name:
+                                description: One of the dimension names.
                                 type: string
                               operator:
+                                description: The dimension operator. Possible values
+                                  are Include, Exclude and StartsWith.
                                 type: string
                               values:
                                 description: The list of dimension values.
@@ -208,12 +215,20 @@ spec:
                             type: object
                           type: array
                         metricName:
+                          description: One of the metric names to be monitored.
                           type: string
                         metricNamespace:
+                          description: One of the metric namespaces to be monitored.
                           type: string
                         operator:
+                          description: The criteria operator. Possible values are
+                            Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan
+                            and LessThanOrEqual.
                           type: string
                         skipMetricValidation:
+                          description: Skip the metric validation to allow creating
+                            an alert rule on a custom metric that isn't yet emitted?
+                            Defaults to false.
                           type: boolean
                         threshold:
                           description: The criteria threshold value that activates
@@ -235,17 +250,24 @@ spec:
                     items:
                       properties:
                         aggregation:
+                          description: The statistic that runs over the metric values.
+                            Possible values are Average, Count, Minimum, Maximum and
+                            Total.
                           type: string
                         alertSensitivity:
                           description: The extent of deviation required to trigger
                             an alert. Possible values are Low, Medium and High.
                           type: string
                         dimension:
+                          description: One or more dimension blocks as defined below.
                           items:
                             properties:
                               name:
+                                description: One of the dimension names.
                                 type: string
                               operator:
+                                description: The dimension operator. Possible values
+                                  are Include, Exclude and StartsWith.
                                 type: string
                               values:
                                 description: The list of dimension values.
@@ -265,19 +287,27 @@ spec:
                         evaluationTotalCount:
                           description: The number of aggregated lookback points. The
                             lookback time window is calculated based on the aggregation
-                            granularity  and the selected number of aggregated points.
+                            granularity (window_size) and the selected number of aggregated
+                            points.
                           type: number
                         ignoreDataBefore:
                           description: The ISO8601 date from which to start learning
                             the metric historical data and calculate the dynamic thresholds.
                           type: string
                         metricName:
+                          description: One of the metric names to be monitored.
                           type: string
                         metricNamespace:
+                          description: One of the metric namespaces to be monitored.
                           type: string
                         operator:
+                          description: The criteria operator. Possible values are
+                            LessThan, GreaterThan and GreaterOrLessThan.
                           type: string
                         skipMetricValidation:
+                          description: Skip the metric validation to allow creating
+                            an alert rule on a custom metric that isn't yet emitted?
+                            Defaults to false.
                           type: boolean
                       required:
                       - aggregation
@@ -473,10 +503,10 @@ spec:
                       group scope or multiple scopes.
                     type: string
                   targetResourceType:
-                    description: The resource type  of the target resource. The resource
-                      type (e.g. Microsoft.Compute/virtualMachines) of the target
-                      pluginsdk. Required when using subscription, resource group
-                      scope or multiple scopes.
+                    description: The resource type (e.g. Microsoft.Compute/virtualMachines)
+                      of the target resource. The resource type (e.g. Microsoft.Compute/virtualMachines)
+                      of the target pluginsdk. Required when using subscription, resource
+                      group scope or multiple scopes.
                     type: string
                   windowSize:
                     description: The period of time that is used to monitor alert

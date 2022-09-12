@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   additionalLocation:
+                    description: One or more additional_location blocks as defined
+                      below.
                     items:
                       properties:
                         capacity:
@@ -72,10 +74,16 @@ spec:
                             Defaults to the capacity of the main region.
                           type: number
                         location:
+                          description: The name of the Azure Region in which the API
+                            Management Service should be expanded to.
                           type: string
                         publicIpAddressId:
+                          description: ID of a standard SKU IPv4 Public IP.
                           type: string
                         virtualNetworkConfiguration:
+                          description: A virtual_network_configuration block as defined
+                            below.  Required when virtual_network_type is External
+                            or Internal.
                           items:
                             properties:
                               subnetId:
@@ -165,6 +173,7 @@ spec:
                             type: object
                           type: array
                         zones:
+                          description: A list of availability zones.
                           items:
                             type: string
                           type: array
@@ -173,11 +182,12 @@ spec:
                       type: object
                     type: array
                   certificate:
+                    description: One or more (up to 10) certificate blocks as defined
+                      below.
                     items:
                       properties:
                         certificatePasswordSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: The password for the certificate.
                           properties:
                             key:
                               description: The key to select.
@@ -231,6 +241,7 @@ spec:
                       supported when additional_location is set.
                     type: boolean
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
@@ -243,13 +254,15 @@ spec:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this API Management Service.
                             Possible values are SystemAssigned, UserAssigned, SystemAssigned,
-                            UserAssigned .
+                            UserAssigned (to enable both).
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   location:
+                    description: The Azure location where the API Management Service
+                      exists. Changing this forces a new resource to be created.
                     type: string
                   minApiVersion:
                     description: The version which the control plane API calls to
@@ -284,6 +297,7 @@ spec:
                       type: object
                     type: array
                   publicIpAddressId:
+                    description: ID of a standard SKU IPv4 Public IP.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Is public access to the service allowed?. Defaults
@@ -437,7 +451,8 @@ spec:
                           type: boolean
                         tripleDesCiphersEnabled:
                           description: Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher
-                            be enabled for alL TLS versions ? Defaults to false.
+                            be enabled for alL TLS versions (1.0, 1.1 and 1.2)? Defaults
+                            to false.
                           type: boolean
                       type: object
                     type: array
@@ -446,6 +461,8 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Should anonymous users be redirected to the
+                            sign in page?
                           type: boolean
                       required:
                       - enabled
@@ -456,6 +473,7 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Can users sign up on the development portal?
                           type: boolean
                         termsOfService:
                           description: A terms_of_service block as defined below.
@@ -466,6 +484,8 @@ spec:
                                   during sign up?
                                 type: boolean
                               enabled:
+                                description: Should Terms of Service be displayed
+                                  during sign up?.
                                 type: boolean
                               text:
                                 description: The Terms of Service which users are
@@ -483,9 +503,10 @@ spec:
                     type: array
                   skuName:
                     description: 'sku_name is a string consisting of two parts separated
-                      by an underscore. The first part is the name, valid values include:
-                      Consumption, Developer, Basic, Standard and Premium. The second
-                      part is the capacity , which must be a positive integer .'
+                      by an underscore(_). The first part is the name, valid values
+                      include: Consumption, Developer, Basic, Standard and Premium.
+                      The second part is the capacity (e.g. the number of deployed
+                      units of the sku), which must be a positive integer (e.g. Developer_1).'
                     type: string
                   tags:
                     additionalProperties:
@@ -493,15 +514,20 @@ spec:
                     description: A mapping of tags assigned to the resource.
                     type: object
                   tenantAccess:
+                    description: A tenant_access block as defined below.
                     items:
                       properties:
                         enabled:
+                          description: Should the access to the management API be
+                            enabled?
                           type: boolean
                       required:
                       - enabled
                       type: object
                     type: array
                   virtualNetworkConfiguration:
+                    description: A virtual_network_configuration block as defined
+                      below. Required when virtual_network_type is External or Internal.
                     items:
                       properties:
                         subnetId:
@@ -593,6 +619,9 @@ spec:
                       values include: None, External, Internal.'
                     type: string
                   zones:
+                    description: Specifies a list of Availability Zones in which this
+                      API Management service should be located. Changing this forces
+                      a new API Management service to be created.
                     items:
                       type: string
                     type: array
@@ -779,6 +808,8 @@ spec:
               atProvider:
                 properties:
                   additionalLocation:
+                    description: One or more additional_location blocks as defined
+                      below.
                     items:
                       properties:
                         gatewayRegionalUrl:
@@ -794,13 +825,19 @@ spec:
                       type: object
                     type: array
                   certificate:
+                    description: One or more (up to 10) certificate blocks as defined
+                      below.
                     items:
                       properties:
                         expiry:
+                          description: 'The expiration date of the certificate in
+                            RFC3339 format: 2000-01-02T03:04:05Z.'
                           type: string
                         subject:
+                          description: The subject of the certificate.
                           type: string
                         thumbprint:
+                          description: The thumbprint of the certificate.
                           type: string
                       type: object
                     type: array
@@ -823,18 +860,32 @@ spec:
                           items:
                             properties:
                               expiry:
+                                description: 'The expiration date of the certificate
+                                  in RFC3339 format: 2000-01-02T03:04:05Z.'
                                 type: string
                               hostName:
+                                description: The name of the API Management Service.
+                                  Changing this forces a new resource to be created.
                                 type: string
                               keyVaultId:
+                                description: The ID of the Key Vault Secret containing
+                                  the SSL Certificate, which must be should be of
+                                  the type application/x-pkcs12.
                                 type: string
                               negotiateClientCertificate:
+                                description: One or more (up to 10) certificate blocks
+                                  as defined below.
                                 type: boolean
                               sslKeyvaultIdentityClientId:
+                                description: The Managed Identity Client ID to use
+                                  to access the Key Vault. This Identity must be specified
+                                  in the identity block to be used.
                                 type: string
                               subject:
+                                description: The subject of the certificate.
                                 type: string
                               thumbprint:
+                                description: The thumbprint of the certificate.
                                 type: string
                             type: object
                           type: array
@@ -844,18 +895,32 @@ spec:
                           items:
                             properties:
                               expiry:
+                                description: 'The expiration date of the certificate
+                                  in RFC3339 format: 2000-01-02T03:04:05Z.'
                                 type: string
                               hostName:
+                                description: The Hostname to use for the Management
+                                  API.
                                 type: string
                               keyVaultId:
+                                description: The ID of the Key Vault Secret containing
+                                  the SSL Certificate, which must be should be of
+                                  the type application/x-pkcs12.
                                 type: string
                               negotiateClientCertificate:
+                                description: Should Client Certificate Negotiation
+                                  be enabled for this Hostname? Defaults to false.
                                 type: boolean
                               sslKeyvaultIdentityClientId:
+                                description: The client id of the System or User Assigned
+                                  Managed identity generated by Azure AD, which has
+                                  GET access to the keyVault containing the SSL certificate.
                                 type: string
                               subject:
+                                description: The subject of the certificate.
                                 type: string
                               thumbprint:
+                                description: The thumbprint of the certificate.
                                 type: string
                             type: object
                           type: array
@@ -864,18 +929,32 @@ spec:
                           items:
                             properties:
                               expiry:
+                                description: 'The expiration date of the certificate
+                                  in RFC3339 format: 2000-01-02T03:04:05Z.'
                                 type: string
                               hostName:
+                                description: The name of the API Management Service.
+                                  Changing this forces a new resource to be created.
                                 type: string
                               keyVaultId:
+                                description: The ID of the Key Vault Secret containing
+                                  the SSL Certificate, which must be should be of
+                                  the type application/x-pkcs12.
                                 type: string
                               negotiateClientCertificate:
+                                description: One or more (up to 10) certificate blocks
+                                  as defined below.
                                 type: boolean
                               sslKeyvaultIdentityClientId:
+                                description: The Managed Identity Client ID to use
+                                  to access the Key Vault. This Identity must be specified
+                                  in the identity block to be used.
                                 type: string
                               subject:
+                                description: The subject of the certificate.
                                 type: string
                               thumbprint:
+                                description: The thumbprint of the certificate.
                                 type: string
                             type: object
                           type: array
@@ -890,18 +969,32 @@ spec:
                                   Defaults to false.
                                 type: boolean
                               expiry:
+                                description: 'The expiration date of the certificate
+                                  in RFC3339 format: 2000-01-02T03:04:05Z.'
                                 type: string
                               hostName:
+                                description: The Hostname to use for the Management
+                                  API.
                                 type: string
                               keyVaultId:
+                                description: The ID of the Key Vault Secret containing
+                                  the SSL Certificate, which must be should be of
+                                  the type application/x-pkcs12.
                                 type: string
                               negotiateClientCertificate:
+                                description: Should Client Certificate Negotiation
+                                  be enabled for this Hostname? Defaults to false.
                                 type: boolean
                               sslKeyvaultIdentityClientId:
+                                description: The Managed Identity Client ID to use
+                                  to access the Key Vault. This Identity must be specified
+                                  in the identity block to be used.
                                 type: string
                               subject:
+                                description: The subject of the certificate.
                                 type: string
                               thumbprint:
+                                description: The thumbprint of the certificate.
                                 type: string
                             type: object
                           type: array
@@ -910,18 +1003,32 @@ spec:
                           items:
                             properties:
                               expiry:
+                                description: 'The expiration date of the certificate
+                                  in RFC3339 format: 2000-01-02T03:04:05Z.'
                                 type: string
                               hostName:
+                                description: The name of the API Management Service.
+                                  Changing this forces a new resource to be created.
                                 type: string
                               keyVaultId:
+                                description: The ID of the Key Vault Secret containing
+                                  the SSL Certificate, which must be should be of
+                                  the type application/x-pkcs12.
                                 type: string
                               negotiateClientCertificate:
+                                description: One or more (up to 10) certificate blocks
+                                  as defined below.
                                 type: boolean
                               sslKeyvaultIdentityClientId:
+                                description: The Managed Identity Client ID to use
+                                  to access the Key Vault. This Identity must be specified
+                                  in the identity block to be used.
                                 type: string
                               subject:
+                                description: The subject of the certificate.
                                 type: string
                               thumbprint:
+                                description: The thumbprint of the certificate.
                                 type: string
                             type: object
                           type: array
@@ -931,6 +1038,7 @@ spec:
                     description: The ID of the API Management Service.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:
@@ -958,10 +1066,11 @@ spec:
                       type: string
                     type: array
                   scmUrl:
-                    description: The URL for the SCM  Endpoint associated with this
-                      API Management service.
+                    description: The URL for the SCM (Source Code Management) Endpoint
+                      associated with this API Management service.
                     type: string
                   tenantAccess:
+                    description: A tenant_access block as defined below.
                     items:
                       properties:
                         tenantId:

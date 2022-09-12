@@ -18,6 +18,7 @@ type CloudToDeviceObservation struct {
 
 type CloudToDeviceParameters struct {
 
+	// The default time to live for cloud-to-device messages, specified as an ISO 8601 timespan duration. This value must be between 1 minute and 48 hours. Defaults to PT1H.
 	// +kubebuilder:validation:Optional
 	DefaultTTL *string `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
@@ -25,16 +26,20 @@ type CloudToDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	Feedback []FeedbackParameters `json:"feedback,omitempty" tf:"feedback,omitempty"`
 
+	// The maximum delivery count for cloud-to-device per-device queues. This value must be between 1 and 100. Defaults to 10.
 	// +kubebuilder:validation:Optional
 	MaxDeliveryCount *float64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
 }
 
 type EndpointObservation struct {
+
+	// The type used to authenticate against the endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// Time interval at which blobs are written to storage. Value should be between 60 and 720 seconds. Default value is 300 seconds. This attribute is applicable for endpoint type AzureIotHub.StorageContainer.
 	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
 
+	// The name of storage container in the storage account. This attribute is mandatory for endpoint type AzureIotHub.StorageContainer.
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	// Encoding that is used to serialize messages to blobs. Supported values are Avro, AvroDeflate and JSON. Default value is Avro. This attribute is applicable for endpoint type AzureIotHub.StorageContainer. Changing this forces a new resource to be created.
@@ -49,15 +54,19 @@ type EndpointObservation struct {
 	// File name format for the blob. Default format is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters are mandatory but can be reordered. This attribute is applicable for endpoint type AzureIotHub.StorageContainer.
 	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
 
+	// The ID of the User Managed Identity used to authenticate against the endpoint.
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
-	// Maximum number of bytes for each blob written to storage. Value should be between 10485760 and 524288000. Default value is 314572800. This attribute is applicable for endpoint type AzureIotHub.StorageContainer.
+	// Maximum number of bytes for each blob written to storage. Value should be between 10485760(10MB) and 524288000(500MB). Default value is 314572800(300MB). This attribute is applicable for endpoint type AzureIotHub.StorageContainer.
 	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
 
+	// The name of the endpoint. The name must be unique across endpoint types. The following names are reserved:  events, operationsMonitoringEvents, fileNotifications and $default.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The resource group in which the endpoint will be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// The type of the endpoint. Possible values are AzureIotHub.StorageContainer, AzureIotHub.ServiceBusQueue, AzureIotHub.ServiceBusTopic or AzureIotHub.EventHub.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -65,12 +74,14 @@ type EndpointParameters struct {
 }
 
 type EnrichmentObservation struct {
+
+	// The list of endpoints which will be enriched.
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
 	// The key of the enrichment.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The value of the enrichment. Value can be any static string, the name of the IoT Hub sending the message  or information from the device twin
+	// The value of the enrichment. Value can be any static string, the name of the IoT Hub sending the message (use $iothubname) or information from the device twin (ex: $twin.tags.latitude)
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -78,12 +89,17 @@ type EnrichmentParameters struct {
 }
 
 type FallbackRouteObservation struct {
+
+	// The condition that is evaluated to apply the routing rule. Defaults to true. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// Used to specify whether the fallback route is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
+	// The source that the routing rule is to be applied to, such as DeviceMessages. Possible values include: Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents, DeviceConnectionStateEvents, DeviceJobLifecycleEvents.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
@@ -95,9 +111,11 @@ type FeedbackObservation struct {
 
 type FeedbackParameters struct {
 
+	// The lock duration for the feedback queue, specified as an ISO 8601 timespan duration. This value must be between 5 and 300 seconds. Defaults to PT60S.
 	// +kubebuilder:validation:Optional
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 
+	// The maximum delivery count for the feedback queue. This value must be between 1 and 100. Defaults to 10.
 	// +kubebuilder:validation:Optional
 	MaxDeliveryCount *float64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
 
@@ -111,24 +129,31 @@ type FileUploadObservation struct {
 
 type FileUploadParameters struct {
 
+	// The type used to authenticate against the storage account. Possible values are keyBased and identityBased. Defaults to keyBased.
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
+	// The connection string for the Azure Storage account to which files are uploaded.
 	// +kubebuilder:validation:Required
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
+	// The name of the root container where the files should be uploaded to. The container need not exist but should be creatable using the connection_string specified.
 	// +kubebuilder:validation:Required
 	ContainerName *string `json:"containerName" tf:"container_name,omitempty"`
 
+	// The period of time for which a file upload notification message is available to consume before it expires, specified as an ISO 8601 timespan duration. This value must be between 1 minute and 48 hours. Defaults to PT1H.
 	// +kubebuilder:validation:Optional
 	DefaultTTL *string `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
+	// The ID of the User Managed Identity used to authenticate against the storage account.
 	// +kubebuilder:validation:Optional
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
+	// The lock duration for the file upload notifications queue, specified as an ISO 8601 timespan duration. This value must be between 5 and 300 seconds. Defaults to PT1M.
 	// +kubebuilder:validation:Optional
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 
+	// The number of times the IoT Hub attempts to deliver a file upload notification message. Defaults to 10.
 	// +kubebuilder:validation:Optional
 	MaxDeliveryCount *float64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
 
@@ -149,7 +174,7 @@ type IOTHubObservation struct {
 	// A enrichment block as defined below.
 	Enrichment []EnrichmentObservation `json:"enrichment,omitempty" tf:"enrichment,omitempty"`
 
-	// The EventHub compatible endpoint for events data
+	// An endpoint block as defined below.
 	EventHubEventsEndpoint *string `json:"eventHubEventsEndpoint,omitempty" tf:"event_hub_events_endpoint,omitempty"`
 
 	// The EventHub namespace for events data
@@ -158,7 +183,7 @@ type IOTHubObservation struct {
 	// The EventHub compatible path for events data
 	EventHubEventsPath *string `json:"eventHubEventsPath,omitempty" tf:"event_hub_events_path,omitempty"`
 
-	// The EventHub compatible endpoint for operational data
+	// An endpoint block as defined below.
 	EventHubOperationsEndpoint *string `json:"eventHubOperationsEndpoint,omitempty" tf:"event_hub_operations_endpoint,omitempty"`
 
 	// The EventHub compatible path for operational data
@@ -167,12 +192,13 @@ type IOTHubObservation struct {
 	// A fallback_route block as defined below. If the fallback route is enabled, messages that don't match any of the supplied routes are automatically sent to this route. Defaults to messages/events.
 	FallbackRoute []FallbackRouteObservation `json:"fallbackRoute,omitempty" tf:"fallback_route,omitempty"`
 
-	// The hostname of the IotHub Resource.
+	// Specifies the name of the IotHub resource. Changing this forces a new resource to be created.
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// The ID of the IoTHub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -182,6 +208,7 @@ type IOTHubObservation struct {
 	// One or more shared_access_policy blocks as defined below.
 	SharedAccessPolicy []SharedAccessPolicyObservation `json:"sharedAccessPolicy,omitempty" tf:"shared_access_policy,omitempty"`
 
+	// Specifies the type of Managed Service Identity that should be configured on this IoT Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -203,6 +230,7 @@ type IOTHubParameters struct {
 	// +kubebuilder:validation:Optional
 	FileUpload []FileUploadParameters `json:"fileUpload,omitempty" tf:"file_upload,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -222,6 +250,7 @@ type IOTHubParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// The name of the resource group under which the IotHub resource has to be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -256,6 +285,7 @@ type IPRuleParameters struct {
 	// +kubebuilder:validation:Required
 	IPMask *string `json:"ipMask" tf:"ip_mask,omitempty"`
 
+	// The name of the IP rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -275,6 +305,7 @@ type IdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// Specifies the type of Managed Service Identity that should be configured on this IoT Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -298,14 +329,20 @@ type NetworkRuleSetParameters struct {
 }
 
 type RouteObservation struct {
+
+	// The condition that is evaluated to apply the routing rule. Defaults to true. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// Used to specify whether a route is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The list of endpoints to which messages that satisfy the condition are routed.
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
+	// The name of the route.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The source that the routing rule is to be applied to, such as DeviceMessages. Possible values include: Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents, DeviceConnectionStateEvents, DeviceJobLifecycleEvents.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
@@ -314,7 +351,7 @@ type RouteParameters struct {
 
 type SharedAccessPolicyObservation struct {
 
-	// The name of the shared access policy.
+	// Specifies the name of the IotHub resource. Changing this forces a new resource to be created.
 	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
 
 	// The permissions assigned to the shared access policy.
@@ -333,6 +370,7 @@ type SkuParameters struct {
 	// +kubebuilder:validation:Required
 	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
+	// The name of the sku. Possible values are B1, B2, B3, F1, S1, S2, and S3.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }

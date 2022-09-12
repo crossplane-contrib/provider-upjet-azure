@@ -40,11 +40,14 @@ type TableACLParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessPolicy []ACLAccessPolicyParameters `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
+	// The ID which should be used for this Shared Identifier.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type TableObservation struct {
+
+	// The ID which should be used for this Shared Identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

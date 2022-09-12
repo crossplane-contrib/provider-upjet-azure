@@ -246,6 +246,7 @@ spec:
                             type: string
                           type: array
                         name:
+                          description: Specifies the name of the rule.
                           type: string
                         protocol:
                           description: One or more protocol blocks as defined below.

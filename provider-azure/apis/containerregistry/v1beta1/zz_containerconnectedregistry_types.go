@@ -59,7 +59,7 @@ type ContainerConnectedRegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	ParentRegistryID *string `json:"parentRegistryId,omitempty" tf:"parent_registry_id,omitempty"`
 
-	// The period of time  for which a message is available to sync before it is expired. Allowed range is from P1D to P90D.
+	// The period of time (in form of ISO8601) for which a message is available to sync before it is expired. Allowed range is from P1D to P90D.
 	// +kubebuilder:validation:Optional
 	SyncMessageTTL *string `json:"syncMessageTtl,omitempty" tf:"sync_message_ttl,omitempty"`
 
@@ -81,7 +81,7 @@ type ContainerConnectedRegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	SyncTokenIDSelector *v1.Selector `json:"syncTokenIdSelector,omitempty" tf:"-"`
 
-	// The time window  during which sync is enabled for each schedule occurrence. Allowed range is from PT3H to P7D.
+	// The time window (in form of ISO8601) during which sync is enabled for each schedule occurrence. Allowed range is from PT3H to P7D.
 	// +kubebuilder:validation:Optional
 	SyncWindow *string `json:"syncWindow,omitempty" tf:"sync_window,omitempty"`
 }
@@ -91,7 +91,7 @@ type NotificationObservation struct {
 
 type NotificationParameters struct {
 
-	// The action of the artifact that wants to be subscribed for the Connected Registry. Possible values are push, delete and * .
+	// The action of the artifact that wants to be subscribed for the Connected Registry. Possible values are push, delete and * (i.e. any).
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
@@ -99,6 +99,7 @@ type NotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
 
+	// The name of the artifact that wants to be subscribed for the Connected Registry.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

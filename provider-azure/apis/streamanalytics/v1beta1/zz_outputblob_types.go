@@ -25,7 +25,7 @@ type OutputBlobParameters struct {
 	// +kubebuilder:validation:Optional
 	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
 
-	// The minimum number of rows per batch .
+	// The minimum number of rows per batch (must be between 0 and 10000).
 	// +kubebuilder:validation:Optional
 	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
 
@@ -102,7 +102,7 @@ type SerializationParameters struct {
 	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
-	// The delimiter that will be used to separate comma-separated value  records. Possible values are   , , ,     , |  and ;.
+	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma),     (tab), | (pipe) and ;.
 	// +kubebuilder:validation:Optional
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 

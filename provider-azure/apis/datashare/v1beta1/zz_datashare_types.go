@@ -57,6 +57,7 @@ type SnapshotScheduleObservation struct {
 
 type SnapshotScheduleParameters struct {
 
+	// The name of the snapshot schedule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

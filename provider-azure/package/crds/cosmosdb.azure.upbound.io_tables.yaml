@@ -142,14 +142,12 @@ spec:
                         type: object
                     type: object
                   autoscaleSettings:
-                    description: An autoscale_settings block as defined below. This
-                      must be set upon database creation otherwise it cannot be updated
-                      without a manual terraform destroy-apply.
+                    description: An autoscale_settings block as defined below.
                     items:
                       properties:
                         maxThroughput:
-                          description: The maximum throughput of the Table . Must
-                            be between 1,000 and 1,000,000. Must be set in increments
+                          description: The maximum throughput of the Table (RU/s).
+                            Must be between 1,000 and 1,000,000. Must be set in increments
                             of 1,000. Conflicts with throughput.
                           type: number
                       type: object
@@ -235,10 +233,8 @@ spec:
                         type: object
                     type: object
                   throughput:
-                    description: The throughput of Table . Must be set in increments
-                      of 100. The minimum value is 400. This must be set upon database
-                      creation otherwise it cannot be updated without a manual terraform
-                      destroy-apply.
+                    description: The throughput of Table (RU/s). Must be set in increments
+                      of 100. The minimum value is 400.
                     type: number
                 type: object
               providerConfigRef:

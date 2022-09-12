@@ -66,15 +66,15 @@ spec:
                 properties:
                   capacity:
                     description: The size of the Redis cache to deploy. Valid values
-                      for a SKU family of C  are 0, 1, 2, 3, 4, 5, 6, and for P  family
-                      are 1, 2, 3, 4.
+                      for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5,
+                      6, and for P (Premium) family are 1, 2, 3, 4.
                     type: number
                   enableNonSslPort:
-                    description: Enable the non-SSL port  - disabled by default.
+                    description: Enable the non-SSL port (6379) - disabled by default.
                     type: boolean
                   family:
                     description: The SKU family/pricing group to use. Valid values
-                      are C  and P
+                      are C (for Basic/Standard SKU family) and P (for Premium)
                     type: string
                   location:
                     description: The location of the resource group.
@@ -114,6 +114,8 @@ spec:
                       endpoint access is allowed. Defaults to true.
                     type: boolean
                   redisConfiguration:
+                    description: A redis_configuration as defined below - with some
+                      limitations by SKU - defaults/details are shown below.
                     items:
                       properties:
                         aofBackupEnabled:
@@ -594,7 +596,8 @@ spec:
               atProvider:
                 properties:
                   hostname:
-                    description: The Hostname of the Redis Instance
+                    description: The name of the Redis instance. Changing this forces
+                      a new resource to be created.
                     type: string
                   id:
                     description: The Route ID.
@@ -603,6 +606,8 @@ spec:
                     description: The non-SSL Port of the Redis Instance
                     type: number
                   redisConfiguration:
+                    description: A redis_configuration as defined below - with some
+                      limitations by SKU - defaults/details are shown below.
                     items:
                       properties:
                         maxclients:

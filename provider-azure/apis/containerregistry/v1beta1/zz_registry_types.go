@@ -18,10 +18,11 @@ type EncryptionObservation struct {
 
 type EncryptionParameters struct {
 
+	// Boolean value that indicates whether the policy is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 
-	// Required) The client ID of the managed identity associated with the encryption key.
+	// The client ID of the managed identity associated with the encryption key.
 	// +kubebuilder:validation:Optional
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id"`
 
@@ -45,6 +46,7 @@ type GeoreplicationsParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Boolean value that indicates whether the policy is enabled.
 	// +kubebuilder:validation:Optional
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
@@ -54,6 +56,7 @@ type IPRuleObservation struct {
 
 type IPRuleParameters struct {
 
+	// The behaviour for requests matching this rule. At this time the only supported value is Allow
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
@@ -77,7 +80,7 @@ type IdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this Container Registry. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned .
+	// Specifies the type of Managed Service Identity that should be configured on this Container Registry. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -102,12 +105,13 @@ type NetworkRuleSetParameters struct {
 
 type RegistryObservation struct {
 
-	// The Username associated with the Container Registry Admin account - if the admin account is enabled.
+	// Specifies the name of the Container Registry. Changing this forces a new resource to be created.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
 	// The ID of the Container Registry.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -121,7 +125,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	AdminEnabled *bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
 
-	// Whether allows anonymous  pull access to this Container Registry? Defaults to false. This is only supported on resources with the Standard or Premium SKU.
+	// Whether allows anonymous (unauthenticated) pull access to this Container Registry? Defaults to false. This is only supported on resources with the Standard or Premium SKU.
 	// +kubebuilder:validation:Optional
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
 
@@ -141,6 +145,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	Georeplications []GeoreplicationsParameters `json:"georeplications,omitempty" tf:"georeplications,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -159,6 +164,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// Boolean value that indicates whether the policy is enabled.
 	// +kubebuilder:validation:Optional
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 
@@ -190,6 +196,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	TrustPolicy []TrustPolicyParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
 
+	// Boolean value that indicates whether the policy is enabled.
 	// +kubebuilder:validation:Optional
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
@@ -203,6 +210,7 @@ type RetentionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days"`
 
+	// Boolean value that indicates whether the policy is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 }
@@ -212,6 +220,7 @@ type TrustPolicyObservation struct {
 
 type TrustPolicyParameters struct {
 
+	// Boolean value that indicates whether the policy is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 }
@@ -221,6 +230,7 @@ type VirtualNetworkObservation struct {
 
 type VirtualNetworkParameters struct {
 
+	// The behaviour for requests matching this rule. At this time the only supported value is Allow
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 

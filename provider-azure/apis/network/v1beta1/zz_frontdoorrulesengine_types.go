@@ -82,6 +82,7 @@ type FrontdoorRulesEngineRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	MatchCondition []RuleMatchConditionParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
 
+	// The name of the rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -99,9 +100,11 @@ type RequestHeaderParameters struct {
 	// +kubebuilder:validation:Optional
 	HeaderActionType *string `json:"headerActionType,omitempty" tf:"header_action_type,omitempty"`
 
+	// header name (string).
 	// +kubebuilder:validation:Optional
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 
+	// value name (string).
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
@@ -115,9 +118,11 @@ type ResponseHeaderParameters struct {
 	// +kubebuilder:validation:Optional
 	HeaderActionType *string `json:"headerActionType,omitempty" tf:"header_action_type,omitempty"`
 
+	// header name (string).
 	// +kubebuilder:validation:Optional
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 
+	// value name (string).
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
@@ -143,6 +148,7 @@ type RuleMatchConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	Transform []*string `json:"transform,omitempty" tf:"transform,omitempty"`
 
+	// (array) can contain one or more strings.
 	// +kubebuilder:validation:Optional
 	Value []*string `json:"value,omitempty" tf:"value,omitempty"`
 

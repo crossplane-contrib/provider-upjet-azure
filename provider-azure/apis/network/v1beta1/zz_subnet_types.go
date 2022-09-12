@@ -18,6 +18,7 @@ type DelegationObservation struct {
 
 type DelegationParameters struct {
 
+	// A name for this delegation.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -35,6 +36,7 @@ type ServiceDelegationParameters struct {
 	// +kubebuilder:validation:Optional
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
+	// A name for this delegation.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -47,6 +49,7 @@ type SubnetObservation struct {
 
 type SubnetParameters struct {
 
+	// The address prefixes to use for the subnet.
 	// +kubebuilder:validation:Required
 	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
 
@@ -62,6 +65,7 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	EnforcePrivateLinkServiceNetworkPolicies *bool `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
 
+	// The name of the resource group in which to create the subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -82,6 +86,7 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
 
+	// The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetwork
 	// +kubebuilder:validation:Optional
 	VirtualNetworkName *string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`

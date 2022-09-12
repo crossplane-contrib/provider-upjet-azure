@@ -18,11 +18,11 @@ type CustomBGPAddressesObservation struct {
 
 type CustomBGPAddressesParameters struct {
 
-	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration
+	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (first one)
 	// +kubebuilder:validation:Required
 	Primary *string `json:"primary" tf:"primary,omitempty"`
 
-	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration
+	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (second one)
 	// +kubebuilder:validation:Required
 	Secondary *string `json:"secondary" tf:"secondary,omitempty"`
 }
@@ -116,7 +116,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
 
-	// A custom_bgp_addresses  block which is documented below.
+	// A custom_bgp_addresses (Border Gateway Protocol custom IP Addresses) block which is documented below.
 	// The block can only be used on IPSec / activeactive connections,
 	// For details about see the relevant section in the Azure documentation.
 	// +kubebuilder:validation:Optional
@@ -130,13 +130,13 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
 
-	// If true, BGP  is enabled
+	// If true, BGP (Border Gateway Protocol) is enabled
 	// for this connection. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableBGP *bool `json:"enableBgp,omitempty" tf:"enable_bgp,omitempty"`
 
 	// The ID of the Express Route Circuit
-	// when creating an ExpressRoute connection .
+	// when creating an ExpressRoute connection (i.e. when type is ExpressRoute).
 	// The Express Route Circuit can be in the same or in a different subscription.
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitID *string `json:"expressRouteCircuitId,omitempty" tf:"express_route_circuit_id,omitempty"`
@@ -160,7 +160,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	LocalAzureIPAddressEnabled *bool `json:"localAzureIpAddressEnabled,omitempty" tf:"local_azure_ip_address_enabled,omitempty"`
 
 	// The ID of the local network gateway
-	// when creating Site-to-Site connection .
+	// when creating Site-to-Site connection (i.e. when type is IPsec).
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.LocalNetworkGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -180,7 +180,8 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	Location *string `json:"location" tf:"location,omitempty"`
 
 	// The ID of the peer virtual
-	// network gateway when creating a VNet-to-VNet connection . The peer Virtual Network Gateway can be in the same or
+	// network gateway when creating a VNet-to-VNet connection (i.e. when type
+	// is Vnet2Vnet). The peer Virtual Network Gateway can be in the same or
 	// in a different subscription.
 	// +crossplane:generate:reference:type=VirtualNetworkGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
@@ -229,8 +230,9 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	TrafficSelectorPolicy []TrafficSelectorPolicyParameters `json:"trafficSelectorPolicy,omitempty" tf:"traffic_selector_policy,omitempty"`
 
 	// The type of connection. Valid options are IPsec
-	// , ExpressRoute , and Vnet2Vnet .
-	// Each connection type requires different mandatory arguments . Changing the connection type will force a new connection
+	// (Site-to-Site), ExpressRoute (ExpressRoute), and Vnet2Vnet (VNet-to-VNet).
+	// Each connection type requires different mandatory arguments (refer to the
+	// examples above). Changing the connection type will force a new connection
 	// to be created.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`

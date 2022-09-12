@@ -22,6 +22,7 @@ type DiskEncryptionKeyParameters struct {
 	// +kubebuilder:validation:Required
 	SecretURL *string `json:"secretUrl" tf:"secret_url,omitempty"`
 
+	// The URL of the Key Vault. This can be found as vault_uri on the azurerm_key_vault resource.
 	// +kubebuilder:validation:Required
 	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
@@ -53,6 +54,7 @@ type KeyEncryptionKeyParameters struct {
 	// +kubebuilder:validation:Required
 	KeyURL *string `json:"keyUrl" tf:"key_url,omitempty"`
 
+	// The ID of the source Key Vault.
 	// +kubebuilder:validation:Required
 	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
@@ -133,7 +135,7 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
 
-	// emand Bursting is enabled for the Managed Disk. Defaults to false.
+	// Demand Bursting is enabled for the Managed Disk. Defaults to false.
 	// +kubebuilder:validation:Optional
 	OnDemandBurstingEnabled *bool `json:"onDemandBurstingEnabled,omitempty" tf:"on_demand_bursting_enabled,omitempty"`
 

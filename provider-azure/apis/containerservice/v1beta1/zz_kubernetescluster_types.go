@@ -115,7 +115,7 @@ type AutoScalerProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
 
-	// If true cluster autoscaler will never delete nodes with pods from kube-system . Defaults to true.
+	// If true cluster autoscaler will never delete nodes with pods from kube-system (except for DaemonSet or mirror pods). Defaults to true.
 	// +kubebuilder:validation:Optional
 	SkipNodesWithSystemPods *bool `json:"skipNodesWithSystemPods,omitempty" tf:"skip_nodes_with_system_pods,omitempty"`
 }
@@ -149,6 +149,7 @@ type AzureActiveDirectoryRoleBasedAccessControlParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerAppSecretSecretRef *v1.SecretKeySelector `json:"serverAppSecretSecretRef,omitempty" tf:"-"`
 
+	// The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
@@ -198,6 +199,7 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MinCount *float64 `json:"minCount,omitempty" tf:"min_count,omitempty"`
 
+	// The name which should be used for the default Kubernetes Node Pool. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -219,7 +221,7 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	OnlyCriticalAddonsEnabled *bool `json:"onlyCriticalAddonsEnabled,omitempty" tf:"only_critical_addons_enabled,omitempty"`
 
-	// Version of Kubernetes used for the Agents. If not specified, the default node pool will be created with the version specified by kubernetes_version. If both are unspecified, the latest recommended version will be used at provisioning time
+	// Version of Kubernetes used for the Agents. If not specified, the default node pool will be created with the version specified by kubernetes_version. If both are unspecified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)
 	// +kubebuilder:validation:Optional
 	OrchestratorVersion *string `json:"orchestratorVersion,omitempty" tf:"orchestrator_version,omitempty"`
 
@@ -252,9 +254,11 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
+	// A mapping of tags to assign to the Node Pool.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The type of Node Pool which should be created. Possible values are AvailabilitySet and VirtualMachineScaleSets. Defaults to VirtualMachineScaleSets.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -316,6 +320,7 @@ type IdentityObservation struct {
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
@@ -325,15 +330,20 @@ type IdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type IngressApplicationGatewayIdentityObservation struct {
+
+	// The Client ID for the Service Principal.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
+	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically.
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
@@ -345,7 +355,7 @@ type IngressApplicationGatewayObservation struct {
 	// The ID of the Application Gateway associated with the ingress controller deployed to this Kubernetes Cluster.
 	EffectiveGatewayID *string `json:"effectiveGatewayId,omitempty" tf:"effective_gateway_id,omitempty"`
 
-	// An ingress_application_gateway_identity block is exported. The exported attributes are defined below.
+	// An identity block as defined below. One of either identity or service_principal must be specified.
 	IngressApplicationGatewayIdentity []IngressApplicationGatewayIdentityObservation `json:"ingressApplicationGatewayIdentity,omitempty" tf:"ingress_application_gateway_identity,omitempty"`
 }
 
@@ -380,7 +390,7 @@ type IngressApplicationGatewayParameters struct {
 
 type KeyVaultSecretsProviderObservation struct {
 
-	// An secret_identity block is exported. The exported attributes are defined below.
+	// An identity block as defined below. One of either identity or service_principal must be specified.
 	SecretIdentity []SecretIdentityObservation `json:"secretIdentity,omitempty" tf:"secret_identity,omitempty"`
 }
 
@@ -400,7 +410,7 @@ type KubeAdminConfigObservation struct {
 	// The Kubernetes cluster server host.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// A username used to authenticate to the Kubernetes cluster.
+	// The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -412,7 +422,7 @@ type KubeConfigObservation struct {
 	// The Kubernetes cluster server host.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// A username used to authenticate to the Kubernetes cluster.
+	// The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -424,7 +434,7 @@ type KubeletConfigObservation struct {
 
 type KubeletConfigParameters struct {
 
-	// Specifies the allow list of unsafe sysctls command or patterns . Changing this forces a new resource to be created.
+	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
@@ -444,7 +454,7 @@ type KubeletConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerLogMaxLine *float64 `json:"containerLogMaxLine,omitempty" tf:"container_log_max_line,omitempty"`
 
-	// Specifies the maximum size  of container log file before it is rotated. Changing this forces a new resource to be created.
+	// Specifies the maximum size (e.g. 10MB) of container log file before it is rotated. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ContainerLogMaxSizeMb *float64 `json:"containerLogMaxSizeMb,omitempty" tf:"container_log_max_size_mb,omitempty"`
 
@@ -470,12 +480,15 @@ type KubeletIdentityObservation struct {
 
 type KubeletIdentityParameters struct {
 
+	// The Client ID of the user-defined Managed Identity to be assigned to the Kubelets. If not specified a Managed Identity is created automatically.
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically.
 	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
+	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically.
 	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
@@ -485,7 +498,7 @@ type KubernetesClusterObservation struct {
 	// The FQDN of the Azure Kubernetes Managed Cluster.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
-	// The Zone Name of the HTTP Application Routing.
+	// The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created.
 	HTTPApplicationRoutingZoneName *string `json:"httpApplicationRoutingZoneName,omitempty" tf:"http_application_routing_zone_name,omitempty"`
 
 	// The Kubernetes Managed Cluster ID.
@@ -590,7 +603,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KubeletIdentity []KubeletIdentityParameters `json:"kubeletIdentity,omitempty" tf:"kubelet_identity,omitempty"`
 
-	// Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time .
+	// Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade).
 	// +kubebuilder:validation:Optional
 	KubernetesVersion *string `json:"kubernetesVersion,omitempty" tf:"kubernetes_version,omitempty"`
 
@@ -618,6 +631,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkProfile []NetworkProfileParameters `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
 
+	// The name of the Resource Group where the Kubernetes Nodes should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NodeResourceGroup *string `json:"nodeResourceGroup,omitempty" tf:"node_resource_group,omitempty"`
 
@@ -673,10 +687,11 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ServicePrincipal []ServicePrincipalParameters `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
 
-	// The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid . Defaults to Free.
+	// The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid (which includes the Uptime SLA). Defaults to Free.
 	// +kubebuilder:validation:Optional
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -712,6 +727,7 @@ type LinuxProfileObservation struct {
 
 type LinuxProfileParameters struct {
 
+	// The Admin Username for the Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
@@ -721,14 +737,18 @@ type LinuxProfileParameters struct {
 }
 
 type LoadBalancerProfileObservation struct {
+
+	// The outcome (resource IDs) of the specified arguments.
 	EffectiveOutboundIps []*string `json:"effectiveOutboundIps,omitempty" tf:"effective_outbound_ips,omitempty"`
 }
 
 type LoadBalancerProfileParameters struct {
 
+	// Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between 4 and 120 inclusive. Defaults to 30.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
+	// Count of desired managed outbound IPs for the cluster load balancer. Must be between 1 and 100 inclusive.
 	// +kubebuilder:validation:Optional
 	ManagedOutboundIPCount *float64 `json:"managedOutboundIpCount,omitempty" tf:"managed_outbound_ip_count,omitempty"`
 
@@ -764,19 +784,24 @@ type MicrosoftDefenderObservation struct {
 
 type MicrosoftDefenderParameters struct {
 
+	// Specifies the ID of the Log Analytics Workspace where the audit logs collected by Microsoft Defender should be sent to.
 	// +kubebuilder:validation:Required
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId" tf:"log_analytics_workspace_id,omitempty"`
 }
 
 type NATGatewayProfileObservation struct {
+
+	// The outcome (resource IDs) of the specified arguments.
 	EffectiveOutboundIps []*string `json:"effectiveOutboundIps,omitempty" tf:"effective_outbound_ips,omitempty"`
 }
 
 type NATGatewayProfileParameters struct {
 
+	// Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between 4 and 120 inclusive. Defaults to 4.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
+	// Count of desired managed outbound IPs for the cluster load balancer. Must be between 1 and 100 inclusive.
 	// +kubebuilder:validation:Optional
 	ManagedOutboundIPCount *float64 `json:"managedOutboundIpCount,omitempty" tf:"managed_outbound_ip_count,omitempty"`
 }
@@ -794,11 +819,11 @@ type NetworkProfileObservation struct {
 
 type NetworkProfileParameters struct {
 
-	// IP address within the Kubernetes service address range that will be used by cluster service discovery . Changing this forces a new resource to be created.
+	// IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DNSServiceIP *string `json:"dnsServiceIp,omitempty" tf:"dns_service_ip,omitempty"`
 
-	// IP address  used as the Docker bridge IP address on nodes. Changing this forces a new resource to be created.
+	// IP address (in CIDR notation) used as the Docker bridge IP address on nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DockerBridgeCidr *string `json:"dockerBridgeCidr,omitempty" tf:"docker_bridge_cidr,omitempty"`
 
@@ -830,7 +855,7 @@ type NetworkProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkPolicy *string `json:"networkPolicy,omitempty" tf:"network_policy,omitempty"`
 
-	// The outbound  routing method which should be used for this Kubernetes Cluster. Possible values are loadBalancer, userDefinedRouting, managedNATGateway and userAssignedNATGateway. Defaults to loadBalancer.
+	// The outbound (egress) routing method which should be used for this Kubernetes Cluster. Possible values are loadBalancer, userDefinedRouting, managedNATGateway and userAssignedNATGateway. Defaults to loadBalancer.
 	// +kubebuilder:validation:Optional
 	OutboundType *string `json:"outboundType,omitempty" tf:"outbound_type,omitempty"`
 
@@ -858,10 +883,14 @@ type NotAllowedParameters struct {
 }
 
 type OmsAgentIdentityObservation struct {
+
+	// The Client ID for the Service Principal.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
+	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically.
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
@@ -870,12 +899,13 @@ type OmsAgentIdentityParameters struct {
 
 type OmsAgentObservation struct {
 
-	// An oms_agent_identity block is exported. The exported attributes are defined below.
+	// An identity block as defined below. One of either identity or service_principal must be specified.
 	OmsAgentIdentity []OmsAgentIdentityObservation `json:"omsAgentIdentity,omitempty" tf:"oms_agent_identity,omitempty"`
 }
 
 type OmsAgentParameters struct {
 
+	// The ID of the Log Analytics Workspace which the OMS Agent should send data to.
 	// +kubebuilder:validation:Required
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId" tf:"log_analytics_workspace_id,omitempty"`
 }
@@ -891,10 +921,14 @@ type SSHKeyParameters struct {
 }
 
 type SecretIdentityObservation struct {
+
+	// The Client ID for the Service Principal.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
+	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically.
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
@@ -906,6 +940,7 @@ type ServicePrincipalObservation struct {
 
 type ServicePrincipalParameters struct {
 
+	// The Client ID for the Service Principal.
 	// +kubebuilder:validation:Required
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
@@ -1055,6 +1090,7 @@ type WindowsProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
+	// The Admin Username for Windows VMs.
 	// +kubebuilder:validation:Required
 	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 

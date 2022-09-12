@@ -77,7 +77,7 @@ spec:
                             by Silverlight.
                           type: string
                         crossDomainPolicy:
-                          description: The content of the Cross Domain Policy .
+                          description: The content of the Cross Domain Policy (crossdomain.xml).
                           type: string
                       type: object
                     type: array
@@ -94,9 +94,10 @@ spec:
                             video and audio tracks of an encoding live event. For
                             example, use PT2S to indicate 2 seconds. For the video
                             track it also defines the key frame interval, or the length
-                            of a GoP . If this value is not set for an encoding live
-                            event, the fragment duration defaults to 2 seconds. The
-                            value cannot be set for pass-through live events.
+                            of a GoP (group of pictures). If this value is not set
+                            for an encoding live event, the fragment duration defaults
+                            to 2 seconds. The value cannot be set for pass-through
+                            live events.
                           type: string
                         presetName:
                           description: The optional encoding preset name, used when
@@ -107,13 +108,13 @@ spec:
                           type: string
                         stretchMode:
                           description: Specifies how the input video will be resized
-                            to fit the desired output resolution. Allowed values are
-                            None, AutoFit or AutoSize. Default is None.
+                            to fit the desired output resolution(s). Allowed values
+                            are None, AutoFit or AutoSize. Default is None.
                           type: string
                         type:
                           description: Live event type. Allowed values are None, Premium1080p
                             or Standard. When set to None, the service simply passes
-                            through the incoming video and audio layer to the output.
+                            through the incoming video and audio layer(s) to the output.
                             When type is set to Standard or Premium1080p, a live encoder
                             transcodes the incoming stream into multiple bitrates
                             or layers. Defaults to None. Changing this forces a new
@@ -138,15 +139,20 @@ spec:
                             value. Changing this forces a new value to be created.
                           type: string
                         ipAccessControlAllow:
+                          description: One or more ip_access_control_allow blocks
+                            as defined below.
                           items:
                             properties:
                               address:
                                 description: The IP address or CIDR range.
                                 type: string
                               name:
+                                description: The friendly name for the IP address
+                                  range.
                                 type: string
                               subnetPrefixLength:
-                                description: The subnet mask prefix length .
+                                description: The subnet mask prefix length (see CIDR
+                                  notation).
                                 type: number
                             type: object
                           type: array
@@ -258,15 +264,20 @@ spec:
                             this forces a new resource to be created.
                           type: string
                         ipAccessControlAllow:
+                          description: One or more ip_access_control_allow blocks
+                            as defined above.
                           items:
                             properties:
                               address:
                                 description: The IP address or CIDR range.
                                 type: string
                               name:
+                                description: The friendly name for the IP address
+                                  range.
                                 type: string
                               subnetPrefixLength:
-                                description: The subnet mask prefix length .
+                                description: The subnet mask prefix length (see CIDR
+                                  notation).
                                 type: number
                             type: object
                           type: array
@@ -370,11 +381,12 @@ spec:
                       Live Event.
                     type: object
                   transcriptionLanguages:
-                    description: Specifies a list of languages  to be used for speech-to-text
-                      transcription – it should match the spoken language in the audio
-                      track. The value should be in BCP-47 format . See the Microsoft
-                      Documentation for more information about the live transcription
-                      feature and the list of supported languages.
+                    description: 'Specifies a list of languages (locale) to be used
+                      for speech-to-text transcription – it should match the spoken
+                      language in the audio track. The value should be in BCP-47 format
+                      (e.g: en-US). See the Microsoft Documentation for more information
+                      about the live transcription feature and the list of supported
+                      languages.'
                     items:
                       type: string
                     type: array

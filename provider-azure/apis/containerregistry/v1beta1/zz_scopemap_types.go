@@ -21,7 +21,7 @@ type ScopeMapObservation struct {
 
 type ScopeMapParameters struct {
 
-	// A list of actions to attach to the scope map .
+	// A list of actions to attach to the scope map (e.g. repo/content/read, repo2/content/delete).
 	// +kubebuilder:validation:Required
 	Actions []*string `json:"actions" tf:"actions,omitempty"`
 

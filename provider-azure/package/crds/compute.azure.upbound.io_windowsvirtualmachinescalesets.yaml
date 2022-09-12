@@ -143,9 +143,12 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Should the automatic instance repair be enabled
+                            on this Virtual Machine Scale Set?
                           type: boolean
                         gracePeriod:
-                          description: Amount of time  for which automatic repairs
+                          description: Amount of time (in minutes, between 30 and
+                            90, defaults to 30 minutes) for which automatic repairs
                             will be delayed. The grace period starts right after the
                             VM is found unhealthy. The time duration should be specified
                             in ISO 8601 format.
@@ -212,27 +215,39 @@ spec:
                     items:
                       properties:
                         caching:
+                          description: The type of Caching which should be used for
+                            this Data Disk. Possible values are None, ReadOnly and
+                            ReadWrite.
                           type: string
                         createOption:
                           description: The create option which should be used for
                             this Data Disk. Possible values are Empty and FromImage.
-                            Defaults to Empty. .
+                            Defaults to Empty. (FromImage should only be used if the
+                            source image includes data disks).
                           type: string
                         diskEncryptionSetId:
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this Data Disk.
                           type: string
                         diskSizeGb:
+                          description: The size of the Data Disk which should be created.
                           type: number
                         lun:
                           description: The Logical Unit Number of the Data Disk, which
                             must be unique within the Virtual Machine.
                           type: number
                         storageAccountType:
+                          description: The Type of Storage Account which should back
+                            this Data Disk. Possible values include Standard_LRS,
+                            StandardSSD_LRS, Premium_LRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
                           type: number
                         ultraSsdDiskMbpsReadWrite:
                           type: number
                         writeAcceleratorEnabled:
+                          description: Should Write Accelerator be enabled for this
+                            Data Disk? Defaults to false.
                           type: boolean
                       required:
                       - caching
@@ -255,8 +270,9 @@ spec:
                       Defaults to true.
                     type: boolean
                   encryptionAtHostEnabled:
-                    description: Should all of the disks  attached to this Virtual
-                      Machine be encrypted by enabling Encryption at Host?
+                    description: Should all of the disks (including the temp disk)
+                      attached to this Virtual Machine be encrypted by enabling Encryption
+                      at Host?
                     type: boolean
                   evictionPolicy:
                     description: The Policy which should be used Virtual Machines
@@ -284,10 +300,12 @@ spec:
                             Extension Configuration hasn't changed.
                           type: string
                         name:
+                          description: The name for the Virtual Machine Scale Set
+                            Extension.
                           type: string
                         protectedSettingsSecretRef:
-                          description: A JSON String which specifies Sensitive Settings  for
-                            the Extension.
+                          description: A JSON String which specifies Sensitive Settings
+                            (such as Passwords) for the Extension.
                           properties:
                             key:
                               description: The key to select.
@@ -310,12 +328,14 @@ spec:
                             type: string
                           type: array
                         publisher:
+                          description: Specifies the Publisher of the Extension.
                           type: string
                         settings:
                           description: A JSON String which specifies Settings for
                             the Extension.
                           type: string
                         type:
+                          description: Specifies the Type of the Extension.
                           type: string
                         typeHandlerVersion:
                           description: Specifies the version of the extension to use,
@@ -331,8 +351,8 @@ spec:
                   extensionsTimeBudget:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
-                      120 minutes  and should be specified in ISO 8601 format. Defaults
-                      to 90 minutes .
+                      120 minutes (inclusive) and should be specified in ISO 8601
+                      format. Defaults to 90 minutes (PT1H30M).
                     type: string
                   healthProbeId:
                     description: The ID of a Load Balancer Probe which should be used
@@ -341,6 +361,7 @@ spec:
                       or Rolling.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
@@ -351,6 +372,10 @@ spec:
                             type: string
                           type: array
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Windows Virtual Machine
+                            Scale Set. Possible values are SystemAssigned, UserAssigned,
+                            SystemAssigned, UserAssigned (to enable both).
                           type: string
                       required:
                       - type
@@ -360,9 +385,10 @@ spec:
                     description: The number of Virtual Machines in the Scale Set.
                     type: number
                   licenseType:
-                    description: Specifies the type of on-premise license  which should
-                      be used for this Virtual Machine Scale Set. Possible values
-                      are None, Windows_Client and Windows_Server.
+                    description: Specifies the type of on-premise license (also known
+                      as Azure Hybrid Use Benefit) which should be used for this Virtual
+                      Machine Scale Set. Possible values are None, Windows_Client
+                      and Windows_Server.
                     type: string
                   location:
                     description: The Azure location where the Windows Virtual Machine
@@ -430,8 +456,12 @@ spec:
                                   type: string
                                 type: array
                               name:
+                                description: The Name which should be used for this
+                                  IP Configuration.
                                 type: string
                               primary:
+                                description: Is this the Primary IP Configuration
+                                  for this Network Interface? Defaults to false.
                                 type: boolean
                               publicIpAddress:
                                 description: A public_ip_address block as defined
@@ -461,6 +491,8 @@ spec:
                                               the Public IP, such as SQL or Storage.
                                             type: string
                                           type:
+                                            description: The Type of IP Tag, such
+                                              as FirstPartyUsage.
                                             type: string
                                         required:
                                         - tag
@@ -468,6 +500,8 @@ spec:
                                         type: object
                                       type: array
                                     name:
+                                      description: The Name of the Public IP Address
+                                        Configuration.
                                       type: string
                                     publicIpPrefixId:
                                       description: The ID of the Public IP Address
@@ -564,18 +598,24 @@ spec:
                                     type: object
                                 type: object
                               version:
+                                description: The Internet Protocol Version which should
+                                  be used for this IP Configuration. Possible values
+                                  are IPv4 and IPv6. Defaults to IPv4.
                                 type: string
                             required:
                             - name
                             type: object
                           type: array
                         name:
+                          description: The Name which should be used for this Network
+                            Interface. Changing this forces a new resource to be created.
                           type: string
                         networkSecurityGroupId:
                           description: The ID of a Network Security Group which should
                             be assigned to this Network Interface.
                           type: string
                         primary:
+                          description: Is this the Primary IP Configuration?
                           type: boolean
                       required:
                       - ipConfiguration
@@ -587,6 +627,9 @@ spec:
                     items:
                       properties:
                         caching:
+                          description: The Type of Caching which should be used for
+                            the Internal OS Disk. Possible values are None, ReadOnly
+                            and ReadWrite.
                           type: string
                         diffDiskSettings:
                           description: A diff_disk_settings block as defined above.
@@ -600,8 +643,13 @@ spec:
                             type: object
                           type: array
                         diskEncryptionSetId:
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this OS Disk. Conflicts with secure_vm_disk_encryption_set_id.
                           type: string
                         diskSizeGb:
+                          description: The Size of the Internal OS Disk in GB, if
+                            you wish to vary from the size used in the image this
+                            Virtual Machine Scale Set is sourced from.
                           type: number
                         secureVmDiskEncryptionSetId:
                           description: The ID of the Disk Encryption Set which should
@@ -616,8 +664,13 @@ spec:
                             to be created.
                           type: string
                         storageAccountType:
+                          description: The Type of Storage Account which should back
+                            this the Internal OS Disk. Possible values include Standard_LRS,
+                            StandardSSD_LRS and Premium_LRS.
                           type: string
                         writeAcceleratorEnabled:
+                          description: Should Write Accelerator be Enabled for this
+                            OS Disk? Defaults to false.
                           type: boolean
                       required:
                       - caching
@@ -638,6 +691,8 @@ spec:
                     items:
                       properties:
                         name:
+                          description: Specifies the name of the image from the marketplace.
+                            Changing this forces a new resource to be created.
                           type: string
                         product:
                           description: Specifies the product of the image from the
@@ -645,6 +700,8 @@ spec:
                             created.
                           type: string
                         publisher:
+                          description: Specifies the publisher of the image. Changing
+                            this forces a new resource to be created.
                           type: string
                       required:
                       - name
@@ -842,6 +899,8 @@ spec:
                       will be capped at 100 Virtual Machines. Defaults to true.
                     type: boolean
                   sku:
+                    description: The Virtual Machine SKU for the Scale Set, such as
+                      Standard_F2.
                     type: string
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
@@ -856,10 +915,16 @@ spec:
                             the virtual machines.
                           type: string
                         publisher:
+                          description: Specifies the publisher of the image used to
+                            create the virtual machines.
                           type: string
                         sku:
+                          description: The Virtual Machine SKU for the Scale Set,
+                            such as Standard_F2.
                           type: string
                         version:
+                          description: Specifies the version of the image used to
+                            create the virtual machines.
                           type: string
                       required:
                       - offer
@@ -879,8 +944,14 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Should the terminate notification be enabled
+                            on this Virtual Machine Scale Set? Defaults to false.
                           type: boolean
                         timeout:
+                          description: Length of time (in minutes, between 5 and 15)
+                            a notification to be sent to the VM on the instance metadata
+                            server till the VM gets deleted. The time duration should
+                            be specified in ISO 8601 format.
                           type: string
                       required:
                       - enabled
@@ -891,8 +962,14 @@ spec:
                     items:
                       properties:
                         enabled:
+                          description: Should the termination notification be enabled
+                            on this Virtual Machine Scale Set? Defaults to false.
                           type: boolean
                         timeout:
+                          description: Length of time (in minutes, between 5 and 15)
+                            a notification to be sent to the VM on the instance metadata
+                            server till the VM gets deleted. The time duration should
+                            be specified in ISO 8601 format.
                           type: string
                       required:
                       - enabled
@@ -903,18 +980,18 @@ spec:
                       possible values are defined here.
                     type: string
                   upgradeMode:
-                    description: Specifies how Upgrades  should be performed to Virtual
-                      Machine Instances. Possible values are Automatic, Manual and
-                      Rolling. Defaults to Manual.
+                    description: Specifies how Upgrades (e.g. changing the Image/SKU)
+                      should be performed to Virtual Machine Instances. Possible values
+                      are Automatic, Manual and Rolling. Defaults to Manual.
                     type: string
                   userData:
                     description: The Base64-Encoded User Data which should be used
                       for this Virtual Machine Scale Set.
                     type: string
                   vtpmEnabled:
-                    description: Specifies if vTPM  and Trusted Launch is enabled
-                      for the Virtual Machine. Changing this forces a new resource
-                      to be created.
+                    description: Specifies if vTPM (Virtual Trusted Platform Module)
+                      and Trusted Launch is enabled for the Virtual Machine. Changing
+                      this forces a new resource to be created.
                     type: boolean
                   winrmListener:
                     description: One or more winrm_listener blocks as defined below.
@@ -1134,6 +1211,7 @@ spec:
                     description: The ID of the Windows Virtual Machine Scale Set.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:

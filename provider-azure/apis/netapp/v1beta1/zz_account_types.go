@@ -60,7 +60,7 @@ type ActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Required
 	Domain *string `json:"domain" tf:"domain,omitempty"`
 
-	// The Organizational Unit  within the Active Directory Domain.
+	// The Organizational Unit (OU) within the Active Directory Domain.
 	// +kubebuilder:validation:Optional
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 

@@ -33,7 +33,8 @@ type PatchScheduleParameters struct {
 
 type RedisCacheObservation struct {
 
-	// The Hostname of the Redis Instance
+	// The name of the Redis instance. Changing this forces a
+	// new resource to be created.
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// The Route ID.
@@ -42,6 +43,7 @@ type RedisCacheObservation struct {
 	// The non-SSL Port of the Redis Instance
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// A redis_configuration as defined below - with some limitations by SKU - defaults/details are shown below.
 	// +kubebuilder:validation:Optional
 	RedisConfiguration []RedisConfigurationObservation `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
@@ -51,15 +53,15 @@ type RedisCacheObservation struct {
 
 type RedisCacheParameters struct {
 
-	// The size of the Redis cache to deploy. Valid values for a SKU family of C  are 0, 1, 2, 3, 4, 5, 6, and for P  family are 1, 2, 3, 4.
+	// The size of the Redis cache to deploy. Valid values for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5, 6, and for P (Premium) family are 1, 2, 3, 4.
 	// +kubebuilder:validation:Required
 	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
-	// Enable the non-SSL port  - disabled by default.
+	// Enable the non-SSL port (6379) - disabled by default.
 	// +kubebuilder:validation:Optional
 	EnableNonSSLPort *bool `json:"enableNonSslPort,omitempty" tf:"enable_non_ssl_port,omitempty"`
 
-	// The SKU family/pricing group to use. Valid values are C  and P
+	// The SKU family/pricing group to use. Valid values are C (for Basic/Standard SKU family) and P (for Premium)
 	// +kubebuilder:validation:Required
 	Family *string `json:"family" tf:"family,omitempty"`
 
@@ -83,6 +85,7 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// A redis_configuration as defined below - with some limitations by SKU - defaults/details are shown below.
 	// +kubebuilder:validation:Optional
 	RedisConfiguration []RedisConfigurationParameters `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 

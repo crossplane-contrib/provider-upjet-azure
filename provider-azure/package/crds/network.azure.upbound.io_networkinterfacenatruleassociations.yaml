@@ -407,8 +407,6 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The  ID of the Association between the Network Interface
-                      and the Load Balancers NAT Rule.
                     type: string
                 type: object
               conditions:

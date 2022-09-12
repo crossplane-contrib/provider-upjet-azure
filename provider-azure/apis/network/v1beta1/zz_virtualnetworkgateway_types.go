@@ -38,7 +38,8 @@ type PeeringAddressesParameters struct {
 	// +kubebuilder:validation:Optional
 	ApipaAddresses []*string `json:"apipaAddresses,omitempty" tf:"apipa_addresses,omitempty"`
 
-	// The name of the IP configuration of this Virtual Network Gateway. In case there are multiple ip_configuration blocks defined, this property is required to specify.
+	// The name of the Virtual Network Gateway. Changing the name
+	// forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 }
@@ -48,6 +49,8 @@ type RevokedCertificateObservation struct {
 
 type RevokedCertificateParameters struct {
 
+	// The name of the Virtual Network Gateway. Changing the name
+	// forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -60,9 +63,14 @@ type RootCertificateObservation struct {
 
 type RootCertificateParameters struct {
 
+	// A user-defined name of the root certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The public certificate of the root certificate
+	// authority. The certificate must be provided in Base-64 encoded X.509 format
+	// (PEM). In particular, this argument must not include the
+	// -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers.
 	// +kubebuilder:validation:Required
 	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
@@ -73,7 +81,7 @@ type VPNClientConfigurationObservation struct {
 type VPNClientConfigurationParameters struct {
 
 	// The client id of the Azure VPN application.
-	// See Create an Active Directory  tenant for P2S OpenVPN protocol connections for values
+	// See Create an Active Directory (AD) tenant for P2S OpenVPN protocol connections for values
 	// +kubebuilder:validation:Optional
 	AADAudience *string `json:"aadAudience,omitempty" tf:"aad_audience,omitempty"`
 
@@ -131,7 +139,7 @@ type VirtualNetworkGatewayBGPSettingsObservation struct {
 
 type VirtualNetworkGatewayBGPSettingsParameters struct {
 
-	// The Autonomous System Number  to use as part of the BGP.
+	// The Autonomous System Number (ASN) to use as part of the BGP.
 	// +kubebuilder:validation:Optional
 	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
 
@@ -149,6 +157,8 @@ type VirtualNetworkGatewayIPConfigurationObservation struct {
 
 type VirtualNetworkGatewayIPConfigurationParameters struct {
 
+	// A user-defined name of the IP configuration. Defaults to
+	// vnetGatewayConfig.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -193,6 +203,7 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 
 type VirtualNetworkGatewayObservation struct {
 
+	// A bgp_settings block which is documented below. In this block the BGP specific settings can be defined.
 	// +kubebuilder:validation:Optional
 	BGPSettings []VirtualNetworkGatewayBGPSettingsObservation `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 
@@ -209,6 +220,7 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ActiveActive *bool `json:"activeActive,omitempty" tf:"active_active,omitempty"`
 
+	// A bgp_settings block which is documented below. In this block the BGP specific settings can be defined.
 	// +kubebuilder:validation:Optional
 	BGPSettings []VirtualNetworkGatewayBGPSettingsParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 
@@ -217,7 +229,7 @@ type VirtualNetworkGatewayParameters struct {
 
 	// The ID of the local network gateway
 	// through which outbound Internet traffic from the virtual network in which the
-	// gateway is created will be routed . Refer to the
+	// gateway is created will be routed (forced tunnelling). Refer to the
 	// Azure documentation on forced tunnelling.
 	// If not specified, forced tunnelling is disabled.
 	// +kubebuilder:validation:Optional
@@ -227,7 +239,7 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// If true, BGP  will be enabled
+	// If true, BGP (Border Gateway Protocol) will be enabled
 	// for this Virtual Network Gateway. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableBGP *bool `json:"enableBgp,omitempty" tf:"enable_bgp,omitempty"`
@@ -236,7 +248,7 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
 
-	// tandby gateway requires exactly one ip_configuration block,
+	// standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
 	// +kubebuilder:validation:Required
@@ -285,7 +297,7 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// o-site connections.
+	// to-site connections.
 	// +kubebuilder:validation:Optional
 	VPNClientConfiguration []VPNClientConfigurationParameters `json:"vpnClientConfiguration,omitempty" tf:"vpn_client_configuration,omitempty"`
 

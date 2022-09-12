@@ -81,7 +81,7 @@ spec:
                               permissions:
                                 description: The permissions which should be associated
                                   with this Shared Identifier. Possible value is combination
-                                  of r , w , d , and l .
+                                  of r (read), w (write), d (delete), and l (list).
                                 type: string
                               start:
                                 description: The time at which this Access Policy
@@ -92,6 +92,8 @@ spec:
                             type: object
                           type: array
                         id:
+                          description: The ID which should be used for this Shared
+                            Identifier.
                           type: string
                       required:
                       - id
@@ -111,9 +113,10 @@ spec:
                     type: object
                   quota:
                     description: The maximum size of the share, in gigabytes. For
-                      Standard storage accounts, this must be 1GB  and at most 5120
-                      GB . For Premium FileStorage storage accounts, this must be
-                      greater than 100 GB and at most 102400 GB .
+                      Standard storage accounts, this must be 1GB (or higher) and
+                      at most 5120 GB (5 TB). For Premium FileStorage storage accounts,
+                      this must be greater than 100 GB and at most 102400 GB (100
+                      TB).
                     type: number
                   storageAccountName:
                     description: Specifies the storage account in which to create
@@ -372,6 +375,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID which should be used for this Shared Identifier.
                     type: string
                   resourceManagerId:
                     description: The Resource Manager ID of this File Share.

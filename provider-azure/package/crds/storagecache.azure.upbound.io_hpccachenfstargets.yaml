@@ -253,8 +253,8 @@ spec:
                         type: object
                     type: object
                   targetHostName:
-                    description: The IP address or fully qualified domain name  of
-                      the HPC Cache NFS target. Changing this forces a new resource
+                    description: The IP address or fully qualified domain name (FQDN)
+                      of the HPC Cache NFS target. Changing this forces a new resource
                       to be created.
                     type: string
                   usageModel:

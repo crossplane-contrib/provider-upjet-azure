@@ -18,7 +18,7 @@ type MongoCollectionAutoscaleSettingsObservation struct {
 
 type MongoCollectionAutoscaleSettingsParameters struct {
 
-	// The maximum throughput of the MongoDB collection . Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	// The maximum throughput of the MongoDB collection (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
@@ -28,9 +28,11 @@ type MongoCollectionIndexObservation struct {
 
 type MongoCollectionIndexParameters struct {
 
+	// Specifies the list of user settable keys for each Cosmos DB Mongo Collection.
 	// +kubebuilder:validation:Required
 	Keys []*string `json:"keys" tf:"keys,omitempty"`
 
+	// Is the index unique or not? Defaults to false.
 	// +kubebuilder:validation:Optional
 	Unique *bool `json:"unique,omitempty" tf:"unique,omitempty"`
 }
@@ -46,6 +48,7 @@ type MongoCollectionObservation struct {
 
 type MongoCollectionParameters struct {
 
+	// Specifies the name of the Cosmos DB Mongo Collection. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -62,7 +65,7 @@ type MongoCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
-	// An autoscale_settings block as defined below. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
+	// An autoscale_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []MongoCollectionAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
@@ -104,14 +107,17 @@ type MongoCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ShardKey *string `json:"shardKey,omitempty" tf:"shard_key,omitempty"`
 
-	// The throughput of the MongoDB collection . Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
+	// The throughput of the MongoDB collection (RU/s). Must be set in increments of 100. The minimum value is 400.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 type SystemIndexesObservation struct {
+
+	// The list of system keys which are not settable for each Cosmos DB Mongo Collection.
 	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 
+	// Identifies whether the table contains no duplicate values.
 	Unique *bool `json:"unique,omitempty" tf:"unique,omitempty"`
 }
 

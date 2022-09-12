@@ -71,6 +71,7 @@ type ExpressRouteCircuitPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The ID of the Route Filter. Only available when peering_type is set to MicrosoftPeering.
 	// +kubebuilder:validation:Optional
 	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
 
@@ -98,6 +99,7 @@ type IPv6Parameters struct {
 	// +kubebuilder:validation:Required
 	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix" tf:"primary_peer_address_prefix,omitempty"`
 
+	// The ID of the Route Filter. Only available when peering_type is set to MicrosoftPeering.
 	// +kubebuilder:validation:Optional
 	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
 
@@ -110,9 +112,11 @@ type MicrosoftPeeringConfigObservation struct {
 
 type MicrosoftPeeringConfigParameters struct {
 
+	// A list of Advertised Public Prefixes.
 	// +kubebuilder:validation:Required
 	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes" tf:"advertised_public_prefixes,omitempty"`
 
+	// The CustomerASN of the peering.
 	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 
@@ -125,9 +129,11 @@ type MicrosoftPeeringObservation struct {
 
 type MicrosoftPeeringParameters struct {
 
+	// A list of Advertised Public Prefixes.
 	// +kubebuilder:validation:Optional
 	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
 
+	// The CustomerASN of the peering.
 	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 

@@ -69,7 +69,8 @@ spec:
                       00:02:00 for two minutes.
                     type: string
                   batchMinRows:
-                    description: The minimum number of rows per batch .
+                    description: The minimum number of rows per batch (must be between
+                      0 and 10000).
                     type: number
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
@@ -171,8 +172,8 @@ spec:
                           type: string
                         fieldDelimiter:
                           description: The delimiter that will be used to separate
-                            comma-separated value  records. Possible values are   ,
-                            , ,     , |  and ;.
+                            comma-separated value (CSV) records. Possible values are   (space),
+                            , (comma),     (tab), | (pipe) and ;.
                           type: string
                         format:
                           description: Specifies the format of the JSON the output

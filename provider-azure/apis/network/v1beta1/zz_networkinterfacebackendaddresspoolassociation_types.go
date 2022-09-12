@@ -14,8 +14,6 @@ import (
 )
 
 type NetworkInterfaceBackendAddressPoolAssociationObservation struct {
-
-	// The  ID of the Association between the Network Interface and the Load Balancers Backend Address Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

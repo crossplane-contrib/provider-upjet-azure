@@ -22,6 +22,7 @@ type AccountObservation struct {
 	// +kubebuilder:validation:Required
 	GeoLocation []GeoLocationObservation `json:"geoLocation,omitempty" tf:"geo_location,omitempty"`
 
+	// The ID of the virtual network subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
@@ -37,7 +38,7 @@ type AccountObservation struct {
 
 type AccountParameters struct {
 
-	// Is write operations on metadata resources  via account keys enabled? Defaults to true.
+	// Is write operations on metadata resources (databases, containers, throughput) via account keys enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	AccessKeyMetadataWritesEnabled *bool `json:"accessKeyMetadataWritesEnabled,omitempty" tf:"access_key_metadata_writes_enabled,omitempty"`
 
@@ -193,6 +194,7 @@ type BackupParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageRedundancy *string `json:"storageRedundancy,omitempty" tf:"storage_redundancy,omitempty"`
 
+	// The type of the backup. Possible values are Continuous and Periodic. Defaults to Periodic. Migration of Periodic to Continuous is one-way, changing Continuous to Periodic forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -202,6 +204,7 @@ type CapabilitiesObservation struct {
 
 type CapabilitiesParameters struct {
 
+	// The database name for the restore request. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -211,7 +214,7 @@ type CapacityObservation struct {
 
 type CapacityParameters struct {
 
-	// The total throughput limit imposed on this Cosmos DB account . Possible values are at least -1. -1 means no limit.
+	// The total throughput limit imposed on this Cosmos DB account (RU/s). Possible values are at least -1. -1 means no limit.
 	// +kubebuilder:validation:Required
 	TotalThroughputLimit *float64 `json:"totalThroughputLimit" tf:"total_throughput_limit,omitempty"`
 }
@@ -225,7 +228,7 @@ type ConsistencyPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	ConsistencyLevel *string `json:"consistencyLevel" tf:"consistency_level,omitempty"`
 
-	// When used with the Bounded Staleness consistency level, this value represents the time amount of staleness  tolerated. Accepted range for this value is 5 - 86400 . Defaults to 5. Required when consistency_level is set to BoundedStaleness.
+	// When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level is set to BoundedStaleness.
 	// +kubebuilder:validation:Optional
 	MaxIntervalInSeconds *float64 `json:"maxIntervalInSeconds,omitempty" tf:"max_interval_in_seconds,omitempty"`
 
@@ -269,17 +272,20 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	CollectionNames []*string `json:"collectionNames,omitempty" tf:"collection_names,omitempty"`
 
+	// The database name for the restore request. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type GeoLocationObservation struct {
+
+	// The ID of the virtual network subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type GeoLocationParameters struct {
 
-	// The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = . Failover priority values must be unique for each of the regions in which the database account exists. Changing this causes the location to be re-provisioned and cannot be changed for the location with failover priority 0.
+	// The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists. Changing this causes the location to be re-provisioned and cannot be changed for the location with failover priority 0.
 	// +kubebuilder:validation:Required
 	FailoverPriority *float64 `json:"failoverPriority" tf:"failover_priority,omitempty"`
 
@@ -293,15 +299,16 @@ type GeoLocationParameters struct {
 
 type IdentityObservation struct {
 
-	// The Principal ID associated with this Managed Service Identity.
+	// The ID of the virtual network subnet.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The Tenant ID associated with this Managed Service Identity.
+	// The ID of the virtual network subnet.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type IdentityParameters struct {
 
+	// Specifies the type of Managed Service Identity that should be configured on this Cosmos Account. The only possible value is SystemAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -315,7 +322,7 @@ type RestoreParameters struct {
 	// +kubebuilder:validation:Optional
 	Database []DatabaseParameters `json:"database,omitempty" tf:"database,omitempty"`
 
-	// The creation time of the database or the collection . Changing this forces a new resource to be created.
+	// The creation time of the database or the collection (Datetime Format RFC 3339). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	RestoreTimestampInUtc *string `json:"restoreTimestampInUtc" tf:"restore_timestamp_in_utc,omitempty"`
 
@@ -339,6 +346,7 @@ type VirtualNetworkRuleObservation struct {
 
 type VirtualNetworkRuleParameters struct {
 
+	// The ID of the virtual network subnet.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 

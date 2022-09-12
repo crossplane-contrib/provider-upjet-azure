@@ -44,11 +44,11 @@ type DataLakeGen2FileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	Ace []AceParameters `json:"ace,omitempty" tf:"ace,omitempty"`
 
-	// Specifies the Object ID of the Azure Active Directory Group to make the owning group of the root path . Possible values also include $superuser.
+	// Specifies the Object ID of the Azure Active Directory Group to make the owning group of the root path (i.e. /). Possible values also include $superuser.
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
-	// Specifies the Object ID of the Azure Active Directory User to make the owning user of the root path . Possible values also include $superuser.
+	// Specifies the Object ID of the Azure Active Directory User to make the owning user of the root path (i.e. /). Possible values also include $superuser.
 	// +kubebuilder:validation:Optional
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 

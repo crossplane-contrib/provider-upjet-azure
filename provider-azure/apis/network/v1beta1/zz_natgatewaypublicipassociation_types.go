@@ -14,8 +14,6 @@ import (
 )
 
 type NATGatewayPublicIPAssociationObservation struct {
-
-	// The  ID of the Association between the NAT Gateway and the Public IP.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

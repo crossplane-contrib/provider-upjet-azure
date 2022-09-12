@@ -14,8 +14,6 @@ import (
 )
 
 type NetworkInterfaceNatRuleAssociationObservation struct {
-
-	// The  ID of the Association between the Network Interface and the Load Balancers NAT Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

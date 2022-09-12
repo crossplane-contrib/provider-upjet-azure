@@ -69,16 +69,24 @@ spec:
                     items:
                       properties:
                         blobUri:
+                          description: Specifies the URI in Azure storage of the blob
+                            that you want to use to create the image.
                           type: string
                         caching:
+                          description: Specifies the caching mode as ReadWrite, ReadOnly,
+                            or None. The default is None.
                           type: string
                         lun:
                           description: Specifies the logical unit number of the data
                             disk.
                           type: number
                         managedDiskId:
+                          description: Specifies the ID of the managed disk resource
+                            that you want to use to create the image.
                           type: string
                         sizeGb:
+                          description: Specifies the size of the image to be created.
+                            The target size can't be smaller than the source size.
                           type: number
                       type: object
                     type: array
@@ -95,10 +103,16 @@ spec:
                     items:
                       properties:
                         blobUri:
+                          description: Specifies the URI in Azure storage of the blob
+                            that you want to use to create the image.
                           type: string
                         caching:
+                          description: Specifies the caching mode as ReadWrite, ReadOnly,
+                            or None. The default is None.
                           type: string
                         managedDiskId:
+                          description: Specifies the ID of the managed disk resource
+                            that you want to use to create the image.
                           type: string
                         osState:
                           description: Specifies the state of the operating system
@@ -110,6 +124,8 @@ spec:
                             or Linux.'
                           type: string
                         sizeGb:
+                          description: Specifies the size of the image to be created.
+                            The target size can't be smaller than the source size.
                           type: number
                       type: object
                     type: array

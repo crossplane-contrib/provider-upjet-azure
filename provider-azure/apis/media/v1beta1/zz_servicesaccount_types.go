@@ -44,14 +44,18 @@ type KeyDeliveryAccessControlParameters struct {
 }
 
 type ServicesAccountObservation struct {
+
+	// Specifies the ID of the Storage Account that will be associated with the Media Services instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
 
 type ServicesAccountParameters struct {
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -95,6 +99,7 @@ type StorageAccountObservation struct {
 
 type StorageAccountParameters struct {
 
+	// Specifies the ID of the Storage Account that will be associated with the Media Services instance.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

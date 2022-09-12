@@ -14,8 +14,6 @@ import (
 )
 
 type NetworkInterfaceApplicationSecurityGroupAssociationObservation struct {
-
-	// The  ID of the Association between the Network Interface and the Application Security Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

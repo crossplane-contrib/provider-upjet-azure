@@ -59,7 +59,7 @@ type RouteTableRouteObservation struct {
 
 type RouteTableRouteParameters struct {
 
-	// The destination to which the route applies. Can be CIDR  or Azure Service Tag  format.
+	// The destination to which the route applies. Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag (such as ApiManagement, AzureBackup or AzureMonitor) format.
 	// +kubebuilder:validation:Optional
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix"`
 

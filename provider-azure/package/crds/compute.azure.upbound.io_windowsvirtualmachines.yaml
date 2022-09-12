@@ -198,8 +198,9 @@ spec:
                       to be created.
                     type: boolean
                   encryptionAtHostEnabled:
-                    description: Should all of the disks  attached to this Virtual
-                      Machine be encrypted by enabling Encryption at Host?
+                    description: Should all of the disks (including the temp disk)
+                      attached to this Virtual Machine be encrypted by enabling Encryption
+                      at Host?
                     type: boolean
                   evictionPolicy:
                     description: Specifies what should happen when the Virtual Machine
@@ -210,8 +211,8 @@ spec:
                   extensionsTimeBudget:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
-                      120 minutes  and should be specified in ISO 8601 format. Defaults
-                      to 90 minutes .
+                      120 minutes (inclusive) and should be specified in ISO 8601
+                      format. Defaults to 90 minutes (PT1H30M).
                     type: string
                   hotpatchingEnabled:
                     description: Should the VM be patched without requiring a reboot?
@@ -219,6 +220,7 @@ spec:
                       information about hot patching please see the product documentation.
                     type: boolean
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
@@ -231,16 +233,16 @@ spec:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Windows Virtual Machine.
                             Possible values are SystemAssigned, UserAssigned, SystemAssigned,
-                            UserAssigned .
+                            UserAssigned (to enable both).
                           type: string
                       required:
                       - type
                       type: object
                     type: array
                   licenseType:
-                    description: Specifies the type of on-premise license  which should
-                      be used for this Virtual Machine. Possible values are None,
-                      Windows_Client and Windows_Server.
+                    description: Specifies the type of on-premise license (also known
+                      as Azure Hybrid Use Benefit) which should be used for this Virtual
+                      Machine. Possible values are None, Windows_Client and Windows_Server.
                     type: string
                   location:
                     description: The Azure location where the Windows Virtual Machine
@@ -302,6 +304,8 @@ spec:
                             Virtual Machine is sourced from.
                           type: number
                         name:
+                          description: The name which should be used for the Internal
+                            OS Disk. Changing this forces a new resource to be created.
                           type: string
                         secureVmDiskEncryptionSetId:
                           description: The ID of the Disk Encryption Set which should
@@ -342,6 +346,9 @@ spec:
                     items:
                       properties:
                         name:
+                          description: Specifies the Name of the Marketplace Image
+                            this Virtual Machine should be created from. Changing
+                            this forces a new resource to be created.
                           type: string
                         product:
                           description: Specifies the Product of the Marketplace Image
@@ -349,6 +356,9 @@ spec:
                             this forces a new resource to be created.
                           type: string
                         publisher:
+                          description: Specifies the Publisher of the Marketplace
+                            Image this Virtual Machine should be created from. Changing
+                            this forces a new resource to be created.
                           type: string
                       required:
                       - name
@@ -509,6 +519,8 @@ spec:
                             the virtual machines.
                           type: string
                         publisher:
+                          description: Specifies the publisher of the image used to
+                            create the virtual machines.
                           type: string
                         sku:
                           description: Specifies the SKU of the image used to create
@@ -540,10 +552,10 @@ spec:
                             on this Virtual Machine? Defaults to false.
                           type: boolean
                         timeout:
-                          description: Length of time  a notification to be sent to
-                            the VM on the instance metadata server till the VM gets
-                            deleted. The time duration should be specified in ISO
-                            8601 format.
+                          description: Length of time (in minutes, between 5 and 15)
+                            a notification to be sent to the VM on the instance metadata
+                            server till the VM gets deleted. The time duration should
+                            be specified in ISO 8601 format.
                           type: string
                       required:
                       - enabled
@@ -564,9 +576,9 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   vtpmEnabled:
-                    description: Specifies if vTPM  and Trusted Launch is enabled
-                      for the Virtual Machine. Changing this forces a new resource
-                      to be created.
+                    description: Specifies if vTPM (virtual Trusted Platform Module)
+                      and Trusted Launch is enabled for the Virtual Machine. Changing
+                      this forces a new resource to be created.
                     type: boolean
                   winrmListener:
                     description: One or more winrm_listener blocks as defined below.
@@ -776,6 +788,7 @@ spec:
                     description: The ID of the Windows Virtual Machine.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:

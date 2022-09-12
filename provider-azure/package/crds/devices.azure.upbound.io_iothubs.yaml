@@ -68,14 +68,25 @@ spec:
                     items:
                       properties:
                         defaultTtl:
+                          description: The default time to live for cloud-to-device
+                            messages, specified as an ISO 8601 timespan duration.
+                            This value must be between 1 minute and 48 hours. Defaults
+                            to PT1H.
                           type: string
                         feedback:
                           description: A feedback block as defined below.
                           items:
                             properties:
                               lockDuration:
+                                description: The lock duration for the feedback queue,
+                                  specified as an ISO 8601 timespan duration. This
+                                  value must be between 5 and 300 seconds. Defaults
+                                  to PT60S.
                                 type: string
                               maxDeliveryCount:
+                                description: The maximum delivery count for the feedback
+                                  queue. This value must be between 1 and 100. Defaults
+                                  to 10.
                                 type: number
                               timeToLive:
                                 description: The retention time for service-bound
@@ -86,6 +97,9 @@ spec:
                             type: object
                           type: array
                         maxDeliveryCount:
+                          description: The maximum delivery count for cloud-to-device
+                            per-device queues. This value must be between 1 and 100.
+                            Defaults to 10.
                           type: number
                       type: object
                     type: array
@@ -102,10 +116,13 @@ spec:
                     items:
                       properties:
                         authenticationType:
+                          description: The type used to authenticate against the storage
+                            account. Possible values are keyBased and identityBased.
+                            Defaults to keyBased.
                           type: string
                         connectionStringSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: The connection string for the Azure Storage
+                            account to which files are uploaded.
                           properties:
                             key:
                               description: The key to select.
@@ -122,14 +139,30 @@ spec:
                           - namespace
                           type: object
                         containerName:
+                          description: The name of the root container where the files
+                            should be uploaded to. The container need not exist but
+                            should be creatable using the connection_string specified.
                           type: string
                         defaultTtl:
+                          description: The period of time for which a file upload
+                            notification message is available to consume before it
+                            expires, specified as an ISO 8601 timespan duration. This
+                            value must be between 1 minute and 48 hours. Defaults
+                            to PT1H.
                           type: string
                         identityId:
+                          description: The ID of the User Managed Identity used to
+                            authenticate against the storage account.
                           type: string
                         lockDuration:
+                          description: The lock duration for the file upload notifications
+                            queue, specified as an ISO 8601 timespan duration. This
+                            value must be between 5 and 300 seconds. Defaults to PT1M.
                           type: string
                         maxDeliveryCount:
+                          description: The number of times the IoT Hub attempts to
+                            deliver a file upload notification message. Defaults to
+                            10.
                           type: number
                         notifications:
                           description: Used to specify whether file notifications
@@ -147,6 +180,7 @@ spec:
                       type: object
                     type: array
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
@@ -156,6 +190,10 @@ spec:
                             type: string
                           type: array
                         type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this IoT Hub. Possible values
+                            are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+                            (to enable both).
                           type: string
                       required:
                       - type
@@ -198,6 +236,7 @@ spec:
                                   for the IP rule.
                                 type: string
                               name:
+                                description: The name of the IP rule.
                                 type: string
                             required:
                             - ipMask
@@ -210,6 +249,9 @@ spec:
                     description: Is the IotHub resource accessible from a public network?
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group under which the IotHub
+                      resource has to be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -294,6 +336,8 @@ spec:
                           description: The number of provisioned IoT Hub units.
                           type: number
                         name:
+                          description: The name of the sku. Possible values are B1,
+                            B2, B3, F1, S1, S2, and S3.
                           type: string
                       required:
                       - capacity
@@ -490,6 +534,9 @@ spec:
                     items:
                       properties:
                         authenticationType:
+                          description: The type used to authenticate against the endpoint.
+                            Possible values are keyBased and identityBased. Defaults
+                            to keyBased.
                           type: string
                         batchFrequencyInSeconds:
                           description: Time interval at which blobs are written to
@@ -498,6 +545,9 @@ spec:
                             endpoint type AzureIotHub.StorageContainer.
                           type: number
                         containerName:
+                          description: The name of storage container in the storage
+                            account. This attribute is mandatory for endpoint type
+                            AzureIotHub.StorageContainer.
                           type: string
                         encoding:
                           description: Encoding that is used to serialize messages
@@ -527,18 +577,29 @@ spec:
                             is applicable for endpoint type AzureIotHub.StorageContainer.
                           type: string
                         identityId:
+                          description: The ID of the User Managed Identity used to
+                            authenticate against the endpoint.
                           type: string
                         maxChunkSizeInBytes:
                           description: Maximum number of bytes for each blob written
-                            to storage. Value should be between 10485760 and 524288000.
-                            Default value is 314572800. This attribute is applicable
-                            for endpoint type AzureIotHub.StorageContainer.
+                            to storage. Value should be between 10485760(10MB) and
+                            524288000(500MB). Default value is 314572800(300MB). This
+                            attribute is applicable for endpoint type AzureIotHub.StorageContainer.
                           type: number
                         name:
+                          description: 'The name of the endpoint. The name must be
+                            unique across endpoint types. The following names are
+                            reserved:  events, operationsMonitoringEvents, fileNotifications
+                            and $default.'
                           type: string
                         resourceGroupName:
+                          description: The resource group in which the endpoint will
+                            be created.
                           type: string
                         type:
+                          description: The type of the endpoint. Possible values are
+                            AzureIotHub.StorageContainer, AzureIotHub.ServiceBusQueue,
+                            AzureIotHub.ServiceBusTopic or AzureIotHub.EventHub.
                           type: string
                       type: object
                     type: array
@@ -547,6 +608,7 @@ spec:
                     items:
                       properties:
                         endpointNames:
+                          description: The list of endpoints which will be enriched.
                           items:
                             type: string
                           type: array
@@ -554,14 +616,15 @@ spec:
                           description: The key of the enrichment.
                           type: string
                         value:
-                          description: The value of the enrichment. Value can be any
-                            static string, the name of the IoT Hub sending the message  or
-                            information from the device twin
+                          description: 'The value of the enrichment. Value can be
+                            any static string, the name of the IoT Hub sending the
+                            message (use $iothubname) or information from the device
+                            twin (ex: $twin.tags.latitude)'
                           type: string
                       type: object
                     type: array
                   eventHubEventsEndpoint:
-                    description: The EventHub compatible endpoint for events data
+                    description: An endpoint block as defined below.
                     type: string
                   eventHubEventsNamespace:
                     description: The EventHub namespace for events data
@@ -570,8 +633,7 @@ spec:
                     description: The EventHub compatible path for events data
                     type: string
                   eventHubOperationsEndpoint:
-                    description: The EventHub compatible endpoint for operational
-                      data
+                    description: An endpoint block as defined below.
                     type: string
                   eventHubOperationsPath:
                     description: The EventHub compatible path for operational data
@@ -583,24 +645,37 @@ spec:
                     items:
                       properties:
                         condition:
+                          description: 'The condition that is evaluated to apply the
+                            routing rule. Defaults to true. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.'
                           type: string
                         enabled:
+                          description: Used to specify whether the fallback route
+                            is enabled.
                           type: boolean
                         endpointNames:
+                          description: The endpoints to which messages that satisfy
+                            the condition are routed. Currently only 1 endpoint is
+                            allowed.
                           items:
                             type: string
                           type: array
                         source:
+                          description: 'The source that the routing rule is to be
+                            applied to, such as DeviceMessages. Possible values include:
+                            Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents,
+                            DeviceConnectionStateEvents, DeviceJobLifecycleEvents.'
                           type: string
                       type: object
                     type: array
                   hostname:
-                    description: The hostname of the IotHub Resource.
+                    description: Specifies the name of the IotHub resource. Changing
+                      this forces a new resource to be created.
                     type: string
                   id:
                     description: The ID of the IoTHub.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:
@@ -618,16 +693,26 @@ spec:
                     items:
                       properties:
                         condition:
+                          description: 'The condition that is evaluated to apply the
+                            routing rule. Defaults to true. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.'
                           type: string
                         enabled:
+                          description: Used to specify whether a route is enabled.
                           type: boolean
                         endpointNames:
+                          description: The list of endpoints to which messages that
+                            satisfy the condition are routed.
                           items:
                             type: string
                           type: array
                         name:
+                          description: The name of the route.
                           type: string
                         source:
+                          description: 'The source that the routing rule is to be
+                            applied to, such as DeviceMessages. Possible values include:
+                            Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents,
+                            DeviceConnectionStateEvents, DeviceJobLifecycleEvents.'
                           type: string
                       type: object
                     type: array
@@ -637,7 +722,8 @@ spec:
                     items:
                       properties:
                         keyName:
-                          description: The name of the shared access policy.
+                          description: Specifies the name of the IotHub resource.
+                            Changing this forces a new resource to be created.
                           type: string
                         permissions:
                           description: The permissions assigned to the shared access
@@ -646,6 +732,9 @@ spec:
                       type: object
                     type: array
                   type:
+                    description: Specifies the type of Managed Service Identity that
+                      should be configured on this IoT Hub. Possible values are SystemAssigned,
+                      UserAssigned, SystemAssigned, UserAssigned (to enable both).
                     type: string
                 type: object
               conditions:

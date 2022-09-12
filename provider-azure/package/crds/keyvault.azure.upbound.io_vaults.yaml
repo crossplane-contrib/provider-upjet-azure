@@ -71,6 +71,7 @@ spec:
                           description: E-mail address of the contact.
                           type: string
                         name:
+                          description: Name of the contact.
                           type: string
                         phone:
                           description: Phone number of the contact.
@@ -81,7 +82,7 @@ spec:
                     type: array
                   enableRbacAuthorization:
                     description: Boolean flag to specify whether Azure Key Vault uses
-                      Role Based Access Control  for authorization of data actions.
+                      Role Based Access Control (RBAC) for authorization of data actions.
                       Defaults to false.
                     type: boolean
                   enabledForDeployment:
@@ -222,7 +223,8 @@ spec:
                     type: string
                   softDeleteRetentionDays:
                     description: The number of days that items should be retained
-                      for once soft-deleted. This value can be between 7 and 90  days.
+                      for once soft-deleted. This value can be between 7 and 90 (the
+                      default) days.
                     type: number
                   tags:
                     additionalProperties:
@@ -230,6 +232,8 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   tenantId:
+                    description: The Azure Active Directory tenant ID that should
+                      be used for authenticating requests to the key vault.
                     type: string
                 required:
                 - location
@@ -460,6 +464,9 @@ spec:
                             type: string
                           type: array
                         tenantId:
+                          description: The Azure Active Directory tenant ID that should
+                            be used for authenticating requests to the key vault.
+                            Must match the tenant_id used above.
                           type: string
                       type: object
                     type: array

@@ -154,10 +154,10 @@ spec:
                       forces a new Live Output to be created.
                     type: string
                   hlsFragmentsPerTsSegment:
-                    description: The number of fragments in an HTTP Live Streaming  TS
-                      segment in the output of the live event. This value does not
-                      affect the packing ratio for HLS CMAF output. Changing this
-                      forces a new Live Output to be created.
+                    description: The number of fragments in an HTTP Live Streaming
+                      (HLS) TS segment in the output of the live event. This value
+                      does not affect the packing ratio for HLS CMAF output. Changing
+                      this forces a new Live Output to be created.
                     type: number
                   liveEventId:
                     description: The id of the live event. Changing this forces a

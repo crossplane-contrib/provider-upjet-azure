@@ -30,6 +30,7 @@ type PrivateDNSZoneObservation struct {
 	// The current number of record sets in this Private DNS zone.
 	NumberOfRecordSets *float64 `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty"`
 
+	// An soa_record block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SoaRecord []PrivateDNSZoneSoaRecordObservation `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 }
@@ -49,9 +50,11 @@ type PrivateDNSZoneParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// An soa_record block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SoaRecord []PrivateDNSZoneSoaRecordParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -94,6 +97,7 @@ type PrivateDNSZoneSoaRecordParameters struct {
 	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
+	// A mapping of tags to assign to the Record Set.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }

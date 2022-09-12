@@ -249,9 +249,9 @@ spec:
                                 items:
                                   properties:
                                     dnsNames:
-                                      description: A list of alternative DNS names  identified
-                                        by the Certificate. Changing this forces a
-                                        new resource to be created.
+                                      description: A list of alternative DNS names
+                                        (FQDNs) identified by the Certificate. Changing
+                                        this forces a new resource to be created.
                                       items:
                                         type: string
                                       type: array

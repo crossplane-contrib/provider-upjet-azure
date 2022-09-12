@@ -33,6 +33,7 @@ type AccessPolicyObservation struct {
 	// List of storage permissions, must be one or more from the following: Backup, Delete, DeleteSAS, Get, GetSAS, List, ListSAS, Purge, Recover, RegenerateKey, Restore, Set, SetSAS and Update.
 	StoragePermissions []*string `json:"storagePermissions,omitempty" tf:"storage_permissions,omitempty"`
 
+	// The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Must match the tenant_id used above.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
@@ -48,6 +49,7 @@ type ContactParameters struct {
 	// +kubebuilder:validation:Required
 	Email *string `json:"email" tf:"email,omitempty"`
 
+	// Name of the contact.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -96,7 +98,7 @@ type VaultParameters struct {
 	// +kubebuilder:validation:Optional
 	Contact []ContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
-	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control  for authorization of data actions. Defaults to false.
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableRbacAuthorization *bool `json:"enableRbacAuthorization,omitempty" tf:"enable_rbac_authorization,omitempty"`
 
@@ -141,7 +143,7 @@ type VaultParameters struct {
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 
-	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90  days.
+	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 (the default) days.
 	// +kubebuilder:validation:Optional
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
@@ -149,6 +151,7 @@ type VaultParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
 	// +kubebuilder:validation:Required
 	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
 }

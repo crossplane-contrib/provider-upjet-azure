@@ -74,6 +74,8 @@ spec:
                             Storage Policy Definition.
                           type: string
                         name:
+                          description: The name which should be used for this Subnet
+                            Service Endpoint Storage Policy Definition.
                           type: string
                         serviceResources:
                           description: Specifies a list of resources that this Subnet

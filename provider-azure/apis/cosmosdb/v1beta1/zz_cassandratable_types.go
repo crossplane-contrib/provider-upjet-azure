@@ -18,7 +18,7 @@ type CassandraTableAutoscaleSettingsObservation struct {
 
 type CassandraTableAutoscaleSettingsParameters struct {
 
-	// The maximum throughput of the Cassandra Table . Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	// The maximum throughput of the Cassandra Table (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
@@ -35,7 +35,7 @@ type CassandraTableParameters struct {
 	// +kubebuilder:validation:Optional
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
-	// An autoscale_settings block as defined below. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
+	// An autoscale_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []CassandraTableAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
@@ -61,7 +61,7 @@ type CassandraTableParameters struct {
 	// +kubebuilder:validation:Required
 	Schema []SchemaParameters `json:"schema" tf:"schema,omitempty"`
 
-	// The throughput of Cassandra KeySpace . Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
+	// The throughput of Cassandra KeySpace (RU/s). Must be set in increments of 100. The minimum value is 400.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
@@ -71,6 +71,7 @@ type ClusterKeyObservation struct {
 
 type ClusterKeyParameters struct {
 
+	// Name of the cluster key to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -84,6 +85,7 @@ type ColumnObservation struct {
 
 type ColumnParameters struct {
 
+	// Name of the column to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -97,6 +99,7 @@ type PartitionKeyObservation struct {
 
 type PartitionKeyParameters struct {
 
+	// Name of the column to partition by.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }

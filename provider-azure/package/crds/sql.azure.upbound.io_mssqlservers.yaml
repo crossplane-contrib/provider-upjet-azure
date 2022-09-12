@@ -96,9 +96,10 @@ spec:
                     items:
                       properties:
                         azureadAuthenticationOnly:
-                          description: Specifies whether only AD Users and administrators  can
-                            be used to login, or also local database users . When
-                            true, the administrator_login and administrator_login_password
+                          description: Specifies whether only AD Users and administrators
+                            (like azuread_administrator.0.login_username) can be used
+                            to login, or also local database users (like administrator_login).
+                            When true, the administrator_login and administrator_login_password
                             properties can be omitted.
                           type: boolean
                         loginUsername:
@@ -246,7 +247,7 @@ spec:
                     type: object
                   version:
                     description: 'The version for the new server. Valid values are:
-                      2.0  and 12.0 .'
+                      2.0 (for v11 server) and 12.0 (for v12 server).'
                     type: string
                 required:
                 - location
@@ -429,8 +430,8 @@ spec:
               atProvider:
                 properties:
                   fullyQualifiedDomainName:
-                    description: The fully qualified domain name of the Azure SQL
-                      Server
+                    description: The name of the Microsoft SQL Server. This needs
+                      to be globally unique within Azure.
                     type: string
                   id:
                     description: the Microsoft SQL Server ID.

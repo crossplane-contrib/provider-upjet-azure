@@ -36,9 +36,11 @@ type ClientRevokedCertificateObservation struct {
 
 type ClientRevokedCertificateParameters struct {
 
+	// A name used to uniquely identify this certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The Thumbprint of the Certificate.
 	// +kubebuilder:validation:Required
 	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 }
@@ -48,9 +50,11 @@ type ClientRootCertificateObservation struct {
 
 type ClientRootCertificateParameters struct {
 
+	// A name used to uniquely identify this certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The Public Key Data associated with the Certificate.
 	// +kubebuilder:validation:Required
 	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
@@ -60,9 +64,11 @@ type RadiusClientRootCertificateObservation struct {
 
 type RadiusClientRootCertificateParameters struct {
 
+	// A name used to uniquely identify this certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The Thumbprint of the Certificate.
 	// +kubebuilder:validation:Required
 	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 }
@@ -72,6 +78,7 @@ type RadiusObservation struct {
 
 type RadiusParameters struct {
 
+	// One or more client_root_certificate blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ClientRootCertificate []RadiusClientRootCertificateParameters `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
 
@@ -79,6 +86,7 @@ type RadiusParameters struct {
 	// +kubebuilder:validation:Optional
 	Server []ServerParameters `json:"server,omitempty" tf:"server,omitempty"`
 
+	// One or more server_root_certificate blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ServerRootCertificate []ServerRootCertificateParameters `json:"serverRootCertificate,omitempty" tf:"server_root_certificate,omitempty"`
 }
@@ -88,6 +96,7 @@ type ServerObservation struct {
 
 type ServerParameters struct {
 
+	// The Address of the Radius Server.
 	// +kubebuilder:validation:Required
 	Address *string `json:"address" tf:"address,omitempty"`
 
@@ -95,6 +104,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Required
 	Score *float64 `json:"score" tf:"score,omitempty"`
 
+	// The Secret used to communicate with the Radius Server.
 	// +kubebuilder:validation:Required
 	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
@@ -104,9 +114,11 @@ type ServerRootCertificateObservation struct {
 
 type ServerRootCertificateParameters struct {
 
+	// A name used to uniquely identify this certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The Public Key Data associated with the Certificate.
 	// +kubebuilder:validation:Required
 	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
@@ -165,6 +177,7 @@ type VPNServerConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientRevokedCertificate []ClientRevokedCertificateParameters `json:"clientRevokedCertificate,omitempty" tf:"client_revoked_certificate,omitempty"`
 
+	// One or more client_root_certificate blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ClientRootCertificate []ClientRootCertificateParameters `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
 
@@ -197,7 +210,7 @@ type VPNServerConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A list of Authentication Types applicable for this VPN Server Configuration. Possible values are AAD , Certificate and Radius.
+	// A list of Authentication Types applicable for this VPN Server Configuration. Possible values are AAD (Azure Active Directory), Certificate and Radius.
 	// +kubebuilder:validation:Required
 	VPNAuthenticationTypes []*string `json:"vpnAuthenticationTypes" tf:"vpn_authentication_types,omitempty"`
 

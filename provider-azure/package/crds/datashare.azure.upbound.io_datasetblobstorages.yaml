@@ -235,6 +235,9 @@ spec:
                     items:
                       properties:
                         name:
+                          description: The name of the storage account to be shared
+                            with the receiver. Changing this forces a new Data Share
+                            Blob Storage Dataset to be created.
                           type: string
                         nameRef:
                           description: Reference to a Account in storage to populate
@@ -586,7 +589,9 @@ spec:
               atProvider:
                 properties:
                   displayName:
-                    description: The name of the Data Share Dataset.
+                    description: The name which should be used for this Data Share
+                      Blob Storage Dataset. Changing this forces a new Data Share
+                      Blob Storage Dataset to be created.
                     type: string
                   id:
                     description: The ID of the Data Share Blob Storage Dataset.

@@ -14,6 +14,8 @@ import (
 )
 
 type LoadBalancerRuleObservation struct {
+
+	// The ID of the Load Balancer Rule.
 	FrontendIPConfigurationID *string `json:"frontendIpConfigurationId,omitempty" tf:"frontend_ip_configuration_id,omitempty"`
 
 	// The ID of the Load Balancer Rule.

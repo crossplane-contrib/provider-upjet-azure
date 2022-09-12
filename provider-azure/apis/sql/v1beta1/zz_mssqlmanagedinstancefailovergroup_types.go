@@ -26,6 +26,7 @@ type MSSQLManagedInstanceFailoverGroupObservation struct {
 
 type MSSQLManagedInstanceFailoverGroupParameters struct {
 
+	// The Azure Region where the Managed Instance Failover Group should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
@@ -81,6 +82,8 @@ type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters 
 }
 
 type PartnerRegionObservation struct {
+
+	// The Azure Region where the Managed Instance Failover Group should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`

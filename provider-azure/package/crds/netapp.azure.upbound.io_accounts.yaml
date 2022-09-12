@@ -78,7 +78,7 @@ spec:
                           description: The name of the Active Directory domain.
                           type: string
                         organizationalUnit:
-                          description: The Organizational Unit  within the Active
+                          description: The Organizational Unit (OU) within the Active
                             Directory Domain.
                           type: string
                         passwordSecretRef:

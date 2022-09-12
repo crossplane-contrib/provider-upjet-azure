@@ -434,8 +434,10 @@ spec:
               atProvider:
                 properties:
                   backendIpConfigurationId:
+                    description: The ID of the Load Balancer NAT Rule.
                     type: string
                   frontendIpConfigurationId:
+                    description: The ID of the Load Balancer NAT Rule.
                     type: string
                   id:
                     description: The ID of the Load Balancer NAT Rule.

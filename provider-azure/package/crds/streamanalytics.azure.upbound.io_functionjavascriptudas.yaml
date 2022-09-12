@@ -74,6 +74,9 @@ spec:
                             Defaults to false.
                           type: boolean
                         type:
+                          description: The input data type of this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
                           type: string
                       required:
                       - type
@@ -84,6 +87,9 @@ spec:
                     items:
                       properties:
                         type:
+                          description: The output data type from this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
                           type: string
                       required:
                       - type

@@ -66,8 +66,8 @@ spec:
               forProvider:
                 properties:
                   privateDnsZoneName:
-                    description: The name of the Private DNS zone . Changing this
-                      forces a new resource to be created.
+                    description: The name of the Private DNS zone (without a terminating
+                      dot). Changing this forces a new resource to be created.
                     type: string
                   privateDnsZoneNameRef:
                     description: Reference to a PrivateDNSZone to populate privateDnsZoneName.

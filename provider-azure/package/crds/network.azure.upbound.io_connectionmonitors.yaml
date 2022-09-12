@@ -69,6 +69,8 @@ spec:
                     items:
                       properties:
                         address:
+                          description: The IP address or domain name of the Network
+                            Connection Monitor endpoint.
                           type: string
                         coverageLevel:
                           description: The test coverage for the Network Connection
@@ -91,12 +93,19 @@ spec:
                                 items:
                                   properties:
                                     address:
+                                      description: The address of the filter item.
                                       type: string
                                     type:
+                                      description: The type of items included in the
+                                        filter. Possible values are AgentAddress.
+                                        Defaults to AgentAddress.
                                       type: string
                                   type: object
                                 type: array
                               type:
+                                description: The behaviour type of this endpoint filter.
+                                  Currently the only allowed value is Include. Defaults
+                                  to Include.
                                 type: string
                             type: object
                           type: array
@@ -108,6 +117,8 @@ spec:
                             type: string
                           type: array
                         name:
+                          description: The name of the endpoint for the Network Connection
+                            Monitor .
                           type: string
                         targetResourceId:
                           description: The resource ID which is used as the endpoint
@@ -235,6 +246,7 @@ spec:
                                   accepts the absolute path.
                                 type: string
                               port:
+                                description: The port for the HTTP connection.
                                 type: number
                               preferHttps:
                                 description: Should HTTPS be preferred over HTTP in
@@ -246,6 +258,7 @@ spec:
                                 items:
                                   properties:
                                     name:
+                                      description: The name of the HTTP header.
                                       type: string
                                     value:
                                       description: The value of the HTTP header.
@@ -268,10 +281,14 @@ spec:
                           items:
                             properties:
                               traceRouteEnabled:
+                                description: Should path evaluation with trace route
+                                  be enabled? Defaults to true.
                                 type: boolean
                             type: object
                           type: array
                         name:
+                          description: The name of test configuration for the Network
+                            Connection Monitor.
                           type: string
                         preferredIpVersion:
                           description: The preferred IP version which is used in the
@@ -304,8 +321,11 @@ spec:
                                   TCP connection. Possible values are None and ListenIfAvailable.
                                 type: string
                               port:
+                                description: The port for the TCP connection.
                                 type: number
                               traceRouteEnabled:
+                                description: Should path evaluation with trace route
+                                  be enabled? Defaults to true.
                                 type: boolean
                             required:
                             - port
@@ -334,6 +354,8 @@ spec:
                             to true.
                           type: boolean
                         name:
+                          description: The name of the test group for the Network
+                            Connection Monitor.
                           type: string
                         sourceEndpoints:
                           description: A list of source endpoint names.

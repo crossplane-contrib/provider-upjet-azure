@@ -18,12 +18,15 @@ type DailyScheduleObservation struct {
 
 type DailyScheduleParameters struct {
 
+	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
 	// +kubebuilder:validation:Required
 	Hour *float64 `json:"hour" tf:"hour,omitempty"`
 
+	// Minute of the hour that the snapshots will be created, valid range is from 0 to 59.
 	// +kubebuilder:validation:Required
 	Minute *float64 `json:"minute" tf:"minute,omitempty"`
 
+	// How many hourly snapshots to keep, valid range is from 0 to 255.
 	// +kubebuilder:validation:Required
 	SnapshotsToKeep *float64 `json:"snapshotsToKeep" tf:"snapshots_to_keep,omitempty"`
 }
@@ -33,9 +36,11 @@ type HourlyScheduleObservation struct {
 
 type HourlyScheduleParameters struct {
 
+	// Minute of the hour that the snapshots will be created, valid range is from 0 to 59.
 	// +kubebuilder:validation:Required
 	Minute *float64 `json:"minute" tf:"minute,omitempty"`
 
+	// How many hourly snapshots to keep, valid range is from 0 to 255.
 	// +kubebuilder:validation:Required
 	SnapshotsToKeep *float64 `json:"snapshotsToKeep" tf:"snapshots_to_keep,omitempty"`
 }
@@ -48,12 +53,15 @@ type MonthlyScheduleParameters struct {
 	// +kubebuilder:validation:Required
 	DaysOfMonth []*float64 `json:"daysOfMonth" tf:"days_of_month,omitempty"`
 
+	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
 	// +kubebuilder:validation:Required
 	Hour *float64 `json:"hour" tf:"hour,omitempty"`
 
+	// Minute of the hour that the snapshots will be created, valid range is from 0 to 59.
 	// +kubebuilder:validation:Required
 	Minute *float64 `json:"minute" tf:"minute,omitempty"`
 
+	// How many hourly snapshots to keep, valid range is from 0 to 255.
 	// +kubebuilder:validation:Required
 	SnapshotsToKeep *float64 `json:"snapshotsToKeep" tf:"snapshots_to_keep,omitempty"`
 }
@@ -66,6 +74,7 @@ type SnapshotPolicyObservation struct {
 
 type SnapshotPolicyParameters struct {
 
+	// The name of the NetApp Account in which the NetApp Snapshot Policy should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -78,21 +87,27 @@ type SnapshotPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// Sets a daily snapshot schedule. See details in below daily_schedule block.
 	// +kubebuilder:validation:Optional
 	DailySchedule []DailyScheduleParameters `json:"dailySchedule,omitempty" tf:"daily_schedule,omitempty"`
 
+	// Defines that the NetApp Snapshot Policy is enabled or not.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
+	// Sets an hourly snapshot schedule. See details in below hourly_schedule block.
 	// +kubebuilder:validation:Optional
 	HourlySchedule []HourlyScheduleParameters `json:"hourlySchedule,omitempty" tf:"hourly_schedule,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// Sets a monthly snapshot schedule. See details in below monthly_schedule block.
 	// +kubebuilder:validation:Optional
 	MonthlySchedule []MonthlyScheduleParameters `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
 
+	// The name of the resource group where the NetApp Snapshot Policy should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -108,6 +123,7 @@ type SnapshotPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Sets a weekly snapshot schedule. See details in below weekly_schedule block.
 	// +kubebuilder:validation:Optional
 	WeeklySchedule []WeeklyScheduleParameters `json:"weeklySchedule,omitempty" tf:"weekly_schedule,omitempty"`
 }
@@ -121,12 +137,15 @@ type WeeklyScheduleParameters struct {
 	// +kubebuilder:validation:Required
 	DaysOfWeek []*string `json:"daysOfWeek" tf:"days_of_week,omitempty"`
 
+	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
 	// +kubebuilder:validation:Required
 	Hour *float64 `json:"hour" tf:"hour,omitempty"`
 
+	// Minute of the hour that the snapshots will be created, valid range is from 0 to 59.
 	// +kubebuilder:validation:Required
 	Minute *float64 `json:"minute" tf:"minute,omitempty"`
 
+	// How many hourly snapshots to keep, valid range is from 0 to 255.
 	// +kubebuilder:validation:Required
 	SnapshotsToKeep *float64 `json:"snapshotsToKeep" tf:"snapshots_to_keep,omitempty"`
 }

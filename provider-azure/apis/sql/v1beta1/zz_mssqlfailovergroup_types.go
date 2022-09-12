@@ -14,8 +14,11 @@ import (
 )
 
 type MSSQLFailoverGroupObservation struct {
+
+	// The ID of the Failover Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A partner_server block as defined below.
 	// +kubebuilder:validation:Required
 	PartnerServer []PartnerServerObservation `json:"partnerServer,omitempty" tf:"partner_server,omitempty"`
 }
@@ -36,6 +39,7 @@ type MSSQLFailoverGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabasesSelector *v1.Selector `json:"databasesSelector,omitempty" tf:"-"`
 
+	// A partner_server block as defined below.
 	// +kubebuilder:validation:Required
 	PartnerServer []PartnerServerParameters `json:"partnerServer" tf:"partner_server,omitempty"`
 
@@ -77,6 +81,7 @@ type PartnerServerObservation struct {
 
 type PartnerServerParameters struct {
 
+	// The ID of a partner SQL server to include in the failover group.
 	// +crossplane:generate:reference:type=MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

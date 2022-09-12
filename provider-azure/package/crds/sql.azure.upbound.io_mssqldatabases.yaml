@@ -157,9 +157,9 @@ spec:
                       is only applicable when the create_mode is Restore.
                     type: string
                   restorePointInTime:
-                    description: Specifies the point in time  of the source database
-                      that will be restored to create the new database. This property
-                      is only settable for create_mode= PointInTimeRestore  databases.
+                    description: Specifies the point in time (ISO8601 format) of the
+                      source database that will be restored to create the new database.
+                      This property is only settable for create_mode= PointInTimeRestore  databases.
                     type: string
                   sampleName:
                     description: Specifies the name of the sample schema to apply
@@ -252,6 +252,8 @@ spec:
                             databases. Value has to be 12 or 24. Defaults to 12 hours.
                           type: number
                         retentionDays:
+                          description: Point In Time Restore configuration. Value
+                            has to be between 7 and 35.
                           type: number
                       required:
                       - retentionDays
@@ -297,14 +299,17 @@ spec:
                             type: string
                           type: array
                         retentionDays:
+                          description: Specifies the number of days to keep in the
+                            Threat Detection audit logs.
                           type: number
                         state:
                           description: The State of the Policy. Possible values are
                             Enabled, Disabled or New.
                           type: string
                         storageAccountAccessKeySecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: Specifies the identifier key of the Threat
+                            Detection audit storage account. Required if state is
+                            Enabled.
                           properties:
                             key:
                               description: The key to select.
@@ -321,6 +326,9 @@ spec:
                           - namespace
                           type: object
                         storageEndpoint:
+                          description: Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net).
+                            This blob storage will hold all Threat Detection audit
+                            logs. Required if state is Enabled.
                           type: string
                       type: object
                     type: array

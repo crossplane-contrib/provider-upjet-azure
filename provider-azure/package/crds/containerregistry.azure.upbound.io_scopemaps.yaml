@@ -65,7 +65,8 @@ spec:
               forProvider:
                 properties:
                   actions:
-                    description: A list of actions to attach to the scope map .
+                    description: A list of actions to attach to the scope map (e.g.
+                      repo/content/read, repo2/content/delete).
                     items:
                       type: string
                     type: array

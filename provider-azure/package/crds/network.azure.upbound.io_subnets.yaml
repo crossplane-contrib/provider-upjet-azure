@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   addressPrefixes:
+                    description: The address prefixes to use for the subnet.
                     items:
                       type: string
                     type: array
@@ -73,6 +74,7 @@ spec:
                     items:
                       properties:
                         name:
+                          description: A name for this delegation.
                           type: string
                         serviceDelegation:
                           description: A service_delegation block as defined below.
@@ -90,6 +92,7 @@ spec:
                                   type: string
                                 type: array
                               name:
+                                description: A name for this delegation.
                                 type: string
                             required:
                             - name
@@ -113,6 +116,8 @@ spec:
                       Default value is false.
                     type: boolean
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the subnet. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -205,6 +210,8 @@ spec:
                       type: string
                     type: array
                   virtualNetworkName:
+                    description: The name of the virtual network to which to attach
+                      the subnet. Changing this forces a new resource to be created.
                     type: string
                   virtualNetworkNameRef:
                     description: Reference to a VirtualNetwork to populate virtualNetworkName.

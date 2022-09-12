@@ -79,6 +79,8 @@ spec:
                         privateIpAddress:
                           type: string
                         privateIpAddressAllocation:
+                          description: Specifies the supported Azure Region where
+                            the Load Balancer should be created.
                           type: string
                         privateIpAddressVersion:
                           description: The version of IP that the Private IP Address

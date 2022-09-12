@@ -91,6 +91,8 @@ spec:
                             type: object
                           type: array
                         id:
+                          description: The ID which should be used for this Shared
+                            Identifier.
                           type: string
                       required:
                       - id
@@ -358,6 +360,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID which should be used for this Shared Identifier.
                     type: string
                 type: object
               conditions:

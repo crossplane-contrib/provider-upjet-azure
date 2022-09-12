@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   accountName:
+                    description: Specifies the name of the Cosmos DB Mongo Collection.
+                      Changing this forces a new resource to be created.
                     type: string
                   accountNameRef:
                     description: Reference to a Account to populate accountName.
@@ -147,15 +149,13 @@ spec:
                       expire n seconds after their last modified time.
                     type: number
                   autoscaleSettings:
-                    description: An autoscale_settings block as defined below. This
-                      must be set upon database creation otherwise it cannot be updated
-                      without a manual terraform destroy-apply.
+                    description: An autoscale_settings block as defined below.
                     items:
                       properties:
                         maxThroughput:
                           description: The maximum throughput of the MongoDB collection
-                            . Must be between 1,000 and 1,000,000. Must be set in
-                            increments of 1,000. Conflicts with throughput.
+                            (RU/s). Must be between 1,000 and 1,000,000. Must be set
+                            in increments of 1,000. Conflicts with throughput.
                           type: number
                       type: object
                     type: array
@@ -246,10 +246,13 @@ spec:
                     items:
                       properties:
                         keys:
+                          description: Specifies the list of user settable keys for
+                            each Cosmos DB Mongo Collection.
                           items:
                             type: string
                           type: array
                         unique:
+                          description: Is the index unique or not? Defaults to false.
                           type: boolean
                       required:
                       - keys
@@ -340,10 +343,8 @@ spec:
                       There must not be any other unique index keys.
                     type: string
                   throughput:
-                    description: The throughput of the MongoDB collection . Must be
-                      set in increments of 100. The minimum value is 400. This must
-                      be set upon database creation otherwise it cannot be updated
-                      without a manual terraform destroy-apply.
+                    description: The throughput of the MongoDB collection (RU/s).
+                      Must be set in increments of 100. The minimum value is 400.
                     type: number
                 type: object
               providerConfigRef:
@@ -530,10 +531,14 @@ spec:
                     items:
                       properties:
                         keys:
+                          description: The list of system keys which are not settable
+                            for each Cosmos DB Mongo Collection.
                           items:
                             type: string
                           type: array
                         unique:
+                          description: Identifies whether the table contains no duplicate
+                            values.
                           type: boolean
                       type: object
                     type: array

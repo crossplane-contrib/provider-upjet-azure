@@ -18,7 +18,7 @@ type SQLDatabaseAutoscaleSettingsObservation struct {
 
 type SQLDatabaseAutoscaleSettingsParameters struct {
 
-	// The maximum throughput of the SQL database . Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	// The maximum throughput of the SQL database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
@@ -44,7 +44,7 @@ type SQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
-	// An autoscale_settings block as defined below. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.
+	// An autoscale_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []SQLDatabaseAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
@@ -61,7 +61,7 @@ type SQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The throughput of SQL database . Must be set in increments of 100. The minimum value is 400. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply.  Do not set when azurerm_cosmosdb_account is configured with EnableServerless capability.
+	// The throughput of SQL database (RU/s). Must be set in increments of 100. The minimum value is 400.  Do not set when azurerm_cosmosdb_account is configured with EnableServerless capability.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }

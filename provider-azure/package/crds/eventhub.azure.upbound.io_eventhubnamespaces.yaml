@@ -78,6 +78,7 @@ spec:
                       new resource to be created.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         type:
@@ -311,8 +312,8 @@ spec:
                     type: object
                   zoneRedundant:
                     description: Specifies if the EventHub Namespace should be Zone
-                      Redundant . Changing this forces a new resource to be created.
-                      Defaults to false.
+                      Redundant (created across Availability Zones). Changing this
+                      forces a new resource to be created. Defaults to false.
                     type: boolean
                 required:
                 - location
@@ -498,6 +499,7 @@ spec:
                     description: The EventHub Namespace ID.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:

@@ -18,9 +18,11 @@ type DataDiskObservation struct {
 
 type DataDiskParameters struct {
 
+	// Specifies the URI in Azure storage of the blob that you want to use to create the image.
 	// +kubebuilder:validation:Optional
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 
+	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
 	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
@@ -28,9 +30,11 @@ type DataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
 
+	// Specifies the ID of the managed disk resource that you want to use to create the image.
 	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
+	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
 	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
@@ -92,12 +96,15 @@ type OsDiskObservation struct {
 
 type OsDiskParameters struct {
 
+	// Specifies the URI in Azure storage of the blob that you want to use to create the image.
 	// +kubebuilder:validation:Optional
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 
+	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
 	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
+	// Specifies the ID of the managed disk resource that you want to use to create the image.
 	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
@@ -109,6 +116,7 @@ type OsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
+	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
 	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }

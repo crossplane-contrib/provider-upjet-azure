@@ -142,8 +142,8 @@ spec:
                         type: object
                     type: object
                   principalId:
-                    description: The ID of the Principal  in Azure Active Directory.
-                      Changing this forces a new resource to be created.
+                    description: The ID of the Principal (Client) in Azure Active
+                      Directory. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group in which the Cosmos

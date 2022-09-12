@@ -87,11 +87,14 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   natIpConfiguration:
-                    description: One or more  nat_ip_configuration block as defined
-                      below.
+                    description: One or more (up to 8) nat_ip_configuration block
+                      as defined below.
                     items:
                       properties:
                         name:
+                          description: Specifies the name which should be used for
+                            the NAT IP Configuration. Changing this forces a new resource
+                            to be created.
                           type: string
                         primary:
                           description: Is this is the Primary IP Configuration? Changing

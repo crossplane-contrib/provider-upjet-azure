@@ -22,6 +22,7 @@ type CompositeIndexIndexParameters struct {
 	// +kubebuilder:validation:Required
 	Order *string `json:"order" tf:"order,omitempty"`
 
+	// Path for which the indexing behaviour applies to.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 }
@@ -31,6 +32,7 @@ type ExcludedPathObservation struct {
 
 type ExcludedPathParameters struct {
 
+	// Path that is excluded from indexing.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 }
@@ -40,6 +42,7 @@ type IncludedPathObservation struct {
 
 type IncludedPathParameters struct {
 
+	// Path for which the indexing behaviour applies to.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 }
@@ -92,6 +95,7 @@ type IndexingPolicySpatialIndexObservation struct {
 
 type IndexingPolicySpatialIndexParameters struct {
 
+	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 }
@@ -101,7 +105,7 @@ type SQLContainerAutoscaleSettingsObservation struct {
 
 type SQLContainerAutoscaleSettingsParameters struct {
 
-	// The maximum throughput of the SQL container . Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	// The maximum throughput of the SQL container (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
@@ -153,7 +157,7 @@ type SQLContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
-	// An autoscale_settings block as defined below. This must be set upon database creation otherwise it cannot be updated without a manual terraform destroy-apply. Requires partition_key_path to be set.
+	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []SQLContainerAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
@@ -203,7 +207,7 @@ type SQLContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The throughput of SQL container . Must be set in increments of 100. The minimum value is 400. This must be set upon container creation otherwise it cannot be updated without a manual terraform destroy-apply.
+	// The throughput of SQL container (RU/s). Must be set in increments of 100. The minimum value is 400.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 

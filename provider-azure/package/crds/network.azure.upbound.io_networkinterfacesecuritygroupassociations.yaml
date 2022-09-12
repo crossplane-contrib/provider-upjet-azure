@@ -400,8 +400,6 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The  ID of the Association between the Network Interface
-                      and the Network Interface.
                     type: string
                 type: object
               conditions:

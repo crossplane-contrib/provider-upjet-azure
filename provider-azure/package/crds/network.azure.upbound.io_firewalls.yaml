@@ -74,11 +74,15 @@ spec:
                     description: The ID of the Firewall Policy applied to this Firewall.
                     type: string
                   ipConfiguration:
+                    description: An ip_configuration block as documented below.
                     items:
                       properties:
                         name:
+                          description: Specifies the name of the IP Configuration.
                           type: string
                         publicIpAddressId:
+                          description: The ID of the Public IP Address associated
+                            with the firewall.
                           type: string
                         publicIpAddressIdRef:
                           description: Reference to a PublicIP to populate publicIpAddressId.
@@ -157,6 +161,8 @@ spec:
                               type: object
                           type: object
                         subnetId:
+                          description: Reference to the subnet associated with the
+                            IP Configuration.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet to populate subnetId.
@@ -250,10 +256,16 @@ spec:
                     items:
                       properties:
                         name:
+                          description: Specifies the name of the IP Configuration.
                           type: string
                         publicIpAddressId:
+                          description: The ID of the Public IP Address associated
+                            with the firewall.
                           type: string
                         subnetId:
+                          description: Reference to the subnet associated with the
+                            IP Configuration. Changing this forces a new resource
+                            to be created.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet to populate subnetId.
@@ -438,10 +450,11 @@ spec:
                     type: object
                   threatIntelMode:
                     description: 'The operation mode for threat intelligence-based
-                      filtering. Possible values are: Off, Alert,Deny and "". Defaults
-                      to Alert.'
+                      filtering. Possible values are: Off, Alert,Deny and ""(empty
+                      string). Defaults to Alert.'
                     type: string
                   virtualHub:
+                    description: A virtual_hub block as documented below.
                     items:
                       properties:
                         publicIpCount:
@@ -648,6 +661,7 @@ spec:
                     description: The ID of the Azure Firewall.
                     type: string
                   ipConfiguration:
+                    description: An ip_configuration block as documented below.
                     items:
                       properties:
                         privateIpAddress:
@@ -666,6 +680,7 @@ spec:
                       type: object
                     type: array
                   virtualHub:
+                    description: A virtual_hub block as documented below.
                     items:
                       properties:
                         privateIpAddress:

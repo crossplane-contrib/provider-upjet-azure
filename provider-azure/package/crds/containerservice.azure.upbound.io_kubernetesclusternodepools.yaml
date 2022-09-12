@@ -93,8 +93,8 @@ spec:
                       properties:
                         allowedUnsafeSysctls:
                           description: Specifies the allow list of unsafe sysctls
-                            command or patterns . Changing this forces a new resource
-                            to be created.
+                            command or patterns (ending in *). Changing this forces
+                            a new resource to be created.
                           items:
                             type: string
                           type: array
@@ -104,9 +104,9 @@ spec:
                             least 2. Changing this forces a new resource to be created.
                           type: number
                         containerLogMaxSizeMb:
-                          description: Specifies the maximum size  of container log
-                            file before it is rotated. Changing this forces a new
-                            resource to be created.
+                          description: Specifies the maximum size (e.g. 10MB) of container
+                            log file before it is rotated. Changing this forces a
+                            new resource to be created.
                           type: number
                         cpuCfsQuotaEnabled:
                           description: Is CPU CFS quota enforcement for containers
@@ -431,15 +431,15 @@ spec:
                     type: string
                   nodeTaints:
                     description: A list of Kubernetes taints which should be applied
-                      to nodes in the agent pool . Changing this forces a new resource
-                      to be created.
+                      to nodes in the agent pool (e.g key=value:NoSchedule). Changing
+                      this forces a new resource to be created.
                     items:
                       type: string
                     type: array
                   orchestratorVersion:
                     description: Version of Kubernetes used for the Agents. If not
                       specified, the latest recommended version will be used at provisioning
-                      time
+                      time (but won't auto-upgrade)
                     type: string
                   osDiskSizeGb:
                     description: The Agent Operating System disk size in GB. Changing
@@ -556,9 +556,10 @@ spec:
                     type: string
                   spotMaxPrice:
                     description: The maximum price you're willing to pay in USD per
-                      Virtual Machine. Valid values are -1  or a positive value with
-                      up to five decimal places. Changing this forces a new resource
-                      to be created.
+                      Virtual Machine. Valid values are -1 (the current on-demand
+                      price for a Virtual Machine) or a positive value with up to
+                      five decimal places. Changing this forces a new resource to
+                      be created.
                     type: number
                   tags:
                     additionalProperties:

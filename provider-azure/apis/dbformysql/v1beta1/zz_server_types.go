@@ -113,11 +113,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	SSLMinimalTLSVersionEnforced *string `json:"sslMinimalTlsVersionEnforced,omitempty" tf:"ssl_minimal_tls_version_enforced,omitempty"`
 
-	// Specifies the SKU Name for this MySQL Server. The name of the SKU, follows the tier + family + cores pattern . For more information see the product documentation.
+	// Specifies the SKU Name for this MySQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. B_Gen4_1, GP_Gen5_8). For more information see the product documentation.
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 
-	// Max storage allowed for a server. Possible values are between 5120 MB and 1048576 MB for the Basic SKU and between 5120 MB and 16777216 MB for General Purpose/Memory Optimized SKUs. For more information see the product documentation.
+	// Max storage allowed for a server. Possible values are between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU and between 5120 MB(5GB) and 16777216 MB(16TB) for General Purpose/Memory Optimized SKUs. For more information see the product documentation.
 	// +kubebuilder:validation:Optional
 	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
 
@@ -163,7 +163,7 @@ type ThreatDetectionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
-	// Specifies the blob storage endpoint . This blob storage will hold all Threat Detection audit logs.
+	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
 	// +kubebuilder:validation:Optional
 	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 }

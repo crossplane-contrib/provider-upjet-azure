@@ -173,11 +173,12 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   ttl:
-                    description: The Time To Live  of the DNS record in seconds.
+                    description: The Time To Live (TTL) of the DNS record in seconds.
                     type: number
                   zoneName:
-                    description: Specifies the DNS Zone where the DNS Zone  exists.
-                      Changing this forces a new resource to be created.
+                    description: Specifies the DNS Zone where the DNS Zone (parent
+                      resource) exists. Changing this forces a new resource to be
+                      created.
                     type: string
                   zoneNameRef:
                     description: Reference to a DNSZone to populate zoneName.

@@ -75,6 +75,7 @@ type FirewallNATRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Required
 	DestinationPorts []*string `json:"destinationPorts" tf:"destination_ports,omitempty"`
 
+	// Specifies the name of the rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

@@ -103,7 +103,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	RestoreDroppedDatabaseID *string `json:"restoreDroppedDatabaseId,omitempty" tf:"restore_dropped_database_id,omitempty"`
 
-	// Specifies the point in time  of the source database that will be restored to create the new database. This property is only settable for create_mode= PointInTimeRestore  databases.
+	// Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. This property is only settable for create_mode= PointInTimeRestore  databases.
 	// +kubebuilder:validation:Optional
 	RestorePointInTime *string `json:"restorePointInTime,omitempty" tf:"restore_point_in_time,omitempty"`
 
@@ -163,6 +163,7 @@ type ShortTermRetentionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupIntervalInHours *float64 `json:"backupIntervalInHours,omitempty" tf:"backup_interval_in_hours,omitempty"`
 
+	// Point In Time Restore configuration. Value has to be between 7 and 35.
 	// +kubebuilder:validation:Required
 	RetentionDays *float64 `json:"retentionDays" tf:"retention_days,omitempty"`
 }
@@ -184,6 +185,7 @@ type ThreatDetectionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
+	// Specifies the number of days to keep in the Threat Detection audit logs.
 	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
@@ -191,9 +193,11 @@ type ThreatDetectionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// Specifies the identifier key of the Threat Detection audit storage account. Required if state is Enabled.
 	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
+	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. Required if state is Enabled.
 	// +kubebuilder:validation:Optional
 	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 }

@@ -38,7 +38,7 @@ type HPCCacheAccessPolicyAccessRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	RootSquashEnabled *bool `json:"rootSquashEnabled,omitempty" tf:"root_squash_enabled,omitempty"`
 
-	// The scope of this rule. The scope and  the filter determine which clients match the rule. Possible values are: default, network, host.
+	// The scope of this rule. The scope and (potentially) the filter determine which clients match the rule. Possible values are: default, network, host.
 	// +kubebuilder:validation:Required
 	Scope *string `json:"scope" tf:"scope,omitempty"`
 

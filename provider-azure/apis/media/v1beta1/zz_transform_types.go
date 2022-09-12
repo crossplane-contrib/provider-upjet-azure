@@ -18,9 +18,11 @@ type AudioAnalyzerPresetObservation struct {
 
 type AudioAnalyzerPresetParameters struct {
 
+	// Possibles value are Basic or Standard. Determines the set of audio analysis operations to be performed.
 	// +kubebuilder:validation:Optional
 	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
 
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
 	// +kubebuilder:validation:Optional
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 }
@@ -40,7 +42,7 @@ type FaceDetectorPresetObservation struct {
 
 type FaceDetectorPresetParameters struct {
 
-	// Possibles value are SourceResolution or StandardDefinition. Specifies the maximum resolution at which your video is analyzed. The default behavior is SourceResolution which will keep the input video at its original resolution when analyzed. Using StandardDefinition will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to StandardDefinition will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component . However, faces that end up being too small in the resized video may not be detected.
+	// Possibles value are SourceResolution or StandardDefinition. Specifies the maximum resolution at which your video is analyzed. The default behavior is SourceResolution which will keep the input video at its original resolution when analyzed. Using StandardDefinition will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to StandardDefinition will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected.
 	// +kubebuilder:validation:Optional
 	AnalysisResolution *string `json:"analysisResolution,omitempty" tf:"analysis_resolution,omitempty"`
 }
@@ -123,9 +125,11 @@ type VideoAnalyzerPresetObservation struct {
 
 type VideoAnalyzerPresetParameters struct {
 
+	// Possibles value are Basic or Standard. Determines the set of audio analysis operations to be performed.
 	// +kubebuilder:validation:Optional
 	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
 
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
 	// +kubebuilder:validation:Optional
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 

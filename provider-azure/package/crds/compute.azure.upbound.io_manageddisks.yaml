@@ -122,6 +122,8 @@ spec:
                                   id on the azurerm_key_vault_secret resource.
                                 type: string
                               sourceVaultId:
+                                description: The URL of the Key Vault. This can be
+                                  found as vault_uri on the azurerm_key_vault resource.
                                 type: string
                             required:
                             - secretUrl
@@ -142,6 +144,7 @@ spec:
                                   on the azurerm_key_vault_key resource.
                                 type: string
                               sourceVaultId:
+                                description: The ID of the source Key Vault.
                                 type: string
                             required:
                             - keyUrl
@@ -187,8 +190,8 @@ spec:
                       values are AllowAll, AllowPrivate, and DenyAll.
                     type: string
                   onDemandBurstingEnabled:
-                    description: emand Bursting is enabled for the Managed Disk. Defaults
-                      to false.
+                    description: Demand Bursting is enabled for the Managed Disk.
+                      Defaults to false.
                     type: boolean
                   osType:
                     description: Specify a value when the source of an Import or Copy

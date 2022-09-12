@@ -22,6 +22,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
 
+	// A name used for this IP Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -60,7 +61,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 
 type NetworkInterfaceObservation struct {
 
-	// If the Virtual Machine using this Network Interface is part of an Availability Set, then this list will have the union of all DNS servers from all Network Interfaces that are part of the Availability Set.
+	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
 	AppliedDNSServers []*string `json:"appliedDnsServers,omitempty" tf:"applied_dns_servers,omitempty"`
 
 	// The ID of the Network Interface.
@@ -69,7 +70,7 @@ type NetworkInterfaceObservation struct {
 	// Even if internal_dns_name_label is not specified, a DNS entry is created for the primary NIC of the VM. This DNS name can be constructed by concatenating the VM name with the value of internal_domain_name_suffix.
 	InternalDomainNameSuffix *string `json:"internalDomainNameSuffix,omitempty" tf:"internal_domain_name_suffix,omitempty"`
 
-	// The Media Access Control  Address of the Network Interface.
+	// The Media Access Control (MAC) Address of the Network Interface.
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
@@ -103,7 +104,7 @@ type NetworkInterfaceParameters struct {
 	// +kubebuilder:validation:Required
 	IPConfiguration []NetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
-	// The  DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
+	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
 	// +kubebuilder:validation:Optional
 	InternalDNSNameLabel *string `json:"internalDnsNameLabel,omitempty" tf:"internal_dns_name_label,omitempty"`
 

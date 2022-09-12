@@ -18,6 +18,7 @@ type BackupVaultObservation struct {
 	// The ID of the Backup Vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
@@ -28,6 +29,7 @@ type BackupVaultParameters struct {
 	// +kubebuilder:validation:Required
 	DatastoreType *string `json:"datastoreType" tf:"datastore_type,omitempty"`
 
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 

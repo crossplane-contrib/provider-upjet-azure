@@ -38,7 +38,7 @@ type ExpressRouteGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The number of scale units with which to provision the ExpressRoute gateway. Each scale unit is equal to 2Gbps, with support for up to 10 scale units .
+	// The number of scale units with which to provision the ExpressRoute gateway. Each scale unit is equal to 2Gbps, with support for up to 10 scale units (20Gbps).
 	// +kubebuilder:validation:Required
 	ScaleUnits *float64 `json:"scaleUnits" tf:"scale_units,omitempty"`
 

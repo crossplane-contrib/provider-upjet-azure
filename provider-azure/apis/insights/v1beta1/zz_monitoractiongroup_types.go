@@ -26,6 +26,7 @@ type AADAuthParameters struct {
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
+	// The ID of the Action Group.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
@@ -66,6 +67,7 @@ type AutomationRunBookReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	RunBookName *string `json:"runbookName" tf:"runbook_name,omitempty"`
 
+	// The URI where webhooks should be sent.
 	// +kubebuilder:validation:Required
 	ServiceURI *string `json:"serviceUri" tf:"service_uri,omitempty"`
 
@@ -140,6 +142,7 @@ type EventHubReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The ID of the Action Group.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
@@ -312,6 +315,7 @@ type WebhookReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The URI where webhooks should be sent.
 	// +kubebuilder:validation:Required
 	ServiceURI *string `json:"serviceUri" tf:"service_uri,omitempty"`
 

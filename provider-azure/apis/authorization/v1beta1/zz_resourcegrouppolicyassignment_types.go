@@ -38,11 +38,11 @@ type NonComplianceMessageObservation struct {
 
 type NonComplianceMessageParameters struct {
 
-	// The non-compliance message text. When assigning policy sets , unless policy_definition_reference_id is specified then this message will be the default for all policies.
+	// The non-compliance message text. When assigning policy sets (initiatives), unless policy_definition_reference_id is specified then this message will be the default for all policies.
 	// +kubebuilder:validation:Required
 	Content *string `json:"content" tf:"content,omitempty"`
 
-	// When assigning policy sets , this is the ID of the policy definition that the non-compliance message applies to.
+	// When assigning policy sets (initiatives), this is the ID of the policy definition that the non-compliance message applies to.
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
 }
@@ -87,7 +87,7 @@ type ResourceGroupPolicyAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	NonComplianceMessage []NonComplianceMessageParameters `json:"nonComplianceMessage,omitempty" tf:"non_compliance_message,omitempty"`
 
-	// Specifies a list of Resource Scopes  within this Management Group which are excluded from this Policy.
+	// Specifies a list of Resource Scopes (for example a Subscription, or a Resource Group) within this Management Group which are excluded from this Policy.
 	// +kubebuilder:validation:Optional
 	NotScopes []*string `json:"notScopes,omitempty" tf:"not_scopes,omitempty"`
 

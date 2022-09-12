@@ -21,7 +21,7 @@ type PrivateDNSZoneVirtualNetworkLinkObservation struct {
 
 type PrivateDNSZoneVirtualNetworkLinkParameters struct {
 
-	// The name of the Private DNS zone . Changing this forces a new resource to be created.
+	// The name of the Private DNS zone (without a terminating dot). Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=PrivateDNSZone
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneName *string `json:"privateDnsZoneName,omitempty" tf:"private_dns_zone_name,omitempty"`

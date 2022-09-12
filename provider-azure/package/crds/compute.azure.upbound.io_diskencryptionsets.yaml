@@ -88,7 +88,8 @@ spec:
                       type: object
                     type: array
                   keyVaultKeyId:
-                    description: Specifies the URL to a Key Vault Key .
+                    description: Specifies the URL to a Key Vault Key (either from
+                      a Key Vault Key, or the Key URL for the Key Vault Secret).
                     type: string
                   keyVaultKeyIdRef:
                     description: Reference to a Key in keyvault to populate keyVaultKeyId.
@@ -441,7 +442,7 @@ spec:
                     items:
                       properties:
                         principalId:
-                          description: The  ID of the Service Principal.
+                          description: The (Client) ID of the Service Principal.
                           type: string
                         tenantId:
                           description: The ID of the Tenant the Service Principal

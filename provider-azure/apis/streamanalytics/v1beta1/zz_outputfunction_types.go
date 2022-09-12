@@ -29,7 +29,7 @@ type OutputFunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	BatchMaxCount *float64 `json:"batchMaxCount,omitempty" tf:"batch_max_count,omitempty"`
 
-	// The maximum batch size in bytes that's sent to the function. Defaults to 262144 .
+	// The maximum batch size in bytes that's sent to the function. Defaults to 262144 (256 kB).
 	// +kubebuilder:validation:Optional
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 

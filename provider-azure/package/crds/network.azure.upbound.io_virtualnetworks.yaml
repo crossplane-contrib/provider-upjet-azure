@@ -66,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   addressSpace:
+                    description: The address space that is used the virtual network.
+                      You can supply more than one address space.
                     items:
                       type: string
                     type: array
@@ -81,6 +83,7 @@ spec:
                             Network.
                           type: boolean
                         id:
+                          description: The ID of DDoS Protection Plan.
                           type: string
                       required:
                       - enable
@@ -103,8 +106,12 @@ spec:
                       Possible values are between 4 and 30 minutes.
                     type: number
                   location:
+                    description: The location/region where the virtual network is
+                      created. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the virtual network.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -370,20 +377,26 @@ spec:
                     description: The GUID of the virtual network.
                     type: string
                   id:
+                    description: The ID of DDoS Protection Plan.
                     type: string
                   subnet:
+                    description: Can be specified multiple times to define multiple
+                      subnets. Each subnet block supports fields documented below.
                     items:
                       properties:
                         addressPrefix:
                           description: The address prefix to use for the subnet.
                           type: string
                         id:
+                          description: The ID of DDoS Protection Plan.
                           type: string
                         name:
+                          description: The name of the virtual network. Changing this
+                            forces a new resource to be created.
                           type: string
                         securityGroup:
                           description: The Network Security Group to associate with
-                            the subnet.
+                            the subnet. (Referenced by id, ie. azurerm_network_security_group.example.id)
                           type: string
                       type: object
                     type: array

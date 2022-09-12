@@ -22,7 +22,7 @@ type CrossSiteAccessPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientAccessPolicy *string `json:"clientAccessPolicy,omitempty" tf:"client_access_policy,omitempty"`
 
-	// The content of the Cross Domain Policy .
+	// The content of the Cross Domain Policy (crossdomain.xml).
 	// +kubebuilder:validation:Optional
 	CrossDomainPolicy *string `json:"crossDomainPolicy,omitempty" tf:"cross_domain_policy,omitempty"`
 }
@@ -32,7 +32,7 @@ type EncodingObservation struct {
 
 type EncodingParameters struct {
 
-	// Use an ISO 8601 time value between 0.5 to 20 seconds to specify the output fragment length for the video and audio tracks of an encoding live event. For example, use PT2S to indicate 2 seconds. For the video track it also defines the key frame interval, or the length of a GoP . If this value is not set for an encoding live event, the fragment duration defaults to 2 seconds. The value cannot be set for pass-through live events.
+	// Use an ISO 8601 time value between 0.5 to 20 seconds to specify the output fragment length for the video and audio tracks of an encoding live event. For example, use PT2S to indicate 2 seconds. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures). If this value is not set for an encoding live event, the fragment duration defaults to 2 seconds. The value cannot be set for pass-through live events.
 	// +kubebuilder:validation:Optional
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
@@ -40,11 +40,11 @@ type EncodingParameters struct {
 	// +kubebuilder:validation:Optional
 	PresetName *string `json:"presetName,omitempty" tf:"preset_name,omitempty"`
 
-	// Specifies how the input video will be resized to fit the desired output resolution. Allowed values are None, AutoFit or AutoSize. Default is None.
+	// Specifies how the input video will be resized to fit the desired output resolution(s). Allowed values are None, AutoFit or AutoSize. Default is None.
 	// +kubebuilder:validation:Optional
 	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
 
-	// Live event type. Allowed values are None, Premium1080p or Standard. When set to None, the service simply passes through the incoming video and audio layer to the output. When type is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bitrates or layers. Defaults to None. Changing this forces a new resource to be created.
+	// Live event type. Allowed values are None, Premium1080p or Standard. When set to None, the service simply passes through the incoming video and audio layer(s) to the output. When type is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bitrates or layers. Defaults to None. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -67,10 +67,11 @@ type IPAccessControlAllowParameters struct {
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// The friendly name for the IP address range.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The subnet mask prefix length .
+	// The subnet mask prefix length (see CIDR notation).
 	// +kubebuilder:validation:Optional
 	SubnetPrefixLength *float64 `json:"subnetPrefixLength,omitempty" tf:"subnet_prefix_length,omitempty"`
 }
@@ -85,6 +86,7 @@ type InputParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessToken *string `json:"accessToken,omitempty" tf:"access_token,omitempty"`
 
+	// One or more ip_access_control_allow blocks as defined below.
 	// +kubebuilder:validation:Optional
 	IPAccessControlAllow []IPAccessControlAllowParameters `json:"ipAccessControlAllow,omitempty" tf:"ip_access_control_allow,omitempty"`
 
@@ -175,7 +177,7 @@ type LiveEventParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies a list of languages  to be used for speech-to-text transcription – it should match the spoken language in the audio track. The value should be in BCP-47 format . See the Microsoft Documentation for more information about the live transcription feature and the list of supported languages.
+	// Specifies a list of languages (locale) to be used for speech-to-text transcription – it should match the spoken language in the audio track. The value should be in BCP-47 format (e.g: en-US). See the Microsoft Documentation for more information about the live transcription feature and the list of supported languages.
 	// +kubebuilder:validation:Optional
 	TranscriptionLanguages []*string `json:"transcriptionLanguages,omitempty" tf:"transcription_languages,omitempty"`
 
@@ -202,10 +204,11 @@ type PreviewIPAccessControlAllowParameters struct {
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// The friendly name for the IP address range.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The subnet mask prefix length .
+	// The subnet mask prefix length (see CIDR notation).
 	// +kubebuilder:validation:Optional
 	SubnetPrefixLength *float64 `json:"subnetPrefixLength,omitempty" tf:"subnet_prefix_length,omitempty"`
 }
@@ -220,6 +223,7 @@ type PreviewParameters struct {
 	// +kubebuilder:validation:Optional
 	AlternativeMediaID *string `json:"alternativeMediaId,omitempty" tf:"alternative_media_id,omitempty"`
 
+	// One or more ip_access_control_allow blocks as defined above.
 	// +kubebuilder:validation:Optional
 	IPAccessControlAllow []PreviewIPAccessControlAllowParameters `json:"ipAccessControlAllow,omitempty" tf:"ip_access_control_allow,omitempty"`
 

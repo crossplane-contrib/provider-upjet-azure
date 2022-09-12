@@ -19,9 +19,11 @@ type FirewallIPConfigurationObservation struct {
 
 type FirewallIPConfigurationParameters struct {
 
+	// Specifies the name of the IP Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The ID of the Public IP Address associated with the firewall.
 	// +crossplane:generate:reference:type=PublicIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,6 +37,7 @@ type FirewallIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
+	// Reference to the subnet associated with the IP Configuration.
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -54,6 +57,7 @@ type FirewallObservation struct {
 	// The ID of the Azure Firewall.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An ip_configuration block as documented below.
 	// +kubebuilder:validation:Optional
 	IPConfiguration []FirewallIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
@@ -61,6 +65,7 @@ type FirewallObservation struct {
 	// +kubebuilder:validation:Optional
 	ManagementIPConfiguration []ManagementIPConfigurationObservation `json:"managementIpConfiguration,omitempty" tf:"management_ip_configuration,omitempty"`
 
+	// A virtual_hub block as documented below.
 	// +kubebuilder:validation:Optional
 	VirtualHub []VirtualHubObservation `json:"virtualHub,omitempty" tf:"virtual_hub,omitempty"`
 }
@@ -75,6 +80,7 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
+	// An ip_configuration block as documented below.
 	// +kubebuilder:validation:Optional
 	IPConfiguration []FirewallIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
@@ -115,10 +121,11 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The operation mode for threat intelligence-based filtering. Possible values are: Off, Alert,Deny and "". Defaults to Alert.
+	// The operation mode for threat intelligence-based filtering. Possible values are: Off, Alert,Deny and ""(empty string). Defaults to Alert.
 	// +kubebuilder:validation:Optional
 	ThreatIntelMode *string `json:"threatIntelMode,omitempty" tf:"threat_intel_mode,omitempty"`
 
+	// A virtual_hub block as documented below.
 	// +kubebuilder:validation:Optional
 	VirtualHub []VirtualHubParameters `json:"virtualHub,omitempty" tf:"virtual_hub,omitempty"`
 
@@ -133,12 +140,15 @@ type ManagementIPConfigurationObservation struct {
 
 type ManagementIPConfigurationParameters struct {
 
+	// Specifies the name of the IP Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The ID of the Public IP Address associated with the firewall.
 	// +kubebuilder:validation:Required
 	PublicIPAddressID *string `json:"publicIpAddressId" tf:"public_ip_address_id,omitempty"`
 
+	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

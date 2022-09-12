@@ -409,8 +409,6 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The  ID of the Association between the Network Interface
-                      and the Load Balancers Backend Address Pool.
                     type: string
                 type: object
               conditions:

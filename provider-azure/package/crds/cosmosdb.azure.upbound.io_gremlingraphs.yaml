@@ -142,16 +142,14 @@ spec:
                         type: object
                     type: object
                   autoscaleSettings:
-                    description: An autoscale_settings block as defined below. This
-                      must be set upon database creation otherwise it cannot be updated
-                      without a manual terraform destroy-apply. Requires partition_key_path
-                      to be set.
+                    description: An autoscale_settings block as defined below. Requires
+                      partition_key_path to be set.
                     items:
                       properties:
                         maxThroughput:
                           description: The maximum throughput of the Gremlin graph
-                            . Must be between 1,000 and 1,000,000. Must be set in
-                            increments of 1,000. Conflicts with throughput.
+                            (RU/s). Must be between 1,000 and 1,000,000. Must be set
+                            in increments of 1,000. Conflicts with throughput.
                           type: number
                       type: object
                     type: array
@@ -254,8 +252,8 @@ spec:
                         type: object
                     type: object
                   defaultTtl:
-                    description: The default time to live  of the Gremlin graph. If
-                      the value is missing or set to "-1", items don’t expire.
+                    description: The default time to live (TTL) of the Gremlin graph.
+                      If the value is missing or set to "-1", items don’t expire.
                     type: number
                   indexPolicy:
                     description: The configuration of the indexing policy. One or
@@ -280,6 +278,8 @@ spec:
                                         are Ascending or Descending.
                                       type: string
                                     path:
+                                      description: Path for which the indexing behaviour
+                                        applies to.
                                       type: string
                                   required:
                                   - order
@@ -312,6 +312,10 @@ spec:
                           items:
                             properties:
                               path:
+                                description: Path for which the indexing behaviour
+                                  applies to. According to the service design, all
+                                  spatial types including LineString, MultiPolygon,
+                                  Point, and Polygon will be applied to the path.
                                 type: string
                             required:
                             - path
@@ -411,10 +415,8 @@ spec:
                         type: object
                     type: object
                   throughput:
-                    description: The throughput of the Gremlin graph . Must be set
-                      in increments of 100. The minimum value is 400. This must be
-                      set upon database creation otherwise it cannot be updated without
-                      a manual terraform destroy-apply.
+                    description: The throughput of the Gremlin graph (RU/s). Must
+                      be set in increments of 100. The minimum value is 400.
                     type: number
                   uniqueKey:
                     description: One or more unique_key blocks as defined below. Changing

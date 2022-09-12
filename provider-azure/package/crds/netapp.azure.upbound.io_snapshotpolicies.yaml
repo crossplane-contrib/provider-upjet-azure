@@ -65,6 +65,9 @@ spec:
               forProvider:
                 properties:
                   accountName:
+                    description: The name of the NetApp Account in which the NetApp
+                      Snapshot Policy should be created. Changing this forces a new
+                      resource to be created.
                     type: string
                   accountNameRef:
                     description: Reference to a Account to populate accountName.
@@ -140,13 +143,21 @@ spec:
                         type: object
                     type: object
                   dailySchedule:
+                    description: Sets a daily snapshot schedule. See details in below
+                      daily_schedule block.
                     items:
                       properties:
                         hour:
+                          description: Hour of the day that the snapshots will be
+                            created, valid range is from 0 to 23.
                           type: number
                         minute:
+                          description: Minute of the hour that the snapshots will
+                            be created, valid range is from 0 to 59.
                           type: number
                         snapshotsToKeep:
+                          description: How many hourly snapshots to keep, valid range
+                            is from 0 to 255.
                           type: number
                       required:
                       - hour
@@ -155,13 +166,21 @@ spec:
                       type: object
                     type: array
                   enabled:
+                    description: Defines that the NetApp Snapshot Policy is enabled
+                      or not.
                     type: boolean
                   hourlySchedule:
+                    description: Sets an hourly snapshot schedule. See details in
+                      below hourly_schedule block.
                     items:
                       properties:
                         minute:
+                          description: Minute of the hour that the snapshots will
+                            be created, valid range is from 0 to 59.
                           type: number
                         snapshotsToKeep:
+                          description: How many hourly snapshots to keep, valid range
+                            is from 0 to 255.
                           type: number
                       required:
                       - minute
@@ -169,8 +188,12 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   monthlySchedule:
+                    description: Sets a monthly snapshot schedule. See details in
+                      below monthly_schedule block.
                     items:
                       properties:
                         daysOfMonth:
@@ -178,10 +201,16 @@ spec:
                             type: number
                           type: array
                         hour:
+                          description: Hour of the day that the snapshots will be
+                            created, valid range is from 0 to 23.
                           type: number
                         minute:
+                          description: Minute of the hour that the snapshots will
+                            be created, valid range is from 0 to 59.
                           type: number
                         snapshotsToKeep:
+                          description: How many hourly snapshots to keep, valid range
+                            is from 0 to 255.
                           type: number
                       required:
                       - daysOfMonth
@@ -191,6 +220,9 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
+                    description: The name of the resource group where the NetApp Snapshot
+                      Policy should be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -272,6 +304,8 @@ spec:
                       type: string
                     type: object
                   weeklySchedule:
+                    description: Sets a weekly snapshot schedule. See details in below
+                      weekly_schedule block.
                     items:
                       properties:
                         daysOfWeek:
@@ -281,10 +315,16 @@ spec:
                             type: string
                           type: array
                         hour:
+                          description: Hour of the day that the snapshots will be
+                            created, valid range is from 0 to 23.
                           type: number
                         minute:
+                          description: Minute of the hour that the snapshots will
+                            be created, valid range is from 0 to 59.
                           type: number
                         snapshotsToKeep:
+                          description: How many hourly snapshots to keep, valid range
+                            is from 0 to 255.
                           type: number
                       required:
                       - daysOfWeek

@@ -66,7 +66,7 @@ spec:
                 properties:
                   allocationPolicy:
                     description: The allocation policy of the IoT Device Provisioning
-                      Service . Defaults to Hashed.
+                      Service (Hashed, GeoLatency or Static). Defaults to Hashed.
                     type: string
                   ipFilterRule:
                     description: An ip_filter_rule block as defined below.
@@ -81,6 +81,7 @@ spec:
                             rule.
                           type: string
                         name:
+                          description: The name of the filter.
                           type: string
                         target:
                           description: Target for requests captured by this rule.
@@ -123,6 +124,7 @@ spec:
                           - namespace
                           type: object
                         location:
+                          description: The location of the IoT hub.
                           type: string
                       required:
                       - connectionStringSecretRef
@@ -130,6 +132,9 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource has to be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether requests from Public Network are allowed.
@@ -224,6 +229,8 @@ spec:
                             Service units.
                           type: number
                         name:
+                          description: The name of the sku. Currently can only be
+                            set to S1.
                           type: string
                       required:
                       - capacity
@@ -416,8 +423,9 @@ spec:
               atProvider:
                 properties:
                   deviceProvisioningHostName:
-                    description: The device endpoint of the IoT Device Provisioning
-                      Service.
+                    description: Specifies the name of the Iot Device Provisioning
+                      Service resource. Changing this forces a new resource to be
+                      created.
                     type: string
                   id:
                     description: The ID of the IoT Device Provisioning Service.
@@ -431,13 +439,14 @@ spec:
                     items:
                       properties:
                         hostname:
-                          description: The IoT Hub hostname.
+                          description: (Computed) The IoT Hub hostname.
                           type: string
                       type: object
                     type: array
                   serviceOperationsHostName:
-                    description: The service endpoint of the IoT Device Provisioning
-                      Service.
+                    description: Specifies the name of the Iot Device Provisioning
+                      Service resource. Changing this forces a new resource to be
+                      created.
                     type: string
                 type: object
               conditions:

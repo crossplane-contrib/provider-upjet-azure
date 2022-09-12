@@ -380,6 +380,7 @@ spec:
               atProvider:
                 properties:
                   frontendIpConfigurationId:
+                    description: The ID of the Load Balancer Rule.
                     type: string
                   id:
                     description: The ID of the Load Balancer Rule.

@@ -66,7 +66,7 @@ spec:
                 properties:
                   dailyQuotaGb:
                     description: The workspace daily quota for ingestion in GB.  Defaults
-                      to -1  if omitted.
+                      to -1 (unlimited) if omitted.
                     type: number
                   internetIngestionEnabled:
                     type: boolean
@@ -164,13 +164,13 @@ spec:
                     type: object
                   retentionInDays:
                     description: The workspace data retention in days. Possible values
-                      are either 7  or range between 30 and 730.
+                      are either 7 (Free Tier only) or range between 30 and 730.
                     type: number
                   sku:
                     description: Specifies the SKU of the Log Analytics Workspace.
                       Possible values are Free, PerNode, Premium, Standard, Standalone,
-                      Unlimited, CapacityReservation, and PerGB2018 . Defaults to
-                      PerGB2018.
+                      Unlimited, CapacityReservation, and PerGB2018 (new SKU as of
+                      2018-04-03). Defaults to PerGB2018.
                     type: string
                   tags:
                     additionalProperties:
@@ -360,7 +360,8 @@ spec:
                     description: The Log Analytics Workspace ID.
                     type: string
                   workspaceId:
-                    description: The Workspace  ID for the Log Analytics Workspace.
+                    description: The Workspace (or Customer) ID for the Log Analytics
+                      Workspace.
                     type: string
                 type: object
               conditions:

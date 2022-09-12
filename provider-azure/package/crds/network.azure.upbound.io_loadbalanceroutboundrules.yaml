@@ -159,6 +159,7 @@ spec:
                     items:
                       properties:
                         name:
+                          description: The name of the Frontend IP Configuration.
                           type: string
                       required:
                       - name

@@ -24,7 +24,7 @@ type ExpressRouteCircuitObservation struct {
 
 type ExpressRouteCircuitParameters struct {
 
-	// Allow the circuit to interact with classic  resources. Defaults to false.
+	// Allow the circuit to interact with classic (RDFE) resources. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AllowClassicOperations *bool `json:"allowClassicOperations,omitempty" tf:"allow_classic_operations,omitempty"`
 

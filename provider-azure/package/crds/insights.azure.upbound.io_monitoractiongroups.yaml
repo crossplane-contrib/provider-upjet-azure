@@ -98,6 +98,7 @@ spec:
                           description: The name for this runbook.
                           type: string
                         serviceUri:
+                          description: The URI where webhooks should be sent.
                           type: string
                         useCommonAlertSchema:
                           type: boolean
@@ -185,6 +186,7 @@ spec:
                         name:
                           type: string
                         tenantId:
+                          description: The ID of the Action Group.
                           type: string
                         useCommonAlertSchema:
                           type: boolean
@@ -381,6 +383,7 @@ spec:
                                   AAD auth.
                                 type: string
                               tenantId:
+                                description: The ID of the Action Group.
                                 type: string
                             required:
                             - objectId
@@ -389,6 +392,7 @@ spec:
                         name:
                           type: string
                         serviceUri:
+                          description: The URI where webhooks should be sent.
                           type: string
                         useCommonAlertSchema:
                           type: boolean

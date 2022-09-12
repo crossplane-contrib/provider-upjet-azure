@@ -150,7 +150,7 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	TrafficAnalytics []TrafficAnalyticsParameters `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
 
-	// The version  of the flow log. Possible values are 1 and 2.
+	// The version (revision) of the flow log. Possible values are 1 and 2.
 	// +kubebuilder:validation:Optional
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }

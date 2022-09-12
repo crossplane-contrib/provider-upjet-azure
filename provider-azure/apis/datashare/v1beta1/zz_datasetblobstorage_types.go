@@ -15,7 +15,7 @@ import (
 
 type DataSetBlobStorageObservation struct {
 
-	// The name of the Data Share Dataset.
+	// The name which should be used for this Data Share Blob Storage Dataset. Changing this forces a new Data Share Blob Storage Dataset to be created.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The ID of the Data Share Blob Storage Dataset.
@@ -69,6 +69,7 @@ type StorageAccountObservation struct {
 
 type StorageAccountParameters struct {
 
+	// The name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

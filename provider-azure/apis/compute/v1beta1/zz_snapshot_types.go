@@ -21,6 +21,7 @@ type EncryptionSettingsDiskEncryptionKeyParameters struct {
 	// +kubebuilder:validation:Required
 	SecretURL *string `json:"secretUrl" tf:"secret_url,omitempty"`
 
+	// The Snapshot ID.
 	// +kubebuilder:validation:Required
 	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
@@ -33,6 +34,7 @@ type EncryptionSettingsKeyEncryptionKeyParameters struct {
 	// +kubebuilder:validation:Required
 	KeyURL *string `json:"keyUrl" tf:"key_url,omitempty"`
 
+	// The Snapshot ID.
 	// +kubebuilder:validation:Required
 	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }

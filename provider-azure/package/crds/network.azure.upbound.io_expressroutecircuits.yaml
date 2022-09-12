@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   allowClassicOperations:
-                    description: Allow the circuit to interact with classic  resources.
-                      Defaults to false.
+                    description: Allow the circuit to interact with classic (RDFE)
+                      resources. Defaults to false.
                     type: boolean
                   bandwidthInGbps:
                     description: The bandwidth in Gbps of the circuit being created

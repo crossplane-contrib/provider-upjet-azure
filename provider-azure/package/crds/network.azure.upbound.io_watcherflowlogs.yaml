@@ -582,8 +582,8 @@ spec:
                       type: object
                     type: array
                   version:
-                    description: The version  of the flow log. Possible values are
-                      1 and 2.
+                    description: The version (revision) of the flow log. Possible
+                      values are 1 and 2.
                     type: number
                 required:
                 - enabled

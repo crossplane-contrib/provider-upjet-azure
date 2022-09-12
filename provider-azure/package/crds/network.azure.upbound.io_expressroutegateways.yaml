@@ -151,7 +151,7 @@ spec:
                   scaleUnits:
                     description: The number of scale units with which to provision
                       the ExpressRoute gateway. Each scale unit is equal to 2Gbps,
-                      with support for up to 10 scale units .
+                      with support for up to 10 scale units (20Gbps).
                     type: number
                   tags:
                     additionalProperties:

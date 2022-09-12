@@ -326,7 +326,7 @@ spec:
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.
-                      This should be a multiple of 32 .
+                      This should be a multiple of 32 (GB).
                     type: number
                   subnetId:
                     description: The subnet resource id that the SQL Managed Instance

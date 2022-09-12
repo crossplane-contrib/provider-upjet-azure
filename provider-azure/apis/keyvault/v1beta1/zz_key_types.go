@@ -49,7 +49,7 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
 
-	// Expiration UTC datetime .
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
 	// +kubebuilder:validation:Optional
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
@@ -61,7 +61,7 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
 
-	// Specifies the Key Type to use for this Key Vault Key. Possible values are EC , EC-HSM, Oct , RSA and RSA-HSM. Changing this forces a new resource to be created.
+	// Specifies the Key Type to use for this Key Vault Key. Possible values are EC (Elliptic Curve), EC-HSM, Oct (Octet), RSA and RSA-HSM. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	KeyType *string `json:"keyType" tf:"key_type,omitempty"`
 
@@ -79,7 +79,7 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
-	// Key not usable before the provided UTC datetime .
+	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
 	// +kubebuilder:validation:Optional
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 

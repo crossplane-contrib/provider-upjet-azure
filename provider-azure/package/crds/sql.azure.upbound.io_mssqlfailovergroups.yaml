@@ -148,9 +148,12 @@ spec:
                         type: object
                     type: object
                   partnerServer:
+                    description: A partner_server block as defined below.
                     items:
                       properties:
                         id:
+                          description: The ID of a partner SQL server to include in
+                            the failover group.
                           type: string
                         idRef:
                           description: Reference to a MSSQLServer to populate id.
@@ -517,8 +520,10 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Failover Group.
                     type: string
                   partnerServer:
+                    description: A partner_server block as defined below.
                     items:
                       properties:
                         location:

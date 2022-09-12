@@ -85,6 +85,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	FqdnTags []*string `json:"fqdnTags,omitempty" tf:"fqdn_tags,omitempty"`
 
+	// Specifies the name of the rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

@@ -18,7 +18,7 @@ type KubernetesClusterNodePoolKubeletConfigObservation struct {
 
 type KubernetesClusterNodePoolKubeletConfigParameters struct {
 
-	// Specifies the allow list of unsafe sysctls command or patterns . Changing this forces a new resource to be created.
+	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
@@ -38,7 +38,7 @@ type KubernetesClusterNodePoolKubeletConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerLogMaxLine *float64 `json:"containerLogMaxLine,omitempty" tf:"container_log_max_line,omitempty"`
 
-	// Specifies the maximum size  of container log file before it is rotated. Changing this forces a new resource to be created.
+	// Specifies the maximum size (e.g. 10MB) of container log file before it is rotated. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ContainerLogMaxSizeMb *float64 `json:"containerLogMaxSizeMb,omitempty" tf:"container_log_max_size_mb,omitempty"`
 
@@ -162,11 +162,11 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	NodePublicIPPrefixID *string `json:"nodePublicIpPrefixId,omitempty" tf:"node_public_ip_prefix_id,omitempty"`
 
-	// A list of Kubernetes taints which should be applied to nodes in the agent pool . Changing this forces a new resource to be created.
+	// A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NodeTaints []*string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
 
-	// Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time
+	// Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)
 	// +kubebuilder:validation:Optional
 	OrchestratorVersion *string `json:"orchestratorVersion,omitempty" tf:"orchestrator_version,omitempty"`
 
@@ -212,7 +212,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ScaleDownMode *string `json:"scaleDownMode,omitempty" tf:"scale_down_mode,omitempty"`
 
-	// The maximum price you're willing to pay in USD per Virtual Machine. Valid values are -1  or a positive value with up to five decimal places. Changing this forces a new resource to be created.
+	// The maximum price you're willing to pay in USD per Virtual Machine. Valid values are -1 (the current on-demand price for a Virtual Machine) or a positive value with up to five decimal places. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SpotMaxPrice *float64 `json:"spotMaxPrice,omitempty" tf:"spot_max_price,omitempty"`
 

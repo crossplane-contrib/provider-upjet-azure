@@ -250,6 +250,7 @@ spec:
                             type: string
                           type: array
                         name:
+                          description: Specifies the name of the rule.
                           type: string
                         protocols:
                           description: A list of protocols. Possible values are Any,

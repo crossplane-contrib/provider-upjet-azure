@@ -88,8 +88,9 @@ spec:
                       resource to be created.
                     type: string
                   principalId:
-                    description: The ID of the Principal  to assign the Role Definition
-                      to. Changing this forces a new resource to be created.
+                    description: The ID of the Principal (User, Group or Service Principal)
+                      to assign the Role Definition to. Changing this forces a new
+                      resource to be created.
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this

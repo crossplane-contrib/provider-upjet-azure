@@ -54,6 +54,7 @@ type CustomHTTPSConfigurationParameters struct {
 
 type FrontdoorCustomHTTPSConfigurationObservation struct {
 
+	// A custom_https_configuration block as defined above.
 	// +kubebuilder:validation:Optional
 	CustomHTTPSConfiguration []CustomHTTPSConfigurationObservation `json:"customHttpsConfiguration,omitempty" tf:"custom_https_configuration,omitempty"`
 
@@ -63,6 +64,7 @@ type FrontdoorCustomHTTPSConfigurationObservation struct {
 
 type FrontdoorCustomHTTPSConfigurationParameters struct {
 
+	// A custom_https_configuration block as defined above.
 	// +kubebuilder:validation:Optional
 	CustomHTTPSConfiguration []CustomHTTPSConfigurationParameters `json:"customHttpsConfiguration,omitempty" tf:"custom_https_configuration,omitempty"`
 

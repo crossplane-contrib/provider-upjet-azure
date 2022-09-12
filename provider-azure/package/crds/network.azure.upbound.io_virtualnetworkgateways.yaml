@@ -72,11 +72,13 @@ spec:
                       will be created. Defaults to false.
                     type: boolean
                   bgpSettings:
+                    description: A bgp_settings block which is documented below. In
+                      this block the BGP specific settings can be defined.
                     items:
                       properties:
                         asn:
-                          description: The Autonomous System Number  to use as part
-                            of the BGP.
+                          description: The Autonomous System Number (ASN) to use as
+                            part of the BGP.
                           type: number
                         peerWeight:
                           description: The weight added to routes which have been
@@ -94,10 +96,8 @@ spec:
                                   type: string
                                 type: array
                               ipConfigurationName:
-                                description: The name of the IP configuration of this
-                                  Virtual Network Gateway. In case there are multiple
-                                  ip_configuration blocks defined, this property is
-                                  required to specify.
+                                description: The name of the Virtual Network Gateway.
+                                  Changing the name forces a new resource to be created.
                                 type: string
                             type: object
                           type: array
@@ -117,9 +117,9 @@ spec:
                   defaultLocalNetworkGatewayId:
                     description: The ID of the local network gateway through which
                       outbound Internet traffic from the virtual network in which
-                      the gateway is created will be routed . Refer to the Azure documentation
-                      on forced tunnelling. If not specified, forced tunnelling is
-                      disabled.
+                      the gateway is created will be routed (forced tunnelling). Refer
+                      to the Azure documentation on forced tunnelling. If not specified,
+                      forced tunnelling is disabled.
                     type: string
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
@@ -127,21 +127,23 @@ spec:
                       a new Virtual Network Gateway to be created.
                     type: string
                   enableBgp:
-                    description: If true, BGP  will be enabled for this Virtual Network
-                      Gateway. Defaults to false.
+                    description: If true, BGP (Border Gateway Protocol) will be enabled
+                      for this Virtual Network Gateway. Defaults to false.
                     type: boolean
                   generation:
                     description: The Generation of the Virtual Network gateway. Possible
                       values include Generation1, Generation2 or None.
                     type: string
                   ipConfiguration:
-                    description: tandby gateway requires exactly one ip_configuration
+                    description: standby gateway requires exactly one ip_configuration
                       block, an active-active gateway requires exactly two ip_configuration
                       blocks whereas an active-active zone redundant gateway with
                       P2S configuration requires exactly three ip_configuration blocks.
                     items:
                       properties:
                         name:
+                          description: A user-defined name of the IP configuration.
+                            Defaults to vnetGatewayConfig.
                           type: string
                         privateIpAddressAllocation:
                           description: Defines how the private IP address of the gateways
@@ -425,12 +427,12 @@ spec:
                       to be created.
                     type: string
                   vpnClientConfiguration:
-                    description: o-site connections.
+                    description: to-site connections.
                     items:
                       properties:
                         aadAudience:
                           description: The client id of the Azure VPN application.
-                            See Create an Active Directory  tenant for P2S OpenVPN
+                            See Create an Active Directory (AD) tenant for P2S OpenVPN
                             protocol connections for values
                           type: string
                         aadIssuer:
@@ -458,6 +460,8 @@ spec:
                           items:
                             properties:
                               name:
+                                description: The name of the Virtual Network Gateway.
+                                  Changing the name forces a new resource to be created.
                                 type: string
                               thumbprint:
                                 type: string
@@ -474,8 +478,14 @@ spec:
                           items:
                             properties:
                               name:
+                                description: A user-defined name of the root certificate.
                                 type: string
                               publicCertData:
+                                description: The public certificate of the root certificate
+                                  authority. The certificate must be provided in Base-64
+                                  encoded X.509 format (PEM). In particular, this
+                                  argument must not include the -----BEGIN CERTIFICATE-----
+                                  or -----END CERTIFICATE----- markers.
                                 type: string
                             required:
                             - name
@@ -689,6 +699,8 @@ spec:
               atProvider:
                 properties:
                   bgpSettings:
+                    description: A bgp_settings block which is documented below. In
+                      this block the BGP specific settings can be defined.
                     items:
                       properties:
                         peeringAddresses:

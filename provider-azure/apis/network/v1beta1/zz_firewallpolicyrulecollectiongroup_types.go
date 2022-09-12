@@ -18,15 +18,19 @@ type ApplicationRuleCollectionObservation struct {
 
 type ApplicationRuleCollectionParameters struct {
 
+	// The action to take for the application rules in this collection. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
+	// The name which should be used for this application rule collection.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The priority of the application rule collection. The range is 100 - 65000.
 	// +kubebuilder:validation:Required
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
+	// One or more rule (application rule) blocks as defined below.
 	// +kubebuilder:validation:Required
 	Rule []ApplicationRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -54,19 +58,22 @@ type ApplicationRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationUrls []*string `json:"destinationUrls,omitempty" tf:"destination_urls,omitempty"`
 
+	// The name which should be used for this rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Protocols []ProtocolsParameters `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
+	// Specifies a list of source IP addresses (including CIDR and *).
 	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
+	// Specifies a list of source IP groups.
 	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 
-	// Boolean specifying if TLS shall be terminated  or not . Must be  true when using destination_urls. Needs Premium SKU for Firewall Policy.
+	// Boolean specifying if TLS shall be terminated (true) or not (false). Must be  true when using destination_urls. Needs Premium SKU for Firewall Policy.
 	// +kubebuilder:validation:Optional
 	TerminateTLS *bool `json:"terminateTls,omitempty" tf:"terminate_tls,omitempty"`
 
@@ -109,6 +116,7 @@ type FirewallPolicyRuleCollectionGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkRuleCollection []NetworkRuleCollectionParameters `json:"networkRuleCollection,omitempty" tf:"network_rule_collection,omitempty"`
 
+	// The priority of the Firewall Policy Rule Collection Group. The range is 100-65000.
 	// +kubebuilder:validation:Required
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 }
@@ -118,15 +126,19 @@ type NATRuleCollectionObservation struct {
 
 type NATRuleCollectionParameters struct {
 
+	// The action to take for the NAT rules in this collection. Currently, the only possible value is Dnat.
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
+	// The name which should be used for this NAT rule collection.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The priority of the NAT rule collection. The range is 100 - 65000.
 	// +kubebuilder:validation:Required
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
+	// A rule (NAT rule) block as defined above.
 	// +kubebuilder:validation:Required
 	Rule []NATRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -136,22 +148,25 @@ type NATRuleCollectionRuleObservation struct {
 
 type NATRuleCollectionRuleParameters struct {
 
-	// The destination IP address .
+	// The destination IP address (including CIDR).
 	// +kubebuilder:validation:Optional
 	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
 
+	// The name which should be used for this rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
+	// Specifies a list of source IP addresses (including CIDR and *).
 	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
+	// Specifies a list of source IP groups.
 	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 
@@ -173,15 +188,19 @@ type NetworkRuleCollectionObservation struct {
 
 type NetworkRuleCollectionParameters struct {
 
+	// The action to take for the network rules in this collection. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 
+	// The name which should be used for this network rule collection.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The priority of the network rule collection. The range is 100 - 65000.
 	// +kubebuilder:validation:Required
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
+	// One or more rule (network rule) blocks as defined above.
 	// +kubebuilder:validation:Required
 	Rule []NetworkRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -204,15 +223,18 @@ type NetworkRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Required
 	DestinationPorts []*string `json:"destinationPorts" tf:"destination_ports,omitempty"`
 
+	// The name which should be used for this rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
+	// Specifies a list of source IP addresses (including CIDR and *).
 	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
+	// Specifies a list of source IP groups.
 	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 }

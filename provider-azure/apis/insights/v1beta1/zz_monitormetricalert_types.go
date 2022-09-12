@@ -60,21 +60,27 @@ type CriteriaObservation struct {
 
 type CriteriaParameters struct {
 
+	// The statistic that runs over the metric values. Possible values are Average, Count, Minimum, Maximum and Total.
 	// +kubebuilder:validation:Required
 	Aggregation *string `json:"aggregation" tf:"aggregation,omitempty"`
 
+	// One or more dimension blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Dimension []DimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
+	// One of the metric names to be monitored.
 	// +kubebuilder:validation:Required
 	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
+	// One of the metric namespaces to be monitored.
 	// +kubebuilder:validation:Required
 	MetricNamespace *string `json:"metricNamespace" tf:"metric_namespace,omitempty"`
 
+	// The criteria operator. Possible values are Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan and LessThanOrEqual.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
+	// Skip the metric validation to allow creating an alert rule on a custom metric that isn't yet emitted? Defaults to false.
 	// +kubebuilder:validation:Optional
 	SkipMetricValidation *bool `json:"skipMetricValidation,omitempty" tf:"skip_metric_validation,omitempty"`
 
@@ -88,9 +94,11 @@ type DimensionObservation struct {
 
 type DimensionParameters struct {
 
+	// One of the dimension names.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The dimension operator. Possible values are Include, Exclude and StartsWith.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -104,9 +112,11 @@ type DynamicCriteriaDimensionObservation struct {
 
 type DynamicCriteriaDimensionParameters struct {
 
+	// One of the dimension names.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The dimension operator. Possible values are Include, Exclude and StartsWith.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -120,6 +130,7 @@ type DynamicCriteriaObservation struct {
 
 type DynamicCriteriaParameters struct {
 
+	// The statistic that runs over the metric values. Possible values are Average, Count, Minimum, Maximum and Total.
 	// +kubebuilder:validation:Required
 	Aggregation *string `json:"aggregation" tf:"aggregation,omitempty"`
 
@@ -127,6 +138,7 @@ type DynamicCriteriaParameters struct {
 	// +kubebuilder:validation:Required
 	AlertSensitivity *string `json:"alertSensitivity" tf:"alert_sensitivity,omitempty"`
 
+	// One or more dimension blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Dimension []DynamicCriteriaDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
@@ -134,7 +146,7 @@ type DynamicCriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	EvaluationFailureCount *float64 `json:"evaluationFailureCount,omitempty" tf:"evaluation_failure_count,omitempty"`
 
-	// The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity  and the selected number of aggregated points.
+	// The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (window_size) and the selected number of aggregated points.
 	// +kubebuilder:validation:Optional
 	EvaluationTotalCount *float64 `json:"evaluationTotalCount,omitempty" tf:"evaluation_total_count,omitempty"`
 
@@ -142,15 +154,19 @@ type DynamicCriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	IgnoreDataBefore *string `json:"ignoreDataBefore,omitempty" tf:"ignore_data_before,omitempty"`
 
+	// One of the metric names to be monitored.
 	// +kubebuilder:validation:Required
 	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
+	// One of the metric namespaces to be monitored.
 	// +kubebuilder:validation:Required
 	MetricNamespace *string `json:"metricNamespace" tf:"metric_namespace,omitempty"`
 
+	// The criteria operator. Possible values are LessThan, GreaterThan and GreaterOrLessThan.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
+	// Skip the metric validation to allow creating an alert rule on a custom metric that isn't yet emitted? Defaults to false.
 	// +kubebuilder:validation:Optional
 	SkipMetricValidation *bool `json:"skipMetricValidation,omitempty" tf:"skip_metric_validation,omitempty"`
 }
@@ -175,7 +191,7 @@ type MonitorMetricAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoMitigate *bool `json:"autoMitigate,omitempty" tf:"auto_mitigate,omitempty"`
 
-	// One or more  criteria blocks as defined below.
+	// One or more (static) criteria blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Criteria []CriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
@@ -235,7 +251,7 @@ type MonitorMetricAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetResourceLocation *string `json:"targetResourceLocation,omitempty" tf:"target_resource_location,omitempty"`
 
-	// The resource type  of the target resource.
+	// The resource type (e.g. Microsoft.Compute/virtualMachines) of the target resource.
 	// The resource type (e.g. Microsoft.Compute/virtualMachines) of the target pluginsdk. Required when using subscription, resource group scope or multiple scopes.
 	// +kubebuilder:validation:Optional
 	TargetResourceType *string `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`

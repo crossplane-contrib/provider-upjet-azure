@@ -47,6 +47,7 @@ type InputParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationParameter *bool `json:"configurationParameter,omitempty" tf:"configuration_parameter,omitempty"`
 
+	// The input data type of this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -56,6 +57,7 @@ type OutputObservation struct {
 
 type OutputParameters struct {
 
+	// The output data type from this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

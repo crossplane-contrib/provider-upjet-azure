@@ -120,6 +120,7 @@ spec:
                       to be created.
                     type: boolean
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         type:
@@ -231,7 +232,8 @@ spec:
                   skuName:
                     description: Specifies the SKU Name for this PostgreSQL Server.
                       The name of the SKU, follows the tier + family + cores pattern
-                      . For more information see the product documentation.
+                      (e.g. B_Gen4_1, GP_Gen5_8). For more information see the product
+                      documentation.
                     type: string
                   sslEnforcementEnabled:
                     description: Specifies if SSL should be enforced on connections.
@@ -244,9 +246,9 @@ spec:
                     type: string
                   storageMb:
                     description: Max storage allowed for a server. Possible values
-                      are between 5120 MB and 1048576 MB for the Basic SKU and between
-                      5120 MB and 16777216 MB for General Purpose/Memory Optimized
-                      SKUs. For more information see the product documentation.
+                      are between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU
+                      and between 5120 MB(5GB) and 16777216 MB(16TB) for General Purpose/Memory
+                      Optimized SKUs. For more information see the product documentation.
                     type: number
                   tags:
                     additionalProperties:
@@ -302,8 +304,9 @@ spec:
                           - namespace
                           type: object
                         storageEndpoint:
-                          description: Specifies the blob storage endpoint . This
-                            blob storage will hold all Threat Detection audit logs.
+                          description: Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net).
+                            This blob storage will hold all Threat Detection audit
+                            logs.
                           type: string
                       type: object
                     type: array
@@ -501,6 +504,7 @@ spec:
                     description: The ID of the PostgreSQL Server.
                     type: string
                   identity:
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:

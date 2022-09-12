@@ -22,6 +22,7 @@ type DDOSProtectionPlanParameters struct {
 	// +kubebuilder:validation:Required
 	Enable *bool `json:"enable" tf:"enable,omitempty"`
 
+	// The ID of DDoS Protection Plan.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 }
@@ -31,13 +32,16 @@ type VirtualNetworkObservation struct {
 	// The GUID of the virtual network.
 	GUID *string `json:"guid,omitempty" tf:"guid,omitempty"`
 
+	// The ID of DDoS Protection Plan.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Can be specified multiple times to define multiple subnets. Each subnet block supports fields documented below.
 	Subnet []VirtualNetworkSubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
 }
 
 type VirtualNetworkParameters struct {
 
+	// The address space that is used the virtual network. You can supply more than one address space.
 	// +kubebuilder:validation:Required
 	AddressSpace []*string `json:"addressSpace" tf:"address_space,omitempty"`
 
@@ -61,9 +65,11 @@ type VirtualNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
 
+	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The name of the resource group in which to create the virtual network.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -86,11 +92,13 @@ type VirtualNetworkSubnetObservation struct {
 	// The address prefix to use for the subnet.
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
 
+	// The ID of DDoS Protection Plan.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the virtual network. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The Network Security Group to associate with the subnet.
+	// The Network Security Group to associate with the subnet. (Referenced by id, ie. azurerm_network_security_group.example.id)
 	SecurityGroup *string `json:"securityGroup,omitempty" tf:"security_group,omitempty"`
 }
 
