@@ -17,6 +17,8 @@ ENV PLUGIN_DIR /terraform/provider-mirror/registry.terraform.io/hashicorp/azurer
 ENV TERRAFORM_NATIVE_PROVIDER_PATH ${PLUGIN_DIR}/${TERRAFORM_NATIVE_PROVIDER_BINARY}
 ENV TF_CLI_CONFIG_FILE /terraform/.terraformrc
 ENV TF_FORK 0
+ENV ARM_DISABLE_TERRAFORM_PARTNER_ID true
+# ENV ARM_PARTNER_ID <guid>
 
 RUN mkdir -p ${PLUGIN_DIR}
 
