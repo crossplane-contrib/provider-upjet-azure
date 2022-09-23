@@ -39,6 +39,7 @@ const (
 	keyTenantID                 = "tenant_id"
 	keyMSIEndpoint              = "msi_endpoint"
 	keyClientSecret             = "client_secret"
+	keyEnvironment              = "environment"
 )
 
 var (
@@ -109,6 +110,9 @@ func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup
 	ps.Configuration[keyTenantID] = azureCreds[keyAzureTenantID]
 	ps.Configuration[keyClientID] = azureCreds[keyAzureClientID]
 	ps.Configuration[keyClientSecret] = azureCreds[keyAzureClientSecret]
+	if pc.Spec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
+	}
 	return nil
 }
 
@@ -122,11 +126,14 @@ func msiAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
 	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
 	ps.Configuration[keyUseMSI] = "true"
-	if pc.Spec.MSIEndpoint != nil && len(*pc.Spec.MSIEndpoint) != 0 {
+	if pc.Spec.MSIEndpoint != nil {
 		ps.Configuration[keyMSIEndpoint] = *pc.Spec.MSIEndpoint
 	}
-	if pc.Spec.ClientID != nil && len(*pc.Spec.ClientID) != 0 {
+	if pc.Spec.ClientID != nil {
 		ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	}
+	if pc.Spec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
 	}
 	return nil
 }
