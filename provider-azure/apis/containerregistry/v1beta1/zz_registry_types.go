@@ -36,6 +36,7 @@ type GeoreplicationsObservation struct {
 
 type GeoreplicationsParameters struct {
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
@@ -43,10 +44,11 @@ type GeoreplicationsParameters struct {
 	// +kubebuilder:validation:Optional
 	RegionalEndpointEnabled *bool `json:"regionalEndpointEnabled,omitempty" tf:"regional_endpoint_enabled,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Boolean value that indicates whether the policy is enabled.
+	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
@@ -105,7 +107,7 @@ type NetworkRuleSetParameters struct {
 
 type RegistryObservation struct {
 
-	// Specifies the name of the Container Registry. Changing this forces a new resource to be created.
+	// The Username associated with the Container Registry Admin account - if the admin account is enabled.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
 	// The ID of the Container Registry.
@@ -149,6 +151,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
@@ -164,7 +167,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// Boolean value that indicates whether the policy is enabled.
+	// Boolean value that indicates whether quarantine policy is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 
@@ -189,6 +192,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -196,7 +200,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	TrustPolicy []TrustPolicyParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
 
-	// Boolean value that indicates whether the policy is enabled.
+	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }

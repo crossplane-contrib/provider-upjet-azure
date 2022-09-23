@@ -149,8 +149,8 @@ spec:
                           description: The Active Directory domain's NetBIOS name.
                           type: string
                         passwordSecretRef:
-                          description: A SecretKeySelector is a reference to a secret
-                            key in an arbitrary namespace.
+                          description: The password of the Active Directory domain
+                            administrator.
                           properties:
                             key:
                               description: The key to select.
@@ -213,8 +213,8 @@ spec:
                                   to be used in the secure LDAP connection.
                                 type: string
                               passwordSecretRef:
-                                description: A SecretKeySelector is a reference to
-                                  a secret key in an arbitrary namespace.
+                                description: The password of the Active Directory
+                                  domain administrator.
                                 properties:
                                   key:
                                     description: The key to select.

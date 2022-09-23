@@ -22,7 +22,7 @@ type DiskEncryptionKeyParameters struct {
 	// +kubebuilder:validation:Required
 	SecretURL *string `json:"secretUrl" tf:"secret_url,omitempty"`
 
-	// The URL of the Key Vault. This can be found as vault_uri on the azurerm_key_vault resource.
+	// The ID of the source Key Vault.
 	// +kubebuilder:validation:Required
 	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }

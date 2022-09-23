@@ -44,6 +44,7 @@ type ApplicationRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies a list of destination IP addresses (including CIDR and *).
 	// +kubebuilder:validation:Optional
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
@@ -51,6 +52,7 @@ type ApplicationRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationFqdnTags []*string `json:"destinationFqdnTags,omitempty" tf:"destination_fqdn_tags,omitempty"`
 
+	// Specifies a list of destination FQDNs. Conflicts with destination_urls.
 	// +kubebuilder:validation:Optional
 	DestinationFqdns []*string `json:"destinationFqdns,omitempty" tf:"destination_fqdns,omitempty"`
 
@@ -62,6 +64,7 @@ type ApplicationRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// One or more protocols blocks as defined below. Not required when specifying destination_fqdn_tags, but required when specifying destination_fqdns.
 	// +kubebuilder:validation:Optional
 	Protocols []ProtocolsParameters `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -152,6 +155,7 @@ type NATRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
 
+	// Specifies a list of destination ports.
 	// +kubebuilder:validation:Optional
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
 
@@ -159,6 +163,7 @@ type NATRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// One or more protocols blocks as defined below. Not required when specifying destination_fqdn_tags, but required when specifying destination_fqdns.
 	// +kubebuilder:validation:Required
 	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
@@ -210,9 +215,11 @@ type NetworkRuleCollectionRuleObservation struct {
 
 type NetworkRuleCollectionRuleParameters struct {
 
+	// Specifies a list of destination IP addresses (including CIDR and *).
 	// +kubebuilder:validation:Optional
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
+	// Specifies a list of destination FQDNs. Conflicts with destination_urls.
 	// +kubebuilder:validation:Optional
 	DestinationFqdns []*string `json:"destinationFqdns,omitempty" tf:"destination_fqdns,omitempty"`
 
@@ -220,6 +227,7 @@ type NetworkRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationIPGroups []*string `json:"destinationIpGroups,omitempty" tf:"destination_ip_groups,omitempty"`
 
+	// Specifies a list of destination ports.
 	// +kubebuilder:validation:Required
 	DestinationPorts []*string `json:"destinationPorts" tf:"destination_ports,omitempty"`
 
@@ -227,6 +235,7 @@ type NetworkRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// One or more protocols blocks as defined below. Not required when specifying destination_fqdn_tags, but required when specifying destination_fqdns.
 	// +kubebuilder:validation:Required
 	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 

@@ -23,6 +23,7 @@ type ModuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
+	// The name which should be used for this module. Possible values are RediSearch, RedisBloom and RedisTimeSeries. Changing this forces a new Redis Enterprise Database to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }

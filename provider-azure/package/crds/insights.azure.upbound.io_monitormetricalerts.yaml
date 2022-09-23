@@ -197,11 +197,12 @@ spec:
                           items:
                             properties:
                               name:
-                                description: One of the dimension names.
+                                description: The name of the Metric Alert. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               operator:
-                                description: The dimension operator. Possible values
-                                  are Include, Exclude and StartsWith.
+                                description: The criteria operator. Possible values
+                                  are LessThan, GreaterThan and GreaterOrLessThan.
                                 type: string
                               values:
                                 description: The list of dimension values.
@@ -263,11 +264,12 @@ spec:
                           items:
                             properties:
                               name:
-                                description: One of the dimension names.
+                                description: The name of the Metric Alert. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               operator:
-                                description: The dimension operator. Possible values
-                                  are Include, Exclude and StartsWith.
+                                description: The criteria operator. Possible values
+                                  are LessThan, GreaterThan and GreaterOrLessThan.
                                 type: string
                               values:
                                 description: The list of dimension values.

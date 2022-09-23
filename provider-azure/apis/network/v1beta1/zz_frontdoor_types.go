@@ -22,7 +22,7 @@ type BackendParameters struct {
 	// +kubebuilder:validation:Required
 	Address *string `json:"address" tf:"address,omitempty"`
 
-	// Specifies if the backend is enabled or not. Valid options are true or false. Defaults to true.
+	// Enable or Disable use of this Backend Routing Rule. Permitted values are true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -48,6 +48,8 @@ type BackendParameters struct {
 }
 
 type BackendPoolHealthProbeObservation struct {
+
+	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -79,6 +81,8 @@ type BackendPoolHealthProbeParameters struct {
 }
 
 type BackendPoolLoadBalancingObservation struct {
+
+	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -102,6 +106,8 @@ type BackendPoolLoadBalancingParameters struct {
 }
 
 type BackendPoolObservation struct {
+
+	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -214,7 +220,7 @@ type FrontDoorObservation struct {
 	// A map/dictionary of Backend Pool Names (key) to the Backend Pool ID (value)
 	BackendPools map[string]*string `json:"backendPools,omitempty" tf:"backend_pools,omitempty"`
 
-	// Specifies the name of the Front Door service. Must be globally unique. Changing this forces a new resource to be created.
+	// The host that each frontendEndpoint must CNAME to.
 	CNAME *string `json:"cname,omitempty" tf:"cname,omitempty"`
 
 	ExplicitResourceOrder []ExplicitResourceOrderObservation `json:"explicitResourceOrder,omitempty" tf:"explicit_resource_order,omitempty"`
@@ -223,12 +229,13 @@ type FrontDoorObservation struct {
 	// +kubebuilder:validation:Required
 	FrontendEndpoint []FrontendEndpointObservation `json:"frontendEndpoint,omitempty" tf:"frontend_endpoint,omitempty"`
 
-	// The names of the frontend_endpoint blocks within this resource to associate with this routing_rule.
+	// A map/dictionary of Frontend Endpoint Names (key) to the Frontend Endpoint ID (value)
 	FrontendEndpoints map[string]*string `json:"frontendEndpoints,omitempty" tf:"frontend_endpoints,omitempty"`
 
 	// The unique ID of the Front Door which is embedded into the incoming headers X-Azure-FDID attribute and maybe used to filter traffic sent by the Front Door to your backend.
 	HeaderFrontdoorID *string `json:"headerFrontdoorId,omitempty" tf:"header_frontdoor_id,omitempty"`
 
+	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A routing_rule block as defined below.
@@ -291,6 +298,8 @@ type FrontDoorParameters struct {
 }
 
 type FrontendEndpointObservation struct {
+
+	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -318,6 +327,8 @@ type FrontendEndpointParameters struct {
 }
 
 type RoutingRuleObservation struct {
+
+	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

@@ -14,6 +14,8 @@ import (
 )
 
 type LoadBalancerFrontendIPConfigurationObservation struct {
+
+	// The id of the Frontend IP Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The list of IDs of inbound rules that use this frontend IP.
@@ -28,16 +30,19 @@ type LoadBalancerFrontendIPConfigurationObservation struct {
 
 type LoadBalancerFrontendIPConfigurationParameters struct {
 
+	// The id of the Frontend IP Configuration of a Gateway Load Balancer that this Load Balancer points to.
 	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
 
+	// Specifies the name of the Load Balancer.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Private IP Address to assign to the Load Balancer.
 	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// Specifies the supported Azure Region where the Load Balancer should be created.
+	// The allocation method for the Private IP Address used by this Load Balancer.
 	// +kubebuilder:validation:Optional
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
@@ -45,6 +50,7 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
 
+	// The ID of a  Public IP Address which is associated with this Load Balancer.
 	// +crossplane:generate:reference:type=PublicIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -58,9 +64,11 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
+	// The ID of a Public IP Prefix which is associated with the Load Balancer.
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
 
+	// The ID of the Subnet which is associated with the IP Configuration.
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -81,11 +89,14 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 
 type LoadBalancerObservation struct {
 
+	// One or multiple frontend_ip_configuration blocks as documented below.
 	// +kubebuilder:validation:Optional
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
+	// The Load Balancer ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Private IP Address to assign to the Load Balancer. The last one and first four IPs in any range are reserved and cannot be manually assigned.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// The list of private IP address assigned to the load balancer in frontend_ip_configuration blocks, if any.
@@ -98,6 +109,7 @@ type LoadBalancerParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
+	// One or multiple frontend_ip_configuration blocks as documented below.
 	// +kubebuilder:validation:Optional
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 

@@ -14,8 +14,11 @@ import (
 )
 
 type CustomDNSConfigsObservation struct {
+
+	// The fully qualified domain name to the private_endpoint.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// A list of all IP Addresses that map to the private_endpoint fqdn.
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
@@ -23,8 +26,11 @@ type CustomDNSConfigsParameters struct {
 }
 
 type PrivateDNSZoneConfigsObservation struct {
+
+	// The ID of the Private DNS Zone Config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the Private DNS Zone that the config belongs to.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of IP Addresses
@@ -38,11 +44,14 @@ type PrivateDNSZoneConfigsParameters struct {
 }
 
 type PrivateDNSZoneGroupObservation struct {
+
+	// The ID of the Private DNS Zone Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type PrivateDNSZoneGroupParameters struct {
 
+	// The name of the Private DNS Zone that the config belongs to.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -62,8 +71,11 @@ type PrivateDNSZoneGroupParameters struct {
 }
 
 type PrivateEndpointNetworkInterfaceObservation struct {
+
+	// The ID of the network interface associated with the private_endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the network interface associated with the private_endpoint.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -73,6 +85,7 @@ type PrivateEndpointNetworkInterfaceParameters struct {
 type PrivateEndpointObservation struct {
 	CustomDNSConfigs []CustomDNSConfigsObservation `json:"customDnsConfigs,omitempty" tf:"custom_dns_configs,omitempty"`
 
+	// The ID of the Private Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	NetworkInterface []PrivateEndpointNetworkInterfaceObservation `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
@@ -146,6 +159,7 @@ type PrivateServiceConnectionParameters struct {
 	// +kubebuilder:validation:Required
 	IsManualConnection *bool `json:"isManualConnection" tf:"is_manual_connection,omitempty"`
 
+	// The name of the Private DNS Zone that the config belongs to.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -167,10 +181,14 @@ type PrivateServiceConnectionParameters struct {
 }
 
 type RecordSetsObservation struct {
+
+	// The fully qualified domain name to the private_dns_zone.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
+	// A list of all IP Addresses that map to the private_dns_zone fqdn.
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
+	// The name of the Private DNS Zone that the config belongs to.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The time to live for each connection to the private_dns_zone.

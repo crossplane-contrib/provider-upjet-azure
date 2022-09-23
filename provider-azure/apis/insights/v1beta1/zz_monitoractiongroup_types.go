@@ -26,7 +26,7 @@ type AADAuthParameters struct {
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
-	// The ID of the Action Group.
+	// The Tenant ID for the subscription containing this Event Hub.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
@@ -36,6 +36,7 @@ type ArmRoleReceiverObservation struct {
 
 type ArmRoleReceiverParameters struct {
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -43,6 +44,7 @@ type ArmRoleReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	RoleID *string `json:"roleId" tf:"role_id,omitempty"`
 
+	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
 	UseCommonAlertSchema *bool `json:"useCommonAlertSchema,omitempty" tf:"use_common_alert_schema,omitempty"`
 }
@@ -60,6 +62,7 @@ type AutomationRunBookReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	IsGlobalRunBook *bool `json:"isGlobalRunbook" tf:"is_global_runbook,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -71,6 +74,7 @@ type AutomationRunBookReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	ServiceURI *string `json:"serviceUri" tf:"service_uri,omitempty"`
 
+	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
 	UseCommonAlertSchema *bool `json:"useCommonAlertSchema,omitempty" tf:"use_common_alert_schema,omitempty"`
 
@@ -84,9 +88,11 @@ type AzureAppPushReceiverObservation struct {
 
 type AzureAppPushReceiverParameters struct {
 
+	// The email address of the user signed into the mobile app who will receive push notifications from this receiver.
 	// +kubebuilder:validation:Required
 	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -108,9 +114,11 @@ type AzureFunctionReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	HTTPTriggerURL *string `json:"httpTriggerUrl" tf:"http_trigger_url,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
 	UseCommonAlertSchema *bool `json:"useCommonAlertSchema,omitempty" tf:"use_common_alert_schema,omitempty"`
 }
@@ -120,12 +128,15 @@ type EmailReceiverObservation struct {
 
 type EmailReceiverParameters struct {
 
+	// The email address of the user signed into the mobile app who will receive push notifications from this receiver.
 	// +kubebuilder:validation:Required
 	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
 	UseCommonAlertSchema *bool `json:"useCommonAlertSchema,omitempty" tf:"use_common_alert_schema,omitempty"`
 }
@@ -139,13 +150,15 @@ type EventHubReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	EventHubID *string `json:"eventHubId" tf:"event_hub_id,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The ID of the Action Group.
+	// The Tenant ID for the subscription containing this Event Hub.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
+	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
 	UseCommonAlertSchema *bool `json:"useCommonAlertSchema,omitempty" tf:"use_common_alert_schema,omitempty"`
 }
@@ -159,6 +172,7 @@ type ItsmReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	ConnectionID *string `json:"connectionId" tf:"connection_id,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -184,6 +198,7 @@ type LogicAppReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	CallbackURL *string `json:"callbackUrl" tf:"callback_url,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -191,6 +206,7 @@ type LogicAppReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
 
+	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
 	UseCommonAlertSchema *bool `json:"useCommonAlertSchema,omitempty" tf:"use_common_alert_schema,omitempty"`
 }
@@ -278,12 +294,15 @@ type SMSReceiverObservation struct {
 
 type SMSReceiverParameters struct {
 
+	// The country code of the SMS receiver.
 	// +kubebuilder:validation:Required
 	CountryCode *string `json:"countryCode" tf:"country_code,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The phone number of the SMS receiver.
 	// +kubebuilder:validation:Required
 	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
 }
@@ -293,12 +312,15 @@ type VoiceReceiverObservation struct {
 
 type VoiceReceiverParameters struct {
 
+	// The country code of the SMS receiver.
 	// +kubebuilder:validation:Required
 	CountryCode *string `json:"countryCode" tf:"country_code,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The phone number of the SMS receiver.
 	// +kubebuilder:validation:Required
 	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
 }
@@ -312,6 +334,7 @@ type WebhookReceiverParameters struct {
 	// +kubebuilder:validation:Optional
 	AADAuth []AADAuthParameters `json:"aadAuth,omitempty" tf:"aad_auth,omitempty"`
 
+	// The name of the Action Group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -319,6 +342,7 @@ type WebhookReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	ServiceURI *string `json:"serviceUri" tf:"service_uri,omitempty"`
 
+	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
 	UseCommonAlertSchema *bool `json:"useCommonAlertSchema,omitempty" tf:"use_common_alert_schema,omitempty"`
 }

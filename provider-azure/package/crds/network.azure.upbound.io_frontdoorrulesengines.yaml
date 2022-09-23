@@ -292,7 +292,7 @@ spec:
                                   type: string
                                 type: array
                               value:
-                                description: (array) can contain one or more strings.
+                                description: value name (string).
                                 items:
                                   type: string
                                 type: array

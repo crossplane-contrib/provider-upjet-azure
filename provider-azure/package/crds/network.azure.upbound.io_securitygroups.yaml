@@ -199,6 +199,8 @@ spec:
                             and Outbound.
                           type: string
                         name:
+                          description: Specifies the name of the network security
+                            group. Changing this forces a new resource to be created.
                           type: string
                         priority:
                           description: Specifies the priority of the rule. The value

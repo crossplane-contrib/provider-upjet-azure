@@ -111,6 +111,8 @@ spec:
                             of this SQL Server.
                           type: string
                         tenantId:
+                          description: The tenant id of the Azure AD Administrator
+                            of this SQL Server.
                           type: string
                       required:
                       - loginUsername
@@ -430,8 +432,8 @@ spec:
               atProvider:
                 properties:
                   fullyQualifiedDomainName:
-                    description: The name of the Microsoft SQL Server. This needs
-                      to be globally unique within Azure.
+                    description: The fully qualified domain name of the Azure SQL
+                      Server (e.g. myServerName.database.windows.net)
                     type: string
                   id:
                     description: the Microsoft SQL Server ID.
@@ -445,6 +447,8 @@ spec:
                             associated with the Identity of this SQL Server.
                           type: string
                         tenantId:
+                          description: The Tenant ID for the Service Principal associated
+                            with the Identity of this SQL Server.
                           type: string
                       type: object
                     type: array

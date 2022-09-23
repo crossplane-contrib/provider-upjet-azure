@@ -377,7 +377,7 @@ spec:
                     description: The GUID of the virtual network.
                     type: string
                   id:
-                    description: The ID of DDoS Protection Plan.
+                    description: The virtual NetworkConfiguration ID.
                     type: string
                   subnet:
                     description: Can be specified multiple times to define multiple
@@ -388,11 +388,10 @@ spec:
                           description: The address prefix to use for the subnet.
                           type: string
                         id:
-                          description: The ID of DDoS Protection Plan.
+                          description: The ID of this subnet.
                           type: string
                         name:
-                          description: The name of the virtual network. Changing this
-                            forces a new resource to be created.
+                          description: The name of the subnet.
                           type: string
                         securityGroup:
                           description: The Network Security Group to associate with

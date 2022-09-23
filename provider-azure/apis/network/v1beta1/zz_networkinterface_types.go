@@ -30,6 +30,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
 
+	// The Static IP Address which should be used.
 	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
@@ -45,6 +46,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
+	// The ID of the Subnet where this Network Interface should be located in.
 	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -61,7 +63,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 
 type NetworkInterfaceObservation struct {
 
-	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
+	// If the Virtual Machine using this Network Interface is part of an Availability Set, then this list will have the union of all DNS servers from all Network Interfaces that are part of the Availability Set.
 	AppliedDNSServers []*string `json:"appliedDnsServers,omitempty" tf:"applied_dns_servers,omitempty"`
 
 	// The ID of the Network Interface.
@@ -73,6 +75,7 @@ type NetworkInterfaceObservation struct {
 	// The Media Access Control (MAC) Address of the Network Interface.
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
+	// The first private IP address of the network interface.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// The private IP addresses of the network interface.

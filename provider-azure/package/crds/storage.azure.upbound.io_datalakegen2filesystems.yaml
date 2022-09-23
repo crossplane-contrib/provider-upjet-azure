@@ -70,6 +70,9 @@ spec:
                     items:
                       properties:
                         id:
+                          description: Specifies the Object ID of the Azure Active
+                            Directory User or Group that the entry relates to. Only
+                            valid for user or group entries.
                           type: string
                         permissions:
                           description: Specifies the permissions for the entry in
@@ -362,6 +365,7 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: The ID of the Data Lake Gen2 File System.
                     type: string
                 type: object
               conditions:

@@ -45,7 +45,7 @@ type KeyDeliveryAccessControlParameters struct {
 
 type ServicesAccountObservation struct {
 
-	// Specifies the ID of the Storage Account that will be associated with the Media Services instance.
+	// The ID of the Media Services Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.

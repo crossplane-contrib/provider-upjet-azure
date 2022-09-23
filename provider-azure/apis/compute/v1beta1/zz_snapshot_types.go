@@ -69,6 +69,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Required
 	CreateOption *string `json:"createOption" tf:"create_option,omitempty"`
 
+	// The size of the Snapshotted Disk in GB.
 	// +kubebuilder:validation:Optional
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
 

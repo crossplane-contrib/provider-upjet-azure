@@ -15,7 +15,7 @@ import (
 
 type DataSetBlobStorageObservation struct {
 
-	// The name which should be used for this Data Share Blob Storage Dataset. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	// The name of the Data Share Dataset.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The ID of the Data Share Blob Storage Dataset.

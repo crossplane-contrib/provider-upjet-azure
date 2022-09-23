@@ -56,7 +56,7 @@ type DestinationParameters struct {
 	// +kubebuilder:validation:Required
 	BlobContainerName *string `json:"blobContainerName" tf:"blob_container_name,omitempty"`
 
-	// The Name of the Destination where the capture should take place. At this time the only supported value is EventHubArchive.AzureBlockBlob.
+	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

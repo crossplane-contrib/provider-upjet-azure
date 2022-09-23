@@ -67,7 +67,7 @@ type IPAccessControlAllowParameters struct {
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The friendly name for the IP address range.
+	// The name which should be used for this Live Event. Changing this forces a new Live Event to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -204,7 +204,7 @@ type PreviewIPAccessControlAllowParameters struct {
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The friendly name for the IP address range.
+	// The name which should be used for this Live Event. Changing this forces a new Live Event to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

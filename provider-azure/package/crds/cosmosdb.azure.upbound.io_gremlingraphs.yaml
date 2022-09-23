@@ -279,7 +279,10 @@ spec:
                                       type: string
                                     path:
                                       description: Path for which the indexing behaviour
-                                        applies to.
+                                        applies to. According to the service design,
+                                        all spatial types including LineString, MultiPolygon,
+                                        Point, and Polygon will be applied to the
+                                        path.
                                       type: string
                                   required:
                                   - order

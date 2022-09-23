@@ -308,13 +308,11 @@ spec:
                                   type: string
                                 type: array
                               name:
-                                description: The Name which should be used for this
-                                  IP Configuration.
+                                description: The Name of the Public IP Address Configuration.
                                 type: string
                               primary:
-                                description: Is this the Primary IP Configuration
-                                  for this Network Interface? Possible values are
-                                  true and false. Defaults to false.
+                                description: Is this the Primary IP Configuration?
+                                  Possible values are true and false. Defaults to false.
                                 type: boolean
                               publicIpAddress:
                                 description: A public_ip_address block as defined
@@ -454,9 +452,8 @@ spec:
                                     type: object
                                 type: object
                               version:
-                                description: The Internet Protocol Version which should
-                                  be used for this IP Configuration. Possible values
-                                  are IPv4 and IPv6. Defaults to IPv4.
+                                description: Specifies the version of the image used
+                                  to create the virtual machines.
                                 type: string
                             required:
                             - name
@@ -605,9 +602,9 @@ spec:
                               patchMode:
                                 description: Specifies the mode of in-guest patching
                                   of this Windows Virtual Machine. Possible values
-                                  are ImageDefault or AutomaticByPlatform. Defaults
-                                  to ImageDefault. For more information on patch modes
-                                  please see the product documentation.
+                                  are Manual, AutomaticByOS and AutomaticByPlatform.
+                                  Defaults to AutomaticByOS. For more information
+                                  on patch modes please see the product documentation.
                                 type: string
                               provisionVmAgent:
                                 description: Should the Azure VM Agent be provisioned

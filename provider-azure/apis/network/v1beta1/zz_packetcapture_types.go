@@ -44,6 +44,7 @@ type PacketCaptureObservation struct {
 	// The Packet Capture ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A storage_location block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	StorageLocation []StorageLocationObservation `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 }
@@ -92,6 +93,7 @@ type PacketCaptureParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A storage_location block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	StorageLocation []StorageLocationParameters `json:"storageLocation" tf:"storage_location,omitempty"`
 

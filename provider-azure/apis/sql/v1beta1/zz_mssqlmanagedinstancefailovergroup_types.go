@@ -21,6 +21,7 @@ type MSSQLManagedInstanceFailoverGroupObservation struct {
 	// A partner_region block as defined below.
 	PartnerRegion []PartnerRegionObservation `json:"partnerRegion,omitempty" tf:"partner_region,omitempty"`
 
+	// The local replication role of the Managed Instance Failover Group.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
@@ -83,9 +84,10 @@ type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters 
 
 type PartnerRegionObservation struct {
 
-	// The Azure Region where the Managed Instance Failover Group should exist. Changing this forces a new resource to be created.
+	// The Azure Region where the Managed Instance Failover Group partner exists.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The partner replication role of the Managed Instance Failover Group.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 

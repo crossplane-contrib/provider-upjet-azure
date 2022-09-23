@@ -103,6 +103,7 @@ spec:
                             specified. Defaults to false.
                           type: boolean
                         privateIpAddress:
+                          description: The Static IP Address which should be used.
                           type: string
                         privateIpAddressAllocation:
                           description: The allocation method used for the Private
@@ -117,6 +118,8 @@ spec:
                             with this NIC
                           type: string
                         subnetId:
+                          description: The ID of the Subnet where this Network Interface
+                            should be located in.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in network to populate
@@ -471,8 +474,10 @@ spec:
               atProvider:
                 properties:
                   appliedDnsServers:
-                    description: A list of IP Addresses defining the DNS Servers which
-                      should be used for this Network Interface.
+                    description: If the Virtual Machine using this Network Interface
+                      is part of an Availability Set, then this list will have the
+                      union of all DNS servers from all Network Interfaces that are
+                      part of the Availability Set.
                     items:
                       type: string
                     type: array
@@ -490,6 +495,7 @@ spec:
                       Interface.
                     type: string
                   privateIpAddress:
+                    description: The first private IP address of the network interface.
                     type: string
                   privateIpAddresses:
                     description: The private IP addresses of the network interface.

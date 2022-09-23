@@ -73,6 +73,8 @@ spec:
                     items:
                       properties:
                         name:
+                          description: The name of the Private DNS Zone that the config
+                            belongs to.
                           type: string
                         privateDnsZoneIds:
                           description: Specifies the list of Private DNS Zones to
@@ -175,6 +177,8 @@ spec:
                             new resource to be created.
                           type: boolean
                         name:
+                          description: The name of the Private DNS Zone that the config
+                            belongs to.
                           type: string
                         privateConnectionResourceAlias:
                           description: The Service Alias of the Private Link Enabled
@@ -559,21 +563,29 @@ spec:
                     items:
                       properties:
                         fqdn:
+                          description: The fully qualified domain name to the private_endpoint.
                           type: string
                         ipAddresses:
+                          description: A list of all IP Addresses that map to the
+                            private_endpoint fqdn.
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   id:
+                    description: The ID of the Private Endpoint.
                     type: string
                   networkInterface:
                     items:
                       properties:
                         id:
+                          description: The ID of the network interface associated
+                            with the private_endpoint.
                           type: string
                         name:
+                          description: The name of the network interface associated
+                            with the private_endpoint.
                           type: string
                       type: object
                     type: array
@@ -581,8 +593,11 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Private DNS Zone Config.
                           type: string
                         name:
+                          description: The name of the Private DNS Zone that the config
+                            belongs to.
                           type: string
                         privateDnsZoneId:
                           description: A list of IP Addresses
@@ -592,12 +607,18 @@ spec:
                           items:
                             properties:
                               fqdn:
+                                description: The fully qualified domain name to the
+                                  private_dns_zone.
                                 type: string
                               ipAddresses:
+                                description: A list of all IP Addresses that map to
+                                  the private_dns_zone fqdn.
                                 items:
                                   type: string
                                 type: array
                               name:
+                                description: The name of the Private DNS Zone that
+                                  the config belongs to.
                                 type: string
                               ttl:
                                 description: The time to live for each connection
@@ -615,6 +636,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Private DNS Zone Group.
                           type: string
                       type: object
                     type: array

@@ -77,9 +77,9 @@ spec:
                                   FQDN)
                                 type: string
                               enabled:
-                                description: Specifies if the backend is enabled or
-                                  not. Valid options are true or false. Defaults to
-                                  true.
+                                description: Enable or Disable use of this Backend
+                                  Routing Rule. Permitted values are true or false.
+                                  Defaults to true.
                                 type: boolean
                               hostHeader:
                                 description: The value to use as the host header sent
@@ -634,6 +634,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Azure Front Door Backend.
                           type: string
                       type: object
                     type: array
@@ -642,6 +643,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Azure Front Door Backend.
                           type: string
                       type: object
                     type: array
@@ -656,6 +658,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Azure Front Door Backend.
                           type: string
                       type: object
                     type: array
@@ -672,9 +675,7 @@ spec:
                       Backend Pool ID (value)
                     type: object
                   cname:
-                    description: Specifies the name of the Front Door service. Must
-                      be globally unique. Changing this forces a new resource to be
-                      created.
+                    description: The host that each frontendEndpoint must CNAME to.
                     type: string
                   explicitResourceOrder:
                     items:
@@ -706,14 +707,15 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Azure Front Door Backend.
                           type: string
                       type: object
                     type: array
                   frontendEndpoints:
                     additionalProperties:
                       type: string
-                    description: The names of the frontend_endpoint blocks within
-                      this resource to associate with this routing_rule.
+                    description: A map/dictionary of Frontend Endpoint Names (key)
+                      to the Frontend Endpoint ID (value)
                     type: object
                   headerFrontdoorId:
                     description: The unique ID of the Front Door which is embedded
@@ -721,12 +723,14 @@ spec:
                       to filter traffic sent by the Front Door to your backend.
                     type: string
                   id:
+                    description: The ID of the Azure Front Door Backend.
                     type: string
                   routingRule:
                     description: A routing_rule block as defined below.
                     items:
                       properties:
                         id:
+                          description: The ID of the Azure Front Door Backend.
                           type: string
                       type: object
                     type: array

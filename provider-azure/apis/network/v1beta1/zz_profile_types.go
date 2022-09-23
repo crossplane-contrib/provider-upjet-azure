@@ -18,7 +18,7 @@ type ContainerNetworkInterfaceIPConfigurationObservation struct {
 
 type ContainerNetworkInterfaceIPConfigurationParameters struct {
 
-	// Specifies the name of the IP Configuration.
+	// Specifies the name of the Network Profile. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

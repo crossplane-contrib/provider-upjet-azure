@@ -22,7 +22,7 @@ type CompositeIndexIndexParameters struct {
 	// +kubebuilder:validation:Required
 	Order *string `json:"order" tf:"order,omitempty"`
 
-	// Path for which the indexing behaviour applies to.
+	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 }
@@ -32,7 +32,7 @@ type ExcludedPathObservation struct {
 
 type ExcludedPathParameters struct {
 
-	// Path that is excluded from indexing.
+	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 }
@@ -42,7 +42,7 @@ type IncludedPathObservation struct {
 
 type IncludedPathParameters struct {
 
-	// Path for which the indexing behaviour applies to.
+	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Required
 	Path *string `json:"path" tf:"path,omitempty"`
 }

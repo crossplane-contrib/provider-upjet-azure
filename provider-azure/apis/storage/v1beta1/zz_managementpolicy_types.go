@@ -87,6 +87,7 @@ type ManagementPolicyObservation struct {
 
 type ManagementPolicyParameters struct {
 
+	// A rule block as documented below.
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
@@ -110,6 +111,7 @@ type MatchBlobIndexTagObservation struct {
 
 type MatchBlobIndexTagParameters struct {
 
+	// A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -139,6 +141,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Filters []FiltersParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 
+	// A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -148,9 +151,11 @@ type SnapshotObservation struct {
 
 type SnapshotParameters struct {
 
+	// The age in days after creation to tier blob snapshot to archive storage. Must be between 0 and 99999.
 	// +kubebuilder:validation:Optional
 	ChangeTierToArchiveAfterDaysSinceCreation *float64 `json:"changeTierToArchiveAfterDaysSinceCreation,omitempty" tf:"change_tier_to_archive_after_days_since_creation,omitempty"`
 
+	// The age in days after creation to tier blob snapshot to cool storage. Must be between 0 and 99999.
 	// +kubebuilder:validation:Optional
 	ChangeTierToCoolAfterDaysSinceCreation *float64 `json:"changeTierToCoolAfterDaysSinceCreation,omitempty" tf:"change_tier_to_cool_after_days_since_creation,omitempty"`
 
@@ -164,9 +169,11 @@ type VersionObservation struct {
 
 type VersionParameters struct {
 
+	// The age in days after creation to tier blob snapshot to archive storage. Must be between 0 and 99999.
 	// +kubebuilder:validation:Optional
 	ChangeTierToArchiveAfterDaysSinceCreation *float64 `json:"changeTierToArchiveAfterDaysSinceCreation,omitempty" tf:"change_tier_to_archive_after_days_since_creation,omitempty"`
 
+	// The age in days after creation to tier blob snapshot to cool storage. Must be between 0 and 99999.
 	// +kubebuilder:validation:Optional
 	ChangeTierToCoolAfterDaysSinceCreation *float64 `json:"changeTierToCoolAfterDaysSinceCreation,omitempty" tf:"change_tier_to_cool_after_days_since_creation,omitempty"`
 

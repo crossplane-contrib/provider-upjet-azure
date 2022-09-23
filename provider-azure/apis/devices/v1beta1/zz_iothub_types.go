@@ -111,11 +111,11 @@ type FeedbackObservation struct {
 
 type FeedbackParameters struct {
 
-	// The lock duration for the feedback queue, specified as an ISO 8601 timespan duration. This value must be between 5 and 300 seconds. Defaults to PT60S.
+	// The lock duration for the file upload notifications queue, specified as an ISO 8601 timespan duration. This value must be between 5 and 300 seconds. Defaults to PT1M.
 	// +kubebuilder:validation:Optional
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 
-	// The maximum delivery count for the feedback queue. This value must be between 1 and 100. Defaults to 10.
+	// The number of times the IoT Hub attempts to deliver a file upload notification message. Defaults to 10.
 	// +kubebuilder:validation:Optional
 	MaxDeliveryCount *float64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
 
@@ -174,7 +174,7 @@ type IOTHubObservation struct {
 	// A enrichment block as defined below.
 	Enrichment []EnrichmentObservation `json:"enrichment,omitempty" tf:"enrichment,omitempty"`
 
-	// An endpoint block as defined below.
+	// The EventHub compatible endpoint for events data
 	EventHubEventsEndpoint *string `json:"eventHubEventsEndpoint,omitempty" tf:"event_hub_events_endpoint,omitempty"`
 
 	// The EventHub namespace for events data
@@ -183,7 +183,7 @@ type IOTHubObservation struct {
 	// The EventHub compatible path for events data
 	EventHubEventsPath *string `json:"eventHubEventsPath,omitempty" tf:"event_hub_events_path,omitempty"`
 
-	// An endpoint block as defined below.
+	// The EventHub compatible endpoint for operational data
 	EventHubOperationsEndpoint *string `json:"eventHubOperationsEndpoint,omitempty" tf:"event_hub_operations_endpoint,omitempty"`
 
 	// The EventHub compatible path for operational data
@@ -192,7 +192,7 @@ type IOTHubObservation struct {
 	// A fallback_route block as defined below. If the fallback route is enabled, messages that don't match any of the supplied routes are automatically sent to this route. Defaults to messages/events.
 	FallbackRoute []FallbackRouteObservation `json:"fallbackRoute,omitempty" tf:"fallback_route,omitempty"`
 
-	// Specifies the name of the IotHub resource. Changing this forces a new resource to be created.
+	// The hostname of the IotHub Resource.
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// The ID of the IoTHub.
@@ -285,7 +285,7 @@ type IPRuleParameters struct {
 	// +kubebuilder:validation:Required
 	IPMask *string `json:"ipMask" tf:"ip_mask,omitempty"`
 
-	// The name of the IP rule.
+	// The name of the sku. Possible values are B1, B2, B3, F1, S1, S2, and S3.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -351,7 +351,7 @@ type RouteParameters struct {
 
 type SharedAccessPolicyObservation struct {
 
-	// Specifies the name of the IotHub resource. Changing this forces a new resource to be created.
+	// The name of the shared access policy.
 	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
 
 	// The permissions assigned to the shared access policy.

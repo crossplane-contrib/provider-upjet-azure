@@ -182,6 +182,10 @@ spec:
                             ERROR_RATE 0.00 INITIAL_SIZE 400).
                           type: string
                         name:
+                          description: The name which should be used for this module.
+                            Possible values are RediSearch, RedisBloom and RedisTimeSeries.
+                            Changing this forces a new Redis Enterprise Database to
+                            be created.
                           type: string
                       required:
                       - name

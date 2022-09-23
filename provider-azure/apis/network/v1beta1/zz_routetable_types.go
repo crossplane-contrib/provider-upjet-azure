@@ -63,6 +63,7 @@ type RouteTableRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix"`
 
+	// The name of the route table. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name"`
 

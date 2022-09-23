@@ -105,6 +105,9 @@ spec:
                     items:
                       properties:
                         location:
+                          description: Specifies the supported Azure location where
+                            the resource exists. Changing this forces a new resource
+                            to be created.
                           type: string
                         regionalEndpointEnabled:
                           description: Whether regional endpoint is enabled for this
@@ -113,10 +116,12 @@ spec:
                         tags:
                           additionalProperties:
                             type: string
+                          description: A mapping of tags to assign to the resource.
                           type: object
                         zoneRedundancyEnabled:
-                          description: Boolean value that indicates whether the policy
-                            is enabled.
+                          description: Whether zone redundancy is enabled for this
+                            Container Registry? Changing this forces a new resource
+                            to be created. Defaults to false.
                           type: boolean
                       required:
                       - location
@@ -143,6 +148,8 @@ spec:
                       type: object
                     type: array
                   location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   networkRuleBypassOption:
                     description: Whether to allow trusted Azure services to access
@@ -273,8 +280,8 @@ spec:
                       container registry. Defaults to true.
                     type: boolean
                   quarantinePolicyEnabled:
-                    description: Boolean value that indicates whether the policy is
-                      enabled.
+                    description: Boolean value that indicates whether quarantine policy
+                      is enabled. Defaults to false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -377,6 +384,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   trustPolicy:
                     description: A trust_policy block as documented below.
@@ -389,8 +397,9 @@ spec:
                       type: object
                     type: array
                   zoneRedundancyEnabled:
-                    description: Boolean value that indicates whether the policy is
-                      enabled.
+                    description: Whether zone redundancy is enabled for this Container
+                      Registry? Changing this forces a new resource to be created.
+                      Defaults to false.
                     type: boolean
                 required:
                 - location
@@ -573,8 +582,8 @@ spec:
               atProvider:
                 properties:
                   adminUsername:
-                    description: Specifies the name of the Container Registry. Changing
-                      this forces a new resource to be created.
+                    description: The Username associated with the Container Registry
+                      Admin account - if the admin account is enabled.
                     type: string
                   id:
                     description: The ID of the Container Registry.

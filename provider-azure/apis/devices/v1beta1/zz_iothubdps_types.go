@@ -15,7 +15,7 @@ import (
 
 type IOTHubDPSObservation struct {
 
-	// Specifies the name of the Iot Device Provisioning Service resource. Changing this forces a new resource to be created.
+	// The device endpoint of the IoT Device Provisioning Service.
 	DeviceProvisioningHostName *string `json:"deviceProvisioningHostName,omitempty" tf:"device_provisioning_host_name,omitempty"`
 
 	// The ID of the IoT Device Provisioning Service.
@@ -28,7 +28,7 @@ type IOTHubDPSObservation struct {
 	// +kubebuilder:validation:Optional
 	LinkedHub []LinkedHubObservation `json:"linkedHub,omitempty" tf:"linked_hub,omitempty"`
 
-	// Specifies the name of the Iot Device Provisioning Service resource. Changing this forces a new resource to be created.
+	// The service endpoint of the IoT Device Provisioning Service.
 	ServiceOperationsHostName *string `json:"serviceOperationsHostName,omitempty" tf:"service_operations_host_name,omitempty"`
 }
 

@@ -116,15 +116,15 @@ type ManagedRuleExclusionObservation struct {
 
 type ManagedRuleExclusionParameters struct {
 
-	// The variable type to be excluded. Possible values are QueryStringArgNames, RequestBodyPostArgNames, RequestCookieNames, RequestHeaderNames.
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
 	// +kubebuilder:validation:Required
 	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
 
-	// Comparison operator to apply to the selector when specifying which elements in the collection this exclusion applies to. Possible values are: Equals, Contains, StartsWith, EndsWith, EqualsAny.
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
-	// Selector for the value in the match_variable attribute this exclusion applies to.
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
 	// +kubebuilder:validation:Required
 	Selector *string `json:"selector" tf:"selector,omitempty"`
 }
@@ -186,15 +186,15 @@ type OverrideExclusionObservation struct {
 
 type OverrideExclusionParameters struct {
 
-	// The variable type to be excluded. Possible values are QueryStringArgNames, RequestBodyPostArgNames, RequestCookieNames, RequestHeaderNames.
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
 	// +kubebuilder:validation:Required
 	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
 
-	// Comparison operator to apply to the selector when specifying which elements in the collection this exclusion applies to. Possible values are: Equals, Contains, StartsWith, EndsWith, EqualsAny.
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
-	// Selector for the value in the match_variable attribute this exclusion applies to.
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
 	// +kubebuilder:validation:Required
 	Selector *string `json:"selector" tf:"selector,omitempty"`
 }
@@ -244,15 +244,15 @@ type RuleExclusionObservation struct {
 
 type RuleExclusionParameters struct {
 
-	// The variable type to be excluded. Possible values are QueryStringArgNames, RequestBodyPostArgNames, RequestCookieNames, RequestHeaderNames.
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
 	// +kubebuilder:validation:Required
 	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
 
-	// Comparison operator to apply to the selector when specifying which elements in the collection this exclusion applies to. Possible values are: Equals, Contains, StartsWith, EndsWith, EqualsAny.
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
-	// Selector for the value in the match_variable attribute this exclusion applies to.
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
 	// +kubebuilder:validation:Required
 	Selector *string `json:"selector" tf:"selector,omitempty"`
 }

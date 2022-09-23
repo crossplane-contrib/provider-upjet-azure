@@ -122,8 +122,7 @@ spec:
                                   id on the azurerm_key_vault_secret resource.
                                 type: string
                               sourceVaultId:
-                                description: The URL of the Key Vault. This can be
-                                  found as vault_uri on the azurerm_key_vault resource.
+                                description: The ID of the source Key Vault.
                                 type: string
                             required:
                             - secretUrl

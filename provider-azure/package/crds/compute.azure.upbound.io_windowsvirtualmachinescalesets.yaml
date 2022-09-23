@@ -227,7 +227,7 @@ spec:
                           type: string
                         diskEncryptionSetId:
                           description: The ID of the Disk Encryption Set which should
-                            be used to encrypt this Data Disk.
+                            be used to encrypt this OS Disk. Conflicts with secure_vm_disk_encryption_set_id.
                           type: string
                         diskSizeGb:
                           description: The size of the Data Disk which should be created.
@@ -246,8 +246,8 @@ spec:
                         ultraSsdDiskMbpsReadWrite:
                           type: number
                         writeAcceleratorEnabled:
-                          description: Should Write Accelerator be enabled for this
-                            Data Disk? Defaults to false.
+                          description: Should Write Accelerator be Enabled for this
+                            OS Disk? Defaults to false.
                           type: boolean
                       required:
                       - caching
@@ -456,12 +456,10 @@ spec:
                                   type: string
                                 type: array
                               name:
-                                description: The Name which should be used for this
-                                  IP Configuration.
+                                description: The Name of the Public IP Address Configuration.
                                 type: string
                               primary:
-                                description: Is this the Primary IP Configuration
-                                  for this Network Interface? Defaults to false.
+                                description: Is this the Primary IP Configuration?
                                 type: boolean
                               publicIpAddress:
                                 description: A public_ip_address block as defined
@@ -598,9 +596,8 @@ spec:
                                     type: object
                                 type: object
                               version:
-                                description: The Internet Protocol Version which should
-                                  be used for this IP Configuration. Possible values
-                                  are IPv4 and IPv6. Defaults to IPv4.
+                                description: Specifies the version of the image used
+                                  to create the virtual machines.
                                 type: string
                             required:
                             - name
@@ -919,8 +916,8 @@ spec:
                             create the virtual machines.
                           type: string
                         sku:
-                          description: The Virtual Machine SKU for the Scale Set,
-                            such as Standard_F2.
+                          description: Specifies the SKU of the image used to create
+                            the virtual machines.
                           type: string
                         version:
                           description: Specifies the version of the image used to
