@@ -280,6 +280,8 @@ spec:
                         type: object
                     type: object
                   storageLocation:
+                    description: A storage_location block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         filePath:
@@ -559,6 +561,8 @@ spec:
                     description: The Packet Capture ID.
                     type: string
                   storageLocation:
+                    description: A storage_location block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         storagePath:

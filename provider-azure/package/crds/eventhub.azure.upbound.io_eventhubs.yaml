@@ -83,9 +83,8 @@ spec:
                                   Blob Storage Account where messages should be archived.
                                 type: string
                               name:
-                                description: The Name of the Destination where the
-                                  capture should take place. At this time the only
-                                  supported value is EventHubArchive.AzureBlockBlob.
+                                description: Specifies the name of the EventHub resource.
+                                  Changing this forces a new resource to be created.
                                 type: string
                               storageAccountId:
                                 description: The ID of the Blob Storage Account where

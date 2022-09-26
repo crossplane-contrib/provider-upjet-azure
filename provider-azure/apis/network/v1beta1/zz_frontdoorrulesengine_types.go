@@ -148,7 +148,7 @@ type RuleMatchConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	Transform []*string `json:"transform,omitempty" tf:"transform,omitempty"`
 
-	// (array) can contain one or more strings.
+	// value name (string).
 	// +kubebuilder:validation:Optional
 	Value []*string `json:"value,omitempty" tf:"value,omitempty"`
 

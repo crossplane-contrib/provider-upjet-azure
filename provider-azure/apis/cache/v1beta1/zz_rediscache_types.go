@@ -33,8 +33,7 @@ type PatchScheduleParameters struct {
 
 type RedisCacheObservation struct {
 
-	// The name of the Redis instance. Changing this forces a
-	// new resource to be created.
+	// The Hostname of the Redis Instance
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// The Route ID.

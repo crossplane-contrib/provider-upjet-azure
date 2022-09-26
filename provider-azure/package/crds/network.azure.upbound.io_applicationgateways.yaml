@@ -88,8 +88,8 @@ spec:
                           - namespace
                           type: object
                         name:
-                          description: The name of the Application Gateway. Changing
-                            this forces a new resource to be created.
+                          description: The Name of the Authentication Certificate
+                            to use.
                           type: string
                       required:
                       - dataSecretRef
@@ -149,8 +149,7 @@ spec:
                           items:
                             properties:
                               name:
-                                description: The name of the Application Gateway.
-                                  Changing this forces a new resource to be created.
+                                description: The Name of the URL Path Map.
                                 type: string
                             required:
                             - name
@@ -166,8 +165,7 @@ spec:
                                   3600 seconds.
                                 type: number
                               enabled:
-                                description: If connection draining is enabled or
-                                  not.
+                                description: Is the Web Application Firewall be enabled?
                                 type: boolean
                             required:
                             - drainTimeoutSec
@@ -562,9 +560,8 @@ spec:
                                   customer error.
                                 type: string
                               statusCode:
-                                description: Status code of the application gateway
-                                  customer error. Possible values are HttpStatus403
-                                  and HttpStatus502
+                                description: A list of allowed status codes for this
+                                  Health Probe.
                                 type: string
                             required:
                             - customErrorPageUrl
@@ -655,7 +652,7 @@ spec:
                           items:
                             properties:
                               name:
-                                description: The name of the IP configuration.
+                                description: The Name of the URL Path Map.
                                 type: string
                               primary:
                                 description: Is this the Primary IP Configuration?
@@ -1048,7 +1045,7 @@ spec:
                                   type: object
                                 type: array
                               name:
-                                description: Unique name of the rewrite rule block
+                                description: The Name of the URL Path Map.
                                 type: string
                               requestHeaderConfiguration:
                                 description: One or more request_header_configuration
@@ -1060,7 +1057,7 @@ spec:
                                       type: string
                                     headerValue:
                                       description: Header value of the header configuration.
-                                        To delete a request header set this property
+                                        To delete a response header set this property
                                         to an empty string.
                                       type: string
                                   required:
@@ -1418,20 +1415,21 @@ spec:
                             properties:
                               backendAddressPoolName:
                                 description: The Name of the Backend Address Pool
-                                  to use for this Path Rule. Cannot be set if redirect_configuration_name
-                                  is set.
+                                  which should be used for this Routing Rule. Cannot
+                                  be set if redirect_configuration_name is set.
                                 type: string
                               backendHttpSettingsName:
                                 description: The Name of the Backend HTTP Settings
-                                  Collection to use for this Path Rule. Cannot be
-                                  set if redirect_configuration_name is set.
+                                  Collection which should be used for this Routing
+                                  Rule. Cannot be set if redirect_configuration_name
+                                  is set.
                                 type: string
                               firewallPolicyId:
                                 description: The ID of the Web Application Firewall
                                   Policy which should be used as a HTTP Listener.
                                 type: string
                               name:
-                                description: The Name of the Path Rule.
+                                description: The Name of the URL Path Map.
                                 type: string
                               paths:
                                 description: A list of Paths used in this Path Rule.
@@ -1439,13 +1437,14 @@ spec:
                                   type: string
                                 type: array
                               redirectConfigurationName:
-                                description: The Name of a Redirect Configuration
-                                  to use for this Path Rule. Cannot be set if backend_address_pool_name
-                                  or backend_http_settings_name is set.
+                                description: The Name of the Redirect Configuration
+                                  which should be used for this Routing Rule. Cannot
+                                  be set if either backend_address_pool_name or backend_http_settings_name
+                                  is set.
                                 type: string
                               rewriteRuleSetName:
                                 description: The Name of the Rewrite Rule Set which
-                                  should be used for this URL Path Map. Only valid
+                                  should be used for this Routing Rule. Only valid
                                   for v2 SKUs.
                                 type: string
                             required:
@@ -1752,6 +1751,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Authentication Certificate.
                           type: string
                       type: object
                     type: array
@@ -1761,6 +1761,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Backend Address Pool.
                           type: string
                       type: object
                     type: array
@@ -1774,10 +1775,12 @@ spec:
                           items:
                             properties:
                               id:
+                                description: The ID of the URL Path Map.
                                 type: string
                             type: object
                           type: array
                         id:
+                          description: The ID of the Backend HTTP Settings Configuration.
                           type: string
                         probeId:
                           description: The ID of the associated Probe.
@@ -1790,6 +1793,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Custom Error Configuration.
                           type: string
                       type: object
                     type: array
@@ -1799,6 +1803,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Frontend IP Configuration.
                           type: string
                         privateLinkConfigurationId:
                           description: The ID of the associated private link configuration.
@@ -1810,6 +1815,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Frontend Port.
                           type: string
                       type: object
                     type: array
@@ -1819,6 +1825,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Gateway IP Configuration.
                           type: string
                       type: object
                     type: array
@@ -1832,6 +1839,7 @@ spec:
                           items:
                             properties:
                               id:
+                                description: The ID of the URL Path Map.
                                 type: string
                             type: object
                           type: array
@@ -1842,6 +1850,7 @@ spec:
                           description: The ID of the associated Frontend Port.
                           type: string
                         id:
+                          description: The ID of the HTTP Listener.
                           type: string
                         sslCertificateId:
                           description: The ID of the associated SSL Certificate.
@@ -1852,6 +1861,7 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: The ID of the Application Gateway.
                     type: string
                   privateEndpointConnection:
                     description: A list of private_endpoint_connection blocks as defined
@@ -1859,10 +1869,10 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the private endpoint connection.
                           type: string
                         name:
-                          description: The name of the Application Gateway. Changing
-                            this forces a new resource to be created.
+                          description: The name of the private endpoint connection.
                           type: string
                       type: object
                     type: array
@@ -1872,6 +1882,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the private link configuration.
                           type: string
                       type: object
                     type: array
@@ -1880,6 +1891,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Probe.
                           type: string
                       type: object
                     type: array
@@ -1889,8 +1901,10 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Redirect Configuration.
                           type: string
                         targetListenerId:
+                          description: The ID of the Application Gateway.
                           type: string
                       type: object
                     type: array
@@ -1900,17 +1914,23 @@ spec:
                     items:
                       properties:
                         backendAddressPoolId:
+                          description: The ID of the associated Backend Address Pool.
                           type: string
                         backendHttpSettingsId:
+                          description: The ID of the associated Backend HTTP Settings
+                            Configuration.
                           type: string
                         httpListenerId:
                           description: The ID of the associated HTTP Listener.
                           type: string
                         id:
+                          description: The ID of the Request Routing Rule.
                           type: string
                         redirectConfigurationId:
+                          description: The ID of the associated Redirect Configuration.
                           type: string
                         rewriteRuleSetId:
+                          description: The ID of the associated Rewrite Rule Set.
                           type: string
                         urlPathMapId:
                           description: The ID of the associated URL Path Map.
@@ -1923,6 +1943,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the Rewrite Rule Set
                           type: string
                       type: object
                     type: array
@@ -1931,6 +1952,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the SSL Certificate.
                           type: string
                         publicCertData:
                           description: The Public Certificate Data associated with
@@ -1943,6 +1965,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the URL Path Map.
                           type: string
                       type: object
                     type: array
@@ -1952,6 +1975,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the URL Path Map.
                           type: string
                       type: object
                     type: array
@@ -1961,6 +1985,7 @@ spec:
                     items:
                       properties:
                         id:
+                          description: The ID of the URL Path Map.
                           type: string
                       type: object
                     type: array
@@ -1979,22 +2004,32 @@ spec:
                           description: The ID of the Default Redirect Configuration.
                           type: string
                         defaultRewriteRuleSetId:
+                          description: The ID of the Application Gateway.
                           type: string
                         id:
+                          description: The ID of the URL Path Map.
                           type: string
                         pathRule:
                           description: One or more path_rule blocks as defined above.
                           items:
                             properties:
                               backendAddressPoolId:
+                                description: The ID of the associated Backend Address
+                                  Pool.
                                 type: string
                               backendHttpSettingsId:
+                                description: The ID of the associated Backend HTTP
+                                  Settings Configuration.
                                 type: string
                               id:
+                                description: The ID of the URL Path Map.
                                 type: string
                               redirectConfigurationId:
+                                description: The ID of the associated Redirect Configuration.
                                 type: string
                               rewriteRuleSetId:
+                                description: The ID of the associated Rewrite Rule
+                                  Set.
                                 type: string
                             type: object
                           type: array

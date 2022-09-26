@@ -38,8 +38,7 @@ type PeeringAddressesParameters struct {
 	// +kubebuilder:validation:Optional
 	ApipaAddresses []*string `json:"apipaAddresses,omitempty" tf:"apipa_addresses,omitempty"`
 
-	// The name of the Virtual Network Gateway. Changing the name
-	// forces a new resource to be created.
+	// The name of the IP configuration of this Virtual Network Gateway. In case there are multiple ip_configuration blocks defined, this property is required to specify.
 	// +kubebuilder:validation:Optional
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 }
@@ -49,8 +48,7 @@ type RevokedCertificateObservation struct {
 
 type RevokedCertificateParameters struct {
 
-	// The name of the Virtual Network Gateway. Changing the name
-	// forces a new resource to be created.
+	// A user-defined name of the revoked certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -63,14 +61,12 @@ type RootCertificateObservation struct {
 
 type RootCertificateParameters struct {
 
-	// A user-defined name of the root certificate.
+	// A user-defined name of the revoked certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The public certificate of the root certificate
-	// authority. The certificate must be provided in Base-64 encoded X.509 format
-	// (PEM). In particular, this argument must not include the
-	// -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers.
+	// The SHA1 thumbprint of the certificate to be
+	// revoked.
 	// +kubebuilder:validation:Required
 	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
@@ -133,6 +129,7 @@ type VPNClientConfigurationParameters struct {
 
 type VirtualNetworkGatewayBGPSettingsObservation struct {
 
+	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
 	// +kubebuilder:validation:Optional
 	PeeringAddresses []PeeringAddressesObservation `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
 }
@@ -148,6 +145,7 @@ type VirtualNetworkGatewayBGPSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 
+	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
 	// +kubebuilder:validation:Optional
 	PeeringAddresses []PeeringAddressesParameters `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
 }

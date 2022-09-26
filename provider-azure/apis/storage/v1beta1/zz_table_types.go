@@ -47,7 +47,7 @@ type TableACLParameters struct {
 
 type TableObservation struct {
 
-	// The ID which should be used for this Shared Identifier.
+	// The ID of the Table within the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

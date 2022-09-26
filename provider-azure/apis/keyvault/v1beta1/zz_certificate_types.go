@@ -151,6 +151,7 @@ type IssuerParametersObservation struct {
 
 type IssuerParametersParameters struct {
 
+	// Specifies the name of the Key Vault Certificate. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }

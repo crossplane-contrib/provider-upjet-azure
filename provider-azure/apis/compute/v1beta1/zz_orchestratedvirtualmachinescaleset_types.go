@@ -78,7 +78,7 @@ type LinuxConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DisablePasswordAuthentication *bool `json:"disablePasswordAuthentication,omitempty" tf:"disable_password_authentication,omitempty"`
 
-	// Specifies the mode of in-guest patching of this Windows Virtual Machine. Possible values are ImageDefault or AutomaticByPlatform. Defaults to ImageDefault. For more information on patch modes please see the product documentation.
+	// Specifies the mode of in-guest patching of this Windows Virtual Machine. Possible values are Manual, AutomaticByOS and AutomaticByPlatform. Defaults to AutomaticByOS. For more information on patch modes please see the product documentation.
 	// +kubebuilder:validation:Optional
 	PatchMode *string `json:"patchMode,omitempty" tf:"patch_mode,omitempty"`
 
@@ -132,11 +132,11 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
 
-	// The Name which should be used for this IP Configuration.
+	// The Name of the Public IP Address Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Is this the Primary IP Configuration for this Network Interface? Possible values are true and false. Defaults to false.
+	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
 
@@ -158,7 +158,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// The Internet Protocol Version which should be used for this IP Configuration. Possible values are IPv4 and IPv6. Defaults to IPv4.
+	// Specifies the version of the image used to create the virtual machines.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }

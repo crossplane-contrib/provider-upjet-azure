@@ -30,6 +30,7 @@ type AzureadAdministratorParameters struct {
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
+	// The tenant id of the Azure AD Administrator of this SQL Server.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
@@ -39,6 +40,7 @@ type MSSQLServerIdentityObservation struct {
 	// The Principal ID for the Service Principal associated with the Identity of this SQL Server.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// The Tenant ID for the Service Principal associated with the Identity of this SQL Server.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
@@ -55,7 +57,7 @@ type MSSQLServerIdentityParameters struct {
 
 type MSSQLServerObservation struct {
 
-	// The name of the Microsoft SQL Server. This needs to be globally unique within Azure.
+	// The fully qualified domain name of the Azure SQL Server (e.g. myServerName.database.windows.net)
 	FullyQualifiedDomainName *string `json:"fullyQualifiedDomainName,omitempty" tf:"fully_qualified_domain_name,omitempty"`
 
 	// the Microsoft SQL Server ID.

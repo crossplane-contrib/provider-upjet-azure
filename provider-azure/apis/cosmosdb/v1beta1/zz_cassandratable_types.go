@@ -71,7 +71,7 @@ type ClusterKeyObservation struct {
 
 type ClusterKeyParameters struct {
 
-	// Name of the cluster key to be created.
+	// Name of the column to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -99,7 +99,7 @@ type PartitionKeyObservation struct {
 
 type PartitionKeyParameters struct {
 
-	// Name of the column to partition by.
+	// Name of the column to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }

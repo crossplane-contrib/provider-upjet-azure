@@ -47,6 +47,7 @@ type ApplicationGatewayObservation struct {
 	// +kubebuilder:validation:Required
 	HTTPListener []HTTPListenerObservation `json:"httpListener,omitempty" tf:"http_listener,omitempty"`
 
+	// The ID of the Application Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of private_endpoint_connection blocks as defined below.
@@ -230,6 +231,8 @@ type ApplicationGatewayParameters struct {
 }
 
 type AuthenticationCertificateObservation struct {
+
+	// The ID of the Authentication Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -239,7 +242,7 @@ type AuthenticationCertificateParameters struct {
 	// +kubebuilder:validation:Required
 	DataSecretRef v1.SecretKeySelector `json:"dataSecretRef" tf:"-"`
 
-	// The name of the Application Gateway. Changing this forces a new resource to be created.
+	// The Name of the Authentication Certificate to use.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -259,6 +262,8 @@ type AutoscaleConfigurationParameters struct {
 }
 
 type BackendAddressPoolObservation struct {
+
+	// The ID of the Backend Address Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -278,12 +283,14 @@ type BackendAddressPoolParameters struct {
 }
 
 type BackendHTTPSettingsAuthenticationCertificateObservation struct {
+
+	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type BackendHTTPSettingsAuthenticationCertificateParameters struct {
 
-	// The name of the Application Gateway. Changing this forces a new resource to be created.
+	// The Name of the URL Path Map.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -294,6 +301,7 @@ type BackendHTTPSettingsObservation struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationCertificate []BackendHTTPSettingsAuthenticationCertificateObservation `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
+	// The ID of the Backend HTTP Settings Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the associated Probe.
@@ -386,12 +394,14 @@ type ConnectionDrainingParameters struct {
 	// +kubebuilder:validation:Required
 	DrainTimeoutSec *float64 `json:"drainTimeoutSec" tf:"drain_timeout_sec,omitempty"`
 
-	// If connection draining is enabled or not.
+	// Is the Web Application Firewall be enabled?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type CustomErrorConfigurationObservation struct {
+
+	// The ID of the Custom Error Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -439,6 +449,8 @@ type ExclusionParameters struct {
 }
 
 type FrontendIPConfigurationObservation struct {
+
+	// The ID of the Frontend IP Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the associated private link configuration.
@@ -493,6 +505,8 @@ type FrontendIPConfigurationParameters struct {
 }
 
 type FrontendPortObservation struct {
+
+	// The ID of the Frontend Port.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -508,6 +522,8 @@ type FrontendPortParameters struct {
 }
 
 type GatewayIPConfigurationObservation struct {
+
+	// The ID of the Gateway IP Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -533,6 +549,8 @@ type GatewayIPConfigurationParameters struct {
 }
 
 type HTTPListenerCustomErrorConfigurationObservation struct {
+
+	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -542,7 +560,7 @@ type HTTPListenerCustomErrorConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	CustomErrorPageURL *string `json:"customErrorPageUrl" tf:"custom_error_page_url,omitempty"`
 
-	// Status code of the application gateway customer error. Possible values are HttpStatus403 and HttpStatus502
+	// A list of allowed status codes for this Health Probe.
 	// +kubebuilder:validation:Required
 	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }
@@ -559,6 +577,7 @@ type HTTPListenerObservation struct {
 	// The ID of the associated Frontend Port.
 	FrontendPortID *string `json:"frontendPortId,omitempty" tf:"frontend_port_id,omitempty"`
 
+	// The ID of the HTTP Listener.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ID of the associated SSL Certificate.
@@ -620,7 +639,7 @@ type IPConfigurationObservation struct {
 
 type IPConfigurationParameters struct {
 
-	// The name of the IP configuration.
+	// The Name of the URL Path Map.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -680,24 +699,30 @@ type MatchParameters struct {
 }
 
 type PathRuleObservation struct {
+
+	// The ID of the associated Backend Address Pool.
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
+	// The ID of the associated Backend HTTP Settings Configuration.
 	BackendHTTPSettingsID *string `json:"backendHttpSettingsId,omitempty" tf:"backend_http_settings_id,omitempty"`
 
+	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the associated Redirect Configuration.
 	RedirectConfigurationID *string `json:"redirectConfigurationId,omitempty" tf:"redirect_configuration_id,omitempty"`
 
+	// The ID of the associated Rewrite Rule Set.
 	RewriteRuleSetID *string `json:"rewriteRuleSetId,omitempty" tf:"rewrite_rule_set_id,omitempty"`
 }
 
 type PathRuleParameters struct {
 
-	// The Name of the Backend Address Pool to use for this Path Rule. Cannot be set if redirect_configuration_name is set.
+	// The Name of the Backend Address Pool which should be used for this Routing Rule. Cannot be set if redirect_configuration_name is set.
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolName *string `json:"backendAddressPoolName,omitempty" tf:"backend_address_pool_name,omitempty"`
 
-	// The Name of the Backend HTTP Settings Collection to use for this Path Rule. Cannot be set if redirect_configuration_name is set.
+	// The Name of the Backend HTTP Settings Collection which should be used for this Routing Rule. Cannot be set if redirect_configuration_name is set.
 	// +kubebuilder:validation:Optional
 	BackendHTTPSettingsName *string `json:"backendHttpSettingsName,omitempty" tf:"backend_http_settings_name,omitempty"`
 
@@ -705,7 +730,7 @@ type PathRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
-	// The Name of the Path Rule.
+	// The Name of the URL Path Map.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -713,19 +738,21 @@ type PathRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Paths []*string `json:"paths" tf:"paths,omitempty"`
 
-	// The Name of a Redirect Configuration to use for this Path Rule. Cannot be set if backend_address_pool_name or backend_http_settings_name is set.
+	// The Name of the Redirect Configuration which should be used for this Routing Rule. Cannot be set if either backend_address_pool_name or backend_http_settings_name is set.
 	// +kubebuilder:validation:Optional
 	RedirectConfigurationName *string `json:"redirectConfigurationName,omitempty" tf:"redirect_configuration_name,omitempty"`
 
-	// The Name of the Rewrite Rule Set which should be used for this URL Path Map. Only valid for v2 SKUs.
+	// The Name of the Rewrite Rule Set which should be used for this Routing Rule. Only valid for v2 SKUs.
 	// +kubebuilder:validation:Optional
 	RewriteRuleSetName *string `json:"rewriteRuleSetName,omitempty" tf:"rewrite_rule_set_name,omitempty"`
 }
 
 type PrivateEndpointConnectionObservation struct {
+
+	// The ID of the private endpoint connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the Application Gateway. Changing this forces a new resource to be created.
+	// The name of the private endpoint connection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -733,6 +760,8 @@ type PrivateEndpointConnectionParameters struct {
 }
 
 type PrivateLinkConfigurationObservation struct {
+
+	// The ID of the private link configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -748,6 +777,8 @@ type PrivateLinkConfigurationParameters struct {
 }
 
 type ProbeObservation struct {
+
+	// The ID of the Probe.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -799,8 +830,11 @@ type ProbeParameters struct {
 }
 
 type RedirectConfigurationObservation struct {
+
+	// The ID of the Redirect Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the Application Gateway.
 	TargetListenerID *string `json:"targetListenerId,omitempty" tf:"target_listener_id,omitempty"`
 }
 
@@ -840,23 +874,29 @@ type RequestHeaderConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	HeaderName *string `json:"headerName" tf:"header_name,omitempty"`
 
-	// Header value of the header configuration. To delete a request header set this property to an empty string.
+	// Header value of the header configuration. To delete a response header set this property to an empty string.
 	// +kubebuilder:validation:Required
 	HeaderValue *string `json:"headerValue" tf:"header_value,omitempty"`
 }
 
 type RequestRoutingRuleObservation struct {
+
+	// The ID of the associated Backend Address Pool.
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
+	// The ID of the associated Backend HTTP Settings Configuration.
 	BackendHTTPSettingsID *string `json:"backendHttpSettingsId,omitempty" tf:"backend_http_settings_id,omitempty"`
 
 	// The ID of the associated HTTP Listener.
 	HTTPListenerID *string `json:"httpListenerId,omitempty" tf:"http_listener_id,omitempty"`
 
+	// The ID of the Request Routing Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the associated Redirect Configuration.
 	RedirectConfigurationID *string `json:"redirectConfigurationId,omitempty" tf:"redirect_configuration_id,omitempty"`
 
+	// The ID of the associated Rewrite Rule Set.
 	RewriteRuleSetID *string `json:"rewriteRuleSetId,omitempty" tf:"rewrite_rule_set_id,omitempty"`
 
 	// The ID of the associated URL Path Map.
@@ -925,7 +965,7 @@ type RewriteRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// Unique name of the rewrite rule block
+	// The Name of the URL Path Map.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -947,6 +987,8 @@ type RewriteRuleParameters struct {
 }
 
 type RewriteRuleSetObservation struct {
+
+	// The ID of the Rewrite Rule Set
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -962,6 +1004,8 @@ type RewriteRuleSetParameters struct {
 }
 
 type SSLCertificateObservation struct {
+
+	// The ID of the SSL Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Public Certificate Data associated with the SSL Certificate.
@@ -1015,6 +1059,8 @@ type SSLPolicyParameters struct {
 }
 
 type SSLProfileObservation struct {
+
+	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -1083,6 +1129,8 @@ type SkuParameters struct {
 }
 
 type TrustedClientCertificateObservation struct {
+
+	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -1098,6 +1146,8 @@ type TrustedClientCertificateParameters struct {
 }
 
 type TrustedRootCertificateObservation struct {
+
+	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -1145,8 +1195,10 @@ type URLPathMapObservation struct {
 	// The ID of the Default Redirect Configuration.
 	DefaultRedirectConfigurationID *string `json:"defaultRedirectConfigurationId,omitempty" tf:"default_redirect_configuration_id,omitempty"`
 
+	// The ID of the Application Gateway.
 	DefaultRewriteRuleSetID *string `json:"defaultRewriteRuleSetId,omitempty" tf:"default_rewrite_rule_set_id,omitempty"`
 
+	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// One or more path_rule blocks as defined above.

@@ -70,6 +70,7 @@ spec:
                       to be created.
                     type: string
                   diskSizeGb:
+                    description: The size of the Snapshotted Disk in GB.
                     type: number
                   encryptionSettings:
                     items:

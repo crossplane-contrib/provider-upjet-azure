@@ -127,10 +127,8 @@ spec:
                                   to consume their logs.
                                 type: string
                               id:
-                                description: The ID of the Log Analytics Workspace
-                                  that the Firewalls associated with this Firewall
-                                  Policy will send their logs to when their locations
-                                  match the firewall_location.
+                                description: 12-digit number (id) which identifies
+                                  your signature.
                                 type: string
                             required:
                             - firewallLocation

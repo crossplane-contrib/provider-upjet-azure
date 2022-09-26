@@ -35,6 +35,7 @@ type ExpressRoutePortObservation struct {
 	// The resource GUID of the Express Route Port.
 	GUID *string `json:"guid,omitempty" tf:"guid,omitempty"`
 
+	// The ID of the Express Route Port.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of link blocks as defined below.
@@ -102,9 +103,10 @@ type Link1Observation struct {
 	// The connector type of the Express Route Port Link.
 	ConnectorType *string `json:"connectorType,omitempty" tf:"connector_type,omitempty"`
 
+	// The ID of this Express Route Port Link.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name which should be used for this Express Route Port. Changing this forces a new Express Route Port to be created.
+	// The interface name of the Azure router associated with the Express Route Port Link.
 	InterfaceName *string `json:"interfaceName,omitempty" tf:"interface_name,omitempty"`
 
 	// The ID that maps from the Express Route Port Link to the patch panel port.
@@ -113,7 +115,7 @@ type Link1Observation struct {
 	// The ID that maps from the patch panel port to the rack.
 	RackID *string `json:"rackId,omitempty" tf:"rack_id,omitempty"`
 
-	// The name which should be used for this Express Route Port. Changing this forces a new Express Route Port to be created.
+	// The name of the Azure router associated with the Express Route Port Link.
 	RouterName *string `json:"routerName,omitempty" tf:"router_name,omitempty"`
 }
 
@@ -141,9 +143,10 @@ type Link2Observation struct {
 	// The connector type of the Express Route Port Link.
 	ConnectorType *string `json:"connectorType,omitempty" tf:"connector_type,omitempty"`
 
+	// The ID of this Express Route Port Link.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name which should be used for this Express Route Port. Changing this forces a new Express Route Port to be created.
+	// The interface name of the Azure router associated with the Express Route Port Link.
 	InterfaceName *string `json:"interfaceName,omitempty" tf:"interface_name,omitempty"`
 
 	// The ID that maps from the Express Route Port Link to the patch panel port.
@@ -152,7 +155,7 @@ type Link2Observation struct {
 	// The ID that maps from the patch panel port to the rack.
 	RackID *string `json:"rackId,omitempty" tf:"rack_id,omitempty"`
 
-	// The name which should be used for this Express Route Port. Changing this forces a new Express Route Port to be created.
+	// The name of the Azure router associated with the Express Route Port Link.
 	RouterName *string `json:"routerName,omitempty" tf:"router_name,omitempty"`
 }
 

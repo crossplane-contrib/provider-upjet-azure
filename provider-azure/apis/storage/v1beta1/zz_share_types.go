@@ -47,7 +47,7 @@ type AccessPolicyParameters struct {
 
 type ShareObservation struct {
 
-	// The ID which should be used for this Shared Identifier.
+	// The ID of the File Share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Resource Manager ID of this File Share.
@@ -63,6 +63,7 @@ type ShareParameters struct {
 	// +kubebuilder:validation:Optional
 	ACL []ACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// The access tier of the File Share. Possible values are Hot, Cool and TransactionOptimized.
 	// +kubebuilder:validation:Optional
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 

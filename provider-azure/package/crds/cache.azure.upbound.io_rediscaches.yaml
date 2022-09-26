@@ -596,8 +596,7 @@ spec:
               atProvider:
                 properties:
                   hostname:
-                    description: The name of the Redis instance. Changing this forces
-                      a new resource to be created.
+                    description: The Hostname of the Redis Instance
                     type: string
                   id:
                     description: The Route ID.

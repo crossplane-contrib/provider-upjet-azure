@@ -169,7 +169,7 @@ type LogAnalyticsWorkspaceParameters struct {
 	// +kubebuilder:validation:Required
 	FirewallLocation *string `json:"firewallLocation" tf:"firewall_location,omitempty"`
 
-	// The ID of the Log Analytics Workspace that the Firewalls associated with this Firewall Policy will send their logs to when their locations match the firewall_location.
+	// 12-digit number (id) which identifies your signature.
 	// +kubebuilder:validation:Required
 	ID *string `json:"id" tf:"id,omitempty"`
 }

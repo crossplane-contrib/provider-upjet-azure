@@ -203,6 +203,7 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The initial number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000 and between min_count and max_count.
 	// +kubebuilder:validation:Optional
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
@@ -251,6 +252,7 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
 
+	// The Kubernetes Managed Cluster ID.
 	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
@@ -340,10 +342,10 @@ type IngressApplicationGatewayIdentityObservation struct {
 	// The Client ID for the Service Principal.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically.
+	// The Object ID of the user-defined Managed Identity used by the OMS Agents.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
-	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically.
+	// The ID of the User Assigned Identity used by the OMS Agents.
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
@@ -355,7 +357,7 @@ type IngressApplicationGatewayObservation struct {
 	// The ID of the Application Gateway associated with the ingress controller deployed to this Kubernetes Cluster.
 	EffectiveGatewayID *string `json:"effectiveGatewayId,omitempty" tf:"effective_gateway_id,omitempty"`
 
-	// An identity block as defined below. One of either identity or service_principal must be specified.
+	// An ingress_application_gateway_identity block is exported. The exported attributes are defined below.
 	IngressApplicationGatewayIdentity []IngressApplicationGatewayIdentityObservation `json:"ingressApplicationGatewayIdentity,omitempty" tf:"ingress_application_gateway_identity,omitempty"`
 }
 
@@ -390,7 +392,7 @@ type IngressApplicationGatewayParameters struct {
 
 type KeyVaultSecretsProviderObservation struct {
 
-	// An identity block as defined below. One of either identity or service_principal must be specified.
+	// An secret_identity block is exported. The exported attributes are defined below.
 	SecretIdentity []SecretIdentityObservation `json:"secretIdentity,omitempty" tf:"secret_identity,omitempty"`
 }
 
@@ -410,7 +412,7 @@ type KubeAdminConfigObservation struct {
 	// The Kubernetes cluster server host.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created.
+	// A username used to authenticate to the Kubernetes cluster.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -422,7 +424,7 @@ type KubeConfigObservation struct {
 	// The Kubernetes cluster server host.
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
-	// The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created.
+	// A username used to authenticate to the Kubernetes cluster.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -498,7 +500,7 @@ type KubernetesClusterObservation struct {
 	// The FQDN of the Azure Kubernetes Managed Cluster.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
-	// The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created.
+	// The Zone Name of the HTTP Application Routing.
 	HTTPApplicationRoutingZoneName *string `json:"httpApplicationRoutingZoneName,omitempty" tf:"http_application_routing_zone_name,omitempty"`
 
 	// The Kubernetes Managed Cluster ID.
@@ -631,7 +633,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkProfile []NetworkProfileParameters `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
 
-	// The name of the Resource Group where the Kubernetes Nodes should exist. Changing this forces a new resource to be created.
+	// The auto-generated Resource Group which contains the resources for this Managed Kubernetes Cluster.
 	// +kubebuilder:validation:Optional
 	NodeResourceGroup *string `json:"nodeResourceGroup,omitempty" tf:"node_resource_group,omitempty"`
 
@@ -744,7 +746,7 @@ type LoadBalancerProfileObservation struct {
 
 type LoadBalancerProfileParameters struct {
 
-	// Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between 4 and 120 inclusive. Defaults to 30.
+	// Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between 4 and 120 inclusive. Defaults to 4.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
@@ -884,13 +886,13 @@ type NotAllowedParameters struct {
 
 type OmsAgentIdentityObservation struct {
 
-	// The Client ID for the Service Principal.
+	// The Client ID of the user-defined Managed Identity used by the OMS Agents.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically.
+	// The Object ID of the user-defined Managed Identity used by the OMS Agents.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
-	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically.
+	// The ID of the User Assigned Identity used by the OMS Agents.
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
@@ -899,7 +901,7 @@ type OmsAgentIdentityParameters struct {
 
 type OmsAgentObservation struct {
 
-	// An identity block as defined below. One of either identity or service_principal must be specified.
+	// An oms_agent_identity block is exported. The exported attributes are defined below.
 	OmsAgentIdentity []OmsAgentIdentityObservation `json:"omsAgentIdentity,omitempty" tf:"oms_agent_identity,omitempty"`
 }
 
@@ -922,13 +924,13 @@ type SSHKeyParameters struct {
 
 type SecretIdentityObservation struct {
 
-	// The Client ID for the Service Principal.
+	// The Client ID of the user-defined Managed Identity used by the Secret Provider.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically.
+	// The Object ID of the user-defined Managed Identity used by the Secret Provider.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
-	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically.
+	// The ID of the User Assigned Identity used by the Secret Provider.
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 

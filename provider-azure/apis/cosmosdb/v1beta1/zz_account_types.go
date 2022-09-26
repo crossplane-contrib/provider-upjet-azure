@@ -118,6 +118,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalAuthenticationDisabled *bool `json:"localAuthenticationDisabled,omitempty" tf:"local_authentication_disabled,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
@@ -204,7 +205,7 @@ type CapabilitiesObservation struct {
 
 type CapabilitiesParameters struct {
 
-	// The database name for the restore request. Changing this forces a new resource to be created.
+	// Specifies the name of the CosmosDB Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -272,7 +273,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	CollectionNames []*string `json:"collectionNames,omitempty" tf:"collection_names,omitempty"`
 
-	// The database name for the restore request. Changing this forces a new resource to be created.
+	// Specifies the name of the CosmosDB Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -289,6 +290,7 @@ type GeoLocationParameters struct {
 	// +kubebuilder:validation:Required
 	FailoverPriority *float64 `json:"failoverPriority" tf:"failover_priority,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
@@ -299,10 +301,10 @@ type GeoLocationParameters struct {
 
 type IdentityObservation struct {
 
-	// The ID of the virtual network subnet.
+	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The ID of the virtual network subnet.
+	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 

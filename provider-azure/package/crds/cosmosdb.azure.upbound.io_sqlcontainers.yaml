@@ -286,7 +286,10 @@ spec:
                                       type: string
                                     path:
                                       description: Path for which the indexing behaviour
-                                        applies to.
+                                        applies to. According to the service design,
+                                        all spatial types including LineString, MultiPolygon,
+                                        Point, and Polygon will be applied to the
+                                        path.
                                       type: string
                                   required:
                                   - order
@@ -304,7 +307,10 @@ spec:
                           items:
                             properties:
                               path:
-                                description: Path that is excluded from indexing.
+                                description: Path for which the indexing behaviour
+                                  applies to. According to the service design, all
+                                  spatial types including LineString, MultiPolygon,
+                                  Point, and Polygon will be applied to the path.
                                 type: string
                             required:
                             - path
@@ -318,7 +324,9 @@ spec:
                             properties:
                               path:
                                 description: Path for which the indexing behaviour
-                                  applies to.
+                                  applies to. According to the service design, all
+                                  spatial types including LineString, MultiPolygon,
+                                  Point, and Polygon will be applied to the path.
                                 type: string
                             required:
                             - path

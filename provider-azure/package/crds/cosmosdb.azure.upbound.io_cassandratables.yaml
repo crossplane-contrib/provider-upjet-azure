@@ -172,7 +172,7 @@ spec:
                           items:
                             properties:
                               name:
-                                description: Name of the cluster key to be created.
+                                description: Name of the column to be created.
                                 type: string
                               orderBy:
                                 description: Order of the key. Currently supported
@@ -204,7 +204,7 @@ spec:
                           items:
                             properties:
                               name:
-                                description: Name of the column to partition by.
+                                description: Name of the column to be created.
                                 type: string
                             required:
                             - name

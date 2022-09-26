@@ -94,11 +94,11 @@ type DimensionObservation struct {
 
 type DimensionParameters struct {
 
-	// One of the dimension names.
+	// The name of the Metric Alert. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The dimension operator. Possible values are Include, Exclude and StartsWith.
+	// The criteria operator. Possible values are LessThan, GreaterThan and GreaterOrLessThan.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
@@ -112,11 +112,11 @@ type DynamicCriteriaDimensionObservation struct {
 
 type DynamicCriteriaDimensionParameters struct {
 
-	// One of the dimension names.
+	// The name of the Metric Alert. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The dimension operator. Possible values are Include, Exclude and StartsWith.
+	// The criteria operator. Possible values are LessThan, GreaterThan and GreaterOrLessThan.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 

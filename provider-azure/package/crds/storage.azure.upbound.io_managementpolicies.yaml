@@ -65,6 +65,7 @@ spec:
               forProvider:
                 properties:
                   rule:
+                    description: A rule block as documented below.
                     items:
                       properties:
                         actions:
@@ -116,8 +117,14 @@ spec:
                                 items:
                                   properties:
                                     changeTierToArchiveAfterDaysSinceCreation:
+                                      description: The age in days after creation
+                                        to tier blob snapshot to archive storage.
+                                        Must be between 0 and 99999.
                                       type: number
                                     changeTierToCoolAfterDaysSinceCreation:
+                                      description: The age in days after creation
+                                        to tier blob snapshot to cool storage. Must
+                                        be between 0 and 99999.
                                       type: number
                                     deleteAfterDaysSinceCreationGreaterThan:
                                       description: The age in days after creation
@@ -131,8 +138,14 @@ spec:
                                 items:
                                   properties:
                                     changeTierToArchiveAfterDaysSinceCreation:
+                                      description: The age in days after creation
+                                        to tier blob snapshot to archive storage.
+                                        Must be between 0 and 99999.
                                       type: number
                                     changeTierToCoolAfterDaysSinceCreation:
+                                      description: The age in days after creation
+                                        to tier blob snapshot to cool storage. Must
+                                        be between 0 and 99999.
                                       type: number
                                     deleteAfterDaysSinceCreation:
                                       description: The age in days after creation
@@ -163,6 +176,10 @@ spec:
                                 items:
                                   properties:
                                     name:
+                                      description: A rule name can contain any combination
+                                        of alpha numeric characters. Rule name is
+                                        case-sensitive. It must be unique within a
+                                        policy.
                                       type: string
                                     operation:
                                       description: The comparison operator which is
@@ -189,6 +206,9 @@ spec:
                             type: object
                           type: array
                         name:
+                          description: A rule name can contain any combination of
+                            alpha numeric characters. Rule name is case-sensitive.
+                            It must be unique within a policy.
                           type: string
                       required:
                       - actions

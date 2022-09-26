@@ -108,11 +108,11 @@ type IPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerInboundNATRulesIds []*string `json:"loadBalancerInboundNatRulesIds,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty"`
 
-	// The Name which should be used for this IP Configuration.
+	// The Name of the Public IP Address Configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Is this the Primary IP Configuration for this Network Interface? Defaults to false.
+	// Is this the Primary IP Configuration?
 	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
 
@@ -134,7 +134,7 @@ type IPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// The Internet Protocol Version which should be used for this IP Configuration. Possible values are IPv4 and IPv6. Defaults to IPv4.
+	// Specifies the version of the image used to create the virtual machines.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -200,7 +200,7 @@ type LinuxVirtualMachineScaleSetDataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
-	// The ID of the Disk Encryption Set which should be used to encrypt this Data Disk.
+	// The ID of the Disk Encryption Set which should be used to encrypt this OS Disk. Conflicts with secure_vm_disk_encryption_set_id.
 	// +kubebuilder:validation:Optional
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
@@ -222,7 +222,7 @@ type LinuxVirtualMachineScaleSetDataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
 
-	// Should Write Accelerator be enabled for this Data Disk? Defaults to false.
+	// Should Write Accelerator be Enabled for this OS Disk? Defaults to false.
 	// +kubebuilder:validation:Optional
 	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
 }
@@ -543,7 +543,7 @@ type LinuxVirtualMachineScaleSetSourceImageReferenceParameters struct {
 	// +kubebuilder:validation:Required
 	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
-	// The Virtual Machine SKU for the Scale Set, such as Standard_F2.
+	// Specifies the SKU of the image used to create the virtual machines.
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 

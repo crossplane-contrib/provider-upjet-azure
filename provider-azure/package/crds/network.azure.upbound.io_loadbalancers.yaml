@@ -70,23 +70,32 @@ spec:
                       Load Balancer to be created.
                     type: string
                   frontendIpConfiguration:
+                    description: One or multiple frontend_ip_configuration blocks
+                      as documented below.
                     items:
                       properties:
                         gatewayLoadBalancerFrontendIpConfigurationId:
+                          description: The id of the Frontend IP Configuration of
+                            a Gateway Load Balancer that this Load Balancer points
+                            to.
                           type: string
                         name:
+                          description: Specifies the name of the Load Balancer.
                           type: string
                         privateIpAddress:
+                          description: Private IP Address to assign to the Load Balancer.
                           type: string
                         privateIpAddressAllocation:
-                          description: Specifies the supported Azure Region where
-                            the Load Balancer should be created.
+                          description: The allocation method for the Private IP Address
+                            used by this Load Balancer.
                           type: string
                         privateIpAddressVersion:
                           description: The version of IP that the Private IP Address
                             is. Possible values are IPv4 or IPv6.
                           type: string
                         publicIpAddressId:
+                          description: The ID of a  Public IP Address which is associated
+                            with this Load Balancer.
                           type: string
                         publicIpAddressIdRef:
                           description: Reference to a PublicIP to populate publicIpAddressId.
@@ -165,8 +174,12 @@ spec:
                               type: object
                           type: object
                         publicIpPrefixId:
+                          description: The ID of a Public IP Prefix which is associated
+                            with the Load Balancer.
                           type: string
                         subnetId:
+                          description: The ID of the Subnet which is associated with
+                            the IP Configuration.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet to populate subnetId.
@@ -532,9 +545,12 @@ spec:
               atProvider:
                 properties:
                   frontendIpConfiguration:
+                    description: One or multiple frontend_ip_configuration blocks
+                      as documented below.
                     items:
                       properties:
                         id:
+                          description: The id of the Frontend IP Configuration.
                           type: string
                         inboundNatRules:
                           description: The list of IDs of inbound rules that use this
@@ -557,8 +573,12 @@ spec:
                       type: object
                     type: array
                   id:
+                    description: The Load Balancer ID.
                     type: string
                   privateIpAddress:
+                    description: Private IP Address to assign to the Load Balancer.
+                      The last one and first four IPs in any range are reserved and
+                      cannot be manually assigned.
                     type: string
                   privateIpAddresses:
                     description: The list of private IP address assigned to the load

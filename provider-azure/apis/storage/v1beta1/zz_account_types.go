@@ -18,7 +18,7 @@ type AccountObservation struct {
 	// The ID of the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as defined below..
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -40,7 +40,7 @@ type AccountObservation struct {
 	// The hostname with port if applicable for file storage in the primary location.
 	PrimaryFileHost *string `json:"primaryFileHost,omitempty" tf:"primary_file_host,omitempty"`
 
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// The primary location of the storage account.
 	PrimaryLocation *string `json:"primaryLocation,omitempty" tf:"primary_location,omitempty"`
 
 	// The endpoint URL for queue storage in the primary location.
@@ -79,7 +79,7 @@ type AccountObservation struct {
 	// The hostname with port if applicable for file storage in the secondary location.
 	SecondaryFileHost *string `json:"secondaryFileHost,omitempty" tf:"secondary_file_host,omitempty"`
 
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// The secondary location of the storage account.
 	SecondaryLocation *string `json:"secondaryLocation,omitempty" tf:"secondary_location,omitempty"`
 
 	// The endpoint URL for queue storage in the secondary location.
@@ -152,7 +152,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as defined below..
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -313,7 +313,7 @@ type ContainerDeleteRetentionPolicyObservation struct {
 
 type ContainerDeleteRetentionPolicyParameters struct {
 
-	// Specifies the number of days that the container should be retained, between 1 and 365 days. Defaults to 7.
+	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
@@ -378,7 +378,7 @@ type DeleteRetentionPolicyObservation struct {
 
 type DeleteRetentionPolicyParameters struct {
 
-	// Specifies the number of days that the blob should be retained, between 1 and 365 days. Defaults to 7.
+	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
@@ -388,7 +388,7 @@ type HourMetricsObservation struct {
 
 type HourMetricsParameters struct {
 
-	// Indicates whether hour metrics are enabled for the Queue service. Changing this forces a new resource.
+	// Indicates whether minute metrics are enabled for the Queue service. Changing this forces a new resource.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -430,11 +430,11 @@ type LoggingObservation struct {
 
 type LoggingParameters struct {
 
-	// Indicates whether all delete requests should be logged. Changing this forces a new resource.
+	// (Defaults to 60 minutes) Used when deleting the Storage Account.
 	// +kubebuilder:validation:Required
 	Delete *bool `json:"delete" tf:"delete,omitempty"`
 
-	// Indicates whether all read requests should be logged. Changing this forces a new resource.
+	// (Defaults to 5 minutes) Used when retrieving the Storage Account.
 	// +kubebuilder:validation:Required
 	Read *bool `json:"read" tf:"read,omitempty"`
 

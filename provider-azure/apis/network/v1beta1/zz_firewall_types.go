@@ -14,6 +14,8 @@ import (
 )
 
 type FirewallIPConfigurationObservation struct {
+
+	// The Private IP address of the Azure Firewall.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 }
 
@@ -135,6 +137,8 @@ type FirewallParameters struct {
 }
 
 type ManagementIPConfigurationObservation struct {
+
+	// The private IP address associated with the Firewall.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 }
 
@@ -164,6 +168,8 @@ type ManagementIPConfigurationParameters struct {
 }
 
 type VirtualHubObservation struct {
+
+	// The private IP address associated with the Firewall.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// The list of public IP addresses associated with the Firewall.

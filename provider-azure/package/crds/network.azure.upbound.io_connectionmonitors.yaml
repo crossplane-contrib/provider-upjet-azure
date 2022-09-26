@@ -103,9 +103,8 @@ spec:
                                   type: object
                                 type: array
                               type:
-                                description: The behaviour type of this endpoint filter.
-                                  Currently the only allowed value is Include. Defaults
-                                  to Include.
+                                description: The type of items included in the filter.
+                                  Possible values are AgentAddress. Defaults to AgentAddress.
                                 type: string
                             type: object
                           type: array
@@ -246,7 +245,7 @@ spec:
                                   accepts the absolute path.
                                 type: string
                               port:
-                                description: The port for the HTTP connection.
+                                description: The port for the TCP connection.
                                 type: number
                               preferHttps:
                                 description: Should HTTPS be preferred over HTTP in
@@ -258,7 +257,8 @@ spec:
                                 items:
                                   properties:
                                     name:
-                                      description: The name of the HTTP header.
+                                      description: The name of the test group for
+                                        the Network Connection Monitor.
                                       type: string
                                     value:
                                       description: The value of the HTTP header.

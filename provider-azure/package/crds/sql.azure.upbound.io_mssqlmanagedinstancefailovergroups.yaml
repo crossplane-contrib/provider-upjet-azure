@@ -437,14 +437,17 @@ spec:
                       properties:
                         location:
                           description: The Azure Region where the Managed Instance
-                            Failover Group should exist. Changing this forces a new
-                            resource to be created.
+                            Failover Group partner exists.
                           type: string
                         role:
+                          description: The partner replication role of the Managed
+                            Instance Failover Group.
                           type: string
                       type: object
                     type: array
                   role:
+                    description: The local replication role of the Managed Instance
+                      Failover Group.
                     type: string
                 type: object
               conditions:

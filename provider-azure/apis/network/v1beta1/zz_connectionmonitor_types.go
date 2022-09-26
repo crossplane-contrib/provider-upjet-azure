@@ -111,7 +111,7 @@ type FilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Item []ItemParameters `json:"item,omitempty" tf:"item,omitempty"`
 
-	// The behaviour type of this endpoint filter. Currently the only allowed value is Include. Defaults to Include.
+	// The type of items included in the filter. Possible values are AgentAddress. Defaults to AgentAddress.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -129,7 +129,7 @@ type HTTPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The port for the HTTP connection.
+	// The port for the TCP connection.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -151,7 +151,7 @@ type HTTPConfigurationRequestHeaderObservation struct {
 
 type HTTPConfigurationRequestHeaderParameters struct {
 
-	// The name of the HTTP header.
+	// The name of the test group for the Network Connection Monitor.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

@@ -665,6 +665,7 @@ spec:
                     items:
                       properties:
                         privateIpAddress:
+                          description: The Private IP address of the Azure Firewall.
                           type: string
                       type: object
                     type: array
@@ -676,6 +677,8 @@ spec:
                     items:
                       properties:
                         privateIpAddress:
+                          description: The private IP address associated with the
+                            Firewall.
                           type: string
                       type: object
                     type: array
@@ -684,6 +687,8 @@ spec:
                     items:
                       properties:
                         privateIpAddress:
+                          description: The private IP address associated with the
+                            Firewall.
                           type: string
                         publicIpAddresses:
                           description: The list of public IP addresses associated

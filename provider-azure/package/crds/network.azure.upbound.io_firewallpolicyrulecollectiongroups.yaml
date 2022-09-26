@@ -92,6 +92,8 @@ spec:
                                   for this rule.
                                 type: string
                               destinationAddresses:
+                                description: Specifies a list of destination IP addresses
+                                  (including CIDR and *).
                                 items:
                                   type: string
                                 type: array
@@ -102,6 +104,8 @@ spec:
                                   type: string
                                 type: array
                               destinationFqdns:
+                                description: Specifies a list of destination FQDNs.
+                                  Conflicts with destination_urls.
                                 items:
                                   type: string
                                 type: array
@@ -117,6 +121,9 @@ spec:
                                   rule.
                                 type: string
                               protocols:
+                                description: One or more protocols blocks as defined
+                                  below. Not required when specifying destination_fqdn_tags,
+                                  but required when specifying destination_fqdns.
                                 items:
                                   properties:
                                     port:
@@ -272,6 +279,7 @@ spec:
                                   CIDR).
                                 type: string
                               destinationPorts:
+                                description: Specifies a list of destination ports.
                                 items:
                                   type: string
                                 type: array
@@ -280,6 +288,9 @@ spec:
                                   rule.
                                 type: string
                               protocols:
+                                description: One or more protocols blocks as defined
+                                  below. Not required when specifying destination_fqdn_tags,
+                                  but required when specifying destination_fqdns.
                                 items:
                                   type: string
                                 type: array
@@ -339,10 +350,14 @@ spec:
                           items:
                             properties:
                               destinationAddresses:
+                                description: Specifies a list of destination IP addresses
+                                  (including CIDR and *).
                                 items:
                                   type: string
                                 type: array
                               destinationFqdns:
+                                description: Specifies a list of destination FQDNs.
+                                  Conflicts with destination_urls.
                                 items:
                                   type: string
                                 type: array
@@ -352,6 +367,7 @@ spec:
                                   type: string
                                 type: array
                               destinationPorts:
+                                description: Specifies a list of destination ports.
                                 items:
                                   type: string
                                 type: array
@@ -360,6 +376,9 @@ spec:
                                   rule.
                                 type: string
                               protocols:
+                                description: One or more protocols blocks as defined
+                                  below. Not required when specifying destination_fqdn_tags,
+                                  but required when specifying destination_fqdns.
                                 items:
                                   type: string
                                 type: array

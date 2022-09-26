@@ -151,6 +151,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// The initial number of nodes which should exist within this Node Pool. Valid values are between 0 and 1000 (inclusive) for user pools and between 1 and 1000 (inclusive) for system pools and must be a value in the range min_count - max_count.
 	// +kubebuilder:validation:Optional
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 

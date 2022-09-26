@@ -590,6 +590,9 @@ spec:
                             to be created.
                           type: string
                         nodeCount:
+                          description: The initial number of nodes which should exist
+                            in this Node Pool. If specified this must be between 1
+                            and 1000 and between min_count and max_count.
                           type: number
                         nodeLabels:
                           additionalProperties:
@@ -720,6 +723,7 @@ spec:
                               type: object
                           type: object
                         proximityPlacementGroupId:
+                          description: The Kubernetes Managed Cluster ID.
                           type: string
                         tags:
                           additionalProperties:
@@ -1201,7 +1205,7 @@ spec:
                               idleTimeoutInMinutes:
                                 description: Desired outbound flow idle timeout in
                                   minutes for the cluster load balancer. Must be between
-                                  4 and 120 inclusive. Defaults to 30.
+                                  4 and 120 inclusive. Defaults to 4.
                                 type: number
                               managedOutboundIpCount:
                                 description: Count of desired managed outbound IPs
@@ -1288,9 +1292,8 @@ spec:
                       type: object
                     type: array
                   nodeResourceGroup:
-                    description: The name of the Resource Group where the Kubernetes
-                      Nodes should exist. Changing this forces a new resource to be
-                      created.
+                    description: The auto-generated Resource Group which contains
+                      the resources for this Managed Kubernetes Cluster.
                     type: string
                   oidcIssuerEnabled:
                     description: Enable or Disable the OIDC issuer URL
@@ -1678,8 +1681,7 @@ spec:
                     description: The FQDN of the Azure Kubernetes Managed Cluster.
                     type: string
                   httpApplicationRoutingZoneName:
-                    description: The name of the Managed Kubernetes Cluster to create.
-                      Changing this forces a new resource to be created.
+                    description: The Zone Name of the HTTP Application Routing.
                     type: string
                   id:
                     description: The Kubernetes Managed Cluster ID.
@@ -1709,8 +1711,8 @@ spec:
                             Cluster.
                           type: string
                         ingressApplicationGatewayIdentity:
-                          description: An identity block as defined below. One of
-                            either identity or service_principal must be specified.
+                          description: An ingress_application_gateway_identity block
+                            is exported. The exported attributes are defined below.
                           items:
                             properties:
                               clientId:
@@ -1718,13 +1720,11 @@ spec:
                                 type: string
                               objectId:
                                 description: The Object ID of the user-defined Managed
-                                  Identity assigned to the Kubelets.If not specified
-                                  a Managed Identity is created automatically.
+                                  Identity used by the OMS Agents.
                                 type: string
                               userAssignedIdentityId:
                                 description: The ID of the User Assigned Identity
-                                  assigned to the Kubelets. If not specified a Managed
-                                  Identity is created automatically.
+                                  used by the OMS Agents.
                                 type: string
                             type: object
                           type: array
@@ -1737,22 +1737,21 @@ spec:
                     items:
                       properties:
                         secretIdentity:
-                          description: An identity block as defined below. One of
-                            either identity or service_principal must be specified.
+                          description: An secret_identity block is exported. The exported
+                            attributes are defined below.
                           items:
                             properties:
                               clientId:
-                                description: The Client ID for the Service Principal.
+                                description: The Client ID of the user-defined Managed
+                                  Identity used by the Secret Provider.
                                 type: string
                               objectId:
                                 description: The Object ID of the user-defined Managed
-                                  Identity assigned to the Kubelets.If not specified
-                                  a Managed Identity is created automatically.
+                                  Identity used by the Secret Provider.
                                 type: string
                               userAssignedIdentityId:
                                 description: The ID of the User Assigned Identity
-                                  assigned to the Kubelets. If not specified a Managed
-                                  Identity is created automatically.
+                                  used by the Secret Provider.
                                 type: string
                             type: object
                           type: array
@@ -1799,22 +1798,21 @@ spec:
                     items:
                       properties:
                         omsAgentIdentity:
-                          description: An identity block as defined below. One of
-                            either identity or service_principal must be specified.
+                          description: An oms_agent_identity block is exported. The
+                            exported attributes are defined below.
                           items:
                             properties:
                               clientId:
-                                description: The Client ID for the Service Principal.
+                                description: The Client ID of the user-defined Managed
+                                  Identity used by the OMS Agents.
                                 type: string
                               objectId:
                                 description: The Object ID of the user-defined Managed
-                                  Identity assigned to the Kubelets.If not specified
-                                  a Managed Identity is created automatically.
+                                  Identity used by the OMS Agents.
                                 type: string
                               userAssignedIdentityId:
                                 description: The ID of the User Assigned Identity
-                                  assigned to the Kubelets. If not specified a Managed
-                                  Identity is created automatically.
+                                  used by the OMS Agents.
                                 type: string
                             type: object
                           type: array

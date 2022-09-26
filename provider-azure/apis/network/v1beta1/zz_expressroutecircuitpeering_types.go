@@ -55,6 +55,7 @@ type ExpressRouteCircuitPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
 
+	// A /30 subnet for the primary link.
 	// +kubebuilder:validation:Required
 	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix" tf:"primary_peer_address_prefix,omitempty"`
 
@@ -75,6 +76,7 @@ type ExpressRouteCircuitPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
 
+	// A /30 subnet for the secondary link.
 	// +kubebuilder:validation:Required
 	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix" tf:"secondary_peer_address_prefix,omitempty"`
 
@@ -96,6 +98,7 @@ type IPv6Parameters struct {
 	// +kubebuilder:validation:Required
 	MicrosoftPeering []MicrosoftPeeringParameters `json:"microsoftPeering" tf:"microsoft_peering,omitempty"`
 
+	// A subnet for the primary link.
 	// +kubebuilder:validation:Required
 	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix" tf:"primary_peer_address_prefix,omitempty"`
 
@@ -103,6 +106,7 @@ type IPv6Parameters struct {
 	// +kubebuilder:validation:Optional
 	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
 
+	// A subnet for the secondary link.
 	// +kubebuilder:validation:Required
 	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix" tf:"secondary_peer_address_prefix,omitempty"`
 }
@@ -120,6 +124,7 @@ type MicrosoftPeeringConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 
+	// The Routing Registry against which the AS number and prefixes are registered.  For example:  ARIN, RIPE, AFRINIC etc.
 	// +kubebuilder:validation:Optional
 	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }
@@ -137,6 +142,7 @@ type MicrosoftPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 
+	// The Routing Registry against which the AS number and prefixes are registered.  For example:  ARIN, RIPE, AFRINIC etc.
 	// +kubebuilder:validation:Optional
 	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }

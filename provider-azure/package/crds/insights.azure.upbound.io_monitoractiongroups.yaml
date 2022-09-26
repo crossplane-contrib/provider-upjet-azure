@@ -69,11 +69,14 @@ spec:
                     items:
                       properties:
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         roleId:
                           description: The arm role id.
                           type: string
                         useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
                           type: boolean
                       required:
                       - name
@@ -93,6 +96,8 @@ spec:
                           description: Indicates whether this instance is global runbook.
                           type: boolean
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         runbookName:
                           description: The name for this runbook.
@@ -101,6 +106,7 @@ spec:
                           description: The URI where webhooks should be sent.
                           type: string
                         useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
                           type: boolean
                         webhookResourceId:
                           description: The resource id for webhook linked to this
@@ -121,8 +127,13 @@ spec:
                     items:
                       properties:
                         emailAddress:
+                          description: The email address of the user signed into the
+                            mobile app who will receive push notifications from this
+                            receiver.
                           type: string
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                       required:
                       - emailAddress
@@ -145,8 +156,11 @@ spec:
                             to.
                           type: string
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
                           type: boolean
                       required:
                       - functionAppResourceId
@@ -160,10 +174,16 @@ spec:
                     items:
                       properties:
                         emailAddress:
+                          description: The email address of the user signed into the
+                            mobile app who will receive push notifications from this
+                            receiver.
                           type: string
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
                           type: boolean
                       required:
                       - emailAddress
@@ -184,11 +204,15 @@ spec:
                           description: The resource ID of the respective Event Hub.
                           type: string
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         tenantId:
-                          description: The ID of the Action Group.
+                          description: The Tenant ID for the subscription containing
+                            this Event Hub.
                           type: string
                         useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
                           type: boolean
                       required:
                       - eventHubId
@@ -204,6 +228,8 @@ spec:
                             connection.
                           type: string
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         region:
                           description: The region of the workspace.
@@ -235,11 +261,14 @@ spec:
                           description: The callback url where HTTP request sent to.
                           type: string
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         resourceId:
                           description: The Azure resource ID of the logic app.
                           type: string
                         useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
                           type: boolean
                       required:
                       - callbackUrl
@@ -335,10 +364,14 @@ spec:
                     items:
                       properties:
                         countryCode:
+                          description: The country code of the SMS receiver.
                           type: string
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         phoneNumber:
+                          description: The phone number of the SMS receiver.
                           type: string
                       required:
                       - countryCode
@@ -356,10 +389,14 @@ spec:
                     items:
                       properties:
                         countryCode:
+                          description: The country code of the SMS receiver.
                           type: string
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         phoneNumber:
+                          description: The phone number of the SMS receiver.
                           type: string
                       required:
                       - countryCode
@@ -383,18 +420,22 @@ spec:
                                   AAD auth.
                                 type: string
                               tenantId:
-                                description: The ID of the Action Group.
+                                description: The Tenant ID for the subscription containing
+                                  this Event Hub.
                                 type: string
                             required:
                             - objectId
                             type: object
                           type: array
                         name:
+                          description: The name of the Action Group. Changing this
+                            forces a new resource to be created.
                           type: string
                         serviceUri:
                           description: The URI where webhooks should be sent.
                           type: string
                         useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
                           type: boolean
                       required:
                       - name

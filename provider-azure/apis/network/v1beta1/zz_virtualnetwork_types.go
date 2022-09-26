@@ -32,7 +32,7 @@ type VirtualNetworkObservation struct {
 	// The GUID of the virtual network.
 	GUID *string `json:"guid,omitempty" tf:"guid,omitempty"`
 
-	// The ID of DDoS Protection Plan.
+	// The virtual NetworkConfiguration ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Can be specified multiple times to define multiple subnets. Each subnet block supports fields documented below.
@@ -92,10 +92,10 @@ type VirtualNetworkSubnetObservation struct {
 	// The address prefix to use for the subnet.
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
 
-	// The ID of DDoS Protection Plan.
+	// The ID of this subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the virtual network. Changing this forces a new resource to be created.
+	// The name of the subnet.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Network Security Group to associate with the subnet. (Referenced by id, ie. azurerm_network_security_group.example.id)

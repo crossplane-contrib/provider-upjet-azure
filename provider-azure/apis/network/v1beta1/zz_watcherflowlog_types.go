@@ -22,6 +22,7 @@ type RetentionPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Days *float64 `json:"days" tf:"days,omitempty"`
 
+	// Should Network Flow Logging be Enabled?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
@@ -31,6 +32,7 @@ type TrafficAnalyticsObservation struct {
 
 type TrafficAnalyticsParameters struct {
 
+	// Should Network Flow Logging be Enabled?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -79,6 +81,7 @@ type WatcherFlowLogObservation struct {
 
 type WatcherFlowLogParameters struct {
 
+	// Should Network Flow Logging be Enabled?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -126,6 +129,7 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A retention_policy block as documented below.
 	// +kubebuilder:validation:Required
 	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy" tf:"retention_policy,omitempty"`
 
@@ -147,6 +151,7 @@ type WatcherFlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// A traffic_analytics block as documented below.
 	// +kubebuilder:validation:Optional
 	TrafficAnalytics []TrafficAnalyticsParameters `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
 

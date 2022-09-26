@@ -18,6 +18,7 @@ type AceObservation struct {
 
 type AceParameters struct {
 
+	// Specifies the Object ID of the Azure Active Directory User or Group that the entry relates to. Only valid for user or group entries.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -35,6 +36,8 @@ type AceParameters struct {
 }
 
 type DataLakeGen2FileSystemObservation struct {
+
+	// The ID of the Data Lake Gen2 File System.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

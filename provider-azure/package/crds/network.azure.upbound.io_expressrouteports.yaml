@@ -423,6 +423,7 @@ spec:
                     description: The resource GUID of the Express Route Port.
                     type: string
                   id:
+                    description: The ID of the Express Route Port.
                     type: string
                   link1:
                     description: A list of link blocks as defined below.
@@ -433,11 +434,11 @@ spec:
                             Link.
                           type: string
                         id:
+                          description: The ID of this Express Route Port Link.
                           type: string
                         interfaceName:
-                          description: The name which should be used for this Express
-                            Route Port. Changing this forces a new Express Route Port
-                            to be created.
+                          description: The interface name of the Azure router associated
+                            with the Express Route Port Link.
                           type: string
                         patchPanelId:
                           description: The ID that maps from the Express Route Port
@@ -448,9 +449,8 @@ spec:
                             to the rack.
                           type: string
                         routerName:
-                          description: The name which should be used for this Express
-                            Route Port. Changing this forces a new Express Route Port
-                            to be created.
+                          description: The name of the Azure router associated with
+                            the Express Route Port Link.
                           type: string
                       type: object
                     type: array
@@ -463,11 +463,11 @@ spec:
                             Link.
                           type: string
                         id:
+                          description: The ID of this Express Route Port Link.
                           type: string
                         interfaceName:
-                          description: The name which should be used for this Express
-                            Route Port. Changing this forces a new Express Route Port
-                            to be created.
+                          description: The interface name of the Azure router associated
+                            with the Express Route Port Link.
                           type: string
                         patchPanelId:
                           description: The ID that maps from the Express Route Port
@@ -478,9 +478,8 @@ spec:
                             to the rack.
                           type: string
                         routerName:
-                          description: The name which should be used for this Express
-                            Route Port. Changing this forces a new Express Route Port
-                            to be created.
+                          description: The name of the Azure router associated with
+                            the Express Route Port Link.
                           type: string
                       type: object
                     type: array

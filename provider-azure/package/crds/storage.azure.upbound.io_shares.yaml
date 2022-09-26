@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   accessTier:
+                    description: The access tier of the File Share. Possible values
+                      are Hot, Cool and TransactionOptimized.
                     type: string
                   acl:
                     description: One or more acl blocks as defined below.
@@ -375,7 +377,7 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID which should be used for this Shared Identifier.
+                    description: The ID of the File Share.
                     type: string
                   resourceManagerId:
                     description: The Resource Manager ID of this File Share.

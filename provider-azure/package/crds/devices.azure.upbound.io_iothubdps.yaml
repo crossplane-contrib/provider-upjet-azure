@@ -423,9 +423,8 @@ spec:
               atProvider:
                 properties:
                   deviceProvisioningHostName:
-                    description: Specifies the name of the Iot Device Provisioning
-                      Service resource. Changing this forces a new resource to be
-                      created.
+                    description: The device endpoint of the IoT Device Provisioning
+                      Service.
                     type: string
                   id:
                     description: The ID of the IoT Device Provisioning Service.
@@ -444,9 +443,8 @@ spec:
                       type: object
                     type: array
                   serviceOperationsHostName:
-                    description: Specifies the name of the Iot Device Provisioning
-                      Service resource. Changing this forces a new resource to be
-                      created.
+                    description: The service endpoint of the IoT Device Provisioning
+                      Service.
                     type: string
                 type: object
               conditions:

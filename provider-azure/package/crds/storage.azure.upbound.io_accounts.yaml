@@ -152,8 +152,8 @@ spec:
                             properties:
                               days:
                                 description: Specifies the number of days that the
-                                  container should be retained, between 1 and 365
-                                  days. Defaults to 7.
+                                  azurerm_storage_share should be retained, between
+                                  1 and 365 days. Defaults to 7.
                                 type: number
                             type: object
                           type: array
@@ -211,8 +211,8 @@ spec:
                             properties:
                               days:
                                 description: Specifies the number of days that the
-                                  blob should be retained, between 1 and 365 days.
-                                  Defaults to 7.
+                                  azurerm_storage_share should be retained, between
+                                  1 and 365 days. Defaults to 7.
                                 type: number
                             type: object
                           type: array
@@ -271,7 +271,7 @@ spec:
                       for more information. Defaults to true.
                     type: boolean
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as defined below..
                     items:
                       properties:
                         identityIds:
@@ -420,9 +420,9 @@ spec:
                           items:
                             properties:
                               enabled:
-                                description: Indicates whether hour metrics are enabled
-                                  for the Queue service. Changing this forces a new
-                                  resource.
+                                description: Indicates whether minute metrics are
+                                  enabled for the Queue service. Changing this forces
+                                  a new resource.
                                 type: boolean
                               includeApis:
                                 description: Indicates whether metrics should generate
@@ -446,12 +446,12 @@ spec:
                           items:
                             properties:
                               delete:
-                                description: Indicates whether all delete requests
-                                  should be logged. Changing this forces a new resource.
+                                description: (Defaults to 60 minutes) Used when deleting
+                                  the Storage Account.
                                 type: boolean
                               read:
-                                description: Indicates whether all read requests should
-                                  be logged. Changing this forces a new resource.
+                                description: (Defaults to 5 minutes) Used when retrieving
+                                  the Storage Account.
                                 type: boolean
                               retentionPolicyDays:
                                 description: Specifies the number of days that logs
@@ -906,7 +906,7 @@ spec:
                     description: The ID of the Storage Account.
                     type: string
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as defined below..
                     items:
                       properties:
                         principalId:
@@ -943,8 +943,7 @@ spec:
                       in the primary location.
                     type: string
                   primaryLocation:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
+                    description: The primary location of the storage account.
                     type: string
                   primaryQueueEndpoint:
                     description: The endpoint URL for queue storage in the primary
@@ -994,8 +993,7 @@ spec:
                       in the secondary location.
                     type: string
                   secondaryLocation:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
+                    description: The secondary location of the storage account.
                     type: string
                   secondaryQueueEndpoint:
                     description: The endpoint URL for queue storage in the secondary
