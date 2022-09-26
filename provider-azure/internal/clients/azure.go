@@ -3,15 +3,15 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"strings"
 
+	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/upbound/upjet/pkg/terraform"
-
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
 	"github.com/upbound/official-providers/provider-azure/apis/v1beta1"
 )
@@ -101,6 +101,7 @@ func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup
 	if err != nil {
 		return errors.Wrap(err, errExtractCredentials)
 	}
+	data = []byte(strings.TrimSpace(string(data)))
 	azureCreds := map[string]string{}
 	if err := json.Unmarshal(data, &azureCreds); err != nil {
 		return errors.Wrap(err, errUnmarshalCredentials)

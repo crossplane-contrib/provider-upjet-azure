@@ -40,30 +40,39 @@ provider-azure   True        True      xpkg.upbound.io/upbound/provider-azure:la
 View the [Provider CRD definition](https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/Provider/v1) to view all available `Provider` options.
 
 ## Configure the provider
-The Azure provider requires credentials for authentication to Azure Cloud. The Azure provider consumes the credentials from a Kubernetes secret object.
+The Azure provider requires credentials for authentication to Azure Cloud. The
+Azure provider consumes the credentials from a Kubernetes secret object.
 
-### Generate a Kubernetes secret
-Generate an [authentication JSON file](https://docs.microsoft.com/en-us/azure/developer/go/azure-sdk-authorization#use-file-based-authentication) with the Azure command-line. Follow the documentation from Microsoft to [Download and install the Azure command-line](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+### Install Azure CLI
 
-### Create an Azure service principal
-Follow the Azure documentation to [find your Subscription ID](https://docs.microsoft.com/en-us/azure/azure-portal/get-subscription-tenant-id) from the Azure Portal.
+Follow the documentation from Microsoft to [download and install the Azure
+command-line](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 
-Log in to the Azure command-line
+Log in to the Azure command-line:
 ```shell
 az login
 ```
 
-Using the Azure command-line and provide your Subscription ID create a service principal and authentication file.
+### Create an Azure service principal
 
-```
-az ad sp create-for-rbac --sdk-auth --role Owner --scopes /subscriptions/<Subscription ID> 
+Follow the Azure documentation to [find your Subscription
+ID](https://docs.microsoft.com/en-us/azure/azure-portal/get-subscription-tenant-id)
+from the Azure Portal.
+
+Using the Azure command-line, provide your Subscription ID to create a  service
+principal and an authentication file.
+
+```shell
+# Replace <Subscription ID> with your subscription ID.
+az ad sp create-for-rbac --sdk-auth --role Owner --scopes /subscriptions/<Subscription ID> \
+  > azure.json
 ```
 
 The command generates a JSON file like this:
 ```json
 {
   "clientId": "5d73973c-1933-4621-9f6a-9642db949768",
-  "clientSecret": "24O8Q~db2DFJ123MBpB25hdESvV3Zy8bfeGYGcSd",
+  "clientSecret": "24O8Q~db2DFJ123MBpB25hdESvV3Zy8cSd",
   "subscriptionId": "c02e2b27-21ef-48e3-96b9-a91305e9e010",
   "tenantId": "7060afec-1db7-4b6f-a44f-82c9c6d8762a",
   "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
@@ -77,7 +86,7 @@ The command generates a JSON file like this:
 
 Use the JSON file to generate a Kubernetes secret.
 
-`kubectl create secret generic azure-secret --from-file=creds=./<JSON file name>`
+`kubectl -n upbound-system create secret generic azure-secret --from-file=creds=./azure.json`
 
 ### Create a ProviderConfig object
 Apply the secret in a `ProviderConfig` Kubernetes configuration file.
@@ -96,4 +105,4 @@ spec:
       key: creds
 ```
 
-**Note:** the `spec.credentials.secretRef.name` must match the `name` in the `kubectl create secret generic <name>` command.
+**Note:** the `spec.credentials.secretRef.name` must match the `name` in the `kubectl -n upbound-system create secret generic <name>` command.
