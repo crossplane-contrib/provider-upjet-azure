@@ -1,3 +1,7 @@
+---
+title: Configuration
+weight: 2
+---
 # Configuration
 
 Install official provider on self-hosted control planes using Universal Crossplane (`UXP`).
