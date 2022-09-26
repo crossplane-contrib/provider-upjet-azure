@@ -1,3 +1,7 @@
+---
+title: Quickstart
+weight: 1
+---
 # Quickstart
 
 This guide walks through the process to install Upbound Universal Crossplane and install the Azure official provider.
