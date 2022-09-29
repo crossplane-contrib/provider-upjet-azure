@@ -52,7 +52,6 @@ import (
 	gremlingraph "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/gremlingraph"
 	mongocollection "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/mongocollection"
 	mongodatabase "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/mongodatabase"
-	notebookworkspace "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/notebookworkspace"
 	sqlcontainer "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqlcontainer"
 	sqldatabase "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqldatabase"
 	sqlfunction "github.com/upbound/official-providers/provider-azure/internal/controller/cosmosdb/sqlfunction"
@@ -318,7 +317,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		gremlingraph.Setup,
 		mongocollection.Setup,
 		mongodatabase.Setup,
-		notebookworkspace.Setup,
 		sqlcontainer.Setup,
 		sqldatabase.Setup,
 		sqlfunction.Setup,

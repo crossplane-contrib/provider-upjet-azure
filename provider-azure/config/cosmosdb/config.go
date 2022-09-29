@@ -45,6 +45,9 @@ func Configure(p *config.Provider) {
 			Type:      "CassandraKeySpace",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"analytical_storage_ttl"},
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_cosmosdb_gremlin_graph", func(r *config.Resource) {
