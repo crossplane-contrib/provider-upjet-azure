@@ -8,9 +8,6 @@ This guide walks through the process to install Upbound Universal Crossplane and
 
 To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfig`, and create a *managed resource* in Azure via Kubernetes.
 
-## Create an Upbound.io user account
-Create an account on [Upbound.io](https://accounts.upbound.io/register). 
-
 <!-- Find detailed instructions in the [account documentation](/getting-started/create-account). -->
 
 ## Create an Upbound.io user account
