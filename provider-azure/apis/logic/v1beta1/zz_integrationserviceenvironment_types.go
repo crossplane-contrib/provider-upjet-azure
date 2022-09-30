@@ -63,8 +63,18 @@ type IntegrationServiceEnvironmentParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of virtual network subnet ids to be used by Integration Service Environment. Exactly four distinct ids to subnets must be provided. Changing this forces a new Integration Service Environment to be created.
-	// +kubebuilder:validation:Required
-	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds" tf:"virtual_network_subnet_ids,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+
+	// References to Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsRefs []v1.Reference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsSelector *v1.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 // IntegrationServiceEnvironmentSpec defines the desired state of IntegrationServiceEnvironment

@@ -34,13 +34,14 @@ metadata:
 spec:
   forProvider:
     displayName: Iot Security Solution
-    iothubIdsRefs:
-    - name: example
+    iothubIdsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     location: West Europe
     name: example-Iot-Security-Solution
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: device
 
 ---
 
@@ -51,15 +52,15 @@ metadata:
     meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-security-iot-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: device
     sku:
-    - capacity: "1"
+    - capacity: 1
       name: S1
 
 ---
@@ -70,11 +71,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: device
+  name: example-security-device-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
-
----
-

@@ -27,8 +27,7 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta1/management
   labels:
     testing.upbound.io/example-name: example
-  #name: example-api-management-${Rand.RFC1123Subdomain}
-  name: example-api-management-123
+  name: example-api-management-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

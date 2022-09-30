@@ -9,8 +9,8 @@ metadata:
 spec:
   forProvider:
     displayName: Iot Security Solution
-    iothubIds:
-    - ${azurerm_iothub.example.id}
+    iothubIdsRefs:
+    - name: example
     location: West Europe
     name: example-Iot-Security-Solution
     resourceGroupNameSelector:

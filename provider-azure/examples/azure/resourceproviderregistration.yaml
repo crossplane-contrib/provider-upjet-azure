@@ -1,0 +1,14 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceProviderRegistration
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Testing of this resource dangerous. It can cause undesired situations."
+    # If Microsoft.PolicyInsights registration has been already done, please add this statement to your example for import.
+    crossplane.io/external-name: /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.PolicyInsights
+    meta.upbound.io/example-id: azure/v1beta1/resourceproviderregistration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: Microsoft.PolicyInsights

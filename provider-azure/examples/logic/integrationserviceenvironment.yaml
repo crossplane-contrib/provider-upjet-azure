@@ -2,6 +2,7 @@ apiVersion: logic.azure.upbound.io/v1beta1
 kind: IntegrationServiceEnvironment
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "Provisioning of this resource takes more than one hour."
     meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: example
@@ -28,10 +29,11 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
     meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-integration-service-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -42,6 +44,7 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
     meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: isesubnet1
@@ -67,6 +70,7 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
     meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: isesubnet2
@@ -88,6 +92,7 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
     meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: isesubnet3
@@ -109,6 +114,7 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
     meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: isesubnet4
@@ -130,6 +136,7 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
     meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
   labels:
     testing.upbound.io/example-name: example
@@ -142,6 +149,3 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

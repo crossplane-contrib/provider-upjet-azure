@@ -1,0 +1,115 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetworkGateway
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs a valid public key."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    activeActive: false
+    enableBgp: false
+    ipConfiguration:
+    - name: vnetGatewayConfig
+      privateIpAddressAllocation: Dynamic
+      publicIpAddressIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Basic
+    type: Vpn
+    vpnClientConfiguration:
+    - addressSpace:
+      - 10.2.0.0/24
+      revokedCertificate:
+      - name: Verizon-Global-Root-CA
+        thumbprint: # Valid thumbprint
+      rootCertificate:
+      - name: DigiCert-Federated-ID-Root-CA
+        publicCertData: # Valid Public Cert
+    vpnType: RouteBased
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of VirtualNetworkGateway."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Dynamic
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of VirtualNetworkGateway."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-vn-gateway
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of VirtualNetworkGateway."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgateway
+    crossplane.io/external-name: GatewaySubnet
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is a dependency of VirtualNetworkGateway."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

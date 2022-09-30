@@ -56,8 +56,18 @@ type IOTSecuritySolutionParameters struct {
 	EventsToExport []*string `json:"eventsToExport,omitempty" tf:"events_to_export,omitempty"`
 
 	// Specifies the IoT Hub resource IDs to which this Iot Security Solution is applied.
-	// +kubebuilder:validation:Required
-	IOTHubIds []*string `json:"iothubIds" tf:"iothub_ids,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)
+	// +kubebuilder:validation:Optional
+	IOTHubIds []*string `json:"iothubIds,omitempty" tf:"iothub_ids,omitempty"`
+
+	// References to IOTHub in devices to populate iothubIds.
+	// +kubebuilder:validation:Optional
+	IOTHubIdsRefs []v1.Reference `json:"iothubIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IOTHub in devices to populate iothubIds.
+	// +kubebuilder:validation:Optional
+	IOTHubIdsSelector *v1.Selector `json:"iothubIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required

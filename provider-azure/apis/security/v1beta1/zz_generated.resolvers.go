@@ -46,7 +46,24 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IOTHubIds),
+		Extract:       resource.ExtractParamPath("id", true),
+		References:    mg.Spec.ForProvider.IOTHubIdsRefs,
+		Selector:      mg.Spec.ForProvider.IOTHubIdsSelector,
+		To: reference.To{
+			List:    &v1beta1.IOTHubList{},
+			Managed: &v1beta1.IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubIds")
+	}
+	mg.Spec.ForProvider.IOTHubIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.IOTHubIdsRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),

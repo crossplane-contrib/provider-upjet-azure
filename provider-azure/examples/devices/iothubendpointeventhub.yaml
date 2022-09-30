@@ -1,0 +1,127 @@
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubEndpointEventHub
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authenticationType: keyBased
+    connectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-eventhub-authorization-rule
+      namespace: upbound-system
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-endpoint
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub-endpoint
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHub
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionCount: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub-endpoint
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: AuthorizationRule
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    listen: false
+    manage: false
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub-endpoint
+    send: true
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-endpoint-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub-endpoint
+    sku: Basic
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
+  labels:
+    testing.upbound.io/example-name: example-endpoint
+  name: example-endpoint-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub-endpoint
+    sku:
+    - capacity: 1
+      name: B1
+    tags:
+      purpose: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointeventhub
+  labels:
+    testing.upbound.io/example-name: example-iothub-endpoint
+  name: example-iothub-endpoint-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

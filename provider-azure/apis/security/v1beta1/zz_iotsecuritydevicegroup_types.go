@@ -61,6 +61,10 @@ type IOTSecurityDeviceGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
+	// Specifies the name of the Device Security Group. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// One or more range_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	RangeRule []RangeRuleParameters `json:"rangeRule,omitempty" tf:"range_rule,omitempty"`
