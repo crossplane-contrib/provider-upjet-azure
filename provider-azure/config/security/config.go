@@ -18,23 +18,27 @@ package security
 
 import (
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
 )
 
 // Configure configures security group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_advanced_threat_protection", func(r *config.Resource) {
-		r.UseAsync = false
 		r.Kind = "AdvancedThreatProtection"
 		delete(r.References, "target_resource_id")
 	})
 
 	p.AddResourceConfigurator("azurerm_iot_security_device_group", func(r *config.Resource) {
-		r.UseAsync = false
 		r.Kind = "IOTSecurityDeviceGroup"
 	})
 
 	p.AddResourceConfigurator("azurerm_iot_security_solution", func(r *config.Resource) {
-		r.UseAsync = false
 		r.Kind = "IOTSecuritySolution"
+
+		r.References["iothub_ids"] = config.Reference{
+			Type:      rconfig.APISPackagePath + "/devices/v1beta1.IOTHub",
+			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)`,
+		}
 	})
 }

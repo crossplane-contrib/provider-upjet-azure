@@ -1,0 +1,56 @@
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: CassandraDatacenter
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is dependent to CassandraCluster that requires manual intervention."
+    meta.upbound.io/example-id: cosmosdb/v1beta1/cassandradatacenter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    availabilityZonesEnabled: false
+    cassandraClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    delegatedManagementSubnetId: ### The ID of the delegated management subnet for this Cassandra Datacenter.
+    diskCount: 4
+    location: West Europe
+    nodeCount: 3
+    skuName: Standard_DS14_v2
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: CassandraCluster
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs valid credentials."
+    meta.upbound.io/example-id: cosmosdb/v1beta1/cassandradatacenter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    defaultAdminPasswordSecretRef:
+      key:  password
+      name: example-secret
+      namespace: upbound-system
+    delegatedManagementSubnetId: ### The ID of the delegated management subnet for this Cassandra Datacenter.
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123

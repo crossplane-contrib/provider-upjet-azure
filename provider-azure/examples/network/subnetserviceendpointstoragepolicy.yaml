@@ -1,0 +1,56 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetServiceEndpointStoragePolicy
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "We need to pass valid service resource ids."
+    meta.upbound.io/example-id: network/v1beta1/subnetserviceendpointstoragepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    definition:
+    - description: definition1
+      name: name1
+      serviceResources:
+      - # Resource id 1 Resource Group
+      - # Resource id 2 Account
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is dependency of SubnetServiceEndpointStoragePolicy."
+    meta.upbound.io/example-id: network/v1beta1/subnetserviceendpointstoragepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-subnet-service
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is dependency of SubnetServiceEndpointStoragePolicy."
+    meta.upbound.io/example-id: network/v1beta1/subnetserviceendpointstoragepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: upbound
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

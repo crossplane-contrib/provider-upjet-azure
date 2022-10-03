@@ -34,6 +34,10 @@ type SQLRoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`

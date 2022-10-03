@@ -88,15 +88,6 @@ func (l *MongoDatabaseList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this NotebookWorkspaceList.
-func (l *NotebookWorkspaceList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this SQLContainerList.
 func (l *SQLContainerList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

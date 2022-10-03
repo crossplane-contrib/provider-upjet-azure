@@ -1,0 +1,155 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetworkGatewayConnection
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource needs valid kubernetes secret."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: onpremise
+  name: onpremise
+spec:
+  forProvider:
+    localNetworkGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: onpremise
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharedKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    type: IPsec
+    virtualNetworkGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: LocalNetworkGateway
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: onpremise
+  name: onpremise
+spec:
+  forProvider:
+    addressSpace:
+    - 10.1.1.0/24
+    gatewayAddress: 168.62.225.23
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Dynamic
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-vng-connection
+spec:
+  forProvider:
+    location: West US
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
+    crossplane.io/external-name: GatewaySubnet
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetworkGateway
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: network/v1beta1/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    activeActive: false
+    enableBgp: false
+    ipConfiguration:
+    - privateIpAddressAllocation: Dynamic
+      publicIpAddressIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Basic
+    type: Vpn
+    vpnType: RouteBased

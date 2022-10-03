@@ -1,0 +1,48 @@
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: SQLRoleAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs a valid scope id."
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sql
+    principalId: # principal-id
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg1
+    roleDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scope: /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: SQLRoleDefinition
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs a valid assignableScopes id(s)."
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sql
+    assignableScopes:
+    - /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}
+    name: example
+    permissions:
+    - dataActions:
+      - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg1
+    type: CustomRole

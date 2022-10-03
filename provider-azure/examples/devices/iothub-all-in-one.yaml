@@ -1,34 +1,4 @@
 apiVersion: devices.azure.upbound.io/v1beta1
-kind: IOTHubEndpointStorageContainer
-metadata:
-  labels:
-    testing.upbound.io/example-name: example
-  annotations:
-    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/608"
-  name: example
-spec:
-  forProvider:
-    batchFrequencyInSeconds: 60
-    connectionStringSecretRef:
-      key: attribute.primary_blob_connection_string
-      name: example-storage-account
-      namespace: upbound-system
-    containerNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    encoding: JSON
-    fileNameFormat: '{iothub}/{partition}_{YYYY}_{MM}_{DD}_{HH}_{mm}'
-    iothubIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    maxChunkSizeInBytes: 10485760
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example-iothub
-
----
-
-apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHubFallbackRoute
 metadata:
   labels:
@@ -41,7 +11,7 @@ spec:
     condition: "true"
     enabled: true
     endpointNamesRefs:
-    - name: example
+    - name: example-storage-container
     iothubNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -54,6 +24,8 @@ spec:
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHub
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
   labels:
     testing.upbound.io/example-name: example
   name: example-${Rand.RFC1123Subdomain}
@@ -74,9 +46,11 @@ spec:
 apiVersion: devices.azure.upbound.io/v1beta1
 kind: IOTHubEndpointStorageContainer
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
   labels:
     testing.upbound.io/example-name: example
-  name: example-${Rand.RFC1123Subdomain}
+  name: example-storage-container
 spec:
   forProvider:
     batchFrequencyInSeconds: 60
@@ -102,6 +76,8 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
   labels:
     testing.upbound.io/example-name: example-iothub
   name: example-iothub-${Rand.RFC1123Subdomain}
@@ -114,6 +90,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
   labels:
     testing.upbound.io/example-name: example
   name: exampleforiothub
@@ -131,6 +109,8 @@ spec:
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Container
 metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -140,3 +120,145 @@ spec:
     storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubConsumerGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubconsumergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    eventhubEndpointName: events
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubEnrichment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubenrichment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endpointNames:
+      - example-storage-container
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    key: tenant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub
+    value: $twin.tags.Tenant
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubRoute
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubenrichment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    condition: "true"
+    enabled: true
+    endpointNames:
+      - example-storage-container
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub
+    source: DeviceMessages
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubSharedAccessPolicy
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubsharedaccesspolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    registryRead: true
+    registryWrite: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubEndpointServiceBusQueue
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authenticationType: keyBased
+    connectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-servicebus-queue-authorization-rule
+      namespace: upbound-system
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubEndpointServiceBusTopic
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "https://github.com/upbound/official-providers/issues/789"
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebustopic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authenticationType: keyBased
+    connectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-servicebus-topic-authorization-rule
+      namespace: upbound-system
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-iothub

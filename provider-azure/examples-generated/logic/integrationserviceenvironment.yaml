@@ -16,11 +16,11 @@ spec:
     skuName: Developer_0
     tags:
       environment: development
-    virtualNetworkSubnetIds:
-    - ${azurerm_subnet.isesubnet1.id}
-    - ${azurerm_subnet.isesubnet2.id}
-    - ${azurerm_subnet.isesubnet3.id}
-    - ${azurerm_subnet.isesubnet4.id}
+    virtualNetworkSubnetIdsRefs:
+    - name: isesubnet1
+    - name: isesubnet2
+    - name: isesubnet3
+    - name: isesubnet4
 
 ---
 

@@ -48,6 +48,10 @@ type SQLRoleDefinitionParameters struct {
 	// +kubebuilder:validation:Required
 	AssignableScopes []*string `json:"assignableScopes" tf:"assignable_scopes,omitempty"`
 
+	// An user-friendly name for the Cosmos DB SQL Role Definition which must be unique for the Database Account.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// A permissions block as defined below.
 	// +kubebuilder:validation:Required
 	Permissions []PermissionsParameters `json:"permissions" tf:"permissions,omitempty"`

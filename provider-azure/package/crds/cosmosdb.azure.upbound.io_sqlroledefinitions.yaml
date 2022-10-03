@@ -151,6 +151,10 @@ spec:
                     items:
                       type: string
                     type: array
+                  name:
+                    description: An user-friendly name for the Cosmos DB SQL Role
+                      Definition which must be unique for the Database Account.
+                    type: string
                   permissions:
                     description: A permissions block as defined below.
                     items:
@@ -257,6 +261,7 @@ spec:
                     type: string
                 required:
                 - assignableScopes
+                - name
                 - permissions
                 type: object
               providerConfigRef:

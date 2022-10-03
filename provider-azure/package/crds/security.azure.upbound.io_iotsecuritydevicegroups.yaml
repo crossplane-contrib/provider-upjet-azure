@@ -171,6 +171,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  name:
+                    description: Specifies the name of the Device Security Group.
+                      Changing this forces a new resource to be created.
+                    type: string
                   rangeRule:
                     description: One or more range_rule blocks as defined below.
                     items:
@@ -203,6 +207,8 @@ spec:
                       - type
                       type: object
                     type: array
+                required:
+                - name
                 type: object
               providerConfigRef:
                 default:

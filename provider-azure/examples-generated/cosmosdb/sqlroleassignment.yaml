@@ -11,6 +11,7 @@ spec:
     accountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    name: 736180af-7fbc-4c7f-9004-22735173c1c3
     principalId: ${data.azurerm_client_config.current.object_id}
     resourceGroupNameSelector:
       matchLabels:
@@ -61,6 +62,7 @@ spec:
         testing.upbound.io/example-name: example
     assignableScopes:
     - /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}
+    name: examplesqlroledef
     permissions:
     - dataActions:
       - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read

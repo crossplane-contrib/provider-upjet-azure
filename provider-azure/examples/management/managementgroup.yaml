@@ -1,0 +1,11 @@
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: management/v1beta1/managementgroup
+  labels:
+    testing.upbound.io/example-name: example_parent
+  name: example-parent
+spec:
+  forProvider:
+    displayName: ParentGroup

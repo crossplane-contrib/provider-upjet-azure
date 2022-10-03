@@ -14,6 +14,7 @@ spec:
     iothubIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    name: example-device-security-group
     rangeRule:
     - duration: PT5M
       max: 30
@@ -33,8 +34,8 @@ metadata:
 spec:
   forProvider:
     displayName: Iot Security Solution
-    iothubIds:
-    - ${azurerm_iothub.example.id}
+    iothubIdsRefs:
+    - name: example
     location: West Europe
     name: example-Iot-Security-Solution
     resourceGroupNameSelector:

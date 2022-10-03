@@ -1,0 +1,151 @@
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: IntegrationServiceEnvironment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Provisioning of this resource takes more than one hour."
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessEndpointType: Internal
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_0
+    tags:
+      environment: development
+    virtualNetworkSubnetIdsRefs:
+    - name: isesubnet1
+    - name: isesubnet2
+    - name: isesubnet3
+    - name: isesubnet4
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-integration-service-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
+  labels:
+    testing.upbound.io/example-name: isesubnet1
+  name: isesubnet1
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/26
+    delegation:
+    - name: integrationServiceEnvironments
+      serviceDelegation:
+      - name: Microsoft.Logic/integrationServiceEnvironments
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
+  labels:
+    testing.upbound.io/example-name: isesubnet2
+  name: isesubnet2
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.64/26
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
+  labels:
+    testing.upbound.io/example-name: isesubnet3
+  name: isesubnet3
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.128/26
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
+  labels:
+    testing.upbound.io/example-name: isesubnet4
+  name: isesubnet4
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.192/26
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource is dependency of root resource."
+    meta.upbound.io/example-id: logic/v1beta1/integrationserviceenvironment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/22
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -1,0 +1,50 @@
+apiVersion: security.azure.upbound.io/v1beta1
+kind: AdvancedThreatProtection
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs valid target resource id."
+    meta.upbound.io/example-id: security/v1beta1/advancedthreatprotection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    enabled: true
+    targetResourceId: ""# Valid Target Resource ID (for this example storage_account.id)
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is dependency of AdvancedThreatProtection."
+    meta.upbound.io/example-id: security/v1beta1/advancedthreatprotection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is dependency of AdvancedThreatProtection."
+    meta.upbound.io/example-id: security/v1beta1/advancedthreatprotection
+  labels:
+    testing.upbound.io/example-name: example
+  name: upbound
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      environment: example

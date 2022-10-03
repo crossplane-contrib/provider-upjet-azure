@@ -18,12 +18,18 @@ package logic
 
 import (
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
 )
 
 // Configure configures logic group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_integration_service_environment", func(r *config.Resource) {
-		r.UseAsync = false
 		r.Kind = "IntegrationServiceEnvironment"
+
+		r.References["virtual_network_subnet_ids"] = config.Reference{
+			Type:      rconfig.APISPackagePath + "/network/v1beta1.Subnet",
+			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)`,
+		}
 	})
 }

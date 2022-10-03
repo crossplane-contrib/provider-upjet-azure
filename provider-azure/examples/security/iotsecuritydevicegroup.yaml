@@ -1,0 +1,78 @@
+apiVersion: security.azure.upbound.io/v1beta1
+kind: IOTSecurityDeviceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allowRule:
+    - connectionToIpsNotAllowed:
+      - 10.0.0.0/24
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-device-security-group
+    rangeRule:
+    - duration: PT5M
+      max: 30
+      min: 0
+      type: ActiveConnectionsNotInAllowedRange
+
+---
+
+apiVersion: security.azure.upbound.io/v1beta1
+kind: IOTSecuritySolution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: Iot Security Solution
+    iothubIdsSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    name: example-Iot-Security-Solution
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: device
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-security-iot-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: device
+    sku:
+    - capacity: 1
+      name: S1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/iotsecuritydevicegroup
+  labels:
+    testing.upbound.io/example-name: device
+  name: example-security-device-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
