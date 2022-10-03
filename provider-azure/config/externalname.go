@@ -44,9 +44,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_dedicated_host":        config.TemplatedStringAsIdentifier("name", "{{ .parameters.dedicated_host_group_id }}/hosts/{ .external_name }}"),
 
 	// cosmosdb
-	"azurerm_cosmosdb_sql_database":         config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .external_name }}"),
-	"azurerm_cosmosdb_sql_container":        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .parameters.database_name }}/containers/{{ .external_name }}"),
-	"azurerm_cosmosdb_sql_role_assignment":  config.IdentifierFromProvider,
+	"azurerm_cosmosdb_sql_database":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .external_name }}"),
+	"azurerm_cosmosdb_sql_container": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .parameters.database_name }}/containers/{{ .external_name }}"),
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
+	"azurerm_cosmosdb_sql_role_assignment": config.IdentifierFromProvider,
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
 	"azurerm_cosmosdb_sql_role_definition":  config.IdentifierFromProvider,
 	"azurerm_cosmosdb_mongo_database":       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .external_name }}"),
 	"azurerm_cosmosdb_mongo_collection":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .parameters.database_name }}/collections/{{ .external_name }}"),
@@ -306,9 +308,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_resource_group_template_deployment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Resources/deployments/{{ .external_name }}"),
 
 	// security
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
 	"azurerm_advanced_threat_protection": config.IdentifierFromProvider,
-	"azurerm_iot_security_device_group":  config.IdentifierFromProvider,
-	"azurerm_iot_security_solution":      config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Security/IoTSecuritySolutions/{{ .external_name }}"),
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
+	"azurerm_iot_security_device_group": config.IdentifierFromProvider,
+	"azurerm_iot_security_solution":     config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Security/IoTSecuritySolutions/{{ .external_name }}"),
 
 	// sql
 	"azurerm_mssql_server":                                          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/servers/{{ .external_name }}"),
