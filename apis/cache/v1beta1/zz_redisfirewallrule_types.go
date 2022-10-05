@@ -26,7 +26,7 @@ type RedisFirewallRuleParameters struct {
 	EndIP *string `json:"endIp" tf:"end_ip,omitempty"`
 
 	// The name of the Redis Cache. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta1.RedisCache
 	// +kubebuilder:validation:Optional
 	RedisCacheName *string `json:"redisCacheName,omitempty" tf:"redis_cache_name,omitempty"`
 
@@ -39,7 +39,7 @@ type RedisFirewallRuleParameters struct {
 	RedisCacheNameSelector *v1.Selector `json:"redisCacheNameSelector,omitempty" tf:"-"`
 
 	// The name of the resource group in which this Redis Cache exists.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

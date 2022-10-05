@@ -58,7 +58,7 @@ type MSSQLManagedInstanceParameters struct {
 
 	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLManagedInstance
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
 
@@ -99,7 +99,7 @@ type MSSQLManagedInstanceParameters struct {
 	PublicDataEndpointEnabled *bool `json:"publicDataEndpointEnabled,omitempty" tf:"public_data_endpoint_enabled,omitempty"`
 
 	// The name of the resource group in which to create the SQL Managed Instance.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -124,7 +124,7 @@ type MSSQLManagedInstanceParameters struct {
 	StorageSizeInGb *float64 `json:"storageSizeInGb" tf:"storage_size_in_gb,omitempty"`
 
 	// The subnet resource id that the SQL Managed Instance will be associated with.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

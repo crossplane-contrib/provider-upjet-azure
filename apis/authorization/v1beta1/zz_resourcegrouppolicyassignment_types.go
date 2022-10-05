@@ -96,7 +96,7 @@ type ResourceGroupPolicyAssignmentParameters struct {
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/authorization/v1beta1.PolicyDefinition
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.PolicyDefinition
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
@@ -110,7 +110,7 @@ type ResourceGroupPolicyAssignmentParameters struct {
 	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Resource Group where this Policy Assignment should be created. Changing this forces a new Policy Assignment to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`

@@ -21,7 +21,7 @@ type NATGatewayPublicIPAssociationParameters struct {
 
 	// The ID of the NAT Gateway. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=NATGateway
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
 
@@ -35,7 +35,7 @@ type NATGatewayPublicIPAssociationParameters struct {
 
 	// The ID of the Public IP which this NAT Gateway which should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=PublicIP
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 

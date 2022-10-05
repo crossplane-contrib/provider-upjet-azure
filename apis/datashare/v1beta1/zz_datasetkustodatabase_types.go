@@ -28,8 +28,8 @@ type DataSetKustoDatabaseObservation struct {
 type DataSetKustoDatabaseParameters struct {
 
 	// The resource ID of the Kusto Cluster Database to be shared with the receiver. Changing this forces a new Data Share Kusto Database Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/kusto/v1beta1.Database
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Database
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KustoDatabaseID *string `json:"kustoDatabaseId,omitempty" tf:"kusto_database_id,omitempty"`
 
@@ -43,7 +43,7 @@ type DataSetKustoDatabaseParameters struct {
 
 	// The resource ID of the Data Share where this Data Share Kusto Database Dataset should be created. Changing this forces a new Data Share Kusto Database Dataset to be created.
 	// +crossplane:generate:reference:type=DataShare
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`
 

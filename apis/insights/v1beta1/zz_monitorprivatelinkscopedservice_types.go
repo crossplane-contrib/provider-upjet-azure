@@ -23,7 +23,7 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 
 	// The ID of the linked resource. It must be the Log Analytics Workspace or the Application Insights component. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ApplicationInsights
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LinkedResourceID *string `json:"linkedResourceId,omitempty" tf:"linked_resource_id,omitempty"`
 
@@ -36,7 +36,7 @@ type MonitorPrivateLinkScopedServiceParameters struct {
 	LinkedResourceIDSelector *v1.Selector `json:"linkedResourceIdSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Azure Monitor Private Link Scoped Service should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

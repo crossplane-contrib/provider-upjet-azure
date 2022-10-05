@@ -92,7 +92,7 @@ type ManagementPolicyParameters struct {
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Specifies the id of the storage account to apply the management policy to.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

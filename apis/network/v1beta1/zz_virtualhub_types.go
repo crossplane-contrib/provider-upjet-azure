@@ -39,7 +39,7 @@ type VirtualHubParameters_2 struct {
 	Location *string `json:"location" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Virtual Hub should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -65,7 +65,7 @@ type VirtualHubParameters_2 struct {
 
 	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualWAN
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 

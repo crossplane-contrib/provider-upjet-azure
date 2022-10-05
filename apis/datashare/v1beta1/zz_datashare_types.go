@@ -23,7 +23,7 @@ type DataShareParameters struct {
 
 	// The ID of the Data Share account in which the Data Share is created. Changing this forces a new Data Share to be created.
 	// +crossplane:generate:reference:type=Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 

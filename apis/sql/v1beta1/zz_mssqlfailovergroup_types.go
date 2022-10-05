@@ -27,7 +27,7 @@ type MSSQLFailoverGroupParameters struct {
 
 	// A set of database names to include in the failover group.
 	// +crossplane:generate:reference:type=MSSQLDatabase
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Databases []*string `json:"databases,omitempty" tf:"databases,omitempty"`
 
@@ -53,7 +53,7 @@ type MSSQLFailoverGroupParameters struct {
 
 	// The ID of the primary SQL Server on which to create the failover group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
@@ -83,7 +83,7 @@ type PartnerServerParameters struct {
 
 	// The ID of a partner SQL server to include in the failover group.
 	// +crossplane:generate:reference:type=MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

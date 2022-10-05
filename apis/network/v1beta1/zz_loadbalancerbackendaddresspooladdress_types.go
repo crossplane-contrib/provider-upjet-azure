@@ -23,7 +23,7 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 
 	// The ID of the Backend Address Pool. Changing this forces a new Backend Address Pool Address to be created.
 	// +crossplane:generate:reference:type=LoadBalancerBackendAddressPool
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
@@ -41,7 +41,7 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 
 	// The ID of the Virtual Network within which the Backend Address Pool should exist.
 	// +crossplane:generate:reference:type=VirtualNetwork
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 

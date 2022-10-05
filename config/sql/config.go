@@ -24,7 +24,7 @@ import (
 
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
-	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 func msSQLConnectionDetails(attr map[string]interface{}) (map[string][]byte, error) {

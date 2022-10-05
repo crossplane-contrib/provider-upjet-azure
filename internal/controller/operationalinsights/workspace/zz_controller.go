@@ -18,7 +18,7 @@ import (
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/operationalinsights/v1beta1"
+	v1beta1 "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
 )
 
 // Setup adds a controller that reconciles Workspace managed resources.

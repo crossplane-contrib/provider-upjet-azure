@@ -17,7 +17,7 @@ limitations under the License.
 package storage
 
 import (
-	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	"github.com/upbound/provider-azure/apis/rconfig"
 
 	"github.com/upbound/upjet/pkg/config"
 )

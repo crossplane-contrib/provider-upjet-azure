@@ -42,7 +42,7 @@ type BackupVaultParameters struct {
 	Redundancy *string `json:"redundancy" tf:"redundancy,omitempty"`
 
 	// The name of the Resource Group where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

@@ -32,7 +32,7 @@ type ObjectReplicationObservation struct {
 type ObjectReplicationParameters struct {
 
 	// The ID of the destination storage account. Changing this forces a new Storage Object Replication to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationStorageAccountID *string `json:"destinationStorageAccountId,omitempty" tf:"destination_storage_account_id,omitempty"`
@@ -50,7 +50,7 @@ type ObjectReplicationParameters struct {
 	Rules []ObjectReplicationRulesParameters `json:"rules" tf:"rules,omitempty"`
 
 	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
@@ -75,7 +75,7 @@ type ObjectReplicationRulesParameters struct {
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
 
 	// The destination storage container name. Changing this forces a new Storage Object Replication to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	DestinationContainerName *string `json:"destinationContainerName,omitempty" tf:"destination_container_name,omitempty"`
 
@@ -92,7 +92,7 @@ type ObjectReplicationRulesParameters struct {
 	FilterOutBlobsWithPrefix []*string `json:"filterOutBlobsWithPrefix,omitempty" tf:"filter_out_blobs_with_prefix,omitempty"`
 
 	// The source storage container name. Changing this forces a new Storage Object Replication to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/storage/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	SourceContainerName *string `json:"sourceContainerName,omitempty" tf:"source_container_name,omitempty"`
 

@@ -30,7 +30,7 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	EnrollmentWrite *bool `json:"enrollmentWrite,omitempty" tf:"enrollment_write,omitempty"`
 
 	// The name of the IoT Hub Device Provisioning service to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHubDPS
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHubDPS
 	// +kubebuilder:validation:Optional
 	IOTHubDPSName *string `json:"iothubDpsName,omitempty" tf:"iothub_dps_name,omitempty"`
 
@@ -51,7 +51,7 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	RegistrationWrite *bool `json:"registrationWrite,omitempty" tf:"registration_write,omitempty"`
 
 	// The name of the resource group under which the IotHub Shared Access Policy resource has to be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

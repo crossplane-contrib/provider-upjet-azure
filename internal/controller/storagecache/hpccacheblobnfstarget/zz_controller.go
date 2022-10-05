@@ -18,7 +18,7 @@ import (
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/storagecache/v1beta1"
+	v1beta1 "github.com/upbound/provider-azure/apis/storagecache/v1beta1"
 )
 
 // Setup adds a controller that reconciles HPCCacheBlobNFSTarget managed resources.

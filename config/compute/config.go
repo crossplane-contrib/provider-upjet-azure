@@ -5,7 +5,7 @@ Copyright 2022 Upbound Inc.
 package compute
 
 import (
-	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	"github.com/upbound/provider-azure/apis/rconfig"
 
 	"github.com/upbound/upjet/pkg/config"
 )

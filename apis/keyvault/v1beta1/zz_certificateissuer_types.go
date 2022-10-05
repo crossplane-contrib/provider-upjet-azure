@@ -53,7 +53,7 @@ type CertificateIssuerParameters struct {
 
 	// The ID of the Key Vault in which to create the Certificate Issuer.
 	// +crossplane:generate:reference:type=Vault
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 

@@ -24,7 +24,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/config"
 
-	"github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 const (

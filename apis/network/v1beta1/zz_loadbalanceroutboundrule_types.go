@@ -44,7 +44,7 @@ type LoadBalancerOutboundRuleParameters struct {
 
 	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
 	// +crossplane:generate:reference:type=LoadBalancerBackendAddressPool
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
@@ -70,7 +70,7 @@ type LoadBalancerOutboundRuleParameters struct {
 
 	// The ID of the Load Balancer in which to create the Outbound Rule. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=LoadBalancer
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 

@@ -48,7 +48,7 @@ type LiveEventOutputParameters struct {
 
 	// The id of the live event. Changing this forces a new Live Output to be created.
 	// +crossplane:generate:reference:type=LiveEvent
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LiveEventID *string `json:"liveEventId,omitempty" tf:"live_event_id,omitempty"`
 

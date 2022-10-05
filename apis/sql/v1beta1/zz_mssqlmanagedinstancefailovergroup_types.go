@@ -33,7 +33,7 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 
 	// The ID of the Azure SQL Managed Instance which will be replicated using a Managed Instance Failover Group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLManagedInstance
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
@@ -47,7 +47,7 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 
 	// The ID of the Azure SQL Managed Instance which will be replicated to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLManagedInstance
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PartnerManagedInstanceID *string `json:"partnerManagedInstanceId,omitempty" tf:"partner_managed_instance_id,omitempty"`
 

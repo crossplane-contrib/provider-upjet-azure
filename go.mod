@@ -1,13 +1,13 @@
-module github.com/upbound/official-providers/provider-azure
+module github.com/upbound/provider-azure
 
-go 1.18
+go 1.19
 
 require (
 	github.com/crossplane/crossplane-runtime v0.18.0-rc.0.0.20220722162506-9ea84ae53615
 	github.com/crossplane/crossplane-tools v0.0.0-20220310165030-1f43fc12793e
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.17.0
 	github.com/pkg/errors v0.9.1
-	github.com/upbound/official-providers/updoc v0.0.0-00010101000000-000000000000
+	github.com/upbound/official-providers/updoc v0.0.0-20221003124519-d2819057cba0
 	github.com/upbound/upjet v0.6.1-0.20220926184909-9fcb735d2821
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.24.0
@@ -155,5 +155,3 @@ require (
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.1 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
-
-replace github.com/upbound/official-providers/updoc => ../updoc
