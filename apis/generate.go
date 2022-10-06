@@ -53,5 +53,6 @@ import (
 
 	_ "github.com/upbound/upjet/cmd/scraper"
 
+	_ "github.com/upbound/official-providers/testing/cmd"
 	_ "github.com/upbound/official-providers/updoc/cmd"
 )

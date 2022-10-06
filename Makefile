@@ -49,6 +49,7 @@ GO111MODULE = on
 # ====================================================================================
 # Setup Kubernetes tools
 
+KIND_VERSION = v0.15.0
 UP_VERSION = v0.13.0
 UP_CHANNEL = stable
 -include build/makelib/k8s_tools.mk
@@ -112,7 +113,7 @@ xpkg.build: $(UP) do.build.images
 		--controller $(BUILD_REGISTRY)/$(PROJECT_NAME)-$(ARCH) \
 		--package-root ./package \
 		--examples-root ./examples \
-		--output ./_output/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg || $(FAIL)
+		--output $(OUTPUT_DIR)/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg || $(FAIL)
 	@$(OK) Built package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
 
 build.artifacts.platform: xpkg.build
@@ -177,8 +178,9 @@ generate.init: pull-docs
 
 uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
 	@$(INFO) running uptest using kind $(KIND_VERSION)
-	@KIND_NODE_IMAGE_TAG=${KIND_NODE_IMAGE_TAG} PLATFORM=${PLATFORM} ./cluster/install_provider.sh || $(FAIL)
-	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd || $(FAIL)
+	@./cluster/install_provider.sh || $(FAIL)
+	@echo "$${UPTEST_EXAMPLE_VALUE_REPLACEMENTS}" > $(WORK_DIR)/replacements.yaml
+	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
 
 uptest-local: $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests with uptest using current kubeconfig $(KIND_VERSION)
