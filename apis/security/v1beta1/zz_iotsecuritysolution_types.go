@@ -56,7 +56,7 @@ type IOTSecuritySolutionParameters struct {
 	EventsToExport []*string `json:"eventsToExport,omitempty" tf:"events_to_export,omitempty"`
 
 	// Specifies the IoT Hub resource IDs to which this Iot Security Solution is applied.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)
 	// +kubebuilder:validation:Optional
 	IOTHubIds []*string `json:"iothubIds,omitempty" tf:"iothub_ids,omitempty"`
@@ -98,7 +98,7 @@ type IOTSecuritySolutionParameters struct {
 	RecommendationsEnabled []RecommendationsEnabledParameters `json:"recommendationsEnabled,omitempty" tf:"recommendations_enabled,omitempty"`
 
 	// Specifies the name of the resource group in which to create the Iot Security Solution. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

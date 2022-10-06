@@ -23,7 +23,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/pipeline"
 
-	"github.com/upbound/official-providers/provider-azure/config"
+	"github.com/upbound/provider-azure/config"
 )
 
 func main() {

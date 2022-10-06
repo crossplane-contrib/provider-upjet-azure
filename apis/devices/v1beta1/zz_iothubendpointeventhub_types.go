@@ -38,7 +38,7 @@ type IOTHubEndpointEventHubParameters struct {
 	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path,omitempty"`
 
 	// The IoTHub ID for the endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
@@ -56,7 +56,7 @@ type IOTHubEndpointEventHubParameters struct {
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
 	// The name of the resource group under which the Event Hub has been created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

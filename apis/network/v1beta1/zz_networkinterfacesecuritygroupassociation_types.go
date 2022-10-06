@@ -21,7 +21,7 @@ type NetworkInterfaceSecurityGroupAssociationParameters struct {
 
 	// The ID of the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=NetworkInterface
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
@@ -35,7 +35,7 @@ type NetworkInterfaceSecurityGroupAssociationParameters struct {
 
 	// The ID of the Network Security Group which should be attached to the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
 

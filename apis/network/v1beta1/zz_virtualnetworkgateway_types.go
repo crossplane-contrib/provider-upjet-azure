@@ -168,7 +168,7 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 
 	// The ID of the public IP address to associate
 	// with the Virtual Network Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
@@ -186,7 +186,7 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 	// the associated subnet is named GatewaySubnet. Therefore, each virtual
 	// network can contain at most a single Virtual Network Gateway.
 	// +crossplane:generate:reference:type=Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -264,7 +264,7 @@ type VirtualNetworkGatewayParameters struct {
 	// The name of the resource group in which to
 	// create the Virtual Network Gateway. Changing the resource group name forces
 	// a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

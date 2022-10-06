@@ -23,7 +23,7 @@ type SubnetNetworkSecurityGroupAssociationParameters struct {
 
 	// The ID of the Network Security Group which should be associated with the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=SecurityGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
 
@@ -37,7 +37,7 @@ type SubnetNetworkSecurityGroupAssociationParameters struct {
 
 	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

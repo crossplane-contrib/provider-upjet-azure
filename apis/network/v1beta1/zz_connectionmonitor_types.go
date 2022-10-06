@@ -31,7 +31,7 @@ type ConnectionMonitorParameters struct {
 
 	// The ID of the Network Watcher. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Watcher
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkWatcherID *string `json:"networkWatcherId,omitempty" tf:"network_watcher_id,omitempty"`
 

@@ -25,7 +25,7 @@ type IOTHubEnrichmentParameters struct {
 	// +kubebuilder:validation:Required
 	EndpointNames []*string `json:"endpointNames" tf:"endpoint_names,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
@@ -41,7 +41,7 @@ type IOTHubEnrichmentParameters struct {
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

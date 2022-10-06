@@ -9,9 +9,9 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1"
-	v1beta1 "github.com/upbound/official-providers/provider-azure/apis/network/v1beta1"
-	rconfig "github.com/upbound/official-providers/provider-azure/apis/rconfig"
+	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta1 "github.com/upbound/provider-azure/apis/network/v1beta1"
+	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

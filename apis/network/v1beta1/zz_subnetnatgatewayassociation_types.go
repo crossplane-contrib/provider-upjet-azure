@@ -22,7 +22,7 @@ type SubnetNATGatewayAssociationObservation struct {
 type SubnetNATGatewayAssociationParameters struct {
 
 	// The ID of the NAT Gateway which should be associated with the Subnet. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.NATGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.NATGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
@@ -37,7 +37,7 @@ type SubnetNATGatewayAssociationParameters struct {
 
 	// The ID of the Subnet. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

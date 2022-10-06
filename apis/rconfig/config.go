@@ -27,7 +27,7 @@ import (
 
 const (
 	// APISPackagePath is the package path for generated APIs root package
-	APISPackagePath = "github.com/upbound/official-providers/provider-azure/apis"
+	APISPackagePath = "github.com/upbound/provider-azure/apis"
 	// ExtractResourceIDFuncPath holds the Azure resource ID extractor func name
 	ExtractResourceIDFuncPath = APISPackagePath + "/rconfig.ExtractResourceID()"
 

@@ -57,7 +57,7 @@ type PrivateDNSZoneGroupParameters struct {
 
 	// Specifies the list of Private DNS Zones to include within the private_dns_zone_group.
 	// +crossplane:generate:reference:type=PrivateDNSZone
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIds []*string `json:"privateDnsZoneIds,omitempty" tf:"private_dns_zone_ids,omitempty"`
 
@@ -116,7 +116,7 @@ type PrivateEndpointParameters struct {
 	PrivateServiceConnection []PrivateServiceConnectionParameters `json:"privateServiceConnection" tf:"private_service_connection,omitempty"`
 
 	// Specifies the Name of the Resource Group within which the Private Endpoint should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -129,7 +129,7 @@ type PrivateEndpointParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`

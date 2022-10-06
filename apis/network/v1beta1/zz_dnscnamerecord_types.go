@@ -29,7 +29,7 @@ type DNSCNAMERecordParameters struct {
 	Record *string `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -49,7 +49,7 @@ type DNSCNAMERecordParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure resource id of the target object. Conflicts with records
-	// +crossplane:generate:reference:type=github.com/upbound/official-providers/provider-azure/apis/network/v1beta1.DNSCNAMERecord
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.DNSCNAMERecord
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`

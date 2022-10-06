@@ -31,7 +31,7 @@ type ExpressRouteConnectionParameters struct {
 
 	// The ID of the Express Route Circuit Peering that this Express Route Connection connects with. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitPeeringID *string `json:"expressRouteCircuitPeeringId,omitempty" tf:"express_route_circuit_peering_id,omitempty"`
 
@@ -45,7 +45,7 @@ type ExpressRouteConnectionParameters struct {
 
 	// The ID of the Express Route Gateway that this Express Route Connection connects with. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ExpressRouteGateway
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExpressRouteGatewayID *string `json:"expressRouteGatewayId,omitempty" tf:"express_route_gateway_id,omitempty"`
 

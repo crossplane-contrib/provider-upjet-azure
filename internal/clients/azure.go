@@ -13,7 +13,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/terraform"
 
-	"github.com/upbound/official-providers/provider-azure/apis/v1beta1"
+	"github.com/upbound/provider-azure/apis/v1beta1"
 )
 
 const (
@@ -81,7 +81,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 			// trying to create is not registered and the returned error is
 			// ambiguous. However, this requires service principal to have provider
 			// registration permissions which are irrelevant in most contexts.
-			// For details, see https://github.com/upbound/official-providers/provider-azure/issues/104
+			// For details, see https://github.com/upbound/provider-azure/issues/104
 			keySkipProviderRegistration: true,
 		}
 

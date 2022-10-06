@@ -26,7 +26,7 @@ type MSSQLServerDNSAliasParameters struct {
 
 	// The ID of the mssql server. Changing this forces a new MSSQL Server DNS Alias to be created.
 	// +crossplane:generate:reference:type=MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/official-providers/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MSSQLServerID *string `json:"mssqlServerId,omitempty" tf:"mssql_server_id,omitempty"`
 
