@@ -28,7 +28,6 @@ exception_set = {
     'ProviderConfigUsage.azure.upbound.io/v1beta1',
 }
 
-
 # Example usage: check-examples.py <CRD dir> <example manifests dir>
 if __name__ == "__main__":
     if len(sys.argv) != 3:
