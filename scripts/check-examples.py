@@ -24,25 +24,19 @@ def load_crd_type(t):
         yield f'{kind}.{group}/{v["name"]}'
 
 
-exceptions = {
-    "provider-azure": {
-        'ProviderConfigUsage.azure.upbound.io/v1beta1'
-    },
+exception_set = {
+    'ProviderConfigUsage.azure.upbound.io/v1beta1',
 }
 
 
-# Example usage: check-examples.py <provider name> <CRD dir> <example manifests dir>
+# Example usage: check-examples.py <CRD dir> <example manifests dir>
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Example usage: check-examples.py <provider name> <CRD dir> <example manifests dir>")
+    if len(sys.argv) != 3:
+        print("Example usage: check-examples.py <CRD dir> <example manifests dir>")
         sys.exit(1)
-    try:
-        exception_set = exceptions[sys.argv[1]]
-    except KeyError:
-        exception_set = set()
-    known_crd_types = load_gvks(sys.argv[2], load_crd_type)
-    example_types = load_gvks(sys.argv[3], lambda t: [] if t is None or not {"kind", "apiVersion"}.issubset(t.keys())
-        else [f'{t["kind"]}.{t["apiVersion"]}'])
+    known_crd_types = load_gvks(sys.argv[1], load_crd_type)
+    example_types = load_gvks(sys.argv[2], lambda t: [] if t is None or not {"kind", "apiVersion"}.issubset(t.keys())
+    else [f'{t["kind"]}.{t["apiVersion"]}'])
     diff = known_crd_types.difference(example_types.union(exception_set))
     if len(diff) == 0:
         print("All CRDs have at least one example...")
