@@ -50,23 +50,47 @@ GO111MODULE = on
 # Setup Kubernetes tools
 
 KIND_VERSION = v0.15.0
-UP_VERSION = v0.13.0
+UP_VERSION = v0.14.0
 UP_CHANNEL = stable
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
 # Setup Images
 
-DOCKER_REGISTRY ?= upbound
+REGISTRY_ORGS ?= xpkg.upbound.io/upbound
 IMAGES = provider-azure
--include build/makelib/image.mk
+-include build/makelib/imagelight.mk
 
 # ====================================================================================
 # Setup XPKG
 
-XPKG_REGISTRY ?= xpkg.upbound.io
-XPKG_ORG ?= upbound
-XPKG_REPO ?= $(PROJECT_NAME)-staging
+XPKG_REG_ORGS ?= xpkg.upbound.io/upbound
+# NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
+# inferred.
+XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound
+XPKGS = provider-azure
+-include build/makelib/xpkg.mk
+
+# NOTE(hasheddan): we force image building to happen prior to xpkg build so that
+# we ensure image is present in daemon.
+xpkg.build.provider-azure: do.build.images
+
+# ====================================================================================
+# Setup Upbound Docs
+
+updoc-upload:
+	@$(INFO) uploading docs for $(VERSION_MINOR)
+	@go run github.com/upbound/official-providers/updoc/cmd upload \
+        --docs-dir=$(ROOT_DIR)/docs \
+        --name=$(PROJECT_NAME) \
+        --version=$(VERSION_MINOR) \
+        --bucket-name=$(BUCKET_NAME) \
+        --cdn-domain=$(CDN_DOMAIN) || $(FAIL)
+	@$(OK) uploaded docs for $(VERSION_MINOR)
+
+ifneq ($(filter release-%,$(BRANCH_NAME)),)
+publish.artifacts: updoc-upload
+endif
 
 # ====================================================================================
 # Targets
@@ -106,33 +130,6 @@ run: go.build
 # build steps in parallel to avoid encountering an installation race condition.
 build.init: $(UP)
 
-xpkg.build: $(UP) do.build.images
-	@$(INFO) Building package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
-	@mkdir -p $(OUTPUT_DIR)/xpkg/$(PLATFORM)
-	@$(UP) xpkg build \
-		--controller $(BUILD_REGISTRY)/$(PROJECT_NAME)-$(ARCH) \
-		--package-root ./package \
-		--examples-root ./examples \
-		--output $(OUTPUT_DIR)/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg || $(FAIL)
-	@$(OK) Built package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM)
-
-build.artifacts.platform: xpkg.build
-
-xpkg.push: $(UP)
-	@$(INFO) Pushing package $(PROJECT_NAME)-$(VERSION).xpkg
-	@$(UP) xpkg push \
-		--package $(OUTPUT_DIR)/xpkg/linux_amd64/$(PROJECT_NAME)-$(VERSION).xpkg \
-		--package $(OUTPUT_DIR)/xpkg/linux_arm64/$(PROJECT_NAME)-$(VERSION).xpkg \
-		$(XPKG_REGISTRY)/$(XPKG_ORG)/$(XPKG_REPO):$(VERSION) || $(FAIL)
-	@$(OK) Pushed package $(PROJECT_NAME)-$(VERSION).xpkg
-
-xpkg.load: $(UP)
-	@$(INFO) Loading package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM) into Docker daemon
-	@docker load -i $(OUTPUT_DIR)/xpkg/$(PLATFORM)/$(PROJECT_NAME)-$(VERSION).xpkg
-	@$(OK) Loaded package $(PROJECT_NAME)-$(VERSION).xpkg for $(PLATFORM) into Docker daemon
-
-.PHONY: cobertura submodules fallthrough run crds.clean
-
 # ====================================================================================
 # Setup Terraform for fetching provider schema
 TERRAFORM := $(TOOLS_HOST_DIR)/terraform-$(TERRAFORM_VERSION)
@@ -156,12 +153,6 @@ $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM)
 	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
 	@$(OK) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) $(TERRAFORM_PROVIDER_VERSION)
 
-generate.init: $(TERRAFORM_PROVIDER_SCHEMA)
-
-.PHONY: $(TERRAFORM_PROVIDER_SCHEMA)
-
-# ====================================================================================
-# Extract Terraform registry metadata
 metadata:
 	@WORK_DIR=.work ../scripts/scrape_metadata.sh
 pull-docs:
@@ -170,7 +161,7 @@ pull-docs:
 	fi
 	@git -C "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))" sparse-checkout set "$(TERRAFORM_DOCS_PATH)"
 
-generate.init: pull-docs
+generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
 
 # ====================================================================================
 # Test utilities
@@ -225,4 +216,4 @@ go.cachedir:
 go.mod.cachedir:
 	@go env GOMODCACHE
 
-.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir
+.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir run crds.clean $(TERRAFORM_PROVIDER_SCHEMA)
