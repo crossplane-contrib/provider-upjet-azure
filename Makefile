@@ -3,13 +3,12 @@
 
 PROJECT_NAME := provider-azure
 PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
-PROJECT_VERSION_TAG_GROUP := azure
 
-export TERRAFORM_PROVIDER_SOURCE ?= hashicorp/azurerm
 export TERRAFORM_VERSION ?= 1.2.1
-export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-azurerm
+export TERRAFORM_PROVIDER_SOURCE ?= hashicorp/azurerm
 export TERRAFORM_PROVIDER_VERSION := 3.8.0
-export GOPRIVATE=github.com/upbound
+export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-azurerm
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/terraform-provider-azurerm/releases/download/v3.8.0
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-azurerm
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 
@@ -37,6 +36,10 @@ NPROCS ?= 1
 # parallel can lead to high CPU utilization. by default we reduce the parallelism
 # to half the number of CPU cores.
 GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
+
+# We need to specify which repos might require login for go commands to authorize
+# correctly.
+export GOPRIVATE = github.com/upbound/*
 
 GO_REQUIRED_VERSION ?= 1.19
 GOLANGCILINT_VERSION ?= 1.50.0
@@ -110,7 +113,7 @@ fallthrough: submodules
 # - generated file
 cobertura:
 	@cat $(GO_TEST_OUTPUT)/coverage.txt | \
-		grep -v zz_generated.deepcopy | \
+		grep -v zz_ | \
 		$(GOCOVER_COBERTURA) > $(GO_TEST_OUTPUT)/cobertura-coverage.xml
 
 # Update the submodules, such as the common build scripts.
@@ -137,7 +140,7 @@ TERRAFORM_WORKDIR := $(WORK_DIR)/terraform
 TERRAFORM_PROVIDER_SCHEMA := config/schema.json
 
 $(TERRAFORM):
-	@$(INFO) installing terraform v$(TERRAFORM_VERSION) $(HOSTOS)-$(HOSTARCH)
+	@$(INFO) installing terraform $(HOSTOS)-$(HOSTARCH)
 	@mkdir -p $(TOOLS_HOST_DIR)/tmp-terraform
 	@curl -fsSL https://releases.hashicorp.com/terraform/$(TERRAFORM_VERSION)/terraform_$(TERRAFORM_VERSION)_$(SAFEHOST_PLATFORM).zip -o $(TOOLS_HOST_DIR)/tmp-terraform/terraform.zip
 	@unzip $(TOOLS_HOST_DIR)/tmp-terraform/terraform.zip -d $(TOOLS_HOST_DIR)/tmp-terraform
@@ -153,8 +156,6 @@ $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM)
 	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
 	@$(OK) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) $(TERRAFORM_PROVIDER_VERSION)
 
-metadata:
-	@WORK_DIR=.work ../scripts/scrape_metadata.sh
 pull-docs:
 	@if [ ! -d "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))" ]; then \
 		git clone -c advice.detachedHead=false --depth 1 --filter=blob:none --branch "v$(TERRAFORM_PROVIDER_VERSION)" --sparse "$(TERRAFORM_PROVIDER_REPO)" "$(WORK_DIR)/$(notdir $(TERRAFORM_PROVIDER_REPO))"; \
@@ -165,7 +166,7 @@ generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
 
 # ====================================================================================
 # Test utilities
-# TODO(sergenyalcin): Move most of this to build submodule.
+# TODO(muvaf): Move most of this to build submodule.
 
 uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
 	@$(INFO) running uptest using kind $(KIND_VERSION)
@@ -175,7 +176,7 @@ uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
 
 uptest-local: $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests with uptest using current kubeconfig $(KIND_VERSION)
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd --skip-provider-config || $(FAIL)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd || $(FAIL)
 
 cluster_dump: $(KUBECTL)
 	@mkdir -p ${DUMP_DIRECTORY}
