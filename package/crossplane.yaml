@@ -4,6 +4,7 @@ metadata:
   name: provider-azure
   annotations:
     meta.crossplane.io/maintainer: Upbound <support@upbound.io>
+    meta.crossplane.io/source: github.com/upbound/provider-azure
     meta.crossplane.io/description: |
       Upbound's official Crossplane provider to manage Microsoft Azure services
       in Kubernetes.
