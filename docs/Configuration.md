@@ -64,11 +64,30 @@ View the Crossplane [Provider CRD definition](https://doc.crds.dev/github.com/cr
 ## Configure the provider
 The Azure provider requires credentials for authentication to Azure Cloud Platform. The Azure provider consumes the credentials from a Kubernetes secret object.
 
-### Generate a Kubernetes secret
-Get Azure Principal Keyfile:
+### Install Azure CLI
+
+Follow the documentation from Microsoft to [download and install the Azure
+command-line](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+
+Log in to the Azure command-line:
+
 ```shell
-# create service principal with Owner role
-az ad sp create-for-rbac --role Contributor --scopes /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx > "creds.json"
+az login
+```
+
+### Create an Azure service principal
+
+Follow the Azure documentation to [find your Subscription
+ID](https://docs.microsoft.com/en-us/azure/azure-portal/get-subscription-tenant-id)
+from the Azure Portal.
+
+Using the Azure command-line, provide your Subscription ID to create a  service
+principal and an authentication file.
+
+```shell
+# Replace <Subscription ID> with your subscription ID.
+az ad sp create-for-rbac --sdk-auth --role Owner --scopes /subscriptions/<Subscription ID> \
+  > azure.json
 ```
 
 Here is an example key file:
@@ -86,9 +105,12 @@ Here is an example key file:
   "managementEndpointUrl": "https://management.core.windows.net/"
 }
 ```
+
+### Generate a Kubernetes secret
+
 Use the JSON file to generate a Kubernetes secret.
 
-`kubectl create secret generic azure-secret --from-file=creds=./<JSON file name>`
+`kubectl create secret generic azure-secret --from-file=creds=./azure.json`
 
 ### Create a ProviderConfig object
 Apply the secret in a `ProviderConfig` Kubernetes configuration file.
