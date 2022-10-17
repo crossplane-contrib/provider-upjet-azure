@@ -32,7 +32,7 @@ limitations under the License.
 // Scrape metadata from Terraform registry
 //go:generate go run github.com/upbound/upjet/cmd/scraper -n hashicorp/terraform-provider-azurerm -r ../.work/terraform-provider-azurerm/website/docs/r -o ../config/provider-metadata.yaml
 
-// Run Terrajet generator
+// Run Upjet generator
 //go:generate go run ../cmd/generator/main.go ..
 
 // Generate deepcopy methodsets and CRD manifests
