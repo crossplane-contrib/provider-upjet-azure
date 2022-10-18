@@ -1,0 +1,60 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServerDNSAlias
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlserverdnsalias
+  labels:
+    testing.upbound.io/example-name: example-dns-alias
+  name: example-dns-alias
+spec:
+  forProvider:
+    mssqlServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dns-alias
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlserverdnsalias
+  labels:
+    testing.upbound.io/example-name: example-dns-alias
+  name: ${Rand.RFC1123Subdomain}-dns-alias
+spec:
+  forProvider:
+    administratorLogin: missadministrator
+    administratorLoginPasswordSecretRef:
+      key: password
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dns-alias
+    version: "12.0"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlserverdnsalias
+  labels:
+    testing.upbound.io/example-name: example-dns-alias
+  name: example-dns-alias-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123
