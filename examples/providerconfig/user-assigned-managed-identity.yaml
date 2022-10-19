@@ -1,0 +1,10 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: UserAssignedManagedIdentity
+  clientID: <clientId of the user-assigned managed identity used as the kubelet identity>
+  subscriptionID: <subscription ID>
+  tenantID: <tenant ID>

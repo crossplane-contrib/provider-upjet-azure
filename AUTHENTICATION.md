@@ -60,7 +60,6 @@ spec:
       name: example-azure-creds
       namespace: upbound-system
       key: creds
-
 ```
 The service principal credentials document is a JSON document
 and looks like the following:
