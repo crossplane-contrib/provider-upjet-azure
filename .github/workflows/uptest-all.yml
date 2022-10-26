@@ -8,9 +8,6 @@ env:
   GO_VERSION: '1.19'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
-  UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
-  UPBOUND_BOT_GITHUB_TOKEN: ${{ secrets.UPBOUND_BOT_GITHUB_TOKEN }}
-
 jobs:
   detect-api-groups:
     runs-on: ubuntu-22.04
@@ -81,12 +78,6 @@ jobs:
           key: ${{ runner.os }}-build-uptest-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-uptest-
 
-      # git needs to be able to access private repositories under upbound.
-      - name: Login to Github
-        run: |
-          git config --global user.name "upbound-bot"
-          echo "machine github.com login upbound-bot password $UPBOUND_BOT_GITHUB_TOKEN" > ~/.netrc
-
       - name: Cache Go Dependencies
         uses: actions/cache@v2
         with:
@@ -119,6 +110,7 @@ jobs:
           UPTEST_AZURE_CREDS: ${{ secrets.UPTEST_AZURE_CREDS }}
           EXAMPLE_LIST: ${{ needs.get-example-list.outputs.example_list }}
           UPTEST_EXAMPLE_VALUE_REPLACEMENTS: ${{ secrets.UPTEST_EXAMPLE_VALUE_REPLACEMENTS }}
+          DUMP_DIRECTORY: "./_output/cluster-dump"
         run: make uptest
 
       - name: Collect Cluster Dump

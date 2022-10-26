@@ -41,8 +41,6 @@ limitations under the License.
 // Generate crossplane-runtime methodsets (resource.Claim, etc)
 //go:generate go run -tags generate github.com/crossplane/crossplane-tools/cmd/angryjet generate-methodsets --header-file=../hack/boilerplate.go.txt ./...
 
-// Run UpDoc generator
-//go:generate go run github.com/upbound/official-providers/updoc/cmd generate --docs-dir=../docs
 
 package apis
 
@@ -52,7 +50,4 @@ import (
 	_ "github.com/crossplane/crossplane-tools/cmd/angryjet" //nolint:typecheck
 
 	_ "github.com/upbound/upjet/cmd/scraper"
-
-	_ "github.com/upbound/official-providers/testing/cmd"
-	_ "github.com/upbound/official-providers/updoc/cmd"
 )
