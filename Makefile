@@ -55,6 +55,7 @@ GO111MODULE = on
 KIND_VERSION = v0.15.0
 UP_VERSION = v0.14.0
 UP_CHANNEL = stable
+UPTEST_VERSION = v0.2.1
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================
@@ -147,27 +148,33 @@ pull-docs:
 
 generate.init: $(TERRAFORM_PROVIDER_SCHEMA) pull-docs
 
-# ====================================================================================
-# Test utilities
-# TODO(muvaf): Move most of this to build submodule.
-
-uptest: $(KIND) $(KUBECTL) $(HELM3) $(UP) $(KUTTL)
-	@$(INFO) running uptest using kind $(KIND_VERSION)
-	@./cluster/install_provider.sh || $(FAIL)
-	@echo "$${UPTEST_EXAMPLE_VALUE_REPLACEMENTS}" > $(WORK_DIR)/replacements.yaml
-	@KIND=$(KIND) KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd --data-source "$(WORK_DIR)/replacements.yaml" || $(FAIL)
-
-uptest-local: $(KUBECTL) $(KUTTL)
-	@$(INFO) running automated tests with uptest using current kubeconfig $(KIND_VERSION)
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) go run github.com/upbound/official-providers/testing/cmd || $(FAIL)
-
-cluster_dump: $(KUBECTL)
-	@mkdir -p ${DUMP_DIRECTORY}
-	@$(KUBECTL) cluster-info dump --output-directory ${DUMP_DIRECTORY} --all-namespaces || true
-	@$(KUBECTL) get managed -o yaml > ${DUMP_DIRECTORY}/managed.yaml || true
-	@cat /tmp/automated-tests/case/*.yaml > ${DUMP_DIRECTORY}/kuttl-inputs.yaml
-
 .PHONY: pull-docs
+
+# ====================================================================================
+# End to End Testing
+CROSSPLANE_NAMESPACE = upbound-system
+-include build/makelib/local.xpkg.mk
+-include build/makelib/controlplane.mk
+
+# This target requires the following environment variables to be set:
+# - UPTEST_CLOUD_CREDENTIALS, cloud credentials for the provider being tested, e.g. export UPTEST_CLOUD_CREDENTIALS=$(cat ~/.aws/credentials)
+# - UPTEST_EXAMPLE_LIST, a comma-separated list of examples to test
+# - UPTEST_DATASOURCE_PATH, see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
+uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
+	@$(INFO) running automated tests
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --setup-script=cluster/test/setup.sh || $(FAIL)
+	@$(OK) running automated tests
+
+uptest-local:
+	@$(WARN) "this target is deprecated, please use 'make uptest' instead"
+
+# This target requires the following environment variables to be set:
+# - UPTEST_CLOUD_CREDENTIALS, cloud credentials for the provider being tested, e.g. export UPTEST_CLOUD_CREDENTIALS=$(cat ~/.aws/credentials)
+# - UPTEST_EXAMPLE_LIST, a comma-separated list of examples to test
+# - UPTEST_DATASOURCE_PATH, see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
+e2e: build controlplane.up local.xpkg.deploy.provider.$(PROJECT_NAME) uptest
+
+.PHONY: uptest e2e
 
 # ====================================================================================
 # Special Targets
