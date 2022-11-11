@@ -2,7 +2,7 @@ apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
-    upjet.upbound.io/timeout: "3600"
+    uptest.upbound.io/timeout: "3600"
   name: example
 spec:
   forProvider:
