@@ -126,6 +126,9 @@ jobs:
           # to save a skipped resource list
           SKIPPED_RESOURCES_CSV: ../_output/skipped_resources.csv
 
+      - name: Report Statistics
+        run: head -1 _output/skipped_resources.csv
+
       - name: Publish skipped resources CSV to Github
         uses: actions/upload-artifact@v3
         with:
