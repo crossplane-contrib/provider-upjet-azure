@@ -5,7 +5,7 @@ metadata:
     meta.upbound.io/example-id: servicebus/v1beta1/servicebusnamespace
   labels:
     testing.upbound.io/example-name: example
-  name: example-servicebus-namespace # Prevent naming conflict
+  name: example-y9w8 # Prevent naming conflict
 spec:
   forProvider:
     location: West Europe
