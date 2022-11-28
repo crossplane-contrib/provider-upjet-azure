@@ -35,6 +35,7 @@ type FrontdoorRulesEngineObservation struct {
 
 type FrontdoorRulesEngineParameters struct {
 
+	// Whether this Rules engine configuration is enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -74,7 +75,7 @@ type FrontdoorRulesEngineRuleObservation struct {
 
 type FrontdoorRulesEngineRuleParameters struct {
 
-	// A rule_action block as defined below.
+	// An action block as defined below.
 	// +kubebuilder:validation:Optional
 	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
@@ -82,7 +83,7 @@ type FrontdoorRulesEngineRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	MatchCondition []RuleMatchConditionParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
 
-	// The name of the rule.
+	// The name of the rule. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -140,7 +141,7 @@ type RuleMatchConditionParameters struct {
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
-	// match against a specific key when variable is set to PostArgs or RequestHeader. It cannot be used with QueryString and RequestMethod. Defaults to null.
+	// match against a specific key when variable is set to PostArgs or RequestHeader. It cannot be used with QueryString and RequestMethod.
 	// +kubebuilder:validation:Optional
 	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
 
@@ -171,7 +172,7 @@ type FrontdoorRulesEngineStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FrontdoorRulesEngine is the Schema for the FrontdoorRulesEngines API. Manages an Azure Front Door Rules Engine configuration and rules.
+// FrontdoorRulesEngine is the Schema for the FrontdoorRulesEngines API. Manages an Azure Front Door (classic) Rules Engine configuration and rules.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

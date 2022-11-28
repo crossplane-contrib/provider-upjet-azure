@@ -162,7 +162,8 @@ spec:
                           type: object
                         subnetId:
                           description: Reference to the subnet associated with the
-                            IP Configuration.
+                            IP Configuration. Changing this forces a new resource
+                            to be created.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet to populate subnetId.
@@ -440,8 +441,8 @@ spec:
                       and AZFW_VNet.  Changing this forces a new resource to be created.
                     type: string
                   skuTier:
-                    description: SKU tier of the Firewall. Possible values are Premium
-                      and Standard.  Changing this forces a new resource to be created.
+                    description: SKU tier of the Firewall. Possible values are Premium,
+                      Standard and Basic.
                     type: string
                   tags:
                     additionalProperties:
@@ -450,8 +451,8 @@ spec:
                     type: object
                   threatIntelMode:
                     description: 'The operation mode for threat intelligence-based
-                      filtering. Possible values are: Off, Alert,Deny and ""(empty
-                      string). Defaults to Alert.'
+                      filtering. Possible values are: Off, Alert and Deny. Defaults
+                      to Alert.'
                     type: string
                   virtualHub:
                     description: A virtual_hub block as documented below.

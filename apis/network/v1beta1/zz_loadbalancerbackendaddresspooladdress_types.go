@@ -13,13 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InboundNATRulePortMappingObservation struct {
+
+	// The Backend Port of the Load Balancing Inbound NAT Rules associated with this Backend Address Pool Address.
+	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
+
+	// The Frontend Port of the Load Balancing Inbound NAT Rules associated with this Backend Address Pool Address.
+	FrontendPort *float64 `json:"frontendPort,omitempty" tf:"frontend_port,omitempty"`
+
+	// The name of the Load Balancing Inbound NAT Rules associated with this Backend Address Pool Address.
+	InboundNATRuleName *string `json:"inboundNatRuleName,omitempty" tf:"inbound_nat_rule_name,omitempty"`
+}
+
+type InboundNATRulePortMappingParameters struct {
+}
+
 type LoadBalancerBackendAddressPoolAddressObservation struct {
 
 	// The ID of the Backend Address Pool Address.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of inbound_nat_rule_port_mapping block as defined below.
+	InboundNATRulePortMapping []InboundNATRulePortMappingObservation `json:"inboundNatRulePortMapping,omitempty" tf:"inbound_nat_rule_port_mapping,omitempty"`
 }
 
 type LoadBalancerBackendAddressPoolAddressParameters struct {
+
+	// The ip config ID of the regional load balancer that's added to the global load balancer's backend address pool.
+	// For global load balancer, user needs to specify the `backend_address_ip_configuration_id` of the added regional load balancers
+	// +kubebuilder:validation:Optional
+	BackendAddressIPConfigurationID *string `json:"backendAddressIpConfigurationId,omitempty" tf:"backend_address_ip_configuration_id,omitempty"`
 
 	// The ID of the Backend Address Pool. Changing this forces a new Backend Address Pool Address to be created.
 	// +crossplane:generate:reference:type=LoadBalancerBackendAddressPool
@@ -36,10 +59,11 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// The Static IP Address which should be allocated to this Backend Address Pool.
-	// +kubebuilder:validation:Required
-	IPAddress *string `json:"ipAddress" tf:"ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The ID of the Virtual Network within which the Backend Address Pool should exist.
+	// For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
 	// +crossplane:generate:reference:type=VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

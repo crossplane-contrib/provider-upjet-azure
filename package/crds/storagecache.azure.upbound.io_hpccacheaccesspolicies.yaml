@@ -89,8 +89,7 @@ spec:
                             filter rule and there is no default rule, access is denied.'
                           type: string
                         rootSquashEnabled:
-                          description: Whether to enable root squash? Defaults to
-                            false.
+                          description: Whether to enable root squash?
                           type: boolean
                         scope:
                           description: 'The scope of this rule. The scope and (potentially)
@@ -99,10 +98,10 @@ spec:
                           type: string
                         submountAccessEnabled:
                           description: Whether allow access to subdirectories under
-                            the root export? Defaults to false.
+                            the root export?
                           type: boolean
                         suidEnabled:
-                          description: Whether SUID is allowed? Defaults to false.
+                          description: Whether SUID is allowed?
                           type: boolean
                       required:
                       - access

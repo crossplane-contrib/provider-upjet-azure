@@ -64,8 +64,20 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  authenticationMethod:
+                    description: The authentication method that is used to authenticate
+                      clients. Possible values are None and Cassandra. Defaults to
+                      Cassandra.
+                    type: string
+                  clientCertificatePems:
+                    description: A list of TLS certificates that is used to authorize
+                      client connecting to the Cassandra Cluster.
+                    items:
+                      type: string
+                    type: array
                   defaultAdminPasswordSecretRef:
                     description: The initial admin password for this Cassandra Cluster.
+                      Changing this forces a new resource to be created.
                     properties:
                       key:
                         description: The key to select.
@@ -159,10 +171,44 @@ spec:
                             type: string
                         type: object
                     type: object
+                  externalGossipCertificatePems:
+                    description: A list of TLS certificates that is used to authorize
+                      gossip from unmanaged Cassandra Data Center.
+                    items:
+                      type: string
+                    type: array
+                  externalSeedNodeIpAddresses:
+                    description: A list of IP Addresses of the seed nodes in unmanaged
+                      the Cassandra Data Center which will be added to the seed node
+                      lists of all managed nodes.
+                    items:
+                      type: string
+                    type: array
+                  hoursBetweenBackups:
+                    description: The number of hours to wait between taking a backup
+                      of the Cassandra Cluster. Defaults to 24.
+                    type: number
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Cassandra Cluster. The
+                            only possible value is SystemAssigned.
+                          type: string
+                      required:
+                      - type
+                      type: object
+                    type: array
                   location:
                     description: The Azure Region where the Cassandra Cluster should
                       exist. Changing this forces a new Cassandra Cluster to be created.
                     type: string
+                  repairEnabled:
+                    description: Is the automatic repair enabled on the Cassandra
+                      Cluster? Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group where the Cassandra
                       Cluster should exist. Changing this forces a new Cassandra Cluster
@@ -248,6 +294,11 @@ spec:
                       type: string
                     description: A mapping of tags assigned to the resource.
                     type: object
+                  version:
+                    description: The version of Cassandra what the Cluster converges
+                      to run. Possible values are 3.11 and 4.0. Defaults to 3.11.
+                      Changing this forces a new Cassandra Cluster to be created.
+                    type: string
                 required:
                 - defaultAdminPasswordSecretRef
                 - location
@@ -431,6 +482,18 @@ spec:
                   id:
                     description: The ID of the Cassandra Cluster.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        principalId:
+                          description: The ID of the Cassandra Cluster.
+                          type: string
+                        tenantId:
+                          description: The ID of the Cassandra Cluster.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

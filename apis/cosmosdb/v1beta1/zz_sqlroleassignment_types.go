@@ -70,8 +70,18 @@ type SQLRoleAssignmentParameters struct {
 	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Scope *string `json:"scope" tf:"scope,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Reference to a Account in cosmosdb to populate scope.
+	// +kubebuilder:validation:Optional
+	ScopeRef *v1.Reference `json:"scopeRef,omitempty" tf:"-"`
+
+	// Selector for a Account in cosmosdb to populate scope.
+	// +kubebuilder:validation:Optional
+	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
 }
 
 // SQLRoleAssignmentSpec defines the desired state of SQLRoleAssignment

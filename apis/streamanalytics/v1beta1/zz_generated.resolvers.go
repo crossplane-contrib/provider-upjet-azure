@@ -248,21 +248,5 @@ func (mg *OutputSynapse) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
-		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
-		To: reference.To{
-			List:    &JobList{},
-			Managed: &Job{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
-	}
-	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
-
 	return nil
 }

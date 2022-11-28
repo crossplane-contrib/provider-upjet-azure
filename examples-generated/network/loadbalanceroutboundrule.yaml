@@ -55,7 +55,6 @@ spec:
     loadbalancerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    resource_group_name: LoadBalancerRG
 
 ---
 

@@ -21,6 +21,9 @@ type LoadBalancerBackendAddressPoolObservation struct {
 	// The ID of the Backend Address Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An array of the Load Balancing Inbound NAT Rules associated with this Backend Address Pool.
+	InboundNATRules []*string `json:"inboundNatRules,omitempty" tf:"inbound_nat_rules,omitempty"`
+
 	// The Load Balancing Rules associated with this Backend Address Pool.
 	LoadBalancingRules []*string `json:"loadBalancingRules,omitempty" tf:"load_balancing_rules,omitempty"`
 
@@ -30,7 +33,7 @@ type LoadBalancerBackendAddressPoolObservation struct {
 
 type LoadBalancerBackendAddressPoolParameters struct {
 
-	// The ID of the Load Balancer in which to create the Backend Address Pool.
+	// The ID of the Load Balancer in which to create the Backend Address Pool. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=LoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -62,11 +65,11 @@ type TunnelInterfaceParameters struct {
 	// +kubebuilder:validation:Required
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
-	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are Native and VXLAN.
+	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are None, Native and VXLAN.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
-	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are Internal and External.
+	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are None, Internal and External.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

@@ -70,8 +70,9 @@ spec:
                       to be created.
                     type: string
                   minimumTlsVersion:
-                    description: The minimum TLS version.  Defaults to 1.2. Changing
-                      this forces a new Redis Enterprise Cluster to be created.
+                    description: The minimum TLS version.  Possible values are 1.0,
+                      1.1 and 1.2. Defaults to 1.2. Changing this forces a new Redis
+                      Enterprise Cluster to be created.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Redis Enterprise

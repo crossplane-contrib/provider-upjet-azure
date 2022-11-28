@@ -37,7 +37,7 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 	// +kubebuilder:validation:Optional
 	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path,omitempty"`
 
-	// The IoTHub ID for the endpoint.
+	// The IoTHub ID for the endpoint. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

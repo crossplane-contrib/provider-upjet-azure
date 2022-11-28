@@ -30,6 +30,12 @@ type KeyObservation struct {
 	// The PEM encoded public key of this Key Vault Key.
 	PublicKeyPem *string `json:"publicKeyPem,omitempty" tf:"public_key_pem,omitempty"`
 
+	// The (Versioned) ID for this Key Vault Key. This property points to a specific version of a Key Vault Key, as such using this won't auto-rotate values if used in other Azure Services.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// The Versionless ID of the Key Vault Key. This property allows other Azure Services (that support it) to auto-rotate their value when the Key Vault Key is updated.
+	ResourceVersionlessID *string `json:"resourceVersionlessId,omitempty" tf:"resource_versionless_id,omitempty"`
+
 	// The current version of the Key Vault Key.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -61,7 +67,7 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
 
-	// Specifies the Key Type to use for this Key Vault Key. Possible values are EC (Elliptic Curve), EC-HSM, Oct (Octet), RSA and RSA-HSM. Changing this forces a new resource to be created.
+	// Specifies the Key Type to use for this Key Vault Key. Possible values are EC (Elliptic Curve), EC-HSM, RSA and RSA-HSM. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	KeyType *string `json:"keyType" tf:"key_type,omitempty"`
 

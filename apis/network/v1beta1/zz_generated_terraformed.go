@@ -232,7 +232,7 @@ func (tr *DNSARecord) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSARecord) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DNSAAAARecord
@@ -306,7 +306,7 @@ func (tr *DNSAAAARecord) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSAAAARecord) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DNSCAARecord
@@ -380,7 +380,7 @@ func (tr *DNSCAARecord) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSCAARecord) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DNSCNAMERecord
@@ -454,7 +454,7 @@ func (tr *DNSCNAMERecord) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSCNAMERecord) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DNSMXRecord
@@ -528,7 +528,7 @@ func (tr *DNSMXRecord) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSMXRecord) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DNSNSRecord
@@ -602,7 +602,7 @@ func (tr *DNSNSRecord) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSNSRecord) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DNSPTRRecord
@@ -676,7 +676,7 @@ func (tr *DNSPTRRecord) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSPTRRecord) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DNSSRVRecord
@@ -750,7 +750,7 @@ func (tr *DNSSRVRecord) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSSRVRecord) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DNSTXTRecord
@@ -824,7 +824,7 @@ func (tr *DNSTXTRecord) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSTXTRecord) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this DNSZone
@@ -898,7 +898,7 @@ func (tr *DNSZone) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DNSZone) GetTerraformSchemaVersion() int {
-	return 1
+	return 2
 }
 
 // GetTerraformResourceType returns Terraform resource type for this ExpressRouteCircuit
@@ -2156,7 +2156,7 @@ func (tr *FrontdoorRulesEngine) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *FrontdoorRulesEngine) GetTerraformSchemaVersion() int {
-	return 1
+	return 2
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IPGroup

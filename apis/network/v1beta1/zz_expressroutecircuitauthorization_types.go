@@ -24,7 +24,7 @@ type ExpressRouteCircuitAuthorizationObservation struct {
 
 type ExpressRouteCircuitAuthorizationParameters struct {
 
-	// The name of the Express Route Circuit in which to create the Authorization.
+	// The name of the Express Route Circuit in which to create the Authorization. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ExpressRouteCircuit
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitName *string `json:"expressRouteCircuitName,omitempty" tf:"express_route_circuit_name,omitempty"`
@@ -37,7 +37,7 @@ type ExpressRouteCircuitAuthorizationParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitNameSelector *v1.Selector `json:"expressRouteCircuitNameSelector,omitempty" tf:"-"`
 
-	// The name of the resource group in which to
+	// The name of the resource group in which to Changing this forces a new resource to be created.
 	// create the ExpressRoute circuit. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional

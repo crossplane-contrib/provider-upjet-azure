@@ -12,7 +12,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     assignableScopes:
-    - /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}/dbs/sales
+    - ${azurerm_cosmosdb_account.example.id}/dbs/sales
     name: acctestsqlrole
     permissions:
     - dataActions:

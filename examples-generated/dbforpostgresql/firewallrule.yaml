@@ -28,7 +28,14 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    version: "11"
 
 ---
 

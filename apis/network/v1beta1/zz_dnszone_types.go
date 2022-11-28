@@ -70,7 +70,7 @@ type SoaRecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpireTime *float64 `json:"expireTime,omitempty" tf:"expire_time,omitempty"`
 
-	// The domain name of the authoritative name server for the SOA record. Defaults to ns1-03.azure-dns.com..
+	// The domain name of the authoritative name server for the SOA record.
 	// +kubebuilder:validation:Required
 	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 

@@ -67,7 +67,8 @@ spec:
                 properties:
                   expressRouteCircuitName:
                     description: The name of the Express Route Circuit in which to
-                      create the Authorization.
+                      create the Authorization. Changing this forces a new resource
+                      to be created.
                     type: string
                   expressRouteCircuitNameRef:
                     description: Reference to a ExpressRouteCircuit to populate expressRouteCircuitName.
@@ -143,9 +144,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
-                    description: The name of the resource group in which to create
-                      the ExpressRoute circuit. Changing this forces a new resource
-                      to be created.
+                    description: The name of the resource group in which to Changing
+                      this forces a new resource to be created. create the ExpressRoute
+                      circuit. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate

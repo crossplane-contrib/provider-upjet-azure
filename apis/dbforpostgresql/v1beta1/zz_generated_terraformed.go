@@ -84,7 +84,7 @@ func (tr *ActiveDirectoryAdministrator) LateInitialize(attrs []byte) (bool, erro
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ActiveDirectoryAdministrator) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this Configuration
@@ -232,7 +232,7 @@ func (tr *Database) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Database) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this FirewallRule
@@ -676,7 +676,7 @@ func (tr *Server) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Server) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this ServerKey

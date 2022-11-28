@@ -21,7 +21,7 @@ type MonitorPrivateLinkScopedServiceObservation struct {
 
 type MonitorPrivateLinkScopedServiceParameters struct {
 
-	// The ID of the linked resource. It must be the Log Analytics Workspace or the Application Insights component. Changing this forces a new resource to be created.
+	// The ID of the linked resource. It must be the Log Analytics workspace or the Application Insights component or the Data Collection endpoint. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

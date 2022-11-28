@@ -232,5 +232,5 @@ func (tr *MonitorSmartDetectorAlertRule) LateInitialize(attrs []byte) (bool, err
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *MonitorSmartDetectorAlertRule) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

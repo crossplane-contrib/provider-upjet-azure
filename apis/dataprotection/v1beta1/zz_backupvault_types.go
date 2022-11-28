@@ -25,7 +25,7 @@ type BackupVaultObservation struct {
 
 type BackupVaultParameters struct {
 
-	// Specifies the type of the data store. Possible values are ArchiveStore, SnapshotStore and VaultStore.
+	// Specifies the type of the data store. Possible values are ArchiveStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	DatastoreType *string `json:"datastoreType" tf:"datastore_type,omitempty"`
 

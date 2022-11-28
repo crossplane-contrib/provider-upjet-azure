@@ -38,7 +38,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The name of the Storage Account where the Container should be created.
+	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`

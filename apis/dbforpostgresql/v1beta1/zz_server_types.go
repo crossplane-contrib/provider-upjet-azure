@@ -76,7 +76,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Whether or not infrastructure is encrypted for this server. Defaults to false. Changing this forces a new resource to be created.
+	// Whether or not infrastructure is encrypted for this server. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
@@ -101,7 +101,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// When create_mode is PointInTimeRestore the point in time to restore from creation_source_server_id.
+	// When create_mode is PointInTimeRestore the point in time to restore from creation_source_server_id. It should be provided in RFC3339 format, e.g. 2013-11-08T22:00:40Z.
 	// +kubebuilder:validation:Optional
 	RestorePointInTime *string `json:"restorePointInTime,omitempty" tf:"restore_point_in_time,omitempty"`
 
@@ -109,11 +109,11 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Required
 	SSLEnforcementEnabled *bool `json:"sslEnforcementEnabled" tf:"ssl_enforcement_enabled,omitempty"`
 
-	// The minimum TLS version to support on the sever. Possible values are TLSEnforcementDisabled, TLS1_0, TLS1_1, and TLS1_2. Defaults to TLSEnforcementDisabled.
+	// The minimum TLS version to support on the sever. Possible values are TLSEnforcementDisabled, TLS1_0, TLS1_1, and TLS1_2. Defaults to TLS1_2.
 	// +kubebuilder:validation:Optional
 	SSLMinimalTLSVersionEnforced *string `json:"sslMinimalTlsVersionEnforced,omitempty" tf:"ssl_minimal_tls_version_enforced,omitempty"`
 
-	// Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. B_Gen4_1, GP_Gen5_8). For more information see the product documentation.
+	// Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. B_Gen4_1, GP_Gen5_8). For more information see the product documentation. Possible values are B_Gen4_1, B_Gen4_2, B_Gen5_1, B_Gen5_2, GP_Gen4_2, GP_Gen4_4, GP_Gen4_8, GP_Gen4_16, GP_Gen4_32, GP_Gen5_2, GP_Gen5_4, GP_Gen5_8, GP_Gen5_16, GP_Gen5_32, GP_Gen5_64, MO_Gen5_2, MO_Gen5_4, MO_Gen5_8, MO_Gen5_16 and MO_Gen5_32.
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 
@@ -129,7 +129,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ThreatDetectionPolicy []ThreatDetectionPolicyParameters `json:"threatDetectionPolicy,omitempty" tf:"threat_detection_policy,omitempty"`
 
-	// Specifies the version of PostgreSQL to use. Valid values are 9.5, 9.6, 10, 10.0, and 11. Changing this forces a new resource to be created.
+	// Specifies the version of PostgreSQL to use. Valid values are 9.5, 9.6, 10, 10.0, 10.2 and 11. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -139,7 +139,7 @@ type ThreatDetectionPolicyObservation struct {
 
 type ThreatDetectionPolicyParameters struct {
 
-	// Specifies a list of alerts which should be disabled. Possible values include Access_Anomaly, Sql_Injection and Sql_Injection_Vulnerability.
+	// Specifies a list of alerts which should be disabled. Possible values are Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration and Unsafe_Action.
 	// +kubebuilder:validation:Optional
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 

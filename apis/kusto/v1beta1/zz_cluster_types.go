@@ -31,7 +31,15 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
-	// Specifies if the cluster could be automatically stopped (due to lack of data or no activity for many days).
+	// List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.
+	// +kubebuilder:validation:Optional
+	AllowedFqdns []*string `json:"allowedFqdns,omitempty" tf:"allowed_fqdns,omitempty"`
+
+	// The list of ips in the format of CIDR allowed to connect to the cluster.
+	// +kubebuilder:validation:Optional
+	AllowedIPRanges []*string `json:"allowedIpRanges,omitempty" tf:"allowed_ip_ranges,omitempty"`
+
+	// Specifies if the cluster could be automatically stopped (due to lack of data or no activity for many days). Defaults to true.
 	// +kubebuilder:validation:Optional
 	AutoStopEnabled *bool `json:"autoStopEnabled,omitempty" tf:"auto_stop_enabled,omitempty"`
 
@@ -39,11 +47,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DiskEncryptionEnabled *bool `json:"diskEncryptionEnabled,omitempty" tf:"disk_encryption_enabled,omitempty"`
 
-	// Is the cluster's double encryption enabled? Defaults to false. Changing this forces a new resource to be created.
+	// Is the cluster's double encryption enabled?  Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DoubleEncryptionEnabled *bool `json:"doubleEncryptionEnabled,omitempty" tf:"double_encryption_enabled,omitempty"`
 
-	// . The engine type that should be used. Possible values are V2 and V3. Defaults to V2.
+	// . The engine type that will be used in the backend. Possible values are V2 and V3. Defaults to V2. Changing this forces a new Kusto Cluster to be created.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -62,6 +70,14 @@ type ClusterParameters struct {
 	// An optimized_auto_scale block as defined below.
 	// +kubebuilder:validation:Optional
 	OptimizedAutoScale []OptimizedAutoScaleParameters `json:"optimizedAutoScale,omitempty" tf:"optimized_auto_scale,omitempty"`
+
+	// Whether to restrict outbound network access. Value is optional but if passed in, must be true or false, default is false.
+	// +kubebuilder:validation:Optional
+	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
+
+	// Indicates what public IP type to create - IPv4 (default), or DualStack (both IPv4 and IPv6).
+	// +kubebuilder:validation:Optional
+	PublicIPType *string `json:"publicIpType,omitempty" tf:"public_ip_type,omitempty"`
 
 	// Is the public network access enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -152,7 +168,7 @@ type SkuParameters struct {
 	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// The name of the SKU. Valid values are: Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D11_v2, Standard_D12_v2, Standard_D13_v2, Standard_D14_v2, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS14_v2+4TB_PS, Standard_E16as_v4+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E16a_v4, Standard_E2a_v4, Standard_E4a_v4, Standard_E64i_v3, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_E8a_v4, Standard_L16s, Standard_L4s, Standard_L8s, Standard_L16s_v2 and Standard_L8s_v2.
+	// The name of the SKU. Valid values are: Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D11_v2, Standard_D12_v2, Standard_D13_v2, Standard_D14_v2, Standard_D16d_v5, Standard_D32d_v4, Standard_D32d_v5, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS14_v2+4TB_PS, Standard_E16a_v4, Standard_E16ads_v5, Standard_E16as_v4+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E16as_v5+3TB_PS, Standard_E16as_v5+4TB_PS, Standard_E16s_v4+3TB_PS, Standard_E16s_v4+4TB_PS, Standard_E16s_v5+3TB_PS, Standard_E16s_v5+4TB_PS, Standard_E2a_v4, Standard_E2ads_v5,Standard_E4a_v4, Standard_E4ads_v5, Standard_E64i_v3, Standard_E80ids_v4, Standard_E8a_v4, Standard_E8ads_v5, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_E8as_v5+1TB_PS, Standard_E8as_v5+2TB_PS, Standard_E8s_v4+1TB_PS, Standard_E8s_v4+2TB_PS, Standard_E8s_v5+1TB_PS, Standard_E8s_v5+2TB_PS, Standard_L16s, Standard_L16s_v2, Standard_L4s, Standard_L8s, Standard_L8s_v2, "Standard_L8s_v3", Standard_L16s_v3, Standard_L8as_v3, Standard_L16as_v3, Standard_EC8as_v5+1TB_PS, Standard_EC8as_v5+2TB_PS, Standard_EC16as_v5+3TB_PS, Standard_EC16as_v5+4TB_PS, Standard_EC8ads_v5, Standard_EC16ads_v5, Standard_E2d_v4, Standard_E4d_v4, Standard_E8d_v4, Standard_E16d_v4, Standard_E2d_v5, Standard_E4d_v5, Standard_E8d_v5 and Standard_E16d_v5.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }

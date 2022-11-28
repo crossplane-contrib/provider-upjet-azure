@@ -10,7 +10,7 @@ spec:
   forProvider:
     accountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
     conflictResolutionPolicy:
     - conflictResolutionPath: /_ts
       mode: LastWriterWins
@@ -23,11 +23,11 @@ spec:
       - /"_etag"/?
       includedPaths:
       - /*
-      indexingMode: Consistent
+      indexingMode: consistent
     partitionKeyPath: /Example
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
     throughput: 400
     uniqueKey:
     - paths:

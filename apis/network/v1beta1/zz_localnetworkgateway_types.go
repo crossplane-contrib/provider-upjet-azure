@@ -59,13 +59,11 @@ type LocalNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayFqdn *string `json:"gatewayFqdn,omitempty" tf:"gateway_fqdn,omitempty"`
 
-	// The location/region where the local network gateway is
-	// created. Changing this forces a new resource to be created.
+	// The location/region where the local network gateway is created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// The name of the resource group in which to
-	// create the local network gateway.
+	// The name of the resource group in which to create the local network gateway. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`

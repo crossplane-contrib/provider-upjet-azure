@@ -66,7 +66,8 @@ spec:
                 properties:
                   autoStartEnabled:
                     description: The flag indicates if the resource should be automatically
-                      started on creation. Default is false.
+                      started on creation. Default is false. Changing this forces
+                      a new resource to be created.
                     type: boolean
                   crossSiteAccessPolicy:
                     description: A cross_site_access_policy block as defined below.
@@ -261,8 +262,7 @@ spec:
                             with the streaming locator created for the preview. The
                             identifier can be used in the CustomLicenseAcquisitionUrlTemplate
                             or the CustomKeyAcquisitionUrlTemplate of the Streaming
-                            Policy specified in the streaming_policy_name field. Changing
-                            this forces a new resource to be created.
+                            Policy specified in the streaming_policy_name field.
                           type: string
                         ipAccessControlAllow:
                           description: One or more ip_access_control_allow blocks

@@ -84,7 +84,7 @@ type SecurityRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Direction *string `json:"direction,omitempty" tf:"direction"`
 
-	// Specifies the name of the network security group. Changing this forces a new resource to be created.
+	// The name of the security rule. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name"`
 

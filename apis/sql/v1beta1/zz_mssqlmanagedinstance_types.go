@@ -24,7 +24,11 @@ type IdentityObservation struct {
 
 type IdentityParameters struct {
 
-	// The identity type of the SQL Managed Instance. The only possible value is SystemAssigned.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
+	// +kubebuilder:validation:Optional
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this SQL Managed Instance. Possible values are SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -56,7 +60,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
+	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -74,7 +78,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// What type of license the Managed Instance will use. Valid values include can be PriceIncluded or BasePrice.
+	// What type of license the Managed Instance will use. Possible values are LicenseIncluded and BasePrice.
 	// +kubebuilder:validation:Required
 	LicenseType *string `json:"licenseType" tf:"license_type,omitempty"`
 
@@ -98,7 +102,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicDataEndpointEnabled *bool `json:"publicDataEndpointEnabled,omitempty" tf:"public_data_endpoint_enabled,omitempty"`
 
-	// The name of the resource group in which to create the SQL Managed Instance.
+	// The name of the resource group in which to create the SQL Managed Instance. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -111,7 +115,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_G8IM, GP_G8IH, BC_Gen4, BC_Gen5, BC_G8IM or BC_G8IH.
+	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 
@@ -123,7 +127,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Required
 	StorageSizeInGb *float64 `json:"storageSizeInGb" tf:"storage_size_in_gb,omitempty"`
 
-	// The subnet resource id that the SQL Managed Instance will be associated with.
+	// The subnet resource id that the SQL Managed Instance will be associated with. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -21,7 +21,7 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorObservation struct {
 
 type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 
-	// When true, only permit logins from AAD users and administrators. When false, also allow local database users. Defaults to false.
+	// When true, only permit logins from AAD users and administrators. When false, also allow local database users.
 	// +kubebuilder:validation:Optional
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 

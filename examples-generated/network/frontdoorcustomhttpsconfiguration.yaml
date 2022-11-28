@@ -36,7 +36,6 @@ spec:
     - name: exampleHealthProbeSetting1
     backendPoolLoadBalancing:
     - name: exampleLoadBalancingSettings1
-    enforce_backend_pools_certificate_name_check: false
     frontendEndpoint:
     - hostName: example-FrontDoor.azurefd.net
       name: exampleFrontendEndpoint1

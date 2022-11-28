@@ -68,6 +68,10 @@ type PointToSiteVPNGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Is the Routing Preference for the Public IP Interface of the VPN Gateway enabled? Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	RoutingPreferenceInternetEnabled *bool `json:"routingPreferenceInternetEnabled,omitempty" tf:"routing_preference_internet_enabled,omitempty"`
+
 	// The Scale Unit for this Point-to-Site VPN Gateway.
 	// +kubebuilder:validation:Required
 	ScaleUnit *float64 `json:"scaleUnit" tf:"scale_unit,omitempty"`
@@ -113,6 +117,14 @@ type RouteParameters struct {
 	// The Virtual Hub Route Table resource id associated with this Routing Configuration.
 	// +kubebuilder:validation:Required
 	AssociatedRouteTableID *string `json:"associatedRouteTableId" tf:"associated_route_table_id,omitempty"`
+
+	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
+	// +kubebuilder:validation:Optional
+	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
+
+	// The resource ID of the Route Map associated with this Routing Configuration for outbound advertised routes.
+	// +kubebuilder:validation:Optional
+	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
 
 	// A propagated_route_table block as defined below.
 	// +kubebuilder:validation:Optional

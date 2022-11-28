@@ -20,7 +20,7 @@ func (mg *MSSQLDatabase) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this MSSQLDatabase
 func (tr *MSSQLDatabase) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"threat_detection_policy[*].storage_account_access_key": "spec.forProvider.threatDetectionPolicy[*].storageAccountAccessKeySecretRef"}
+	return map[string]string{"import[*].administrator_login_password": "spec.forProvider.import[*].administratorLoginPasswordSecretRef", "import[*].storage_key": "spec.forProvider.import[*].storageKeySecretRef", "threat_detection_policy[*].storage_account_access_key": "spec.forProvider.threatDetectionPolicy[*].storageAccountAccessKeySecretRef"}
 }
 
 // GetObservation of this MSSQLDatabase
@@ -824,7 +824,7 @@ func (tr *MSSQLServerTransparentDataEncryption) LateInitialize(attrs []byte) (bo
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *MSSQLServerTransparentDataEncryption) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this MSSQLVirtualNetworkRule

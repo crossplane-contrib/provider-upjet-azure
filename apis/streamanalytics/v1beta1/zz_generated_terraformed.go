@@ -84,7 +84,7 @@ func (tr *Cluster) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Cluster) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this FunctionJavascriptUda
@@ -158,7 +158,7 @@ func (tr *FunctionJavascriptUda) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *FunctionJavascriptUda) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this Job
@@ -168,7 +168,7 @@ func (mg *Job) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Job
 func (tr *Job) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"job_storage_account[*].account_key": "spec.forProvider.jobStorageAccount[*].accountKeySecretRef"}
 }
 
 // GetObservation of this Job
@@ -232,7 +232,7 @@ func (tr *Job) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Job) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this ManagedPrivateEndpoint
@@ -306,7 +306,7 @@ func (tr *ManagedPrivateEndpoint) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ManagedPrivateEndpoint) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this OutputBlob
@@ -380,7 +380,7 @@ func (tr *OutputBlob) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *OutputBlob) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this OutputFunction
@@ -454,7 +454,7 @@ func (tr *OutputFunction) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *OutputFunction) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this OutputSynapse
@@ -528,5 +528,5 @@ func (tr *OutputSynapse) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *OutputSynapse) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

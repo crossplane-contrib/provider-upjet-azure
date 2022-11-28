@@ -20,9 +20,9 @@ spec:
     enableAutomaticFailover: true
     geoLocation:
     - failoverPriority: 1
-      location: ${var.failover_location}
+      location: eastus
     - failoverPriority: 0
-      location: West Europe
+      location: westus
     kind: MongoDB
     location: West Europe
     offerType: Standard
@@ -42,7 +42,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    location: ${var.resource_group_location}
+    location: West Europe
 
 ---
 

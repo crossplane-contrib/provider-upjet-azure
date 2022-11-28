@@ -156,7 +156,7 @@ spec:
                           type: number
                         hostName:
                           description: The domain name of the authoritative name server
-                            for the SOA record. Defaults to ns1-03.azure-dns.com..
+                            for the SOA record.
                           type: string
                         minimumTtl:
                           description: The minimum Time To Live for the SOA record.

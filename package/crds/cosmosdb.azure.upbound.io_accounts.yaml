@@ -84,8 +84,8 @@ spec:
                     type: array
                   analyticalStorageEnabled:
                     description: Enable Analytical Storage option for this Cosmos
-                      DB account. Defaults to false. Changing this forces a new resource
-                      to be created.
+                      DB account. Defaults to false. Enabling and then disabling analytical
+                      storage forces a new resource to be created.
                     type: boolean
                   backup:
                     description: A backup block as defined below.
@@ -108,9 +108,9 @@ spec:
                           type: string
                         type:
                           description: The type of the backup. Possible values are
-                            Continuous and Periodic. Defaults to Periodic. Migration
-                            of Periodic to Continuous is one-way, changing Continuous
-                            to Periodic forces a new resource to be created.
+                            Continuous and Periodic. Migration of Periodic to Continuous
+                            is one-way, changing Continuous to Periodic forces a new
+                            resource to be created.
                           type: string
                       required:
                       - type
@@ -251,9 +251,8 @@ spec:
                             be changed for the location with failover priority 0.
                           type: number
                         location:
-                          description: Specifies the supported Azure location where
-                            the resource exists. Changing this forces a new resource
-                            to be created.
+                          description: The name of the Azure region to host replicated
+                            data. Changing this forces a new resource to be created.
                           type: string
                         zoneRedundant:
                           description: Should zone redundancy be enabled for this
@@ -268,10 +267,16 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Cosmos Account.
+                          items:
+                            type: string
+                          type: array
                         type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this Cosmos Account. The
-                            only possible value is SystemAssigned.
+                          description: The Type of Managed Identity assigned to this
+                            Cosmos account. Possible values are SystemAssigned, UserAssigned
+                            and SystemAssigned, UserAssigned.
                           type: string
                       required:
                       - type
@@ -294,8 +299,9 @@ spec:
                     type: string
                   kind:
                     description: Specifies the Kind of CosmosDB to create - possible
-                      values are GlobalDocumentDB and MongoDB. Defaults to GlobalDocumentDB.
-                      Changing this forces a new resource to be created.
+                      values are GlobalDocumentDB, MongoDB and Parse. Defaults to
+                      GlobalDocumentDB. Changing this forces a new resource to be
+                      created.
                     type: string
                   localAuthenticationDisabled:
                     description: Disable local authentication and ensure only MSI
@@ -325,7 +331,7 @@ spec:
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether or not public network access is allowed for
-                      this CosmosDB account.
+                      this CosmosDB account. Defaults to true.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which the CosmosDB
@@ -743,7 +749,7 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: The ID of the virtual network subnet.
+                    description: The CosmosDB Account ID.
                     type: string
                   identity:
                     description: An identity block as defined below.

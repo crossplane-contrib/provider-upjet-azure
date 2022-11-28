@@ -53,6 +53,10 @@ type FilterParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeBlobVersions *bool `json:"includeBlobVersions,omitempty" tf:"include_blob_versions,omitempty"`
 
+	// Includes deleted blobs in blob inventory or not? Defaults to false.
+	// +kubebuilder:validation:Optional
+	IncludeDeleted *bool `json:"includeDeleted,omitempty" tf:"include_deleted,omitempty"`
+
 	// Includes blob snapshots in blob inventory or not? Defaults to false.
 	// +kubebuilder:validation:Optional
 	IncludeSnapshots *bool `json:"includeSnapshots,omitempty" tf:"include_snapshots,omitempty"`

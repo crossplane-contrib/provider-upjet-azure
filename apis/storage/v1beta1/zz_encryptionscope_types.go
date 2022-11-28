@@ -21,7 +21,7 @@ type EncryptionScopeObservation struct {
 
 type EncryptionScopeParameters struct {
 
-	// Is a secondary layer of encryption with Platform Managed Keys for data applied?
+	// Is a secondary layer of encryption with Platform Managed Keys for data applied? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionRequired *bool `json:"infrastructureEncryptionRequired,omitempty" tf:"infrastructure_encryption_required,omitempty"`
 

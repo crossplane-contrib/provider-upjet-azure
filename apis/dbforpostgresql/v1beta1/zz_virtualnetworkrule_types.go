@@ -21,7 +21,7 @@ type VirtualNetworkRuleObservation struct {
 
 type VirtualNetworkRuleParameters struct {
 
-	// Should the Virtual Network Rule be created before the Subnet has the Virtual Network Service Endpoint enabled? Defaults to false.
+	// Should the Virtual Network Rule be created before the Subnet has the Virtual Network Service Endpoint enabled?
 	// +kubebuilder:validation:Optional
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 

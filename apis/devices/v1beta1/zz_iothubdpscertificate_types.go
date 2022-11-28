@@ -38,6 +38,10 @@ type IOTHubDPSCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTDPSNameSelector *v1.Selector `json:"iotDpsNameSelector,omitempty" tf:"-"`
 
+	// Specifies if the certificate is created in verified state. Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
+
 	// The name of the resource group under which the Iot Device Provisioning Service Certificate resource has to be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional

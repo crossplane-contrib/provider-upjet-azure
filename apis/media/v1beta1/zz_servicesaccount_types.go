@@ -24,7 +24,11 @@ type IdentityObservation struct {
 
 type IdentityParameters struct {
 
-	// Specifies the type of Managed Service Identity that should be configured on this Media Services Account. Possible value is  SystemAssigned.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Media Services Account.
+	// +kubebuilder:validation:Optional
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Media Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -84,8 +88,7 @@ type ServicesAccountParameters struct {
 	// +kubebuilder:validation:Required
 	StorageAccount []StorageAccountParameters `json:"storageAccount" tf:"storage_account,omitempty"`
 
-	// Specifies the storage authentication type.
-	// Possible value is  ManagedIdentity or System.
+	// Specifies the storage authentication type. Possible value is  ManagedIdentity or System.
 	// +kubebuilder:validation:Optional
 	StorageAuthenticationType *string `json:"storageAuthenticationType,omitempty" tf:"storage_authentication_type,omitempty"`
 

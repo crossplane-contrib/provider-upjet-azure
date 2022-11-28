@@ -604,7 +604,7 @@ func (tr *ManagedDisk) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ManagedDisk) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this OrchestratedVirtualMachineScaleSet
@@ -614,7 +614,7 @@ func (mg *OrchestratedVirtualMachineScaleSet) GetTerraformResourceType() string 
 
 // GetConnectionDetailsMapping for this OrchestratedVirtualMachineScaleSet
 func (tr *OrchestratedVirtualMachineScaleSet) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"extension[*].protected_settings": "spec.forProvider.extension[*].protectedSettingsSecretRef", "os_profile[*].custom_data": "spec.forProvider.osProfile[*].customDataSecretRef", "os_profile[*].linux_configuration[*].admin_password": "spec.forProvider.osProfile[*].linuxConfiguration[*].adminPasswordSecretRef", "os_profile[*].windows_configuration[*].admin_password": "spec.forProvider.osProfile[*].windowsConfiguration[*].adminPasswordSecretRef"}
+	return map[string]string{"extension[*].protected_settings": "spec.forProvider.extension[*].protectedSettingsSecretRef", "os_profile[*].custom_data": "spec.forProvider.osProfile[*].customDataSecretRef", "os_profile[*].linux_configuration[*].admin_password": "spec.forProvider.osProfile[*].linuxConfiguration[*].adminPasswordSecretRef", "os_profile[*].windows_configuration[*].admin_password": "spec.forProvider.osProfile[*].windowsConfiguration[*].adminPasswordSecretRef", "user_data_base64": "spec.forProvider.userDataBase64SecretRef"}
 }
 
 // GetObservation of this OrchestratedVirtualMachineScaleSet
@@ -900,7 +900,7 @@ func (tr *Snapshot) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Snapshot) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this WindowsVirtualMachine

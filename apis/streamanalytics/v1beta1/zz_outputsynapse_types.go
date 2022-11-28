@@ -25,7 +25,7 @@ type OutputSynapseParameters struct {
 	// +kubebuilder:validation:Required
 	Database *string `json:"database" tf:"database,omitempty"`
 
-	// The password that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
+	// The password that will be used to connect to the Azure SQL database.
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
@@ -47,17 +47,8 @@ type OutputSynapseParameters struct {
 	Server *string `json:"server" tf:"server,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/streamanalytics/v1beta1.Job
-	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
-
-	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
-	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
-
-	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
-	// +kubebuilder:validation:Optional
-	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name,omitempty"`
 
 	// The name of the table in the Azure SQL database. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required

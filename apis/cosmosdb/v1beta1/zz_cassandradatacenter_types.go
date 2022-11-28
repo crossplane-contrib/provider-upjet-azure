@@ -25,6 +25,14 @@ type CassandraDatacenterParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZonesEnabled *bool `json:"availabilityZonesEnabled,omitempty" tf:"availability_zones_enabled,omitempty"`
 
+	// The key URI of the customer key to use for the encryption of the backup Storage Account.
+	// +kubebuilder:validation:Optional
+	BackupStorageCustomerKeyURI *string `json:"backupStorageCustomerKeyUri,omitempty" tf:"backup_storage_customer_key_uri,omitempty"`
+
+	// The fragment of the cassandra.yaml configuration file to be included in the cassandra.yaml for all nodes in this Cassandra Datacenter. The fragment should be Base64 encoded and only a subset of keys is allowed.
+	// +kubebuilder:validation:Optional
+	Base64EncodedYamlFragment *string `json:"base64EncodedYamlFragment,omitempty" tf:"base64_encoded_yaml_fragment,omitempty"`
+
 	// The ID of the Cassandra Cluster. Changing this forces a new Cassandra Datacenter to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.CassandraCluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
@@ -53,19 +61,27 @@ type CassandraDatacenterParameters struct {
 	// +kubebuilder:validation:Optional
 	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
 
-	// Determines the number of p30 disks that are attached to each node. Defaults to 4.
+	// Determines the number of p30 disks that are attached to each node.
 	// +kubebuilder:validation:Optional
 	DiskCount *float64 `json:"diskCount,omitempty" tf:"disk_count,omitempty"`
+
+	// The Disk SKU that is used for this Cassandra Datacenter. Defaults to P30.
+	// +kubebuilder:validation:Optional
+	DiskSku *string `json:"diskSku,omitempty" tf:"disk_sku,omitempty"`
 
 	// The Azure Region where the Cassandra Datacenter should exist. Changing this forces a new Cassandra Datacenter to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// The key URI of the customer key to use for the encryption of the Managed Disk.
+	// +kubebuilder:validation:Optional
+	ManagedDiskCustomerKeyURI *string `json:"managedDiskCustomerKeyUri,omitempty" tf:"managed_disk_customer_key_uri,omitempty"`
+
 	// The number of nodes the Cassandra Datacenter should have. The number should be equal or greater than 3. Defaults to 3.
 	// +kubebuilder:validation:Optional
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
-	// Determines the selected sku. Defaults to Standard_DS14_v2.
+	// Determines the selected sku.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 }

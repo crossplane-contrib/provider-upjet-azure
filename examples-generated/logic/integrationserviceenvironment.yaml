@@ -49,7 +49,7 @@ metadata:
 spec:
   forProvider:
     addressPrefixes:
-    - 10.0.1.0/26
+    - 10.0.1.0/27
     delegation:
     - name: integrationServiceEnvironments
       serviceDelegation:
@@ -74,7 +74,7 @@ metadata:
 spec:
   forProvider:
     addressPrefixes:
-    - 10.0.1.64/26
+    - 10.0.1.32/27
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -95,7 +95,7 @@ metadata:
 spec:
   forProvider:
     addressPrefixes:
-    - 10.0.1.128/26
+    - 10.0.1.64/27
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -116,7 +116,7 @@ metadata:
 spec:
   forProvider:
     addressPrefixes:
-    - 10.0.1.192/26
+    - 10.0.1.96/27
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

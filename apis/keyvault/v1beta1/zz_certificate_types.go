@@ -52,11 +52,11 @@ type CertificateCertificateObservation struct {
 
 type CertificateCertificateParameters struct {
 
-	// The base64-encoded certificate contents. Changing this forces a new resource to be created.
+	// The base64-encoded certificate contents.
 	// +kubebuilder:validation:Required
 	ContentsSecretRef v1.SecretKeySelector `json:"contentsSecretRef" tf:"-"`
 
-	// The password associated with the certificate. Changing this forces a new resource to be created.
+	// The password associated with the certificate.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
@@ -101,7 +101,7 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificatePolicy []CertificatePolicyParameters `json:"certificatePolicy,omitempty" tf:"certificate_policy,omitempty"`
 
-	// The ID of the Key Vault where the Certificate should be created.
+	// The ID of the Key Vault where the Certificate should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -151,7 +151,7 @@ type IssuerParametersObservation struct {
 
 type IssuerParametersParameters struct {
 
-	// Specifies the name of the Key Vault Certificate. Changing this forces a new resource to be created.
+	// The name of the Certificate Issuer. Possible values include Self (for self-signed certificate), or Unknown (for a certificate issuing authority like Let's Encrypt and Azure direct supported ones). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -173,7 +173,7 @@ type KeyPropertiesParameters struct {
 	// +kubebuilder:validation:Optional
 	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
 
-	// Specifies the type of key, such as RSA or EC. Changing this forces a new resource to be created.
+	// Specifies the type of key. Possible values are EC, EC-HSM, RSA, RSA-HSM and oct. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	KeyType *string `json:"keyType" tf:"key_type,omitempty"`
 

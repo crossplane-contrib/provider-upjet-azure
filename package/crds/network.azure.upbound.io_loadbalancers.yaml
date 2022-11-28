@@ -75,27 +75,30 @@ spec:
                     items:
                       properties:
                         gatewayLoadBalancerFrontendIpConfigurationId:
-                          description: The id of the Frontend IP Configuration of
-                            a Gateway Load Balancer that this Load Balancer points
-                            to.
+                          description: The Frontend IP Configuration ID of a Gateway
+                            SKU Load Balancer.
                           type: string
                         name:
-                          description: Specifies the name of the Load Balancer.
+                          description: Specifies the name of the frontend IP configuration.
+                            Changing this forces a new resource to be created.
                           type: string
                         privateIpAddress:
                           description: Private IP Address to assign to the Load Balancer.
+                            The last one and first four IPs in any range are reserved
+                            and cannot be manually assigned.
                           type: string
                         privateIpAddressAllocation:
                           description: The allocation method for the Private IP Address
-                            used by this Load Balancer.
+                            used by this Load Balancer. Possible values as Dynamic
+                            and Static.
                           type: string
                         privateIpAddressVersion:
                           description: The version of IP that the Private IP Address
                             is. Possible values are IPv4 or IPv6.
                           type: string
                         publicIpAddressId:
-                          description: The ID of a  Public IP Address which is associated
-                            with this Load Balancer.
+                          description: The ID of a Public IP Address which should
+                            be associated with the Load Balancer.
                           type: string
                         publicIpAddressIdRef:
                           description: Reference to a PublicIP to populate publicIpAddressId.
@@ -174,12 +177,13 @@ spec:
                               type: object
                           type: object
                         publicIpPrefixId:
-                          description: The ID of a Public IP Prefix which is associated
-                            with the Load Balancer.
+                          description: The ID of a Public IP Prefix which should be
+                            associated with the Load Balancer. Public IP Prefix can
+                            only be used with outbound rules.
                           type: string
                         subnetId:
-                          description: The ID of the Subnet which is associated with
-                            the IP Configuration.
+                          description: The ID of the Subnet which should be associated
+                            with the IP Configuration.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet to populate subnetId.
@@ -270,11 +274,13 @@ spec:
                     type: array
                   location:
                     description: Specifies the supported Azure Region where the Load
-                      Balancer should be created.
+                      Balancer should be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group in which to create
-                      the Load Balancer.
+                      the Load Balancer. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -353,7 +359,8 @@ spec:
                     type: object
                   sku:
                     description: The SKU of the Azure Load Balancer. Accepted values
-                      are Basic, Standard and Gateway. Defaults to Basic.
+                      are Basic, Standard and Gateway. Defaults to Basic. Changing
+                      this forces a new resource to be created.
                     type: string
                   skuTier:
                     description: sku_tier -  The SKU tier of this Load Balancer. Possible
@@ -576,9 +583,8 @@ spec:
                     description: The Load Balancer ID.
                     type: string
                   privateIpAddress:
-                    description: Private IP Address to assign to the Load Balancer.
-                      The last one and first four IPs in any range are reserved and
-                      cannot be manually assigned.
+                    description: The first private IP address assigned to the load
+                      balancer in frontend_ip_configuration blocks, if any.
                     type: string
                   privateIpAddresses:
                     description: The list of private IP address assigned to the load

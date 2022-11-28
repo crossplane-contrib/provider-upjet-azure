@@ -72,7 +72,7 @@ spec:
                     description: Are the floating IPs enabled for this Load Balancer
                       Rule? A floating IP is reassigned to a secondary server in case
                       the primary server fails. Required to configure a SQL AlwaysOn
-                      Availability Group. Defaults to false.
+                      Availability Group.
                     type: boolean
                   frontendIpConfigurationName:
                     description: The name of the frontend IP configuration exposing
@@ -96,7 +96,7 @@ spec:
                     type: number
                   loadbalancerId:
                     description: The ID of the Load Balancer in which to create the
-                      NAT pool.
+                      NAT pool. Changing this forces a new resource to be created.
                     type: string
                   loadbalancerIdRef:
                     description: Reference to a LoadBalancer to populate loadbalancerId.
@@ -173,11 +173,11 @@ spec:
                     type: object
                   protocol:
                     description: The transport protocol for the external endpoint.
-                      Possible values are Udp or Tcp.
+                      Possible values are All, Tcp and Udp.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the resource.
+                      the resource. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -256,7 +256,6 @@ spec:
                     type: object
                   tcpResetEnabled:
                     description: Is TCP Reset enabled for this Load Balancer Rule?
-                      Defaults to false.
                     type: boolean
                 required:
                 - backendPort

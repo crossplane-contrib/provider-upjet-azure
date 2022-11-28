@@ -51,7 +51,7 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
-	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values.
+	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }

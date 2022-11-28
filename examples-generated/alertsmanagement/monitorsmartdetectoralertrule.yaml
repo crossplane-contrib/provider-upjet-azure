@@ -10,7 +10,7 @@ spec:
   forProvider:
     actionGroup:
     - idsRefs:
-      - name: test
+      - name: example
     detectorType: FailureAnomaliesDetector
     frequency: PT1M
     name: example-smart-detector-alert-rule
@@ -54,7 +54,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    shortName: exampleactiongroup
+    shortName: example
 
 ---
 

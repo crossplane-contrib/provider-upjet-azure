@@ -28,7 +28,7 @@ type LoadBalancerNatPoolParameters struct {
 	// +kubebuilder:validation:Required
 	BackendPort *float64 `json:"backendPort" tf:"backend_port,omitempty"`
 
-	// Are the floating IPs enabled for this Load Balancer Rule? A floating IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
+	// Are the floating IPs enabled for this Load Balancer Rule? A floating IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group.
 	// +kubebuilder:validation:Optional
 	FloatingIPEnabled *bool `json:"floatingIpEnabled,omitempty" tf:"floating_ip_enabled,omitempty"`
 
@@ -48,7 +48,7 @@ type LoadBalancerNatPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
-	// The ID of the Load Balancer in which to create the NAT pool.
+	// The ID of the Load Balancer in which to create the NAT pool. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=LoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -62,11 +62,11 @@ type LoadBalancerNatPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
-	// The transport protocol for the external endpoint. Possible values are Udp or Tcp.
+	// The transport protocol for the external endpoint. Possible values are All, Tcp and Udp.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
-	// The name of the resource group in which to create the resource.
+	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -79,7 +79,7 @@ type LoadBalancerNatPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Is TCP Reset enabled for this Load Balancer Rule? Defaults to false.
+	// Is TCP Reset enabled for this Load Balancer Rule?
 	// +kubebuilder:validation:Optional
 	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }
