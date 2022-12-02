@@ -13,8 +13,8 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-// ResolveReferences of this ServicebusNamespace.
-func (mg *ServicebusNamespace) ResolveReferences(ctx context.Context, c client.Reader) error {
+// ResolveReferences of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse

@@ -58,7 +58,7 @@ spec:
 ---
 
 apiVersion: servicebus.azure.upbound.io/v1beta1
-kind: ServicebusNamespace
+kind: ServiceBusNamespace
 metadata:
   annotations:
     meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue

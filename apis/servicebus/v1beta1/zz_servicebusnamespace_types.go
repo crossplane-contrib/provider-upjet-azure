@@ -51,7 +51,7 @@ type IdentityParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
-type ServicebusNamespaceObservation struct {
+type ServiceBusNamespaceObservation struct {
 
 	// The ServiceBus Namespace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -61,7 +61,7 @@ type ServicebusNamespaceObservation struct {
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
 
-type ServicebusNamespaceParameters struct {
+type ServiceBusNamespaceParameters struct {
 
 	// Specifies the capacity. When sku is Premium, capacity can be 1, 2, 4, 8 or 16. When sku is Basic or Standard, capacity can be 0 only.
 	// +kubebuilder:validation:Optional
@@ -110,51 +110,51 @@ type ServicebusNamespaceParameters struct {
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
-// ServicebusNamespaceSpec defines the desired state of ServicebusNamespace
-type ServicebusNamespaceSpec struct {
+// ServiceBusNamespaceSpec defines the desired state of ServiceBusNamespace
+type ServiceBusNamespaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServicebusNamespaceParameters `json:"forProvider"`
+	ForProvider     ServiceBusNamespaceParameters `json:"forProvider"`
 }
 
-// ServicebusNamespaceStatus defines the observed state of ServicebusNamespace.
-type ServicebusNamespaceStatus struct {
+// ServiceBusNamespaceStatus defines the observed state of ServiceBusNamespace.
+type ServiceBusNamespaceStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServicebusNamespaceObservation `json:"atProvider,omitempty"`
+	AtProvider        ServiceBusNamespaceObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ServicebusNamespace is the Schema for the ServicebusNamespaces API. Manages a ServiceBus Namespace.
+// ServiceBusNamespace is the Schema for the ServiceBusNamespaces API. Manages a ServiceBus Namespace.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}
-type ServicebusNamespace struct {
+type ServiceBusNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServicebusNamespaceSpec   `json:"spec"`
-	Status            ServicebusNamespaceStatus `json:"status,omitempty"`
+	Spec              ServiceBusNamespaceSpec   `json:"spec"`
+	Status            ServiceBusNamespaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ServicebusNamespaceList contains a list of ServicebusNamespaces
-type ServicebusNamespaceList struct {
+// ServiceBusNamespaceList contains a list of ServiceBusNamespaces
+type ServiceBusNamespaceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ServicebusNamespace `json:"items"`
+	Items           []ServiceBusNamespace `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	ServicebusNamespace_Kind             = "ServicebusNamespace"
-	ServicebusNamespace_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: ServicebusNamespace_Kind}.String()
-	ServicebusNamespace_KindAPIVersion   = ServicebusNamespace_Kind + "." + CRDGroupVersion.String()
-	ServicebusNamespace_GroupVersionKind = CRDGroupVersion.WithKind(ServicebusNamespace_Kind)
+	ServiceBusNamespace_Kind             = "ServiceBusNamespace"
+	ServiceBusNamespace_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: ServiceBusNamespace_Kind}.String()
+	ServiceBusNamespace_KindAPIVersion   = ServiceBusNamespace_Kind + "." + CRDGroupVersion.String()
+	ServiceBusNamespace_GroupVersionKind = CRDGroupVersion.WithKind(ServiceBusNamespace_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&ServicebusNamespace{}, &ServicebusNamespaceList{})
+	SchemeBuilder.Register(&ServiceBusNamespace{}, &ServiceBusNamespaceList{})
 }

@@ -13,8 +13,8 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: ServicebusNamespace
-    listKind: ServicebusNamespaceList
+    kind: ServiceBusNamespace
+    listKind: ServiceBusNamespaceList
     plural: servicebusnamespaces
     singular: servicebusnamespace
   scope: Cluster
@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ServicebusNamespace is the Schema for the ServicebusNamespaces
+        description: ServiceBusNamespace is the Schema for the ServiceBusNamespaces
           API. Manages a ServiceBus Namespace.
         properties:
           apiVersion:
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ServicebusNamespaceSpec defines the desired state of ServicebusNamespace
+            description: ServiceBusNamespaceSpec defines the desired state of ServiceBusNamespace
             properties:
               deletionPolicy:
                 default: Delete
@@ -387,7 +387,7 @@ spec:
             - forProvider
             type: object
           status:
-            description: ServicebusNamespaceStatus defines the observed state of ServicebusNamespace.
+            description: ServiceBusNamespaceStatus defines the observed state of ServiceBusNamespace.
             properties:
               atProvider:
                 properties:

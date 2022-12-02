@@ -21,9 +21,9 @@ import (
 	v1beta1 "github.com/upbound/provider-azure/apis/servicebus/v1beta1"
 )
 
-// Setup adds a controller that reconciles ServicebusNamespace managed resources.
+// Setup adds a controller that reconciles ServiceBusNamespace managed resources.
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
-	name := managed.ControllerName(v1beta1.ServicebusNamespace_GroupVersionKind.String())
+	name := managed.ControllerName(v1beta1.ServiceBusNamespace_GroupVersionKind.String())
 	var initializers managed.InitializerChain
 	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	cps := []managed.ConnectionPublisher{managed.NewAPISecretPublisher(mgr.GetClient(), mgr.GetScheme())}
@@ -31,9 +31,9 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK))
 	}
 	r := managed.NewReconciler(mgr,
-		xpresource.ManagedKind(v1beta1.ServicebusNamespace_GroupVersionKind),
+		xpresource.ManagedKind(v1beta1.ServiceBusNamespace_GroupVersionKind),
 		managed.WithExternalConnecter(tjcontroller.NewConnector(mgr.GetClient(), o.WorkspaceStore, o.SetupFn, o.Provider.Resources["azurerm_servicebus_namespace"],
-			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.ServicebusNamespace_GroupVersionKind))),
+			tjcontroller.WithCallbackProvider(tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.ServiceBusNamespace_GroupVersionKind))),
 		)),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
@@ -47,6 +47,6 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
-		For(&v1beta1.ServicebusNamespace{}).
+		For(&v1beta1.ServiceBusNamespace{}).
 		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
 }

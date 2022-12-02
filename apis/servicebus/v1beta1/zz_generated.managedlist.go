@@ -7,8 +7,8 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
-// GetItems of this ServicebusNamespaceList.
-func (l *ServicebusNamespaceList) GetItems() []resource.Managed {
+// GetItems of this ServiceBusNamespaceList.
+func (l *ServiceBusNamespaceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

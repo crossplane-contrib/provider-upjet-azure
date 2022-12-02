@@ -1,5 +1,5 @@
 apiVersion: servicebus.azure.upbound.io/v1beta1
-kind: ServicebusNamespace
+kind: ServiceBusNamespace
 metadata:
   annotations:
     meta.upbound.io/example-id: servicebus/v1beta1/servicebusnamespace

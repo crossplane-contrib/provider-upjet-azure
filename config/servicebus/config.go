@@ -23,10 +23,9 @@ import (
 // Configure configures security group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_servicebus_namespace", func(r *config.Resource) {
-		r.UseAsync = true
-		// Issues on using Namespace as Kind in servicebus
+		// Issues on using Namespace as Kind in ServiceBus
 		// https://github.com/crossplane/terrajet/issues/234
 		// https://github.com/kubernetes/kubernetes/pull/108382
-		r.Kind = "ServicebusNamespace"
+		r.Kind = "ServiceBusNamespace"
 	})
 }

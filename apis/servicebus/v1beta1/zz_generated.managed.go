@@ -7,68 +7,68 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
-// GetCondition of this ServicebusNamespace.
-func (mg *ServicebusNamespace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this ServicebusNamespace.
-func (mg *ServicebusNamespace) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetProviderConfigReference of this ServicebusNamespace.
-func (mg *ServicebusNamespace) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 /*
-GetProviderReference of this ServicebusNamespace.
+GetProviderReference of this ServiceBusNamespace.
 Deprecated: Use GetProviderConfigReference.
 */
-func (mg *ServicebusNamespace) GetProviderReference() *xpv1.Reference {
+func (mg *ServiceBusNamespace) GetProviderReference() *xpv1.Reference {
 	return mg.Spec.ProviderReference
 }
 
-// GetPublishConnectionDetailsTo of this ServicebusNamespace.
-func (mg *ServicebusNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+// GetPublishConnectionDetailsTo of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
-// GetWriteConnectionSecretToReference of this ServicebusNamespace.
-func (mg *ServicebusNamespace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this ServicebusNamespace.
-func (mg *ServicebusNamespace) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this ServicebusNamespace.
-func (mg *ServicebusNamespace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetProviderConfigReference of this ServicebusNamespace.
-func (mg *ServicebusNamespace) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 /*
-SetProviderReference of this ServicebusNamespace.
+SetProviderReference of this ServiceBusNamespace.
 Deprecated: Use SetProviderConfigReference.
 */
-func (mg *ServicebusNamespace) SetProviderReference(r *xpv1.Reference) {
+func (mg *ServiceBusNamespace) SetProviderReference(r *xpv1.Reference) {
 	mg.Spec.ProviderReference = r
 }
 
-// SetPublishConnectionDetailsTo of this ServicebusNamespace.
-func (mg *ServicebusNamespace) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+// SetPublishConnectionDetailsTo of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
 }
 
-// SetWriteConnectionSecretToReference of this ServicebusNamespace.
-func (mg *ServicebusNamespace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ServiceBusNamespace.
+func (mg *ServiceBusNamespace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

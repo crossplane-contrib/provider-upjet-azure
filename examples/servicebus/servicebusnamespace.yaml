@@ -1,11 +1,11 @@
 apiVersion: servicebus.azure.upbound.io/v1beta1
-kind: ServicebusNamespace
+kind: ServiceBusNamespace
 metadata:
   annotations:
     meta.upbound.io/example-id: servicebus/v1beta1/servicebusnamespace
   labels:
     testing.upbound.io/example-name: example
-  name: example-y9w8 # Prevent naming conflict
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -17,7 +17,6 @@ spec:
       source: terraform
 
 ---
-
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
