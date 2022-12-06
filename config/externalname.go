@@ -314,6 +314,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_iot_security_device_group": config.IdentifierFromProvider,
 	"azurerm_iot_security_solution":     config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Security/IoTSecuritySolutions/{{ .external_name }}"),
 
+	// servicebus
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1
+	"azurerm_servicebus_namespace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ServiceBus/namespaces/{{ .external_name }}"),
+
 	// sql
 	"azurerm_mssql_server":                                          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/servers/{{ .external_name }}"),
 	"azurerm_mssql_database":                                        config.TemplatedStringAsIdentifier("name", "{{ .parameters.server_id }}/databases/{{ .external_name }}"),

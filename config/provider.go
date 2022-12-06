@@ -51,6 +51,7 @@ import (
 	"github.com/upbound/provider-azure/config/postgresql"
 	"github.com/upbound/provider-azure/config/resource"
 	"github.com/upbound/provider-azure/config/security"
+	"github.com/upbound/provider-azure/config/servicebus"
 	"github.com/upbound/provider-azure/config/sql"
 	"github.com/upbound/provider-azure/config/storage"
 	"github.com/upbound/provider-azure/config/storagecache"
@@ -171,6 +172,7 @@ func GetProvider() *tjconfig.Provider {
 		dataprotection.Configure,
 		kusto.Configure,
 		storagecache.Configure,
+		servicebus.Configure,
 	} {
 		configure(pc)
 	}
