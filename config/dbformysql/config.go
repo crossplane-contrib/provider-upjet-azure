@@ -17,10 +17,19 @@ limitations under the License.
 package dbformysql
 
 import (
+	"fmt"
+	"strconv"
+
+	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+
 	"github.com/upbound/provider-azure/apis/rconfig"
 
 	"github.com/upbound/upjet/pkg/config"
 	"github.com/upbound/upjet/pkg/registry"
+)
+
+const (
+	mysqlServerPort = 3306
 )
 
 // Configure configures dbformysql group
@@ -51,5 +60,13 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_mysql_server", func(r *config.Resource) {
 		r.MetaResource.ExternalName = registry.RandRFC1123Subdomain
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
+			return map[string][]byte{
+				xpv1.ResourceCredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", attr["administrator_login"], attr["name"])),
+				xpv1.ResourceCredentialsSecretPasswordKey: []byte(attr["administrator_login_password"].(string)),
+				xpv1.ResourceCredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
+				xpv1.ResourceCredentialsSecretPortKey:     []byte(strconv.Itoa(mysqlServerPort)),
+			}, nil
+		}
 	})
 }
