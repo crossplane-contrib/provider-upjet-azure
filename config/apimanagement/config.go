@@ -28,4 +28,9 @@ func Configure(p *config.Provider) {
 		// Mutually exclusive with azurerm_api_management_custom_domain
 		config.MoveToStatus(r.TerraformResource, "hostname_configuration")
 	})
+	p.AddResourceConfigurator("azurerm_api_management_api_operation", func(r *config.Resource) {
+		r.References["api_name"] = config.Reference{
+			Type: "API",
+		}
+	})
 }

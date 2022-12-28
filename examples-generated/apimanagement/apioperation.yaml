@@ -1,0 +1,26 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: APIOperation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementName: ${data.azurerm_api_management_api.example.api_management_name}
+    apiNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_api
+    description: This can only be done by the logged in user.
+    displayName: Delete User Operation
+    method: DELETE
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_api
+    response:
+    - statusCode: 200
+    urlTemplate: /users/{id}/delete
+
+---
+
