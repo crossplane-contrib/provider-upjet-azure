@@ -12,6 +12,7 @@ import (
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -79,6 +80,80 @@ func (mg *APIOperation) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.APIName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APINameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this APIOperationPolicy.
+func (mg *APIOperationPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIManagementName),
+		Extract:      resource.ExtractParamPath("api_management_name", false),
+		Reference:    mg.Spec.ForProvider.APIManagementNameRef,
+		Selector:     mg.Spec.ForProvider.APIManagementNameSelector,
+		To: reference.To{
+			List:    &APIOperationList{},
+			Managed: &APIOperation{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIManagementName")
+	}
+	mg.Spec.ForProvider.APIManagementName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIManagementNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIName),
+		Extract:      resource.ExtractParamPath("api_name", false),
+		Reference:    mg.Spec.ForProvider.APINameRef,
+		Selector:     mg.Spec.ForProvider.APINameSelector,
+		To: reference.To{
+			List:    &APIOperationList{},
+			Managed: &APIOperation{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIName")
+	}
+	mg.Spec.ForProvider.APIName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APINameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OperationID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.OperationIDRef,
+		Selector:     mg.Spec.ForProvider.OperationIDSelector,
+		To: reference.To{
+			List:    &APIOperationList{},
+			Managed: &APIOperation{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.OperationID")
+	}
+	mg.Spec.ForProvider.OperationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.OperationIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),

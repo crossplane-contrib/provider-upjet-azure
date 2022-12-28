@@ -1,32 +1,8 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: APIOperation
+kind: APIOperationPolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/apioperation
-  labels:
-    testing.upbound.io/example-name: example
-  name: user-delete
-spec:
-  forProvider:
-    # There must be a Management resource with the following name in the Azure Portal.
-    apiManagementName: uptest-management-example
-    # There must be a ResourceGroup resource with the following name in the Azure Portal.
-    resourceGroupName: uptest-resourcegroup-example
-    apiNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example 
-    description: This can only be done by the logged in user.
-    displayName: Delete User Operation
-    method: DELETE
-    response:
-    - statusCode: 200
-    urlTemplate: /demo/items
----
-apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: API
-metadata:
-  annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/apioperation
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationpolicy
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -36,12 +12,55 @@ spec:
     apiManagementName: uptest-management-example
     # There must be a ResourceGroup resource with the following name in the Azure Portal.
     resourceGroupName: uptest-resourcegroup-example
+    operationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    apiNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    xmlContent: |
+      <policies>
+        <inbound>
+          <find-and-replace from="xyz" to="abc" />
+        </inbound>
+      </policies>
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: APIOperation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperation
+  labels:
+    testing.upbound.io/example-name: example
+  name: acctest-operation
+spec:
+  forProvider:
+    # There must be a Management resource with the following name in the Azure Portal.
+    apiManagementName: uptest-management-example
+    # There must be a ResourceGroup resource with the following name in the Azure Portal.
+    resourceGroupName: uptest-resourcegroup-example
+    apiNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example 
+    displayName: DELETE Resource
+    method: DELETE
+    urlTemplate: /resource
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: API
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-api
+spec:
+  forProvider:
+    # There must be a Management resource with the following name in the Azure Portal.
+    apiManagementName: uptest-management-example
+    # There must be a ResourceGroup resource with the following name in the Azure Portal.
+    resourceGroupName: uptest-resourcegroup-example
+    revision: "1"
     displayName: Example API
-    import:
-    - contentFormat: swagger-link-json
-      contentValue: http://conferenceapi.azurewebsites.net/?format=json
-    path: example
     protocols:
     - https
-    revision: "1"
-

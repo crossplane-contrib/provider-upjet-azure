@@ -10,6 +10,8 @@ spec:
   forProvider:
     # There must be a Management resource with the following name in the Azure Portal.
     apiManagementName: uptest-management-example
+    # There must be a ResourceGroup resource with the following name in the Azure Portal.
+    resourceGroupName: uptest-resourcegroup-example
     displayName: Example API
     import:
     - contentFormat: swagger-link-json
@@ -17,6 +19,4 @@ spec:
     path: example
     protocols:
     - https
-    # There must be a ResourceGroup resource with the following name in the Azure Portal.
-    resourceGroupName: uptest-resourcegroup-example
     revision: "1"

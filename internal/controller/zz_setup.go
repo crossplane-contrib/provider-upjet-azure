@@ -11,6 +11,7 @@ import (
 
 	api "github.com/upbound/provider-azure/internal/controller/apimanagement/api"
 	apioperation "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperation"
+	apioperationpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperationpolicy"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
@@ -279,6 +280,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		api.Setup,
 		apioperation.Setup,
+		apioperationpolicy.Setup,
 		management.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
