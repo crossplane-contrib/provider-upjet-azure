@@ -1,0 +1,43 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: APIPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apipolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    # There must be a Management resource with the following name in the Azure Portal.
+    apiManagementName: uptest-management-example
+    # There must be a ResourceGroup resource with the following name in the Azure Portal.
+    resourceGroupName: uptest-resourcegroup-example
+    apiNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example 
+    xmlContent: |
+      <policies>
+        <inbound>
+          <find-and-replace from="xyz" to="abc" />
+        </inbound>
+      </policies>
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: API
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apipolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: my-api
+spec:
+  forProvider:
+    # There must be a Management resource with the following name in the Azure Portal.
+    apiManagementName: uptest-management-example
+    # There must be a ResourceGroup resource with the following name in the Azure Portal.
+    resourceGroupName: uptest-resourcegroup-example
+    revision: "2"
+    displayName: Example API
+    protocols:
+    - https
+

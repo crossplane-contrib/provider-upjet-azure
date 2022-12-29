@@ -271,6 +271,72 @@ func (mg *APIOperationTag) SetWriteConnectionSecretToReference(r *xpv1.SecretRef
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this APIPolicy.
+func (mg *APIPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this APIPolicy.
+func (mg *APIPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this APIPolicy.
+func (mg *APIPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this APIPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *APIPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this APIPolicy.
+func (mg *APIPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this APIPolicy.
+func (mg *APIPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this APIPolicy.
+func (mg *APIPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this APIPolicy.
+func (mg *APIPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this APIPolicy.
+func (mg *APIPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this APIPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *APIPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this APIPolicy.
+func (mg *APIPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this APIPolicy.
+func (mg *APIPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Management.
 func (mg *Management) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
