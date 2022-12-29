@@ -242,6 +242,32 @@ func (mg *APIPolicy) ResolveReferences(ctx context.Context, c client.Reader) err
 	return nil
 }
 
+// ResolveReferences of this APIRelease.
+func (mg *APIRelease) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.APIIDRef,
+		Selector:     mg.Spec.ForProvider.APIIDSelector,
+		To: reference.To{
+			List:    &APIList{},
+			Managed: &API{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIID")
+	}
+	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Management.
 func (mg *Management) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
