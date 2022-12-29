@@ -17,6 +17,7 @@ import (
 	apirelease "github.com/upbound/provider-azure/internal/controller/apimanagement/apirelease"
 	apischema "github.com/upbound/provider-azure/internal/controller/apimanagement/apischema"
 	apiversionset "github.com/upbound/provider-azure/internal/controller/apimanagement/apiversionset"
+	authorizationserver "github.com/upbound/provider-azure/internal/controller/apimanagement/authorizationserver"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
@@ -291,6 +292,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apirelease.Setup,
 		apischema.Setup,
 		apiversionset.Setup,
+		authorizationserver.Setup,
 		management.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,

@@ -535,6 +535,72 @@ func (mg *APIVersionSet) SetWriteConnectionSecretToReference(r *xpv1.SecretRefer
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this AuthorizationServer.
+func (mg *AuthorizationServer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AuthorizationServer.
+func (mg *AuthorizationServer) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AuthorizationServer.
+func (mg *AuthorizationServer) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AuthorizationServer.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AuthorizationServer) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AuthorizationServer.
+func (mg *AuthorizationServer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AuthorizationServer.
+func (mg *AuthorizationServer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AuthorizationServer.
+func (mg *AuthorizationServer) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AuthorizationServer.
+func (mg *AuthorizationServer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AuthorizationServer.
+func (mg *AuthorizationServer) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AuthorizationServer.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AuthorizationServer) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AuthorizationServer.
+func (mg *AuthorizationServer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AuthorizationServer.
+func (mg *AuthorizationServer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Management.
 func (mg *Management) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
