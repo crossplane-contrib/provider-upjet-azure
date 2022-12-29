@@ -1,0 +1,16 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: APIVersionSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apiversionset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-apimapi-1-0-0
+spec:
+  forProvider:
+    # There must be a Management resource with the following name in the Azure Portal.
+    apiManagementName: uptest-management-example
+    # There must be a ResourceGroup resource with the following name in the Azure Portal.
+    resourceGroupName: uptest-resourcegroup-example
+    displayName: ExampleAPIVersionSet
+    versioningScheme: Segment
