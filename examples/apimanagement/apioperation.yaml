@@ -20,7 +20,7 @@ spec:
     method: DELETE
     response:
     - statusCode: 200
-    urlTemplate: /demo/items
+    urlTemplate: /users/delete
 ---
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: API

@@ -174,6 +174,32 @@ func (mg *APIOperationPolicy) ResolveReferences(ctx context.Context, c client.Re
 	return nil
 }
 
+// ResolveReferences of this APIOperationTag.
+func (mg *APIOperationTag) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIOperationID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.APIOperationIDRef,
+		Selector:     mg.Spec.ForProvider.APIOperationIDSelector,
+		To: reference.To{
+			List:    &APIOperationList{},
+			Managed: &APIOperation{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIOperationID")
+	}
+	mg.Spec.ForProvider.APIOperationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIOperationIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Management.
 func (mg *Management) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

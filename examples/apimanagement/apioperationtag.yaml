@@ -1,38 +1,26 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: APIOperationPolicy
+kind: APIOperationTag
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationpolicy
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationtag
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-tag
 spec:
   forProvider:
-    # There must be a Management resource with the following name in the Azure Portal.
-    apiManagementName: uptest-management-example
-    # There must be a ResourceGroup resource with the following name in the Azure Portal.
-    resourceGroupName: uptest-resourcegroup-example
-    operationIdSelector:
+    displayName: example-Tag
+    apiOperationIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    apiNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    xmlContent: |
-      <policies>
-        <inbound>
-          <find-and-replace from="xyz" to="abc" />
-        </inbound>
-      </policies>
 ---
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: APIOperation
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationpolicy
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationtag
   labels:
     testing.upbound.io/example-name: example
-  name: acctest-operation
+  name: user-delete
 spec:
   forProvider:
     # There must be a Management resource with the following name in the Azure Portal.
@@ -41,26 +29,29 @@ spec:
     resourceGroupName: uptest-resourcegroup-example
     apiNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example 
-    displayName: DELETE Resource
+        testing.upbound.io/example-name: example
+    description: This can only be done by the logged in user.
+    displayName: Delete User Operation
     method: DELETE
-    urlTemplate: /resource
+    response:
+    - statusCode: 200
+    urlTemplate: /users/delete
 ---
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: API
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationpolicy
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationtag
   labels:
     testing.upbound.io/example-name: example
-  name: example-api
+  name: search-api
 spec:
   forProvider:
     # There must be a Management resource with the following name in the Azure Portal.
     apiManagementName: uptest-management-example
     # There must be a ResourceGroup resource with the following name in the Azure Portal.
     resourceGroupName: uptest-resourcegroup-example
-    revision: "1"
+    revision: "2"
     displayName: Example API
     protocols:
     - https
