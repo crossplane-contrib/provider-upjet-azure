@@ -15,6 +15,7 @@ import (
 	apioperationtag "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperationtag"
 	apipolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/apipolicy"
 	apirelease "github.com/upbound/provider-azure/internal/controller/apimanagement/apirelease"
+	apischema "github.com/upbound/provider-azure/internal/controller/apimanagement/apischema"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
@@ -287,6 +288,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apioperationtag.Setup,
 		apipolicy.Setup,
 		apirelease.Setup,
+		apischema.Setup,
 		management.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,

@@ -38,4 +38,9 @@ func Configure(p *config.Provider) {
 			Type: "API",
 		}
 	})
+	p.AddResourceConfigurator("azurerm_api_management_api_schema", func(r *config.Resource) {
+		r.References["api_name"] = config.Reference{
+			Type: "API",
+		}
+	})
 }
