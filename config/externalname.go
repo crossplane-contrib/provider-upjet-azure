@@ -377,6 +377,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// azurerm_policy_definition can be imported
 	// azurerm_policy_definition.examplePolicy /subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Authorization/policyDefinitions/<POLICY_NAME>
 	"azurerm_policy_definition": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Authorization/policyDefinitions/{{ .external_name }}"),
+
+	// alertsmanagement
+	//
+	// Monitor Action Rule can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AlertsManagement/actionRules/actionRule1
+	"azurerm_monitor_action_rule_action_group": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.AlertsManagement/actionRules/{{ .external_name }}"),
+	// Monitor Action Rule can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AlertsManagement/actionRules/actionRule1
+	"azurerm_monitor_action_rule_suppression": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.AlertsManagement/actionRules/{{ .external_name }}"),
+	// Monitor Smart Detector Alert Rule can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AlertsManagement/smartDetectorAlertRules/rule1
+	"azurerm_monitor_smart_detector_alert_rule": config.IdentifierFromProvider,
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
