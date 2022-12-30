@@ -1,0 +1,18 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Gateway
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource required a Management id"
+    meta.upbound.io/example-id: apimanagement/v1beta1/gateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-gateway
+spec:
+  forProvider:
+    apiManagementId: <azurerm_api_management.example.id>
+    description: Example API Management gateway
+    locationData:
+    - city: example city
+      district: example district
+      name: example name
+      region: example region

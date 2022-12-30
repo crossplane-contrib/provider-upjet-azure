@@ -521,6 +521,32 @@ func (mg *EmailTemplate) ResolveReferences(ctx context.Context, c client.Reader)
 	return nil
 }
 
+// ResolveReferences of this Gateway.
+func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIManagementID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.APIManagementIDRef,
+		Selector:     mg.Spec.ForProvider.APIManagementIDSelector,
+		To: reference.To{
+			List:    &ManagementList{},
+			Managed: &Management{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIManagementID")
+	}
+	mg.Spec.ForProvider.APIManagementID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIManagementIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Management.
 func (mg *Management) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
