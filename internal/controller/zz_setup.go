@@ -23,6 +23,7 @@ import (
 	emailtemplate "github.com/upbound/provider-azure/internal/controller/apimanagement/emailtemplate"
 	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
+	namedvalue "github.com/upbound/provider-azure/internal/controller/apimanagement/namedvalue"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
@@ -302,6 +303,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		emailtemplate.Setup,
 		gateway.Setup,
 		management.Setup,
+		namedvalue.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		roleassignment.Setup,

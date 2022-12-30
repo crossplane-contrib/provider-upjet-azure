@@ -1,0 +1,28 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: NamedValue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/namedvalue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    # There must be a Management resource with the following name in the Azure Portal.
+    apiManagementName: uptest-management-example
+    # There must be a ResourceGroup resource with the following name in the Azure Portal.
+    resourceGroupName: uptest-resourcegroup-example
+    displayName: ExampleProperty
+    valueSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+---
+apiVersion: v1
+data:
+  example-key: dXBib3VuZHJvY2tz
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
