@@ -18,6 +18,7 @@ import (
 	apischema "github.com/upbound/provider-azure/internal/controller/apimanagement/apischema"
 	apiversionset "github.com/upbound/provider-azure/internal/controller/apimanagement/apiversionset"
 	authorizationserver "github.com/upbound/provider-azure/internal/controller/apimanagement/authorizationserver"
+	backend "github.com/upbound/provider-azure/internal/controller/apimanagement/backend"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
@@ -293,6 +294,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apischema.Setup,
 		apiversionset.Setup,
 		authorizationserver.Setup,
+		backend.Setup,
 		management.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,

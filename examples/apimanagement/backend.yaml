@@ -1,0 +1,16 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Backend
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/backend
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-backend
+spec:
+  forProvider:
+    # There must be a Management resource with the following name in the Azure Portal.
+    apiManagementName: uptest-management-example
+    # There must be a ResourceGroup resource with the following name in the Azure Portal.
+    resourceGroupName: uptest-resourcegroup-example
+    protocol: http
+    url: https://backend
