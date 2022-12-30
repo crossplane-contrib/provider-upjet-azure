@@ -10,7 +10,8 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
-	v1beta11 "github.com/upbound/provider-azure/apis/network/v1beta1"
+	v1beta11 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -420,6 +421,64 @@ func (mg *Backend) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this Certificate.
+func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIManagementName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.APIManagementNameRef,
+		Selector:     mg.Spec.ForProvider.APIManagementNameSelector,
+		To: reference.To{
+			List:    &ManagementList{},
+			Managed: &Management{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIManagementName")
+	}
+	mg.Spec.ForProvider.APIManagementName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIManagementNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultSecretID),
+		Extract:      resource.ExtractParamPath("secret_id", true),
+		Reference:    mg.Spec.ForProvider.KeyVaultSecretIDRef,
+		Selector:     mg.Spec.ForProvider.KeyVaultSecretIDSelector,
+		To: reference.To{
+			List:    &v1beta11.CertificateList{},
+			Managed: &v1beta11.Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultSecretID")
+	}
+	mg.Spec.ForProvider.KeyVaultSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultSecretIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Management.
 func (mg *Management) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -435,8 +494,8 @@ func (mg *Management) ResolveReferences(ctx context.Context, c client.Reader) er
 				Reference:    mg.Spec.ForProvider.AdditionalLocation[i3].VirtualNetworkConfiguration[i4].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.AdditionalLocation[i3].VirtualNetworkConfiguration[i4].SubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -470,8 +529,8 @@ func (mg *Management) ResolveReferences(ctx context.Context, c client.Reader) er
 			Reference:    mg.Spec.ForProvider.VirtualNetworkConfiguration[i3].SubnetIDRef,
 			Selector:     mg.Spec.ForProvider.VirtualNetworkConfiguration[i3].SubnetIDSelector,
 			To: reference.To{
-				List:    &v1beta11.SubnetList{},
-				Managed: &v1beta11.Subnet{},
+				List:    &v1beta12.SubnetList{},
+				Managed: &v1beta12.Subnet{},
 			},
 		})
 		if err != nil {

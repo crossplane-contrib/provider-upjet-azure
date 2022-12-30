@@ -19,6 +19,7 @@ import (
 	apiversionset "github.com/upbound/provider-azure/internal/controller/apimanagement/apiversionset"
 	authorizationserver "github.com/upbound/provider-azure/internal/controller/apimanagement/authorizationserver"
 	backend "github.com/upbound/provider-azure/internal/controller/apimanagement/backend"
+	certificate "github.com/upbound/provider-azure/internal/controller/apimanagement/certificate"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
@@ -125,7 +126,7 @@ import (
 	monitorprivatelinkscope "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscope"
 	monitorprivatelinkscopedservice "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscopedservice"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/keyvault/accesspolicy"
-	certificate "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"
+	certificatekeyvault "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"
 	certificateissuer "github.com/upbound/provider-azure/internal/controller/keyvault/certificateissuer"
 	key "github.com/upbound/provider-azure/internal/controller/keyvault/key"
 	managedhardwaresecuritymodule "github.com/upbound/provider-azure/internal/controller/keyvault/managedhardwaresecuritymodule"
@@ -295,6 +296,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apiversionset.Setup,
 		authorizationserver.Setup,
 		backend.Setup,
+		certificate.Setup,
 		management.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
@@ -401,7 +403,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		monitorprivatelinkscope.Setup,
 		monitorprivatelinkscopedservice.Setup,
 		accesspolicy.Setup,
-		certificate.Setup,
+		certificatekeyvault.Setup,
 		certificateissuer.Setup,
 		key.Setup,
 		managedhardwaresecuritymodule.Setup,
