@@ -20,6 +20,7 @@ import (
 	authorizationserver "github.com/upbound/provider-azure/internal/controller/apimanagement/authorizationserver"
 	backend "github.com/upbound/provider-azure/internal/controller/apimanagement/backend"
 	certificate "github.com/upbound/provider-azure/internal/controller/apimanagement/certificate"
+	emailtemplate "github.com/upbound/provider-azure/internal/controller/apimanagement/emailtemplate"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
@@ -297,6 +298,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		authorizationserver.Setup,
 		backend.Setup,
 		certificate.Setup,
+		emailtemplate.Setup,
 		management.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,

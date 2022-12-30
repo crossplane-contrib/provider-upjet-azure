@@ -1,0 +1,27 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: EmailTemplate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/emailtemplate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    templateName: ConfirmSignUpIdentityDefault
+    # There must be a Management resource with the following name in the Azure Portal.
+    apiManagementName: uptest-management-example
+    # There must be a ResourceGroup resource with the following name in the Azure Portal.
+    resourceGroupName: uptest-resourcegroup-example
+    body: |
+      <!DOCTYPE html >
+      <html>
+      <head>
+        <meta charset="UTF-8" />
+        <title>Customized Letter Title</title>
+      </head>
+      <body>
+        <p style="font-size:12pt;font-family:'Segoe UI'">Dear $DevFirstName $DevLastName,</p>
+      </body>
+      </html>
+    subject: Customized confirmation email for your new $OrganizationName API account
