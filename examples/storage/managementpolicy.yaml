@@ -40,4 +40,6 @@ spec:
         - container2/prefix1
         - container2/prefix2
       name: rule2
-    storageAccountId: /subscriptions/.../resourceGroups/example-resources111/providers/Microsoft.Storage/storageAccounts/examplestoracc111
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
