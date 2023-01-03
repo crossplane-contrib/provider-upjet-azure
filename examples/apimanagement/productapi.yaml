@@ -25,7 +25,7 @@ apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Product
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/product
+    meta.upbound.io/example-id: apimanagement/v1beta1/productapi
   labels:
     testing.upbound.io/example-name: example
   name: my-product
@@ -44,7 +44,7 @@ apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: API
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationtag
+    meta.upbound.io/example-id: apimanagement/v1beta1/productapi
   labels:
     testing.upbound.io/example-name: example
   name: search-api
@@ -65,8 +65,7 @@ apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource creates a new pricing tier. So this is a high costly resource."
-    meta.upbound.io/example-id: apimanagement/v1beta1/management
+    meta.upbound.io/example-id: apimanagement/v1beta1/productapi
   labels:
     testing.upbound.io/example-name: example
   name: uptest-management-example
@@ -84,8 +83,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource is dependency of Management. This resource is skipping because parent resource was skipped."
-    meta.upbound.io/example-id: apimanagement/v1beta1/management
+    meta.upbound.io/example-id: apimanagement/v1beta1/productapi
   labels:
     testing.upbound.io/example-name: example
   name: uptest-resourcegroup-example

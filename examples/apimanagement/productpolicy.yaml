@@ -1,14 +1,20 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: Policy
+kind: ProductPolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/policy
+    meta.upbound.io/example-id: apimanagement/v1beta1/productpolicy
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    apiManagementIdSelector:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    productIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     xmlContent: |
@@ -19,13 +25,13 @@ spec:
       </policies>
 ---
 apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: NamedValue
+kind: Product
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/policy
+    meta.upbound.io/example-id: apimanagement/v1beta1/productpolicy
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: my-product
 spec:
   forProvider:
     apiManagementNameSelector:
@@ -34,26 +40,14 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    displayName: ExampleProperty
-    valueSecretRef:
-      key: example-key
-      name: example-secret
-      namespace: upbound-system
----
-apiVersion: v1
-data:
-  example-key: dXBib3VuZHJvY2tz
-kind: Secret
-metadata:
-  name: example-secret
-  namespace: upbound-system
-type: Opaque
+    displayName: Test Product
+    published: true
 ---
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/policy
+    meta.upbound.io/example-id: apimanagement/v1beta1/productpolicy
   labels:
     testing.upbound.io/example-name: example
   name: uptest-management-example
@@ -71,11 +65,10 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/policy
+    meta.upbound.io/example-id: apimanagement/v1beta1/productpolicy
   labels:
     testing.upbound.io/example-name: example
   name: uptest-resourcegroup-example
 spec:
   forProvider:
     location: West Europe
-
