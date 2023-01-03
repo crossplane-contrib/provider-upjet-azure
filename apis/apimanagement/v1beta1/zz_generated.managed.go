@@ -996,3 +996,69 @@ func (mg *NamedValue) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDet
 func (mg *NamedValue) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this NotificationRecipientEmail.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *NotificationRecipientEmail) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this NotificationRecipientEmail.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *NotificationRecipientEmail) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this NotificationRecipientEmail.
+func (mg *NotificationRecipientEmail) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

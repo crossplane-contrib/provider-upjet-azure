@@ -24,6 +24,7 @@ import (
 	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	namedvalue "github.com/upbound/provider-azure/internal/controller/apimanagement/namedvalue"
+	notificationrecipientemail "github.com/upbound/provider-azure/internal/controller/apimanagement/notificationrecipientemail"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
@@ -304,6 +305,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		gateway.Setup,
 		management.Setup,
 		namedvalue.Setup,
+		notificationrecipientemail.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		roleassignment.Setup,
