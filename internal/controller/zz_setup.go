@@ -29,6 +29,7 @@ import (
 	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/apimanagement/productapi"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/productpolicy"
+	tag "github.com/upbound/provider-azure/internal/controller/apimanagement/tag"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
@@ -314,6 +315,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		product.Setup,
 		productapi.Setup,
 		productpolicy.Setup,
+		tag.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		roleassignment.Setup,
