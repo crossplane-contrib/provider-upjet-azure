@@ -75,7 +75,7 @@ metadata:
     meta.upbound.io/example-id: storage/v1beta1/managementpolicy
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: managementpolicy
 spec:
   forProvider:
     accountKind: BlobStorage
