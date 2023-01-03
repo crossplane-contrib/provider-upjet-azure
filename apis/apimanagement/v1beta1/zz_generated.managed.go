@@ -865,6 +865,72 @@ func (mg *Gateway) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) 
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this IdentityProviderAAD.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *IdentityProviderAAD) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this IdentityProviderAAD.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *IdentityProviderAAD) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this IdentityProviderAAD.
+func (mg *IdentityProviderAAD) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Management.
 func (mg *Management) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
