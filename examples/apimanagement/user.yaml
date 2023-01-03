@@ -1,16 +1,24 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: Tag
+kind: User
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/tag
+    meta.upbound.io/example-id: apimanagement/v1beta1/user
   labels:
     testing.upbound.io/example-name: example
-  name: example-tag
+  name: example
 spec:
   forProvider:
-    apiManagementIdSelector:
+    userId: 5931a75ae4bbd512288c680b
+    apiManagementNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    email: tom+tfdev@hashicorp.com
+    firstName: Example
+    lastName: User
+    state: active
 ---
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
