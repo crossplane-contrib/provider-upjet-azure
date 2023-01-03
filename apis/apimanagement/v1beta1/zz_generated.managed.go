@@ -931,6 +931,72 @@ func (mg *IdentityProviderAAD) SetWriteConnectionSecretToReference(r *xpv1.Secre
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this IdentityProviderFacebook.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *IdentityProviderFacebook) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this IdentityProviderFacebook.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *IdentityProviderFacebook) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this IdentityProviderFacebook.
+func (mg *IdentityProviderFacebook) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Management.
 func (mg *Management) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

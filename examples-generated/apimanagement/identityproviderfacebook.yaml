@@ -1,8 +1,8 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: IdentityProviderAAD
+kind: IdentityProviderFacebook
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovideraad
+    meta.upbound.io/example-id: apimanagement/v1beta1/identityproviderfacebook
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -11,35 +11,25 @@ spec:
     apiManagementNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    allowedTenants:
-    # manuel int?
-    - b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
-    clientId: 00000000-0000-0000-0000-000000000000
-    clientSecretSecretRef:
+    appId: "00000000000000000000000000000000"
+    appSecretSecretRef:
       key: example-key
       name: example-secret
       namespace: upbound-system
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
 ---
-apiVersion: v1
-data:
-  example-key: dXBib3VuZHJvY2tz
-kind: Secret
-metadata:
-  name: example-secret
-  namespace: upbound-system
-type: Opaque
----
+
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/product
+    meta.upbound.io/example-id: apimanagement/v1beta1/identityproviderfacebook
   labels:
     testing.upbound.io/example-name: example
-  name: uptest-management-example
+  name: example
 spec:
   forProvider:
     location: West Europe
@@ -49,15 +39,20 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: Developer_1
+
 ---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/product
+    meta.upbound.io/example-id: apimanagement/v1beta1/identityproviderfacebook
   labels:
     testing.upbound.io/example-name: example
-  name: uptest-resourcegroup-example
+  name: example
 spec:
   forProvider:
     location: West Europe
+
+---
+

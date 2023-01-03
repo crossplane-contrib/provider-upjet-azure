@@ -23,6 +23,7 @@ import (
 	emailtemplate "github.com/upbound/provider-azure/internal/controller/apimanagement/emailtemplate"
 	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovideraad"
+	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/apimanagement/identityproviderfacebook"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	namedvalue "github.com/upbound/provider-azure/internal/controller/apimanagement/namedvalue"
 	notificationrecipientemail "github.com/upbound/provider-azure/internal/controller/apimanagement/notificationrecipientemail"
@@ -312,6 +313,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		emailtemplate.Setup,
 		gateway.Setup,
 		identityprovideraad.Setup,
+		identityproviderfacebook.Setup,
 		management.Setup,
 		namedvalue.Setup,
 		notificationrecipientemail.Setup,

@@ -1,8 +1,8 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: IdentityProviderAAD
+kind: IdentityProviderFacebook
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovideraad
+    meta.upbound.io/example-id: apimanagement/v1beta1/identityproviderfacebook
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -14,11 +14,8 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    allowedTenants:
-    # manuel int?
-    - b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
-    clientId: 00000000-0000-0000-0000-000000000000
-    clientSecretSecretRef:
+    appId: "00000000000000000000000000000000"
+    appSecretSecretRef:
       key: example-key
       name: example-secret
       namespace: upbound-system
