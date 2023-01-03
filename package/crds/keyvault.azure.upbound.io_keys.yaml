@@ -88,8 +88,8 @@ spec:
                     type: number
                   keyType:
                     description: Specifies the Key Type to use for this Key Vault
-                      Key. Possible values are EC (Elliptic Curve), EC-HSM, Oct (Octet),
-                      RSA and RSA-HSM. Changing this forces a new resource to be created.
+                      Key. Possible values are EC (Elliptic Curve), EC-HSM, RSA and
+                      RSA-HSM. Changing this forces a new resource to be created.
                     type: string
                   keyVaultId:
                     description: The ID of the Key Vault where the Key should be created.
@@ -371,6 +371,16 @@ spec:
                     type: string
                   publicKeyPem:
                     description: The PEM encoded public key of this Key Vault Key.
+                    type: string
+                  resourceId:
+                    description: The (Versioned) ID for this Key Vault Key. This property
+                      points to a specific version of a Key Vault Key, as such using
+                      this won't auto-rotate values if used in other Azure Services.
+                    type: string
+                  resourceVersionlessId:
+                    description: The Versionless ID of the Key Vault Key. This property
+                      allows other Azure Services (that support it) to auto-rotate
+                      their value when the Key Vault Key is updated.
                     type: string
                   version:
                     description: The current version of the Key Vault Key.

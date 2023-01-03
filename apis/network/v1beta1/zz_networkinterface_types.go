@@ -22,7 +22,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
 
-	// A name used for this IP Configuration.
+	// A name used for this IP Configuration. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

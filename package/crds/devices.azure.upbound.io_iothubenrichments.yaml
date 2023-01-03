@@ -145,7 +145,8 @@ spec:
                         type: object
                     type: object
                   key:
-                    description: The key of the enrichment.
+                    description: The key of the enrichment. Changing this forces a
+                      new resource to be created.
                     type: string
                   resourceGroupName:
                     type: string

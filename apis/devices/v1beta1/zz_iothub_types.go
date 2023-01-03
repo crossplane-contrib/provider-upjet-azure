@@ -99,7 +99,7 @@ type FallbackRouteObservation struct {
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
-	// The source that the routing rule is to be applied to, such as DeviceMessages. Possible values include: Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents, DeviceConnectionStateEvents, DeviceJobLifecycleEvents.
+	// The source that the routing rule is to be applied to, such as DeviceMessages. Possible values include: Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents, DeviceConnectionStateEvents, DeviceJobLifecycleEvents and DigitalTwinChangeEvents.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
@@ -342,7 +342,7 @@ type RouteObservation struct {
 	// The name of the route.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The source that the routing rule is to be applied to, such as DeviceMessages. Possible values include: Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents, DeviceConnectionStateEvents, DeviceJobLifecycleEvents.
+	// The source that the routing rule is to be applied to, such as DeviceMessages. Possible values include: Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents, DeviceConnectionStateEvents, DeviceJobLifecycleEvents and DigitalTwinChangeEvents.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 

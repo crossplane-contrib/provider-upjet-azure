@@ -65,6 +65,12 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  backendAddressIpConfigurationId:
+                    description: The ip config ID of the regional load balancer that's
+                      added to the global load balancer's backend address pool. For
+                      global load balancer, user needs to specify the `backend_address_ip_configuration_id`
+                      of the added regional load balancers
+                    type: string
                   backendAddressPoolId:
                     description: The ID of the Backend Address Pool. Changing this
                       forces a new Backend Address Pool Address to be created.
@@ -150,7 +156,8 @@ spec:
                     type: string
                   virtualNetworkId:
                     description: The ID of the Virtual Network within which the Backend
-                      Address Pool should exist.
+                      Address Pool should exist. For regional load balancer, user
+                      needs to specify `virtual_network_id` and `ip_address`
                     type: string
                   virtualNetworkIdRef:
                     description: Reference to a VirtualNetwork to populate virtualNetworkId.
@@ -225,8 +232,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - ipAddress
                 type: object
               providerConfigRef:
                 default:
@@ -408,6 +413,25 @@ spec:
                   id:
                     description: The ID of the Backend Address Pool Address.
                     type: string
+                  inboundNatRulePortMapping:
+                    description: A list of inbound_nat_rule_port_mapping block as
+                      defined below.
+                    items:
+                      properties:
+                        backendPort:
+                          description: The Backend Port of the Load Balancing Inbound
+                            NAT Rules associated with this Backend Address Pool Address.
+                          type: number
+                        frontendPort:
+                          description: The Frontend Port of the Load Balancing Inbound
+                            NAT Rules associated with this Backend Address Pool Address.
+                          type: number
+                        inboundNatRuleName:
+                          description: The name of the Load Balancing Inbound NAT
+                            Rules associated with this Backend Address Pool Address.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

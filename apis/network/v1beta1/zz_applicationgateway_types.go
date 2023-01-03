@@ -144,6 +144,10 @@ type ApplicationGatewayParameters struct {
 	// +kubebuilder:validation:Required
 	GatewayIPConfiguration []GatewayIPConfigurationParameters `json:"gatewayIpConfiguration" tf:"gateway_ip_configuration,omitempty"`
 
+	// A global block as defined below.
+	// +kubebuilder:validation:Optional
+	Global []GlobalParameters `json:"global,omitempty" tf:"global,omitempty"`
+
 	// One or more http_listener blocks as defined below.
 	// +kubebuilder:validation:Required
 	HTTPListener []HTTPListenerParameters `json:"httpListener" tf:"http_listener,omitempty"`
@@ -297,7 +301,7 @@ type BackendHTTPSettingsAuthenticationCertificateParameters struct {
 
 type BackendHTTPSettingsObservation struct {
 
-	// One or more authentication_certificate blocks.
+	// One or more authentication_certificate blocks as defined below.
 	// +kubebuilder:validation:Optional
 	AuthenticationCertificate []BackendHTTPSettingsAuthenticationCertificateObservation `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
@@ -314,7 +318,7 @@ type BackendHTTPSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	AffinityCookieName *string `json:"affinityCookieName,omitempty" tf:"affinity_cookie_name,omitempty"`
 
-	// One or more authentication_certificate blocks.
+	// One or more authentication_certificate blocks as defined below.
 	// +kubebuilder:validation:Optional
 	AuthenticationCertificate []BackendHTTPSettingsAuthenticationCertificateParameters `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
@@ -354,7 +358,7 @@ type BackendHTTPSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
-	// The request timeout in seconds, which must be between 1 and 86400 seconds.
+	// The request timeout in seconds, which must be between 1 and 86400 seconds. Defaults to 30.
 	// +kubebuilder:validation:Optional
 	RequestTimeout *float64 `json:"requestTimeout,omitempty" tf:"request_timeout,omitempty"`
 
@@ -394,7 +398,7 @@ type ConnectionDrainingParameters struct {
 	// +kubebuilder:validation:Required
 	DrainTimeoutSec *float64 `json:"drainTimeoutSec" tf:"drain_timeout_sec,omitempty"`
 
-	// Is the Web Application Firewall be enabled?
+	// Is the Web Application Firewall enabled?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
@@ -421,7 +425,7 @@ type DisabledRuleGroupObservation struct {
 
 type DisabledRuleGroupParameters struct {
 
-	// The rule group where specific rules should be disabled. Accepted values are:  crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, General, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION
+	// The rule group where specific rules should be disabled. Possible values are crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, General, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION and REQUEST-944-APPLICATION-ATTACK-JAVA.
 	// +kubebuilder:validation:Required
 	RuleGroupName *string `json:"ruleGroupName" tf:"rule_group_name,omitempty"`
 
@@ -435,7 +439,7 @@ type ExclusionObservation struct {
 
 type ExclusionParameters struct {
 
-	// Match variable of the exclusion rule to exclude header, cookie or GET arguments. Possible values are RequestHeaderNames, RequestArgNames and RequestCookieNames
+	// Match variable of the exclusion rule to exclude header, cookie or GET arguments. Possible values are RequestArgKeys, RequestArgNames, RequestArgValues, RequestCookieKeys, RequestCookieNames, RequestCookieValues, RequestHeaderKeys, RequestHeaderNames and RequestHeaderValues
 	// +kubebuilder:validation:Required
 	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
 
@@ -443,7 +447,7 @@ type ExclusionParameters struct {
 	// +kubebuilder:validation:Optional
 	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
 
-	// Operator which will be used to search in the variable content. Possible values are Equals, StartsWith, EndsWith, Contains. If empty will exclude all traffic on this match_variable
+	// Operator which will be used to search in the variable content. Possible values are Contains, EndsWith, Equals, EqualsAny and StartsWith. If empty will exclude all traffic on this match_variable
 	// +kubebuilder:validation:Optional
 	SelectorMatchOperator *string `json:"selectorMatchOperator,omitempty" tf:"selector_match_operator,omitempty"`
 }
@@ -548,6 +552,20 @@ type GatewayIPConfigurationParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
+type GlobalObservation struct {
+}
+
+type GlobalParameters struct {
+
+	// Whether Application Gateway's Request buffer is enabled.
+	// +kubebuilder:validation:Required
+	RequestBufferingEnabled *bool `json:"requestBufferingEnabled" tf:"request_buffering_enabled,omitempty"`
+
+	// Whether Application Gateway's Response buffer is enabled.
+	// +kubebuilder:validation:Required
+	ResponseBufferingEnabled *bool `json:"responseBufferingEnabled" tf:"response_buffering_enabled,omitempty"`
+}
+
 type HTTPListenerCustomErrorConfigurationObservation struct {
 
 	// The ID of the URL Path Map.
@@ -583,7 +601,7 @@ type HTTPListenerObservation struct {
 	// The ID of the associated SSL Certificate.
 	SSLCertificateID *string `json:"sslCertificateId,omitempty" tf:"ssl_certificate_id,omitempty"`
 
-	// The ID of the associated SSL Certificate.
+	// The ID of the associated SSL Profile.
 	SSLProfileID *string `json:"sslProfileId,omitempty" tf:"ssl_profile_id,omitempty"`
 }
 
@@ -621,7 +639,7 @@ type HTTPListenerParameters struct {
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
-	// Should Server Name Indication be Required? Defaults to false.
+	// Should Server Name Indication be Required?
 	// +kubebuilder:validation:Optional
 	RequireSni *bool `json:"requireSni,omitempty" tf:"require_sni,omitempty"`
 
@@ -690,8 +708,8 @@ type MatchObservation struct {
 type MatchParameters struct {
 
 	// A snippet from the Response Body which must be present in the Response.
-	// +kubebuilder:validation:Required
-	Body *string `json:"body" tf:"body,omitempty"`
+	// +kubebuilder:validation:Optional
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// A list of allowed status codes for this Health Probe.
 	// +kubebuilder:validation:Required
@@ -824,7 +842,7 @@ type ProbeParameters struct {
 	// +kubebuilder:validation:Required
 	Timeout *float64 `json:"timeout" tf:"timeout,omitempty"`
 
-	// The Unhealthy Threshold for this Probe, which indicates the amount of retries which should be attempted before a node is deemed unhealthy. Possible values are from 1 - 20 seconds.
+	// The Unhealthy Threshold for this Probe, which indicates the amount of retries which should be attempted before a node is deemed unhealthy. Possible values are from 1 to 20.
 	// +kubebuilder:validation:Required
 	UnhealthyThreshold *float64 `json:"unhealthyThreshold" tf:"unhealthy_threshold,omitempty"`
 }
@@ -1036,7 +1054,7 @@ type SSLPolicyObservation struct {
 
 type SSLPolicyParameters struct {
 
-	// A List of accepted cipher suites. Possible values are: TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256 and TLS_RSA_WITH_AES_256_GCM_SHA384.
+	// A List of accepted cipher suites. Possible values are: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256 and TLS_RSA_WITH_AES_256_GCM_SHA384.
 	// +kubebuilder:validation:Optional
 	CipherSuites []*string `json:"cipherSuites,omitempty" tf:"cipher_suites,omitempty"`
 
@@ -1088,7 +1106,7 @@ type SSLProfileSSLPolicyObservation struct {
 
 type SSLProfileSSLPolicyParameters struct {
 
-	// A List of accepted cipher suites. Possible values are: TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256 and TLS_RSA_WITH_AES_256_GCM_SHA384.
+	// A List of accepted cipher suites. Possible values are: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256 and TLS_RSA_WITH_AES_256_GCM_SHA384.
 	// +kubebuilder:validation:Optional
 	CipherSuites []*string `json:"cipherSuites,omitempty" tf:"cipher_suites,omitempty"`
 
@@ -1171,6 +1189,10 @@ type URLObservation struct {
 
 type URLParameters struct {
 
+	// The components used to rewrite the URL. Possible values are path_only and query_string_only to limit the rewrite to the URL Path or URL Query String only.
+	// +kubebuilder:validation:Optional
+	Components *string `json:"components,omitempty" tf:"components,omitempty"`
+
 	// The URL path to rewrite.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
@@ -1242,7 +1264,7 @@ type WafConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DisabledRuleGroup []DisabledRuleGroupParameters `json:"disabledRuleGroup,omitempty" tf:"disabled_rule_group,omitempty"`
 
-	// Is the Web Application Firewall be enabled?
+	// Is the Web Application Firewall enabled?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -1266,11 +1288,11 @@ type WafConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
 
-	// The Type of the Rule Set used for this Web Application Firewall. Currently, only OWASP is supported.
+	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP and Microsoft_BotManagerRuleSet.
 	// +kubebuilder:validation:Optional
 	RuleSetType *string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty"`
 
-	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 2.2.9, 3.0, 3.1,  and 3.2.
+	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.2.9, 3.0, 3.1 and 3.2.
 	// +kubebuilder:validation:Required
 	RuleSetVersion *string `json:"ruleSetVersion" tf:"rule_set_version,omitempty"`
 }

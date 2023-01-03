@@ -1269,6 +1269,11 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.AzureVMwareDataStoreEnabled != nil {
+		in, out := &in.AzureVMwareDataStoreEnabled, &out.AzureVMwareDataStoreEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.CreateFromSnapshotResourceID != nil {
 		in, out := &in.CreateFromSnapshotResourceID, &out.CreateFromSnapshotResourceID
 		*out = new(string)
@@ -1307,6 +1312,11 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkFeatures != nil {
+		in, out := &in.NetworkFeatures, &out.NetworkFeatures
 		*out = new(string)
 		**out = **in
 	}
@@ -1408,6 +1418,11 @@ func (in *VolumeParameters) DeepCopyInto(out *VolumeParameters) {
 	}
 	if in.VolumePath != nil {
 		in, out := &in.VolumePath, &out.VolumePath
+		*out = new(string)
+		**out = **in
+	}
+	if in.Zone != nil {
+		in, out := &in.Zone, &out.Zone
 		*out = new(string)
 		**out = **in
 	}

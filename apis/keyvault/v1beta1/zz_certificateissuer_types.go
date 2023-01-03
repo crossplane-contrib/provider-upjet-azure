@@ -51,7 +51,7 @@ type CertificateIssuerParameters struct {
 	// +kubebuilder:validation:Optional
 	Admin []AdminParameters `json:"admin,omitempty" tf:"admin,omitempty"`
 
-	// The ID of the Key Vault in which to create the Certificate Issuer.
+	// The ID of the Key Vault in which to create the Certificate Issuer. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

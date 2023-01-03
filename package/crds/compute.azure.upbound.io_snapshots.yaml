@@ -66,22 +66,27 @@ spec:
                 properties:
                   createOption:
                     description: Indicates how the snapshot is to be created. Possible
-                      values are Copy or Import. Changing this forces a new resource
-                      to be created.
+                      values are Copy or Import.
                     type: string
                   diskSizeGb:
                     description: The size of the Snapshotted Disk in GB.
                     type: number
                   encryptionSettings:
+                    description: A encryption_settings block as defined below.
                     items:
                       properties:
                         diskEncryptionKey:
+                          description: A disk_encryption_key block as defined below.
                           items:
                             properties:
                               secretUrl:
+                                description: The URL to the Key Vault Secret used
+                                  as the Disk Encryption Key. This can be found as
+                                  id on the azurerm_key_vault_secret resource.
                                 type: string
                               sourceVaultId:
-                                description: The Snapshot ID.
+                                description: The ID of the source Key Vault. This
+                                  can be found as id on the azurerm_key_vault resource.
                                 type: string
                             required:
                             - secretUrl
@@ -91,20 +96,23 @@ spec:
                         enabled:
                           type: boolean
                         keyEncryptionKey:
+                          description: A key_encryption_key block as defined below.
                           items:
                             properties:
                               keyUrl:
+                                description: The URL to the Key Vault Key used as
+                                  the Key Encryption Key. This can be found as id
+                                  on the azurerm_key_vault_key resource.
                                 type: string
                               sourceVaultId:
-                                description: The Snapshot ID.
+                                description: The ID of the source Key Vault. This
+                                  can be found as id on the azurerm_key_vault resource.
                                 type: string
                             required:
                             - keyUrl
                             - sourceVaultId
                             type: object
                           type: array
-                      required:
-                      - enabled
                       type: object
                     type: array
                   location:

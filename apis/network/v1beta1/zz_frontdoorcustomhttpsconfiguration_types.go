@@ -29,7 +29,7 @@ type CustomHTTPSConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateSecretName *string `json:"azureKeyVaultCertificateSecretName,omitempty" tf:"azure_key_vault_certificate_secret_name,omitempty"`
 
-	// The version of the Key Vault secret representing the full certificate PFX. Defaults to Latest.
+	// The version of the Key Vault secret representing the full certificate PFX.
 	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateSecretVersion *string `json:"azureKeyVaultCertificateSecretVersion,omitempty" tf:"azure_key_vault_certificate_secret_version,omitempty"`
 
@@ -72,7 +72,7 @@ type FrontdoorCustomHTTPSConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	CustomHTTPSProvisioningEnabled *bool `json:"customHttpsProvisioningEnabled" tf:"custom_https_provisioning_enabled,omitempty"`
 
-	// The ID of the FrontDoor Frontend Endpoint which this configuration refers to.
+	// The ID of the Front Door Frontend Endpoint which this configuration refers to. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	FrontendEndpointID *string `json:"frontendEndpointId" tf:"frontend_endpoint_id,omitempty"`
 }
@@ -91,7 +91,7 @@ type FrontdoorCustomHTTPSConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FrontdoorCustomHTTPSConfiguration is the Schema for the FrontdoorCustomHTTPSConfigurations API. Manages the Custom Https Configuration for an Azure Front Door Frontend Endpoint.
+// FrontdoorCustomHTTPSConfiguration is the Schema for the FrontdoorCustomHTTPSConfigurations API. Manages the Custom Https Configuration for an Azure Front Door (classic) Frontend Endpoint.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

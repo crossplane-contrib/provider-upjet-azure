@@ -1497,6 +1497,22 @@ func (mg *LoadBalancerNatRule) ResolveReferences(ctx context.Context, c client.R
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BackendAddressPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.BackendAddressPoolIDRef,
+		Selector:     mg.Spec.ForProvider.BackendAddressPoolIDSelector,
+		To: reference.To{
+			List:    &LoadBalancerBackendAddressPoolList{},
+			Managed: &LoadBalancerBackendAddressPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BackendAddressPoolID")
+	}
+	mg.Spec.ForProvider.BackendAddressPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BackendAddressPoolIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoadbalancerID),
 		Extract:      rconfig.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.LoadbalancerIDRef,

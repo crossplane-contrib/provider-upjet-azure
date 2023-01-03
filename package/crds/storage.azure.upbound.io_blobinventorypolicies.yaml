@@ -85,6 +85,10 @@ spec:
                                 description: Includes blob versions in blob inventory
                                   or not? Defaults to false.
                                 type: boolean
+                              includeDeleted:
+                                description: Includes deleted blobs in blob inventory
+                                  or not? Defaults to false.
+                                type: boolean
                               includeSnapshots:
                                 description: Includes blob snapshots in blob inventory
                                   or not? Defaults to false.

@@ -233,6 +233,16 @@ func (in *ServiceBusNamespaceParameters) DeepCopyInto(out *ServiceBusNamespacePa
 		*out = new(string)
 		**out = **in
 	}
+	if in.MinimumTLSVersion != nil {
+		in, out := &in.MinimumTLSVersion, &out.MinimumTLSVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)

@@ -340,7 +340,8 @@ spec:
                     type: object
                   shardKey:
                     description: The name of the key to partition on for sharding.
-                      There must not be any other unique index keys.
+                      There must not be any other unique index keys. Changing this
+                      forces a new resource to be created.
                     type: string
                   throughput:
                     description: The throughput of the MongoDB collection (RU/s).

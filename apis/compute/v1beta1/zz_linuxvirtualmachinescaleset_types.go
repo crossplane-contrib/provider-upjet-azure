@@ -22,7 +22,7 @@ type AutomaticInstanceRepairParameters struct {
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Amount of time (in minutes, between 30 and 90, defaults to 30 minutes) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format.
+	// Amount of time (in minutes, between 30 and 90, defaults to 30 minutes) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format. Defaults to PT30M.
 	// +kubebuilder:validation:Optional
 	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 }
@@ -50,7 +50,7 @@ type ExtensionParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoUpgradeMinorVersion *bool `json:"autoUpgradeMinorVersion,omitempty" tf:"auto_upgrade_minor_version,omitempty"`
 
-	// Should the Extension be automatically updated whenever the Publisher releases a new version of this VM Extension? Defaults to false.
+	// Should the Extension be automatically updated whenever the Publisher releases a new version of this VM Extension?
 	// +kubebuilder:validation:Optional
 	AutomaticUpgradeEnabled *bool `json:"automaticUpgradeEnabled,omitempty" tf:"automatic_upgrade_enabled,omitempty"`
 
@@ -61,6 +61,10 @@ type ExtensionParameters struct {
 	// The name for the Virtual Machine Scale Set Extension.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// A protected_settings_from_key_vault block as defined below.
+	// +kubebuilder:validation:Optional
+	ProtectedSettingsFromKeyVault []ProtectedSettingsFromKeyVaultParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
 	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
 	// +kubebuilder:validation:Optional
@@ -85,6 +89,27 @@ type ExtensionParameters struct {
 	// Specifies the version of the extension to use, available versions can be found using the Azure CLI.
 	// +kubebuilder:validation:Required
 	TypeHandlerVersion *string `json:"typeHandlerVersion" tf:"type_handler_version,omitempty"`
+}
+
+type GalleryApplicationsObservation struct {
+}
+
+type GalleryApplicationsParameters struct {
+
+	// +kubebuilder:validation:Optional
+	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
+
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// The ID of the Linux Virtual Machine Scale Set.
+	// +kubebuilder:validation:Required
+	PackageReferenceID *string `json:"packageReferenceId" tf:"package_reference_id,omitempty"`
+
+	// The IP Tag associated with the Public IP, such as SQL or Storage.
+	// +kubebuilder:validation:Optional
+	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type IPConfigurationObservation struct {
@@ -158,7 +183,7 @@ type LinuxVirtualMachineScaleSetAdditionalCapabilitiesObservation struct {
 
 type LinuxVirtualMachineScaleSetAdditionalCapabilitiesParameters struct {
 
-	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine Scale Set? Defaults to false. Changing this forces a new resource to be created.
+	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine Scale Set? Possible values are true or false. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
@@ -200,7 +225,7 @@ type LinuxVirtualMachineScaleSetDataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
-	// The ID of the Disk Encryption Set which should be used to encrypt this OS Disk. Conflicts with secure_vm_disk_encryption_set_id.
+	// The ID of the Disk Encryption Set which should be used to encrypt this OS Disk. Conflicts with secure_vm_disk_encryption_set_id. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
@@ -212,7 +237,11 @@ type LinuxVirtualMachineScaleSetDataDiskParameters struct {
 	// +kubebuilder:validation:Required
 	Lun *float64 `json:"lun" tf:"lun,omitempty"`
 
-	// The Type of Storage Account which should back this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, Premium_LRS and UltraSSD_LRS.
+	// The name of the Data Disk.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Type of Storage Account which should back this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS and UltraSSD_LRS.
 	// +kubebuilder:validation:Required
 	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
@@ -225,6 +254,28 @@ type LinuxVirtualMachineScaleSetDataDiskParameters struct {
 	// Should Write Accelerator be Enabled for this OS Disk? Defaults to false.
 	// +kubebuilder:validation:Optional
 	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
+}
+
+type LinuxVirtualMachineScaleSetGalleryApplicationObservation struct {
+}
+
+type LinuxVirtualMachineScaleSetGalleryApplicationParameters struct {
+
+	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
+
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// Specifies a passthrough value for more generic context. This field can be any valid string value. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+
+	// Specifies the Gallery Application Version resource ID. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
+	VersionID *string `json:"versionId" tf:"version_id,omitempty"`
 }
 
 type LinuxVirtualMachineScaleSetIdentityObservation struct {
@@ -273,7 +324,7 @@ type LinuxVirtualMachineScaleSetOsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	DiffDiskSettings []OsDiskDiffDiskSettingsParameters `json:"diffDiskSettings,omitempty" tf:"diff_disk_settings,omitempty"`
 
-	// The ID of the Disk Encryption Set which should be used to encrypt this OS Disk. Conflicts with secure_vm_disk_encryption_set_id.
+	// The ID of the Disk Encryption Set which should be used to encrypt this OS Disk. Conflicts with secure_vm_disk_encryption_set_id. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
@@ -289,7 +340,7 @@ type LinuxVirtualMachineScaleSetOsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityEncryptionType *string `json:"securityEncryptionType,omitempty" tf:"security_encryption_type,omitempty"`
 
-	// The Type of Storage Account which should back this the Internal OS Disk. Possible values include Standard_LRS, StandardSSD_LRS and Premium_LRS.
+	// The Type of Storage Account which should back this the Internal OS Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS and Premium_ZRS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
@@ -300,7 +351,7 @@ type LinuxVirtualMachineScaleSetOsDiskParameters struct {
 
 type LinuxVirtualMachineScaleSetParameters struct {
 
-	// A additional_capabilities block as defined below.
+	// An additional_capabilities block as defined below.
 	// +kubebuilder:validation:Optional
 	AdditionalCapabilities []LinuxVirtualMachineScaleSetAdditionalCapabilitiesParameters `json:"additionalCapabilities,omitempty" tf:"additional_capabilities,omitempty"`
 
@@ -316,11 +367,11 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Required
 	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
-	// A automatic_instance_repair block as defined below. To enable the automatic instance repair, this Virtual Machine Scale Set must have a valid health_probe_id or an Application Health Extension.
+	// An automatic_instance_repair block as defined below. To enable the automatic instance repair, this Virtual Machine Scale Set must have a valid health_probe_id or an Application Health Extension.
 	// +kubebuilder:validation:Optional
 	AutomaticInstanceRepair []AutomaticInstanceRepairParameters `json:"automaticInstanceRepair,omitempty" tf:"automatic_instance_repair,omitempty"`
 
-	// A automatic_os_upgrade_policy block as defined below. This can only be specified when upgrade_mode is set to Automatic.
+	// An automatic_os_upgrade_policy block as defined below. This can only be specified when upgrade_mode is set to either Automatic or Rolling.
 	// +kubebuilder:validation:Optional
 	AutomaticOsUpgradePolicy []AutomaticOsUpgradePolicyParameters `json:"automaticOsUpgradePolicy,omitempty" tf:"automatic_os_upgrade_policy,omitempty"`
 
@@ -328,7 +379,11 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	BootDiagnostics []LinuxVirtualMachineScaleSetBootDiagnosticsParameters `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
 
-	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix.
+	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine Scale Set should be allocated to. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
+
+	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ComputerNamePrefix *string `json:"computerNamePrefix,omitempty" tf:"computer_name_prefix,omitempty"`
 
@@ -356,7 +411,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionAtHostEnabled *bool `json:"encryptionAtHostEnabled,omitempty" tf:"encryption_at_host_enabled,omitempty"`
 
-	// The Policy which should be used Virtual Machines are Evicted from the Scale Set. Changing this forces a new resource to be created.
+	// Specifies the eviction policy for Virtual Machines in this Scale Set. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
@@ -364,21 +419,36 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Extension []ExtensionParameters `json:"extension,omitempty" tf:"extension,omitempty"`
 
+	// Should extension operations be allowed on the Virtual Machine Scale Set? Possible values are true or false. Defaults to true. Changing this forces a new Linux Virtual Machine Scale Set to be created.
+	// +kubebuilder:validation:Optional
+	ExtensionOperationsEnabled *bool `json:"extensionOperationsEnabled,omitempty" tf:"extension_operations_enabled,omitempty"`
+
 	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
+
+	// A gallery_application block as defined below.
+	// +kubebuilder:validation:Optional
+	GalleryApplication []LinuxVirtualMachineScaleSetGalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	GalleryApplications []GalleryApplicationsParameters `json:"galleryApplications,omitempty" tf:"gallery_applications,omitempty"`
 
 	// The ID of a Load Balancer Probe which should be used to determine the health of an instance. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling.
 	// +kubebuilder:validation:Optional
 	HealthProbeID *string `json:"healthProbeId,omitempty" tf:"health_probe_id,omitempty"`
 
+	// Specifies the ID of the dedicated host group that the virtual machine scale set resides in. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
+
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []LinuxVirtualMachineScaleSetIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The number of Virtual Machines in the Scale Set.
-	// +kubebuilder:validation:Required
-	Instances *float64 `json:"instances" tf:"instances,omitempty"`
+	// The number of Virtual Machines in the Scale Set. Defaults to 0.
+	// +kubebuilder:validation:Optional
+	Instances *float64 `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// The Azure location where the Linux Virtual Machine Scale Set should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
@@ -400,7 +470,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Overprovision *bool `json:"overprovision,omitempty" tf:"overprovision,omitempty"`
 
-	// A plan block as documented below.
+	// A plan block as defined below.
 	// +kubebuilder:validation:Optional
 	Plan []LinuxVirtualMachineScaleSetPlanParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
@@ -437,7 +507,10 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	RollingUpgradePolicy []RollingUpgradePolicyParameters `json:"rollingUpgradePolicy,omitempty" tf:"rolling_upgrade_policy,omitempty"`
 
-	// The scale-in policy rule that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled in. Possible values for the scale-in policy rules are Default, NewestVM and OldestVM, defaults to Default. For more information about scale in policy, please refer to this doc.
+	// A scale_in block as defined below.
+	// +kubebuilder:validation:Optional
+	ScaleIn []ScaleInParameters `json:"scaleIn,omitempty" tf:"scale_in,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	ScaleInPolicy *string `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
 
@@ -457,13 +530,17 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 
-	// The ID of an Image which each Virtual Machine in this Scale Set should be based on.
+	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
 	// +kubebuilder:validation:Optional
 	SourceImageID *string `json:"sourceImageId,omitempty" tf:"source_image_id,omitempty"`
 
 	// A source_image_reference block as defined below.
 	// +kubebuilder:validation:Optional
 	SourceImageReference []LinuxVirtualMachineScaleSetSourceImageReferenceParameters `json:"sourceImageReference,omitempty" tf:"source_image_reference,omitempty"`
+
+	// A spot_restore block as defined below.
+	// +kubebuilder:validation:Optional
+	SpotRestore []SpotRestoreParameters `json:"spotRestore,omitempty" tf:"spot_restore,omitempty"`
 
 	// A mapping of tags which should be assigned to this Virtual Machine Scale Set.
 	// +kubebuilder:validation:Optional
@@ -477,7 +554,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	TerminationNotification []LinuxVirtualMachineScaleSetTerminationNotificationParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
 
-	// Specifies how Upgrades (e.g. changing the Image/SKU) should be performed to Virtual Machine Instances. Possible values are Automatic, Manual and Rolling. Defaults to Manual.
+	// Specifies how Upgrades (e.g. changing the Image/SKU) should be performed to Virtual Machine Instances. Possible values are Automatic, Manual and Rolling. Defaults to Manual. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	UpgradeMode *string `json:"upgradeMode,omitempty" tf:"upgrade_mode,omitempty"`
 
@@ -557,11 +634,11 @@ type LinuxVirtualMachineScaleSetTerminationNotificationObservation struct {
 
 type LinuxVirtualMachineScaleSetTerminationNotificationParameters struct {
 
-	// Should the termination notification be enabled on this Virtual Machine Scale Set? Defaults to false.
+	// Should the termination notification be enabled on this Virtual Machine Scale Set?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format.
+	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -605,8 +682,27 @@ type OsDiskDiffDiskSettingsObservation struct {
 
 type OsDiskDiffDiskSettingsParameters struct {
 
+	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Option *string `json:"option" tf:"option,omitempty"`
+
+	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
+}
+
+type ProtectedSettingsFromKeyVaultObservation struct {
+}
+
+type ProtectedSettingsFromKeyVaultParameters struct {
+
+	// The URL to the Key Vault Secret which stores the protected settings.
+	// +kubebuilder:validation:Required
+	SecretURL *string `json:"secretUrl" tf:"secret_url,omitempty"`
+
+	// The ID of the source Key Vault.
+	// +kubebuilder:validation:Required
+	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
 
 type PublicIPAddressObservation struct {
@@ -633,12 +729,20 @@ type PublicIPAddressParameters struct {
 	// The ID of the Public IP Address Prefix from where Public IP Addresses should be allocated. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
+
+	// Specifies the version of the image used to create the virtual machines.
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type RollingUpgradePolicyObservation struct {
 }
 
 type RollingUpgradePolicyParameters struct {
+
+	// Should the Virtual Machine Scale Set ignore the Azure Zone boundaries when constructing upgrade batches? Possible values are true or false.
+	// +kubebuilder:validation:Optional
+	CrossZoneUpgradesEnabled *bool `json:"crossZoneUpgradesEnabled,omitempty" tf:"cross_zone_upgrades_enabled,omitempty"`
 
 	// The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability.
 	// +kubebuilder:validation:Required
@@ -655,6 +759,24 @@ type RollingUpgradePolicyParameters struct {
 	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format.
 	// +kubebuilder:validation:Required
 	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches" tf:"pause_time_between_batches,omitempty"`
+
+	// Upgrade all unhealthy instances in a scale set before any healthy instances. Possible values are true or false.
+	// +kubebuilder:validation:Optional
+	PrioritizeUnhealthyInstancesEnabled *bool `json:"prioritizeUnhealthyInstancesEnabled,omitempty" tf:"prioritize_unhealthy_instances_enabled,omitempty"`
+}
+
+type ScaleInObservation struct {
+}
+
+type ScaleInParameters struct {
+
+	// Should the virtual machines chosen for removal be force deleted when the virtual machine scale set is being scaled-in? Possible values are true or false. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ForceDeletionEnabled *bool `json:"forceDeletionEnabled,omitempty" tf:"force_deletion_enabled,omitempty"`
+
+	// The scale-in policy rule that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled in. Possible values for the scale-in policy rules are Default, NewestVM and OldestVM, defaults to Default. For more information about scale in policy, please refer to this doc.
+	// +kubebuilder:validation:Optional
+	Rule *string `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type SecretCertificateObservation struct {
@@ -667,16 +789,30 @@ type SecretCertificateParameters struct {
 	URL *string `json:"url" tf:"url,omitempty"`
 }
 
+type SpotRestoreObservation struct {
+}
+
+type SpotRestoreParameters struct {
+
+	// Should the Spot-Try-Restore feature be enabled? The Spot-Try-Restore feature will attempt to automatically restore the evicted Spot Virtual Machine Scale Set VM instances opportunistically based on capacity availability and pricing constraints. Possible values are true or false. Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The length of time that the Virtual Machine Scale Set should attempt to restore the Spot VM instances which have been evicted. The time duration should be between 15 minutes and 120 minutes (inclusive). The time duration should be specified in the ISO 8601 format. Defaults to 90 minutes (e.g. PT1H30M). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
 type TerminateNotificationObservation struct {
 }
 
 type TerminateNotificationParameters struct {
 
-	// Should the terminate notification be enabled on this Virtual Machine Scale Set? Defaults to false.
+	// Should the terminate notification be enabled on this Virtual Machine Scale Set?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format.
+	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }

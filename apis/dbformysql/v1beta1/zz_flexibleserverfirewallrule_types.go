@@ -21,7 +21,7 @@ type FlexibleServerFirewallRuleObservation struct {
 
 type FlexibleServerFirewallRuleParameters struct {
 
-	// Specifies the End IP Address associated with this Firewall Rule. Changing this forces a new resource to be created.
+	// Specifies the End IP Address associated with this Firewall Rule.
 	// +kubebuilder:validation:Required
 	EndIPAddress *string `json:"endIpAddress" tf:"end_ip_address,omitempty"`
 
@@ -51,7 +51,7 @@ type FlexibleServerFirewallRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
-	// Specifies the Start IP Address associated with this Firewall Rule. Changing this forces a new resource to be created.
+	// Specifies the Start IP Address associated with this Firewall Rule.
 	// +kubebuilder:validation:Required
 	StartIPAddress *string `json:"startIpAddress" tf:"start_ip_address,omitempty"`
 }

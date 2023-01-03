@@ -71,7 +71,7 @@ spec:
                     type: number
                   loadbalancerId:
                     description: The ID of the LoadBalancer in which to create the
-                      NAT Rule.
+                      NAT Rule. Changing this forces a new resource to be created.
                     type: string
                   loadbalancerIdRef:
                     description: Reference to a LoadBalancer to populate loadbalancerId.
@@ -156,6 +156,11 @@ spec:
                   port:
                     description: Port on which the Probe queries the backend endpoint.
                       Possible values range from 1 to 65535, inclusive.
+                    type: number
+                  probeThreshold:
+                    description: The number of consecutive successful or failed probes
+                      that allow or deny traffic to this endpoint. Possible values
+                      range from 1 to 100. The default value is 1.
                     type: number
                   protocol:
                     description: Specifies the protocol of the end point. Possible

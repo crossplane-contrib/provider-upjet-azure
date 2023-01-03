@@ -594,6 +594,22 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.RoleDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleDefinitionIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ScopeRef,
+		Selector:     mg.Spec.ForProvider.ScopeSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Scope")
+	}
+	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
+
 	return nil
 }
 

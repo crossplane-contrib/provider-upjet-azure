@@ -36,7 +36,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: FrontDoor is the Schema for the FrontDoors API. Manages an Azure
-          Front Door instance.
+          Front Door (classic) instance.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -119,7 +119,8 @@ spec:
                             block within this resource to use for this Backend Pool.
                           type: string
                         name:
-                          description: Specifies the name of the Backend Pool.
+                          description: Specifies the name of the Backend Pool. Changing
+                            this forces a new resource to be created.
                           type: string
                       required:
                       - backend
@@ -140,7 +141,8 @@ spec:
                             Defaults to 120.
                           type: number
                         name:
-                          description: Specifies the name of the Health Probe.
+                          description: Specifies the name of the Health Probe. Changing
+                            this forces a new resource to be created.
                           type: string
                         path:
                           description: The path to use for the Health Probe. Default
@@ -149,11 +151,11 @@ spec:
                         probeMethod:
                           description: 'Specifies HTTP method the health probe uses
                             when querying the backend pool instances. Possible values
-                            include: Get and Head. Defaults to Get.'
+                            include: Get and Head. Defaults to GET.'
                           type: string
                         protocol:
                           description: Protocol scheme to use for the Health Probe.
-                            Defaults to Http.
+                            Possible values are Http and Https. Defaults to Http.
                           type: string
                       required:
                       - name
@@ -169,7 +171,8 @@ spec:
                             to 0.
                           type: number
                         name:
-                          description: Specifies the name of the Load Balancer.
+                          description: Specifies the name of the Load Balancer. Changing
+                            this forces a new resource to be created.
                           type: string
                         sampleSize:
                           description: The number of samples to consider for load
@@ -215,6 +218,7 @@ spec:
                           type: string
                         name:
                           description: Specifies the name of the frontend_endpoint.
+                            Changing this forces a new resource to be created.
                           type: string
                         sessionAffinityEnabled:
                           description: Whether to allow session affinity on this host.
@@ -323,7 +327,7 @@ spec:
                       properties:
                         acceptedProtocols:
                           description: Protocol schemes to match for the Backend Routing
-                            Rule. Defaults to Http.
+                            Rule. Possible values are Http and Https.
                           items:
                             type: string
                           type: array
@@ -392,11 +396,12 @@ spec:
                             type: string
                           type: array
                         name:
-                          description: Specifies the name of the Routing Rule.
+                          description: Specifies the name of the Routing Rule. Changing
+                            this forces a new resource to be created.
                           type: string
                         patternsToMatch:
                           description: The route patterns for the Backend Routing
-                            Rule. Defaults to /*.
+                            Rule.
                           items:
                             type: string
                           type: array
@@ -423,7 +428,6 @@ spec:
                               redirectProtocol:
                                 description: Protocol to use when redirecting. Valid
                                   options are HttpOnly, HttpsOnly, or MatchRequest.
-                                  Defaults to MatchRequest
                                 type: string
                               redirectType:
                                 description: Status code for the redirect. Valida

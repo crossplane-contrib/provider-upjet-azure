@@ -22,7 +22,7 @@ type DataProtectionReplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Location of the primary volume.
+	// Location of the primary volume. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	RemoteVolumeLocation *string `json:"remoteVolumeLocation" tf:"remote_volume_location,omitempty"`
 
@@ -119,7 +119,10 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
-	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name, account_name and pool_name.
+	// +kubebuilder:validation:Optional
+	AzureVMwareDataStoreEnabled *bool `json:"azureVmwareDataStoreEnabled,omitempty" tf:"azure_vmware_data_store_enabled,omitempty"`
+
+	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name, account_name and pool_name. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Snapshot
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -148,6 +151,10 @@ type VolumeParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
+
+	// Indicates which network feature to use, accepted values are Basic or Standard, it defaults to Basic if not defined. This is a feature in public preview and for more information about it and how to register, please refer to Configure network features for an Azure NetApp Files volume. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	NetworkFeatures *string `json:"networkFeatures,omitempty" tf:"network_features,omitempty"`
 
 	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Pool
@@ -179,11 +186,11 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Volume security style, accepted values are Unix or Ntfs. If not provided, single-protocol volume is created defaulting to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to Ntfs. In a dual-protocol volume, if not provided, its value will be Ntfs.
+	// Volume security style, accepted values are Unix or Ntfs. If not provided, single-protocol volume is created defaulting to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to Ntfs. In a dual-protocol volume, if not provided, its value will be Ntfs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
-	// The target performance of the file system. Valid values include Premium, Standard, or Ultra.
+	// The target performance of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	ServiceLevel *string `json:"serviceLevel" tf:"service_level,omitempty"`
 
@@ -220,6 +227,10 @@ type VolumeParameters struct {
 	// A unique file path for the volume. Used when creating mount targets. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	VolumePath *string `json:"volumePath" tf:"volume_path,omitempty"`
+
+	// Specifies the Availability Zone in which the Volume should be located. Possible values are 1, 2 and 3. This feature is currently in preview, for more information on how to enable it, please refer to Manage availability zone volume placement for Azure NetApp Files
+	// +kubebuilder:validation:Optional
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 // VolumeSpec defines the desired state of Volume

@@ -37,7 +37,7 @@ type IOTHubEnrichmentParameters struct {
 	// +kubebuilder:validation:Optional
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
-	// The key of the enrichment.
+	// The key of the enrichment. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Key *string `json:"key" tf:"key,omitempty"`
 

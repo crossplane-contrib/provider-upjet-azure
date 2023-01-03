@@ -51,11 +51,11 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	DataDisk []DataDiskParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. The default is V1.
+	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. The default is V1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
-	// Specified the supported Azure location where the resource exists.
+	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
@@ -64,7 +64,7 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	OsDisk []OsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
-	// The name of the resource group in which to create
+	// The name of the resource group in which to create. Changing this forces a new resource to be created.
 	// the image. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -108,7 +108,7 @@ type OsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
-	// Specifies the state of the operating system contained in the blob. Currently, the only value is Generalized.
+	// Specifies the state of the operating system contained in the blob. Currently, the only value is Generalized. Possible values are Generalized and Specialized.
 	// +kubebuilder:validation:Optional
 	OsState *string `json:"osState,omitempty" tf:"os_state,omitempty"`
 

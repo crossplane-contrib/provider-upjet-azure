@@ -102,7 +102,8 @@ spec:
                       against the Event Hub endpoint.
                     type: string
                   iothubId:
-                    description: The IoTHub ID for the endpoint.
+                    description: The IoTHub ID for the endpoint. Changing this forces
+                      a new resource to be created.
                     type: string
                   iothubIdRef:
                     description: Reference to a IOTHub in devices to populate iothubId.

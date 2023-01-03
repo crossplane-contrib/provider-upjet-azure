@@ -10,9 +10,9 @@ spec:
   forProvider:
     accountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-    body: "  \tfunction () { var context = getContext(); var response = context.getResponse();
-      response.setBody('Hello, World'); }\n"
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    body: |2
+         function () { var context = getContext(); var response = context.getResponse(); response.setBody('Hello, World'); }
     containerNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -21,7 +21,7 @@ spec:
         testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
 
 ---
 
@@ -37,14 +37,14 @@ spec:
   forProvider:
     accountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     partitionKeyPath: /id
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
 
 ---
 

@@ -103,7 +103,7 @@ type MongoCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The name of the key to partition on for sharding. There must not be any other unique index keys.
+	// The name of the key to partition on for sharding. There must not be any other unique index keys. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ShardKey *string `json:"shardKey,omitempty" tf:"shard_key,omitempty"`
 

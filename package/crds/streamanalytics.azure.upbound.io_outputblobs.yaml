@@ -64,6 +64,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Output. Possible
+                      values are Msi and ConnectionString. Defaults to ConnectionString.
+                    type: string
                   batchMaxWaitTime:
                     description: The maximum wait time per batch in hh:mm:ss e.g.
                       00:02:00 for two minutes.
@@ -171,9 +175,9 @@ spec:
                             of output. It currently can only be set to UTF8.
                           type: string
                         fieldDelimiter:
-                          description: The delimiter that will be used to separate
-                            comma-separated value (CSV) records. Possible values are   (space),
-                            , (comma),     (tab), | (pipe) and ;.
+                          description: "The delimiter that will be used to separate
+                            comma-separated value (CSV) records. Possible values are
+                            \  (space), , (comma), \t (tab), | (pipe) and ;."
                           type: string
                         format:
                           description: Specifies the format of the JSON the output
@@ -370,7 +374,6 @@ spec:
                 - dateFormat
                 - pathPattern
                 - serialization
-                - storageAccountKeySecretRef
                 - streamAnalyticsJobName
                 - timeFormat
                 type: object

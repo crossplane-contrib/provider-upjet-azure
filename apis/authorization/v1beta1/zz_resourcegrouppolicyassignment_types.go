@@ -67,7 +67,7 @@ type ResourceGroupPolicyAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Specifies if this Policy should be enforced or not?
+	// Specifies if this Policy should be enforced or not? Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 

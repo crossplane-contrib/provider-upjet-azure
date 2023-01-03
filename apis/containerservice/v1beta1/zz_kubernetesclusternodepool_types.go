@@ -89,15 +89,23 @@ type KubernetesClusterNodePoolObservation struct {
 
 type KubernetesClusterNodePoolParameters struct {
 
-	// Whether to enable auto-scaler. Defaults to false.
+	// Specifies the ID of the Capacity Reservation Group where this Node Pool should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
+
+	// Specifies whether to trust a Custom CA.
+	// +kubebuilder:validation:Optional
+	CustomCATrustEnabled *bool `json:"customCaTrustEnabled,omitempty" tf:"custom_ca_trust_enabled,omitempty"`
+
+	// Whether to enable auto-scaler.
 	// +kubebuilder:validation:Optional
 	EnableAutoScaling *bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty"`
 
-	// Should the nodes in this Node Pool have host encryption enabled? Defaults to false.
+	// Should the nodes in this Node Pool have host encryption enabled?  Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnableHostEncryption *bool `json:"enableHostEncryption,omitempty" tf:"enable_host_encryption,omitempty"`
 
-	// Should each node have a Public IP Address? Defaults to false.  Changing this forces a new resource to be created.
+	// Should each node have a Public IP Address?   Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnableNodePublicIP *bool `json:"enableNodePublicIp,omitempty" tf:"enable_node_public_ip,omitempty"`
 
@@ -108,6 +116,10 @@ type KubernetesClusterNodePoolParameters struct {
 	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
+
+	// The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
 
 	// A kubelet_config block as defined below.
 	// +kubebuilder:validation:Optional
@@ -143,6 +155,10 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
 
+	// A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It cannot be specified for Windows nodes and must be a static string (i.e. will be printed raw and not executed as a script). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	MessageOfTheDay *string `json:"messageOfTheDay,omitempty" tf:"message_of_the_day,omitempty"`
+
 	// The minimum number of nodes which should exist within this Node Pool. Valid values are between 0 and 1000 and must be less than or equal to max_count.
 	// +kubebuilder:validation:Optional
 	MinCount *float64 `json:"minCount,omitempty" tf:"min_count,omitempty"`
@@ -167,7 +183,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeTaints []*string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
 
-	// Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)
+	// Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). AKS does not require an exact patch version to be specified, minor version aliases such as 1.22 are also supported. - The minor version's latest GA patch is automatically chosen in that case. More details can be found in the documentation.
 	// +kubebuilder:validation:Optional
 	OrchestratorVersion *string `json:"orchestratorVersion,omitempty" tf:"orchestrator_version,omitempty"`
 
@@ -179,7 +195,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// OsSKU to be used to specify Linux OSType. Not applicable to Windows OSType. Possible values include: Ubuntu, CBLMariner. Defaults to Ubuntu. Changing this forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values include: Ubuntu, CBLMariner, Mariner, Windows2019, Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
@@ -221,7 +237,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information.
+	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 
@@ -233,7 +249,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Required
 	VMSize *string `json:"vmSize" tf:"vm_size,omitempty"`
 
-	// The ID of the Subnet where this Node Pool should exist.
+	// The ID of the Subnet where this Node Pool should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -246,6 +262,10 @@ type KubernetesClusterNodePoolParameters struct {
 	// Selector for a Subnet in network to populate vnetSubnetId.
 	// +kubebuilder:validation:Optional
 	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
+
+	// A windows_profile block as documented below.
+	// +kubebuilder:validation:Optional
+	WindowsProfile []KubernetesClusterNodePoolWindowsProfileParameters `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
 
 	// Used to specify the workload runtime. Allowed values are OCIContainer and WasmWasi.
 	// +kubebuilder:validation:Optional
@@ -264,6 +284,16 @@ type KubernetesClusterNodePoolUpgradeSettingsParameters struct {
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	// +kubebuilder:validation:Required
 	MaxSurge *string `json:"maxSurge" tf:"max_surge,omitempty"`
+}
+
+type KubernetesClusterNodePoolWindowsProfileObservation struct {
+}
+
+type KubernetesClusterNodePoolWindowsProfileParameters struct {
+
+	// Should the Windows nodes in this Node Pool have outbound NAT enabled? Defaults to true. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	OutboundNATEnabled *bool `json:"outboundNatEnabled,omitempty" tf:"outbound_nat_enabled,omitempty"`
 }
 
 type LinuxOsConfigSysctlConfigObservation struct {

@@ -67,8 +67,9 @@ spec:
                 properties:
                   linkedResourceId:
                     description: The ID of the linked resource. It must be the Log
-                      Analytics Workspace or the Application Insights component. Changing
-                      this forces a new resource to be created.
+                      Analytics workspace or the Application Insights component or
+                      the Data Collection endpoint. Changing this forces a new resource
+                      to be created.
                     type: string
                   linkedResourceIdRef:
                     description: Reference to a ApplicationInsights to populate linkedResourceId.

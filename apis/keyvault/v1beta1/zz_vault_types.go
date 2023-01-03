@@ -21,7 +21,7 @@ type AccessPolicyObservation struct {
 	// List of certificate permissions, must be one or more from the following: Backup, Create, Delete, DeleteIssuers, Get, GetIssuers, Import, List, ListIssuers, ManageContacts, ManageIssuers, Purge, Recover, Restore, SetIssuers and Update.
 	CertificatePermissions []*string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty"`
 
-	// List of key permissions, must be one or more from the following: Backup, Create, Decrypt, Delete, Encrypt, Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update, Verify and WrapKey.
+	// List of key permissions. Possible values are Backup, Create, Decrypt, Delete, Encrypt, Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update, Verify, WrapKey, Release, Rotate, GetRotationPolicy and SetRotationPolicy.
 	KeyPermissions []*string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
 
 	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies.
@@ -82,7 +82,7 @@ type NetworkAclsParameters struct {
 
 type VaultObservation struct {
 
-	// A list of up to 16 objects describing access policies, as described below.
+	// A list of up to 1024 objects describing access policies, as described below.
 	AccessPolicy []AccessPolicyObservation `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
 	// The ID of the Key Vault.
@@ -98,19 +98,19 @@ type VaultParameters struct {
 	// +kubebuilder:validation:Optional
 	Contact []ContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
-	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions. Defaults to false.
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
 	// +kubebuilder:validation:Optional
 	EnableRbacAuthorization *bool `json:"enableRbacAuthorization,omitempty" tf:"enable_rbac_authorization,omitempty"`
 
-	// Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault. Defaults to false.
+	// Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
 	// +kubebuilder:validation:Optional
 	EnabledForDeployment *bool `json:"enabledForDeployment,omitempty" tf:"enabled_for_deployment,omitempty"`
 
-	// Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys. Defaults to false.
+	// Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.
 	// +kubebuilder:validation:Optional
 	EnabledForDiskEncryption *bool `json:"enabledForDiskEncryption,omitempty" tf:"enabled_for_disk_encryption,omitempty"`
 
-	// Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Defaults to false.
+	// Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.
 	// +kubebuilder:validation:Optional
 	EnabledForTemplateDeployment *bool `json:"enabledForTemplateDeployment,omitempty" tf:"enabled_for_template_deployment,omitempty"`
 
@@ -122,7 +122,11 @@ type VaultParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkAcls []NetworkAclsParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
 
-	// Is Purge Protection enabled for this Key Vault? Defaults to false.
+	// Whether public network access is allowed for this Key Vault. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Is Purge Protection enabled for this Key Vault?
 	// +kubebuilder:validation:Optional
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 

@@ -70,8 +70,7 @@ spec:
                     items:
                       properties:
                         contentsSecretRef:
-                          description: The base64-encoded certificate contents. Changing
-                            this forces a new resource to be created.
+                          description: The base64-encoded certificate contents.
                           properties:
                             key:
                               description: The key to select.
@@ -89,7 +88,6 @@ spec:
                           type: object
                         passwordSecretRef:
                           description: The password associated with the certificate.
-                            Changing this forces a new resource to be created.
                           properties:
                             key:
                               description: The key to select.
@@ -118,7 +116,10 @@ spec:
                           items:
                             properties:
                               name:
-                                description: Specifies the name of the Key Vault Certificate.
+                                description: The name of the Certificate Issuer. Possible
+                                  values include Self (for self-signed certificate),
+                                  or Unknown (for a certificate issuing authority
+                                  like Let's Encrypt and Azure direct supported ones).
                                   Changing this forces a new resource to be created.
                                 type: string
                             required:
@@ -148,9 +149,9 @@ spec:
                                   this forces a new resource to be created.
                                 type: number
                               keyType:
-                                description: Specifies the type of key, such as RSA
-                                  or EC. Changing this forces a new resource to be
-                                  created.
+                                description: Specifies the type of key. Possible values
+                                  are EC, EC-HSM, RSA, RSA-HSM and oct. Changing this
+                                  forces a new resource to be created.
                                 type: string
                               reuseKey:
                                 description: Is the key reusable? Changing this forces
@@ -291,7 +292,7 @@ spec:
                     type: array
                   keyVaultId:
                     description: The ID of the Key Vault where the Certificate should
-                      be created.
+                      be created. Changing this forces a new resource to be created.
                     type: string
                   keyVaultIdRef:
                     description: Reference to a Vault to populate keyVaultId.

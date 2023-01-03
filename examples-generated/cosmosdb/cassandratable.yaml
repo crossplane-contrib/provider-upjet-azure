@@ -62,7 +62,7 @@ spec:
         testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: azurerm_cosmosdb_account
+        testing.upbound.io/example-name: example
     throughput: 400
 
 ---

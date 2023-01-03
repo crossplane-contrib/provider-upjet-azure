@@ -67,7 +67,6 @@ spec:
                   ignoreMissingVnetServiceEndpoint:
                     description: Should the Virtual Network Rule be created before
                       the Subnet has the Virtual Network Service Endpoint enabled?
-                      Defaults to false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group where the PostgreSQL

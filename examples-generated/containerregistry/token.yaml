@@ -10,13 +10,13 @@ spec:
   forProvider:
     containerRegistryNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: acr
+        testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     scopeMapIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: map
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -32,8 +32,8 @@ spec:
   forProvider:
     adminEnabled: false
     georeplications:
-    - East US
-    - West Europe
+    - location: East US
+    - location: West Europe
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -57,7 +57,7 @@ spec:
     - repositories/repo1/content/write
     containerRegistryNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: acr
+        testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

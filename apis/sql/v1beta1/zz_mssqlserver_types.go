@@ -46,11 +46,11 @@ type MSSQLServerIdentityObservation struct {
 
 type MSSQLServerIdentityParameters struct {
 
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this API Management Service.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Server.
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Possible values are SystemAssigned, UserAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this SQL Server. Possible values are SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -97,7 +97,7 @@ type MSSQLServerParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// The Minimum TLS Version for all SQL Database and SQL Data Warehouse databases associated with the server. Valid values are: 1.0, 1.1 and 1.2.
+	// The Minimum TLS Version for all SQL Database and SQL Data Warehouse databases associated with the server. Valid values are: 1.0, 1.1 , 1.2 and Disabled. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -105,7 +105,7 @@ type MSSQLServerParameters struct {
 	// +kubebuilder:validation:Optional
 	OutboundNetworkRestrictionEnabled *bool `json:"outboundNetworkRestrictionEnabled,omitempty" tf:"outbound_network_restriction_enabled,omitempty"`
 
-	// Specifies the primary user managed identity id. Required if type is UserAssigned and should be combined with user_assigned_identity_ids.
+	// Specifies the primary user managed identity id. Required if type is UserAssigned and should be combined with identity_ids.
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 
@@ -113,7 +113,7 @@ type MSSQLServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// The name of the resource group in which to create the Microsoft SQL Server.
+	// The name of the resource group in which to create the Microsoft SQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -130,7 +130,7 @@ type MSSQLServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server).
+	// The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }

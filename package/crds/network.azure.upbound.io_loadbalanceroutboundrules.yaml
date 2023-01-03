@@ -166,7 +166,8 @@ spec:
                       type: object
                     type: array
                   idleTimeoutInMinutes:
-                    description: The timeout for the TCP idle connection
+                    description: The timeout for the TCP idle connection Defaults
+                      to 4.
                     type: number
                   loadbalancerId:
                     description: The ID of the Load Balancer in which to create the

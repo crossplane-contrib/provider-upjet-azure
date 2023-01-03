@@ -12,6 +12,7 @@ import (
 	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta1 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -94,6 +95,22 @@ func (mg *KubernetesCluster) ResolveReferences(ctx context.Context, c client.Rea
 		mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateDNSZoneID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PrivateDNSZoneIDRef,
+		Selector:     mg.Spec.ForProvider.PrivateDNSZoneIDSelector,
+		To: reference.To{
+			List:    &v1beta1.PrivateDNSZoneList{},
+			Managed: &v1beta1.PrivateDNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrivateDNSZoneID")
+	}
+	mg.Spec.ForProvider.PrivateDNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrivateDNSZoneIDRef = rsp.ResolvedReference
+
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
