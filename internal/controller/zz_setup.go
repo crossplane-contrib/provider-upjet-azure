@@ -27,6 +27,7 @@ import (
 	notificationrecipientemail "github.com/upbound/provider-azure/internal/controller/apimanagement/notificationrecipientemail"
 	policy "github.com/upbound/provider-azure/internal/controller/apimanagement/policy"
 	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
+	productapi "github.com/upbound/provider-azure/internal/controller/apimanagement/productapi"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
@@ -310,6 +311,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		notificationrecipientemail.Setup,
 		policy.Setup,
 		product.Setup,
+		productapi.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		roleassignment.Setup,
