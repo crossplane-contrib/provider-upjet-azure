@@ -29,6 +29,7 @@ import (
 	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/apimanagement/productapi"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/productpolicy"
+	subscription "github.com/upbound/provider-azure/internal/controller/apimanagement/subscription"
 	tag "github.com/upbound/provider-azure/internal/controller/apimanagement/tag"
 	user "github.com/upbound/provider-azure/internal/controller/apimanagement/user"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
@@ -36,7 +37,7 @@ import (
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
 	resourcegroup "github.com/upbound/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/provider-azure/internal/controller/azure/resourceproviderregistration"
-	subscription "github.com/upbound/provider-azure/internal/controller/azure/subscription"
+	subscriptionazure "github.com/upbound/provider-azure/internal/controller/azure/subscription"
 	rediscache "github.com/upbound/provider-azure/internal/controller/cache/rediscache"
 	redisenterprisecluster "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisedatabase"
@@ -316,6 +317,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		product.Setup,
 		productapi.Setup,
 		productpolicy.Setup,
+		subscription.Setup,
 		tag.Setup,
 		user.Setup,
 		policydefinition.Setup,
@@ -323,7 +325,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		roleassignment.Setup,
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
-		subscription.Setup,
+		subscriptionazure.Setup,
 		rediscache.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,

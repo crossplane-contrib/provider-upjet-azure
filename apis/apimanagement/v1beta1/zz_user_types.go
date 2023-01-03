@@ -74,10 +74,6 @@ type UserParameters struct {
 	// The state of this user. Possible values are active, blocked and pending.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
-
-	// The Identifier for this User, which must be unique within the API Management Service. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	UserID *string `json:"userId" tf:"user_id,omitempty"`
 }
 
 // UserSpec defines the desired state of User

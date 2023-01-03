@@ -1,4 +1,48 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Subscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/subscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    productIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Product
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/product
+  labels:
+    testing.upbound.io/example-name: example
+  # We can not use uid here, we faced the ıssue: "name must start with a letter or underscore and may
+  # contain only letters,\n\e[31m│\e[0m \e[0mdigits, underscores, and dashes."
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    displayName: Test Product
+    published: true
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: User
 metadata:
   annotations:
@@ -7,9 +51,9 @@ metadata:
     testing.upbound.io/example-name: example
   # We can not use uid here, we faced the ıssue: "name must start with a letter or underscore and may
   # contain only letters,\n\e[31m│\e[0m \e[0mdigits, underscores, and dashes."
-  name: test-user
+  name: example
 spec:
-  forProvider: 
+  forProvider:
     apiManagementNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

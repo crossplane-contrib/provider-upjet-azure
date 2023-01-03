@@ -5,6 +5,8 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta1/product
   labels:
     testing.upbound.io/example-name: example
+  # We can not use uid here, we faced the ıssue: "name must start with a letter or underscore and may
+  # contain only letters,\n\e[31m│\e[0m \e[0mdigits, underscores, and dashes."
   name: example
 spec:
   forProvider:

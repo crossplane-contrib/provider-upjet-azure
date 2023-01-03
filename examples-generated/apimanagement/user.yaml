@@ -18,7 +18,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     state: active
-    userId: 5931a75ae4bbd512288c680b
 
 ---
 

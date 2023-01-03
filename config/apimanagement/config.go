@@ -62,4 +62,15 @@ func Configure(p *config.Provider) {
 			Type: "Management",
 		}
 	})
+	p.AddResourceConfigurator("azurerm_api_management_subscription", func(r *config.Resource) {
+		r.References["user_id"] = config.Reference{
+			Type: "User",
+		}
+		r.References["product_id"] = config.Reference{
+			Type: "Product",
+		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
+	})
 }
