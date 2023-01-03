@@ -1,6 +1,10 @@
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: ManagementPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/managementpolicy
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
@@ -16,6 +20,10 @@ spec:
       filters:
       - blobTypes:
         - blockBlob
+        matchBlobIndexTag:
+        - name: tag1
+          operation: ==
+          value: val1
         prefixMatch:
         - container1/prefix1
       name: rule1
@@ -41,5 +49,39 @@ spec:
         - container2/prefix2
       name: rule2
     storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/managementpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/managementpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountKind: BlobStorage
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
