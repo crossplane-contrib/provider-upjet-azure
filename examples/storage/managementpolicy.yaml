@@ -20,10 +20,6 @@ spec:
       filters:
       - blobTypes:
         - blockBlob
-        matchBlobIndexTag:
-        - name: tag1
-          operation: ==
-          value: val1
         prefixMatch:
         - container1/prefix1
       name: rule1
