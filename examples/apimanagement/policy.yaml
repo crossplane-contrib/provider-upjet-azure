@@ -1,0 +1,83 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/policy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    xmlContent: |
+      <policies>
+        <inbound>
+          <find-and-replace from="xyz" to="abc" />
+        </inbound>
+      </policies>
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: NamedValue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/namedvalue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    displayName: ExampleProperty
+    valueSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+---
+apiVersion: v1
+data:
+  example-key: dXBib3VuZHJvY2tz
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource creates a new pricing tier. So this is a high costly resource."
+    meta.upbound.io/example-id: apimanagement/v1beta1/management
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-management-example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource is dependency of Management. This resource is skipping because parent resource was skipped."
+    meta.upbound.io/example-id: apimanagement/v1beta1/management
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-resourcegroup-example
+spec:
+  forProvider:
+    location: West Europe
+
