@@ -26,6 +26,7 @@ import (
 	namedvalue "github.com/upbound/provider-azure/internal/controller/apimanagement/namedvalue"
 	notificationrecipientemail "github.com/upbound/provider-azure/internal/controller/apimanagement/notificationrecipientemail"
 	policy "github.com/upbound/provider-azure/internal/controller/apimanagement/policy"
+	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
@@ -308,6 +309,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		namedvalue.Setup,
 		notificationrecipientemail.Setup,
 		policy.Setup,
+		product.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		roleassignment.Setup,
