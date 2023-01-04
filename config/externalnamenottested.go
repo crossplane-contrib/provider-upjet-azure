@@ -75,10 +75,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// TODO: TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"azurerm_api_management_identity_provider_aadb2c": config.IdentifierFromProvider,
 
-	// API Management Microsoft Identity Provider can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/identityProviders/microsoft
-	// TODO: TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"azurerm_api_management_identity_provider_microsoft": config.IdentifierFromProvider,
 	// API Management Twitter Identity Provider can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/identityProviders/twitter
 	// TODO: TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.

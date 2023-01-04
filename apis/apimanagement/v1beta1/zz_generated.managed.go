@@ -1063,6 +1063,72 @@ func (mg *IdentityProviderGoogle) SetWriteConnectionSecretToReference(r *xpv1.Se
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this IdentityProviderMicrosoft.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *IdentityProviderMicrosoft) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this IdentityProviderMicrosoft.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *IdentityProviderMicrosoft) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this IdentityProviderMicrosoft.
+func (mg *IdentityProviderMicrosoft) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Management.
 func (mg *Management) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
