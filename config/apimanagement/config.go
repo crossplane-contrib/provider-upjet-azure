@@ -32,15 +32,24 @@ func Configure(p *config.Provider) {
 		r.References["api_name"] = config.Reference{
 			Type: "API",
 		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_api_policy", func(r *config.Resource) {
 		r.References["api_name"] = config.Reference{
 			Type: "API",
 		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_api_schema", func(r *config.Resource) {
 		r.References["api_name"] = config.Reference{
 			Type: "API",
+		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_product_api", func(r *config.Resource) {

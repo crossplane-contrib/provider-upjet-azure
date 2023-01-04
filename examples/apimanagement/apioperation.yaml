@@ -8,10 +8,12 @@ metadata:
   name: user-delete
 spec:
   forProvider:
-    # There must be a Management resource with the following name in the Azure Portal.
-    apiManagementName: uptest-management-example
-    # There must be a ResourceGroup resource with the following name in the Azure Portal.
-    resourceGroupName: uptest-resourcegroup-example
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     apiNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example 
@@ -32,10 +34,12 @@ metadata:
   name: example
 spec:
   forProvider:
-    # There must be a Management resource with the following name in the Azure Portal.
-    apiManagementName: uptest-management-example
-    # There must be a ResourceGroup resource with the following name in the Azure Portal.
-    resourceGroupName: uptest-resourcegroup-example
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     displayName: Example API
     import:
     - contentFormat: swagger-link-json
@@ -44,4 +48,33 @@ spec:
     protocols:
     - https
     revision: "1"
-
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperation
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-management-example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperation
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-resourcegroup-example
+spec:
+  forProvider:
+    location: West Europe

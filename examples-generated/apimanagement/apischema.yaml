@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiManagementName: ${data.azurerm_api_management_api.example.api_management_name}
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management_api
     apiNameSelector:
       matchLabels:
         testing.upbound.io/example-name: azurerm_api_management_api

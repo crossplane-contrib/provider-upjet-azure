@@ -17,21 +17,22 @@ spec:
     displayName: Example Provider
     metadataEndpoint: https://example.com/example
     clientIdSecretRef:
-      key: example-key
+      key: client-id
       name: example-secret
       namespace: upbound-system
     clientSecretSecretRef:
-      key: example-key
+      key: client-secret
       name: example-secret
       namespace: upbound-system
 ---
 apiVersion: v1
-data:
-  example-key: dXBib3VuZHJvY2tz
 kind: Secret
 metadata:
   name: example-secret
   namespace: upbound-system
+stringData:
+  client-secret: 00001111-423egvwdcsjx-00001111
+  client-id: 00001111-2222-3333-4444-555566667777
 type: Opaque
 ---
 apiVersion: apimanagement.azure.upbound.io/v1beta1

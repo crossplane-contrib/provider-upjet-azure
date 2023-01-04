@@ -22,8 +22,17 @@ type APISchemaObservation struct {
 type APISchemaParameters struct {
 
 	// The Name of the API Management Service where the API exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	APIManagementName *string `json:"apiManagementName" tf:"api_management_name,omitempty"`
+	// +crossplane:generate:reference:type=Management
+	// +kubebuilder:validation:Optional
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// Reference to a Management to populate apiManagementName.
+	// +kubebuilder:validation:Optional
+	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+
+	// Selector for a Management to populate apiManagementName.
+	// +kubebuilder:validation:Optional
+	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The name of the API within the API Management Service where this API Schema should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=API

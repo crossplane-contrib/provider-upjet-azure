@@ -190,6 +190,16 @@ func (in *APIOperationParameters) DeepCopyInto(out *APIOperationParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIManagementNameRef != nil {
+		in, out := &in.APIManagementNameRef, &out.APIManagementNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIManagementNameSelector != nil {
+		in, out := &in.APIManagementNameSelector, &out.APIManagementNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.APIName != nil {
 		in, out := &in.APIName, &out.APIName
 		*out = new(string)
@@ -884,6 +894,16 @@ func (in *APIPolicyParameters) DeepCopyInto(out *APIPolicyParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIManagementNameRef != nil {
+		in, out := &in.APIManagementNameRef, &out.APIManagementNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIManagementNameSelector != nil {
+		in, out := &in.APIManagementNameSelector, &out.APIManagementNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.APIName != nil {
 		in, out := &in.APIName, &out.APIName
 		*out = new(string)
@@ -1204,6 +1224,16 @@ func (in *APISchemaParameters) DeepCopyInto(out *APISchemaParameters) {
 		in, out := &in.APIManagementName, &out.APIManagementName
 		*out = new(string)
 		**out = **in
+	}
+	if in.APIManagementNameRef != nil {
+		in, out := &in.APIManagementNameRef, &out.APIManagementNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIManagementNameSelector != nil {
+		in, out := &in.APIManagementNameSelector, &out.APIManagementNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.APIName != nil {
 		in, out := &in.APIName, &out.APIName

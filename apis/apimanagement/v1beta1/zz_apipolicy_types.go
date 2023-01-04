@@ -22,8 +22,17 @@ type APIPolicyObservation struct {
 type APIPolicyParameters struct {
 
 	// The name of the API Management Service. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	APIManagementName *string `json:"apiManagementName" tf:"api_management_name,omitempty"`
+	// +crossplane:generate:reference:type=Management
+	// +kubebuilder:validation:Optional
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// Reference to a Management to populate apiManagementName.
+	// +kubebuilder:validation:Optional
+	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+
+	// Selector for a Management to populate apiManagementName.
+	// +kubebuilder:validation:Optional
+	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management API within the API Management Service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=API
