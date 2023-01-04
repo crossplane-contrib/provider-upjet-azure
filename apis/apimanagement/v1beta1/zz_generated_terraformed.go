@@ -1197,6 +1197,80 @@ func (tr *IdentityProviderFacebook) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this IdentityProviderGoogle
+func (mg *IdentityProviderGoogle) GetTerraformResourceType() string {
+	return "azurerm_api_management_identity_provider_google"
+}
+
+// GetConnectionDetailsMapping for this IdentityProviderGoogle
+func (tr *IdentityProviderGoogle) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"client_secret": "spec.forProvider.clientSecretSecretRef"}
+}
+
+// GetObservation of this IdentityProviderGoogle
+func (tr *IdentityProviderGoogle) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this IdentityProviderGoogle
+func (tr *IdentityProviderGoogle) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this IdentityProviderGoogle
+func (tr *IdentityProviderGoogle) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this IdentityProviderGoogle
+func (tr *IdentityProviderGoogle) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this IdentityProviderGoogle
+func (tr *IdentityProviderGoogle) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this IdentityProviderGoogle using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *IdentityProviderGoogle) LateInitialize(attrs []byte) (bool, error) {
+	params := &IdentityProviderGoogleParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *IdentityProviderGoogle) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this NamedValue
 func (mg *NamedValue) GetTerraformResourceType() string {
 	return "azurerm_api_management_named_value"
