@@ -71,6 +71,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/identityProviders/microsoft
 	// TODO: TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"azurerm_api_management_identity_provider_microsoft": config.IdentifierFromProvider,
+	// API Management Twitter Identity Provider can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/identityProviders/twitter
+	// TODO: TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"azurerm_api_management_identity_provider_twitter": config.IdentifierFromProvider,
 	// API Management Properties can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resources/providers/Microsoft.ApiManagement/service/example-apim/namedValues/example-apimp
 	"azurerm_api_management_named_value": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/namedValues/{{ .external_name }}"),

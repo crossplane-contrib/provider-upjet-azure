@@ -26,6 +26,7 @@ import (
 	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidergoogle"
 	identityprovidermicrosoft "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidermicrosoft"
+	identityprovidertwitter "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidertwitter"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	namedvalue "github.com/upbound/provider-azure/internal/controller/apimanagement/namedvalue"
 	notificationrecipientemail "github.com/upbound/provider-azure/internal/controller/apimanagement/notificationrecipientemail"
@@ -318,6 +319,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
 		identityprovidermicrosoft.Setup,
+		identityprovidertwitter.Setup,
 		management.Setup,
 		namedvalue.Setup,
 		notificationrecipientemail.Setup,
