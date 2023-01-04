@@ -30,6 +30,7 @@ import (
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	namedvalue "github.com/upbound/provider-azure/internal/controller/apimanagement/namedvalue"
 	notificationrecipientemail "github.com/upbound/provider-azure/internal/controller/apimanagement/notificationrecipientemail"
+	openidconnectprovider "github.com/upbound/provider-azure/internal/controller/apimanagement/openidconnectprovider"
 	policy "github.com/upbound/provider-azure/internal/controller/apimanagement/policy"
 	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/apimanagement/productapi"
@@ -323,6 +324,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		management.Setup,
 		namedvalue.Setup,
 		notificationrecipientemail.Setup,
+		openidconnectprovider.Setup,
 		policy.Setup,
 		product.Setup,
 		productapi.Setup,

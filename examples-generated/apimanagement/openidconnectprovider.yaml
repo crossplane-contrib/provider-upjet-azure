@@ -1,8 +1,8 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: IdentityProviderTwitter
+kind: OpenIDConnectProvider
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovidertwitter
+    meta.upbound.io/example-id: apimanagement/v1beta1/openidconnectprovider
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -11,32 +11,26 @@ spec:
     apiManagementNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    apiKey: "00000000000000000000000000000000"
-    apiSecretKeySecretRef:
+    clientIdSecretRef:
       key: example-key
       name: example-secret
       namespace: upbound-system
+    displayName: Example Provider
+    metadataEndpoint: https://example.com/example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
 ---
-apiVersion: v1
-data:
-  example-key: dXBib3VuZHJvY2tz
-kind: Secret
-metadata:
-  name: example-secret
-  namespace: upbound-system
-type: Opaque
----
+
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovidertwitter
+    meta.upbound.io/example-id: apimanagement/v1beta1/openidconnectprovider
   labels:
     testing.upbound.io/example-name: example
-  name: uptest-management-example
+  name: example
 spec:
   forProvider:
     location: West Europe
@@ -46,15 +40,20 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: Developer_1
+
 ---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovidertwitter
+    meta.upbound.io/example-id: apimanagement/v1beta1/openidconnectprovider
   labels:
     testing.upbound.io/example-name: example
-  name: uptest-resourcegroup-example
+  name: example
 spec:
   forProvider:
     location: West Europe
+
+---
+

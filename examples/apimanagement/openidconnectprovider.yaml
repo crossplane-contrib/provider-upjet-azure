@@ -1,8 +1,8 @@
 apiVersion: apimanagement.azure.upbound.io/v1beta1
-kind: IdentityProviderTwitter
+kind: OpenIDConnectProvider
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovidertwitter
+    meta.upbound.io/example-id: apimanagement/v1beta1/openidconnectprovider
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -14,8 +14,13 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    apiKey: "00000000000000000000000000000000"
-    apiSecretKeySecretRef:
+    displayName: Example Provider
+    metadataEndpoint: https://example.com/example
+    clientIdSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    clientSecretSecretRef:
       key: example-key
       name: example-secret
       namespace: upbound-system
@@ -33,7 +38,7 @@ apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovidertwitter
+    meta.upbound.io/example-id: apimanagement/v1beta1/openidconnectprovider
   labels:
     testing.upbound.io/example-name: example
   name: uptest-management-example
@@ -51,10 +56,11 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovidertwitter
+    meta.upbound.io/example-id: apimanagement/v1beta1/openidconnectprovider
   labels:
     testing.upbound.io/example-name: example
   name: uptest-resourcegroup-example
 spec:
   forProvider:
     location: West Europe
+
