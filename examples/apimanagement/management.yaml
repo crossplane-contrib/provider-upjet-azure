@@ -3,7 +3,6 @@ kind: Management
 metadata:
   annotations:
     uptest.upbound.io/timeout: "7200"
-    upjet.upbound.io/manual-intervention: "This resource creates a new pricing tier. So this is a high costly resource."
     meta.upbound.io/example-id: apimanagement/v1beta1/management
   labels:
     testing.upbound.io/example-name: example
@@ -22,7 +21,6 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource is dependency of Management. This resource is skipping because parent resource was skipped."
     meta.upbound.io/example-id: apimanagement/v1beta1/management
   labels:
     testing.upbound.io/example-name: example
