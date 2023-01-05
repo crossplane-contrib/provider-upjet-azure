@@ -16,6 +16,7 @@ apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "7200"
     meta.upbound.io/example-id: apimanagement/v1beta1/tag
   labels:
     testing.upbound.io/example-name: example

@@ -48,6 +48,7 @@ type SubscriptionParameters struct {
 
 	// The ID of the Product which should be assigned to this Subscription. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Product
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
@@ -86,6 +87,7 @@ type SubscriptionParameters struct {
 
 	// The ID of the User which should be assigned to this Subscription. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 

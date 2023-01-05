@@ -30,15 +30,16 @@ kind: Secret
 metadata:
   name: example-secret
   namespace: upbound-system
+type: Opaque
 stringData:
   client-secret: 00001111-423egvwdcsjx-00001111
   client-id: 00001111-2222-3333-4444-555566667777
-type: Opaque
 ---
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "7200"
     meta.upbound.io/example-id: apimanagement/v1beta1/openidconnectprovider
   labels:
     testing.upbound.io/example-name: example

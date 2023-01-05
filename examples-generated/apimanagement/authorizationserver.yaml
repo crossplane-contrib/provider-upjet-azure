@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiManagementName: ${data.azurerm_api_management.example.name}
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management
     authorizationEndpoint: https://example.mydomain.com/client/authorize
     clientId: 42424242-4242-4242-4242-424242424242
     clientRegistrationEndpoint: https://example.mydomain.com/client/register

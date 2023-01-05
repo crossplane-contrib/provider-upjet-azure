@@ -1755,6 +1755,16 @@ func (in *AuthorizationServerParameters) DeepCopyInto(out *AuthorizationServerPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIManagementNameRef != nil {
+		in, out := &in.APIManagementNameRef, &out.APIManagementNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIManagementNameSelector != nil {
+		in, out := &in.APIManagementNameSelector, &out.APIManagementNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AuthorizationEndpoint != nil {
 		in, out := &in.AuthorizationEndpoint, &out.AuthorizationEndpoint
 		*out = new(string)

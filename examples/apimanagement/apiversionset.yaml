@@ -5,12 +5,45 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta1/apiversionset
   labels:
     testing.upbound.io/example-name: example
-  name: example-apimapi-1-0-0
+  name: example-apimapi
 spec:
   forProvider:
-    # There must be a Management resource with the following name in the Azure Portal.
-    apiManagementName: uptest-management-example
-    # There must be a ResourceGroup resource with the following name in the Azure Portal.
-    resourceGroupName: uptest-resourcegroup-example
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     displayName: ExampleAPIVersionSet
     versioningScheme: Segment
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: apimanagement/v1beta1/apiversionset
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-management-example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apiversionset
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-resourcegroup-example
+spec:
+  forProvider:
+    location: West Europe

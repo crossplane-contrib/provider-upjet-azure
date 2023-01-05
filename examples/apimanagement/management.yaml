@@ -2,6 +2,7 @@ apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
   annotations:
+    uptest.upbound.io/timeout: "7200"
     upjet.upbound.io/manual-intervention: "This resource creates a new pricing tier. So this is a high costly resource."
     meta.upbound.io/example-id: apimanagement/v1beta1/management
   labels:
@@ -16,9 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: Developer_1
-
 ---
-
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:

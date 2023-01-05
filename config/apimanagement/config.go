@@ -17,6 +17,7 @@ limitations under the License.
 package apimanagement
 
 import (
+	"github.com/upbound/provider-azure/apis/rconfig"
 	"github.com/upbound/upjet/pkg/config"
 )
 
@@ -73,11 +74,18 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_api_management_subscription", func(r *config.Resource) {
 		r.References["user_id"] = config.Reference{
-			Type: "User",
+			Type:      "User",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["product_id"] = config.Reference{
-			Type: "Product",
+			Type:      "Product",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_authorization_server", func(r *config.Resource) {
 		r.References["api_management_name"] = config.Reference{
 			Type: "Management",
 		}

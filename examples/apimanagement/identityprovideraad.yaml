@@ -15,8 +15,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     allowedTenants:
-    # manuel int?
-    - b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
+    - ${data.azurerm_client_config.current.tenant_id}
     clientId: 00000000-0000-0000-0000-000000000000
     clientSecretSecretRef:
       key: example-key
@@ -24,19 +23,20 @@ spec:
       namespace: upbound-system
 ---
 apiVersion: v1
-data:
-  example-key: dXBib3VuZHJvY2tz
 kind: Secret
 metadata:
   name: example-secret
   namespace: upbound-system
 type: Opaque
+stringData:
+  example-key: dXBib3VuZHJvY2tz
 ---
 apiVersion: apimanagement.azure.upbound.io/v1beta1
 kind: Management
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/product
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovideraad
   labels:
     testing.upbound.io/example-name: example
   name: uptest-management-example
@@ -54,7 +54,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: apimanagement/v1beta1/product
+    meta.upbound.io/example-id: apimanagement/v1beta1/identityprovideraad
   labels:
     testing.upbound.io/example-name: example
   name: uptest-resourcegroup-example
