@@ -9,6 +9,9 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	monitoractionruleactiongroup "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionruleactiongroup"
+	monitoractionrulesuppression "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionrulesuppression"
+	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitorsmartdetectoralertrule"
 	api "github.com/upbound/provider-azure/internal/controller/apimanagement/api"
 	apioperation "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperation"
 	apioperationpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperationpolicy"
@@ -303,6 +306,9 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		monitoractionruleactiongroup.Setup,
+		monitoractionrulesuppression.Setup,
+		monitorsmartdetectoralertrule.Setup,
 		api.Setup,
 		apioperation.Setup,
 		apioperationpolicy.Setup,

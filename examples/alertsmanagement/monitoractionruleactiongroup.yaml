@@ -1,0 +1,48 @@
+apiVersion: alertsmanagement.azure.upbound.io/v1beta1
+kind: MonitorActionRuleActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoractionruleactiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    actionGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoractionruleactiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shortName: examplegroup
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta1/monitoractionruleactiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
