@@ -17,8 +17,9 @@ limitations under the License.
 package apimanagement
 
 import (
-	"github.com/upbound/provider-azure/apis/rconfig"
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 // Configure configures apimanagement group
