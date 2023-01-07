@@ -10,6 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta14 "github.com/upbound/provider-azure/apis/cache/v1beta1"
 	v1beta12 "github.com/upbound/provider-azure/apis/insights/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	v1beta13 "github.com/upbound/provider-azure/apis/network/v1beta1"
@@ -1251,6 +1252,48 @@ func (mg *ProductPolicy) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this RedisCache.
+func (mg *RedisCache) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIManagementID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.APIManagementIDRef,
+		Selector:     mg.Spec.ForProvider.APIManagementIDSelector,
+		To: reference.To{
+			List:    &ManagementList{},
+			Managed: &Management{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIManagementID")
+	}
+	mg.Spec.ForProvider.APIManagementID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIManagementIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedisCacheID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RedisCacheIDRef,
+		Selector:     mg.Spec.ForProvider.RedisCacheIDSelector,
+		To: reference.To{
+			List:    &v1beta14.RedisCacheList{},
+			Managed: &v1beta14.RedisCache{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RedisCacheID")
+	}
+	mg.Spec.ForProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RedisCacheIDRef = rsp.ResolvedReference
 
 	return nil
 }

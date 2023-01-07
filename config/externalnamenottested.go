@@ -63,10 +63,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"azurerm_api_management_identity_provider_aadb2c": config.IdentifierFromProvider,
 
-	// API Management Redis Caches can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ApiManagement/service/service1/caches/cache1
-	"azurerm_api_management_redis_cache": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_management_id }}/caches/{{ .external_name }}"),
-
 	// appconfiguration
 	//
 	// App Configurations can be imported using the resource id

@@ -39,6 +39,7 @@ import (
 	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/apimanagement/productapi"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/productpolicy"
+	rediscache "github.com/upbound/provider-azure/internal/controller/apimanagement/rediscache"
 	subscription "github.com/upbound/provider-azure/internal/controller/apimanagement/subscription"
 	tag "github.com/upbound/provider-azure/internal/controller/apimanagement/tag"
 	user "github.com/upbound/provider-azure/internal/controller/apimanagement/user"
@@ -48,7 +49,7 @@ import (
 	resourcegroup "github.com/upbound/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/provider-azure/internal/controller/azure/resourceproviderregistration"
 	subscriptionazure "github.com/upbound/provider-azure/internal/controller/azure/subscription"
-	rediscache "github.com/upbound/provider-azure/internal/controller/cache/rediscache"
+	rediscachecache "github.com/upbound/provider-azure/internal/controller/cache/rediscache"
 	redisenterprisecluster "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/provider-azure/internal/controller/cache/redisfirewallrule"
@@ -337,6 +338,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		product.Setup,
 		productapi.Setup,
 		productpolicy.Setup,
+		rediscache.Setup,
 		subscription.Setup,
 		tag.Setup,
 		user.Setup,
@@ -346,7 +348,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
 		subscriptionazure.Setup,
-		rediscache.Setup,
+		rediscachecache.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
