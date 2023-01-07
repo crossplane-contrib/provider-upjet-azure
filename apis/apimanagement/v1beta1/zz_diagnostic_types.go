@@ -13,56 +13,10 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BackendRequestObservation struct {
+type BackendRequestDataMaskingHeadersObservation struct {
 }
 
-type BackendRequestParameters struct {
-
-	// Number of payload bytes to log (up to 8192).
-	// +kubebuilder:validation:Optional
-	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DataMasking []DataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
-
-	// Specifies a list of headers to log.
-	// +kubebuilder:validation:Optional
-	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
-}
-
-type BackendResponseDataMaskingObservation struct {
-}
-
-type BackendResponseDataMaskingParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Headers []DataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	QueryParams []DataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
-}
-
-type BackendResponseObservation struct {
-}
-
-type BackendResponseParameters struct {
-
-	// Number of payload bytes to log (up to 8192).
-	// +kubebuilder:validation:Optional
-	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DataMasking []BackendResponseDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
-
-	// Specifies a list of headers to log.
-	// +kubebuilder:validation:Optional
-	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
-}
-
-type DataMaskingHeadersObservation struct {
-}
-
-type DataMaskingHeadersParameters struct {
+type BackendRequestDataMaskingHeadersParameters struct {
 
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
@@ -71,28 +25,204 @@ type DataMaskingHeadersParameters struct {
 	Value *string `json:"value" tf:"value,omitempty"`
 }
 
-type DataMaskingObservation struct {
+type BackendRequestDataMaskingObservation struct {
 }
 
-type DataMaskingParameters struct {
+type BackendRequestDataMaskingParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Headers []HeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers []BackendRequestDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	QueryParams []QueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
+	QueryParams []BackendRequestDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
-type DataMaskingQueryParamsObservation struct {
+type BackendRequestDataMaskingQueryParamsObservation struct {
 }
 
-type DataMaskingQueryParamsParameters struct {
+type BackendRequestDataMaskingQueryParamsParameters struct {
 
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type BackendResponseDataMaskingHeadersObservation struct {
+}
+
+type BackendResponseDataMaskingHeadersParameters struct {
+
+	// +kubebuilder:validation:Required
+	Mode *string `json:"mode" tf:"mode,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type BackendResponseDataMaskingQueryParamsObservation struct {
+}
+
+type BackendResponseDataMaskingQueryParamsParameters struct {
+
+	// +kubebuilder:validation:Required
+	Mode *string `json:"mode" tf:"mode,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type DiagnosticBackendRequestObservation struct {
+}
+
+type DiagnosticBackendRequestParameters struct {
+
+	// Number of payload bytes to log (up to 8192).
+	// +kubebuilder:validation:Optional
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DataMasking []BackendRequestDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	// +kubebuilder:validation:Optional
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
+}
+
+type DiagnosticBackendResponseDataMaskingObservation struct {
+}
+
+type DiagnosticBackendResponseDataMaskingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Headers []BackendResponseDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	QueryParams []BackendResponseDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
+}
+
+type DiagnosticBackendResponseObservation struct {
+}
+
+type DiagnosticBackendResponseParameters struct {
+
+	// Number of payload bytes to log (up to 8192).
+	// +kubebuilder:validation:Optional
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DataMasking []DiagnosticBackendResponseDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	// +kubebuilder:validation:Optional
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
+}
+
+type DiagnosticFrontendRequestDataMaskingHeadersObservation struct {
+}
+
+type DiagnosticFrontendRequestDataMaskingHeadersParameters struct {
+
+	// +kubebuilder:validation:Required
+	Mode *string `json:"mode" tf:"mode,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type DiagnosticFrontendRequestDataMaskingObservation struct {
+}
+
+type DiagnosticFrontendRequestDataMaskingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Headers []DiagnosticFrontendRequestDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	QueryParams []DiagnosticFrontendRequestDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
+}
+
+type DiagnosticFrontendRequestDataMaskingQueryParamsObservation struct {
+}
+
+type DiagnosticFrontendRequestDataMaskingQueryParamsParameters struct {
+
+	// +kubebuilder:validation:Required
+	Mode *string `json:"mode" tf:"mode,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type DiagnosticFrontendRequestObservation struct {
+}
+
+type DiagnosticFrontendRequestParameters struct {
+
+	// Number of payload bytes to log (up to 8192).
+	// +kubebuilder:validation:Optional
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DataMasking []DiagnosticFrontendRequestDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	// +kubebuilder:validation:Optional
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
+}
+
+type DiagnosticFrontendResponseDataMaskingHeadersObservation struct {
+}
+
+type DiagnosticFrontendResponseDataMaskingHeadersParameters struct {
+
+	// +kubebuilder:validation:Required
+	Mode *string `json:"mode" tf:"mode,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type DiagnosticFrontendResponseDataMaskingObservation struct {
+}
+
+type DiagnosticFrontendResponseDataMaskingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Headers []DiagnosticFrontendResponseDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	QueryParams []DiagnosticFrontendResponseDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
+}
+
+type DiagnosticFrontendResponseDataMaskingQueryParamsObservation struct {
+}
+
+type DiagnosticFrontendResponseDataMaskingQueryParamsParameters struct {
+
+	// +kubebuilder:validation:Required
+	Mode *string `json:"mode" tf:"mode,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type DiagnosticFrontendResponseObservation struct {
+}
+
+type DiagnosticFrontendResponseParameters struct {
+
+	// Number of payload bytes to log (up to 8192).
+	// +kubebuilder:validation:Optional
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	DataMasking []DiagnosticFrontendResponseDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	// +kubebuilder:validation:Optional
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type DiagnosticObservation struct {
@@ -136,19 +266,19 @@ type DiagnosticParameters struct {
 
 	// A backend_request block as defined below.
 	// +kubebuilder:validation:Optional
-	BackendRequest []BackendRequestParameters `json:"backendRequest,omitempty" tf:"backend_request,omitempty"`
+	BackendRequest []DiagnosticBackendRequestParameters `json:"backendRequest,omitempty" tf:"backend_request,omitempty"`
 
 	// A backend_response block as defined below.
 	// +kubebuilder:validation:Optional
-	BackendResponse []BackendResponseParameters `json:"backendResponse,omitempty" tf:"backend_response,omitempty"`
+	BackendResponse []DiagnosticBackendResponseParameters `json:"backendResponse,omitempty" tf:"backend_response,omitempty"`
 
 	// A frontend_request block as defined below.
 	// +kubebuilder:validation:Optional
-	FrontendRequest []FrontendRequestParameters `json:"frontendRequest,omitempty" tf:"frontend_request,omitempty"`
+	FrontendRequest []DiagnosticFrontendRequestParameters `json:"frontendRequest,omitempty" tf:"frontend_request,omitempty"`
 
 	// A frontend_response block as defined below.
 	// +kubebuilder:validation:Optional
-	FrontendResponse []FrontendResponseParameters `json:"frontendResponse,omitempty" tf:"frontend_response,omitempty"`
+	FrontendResponse []DiagnosticFrontendResponseParameters `json:"frontendResponse,omitempty" tf:"frontend_response,omitempty"`
 
 	// The HTTP Correlation Protocol to use. Possible values are None, Legacy or W3C.
 	// +kubebuilder:validation:Optional
@@ -182,136 +312,6 @@ type DiagnosticParameters struct {
 	// Logging verbosity. Possible values are verbose, information or error.
 	// +kubebuilder:validation:Optional
 	Verbosity *string `json:"verbosity,omitempty" tf:"verbosity,omitempty"`
-}
-
-type FrontendRequestDataMaskingHeadersObservation struct {
-}
-
-type FrontendRequestDataMaskingHeadersParameters struct {
-
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
-}
-
-type FrontendRequestDataMaskingObservation struct {
-}
-
-type FrontendRequestDataMaskingParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Headers []FrontendRequestDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	QueryParams []FrontendRequestDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
-}
-
-type FrontendRequestDataMaskingQueryParamsObservation struct {
-}
-
-type FrontendRequestDataMaskingQueryParamsParameters struct {
-
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
-}
-
-type FrontendRequestObservation struct {
-}
-
-type FrontendRequestParameters struct {
-
-	// Number of payload bytes to log (up to 8192).
-	// +kubebuilder:validation:Optional
-	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DataMasking []FrontendRequestDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
-
-	// Specifies a list of headers to log.
-	// +kubebuilder:validation:Optional
-	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
-}
-
-type FrontendResponseDataMaskingHeadersObservation struct {
-}
-
-type FrontendResponseDataMaskingHeadersParameters struct {
-
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
-}
-
-type FrontendResponseDataMaskingObservation struct {
-}
-
-type FrontendResponseDataMaskingParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Headers []FrontendResponseDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	QueryParams []FrontendResponseDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
-}
-
-type FrontendResponseDataMaskingQueryParamsObservation struct {
-}
-
-type FrontendResponseDataMaskingQueryParamsParameters struct {
-
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
-}
-
-type FrontendResponseObservation struct {
-}
-
-type FrontendResponseParameters struct {
-
-	// Number of payload bytes to log (up to 8192).
-	// +kubebuilder:validation:Optional
-	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	DataMasking []FrontendResponseDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
-
-	// Specifies a list of headers to log.
-	// +kubebuilder:validation:Optional
-	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
-}
-
-type HeadersObservation struct {
-}
-
-type HeadersParameters struct {
-
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
-}
-
-type QueryParamsObservation struct {
-}
-
-type QueryParamsParameters struct {
-
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
-
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // DiagnosticSpec defines the desired state of Diagnostic

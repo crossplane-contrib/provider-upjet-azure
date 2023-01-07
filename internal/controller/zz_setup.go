@@ -13,6 +13,7 @@ import (
 	monitoractionrulesuppression "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionrulesuppression"
 	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitorsmartdetectoralertrule"
 	api "github.com/upbound/provider-azure/internal/controller/apimanagement/api"
+	apidiagnostic "github.com/upbound/provider-azure/internal/controller/apimanagement/apidiagnostic"
 	apioperation "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperation"
 	apioperationpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperationpolicy"
 	apioperationtag "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperationtag"
@@ -313,6 +314,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		monitoractionrulesuppression.Setup,
 		monitorsmartdetectoralertrule.Setup,
 		api.Setup,
+		apidiagnostic.Setup,
 		apioperation.Setup,
 		apioperationpolicy.Setup,
 		apioperationtag.Setup,
