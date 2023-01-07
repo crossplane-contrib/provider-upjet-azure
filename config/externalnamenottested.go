@@ -62,26 +62,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/service1/identityProviders/AadB2C
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"azurerm_api_management_identity_provider_aadb2c": config.IdentifierFromProvider,
-	// API Management Facebook Identity Provider can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/identityProviders/facebook
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"azurerm_api_management_identity_provider_facebook": config.IdentifierFromProvider,
-	// API Management Google Identity Provider can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/identityProviders/google
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"azurerm_api_management_identity_provider_google": config.IdentifierFromProvider,
-	// API Management Microsoft Identity Provider can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/identityProviders/microsoft
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"azurerm_api_management_identity_provider_microsoft": config.IdentifierFromProvider,
-	// API Management Twitter Identity Provider can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/identityProviders/twitter
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"azurerm_api_management_identity_provider_twitter": config.IdentifierFromProvider,
-
-	// API Management Loggers can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/example-rg/providers/Microsoft.ApiManagement/service/example-apim/loggers/example-logger
-	"azurerm_api_management_logger": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/loggers/{{ .external_name }}"),
 
 	// API Management Redis Caches can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ApiManagement/service/service1/caches/cache1
