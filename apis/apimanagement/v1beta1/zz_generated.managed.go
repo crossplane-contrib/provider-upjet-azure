@@ -733,6 +733,72 @@ func (mg *Certificate) SetWriteConnectionSecretToReference(r *xpv1.SecretReferen
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this Diagnostic.
+func (mg *Diagnostic) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this Diagnostic.
+func (mg *Diagnostic) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this Diagnostic.
+func (mg *Diagnostic) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this Diagnostic.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *Diagnostic) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this Diagnostic.
+func (mg *Diagnostic) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this Diagnostic.
+func (mg *Diagnostic) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this Diagnostic.
+func (mg *Diagnostic) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this Diagnostic.
+func (mg *Diagnostic) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this Diagnostic.
+func (mg *Diagnostic) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this Diagnostic.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *Diagnostic) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this Diagnostic.
+func (mg *Diagnostic) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this Diagnostic.
+func (mg *Diagnostic) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this EmailTemplate.
 func (mg *EmailTemplate) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

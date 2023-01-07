@@ -23,6 +23,7 @@ import (
 	authorizationserver "github.com/upbound/provider-azure/internal/controller/apimanagement/authorizationserver"
 	backend "github.com/upbound/provider-azure/internal/controller/apimanagement/backend"
 	certificate "github.com/upbound/provider-azure/internal/controller/apimanagement/certificate"
+	diagnostic "github.com/upbound/provider-azure/internal/controller/apimanagement/diagnostic"
 	emailtemplate "github.com/upbound/provider-azure/internal/controller/apimanagement/emailtemplate"
 	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovideraad"
@@ -322,6 +323,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		authorizationserver.Setup,
 		backend.Setup,
 		certificate.Setup,
+		diagnostic.Setup,
 		emailtemplate.Setup,
 		gateway.Setup,
 		identityprovideraad.Setup,
