@@ -14,3 +14,15 @@ spec:
       relativePriority: Normal
     resourceGroupNameRef:
       name: example-media-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-media-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
