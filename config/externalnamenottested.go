@@ -28,12 +28,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /providers/Microsoft.AADIAM/diagnosticSettings/setting1
 	"azurerm_monitor_aad_diagnostic_setting": config.TemplatedStringAsIdentifier("name", "/providers/Microsoft.AADIAM/diagnosticSettings/{{ .external_name }}"),
 
-	// analysisservices
-	//
-	// Analysis Services Server can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcegroup1/providers/Microsoft.AnalysisServices/servers/server1
-	"azurerm_analysis_services_server": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.AnalysisServices/servers/{{ .external_name }}"),
-
 	// api
 	//
 	// API Connections can be imported using the resource id
