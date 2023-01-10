@@ -73,6 +73,72 @@ func (mg *ApplicationInsights) SetWriteConnectionSecretToReference(r *xpv1.Secre
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ApplicationInsightsAPIKey.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsAPIKey) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ApplicationInsightsAPIKey.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsAPIKey) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MonitorActionGroup.
 func (mg *MonitorActionGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

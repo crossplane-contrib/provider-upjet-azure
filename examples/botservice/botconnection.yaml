@@ -1,0 +1,69 @@
+apiVersion: botservice.azure.upbound.io/v1beta1
+kind: BotConnection
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "microsoftAppId, clientId and secret key are a part of application which we cannot obtain and need to be hardcoded"
+    meta.upbound.io/example-id: botservice/v1beta1/botconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: bot-connection-name
+spec:
+  forProvider:
+    botNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bot-channels-registration-label
+    clientId: 2c909958-d48c-4ae8-8d7a-399177cfb3e4
+    clientSecretSecretRef:
+      key: example-key
+      name: secret
+      namespace: upbound-system
+    location: global
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azure-bot-r-group-label
+    serviceProviderName: box
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: 84ad72a9-5275-4bda-85a1-b5c20f0b23e1
+
+---
+
+apiVersion: botservice.azure.upbound.io/v1beta1
+kind: BotChannelsRegistration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botconnection
+  labels:
+    testing.upbound.io/example-name: bot-channels-registration-label
+  name: botchannelsregistrationname
+spec:
+  forProvider:
+    location: global
+    microsoftAppId: 2c909958-d48c-4ae8-8d7a-399177cfb3e4
+    name: bottChannelsRegistrationName
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azure-bot-r-group-label
+    sku: S1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botconnection
+  labels:
+    testing.upbound.io/example-name: azure-bot-r-group-label
+  name: bot-resource-group-thu-t
+spec:
+  forProvider:
+    location: West Europe

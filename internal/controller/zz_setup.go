@@ -77,6 +77,16 @@ import (
 	resourceproviderregistration "github.com/upbound/provider-azure/internal/controller/azure/resourceproviderregistration"
 	subscriptionazure "github.com/upbound/provider-azure/internal/controller/azure/subscription"
 	cluster "github.com/upbound/provider-azure/internal/controller/azurestackhci/cluster"
+	botchannelalexa "github.com/upbound/provider-azure/internal/controller/botservice/botchannelalexa"
+	botchanneldirectline "github.com/upbound/provider-azure/internal/controller/botservice/botchanneldirectline"
+	botchannelline "github.com/upbound/provider-azure/internal/controller/botservice/botchannelline"
+	botchannelmsteams "github.com/upbound/provider-azure/internal/controller/botservice/botchannelmsteams"
+	botchannelslack "github.com/upbound/provider-azure/internal/controller/botservice/botchannelslack"
+	botchannelsms "github.com/upbound/provider-azure/internal/controller/botservice/botchannelsms"
+	botchannelsregistration "github.com/upbound/provider-azure/internal/controller/botservice/botchannelsregistration"
+	botchannelwebchat "github.com/upbound/provider-azure/internal/controller/botservice/botchannelwebchat"
+	botconnection "github.com/upbound/provider-azure/internal/controller/botservice/botconnection"
+	botwebapp "github.com/upbound/provider-azure/internal/controller/botservice/botwebapp"
 	rediscachecache "github.com/upbound/provider-azure/internal/controller/cache/rediscache"
 	redisenterprisecluster "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisedatabase"
@@ -84,6 +94,7 @@ import (
 	redislinkedserver "github.com/upbound/provider-azure/internal/controller/cache/redislinkedserver"
 	endpoint "github.com/upbound/provider-azure/internal/controller/cdn/endpoint"
 	profile "github.com/upbound/provider-azure/internal/controller/cdn/profile"
+	accountcognitiveservices "github.com/upbound/provider-azure/internal/controller/cognitiveservices/account"
 	service "github.com/upbound/provider-azure/internal/controller/communication/service"
 	availabilityset "github.com/upbound/provider-azure/internal/controller/compute/availabilityset"
 	dedicatedhost "github.com/upbound/provider-azure/internal/controller/compute/dedicatedhost"
@@ -178,6 +189,7 @@ import (
 	eventhub "github.com/upbound/provider-azure/internal/controller/eventhub/eventhub"
 	eventhubnamespace "github.com/upbound/provider-azure/internal/controller/eventhub/eventhubnamespace"
 	applicationinsights "github.com/upbound/provider-azure/internal/controller/insights/applicationinsights"
+	applicationinsightsapikey "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsapikey"
 	monitoractiongroup "github.com/upbound/provider-azure/internal/controller/insights/monitoractiongroup"
 	monitormetricalert "github.com/upbound/provider-azure/internal/controller/insights/monitormetricalert"
 	monitorprivatelinkscope "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscope"
@@ -411,6 +423,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		resourceproviderregistration.Setup,
 		subscriptionazure.Setup,
 		cluster.Setup,
+		botchannelalexa.Setup,
+		botchanneldirectline.Setup,
+		botchannelline.Setup,
+		botchannelmsteams.Setup,
+		botchannelslack.Setup,
+		botchannelsms.Setup,
+		botchannelsregistration.Setup,
+		botchannelwebchat.Setup,
+		botconnection.Setup,
+		botwebapp.Setup,
 		rediscachecache.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,
@@ -418,6 +440,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		redislinkedserver.Setup,
 		endpoint.Setup,
 		profile.Setup,
+		accountcognitiveservices.Setup,
 		service.Setup,
 		availabilityset.Setup,
 		dedicatedhost.Setup,
@@ -512,6 +535,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventhub.Setup,
 		eventhubnamespace.Setup,
 		applicationinsights.Setup,
+		applicationinsightsapikey.Setup,
 		monitoractiongroup.Setup,
 		monitormetricalert.Setup,
 		monitorprivatelinkscope.Setup,
