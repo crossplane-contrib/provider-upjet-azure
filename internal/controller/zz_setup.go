@@ -78,6 +78,7 @@ import (
 	snapshot "github.com/upbound/provider-azure/internal/controller/compute/snapshot"
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
+	ledger "github.com/upbound/provider-azure/internal/controller/confidentialledger/ledger"
 	agentpool "github.com/upbound/provider-azure/internal/controller/containerregistry/agentpool"
 	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/containerregistry/containerconnectedregistry"
 	registry "github.com/upbound/provider-azure/internal/controller/containerregistry/registry"
@@ -387,6 +388,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		snapshot.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
+		ledger.Setup,
 		agentpool.Setup,
 		containerconnectedregistry.Setup,
 		registry.Setup,
