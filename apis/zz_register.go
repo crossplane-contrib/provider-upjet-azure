@@ -19,6 +19,7 @@ import (
 	v1beta1cache "github.com/upbound/provider-azure/apis/cache/v1beta1"
 	v1beta1communication "github.com/upbound/provider-azure/apis/communication/v1beta1"
 	v1beta1compute "github.com/upbound/provider-azure/apis/compute/v1beta1"
+	v1beta1confidentialledger "github.com/upbound/provider-azure/apis/confidentialledger/v1beta1"
 	v1beta1containerregistry "github.com/upbound/provider-azure/apis/containerregistry/v1beta1"
 	v1beta1containerservice "github.com/upbound/provider-azure/apis/containerservice/v1beta1"
 	v1beta1cosmosdb "github.com/upbound/provider-azure/apis/cosmosdb/v1beta1"
@@ -65,6 +66,7 @@ func init() {
 		v1beta1cache.SchemeBuilder.AddToScheme,
 		v1beta1communication.SchemeBuilder.AddToScheme,
 		v1beta1compute.SchemeBuilder.AddToScheme,
+		v1beta1confidentialledger.SchemeBuilder.AddToScheme,
 		v1beta1containerregistry.SchemeBuilder.AddToScheme,
 		v1beta1containerservice.SchemeBuilder.AddToScheme,
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,

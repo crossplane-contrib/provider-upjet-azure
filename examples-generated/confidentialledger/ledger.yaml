@@ -1,0 +1,36 @@
+apiVersion: confidentialledger.azure.upbound.io/v1beta1
+kind: Ledger
+metadata:
+  annotations:
+    meta.upbound.io/example-id: confidentialledger/v1beta1/ledger
+  labels:
+    testing.upbound.io/example-name: ledger
+  name: ledger
+spec:
+  forProvider:
+    aad_based_security_principals:
+    - ledger_role_name: Administrator
+      principal_id: ${data.azurerm_client_config.current.object_id}
+      tenant_id: ${data.azurerm_client_config.current.tenant_id}
+    ledgerType: Private
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: confidentialledger/v1beta1/ledger
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
