@@ -25,6 +25,7 @@ import (
 	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/provider-azure/internal/controller/cache/redisfirewallrule"
 	redislinkedserver "github.com/upbound/provider-azure/internal/controller/cache/redislinkedserver"
+	service "github.com/upbound/provider-azure/internal/controller/communication/service"
 	availabilityset "github.com/upbound/provider-azure/internal/controller/compute/availabilityset"
 	dedicatedhost "github.com/upbound/provider-azure/internal/controller/compute/dedicatedhost"
 	diskaccess "github.com/upbound/provider-azure/internal/controller/compute/diskaccess"
@@ -295,6 +296,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
 		redislinkedserver.Setup,
+		service.Setup,
 		availabilityset.Setup,
 		dedicatedhost.Setup,
 		diskaccess.Setup,
