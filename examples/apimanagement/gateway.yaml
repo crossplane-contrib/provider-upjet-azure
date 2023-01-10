@@ -28,7 +28,6 @@ metadata:
     testing.upbound.io/example-name: example
   name: uptest-management-example
 spec:
-  deletionPolicy: Orphan
   forProvider:
     location: West Europe
     publisherEmail: company@terraform.io
@@ -47,6 +46,5 @@ metadata:
     testing.upbound.io/example-name: example
   name: uptest-resourcegroup-example
 spec:
-  deletionPolicy: Orphan
   forProvider:
     location: West Europe
