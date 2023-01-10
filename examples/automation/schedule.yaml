@@ -1,0 +1,58 @@
+apiVersion: automation.azure.upbound.io/v1beta1
+kind: Schedule
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: automation/v1beta1/schedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    automationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: This is an example schedule
+    frequency: Week
+    interval: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    startTime: "2023-04-15T18:00:15+02:00"
+    timezone: Australia/Perth
+    weekDays:
+    - Friday
+
+---
+
+apiVersion: automation.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Basic
+    tags:
+      environment: development
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/schedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

@@ -49,6 +49,12 @@ import (
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
+	account "github.com/upbound/provider-azure/internal/controller/automation/account"
+	credential "github.com/upbound/provider-azure/internal/controller/automation/credential"
+	module "github.com/upbound/provider-azure/internal/controller/automation/module"
+	variablebool "github.com/upbound/provider-azure/internal/controller/automation/variablebool"
+	variableint "github.com/upbound/provider-azure/internal/controller/automation/variableint"
+	variablestring "github.com/upbound/provider-azure/internal/controller/automation/variablestring"
 	resourcegroup "github.com/upbound/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/provider-azure/internal/controller/azure/resourceproviderregistration"
 	subscriptionazure "github.com/upbound/provider-azure/internal/controller/azure/subscription"
@@ -80,7 +86,7 @@ import (
 	webhook "github.com/upbound/provider-azure/internal/controller/containerregistry/webhook"
 	kubernetescluster "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetescluster"
 	kubernetesclusternodepool "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
-	account "github.com/upbound/provider-azure/internal/controller/cosmosdb/account"
+	accountcosmosdb "github.com/upbound/provider-azure/internal/controller/cosmosdb/account"
 	cassandracluster "github.com/upbound/provider-azure/internal/controller/cosmosdb/cassandracluster"
 	cassandradatacenter "github.com/upbound/provider-azure/internal/controller/cosmosdb/cassandradatacenter"
 	cassandrakeyspace "github.com/upbound/provider-azure/internal/controller/cosmosdb/cassandrakeyspace"
@@ -352,6 +358,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		roleassignment.Setup,
+		account.Setup,
+		credential.Setup,
+		module.Setup,
+		variablebool.Setup,
+		variableint.Setup,
+		variablestring.Setup,
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
 		subscriptionazure.Setup,
@@ -383,7 +395,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		webhook.Setup,
 		kubernetescluster.Setup,
 		kubernetesclusternodepool.Setup,
-		account.Setup,
+		accountcosmosdb.Setup,
 		cassandracluster.Setup,
 		cassandradatacenter.Setup,
 		cassandrakeyspace.Setup,
