@@ -1,0 +1,82 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    redisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    redisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    cacheLocation: East Us
+    connectionStringSecretRef:
+      key: attribute.primary_connection_string
+      name: example-redis-cache
+      namespace: upbound-system
+    description: Redis cache instances
+---
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  writeConnectionSecretToRef:
+    namespace: upbound-system
+    name: example-redis-cache
+  forProvider:
+    redisVersion: "6"
+    capacity: 1
+    enableNonSslPort: false
+    family: C
+    location: West Europe
+    minimumTlsVersion: "1.2"
+    redisConfiguration:
+    - {}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Basic
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: apimanagement/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-management-example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-resourcegroup-example
+spec:
+  forProvider:
+    location: West Europe

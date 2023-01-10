@@ -18,6 +18,8 @@ package apimanagement
 
 import (
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 // Configure configures apimanagement group
@@ -27,5 +29,66 @@ func Configure(p *config.Provider) {
 		r.UseAsync = false
 		// Mutually exclusive with azurerm_api_management_custom_domain
 		config.MoveToStatus(r.TerraformResource, "hostname_configuration")
+	})
+	p.AddResourceConfigurator("azurerm_api_management_api_operation", func(r *config.Resource) {
+		r.References["api_name"] = config.Reference{
+			Type: "API",
+		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_api_policy", func(r *config.Resource) {
+		r.References["api_name"] = config.Reference{
+			Type: "API",
+		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_api_schema", func(r *config.Resource) {
+		r.References["api_name"] = config.Reference{
+			Type: "API",
+		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_product_api", func(r *config.Resource) {
+		r.References["api_name"] = config.Reference{
+			Type: "API",
+		}
+		r.References["product_id"] = config.Reference{
+			Type: "Product",
+		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_product_policy", func(r *config.Resource) {
+		r.References["product_id"] = config.Reference{
+			Type: "Product",
+		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_subscription", func(r *config.Resource) {
+		r.References["user_id"] = config.Reference{
+			Type:      "User",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["product_id"] = config.Reference{
+			Type:      "Product",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_authorization_server", func(r *config.Resource) {
+		r.References["api_management_name"] = config.Reference{
+			Type: "Management",
+		}
 	})
 }

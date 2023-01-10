@@ -13,14 +13,46 @@ import (
 	monitoractionrulesuppression "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionrulesuppression"
 	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitorsmartdetectoralertrule"
 	server "github.com/upbound/provider-azure/internal/controller/analysisservices/server"
+	api "github.com/upbound/provider-azure/internal/controller/apimanagement/api"
+	apidiagnostic "github.com/upbound/provider-azure/internal/controller/apimanagement/apidiagnostic"
+	apioperation "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperation"
+	apioperationpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperationpolicy"
+	apioperationtag "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperationtag"
+	apipolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/apipolicy"
+	apirelease "github.com/upbound/provider-azure/internal/controller/apimanagement/apirelease"
+	apischema "github.com/upbound/provider-azure/internal/controller/apimanagement/apischema"
+	apiversionset "github.com/upbound/provider-azure/internal/controller/apimanagement/apiversionset"
+	authorizationserver "github.com/upbound/provider-azure/internal/controller/apimanagement/authorizationserver"
+	backend "github.com/upbound/provider-azure/internal/controller/apimanagement/backend"
+	certificate "github.com/upbound/provider-azure/internal/controller/apimanagement/certificate"
+	diagnostic "github.com/upbound/provider-azure/internal/controller/apimanagement/diagnostic"
+	emailtemplate "github.com/upbound/provider-azure/internal/controller/apimanagement/emailtemplate"
+	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
+	identityprovideraad "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovideraad"
+	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/apimanagement/identityproviderfacebook"
+	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidergoogle"
+	identityprovidermicrosoft "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidermicrosoft"
+	identityprovidertwitter "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidertwitter"
+	logger "github.com/upbound/provider-azure/internal/controller/apimanagement/logger"
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
+	namedvalue "github.com/upbound/provider-azure/internal/controller/apimanagement/namedvalue"
+	notificationrecipientemail "github.com/upbound/provider-azure/internal/controller/apimanagement/notificationrecipientemail"
+	openidconnectprovider "github.com/upbound/provider-azure/internal/controller/apimanagement/openidconnectprovider"
+	policy "github.com/upbound/provider-azure/internal/controller/apimanagement/policy"
+	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
+	productapi "github.com/upbound/provider-azure/internal/controller/apimanagement/productapi"
+	productpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/productpolicy"
+	rediscache "github.com/upbound/provider-azure/internal/controller/apimanagement/rediscache"
+	subscription "github.com/upbound/provider-azure/internal/controller/apimanagement/subscription"
+	tag "github.com/upbound/provider-azure/internal/controller/apimanagement/tag"
+	user "github.com/upbound/provider-azure/internal/controller/apimanagement/user"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
 	resourcegroup "github.com/upbound/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/provider-azure/internal/controller/azure/resourceproviderregistration"
-	subscription "github.com/upbound/provider-azure/internal/controller/azure/subscription"
-	rediscache "github.com/upbound/provider-azure/internal/controller/cache/rediscache"
+	subscriptionazure "github.com/upbound/provider-azure/internal/controller/azure/subscription"
+	rediscachecache "github.com/upbound/provider-azure/internal/controller/cache/rediscache"
 	redisenterprisecluster "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/provider-azure/internal/controller/cache/redisfirewallrule"
@@ -120,7 +152,7 @@ import (
 	monitorprivatelinkscope "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscope"
 	monitorprivatelinkscopedservice "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscopedservice"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/keyvault/accesspolicy"
-	certificate "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"
+	certificatekeyvault "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"
 	certificateissuer "github.com/upbound/provider-azure/internal/controller/keyvault/certificateissuer"
 	key "github.com/upbound/provider-azure/internal/controller/keyvault/key"
 	managedhardwaresecuritymodule "github.com/upbound/provider-azure/internal/controller/keyvault/managedhardwaresecuritymodule"
@@ -284,14 +316,46 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		monitoractionrulesuppression.Setup,
 		monitorsmartdetectoralertrule.Setup,
 		server.Setup,
+		api.Setup,
+		apidiagnostic.Setup,
+		apioperation.Setup,
+		apioperationpolicy.Setup,
+		apioperationtag.Setup,
+		apipolicy.Setup,
+		apirelease.Setup,
+		apischema.Setup,
+		apiversionset.Setup,
+		authorizationserver.Setup,
+		backend.Setup,
+		certificate.Setup,
+		diagnostic.Setup,
+		emailtemplate.Setup,
+		gateway.Setup,
+		identityprovideraad.Setup,
+		identityproviderfacebook.Setup,
+		identityprovidergoogle.Setup,
+		identityprovidermicrosoft.Setup,
+		identityprovidertwitter.Setup,
+		logger.Setup,
 		management.Setup,
+		namedvalue.Setup,
+		notificationrecipientemail.Setup,
+		openidconnectprovider.Setup,
+		policy.Setup,
+		product.Setup,
+		productapi.Setup,
+		productpolicy.Setup,
+		rediscache.Setup,
+		subscription.Setup,
+		tag.Setup,
+		user.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		roleassignment.Setup,
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
-		subscription.Setup,
-		rediscache.Setup,
+		subscriptionazure.Setup,
+		rediscachecache.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
@@ -391,7 +455,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		monitorprivatelinkscope.Setup,
 		monitorprivatelinkscopedservice.Setup,
 		accesspolicy.Setup,
-		certificate.Setup,
+		certificatekeyvault.Setup,
 		certificateissuer.Setup,
 		key.Setup,
 		managedhardwaresecuritymodule.Setup,

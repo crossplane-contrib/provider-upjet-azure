@@ -1,0 +1,25 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: AuthorizationServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/authorizationserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management
+    authorizationEndpoint: https://example.mydomain.com/client/authorize
+    clientId: 42424242-4242-4242-4242-424242424242
+    clientRegistrationEndpoint: https://example.mydomain.com/client/register
+    displayName: Test Server
+    grantTypes:
+    - authorizationCode
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management
+
+---
+

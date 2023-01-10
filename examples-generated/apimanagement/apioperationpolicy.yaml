@@ -1,0 +1,44 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: APIOperationPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    apiNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    operationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    xmlContent: |
+      <policies>
+        <inbound>
+          <find-and-replace from="xyz" to="abc" />
+        </inbound>
+      </policies>
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: APIOperation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/apioperationpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider: {}
+
+---
+

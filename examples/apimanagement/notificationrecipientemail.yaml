@@ -1,0 +1,46 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: NotificationRecipientEmail
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/notificationrecipientemail
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    email: foo@bar.com
+    notificationType: AccountClosedPublisher
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: apimanagement/v1beta1/notificationrecipientemail
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-management-example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/notificationrecipientemail
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-resourcegroup-example
+spec:
+  forProvider:
+    location: West Europe
