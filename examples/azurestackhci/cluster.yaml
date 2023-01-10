@@ -1,0 +1,31 @@
+apiVersion: azurestackhci.azure.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "clientId is a part of application which we cannot obtain and need to be hardcoded"
+    meta.upbound.io/example-id: azurestackhci/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clientId: 2351ca13-329c-47c5-ae67-462a24103c02
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: azurestackhci/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

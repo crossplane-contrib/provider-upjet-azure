@@ -15,6 +15,7 @@ import (
 	v1beta1apimanagement "github.com/upbound/provider-azure/apis/apimanagement/v1beta1"
 	v1beta1authorization "github.com/upbound/provider-azure/apis/authorization/v1beta1"
 	v1beta1azure "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta1azurestackhci "github.com/upbound/provider-azure/apis/azurestackhci/v1beta1"
 	v1beta1cache "github.com/upbound/provider-azure/apis/cache/v1beta1"
 	v1beta1communication "github.com/upbound/provider-azure/apis/communication/v1beta1"
 	v1beta1compute "github.com/upbound/provider-azure/apis/compute/v1beta1"
@@ -60,6 +61,7 @@ func init() {
 		v1beta1apimanagement.SchemeBuilder.AddToScheme,
 		v1beta1authorization.SchemeBuilder.AddToScheme,
 		v1beta1azure.SchemeBuilder.AddToScheme,
+		v1beta1azurestackhci.SchemeBuilder.AddToScheme,
 		v1beta1cache.SchemeBuilder.AddToScheme,
 		v1beta1communication.SchemeBuilder.AddToScheme,
 		v1beta1compute.SchemeBuilder.AddToScheme,
