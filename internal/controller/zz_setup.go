@@ -12,6 +12,7 @@ import (
 	monitoractionruleactiongroup "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionruleactiongroup"
 	monitoractionrulesuppression "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionrulesuppression"
 	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitorsmartdetectoralertrule"
+	server "github.com/upbound/provider-azure/internal/controller/analysisservices/server"
 	api "github.com/upbound/provider-azure/internal/controller/apimanagement/api"
 	apidiagnostic "github.com/upbound/provider-azure/internal/controller/apimanagement/apidiagnostic"
 	apioperation "github.com/upbound/provider-azure/internal/controller/apimanagement/apioperation"
@@ -106,7 +107,7 @@ import (
 	configuration "github.com/upbound/provider-azure/internal/controller/dbformariadb/configuration"
 	database "github.com/upbound/provider-azure/internal/controller/dbformariadb/database"
 	firewallrule "github.com/upbound/provider-azure/internal/controller/dbformariadb/firewallrule"
-	server "github.com/upbound/provider-azure/internal/controller/dbformariadb/server"
+	serverdbformariadb "github.com/upbound/provider-azure/internal/controller/dbformariadb/server"
 	virtualnetworkrule "github.com/upbound/provider-azure/internal/controller/dbformariadb/virtualnetworkrule"
 	configurationdbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/configuration"
 	firewallruledbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/firewallrule"
@@ -313,6 +314,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		monitoractionruleactiongroup.Setup,
 		monitoractionrulesuppression.Setup,
 		monitorsmartdetectoralertrule.Setup,
+		server.Setup,
 		api.Setup,
 		apidiagnostic.Setup,
 		apioperation.Setup,
@@ -407,7 +409,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		configuration.Setup,
 		database.Setup,
 		firewallrule.Setup,
-		server.Setup,
+		serverdbformariadb.Setup,
 		virtualnetworkrule.Setup,
 		configurationdbformysql.Setup,
 		firewallruledbformysql.Setup,

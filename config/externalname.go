@@ -491,6 +491,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Monitor Smart Detector Alert Rule can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AlertsManagement/smartDetectorAlertRules/rule1
 	"azurerm_monitor_smart_detector_alert_rule": config.IdentifierFromProvider,
+
+	// analysisservices
+	//
+	// Analysis Services Server can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcegroup1/providers/Microsoft.AnalysisServices/servers/server1
+	"azurerm_analysis_services_server": config.IdentifierFromProvider,
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {

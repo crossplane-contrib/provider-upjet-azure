@@ -1,0 +1,42 @@
+apiVersion: analysisservices.azure.upbound.io/v1beta1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: analysisservices/v1beta1/server
+  labels:
+    testing.upbound.io/example-name: server
+  name: server
+spec:
+  forProvider:
+    adminUsers:
+    - myuser@domain.tld
+    enablePowerBiService: true
+    ipv4FirewallRule:
+    - name: myRule1
+      rangeEnd: 210.117.252.255
+      rangeStart: 210.117.252.0
+    location: West Europe
+    name: analysisservicesserver
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: S0
+    tags:
+      abc: 123
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: analysisservices/v1beta1/server
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
