@@ -76,6 +76,7 @@ apiVersion: insights.azure.upbound.io/v1beta1
 kind: ApplicationInsights
 metadata:
   annotations:
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-logger.sh
     meta.upbound.io/example-id: apimanagement/v1beta1/diagnostic
   labels:
     testing.upbound.io/example-name: example

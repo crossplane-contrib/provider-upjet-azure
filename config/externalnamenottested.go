@@ -51,7 +51,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// API Management Custom Domains can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/customDomains/default
 	"azurerm_api_management_custom_domain": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_management_id }}/customDomains/default"),
-
 	// API Management Azure AD B2C Identity Providers can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/service1/identityProviders/AadB2C
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
