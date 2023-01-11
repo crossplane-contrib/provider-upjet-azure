@@ -43,7 +43,7 @@ type CertificateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
-	// The base-64 encoded certificate data, which must be a PFX file. Changing this forces a new resource to be created.
+	// The base-64 encoded certificate data, which must be a PFX file.
 	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
@@ -65,7 +65,7 @@ type CertificateParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretIDSelector *v1.Selector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 
-	// The password used for this certificate. Changing this forces a new resource to be created.
+	// The password used for this certificate.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 

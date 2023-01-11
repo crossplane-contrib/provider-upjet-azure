@@ -317,14 +317,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_mariadb_configuration":        config.IdentifierFromProvider,
 
 	// media
-	"azurerm_media_services_account":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaservices/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Media/mediaServices/account1
+	"azurerm_media_services_account":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaServices/{{ .external_name }}"),
 	"azurerm_media_asset":              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaservices/{{ .parameters.media_services_account_name }}/assets/{{ .external_name }}"),
 	"azurerm_media_live_event":         config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaservices/{{ .parameters.media_services_account_name }}/liveevents/{{ .external_name }}"),
 	"azurerm_media_live_event_output":  config.TemplatedStringAsIdentifier("name", "{{ .parameters.live_event_id }}/liveoutputs/{{ .external_name }}"),
 	"azurerm_media_streaming_endpoint": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaservices/{{ .parameters.media_services_account_name }}/streamingendpoints/{{ .external_name }}"),
 	"azurerm_media_streaming_locator":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaservices/{{ .parameters.media_services_account_name }}/streaminglocators/{{ .external_name }}"),
 	"azurerm_media_streaming_policy":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaservices/{{ .parameters.media_services_account_name }}/streamingpolicies/{{ .external_name }}"),
-	"azurerm_media_transform":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaservices/{{ .parameters.media_services_account_name }}/transforms/{{ .external_name }}"),
+	"azurerm_media_transform":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaServices/{{ .parameters.media_services_account_name }}/transforms/{{ .external_name }}"),
 
 	// mixedreality
 	"azurerm_spatial_anchors_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{{ .external_name }}"),

@@ -15,6 +15,10 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
     displayName: Example Provider
     metadataEndpoint: https://example.com/example
     resourceGroupNameSelector:
