@@ -1429,6 +1429,16 @@ func (in *OutputSynapseParameters) DeepCopyInto(out *OutputSynapseParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.StreamAnalyticsJobNameRef != nil {
+		in, out := &in.StreamAnalyticsJobNameRef, &out.StreamAnalyticsJobNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StreamAnalyticsJobNameSelector != nil {
+		in, out := &in.StreamAnalyticsJobNameSelector, &out.StreamAnalyticsJobNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Table != nil {
 		in, out := &in.Table, &out.Table
 		*out = new(string)
