@@ -58,6 +58,7 @@ import (
 	resourcegroup "github.com/upbound/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/provider-azure/internal/controller/azure/resourceproviderregistration"
 	subscriptionazure "github.com/upbound/provider-azure/internal/controller/azure/subscription"
+	cluster "github.com/upbound/provider-azure/internal/controller/azurestackhci/cluster"
 	rediscachecache "github.com/upbound/provider-azure/internal/controller/cache/rediscache"
 	redisenterprisecluster "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisedatabase"
@@ -169,7 +170,7 @@ import (
 	managedstorageaccountsastokendefinition "github.com/upbound/provider-azure/internal/controller/keyvault/managedstorageaccountsastokendefinition"
 	secret "github.com/upbound/provider-azure/internal/controller/keyvault/secret"
 	vault "github.com/upbound/provider-azure/internal/controller/keyvault/vault"
-	cluster "github.com/upbound/provider-azure/internal/controller/kusto/cluster"
+	clusterkusto "github.com/upbound/provider-azure/internal/controller/kusto/cluster"
 	databasekusto "github.com/upbound/provider-azure/internal/controller/kusto/database"
 	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
@@ -370,6 +371,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
 		subscriptionazure.Setup,
+		cluster.Setup,
 		rediscachecache.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,
@@ -481,7 +483,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedstorageaccountsastokendefinition.Setup,
 		secret.Setup,
 		vault.Setup,
-		cluster.Setup,
+		clusterkusto.Setup,
 		databasekusto.Setup,
 		integrationserviceenvironment.Setup,
 		managementgroup.Setup,
