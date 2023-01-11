@@ -32,5 +32,3 @@ spec:
       name: example
     vpnAuthenticationTypes:
     - Certificate
-  providerConfigRef:
-    name: example

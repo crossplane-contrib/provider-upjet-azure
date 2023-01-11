@@ -13,5 +13,3 @@ spec:
       name: example
     peeringIdRef:
       name: example
-  providerConfigRef:
-    name: example

@@ -13,8 +13,7 @@ spec:
         name: saflow2962022
     # Composition required for fully automated example below
     targetResourceId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/norway-watcher-rg/providers/Microsoft.Compute/virtualMachines/example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Watcher
@@ -25,8 +24,7 @@ spec:
     location: Norway East
     resourceGroupNameRef:
       name: norway-watcher-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -37,8 +35,7 @@ spec:
     location: Norway East
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
@@ -53,8 +50,6 @@ spec:
     accountReplicationType: "LRS"
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
   writeConnectionSecretToRef:
     name: example-storage-account
     namespace: upbound-system
@@ -70,8 +65,7 @@ spec:
       name: norway-watcher-rg
     addressSpace:
       - "10.0.0.0/16"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
@@ -85,8 +79,7 @@ spec:
       name: example-vn-for-network-int-test
     addressPrefixes:
       - "10.0.1.0/24"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterface
@@ -102,8 +95,7 @@ spec:
     location: Norway East
     resourceGroupNameRef:
       name: norway-watcher-rg
-  providerConfigRef:
-    name: example
+
 ---
 # AzureNetworkWatcherExtension was manually enabled in Portal to unblock creation of PacketCapture
 # See https://github.com/upbound/official-providers/issues/316
@@ -131,5 +123,3 @@ spec:
       publisher: Canonical
       sku: 16.04-LTS
       version: latest
-  providerConfigRef:
-    name: example

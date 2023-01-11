@@ -8,8 +8,7 @@ spec:
   forProvider:
     resourceGroupNameRef:
       name: private-dns-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -20,8 +19,7 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSARecord
@@ -36,8 +34,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSAAAARecord
@@ -53,8 +50,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSCNAMERecord
@@ -68,8 +64,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSMXRecord
@@ -89,8 +84,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSPTRRecord
@@ -105,8 +99,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSSRVRecord
@@ -130,8 +123,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSTXTRecord
@@ -146,8 +138,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
@@ -163,8 +154,7 @@ spec:
     dnsServers:
       - "10.0.0.4"
       - "10.0.0.5"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSZoneVirtualNetworkLink
@@ -178,5 +168,3 @@ spec:
       name: private-dns-rg
     virtualNetworkIdRef:
       name: example-vn-private-dns
-  providerConfigRef:
-    name: example

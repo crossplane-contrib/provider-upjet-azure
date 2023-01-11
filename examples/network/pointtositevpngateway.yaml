@@ -7,8 +7,7 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualWAN
@@ -19,8 +18,7 @@ spec:
     location: West Europe
     resourceGroupNameRef:
       name: example-vpn-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualHub
@@ -34,8 +32,7 @@ spec:
       name: example-vpn-rg
     virtualWanIdRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VPNServerConfiguration
@@ -71,8 +68,7 @@ spec:
       name: example-vpn-rg
     vpnAuthenticationTypes:
     - Certificate
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PointToSiteVPNGateway
@@ -93,5 +89,3 @@ spec:
       name: example
     vpnServerConfigurationIdRef:
       name: example
-  providerConfigRef:
-    name: example

@@ -8,5 +8,3 @@ spec:
       name: example
     publicIpAddressIdRef:
       name: example
-  providerConfigRef:
-    name: example

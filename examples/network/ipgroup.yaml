@@ -13,8 +13,7 @@ spec:
       name: example-ipgroup-rg
     tags:
       environment: Production
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -25,5 +24,3 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example

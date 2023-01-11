@@ -15,5 +15,3 @@ spec:
       name: example-resources
     targetHostName: 10.0.2.4
     usageModel: READ_HEAVY_INFREQ
-  providerConfigRef:
-    name: example

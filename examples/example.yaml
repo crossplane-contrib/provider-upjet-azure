@@ -18,8 +18,6 @@ spec:
         testing.upbound.io/example-name: example
     skuName: premium
     tenantId: ${data.azurerm_client_config.current.tenant_id}
-  providerConfigRef:
-    name: default
 
 ---
 
@@ -40,8 +38,6 @@ spec:
         testing.upbound.io/example-name: example
     objectId: ${data.azurerm_client_config.current.object_id}
     tenantId: ${data.azurerm_client_config.current.tenant_id}
-  providerConfigRef:
-    name: default
 
 ---
 
@@ -54,5 +50,3 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-  providerConfigRef:
-    name: default

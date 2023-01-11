@@ -32,5 +32,3 @@ spec:
       publisher: Canonical
       sku: 16.04-LTS
       version: latest
-  providerConfigRef:
-    name: example

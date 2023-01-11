@@ -12,5 +12,3 @@ spec:
       environment: Production
     virtualHubIdRef:
       name: example
-  providerConfigRef:
-    name: example
