@@ -30,6 +30,7 @@ import (
 	"github.com/upbound/provider-azure/config/cache"
 	"github.com/upbound/provider-azure/config/common"
 	"github.com/upbound/provider-azure/config/compute"
+	"github.com/upbound/provider-azure/config/consumption"
 	"github.com/upbound/provider-azure/config/containerregistry"
 	"github.com/upbound/provider-azure/config/containerservice"
 	"github.com/upbound/provider-azure/config/cosmosdb"
@@ -175,6 +176,7 @@ func GetProvider() *tjconfig.Provider {
 		kusto.Configure,
 		storagecache.Configure,
 		servicebus.Configure,
+		consumption.Configure,
 	} {
 		configure(pc)
 	}

@@ -79,6 +79,9 @@ import (
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
 	ledger "github.com/upbound/provider-azure/internal/controller/confidentialledger/ledger"
+	budgetmanagementgroup "github.com/upbound/provider-azure/internal/controller/consumption/budgetmanagementgroup"
+	budgetresourcegroup "github.com/upbound/provider-azure/internal/controller/consumption/budgetresourcegroup"
+	budgetsubscription "github.com/upbound/provider-azure/internal/controller/consumption/budgetsubscription"
 	agentpool "github.com/upbound/provider-azure/internal/controller/containerregistry/agentpool"
 	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/containerregistry/containerconnectedregistry"
 	registry "github.com/upbound/provider-azure/internal/controller/containerregistry/registry"
@@ -389,6 +392,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
 		ledger.Setup,
+		budgetmanagementgroup.Setup,
+		budgetresourcegroup.Setup,
+		budgetsubscription.Setup,
 		agentpool.Setup,
 		containerconnectedregistry.Setup,
 		registry.Setup,
