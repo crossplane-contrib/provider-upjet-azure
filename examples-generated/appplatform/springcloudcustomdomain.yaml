@@ -1,0 +1,88 @@
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudCustomDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: ${join(".", [azurerm_dns_cname_record.example.name, azurerm_dns_cname_record.example.zone_name])}
+    springCloudAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSCNAMERecord
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    record: ${azurerm_spring_cloud_app.example.fqdn}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_dns_zone
+    ttl: 300
+    zoneNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_dns_zone
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

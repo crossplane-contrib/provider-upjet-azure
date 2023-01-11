@@ -1,0 +1,113 @@
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudCertificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    keyVaultCertificateIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    certificatePolicy:
+    - issuerParameters:
+      - name: Self
+      keyProperties:
+      - exportable: true
+        keySize: 2048
+        keyType: RSA
+        reuseKey: true
+      lifetimeAction:
+      - action:
+        - actionType: AutoRenew
+        trigger:
+        - daysBeforeExpiry: 30
+      secretProperties:
+      - contentType: application/x-pkcs12
+      x509CertificateProperties:
+      - keyUsage:
+        - cRLSign
+        - dataEncipherment
+        - digitalSignature
+        - keyAgreement
+        - keyCertSign
+        - keyEncipherment
+        subject: CN=contoso.com
+        validityInMonths: 12
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudcertificate
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
