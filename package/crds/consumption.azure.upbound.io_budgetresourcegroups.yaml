@@ -1,0 +1,568 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: budgetresourcegroups.consumption.azure.upbound.io
+spec:
+  group: consumption.azure.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - azure
+    kind: BudgetResourceGroup
+    listKind: BudgetResourceGroupList
+    plural: budgetresourcegroups
+    singular: budgetresourcegroup
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: BudgetResourceGroup is the Schema for the BudgetResourceGroups
+          API. Manages a Resource Group Consumption Budget.
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: BudgetResourceGroupSpec defines the desired state of BudgetResourceGroup
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  amount:
+                    description: The total amount of cost to track with the budget.
+                    type: number
+                  etag:
+                    description: The ETag of the Resource Group Consumption Budget
+                    type: string
+                  filter:
+                    description: A filter block as defined below.
+                    items:
+                      properties:
+                        dimension:
+                          description: One or more dimension blocks as defined below
+                            to filter the budget on.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the tag to use for the filter.
+                                type: string
+                              operator:
+                                description: The operator to use for comparison. The
+                                  allowed values are In.
+                                type: string
+                              values:
+                                description: Specifies a list of values for the tag.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - name
+                            - values
+                            type: object
+                          type: array
+                        not:
+                          description: A not block as defined below to filter the
+                            budget on.
+                          items:
+                            properties:
+                              dimension:
+                                description: One dimension block as defined below
+                                  to filter the budget on. Conflicts with tag.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the tag to use for
+                                        the filter.
+                                      type: string
+                                    operator:
+                                      description: The operator to use for comparison.
+                                        The allowed values are In.
+                                      type: string
+                                    values:
+                                      description: Specifies a list of values for
+                                        the tag.
+                                      items:
+                                        type: string
+                                      type: array
+                                  required:
+                                  - name
+                                  - values
+                                  type: object
+                                type: array
+                              tag:
+                                description: One tag block as defined below to filter
+                                  the budget on. Conflicts with dimension.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the tag to use for
+                                        the filter.
+                                      type: string
+                                    operator:
+                                      description: The operator to use for comparison.
+                                        The allowed values are In.
+                                      type: string
+                                    values:
+                                      description: Specifies a list of values for
+                                        the tag.
+                                      items:
+                                        type: string
+                                      type: array
+                                  required:
+                                  - name
+                                  - values
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        tag:
+                          description: One or more tag blocks as defined below to
+                            filter the budget on.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the tag to use for the filter.
+                                type: string
+                              operator:
+                                description: The operator to use for comparison. The
+                                  allowed values are In.
+                                type: string
+                              values:
+                                description: Specifies a list of values for the tag.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - name
+                            - values
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: The name which should be used for this Resource Group
+                      Consumption Budget. Changing this forces a new Resource Group
+                      Consumption Budget to be created.
+                    type: string
+                  notification:
+                    description: One or more notification blocks as defined below.
+                    items:
+                      properties:
+                        contactEmails:
+                          description: Specifies a list of email addresses to send
+                            the budget notification to when the threshold is exceeded.
+                          items:
+                            type: string
+                          type: array
+                        contactGroups:
+                          description: Specifies a list of Action Group IDs to send
+                            the budget notification to when the threshold is exceeded.
+                          items:
+                            type: string
+                          type: array
+                        contactRoles:
+                          description: Specifies a list of contact roles to send the
+                            budget notification to when the threshold is exceeded.
+                          items:
+                            type: string
+                          type: array
+                        enabled:
+                          description: Should the notification be enabled?
+                          type: boolean
+                        operator:
+                          description: The comparison operator for the notification.
+                            Must be one of EqualTo, GreaterThan, or GreaterThanOrEqualTo.
+                          type: string
+                        threshold:
+                          description: Threshold value associated with a notification.
+                            Notification is sent when the cost exceeded the threshold.
+                            It is always percent and has to be between 0 and 1000.
+                          type: number
+                        thresholdType:
+                          description: The type of threshold for the notification.
+                            This determines whether the notification is triggered
+                            by forecasted costs or actual costs. The allowed values
+                            are Actual and Forecasted. Default is Actual.
+                          type: string
+                      required:
+                      - operator
+                      - threshold
+                      type: object
+                    type: array
+                  resourceGroupId:
+                    description: The ID of the Resource Group to create the consumption
+                      budget for in the form of /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1.
+                      Changing this forces a new Resource Group Consumption Budget
+                      to be created.
+                    type: string
+                  resourceGroupIdRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupIdSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  timeGrain:
+                    description: The time covered by a budget. Tracking of the amount
+                      will be reset based on the time grain. Must be one of Monthly,
+                      Quarterly, Annually, BillingMonth, BillingQuarter, or BillingYear.
+                      Defaults to Monthly.
+                    type: string
+                  timePeriod:
+                    description: A time_period block as defined below.
+                    items:
+                      properties:
+                        endDate:
+                          description: The end date for the budget. If not set this
+                            will be 10 years after the start date.
+                          type: string
+                        startDate:
+                          description: The start date for the budget. The start date
+                            must be first of the month and should be less than the
+                            end date. Budget start date must be on or after June 1,
+                            2017. Future start date should not be more than twelve
+                            months. Past start date should be selected within the
+                            timegrain period. Changing this forces a new Resource
+                            Group Consumption Budget to be created.
+                          type: string
+                      required:
+                      - startDate
+                      type: object
+                    type: array
+                required:
+                - amount
+                - name
+                - notification
+                - timePeriod
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: BudgetResourceGroupStatus defines the observed state of BudgetResourceGroup.
+            properties:
+              atProvider:
+                properties:
+                  id:
+                    description: The ID of the Resource Group Consumption Budget.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
