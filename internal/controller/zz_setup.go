@@ -63,6 +63,8 @@ import (
 	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/provider-azure/internal/controller/cache/redisfirewallrule"
 	redislinkedserver "github.com/upbound/provider-azure/internal/controller/cache/redislinkedserver"
+	endpoint "github.com/upbound/provider-azure/internal/controller/cdn/endpoint"
+	profile "github.com/upbound/provider-azure/internal/controller/cdn/profile"
 	service "github.com/upbound/provider-azure/internal/controller/communication/service"
 	availabilityset "github.com/upbound/provider-azure/internal/controller/compute/availabilityset"
 	dedicatedhost "github.com/upbound/provider-azure/internal/controller/compute/dedicatedhost"
@@ -248,7 +250,7 @@ import (
 	privatednszonevirtualnetworklink "github.com/upbound/provider-azure/internal/controller/network/privatednszonevirtualnetworklink"
 	privateendpoint "github.com/upbound/provider-azure/internal/controller/network/privateendpoint"
 	privatelinkservice "github.com/upbound/provider-azure/internal/controller/network/privatelinkservice"
-	profile "github.com/upbound/provider-azure/internal/controller/network/profile"
+	profilenetwork "github.com/upbound/provider-azure/internal/controller/network/profile"
 	publicip "github.com/upbound/provider-azure/internal/controller/network/publicip"
 	publicipprefix "github.com/upbound/provider-azure/internal/controller/network/publicipprefix"
 	routetable "github.com/upbound/provider-azure/internal/controller/network/routetable"
@@ -373,6 +375,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
 		redislinkedserver.Setup,
+		endpoint.Setup,
+		profile.Setup,
 		service.Setup,
 		availabilityset.Setup,
 		dedicatedhost.Setup,
@@ -558,7 +562,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		privatednszonevirtualnetworklink.Setup,
 		privateendpoint.Setup,
 		privatelinkservice.Setup,
-		profile.Setup,
+		profilenetwork.Setup,
 		publicip.Setup,
 		publicipprefix.Setup,
 		routetable.Setup,
