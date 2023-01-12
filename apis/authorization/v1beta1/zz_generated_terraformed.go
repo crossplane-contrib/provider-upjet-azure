@@ -13,6 +13,80 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this ManagementLock
+func (mg *ManagementLock) GetTerraformResourceType() string {
+	return "azurerm_management_lock"
+}
+
+// GetConnectionDetailsMapping for this ManagementLock
+func (tr *ManagementLock) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ManagementLock
+func (tr *ManagementLock) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ManagementLock
+func (tr *ManagementLock) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ManagementLock
+func (tr *ManagementLock) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ManagementLock
+func (tr *ManagementLock) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ManagementLock
+func (tr *ManagementLock) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ManagementLock using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ManagementLock) LateInitialize(attrs []byte) (bool, error) {
+	params := &ManagementLockParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ManagementLock) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this PolicyDefinition
 func (mg *PolicyDefinition) GetTerraformResourceType() string {
 	return "azurerm_policy_definition"
@@ -161,6 +235,154 @@ func (tr *ResourceGroupPolicyAssignment) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ResourcePolicyAssignment
+func (mg *ResourcePolicyAssignment) GetTerraformResourceType() string {
+	return "azurerm_resource_policy_assignment"
+}
+
+// GetConnectionDetailsMapping for this ResourcePolicyAssignment
+func (tr *ResourcePolicyAssignment) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ResourcePolicyAssignment
+func (tr *ResourcePolicyAssignment) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ResourcePolicyAssignment
+func (tr *ResourcePolicyAssignment) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ResourcePolicyAssignment
+func (tr *ResourcePolicyAssignment) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ResourcePolicyAssignment
+func (tr *ResourcePolicyAssignment) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ResourcePolicyAssignment
+func (tr *ResourcePolicyAssignment) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ResourcePolicyAssignment using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ResourcePolicyAssignment) LateInitialize(attrs []byte) (bool, error) {
+	params := &ResourcePolicyAssignmentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ResourcePolicyAssignment) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ResourcePolicyExemption
+func (mg *ResourcePolicyExemption) GetTerraformResourceType() string {
+	return "azurerm_resource_policy_exemption"
+}
+
+// GetConnectionDetailsMapping for this ResourcePolicyExemption
+func (tr *ResourcePolicyExemption) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ResourcePolicyExemption
+func (tr *ResourcePolicyExemption) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ResourcePolicyExemption
+func (tr *ResourcePolicyExemption) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ResourcePolicyExemption
+func (tr *ResourcePolicyExemption) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ResourcePolicyExemption
+func (tr *ResourcePolicyExemption) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ResourcePolicyExemption
+func (tr *ResourcePolicyExemption) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ResourcePolicyExemption using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ResourcePolicyExemption) LateInitialize(attrs []byte) (bool, error) {
+	params := &ResourcePolicyExemptionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ResourcePolicyExemption) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this RoleAssignment
 func (mg *RoleAssignment) GetTerraformResourceType() string {
 	return "azurerm_role_assignment"
@@ -233,5 +455,227 @@ func (tr *RoleAssignment) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *RoleAssignment) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this RoleDefinition
+func (mg *RoleDefinition) GetTerraformResourceType() string {
+	return "azurerm_role_definition"
+}
+
+// GetConnectionDetailsMapping for this RoleDefinition
+func (tr *RoleDefinition) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this RoleDefinition
+func (tr *RoleDefinition) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this RoleDefinition
+func (tr *RoleDefinition) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this RoleDefinition
+func (tr *RoleDefinition) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this RoleDefinition
+func (tr *RoleDefinition) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this RoleDefinition
+func (tr *RoleDefinition) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this RoleDefinition using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *RoleDefinition) LateInitialize(attrs []byte) (bool, error) {
+	params := &RoleDefinitionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *RoleDefinition) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SubscriptionPolicyAssignment
+func (mg *SubscriptionPolicyAssignment) GetTerraformResourceType() string {
+	return "azurerm_subscription_policy_assignment"
+}
+
+// GetConnectionDetailsMapping for this SubscriptionPolicyAssignment
+func (tr *SubscriptionPolicyAssignment) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SubscriptionPolicyAssignment
+func (tr *SubscriptionPolicyAssignment) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SubscriptionPolicyAssignment
+func (tr *SubscriptionPolicyAssignment) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SubscriptionPolicyAssignment
+func (tr *SubscriptionPolicyAssignment) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SubscriptionPolicyAssignment
+func (tr *SubscriptionPolicyAssignment) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SubscriptionPolicyAssignment
+func (tr *SubscriptionPolicyAssignment) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SubscriptionPolicyAssignment using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SubscriptionPolicyAssignment) LateInitialize(attrs []byte) (bool, error) {
+	params := &SubscriptionPolicyAssignmentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SubscriptionPolicyAssignment) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SubscriptionPolicyExemption
+func (mg *SubscriptionPolicyExemption) GetTerraformResourceType() string {
+	return "azurerm_subscription_policy_exemption"
+}
+
+// GetConnectionDetailsMapping for this SubscriptionPolicyExemption
+func (tr *SubscriptionPolicyExemption) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SubscriptionPolicyExemption
+func (tr *SubscriptionPolicyExemption) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SubscriptionPolicyExemption
+func (tr *SubscriptionPolicyExemption) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SubscriptionPolicyExemption
+func (tr *SubscriptionPolicyExemption) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SubscriptionPolicyExemption
+func (tr *SubscriptionPolicyExemption) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SubscriptionPolicyExemption
+func (tr *SubscriptionPolicyExemption) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SubscriptionPolicyExemption using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SubscriptionPolicyExemption) LateInitialize(attrs []byte) (bool, error) {
+	params := &SubscriptionPolicyExemptionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SubscriptionPolicyExemption) GetTerraformSchemaVersion() int {
 	return 0
 }

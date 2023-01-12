@@ -49,8 +49,18 @@ type RoleAssignmentParameters struct {
 	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
 
 	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created. Conflicts with role_definition_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.RoleDefinition
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("role_definition_resource_id",true)
 	// +kubebuilder:validation:Optional
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+
+	// Reference to a RoleDefinition in authorization to populate roleDefinitionId.
+	// +kubebuilder:validation:Optional
+	RoleDefinitionIDRef *v1.Reference `json:"roleDefinitionIdRef,omitempty" tf:"-"`
+
+	// Selector for a RoleDefinition in authorization to populate roleDefinitionId.
+	// +kubebuilder:validation:Optional
+	RoleDefinitionIDSelector *v1.Selector `json:"roleDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The name of a built-in Role. Changing this forces a new resource to be created. Conflicts with role_definition_id.
 	// +kubebuilder:validation:Optional

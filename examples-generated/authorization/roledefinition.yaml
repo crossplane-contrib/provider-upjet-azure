@@ -1,0 +1,22 @@
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/roledefinition
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assignableScopes:
+    - ${data.azurerm_subscription.primary.id}
+    description: This is a custom role created via Terraform
+    name: my-custom-role
+    permissions:
+    - actions:
+      - '*'
+      notActions: []
+    scope: ${data.azurerm_subscription.primary.id}
+
+---
+

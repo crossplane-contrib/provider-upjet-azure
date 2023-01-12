@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: roleassignments.authorization.azure.upbound.io
+  name: resourcepolicyexemptions.authorization.azure.upbound.io
 spec:
   group: authorization.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: RoleAssignment
-    listKind: RoleAssignmentList
-    plural: roleassignments
-    singular: roleassignment
+    kind: ResourcePolicyExemption
+    listKind: ResourcePolicyExemptionList
+    plural: resourcepolicyexemptions
+    singular: resourcepolicyexemption
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: RoleAssignment is the Schema for the RoleAssignments API. Assigns
-          a given Principal (User or Group) to a given Role.
+        description: ResourcePolicyExemption is the Schema for the ResourcePolicyExemptions
+          API. Manages a Resource Policy Exemption.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: RoleAssignmentSpec defines the desired state of RoleAssignment
+            description: ResourcePolicyExemptionSpec defines the desired state of
+              ResourcePolicyExemption
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,41 +65,36 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  condition:
-                    description: The condition that limits the resources that the
-                      role can be assigned to. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  conditionVersion:
-                    description: The version of the condition. Possible values are
-                      1.0 or 2.0. Changing this forces a new resource to be created.
-                    type: string
-                  delegatedManagedIdentityResourceId:
-                    description: The delegated Azure Resource Id which contains a
-                      Managed Identity. Changing this forces a new resource to be
-                      created.
-                    type: string
                   description:
-                    description: The description for this Role Assignment. Changing
-                      this forces a new resource to be created.
+                    description: A description to use for this Policy Exemption.
+                    type: string
+                  displayName:
+                    description: A friendly display name to use for this Policy Exemption.
+                    type: string
+                  exemptionCategory:
+                    description: The category of this policy exemption. Possible values
+                      are Waiver and Mitigated.
+                    type: string
+                  expiresOn:
+                    description: The expiration date and time in UTC ISO 8601 format
+                      of this policy exemption.
+                    type: string
+                  metadata:
+                    description: The metadata for this policy exemption. This is a
+                      JSON string representing additional metadata that should be
+                      stored with the policy exemption.
                     type: string
                   name:
-                    description: A unique UUID/GUID for this Role Assignment - one
-                      will be generated if not specified. Changing this forces a new
-                      resource to be created.
+                    description: The name of the Policy Exemption. Changing this forces
+                      a new resource to be created.
                     type: string
-                  principalId:
-                    description: The ID of the Principal (User, Group or Service Principal)
-                      to assign the Role Definition to. Changing this forces a new
-                      resource to be created.
+                  policyAssignmentId:
+                    description: The ID of the Policy Assignment to be exempted at
+                      the specified Scope.
                     type: string
-                  roleDefinitionId:
-                    description: The Scoped-ID of the Role Definition. Changing this
-                      forces a new resource to be created. Conflicts with role_definition_name.
-                    type: string
-                  roleDefinitionIdRef:
-                    description: Reference to a RoleDefinition in authorization to
-                      populate roleDefinitionId.
+                  policyAssignmentIdRef:
+                    description: Reference to a ResourcePolicyAssignment in authorization
+                      to populate policyAssignmentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -131,9 +127,9 @@ spec:
                     required:
                     - name
                     type: object
-                  roleDefinitionIdSelector:
-                    description: Selector for a RoleDefinition in authorization to
-                      populate roleDefinitionId.
+                  policyAssignmentIdSelector:
+                    description: Selector for a ResourcePolicyAssignment in authorization
+                      to populate policyAssignmentId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -171,29 +167,95 @@ spec:
                             type: string
                         type: object
                     type: object
-                  roleDefinitionName:
-                    description: The name of a built-in Role. Changing this forces
-                      a new resource to be created. Conflicts with role_definition_id.
+                  policyDefinitionReferenceIds:
+                    description: The policy definition reference ID list when the
+                      associated policy assignment is an assignment of a policy set
+                      definition.
+                    items:
+                      type: string
+                    type: array
+                  resourceId:
+                    description: The Resource ID where the Policy Exemption should
+                      be applied. Changing this forces a new resource to be created.
                     type: string
-                  scope:
-                    description: The scope at which the Role Assignment applies to,
-                      such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333,
-                      /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup,
-                      or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM,
-                      or /providers/Microsoft.Management/managementGroups/myMG. Changing
-                      this forces a new resource to be created.
-                    type: string
-                  skipServicePrincipalAadCheck:
-                    description: If the principal_id is a newly provisioned Service
-                      Principal set this value to true to skip the Azure Active Directory
-                      check which may fail due to replication lag. This argument is
-                      only valid if the principal_id is a Service Principal identity.
-                      If it is not a Service Principal identity it will cause the
-                      role assignment to fail. Defaults to false.
-                    type: boolean
+                  resourceIdRef:
+                    description: Reference to a ResourcePolicyAssignment in authorization
+                      to populate resourceId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceIdSelector:
+                    description: Selector for a ResourcePolicyAssignment in authorization
+                      to populate resourceId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 required:
-                - principalId
-                - scope
+                - exemptionCategory
+                - name
                 type: object
               providerConfigRef:
                 default:
@@ -367,16 +429,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: RoleAssignmentStatus defines the observed state of RoleAssignment.
+            description: ResourcePolicyExemptionStatus defines the observed state
+              of ResourcePolicyExemption.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The Role Assignment ID.
-                    type: string
-                  principalType:
-                    description: The type of the principal_id, e.g. User, Group, Service
-                      Principal, Application, etc.
+                    description: The Policy Exemption id.
                     type: string
                 type: object
               conditions:
