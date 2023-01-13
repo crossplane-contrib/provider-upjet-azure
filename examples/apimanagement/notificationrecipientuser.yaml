@@ -1,0 +1,76 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: NotificationRecipientUser
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: apimanagement/v1beta1/notificationrecipientuser
+  labels:
+    testing.upbound.io/example-name: example
+  name: notif-example
+spec:
+  forProvider:
+    apiManagementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    userIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    notificationType: AccountClosedPublisher
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/notificationrecipientuser
+  labels:
+    testing.upbound.io/example-name: example
+  name: notif-example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/notificationrecipientuser
+  labels:
+    testing.upbound.io/example-name: example
+  name: notif-example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    email: foo@bar.com
+    firstName: Example
+    lastName: User
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    state: active
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/notificationrecipientuser
+  labels:
+    testing.upbound.io/example-name: example
+  name: notif-example
+spec:
+  forProvider:
+    location: West Europe
+

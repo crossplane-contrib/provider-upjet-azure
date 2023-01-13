@@ -21,6 +21,7 @@ import (
 	apipolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/apipolicy"
 	apirelease "github.com/upbound/provider-azure/internal/controller/apimanagement/apirelease"
 	apischema "github.com/upbound/provider-azure/internal/controller/apimanagement/apischema"
+	apitag "github.com/upbound/provider-azure/internal/controller/apimanagement/apitag"
 	apiversionset "github.com/upbound/provider-azure/internal/controller/apimanagement/apiversionset"
 	authorizationserver "github.com/upbound/provider-azure/internal/controller/apimanagement/authorizationserver"
 	backend "github.com/upbound/provider-azure/internal/controller/apimanagement/backend"
@@ -37,6 +38,7 @@ import (
 	management "github.com/upbound/provider-azure/internal/controller/apimanagement/management"
 	namedvalue "github.com/upbound/provider-azure/internal/controller/apimanagement/namedvalue"
 	notificationrecipientemail "github.com/upbound/provider-azure/internal/controller/apimanagement/notificationrecipientemail"
+	notificationrecipientuser "github.com/upbound/provider-azure/internal/controller/apimanagement/notificationrecipientuser"
 	openidconnectprovider "github.com/upbound/provider-azure/internal/controller/apimanagement/openidconnectprovider"
 	policy "github.com/upbound/provider-azure/internal/controller/apimanagement/policy"
 	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
@@ -355,6 +357,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apipolicy.Setup,
 		apirelease.Setup,
 		apischema.Setup,
+		apitag.Setup,
 		apiversionset.Setup,
 		authorizationserver.Setup,
 		backend.Setup,
@@ -371,6 +374,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		management.Setup,
 		namedvalue.Setup,
 		notificationrecipientemail.Setup,
+		notificationrecipientuser.Setup,
 		openidconnectprovider.Setup,
 		policy.Setup,
 		product.Setup,
