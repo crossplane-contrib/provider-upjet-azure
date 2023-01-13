@@ -1,0 +1,75 @@
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: ResourcePolicyExemption
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    exemptionCategory: Mitigated
+    name: exemption1
+    policyAssignmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: westus
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: ResourcePolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: westus
+    name: assignment1
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_policy_set_definition
+    resourceId: ${azurerm_virtual_network.example.id}
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta1/resourcepolicyexemption
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: westus
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

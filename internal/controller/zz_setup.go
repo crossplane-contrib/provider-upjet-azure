@@ -56,9 +56,15 @@ import (
 	springcloudjavadeployment "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudjavadeployment"
 	springcloudservice "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudservice"
 	springcloudstorage "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudstorage"
+	managementlock "github.com/upbound/provider-azure/internal/controller/authorization/managementlock"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
+	resourcepolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcepolicyassignment"
+	resourcepolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/resourcepolicyexemption"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
+	roledefinition "github.com/upbound/provider-azure/internal/controller/authorization/roledefinition"
+	subscriptionpolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyassignment"
+	subscriptionpolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyexemption"
 	account "github.com/upbound/provider-azure/internal/controller/automation/account"
 	credential "github.com/upbound/provider-azure/internal/controller/automation/credential"
 	module "github.com/upbound/provider-azure/internal/controller/automation/module"
@@ -382,9 +388,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		springcloudjavadeployment.Setup,
 		springcloudservice.Setup,
 		springcloudstorage.Setup,
+		managementlock.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
+		resourcepolicyassignment.Setup,
+		resourcepolicyexemption.Setup,
 		roleassignment.Setup,
+		roledefinition.Setup,
+		subscriptionpolicyassignment.Setup,
+		subscriptionpolicyexemption.Setup,
 		account.Setup,
 		credential.Setup,
 		module.Setup,

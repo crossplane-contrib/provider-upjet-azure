@@ -7,6 +7,15 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this ManagementLockList.
+func (l *ManagementLockList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this PolicyDefinitionList.
 func (l *PolicyDefinitionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -25,8 +34,53 @@ func (l *ResourceGroupPolicyAssignmentList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ResourcePolicyAssignmentList.
+func (l *ResourcePolicyAssignmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ResourcePolicyExemptionList.
+func (l *ResourcePolicyExemptionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this RoleAssignmentList.
 func (l *RoleAssignmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this RoleDefinitionList.
+func (l *RoleDefinitionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SubscriptionPolicyAssignmentList.
+func (l *SubscriptionPolicyAssignmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SubscriptionPolicyExemptionList.
+func (l *SubscriptionPolicyExemptionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
