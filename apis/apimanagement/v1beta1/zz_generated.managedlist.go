@@ -79,6 +79,15 @@ func (l *APISchemaList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this APITagList.
+func (l *APITagList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this APIVersionSetList.
 func (l *APIVersionSetList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -216,6 +225,15 @@ func (l *NamedValueList) GetItems() []resource.Managed {
 
 // GetItems of this NotificationRecipientEmailList.
 func (l *NotificationRecipientEmailList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this NotificationRecipientUserList.
+func (l *NotificationRecipientUserList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
