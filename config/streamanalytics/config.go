@@ -17,12 +17,25 @@ limitations under the License.
 package streamanalytics
 
 import (
+	"github.com/upbound/provider-azure/apis/rconfig"
+
 	"github.com/upbound/upjet/pkg/config"
 )
 
 // Configure configures storagesync group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_stream_analytics_output_synapse", func(r *config.Resource) {
+		r.References["stream_analytics_job_name"] = config.Reference{
+			Type: "Job",
+		}
+	})
+	p.AddResourceConfigurator("azurerm_stream_analytics_function_javascript_uda", func(r *config.Resource) {
+		r.References["stream_analytics_job_id"] = config.Reference{
+			Type:      "Job",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+	p.AddResourceConfigurator("azurerm_stream_analytics_output_blob", func(r *config.Resource) {
 		r.References["stream_analytics_job_name"] = config.Reference{
 			Type: "Job",
 		}

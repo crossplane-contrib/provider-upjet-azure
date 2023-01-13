@@ -2,12 +2,51 @@ apiVersion: compute.azure.upbound.io/v1beta1
 kind: Snapshot
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
-  name: example-snapshot
+    meta.upbound.io/example-id: compute/v1beta1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: snapshot
 spec:
   forProvider:
     createOption: Copy
     location: West Europe
-    resourceGroupNameRef:
-      name: example-compute
-    sourceUri: ...
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceUriSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: ManagedDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-managed-disk
+spec:
+  forProvider:
+    createOption: Empty
+    diskSizeGb: 10
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountType: Standard_LRS
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/snapshot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-snapshot-rg
+spec:
+  forProvider:
+    location: West Europe

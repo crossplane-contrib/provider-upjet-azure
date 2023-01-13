@@ -26,7 +26,9 @@ spec:
               return this.state;
           }
       }
-    streamAnalyticsJobId: ${data.azurerm_stream_analytics_job.example.id}
+    streamAnalyticsJobIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
 
 ---
 

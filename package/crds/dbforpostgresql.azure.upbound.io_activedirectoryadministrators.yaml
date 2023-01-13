@@ -65,6 +65,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  login:
+                    description: The login name of the principal to set as the server
+                      administrator
+                    type: string
                   objectId:
                     description: The ID of the principal to set as the server administrator.
                       For a managed identity this should be the Client ID of the identity.
@@ -230,6 +234,7 @@ spec:
                     description: The Azure Tenant ID
                     type: string
                 required:
+                - login
                 - objectId
                 - tenantId
                 type: object

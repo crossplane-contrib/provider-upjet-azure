@@ -1,22 +1,33 @@
 apiVersion: kusto.azure.upbound.io/v1beta1
 kind: Cluster
 metadata:
-  name: exampleupbound
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: examplekustocluster
 spec:
   forProvider:
     location: West Europe
-    resourceGroupNameRef:
-      name: example-rg-kusto
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     sku:
     - capacity: 2
       name: Standard_D13_v2
     tags:
       Environment: Production
+
 ---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
-  name: example-rg-kusto
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: my-kusto-rg
 spec:
   forProvider:
     location: West Europe

@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    login: sqladmin
+    login: anotheradmin
     objectId: ${data.azurerm_client_config.current.object_id}
     resourceGroupNameSelector:
       matchLabels:
@@ -27,10 +27,10 @@ metadata:
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/activedirectoryadministrator
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-psqlserver-upbound
 spec:
   forProvider:
-    administratorLogin: 4dm1n157r470r
+    administratorLogin: sqladmin
     administratorLoginPasswordSecretRef:
       key: example-key
       name: example-secret
@@ -58,4 +58,13 @@ spec:
     location: West Europe
 
 ---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
 

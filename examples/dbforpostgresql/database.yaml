@@ -1,11 +1,32 @@
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/database
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-database
+spec:
+  forProvider:
+    charset: UTF8
+    collation: English_United States.1252
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: Server
 metadata:
   annotations:
-    meta.upbound.io/example-id: dbforpostgresql/v1beta1/server
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/database
   labels:
     testing.upbound.io/example-name: example
-  name: example-upbound-pg-single-server
+  name: example-server-for-database
 spec:
   forProvider:
     administratorLogin: psqladmin
@@ -15,17 +36,15 @@ spec:
       namespace: upbound-system
     autoGrowEnabled: true
     backupRetentionDays: 7
-    geoRedundantBackupEnabled: true
+    geoRedundantBackupEnabled: false
     location: West Europe
-    publicNetworkAccessEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: GP_Gen5_4
+    skuName: B_Gen5_2
     sslEnforcementEnabled: true
-    sslMinimalTlsVersionEnforced: TLS1_2
-    storageMb: 640000
-    version: "11"
+    storageMb: 5120
+    version: "9.5"
 
 ---
 
@@ -33,10 +52,10 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: dbforpostgresql/v1beta1/server
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/database
   labels:
     testing.upbound.io/example-name: example
-  name: example-dbforpostgresql-${Rand.RFC1123Subdomain}
+  name: example
 spec:
   forProvider:
     location: West Europe
