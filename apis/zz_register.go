@@ -13,6 +13,7 @@ import (
 	v1beta1 "github.com/upbound/provider-azure/apis/alertsmanagement/v1beta1"
 	v1beta1analysisservices "github.com/upbound/provider-azure/apis/analysisservices/v1beta1"
 	v1beta1apimanagement "github.com/upbound/provider-azure/apis/apimanagement/v1beta1"
+	v1beta1appplatform "github.com/upbound/provider-azure/apis/appplatform/v1beta1"
 	v1beta1authorization "github.com/upbound/provider-azure/apis/authorization/v1beta1"
 	v1beta1automation "github.com/upbound/provider-azure/apis/automation/v1beta1"
 	v1beta1azure "github.com/upbound/provider-azure/apis/azure/v1beta1"
@@ -63,6 +64,7 @@ func init() {
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1beta1analysisservices.SchemeBuilder.AddToScheme,
 		v1beta1apimanagement.SchemeBuilder.AddToScheme,
+		v1beta1appplatform.SchemeBuilder.AddToScheme,
 		v1beta1authorization.SchemeBuilder.AddToScheme,
 		v1beta1automation.SchemeBuilder.AddToScheme,
 		v1beta1azure.SchemeBuilder.AddToScheme,

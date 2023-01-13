@@ -46,6 +46,16 @@ import (
 	subscription "github.com/upbound/provider-azure/internal/controller/apimanagement/subscription"
 	tag "github.com/upbound/provider-azure/internal/controller/apimanagement/tag"
 	user "github.com/upbound/provider-azure/internal/controller/apimanagement/user"
+	springcloudactivedeployment "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudactivedeployment"
+	springcloudapp "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudapp"
+	springcloudappcosmosdbassociation "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudappcosmosdbassociation"
+	springcloudappmysqlassociation "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudappmysqlassociation"
+	springcloudappredisassociation "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudappredisassociation"
+	springcloudcertificate "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudcertificate"
+	springcloudcustomdomain "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudcustomdomain"
+	springcloudjavadeployment "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudjavadeployment"
+	springcloudservice "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudservice"
+	springcloudstorage "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudstorage"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	roleassignment "github.com/upbound/provider-azure/internal/controller/authorization/roleassignment"
@@ -362,6 +372,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subscription.Setup,
 		tag.Setup,
 		user.Setup,
+		springcloudactivedeployment.Setup,
+		springcloudapp.Setup,
+		springcloudappcosmosdbassociation.Setup,
+		springcloudappmysqlassociation.Setup,
+		springcloudappredisassociation.Setup,
+		springcloudcertificate.Setup,
+		springcloudcustomdomain.Setup,
+		springcloudjavadeployment.Setup,
+		springcloudservice.Setup,
+		springcloudstorage.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		roleassignment.Setup,

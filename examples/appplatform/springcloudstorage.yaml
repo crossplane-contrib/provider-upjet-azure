@@ -1,0 +1,67 @@
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudStorage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-storage
+spec:
+  forProvider:
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountKey: key1
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: spring-group
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-service
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleac
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -1,0 +1,29 @@
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-service
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-group
+spec:
+  forProvider:
+    location: West Europe
+

@@ -1,0 +1,92 @@
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudAppCosmosDBAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappcosmosdbassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiType: table
+    cosmosdbAccessKey: key1
+    cosmosdbAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    springCloudAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappcosmosdbassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleac
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: Strong
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappcosmosdbassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: spring-group
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappcosmosdbassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-app
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappcosmosdbassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-service
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -1,0 +1,105 @@
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudAppMySQLAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    databaseName: ${azurerm_mysql_database.example.name}
+    mysqlServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    passwordSecretRef:
+      key: attribute.administrator_login_password
+      name: example-mysql-server
+      namespace: upbound-system
+    springCloudAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    usernameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: Server
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: mysqladminun
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: B_Gen5_2
+    sslEnforcementEnabled: true
+    sslMinimalTlsVersionEnforced: TLS1_2
+    storageMb: 5120
+    version: "5.7"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
