@@ -29,6 +29,7 @@ import (
 	v1beta1containerregistry "github.com/upbound/provider-azure/apis/containerregistry/v1beta1"
 	v1beta1containerservice "github.com/upbound/provider-azure/apis/containerservice/v1beta1"
 	v1beta1cosmosdb "github.com/upbound/provider-azure/apis/cosmosdb/v1beta1"
+	v1beta1costmanagement "github.com/upbound/provider-azure/apis/costmanagement/v1beta1"
 	v1beta1dataprotection "github.com/upbound/provider-azure/apis/dataprotection/v1beta1"
 	v1beta1datashare "github.com/upbound/provider-azure/apis/datashare/v1beta1"
 	v1beta1dbformariadb "github.com/upbound/provider-azure/apis/dbformariadb/v1beta1"
@@ -82,6 +83,7 @@ func init() {
 		v1beta1containerregistry.SchemeBuilder.AddToScheme,
 		v1beta1containerservice.SchemeBuilder.AddToScheme,
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,
+		v1beta1costmanagement.SchemeBuilder.AddToScheme,
 		v1beta1dataprotection.SchemeBuilder.AddToScheme,
 		v1beta1datashare.SchemeBuilder.AddToScheme,
 		v1beta1dbformariadb.SchemeBuilder.AddToScheme,
