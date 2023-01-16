@@ -60,7 +60,7 @@ type ConfigServerGitSettingSSHAuthParameters struct {
 	// +kubebuilder:validation:Required
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
-	// Indicates whether the Config Server instance will fail to start if the host_key does not match.
+	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
 	// +kubebuilder:validation:Optional
 	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
 }
@@ -105,6 +105,10 @@ type NetworkParameters struct {
 	// A list of (at least 3) CIDR ranges (at least /16) which are used to host the Spring Cloud infrastructure, which must not overlap with any existing CIDR ranges in the Subnet. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	CidrRanges []*string `json:"cidrRanges" tf:"cidr_ranges,omitempty"`
+
+	// Ingress read time out in seconds. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ReadTimeoutSeconds *float64 `json:"readTimeoutSeconds,omitempty" tf:"read_timeout_seconds,omitempty"`
 
 	// Specifies the Name of the resource group containing network resources of Azure Spring Cloud Service Runtime. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -152,7 +156,7 @@ type RepositoryParameters struct {
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
-	// A name to identify on the Git repository, required only if repos exists.
+	// A name to identify on the Git repository, required only if repos exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -181,6 +185,7 @@ type RequiredNetworkTrafficRulesObservation struct {
 	// The FQDN list of required traffic.
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
+	// The IP list of required traffic.
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
 	// The port of required traffic.
@@ -210,7 +215,7 @@ type SSHAuthParameters struct {
 	// +kubebuilder:validation:Required
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
-	// Indicates whether the Config Server instance will fail to start if the host_key does not match.
+	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
 	// +kubebuilder:validation:Optional
 	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
 }
@@ -232,17 +237,21 @@ type SpringCloudServiceObservation struct {
 
 type SpringCloudServiceParameters struct {
 
-	// Specifies the size for this Spring Cloud Service's default build agent pool. Possible values are S1, S2, S3, S4 and S5.
+	// Specifies the size for this Spring Cloud Service's default build agent pool. Possible values are S1, S2, S3, S4 and S5. This field is applicable only for Spring Cloud Service with enterprise tier.
 	// +kubebuilder:validation:Optional
 	BuildAgentPoolSize *string `json:"buildAgentPoolSize,omitempty" tf:"build_agent_pool_size,omitempty"`
 
-	// A config_server_git_setting block as defined below.
+	// A config_server_git_setting block as defined below. This field is applicable only for Spring Cloud Service with basic and standard tier.
 	// +kubebuilder:validation:Optional
 	ConfigServerGitSetting []ConfigServerGitSettingParameters `json:"configServerGitSetting,omitempty" tf:"config_server_git_setting,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
+
+	// Should the log stream in vnet injection instance could be accessed from Internet?
+	// +kubebuilder:validation:Optional
+	LogStreamPublicEndpointEnabled *bool `json:"logStreamPublicEndpointEnabled,omitempty" tf:"log_stream_public_endpoint_enabled,omitempty"`
 
 	// A network block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -261,11 +270,11 @@ type SpringCloudServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Whether enable the default Service Registry.
+	// Whether enable the default Service Registry. This field is applicable only for Spring Cloud Service with enterprise tier.
 	// +kubebuilder:validation:Optional
 	ServiceRegistryEnabled *bool `json:"serviceRegistryEnabled,omitempty" tf:"service_registry_enabled,omitempty"`
 
-	// Specifies the SKU Name for this Spring Cloud Service. Possible values are B0, S0 and E0. Defaults to S0.
+	// Specifies the SKU Name for this Spring Cloud Service. Possible values are B0, S0 and E0. Defaults to S0. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 

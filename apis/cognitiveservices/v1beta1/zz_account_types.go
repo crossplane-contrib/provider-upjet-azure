@@ -32,9 +32,21 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomQuestionAnsweringSearchServiceID *string `json:"customQuestionAnsweringSearchServiceId,omitempty" tf:"custom_question_answering_search_service_id,omitempty"`
 
+	// If kind is TextAnalytics this specifies the key of the Search service.
+	// +kubebuilder:validation:Optional
+	CustomQuestionAnsweringSearchServiceKey *string `json:"customQuestionAnsweringSearchServiceKey,omitempty" tf:"custom_question_answering_search_service_key,omitempty"`
+
 	// The subdomain name used for token-based authentication. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
+
+	// A customer_managed_key block as documented below.
+	// +kubebuilder:validation:Optional
+	CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+
+	// Whether to enable the dynamic throttling for this Cognitive Service Account.
+	// +kubebuilder:validation:Optional
+	DynamicThrottlingEnabled *bool `json:"dynamicThrottlingEnabled,omitempty" tf:"dynamic_throttling_enabled,omitempty"`
 
 	// List of FQDNs allowed for the Cognitive Account.
 	// +kubebuilder:validation:Optional
@@ -44,7 +56,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the type of Cognitive Service Account that should be created. Possible values are Academic, AnomalyDetector, Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search, Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7, CognitiveServices, ComputerVision, ContentModerator, CustomSpeech, CustomVision.Prediction, CustomVision.Training, Emotion, Face,FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor, Personalizer, QnAMaker, Recommendations, SpeakerRecognition, Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation and WebLM. Changing this forces a new resource to be created.
+	// Specifies the type of Cognitive Service Account that should be created. Possible values are Academic, AnomalyDetector, Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search, Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7, CognitiveServices, ComputerVision, ContentModerator, CustomSpeech, CustomVision.Prediction, CustomVision.Training, Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations, SpeakerRecognition, Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation and WebLM. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Kind *string `json:"kind" tf:"kind,omitempty"`
 
@@ -101,7 +113,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the SKU Name for this Cognitive Service Account. Possible values are F0, F1, S, S0, S1, S2, S3, S4, S5, S6, P0, P1, and P2.
+	// Specifies the SKU Name for this Cognitive Service Account. Possible values are F0, F1, S0, S, S1, S2, S3, S4, S5, S6, P0, P1, P2 and E0.
 	// +kubebuilder:validation:Required
 	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
 
@@ -112,6 +124,20 @@ type AccountParameters struct {
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type CustomerManagedKeyObservation struct {
+}
+
+type CustomerManagedKeyParameters struct {
+
+	// The Client ID of the User Assigned Identity that has access to the key. This property only needs to be specified when there're multiple identities attached to the Cognitive Account.
+	// +kubebuilder:validation:Optional
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
+	// +kubebuilder:validation:Required
+	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
 }
 
 type IdentityObservation struct {

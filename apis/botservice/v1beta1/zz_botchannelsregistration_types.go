@@ -90,6 +90,10 @@ type BotChannelsRegistrationParameters struct {
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 
+	// Is the streaming endpoint enabled for the Bot Channels Registration. Defaults to false.
+	// +kubebuilder:validation:Optional
+	StreamingEndpointEnabled *bool `json:"streamingEndpointEnabled,omitempty" tf:"streaming_endpoint_enabled,omitempty"`
+
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

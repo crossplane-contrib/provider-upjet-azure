@@ -67,10 +67,13 @@ spec:
                   buildAgentPoolSize:
                     description: Specifies the size for this Spring Cloud Service's
                       default build agent pool. Possible values are S1, S2, S3, S4
-                      and S5.
+                      and S5. This field is applicable only for Spring Cloud Service
+                      with enterprise tier.
                     type: string
                   configServerGitSetting:
                     description: A config_server_git_setting block as defined below.
+                      This field is applicable only for Spring Cloud Service with
+                      basic and standard tier.
                     items:
                       properties:
                         httpBasicAuth:
@@ -155,7 +158,8 @@ spec:
                                 type: string
                               name:
                                 description: A name to identify on the Git repository,
-                                  required only if repos exists.
+                                  required only if repos exists. Changing this forces
+                                  a new resource to be created.
                                 type: string
                               pattern:
                                 description: An array of strings used to match an
@@ -221,7 +225,7 @@ spec:
                                     strictHostKeyCheckingEnabled:
                                       description: Indicates whether the Config Server
                                         instance will fail to start if the host_key
-                                        does not match.
+                                        does not match. Defaults to true.
                                       type: boolean
                                   required:
                                   - privateKeySecretRef
@@ -294,6 +298,7 @@ spec:
                               strictHostKeyCheckingEnabled:
                                 description: Indicates whether the Config Server instance
                                   will fail to start if the host_key does not match.
+                                  Defaults to true.
                                 type: boolean
                             required:
                             - privateKeySecretRef
@@ -312,6 +317,10 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  logStreamPublicEndpointEnabled:
+                    description: Should the log stream in vnet injection instance
+                      could be accessed from Internet?
+                    type: boolean
                   network:
                     description: A network block as defined below. Changing this forces
                       a new resource to be created.
@@ -415,6 +424,10 @@ spec:
                           items:
                             type: string
                           type: array
+                        readTimeoutSeconds:
+                          description: Ingress read time out in seconds. Changing
+                            this forces a new resource to be created.
+                          type: number
                         serviceRuntimeNetworkResourceGroup:
                           description: Specifies the Name of the resource group containing
                             network resources of Azure Spring Cloud Service Runtime.
@@ -588,11 +601,14 @@ spec:
                         type: object
                     type: object
                   serviceRegistryEnabled:
-                    description: Whether enable the default Service Registry.
+                    description: Whether enable the default Service Registry. This
+                      field is applicable only for Spring Cloud Service with enterprise
+                      tier.
                     type: boolean
                   skuName:
                     description: Specifies the SKU Name for this Spring Cloud Service.
-                      Possible values are B0, S0 and E0. Defaults to S0.
+                      Possible values are B0, S0 and E0. Defaults to S0. Changing
+                      this forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -898,6 +914,7 @@ spec:
                             type: string
                           type: array
                         ipAddresses:
+                          description: The IP list of required traffic.
                           items:
                             type: string
                           type: array

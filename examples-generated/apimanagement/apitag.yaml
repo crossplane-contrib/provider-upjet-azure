@@ -26,7 +26,7 @@ spec:
   forProvider:
     apiManagementNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_api_management
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

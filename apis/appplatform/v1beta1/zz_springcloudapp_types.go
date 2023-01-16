@@ -59,6 +59,32 @@ type IdentityParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type IngressSettingsObservation struct {
+}
+
+type IngressSettingsParameters struct {
+
+	// Specifies how ingress should communicate with this app backend service. Allowed values are GRPC and Default. Defaults to Default.
+	// +kubebuilder:validation:Optional
+	BackendProtocol *string `json:"backendProtocol,omitempty" tf:"backend_protocol,omitempty"`
+
+	// Specifies the ingress read time out in seconds. Defaults to 300.
+	// +kubebuilder:validation:Optional
+	ReadTimeoutInSeconds *float64 `json:"readTimeoutInSeconds,omitempty" tf:"read_timeout_in_seconds,omitempty"`
+
+	// Specifies the ingress send time out in seconds. Defaults to 60.
+	// +kubebuilder:validation:Optional
+	SendTimeoutInSeconds *float64 `json:"sendTimeoutInSeconds,omitempty" tf:"send_timeout_in_seconds,omitempty"`
+
+	// Specifies the type of the affinity, set this to Cookie to enable session affinity. Allowed values are Cookie and None. Defaults to None.
+	// +kubebuilder:validation:Optional
+	SessionAffinity *string `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty"`
+
+	// Specifies the time in seconds until the cookie expires.
+	// +kubebuilder:validation:Optional
+	SessionCookieMaxAge *float64 `json:"sessionCookieMaxAge,omitempty" tf:"session_cookie_max_age,omitempty"`
+}
+
 type PersistentDiskObservation struct {
 }
 
@@ -107,6 +133,10 @@ type SpringCloudAppParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// An ingress_settings block as defined below.
+	// +kubebuilder:validation:Optional
+	IngressSettings []IngressSettingsParameters `json:"ingressSettings,omitempty" tf:"ingress_settings,omitempty"`
+
 	// Does the Spring Cloud Application have public endpoint? Defaults to false.
 	// +kubebuilder:validation:Optional
 	IsPublic *bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
@@ -114,6 +144,10 @@ type SpringCloudAppParameters struct {
 	// An persistent_disk block as defined below.
 	// +kubebuilder:validation:Optional
 	PersistentDisk []PersistentDiskParameters `json:"persistentDisk,omitempty" tf:"persistent_disk,omitempty"`
+
+	// Should the App in vnet injection instance exposes endpoint which could be accessed from Internet?
+	// +kubebuilder:validation:Optional
+	PublicEndpointEnabled *bool `json:"publicEndpointEnabled,omitempty" tf:"public_endpoint_enabled,omitempty"`
 
 	// Specifies the name of the resource group in which to create the Spring Cloud Application. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

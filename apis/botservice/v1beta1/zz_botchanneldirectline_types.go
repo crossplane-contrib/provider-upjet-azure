@@ -69,7 +69,7 @@ type SiteObservation struct {
 
 type SiteParameters struct {
 
-	// Enables/Disables this site. Enabled by default
+	// Enables/Disables this site. Enabled by default Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -85,11 +85,11 @@ type SiteParameters struct {
 	// +kubebuilder:validation:Optional
 	TrustedOrigins []*string `json:"trustedOrigins,omitempty" tf:"trusted_origins,omitempty"`
 
-	// Enables v1 of the Directline protocol for this site. Enabled by default
+	// Enables v1 of the Directline protocol for this site. Enabled by default Defaults to true.
 	// +kubebuilder:validation:Optional
 	V1Allowed *bool `json:"v1Allowed,omitempty" tf:"v1_allowed,omitempty"`
 
-	// Enables v3 of the Directline protocol for this site. Enabled by default
+	// Enables v3 of the Directline protocol for this site. Enabled by default Defaults to true.
 	// +kubebuilder:validation:Optional
 	V3Allowed *bool `json:"v3Allowed,omitempty" tf:"v3_allowed,omitempty"`
 }

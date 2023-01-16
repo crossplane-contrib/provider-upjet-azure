@@ -86,7 +86,8 @@ spec:
                     type: string
                   policyAssignmentId:
                     description: The ID of the Policy Assignment to be exempted at
-                      the specified Scope.
+                      the specified Scope. Changing this forces a new resource to
+                      be created.
                     type: string
                   policyAssignmentIdRef:
                     description: Reference to a SubscriptionPolicyAssignment in authorization
