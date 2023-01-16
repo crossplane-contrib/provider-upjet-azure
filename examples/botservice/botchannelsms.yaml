@@ -1,0 +1,69 @@
+apiVersion: botservice.azure.upbound.io/v1beta1
+kind: BotChannelSMS
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "microsoftAppId is a part of application which we cannot obtain and need to be hardcoded;
+    personal account is used for smsChannelAccountSecurityId and secret key"
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelsms
+  labels:
+    testing.upbound.io/example-name: example
+  name: channel-sms
+spec:
+  forProvider:
+    botNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bot-channels-registration-label
+    phoneNumber: "+18455524392"
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azure-bot-r-group-label
+    smsChannelAccountSecurityId: ACb12d958384fa006cef2d25b6dcf3ec48
+    smsChannelAuthTokenSecretRef:
+      key: example-key
+      name: secret
+      namespace: upbound-system
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: 564e7233ffd59150000800e9ad354584
+
+---
+
+apiVersion: botservice.azure.upbound.io/v1beta1
+kind: BotChannelsRegistration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelsms
+  labels:
+    testing.upbound.io/example-name: bot-channels-registration-label
+  name: botchannelsregistrationname
+spec:
+  forProvider:
+    location: global
+    microsoftAppId: 2c909958-d48c-4ae8-8d7a-399177cfb3e4
+    name: bottChannelsRegistrationName
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azure-bot-r-group-label
+    sku: S1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: botservice/v1beta1/botchannelsms
+  labels:
+    testing.upbound.io/example-name: azure-bot-r-group-label
+  name: bot-resource-group-thu-t
+spec:
+  forProvider:
+    location: West Europe
