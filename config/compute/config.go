@@ -22,6 +22,10 @@ func Configure(p *config.Provider) {
 				"virtual_machine_scale_set_id"},
 		}
 	})
+	p.AddResourceConfigurator("azurerm_linux_virtual_machine_scale_set", func(r *config.Resource) {
+		// In version 3.38.0 the `scale_in_policy` parameter was removed, and replaced by `scale_in`
+		config.MoveToStatus(r.TerraformResource, "scale_in_policy")
+	})
 	/* Note on testing:
 	* - create a storage account
 	* - upload a text file with *.vhd extension

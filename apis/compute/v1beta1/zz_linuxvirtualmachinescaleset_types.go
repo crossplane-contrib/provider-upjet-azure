@@ -309,6 +309,8 @@ type LinuxVirtualMachineScaleSetObservation struct {
 	// +kubebuilder:validation:Optional
 	Identity []LinuxVirtualMachineScaleSetIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	ScaleInPolicy *string `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
+
 	// The Unique ID for this Linux Virtual Machine Scale Set.
 	UniqueID *string `json:"uniqueId,omitempty" tf:"unique_id,omitempty"`
 }
@@ -512,9 +514,6 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	// A scale_in block as defined below.
 	// +kubebuilder:validation:Optional
 	ScaleIn []ScaleInParameters `json:"scaleIn,omitempty" tf:"scale_in,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ScaleInPolicy *string `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
 
 	// One or more secret blocks as defined below.
 	// +kubebuilder:validation:Optional

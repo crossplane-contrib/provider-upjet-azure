@@ -3154,6 +3154,11 @@ func (in *LinuxVirtualMachineScaleSetObservation) DeepCopyInto(out *LinuxVirtual
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ScaleInPolicy != nil {
+		in, out := &in.ScaleInPolicy, &out.ScaleInPolicy
+		*out = new(string)
+		**out = **in
+	}
 	if in.UniqueID != nil {
 		in, out := &in.UniqueID, &out.UniqueID
 		*out = new(string)
@@ -3475,11 +3480,6 @@ func (in *LinuxVirtualMachineScaleSetParameters) DeepCopyInto(out *LinuxVirtualM
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
-	}
-	if in.ScaleInPolicy != nil {
-		in, out := &in.ScaleInPolicy, &out.ScaleInPolicy
-		*out = new(string)
-		**out = **in
 	}
 	if in.Secret != nil {
 		in, out := &in.Secret, &out.Secret
