@@ -205,8 +205,14 @@ import (
 	managedstorageaccountsastokendefinition "github.com/upbound/provider-azure/internal/controller/keyvault/managedstorageaccountsastokendefinition"
 	secret "github.com/upbound/provider-azure/internal/controller/keyvault/secret"
 	vault "github.com/upbound/provider-azure/internal/controller/keyvault/vault"
+	attacheddatabaseconfiguration "github.com/upbound/provider-azure/internal/controller/kusto/attacheddatabaseconfiguration"
 	clusterkusto "github.com/upbound/provider-azure/internal/controller/kusto/cluster"
+	clusterprincipalassignment "github.com/upbound/provider-azure/internal/controller/kusto/clusterprincipalassignment"
 	databasekusto "github.com/upbound/provider-azure/internal/controller/kusto/database"
+	databaseprincipalassignment "github.com/upbound/provider-azure/internal/controller/kusto/databaseprincipalassignment"
+	eventgriddataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventgriddataconnection"
+	eventhubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventhubdataconnection"
+	iothubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/iothubdataconnection"
 	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
@@ -553,8 +559,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedstorageaccountsastokendefinition.Setup,
 		secret.Setup,
 		vault.Setup,
+		attacheddatabaseconfiguration.Setup,
 		clusterkusto.Setup,
+		clusterprincipalassignment.Setup,
 		databasekusto.Setup,
+		databaseprincipalassignment.Setup,
+		eventgriddataconnection.Setup,
+		eventhubdataconnection.Setup,
+		iothubdataconnection.Setup,
 		integrationserviceenvironment.Setup,
 		managementgroup.Setup,
 		marketplaceagreement.Setup,
