@@ -362,4 +362,96 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Site Recovery Fabric can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group-name/providers/Microsoft.RecoveryServices/vaults/recovery-vault-name/replicationFabrics/fabric-name
 	"azurerm_site_recovery_fabric": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.RecoveryServices/vaults/{{ .parameters.recovery_vault_name }}/replicationFabrics/{{ .external_name }}"),
+	// streamanalytics
+	//
+	// Stream Analytics Outputs to Microsoft SQL Server Database can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.StreamAnalytics/streamingjobs/job1/outputs/output1
+	"azurerm_stream_analytics_output_mssql": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourcegroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
+	// Stream Analytics Output ServiceBus Queue's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.StreamAnalytics/streamingjobs/job1/outputs/output1
+	"azurerm_stream_analytics_output_servicebus_queue": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourcegroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
+	// Stream Analytics Output ServiceBus Topic's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.StreamAnalytics/streamingjobs/job1/outputs/output1
+	"azurerm_stream_analytics_output_servicebus_topic": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourcegroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
+	// Stream Analytics Reference Input Blob's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.StreamAnalytics/streamingjobs/job1/inputs/input1
+	"azurerm_stream_analytics_reference_input_blob": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourcegroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_name }}/inputs/{{ .external_name }}"),
+	// Stream Analytics Stream Input Blob's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/inputs/input1
+	"azurerm_stream_analytics_stream_input_blob": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourcegroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_name }}/inputs/{{ .external_name }}"),
+	// Stream Analytics Stream Input EventHub's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/inputs/input1
+	"azurerm_stream_analytics_stream_input_eventhub": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourcegroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_name }}/inputs/{{ .external_name }}"),
+	// Stream Analytics Stream Input IoTHub's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/inputs/input1
+	"azurerm_stream_analytics_stream_input_iothub": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourcegroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingjobs/{{ .parameters.stream_analytics_job_name }}/inputs/{{ .external_name }}"),
+
+	// subscription
+	//
+	// Policy Remediations can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.PolicyInsights/remediations/remediation1
+	"azurerm_subscription_policy_remediation": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.PolicyInsights/remediations/{{ .external_name }}"),
+
+	// synapse
+	//
+	// Synapse Firewall Rule can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourcegroup1/providers/Microsoft.Synapse/workspaces/workspace1/firewallRules/rule1
+	"azurerm_synapse_firewall_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.synapse_workspace_id }}/firewallRules/{{ .external_name }}"),
+	// Synapse Azure Integration Runtimes can be imported using the resource id
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Synapse/workspaces/workspace1/integrationRuntimes/IntegrationRuntime1
+	"azurerm_synapse_integration_runtime_azure": config.TemplatedStringAsIdentifier("name", "{{ .parameters.synapse_workspace_id }}/integrationRuntimes/{{ .external_name }}"),
+	// Synapse Self-hosted Integration Runtimes can be imported using the resource id
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Synapse/workspaces/workspace1/integrationRuntimes/IntegrationRuntime1
+	"azurerm_synapse_integration_runtime_self_hosted": config.TemplatedStringAsIdentifier("name", "{{ .parameters.synapse_workspace_id }}/integrationRuntimes/{{ .external_name }}"),
+	// Synapse Linked Services can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.Synapse/workspaces/workspace1/linkedServices/linkedservice1
+	"azurerm_synapse_linked_service": config.TemplatedStringAsIdentifier("name", "{{ .parameters.synapse_workspace_id }}/linkedServices/{{ .external_name }}"),
+	// Synapse Managed Private Endpoint can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/managedVirtualNetworks/default/managedPrivateEndpoints/endpoint1
+	"azurerm_synapse_managed_private_endpoint": config.IdentifierFromProvider,
+	// Synapse Private Link Hub can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/privateLinkHubs/privateLinkHub1
+	"azurerm_synapse_private_link_hub": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Synapse/privateLinkHubs/{{ .external_name }}"),
+	// Synapse Role Assignment can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1|000000000000
+	"azurerm_synapse_role_assignment": config.IdentifierFromProvider,
+	// Synapse Spark Pool can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/bigDataPools/sparkPool1
+	"azurerm_synapse_spark_pool": config.TemplatedStringAsIdentifier("name", "{{ .parameters.synapse_workspace_id }}/bigDataPools/{{ .external_name }}"),
+	// Synapse SQL Pool can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/sqlPools/sqlPool1
+	"azurerm_synapse_sql_pool": config.TemplatedStringAsIdentifier("name", "{{ .parameters.synapse_workspace_id }}/sqlPools/{{ .external_name }}"),
+	// Synapse SQL Pool Extended Auditing Policys can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/sqlPools/sqlPool1/extendedAuditingSettings/default
+	"azurerm_synapse_sql_pool_extended_auditing_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.sql_pool_id }}/extendedAuditingSettings/default"),
+	// Synapse SQL Pool Security Alert Policies can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/sqlPools/sqlPool1/securityAlertPolicies/default
+	"azurerm_synapse_sql_pool_security_alert_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.sql_pool_id }}/securityAlertPolicies/default"),
+	// Synapse SQL Pool Vulnerability Assessment can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/sqlPools/sqlPool1/vulnerabilityAssessments/default
+	"azurerm_synapse_sql_pool_vulnerability_assessment": config.TemplatedStringAsIdentifier("", "{{ .parameters.sql_pool_id }}/vulnerabilityAssessments/default"),
+	// Synapse SQL Pool Vulnerability Assessment Rule Baselines can be imported using the resource id
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Synapse/workspaces/workspace1/sqlPools/sqlPool1/vulnerabilityAssessments/default/rules/rule1/baselines/baseline1
+	"azurerm_synapse_sql_pool_vulnerability_assessment_baseline": config.TemplatedStringAsIdentifier("", "{{ .parameters.sql_pool_vulnerability_assessment_id }}/rules/{{ .parameters.rule_name }}/baselines/{{ .external_name }}"),
+	// Synapse SQL Pool Workload Classifiers can be imported using the resource id
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Synapse/workspaces/workspace1/sqlPools/sqlPool1/workloadGroups/workloadGroup1/workloadClassifiers/workloadClassifier1
+	"azurerm_synapse_sql_pool_workload_classifier": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workload_group_id }}/workloadClassifiers/{{ .external_name }}"),
+	// Synapse SQL Pool Workload Groups can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.Synapse/workspaces/workspace1/sqlPools/sqlPool1/workloadGroups/workloadGroup1
+	"azurerm_synapse_sql_pool_workload_group": config.TemplatedStringAsIdentifier("name", "{{ .parameters.sql_pool_id }}/workloadGroups/{{ .external_name }}"),
+	// Synapse Workspace can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1
+	"azurerm_synapse_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Synapse/workspaces/{{ .external_name }}"),
+	// Synapse Workspace Azure AD Administrator can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1/administrators/activeDirectory
+	"azurerm_synapse_workspace_aad_admin": config.TemplatedStringAsIdentifier("", "{{ .parameters.synapse_workspace_id }}/administrators/{{ .external_name }}"),
+	// Synapse Workspace Extended Auditing Policies can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/extendedAuditingSettings/default
+	"azurerm_synapse_workspace_extended_auditing_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.synapse_workspace_id }}/extendedAuditingSettings/default"),
+	// Synapse Workspace Keys can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/keys/key1
+	"azurerm_synapse_workspace_key": config.TemplatedStringAsIdentifier("", "{{ .parameters.synapse_workspace_id }}/keys/{{ .external_name }}"),
+	// Synapse Workspace Security Alert Policies can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/securityAlertPolicies/Default
+	"azurerm_synapse_workspace_security_alert_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.synapse_workspace_id }}/securityAlertPolicies/Default"),
 }
