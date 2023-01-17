@@ -139,6 +139,8 @@ import (
 	sqlstoredprocedure "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqlstoredprocedure"
 	sqltrigger "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqltrigger"
 	table "github.com/upbound/provider-azure/internal/controller/cosmosdb/table"
+	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/resourcegroupcostmanagementexport"
+	subscriptioncostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/subscriptioncostmanagementexport"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backupvault "github.com/upbound/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/provider-azure/internal/controller/datashare/account"
@@ -485,6 +487,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sqlstoredprocedure.Setup,
 		sqltrigger.Setup,
 		table.Setup,
+		resourcegroupcostmanagementexport.Setup,
+		subscriptioncostmanagementexport.Setup,
 		backuppolicyblobstorage.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,
