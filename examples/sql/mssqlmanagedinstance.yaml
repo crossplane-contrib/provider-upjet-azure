@@ -97,8 +97,7 @@ spec:
       name: example-sql-rg
     tags:
       environment: Production
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SubnetNetworkSecurityGroupAssociation

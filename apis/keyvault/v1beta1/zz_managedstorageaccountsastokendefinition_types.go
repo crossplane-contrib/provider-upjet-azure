@@ -46,7 +46,7 @@ type ManagedStorageAccountSASTokenDefinitionParameters struct {
 	// +kubebuilder:validation:Required
 	SASType *string `json:"sasType" tf:"sas_type,omitempty"`
 
-	// A mapping of tags which should be assigned to the SAS Definition.
+	// A mapping of tags which should be assigned to the SAS Definition. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

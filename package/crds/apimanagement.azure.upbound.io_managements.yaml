@@ -73,6 +73,11 @@ spec:
                           description: The number of compute units in this region.
                             Defaults to the capacity of the main region.
                           type: number
+                        gatewayDisabled:
+                          description: Only valid for an Api Management service deployed
+                            in multiple locations. This can be used to disable the
+                            gateway in this additional location.
+                          type: boolean
                         location:
                           description: The name of the Azure Region in which the API
                             Management Service should be expanded to.
@@ -173,7 +178,8 @@ spec:
                             type: object
                           type: array
                         zones:
-                          description: A list of availability zones.
+                          description: A list of availability zones. Changing this
+                            forces a new resource to be created.
                           items:
                             type: string
                           type: array
@@ -426,8 +432,12 @@ spec:
                             cipher be enabled? Defaults to false.
                           type: boolean
                         tlsEcdheRsaWithAes128CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                            cipher be enabled? Defaults to false.
                           type: boolean
                         tlsEcdheRsaWithAes256CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                            cipher be enabled? Defaults to false.
                           type: boolean
                         tlsRsaWithAes128CbcSha256CiphersEnabled:
                           description: Should the TLS_RSA_WITH_AES_128_CBC_SHA256
@@ -449,10 +459,13 @@ spec:
                           description: Should the TLS_RSA_WITH_AES_256_CBC_SHA cipher
                             be enabled? Defaults to false.
                           type: boolean
+                        tlsRsaWithAes256GcmSha384CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_256_GCM_SHA384
+                            cipher be enabled? Defaults to false.
+                          type: boolean
                         tripleDesCiphersEnabled:
                           description: Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher
-                            be enabled for alL TLS versions (1.0, 1.1 and 1.2)? Defaults
-                            to false.
+                            be enabled for alL TLS versions (1.0, 1.1 and 1.2)?
                           type: boolean
                       type: object
                     type: array
@@ -869,6 +882,12 @@ spec:
                             below.
                           items:
                             properties:
+                              certificateSource:
+                                description: The source of the certificate.
+                                type: string
+                              certificateStatus:
+                                description: The status of the certificate.
+                                type: string
                               expiry:
                                 description: 'The expiration date of the certificate
                                   in RFC3339 format: 2000-01-02T03:04:05Z.'
@@ -904,6 +923,12 @@ spec:
                             below.
                           items:
                             properties:
+                              certificateSource:
+                                description: The source of the certificate.
+                                type: string
+                              certificateStatus:
+                                description: The status of the certificate.
+                                type: string
                               expiry:
                                 description: 'The expiration date of the certificate
                                   in RFC3339 format: 2000-01-02T03:04:05Z.'
@@ -938,6 +963,12 @@ spec:
                           description: One or more portal blocks as documented below.
                           items:
                             properties:
+                              certificateSource:
+                                description: The source of the certificate.
+                                type: string
+                              certificateStatus:
+                                description: The status of the certificate.
+                                type: string
                               expiry:
                                 description: 'The expiration date of the certificate
                                   in RFC3339 format: 2000-01-02T03:04:05Z.'
@@ -972,6 +1003,12 @@ spec:
                           description: One or more proxy blocks as documented below.
                           items:
                             properties:
+                              certificateSource:
+                                description: The source of the certificate.
+                                type: string
+                              certificateStatus:
+                                description: The status of the certificate.
+                                type: string
                               defaultSslBinding:
                                 description: Is the certificate associated with this
                                   Hostname the Default SSL Certificate? This is used
@@ -1012,6 +1049,12 @@ spec:
                           description: One or more scm blocks as documented below.
                           items:
                             properties:
+                              certificateSource:
+                                description: The source of the certificate.
+                                type: string
+                              certificateStatus:
+                                description: The status of the certificate.
+                                type: string
                               expiry:
                                 description: 'The expiration date of the certificate
                                   in RFC3339 format: 2000-01-02T03:04:05Z.'

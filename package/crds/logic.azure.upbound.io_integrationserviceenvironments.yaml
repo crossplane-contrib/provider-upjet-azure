@@ -175,7 +175,7 @@ spec:
                   virtualNetworkSubnetIds:
                     description: A list of virtual network subnet ids to be used by
                       Integration Service Environment. Exactly four distinct ids to
-                      subnets must be provided. Changing this forces a new Integration
+                      /27 subnets must be provided. Changing this forces a new Integration
                       Service Environment to be created.
                     items:
                       type: string

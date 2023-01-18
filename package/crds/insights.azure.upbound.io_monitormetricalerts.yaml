@@ -285,12 +285,13 @@ spec:
                         evaluationFailureCount:
                           description: The number of violations to trigger an alert.
                             Should be smaller or equal to evaluation_total_count.
+                            Defaults to 4.
                           type: number
                         evaluationTotalCount:
                           description: The number of aggregated lookback points. The
                             lookback time window is calculated based on the aggregation
                             granularity (window_size) and the selected number of aggregated
-                            points.
+                            points. Defaults to 4.
                           type: number
                         ignoreDataBefore:
                           description: The ISO8601 date from which to start learning
@@ -309,7 +310,6 @@ spec:
                         skipMetricValidation:
                           description: Skip the metric validation to allow creating
                             an alert rule on a custom metric that isn't yet emitted?
-                            Defaults to false.
                           type: boolean
                       required:
                       - aggregation
@@ -330,7 +330,8 @@ spec:
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the Metric Alert instance.
+                      the Metric Alert instance. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate

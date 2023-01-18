@@ -21,7 +21,7 @@ type MSSQLOutboundFirewallRuleObservation struct {
 
 type MSSQLOutboundFirewallRuleParameters struct {
 
-	// The resource ID of the SQL Server on which to create the Outbound Firewall Rule.
+	// The resource ID of the SQL Server on which to create the Outbound Firewall Rule. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

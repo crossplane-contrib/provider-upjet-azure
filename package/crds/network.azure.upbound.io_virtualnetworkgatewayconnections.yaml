@@ -91,10 +91,10 @@ spec:
                     type: string
                   connectionProtocol:
                     description: 'The IKE protocol version to use. Possible values
-                      are IKEv1 and IKEv2. Defaults to IKEv2. Changing this value
-                      will force a resource to be created. -> Note: Only valid for
-                      IPSec connections on virtual network gateways with SKU VpnGw1,
-                      VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.'
+                      are IKEv1 and IKEv2, values are IKEv1 and IKEv2. Defaults to
+                      IKEv2. Changing this forces a new resource to be created. ->
+                      Note: Only valid for IPSec connections on virtual network gateways
+                      with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.'
                     type: string
                   customBgpAddresses:
                     description: A custom_bgp_addresses (Border Gateway Protocol custom
@@ -133,7 +133,7 @@ spec:
                     description: The ID of the Express Route Circuit when creating
                       an ExpressRoute connection (i.e. when type is ExpressRoute).
                       The Express Route Circuit can be in the same or in a different
-                      subscription.
+                      subscription. Changing this forces a new resource to be created.
                     type: string
                   expressRouteGatewayBypass:
                     description: If true, data packets will bypass ExpressRoute Gateway
@@ -286,7 +286,7 @@ spec:
                     description: The ID of the peer virtual network gateway when creating
                       a VNet-to-VNet connection (i.e. when type is Vnet2Vnet). The
                       peer Virtual Network Gateway can be in the same or in a different
-                      subscription.
+                      subscription. Changing this forces a new resource to be created.
                     type: string
                   peerVirtualNetworkGatewayIdRef:
                     description: Reference to a VirtualNetworkGateway to populate
@@ -365,8 +365,7 @@ spec:
                     type: object
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the connection Changing the name forces a new resource to be
-                      created.
+                      the connection Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -496,8 +495,8 @@ spec:
                     description: The type of connection. Valid options are IPsec (Site-to-Site),
                       ExpressRoute (ExpressRoute), and Vnet2Vnet (VNet-to-VNet). Each
                       connection type requires different mandatory arguments (refer
-                      to the examples above). Changing the connection type will force
-                      a new connection to be created.
+                      to the examples above). Changing this forces a new resource
+                      to be created.
                     type: string
                   usePolicyBasedTrafficSelectors:
                     description: If true, policy-based traffic selectors are enabled
@@ -506,8 +505,8 @@ spec:
                     type: boolean
                   virtualNetworkGatewayId:
                     description: The ID of the Virtual Network Gateway in which the
-                      connection will be created. Changing the gateway forces a new
-                      resource to be created.
+                      connection will be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   virtualNetworkGatewayIdRef:
                     description: Reference to a VirtualNetworkGateway to populate

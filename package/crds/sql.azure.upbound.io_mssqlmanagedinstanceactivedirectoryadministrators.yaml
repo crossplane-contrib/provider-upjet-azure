@@ -69,7 +69,6 @@ spec:
                   azureadAuthenticationOnly:
                     description: When true, only permit logins from AAD users and
                       administrators. When false, also allow local database users.
-                      Defaults to false.
                     type: boolean
                   loginUsername:
                     description: The login name of the principal to set as the Managed

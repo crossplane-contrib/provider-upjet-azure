@@ -76,8 +76,7 @@ spec:
                     description: A description of the Role Definition.
                     type: string
                   name:
-                    description: The name of the Role Definition. Changing this forces
-                      a new resource to be created.
+                    description: The name of the Role Definition.
                     type: string
                   permissions:
                     description: A permissions block as defined below.

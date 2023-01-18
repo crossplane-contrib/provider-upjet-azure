@@ -34,7 +34,7 @@ type AccessRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// Whether to enable root squash? Defaults to false.
+	// Whether to enable root squash?
 	// +kubebuilder:validation:Optional
 	RootSquashEnabled *bool `json:"rootSquashEnabled,omitempty" tf:"root_squash_enabled,omitempty"`
 
@@ -42,11 +42,11 @@ type AccessRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Scope *string `json:"scope" tf:"scope,omitempty"`
 
-	// Whether allow access to subdirectories under the root export? Defaults to false.
+	// Whether allow access to subdirectories under the root export?
 	// +kubebuilder:validation:Optional
 	SubmountAccessEnabled *bool `json:"submountAccessEnabled,omitempty" tf:"submount_access_enabled,omitempty"`
 
-	// Whether SUID is allowed? Defaults to false.
+	// Whether SUID is allowed?
 	// +kubebuilder:validation:Optional
 	SuidEnabled *bool `json:"suidEnabled,omitempty" tf:"suid_enabled,omitempty"`
 }
@@ -154,11 +154,11 @@ type DirectoryLdapParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateValidationURI *string `json:"certificateValidationUri,omitempty" tf:"certificate_validation_uri,omitempty"`
 
-	// Whether the certificate should be automatically downloaded. This can be set to true only when certificate_validation_uri is provided. Defaults to false.
+	// Whether the certificate should be automatically downloaded. This can be set to true only when certificate_validation_uri is provided.
 	// +kubebuilder:validation:Optional
 	DownloadCertificateAutomatically *bool `json:"downloadCertificateAutomatically,omitempty" tf:"download_certificate_automatically,omitempty"`
 
-	// Whether the LDAP connection should be encrypted? Defaults to false.
+	// Whether the LDAP connection should be encrypted?
 	// +kubebuilder:validation:Optional
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
@@ -177,6 +177,10 @@ type HPCCacheObservation struct {
 }
 
 type HPCCacheParameters struct {
+
+	// Specifies whether the HPC Cache automatically rotates Encryption Key to the latest version.
+	// +kubebuilder:validation:Optional
+	AutomaticallyRotateKeyToLatestEnabled *bool `json:"automaticallyRotateKeyToLatestEnabled,omitempty" tf:"automatically_rotate_key_to_latest_enabled,omitempty"`
 
 	// The size of the HPC Cache, in GB. Possible values are 3072, 6144, 12288, 21623, 24576, 43246, 49152 and 86491. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
@@ -201,6 +205,14 @@ type HPCCacheParameters struct {
 	// A directory_ldap block as defined below.
 	// +kubebuilder:validation:Optional
 	DirectoryLdap []DirectoryLdapParameters `json:"directoryLdap,omitempty" tf:"directory_ldap,omitempty"`
+
+	// An identity block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to encrypt the data in this HPC Cache.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// Specifies the supported Azure Region where the HPC Cache should be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
@@ -248,6 +260,20 @@ type HPCCacheParameters struct {
 	// A mapping of tags to assign to the HPC Cache.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type IdentityObservation struct {
+}
+
+type IdentityParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this HPC Cache. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this HPC Cache. Only possible value is UserAssigned. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // HPCCacheSpec defines the desired state of HPCCache

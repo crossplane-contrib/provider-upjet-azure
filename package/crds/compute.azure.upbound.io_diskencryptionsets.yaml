@@ -67,21 +67,32 @@ spec:
                   autoKeyRotationEnabled:
                     description: Boolean flag to specify whether Azure Disk Encryption
                       Set automatically rotates encryption Key to latest version.
-                      Defaults to false.
                     type: boolean
                   encryptionType:
                     description: The type of key used to encrypt the data of the disk.
                       Possible values are EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys
                       and ConfidentialVmEncryptedWithCustomerKey. Defaults to EncryptionAtRestWithCustomerKey.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  federatedClientId:
+                    description: Multi-tenant application client id to access key
+                      vault in a different tenant.
                     type: string
                   identity:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Disk Encryption Set.
+                          items:
+                            type: string
+                          type: array
                         type:
                           description: The type of Managed Service Identity that is
-                            configured on this Disk Encryption Set. The only possible
-                            value is SystemAssigned.
+                            configured on this Disk Encryption Set.  Possible values
+                            are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+                            (to enable both).
                           type: string
                       required:
                       - type

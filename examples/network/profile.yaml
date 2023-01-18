@@ -13,8 +13,7 @@ spec:
     location: West Europe
     resourceGroupNameRef:
       name: networkprofile-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -25,8 +24,7 @@ spec:
     location: "West Europe"
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
@@ -42,8 +40,7 @@ spec:
     dnsServers:
       - "10.0.0.4"
       - "10.0.0.5"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
@@ -57,5 +54,3 @@ spec:
       name: example-vn-for-network-profile
     addressPrefixes:
       - "10.0.1.0/24"
-  providerConfigRef:
-    name: example

@@ -29,7 +29,7 @@ spec:
   forProvider:
     administratorLogin: 4dm1n157r470r
     administratorLoginPasswordSecretRef:
-      key: example-key
+      key: password
       name: example-secret
       namespace: upbound-system
     location: West Europe
@@ -93,3 +93,14 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sql-vn-rule
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123

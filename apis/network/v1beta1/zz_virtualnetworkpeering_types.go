@@ -21,24 +21,19 @@ type VirtualNetworkPeeringObservation struct {
 
 type VirtualNetworkPeeringParameters struct {
 
-	// Controls if forwarded traffic from  VMs
-	// in the remote virtual network is allowed. Defaults to false.
+	// Controls if forwarded traffic from  VMs in the remote virtual network is allowed. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AllowForwardedTraffic *bool `json:"allowForwardedTraffic,omitempty" tf:"allow_forwarded_traffic,omitempty"`
 
-	// Controls gatewayLinks can be used in the
-	// remote virtual network’s link to the local virtual network.
+	// Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network.
 	// +kubebuilder:validation:Optional
 	AllowGatewayTransit *bool `json:"allowGatewayTransit,omitempty" tf:"allow_gateway_transit,omitempty"`
 
-	// Controls if the VMs in the remote
-	// virtual network can access VMs in the local virtual network. Defaults to
-	// true.
+	// Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
 
-	// The full Azure resource ID of the
-	// remote virtual network.  Changing this forces a new resource to be created.
+	// The full Azure resource ID of the remote virtual network.  Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -52,8 +47,7 @@ type VirtualNetworkPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteVirtualNetworkIDSelector *v1.Selector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
 
-	// The name of the resource group in which to
-	// create the virtual network peering. Changing this forces a new resource to be
+	// The name of the resource group in which to create the virtual network peering. Changing this forces a new resource to be
 	// created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -76,8 +70,7 @@ type VirtualNetworkPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	UseRemoteGateways *bool `json:"useRemoteGateways,omitempty" tf:"use_remote_gateways,omitempty"`
 
-	// The name of the virtual network. Changing
-	// this forces a new resource to be created.
+	// The name of the virtual network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetwork
 	// +kubebuilder:validation:Optional
 	VirtualNetworkName *string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`

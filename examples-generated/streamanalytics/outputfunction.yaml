@@ -32,7 +32,8 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
-  forProvider: {}
+  forProvider:
+    location: West Europe
 
 ---
 
@@ -48,7 +49,7 @@ spec:
   forProvider:
     accountReplicationType: LRS
     accountTier: Standard
-    location: ${azurerm_resource_group.example.location}
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -65,7 +66,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    location: ${azurerm_resource_group.example.location}
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

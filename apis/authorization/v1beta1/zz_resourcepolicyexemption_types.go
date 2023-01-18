@@ -45,7 +45,7 @@ type ResourcePolicyExemptionParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The ID of the Policy Assignment to be exempted at the specified Scope.
+	// The ID of the Policy Assignment to be exempted at the specified Scope. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.ResourcePolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

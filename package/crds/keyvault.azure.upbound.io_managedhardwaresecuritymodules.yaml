@@ -76,10 +76,32 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  networkAcls:
+                    description: A network_acls block as defined below.
+                    items:
+                      properties:
+                        bypass:
+                          description: Specifies which traffic can bypass the network
+                            rules. Possible values are AzureServices and None.
+                          type: string
+                        defaultAction:
+                          description: The Default Action to use. Possible values
+                            are Allow and Deny.
+                          type: string
+                      required:
+                      - bypass
+                      - defaultAction
+                      type: object
+                    type: array
+                  publicNetworkAccessEnabled:
+                    description: Whether traffic from public networks is permitted.
+                      Defaults to true. Changing this forces a new resource to be
+                      created.
+                    type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault Managed
-                      Hardware Security Module? Defaults to false. Changing this forces
-                      a new resource to be created.
+                      Hardware Security Module?  Changing this forces a new resource
+                      to be created.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create

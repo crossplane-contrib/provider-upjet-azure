@@ -111,7 +111,8 @@ spec:
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the virtual network.
+                      the virtual network. Changing this forces a new resource to
+                      be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -391,7 +392,8 @@ spec:
                           description: The ID of this subnet.
                           type: string
                         name:
-                          description: The name of the subnet.
+                          description: The name of the subnet. Changing this forces
+                            a new resource to be created.
                           type: string
                         securityGroup:
                           description: The Network Security Group to associate with

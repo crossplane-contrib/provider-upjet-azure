@@ -107,7 +107,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
-	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Changing this forces a new resource to be created. Defaults to StorageV2.
+	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2.  Defaults to StorageV2.
 	// +kubebuilder:validation:Optional
 	AccountKind *string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
 
@@ -143,6 +143,10 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
+	// Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account. The default value is false
+	// +kubebuilder:validation:Optional
+	DefaultToOauthAuthentication *bool `json:"defaultToOauthAuthentication,omitempty" tf:"default_to_oauth_authentication,omitempty"`
+
 	// Specifies the Edge Zone within the Azure Region where this Storage Account should exist. Changing this forces a new Storage Account to be created.
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
@@ -155,6 +159,10 @@ type AccountParameters struct {
 	// An identity block as defined below..
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// An immutability_policy block as defined below.
+	// +kubebuilder:validation:Optional
+	ImmutabilityPolicy []ImmutabilityPolicyParameters `json:"immutabilityPolicy,omitempty" tf:"immutability_policy,omitempty"`
 
 	// Is infrastructure encryption enabled? Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -184,6 +192,10 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Nfsv3Enabled *bool `json:"nfsv3Enabled,omitempty" tf:"nfsv3_enabled,omitempty"`
 
+	// Whether the public network access is enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
 	// The encryption type of the queue service. Possible values are Service and Account. Changing this forces a new resource to be created. Default value is Service.
 	// +kubebuilder:validation:Optional
 	QueueEncryptionKeyType *string `json:"queueEncryptionKeyType,omitempty" tf:"queue_encryption_key_type,omitempty"`
@@ -208,6 +220,14 @@ type AccountParameters struct {
 	// A routing block as defined below.
 	// +kubebuilder:validation:Optional
 	Routing []RoutingParameters `json:"routing,omitempty" tf:"routing,omitempty"`
+
+	// A sas_policy block as defined below.
+	// +kubebuilder:validation:Optional
+	SASPolicy []SASPolicyParameters `json:"sasPolicy,omitempty" tf:"sas_policy,omitempty"`
+
+	// Boolean, enable SFTP for the storage account
+	// +kubebuilder:validation:Optional
+	SFTPEnabled *bool `json:"sftpEnabled,omitempty" tf:"sftp_enabled,omitempty"`
 
 	// A share_properties block as defined below.
 	// +kubebuilder:validation:Optional
@@ -283,6 +303,10 @@ type BlobPropertiesParameters struct {
 	// +kubebuilder:validation:Optional
 	ChangeFeedEnabled *bool `json:"changeFeedEnabled,omitempty" tf:"change_feed_enabled,omitempty"`
 
+	// The duration of change feed events retention in days. The possible values are between 1 and 146000 days (400 years). Setting this to null (or omit this in the configuration file) indicates an infinite retention of the change feed.
+	// +kubebuilder:validation:Optional
+	ChangeFeedRetentionInDays *float64 `json:"changeFeedRetentionInDays,omitempty" tf:"change_feed_retention_in_days,omitempty"`
+
 	// A container_delete_retention_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	ContainerDeleteRetentionPolicy []ContainerDeleteRetentionPolicyParameters `json:"containerDeleteRetentionPolicy,omitempty" tf:"container_delete_retention_policy,omitempty"`
@@ -302,6 +326,10 @@ type BlobPropertiesParameters struct {
 	// Is the last access time based tracking enabled? Default to false.
 	// +kubebuilder:validation:Optional
 	LastAccessTimeEnabled *bool `json:"lastAccessTimeEnabled,omitempty" tf:"last_access_time_enabled,omitempty"`
+
+	// A restore_policy block as defined below. This must be used together with delete_retention_policy set and versioning_enabled set to true.
+	// +kubebuilder:validation:Optional
+	RestorePolicy []RestorePolicyParameters `json:"restorePolicy,omitempty" tf:"restore_policy,omitempty"`
 
 	// Is versioning enabled? Default to false.
 	// +kubebuilder:validation:Optional
@@ -425,6 +453,24 @@ type IdentityParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type ImmutabilityPolicyObservation struct {
+}
+
+type ImmutabilityPolicyParameters struct {
+
+	// When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.
+	// +kubebuilder:validation:Required
+	AllowProtectedAppendWrites *bool `json:"allowProtectedAppendWrites" tf:"allow_protected_append_writes,omitempty"`
+
+	// The immutability period for the blobs in the container since the policy creation, in days.
+	// +kubebuilder:validation:Required
+	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays" tf:"period_since_creation_in_days,omitempty"`
+
+	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
+	// +kubebuilder:validation:Required
+	State *string `json:"state" tf:"state,omitempty"`
+}
+
 type LoggingObservation struct {
 }
 
@@ -478,8 +524,7 @@ type NetworkRulesObservation struct {
 
 type NetworkRulesParameters struct {
 
-	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are
-	// any combination of Logging, Metrics, AzureServices, or None.
+	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
 	// +kubebuilder:validation:Optional
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
@@ -563,6 +608,16 @@ type QueuePropertiesParameters struct {
 	MinuteMetrics []MinuteMetricsParameters `json:"minuteMetrics,omitempty" tf:"minute_metrics,omitempty"`
 }
 
+type RestorePolicyObservation struct {
+}
+
+type RestorePolicyParameters struct {
+
+	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
+	// +kubebuilder:validation:Required
+	Days *float64 `json:"days" tf:"days,omitempty"`
+}
+
 type RetentionPolicyObservation struct {
 }
 
@@ -591,6 +646,20 @@ type RoutingParameters struct {
 	PublishMicrosoftEndpoints *bool `json:"publishMicrosoftEndpoints,omitempty" tf:"publish_microsoft_endpoints,omitempty"`
 }
 
+type SASPolicyObservation struct {
+}
+
+type SASPolicyParameters struct {
+
+	// The SAS expiration action. The only possible value is Log at this moment. Defaults to Log.
+	// +kubebuilder:validation:Optional
+	ExpirationAction *string `json:"expirationAction,omitempty" tf:"expiration_action,omitempty"`
+
+	// The SAS expiration period in format of DD.HH:MM:SS.
+	// +kubebuilder:validation:Required
+	ExpirationPeriod *string `json:"expirationPeriod" tf:"expiration_period,omitempty"`
+}
+
 type SMBObservation struct {
 }
 
@@ -607,6 +676,10 @@ type SMBParameters struct {
 	// A set of Kerberos ticket encryption. Possible values are RC4-HMAC, and AES-256.
 	// +kubebuilder:validation:Optional
 	KerberosTicketEncryptionType []*string `json:"kerberosTicketEncryptionType,omitempty" tf:"kerberos_ticket_encryption_type,omitempty"`
+
+	// Indicates whether multichannel is enabled. Defaults to false. This is only supported on Premium storage accounts.
+	// +kubebuilder:validation:Optional
+	MultichannelEnabled *bool `json:"multichannelEnabled,omitempty" tf:"multichannel_enabled,omitempty"`
 
 	// A set of SMB protocol versions. Possible values are SMB2.1, SMB3.0, and SMB3.1.1.
 	// +kubebuilder:validation:Optional

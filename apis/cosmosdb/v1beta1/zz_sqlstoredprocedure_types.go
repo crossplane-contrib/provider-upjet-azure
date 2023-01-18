@@ -22,15 +22,15 @@ type SQLStoredProcedureObservation struct {
 type SQLStoredProcedureParameters struct {
 
 	// The name of the Cosmos DB Account to create the stored procedure within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Reference to a Account in cosmosdb to populate accountName.
+	// Reference to a Account to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
-	// Selector for a Account in cosmosdb to populate accountName.
+	// Selector for a Account to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 

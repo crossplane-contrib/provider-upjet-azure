@@ -36,7 +36,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    shortName: exampleactiongroup
+    shortName: example
 
 ---
 

@@ -67,7 +67,8 @@ spec:
                 properties:
                   serverId:
                     description: The resource ID of the SQL Server on which to create
-                      the Outbound Firewall Rule.
+                      the Outbound Firewall Rule. Changing this forces a new resource
+                      to be created.
                     type: string
                   serverIdRef:
                     description: Reference to a MSSQLServer to populate serverId.

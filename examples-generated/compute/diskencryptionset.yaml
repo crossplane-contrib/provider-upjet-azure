@@ -52,9 +52,15 @@ metadata:
 spec:
   forProvider:
     keyPermissions:
+    - Create
+    - Delete
     - Get
-    - WrapKey
-    - UnwrapKey
+    - Purge
+    - Recover
+    - Update
+    - List
+    - Decrypt
+    - Sign
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -74,9 +80,15 @@ metadata:
 spec:
   forProvider:
     keyPermissions:
-    - get
-    - create
-    - delete
+    - Create
+    - Delete
+    - Get
+    - Purge
+    - Recover
+    - Update
+    - List
+    - Decrypt
+    - Sign
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -121,6 +133,22 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/diskencryptionset
+  labels:
+    testing.upbound.io/example-name: example-disk
+  name: example-disk
+spec:
+  forProvider:
+    principalId: ${azurerm_disk_encryption_set.example.identity.0.principal_id}
+    roleDefinitionName: Key Vault Crypto Service Encryption User
+    scope: ${azurerm_key_vault.example.id}
 
 ---
 

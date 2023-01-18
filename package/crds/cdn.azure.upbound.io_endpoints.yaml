@@ -565,7 +565,7 @@ spec:
                                 type: string
                               protocol:
                                 description: Specifies the protocol part of the URL.
-                                  Valid values are Http and Https.
+                                  Valid values are MatchRequest, Http and Https.
                                 type: string
                               queryString:
                                 description: Specifies the query string part of the
@@ -735,7 +735,7 @@ spec:
                                 type: string
                               protocol:
                                 description: Specifies the protocol part of the URL.
-                                  Valid values are Http and Https.
+                                  Valid values are MatchRequest, Http and Https.
                                 type: string
                               queryString:
                                 description: Specifies the query string part of the
@@ -837,6 +837,7 @@ spec:
                     type: string
                   profileName:
                     description: The CDN Profile to which to attach the CDN Endpoint.
+                      Changing this forces a new resource to be created.
                     type: string
                   profileNameRef:
                     description: Reference to a Profile in cdn to populate profileName.
@@ -919,7 +920,8 @@ spec:
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the CDN Endpoint.
+                      the CDN Endpoint. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate

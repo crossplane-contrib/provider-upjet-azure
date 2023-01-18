@@ -21,6 +21,10 @@ type OutputBlobObservation struct {
 
 type OutputBlobParameters struct {
 
+	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	// +kubebuilder:validation:Optional
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
 	// The maximum wait time per batch in hh:mm:ss e.g. 00:02:00 for two minutes.
 	// +kubebuilder:validation:Optional
 	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
@@ -55,8 +59,8 @@ type OutputBlobParameters struct {
 	Serialization []SerializationParameters `json:"serialization" tf:"serialization,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account.
-	// +kubebuilder:validation:Required
-	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+	// +kubebuilder:validation:Optional
+	StorageAccountKeySecretRef *v1.SecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -85,8 +89,17 @@ type OutputBlobParameters struct {
 	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name,omitempty"`
+	// +crossplane:generate:reference:type=Job
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// Reference to a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
 	// +kubebuilder:validation:Required
@@ -102,7 +115,7 @@ type SerializationParameters struct {
 	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
-	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma),     (tab), | (pipe) and ;.
+	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
 	// +kubebuilder:validation:Optional
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 

@@ -115,7 +115,7 @@ type LiveEventObservation struct {
 
 type LiveEventParameters struct {
 
-	// The flag indicates if the resource should be automatically started on creation. Default is false.
+	// The flag indicates if the resource should be automatically started on creation. Default is false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	AutoStartEnabled *bool `json:"autoStartEnabled,omitempty" tf:"auto_start_enabled,omitempty"`
 
@@ -219,7 +219,7 @@ type PreviewObservation struct {
 
 type PreviewParameters struct {
 
-	// An alternative media identifier associated with the streaming locator created for the preview. The identifier can be used in the CustomLicenseAcquisitionUrlTemplate or the CustomKeyAcquisitionUrlTemplate of the Streaming Policy specified in the streaming_policy_name field. Changing this forces a new resource to be created.
+	// An alternative media identifier associated with the streaming locator created for the preview. The identifier can be used in the CustomLicenseAcquisitionUrlTemplate or the CustomKeyAcquisitionUrlTemplate of the Streaming Policy specified in the streaming_policy_name field.
 	// +kubebuilder:validation:Optional
 	AlternativeMediaID *string `json:"alternativeMediaId,omitempty" tf:"alternative_media_id,omitempty"`
 

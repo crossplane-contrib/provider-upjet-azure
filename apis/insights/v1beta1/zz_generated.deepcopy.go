@@ -1091,8 +1091,23 @@ func (in *EventHubReceiverParameters) DeepCopyInto(out *EventHubReceiverParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.EventHubName != nil {
+		in, out := &in.EventHubName, &out.EventHubName
+		*out = new(string)
+		**out = **in
+	}
+	if in.EventHubNamespace != nil {
+		in, out := &in.EventHubNamespace, &out.EventHubNamespace
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubscriptionID != nil {
+		in, out := &in.SubscriptionID, &out.SubscriptionID
 		*out = new(string)
 		**out = **in
 	}

@@ -19,11 +19,12 @@ spec:
     - address: terraform.io
       name: destination
     location: West Europe
-    network_watcher_name: ${azurerm_network_watcher.example.name}
+    networkWatcherIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     notes: examplenote
     outputWorkspaceResourceIds:
     - ${azurerm_log_analytics_workspace.example.id}
-    resource_group_name: ${azurerm_resource_group.example.name}
     testConfiguration:
     - name: tcpName
       protocol: Tcp
@@ -33,7 +34,6 @@ spec:
     testGroup:
     - destinationEndpoints:
       - destination
-      disable: false
       name: exampletg
       sourceEndpoints:
       - source
@@ -56,7 +56,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    sku: pergb2018
+    sku: PerGB2018
 
 ---
 

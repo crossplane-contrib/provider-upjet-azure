@@ -19,13 +19,14 @@ spec:
       remoteVolumeLocation: West Europe
       remoteVolumeResourceIdSelector:
         matchLabels:
-          testing.upbound.io/example-name: example_primary
+          testing.upbound.io/example-name: example
       replicationFrequency: 10minutes
     dataProtectionSnapshotPolicy:
     - snapshotPolicyIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example
     location: West Europe
+    networkFeatures: Basic
     poolNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -42,6 +43,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     volumePath: my-unique-file-path
+    zone: "1"
 
 ---
 

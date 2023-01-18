@@ -28,7 +28,7 @@ type DNSPTRRecordParameters struct {
 	// +kubebuilder:validation:Required
 	Records []*string `json:"records" tf:"records,omitempty"`
 
-	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
+	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -49,7 +49,7 @@ type DNSPTRRecordParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the DNS Zone where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
+	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=DNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`

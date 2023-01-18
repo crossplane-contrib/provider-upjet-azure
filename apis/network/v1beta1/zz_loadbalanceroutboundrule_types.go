@@ -64,7 +64,7 @@ type LoadBalancerOutboundRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	FrontendIPConfiguration []LoadBalancerOutboundRuleFrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
-	// The timeout for the TCP idle connection
+	// The timeout for the TCP idle connection Defaults to 4.
 	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 

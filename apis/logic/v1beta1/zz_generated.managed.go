@@ -7,6 +7,138 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppIntegrationAccount.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccount) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppIntegrationAccount.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccount) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppIntegrationAccountBatchConfiguration.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccountBatchConfiguration) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppIntegrationAccountBatchConfiguration.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccountBatchConfiguration) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this IntegrationServiceEnvironment.
 func (mg *IntegrationServiceEnvironment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

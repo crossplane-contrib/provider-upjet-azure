@@ -27,6 +27,36 @@ type DNSParameters struct {
 	Servers []*string `json:"servers,omitempty" tf:"servers,omitempty"`
 }
 
+type ExplicitProxyObservation struct {
+}
+
+type ExplicitProxyParameters struct {
+
+	// Whether the pac file port and url need to be provided.
+	// +kubebuilder:validation:Optional
+	EnablePacFile *bool `json:"enablePacFile,omitempty" tf:"enable_pac_file,omitempty"`
+
+	// Whether the explicit proxy is enabled for this Firewall Policy.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The port number for explicit http protocol.
+	// +kubebuilder:validation:Optional
+	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
+
+	// The port number for explicit proxy https protocol.
+	// +kubebuilder:validation:Optional
+	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
+
+	// Specifies a SAS URL for PAC file.
+	// +kubebuilder:validation:Optional
+	PacFile *string `json:"pacFile,omitempty" tf:"pac_file,omitempty"`
+
+	// Specifies a port number for firewall to serve PAC file.
+	// +kubebuilder:validation:Optional
+	PacFilePort *float64 `json:"pacFilePort,omitempty" tf:"pac_file_port,omitempty"`
+}
+
 type FirewallPolicyIdentityObservation struct {
 }
 
@@ -58,6 +88,10 @@ type FirewallPolicyObservation struct {
 
 type FirewallPolicyParameters struct {
 
+	// Whether enable auto learn private ip range.
+	// +kubebuilder:validation:Optional
+	AutoLearnPrivateRangesEnabled *bool `json:"autoLearnPrivateRangesEnabled,omitempty" tf:"auto_learn_private_ranges_enabled,omitempty"`
+
 	// The ID of the base Firewall Policy.
 	// +kubebuilder:validation:Optional
 	BasePolicyID *string `json:"basePolicyId,omitempty" tf:"base_policy_id,omitempty"`
@@ -65,6 +99,10 @@ type FirewallPolicyParameters struct {
 	// A dns block as defined below.
 	// +kubebuilder:validation:Optional
 	DNS []DNSParameters `json:"dns,omitempty" tf:"dns,omitempty"`
+
+	// A explicit_proxy block as defined below.
+	// +kubebuilder:validation:Optional
+	ExplicitProxy []ExplicitProxyParameters `json:"explicitProxy,omitempty" tf:"explicit_proxy,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -99,7 +137,11 @@ type FirewallPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The SKU Tier of the Firewall Policy. Possible values are Standard, Premium. Changing this forces a new Firewall Policy to be created.
+	// Whether SQL Redirect traffic filtering is allowed. Enabling this flag requires no rule using ports between 11000-11999.
+	// +kubebuilder:validation:Optional
+	SQLRedirectAllowed *bool `json:"sqlRedirectAllowed,omitempty" tf:"sql_redirect_allowed,omitempty"`
+
+	// The SKU Tier of the Firewall Policy. Possible values are Standard, Premium and Basic. Changing this forces a new Firewall Policy to be created.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -150,6 +192,10 @@ type IntrusionDetectionParameters struct {
 	// In which mode you want to run intrusion detection: Off, Alert or Deny.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// A list of Private IP address ranges to identify traffic direction. By default, only ranges defined by IANA RFC 1918 are considered private IP addresses.
+	// +kubebuilder:validation:Optional
+	PrivateRanges []*string `json:"privateRanges,omitempty" tf:"private_ranges,omitempty"`
 
 	// One or more signature_overrides blocks as defined below.
 	// +kubebuilder:validation:Optional

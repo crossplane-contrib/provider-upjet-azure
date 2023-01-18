@@ -36,7 +36,7 @@ type ExpressRouteCircuitParameters struct {
 	// +kubebuilder:validation:Optional
 	BandwidthInMbps *float64 `json:"bandwidthInMbps,omitempty" tf:"bandwidth_in_mbps,omitempty"`
 
-	// The ID of the Express Route Port this Express Route Circuit is based on.
+	// The ID of the Express Route Port this Express Route Circuit is based on. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ExpressRoutePortID *string `json:"expressRoutePortId,omitempty" tf:"express_route_port_id,omitempty"`
 

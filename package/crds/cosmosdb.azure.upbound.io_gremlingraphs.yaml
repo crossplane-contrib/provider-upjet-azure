@@ -69,7 +69,7 @@ spec:
                       Graph within. Changing this forces a new resource to be created.
                     type: string
                   accountNameRef:
-                    description: Reference to a Account in cosmosdb to populate accountName.
+                    description: Reference to a Account to populate accountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -103,7 +103,7 @@ spec:
                     - name
                     type: object
                   accountNameSelector:
-                    description: Selector for a Account in cosmosdb to populate accountName.
+                    description: Selector for a Account to populate accountName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -334,7 +334,7 @@ spec:
                     type: string
                   partitionKeyVersion:
                     description: Define a partition key version. Changing this forces
-                      a new resource to be created. Possible values are 1 and 2. This
+                      a new resource to be created. Possible values are 1and 2. This
                       should be set to 2 in order to use large partition keys.
                     type: number
                   resourceGroupName:
@@ -428,6 +428,7 @@ spec:
                       properties:
                         paths:
                           description: A list of paths to use for this unique key.
+                            Changing this forces a new resource to be created.
                           items:
                             type: string
                           type: array

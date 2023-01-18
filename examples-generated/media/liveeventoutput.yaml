@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    archive_window_length: PT5M
+    archiveWindowDuration: PT5M
     assetNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

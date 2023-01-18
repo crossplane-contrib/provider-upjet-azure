@@ -22,7 +22,7 @@ type BudgetResourceGroupFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Dimension []FilterDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
-	// A not block as defined below to filter the budget on.
+	// A not block as defined below to filter the budget on. This is deprecated as the API no longer supports it and will be removed in version 4.0 of the provider.
 	// +kubebuilder:validation:Optional
 	Not []FilterNotParameters `json:"not,omitempty" tf:"not,omitempty"`
 
@@ -66,7 +66,7 @@ type BudgetResourceGroupNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	ContactRoles []*string `json:"contactRoles,omitempty" tf:"contact_roles,omitempty"`
 
-	// Should the notification be enabled?
+	// Should the notification be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -78,7 +78,7 @@ type BudgetResourceGroupNotificationParameters struct {
 	// +kubebuilder:validation:Required
 	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 
-	// The type of threshold for the notification. This determines whether the notification is triggered by forecasted costs or actual costs. The allowed values are Actual and Forecasted. Default is Actual.
+	// The type of threshold for the notification. This determines whether the notification is triggered by forecasted costs or actual costs. The allowed values are Actual and Forecasted. Default is Actual. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ThresholdType *string `json:"thresholdType,omitempty" tf:"threshold_type,omitempty"`
 }
@@ -125,7 +125,7 @@ type BudgetResourceGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 
-	// The time covered by a budget. Tracking of the amount will be reset based on the time grain. Must be one of Monthly, Quarterly, Annually, BillingMonth, BillingQuarter, or BillingYear. Defaults to Monthly.
+	// The time covered by a budget. Tracking of the amount will be reset based on the time grain. Must be one of BillingAnnual, BillingMonth, BillingQuarter, Annually, Monthly and Quarterly. Defaults to Monthly.
 	// +kubebuilder:validation:Optional
 	TimeGrain *string `json:"timeGrain,omitempty" tf:"time_grain,omitempty"`
 

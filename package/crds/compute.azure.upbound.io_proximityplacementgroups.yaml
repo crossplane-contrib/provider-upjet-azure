@@ -66,6 +66,12 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  allowedVmSizes:
+                    description: Specifies the supported sizes of Virtual Machines
+                      that can be created in the Proximity Placement Group.
+                    items:
+                      type: string
+                    type: array
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -155,6 +161,10 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                  zone:
+                    description: Specifies the supported zone of the Proximity Placement
+                      Group. Changing this forces a new resource to be created.
+                    type: string
                 required:
                 - location
                 type: object

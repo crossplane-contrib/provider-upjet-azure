@@ -63,11 +63,15 @@ type PrivateLinkServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoApprovalSubscriptionIds []*string `json:"autoApprovalSubscriptionIds,omitempty" tf:"auto_approval_subscription_ids,omitempty"`
 
-	// Should the Private Link Service support the Proxy Protocol? Defaults to false.
+	// Should the Private Link Service support the Proxy Protocol?
 	// +kubebuilder:validation:Optional
 	EnableProxyProtocol *bool `json:"enableProxyProtocol,omitempty" tf:"enable_proxy_protocol,omitempty"`
 
-	// A list of Frontend IP Configuration IDs from a Standard Load Balancer, where traffic from the Private Link Service should be routed. You can use Load Balancer Rules to direct this traffic to appropriate backend pools where your applications are running.
+	// List of FQDNs allowed for the Private Link Service.
+	// +kubebuilder:validation:Optional
+	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
+
+	// A list of Frontend IP Configuration IDs from a Standard Load Balancer, where traffic from the Private Link Service should be routed. You can use Load Balancer Rules to direct this traffic to appropriate backend pools where your applications are running. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	LoadBalancerFrontendIPConfigurationIds []*string `json:"loadBalancerFrontendIpConfigurationIds" tf:"load_balancer_frontend_ip_configuration_ids,omitempty"`
 
@@ -92,7 +96,7 @@ type PrivateLinkServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

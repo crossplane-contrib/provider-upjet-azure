@@ -26,7 +26,7 @@ type AADAuthParameters struct {
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
-	// The Tenant ID for the subscription containing this Event Hub.
+	// The tenant id for AAD auth.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
@@ -36,7 +36,7 @@ type ArmRoleReceiverObservation struct {
 
 type ArmRoleReceiverParameters struct {
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the ARM role receiver. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -62,7 +62,7 @@ type AutomationRunBookReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	IsGlobalRunBook *bool `json:"isGlobalRunbook" tf:"is_global_runbook,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the automation runbook receiver. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -92,7 +92,7 @@ type AzureAppPushReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the Azure app push receiver. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -114,7 +114,7 @@ type AzureFunctionReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	HTTPTriggerURL *string `json:"httpTriggerUrl" tf:"http_trigger_url,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the Azure Function receiver. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -128,11 +128,11 @@ type EmailReceiverObservation struct {
 
 type EmailReceiverParameters struct {
 
-	// The email address of the user signed into the mobile app who will receive push notifications from this receiver.
+	// The email address of this receiver.
 	// +kubebuilder:validation:Required
 	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the email receiver. Names must be unique (case-insensitive) across all receivers within an action group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -147,18 +147,30 @@ type EventHubReceiverObservation struct {
 type EventHubReceiverParameters struct {
 
 	// The resource ID of the respective Event Hub.
-	// +kubebuilder:validation:Required
-	EventHubID *string `json:"eventHubId" tf:"event_hub_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the specific Event Hub queue.
+	// +kubebuilder:validation:Optional
+	EventHubName *string `json:"eventHubName,omitempty" tf:"event_hub_name,omitempty"`
+
+	// The namespace name of the Event Hub.
+	// +kubebuilder:validation:Optional
+	EventHubNamespace *string `json:"eventHubNamespace,omitempty" tf:"event_hub_namespace,omitempty"`
+
+	// The name of the EventHub Receiver, must be unique within action group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The ID for the subscription containing this Event Hub. Default to the subscription ID of the Action Group.
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The Tenant ID for the subscription containing this Event Hub.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// Enables or disables the common alert schema.
+	// Indicates whether to use common alert schema.
 	// +kubebuilder:validation:Optional
 	UseCommonAlertSchema *bool `json:"useCommonAlertSchema,omitempty" tf:"use_common_alert_schema,omitempty"`
 }
@@ -172,7 +184,7 @@ type ItsmReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	ConnectionID *string `json:"connectionId" tf:"connection_id,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the ITSM receiver. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -198,7 +210,7 @@ type LogicAppReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	CallbackURL *string `json:"callbackUrl" tf:"callback_url,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the logic app receiver. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -255,7 +267,7 @@ type MonitorActionGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LogicAppReceiver []LogicAppReceiverParameters `json:"logicAppReceiver,omitempty" tf:"logic_app_receiver,omitempty"`
 
-	// The name of the resource group in which to create the Action Group instance.
+	// The name of the resource group in which to create the Action Group instance. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -298,7 +310,7 @@ type SMSReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	CountryCode *string `json:"countryCode" tf:"country_code,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the SMS receiver. Names must be unique (case-insensitive) across all receivers within an action group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -312,15 +324,15 @@ type VoiceReceiverObservation struct {
 
 type VoiceReceiverParameters struct {
 
-	// The country code of the SMS receiver.
+	// The country code of the voice receiver.
 	// +kubebuilder:validation:Required
 	CountryCode *string `json:"countryCode" tf:"country_code,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the voice receiver. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The phone number of the SMS receiver.
+	// The phone number of the voice receiver.
 	// +kubebuilder:validation:Required
 	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
 }
@@ -334,7 +346,7 @@ type WebhookReceiverParameters struct {
 	// +kubebuilder:validation:Optional
 	AADAuth []AADAuthParameters `json:"aadAuth,omitempty" tf:"aad_auth,omitempty"`
 
-	// The name of the Action Group. Changing this forces a new resource to be created.
+	// The name of the webhook receiver. Names must be unique (case-insensitive) across all receivers within an action group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

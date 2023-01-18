@@ -7,8 +7,7 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
@@ -21,8 +20,7 @@ spec:
       name: networkinterfacetestrg
     addressSpace:
       - "10.0.0.0/16"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
@@ -36,8 +34,7 @@ spec:
       name: example-vn-for-network-int-test
     addressPrefixes:
       - "10.0.1.0/24"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ApplicationSecurityGroup
@@ -50,8 +47,7 @@ spec:
       name: networkinterfacetestrg
     tags:
       Hello: World
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterface
@@ -67,8 +63,7 @@ spec:
     location: West Europe
     resourceGroupNameRef:
       name: networkinterfacetestrg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterfaceApplicationSecurityGroupAssociation
@@ -80,8 +75,7 @@ spec:
       name: example-asg
     networkInterfaceIdRef:
       name: example-nic
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PublicIP
@@ -96,8 +90,7 @@ spec:
       name: networkinterfacetestrg
     tags:
       environment: Production
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancer
@@ -113,8 +106,7 @@ spec:
       - name: publicipaddress
         publicIpAddressIdRef:
           name: publicipfornetworkinterface
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerBackendAddressPool
@@ -124,8 +116,7 @@ spec:
   forProvider:
     loadbalancerIdRef:
       name: testloadbalancer
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterfaceBackendAddressPoolAssociation
@@ -138,8 +129,7 @@ spec:
     ipConfigurationName: testconfiguration1
     networkInterfaceIdRef:
       name: example-nic
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerNatRule
@@ -155,8 +145,7 @@ spec:
     protocol: Tcp
     resourceGroupNameRef:
       name: networkinterfacetestrg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterfaceNatRuleAssociation
@@ -169,8 +158,7 @@ spec:
       name: example
     networkInterfaceIdRef:
       name: example-nic
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityGroup
@@ -183,8 +171,7 @@ spec:
       name: networkinterfacetestrg
     tags:
       environment: Production
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: SecurityRule
@@ -204,8 +191,7 @@ spec:
       name: networkinterfacetestrg
     sourceAddressPrefix: '*'
     sourcePortRange: '*'
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterfaceSecurityGroupAssociation
@@ -217,5 +203,3 @@ spec:
       name: example-nic
     networkSecurityGroupIdRef:
       name: example
-  providerConfigRef:
-    name: example

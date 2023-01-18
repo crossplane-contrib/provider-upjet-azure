@@ -38,6 +38,10 @@ type IOTHubDPSParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocationPolicy *string `json:"allocationPolicy,omitempty" tf:"allocation_policy,omitempty"`
 
+	// Specifies if the IoT Device Provisioning Service has data residency and disaster recovery enabled. Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DataResidencyEnabled *bool `json:"dataResidencyEnabled,omitempty" tf:"data_residency_enabled,omitempty"`
+
 	// An ip_filter_rule block as defined below.
 	// +kubebuilder:validation:Optional
 	IPFilterRule []IPFilterRuleParameters `json:"ipFilterRule,omitempty" tf:"ip_filter_rule,omitempty"`
@@ -120,7 +124,7 @@ type LinkedHubObservation struct {
 
 type LinkedHubParameters struct {
 
-	// The weight applied to the IoT Hub. Defaults to 0.
+	// The weight applied to the IoT Hub. Defaults to 1.
 	// +kubebuilder:validation:Optional
 	AllocationWeight *float64 `json:"allocationWeight,omitempty" tf:"allocation_weight,omitempty"`
 

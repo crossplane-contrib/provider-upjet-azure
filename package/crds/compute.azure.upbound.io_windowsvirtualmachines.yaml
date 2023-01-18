@@ -135,7 +135,7 @@ spec:
                     type: string
                   allowExtensionOperations:
                     description: Should Extension Operations be allowed on this Virtual
-                      Machine?
+                      Machine? Defaults to true.
                     type: boolean
                   availabilitySetId:
                     description: Specifies the ID of the Availability Set in which
@@ -153,6 +153,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  capacityReservationGroupId:
+                    description: Specifies the ID of the Capacity Reservation Group
+                      which the Virtual Machine should be allocated to.
+                    type: string
                   computerName:
                     description: Specifies the Hostname which should be used for this
                       Virtual Machine. If unspecified this defaults to the value for
@@ -195,7 +199,7 @@ spec:
                   enableAutomaticUpdates:
                     description: Specifies if Automatic Updates are Enabled for the
                       Windows Virtual Machine. Changing this forces a new resource
-                      to be created.
+                      to be created. Defaults to true.
                     type: boolean
                   encryptionAtHostEnabled:
                     description: Should all of the disks (including the temp disk)
@@ -204,9 +208,9 @@ spec:
                     type: boolean
                   evictionPolicy:
                     description: Specifies what should happen when the Virtual Machine
-                      is evicted for price reasons when using a Spot instance. At
-                      this time the only supported value is Deallocate. Changing this
-                      forces a new resource to be created.
+                      is evicted for price reasons when using a Spot instance. Possible
+                      values are Deallocate and Delete. Changing this forces a new
+                      resource to be created.
                     type: string
                   extensionsTimeBudget:
                     description: Specifies the duration allocated for all extensions
@@ -214,6 +218,30 @@ spec:
                       120 minutes (inclusive) and should be specified in ISO 8601
                       format. Defaults to 90 minutes (PT1H30M).
                     type: string
+                  galleryApplication:
+                    description: A gallery_application block as defined below.
+                    items:
+                      properties:
+                        configurationBlobUri:
+                          description: Specifies the URI to an Azure Blob that will
+                            replace the default configuration for the package if provided.
+                          type: string
+                        order:
+                          description: Specifies the order in which the packages have
+                            to be installed. Possible values are between 0 and 2,147,483,647.
+                          type: number
+                        tag:
+                          description: Specifies a passthrough value for more generic
+                            context. This field can be any valid string value.
+                          type: string
+                        versionId:
+                          description: Specifies the Gallery Application Version resource
+                            ID.
+                          type: string
+                      required:
+                      - versionId
+                      type: object
+                    type: array
                   hotpatchingEnabled:
                     description: Should the VM be patched without requiring a reboot?
                       Possible values are true or false. Defaults to false. For more
@@ -334,6 +362,11 @@ spec:
                       - storageAccountType
                       type: object
                     type: array
+                  patchAssessmentMode:
+                    description: Specifies the mode of VM Guest Patching for the Virtual
+                      Machine. Possible values are AutomaticByPlatform or ImageDefault.
+                      Defaults to ImageDefault.
+                    type: string
                   patchMode:
                     description: Specifies the mode of in-guest patching to this Windows
                       Virtual Machine. Possible values are Manual, AutomaticByOS and
@@ -508,6 +541,10 @@ spec:
                   sourceImageId:
                     description: The ID of the Image which this Virtual Machine should
                       be created from. Changing this forces a new resource to be created.
+                      Possible Image ID types include Image IDs, Shared Image IDs,
+                      Shared Image Version IDs, Community Gallery Image IDs, Community
+                      Gallery Image Version IDs, Shared Gallery Image IDs and Shared
+                      Gallery Image Version IDs.
                     type: string
                   sourceImageReference:
                     description: A source_image_reference block as defined below.
@@ -549,13 +586,13 @@ spec:
                       properties:
                         enabled:
                           description: Should the termination notification be enabled
-                            on this Virtual Machine? Defaults to false.
+                            on this Virtual Machine?
                           type: boolean
                         timeout:
                           description: Length of time (in minutes, between 5 and 15)
                             a notification to be sent to the VM on the instance metadata
                             server till the VM gets deleted. The time duration should
-                            be specified in ISO 8601 format.
+                            be specified in ISO 8601 format. Defaults to PT5M.
                           type: string
                       required:
                       - enabled
@@ -587,8 +624,11 @@ spec:
                         certificateUrl:
                           description: The Secret URL of a Key Vault Certificate,
                             which must be specified when protocol is set to Https.
+                            Changing this forces a new resource to be created.
                           type: string
                         protocol:
+                          description: Specifies the protocol of listener. Possible
+                            values are Http or Https
                           type: string
                       required:
                       - protocol

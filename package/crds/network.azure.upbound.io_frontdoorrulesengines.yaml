@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: FrontdoorRulesEngine is the Schema for the FrontdoorRulesEngines
-          API. Manages an Azure Front Door Rules Engine configuration and rules.
+          API. Manages an Azure Front Door (classic) Rules Engine configuration and
+          rules.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -65,6 +66,8 @@ spec:
               forProvider:
                 properties:
                   enabled:
+                    description: Whether this Rules engine configuration is enabled?
+                      Defaults to true.
                     type: boolean
                   frontdoorName:
                     description: The name of the Front Door instance. Changing this
@@ -227,7 +230,7 @@ spec:
                     items:
                       properties:
                         action:
-                          description: A rule_action block as defined below.
+                          description: An action block as defined below.
                           items:
                             properties:
                               requestHeader:
@@ -281,8 +284,7 @@ spec:
                               selector:
                                 description: match against a specific key when variable
                                   is set to PostArgs or RequestHeader. It cannot be
-                                  used with QueryString and RequestMethod. Defaults
-                                  to null.
+                                  used with QueryString and RequestMethod.
                                 type: string
                               transform:
                                 description: can be set to one or more values out
@@ -307,7 +309,8 @@ spec:
                             type: object
                           type: array
                         name:
-                          description: The name of the rule.
+                          description: The name of the rule. Changing this forces
+                            a new resource to be created.
                           type: string
                         priority:
                           description: Priority of the rule, must be unique per rules

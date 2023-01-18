@@ -16,7 +16,7 @@ spec:
     route:
     - addressPrefix: 10.1.0.0/16
       name: route1
-      nextHopType: vnetlocal
+      nextHopType: VnetLocal
     tags:
       environment: Production
 

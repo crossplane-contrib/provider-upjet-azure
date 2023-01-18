@@ -22,7 +22,7 @@ type AccountObservation struct {
 	// +kubebuilder:validation:Required
 	GeoLocation []GeoLocationObservation `json:"geoLocation,omitempty" tf:"geo_location,omitempty"`
 
-	// The ID of the virtual network subnet.
+	// The CosmosDB Account ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
@@ -46,7 +46,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	AnalyticalStorage []AnalyticalStorageParameters `json:"analyticalStorage,omitempty" tf:"analytical_storage,omitempty"`
 
-	// Enable Analytical Storage option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
+	// Enable Analytical Storage option for this Cosmos DB account. Defaults to false. Enabling and then disabling analytical storage forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	AnalyticalStorageEnabled *bool `json:"analyticalStorageEnabled,omitempty" tf:"analytical_storage_enabled,omitempty"`
 
@@ -110,7 +110,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
-	// Specifies the Kind of CosmosDB to create - possible values are GlobalDocumentDB and MongoDB. Defaults to GlobalDocumentDB. Changing this forces a new resource to be created.
+	// Specifies the Kind of CosmosDB to create - possible values are GlobalDocumentDB, MongoDB and Parse. Defaults to GlobalDocumentDB. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
@@ -138,7 +138,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Required
 	OfferType *string `json:"offerType" tf:"offer_type,omitempty"`
 
-	// Whether or not public network access is allowed for this CosmosDB account.
+	// Whether or not public network access is allowed for this CosmosDB account. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
@@ -195,7 +195,7 @@ type BackupParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageRedundancy *string `json:"storageRedundancy,omitempty" tf:"storage_redundancy,omitempty"`
 
-	// The type of the backup. Possible values are Continuous and Periodic. Defaults to Periodic. Migration of Periodic to Continuous is one-way, changing Continuous to Periodic forces a new resource to be created.
+	// The type of the backup. Possible values are Continuous and Periodic. Migration of Periodic to Continuous is one-way, changing Continuous to Periodic forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -290,7 +290,7 @@ type GeoLocationParameters struct {
 	// +kubebuilder:validation:Required
 	FailoverPriority *float64 `json:"failoverPriority" tf:"failover_priority,omitempty"`
 
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// The name of the Azure region to host replicated data. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
@@ -310,7 +310,11 @@ type IdentityObservation struct {
 
 type IdentityParameters struct {
 
-	// Specifies the type of Managed Service Identity that should be configured on this Cosmos Account. The only possible value is SystemAssigned.
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cosmos Account.
+	// +kubebuilder:validation:Optional
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Type of Managed Identity assigned to this Cosmos account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

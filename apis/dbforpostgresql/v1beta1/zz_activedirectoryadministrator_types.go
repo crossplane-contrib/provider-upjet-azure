@@ -21,6 +21,10 @@ type ActiveDirectoryAdministratorObservation struct {
 
 type ActiveDirectoryAdministratorParameters struct {
 
+	// The login name of the principal to set as the server administrator
+	// +kubebuilder:validation:Required
+	Login *string `json:"login" tf:"login,omitempty"`
+
 	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`

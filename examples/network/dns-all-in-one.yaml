@@ -7,8 +7,7 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSZone
@@ -20,8 +19,7 @@ spec:
   forProvider:
     resourceGroupNameRef:
       name: example-dns-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSARecord
@@ -36,8 +34,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSAAAARecord
@@ -52,8 +49,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSCAARecord
@@ -81,8 +77,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSCNAMERecord
@@ -96,8 +91,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSMXRecord
@@ -117,8 +111,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSNSRecord
@@ -136,8 +129,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSPTRRecord
@@ -152,8 +144,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSSRVRecord
@@ -173,8 +164,7 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: DNSTXTRecord
@@ -192,5 +182,3 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example

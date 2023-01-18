@@ -6,9 +6,9 @@ PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION ?= 1.2.1
 export TERRAFORM_PROVIDER_SOURCE ?= hashicorp/azurerm
-export TERRAFORM_PROVIDER_VERSION := 3.8.0
+export TERRAFORM_PROVIDER_VERSION := 3.38.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-azurerm
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/terraform-provider-azurerm/releases/download/v3.8.0
+export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/terraform-provider-azurerm/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-azurerm
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 
@@ -55,7 +55,7 @@ GO111MODULE = on
 KIND_VERSION = v0.15.0
 UP_VERSION = v0.14.0
 UP_CHANNEL = stable
-UPTEST_VERSION = v0.4.0
+UPTEST_VERSION = v0.5.0
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================

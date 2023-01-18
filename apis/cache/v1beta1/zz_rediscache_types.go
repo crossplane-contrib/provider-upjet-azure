@@ -13,6 +13,26 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IdentityObservation struct {
+
+	// The Route ID.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Route ID.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
+	// +kubebuilder:validation:Optional
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type PatchScheduleObservation struct {
 }
 
@@ -39,6 +59,10 @@ type RedisCacheObservation struct {
 	// The Route ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
 	// The non-SSL Port of the Redis Instance
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -52,7 +76,7 @@ type RedisCacheObservation struct {
 
 type RedisCacheParameters struct {
 
-	// The size of the Redis cache to deploy. Valid values for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5, 6, and for P (Premium) family are 1, 2, 3, 4.
+	// The size of the Redis cache to deploy. Valid values for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5, 6, and for P (Premium) family are 1, 2, 3, 4, 5.
 	// +kubebuilder:validation:Required
 	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
@@ -64,11 +88,15 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Required
 	Family *string `json:"family" tf:"family,omitempty"`
 
-	// The location of the resource group.
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The location of the resource group. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// The minimum TLS version.  Defaults to 1.0.
+	// The minimum TLS version.  Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -76,7 +104,7 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	PatchSchedule []PatchScheduleParameters `json:"patchSchedule,omitempty" tf:"patch_schedule,omitempty"`
 
-	// The Static IP Address to assign to the Redis Cache when hosted inside the Virtual Network. Changing this forces a new resource to be created.
+	// The Static IP Address to assign to the Redis Cache when hosted inside the Virtual Network. This argument implies the use of subnet_id. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateStaticIPAddress *string `json:"privateStaticIpAddress,omitempty" tf:"private_static_ip_address,omitempty"`
 
@@ -100,8 +128,7 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicasPerPrimary *float64 `json:"replicasPerPrimary,omitempty" tf:"replicas_per_primary,omitempty"`
 
-	// The name of the resource group in which to
-	// create the Redis instance.
+	// The name of the resource group in which to create the Redis instance. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -181,7 +208,7 @@ type RedisConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxmemoryDelta *float64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty"`
 
-	// How Redis will select what to remove when maxmemory is reached. Defaults are shown below.
+	// How Redis will select what to remove when maxmemory is reached. Defaults are shown below. Defaults to volatile-lru.
 	// +kubebuilder:validation:Optional
 	MaxmemoryPolicy *string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty"`
 

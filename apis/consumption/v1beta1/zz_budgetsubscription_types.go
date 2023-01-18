@@ -72,7 +72,7 @@ type BudgetSubscriptionFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	Dimension []BudgetSubscriptionFilterDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
-	// A not block as defined below to filter the budget on.
+	// A not block as defined below to filter the budget on. This is deprecated as the API no longer supports it and will be removed in version 4.0 of the provider.
 	// +kubebuilder:validation:Optional
 	Not []BudgetSubscriptionFilterNotParameters `json:"not,omitempty" tf:"not,omitempty"`
 
@@ -126,7 +126,7 @@ type BudgetSubscriptionNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	ContactRoles []*string `json:"contactRoles,omitempty" tf:"contact_roles,omitempty"`
 
-	// Should the notification be enabled?
+	// Should the notification be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -171,7 +171,7 @@ type BudgetSubscriptionParameters struct {
 	// +kubebuilder:validation:Required
 	SubscriptionID *string `json:"subscriptionId" tf:"subscription_id,omitempty"`
 
-	// The time covered by a budget. Tracking of the amount will be reset based on the time grain. Must be one of Monthly, Quarterly, Annually, BillingMonth, BillingQuarter, or BillingYear. Defaults to Monthly.
+	// The time covered by a budget. Tracking of the amount will be reset based on the time grain. Must be one of BillingAnnual, BillingMonth, BillingQuarter, Annually, Monthly and Quarterly. Defaults to Monthly.
 	// +kubebuilder:validation:Optional
 	TimeGrain *string `json:"timeGrain,omitempty" tf:"time_grain,omitempty"`
 

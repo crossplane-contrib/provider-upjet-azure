@@ -174,7 +174,10 @@ spec:
                                   with audio recordings with clearly discernible speech.
                                   If automatic detection fails to find the language,
                                   transcription would fallback to ''en-US''." The
-                                  list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.'
+                                  list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
+                                  Possible values are ar-EG, ar-SY, de-DE, en-AU,
+                                  en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT,
+                                  ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.'
                                 type: string
                             type: object
                           type: array
@@ -184,12 +187,17 @@ spec:
                             properties:
                               presetName:
                                 description: The built-in preset to be used for encoding
-                                  videos. The allowed values are AACGoodQualityAudio,
-                                  AdaptiveStreaming,ContentAwareEncoding, ContentAwareEncodingExperimental,CopyAllBitrateNonInterleaved,
-                                  H264MultipleBitrate1080p,H264MultipleBitrate720p,
-                                  H264MultipleBitrateSD,H264SingleBitrate1080p, H264SingleBitrate720p
-                                  and H264SingleBitrateSD.
+                                  videos. The Possible values are AACGoodQualityAudio,
+                                  AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental,
+                                  CopyAllBitrateNonInterleaved, H265AdaptiveStreaming,
+                                  H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p,
+                                  H265SingleBitrate720p, H264MultipleBitrate1080p,
+                                  H264MultipleBitrateSD, H264MultipleBitrate720p,
+                                  H264SingleBitrate1080p, H264SingleBitrateSD and
+                                  H264SingleBitrate720p.
                                 type: string
+                            required:
+                            - presetName
                             type: object
                           type: array
                         faceDetectorPreset:
@@ -256,7 +264,10 @@ spec:
                                   with audio recordings with clearly discernible speech.
                                   If automatic detection fails to find the language,
                                   transcription would fallback to ''en-US''." The
-                                  list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.'
+                                  list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
+                                  Possible values are ar-EG, ar-SY, de-DE, en-AU,
+                                  en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT,
+                                  ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.'
                                 type: string
                               insightsType:
                                 description: Defines the type of insights that you

@@ -90,7 +90,7 @@ spec:
                     type: array
                   keyVaultId:
                     description: The ID of the Key Vault in which to create the Certificate
-                      Issuer.
+                      Issuer. Changing this forces a new resource to be created.
                     type: string
                   keyVaultIdRef:
                     description: Reference to a Vault to populate keyVaultId.

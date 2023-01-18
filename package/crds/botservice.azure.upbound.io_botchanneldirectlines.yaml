@@ -234,6 +234,7 @@ spec:
                       properties:
                         enabled:
                           description: Enables/Disables this site. Enabled by default
+                            Defaults to true.
                           type: boolean
                         enhancedAuthenticationEnabled:
                           description: Enables additional security measures for this
@@ -252,11 +253,11 @@ spec:
                           type: array
                         v1Allowed:
                           description: Enables v1 of the Directline protocol for this
-                            site. Enabled by default
+                            site. Enabled by default Defaults to true.
                           type: boolean
                         v3Allowed:
                           description: Enables v3 of the Directline protocol for this
-                            site. Enabled by default
+                            site. Enabled by default Defaults to true.
                           type: boolean
                       required:
                       - name

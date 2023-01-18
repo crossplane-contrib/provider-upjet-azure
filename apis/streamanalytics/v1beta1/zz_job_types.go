@@ -48,6 +48,10 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	CompatibilityLevel *string `json:"compatibilityLevel,omitempty" tf:"compatibility_level,omitempty"`
 
+	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount.
+	// +kubebuilder:validation:Optional
+	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
+
 	// Specifies the Data Locale of the Job, which should be a supported .NET Culture.
 	// +kubebuilder:validation:Optional
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
@@ -67,6 +71,10 @@ type JobParameters struct {
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The details of the job storage account. A job_storage_account block as defined below.
+	// +kubebuilder:validation:Optional
+	JobStorageAccount []JobStorageAccountParameters `json:"jobStorageAccount,omitempty" tf:"job_storage_account,omitempty"`
 
 	// The Azure Region in which the Resource Group exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
@@ -108,6 +116,24 @@ type JobParameters struct {
 	// The type of the Stream Analytics Job. Possible values are Cloud and Edge. Defaults to Cloud. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type JobStorageAccountObservation struct {
+}
+
+type JobStorageAccountParameters struct {
+
+	// The account key for the Azure storage account.
+	// +kubebuilder:validation:Required
+	AccountKeySecretRef v1.SecretKeySelector `json:"accountKeySecretRef" tf:"-"`
+
+	// The name of the Azure storage account.
+	// +kubebuilder:validation:Required
+	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
+
+	// The authentication mode of the storage account. The only supported value is ConnectionString. Defaults to ConnectionString.
+	// +kubebuilder:validation:Optional
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 }
 
 // JobSpec defines the desired state of Job

@@ -2,12 +2,74 @@ apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: ManagedPrivateEndpoint
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    meta.upbound.io/example-id: streamanalytics/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleprivateendpoint
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamAnalyticsClusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subresourceName: blob
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+    uptest.upbound.io/timeout: "3600"
   name: example
 spec:
   forProvider:
-    resourceGroupNameRef:
-      name: example-resources
-    streamAnalyticsClusterName: example
-    subresourceName: blob
-    targetResourceId: <targetresourceid>
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamingCapacity: 36
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleupboundprivate
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/managedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-stream
+spec:
+  forProvider:
+    location: West Europe

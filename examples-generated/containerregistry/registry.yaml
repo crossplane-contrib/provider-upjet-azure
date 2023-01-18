@@ -13,7 +13,7 @@ spec:
     - location: East US
       tags: {}
       zoneRedundancyEnabled: true
-    - location: westeurope
+    - location: North Europe
       tags: {}
       zoneRedundancyEnabled: true
     location: West Europe

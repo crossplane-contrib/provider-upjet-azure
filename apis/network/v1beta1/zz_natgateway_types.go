@@ -49,7 +49,7 @@ type NATGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
