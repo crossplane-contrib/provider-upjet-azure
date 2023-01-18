@@ -36,7 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: FrontdoorFirewallPolicy is the Schema for the FrontdoorFirewallPolicys
-          API. Manages an Azure Front Door Web Application Firewall Policy instance.
+          API. Manages an Azure Front Door (classic) Web Application Firewall Policy
+          instance.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -136,6 +137,7 @@ spec:
                         name:
                           description: Gets name of the resource that is unique within
                             a policy. This name can be used to access the resource.
+                            Changing this forces a new resource to be created.
                           type: string
                         priority:
                           description: The priority of the rule. Rules with a lower
@@ -579,10 +581,10 @@ spec:
                       type: string
                     type: array
                   id:
-                    description: The ID of the FrontDoor Firewall Policy.
+                    description: The ID of the Front Door Firewall Policy.
                     type: string
                   location:
-                    description: The Azure Region where this FrontDoor Firewall Policy
+                    description: The Azure Region where this Front Door Firewall Policy
                       exists.
                     type: string
                 type: object

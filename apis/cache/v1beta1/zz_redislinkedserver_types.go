@@ -52,7 +52,7 @@ type RedisLinkedServerParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The role of the linked Redis cache (eg "Secondary"). Changing this forces a new Redis to be created.
+	// The role of the linked Redis cache (eg "Secondary"). Changing this forces a new Redis to be created. Possible values are Primary and Secondary.
 	// +kubebuilder:validation:Required
 	ServerRole *string `json:"serverRole" tf:"server_role,omitempty"`
 

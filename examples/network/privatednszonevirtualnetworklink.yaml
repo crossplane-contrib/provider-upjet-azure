@@ -10,5 +10,4 @@ spec:
       name: example
     virtualNetworkIdRef:
       name: example
-  providerConfigRef:
-    name: example
+

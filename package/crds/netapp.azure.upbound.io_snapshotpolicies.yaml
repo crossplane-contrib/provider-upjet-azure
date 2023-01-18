@@ -197,6 +197,8 @@ spec:
                     items:
                       properties:
                         daysOfMonth:
+                          description: List of the days of the month when the snapshots
+                            will be created, valid range is from 1 to 30.
                           items:
                             type: number
                           type: array
@@ -302,6 +304,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   weeklySchedule:
                     description: Sets a weekly snapshot schedule. See details in below

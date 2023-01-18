@@ -142,11 +142,11 @@ type DynamicCriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	Dimension []DynamicCriteriaDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
-	// The number of violations to trigger an alert. Should be smaller or equal to evaluation_total_count.
+	// The number of violations to trigger an alert. Should be smaller or equal to evaluation_total_count. Defaults to 4.
 	// +kubebuilder:validation:Optional
 	EvaluationFailureCount *float64 `json:"evaluationFailureCount,omitempty" tf:"evaluation_failure_count,omitempty"`
 
-	// The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (window_size) and the selected number of aggregated points.
+	// The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (window_size) and the selected number of aggregated points. Defaults to 4.
 	// +kubebuilder:validation:Optional
 	EvaluationTotalCount *float64 `json:"evaluationTotalCount,omitempty" tf:"evaluation_total_count,omitempty"`
 
@@ -166,7 +166,7 @@ type DynamicCriteriaParameters struct {
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
-	// Skip the metric validation to allow creating an alert rule on a custom metric that isn't yet emitted? Defaults to false.
+	// Skip the metric validation to allow creating an alert rule on a custom metric that isn't yet emitted?
 	// +kubebuilder:validation:Optional
 	SkipMetricValidation *bool `json:"skipMetricValidation,omitempty" tf:"skip_metric_validation,omitempty"`
 }
@@ -211,7 +211,7 @@ type MonitorMetricAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
-	// The name of the resource group in which to create the Metric Alert instance.
+	// The name of the resource group in which to create the Metric Alert instance. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`

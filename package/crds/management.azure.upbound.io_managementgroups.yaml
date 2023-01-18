@@ -69,8 +69,7 @@ spec:
                       specified, this will be the same as the name.
                     type: string
                   parentManagementGroupId:
-                    description: The ID of the Parent Management Group. Changing this
-                      forces a new resource to be created.
+                    description: The ID of the Parent Management Group.
                     type: string
                   parentManagementGroupIdRef:
                     description: Reference to a ManagementGroup in management to populate

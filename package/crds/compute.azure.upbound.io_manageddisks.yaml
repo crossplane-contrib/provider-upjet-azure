@@ -80,22 +80,24 @@ spec:
                   diskIopsReadOnly:
                     description: The number of IOPS allowed across all VMs mounting
                       the shared disk as read-only; only settable for UltraSSD disks
-                      with shared disk enabled. One operation can transfer between
-                      4k and 256k bytes.
+                      and PremiumV2 disks with shared disk enabled. One operation
+                      can transfer between 4k and 256k bytes.
                     type: number
                   diskIopsReadWrite:
                     description: The number of IOPS allowed for this disk; only settable
-                      for UltraSSD disks. One operation can transfer between 4k and
-                      256k bytes.
+                      for UltraSSD disks and PremiumV2 disks. One operation can transfer
+                      between 4k and 256k bytes.
                     type: number
                   diskMbpsReadOnly:
                     description: The bandwidth allowed across all VMs mounting the
-                      shared disk as read-only; only settable for UltraSSD disks with
-                      shared disk enabled. MBps means millions of bytes per second.
+                      shared disk as read-only; only settable for UltraSSD disks and
+                      PremiumV2 disks with shared disk enabled. MBps means millions
+                      of bytes per second.
                     type: number
                   diskMbpsReadWrite:
                     description: The bandwidth allowed for this disk; only settable
-                      for UltraSSD disks. MBps means millions of bytes per second.
+                      for UltraSSD disks and PremiumV2 disks. MBps means millions
+                      of bytes per second.
                     type: number
                   diskSizeGb:
                     description: Specifies the size of the managed disk to create
@@ -122,7 +124,8 @@ spec:
                                   id on the azurerm_key_vault_secret resource.
                                 type: string
                               sourceVaultId:
-                                description: The ID of the source Key Vault.
+                                description: The ID of the source Key Vault. This
+                                  can be found as id on the azurerm_key_vault resource.
                                 type: string
                             required:
                             - secretUrl
@@ -130,8 +133,6 @@ spec:
                             type: object
                           type: array
                         enabled:
-                          description: Is Encryption enabled on this Managed Disk?
-                            Changing this forces a new resource to be created.
                           type: boolean
                         keyEncryptionKey:
                           description: A key_encryption_key block as defined below.
@@ -143,21 +144,20 @@ spec:
                                   on the azurerm_key_vault_key resource.
                                 type: string
                               sourceVaultId:
-                                description: The ID of the source Key Vault.
+                                description: The ID of the source Key Vault. This
+                                  can be found as id on the azurerm_key_vault resource.
                                 type: string
                             required:
                             - keyUrl
                             - sourceVaultId
                             type: object
                           type: array
-                      required:
-                      - enabled
                       type: object
                     type: array
                   galleryImageReferenceId:
                     description: ID of a Gallery Image Version to copy when create_option
                       is FromImage. This field cannot be specified if image_reference_id
-                      is specified.
+                      is specified. Changing this forces a new resource to be created.
                     type: string
                   hyperVGeneration:
                     description: The HyperV Generation of the Disk when the source
@@ -168,7 +168,8 @@ spec:
                   imageReferenceId:
                     description: ID of an existing platform/marketplace disk image
                       to copy when create_option is FromImage. This field cannot be
-                      specified if gallery_image_reference_id is specified.
+                      specified if gallery_image_reference_id is specified. Changing
+                      this forces a new resource to be created.
                     type: string
                   location:
                     description: Specified the supported Azure location where the
@@ -189,8 +190,8 @@ spec:
                       values are AllowAll, AllowPrivate, and DenyAll.
                     type: string
                   onDemandBurstingEnabled:
-                    description: Demand Bursting is enabled for the Managed Disk.
-                      Defaults to false.
+                    description: Specifies if On-Demand Bursting is enabled for the
+                      Managed Disk.
                     type: boolean
                   osType:
                     description: Specify a value when the source of an Import or Copy
@@ -203,7 +204,8 @@ spec:
                     type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group where the Managed
-                      Disk should exist.
+                      Disk should exist. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -293,9 +295,10 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   sourceResourceId:
-                    description: The ID of an existing Managed Disk to copy create_option
-                      is Copy or the recovery point to restore when create_option
-                      is Restore
+                    description: The ID of an existing Managed Disk or Snapshot to
+                      copy when create_option is Copy or the recovery point to restore
+                      when create_option is Restore. Changing this forces a new resource
+                      to be created.
                     type: string
                   sourceResourceIdRef:
                     description: Reference to a ManagedDisk in compute to populate
@@ -374,7 +377,7 @@ spec:
                     type: object
                   sourceUri:
                     description: URI to a valid VHD file to be used when create_option
-                      is Import.
+                      is Import. Changing this forces a new resource to be created.
                     type: string
                   storageAccountId:
                     description: The ID of the Storage Account where the source_uri
@@ -384,7 +387,7 @@ spec:
                   storageAccountType:
                     description: The type of storage to use for the managed disk.
                       Possible values are Standard_LRS, StandardSSD_ZRS, Premium_LRS,
-                      Premium_ZRS, StandardSSD_LRS or UltraSSD_LRS.
+                      PremiumV2_LRS, Premium_ZRS, StandardSSD_LRS or UltraSSD_LRS.
                     type: string
                   tags:
                     additionalProperties:
@@ -398,8 +401,16 @@ spec:
                     type: string
                   trustedLaunchEnabled:
                     description: Specifies if Trusted Launch is enabled for the Managed
-                      Disk. Defaults to false.
+                      Disk. Changing this forces a new resource to be created.
                     type: boolean
+                  uploadSizeBytes:
+                    description: Specifies the size of the managed disk to create
+                      in bytes. Required when create_option is Upload. The value must
+                      be equal to the source disk to be copied in bytes. Source disk
+                      size could be calculated with ls -l or wc -c. More information
+                      can be found at Copy a managed disk. Changing this forces a
+                      new resource to be created.
+                    type: number
                   zone:
                     description: Specifies the Availability Zone in which this Managed
                       Disk should be located. Changing this property forces a new

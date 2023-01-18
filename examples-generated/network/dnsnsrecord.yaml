@@ -9,8 +9,8 @@ metadata:
 spec:
   forProvider:
     records:
-    - ns1.contoso.com
-    - ns2.contoso.com
+    - ns1.contoso.com.
+    - ns2.contoso.com.
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -35,7 +35,7 @@ type APIOperationPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
-	// The ID of the API Management API Operation within the API Management Service. Changing this forces a new resource to be created.
+	// The name of the API within the API Management Service where the Operation exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.APIOperation
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("api_name",false)
 	// +kubebuilder:validation:Optional
@@ -49,7 +49,7 @@ type APIOperationPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	APINameSelector *v1.Selector `json:"apiNameSelector,omitempty" tf:"-"`
 
-	// The operation identifier within an API. Must be unique in the current API Management service instance.
+	// The operation identifier within an API. Must be unique in the current API Management service instance. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.APIOperation
 	// +kubebuilder:validation:Optional
 	OperationID *string `json:"operationId,omitempty" tf:"operation_id,omitempty"`

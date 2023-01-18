@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     adminSshKey:
-    - publicKey: ${file("~/.ssh/id_rsa.pub")}
+    - publicKey: ${local.first_public_key}
       username: adminuser
     adminUsername: adminuser
     instances: 1

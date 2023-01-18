@@ -66,7 +66,8 @@ spec:
                 properties:
                   datastoreType:
                     description: Specifies the type of the data store. Possible values
-                      are ArchiveStore, SnapshotStore and VaultStore.
+                      are ArchiveStore, SnapshotStore and VaultStore. Changing this
+                      forces a new resource to be created.
                     type: string
                   identity:
                     description: An identity block as defined below.

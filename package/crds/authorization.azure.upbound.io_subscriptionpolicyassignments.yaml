@@ -74,6 +74,7 @@ spec:
                     type: string
                   enforce:
                     description: Specifies if this Policy should be enforced or not?
+                      Defaults to true.
                     type: boolean
                   identity:
                     description: An identity block as defined below.

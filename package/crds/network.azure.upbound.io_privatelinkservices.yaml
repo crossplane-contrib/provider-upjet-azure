@@ -72,13 +72,19 @@ spec:
                     type: array
                   enableProxyProtocol:
                     description: Should the Private Link Service support the Proxy
-                      Protocol? Defaults to false.
+                      Protocol?
                     type: boolean
+                  fqdns:
+                    description: List of FQDNs allowed for the Private Link Service.
+                    items:
+                      type: string
+                    type: array
                   loadBalancerFrontendIpConfigurationIds:
                     description: A list of Frontend IP Configuration IDs from a Standard
                       Load Balancer, where traffic from the Private Link Service should
                       be routed. You can use Load Balancer Rules to direct this traffic
                       to appropriate backend pools where your applications are running.
+                      Changing this forces a new resource to be created.
                     items:
                       type: string
                     type: array
@@ -277,8 +283,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags to assign to the resource. Changing
-                      this forces a new resource to be created.
+                    description: A mapping of tags to assign to the resource.
                     type: object
                   visibilitySubscriptionIds:
                     description: A list of Subscription UUID/GUID's that will be able

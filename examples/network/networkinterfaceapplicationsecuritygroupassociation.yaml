@@ -8,5 +8,3 @@ spec:
       name: example
     networkInterfaceIdRef:
       name: example
-  providerConfigRef:
-    name: example

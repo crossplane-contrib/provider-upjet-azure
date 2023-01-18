@@ -70,7 +70,8 @@ spec:
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the Spatial Anchors Account.
+                      the Spatial Anchors Account. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate

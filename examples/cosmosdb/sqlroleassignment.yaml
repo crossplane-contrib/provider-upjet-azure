@@ -2,8 +2,8 @@ apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLRoleAssignment
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource needs a valid scope id."
     meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
+    upjet.upbound.io/manual-intervention: "This resource needs a SQLRoleDefinition resource."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -11,23 +11,27 @@ spec:
   forProvider:
     accountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: sql
-    principalId: # principal-id
+        testing.upbound.io/example-name: example
+    name: 736180af-7fbc-4c7f-9004-22735173c1c3
+    principalId: ${data.azurerm_client_config.current.object_id}
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: rg1
+        testing.upbound.io/example-name: example
     roleDefinitionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    scope: /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}
+    scopeSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
 ---
 
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLRoleDefinition
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource needs a valid assignableScopes id(s)."
     meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
+    upjet.upbound.io/manual-intervention: "This resource needs a valid assignableScopes id(s)."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -35,14 +39,55 @@ spec:
   forProvider:
     accountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: sql
+        testing.upbound.io/example-name: example
     assignableScopes:
-    - /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}
-    name: example
+    - ${azurerm_cosmosdb_account.example.id}
+    name: examplesqlroledef
     permissions:
     - dataActions:
       - Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: rg1
+        testing.upbound.io/example-name: example
     type: CustomRole
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
+    upjet.upbound.io/manual-intervention: "This resource is dependency of SQLRoleAssignment. This resource is skipping because parent resource was skipped."
+  labels:
+  labels:
+    testing.upbound.io/example-name: example
+  name: upbound-example
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: Strong
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlroleassignment
+    upjet.upbound.io/manual-intervention: "This resource is dependency of SQLRoleAssignment. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

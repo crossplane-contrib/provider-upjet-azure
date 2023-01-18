@@ -65,6 +65,13 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  autoRotationEnabled:
+                    description: When enabled, the server will continuously check
+                      the key vault for any new versions of the key being used as
+                      the TDE protector. If a new version of the key is detected,
+                      the TDE protector on the server will be automatically rotated
+                      to the latest key version within 60 minutes.
+                    type: boolean
                   keyVaultKeyId:
                     description: To use customer managed keys from Azure Key Vault,
                       provide the AKV Key ID. To use service managed keys, omit this
@@ -144,7 +151,8 @@ spec:
                         type: object
                     type: object
                   serverId:
-                    description: Specifies the name of the MS SQL Server.
+                    description: Specifies the name of the MS SQL Server. Changing
+                      this forces a new resource to be created.
                     type: string
                   serverIdRef:
                     description: Reference to a MSSQLServer to populate serverId.

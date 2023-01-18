@@ -67,7 +67,7 @@ spec:
                 properties:
                   endIpAddress:
                     description: Specifies the End IP Address associated with this
-                      Firewall Rule. Changing this forces a new resource to be created.
+                      Firewall Rule.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which the MySQL
@@ -228,7 +228,7 @@ spec:
                     type: object
                   startIpAddress:
                     description: Specifies the Start IP Address associated with this
-                      Firewall Rule. Changing this forces a new resource to be created.
+                      Firewall Rule.
                     type: string
                 required:
                 - endIpAddress

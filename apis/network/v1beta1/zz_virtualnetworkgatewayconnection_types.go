@@ -103,15 +103,11 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
-	// Connection mode to use. Possible
-	// values are Default, InitiatorOnly and ResponderOnly. Defaults to Default.
-	// Changing this value will force a resource to be created.
+	// Connection mode to use. Possible values are Default, InitiatorOnly and ResponderOnly. Defaults to Default. Changing this value will force a resource to be created.
 	// +kubebuilder:validation:Optional
 	ConnectionMode *string `json:"connectionMode,omitempty" tf:"connection_mode,omitempty"`
 
-	// The IKE protocol version to use. Possible
-	// values are IKEv1 and IKEv2. Defaults to IKEv2.
-	// Changing this value will force a resource to be created.
+	// The IKE protocol version to use. Possible values are IKEv1 and IKEv2, values are IKEv1 and IKEv2. Defaults to IKEv2. Changing this forces a new resource to be created.
 	// -> Note: Only valid for IPSec connections on virtual network gateways with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.
 	// +kubebuilder:validation:Optional
 	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
@@ -135,9 +131,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableBGP *bool `json:"enableBgp,omitempty" tf:"enable_bgp,omitempty"`
 
-	// The ID of the Express Route Circuit
-	// when creating an ExpressRoute connection (i.e. when type is ExpressRoute).
-	// The Express Route Circuit can be in the same or in a different subscription.
+	// The ID of the Express Route Circuit when creating an ExpressRoute connection (i.e. when type is ExpressRoute). The Express Route Circuit can be in the same or in a different subscription. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitID *string `json:"expressRouteCircuitId,omitempty" tf:"express_route_circuit_id,omitempty"`
 
@@ -174,15 +168,11 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalNetworkGatewayIDSelector *v1.Selector `json:"localNetworkGatewayIdSelector,omitempty" tf:"-"`
 
-	// The location/region where the connection is
-	// located. Changing this forces a new resource to be created.
+	// The location/region where the connection is located. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// The ID of the peer virtual
-	// network gateway when creating a VNet-to-VNet connection (i.e. when type
-	// is Vnet2Vnet). The peer Virtual Network Gateway can be in the same or
-	// in a different subscription.
+	// The ID of the peer virtual network gateway when creating a VNet-to-VNet connection (i.e. when type is Vnet2Vnet). The peer Virtual Network Gateway can be in the same or in a different subscription. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetworkGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -196,8 +186,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayIDSelector *v1.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 
-	// The name of the resource group in which to
-	// create the connection Changing the name forces a new resource to be created.
+	// The name of the resource group in which to create the connection Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -229,11 +218,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	TrafficSelectorPolicy []TrafficSelectorPolicyParameters `json:"trafficSelectorPolicy,omitempty" tf:"traffic_selector_policy,omitempty"`
 
-	// The type of connection. Valid options are IPsec
-	// (Site-to-Site), ExpressRoute (ExpressRoute), and Vnet2Vnet (VNet-to-VNet).
-	// Each connection type requires different mandatory arguments (refer to the
-	// examples above). Changing the connection type will force a new connection
-	// to be created.
+	// The type of connection. Valid options are IPsec (Site-to-Site), ExpressRoute (ExpressRoute), and Vnet2Vnet (VNet-to-VNet). Each connection type requires different mandatory arguments (refer to the examples above). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
@@ -243,9 +228,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	UsePolicyBasedTrafficSelectors *bool `json:"usePolicyBasedTrafficSelectors,omitempty" tf:"use_policy_based_traffic_selectors,omitempty"`
 
-	// The ID of the Virtual Network Gateway
-	// in which the connection will be created. Changing the gateway forces a new
-	// resource to be created.
+	// The ID of the Virtual Network Gateway in which the connection will be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetworkGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -61,7 +61,7 @@ type ManagedStorageAccountParameters struct {
 	// +kubebuilder:validation:Required
 	StorageAccountKey *string `json:"storageAccountKey" tf:"storage_account_key,omitempty"`
 
-	// A mapping of tags which should be assigned to the Key Vault Managed Storage Account.
+	// A mapping of tags which should be assigned to the Key Vault Managed Storage Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }

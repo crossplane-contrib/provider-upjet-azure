@@ -13,6 +13,40 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ImportObservation struct {
+}
+
+type ImportParameters struct {
+
+	// Specifies the name of the SQL administrator.
+	// +kubebuilder:validation:Required
+	AdministratorLogin *string `json:"administratorLogin" tf:"administrator_login,omitempty"`
+
+	// Specifies the password of the SQL administrator.
+	// +kubebuilder:validation:Required
+	AdministratorLoginPasswordSecretRef v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
+
+	// Specifies the type of authentication used to access the server. Valid values are SQL or ADPassword.
+	// +kubebuilder:validation:Required
+	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
+
+	// The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for storage_uri parameter.
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Specifies the access key for the storage account.
+	// +kubebuilder:validation:Required
+	StorageKeySecretRef v1.SecretKeySelector `json:"storageKeySecretRef" tf:"-"`
+
+	// Specifies the type of access key for the storage account. Valid values are StorageAccessKey or SharedAccessKey.
+	// +kubebuilder:validation:Required
+	StorageKeyType *string `json:"storageKeyType" tf:"storage_key_type,omitempty"`
+
+	// Specifies the blob URI of the .bacpac file.
+	// +kubebuilder:validation:Required
+	StorageURI *string `json:"storageUri" tf:"storage_uri,omitempty"`
+}
+
 type LongTermRetentionPolicyObservation struct {
 }
 
@@ -51,7 +85,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary.
+	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
@@ -63,9 +97,13 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ElasticPoolID *string `json:"elasticPoolId,omitempty" tf:"elastic_pool_id,omitempty"`
 
-	// A boolean that specifies if the Geo Backup Policy is enabled.
+	// A boolean that specifies if the Geo Backup Policy is enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	GeoBackupEnabled *bool `json:"geoBackupEnabled,omitempty" tf:"geo_backup_enabled,omitempty"`
+
+	// A Database Import block as documented below. Mutually exclusive with create_mode.
+	// +kubebuilder:validation:Optional
+	Import []ImportParameters `json:"import,omitempty" tf:"import,omitempty"`
 
 	// A boolean that specifies if this is a ledger database. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -78,6 +116,10 @@ type MSSQLDatabaseParameters struct {
 	// A long_term_retention_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	LongTermRetentionPolicy []LongTermRetentionPolicyParameters `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
+
+	// The name of the Public Maintenance Configuration window to apply to the database. Valid values include SQL_Default, SQL_EastUS_DB_1, SQL_EastUS2_DB_1, SQL_SoutheastAsia_DB_1, SQL_AustraliaEast_DB_1, SQL_NorthEurope_DB_1, SQL_SouthCentralUS_DB_1, SQL_WestUS2_DB_1, SQL_UKSouth_DB_1, SQL_WestEurope_DB_1, SQL_EastUS_DB_2, SQL_EastUS2_DB_2, SQL_WestUS2_DB_2, SQL_SoutheastAsia_DB_2, SQL_AustraliaEast_DB_2, SQL_NorthEurope_DB_2, SQL_SouthCentralUS_DB_2, SQL_UKSouth_DB_2, SQL_WestEurope_DB_2, SQL_AustraliaSoutheast_DB_1, SQL_BrazilSouth_DB_1, SQL_CanadaCentral_DB_1, SQL_CanadaEast_DB_1, SQL_CentralUS_DB_1, SQL_EastAsia_DB_1, SQL_FranceCentral_DB_1, SQL_GermanyWestCentral_DB_1, SQL_CentralIndia_DB_1, SQL_SouthIndia_DB_1, SQL_JapanEast_DB_1, SQL_JapanWest_DB_1, SQL_NorthCentralUS_DB_1, SQL_UKWest_DB_1, SQL_WestUS_DB_1, SQL_AustraliaSoutheast_DB_2, SQL_BrazilSouth_DB_2, SQL_CanadaCentral_DB_2, SQL_CanadaEast_DB_2, SQL_CentralUS_DB_2, SQL_EastAsia_DB_2, SQL_FranceCentral_DB_2, SQL_GermanyWestCentral_DB_2, SQL_CentralIndia_DB_2, SQL_SouthIndia_DB_2, SQL_JapanEast_DB_2, SQL_JapanWest_DB_2, SQL_NorthCentralUS_DB_2, SQL_UKWest_DB_2, SQL_WestUS_DB_2, SQL_WestCentralUS_DB_1, SQL_FranceSouth_DB_1, SQL_WestCentralUS_DB_2, SQL_FranceSouth_DB_2, SQL_SwitzerlandNorth_DB_1, SQL_SwitzerlandNorth_DB_2, SQL_BrazilSoutheast_DB_1, SQL_UAENorth_DB_1, SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2. Defaults to SQL_Default.
+	// +kubebuilder:validation:Optional
+	MaintenanceConfigurationName *string `json:"maintenanceConfigurationName,omitempty" tf:"maintenance_configuration_name,omitempty"`
 
 	// The max size of the database in gigabytes.
 	// +kubebuilder:validation:Optional
@@ -133,7 +175,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Possible values are Geo, GeoZone, Local and Zone.  The default value is Geo.
+	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. The default value is Geo.
 	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
@@ -177,7 +219,7 @@ type ThreatDetectionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Should the account administrators be emailed when this alert is triggered?
+	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
 	// +kubebuilder:validation:Optional
 	EmailAccountAdmins *string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 

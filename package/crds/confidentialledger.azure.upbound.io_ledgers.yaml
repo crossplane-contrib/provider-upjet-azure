@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   azureadBasedServicePrincipal:
+                    description: A list of azuread_based_service_principal blocks
+                      as defined below.
                     items:
                       properties:
                         ledgerRoleName:
@@ -87,6 +89,8 @@ spec:
                       type: object
                     type: array
                   certificateBasedSecurityPrincipal:
+                    description: A list of certificate_based_security_principal blocks
+                      as defined below.
                     items:
                       properties:
                         ledgerRoleName:

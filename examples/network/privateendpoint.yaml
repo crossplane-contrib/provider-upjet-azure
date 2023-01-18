@@ -16,8 +16,7 @@ spec:
       name: loadbalancerrg
     subnetIdRef:
       name: service
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -30,8 +29,7 @@ spec:
     location: "West Europe"
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
@@ -49,8 +47,7 @@ spec:
     dnsServers:
       - "10.0.0.4"
       - "10.0.0.5"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
@@ -67,8 +64,7 @@ spec:
       name: example-vn-for-lb
     addressPrefixes:
       - "10.0.1.0/24"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
@@ -85,8 +81,7 @@ spec:
       name: example-vn-for-lb
     addressPrefixes:
       - "10.0.2.0/24"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PublicIP
@@ -103,8 +98,7 @@ spec:
       name: loadbalancerrg
     tags:
       environment: Production
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancer
@@ -122,8 +116,7 @@ spec:
       - name: publicipaddress
         publicIpAddressIdRef:
           name: publicipforlb
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateLinkService
@@ -144,5 +137,3 @@ spec:
         name: service
     resourceGroupNameRef:
       name: loadbalancerrg
-  providerConfigRef:
-    name: example

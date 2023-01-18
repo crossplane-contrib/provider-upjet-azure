@@ -36,8 +36,8 @@ spec:
     schema:
       openAPIV3Schema:
         description: FrontdoorCustomHTTPSConfiguration is the Schema for the FrontdoorCustomHTTPSConfigurations
-          API. Manages the Custom Https Configuration for an Azure Front Door Frontend
-          Endpoint.
+          API. Manages the Custom Https Configuration for an Azure Front Door (classic)
+          Frontend Endpoint.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -67,7 +67,7 @@ spec:
               forProvider:
                 properties:
                   customHttpsConfiguration:
-                    description: A custom_https_configuration block as defined below.
+                    description: A custom_https_configuration block as defined above.
                     items:
                       properties:
                         azureKeyVaultCertificateSecretName:
@@ -76,7 +76,7 @@ spec:
                           type: string
                         azureKeyVaultCertificateSecretVersion:
                           description: The version of the Key Vault secret representing
-                            the full certificate PFX. Defaults to Latest.
+                            the full certificate PFX.
                           type: string
                         azureKeyVaultCertificateVaultId:
                           description: The ID of the Key Vault containing the SSL
@@ -172,8 +172,9 @@ spec:
                       domain associated with the Front Door?
                     type: boolean
                   frontendEndpointId:
-                    description: The ID of the FrontDoor Frontend Endpoint which this
-                      configuration refers to.
+                    description: The ID of the Front Door Frontend Endpoint which
+                      this configuration refers to. Changing this forces a new resource
+                      to be created.
                     type: string
                 required:
                 - customHttpsProvisioningEnabled
@@ -357,7 +358,7 @@ spec:
               atProvider:
                 properties:
                   customHttpsConfiguration:
-                    description: A custom_https_configuration block as defined below.
+                    description: A custom_https_configuration block as defined above.
                     items:
                       properties:
                         minimumTlsVersion:

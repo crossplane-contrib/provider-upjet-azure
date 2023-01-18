@@ -41,6 +41,7 @@ type DNSARecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// The Time To Live (TTL) of the DNS record in seconds.
 	// +kubebuilder:validation:Required
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 
@@ -48,7 +49,7 @@ type DNSARecordParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The Azure resource id of the target object. Conflicts with records
+	// The Azure resource id of the target object. Conflicts with records.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

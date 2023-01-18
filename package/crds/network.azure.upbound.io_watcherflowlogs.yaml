@@ -315,7 +315,7 @@ spec:
                           description: The number of days to retain flow log records.
                           type: number
                         enabled:
-                          description: Should Network Flow Logging be Enabled?
+                          description: Boolean flag to enable/disable retention.
                           type: boolean
                       required:
                       - days
@@ -410,11 +410,11 @@ spec:
                     items:
                       properties:
                         enabled:
-                          description: Should Network Flow Logging be Enabled?
+                          description: Boolean flag to enable/disable traffic analytics.
                           type: boolean
                         intervalInMinutes:
                           description: How frequently service should do flow analytics
-                            in minutes.
+                            in minutes. Defaults to 60.
                           type: number
                         workspaceId:
                           description: The resource GUID of the attached workspace.

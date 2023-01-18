@@ -11,5 +11,3 @@ spec:
     loadbalancerIdRef:
       name: example
     protocol: Tcp
-  providerConfigRef:
-    name: example

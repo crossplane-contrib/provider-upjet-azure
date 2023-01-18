@@ -69,7 +69,7 @@ type VirtualNetworkParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// The name of the resource group in which to create the virtual network.
+	// The name of the resource group in which to create the virtual network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -95,7 +95,7 @@ type VirtualNetworkSubnetObservation struct {
 	// The ID of this subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the subnet.
+	// The name of the subnet. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Network Security Group to associate with the subnet. (Referenced by id, ie. azurerm_network_security_group.example.id)

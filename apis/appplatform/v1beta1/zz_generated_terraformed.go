@@ -84,7 +84,7 @@ func (tr *SpringCloudActiveDeployment) LateInitialize(attrs []byte) (bool, error
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudActiveDeployment) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudApp
@@ -158,7 +158,7 @@ func (tr *SpringCloudApp) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudApp) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudAppCosmosDBAssociation
@@ -232,7 +232,7 @@ func (tr *SpringCloudAppCosmosDBAssociation) LateInitialize(attrs []byte) (bool,
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudAppCosmosDBAssociation) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudAppMySQLAssociation
@@ -306,7 +306,7 @@ func (tr *SpringCloudAppMySQLAssociation) LateInitialize(attrs []byte) (bool, er
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudAppMySQLAssociation) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudAppRedisAssociation
@@ -380,7 +380,7 @@ func (tr *SpringCloudAppRedisAssociation) LateInitialize(attrs []byte) (bool, er
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudAppRedisAssociation) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudCertificate
@@ -454,7 +454,7 @@ func (tr *SpringCloudCertificate) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudCertificate) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudCustomDomain
@@ -528,7 +528,7 @@ func (tr *SpringCloudCustomDomain) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudCustomDomain) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudJavaDeployment
@@ -602,7 +602,7 @@ func (tr *SpringCloudJavaDeployment) LateInitialize(attrs []byte) (bool, error) 
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudJavaDeployment) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudService
@@ -676,7 +676,7 @@ func (tr *SpringCloudService) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudService) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudStorage
@@ -750,5 +750,5 @@ func (tr *SpringCloudStorage) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudStorage) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

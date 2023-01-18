@@ -22,7 +22,7 @@ type RetentionPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	Days *float64 `json:"days" tf:"days,omitempty"`
 
-	// Should Network Flow Logging be Enabled?
+	// Boolean flag to enable/disable retention.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
@@ -32,11 +32,11 @@ type TrafficAnalyticsObservation struct {
 
 type TrafficAnalyticsParameters struct {
 
-	// Should Network Flow Logging be Enabled?
+	// Boolean flag to enable/disable traffic analytics.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// How frequently service should do flow analytics in minutes.
+	// How frequently service should do flow analytics in minutes. Defaults to 60.
 	// +kubebuilder:validation:Optional
 	IntervalInMinutes *float64 `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
 

@@ -2,7 +2,7 @@ apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: OutputBlob
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputblob
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -12,7 +12,7 @@ spec:
     pathPattern: some-pattern
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: azurerm_stream_analytics_job
+        testing.upbound.io/example-name: example
     serialization:
     - encoding: UTF8
       fieldDelimiter: ','
@@ -27,22 +27,10 @@ spec:
     storageContainerNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    streamAnalyticsJobName: ${data.azurerm_stream_analytics_job.example.name}
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     timeFormat: HH
-
----
-
-apiVersion: azure.upbound.io/v1beta1
-kind: ResourceGroup
-metadata:
-  annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    location: West Europe
 
 ---
 
@@ -50,18 +38,23 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputblob
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: exampleupboundstblob
 spec:
   forProvider:
+    accountKind: StorageV2
     accountReplicationType: LRS
     accountTier: Standard
+    isHnsEnabled: true
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system
 
 ---
 
@@ -69,7 +62,7 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: Container
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputblob
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -79,3 +72,48 @@ spec:
     storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-job
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamingUnits: 3
+    tags:
+      environment: example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+

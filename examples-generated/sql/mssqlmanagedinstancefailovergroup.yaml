@@ -18,7 +18,6 @@ spec:
     readWriteEndpointFailoverPolicy:
     - graceMinutes: 60
       mode: Automatic
-    resource_group_name: ${azurerm_resource_group.primary.name}
 
 ---
 
@@ -38,15 +37,15 @@ spec:
       name: example-secret
       namespace: upbound-system
     licenseType: BasePrice
-    location: ${azurerm_resource_group.primary.location}
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: primary
+        testing.upbound.io/example-name: example
     skuName: GP_Gen5
     storageSizeInGb: 32
     subnetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: primary
+        testing.upbound.io/example-name: example
     tags:
       environment: prod
     vcores: 4
@@ -69,18 +68,144 @@ spec:
       name: example-secret
       namespace: upbound-system
     licenseType: BasePrice
-    location: ${azurerm_resource_group.secondary.location}
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: secondary
+        testing.upbound.io/example-name: example
     skuName: GP_Gen5
     storageSizeInGb: 32
     subnetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: secondary
+        testing.upbound.io/example-name: example
     tags:
       environment: prod
     vcores: 4
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetNetworkSecurityGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    networkSecurityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetRouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlmanagedinstancefailovergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

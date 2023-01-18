@@ -31,6 +31,14 @@ type PublicIPParameters struct {
 	// +kubebuilder:validation:Required
 	AllocationMethod *string `json:"allocationMethod" tf:"allocation_method,omitempty"`
 
+	// The DDoS protection mode of the public IP. Possible values are Disabled, Enabled, and VirtualNetworkInherited. Defaults to VirtualNetworkInherited.
+	// +kubebuilder:validation:Optional
+	DDOSProtectionMode *string `json:"ddosProtectionMode,omitempty" tf:"ddos_protection_mode,omitempty"`
+
+	// The ID of DDoS protection plan associated with the public IP.
+	// +kubebuilder:validation:Optional
+	DDOSProtectionPlanID *string `json:"ddosProtectionPlanId,omitempty" tf:"ddos_protection_plan_id,omitempty"`
+
 	// Label for the Domain Name. Will be used to make up the FQDN.  If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
 	// +kubebuilder:validation:Optional
 	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
@@ -39,11 +47,11 @@ type PublicIPParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// A mapping of IP tags to assign to the public IP.
+	// A mapping of IP tags to assign to the public IP. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
-	// The IP Version to use, IPv6 or IPv4.
+	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 
@@ -55,7 +63,7 @@ type PublicIPParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// If specified then public IP address allocated will be provided from the public IP prefix resource.
+	// If specified then public IP address allocated will be provided from the public IP prefix resource. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
 
@@ -76,11 +84,11 @@ type PublicIPParameters struct {
 	// +kubebuilder:validation:Optional
 	ReverseFqdn *string `json:"reverseFqdn,omitempty" tf:"reverse_fqdn,omitempty"`
 
-	// The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Basic.
+	// The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Basic. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
-	// The SKU Tier that should be used for the Public IP. Possible values are Regional and Global. Defaults to Regional.
+	// The SKU Tier that should be used for the Public IP. Possible values are Regional and Global. Defaults to Regional. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
@@ -88,7 +96,7 @@ type PublicIPParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A collection containing the availability zone to allocate the Public IP in.
+	// A collection containing the availability zone to allocate the Public IP in. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }

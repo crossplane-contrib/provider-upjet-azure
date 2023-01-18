@@ -80,7 +80,8 @@ spec:
                             TheLastWeek, TheLastMonth, TheLastBillingMonth, Custom.'
                           type: string
                         type:
-                          description: The type of the query.
+                          description: The type of the query. Possible values are
+                            ActualCost, AmortizedCost and Usage.
                           type: string
                       required:
                       - timeFrame
@@ -93,7 +94,8 @@ spec:
                       properties:
                         containerId:
                           description: The Resource Manager ID of the container where
-                            exports will be uploaded.
+                            exports will be uploaded. Changing this forces a new resource
+                            to be created.
                           type: string
                         containerIdRef:
                           description: Reference to a Container in storage to populate
@@ -175,7 +177,8 @@ spec:
                           type: object
                         rootFolderPath:
                           description: The path of the directory where exports will
-                            be uploaded.
+                            be uploaded. Changing this forces a new resource to be
+                            created.
                           type: string
                       required:
                       - rootFolderPath
@@ -193,7 +196,7 @@ spec:
                     type: string
                   resourceGroupId:
                     description: The id of the resource group on which to create an
-                      export.
+                      export. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupIdRef:
                     description: Reference to a ResourceGroup in azure to populate

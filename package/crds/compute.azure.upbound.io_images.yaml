@@ -92,11 +92,13 @@ spec:
                     type: array
                   hyperVGeneration:
                     description: The HyperVGenerationType of the VirtualMachine created
-                      from the image as V1, V2. The default is V1.
+                      from the image as V1, V2. The default is V1. Changing this forces
+                      a new resource to be created.
                     type: string
                   location:
                     description: Specified the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
+                      Changing this forces a new resource to be created.
                     type: string
                   osDisk:
                     description: One or more os_disk elements as defined below.
@@ -117,6 +119,7 @@ spec:
                         osState:
                           description: Specifies the state of the operating system
                             contained in the blob. Currently, the only value is Generalized.
+                            Possible values are Generalized and Specialized.
                           type: string
                         osType:
                           description: 'Specifies the type of operating system contained
@@ -130,8 +133,9 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
-                    description: The name of the resource group in which to create
-                      the image. Changing this forces a new resource to be created.
+                    description: The name of the resource group in which to create.
+                      Changing this forces a new resource to be created. the image.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate

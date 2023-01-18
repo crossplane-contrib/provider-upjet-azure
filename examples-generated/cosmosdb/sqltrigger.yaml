@@ -29,14 +29,14 @@ spec:
   forProvider:
     accountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     partitionKeyPath: /id
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
 
 ---
 

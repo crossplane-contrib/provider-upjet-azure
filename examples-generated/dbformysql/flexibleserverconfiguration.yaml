@@ -33,10 +33,10 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    location: ${azurerm_resource_group.test.location}
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     skuName: GP_Standard_D2ds_v4
 
 ---

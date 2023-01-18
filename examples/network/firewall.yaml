@@ -15,5 +15,3 @@ spec:
     location: West Europe
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

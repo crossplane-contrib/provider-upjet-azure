@@ -689,6 +689,11 @@ func (in *IOTHubDPSCertificateParameters) DeepCopyInto(out *IOTHubDPSCertificate
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.IsVerified != nil {
+		in, out := &in.IsVerified, &out.IsVerified
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -830,6 +835,11 @@ func (in *IOTHubDPSParameters) DeepCopyInto(out *IOTHubDPSParameters) {
 	if in.AllocationPolicy != nil {
 		in, out := &in.AllocationPolicy, &out.AllocationPolicy
 		*out = new(string)
+		**out = **in
+	}
+	if in.DataResidencyEnabled != nil {
+		in, out := &in.DataResidencyEnabled, &out.DataResidencyEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.IPFilterRule != nil {

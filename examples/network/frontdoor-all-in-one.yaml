@@ -7,8 +7,7 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: FrontDoor
@@ -46,8 +45,7 @@ spec:
       name: exampleRoutingRule1
       patternsToMatch:
       - /*
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: FrontdoorCustomHTTPSConfiguration
@@ -57,8 +55,7 @@ spec:
   forProvider:
     customHttpsProvisioningEnabled: false
     frontendEndpointId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-frontdoor-rg/providers/Microsoft.Network/frontDoors/example/frontendEndpoints/example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: FrontdoorFirewallPolicy
@@ -137,8 +134,7 @@ spec:
     redirectUrl: https://www.contoso.com
     resourceGroupNameRef:
       name: example-frontdoor-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: FrontdoorRulesEngine
@@ -174,5 +170,3 @@ spec:
         variable: RequestMethod
       name: overwriteorigin
       priority: 2
-  providerConfigRef:
-    name: example

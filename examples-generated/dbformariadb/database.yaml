@@ -8,8 +8,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    charset: utf8
-    collation: utf8_general_ci
+    charset: utf8mb4
+    collation: utf8mb4_unicode_520_ci
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

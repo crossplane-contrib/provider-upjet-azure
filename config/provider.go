@@ -58,6 +58,7 @@ import (
 	"github.com/upbound/provider-azure/config/storage"
 	"github.com/upbound/provider-azure/config/storagecache"
 	"github.com/upbound/provider-azure/config/storagesync"
+	"github.com/upbound/provider-azure/config/streamanalytics"
 )
 
 const (
@@ -177,6 +178,7 @@ func GetProvider() *tjconfig.Provider {
 		storagecache.Configure,
 		servicebus.Configure,
 		consumption.Configure,
+		streamanalytics.Configure,
 	} {
 		configure(pc)
 	}

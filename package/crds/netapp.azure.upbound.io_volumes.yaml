@@ -141,11 +141,17 @@ spec:
                             type: string
                         type: object
                     type: object
+                  azureVmwareDataStoreEnabled:
+                    description: Is the NetApp Volume enabled for Azure VMware Solution
+                      (AVS) datastore purpose. Defaults to false. Changing this forces
+                      a new resource to be created.
+                    type: boolean
                   createFromSnapshotResourceId:
                     description: 'Creates volume from snapshot. Following properties
                       must be the same as the original volume where the snapshot was
                       taken from: protocols, subnet_id, location, service_level, resource_group_name,
-                      account_name and pool_name.'
+                      account_name and pool_name. Changing this forces a new resource
+                      to be created.'
                     type: string
                   createFromSnapshotResourceIdRef:
                     description: Reference to a Snapshot to populate createFromSnapshotResourceId.
@@ -229,7 +235,8 @@ spec:
                             destination.
                           type: string
                         remoteVolumeLocation:
-                          description: Location of the primary volume.
+                          description: Location of the primary volume. Changing this
+                            forces a new resource to be created.
                           type: string
                         remoteVolumeResourceId:
                           description: Resource ID of the primary volume.
@@ -444,6 +451,14 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  networkFeatures:
+                    description: Indicates which network feature to use, accepted
+                      values are Basic or Standard, it defaults to Basic if not defined.
+                      This is a feature in public preview and for more information
+                      about it and how to register, please refer to Configure network
+                      features for an Azure NetApp Files volume. Changing this forces
+                      a new resource to be created.
+                    type: string
                   poolName:
                     description: The name of the NetApp pool in which the NetApp Volume
                       should be created. Changing this forces a new resource to be
@@ -618,11 +633,12 @@ spec:
                       Ntfs. If not provided, single-protocol volume is created defaulting
                       to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
                       to Ntfs. In a dual-protocol volume, if not provided, its value
-                      will be Ntfs.
+                      will be Ntfs. Changing this forces a new resource to be created.
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid
-                      values include Premium, Standard, or Ultra.
+                      values include Premium, Standard, or Ultra. Changing this forces
+                      a new resource to be created.
                     type: string
                   snapshotDirectoryVisible:
                     description: Specifies whether the .snapshot (NFS clients) or
@@ -722,6 +738,13 @@ spec:
                   volumePath:
                     description: A unique file path for the volume. Used when creating
                       mount targets. Changing this forces a new resource to be created.
+                    type: string
+                  zone:
+                    description: Specifies the Availability Zone in which the Volume
+                      should be located. Possible values are 1, 2 and 3. This feature
+                      is currently in preview, for more information on how to enable
+                      it, please refer to Manage availability zone volume placement
+                      for Azure NetApp Files
                     type: string
                 required:
                 - location

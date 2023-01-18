@@ -27,7 +27,7 @@ type LoadBalancerProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
-	// The ID of the LoadBalancer in which to create the NAT Rule.
+	// The ID of the LoadBalancer in which to create the NAT Rule. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=LoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -48,6 +48,10 @@ type LoadBalancerProbeParameters struct {
 	// Port on which the Probe queries the backend endpoint. Possible values range from 1 to 65535, inclusive.
 	// +kubebuilder:validation:Required
 	Port *float64 `json:"port" tf:"port,omitempty"`
+
+	// The number of consecutive successful or failed probes that allow or deny traffic to this endpoint. Possible values range from 1 to 100. The default value is 1.
+	// +kubebuilder:validation:Optional
+	ProbeThreshold *float64 `json:"probeThreshold,omitempty" tf:"probe_threshold,omitempty"`
 
 	// Specifies the protocol of the end point. Possible values are Http, Https or Tcp. If TCP is specified, a received ACK is required for the probe to be successful. If HTTP is specified, a 200 OK response from the specified URI is required for the probe to be successful.
 	// +kubebuilder:validation:Optional

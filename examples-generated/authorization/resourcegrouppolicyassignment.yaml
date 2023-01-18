@@ -36,10 +36,20 @@ metadata:
   name: example
 spec:
   forProvider:
+    displayName: my-policy-definition
     mode: All
-    policyRule: "\t{\n    \"if\": {\n      \"not\": {\n        \"field\": \"location\",\n
-      \       \"equals\": \"westeurope\"\n      }\n    },\n    \"then\": {\n      \"effect\":
-      \"Deny\"\n    }\n  }\n"
+    policyRule: |2
+       {
+          "if": {
+            "not": {
+              "field": "location",
+              "equals": "westeurope"
+            }
+          },
+          "then": {
+            "effect": "Deny"
+          }
+        }
     policyType: Custom
 
 ---

@@ -21,6 +21,10 @@ type ProximityPlacementGroupObservation struct {
 
 type ProximityPlacementGroupParameters struct {
 
+	// Specifies the supported sizes of Virtual Machines that can be created in the Proximity Placement Group.
+	// +kubebuilder:validation:Optional
+	AllowedVMSizes []*string `json:"allowedVmSizes,omitempty" tf:"allowed_vm_sizes,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
@@ -41,6 +45,10 @@ type ProximityPlacementGroupParameters struct {
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the supported zone of the Proximity Placement Group. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 // ProximityPlacementGroupSpec defines the desired state of ProximityPlacementGroup

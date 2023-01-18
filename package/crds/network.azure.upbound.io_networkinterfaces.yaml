@@ -95,7 +95,8 @@ spec:
                             SKU Load Balancer.
                           type: string
                         name:
-                          description: A name used for this IP Configuration.
+                          description: A name used for this IP Configuration. Changing
+                            this forces a new resource to be created.
                           type: string
                         primary:
                           description: Is this the Primary IP Configuration? Must

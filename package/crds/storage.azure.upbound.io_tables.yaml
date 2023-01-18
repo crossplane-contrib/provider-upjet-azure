@@ -99,8 +99,10 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The name of the storage table. Must be unique within
-                      the storage account the table is located.
+                    description: The name of the storage table. Only Alphanumeric
+                      characters allowed, starting with a letter. Must be unique within
+                      the storage account the table is located. Changing this forces
+                      a new resource to be created.
                     type: string
                   storageAccountName:
                     description: Specifies the storage account in which to create

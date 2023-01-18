@@ -10,6 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	v1beta11 "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -37,6 +38,32 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this FunctionJavascriptUda.
+func (mg *FunctionJavascriptUda) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobIDRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobIDSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobID")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -179,6 +206,22 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageContainerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
 }

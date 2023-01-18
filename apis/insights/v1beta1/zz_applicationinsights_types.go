@@ -44,6 +44,7 @@ type ApplicationInsightsParameters struct {
 	// +kubebuilder:validation:Optional
 	ForceCustomerStorageForProfiler *bool `json:"forceCustomerStorageForProfiler,omitempty" tf:"force_customer_storage_for_profiler,omitempty"`
 
+	// Should the Application Insights component support ingestion over the Public Internet? Defaults to true.
 	// +kubebuilder:validation:Optional
 	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
 
@@ -59,8 +60,7 @@ type ApplicationInsightsParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// The name of the resource group in which to
-	// create the Application Insights component.
+	// The name of the resource group in which to create the Application Insights component. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -77,7 +77,7 @@ type ApplicationInsightsParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
-	// Specifies the percentage of the data produced by the monitored application that is sampled for Application Insights telemetry.
+	// Specifies the percentage of the data produced by the monitored application that is sampled for Application Insights telemetry. Defaults to 100.
 	// +kubebuilder:validation:Optional
 	SamplingPercentage *float64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
 
@@ -85,7 +85,7 @@ type ApplicationInsightsParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the id of a log analytics workspace resource
+	// Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

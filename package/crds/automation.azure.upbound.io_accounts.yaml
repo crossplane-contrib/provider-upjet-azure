@@ -64,6 +64,26 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  encryption:
+                    description: An encryption block as defined below.
+                    items:
+                      properties:
+                        keySource:
+                          description: The source of the encryption key. Possible
+                            values are Microsoft.Automation and Microsoft.Keyvault.
+                          type: string
+                        keyVaultKeyId:
+                          description: The ID of the Key Vault Key which should be
+                            used to Encrypt the data in this Automation Account.
+                          type: string
+                        userAssignedIdentityId:
+                          description: The User Assigned Managed Identity ID to be
+                            used for accessing the Customer Managed Key for encryption.
+                          type: string
+                      required:
+                      - keyVaultKeyId
+                      type: object
+                    type: array
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -83,6 +103,10 @@ spec:
                       - type
                       type: object
                     type: array
+                  localAuthenticationEnabled:
+                    description: Whether requests using non-AAD authentication are
+                      blocked. Defaults to true.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -172,8 +196,8 @@ spec:
                         type: object
                     type: object
                   skuName:
-                    description: The SKU of the account - only Basic is supported
-                      at this time.
+                    description: The SKU of the account. Possible values are Basic
+                      and Free.
                     type: string
                   tags:
                     additionalProperties:
@@ -364,6 +388,10 @@ spec:
                     description: The DSC Server Endpoint associated with this Automation
                       Account.
                     type: string
+                  hybridServiceUrl:
+                    description: The URL of automation hybrid service which is used
+                      for hybrid worker on-boarding With this Automation Account.
+                    type: string
                   id:
                     description: The ID of the Automation Account.
                     type: string
@@ -378,6 +406,18 @@ spec:
                         tenantId:
                           description: The Tenant ID associated with this Managed
                             Service Identity.
+                          type: string
+                      type: object
+                    type: array
+                  privateEndpointConnection:
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the Automation Account.
+                          type: string
+                        name:
+                          description: Specifies the name of the Automation Account.
+                            Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array

@@ -219,8 +219,16 @@ spec:
                             type: string
                         type: object
                     type: object
+                  components:
+                    description: Types definitions. Used for Swagger/OpenAPI v2/v3
+                      schemas only.
+                    type: string
                   contentType:
                     description: The content type of the API Schema.
+                    type: string
+                  definitions:
+                    description: Types definitions. Used for Swagger/OpenAPI v1 schemas
+                      only.
                     type: string
                   resourceGroupName:
                     description: The Name of the Resource Group in which the API Management
@@ -307,7 +315,6 @@ spec:
                     type: string
                 required:
                 - contentType
-                - value
                 type: object
               providerConfigRef:
                 default:

@@ -1395,6 +1395,11 @@ func (in *BotChannelsRegistrationParameters) DeepCopyInto(out *BotChannelsRegist
 		*out = new(string)
 		**out = **in
 	}
+	if in.StreamingEndpointEnabled != nil {
+		in, out := &in.StreamingEndpointEnabled, &out.StreamingEndpointEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

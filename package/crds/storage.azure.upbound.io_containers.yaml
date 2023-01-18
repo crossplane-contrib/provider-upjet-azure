@@ -76,7 +76,8 @@ spec:
                     type: object
                   storageAccountName:
                     description: The name of the Storage Account where the Container
-                      should be created.
+                      should be created. Changing this forces a new resource to be
+                      created.
                     type: string
                   storageAccountNameRef:
                     description: Reference to a Account to populate storageAccountName.

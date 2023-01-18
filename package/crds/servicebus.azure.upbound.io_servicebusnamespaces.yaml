@@ -79,7 +79,8 @@ spec:
                           type: string
                         infrastructureEncryptionEnabled:
                           description: Used to specify whether enable Infrastructure
-                            Encryption (Double Encryption).
+                            Encryption (Double Encryption). Changing this forces a
+                            new resource to be created.
                           type: boolean
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key which should be
@@ -96,7 +97,7 @@ spec:
                       properties:
                         identityIds:
                           description: Specifies a list of User Assigned Managed Identity
-                            IDs to be assigned to this API Management Service.
+                            IDs to be assigned to this ServiceBus namespace.
                           items:
                             type: string
                           type: array
@@ -118,9 +119,18 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  minimumTlsVersion:
+                    description: 'The minimum supported TLS version for this Service
+                      Bus Namespace. Valid values are: 1.0, 1.1 and 1.2. The current
+                      default minimum TLS version is 1.2.'
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Is public network access enabled for the Service
+                      Bus Namespace? Defaults to true.
+                    type: boolean
                   resourceGroupName:
-                    description: The name of the resource group in which to create
-                      the namespace.
+                    description: The name of the resource group in which to Changing
+                      this forces a new resource to be created. create the namespace.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -209,7 +219,8 @@ spec:
                     type: object
                   zoneRedundant:
                     description: Whether or not this resource is zone redundant. sku
-                      needs to be Premium. Defaults to false.
+                      needs to be Premium. Changing this forces a new resource to
+                      be created.
                     type: boolean
                 required:
                 - location

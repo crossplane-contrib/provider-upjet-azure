@@ -98,7 +98,8 @@ spec:
                           type: array
                         not:
                           description: A not block as defined below to filter the
-                            budget on.
+                            budget on. This is deprecated as the API no longer supports
+                            it and will be removed in version 4.0 of the provider.
                           items:
                             properties:
                               dimension:
@@ -270,7 +271,8 @@ spec:
                             type: string
                           type: array
                         enabled:
-                          description: Should the notification be enabled?
+                          description: Should the notification be enabled? Defaults
+                            to true.
                           type: boolean
                         operator:
                           description: The comparison operator for the notification.
@@ -296,8 +298,8 @@ spec:
                     type: array
                   timeGrain:
                     description: The time covered by a budget. Tracking of the amount
-                      will be reset based on the time grain. Must be one of Monthly,
-                      Quarterly, Annually, BillingMonth, BillingQuarter, or BillingYear.
+                      will be reset based on the time grain. Must be one of BillingAnnual,
+                      BillingMonth, BillingQuarter, Annually, Monthly and Quarterly.
                       Defaults to Monthly.
                     type: string
                   timePeriod:

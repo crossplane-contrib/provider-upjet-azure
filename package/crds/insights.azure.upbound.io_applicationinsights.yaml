@@ -92,6 +92,8 @@ spec:
                       to false.
                     type: boolean
                   internetIngestionEnabled:
+                    description: Should the Application Insights component support
+                      ingestion over the Public Internet? Defaults to true.
                     type: boolean
                   internetQueryEnabled:
                     description: Should the Application Insights component support
@@ -106,7 +108,8 @@ spec:
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the Application Insights component.
+                      the Application Insights component. Changing this forces a new
+                      resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -191,7 +194,7 @@ spec:
                   samplingPercentage:
                     description: Specifies the percentage of the data produced by
                       the monitored application that is sampled for Application Insights
-                      telemetry.
+                      telemetry. Defaults to 100.
                     type: number
                   tags:
                     additionalProperties:
@@ -199,7 +202,8 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   workspaceId:
-                    description: Specifies the id of a log analytics workspace resource
+                    description: Specifies the id of a log analytics workspace resource.
+                      Changing this forces a new resource to be created.
                     type: string
                   workspaceIdRef:
                     description: Reference to a Workspace in operationalinsights to

@@ -88,6 +88,25 @@ spec:
                     - name
                     - namespace
                     type: object
+                  authentication:
+                    description: An authentication block as defined below.
+                    items:
+                      properties:
+                        activeDirectoryAuthEnabled:
+                          description: Whether or not Active Directory authentication
+                            is allowed to access the PostgreSQL Flexible Server.
+                          type: boolean
+                        passwordAuthEnabled:
+                          description: Whether or not password authentication is allowed
+                            to access the PostgreSQL Flexible Server.
+                          type: boolean
+                        tenantId:
+                          description: The Tenant ID of the Azure Active Directory
+                            which is used by the Active Directory authentication.
+                            active_directory_auth_enabled must be set to true.
+                          type: string
+                      type: object
+                    type: array
                   backupRetentionDays:
                     description: The backup retention days for the PostgreSQL Flexible
                       Server. Possible values are between 7 and 35 days.
@@ -225,7 +244,7 @@ spec:
                       type: object
                     type: array
                   pointInTimeRestoreTimeInUtc:
-                    description: The point in time to restore from creation_source_server_id
+                    description: The point in time to restore from source_server_id
                       when create_mode is PointInTimeRestore. Changing this forces
                       a new PostgreSQL Flexible Server to be created.
                     type: string
@@ -403,7 +422,7 @@ spec:
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible
                       Server. Possible values are 32768, 65536, 131072, 262144, 524288,
-                      1048576, 2097152, 4194304, 8388608, 16777216, and 33554432.
+                      1048576, 2097152, 4194304, 8388608, and 16777216.
                     type: number
                   tags:
                     additionalProperties:
@@ -413,7 +432,7 @@ spec:
                     type: object
                   version:
                     description: The version of PostgreSQL Flexible Server to use.
-                      Possible values are 11,12 and 13. Required when create_mode
+                      Possible values are 11,12, 13 and 14. Required when create_mode
                       is Default. Changing this forces a new PostgreSQL Flexible Server
                       to be created.
                     type: string

@@ -39,11 +39,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: B_Gen5_2
-    ssl_enforcement: Enabled
-    storage_profile:
-    - backup_retention_days: 7
-      geo_redundant_backup: Disabled
-      storage_mb: 5120
+    sslEnforcementEnabled: true
     version: "10.2"
 
 ---

@@ -63,7 +63,7 @@ type ProductParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Is a Subscription required to access API's included in this Product?
+	// Is a Subscription required to access API's included in this Product? Defaults to true.
 	// +kubebuilder:validation:Optional
 	SubscriptionRequired *bool `json:"subscriptionRequired,omitempty" tf:"subscription_required,omitempty"`
 

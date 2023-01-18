@@ -129,14 +129,14 @@ spec:
                       properties:
                         identityIds:
                           description: Specifies a list of User Assigned Managed Identity
-                            IDs to be assigned to this API Management Service.
+                            IDs to be assigned to this SQL Server.
                           items:
                             type: string
                           type: array
                         type:
                           description: Specifies the type of Managed Service Identity
-                            that should be configured on this API Management Service.
-                            Possible values are SystemAssigned, UserAssigned.
+                            that should be configured on this SQL Server. Possible
+                            values are SystemAssigned, UserAssigned.
                           type: string
                       required:
                       - type
@@ -149,7 +149,7 @@ spec:
                   minimumTlsVersion:
                     description: 'The Minimum TLS Version for all SQL Database and
                       SQL Data Warehouse databases associated with the server. Valid
-                      values are: 1.0, 1.1 and 1.2.'
+                      values are: 1.0, 1.1 , 1.2 and Disabled. Defaults to 1.2.'
                     type: string
                   outboundNetworkRestrictionEnabled:
                     description: Whether outbound network traffic is restricted for
@@ -157,7 +157,7 @@ spec:
                     type: boolean
                   primaryUserAssignedIdentityId:
                     description: Specifies the primary user managed identity id. Required
-                      if type is UserAssigned and should be combined with user_assigned_identity_ids.
+                      if type is UserAssigned and should be combined with identity_ids.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for this
@@ -165,7 +165,8 @@ spec:
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the Microsoft SQL Server.
+                      the Microsoft SQL Server. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -249,7 +250,8 @@ spec:
                     type: object
                   version:
                     description: 'The version for the new server. Valid values are:
-                      2.0 (for v11 server) and 12.0 (for v12 server).'
+                      2.0 (for v11 server) and 12.0 (for v12 server). Changing this
+                      forces a new resource to be created.'
                     type: string
                 required:
                 - location

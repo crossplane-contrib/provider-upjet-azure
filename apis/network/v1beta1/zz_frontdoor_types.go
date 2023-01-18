@@ -63,7 +63,7 @@ type BackendPoolHealthProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
-	// Specifies the name of the Health Probe.
+	// Specifies the name of the Health Probe. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -71,11 +71,11 @@ type BackendPoolHealthProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: Get and Head. Defaults to Get.
+	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: Get and Head. Defaults to GET.
 	// +kubebuilder:validation:Optional
 	ProbeMethod *string `json:"probeMethod,omitempty" tf:"probe_method,omitempty"`
 
-	// Protocol scheme to use for the Health Probe. Defaults to Http.
+	// Protocol scheme to use for the Health Probe. Possible values are Http and Https. Defaults to Http.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
@@ -92,7 +92,7 @@ type BackendPoolLoadBalancingParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalLatencyMilliseconds *float64 `json:"additionalLatencyMilliseconds,omitempty" tf:"additional_latency_milliseconds,omitempty"`
 
-	// Specifies the name of the Load Balancer.
+	// Specifies the name of the Load Balancer. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -125,7 +125,7 @@ type BackendPoolParameters struct {
 	// +kubebuilder:validation:Required
 	LoadBalancingName *string `json:"loadBalancingName" tf:"load_balancing_name,omitempty"`
 
-	// Specifies the name of the Backend Pool.
+	// Specifies the name of the Backend Pool. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -260,6 +260,7 @@ type FrontDoorParameters struct {
 	// +kubebuilder:validation:Required
 	BackendPoolLoadBalancing []BackendPoolLoadBalancingParameters `json:"backendPoolLoadBalancing" tf:"backend_pool_load_balancing,omitempty"`
 
+	// A backend_pool_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	BackendPoolSettings []BackendPoolSettingsParameters `json:"backendPoolSettings,omitempty" tf:"backend_pool_settings,omitempty"`
 
@@ -309,7 +310,7 @@ type FrontendEndpointParameters struct {
 	// +kubebuilder:validation:Required
 	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
-	// Specifies the name of the frontend_endpoint.
+	// Specifies the name of the frontend_endpoint. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -334,7 +335,7 @@ type RoutingRuleObservation struct {
 
 type RoutingRuleParameters struct {
 
-	// Protocol schemes to match for the Backend Routing Rule. Defaults to Http.
+	// Protocol schemes to match for the Backend Routing Rule. Possible values are Http and Https.
 	// +kubebuilder:validation:Required
 	AcceptedProtocols []*string `json:"acceptedProtocols" tf:"accepted_protocols,omitempty"`
 
@@ -350,11 +351,11 @@ type RoutingRuleParameters struct {
 	// +kubebuilder:validation:Required
 	FrontendEndpoints []*string `json:"frontendEndpoints" tf:"frontend_endpoints,omitempty"`
 
-	// Specifies the name of the Routing Rule.
+	// Specifies the name of the Routing Rule. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The route patterns for the Backend Routing Rule. Defaults to /*.
+	// The route patterns for the Backend Routing Rule.
 	// +kubebuilder:validation:Required
 	PatternsToMatch []*string `json:"patternsToMatch" tf:"patterns_to_match,omitempty"`
 
@@ -384,7 +385,7 @@ type RoutingRuleRedirectConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomQueryString *string `json:"customQueryString,omitempty" tf:"custom_query_string,omitempty"`
 
-	// Protocol to use when redirecting. Valid options are HttpOnly, HttpsOnly, or MatchRequest. Defaults to MatchRequest
+	// Protocol to use when redirecting. Valid options are HttpOnly, HttpsOnly, or MatchRequest.
 	// +kubebuilder:validation:Required
 	RedirectProtocol *string `json:"redirectProtocol" tf:"redirect_protocol,omitempty"`
 
@@ -407,7 +408,7 @@ type FrontDoorStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FrontDoor is the Schema for the FrontDoors API. Manages an Azure Front Door instance.
+// FrontDoor is the Schema for the FrontDoors API. Manages an Azure Front Door (classic) instance.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

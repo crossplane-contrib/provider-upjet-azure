@@ -34,7 +34,7 @@ type HPCCacheAccessPolicyAccessRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// Whether to enable root squash? Defaults to false.
+	// Whether to enable root squash?
 	// +kubebuilder:validation:Optional
 	RootSquashEnabled *bool `json:"rootSquashEnabled,omitempty" tf:"root_squash_enabled,omitempty"`
 
@@ -42,11 +42,11 @@ type HPCCacheAccessPolicyAccessRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Scope *string `json:"scope" tf:"scope,omitempty"`
 
-	// Whether allow access to subdirectories under the root export? Defaults to false.
+	// Whether allow access to subdirectories under the root export?
 	// +kubebuilder:validation:Optional
 	SubmountAccessEnabled *bool `json:"submountAccessEnabled,omitempty" tf:"submount_access_enabled,omitempty"`
 
-	// Whether SUID is allowed? Defaults to false.
+	// Whether SUID is allowed?
 	// +kubebuilder:validation:Optional
 	SuidEnabled *bool `json:"suidEnabled,omitempty" tf:"suid_enabled,omitempty"`
 }

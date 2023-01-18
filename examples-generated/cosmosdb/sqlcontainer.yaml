@@ -10,7 +10,7 @@ spec:
   forProvider:
     accountNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -20,17 +20,36 @@ spec:
       includedPath:
       - path: /*
       - path: /included/?
-      indexingMode: Consistent
+      indexingMode: consistent
     partitionKeyPath: /definition/id
     partitionKeyVersion: 1
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
     throughput: 400
     uniqueKey:
     - paths:
       - /definition/idlong
       - /definition/idshort
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta1
+kind: SQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlcontainer
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
 
 ---
 

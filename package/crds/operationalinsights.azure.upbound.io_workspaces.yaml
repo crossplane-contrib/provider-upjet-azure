@@ -64,14 +64,24 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  allowResourceOnlyPermissions:
+                    description: Specifies if the log Analytics Workspace allow users
+                      accessing to data associated with resources they have permission
+                      to view, without permission to workspace. Defaults to true.
+                    type: boolean
+                  cmkForQueryForced:
+                    description: Is Customer Managed Storage mandatory for query management?
+                    type: boolean
                   dailyQuotaGb:
                     description: The workspace daily quota for ingestion in GB.  Defaults
                       to -1 (unlimited) if omitted.
                     type: number
                   internetIngestionEnabled:
+                    description: Should the Log Analytics Workspace support ingestion
+                      over the Public Internet? Defaults to true.
                     type: boolean
                   internetQueryEnabled:
-                    description: Should the Log Analytics Workflow support querying
+                    description: Should the Log Analytics Workspace support querying
                       over the Public Internet? Defaults to true.
                     type: boolean
                   location:
