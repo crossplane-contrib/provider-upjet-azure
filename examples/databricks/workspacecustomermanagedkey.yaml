@@ -1,0 +1,159 @@
+apiVersion: databricks.azure.upbound.io/v1beta1
+kind: WorkspaceCustomerManagedKey
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires Data Bricks real object ID."
+    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    keyVaultKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplekey
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampleworkspace
+
+---
+
+apiVersion: databricks.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires Data Bricks real object ID."
+    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: exampleworkspace
+  name: exampleworkspace
+spec:
+  forProvider:
+    customerManagedKeyEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplebricksrg
+    sku: premium
+    tags:
+      Environment: Production
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires Data Bricks real object ID."
+    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: exampledatabrickkeyvault
+  name: exampledatabrickkeyvault
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplebricksrg
+    skuName: premium
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires Data Bricks real object ID."
+    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: databricks
+  name: databricks
+spec:
+  forProvider:
+    keyPermissions:
+    - Create
+    - Delete
+    - Get
+    - Purge
+    - Recover
+    - Update
+    - List
+    - Decrypt
+    - Sign
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampledatabrickkeyvault
+    objectId: ${azurerm_databricks_workspace.example.storage_account_identity.0.principal_id}
+    tenantId: ${azurerm_databricks_workspace.example.storage_account_identity.0.tenant_id}
+
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires Data Bricks real object ID."
+    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: accesspolicya
+  name: accesspolicya
+spec:
+  forProvider:
+    keyPermissions:
+    - Create
+    - Delete
+    - Get
+    - Purge
+    - Recover
+    - Update
+    - List
+    - Decrypt
+    - Sign
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampledatabrickkeyvault
+    objectId: ${data.azurerm_client_config.current.object_id}
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires Data Bricks real object ID."
+    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: examplekey
+  name: examplekey
+spec:
+  forProvider:
+    keyOpts:
+    - decrypt
+    - encrypt
+    - sign
+    - unwrapKey
+    - verify
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampledatabrickkeyvault
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires Data Bricks real object ID."
+    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+  labels:
+    testing.upbound.io/example-name: examplebricksrg
+  name: examplebricksrg
+spec:
+  forProvider:
+    location: West Europe
