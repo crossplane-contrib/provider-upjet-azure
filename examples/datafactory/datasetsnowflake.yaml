@@ -1,0 +1,65 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: DataSetSnowflake
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsnowflake
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetsnowflake-datafactory
+    linkedServiceName: anonymous
+    schemaName: foo_schema
+    tableName: foo_table
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsnowflake
+  labels:
+    testing.upbound.io/example-name: datasetsnowflake-datafactory
+  name: datasetsnowflake-datafactory
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetsnowflake-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsnowflake
+  labels:
+    testing.upbound.io/example-name: datasetsnowflake-rg
+  name: datasetsnowflake-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceOdbc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetsnowflake
+  labels:
+    testing.upbound.io/example-name: anonymous
+  name: anonymous
+spec:
+  forProvider:
+    connectionString: Driver={SQL Server};Server=test;Database=test;Uid=test;Pwd=test;
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetsnowflake-datafactory
+

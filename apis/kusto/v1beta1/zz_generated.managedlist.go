@@ -7,6 +7,15 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this AttachedDatabaseConfigurationList.
+func (l *AttachedDatabaseConfigurationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ClusterList.
 func (l *ClusterList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -16,8 +25,53 @@ func (l *ClusterList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ClusterPrincipalAssignmentList.
+func (l *ClusterPrincipalAssignmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DatabaseList.
 func (l *DatabaseList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DatabasePrincipalAssignmentList.
+func (l *DatabasePrincipalAssignmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this EventGridDataConnectionList.
+func (l *EventGridDataConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this EventHubDataConnectionList.
+func (l *EventHubDataConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this IOTHubDataConnectionList.
+func (l *IOTHubDataConnectionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

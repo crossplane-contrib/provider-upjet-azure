@@ -141,6 +141,25 @@ import (
 	table "github.com/upbound/provider-azure/internal/controller/cosmosdb/table"
 	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/resourcegroupcostmanagementexport"
 	subscriptioncostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/subscriptioncostmanagementexport"
+	device "github.com/upbound/provider-azure/internal/controller/databoxedge/device"
+	workspace "github.com/upbound/provider-azure/internal/controller/databricks/workspace"
+	workspacecustomermanagedkey "github.com/upbound/provider-azure/internal/controller/databricks/workspacecustomermanagedkey"
+	customdataset "github.com/upbound/provider-azure/internal/controller/datafactory/customdataset"
+	dataflow "github.com/upbound/provider-azure/internal/controller/datafactory/dataflow"
+	datasetazureblob "github.com/upbound/provider-azure/internal/controller/datafactory/datasetazureblob"
+	datasetbinary "github.com/upbound/provider-azure/internal/controller/datafactory/datasetbinary"
+	datasetcosmosdbsqlapi "github.com/upbound/provider-azure/internal/controller/datafactory/datasetcosmosdbsqlapi"
+	datasetdelimitedtext "github.com/upbound/provider-azure/internal/controller/datafactory/datasetdelimitedtext"
+	datasethttp "github.com/upbound/provider-azure/internal/controller/datafactory/datasethttp"
+	datasetjson "github.com/upbound/provider-azure/internal/controller/datafactory/datasetjson"
+	datasetmysql "github.com/upbound/provider-azure/internal/controller/datafactory/datasetmysql"
+	datasetparquet "github.com/upbound/provider-azure/internal/controller/datafactory/datasetparquet"
+	datasetpostgresql "github.com/upbound/provider-azure/internal/controller/datafactory/datasetpostgresql"
+	datasetsnowflake "github.com/upbound/provider-azure/internal/controller/datafactory/datasetsnowflake"
+	factory "github.com/upbound/provider-azure/internal/controller/datafactory/factory"
+	integrationruntimeazure "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazure"
+	integrationruntimeazuressis "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazuressis"
+	linkedserviceodbc "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceodbc"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backupvault "github.com/upbound/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/provider-azure/internal/controller/datashare/account"
@@ -196,6 +215,7 @@ import (
 	monitormetricalert "github.com/upbound/provider-azure/internal/controller/insights/monitormetricalert"
 	monitorprivatelinkscope "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscope"
 	monitorprivatelinkscopedservice "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscopedservice"
+	application "github.com/upbound/provider-azure/internal/controller/iotcentral/application"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/keyvault/accesspolicy"
 	certificatekeyvault "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"
 	certificateissuer "github.com/upbound/provider-azure/internal/controller/keyvault/certificateissuer"
@@ -205,8 +225,14 @@ import (
 	managedstorageaccountsastokendefinition "github.com/upbound/provider-azure/internal/controller/keyvault/managedstorageaccountsastokendefinition"
 	secret "github.com/upbound/provider-azure/internal/controller/keyvault/secret"
 	vault "github.com/upbound/provider-azure/internal/controller/keyvault/vault"
+	attacheddatabaseconfiguration "github.com/upbound/provider-azure/internal/controller/kusto/attacheddatabaseconfiguration"
 	clusterkusto "github.com/upbound/provider-azure/internal/controller/kusto/cluster"
+	clusterprincipalassignment "github.com/upbound/provider-azure/internal/controller/kusto/clusterprincipalassignment"
 	databasekusto "github.com/upbound/provider-azure/internal/controller/kusto/database"
+	databaseprincipalassignment "github.com/upbound/provider-azure/internal/controller/kusto/databaseprincipalassignment"
+	eventgriddataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventgriddataconnection"
+	eventhubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventhubdataconnection"
+	iothubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/iothubdataconnection"
 	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
@@ -307,8 +333,17 @@ import (
 	watcher "github.com/upbound/provider-azure/internal/controller/network/watcher"
 	watcherflowlog "github.com/upbound/provider-azure/internal/controller/network/watcherflowlog"
 	notificationhub "github.com/upbound/provider-azure/internal/controller/notificationhubs/notificationhub"
-	workspace "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
+	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
+	powerbiembedded "github.com/upbound/provider-azure/internal/controller/powerbidedicated/powerbiembedded"
 	providerconfig "github.com/upbound/provider-azure/internal/controller/providerconfig"
+	accountpurview "github.com/upbound/provider-azure/internal/controller/purview/account"
+	backupcontainerstorageaccount "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupcontainerstorageaccount"
+	backuppolicyfileshare "github.com/upbound/provider-azure/internal/controller/recoveryservices/backuppolicyfileshare"
+	backuppolicyvm "github.com/upbound/provider-azure/internal/controller/recoveryservices/backuppolicyvm"
+	backupprotectedfileshare "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedfileshare"
+	backupprotectedvm "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedvm"
+	siterecoveryfabric "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryfabric"
+	vaultrecoveryservices "github.com/upbound/provider-azure/internal/controller/recoveryservices/vault"
 	resourcegrouptemplatedeployment "github.com/upbound/provider-azure/internal/controller/resources/resourcegrouptemplatedeployment"
 	advancedthreatprotection "github.com/upbound/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/provider-azure/internal/controller/security/iotsecuritydevicegroup"
@@ -351,6 +386,7 @@ import (
 	outputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputblob"
 	outputfunction "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputfunction"
 	outputsynapse "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputsynapse"
+	serviceplan "github.com/upbound/provider-azure/internal/controller/web/serviceplan"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -489,6 +525,25 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		table.Setup,
 		resourcegroupcostmanagementexport.Setup,
 		subscriptioncostmanagementexport.Setup,
+		device.Setup,
+		workspace.Setup,
+		workspacecustomermanagedkey.Setup,
+		customdataset.Setup,
+		dataflow.Setup,
+		datasetazureblob.Setup,
+		datasetbinary.Setup,
+		datasetcosmosdbsqlapi.Setup,
+		datasetdelimitedtext.Setup,
+		datasethttp.Setup,
+		datasetjson.Setup,
+		datasetmysql.Setup,
+		datasetparquet.Setup,
+		datasetpostgresql.Setup,
+		datasetsnowflake.Setup,
+		factory.Setup,
+		integrationruntimeazure.Setup,
+		integrationruntimeazuressis.Setup,
+		linkedserviceodbc.Setup,
 		backuppolicyblobstorage.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,
@@ -544,6 +599,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		monitormetricalert.Setup,
 		monitorprivatelinkscope.Setup,
 		monitorprivatelinkscopedservice.Setup,
+		application.Setup,
 		accesspolicy.Setup,
 		certificatekeyvault.Setup,
 		certificateissuer.Setup,
@@ -553,8 +609,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedstorageaccountsastokendefinition.Setup,
 		secret.Setup,
 		vault.Setup,
+		attacheddatabaseconfiguration.Setup,
 		clusterkusto.Setup,
+		clusterprincipalassignment.Setup,
 		databasekusto.Setup,
+		databaseprincipalassignment.Setup,
+		eventgriddataconnection.Setup,
+		eventhubdataconnection.Setup,
+		iothubdataconnection.Setup,
 		integrationserviceenvironment.Setup,
 		managementgroup.Setup,
 		marketplaceagreement.Setup,
@@ -655,8 +717,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		watcher.Setup,
 		watcherflowlog.Setup,
 		notificationhub.Setup,
-		workspace.Setup,
+		workspaceoperationalinsights.Setup,
+		powerbiembedded.Setup,
 		providerconfig.Setup,
+		accountpurview.Setup,
+		backupcontainerstorageaccount.Setup,
+		backuppolicyfileshare.Setup,
+		backuppolicyvm.Setup,
+		backupprotectedfileshare.Setup,
+		backupprotectedvm.Setup,
+		siterecoveryfabric.Setup,
+		vaultrecoveryservices.Setup,
 		resourcegrouptemplatedeployment.Setup,
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,
@@ -699,6 +770,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		outputblob.Setup,
 		outputfunction.Setup,
 		outputsynapse.Setup,
+		serviceplan.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

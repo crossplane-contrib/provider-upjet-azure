@@ -1,0 +1,32 @@
+apiVersion: iotcentral.azure.upbound.io/v1beta1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iotcentral/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-iotcentral-app-subdomain-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    displayName: example-iotcentral-app-subdomain-${Rand.RFC1123Subdomain}
+    name: example-iotcentral-app-subdomain-${Rand.RFC1123Subdomain}
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iotcentral-r-group-label
+    sku: ST1
+    subDomain: example-iotcentral-app-subdomain-${Rand.RFC1123Subdomain}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iotcentral/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: iotcentral-r-group-label
+  name: iotcentral-r-group
+spec:
+  forProvider:
+    location: West Europe

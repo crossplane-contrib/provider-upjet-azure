@@ -1,0 +1,149 @@
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: EventHubDataConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventhubdataconnection
+  labels:
+    testing.upbound.io/example-name: eventhub_connection
+  name: eventhub-connection
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cluster
+    consumerGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: consumer_group
+    dataFormat: JSON
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: database
+    eventhubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: eventhub
+    location: West Europe
+    mappingRuleName: my-table-mapping
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tableName: my-table
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventhubdataconnection
+  labels:
+    testing.upbound.io/example-name: eventhub
+  name: eventhub
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionCount: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: ConsumerGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventhubdataconnection
+  labels:
+    testing.upbound.io/example-name: consumer_group
+  name: consumer-group
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventhubdataconnection
+  labels:
+    testing.upbound.io/example-name: eventhub_ns
+  name: eventhub-ns
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventhubdataconnection
+  labels:
+    testing.upbound.io/example-name: cluster
+  name: cluster
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 2
+      name: Standard_D13_v2
+
+---
+
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventhubdataconnection
+  labels:
+    testing.upbound.io/example-name: database
+  name: database
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    hotCachePeriod: P7D
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    softDeletePeriod: P31D
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventhubdataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

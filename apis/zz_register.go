@@ -30,6 +30,9 @@ import (
 	v1beta1containerservice "github.com/upbound/provider-azure/apis/containerservice/v1beta1"
 	v1beta1cosmosdb "github.com/upbound/provider-azure/apis/cosmosdb/v1beta1"
 	v1beta1costmanagement "github.com/upbound/provider-azure/apis/costmanagement/v1beta1"
+	v1beta1databoxedge "github.com/upbound/provider-azure/apis/databoxedge/v1beta1"
+	v1beta1databricks "github.com/upbound/provider-azure/apis/databricks/v1beta1"
+	v1beta1datafactory "github.com/upbound/provider-azure/apis/datafactory/v1beta1"
 	v1beta1dataprotection "github.com/upbound/provider-azure/apis/dataprotection/v1beta1"
 	v1beta1datashare "github.com/upbound/provider-azure/apis/datashare/v1beta1"
 	v1beta1dbformariadb "github.com/upbound/provider-azure/apis/dbformariadb/v1beta1"
@@ -38,6 +41,7 @@ import (
 	v1beta1devices "github.com/upbound/provider-azure/apis/devices/v1beta1"
 	v1beta1eventhub "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
 	v1beta1insights "github.com/upbound/provider-azure/apis/insights/v1beta1"
+	v1beta1iotcentral "github.com/upbound/provider-azure/apis/iotcentral/v1beta1"
 	v1beta1keyvault "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	v1beta1kusto "github.com/upbound/provider-azure/apis/kusto/v1beta1"
 	v1beta1logic "github.com/upbound/provider-azure/apis/logic/v1beta1"
@@ -49,6 +53,9 @@ import (
 	v1beta1network "github.com/upbound/provider-azure/apis/network/v1beta1"
 	v1beta1notificationhubs "github.com/upbound/provider-azure/apis/notificationhubs/v1beta1"
 	v1beta1operationalinsights "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
+	v1beta1powerbidedicated "github.com/upbound/provider-azure/apis/powerbidedicated/v1beta1"
+	v1beta1purview "github.com/upbound/provider-azure/apis/purview/v1beta1"
+	v1beta1recoveryservices "github.com/upbound/provider-azure/apis/recoveryservices/v1beta1"
 	v1beta1resources "github.com/upbound/provider-azure/apis/resources/v1beta1"
 	v1beta1security "github.com/upbound/provider-azure/apis/security/v1beta1"
 	v1beta1servicebus "github.com/upbound/provider-azure/apis/servicebus/v1beta1"
@@ -59,6 +66,7 @@ import (
 	v1beta1streamanalytics "github.com/upbound/provider-azure/apis/streamanalytics/v1beta1"
 	v1alpha1 "github.com/upbound/provider-azure/apis/v1alpha1"
 	v1beta1apis "github.com/upbound/provider-azure/apis/v1beta1"
+	v1beta1web "github.com/upbound/provider-azure/apis/web/v1beta1"
 )
 
 func init() {
@@ -84,6 +92,9 @@ func init() {
 		v1beta1containerservice.SchemeBuilder.AddToScheme,
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,
 		v1beta1costmanagement.SchemeBuilder.AddToScheme,
+		v1beta1databoxedge.SchemeBuilder.AddToScheme,
+		v1beta1databricks.SchemeBuilder.AddToScheme,
+		v1beta1datafactory.SchemeBuilder.AddToScheme,
 		v1beta1dataprotection.SchemeBuilder.AddToScheme,
 		v1beta1datashare.SchemeBuilder.AddToScheme,
 		v1beta1dbformariadb.SchemeBuilder.AddToScheme,
@@ -92,6 +103,7 @@ func init() {
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
 		v1beta1insights.SchemeBuilder.AddToScheme,
+		v1beta1iotcentral.SchemeBuilder.AddToScheme,
 		v1beta1keyvault.SchemeBuilder.AddToScheme,
 		v1beta1kusto.SchemeBuilder.AddToScheme,
 		v1beta1logic.SchemeBuilder.AddToScheme,
@@ -103,6 +115,9 @@ func init() {
 		v1beta1network.SchemeBuilder.AddToScheme,
 		v1beta1notificationhubs.SchemeBuilder.AddToScheme,
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,
+		v1beta1powerbidedicated.SchemeBuilder.AddToScheme,
+		v1beta1purview.SchemeBuilder.AddToScheme,
+		v1beta1recoveryservices.SchemeBuilder.AddToScheme,
 		v1beta1resources.SchemeBuilder.AddToScheme,
 		v1beta1security.SchemeBuilder.AddToScheme,
 		v1beta1servicebus.SchemeBuilder.AddToScheme,
@@ -113,6 +128,7 @@ func init() {
 		v1beta1streamanalytics.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1apis.SchemeBuilder.AddToScheme,
+		v1beta1web.SchemeBuilder.AddToScheme,
 	)
 }
 
