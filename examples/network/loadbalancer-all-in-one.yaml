@@ -8,8 +8,7 @@ spec:
     location: "West Europe"
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: PublicIP
@@ -24,8 +23,7 @@ spec:
       name: loadbalancerrg
     tags:
       environment: Production
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancer
@@ -41,8 +39,7 @@ spec:
       - name: publicipaddress
         publicIpAddressIdRef:
           name: publicipforlb
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerNatRule
@@ -58,8 +55,7 @@ spec:
     protocol: Tcp
     resourceGroupNameRef:
       name: loadbalancerrg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerBackendAddressPool
@@ -69,8 +65,7 @@ spec:
   forProvider:
     loadbalancerIdRef:
       name: testloadbalancer
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
@@ -86,8 +81,7 @@ spec:
     dnsServers:
       - "10.0.0.4"
       - "10.0.0.5"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerBackendAddressPoolAddress
@@ -100,8 +94,7 @@ spec:
     ipAddress: 10.0.0.1
     virtualNetworkIdRef:
       name: example-vn-for-lb
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerNatPool
@@ -118,8 +111,7 @@ spec:
     protocol: Tcp
     resourceGroupNameRef:
       name: loadbalancerrg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerOutboundRule
@@ -134,8 +126,7 @@ spec:
     loadbalancerIdRef:
       name: testloadbalancer
     protocol: Tcp
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerProbe
@@ -146,8 +137,7 @@ spec:
     loadbalancerIdRef:
       name: testloadbalancer
     port: 22
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: LoadBalancerRule
@@ -162,5 +152,3 @@ spec:
     loadbalancerIdRef:
       name: testloadbalancer
     protocol: Tcp
-  providerConfigRef:
-    name: example

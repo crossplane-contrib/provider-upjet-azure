@@ -70,8 +70,7 @@ spec:
                     type: string
                   passwordSecretRef:
                     description: The password that will be used to connect to the
-                      Azure SQL database. Changing this forces a new resource to be
-                      created.
+                      Azure SQL database.
                     properties:
                       key:
                         description: The key to select.
@@ -175,8 +174,7 @@ spec:
                       forces a new resource to be created.
                     type: string
                   streamAnalyticsJobNameRef:
-                    description: Reference to a Job in streamanalytics to populate
-                      streamAnalyticsJobName.
+                    description: Reference to a Job to populate streamAnalyticsJobName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -210,8 +208,7 @@ spec:
                     - name
                     type: object
                   streamAnalyticsJobNameSelector:
-                    description: Selector for a Job in streamanalytics to populate
-                      streamAnalyticsJobName.
+                    description: Selector for a Job to populate streamAnalyticsJobName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

@@ -30,7 +30,7 @@ type CustomRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	MatchCondition []MatchConditionParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
 
-	// Gets name of the resource that is unique within a policy. This name can be used to access the resource.
+	// Gets name of the resource that is unique within a policy. This name can be used to access the resource. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -56,10 +56,10 @@ type FrontdoorFirewallPolicyObservation struct {
 	// The Frontend Endpoints associated with this Front Door Web Application Firewall policy.
 	FrontendEndpointIds []*string `json:"frontendEndpointIds,omitempty" tf:"frontend_endpoint_ids,omitempty"`
 
-	// The ID of the FrontDoor Firewall Policy.
+	// The ID of the Front Door Firewall Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The Azure Region where this FrontDoor Firewall Policy exists.
+	// The Azure Region where this Front Door Firewall Policy exists.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 }
 
@@ -271,7 +271,7 @@ type FrontdoorFirewallPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 
-// FrontdoorFirewallPolicy is the Schema for the FrontdoorFirewallPolicys API. Manages an Azure Front Door Web Application Firewall Policy instance.
+// FrontdoorFirewallPolicy is the Schema for the FrontdoorFirewallPolicys API. Manages an Azure Front Door (classic) Web Application Firewall Policy instance.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

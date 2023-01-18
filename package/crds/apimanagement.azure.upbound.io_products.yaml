@@ -239,7 +239,7 @@ spec:
                     type: object
                   subscriptionRequired:
                     description: Is a Subscription required to access API's included
-                      in this Product?
+                      in this Product? Defaults to true.
                     type: boolean
                   subscriptionsLimit:
                     description: The number of subscriptions a user can have to this

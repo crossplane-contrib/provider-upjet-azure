@@ -51,3 +51,14 @@ metadata:
 spec:
   forProvider:
     location: EastUs
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: dXBib3VuZHJvY2tz

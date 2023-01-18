@@ -93,7 +93,7 @@ spec:
                     type: string
                   dnsZonePartnerId:
                     description: The ID of the SQL Managed Instance which will share
-                      the DNS zone. This is a prerequisite for creating an azurerm_managed_instance_failover_group.
+                      the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group.
                       Setting this after creation forces a new resource to be created.
                     type: string
                   dnsZonePartnerIdRef:
@@ -173,9 +173,17 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this SQL Managed Instance. Required
+                            when type is set to UserAssigned.
+                          items:
+                            type: string
+                          type: array
                         type:
-                          description: The identity type of the SQL Managed Instance.
-                            The only possible value is SystemAssigned.
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this SQL Managed Instance.
+                            Possible values are SystemAssigned, UserAssigned.
                           type: string
                       required:
                       - type
@@ -183,7 +191,7 @@ spec:
                     type: array
                   licenseType:
                     description: What type of license the Managed Instance will use.
-                      Valid values include can be PriceIncluded or BasePrice.
+                      Possible values are LicenseIncluded and BasePrice.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the
@@ -236,7 +244,8 @@ spec:
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the SQL Managed Instance.
+                      the SQL Managed Instance. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -315,8 +324,8 @@ spec:
                     type: object
                   skuName:
                     description: Specifies the SKU Name for the SQL Managed Instance.
-                      Valid values include GP_Gen4, GP_Gen5, GP_G8IM, GP_G8IH, BC_Gen4,
-                      BC_Gen5, BC_G8IM or BC_G8IH.
+                      Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
+                      BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
                     type: string
                   storageAccountType:
                     description: Specifies the storage account type used to store
@@ -330,7 +339,8 @@ spec:
                     type: number
                   subnetId:
                     description: The subnet resource id that the SQL Managed Instance
-                      will be associated with.
+                      will be associated with. Changing this forces a new resource
+                      to be created.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in network to populate subnetId.

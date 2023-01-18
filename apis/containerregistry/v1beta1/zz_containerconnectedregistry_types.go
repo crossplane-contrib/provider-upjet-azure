@@ -63,7 +63,7 @@ type ContainerConnectedRegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	SyncMessageTTL *string `json:"syncMessageTtl,omitempty" tf:"sync_message_ttl,omitempty"`
 
-	// The cron expression indicating the schedule that the Connected Registry will sync with its parent.
+	// The cron expression indicating the schedule that the Connected Registry will sync with its parent. Defaults to * * * * *.
 	// +kubebuilder:validation:Optional
 	SyncSchedule *string `json:"syncSchedule,omitempty" tf:"sync_schedule,omitempty"`
 

@@ -68,10 +68,36 @@ spec:
                     description: If kind is TextAnalytics this specifies the ID of
                       the Search service.
                     type: string
+                  customQuestionAnsweringSearchServiceKey:
+                    description: If kind is TextAnalytics this specifies the key of
+                      the Search service.
+                    type: string
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
                       Changing this forces a new resource to be created.
                     type: string
+                  customerManagedKey:
+                    description: A customer_managed_key block as documented below.
+                    items:
+                      properties:
+                        identityClientId:
+                          description: The Client ID of the User Assigned Identity
+                            that has access to the key. This property only needs to
+                            be specified when there're multiple identities attached
+                            to the Cognitive Account.
+                          type: string
+                        keyVaultKeyId:
+                          description: The ID of the Key Vault Key which should be
+                            used to Encrypt the data in this Cognitive Account.
+                          type: string
+                      required:
+                      - keyVaultKeyId
+                      type: object
+                    type: array
+                  dynamicThrottlingEnabled:
+                    description: Whether to enable the dynamic throttling for this
+                      Cognitive Service Account.
+                    type: boolean
                   fqdns:
                     description: List of FQDNs allowed for the Cognitive Account.
                     items:
@@ -103,11 +129,11 @@ spec:
                       Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search,
                       Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
                       CognitiveServices, ComputerVision, ContentModerator, CustomSpeech,
-                      CustomVision.Prediction, CustomVision.Training, Emotion, Face,FormRecognizer,
-                      ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor, Personalizer,
-                      QnAMaker, Recommendations, SpeakerRecognition, Speech, SpeechServices,
-                      SpeechTranslation, TextAnalytics, TextTranslation and WebLM.
-                      Changing this forces a new resource to be created.
+                      CustomVision.Prediction, CustomVision.Training, Emotion, Face,
+                      FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor,
+                      OpenAI, Personalizer, QnAMaker, Recommendations, SpeakerRecognition,
+                      Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation
+                      and WebLM. Changing this forces a new resource to be created.
                     type: string
                   localAuthEnabled:
                     description: Whether local authentication methods is enabled for
@@ -344,8 +370,8 @@ spec:
                     type: object
                   skuName:
                     description: Specifies the SKU Name for this Cognitive Service
-                      Account. Possible values are F0, F1, S, S0, S1, S2, S3, S4,
-                      S5, S6, P0, P1, and P2.
+                      Account. Possible values are F0, F1, S0, S, S1, S2, S3, S4,
+                      S5, S6, P0, P1, P2 and E0.
                     type: string
                   storage:
                     description: A storage block as defined below.

@@ -44,6 +44,23 @@ spec:
 ---
 
 apiVersion: network.azure.upbound.io/v1beta1
+kind: LoadBalancerBackendAddressPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/loadbalancernatrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    loadbalancerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resource_group_name: LoadBalancerRG
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
 kind: PublicIP
 metadata:
   annotations:

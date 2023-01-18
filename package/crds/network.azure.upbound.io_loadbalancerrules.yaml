@@ -86,7 +86,6 @@ spec:
                     type: boolean
                   enableTcpReset:
                     description: Is TCP Reset enabled for this Load Balancer Rule?
-                      Defaults to false.
                     type: boolean
                   frontendIpConfigurationName:
                     description: The name of the frontend IP configuration to which
@@ -114,7 +113,7 @@ spec:
                     type: string
                   loadbalancerId:
                     description: The ID of the Load Balancer in which to create the
-                      Rule.
+                      Rule. Changing this forces a new resource to be created.
                     type: string
                   loadbalancerIdRef:
                     description: Reference to a LoadBalancer to populate loadbalancerId.

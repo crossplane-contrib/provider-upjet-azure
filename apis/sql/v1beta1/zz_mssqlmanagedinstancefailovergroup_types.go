@@ -63,7 +63,7 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 	// +kubebuilder:validation:Required
 	ReadWriteEndpointFailoverPolicy []MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy" tf:"read_write_endpoint_failover_policy,omitempty"`
 
-	// Failover policy for the read-only endpoint. Defaults to false.
+	// Failover policy for the read-only endpoint. Defaults to true.
 	// +kubebuilder:validation:Optional
 	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
 }

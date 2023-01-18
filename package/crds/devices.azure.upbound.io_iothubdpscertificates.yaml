@@ -160,6 +160,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  isVerified:
+                    description: Specifies if the certificate is created in verified
+                      state. Defaults to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group under which the Iot
                       Device Provisioning Service Certificate resource has to be created.

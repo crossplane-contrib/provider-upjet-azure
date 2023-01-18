@@ -52,7 +52,7 @@ type RoleDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the Role Definition. Changing this forces a new resource to be created.
+	// The name of the Role Definition.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

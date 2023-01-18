@@ -18,6 +18,12 @@ type SecretObservation struct {
 	// The Key Vault Secret ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The (Versioned) ID for this Key Vault Secret. This property points to a specific version of a Key Vault Secret, as such using this won't auto-rotate values if used in other Azure Services.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// The Versionless ID of the Key Vault Secret. This property allows other Azure Services (that support it) to auto-rotate their value when the Key Vault Secret is updated.
+	ResourceVersionlessID *string `json:"resourceVersionlessId,omitempty" tf:"resource_versionless_id,omitempty"`
+
 	// The current version of the Key Vault Secret.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
@@ -35,7 +41,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
-	// The ID of the Key Vault where the Secret should be created.
+	// The ID of the Key Vault where the Secret should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

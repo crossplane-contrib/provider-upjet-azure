@@ -28,8 +28,7 @@ spec:
       - source
       testConfigurationNames:
       - tcpName
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
@@ -45,8 +44,7 @@ spec:
     dnsServers:
       - "10.0.0.4"
       - "10.0.0.5"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
@@ -60,8 +58,7 @@ spec:
       name: example-vn-for-connection-monitor
     addressPrefixes:
       - "10.0.0.0/24"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: Watcher
@@ -72,8 +69,7 @@ spec:
     location: Norway East
     resourceGroupNameRef:
       name: norway-watcher-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -84,5 +80,3 @@ spec:
     location: Norway East
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example

@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: storage/v1beta1/accountnetworkrules
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     bypass:
@@ -15,9 +15,9 @@ spec:
     - 127.0.0.1
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     virtualNetworkSubnetIds:
-    - ${azurerm_subnet.test.id}
+    - ${azurerm_subnet.example.id}
 
 ---
 

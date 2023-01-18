@@ -31,6 +31,8 @@ metadata:
   name: example
 spec:
   forProvider:
+    identity:
+    - type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

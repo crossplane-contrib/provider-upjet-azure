@@ -13,6 +13,20 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ManagedHardwareSecurityModuleNetworkAclsObservation struct {
+}
+
+type ManagedHardwareSecurityModuleNetworkAclsParameters struct {
+
+	// Specifies which traffic can bypass the network rules. Possible values are AzureServices and None.
+	// +kubebuilder:validation:Required
+	Bypass *string `json:"bypass" tf:"bypass,omitempty"`
+
+	// The Default Action to use. Possible values are Allow and Deny.
+	// +kubebuilder:validation:Required
+	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
+}
+
 type ManagedHardwareSecurityModuleObservation struct {
 
 	// The URI of the Key Vault Managed Hardware Security Module, used for performing operations on keys.
@@ -32,7 +46,15 @@ type ManagedHardwareSecurityModuleParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// Is Purge Protection enabled for this Key Vault Managed Hardware Security Module? Defaults to false. Changing this forces a new resource to be created.
+	// A network_acls block as defined below.
+	// +kubebuilder:validation:Optional
+	NetworkAcls []ManagedHardwareSecurityModuleNetworkAclsParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+
+	// Whether traffic from public networks is permitted. Defaults to true. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Is Purge Protection enabled for this Key Vault Managed Hardware Security Module?  Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 

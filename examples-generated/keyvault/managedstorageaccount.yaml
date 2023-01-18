@@ -12,6 +12,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     regenerateKeyAutomatically: false
+    regenerationPeriod: P1D
     storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

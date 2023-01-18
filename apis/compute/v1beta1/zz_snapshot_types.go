@@ -18,10 +18,11 @@ type EncryptionSettingsDiskEncryptionKeyObservation struct {
 
 type EncryptionSettingsDiskEncryptionKeyParameters struct {
 
+	// The URL to the Key Vault Secret used as the Disk Encryption Key. This can be found as id on the azurerm_key_vault_secret resource.
 	// +kubebuilder:validation:Required
 	SecretURL *string `json:"secretUrl" tf:"secret_url,omitempty"`
 
-	// The Snapshot ID.
+	// The ID of the source Key Vault. This can be found as id on the azurerm_key_vault resource.
 	// +kubebuilder:validation:Required
 	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
@@ -31,10 +32,11 @@ type EncryptionSettingsKeyEncryptionKeyObservation struct {
 
 type EncryptionSettingsKeyEncryptionKeyParameters struct {
 
+	// The URL to the Key Vault Key used as the Key Encryption Key. This can be found as id on the azurerm_key_vault_key resource.
 	// +kubebuilder:validation:Required
 	KeyURL *string `json:"keyUrl" tf:"key_url,omitempty"`
 
-	// The Snapshot ID.
+	// The ID of the source Key Vault. This can be found as id on the azurerm_key_vault resource.
 	// +kubebuilder:validation:Required
 	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
@@ -44,12 +46,14 @@ type SnapshotEncryptionSettingsObservation struct {
 
 type SnapshotEncryptionSettingsParameters struct {
 
+	// A disk_encryption_key block as defined below.
 	// +kubebuilder:validation:Optional
 	DiskEncryptionKey []EncryptionSettingsDiskEncryptionKeyParameters `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty"`
 
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// A key_encryption_key block as defined below.
 	// +kubebuilder:validation:Optional
 	KeyEncryptionKey []EncryptionSettingsKeyEncryptionKeyParameters `json:"keyEncryptionKey,omitempty" tf:"key_encryption_key,omitempty"`
 }
@@ -65,7 +69,7 @@ type SnapshotObservation struct {
 
 type SnapshotParameters struct {
 
-	// Indicates how the snapshot is to be created. Possible values are Copy or Import. Changing this forces a new resource to be created.
+	// Indicates how the snapshot is to be created. Possible values are Copy or Import.
 	// +kubebuilder:validation:Required
 	CreateOption *string `json:"createOption" tf:"create_option,omitempty"`
 
@@ -73,6 +77,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
 
+	// A encryption_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	EncryptionSettings []SnapshotEncryptionSettingsParameters `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty"`
 

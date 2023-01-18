@@ -7,8 +7,7 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuit
@@ -27,8 +26,7 @@ spec:
       tier: Standard
     tags:
       environment: Production
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuitAuthorization
@@ -40,8 +38,7 @@ spec:
       name: example-circuit
     resourceGroupNameRef:
       name: example-expressroute-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteCircuitPeering
@@ -68,8 +65,7 @@ spec:
       name: example-expressroute-rg
     secondaryPeerAddressPrefix: 123.0.0.4/30
     vlanId: 300
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualWAN
@@ -80,8 +76,7 @@ spec:
     location: West Europe
     resourceGroupNameRef:
       name: example-expressroute-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualHub
@@ -95,8 +90,7 @@ spec:
       name: example-expressroute-rg
     virtualWanIdRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteGateway
@@ -112,8 +106,7 @@ spec:
       environment: Production
     virtualHubIdRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRouteConnection
@@ -125,8 +118,7 @@ spec:
       name: example
     expressRouteGatewayIdRef:
       name: example
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: network.azure.upbound.io/v1beta1
 kind: ExpressRoutePort
@@ -141,6 +133,3 @@ spec:
     peeringLocation: VantageDC-Newport-NGD
     resourceGroupNameRef:
       name: example-expressroute-rg
-  providerConfigRef:
-    name: example
-

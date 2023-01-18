@@ -63,11 +63,11 @@ type ShareParameters struct {
 	// +kubebuilder:validation:Optional
 	ACL []ACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The access tier of the File Share. Possible values are Hot, Cool and TransactionOptimized.
+	// The access tier of the File Share. Possible values are Hot, Cool and TransactionOptimized, Premium.
 	// +kubebuilder:validation:Optional
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
-	// The protocol used for the share. Possible values are SMB and NFS. The SBM indicates the share can be accessed by SMBv3.0, SMBv2.1 and REST. The NFS indicates the share can be accessed by NFSv4.1. Defaults to SMB. Changing this forces a new resource to be created.
+	// The protocol used for the share. Possible values are SMB and NFS. The SMB indicates the share can be accessed by SMBv3.0, SMBv2.1 and REST. The NFS indicates the share can be accessed by NFSv4.1. Defaults to SMB. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnabledProtocol *string `json:"enabledProtocol,omitempty" tf:"enabled_protocol,omitempty"`
 
@@ -79,8 +79,7 @@ type ShareParameters struct {
 	// +kubebuilder:validation:Required
 	Quota *float64 `json:"quota" tf:"quota,omitempty"`
 
-	// Specifies the storage account in which to create the share.
-	// Changing this forces a new resource to be created.
+	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`

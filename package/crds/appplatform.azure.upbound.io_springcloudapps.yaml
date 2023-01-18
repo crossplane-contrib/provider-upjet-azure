@@ -120,6 +120,34 @@ spec:
                       - type
                       type: object
                     type: array
+                  ingressSettings:
+                    description: An ingress_settings block as defined below.
+                    items:
+                      properties:
+                        backendProtocol:
+                          description: Specifies how ingress should communicate with
+                            this app backend service. Allowed values are GRPC and
+                            Default. Defaults to Default.
+                          type: string
+                        readTimeoutInSeconds:
+                          description: Specifies the ingress read time out in seconds.
+                            Defaults to 300.
+                          type: number
+                        sendTimeoutInSeconds:
+                          description: Specifies the ingress send time out in seconds.
+                            Defaults to 60.
+                          type: number
+                        sessionAffinity:
+                          description: Specifies the type of the affinity, set this
+                            to Cookie to enable session affinity. Allowed values are
+                            Cookie and None. Defaults to None.
+                          type: string
+                        sessionCookieMaxAge:
+                          description: Specifies the time in seconds until the cookie
+                            expires.
+                          type: number
+                      type: object
+                    type: array
                   isPublic:
                     description: Does the Spring Cloud Application have public endpoint?
                       Defaults to false.
@@ -140,6 +168,10 @@ spec:
                       - sizeInGb
                       type: object
                     type: array
+                  publicEndpointEnabled:
+                    description: Should the App in vnet injection instance exposes
+                      endpoint which could be accessed from Internet?
+                    type: boolean
                   resourceGroupName:
                     description: Specifies the name of the resource group in which
                       to create the Spring Cloud Application. Changing this forces

@@ -25,5 +25,3 @@ spec:
       publisher: MicrosoftWindowsServer
       sku: 2016-Datacenter
       version: latest
-  providerConfigRef:
-    name: example

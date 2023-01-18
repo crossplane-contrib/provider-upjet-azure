@@ -18,6 +18,8 @@ type ExpressRouteCircuitPeeringObservation struct {
 	// The ASN used by Azure.
 	AzureAsn *float64 `json:"azureAsn,omitempty" tf:"azure_asn,omitempty"`
 
+	GatewayManagerEtag *string `json:"gatewayManagerEtag,omitempty" tf:"gateway_manager_etag,omitempty"`
+
 	// The ID of the ExpressRoute Circuit Peering.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -30,7 +32,7 @@ type ExpressRouteCircuitPeeringObservation struct {
 
 type ExpressRouteCircuitPeeringParameters struct {
 
-	// The name of the ExpressRoute Circuit in which to create the Peering.
+	// The name of the ExpressRoute Circuit in which to create the Peering. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ExpressRouteCircuit
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitName *string `json:"expressRouteCircuitName,omitempty" tf:"express_route_circuit_name,omitempty"`
@@ -43,11 +45,15 @@ type ExpressRouteCircuitPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitNameSelector *v1.Selector `json:"expressRouteCircuitNameSelector,omitempty" tf:"-"`
 
+	// A boolean value indicating whether the IPv4 peering is enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	IPv4Enabled *bool `json:"ipv4Enabled,omitempty" tf:"ipv4_enabled,omitempty"`
+
 	// A ipv6 block as defined below.
 	// +kubebuilder:validation:Optional
 	IPv6 []IPv6Parameters `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
-	// A microsoft_peering_config block as defined below. Required when peering_type is set to MicrosoftPeering.
+	// A microsoft_peering_config block as defined below. Required when peering_type is set to MicrosoftPeering and config for IPv4.
 	// +kubebuilder:validation:Optional
 	MicrosoftPeeringConfig []MicrosoftPeeringConfigParameters `json:"microsoftPeeringConfig,omitempty" tf:"microsoft_peering_config,omitempty"`
 
@@ -55,9 +61,9 @@ type ExpressRouteCircuitPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
 
-	// A /30 subnet for the primary link.
-	// +kubebuilder:validation:Required
-	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix" tf:"primary_peer_address_prefix,omitempty"`
+	// A /30 subnet for the primary link. Required when config for IPv4.
+	// +kubebuilder:validation:Optional
+	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix,omitempty" tf:"primary_peer_address_prefix,omitempty"`
 
 	// The name of the resource group in which to create the Express Route Circuit Peering. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -76,9 +82,9 @@ type ExpressRouteCircuitPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
 
-	// A /30 subnet for the secondary link.
-	// +kubebuilder:validation:Required
-	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix" tf:"secondary_peer_address_prefix,omitempty"`
+	// A /30 subnet for the secondary link. Required when config for IPv4.
+	// +kubebuilder:validation:Optional
+	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
 
 	// The shared key. Can be a maximum of 25 characters.
 	// +kubebuilder:validation:Optional
@@ -94,9 +100,13 @@ type IPv6Observation struct {
 
 type IPv6Parameters struct {
 
+	// A boolean value indicating whether the IPv6 peering is enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// A microsoft_peering block as defined below.
-	// +kubebuilder:validation:Required
-	MicrosoftPeering []MicrosoftPeeringParameters `json:"microsoftPeering" tf:"microsoft_peering,omitempty"`
+	// +kubebuilder:validation:Optional
+	MicrosoftPeering []MicrosoftPeeringParameters `json:"microsoftPeering,omitempty" tf:"microsoft_peering,omitempty"`
 
 	// A subnet for the primary link.
 	// +kubebuilder:validation:Required
@@ -120,11 +130,11 @@ type MicrosoftPeeringConfigParameters struct {
 	// +kubebuilder:validation:Required
 	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes" tf:"advertised_public_prefixes,omitempty"`
 
-	// The CustomerASN of the peering.
+	// The CustomerASN of the peering. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 
-	// The Routing Registry against which the AS number and prefixes are registered.  For example:  ARIN, RIPE, AFRINIC etc.
+	// The Routing Registry against which the AS number and prefixes are registered.  For example:  ARIN, RIPE, AFRINIC etc. Defaults to NONE.
 	// +kubebuilder:validation:Optional
 	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }
@@ -138,11 +148,11 @@ type MicrosoftPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
 
-	// The CustomerASN of the peering.
+	// The CustomerASN of the peering. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 
-	// The Routing Registry against which the AS number and prefixes are registered.  For example:  ARIN, RIPE, AFRINIC etc.
+	// The Routing Registry against which the AS number and prefixes are registered.  For example:  ARIN, RIPE, AFRINIC etc. Defaults to NONE.
 	// +kubebuilder:validation:Optional
 	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }

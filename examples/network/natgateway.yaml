@@ -11,8 +11,7 @@ spec:
     skuName: Standard
     zones:
     - "1"
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -23,5 +22,3 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example

@@ -10,5 +10,3 @@ spec:
       name: example
     virtualWanIdRef:
       name: example
-  providerConfigRef:
-    name: example

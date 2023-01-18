@@ -36,7 +36,7 @@ type PublicIPPrefixParameters struct {
 	// +kubebuilder:validation:Optional
 	PrefixLength *float64 `json:"prefixLength,omitempty" tf:"prefix_length,omitempty"`
 
-	// The name of the resource group in which to create the Public IP Prefix.
+	// The name of the resource group in which to create the Public IP Prefix. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`

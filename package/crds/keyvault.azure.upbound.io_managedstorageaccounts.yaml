@@ -234,7 +234,8 @@ spec:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
-                      Key Vault Managed Storage Account.
+                      Key Vault Managed Storage Account. Changing this forces a new
+                      resource to be created.
                     type: object
                 required:
                 - storageAccountKey

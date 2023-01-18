@@ -10,10 +10,6 @@ spec:
   forProvider:
     idleTimeoutInMinutes: 10
     location: West Europe
-    public_ip_address_ids:
-    - ${azurerm_public_ip.example.id}
-    public_ip_prefix_ids:
-    - ${azurerm_public_ip_prefix.example.id}
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

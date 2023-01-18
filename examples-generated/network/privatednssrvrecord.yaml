@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/privatednssrvrecord
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     record:
@@ -19,13 +19,13 @@ spec:
       weight: 10
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     tags:
       Environment: Production
     ttl: 300
     zoneNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -35,13 +35,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/privatednssrvrecord
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
 
 ---
 

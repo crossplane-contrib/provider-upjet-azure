@@ -248,15 +248,47 @@ spec:
                               description:
                                 description: A description of this Template Parameter.
                                 type: string
+                              example:
+                                description: One or more example blocks as defined
+                                  above.
+                                items:
+                                  properties:
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    externalValue:
+                                      description: A URL that points to the literal
+                                        example.
+                                      type: string
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    summary:
+                                      description: A short description for this example.
+                                      type: string
+                                    value:
+                                      description: The example of the representation.
+                                      type: string
+                                  required:
+                                  - name
+                                  type: object
+                                type: array
                               name:
                                 description: The Name of this Template Parameter.
                                 type: string
                               required:
                                 description: Is this Template Parameter Required?
                                 type: boolean
+                              schemaId:
+                                description: The name of the Schema.
+                                type: string
                               type:
                                 description: The Type of this Template Parameter,
                                   such as a string.
+                                type: string
+                              typeName:
+                                description: The type name defined by the Schema.
                                 type: string
                               values:
                                 description: One or more acceptable values for this
@@ -281,15 +313,47 @@ spec:
                               description:
                                 description: A description of this Template Parameter.
                                 type: string
+                              example:
+                                description: One or more example blocks as defined
+                                  above.
+                                items:
+                                  properties:
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    externalValue:
+                                      description: A URL that points to the literal
+                                        example.
+                                      type: string
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    summary:
+                                      description: A short description for this example.
+                                      type: string
+                                    value:
+                                      description: The example of the representation.
+                                      type: string
+                                  required:
+                                  - name
+                                  type: object
+                                type: array
                               name:
                                 description: The Name of this Template Parameter.
                                 type: string
                               required:
                                 description: Is this Template Parameter Required?
                                 type: boolean
+                              schemaId:
+                                description: The name of the Schema.
+                                type: string
                               type:
                                 description: The Type of this Template Parameter,
                                   such as a string.
+                                type: string
+                              typeName:
+                                description: The type name defined by the Schema.
                                 type: string
                               values:
                                 description: One or more acceptable values for this
@@ -351,15 +415,49 @@ spec:
                                       description: A description of this Template
                                         Parameter.
                                       type: string
+                                    example:
+                                      description: One or more example blocks as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          description:
+                                            description: A description of this Template
+                                              Parameter.
+                                            type: string
+                                          externalValue:
+                                            description: A URL that points to the
+                                              literal example.
+                                            type: string
+                                          name:
+                                            description: The Name of this Template
+                                              Parameter.
+                                            type: string
+                                          summary:
+                                            description: A short description for this
+                                              example.
+                                            type: string
+                                          value:
+                                            description: The example of the representation.
+                                            type: string
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
                                     name:
                                       description: The Name of this Template Parameter.
                                       type: string
                                     required:
                                       description: Is this Template Parameter Required?
                                       type: boolean
+                                    schemaId:
+                                      description: The name of the Schema.
+                                      type: string
                                     type:
                                       description: The Type of this Template Parameter,
                                         such as a string.
+                                      type: string
+                                    typeName:
+                                      description: The type name defined by the Schema.
                                       type: string
                                     values:
                                       description: One or more acceptable values for
@@ -374,11 +472,10 @@ spec:
                                   type: object
                                 type: array
                               schemaId:
-                                description: The ID of an API Management Schema which
-                                  represents this Response.
+                                description: The name of the Schema.
                                 type: string
                               typeName:
-                                description: The Type Name defined by the Schema.
+                                description: The type name defined by the Schema.
                                 type: string
                             required:
                             - contentType
@@ -483,15 +580,47 @@ spec:
                               description:
                                 description: A description of this Template Parameter.
                                 type: string
+                              example:
+                                description: One or more example blocks as defined
+                                  above.
+                                items:
+                                  properties:
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    externalValue:
+                                      description: A URL that points to the literal
+                                        example.
+                                      type: string
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    summary:
+                                      description: A short description for this example.
+                                      type: string
+                                    value:
+                                      description: The example of the representation.
+                                      type: string
+                                  required:
+                                  - name
+                                  type: object
+                                type: array
                               name:
                                 description: The Name of this Template Parameter.
                                 type: string
                               required:
                                 description: Is this Template Parameter Required?
                                 type: boolean
+                              schemaId:
+                                description: The name of the Schema.
+                                type: string
                               type:
                                 description: The Type of this Template Parameter,
                                   such as a string.
+                                type: string
+                              typeName:
+                                description: The type name defined by the Schema.
                                 type: string
                               values:
                                 description: One or more acceptable values for this
@@ -553,15 +682,49 @@ spec:
                                       description: A description of this Template
                                         Parameter.
                                       type: string
+                                    example:
+                                      description: One or more example blocks as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          description:
+                                            description: A description of this Template
+                                              Parameter.
+                                            type: string
+                                          externalValue:
+                                            description: A URL that points to the
+                                              literal example.
+                                            type: string
+                                          name:
+                                            description: The Name of this Template
+                                              Parameter.
+                                            type: string
+                                          summary:
+                                            description: A short description for this
+                                              example.
+                                            type: string
+                                          value:
+                                            description: The example of the representation.
+                                            type: string
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
                                     name:
                                       description: The Name of this Template Parameter.
                                       type: string
                                     required:
                                       description: Is this Template Parameter Required?
                                       type: boolean
+                                    schemaId:
+                                      description: The name of the Schema.
+                                      type: string
                                     type:
                                       description: The Type of this Template Parameter,
                                         such as a string.
+                                      type: string
+                                    typeName:
+                                      description: The type name defined by the Schema.
                                       type: string
                                     values:
                                       description: One or more acceptable values for
@@ -576,11 +739,10 @@ spec:
                                   type: object
                                 type: array
                               schemaId:
-                                description: The ID of an API Management Schema which
-                                  represents this Response.
+                                description: The name of the Schema.
                                 type: string
                               typeName:
-                                description: The Type Name defined by the Schema.
+                                description: The type name defined by the Schema.
                                 type: string
                             required:
                             - contentType
@@ -604,15 +766,44 @@ spec:
                         description:
                           description: A description of this Template Parameter.
                           type: string
+                        example:
+                          description: One or more example blocks as defined above.
+                          items:
+                            properties:
+                              description:
+                                description: A description of this Template Parameter.
+                                type: string
+                              externalValue:
+                                description: A URL that points to the literal example.
+                                type: string
+                              name:
+                                description: The Name of this Template Parameter.
+                                type: string
+                              summary:
+                                description: A short description for this example.
+                                type: string
+                              value:
+                                description: The example of the representation.
+                                type: string
+                            required:
+                            - name
+                            type: object
+                          type: array
                         name:
                           description: The Name of this Template Parameter.
                           type: string
                         required:
                           description: Is this Template Parameter Required?
                           type: boolean
+                        schemaId:
+                          description: The name of the Schema.
+                          type: string
                         type:
                           description: The Type of this Template Parameter, such as
                             a string.
+                          type: string
+                        typeName:
+                          description: The type name defined by the Schema.
                           type: string
                         values:
                           description: One or more acceptable values for this Template

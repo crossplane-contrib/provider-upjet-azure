@@ -69,8 +69,8 @@ spec:
                     items:
                       properties:
                         name:
-                          description: The name of the Action Group. Changing this
-                            forces a new resource to be created.
+                          description: The name of the ARM role receiver. Changing
+                            this forces a new resource to be created.
                           type: string
                         roleId:
                           description: The arm role id.
@@ -96,8 +96,8 @@ spec:
                           description: Indicates whether this instance is global runbook.
                           type: boolean
                         name:
-                          description: The name of the Action Group. Changing this
-                            forces a new resource to be created.
+                          description: The name of the automation runbook receiver.
+                            Changing this forces a new resource to be created.
                           type: string
                         runbookName:
                           description: The name for this runbook.
@@ -132,8 +132,8 @@ spec:
                             receiver.
                           type: string
                         name:
-                          description: The name of the Action Group. Changing this
-                            forces a new resource to be created.
+                          description: The name of the Azure app push receiver. Changing
+                            this forces a new resource to be created.
                           type: string
                       required:
                       - emailAddress
@@ -156,8 +156,8 @@ spec:
                             to.
                           type: string
                         name:
-                          description: The name of the Action Group. Changing this
-                            forces a new resource to be created.
+                          description: The name of the Azure Function receiver. Changing
+                            this forces a new resource to be created.
                           type: string
                         useCommonAlertSchema:
                           description: Enables or disables the common alert schema.
@@ -174,13 +174,13 @@ spec:
                     items:
                       properties:
                         emailAddress:
-                          description: The email address of the user signed into the
-                            mobile app who will receive push notifications from this
-                            receiver.
+                          description: The email address of this receiver.
                           type: string
                         name:
-                          description: The name of the Action Group. Changing this
-                            forces a new resource to be created.
+                          description: The name of the email receiver. Names must
+                            be unique (case-insensitive) across all receivers within
+                            an action group. Changing this forces a new resource to
+                            be created.
                           type: string
                         useCommonAlertSchema:
                           description: Enables or disables the common alert schema.
@@ -203,19 +203,30 @@ spec:
                         eventHubId:
                           description: The resource ID of the respective Event Hub.
                           type: string
+                        eventHubName:
+                          description: The name of the specific Event Hub queue.
+                          type: string
+                        eventHubNamespace:
+                          description: The namespace name of the Event Hub.
+                          type: string
                         name:
-                          description: The name of the Action Group. Changing this
-                            forces a new resource to be created.
+                          description: The name of the EventHub Receiver, must be
+                            unique within action group. Changing this forces a new
+                            resource to be created.
+                          type: string
+                        subscriptionId:
+                          description: The ID for the subscription containing this
+                            Event Hub. Default to the subscription ID of the Action
+                            Group.
                           type: string
                         tenantId:
                           description: The Tenant ID for the subscription containing
                             this Event Hub.
                           type: string
                         useCommonAlertSchema:
-                          description: Enables or disables the common alert schema.
+                          description: Indicates whether to use common alert schema.
                           type: boolean
                       required:
-                      - eventHubId
                       - name
                       type: object
                     type: array
@@ -228,7 +239,7 @@ spec:
                             connection.
                           type: string
                         name:
-                          description: The name of the Action Group. Changing this
+                          description: The name of the ITSM receiver. Changing this
                             forces a new resource to be created.
                           type: string
                         region:
@@ -261,8 +272,8 @@ spec:
                           description: The callback url where HTTP request sent to.
                           type: string
                         name:
-                          description: The name of the Action Group. Changing this
-                            forces a new resource to be created.
+                          description: The name of the logic app receiver. Changing
+                            this forces a new resource to be created.
                           type: string
                         resourceId:
                           description: The Azure resource ID of the logic app.
@@ -278,7 +289,8 @@ spec:
                     type: array
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the Action Group instance.
+                      the Action Group instance. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -367,8 +379,10 @@ spec:
                           description: The country code of the SMS receiver.
                           type: string
                         name:
-                          description: The name of the Action Group. Changing this
-                            forces a new resource to be created.
+                          description: The name of the SMS receiver. Names must be
+                            unique (case-insensitive) across all receivers within
+                            an action group. Changing this forces a new resource to
+                            be created.
                           type: string
                         phoneNumber:
                           description: The phone number of the SMS receiver.
@@ -389,14 +403,14 @@ spec:
                     items:
                       properties:
                         countryCode:
-                          description: The country code of the SMS receiver.
+                          description: The country code of the voice receiver.
                           type: string
                         name:
-                          description: The name of the Action Group. Changing this
+                          description: The name of the voice receiver. Changing this
                             forces a new resource to be created.
                           type: string
                         phoneNumber:
-                          description: The phone number of the SMS receiver.
+                          description: The phone number of the voice receiver.
                           type: string
                       required:
                       - countryCode
@@ -420,16 +434,17 @@ spec:
                                   AAD auth.
                                 type: string
                               tenantId:
-                                description: The Tenant ID for the subscription containing
-                                  this Event Hub.
+                                description: The tenant id for AAD auth.
                                 type: string
                             required:
                             - objectId
                             type: object
                           type: array
                         name:
-                          description: The name of the Action Group. Changing this
-                            forces a new resource to be created.
+                          description: The name of the webhook receiver. Names must
+                            be unique (case-insensitive) across all receivers within
+                            an action group. Changing this forces a new resource to
+                            be created.
                           type: string
                         serviceUri:
                           description: The URI where webhooks should be sent.

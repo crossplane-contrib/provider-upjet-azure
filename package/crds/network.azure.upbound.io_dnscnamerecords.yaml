@@ -154,7 +154,7 @@ spec:
                     type: object
                   targetResourceId:
                     description: The Azure resource id of the target object. Conflicts
-                      with records
+                      with record.
                     type: string
                   targetResourceIdRef:
                     description: Reference to a DNSCNAMERecord in network to populate
@@ -232,6 +232,7 @@ spec:
                         type: object
                     type: object
                   ttl:
+                    description: The Time To Live (TTL) of the DNS record in seconds.
                     type: number
                   zoneName:
                     description: Specifies the DNS Zone where the resource exists.

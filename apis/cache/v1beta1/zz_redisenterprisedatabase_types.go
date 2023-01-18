@@ -19,11 +19,11 @@ type ModuleObservation struct {
 
 type ModuleParameters struct {
 
-	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400).
+	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
 	// +kubebuilder:validation:Optional
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// The name which should be used for this module. Possible values are RediSearch, RedisBloom and RedisTimeSeries. Changing this forces a new Redis Enterprise Database to be created.
+	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -78,7 +78,7 @@ type RedisEnterpriseDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Module []ModuleParameters `json:"module,omitempty" tf:"module,omitempty"`
 
-	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created.
+	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 

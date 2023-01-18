@@ -22,7 +22,7 @@ type AudioAnalyzerPresetParameters struct {
 	// +kubebuilder:validation:Optional
 	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
 
-	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463. Possible values are ar-EG, ar-SY, de-DE, en-AU, en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.
 	// +kubebuilder:validation:Optional
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 }
@@ -32,9 +32,9 @@ type BuiltinPresetObservation struct {
 
 type BuiltinPresetParameters struct {
 
-	// The built-in preset to be used for encoding videos. The allowed values are AACGoodQualityAudio, AdaptiveStreaming,ContentAwareEncoding, ContentAwareEncodingExperimental,CopyAllBitrateNonInterleaved, H264MultipleBitrate1080p,H264MultipleBitrate720p, H264MultipleBitrateSD,H264SingleBitrate1080p, H264SingleBitrate720p and H264SingleBitrateSD.
-	// +kubebuilder:validation:Optional
-	PresetName *string `json:"presetName,omitempty" tf:"preset_name,omitempty"`
+	// The built-in preset to be used for encoding videos. The Possible values are AACGoodQualityAudio, AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental, CopyAllBitrateNonInterleaved, H265AdaptiveStreaming, H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p, H265SingleBitrate720p, H264MultipleBitrate1080p, H264MultipleBitrateSD, H264MultipleBitrate720p, H264SingleBitrate1080p, H264SingleBitrateSD and H264SingleBitrate720p.
+	// +kubebuilder:validation:Required
+	PresetName *string `json:"presetName" tf:"preset_name,omitempty"`
 }
 
 type FaceDetectorPresetObservation struct {
@@ -129,7 +129,7 @@ type VideoAnalyzerPresetParameters struct {
 	// +kubebuilder:validation:Optional
 	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
 
-	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463. Possible values are ar-EG, ar-SY, de-DE, en-AU, en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.
 	// +kubebuilder:validation:Optional
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 

@@ -22,7 +22,7 @@ type ExportDataOptionsParameters struct {
 	// +kubebuilder:validation:Required
 	TimeFrame *string `json:"timeFrame" tf:"time_frame,omitempty"`
 
-	// The type of the query.
+	// The type of the query. Possible values are ActualCost, AmortizedCost and Usage.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -32,7 +32,7 @@ type ExportDataStorageLocationObservation struct {
 
 type ExportDataStorageLocationParameters struct {
 
-	// The Resource Manager ID of the container where exports will be uploaded.
+	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
 	// +kubebuilder:validation:Optional
@@ -46,7 +46,7 @@ type ExportDataStorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
-	// The path of the directory where exports will be uploaded.
+	// The path of the directory where exports will be uploaded. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	RootFolderPath *string `json:"rootFolderPath" tf:"root_folder_path,omitempty"`
 }
@@ -83,7 +83,7 @@ type ResourceGroupCostManagementExportParameters struct {
 	// +kubebuilder:validation:Required
 	RecurrenceType *string `json:"recurrenceType" tf:"recurrence_type,omitempty"`
 
-	// The id of the resource group on which to create an export.
+	// The id of the resource group on which to create an export. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -158,7 +158,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
-                      SAS Definition.
+                      SAS Definition. Changing this forces a new resource to be created.
                     type: object
                   validityPeriod:
                     description: Validity period of SAS token. Value needs to be in

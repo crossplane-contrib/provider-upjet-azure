@@ -38,6 +38,7 @@ type ScopeMapParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerRegistryNameSelector *v1.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
 
+	// The description of the Container Registry.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

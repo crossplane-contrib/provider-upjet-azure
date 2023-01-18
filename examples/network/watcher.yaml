@@ -7,8 +7,7 @@ spec:
     location: Norway East
     resourceGroupNameRef:
       name: norway-watcher-rg
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -19,5 +18,3 @@ spec:
     location: Norway East
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example

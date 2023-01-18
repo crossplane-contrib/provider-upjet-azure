@@ -59,9 +59,11 @@ type LedgerObservation struct {
 
 type LedgerParameters struct {
 
+	// A list of azuread_based_service_principal blocks as defined below.
 	// +kubebuilder:validation:Required
 	AzureadBasedServicePrincipal []AzureadBasedServicePrincipalParameters `json:"azureadBasedServicePrincipal" tf:"azuread_based_service_principal,omitempty"`
 
+	// A list of certificate_based_security_principal blocks as defined below.
 	// +kubebuilder:validation:Optional
 	CertificateBasedSecurityPrincipal []CertificateBasedSecurityPrincipalParameters `json:"certificateBasedSecurityPrincipal,omitempty" tf:"certificate_based_security_principal,omitempty"`
 

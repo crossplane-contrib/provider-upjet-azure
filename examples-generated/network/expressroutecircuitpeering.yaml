@@ -11,8 +11,10 @@ spec:
     expressRouteCircuitNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    ipv4Enabled: true
     ipv6:
-    - microsoftPeering:
+    - enabled: true
+      microsoftPeering:
       - advertisedPublicPrefixes:
         - 2002:db01::/126
       primaryPeerAddressPrefix: 2002:db01::/126

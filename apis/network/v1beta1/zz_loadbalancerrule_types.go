@@ -40,7 +40,7 @@ type LoadBalancerRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableFloatingIP *bool `json:"enableFloatingIp,omitempty" tf:"enable_floating_ip,omitempty"`
 
-	// Is TCP Reset enabled for this Load Balancer Rule? Defaults to false.
+	// Is TCP Reset enabled for this Load Balancer Rule?
 	// +kubebuilder:validation:Optional
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
@@ -60,7 +60,7 @@ type LoadBalancerRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadDistribution *string `json:"loadDistribution,omitempty" tf:"load_distribution,omitempty"`
 
-	// The ID of the Load Balancer in which to create the Rule.
+	// The ID of the Load Balancer in which to create the Rule. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=LoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

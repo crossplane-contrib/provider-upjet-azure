@@ -8,5 +8,3 @@ spec:
       name: example
     expressRouteGatewayIdRef:
       name: example
-  providerConfigRef:
-    name: example

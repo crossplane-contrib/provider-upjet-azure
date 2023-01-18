@@ -84,7 +84,7 @@ func (tr *IOTHub) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHub) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubConsumerGroup
@@ -158,7 +158,7 @@ func (tr *IOTHubConsumerGroup) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubConsumerGroup) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubDPS
@@ -454,7 +454,7 @@ func (tr *IOTHubEndpointEventHub) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubEndpointEventHub) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubEndpointServiceBusQueue
@@ -528,7 +528,7 @@ func (tr *IOTHubEndpointServiceBusQueue) LateInitialize(attrs []byte) (bool, err
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubEndpointServiceBusQueue) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubEndpointServiceBusTopic
@@ -602,7 +602,7 @@ func (tr *IOTHubEndpointServiceBusTopic) LateInitialize(attrs []byte) (bool, err
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubEndpointServiceBusTopic) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubEndpointStorageContainer
@@ -676,7 +676,7 @@ func (tr *IOTHubEndpointStorageContainer) LateInitialize(attrs []byte) (bool, er
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubEndpointStorageContainer) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubEnrichment
@@ -750,7 +750,7 @@ func (tr *IOTHubEnrichment) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubEnrichment) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubFallbackRoute
@@ -824,7 +824,7 @@ func (tr *IOTHubFallbackRoute) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubFallbackRoute) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubRoute
@@ -898,7 +898,7 @@ func (tr *IOTHubRoute) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubRoute) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubSharedAccessPolicy
@@ -972,5 +972,5 @@ func (tr *IOTHubSharedAccessPolicy) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubSharedAccessPolicy) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

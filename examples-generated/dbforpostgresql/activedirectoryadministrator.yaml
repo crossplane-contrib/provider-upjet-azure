@@ -8,6 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    login: sqladmin
     objectId: ${data.azurerm_client_config.current.object_id}
     resourceGroupNameSelector:
       matchLabels:
@@ -38,6 +39,8 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
     version: "9.6"
 
 ---

@@ -18,7 +18,7 @@ type EncryptionObservation struct {
 
 type EncryptionParameters struct {
 
-	// Boolean value that indicates whether the policy is enabled.
+	// Boolean value that indicates whether encryption is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 
@@ -36,15 +36,15 @@ type GeoreplicationsObservation struct {
 
 type GeoreplicationsParameters struct {
 
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// A location where the container registry should be geo-replicated. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// Whether regional endpoint is enabled for this Container Registry? Defaults to false.
+	// Whether regional endpoint is enabled for this Container Registry?
 	// +kubebuilder:validation:Optional
 	RegionalEndpointEnabled *bool `json:"regionalEndpointEnabled,omitempty" tf:"regional_endpoint_enabled,omitempty"`
 
-	// A mapping of tags to assign to the resource.
+	// A mapping of tags to assign to this replication location.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -127,11 +127,11 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	AdminEnabled *bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
 
-	// Whether allows anonymous (unauthenticated) pull access to this Container Registry? Defaults to false. This is only supported on resources with the Standard or Premium SKU.
+	// Whether allows anonymous (unauthenticated) pull access to this Container Registry?  This is only supported on resources with the Standard or Premium SKU.
 	// +kubebuilder:validation:Optional
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
 
-	// Whether to enable dedicated data endpoints for this Container Registry? Defaults to false. This is only supported on resources with the Premium SKU.
+	// Whether to enable dedicated data endpoints for this Container Registry?  This is only supported on resources with the Premium SKU.
 	// +kubebuilder:validation:Optional
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
 
@@ -167,7 +167,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// Boolean value that indicates whether quarantine policy is enabled. Defaults to false.
+	// Boolean value that indicates whether quarantine policy is enabled.
 	// +kubebuilder:validation:Optional
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 

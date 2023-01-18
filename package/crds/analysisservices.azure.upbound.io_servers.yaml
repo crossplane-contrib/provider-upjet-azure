@@ -115,7 +115,8 @@ spec:
                       exists. Changing this forces a new resource to be created.
                     type: string
                   name:
-                    description: The name of the Analysis Services Server. Changing
+                    description: The name of the Analysis Services Server. Only lowercase
+                      Alphanumeric characters allowed, starting with a letter. Changing
                       this forces a new resource to be created.
                     type: string
                   querypoolConnectionMode:

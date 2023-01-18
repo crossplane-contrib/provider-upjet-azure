@@ -10,8 +10,7 @@ spec:
     location: West Europe
     resourceGroupNameRef:
       name: example-local-network-gw
-  providerConfigRef:
-    name: example
+
 ---
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
@@ -22,5 +21,4 @@ spec:
     location: West Europe
     tags:
       provisioner: crossplane
-  providerConfigRef:
-    name: example
+

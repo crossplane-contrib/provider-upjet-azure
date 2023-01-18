@@ -78,7 +78,8 @@ spec:
                     type: number
                   expressRoutePortId:
                     description: The ID of the Express Route Port this Express Route
-                      Circuit is based on.
+                      Circuit is based on. Changing this forces a new resource to
+                      be created.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the

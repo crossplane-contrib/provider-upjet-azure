@@ -16,5 +16,3 @@ spec:
     ttl: 300
     zoneNameRef:
       name: example
-  providerConfigRef:
-    name: example

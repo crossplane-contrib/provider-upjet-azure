@@ -50,6 +50,7 @@ type MonthlyScheduleObservation struct {
 
 type MonthlyScheduleParameters struct {
 
+	// List of the days of the month when the snapshots will be created, valid range is from 1 to 30.
 	// +kubebuilder:validation:Required
 	DaysOfMonth []*float64 `json:"daysOfMonth" tf:"days_of_month,omitempty"`
 
@@ -120,6 +121,7 @@ type SnapshotPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

@@ -31,6 +31,10 @@ type AdditionalLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
+	// Only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.
+	// +kubebuilder:validation:Optional
+	GatewayDisabled *bool `json:"gatewayDisabled,omitempty" tf:"gateway_disabled,omitempty"`
+
 	// The name of the Azure Region in which the API Management Service should be expanded to.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
@@ -43,7 +47,7 @@ type AdditionalLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkConfiguration []VirtualNetworkConfigurationParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
-	// A list of availability zones.
+	// A list of availability zones. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -77,6 +81,12 @@ type CertificateParameters struct {
 
 type DeveloperPortalObservation struct {
 
+	// The source of the certificate.
+	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
+
+	// The status of the certificate.
+	CertificateStatus *string `json:"certificateStatus,omitempty" tf:"certificate_status,omitempty"`
+
 	// The expiration date of the certificate in RFC3339 format: 2000-01-02T03:04:05Z.
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
@@ -103,6 +113,12 @@ type DeveloperPortalParameters struct {
 }
 
 type HostNameConfigurationManagementObservation struct {
+
+	// The source of the certificate.
+	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
+
+	// The status of the certificate.
+	CertificateStatus *string `json:"certificateStatus,omitempty" tf:"certificate_status,omitempty"`
 
 	// The expiration date of the certificate in RFC3339 format: 2000-01-02T03:04:05Z.
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
@@ -363,6 +379,12 @@ type PolicyParameters struct {
 
 type PortalObservation struct {
 
+	// The source of the certificate.
+	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
+
+	// The status of the certificate.
+	CertificateStatus *string `json:"certificateStatus,omitempty" tf:"certificate_status,omitempty"`
+
 	// The expiration date of the certificate in RFC3339 format: 2000-01-02T03:04:05Z.
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
@@ -400,6 +422,12 @@ type ProtocolsParameters struct {
 
 type ProxyObservation struct {
 
+	// The source of the certificate.
+	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
+
+	// The status of the certificate.
+	CertificateStatus *string `json:"certificateStatus,omitempty" tf:"certificate_status,omitempty"`
+
 	// Is the certificate associated with this Hostname the Default SSL Certificate? This is used when an SNI header isn't specified by a client. Defaults to false.
 	DefaultSSLBinding *bool `json:"defaultSslBinding,omitempty" tf:"default_ssl_binding,omitempty"`
 
@@ -429,6 +457,12 @@ type ProxyParameters struct {
 }
 
 type ScmObservation struct {
+
+	// The source of the certificate.
+	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
+
+	// The status of the certificate.
+	CertificateStatus *string `json:"certificateStatus,omitempty" tf:"certificate_status,omitempty"`
 
 	// The expiration date of the certificate in RFC3339 format: 2000-01-02T03:04:05Z.
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
@@ -492,9 +526,11 @@ type SecurityParameters struct {
 	// +kubebuilder:validation:Optional
 	TLSEcdheEcdsaWithAes256CbcShaCiphersEnabled *bool `json:"tlsEcdheEcdsaWithAes256CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_ecdsa_with_aes256_cbc_sha_ciphers_enabled,omitempty"`
 
+	// Should the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	TLSEcdheRsaWithAes128CbcShaCiphersEnabled *bool `json:"tlsEcdheRsaWithAes128CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_rsa_with_aes128_cbc_sha_ciphers_enabled,omitempty"`
 
+	// Should the TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA cipher be enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	TLSEcdheRsaWithAes256CbcShaCiphersEnabled *bool `json:"tlsEcdheRsaWithAes256CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_rsa_with_aes256_cbc_sha_ciphers_enabled,omitempty"`
 
@@ -518,7 +554,11 @@ type SecurityParameters struct {
 	// +kubebuilder:validation:Optional
 	TLSRsaWithAes256CbcShaCiphersEnabled *bool `json:"tlsRsaWithAes256CbcShaCiphersEnabled,omitempty" tf:"tls_rsa_with_aes256_cbc_sha_ciphers_enabled,omitempty"`
 
-	// Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher be enabled for alL TLS versions (1.0, 1.1 and 1.2)? Defaults to false.
+	// Should the TLS_RSA_WITH_AES_256_GCM_SHA384 cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	TLSRsaWithAes256GCMSha384CiphersEnabled *bool `json:"tlsRsaWithAes256GcmSha384CiphersEnabled,omitempty" tf:"tls_rsa_with_aes256_gcm_sha384_ciphers_enabled,omitempty"`
+
+	// Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher be enabled for alL TLS versions (1.0, 1.1 and 1.2)?
 	// +kubebuilder:validation:Optional
 	TripleDesCiphersEnabled *bool `json:"tripleDesCiphersEnabled,omitempty" tf:"triple_des_ciphers_enabled,omitempty"`
 }

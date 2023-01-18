@@ -16,5 +16,3 @@ spec:
       name: example
     sourceAddressPrefix: '*'
     sourcePortRange: '*'
-  providerConfigRef:
-    name: example

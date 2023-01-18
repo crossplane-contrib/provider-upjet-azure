@@ -145,7 +145,8 @@ spec:
                           description: The name of the affinity cookie.
                           type: string
                         authenticationCertificate:
-                          description: One or more authentication_certificate blocks.
+                          description: One or more authentication_certificate blocks
+                            as defined below.
                           items:
                             properties:
                               name:
@@ -165,7 +166,7 @@ spec:
                                   3600 seconds.
                                 type: number
                               enabled:
-                                description: Is the Web Application Firewall be enabled?
+                                description: Is the Web Application Firewall enabled?
                                 type: boolean
                             required:
                             - drainTimeoutSec
@@ -205,7 +206,7 @@ spec:
                           type: string
                         requestTimeout:
                           description: The request timeout in seconds, which must
-                            be between 1 and 86400 seconds.
+                            be between 1 and 86400 seconds. Defaults to 30.
                           type: number
                         trustedRootCertificateNames:
                           description: A list of trusted_root_certificate names.
@@ -546,6 +547,23 @@ spec:
                       - name
                       type: object
                     type: array
+                  global:
+                    description: A global block as defined below.
+                    items:
+                      properties:
+                        requestBufferingEnabled:
+                          description: Whether Application Gateway's Request buffer
+                            is enabled.
+                          type: boolean
+                        responseBufferingEnabled:
+                          description: Whether Application Gateway's Response buffer
+                            is enabled.
+                          type: boolean
+                      required:
+                      - requestBufferingEnabled
+                      - responseBufferingEnabled
+                      type: object
+                    type: array
                   httpListener:
                     description: One or more http_listener blocks as defined below.
                     items:
@@ -600,7 +618,6 @@ spec:
                           type: string
                         requireSni:
                           description: Should Server Name Indication be Required?
-                            Defaults to false.
                           type: boolean
                         sslCertificateName:
                           description: The name of the associated SSL Certificate
@@ -792,7 +809,6 @@ spec:
                                   type: string
                                 type: array
                             required:
-                            - body
                             - statusCode
                             type: object
                           type: array
@@ -830,7 +846,7 @@ spec:
                           description: The Unhealthy Threshold for this Probe, which
                             indicates the amount of retries which should be attempted
                             before a node is deemed unhealthy. Possible values are
-                            from 1 - 20 seconds.
+                            from 1 to 20.
                           type: number
                       required:
                       - interval
@@ -1091,6 +1107,12 @@ spec:
                                 description: One url block as defined above
                                 items:
                                   properties:
+                                    components:
+                                      description: The components used to rewrite
+                                        the URL. Possible values are path_only and
+                                        query_string_only to limit the rewrite to
+                                        the URL Path or URL Query String only.
+                                      type: string
                                     path:
                                       description: The URL path to rewrite.
                                       type: string
@@ -1199,19 +1221,20 @@ spec:
                       properties:
                         cipherSuites:
                           description: 'A List of accepted cipher suites. Possible
-                            values are: TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,
-                            TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,
-                            TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
-                            TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
-                            TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
-                            TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
-                            TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
-                            TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+                            values are: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA,
+                            TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA,
+                            TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA,
+                            TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA,
+                            TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+                            TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+                            TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,
+                            TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+                            TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
                             TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
-                            TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA,
-                            TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256,
-                            TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256
-                            and TLS_RSA_WITH_AES_256_GCM_SHA384.'
+                            TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_3DES_EDE_CBC_SHA,
+                            TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256,
+                            TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA,
+                            TLS_RSA_WITH_AES_256_CBC_SHA256 and TLS_RSA_WITH_AES_256_GCM_SHA384.'
                           items:
                             type: string
                           type: array
@@ -1252,19 +1275,20 @@ spec:
                             properties:
                               cipherSuites:
                                 description: 'A List of accepted cipher suites. Possible
-                                  values are: TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,
-                                  TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,
-                                  TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
-                                  TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384,
-                                  TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
-                                  TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
-                                  TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
-                                  TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+                                  values are: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA,
+                                  TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA,
+                                  TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA,
+                                  TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA,
+                                  TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+                                  TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+                                  TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,
+                                  TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+                                  TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
                                   TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
-                                  TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA,
-                                  TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256,
-                                  TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256
-                                  and TLS_RSA_WITH_AES_256_GCM_SHA384.'
+                                  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_3DES_EDE_CBC_SHA,
+                                  TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256,
+                                  TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA,
+                                  TLS_RSA_WITH_AES_256_CBC_SHA256 and TLS_RSA_WITH_AES_256_GCM_SHA384.'
                                 items:
                                   type: string
                                 type: array
@@ -1467,18 +1491,19 @@ spec:
                           items:
                             properties:
                               ruleGroupName:
-                                description: 'The rule group where specific rules
-                                  should be disabled. Accepted values are:  crs_20_protocol_violations,
+                                description: The rule group where specific rules should
+                                  be disabled. Possible values are crs_20_protocol_violations,
                                   crs_21_protocol_anomalies, crs_23_request_limits,
                                   crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks,
                                   crs_41_sql_injection_attacks, crs_41_xss_attacks,
                                   crs_42_tight_security, crs_45_trojans, General,
-                                  REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION,
+                                  Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION,
                                   REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK,
                                   REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI,
                                   REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP,
                                   REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI,
-                                  REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION'
+                                  REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION
+                                  and REQUEST-944-APPLICATION-ATTACK-JAVA.
                                 type: string
                               rules:
                                 description: A list of rules which should be disabled
@@ -1492,7 +1517,7 @@ spec:
                             type: object
                           type: array
                         enabled:
-                          description: Is the Web Application Firewall be enabled?
+                          description: Is the Web Application Firewall enabled?
                           type: boolean
                         exclusion:
                           description: one or more exclusion blocks as defined below.
@@ -1501,8 +1526,9 @@ spec:
                               matchVariable:
                                 description: Match variable of the exclusion rule
                                   to exclude header, cookie or GET arguments. Possible
-                                  values are RequestHeaderNames, RequestArgNames and
-                                  RequestCookieNames
+                                  values are RequestArgKeys, RequestArgNames, RequestArgValues,
+                                  RequestCookieKeys, RequestCookieNames, RequestCookieValues,
+                                  RequestHeaderKeys, RequestHeaderNames and RequestHeaderValues
                                 type: string
                               selector:
                                 description: String value which will be used for the
@@ -1511,9 +1537,9 @@ spec:
                                 type: string
                               selectorMatchOperator:
                                 description: Operator which will be used to search
-                                  in the variable content. Possible values are Equals,
-                                  StartsWith, EndsWith, Contains. If empty will exclude
-                                  all traffic on this match_variable
+                                  in the variable content. Possible values are Contains,
+                                  EndsWith, Equals, EqualsAny and StartsWith. If empty
+                                  will exclude all traffic on this match_variable
                                 type: string
                             required:
                             - matchVariable
@@ -1538,12 +1564,12 @@ spec:
                           type: boolean
                         ruleSetType:
                           description: The Type of the Rule Set used for this Web
-                            Application Firewall. Currently, only OWASP is supported.
+                            Application Firewall. Possible values are OWASP and Microsoft_BotManagerRuleSet.
                           type: string
                         ruleSetVersion:
                           description: The Version of the Rule Set used for this Web
-                            Application Firewall. Possible values are 2.2.9, 3.0,
-                            3.1,  and 3.2.
+                            Application Firewall. Possible values are 0.1, 1.0, 2.2.9,
+                            3.0, 3.1 and 3.2.
                           type: string
                       required:
                       - enabled
@@ -1771,7 +1797,8 @@ spec:
                     items:
                       properties:
                         authenticationCertificate:
-                          description: One or more authentication_certificate blocks.
+                          description: One or more authentication_certificate blocks
+                            as defined below.
                           items:
                             properties:
                               id:
@@ -1856,7 +1883,7 @@ spec:
                           description: The ID of the associated SSL Certificate.
                           type: string
                         sslProfileId:
-                          description: The ID of the associated SSL Certificate.
+                          description: The ID of the associated SSL Profile.
                           type: string
                       type: object
                     type: array

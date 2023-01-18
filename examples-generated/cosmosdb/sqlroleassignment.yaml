@@ -19,7 +19,9 @@ spec:
     roleDefinitionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    scope: /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}
+    scopeSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -61,7 +63,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     assignableScopes:
-    - /subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.example.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.example.name}
+    - ${azurerm_cosmosdb_account.example.id}
     name: examplesqlroledef
     permissions:
     - dataActions:

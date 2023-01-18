@@ -242,7 +242,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	ProbePath *string `json:"probePath,omitempty" tf:"probe_path,omitempty"`
 
-	// The CDN Profile to which to attach the CDN Endpoint.
+	// The CDN Profile to which to attach the CDN Endpoint. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.Profile
 	// +kubebuilder:validation:Optional
 	ProfileName *string `json:"profileName,omitempty" tf:"profile_name,omitempty"`
@@ -259,7 +259,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	QuerystringCachingBehaviour *string `json:"querystringCachingBehaviour,omitempty" tf:"querystring_caching_behaviour,omitempty"`
 
-	// The name of the resource group in which to create the CDN Endpoint.
+	// The name of the resource group in which to create the CDN Endpoint. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -406,7 +406,7 @@ type GlobalDeliveryRuleURLRedirectActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies the protocol part of the URL. Valid values are Http and Https.
+	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -768,7 +768,7 @@ type URLRedirectActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies the protocol part of the URL. Valid values are Http and Https.
+	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 

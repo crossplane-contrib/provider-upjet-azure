@@ -14,7 +14,7 @@ spec:
       priority: 500
       rule:
       - destinationFqdns:
-        - .microsoft.com
+        - '*.microsoft.com'
         name: app_rule_collection1_rule1
         protocols:
         - port: 80
@@ -34,7 +34,6 @@ spec:
       - destinationAddress: 192.168.1.1
         destinationPorts:
         - "80"
-        - 1000-2000
         name: nat_rule_collection1_rule1
         protocols:
         - TCP

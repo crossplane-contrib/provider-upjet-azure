@@ -48,7 +48,7 @@ type MongoCollectionObservation struct {
 
 type MongoCollectionParameters struct {
 
-	// Specifies the name of the Cosmos DB Mongo Collection. Changing this forces a new resource to be created.
+	// The name of the Cosmos DB Account in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -103,7 +103,7 @@ type MongoCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The name of the key to partition on for sharding. There must not be any other unique index keys.
+	// The name of the key to partition on for sharding. There must not be any other unique index keys. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ShardKey *string `json:"shardKey,omitempty" tf:"shard_key,omitempty"`
 

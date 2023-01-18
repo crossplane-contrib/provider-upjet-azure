@@ -71,6 +71,28 @@ type DiffDiskSettingsParameters struct {
 	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
 }
 
+type GalleryApplicationObservation struct {
+}
+
+type GalleryApplicationParameters struct {
+
+	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
+	// +kubebuilder:validation:Optional
+	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
+
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// +kubebuilder:validation:Optional
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// Specifies a passthrough value for more generic context. This field can be any valid string value.
+	// +kubebuilder:validation:Optional
+	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+
+	// Specifies the Gallery Application Version resource ID.
+	// +kubebuilder:validation:Required
+	VersionID *string `json:"versionId" tf:"version_id,omitempty"`
+}
+
 type LinuxVirtualMachineIdentityObservation struct {
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -176,7 +198,7 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Required
 	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
-	// Should Extension Operations be allowed on this Virtual Machine?
+	// Should Extension Operations be allowed on this Virtual Machine? Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowExtensionOperations *bool `json:"allowExtensionOperations,omitempty" tf:"allow_extension_operations,omitempty"`
 
@@ -187,6 +209,10 @@ type LinuxVirtualMachineParameters struct {
 	// A boot_diagnostics block as defined below.
 	// +kubebuilder:validation:Optional
 	BootDiagnostics []BootDiagnosticsParameters `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
+
+	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine should be allocated to.
+	// +kubebuilder:validation:Optional
+	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 
 	// Specifies the Hostname which should be used for this Virtual Machine. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name, then you must specify computer_name. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -216,13 +242,17 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionAtHostEnabled *bool `json:"encryptionAtHostEnabled,omitempty" tf:"encryption_at_host_enabled,omitempty"`
 
-	// Specifies what should happen when the Virtual Machine is evicted for price reasons when using a Spot instance. At this time the only supported value is Deallocate. Changing this forces a new resource to be created.
+	// Specifies what should happen when the Virtual Machine is evicted for price reasons when using a Spot instance. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
 	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
+
+	// A gallery_application block as defined below.
+	// +kubebuilder:validation:Optional
+	GalleryApplication []GalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -257,6 +287,10 @@ type LinuxVirtualMachineParameters struct {
 	// A os_disk block as defined below.
 	// +kubebuilder:validation:Required
 	OsDisk []LinuxVirtualMachineOsDiskParameters `json:"osDisk" tf:"os_disk,omitempty"`
+
+	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
+	// +kubebuilder:validation:Optional
+	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
 
 	// Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are AutomaticByPlatform and ImageDefault. Defaults to ImageDefault. For more information on patch modes please see the product documentation.
 	// +kubebuilder:validation:Optional
@@ -307,7 +341,7 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Required
 	Size *string `json:"size" tf:"size,omitempty"`
 
-	// The ID of the Image which this Virtual Machine should be created from. Changing this forces a new resource to be created.
+	// The ID of the Image which this Virtual Machine should be created from. Changing this forces a new resource to be created. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
 	// +kubebuilder:validation:Optional
 	SourceImageID *string `json:"sourceImageId,omitempty" tf:"source_image_id,omitempty"`
 
@@ -399,11 +433,11 @@ type TerminationNotificationObservation struct {
 
 type TerminationNotificationParameters struct {
 
-	// Should the termination notification be enabled on this Virtual Machine? Defaults to false.
+	// Should the termination notification be enabled on this Virtual Machine?
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format.
+	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }

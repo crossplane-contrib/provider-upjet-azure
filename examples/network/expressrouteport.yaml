@@ -11,5 +11,3 @@ spec:
     peeringLocation: VantageDC-Newport-NGD
     resourceGroupNameRef:
       name: example
-  providerConfigRef:
-    name: example

@@ -40,6 +40,14 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
+	// Type of API. Possible values are graphql, http, soap, and websocket. Defaults to http.
+	// +kubebuilder:validation:Optional
+	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
+
+	// A contact block as documented below.
+	// +kubebuilder:validation:Optional
+	Contact []ContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
+
 	// A description of the API Management API, which may include HTML formatting tags.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -51,6 +59,10 @@ type APIParameters struct {
 	// A import block as documented below.
 	// +kubebuilder:validation:Optional
 	Import []ImportParameters `json:"import,omitempty" tf:"import,omitempty"`
+
+	// A license block as documented below.
+	// +kubebuilder:validation:Optional
+	License []LicenseParameters `json:"license,omitempty" tf:"license,omitempty"`
 
 	// An oauth2_authorization block as documented below.
 	// +kubebuilder:validation:Optional
@@ -64,7 +76,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// A list of protocols the operations in this API can be invoked. Possible values are http and https.
+	// A list of protocols the operations in this API can be invoked. Possible values are http, https, ws, and wss.
 	// +kubebuilder:validation:Optional
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
@@ -81,7 +93,7 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The Revision which used for this API.
+	// The Revision which used for this API. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Revision *string `json:"revision" tf:"revision,omitempty"`
 
@@ -105,9 +117,13 @@ type APIParameters struct {
 	// +kubebuilder:validation:Optional
 	SubscriptionKeyParameterNames []SubscriptionKeyParameterNamesParameters `json:"subscriptionKeyParameterNames,omitempty" tf:"subscription_key_parameter_names,omitempty"`
 
-	// Should this API require a subscription key?
+	// Should this API require a subscription key? Defaults to true.
 	// +kubebuilder:validation:Optional
 	SubscriptionRequired *bool `json:"subscriptionRequired,omitempty" tf:"subscription_required,omitempty"`
+
+	// Absolute URL of the Terms of Service for the API.
+	// +kubebuilder:validation:Optional
+	TermsOfServiceURL *string `json:"termsOfServiceUrl,omitempty" tf:"terms_of_service_url,omitempty"`
 
 	// The Version number of this API, if this API is versioned.
 	// +kubebuilder:validation:Optional
@@ -120,6 +136,24 @@ type APIParameters struct {
 	// The ID of the Version Set which this API is associated with.
 	// +kubebuilder:validation:Optional
 	VersionSetID *string `json:"versionSetId,omitempty" tf:"version_set_id,omitempty"`
+}
+
+type ContactObservation struct {
+}
+
+type ContactParameters struct {
+
+	// The email address of the contact person/organization.
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The name of the contact person/organization.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Absolute URL of the contact information.
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type ImportObservation struct {
@@ -138,6 +172,20 @@ type ImportParameters struct {
 	// A wsdl_selector block as defined below, which allows you to limit the import of a WSDL to only a subset of the document. This can only be specified when content_format is wsdl or wsdl-link.
 	// +kubebuilder:validation:Optional
 	WsdlSelector []WsdlSelectorParameters `json:"wsdlSelector,omitempty" tf:"wsdl_selector,omitempty"`
+}
+
+type LicenseObservation struct {
+}
+
+type LicenseParameters struct {
+
+	// The name of the license .
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Absolute URL of the license.
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type Oauth2AuthorizationObservation struct {

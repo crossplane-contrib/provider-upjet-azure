@@ -150,6 +150,7 @@ spec:
                         type: object
                     type: object
                   description:
+                    description: The description of the Container Registry.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create

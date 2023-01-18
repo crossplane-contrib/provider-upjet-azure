@@ -57,12 +57,11 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	ACL []TableACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The name of the storage table. Must be unique within the storage account the table is located.
+	// The name of the storage table. Only Alphanumeric characters allowed, starting with a letter. Must be unique within the storage account the table is located. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Specifies the storage account in which to create the storage table.
-	// Changing this forces a new resource to be created.
+	// Specifies the storage account in which to create the storage table. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`

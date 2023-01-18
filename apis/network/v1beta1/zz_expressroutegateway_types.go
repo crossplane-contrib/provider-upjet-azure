@@ -46,7 +46,7 @@ type ExpressRouteGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The ID of a Virtual HUB within which the ExpressRoute gateway should be created.
+	// The ID of a Virtual HUB within which the ExpressRoute gateway should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
