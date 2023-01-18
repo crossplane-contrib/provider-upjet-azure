@@ -84,7 +84,7 @@ func (tr *AttachedDatabaseConfiguration) LateInitialize(attrs []byte) (bool, err
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *AttachedDatabaseConfiguration) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this Cluster
@@ -232,7 +232,7 @@ func (tr *ClusterPrincipalAssignment) LateInitialize(attrs []byte) (bool, error)
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ClusterPrincipalAssignment) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this Database
@@ -380,7 +380,7 @@ func (tr *DatabasePrincipalAssignment) LateInitialize(attrs []byte) (bool, error
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *DatabasePrincipalAssignment) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this EventGridDataConnection
@@ -454,7 +454,7 @@ func (tr *EventGridDataConnection) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *EventGridDataConnection) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this EventHubDataConnection
@@ -528,7 +528,7 @@ func (tr *EventHubDataConnection) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *EventHubDataConnection) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this IOTHubDataConnection
@@ -602,5 +602,5 @@ func (tr *IOTHubDataConnection) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *IOTHubDataConnection) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

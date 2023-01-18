@@ -37,7 +37,7 @@ type AttachedDatabaseConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// The resource id of the cluster where the databases you would like to attach reside.
+	// The resource id of the cluster where the databases you would like to attach reside. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -51,7 +51,7 @@ type AttachedDatabaseConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterResourceIDSelector *v1.Selector `json:"clusterResourceIdSelector,omitempty" tf:"-"`
 
-	// The name of the database which you would like to attach, use * if you want to follow all current and future databases.
+	// The name of the database which you would like to attach, use * if you want to follow all current and future databases. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Database
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`

@@ -21,9 +21,7 @@ type EventGridDataConnectionObservation struct {
 
 type EventGridDataConnectionParameters struct {
 
-	// Specifies the blob storage event type that needs to be processed. Possible
-	// Values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobRenamed. Defaults
-	// to Microsoft.Storage.BlobCreated.
+	// Specifies the blob storage event type that needs to be processed. Possible Values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobRenamed. Defaults to Microsoft.Storage.BlobCreated.
 	// +kubebuilder:validation:Optional
 	BlobStorageEventType *string `json:"blobStorageEventType,omitempty" tf:"blob_storage_event_type,omitempty"`
 
@@ -40,7 +38,7 @@ type EventGridDataConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
-	// Specifies the data format of the EventHub messages. Allowed values: AVRO, CSV, JSON, MULTIJSON, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV and TXT
+	// Specifies the data format of the EventHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE.
 	// +kubebuilder:validation:Optional
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
@@ -57,8 +55,15 @@ type EventGridDataConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// Specifies the Event Hub consumer group this data connection will use for
-	// ingestion. Changing this forces a new resource to be created.
+	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
+
+	// The resource ID of the event grid that is subscribed to the storage account events.
+	// +kubebuilder:validation:Optional
+	EventGridResourceID *string `json:"eventgridResourceId,omitempty" tf:"eventgrid_resource_id,omitempty"`
+
+	// Specifies the Event Hub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.ConsumerGroup
 	// +kubebuilder:validation:Optional
 	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
@@ -71,8 +76,7 @@ type EventGridDataConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the resource id of the Event Hub this data connection will use for ingestion.
-	// Changing this forces a new resource to be created.
+	// Specifies the resource id of the Event Hub this data connection will use for ingestion. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -89,6 +93,10 @@ type EventGridDataConnectionParameters struct {
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
+
+	// Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id.  For user assigned identity (UAI) provide the UAI resource Id.
+	// +kubebuilder:validation:Optional
+	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
 
 	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created.
 	// +kubebuilder:validation:Optional

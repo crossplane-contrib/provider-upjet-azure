@@ -39,8 +39,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     messageRetention: 1
@@ -82,8 +82,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     location: West Europe

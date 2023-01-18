@@ -145,7 +145,8 @@ spec:
                     type: object
                   clusterResourceId:
                     description: The resource id of the cluster where the databases
-                      you would like to attach reside.
+                      you would like to attach reside. Changing this forces a new
+                      resource to be created.
                     type: string
                   clusterResourceIdRef:
                     description: Reference to a Cluster in kusto to populate clusterResourceId.
@@ -223,6 +224,7 @@ spec:
                   databaseName:
                     description: The name of the database which you would like to
                       attach, use * if you want to follow all current and future databases.
+                      Changing this forces a new resource to be created.
                     type: string
                   databaseNameRef:
                     description: Reference to a Database in kusto to populate databaseName.

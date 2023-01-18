@@ -150,8 +150,9 @@ spec:
                     type: object
                   dataFormat:
                     description: 'Specifies the data format of the EventHub messages.
-                      Allowed values: AVRO, CSV, JSON, MULTIJSON, PSV, RAW, SCSV,
-                      SINGLEJSON, SOHSV, TSV and TXT'
+                      Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC,
+                      PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and
+                      W3CLOGFILE.'
                     type: string
                   databaseName:
                     description: Specifies the name of the Kusto Database this data
@@ -231,6 +232,16 @@ spec:
                             type: string
                         type: object
                     type: object
+                  databaseRoutingType:
+                    description: 'Indication for database routing information from
+                      the data connection, by default only database routing information
+                      is allowed. Allowed values: Single, Multi. Changing this forces
+                      a new resource to be created.'
+                    type: string
+                  eventgridResourceId:
+                    description: The resource ID of the event grid that is subscribed
+                      to the storage account events.
+                    type: string
                   eventhubConsumerGroupName:
                     description: Specifies the Event Hub consumer group this data
                       connection will use for ingestion. Changing this forces a new
@@ -392,6 +403,11 @@ spec:
                   location:
                     description: The location where the Kusto Database should be created.
                       Changing this forces a new resource to be created.
+                    type: string
+                  managedIdentityResourceId:
+                    description: Empty for non-managed identity based data connection.
+                      For system assigned identity, provide cluster resource Id.  For
+                      user assigned identity (UAI) provide the UAI resource Id.
                     type: string
                   mappingRuleName:
                     description: Specifies the mapping rule used for the message ingestion.

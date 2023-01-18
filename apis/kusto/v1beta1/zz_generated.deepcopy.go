@@ -1234,6 +1234,16 @@ func (in *EventGridDataConnectionParameters) DeepCopyInto(out *EventGridDataConn
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DatabaseRoutingType != nil {
+		in, out := &in.DatabaseRoutingType, &out.DatabaseRoutingType
+		*out = new(string)
+		**out = **in
+	}
+	if in.EventGridResourceID != nil {
+		in, out := &in.EventGridResourceID, &out.EventGridResourceID
+		*out = new(string)
+		**out = **in
+	}
 	if in.EventHubConsumerGroupName != nil {
 		in, out := &in.EventHubConsumerGroupName, &out.EventHubConsumerGroupName
 		*out = new(string)
@@ -1266,6 +1276,11 @@ func (in *EventGridDataConnectionParameters) DeepCopyInto(out *EventGridDataConn
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedIdentityResourceID != nil {
+		in, out := &in.ManagedIdentityResourceID, &out.ManagedIdentityResourceID
 		*out = new(string)
 		**out = **in
 	}
@@ -1496,6 +1511,11 @@ func (in *EventHubDataConnectionParameters) DeepCopyInto(out *EventHubDataConnec
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseRoutingType != nil {
+		in, out := &in.DatabaseRoutingType, &out.DatabaseRoutingType
+		*out = new(string)
+		**out = **in
 	}
 	if in.EventHubID != nil {
 		in, out := &in.EventHubID, &out.EventHubID
@@ -1735,6 +1755,11 @@ func (in *IOTHubDataConnectionParameters) DeepCopyInto(out *IOTHubDataConnection
 		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseRoutingType != nil {
+		in, out := &in.DatabaseRoutingType, &out.DatabaseRoutingType
+		*out = new(string)
+		**out = **in
 	}
 	if in.EventSystemProperties != nil {
 		in, out := &in.EventSystemProperties, &out.EventSystemProperties

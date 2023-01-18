@@ -17,7 +17,6 @@ spec:
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    default_principal_modifications_kind: Union
     location: West Europe
     name: configuration1
     resourceGroupNameSelector:
@@ -91,7 +90,7 @@ spec:
   forProvider:
     clusterNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: cluster2
+        testing.upbound.io/example-name: example
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -111,7 +110,7 @@ spec:
   forProvider:
     clusterNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: cluster2
+        testing.upbound.io/example-name: follower_cluster
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

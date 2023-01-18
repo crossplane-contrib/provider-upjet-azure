@@ -47,7 +47,7 @@ type IOTHubDataConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConsumerGroupSelector *v1.Selector `json:"consumerGroupSelector,omitempty" tf:"-"`
 
-	// Specifies the data format of the IoTHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE.
+	// Specifies the data format of the IoTHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
@@ -64,7 +64,11 @@ type IOTHubDataConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// Specifies the System Properties that each IoT Hub message should contain. Changing this forces a new resource to be created.
+	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
+
+	// Specifies the System Properties that each IoT Hub message should contain. Changing this forces a new resource to be created. Possible values are message-id, sequence-number, to, absolute-expiry-time, iothub-enqueuedtime, correlation-id, user-id, iothub-ack, iothub-connection-device-id, iothub-connection-auth-generation-id and iothub-connection-auth-method.
 	// +kubebuilder:validation:Optional
 	EventSystemProperties []*string `json:"eventSystemProperties,omitempty" tf:"event_system_properties,omitempty"`
 
@@ -86,7 +90,7 @@ type IOTHubDataConnectionParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created.
+	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	MappingRuleName *string `json:"mappingRuleName,omitempty" tf:"mapping_rule_name,omitempty"`
 
@@ -116,7 +120,7 @@ type IOTHubDataConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	SharedAccessPolicyNameSelector *v1.Selector `json:"sharedAccessPolicyNameSelector,omitempty" tf:"-"`
 
-	// Specifies the target table name used for the message ingestion. Table must exist before resource is created.
+	// Specifies the target table name used for the message ingestion. Table must exist before resource is created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
