@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: notificationhubs.notificationhubs.azure.upbound.io
+  name: trafficmanagerprofiles.network.azure.upbound.io
 spec:
-  group: notificationhubs.azure.upbound.io
+  group: network.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: NotificationHub
-    listKind: NotificationHubList
-    plural: notificationhubs
-    singular: notificationhub
+    kind: TrafficManagerProfile
+    listKind: TrafficManagerProfileList
+    plural: trafficmanagerprofiles
+    singular: trafficmanagerprofile
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NotificationHub is the Schema for the NotificationHubs API. Manages
-          a Notification Hub within a Notification Hub Namespace.
+        description: TrafficManagerProfile is the Schema for the TrafficManagerProfiles
+          API. Manages a Traffic Manager Profile.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: NotificationHubSpec defines the desired state of NotificationHub
+            description: TrafficManagerProfileSpec defines the desired state of TrafficManagerProfile
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,168 +64,105 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  apnsCredential:
-                    description: A apns_credential block as defined below.
+                  dnsConfig:
+                    description: This block specifies the DNS configuration of the
+                      Profile, it supports the fields documented below.
                     items:
                       properties:
-                        applicationMode:
-                          description: The Application Mode which defines which server
-                            the APNS Messages should be sent to. Possible values are
-                            Production and Sandbox.
+                        relativeName:
+                          description: The relative domain name, this is combined
+                            with the domain name used by Traffic Manager to form the
+                            FQDN which is exported as documented below. Changing this
+                            forces a new resource to be created.
                           type: string
-                        bundleId:
-                          description: The Bundle ID of the iOS/macOS application
-                            to send push notifications for, such as com.hashicorp.example.
-                          type: string
-                        keyId:
-                          description: The Apple Push Notifications Service (APNS)
-                            Key.
-                          type: string
-                        teamId:
-                          description: The ID of the team the Token.
-                          type: string
-                        tokenSecretRef:
-                          description: The Push Token associated with the Apple Developer
-                            Account. This is the contents of the key downloaded from
-                            the Apple Developer Portal between the -----BEGIN PRIVATE
-                            KEY----- and -----END PRIVATE KEY----- blocks.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
+                        ttl:
+                          description: The TTL value of the Profile used by Local
+                            DNS resolvers and clients.
+                          type: number
                       required:
-                      - applicationMode
-                      - bundleId
-                      - keyId
-                      - teamId
-                      - tokenSecretRef
+                      - relativeName
+                      - ttl
                       type: object
                     type: array
-                  gcmCredential:
-                    description: A gcm_credential block as defined below.
+                  maxReturn:
+                    description: The amount of endpoints to return for DNS queries
+                      to this Profile. Possible values range from 1 to 8.
+                    type: number
+                  monitorConfig:
+                    description: This block specifies the Endpoint monitoring configuration
+                      for the Profile, it supports the fields documented below.
                     items:
                       properties:
-                        apiKeySecretRef:
-                          description: The API Key associated with the Google Cloud
-                            Messaging service.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
+                        customHeader:
+                          description: One or more custom_header blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the Traffic Manager profile.
+                                  Changing this forces a new resource to be created.
+                                type: string
+                              value:
+                                description: The value of custom header. Applicable
+                                  for HTTP and HTTPS protocol.
+                                type: string
+                            required:
+                            - name
+                            - value
+                            type: object
+                          type: array
+                        expectedStatusCodeRanges:
+                          description: A list of status code ranges in the format
+                            of 100-101.
+                          items:
+                            type: string
+                          type: array
+                        intervalInSeconds:
+                          description: 'The interval used to check the endpoint health
+                            from a Traffic Manager probing agent. You can specify
+                            two values here: 30 (normal probing) and 10 (fast probing).
+                            The default value is 30.'
+                          type: number
+                        path:
+                          description: The path used by the monitoring checks. Required
+                            when protocol is set to HTTP or HTTPS - cannot be set
+                            when protocol is set to TCP.
+                          type: string
+                        port:
+                          description: The port number used by the monitoring checks.
+                          type: number
+                        protocol:
+                          description: The protocol used by the monitoring checks,
+                            supported values are HTTP, HTTPS and TCP.
+                          type: string
+                        timeoutInSeconds:
+                          description: The amount of time the Traffic Manager probing
+                            agent should wait before considering that check a failure
+                            when a health check probe is sent to the endpoint. If
+                            interval_in_seconds is set to 30, then timeout_in_seconds
+                            can be between 5 and 10. The default value is 10. If interval_in_seconds
+                            is set to 10, then valid values are between 5 and 9 and
+                            timeout_in_seconds is required.
+                          type: number
+                        toleratedNumberOfFailures:
+                          description: The number of failures a Traffic Manager probing
+                            agent tolerates before marking that endpoint as unhealthy.
+                            Valid values are between 0 and 9. The default value is
+                            3
+                          type: number
                       required:
-                      - apiKeySecretRef
+                      - port
+                      - protocol
                       type: object
                     type: array
-                  location:
-                    description: The Azure Region in which this Notification Hub Namespace
-                      exists. Changing this forces a new resource to be created.
+                  profileStatus:
+                    description: The status of the profile, can be set to either Enabled
+                      or Disabled. Defaults to Enabled.
                     type: string
-                  namespaceName:
-                    description: The name of the Notification Hub Namespace in which
-                      to create this Notification Hub. Changing this forces a new
-                      resource to be created.
-                    type: string
-                  namespaceNameRef:
-                    description: Reference to a NotificationHubNamespace in notificationhubs
-                      to populate namespaceName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  namespaceNameSelector:
-                    description: Selector for a NotificationHubNamespace in notificationhubs
-                      to populate namespaceName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   resourceGroupName:
-                    description: The name of the Resource Group in which the Notification
-                      Hub Namespace exists. Changing this forces a new resource to
-                      be created.
+                    description: The name of the resource group in which to create
+                      the Traffic Manager profile. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -307,8 +244,19 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                  trafficRoutingMethod:
+                    description: Specifies the algorithm used to route traffic. Possible
+                      values are Geographic, Weighted, Performance, Priority, Subnet
+                      and MultiValue.
+                    type: string
+                  trafficViewEnabled:
+                    description: Indicates whether Traffic View is enabled for the
+                      Traffic Manager profile.
+                    type: boolean
                 required:
-                - location
+                - dnsConfig
+                - monitorConfig
+                - trafficRoutingMethod
                 type: object
               providerConfigRef:
                 default:
@@ -482,12 +430,16 @@ spec:
             - forProvider
             type: object
           status:
-            description: NotificationHubStatus defines the observed state of NotificationHub.
+            description: TrafficManagerProfileStatus defines the observed state of
+              TrafficManagerProfile.
             properties:
               atProvider:
                 properties:
+                  fqdn:
+                    description: The FQDN of the created Profile.
+                    type: string
                   id:
-                    description: The ID of the Notification Hub.
+                    description: The ID of the Traffic Manager Profile.
                     type: string
                 type: object
               conditions:

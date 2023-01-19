@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: notificationhubs.notificationhubs.azure.upbound.io
+  name: notificationhubnamespaces.notificationhubs.azure.upbound.io
 spec:
   group: notificationhubs.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: NotificationHub
-    listKind: NotificationHubList
-    plural: notificationhubs
-    singular: notificationhub
+    kind: NotificationHubNamespace
+    listKind: NotificationHubNamespaceList
+    plural: notificationhubnamespaces
+    singular: notificationhubnamespace
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NotificationHub is the Schema for the NotificationHubs API. Manages
-          a Notification Hub within a Notification Hub Namespace.
+        description: NotificationHubNamespace is the Schema for the NotificationHubNamespaces
+          API. Manages a Notification Hub Namespace.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: NotificationHubSpec defines the desired state of NotificationHub
+            description: NotificationHubNamespaceSpec defines the desired state of
+              NotificationHubNamespace
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,168 +65,23 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  apnsCredential:
-                    description: A apns_credential block as defined below.
-                    items:
-                      properties:
-                        applicationMode:
-                          description: The Application Mode which defines which server
-                            the APNS Messages should be sent to. Possible values are
-                            Production and Sandbox.
-                          type: string
-                        bundleId:
-                          description: The Bundle ID of the iOS/macOS application
-                            to send push notifications for, such as com.hashicorp.example.
-                          type: string
-                        keyId:
-                          description: The Apple Push Notifications Service (APNS)
-                            Key.
-                          type: string
-                        teamId:
-                          description: The ID of the team the Token.
-                          type: string
-                        tokenSecretRef:
-                          description: The Push Token associated with the Apple Developer
-                            Account. This is the contents of the key downloaded from
-                            the Apple Developer Portal between the -----BEGIN PRIVATE
-                            KEY----- and -----END PRIVATE KEY----- blocks.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
-                      required:
-                      - applicationMode
-                      - bundleId
-                      - keyId
-                      - teamId
-                      - tokenSecretRef
-                      type: object
-                    type: array
-                  gcmCredential:
-                    description: A gcm_credential block as defined below.
-                    items:
-                      properties:
-                        apiKeySecretRef:
-                          description: The API Key associated with the Google Cloud
-                            Messaging service.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
-                      required:
-                      - apiKeySecretRef
-                      type: object
-                    type: array
+                  enabled:
+                    description: Is this Notification Hub Namespace enabled? Defaults
+                      to true.
+                    type: boolean
                   location:
                     description: The Azure Region in which this Notification Hub Namespace
-                      exists. Changing this forces a new resource to be created.
+                      should be created. Changing this forces a new resource to be
+                      created.
                     type: string
-                  namespaceName:
-                    description: The name of the Notification Hub Namespace in which
-                      to create this Notification Hub. Changing this forces a new
-                      resource to be created.
+                  namespaceType:
+                    description: The Type of Namespace - possible values are Messaging
+                      or NotificationHub.
                     type: string
-                  namespaceNameRef:
-                    description: Reference to a NotificationHubNamespace in notificationhubs
-                      to populate namespaceName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  namespaceNameSelector:
-                    description: Selector for a NotificationHubNamespace in notificationhubs
-                      to populate namespaceName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   resourceGroupName:
                     description: The name of the Resource Group in which the Notification
-                      Hub Namespace exists. Changing this forces a new resource to
-                      be created.
+                      Hub Namespace should exist. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -302,6 +158,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  skuName:
+                    description: The name of the SKU to use for this Notification
+                      Hub Namespace. Possible values are Free, Basic or Standard.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -309,6 +169,8 @@ spec:
                     type: object
                 required:
                 - location
+                - namespaceType
+                - skuName
                 type: object
               providerConfigRef:
                 default:
@@ -482,12 +344,17 @@ spec:
             - forProvider
             type: object
           status:
-            description: NotificationHubStatus defines the observed state of NotificationHub.
+            description: NotificationHubNamespaceStatus defines the observed state
+              of NotificationHubNamespace.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Notification Hub.
+                    description: The ID of the Notification Hub Namespace.
+                    type: string
+                  servicebusEndpoint:
+                    description: The ServiceBus Endpoint for this Notification Hub
+                      Namespace.
                     type: string
                 type: object
               conditions:

@@ -585,6 +585,12 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_vpn_gateway", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"bgp_settings"},
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_subnet_service_endpoint_storage_policy", func(r *config.Resource) {
 		r.Kind = "SubnetServiceEndpointStoragePolicy"
 	})

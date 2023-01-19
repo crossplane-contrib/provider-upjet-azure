@@ -70,8 +70,17 @@ type NotificationHubParameters struct {
 	Location *string `json:"location" tf:"location,omitempty"`
 
 	// The name of the Notification Hub Namespace in which to create this Notification Hub. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	NamespaceName *string `json:"namespaceName" tf:"namespace_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/notificationhubs/v1beta1.NotificationHubNamespace
+	// +kubebuilder:validation:Optional
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// Reference to a NotificationHubNamespace in notificationhubs to populate namespaceName.
+	// +kubebuilder:validation:Optional
+	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a NotificationHubNamespace in notificationhubs to populate namespaceName.
+	// +kubebuilder:validation:Optional
+	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the Notification Hub Namespace exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

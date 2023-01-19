@@ -5563,6 +5563,80 @@ func (tr *SubnetServiceEndpointStoragePolicy) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this TrafficManagerProfile
+func (mg *TrafficManagerProfile) GetTerraformResourceType() string {
+	return "azurerm_traffic_manager_profile"
+}
+
+// GetConnectionDetailsMapping for this TrafficManagerProfile
+func (tr *TrafficManagerProfile) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TrafficManagerProfile
+func (tr *TrafficManagerProfile) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TrafficManagerProfile
+func (tr *TrafficManagerProfile) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TrafficManagerProfile
+func (tr *TrafficManagerProfile) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TrafficManagerProfile
+func (tr *TrafficManagerProfile) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TrafficManagerProfile
+func (tr *TrafficManagerProfile) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TrafficManagerProfile using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TrafficManagerProfile) LateInitialize(attrs []byte) (bool, error) {
+	params := &TrafficManagerProfileParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TrafficManagerProfile) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this VirtualHub
 func (mg *VirtualHub) GetTerraformResourceType() string {
 	return "azurerm_virtual_hub"
@@ -6008,6 +6082,155 @@ func (tr *VirtualWAN) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this VPNGateway
+func (mg *VPNGateway) GetTerraformResourceType() string {
+	return "azurerm_vpn_gateway"
+}
+
+// GetConnectionDetailsMapping for this VPNGateway
+func (tr *VPNGateway) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VPNGateway
+func (tr *VPNGateway) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VPNGateway
+func (tr *VPNGateway) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VPNGateway
+func (tr *VPNGateway) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VPNGateway
+func (tr *VPNGateway) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VPNGateway
+func (tr *VPNGateway) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VPNGateway using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VPNGateway) LateInitialize(attrs []byte) (bool, error) {
+	params := &VPNGatewayParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("BGPSettings"))
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VPNGateway) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this VPNGatewayConnection
+func (mg *VPNGatewayConnection) GetTerraformResourceType() string {
+	return "azurerm_vpn_gateway_connection"
+}
+
+// GetConnectionDetailsMapping for this VPNGatewayConnection
+func (tr *VPNGatewayConnection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VPNGatewayConnection
+func (tr *VPNGatewayConnection) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VPNGatewayConnection
+func (tr *VPNGatewayConnection) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VPNGatewayConnection
+func (tr *VPNGatewayConnection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VPNGatewayConnection
+func (tr *VPNGatewayConnection) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VPNGatewayConnection
+func (tr *VPNGatewayConnection) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VPNGatewayConnection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VPNGatewayConnection) LateInitialize(attrs []byte) (bool, error) {
+	params := &VPNGatewayConnectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VPNGatewayConnection) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this VPNServerConfiguration
 func (mg *VPNServerConfiguration) GetTerraformResourceType() string {
 	return "azurerm_vpn_server_configuration"
@@ -6079,5 +6302,153 @@ func (tr *VPNServerConfiguration) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *VPNServerConfiguration) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this VPNSite
+func (mg *VPNSite) GetTerraformResourceType() string {
+	return "azurerm_vpn_site"
+}
+
+// GetConnectionDetailsMapping for this VPNSite
+func (tr *VPNSite) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VPNSite
+func (tr *VPNSite) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VPNSite
+func (tr *VPNSite) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VPNSite
+func (tr *VPNSite) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VPNSite
+func (tr *VPNSite) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VPNSite
+func (tr *VPNSite) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VPNSite using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VPNSite) LateInitialize(attrs []byte) (bool, error) {
+	params := &VPNSiteParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VPNSite) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this WebApplicationFirewallPolicy
+func (mg *WebApplicationFirewallPolicy) GetTerraformResourceType() string {
+	return "azurerm_web_application_firewall_policy"
+}
+
+// GetConnectionDetailsMapping for this WebApplicationFirewallPolicy
+func (tr *WebApplicationFirewallPolicy) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this WebApplicationFirewallPolicy
+func (tr *WebApplicationFirewallPolicy) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this WebApplicationFirewallPolicy
+func (tr *WebApplicationFirewallPolicy) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this WebApplicationFirewallPolicy
+func (tr *WebApplicationFirewallPolicy) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this WebApplicationFirewallPolicy
+func (tr *WebApplicationFirewallPolicy) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this WebApplicationFirewallPolicy
+func (tr *WebApplicationFirewallPolicy) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this WebApplicationFirewallPolicy using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *WebApplicationFirewallPolicy) LateInitialize(attrs []byte) (bool, error) {
+	params := &WebApplicationFirewallPolicyParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *WebApplicationFirewallPolicy) GetTerraformSchemaVersion() int {
 	return 0
 }

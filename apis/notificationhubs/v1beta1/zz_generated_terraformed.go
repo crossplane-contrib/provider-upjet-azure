@@ -86,3 +86,151 @@ func (tr *NotificationHub) LateInitialize(attrs []byte) (bool, error) {
 func (tr *NotificationHub) GetTerraformSchemaVersion() int {
 	return 1
 }
+
+// GetTerraformResourceType returns Terraform resource type for this AuthorizationRule
+func (mg *AuthorizationRule) GetTerraformResourceType() string {
+	return "azurerm_notification_hub_authorization_rule"
+}
+
+// GetConnectionDetailsMapping for this AuthorizationRule
+func (tr *AuthorizationRule) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this AuthorizationRule
+func (tr *AuthorizationRule) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this AuthorizationRule
+func (tr *AuthorizationRule) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this AuthorizationRule
+func (tr *AuthorizationRule) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this AuthorizationRule
+func (tr *AuthorizationRule) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this AuthorizationRule
+func (tr *AuthorizationRule) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this AuthorizationRule using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *AuthorizationRule) LateInitialize(attrs []byte) (bool, error) {
+	params := &AuthorizationRuleParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *AuthorizationRule) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this NotificationHubNamespace
+func (mg *NotificationHubNamespace) GetTerraformResourceType() string {
+	return "azurerm_notification_hub_namespace"
+}
+
+// GetConnectionDetailsMapping for this NotificationHubNamespace
+func (tr *NotificationHubNamespace) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this NotificationHubNamespace
+func (tr *NotificationHubNamespace) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this NotificationHubNamespace
+func (tr *NotificationHubNamespace) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this NotificationHubNamespace
+func (tr *NotificationHubNamespace) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this NotificationHubNamespace
+func (tr *NotificationHubNamespace) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this NotificationHubNamespace
+func (tr *NotificationHubNamespace) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this NotificationHubNamespace using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *NotificationHubNamespace) LateInitialize(attrs []byte) (bool, error) {
+	params := &NotificationHubNamespaceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *NotificationHubNamespace) GetTerraformSchemaVersion() int {
+	return 1
+}

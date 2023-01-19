@@ -1,8 +1,33 @@
 apiVersion: notificationhubs.azure.upbound.io/v1beta1
+kind: AuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/authorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    listen: true
+    manage: true
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    notificationHubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    send: true
+
+---
+
+apiVersion: notificationhubs.azure.upbound.io/v1beta1
 kind: NotificationHub
 metadata:
   annotations:
-    meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhub
+    meta.upbound.io/example-id: notificationhubs/v1beta1/authorizationrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -22,7 +47,7 @@ apiVersion: notificationhubs.azure.upbound.io/v1beta1
 kind: NotificationHubNamespace
 metadata:
   annotations:
-    meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhub
+    meta.upbound.io/example-id: notificationhubs/v1beta1/authorizationrule
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -41,7 +66,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhub
+    meta.upbound.io/example-id: notificationhubs/v1beta1/authorizationrule
   labels:
     testing.upbound.io/example-name: example
   name: example
