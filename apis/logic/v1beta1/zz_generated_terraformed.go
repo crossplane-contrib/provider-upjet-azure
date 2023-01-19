@@ -86,3 +86,151 @@ func (tr *IntegrationServiceEnvironment) LateInitialize(attrs []byte) (bool, err
 func (tr *IntegrationServiceEnvironment) GetTerraformSchemaVersion() int {
 	return 0
 }
+
+// GetTerraformResourceType returns Terraform resource type for this AppIntegrationAccount
+func (mg *AppIntegrationAccount) GetTerraformResourceType() string {
+	return "azurerm_logic_app_integration_account"
+}
+
+// GetConnectionDetailsMapping for this AppIntegrationAccount
+func (tr *AppIntegrationAccount) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this AppIntegrationAccount
+func (tr *AppIntegrationAccount) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this AppIntegrationAccount
+func (tr *AppIntegrationAccount) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this AppIntegrationAccount
+func (tr *AppIntegrationAccount) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this AppIntegrationAccount
+func (tr *AppIntegrationAccount) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this AppIntegrationAccount
+func (tr *AppIntegrationAccount) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this AppIntegrationAccount using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *AppIntegrationAccount) LateInitialize(attrs []byte) (bool, error) {
+	params := &AppIntegrationAccountParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *AppIntegrationAccount) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this AppIntegrationAccountBatchConfiguration
+func (mg *AppIntegrationAccountBatchConfiguration) GetTerraformResourceType() string {
+	return "azurerm_logic_app_integration_account_batch_configuration"
+}
+
+// GetConnectionDetailsMapping for this AppIntegrationAccountBatchConfiguration
+func (tr *AppIntegrationAccountBatchConfiguration) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this AppIntegrationAccountBatchConfiguration
+func (tr *AppIntegrationAccountBatchConfiguration) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this AppIntegrationAccountBatchConfiguration
+func (tr *AppIntegrationAccountBatchConfiguration) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this AppIntegrationAccountBatchConfiguration
+func (tr *AppIntegrationAccountBatchConfiguration) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this AppIntegrationAccountBatchConfiguration
+func (tr *AppIntegrationAccountBatchConfiguration) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this AppIntegrationAccountBatchConfiguration
+func (tr *AppIntegrationAccountBatchConfiguration) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this AppIntegrationAccountBatchConfiguration using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *AppIntegrationAccountBatchConfiguration) LateInitialize(attrs []byte) (bool, error) {
+	params := &AppIntegrationAccountBatchConfigurationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *AppIntegrationAccountBatchConfiguration) GetTerraformSchemaVersion() int {
+	return 0
+}

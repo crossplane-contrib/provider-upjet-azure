@@ -627,6 +627,15 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// API Management Notification Recipient Users can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ApiManagement/service/service1/notifications/notificationName1/recipientUsers/userid1
 	"azurerm_api_management_notification_recipient_user": config.IdentifierFromProvider,
+
+	// logic
+	//
+	// Logic App Integration Account Batch Configurations can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logic/integrationAccounts/account1/batchConfigurations/batchConfiguration1
+	"azurerm_logic_app_integration_account_batch_configuration": config.IdentifierFromProvider,
+	// Logic App Integration Accounts can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logic/integrationAccounts/account1
+	"azurerm_logic_app_integration_account": config.IdentifierFromProvider,
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {

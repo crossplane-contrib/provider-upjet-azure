@@ -207,6 +207,8 @@ import (
 	vault "github.com/upbound/provider-azure/internal/controller/keyvault/vault"
 	clusterkusto "github.com/upbound/provider-azure/internal/controller/kusto/cluster"
 	databasekusto "github.com/upbound/provider-azure/internal/controller/kusto/database"
+	appintegrationaccount "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccount"
+	appintegrationaccountbatchconfiguration "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccountbatchconfiguration"
 	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
@@ -555,6 +557,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vault.Setup,
 		clusterkusto.Setup,
 		databasekusto.Setup,
+		appintegrationaccount.Setup,
+		appintegrationaccountbatchconfiguration.Setup,
 		integrationserviceenvironment.Setup,
 		managementgroup.Setup,
 		marketplaceagreement.Setup,
