@@ -141,6 +141,9 @@ import (
 	table "github.com/upbound/provider-azure/internal/controller/cosmosdb/table"
 	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/resourcegroupcostmanagementexport"
 	subscriptioncostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/subscriptioncostmanagementexport"
+	device "github.com/upbound/provider-azure/internal/controller/databoxedge/device"
+	workspace "github.com/upbound/provider-azure/internal/controller/databricks/workspace"
+	workspacecustomermanagedkey "github.com/upbound/provider-azure/internal/controller/databricks/workspacecustomermanagedkey"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backupvault "github.com/upbound/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/provider-azure/internal/controller/datashare/account"
@@ -309,7 +312,7 @@ import (
 	watcher "github.com/upbound/provider-azure/internal/controller/network/watcher"
 	watcherflowlog "github.com/upbound/provider-azure/internal/controller/network/watcherflowlog"
 	notificationhub "github.com/upbound/provider-azure/internal/controller/notificationhubs/notificationhub"
-	workspace "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
+	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
 	providerconfig "github.com/upbound/provider-azure/internal/controller/providerconfig"
 	resourcegrouptemplatedeployment "github.com/upbound/provider-azure/internal/controller/resources/resourcegrouptemplatedeployment"
 	advancedthreatprotection "github.com/upbound/provider-azure/internal/controller/security/advancedthreatprotection"
@@ -491,6 +494,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		table.Setup,
 		resourcegroupcostmanagementexport.Setup,
 		subscriptioncostmanagementexport.Setup,
+		device.Setup,
+		workspace.Setup,
+		workspacecustomermanagedkey.Setup,
 		backuppolicyblobstorage.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,
@@ -659,7 +665,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		watcher.Setup,
 		watcherflowlog.Setup,
 		notificationhub.Setup,
-		workspace.Setup,
+		workspaceoperationalinsights.Setup,
 		providerconfig.Setup,
 		resourcegrouptemplatedeployment.Setup,
 		advancedthreatprotection.Setup,
