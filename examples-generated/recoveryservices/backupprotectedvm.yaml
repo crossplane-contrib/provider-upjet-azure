@@ -1,0 +1,77 @@
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: BackupProtectedVM
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedvm
+  labels:
+    testing.upbound.io/example-name: vm1
+  name: vm1
+spec:
+  forProvider:
+    backupPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceVmId: ${data.azurerm_virtual_machine.example.id}
+
+---
+
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: BackupPolicyVM
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedvm
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backup:
+    - frequency: Daily
+      time: "23:00"
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedvm
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedvm
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
