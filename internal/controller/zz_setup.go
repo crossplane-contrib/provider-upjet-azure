@@ -199,6 +199,7 @@ import (
 	monitormetricalert "github.com/upbound/provider-azure/internal/controller/insights/monitormetricalert"
 	monitorprivatelinkscope "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscope"
 	monitorprivatelinkscopedservice "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscopedservice"
+	application "github.com/upbound/provider-azure/internal/controller/iotcentral/application"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/keyvault/accesspolicy"
 	certificatekeyvault "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"
 	certificateissuer "github.com/upbound/provider-azure/internal/controller/keyvault/certificateissuer"
@@ -356,6 +357,7 @@ import (
 	outputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputblob"
 	outputfunction "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputfunction"
 	outputsynapse "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputsynapse"
+	serviceplan "github.com/upbound/provider-azure/internal/controller/web/serviceplan"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -552,6 +554,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		monitormetricalert.Setup,
 		monitorprivatelinkscope.Setup,
 		monitorprivatelinkscopedservice.Setup,
+		application.Setup,
 		accesspolicy.Setup,
 		certificatekeyvault.Setup,
 		certificateissuer.Setup,
@@ -709,6 +712,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		outputblob.Setup,
 		outputfunction.Setup,
 		outputsynapse.Setup,
+		serviceplan.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

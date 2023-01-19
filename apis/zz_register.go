@@ -40,6 +40,7 @@ import (
 	v1beta1devices "github.com/upbound/provider-azure/apis/devices/v1beta1"
 	v1beta1eventhub "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
 	v1beta1insights "github.com/upbound/provider-azure/apis/insights/v1beta1"
+	v1beta1iotcentral "github.com/upbound/provider-azure/apis/iotcentral/v1beta1"
 	v1beta1keyvault "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	v1beta1kusto "github.com/upbound/provider-azure/apis/kusto/v1beta1"
 	v1beta1logic "github.com/upbound/provider-azure/apis/logic/v1beta1"
@@ -61,6 +62,7 @@ import (
 	v1beta1streamanalytics "github.com/upbound/provider-azure/apis/streamanalytics/v1beta1"
 	v1alpha1 "github.com/upbound/provider-azure/apis/v1alpha1"
 	v1beta1apis "github.com/upbound/provider-azure/apis/v1beta1"
+	v1beta1web "github.com/upbound/provider-azure/apis/web/v1beta1"
 )
 
 func init() {
@@ -96,6 +98,7 @@ func init() {
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
 		v1beta1insights.SchemeBuilder.AddToScheme,
+		v1beta1iotcentral.SchemeBuilder.AddToScheme,
 		v1beta1keyvault.SchemeBuilder.AddToScheme,
 		v1beta1kusto.SchemeBuilder.AddToScheme,
 		v1beta1logic.SchemeBuilder.AddToScheme,
@@ -117,6 +120,7 @@ func init() {
 		v1beta1streamanalytics.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1apis.SchemeBuilder.AddToScheme,
+		v1beta1web.SchemeBuilder.AddToScheme,
 	)
 }
 
