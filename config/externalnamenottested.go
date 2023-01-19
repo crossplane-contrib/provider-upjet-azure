@@ -567,4 +567,129 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Data Factory SQL Server Table Datasets can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/datasets/example
 	"azurerm_data_factory_dataset_sql_server": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/datasets/{{ .external_name }}"),
+	// Data Factory Azure Integration Runtimes can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/integrationruntimes/example
+	"azurerm_data_factory_integration_runtime_azure": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/integrationruntimes/{{ .external_name }}"),
+	// Data Factory Azure-SSIS Integration Runtimes can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/integrationruntimes/example
+	"azurerm_data_factory_integration_runtime_azure_ssis": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/integrationruntimes/{{ .external_name }}"),
+
+	// databoxedge
+	//
+	// Databox Edge Devices can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/device1
+	"azurerm_databox_edge_device": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{{ .external_name }}"),
+
+	// databricks
+	//
+	// Databrick Workspaces can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Databricks/workspaces/workspace1
+	"azurerm_databricks_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Databricks/workspaces/{{ .external_name }}"),
+	// Databricks Workspace Customer Managed Key can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Databricks/workspaces/workspace1
+	"azurerm_databricks_workspace_customer_managed_key": config.TemplatedStringAsIdentifier("", "{{ .parameters.workspace_id }}"),
+
+	// securityinsights
+	//
+	// Sentinel Scheduled Alert Rules can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/alertRules/rule1
+	"azurerm_sentinel_alert_rule_scheduled": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/alertRules/{{ .external_name }}"),
+	// AWS CloudTrail Data Connectors can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_aws_cloud_trail": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// Azure Active Directory Data Connectors can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_azure_active_directory": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// Azure Advanced Threat Protection Data Connectors can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_azure_advanced_threat_protection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// Azure Security Center Data Connectors can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_azure_security_center": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// Microsoft Cloud App Security Data Connectors can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_microsoft_cloud_app_security": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// Office 365 Data Connectors can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_office_365": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// Threat Intelligence Data Connectors can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_threat_intelligence": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+
+	// sentinel
+	//
+	// Sentinel Automation Rules can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/automationRules/rule1
+	"azurerm_sentinel_automation_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/automationRules/{{ .external_name }}"),
+	// AWS S3 Data Connectors can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_aws_s3": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// Sentinel Watchlists can be imported using the resource id
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/watchlists/list1
+	"azurerm_sentinel_watchlist": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/watchlists/{{ .external_name }}"),
+	// Sentinel Watchlist Items can be imported using the resource id
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/watchlists/list1/watchlistItems/item1
+	"azurerm_sentinel_watchlist_item": config.TemplatedStringAsIdentifier("", "{{ .parameters.watchlist_id }}/watchlistItems/{{ .external_name }}"),
+
+	// service
+	//
+	// Resource Groups can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.ServiceFabric/managedClusters/clusterName1
+	"azurerm_service_fabric_managed_cluster": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ServiceFabric/managedClusters/{{ .external_name }}"),
+
+	// servicebus
+	//
+	// ServiceBus Namespace authorization rules can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/authorizationRules/rule1
+	"azurerm_servicebus_namespace_authorization_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/authorizationRules/{{ .external_name }}"),
+	// Service Bus DR configs can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/disasterRecoveryConfigs/config1
+	"azurerm_servicebus_namespace_disaster_recovery_config": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/disasterRecoveryConfigs/{{ .external_name }}"),
+	// Service Bus Namespace can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/sbns1
+	// TODO: Check documentation, it seems there is a bug
+	"azurerm_servicebus_namespace_network_rule_set": config.IdentifierFromProvider,
+	// Service Bus Queue can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1/queues/snqueue1
+	"azurerm_servicebus_queue": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/queues/{{ .external_name }}"),
+	// ServiceBus Queue Authorization Rules can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/queues/queue1/authorizationRules/rule1
+	"azurerm_servicebus_queue_authorization_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.queue_id }}/authorizationRules/{{ .external_name }}"),
+	// Service Bus Subscriptions can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1/topics/sntopic1/subscriptions/sbsub1
+	"azurerm_servicebus_subscription": config.TemplatedStringAsIdentifier("name", "{{ .parameters.topic_id }}/subscriptions/{{ .external_name }}"),
+	// Service Bus Subscription Rule can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1/topics/sntopic1/subscriptions/sbsub1/rules/sbrule1
+	"azurerm_servicebus_subscription_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.subscription_id }}/rules/{{ .external_name }}"),
+	// Service Bus Topics can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1/topics/sntopic1
+	"azurerm_servicebus_topic": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/topics/{{ .external_name }}"),
+	// ServiceBus Topic authorization rules can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/topics/topic1/authorizationRules/rule1
+	"azurerm_servicebus_topic_authorization_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.topic_id }}/authorizationRules/{{ .external_name }}"),
+
+	// servicefabric
+	//
+	// Service Fabric Clusters can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceFabric/clusters/cluster1
+	"azurerm_service_fabric_cluster": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ServiceFabric/clusters/{{ .external_name }}"),
+
+	// signalrservice
+	//
+	// SignalR services can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/terraform-signalr/providers/Microsoft.SignalRService/signalR/tfex-signalr
+	"azurerm_signalr_service": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.SignalRService/signalR/{{ .external_name }}"),
+	// Network ACLs for a SignalR service can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.SignalRService/signalR/signalr1
+	// TODO: Check documentation, it seems there is a bug
+	"azurerm_signalr_service_network_acl": config.IdentifierFromProvider,
+
+	// solutions
+	//
+	// Managed Application can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Solutions/applications/app1
+	"azurerm_managed_application": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Solutions/applications/{{ .external_name }}"),
+	// Managed Application Definition can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Solutions/applicationDefinitions/appDefinition1
+	"azurerm_managed_application_definition": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Solutions/applicationDefinitions/{{ .external_name }}"),
 }
