@@ -342,7 +342,15 @@ import (
 	authorizationrulenotificationhubs "github.com/upbound/provider-azure/internal/controller/notificationhubs/authorizationrule"
 	notificationhub "github.com/upbound/provider-azure/internal/controller/notificationhubs/notificationhub"
 	notificationhubnamespace "github.com/upbound/provider-azure/internal/controller/notificationhubs/notificationhubnamespace"
+	loganalyticsdataexportrule "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticsdataexportrule"
+	loganalyticsdatasourcewindowsevent "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticsdatasourcewindowsevent"
+	loganalyticsdatasourcewindowsperformancecounter "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticsdatasourcewindowsperformancecounter"
+	loganalyticslinkedservice "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticslinkedservice"
+	loganalyticslinkedstorageaccount "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticslinkedstorageaccount"
+	loganalyticssavedsearch "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticssavedsearch"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
+	loganalyticssolution "github.com/upbound/provider-azure/internal/controller/operationsmanagement/loganalyticssolution"
+	dashboard "github.com/upbound/provider-azure/internal/controller/portal/dashboard"
 	powerbiembedded "github.com/upbound/provider-azure/internal/controller/powerbidedicated/powerbiembedded"
 	providerconfig "github.com/upbound/provider-azure/internal/controller/providerconfig"
 	accountpurview "github.com/upbound/provider-azure/internal/controller/purview/account"
@@ -760,7 +768,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		authorizationrulenotificationhubs.Setup,
 		notificationhub.Setup,
 		notificationhubnamespace.Setup,
+		loganalyticsdataexportrule.Setup,
+		loganalyticsdatasourcewindowsevent.Setup,
+		loganalyticsdatasourcewindowsperformancecounter.Setup,
+		loganalyticslinkedservice.Setup,
+		loganalyticslinkedstorageaccount.Setup,
+		loganalyticssavedsearch.Setup,
 		workspaceoperationalinsights.Setup,
+		loganalyticssolution.Setup,
+		dashboard.Setup,
 		powerbiembedded.Setup,
 		providerconfig.Setup,
 		accountpurview.Setup,

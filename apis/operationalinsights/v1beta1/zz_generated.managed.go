@@ -7,6 +7,402 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LogAnalyticsDataExportRule.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LogAnalyticsDataExportRule) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LogAnalyticsDataExportRule.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LogAnalyticsDataExportRule) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LogAnalyticsDataSourceWindowsEvent.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LogAnalyticsDataSourceWindowsEvent.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LogAnalyticsLinkedService.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LogAnalyticsLinkedService) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LogAnalyticsLinkedService.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LogAnalyticsLinkedService) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LogAnalyticsLinkedStorageAccount.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LogAnalyticsLinkedStorageAccount) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LogAnalyticsLinkedStorageAccount.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LogAnalyticsLinkedStorageAccount) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LogAnalyticsSavedSearch.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LogAnalyticsSavedSearch) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LogAnalyticsSavedSearch.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LogAnalyticsSavedSearch) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Workspace.
 func (mg *Workspace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

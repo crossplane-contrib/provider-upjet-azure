@@ -13,6 +13,450 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this LogAnalyticsDataExportRule
+func (mg *LogAnalyticsDataExportRule) GetTerraformResourceType() string {
+	return "azurerm_log_analytics_data_export_rule"
+}
+
+// GetConnectionDetailsMapping for this LogAnalyticsDataExportRule
+func (tr *LogAnalyticsDataExportRule) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LogAnalyticsDataExportRule
+func (tr *LogAnalyticsDataExportRule) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LogAnalyticsDataExportRule
+func (tr *LogAnalyticsDataExportRule) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LogAnalyticsDataExportRule
+func (tr *LogAnalyticsDataExportRule) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LogAnalyticsDataExportRule
+func (tr *LogAnalyticsDataExportRule) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LogAnalyticsDataExportRule
+func (tr *LogAnalyticsDataExportRule) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LogAnalyticsDataExportRule using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LogAnalyticsDataExportRule) LateInitialize(attrs []byte) (bool, error) {
+	params := &LogAnalyticsDataExportRuleParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LogAnalyticsDataExportRule) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LogAnalyticsDataSourceWindowsEvent
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetTerraformResourceType() string {
+	return "azurerm_log_analytics_datasource_windows_event"
+}
+
+// GetConnectionDetailsMapping for this LogAnalyticsDataSourceWindowsEvent
+func (tr *LogAnalyticsDataSourceWindowsEvent) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LogAnalyticsDataSourceWindowsEvent
+func (tr *LogAnalyticsDataSourceWindowsEvent) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LogAnalyticsDataSourceWindowsEvent
+func (tr *LogAnalyticsDataSourceWindowsEvent) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LogAnalyticsDataSourceWindowsEvent
+func (tr *LogAnalyticsDataSourceWindowsEvent) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LogAnalyticsDataSourceWindowsEvent
+func (tr *LogAnalyticsDataSourceWindowsEvent) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LogAnalyticsDataSourceWindowsEvent
+func (tr *LogAnalyticsDataSourceWindowsEvent) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LogAnalyticsDataSourceWindowsEvent using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LogAnalyticsDataSourceWindowsEvent) LateInitialize(attrs []byte) (bool, error) {
+	params := &LogAnalyticsDataSourceWindowsEventParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LogAnalyticsDataSourceWindowsEvent) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LogAnalyticsDataSourceWindowsPerformanceCounter
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetTerraformResourceType() string {
+	return "azurerm_log_analytics_datasource_windows_performance_counter"
+}
+
+// GetConnectionDetailsMapping for this LogAnalyticsDataSourceWindowsPerformanceCounter
+func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LogAnalyticsDataSourceWindowsPerformanceCounter
+func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LogAnalyticsDataSourceWindowsPerformanceCounter
+func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LogAnalyticsDataSourceWindowsPerformanceCounter
+func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LogAnalyticsDataSourceWindowsPerformanceCounter
+func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LogAnalyticsDataSourceWindowsPerformanceCounter
+func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LogAnalyticsDataSourceWindowsPerformanceCounter using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) LateInitialize(attrs []byte) (bool, error) {
+	params := &LogAnalyticsDataSourceWindowsPerformanceCounterParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LogAnalyticsLinkedService
+func (mg *LogAnalyticsLinkedService) GetTerraformResourceType() string {
+	return "azurerm_log_analytics_linked_service"
+}
+
+// GetConnectionDetailsMapping for this LogAnalyticsLinkedService
+func (tr *LogAnalyticsLinkedService) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LogAnalyticsLinkedService
+func (tr *LogAnalyticsLinkedService) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LogAnalyticsLinkedService
+func (tr *LogAnalyticsLinkedService) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LogAnalyticsLinkedService
+func (tr *LogAnalyticsLinkedService) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LogAnalyticsLinkedService
+func (tr *LogAnalyticsLinkedService) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LogAnalyticsLinkedService
+func (tr *LogAnalyticsLinkedService) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LogAnalyticsLinkedService using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LogAnalyticsLinkedService) LateInitialize(attrs []byte) (bool, error) {
+	params := &LogAnalyticsLinkedServiceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LogAnalyticsLinkedService) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LogAnalyticsLinkedStorageAccount
+func (mg *LogAnalyticsLinkedStorageAccount) GetTerraformResourceType() string {
+	return "azurerm_log_analytics_linked_storage_account"
+}
+
+// GetConnectionDetailsMapping for this LogAnalyticsLinkedStorageAccount
+func (tr *LogAnalyticsLinkedStorageAccount) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LogAnalyticsLinkedStorageAccount
+func (tr *LogAnalyticsLinkedStorageAccount) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LogAnalyticsLinkedStorageAccount
+func (tr *LogAnalyticsLinkedStorageAccount) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LogAnalyticsLinkedStorageAccount
+func (tr *LogAnalyticsLinkedStorageAccount) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LogAnalyticsLinkedStorageAccount
+func (tr *LogAnalyticsLinkedStorageAccount) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LogAnalyticsLinkedStorageAccount
+func (tr *LogAnalyticsLinkedStorageAccount) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LogAnalyticsLinkedStorageAccount using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LogAnalyticsLinkedStorageAccount) LateInitialize(attrs []byte) (bool, error) {
+	params := &LogAnalyticsLinkedStorageAccountParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LogAnalyticsLinkedStorageAccount) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LogAnalyticsSavedSearch
+func (mg *LogAnalyticsSavedSearch) GetTerraformResourceType() string {
+	return "azurerm_log_analytics_saved_search"
+}
+
+// GetConnectionDetailsMapping for this LogAnalyticsSavedSearch
+func (tr *LogAnalyticsSavedSearch) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LogAnalyticsSavedSearch
+func (tr *LogAnalyticsSavedSearch) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LogAnalyticsSavedSearch
+func (tr *LogAnalyticsSavedSearch) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LogAnalyticsSavedSearch
+func (tr *LogAnalyticsSavedSearch) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LogAnalyticsSavedSearch
+func (tr *LogAnalyticsSavedSearch) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LogAnalyticsSavedSearch
+func (tr *LogAnalyticsSavedSearch) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LogAnalyticsSavedSearch using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LogAnalyticsSavedSearch) LateInitialize(attrs []byte) (bool, error) {
+	params := &LogAnalyticsSavedSearchParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LogAnalyticsSavedSearch) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Workspace
 func (mg *Workspace) GetTerraformResourceType() string {
 	return "azurerm_log_analytics_workspace"
