@@ -123,6 +123,8 @@ var skipList = []string{
 	"azurerm_sql_failover_group",
 	"azurerm_logic_app_integration_account_certificate",
 	"azurerm_container_group",
+	// Azure are officially halting the preview of Azure Disk Pools, and it will not be made generally available.
+	"azurerm_disk_pool_iscsi_target",
 }
 
 // GetProvider returns provider configuration
