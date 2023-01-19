@@ -709,6 +709,36 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logic/integrationAccounts/account1
 	"azurerm_logic_app_integration_account": config.IdentifierFromProvider,
 
+	// streamanalytics
+	//
+	// Stream Analytics Outputs to Microsoft SQL Server Database can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.StreamAnalytics/streamingjobs/job1/outputs/output1
+	"azurerm_stream_analytics_output_mssql": config.IdentifierFromProvider,
+	// Stream Analytics Reference Input Blob's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.StreamAnalytics/streamingjobs/job1/inputs/input1
+	"azurerm_stream_analytics_reference_input_blob": config.IdentifierFromProvider,
+	// Stream Analytics Stream Input Blob's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/inputs/input1
+	"azurerm_stream_analytics_stream_input_blob": config.IdentifierFromProvider,
+	// Stream Analytics Stream Input EventHub's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/inputs/input1
+	"azurerm_stream_analytics_stream_input_eventhub": config.IdentifierFromProvider,
+	// Stream Analytics Stream Input IoTHub's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/inputs/input1
+	"azurerm_stream_analytics_stream_input_iothub": config.IdentifierFromProvider,
+	// Stream Analytics Output ServiceBus Queue's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.StreamAnalytics/streamingjobs/job1/outputs/output1
+	"azurerm_stream_analytics_output_servicebus_queue": config.IdentifierFromProvider,
+	// Stream Analytics Output ServiceBus Topic's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.StreamAnalytics/streamingjobs/job1/outputs/output1
+	"azurerm_stream_analytics_output_servicebus_topic": config.IdentifierFromProvider,
+
+	// subscription
+	//
+	// Policy Remediations can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.PolicyInsights/remediations/remediation1
+	"azurerm_subscription_policy_remediation": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.PolicyInsights/remediations/{{ .external_name }}"),
+
 	// databoxedge
 	//
 	// Databox Edge Devices can be imported using the resource id

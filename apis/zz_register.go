@@ -54,6 +54,7 @@ import (
 	v1beta1notificationhubs "github.com/upbound/provider-azure/apis/notificationhubs/v1beta1"
 	v1beta1operationalinsights "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
 	v1beta1operationsmanagement "github.com/upbound/provider-azure/apis/operationsmanagement/v1beta1"
+	v1beta1policyinsights "github.com/upbound/provider-azure/apis/policyinsights/v1beta1"
 	v1beta1portal "github.com/upbound/provider-azure/apis/portal/v1beta1"
 	v1beta1powerbidedicated "github.com/upbound/provider-azure/apis/powerbidedicated/v1beta1"
 	v1beta1purview "github.com/upbound/provider-azure/apis/purview/v1beta1"
@@ -119,6 +120,7 @@ func init() {
 		v1beta1notificationhubs.SchemeBuilder.AddToScheme,
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,
 		v1beta1operationsmanagement.SchemeBuilder.AddToScheme,
+		v1beta1policyinsights.SchemeBuilder.AddToScheme,
 		v1beta1portal.SchemeBuilder.AddToScheme,
 		v1beta1powerbidedicated.SchemeBuilder.AddToScheme,
 		v1beta1purview.SchemeBuilder.AddToScheme,

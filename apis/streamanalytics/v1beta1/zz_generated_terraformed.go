@@ -457,6 +457,228 @@ func (tr *OutputFunction) GetTerraformSchemaVersion() int {
 	return 1
 }
 
+// GetTerraformResourceType returns Terraform resource type for this OutputMSSQL
+func (mg *OutputMSSQL) GetTerraformResourceType() string {
+	return "azurerm_stream_analytics_output_mssql"
+}
+
+// GetConnectionDetailsMapping for this OutputMSSQL
+func (tr *OutputMSSQL) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+}
+
+// GetObservation of this OutputMSSQL
+func (tr *OutputMSSQL) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this OutputMSSQL
+func (tr *OutputMSSQL) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this OutputMSSQL
+func (tr *OutputMSSQL) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this OutputMSSQL
+func (tr *OutputMSSQL) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this OutputMSSQL
+func (tr *OutputMSSQL) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this OutputMSSQL using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *OutputMSSQL) LateInitialize(attrs []byte) (bool, error) {
+	params := &OutputMSSQLParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *OutputMSSQL) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this OutputServiceBusQueue
+func (mg *OutputServiceBusQueue) GetTerraformResourceType() string {
+	return "azurerm_stream_analytics_output_servicebus_queue"
+}
+
+// GetConnectionDetailsMapping for this OutputServiceBusQueue
+func (tr *OutputServiceBusQueue) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"shared_access_policy_key": "spec.forProvider.sharedAccessPolicyKeySecretRef"}
+}
+
+// GetObservation of this OutputServiceBusQueue
+func (tr *OutputServiceBusQueue) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this OutputServiceBusQueue
+func (tr *OutputServiceBusQueue) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this OutputServiceBusQueue
+func (tr *OutputServiceBusQueue) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this OutputServiceBusQueue
+func (tr *OutputServiceBusQueue) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this OutputServiceBusQueue
+func (tr *OutputServiceBusQueue) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this OutputServiceBusQueue using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *OutputServiceBusQueue) LateInitialize(attrs []byte) (bool, error) {
+	params := &OutputServiceBusQueueParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *OutputServiceBusQueue) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this OutputServiceBusTopic
+func (mg *OutputServiceBusTopic) GetTerraformResourceType() string {
+	return "azurerm_stream_analytics_output_servicebus_topic"
+}
+
+// GetConnectionDetailsMapping for this OutputServiceBusTopic
+func (tr *OutputServiceBusTopic) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"shared_access_policy_key": "spec.forProvider.sharedAccessPolicyKeySecretRef"}
+}
+
+// GetObservation of this OutputServiceBusTopic
+func (tr *OutputServiceBusTopic) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this OutputServiceBusTopic
+func (tr *OutputServiceBusTopic) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this OutputServiceBusTopic
+func (tr *OutputServiceBusTopic) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this OutputServiceBusTopic
+func (tr *OutputServiceBusTopic) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this OutputServiceBusTopic
+func (tr *OutputServiceBusTopic) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this OutputServiceBusTopic using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *OutputServiceBusTopic) LateInitialize(attrs []byte) (bool, error) {
+	params := &OutputServiceBusTopicParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *OutputServiceBusTopic) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this OutputSynapse
 func (mg *OutputSynapse) GetTerraformResourceType() string {
 	return "azurerm_stream_analytics_output_synapse"
@@ -528,5 +750,301 @@ func (tr *OutputSynapse) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *OutputSynapse) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ReferenceInputBlob
+func (mg *ReferenceInputBlob) GetTerraformResourceType() string {
+	return "azurerm_stream_analytics_reference_input_blob"
+}
+
+// GetConnectionDetailsMapping for this ReferenceInputBlob
+func (tr *ReferenceInputBlob) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"storage_account_key": "spec.forProvider.storageAccountKeySecretRef"}
+}
+
+// GetObservation of this ReferenceInputBlob
+func (tr *ReferenceInputBlob) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ReferenceInputBlob
+func (tr *ReferenceInputBlob) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ReferenceInputBlob
+func (tr *ReferenceInputBlob) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ReferenceInputBlob
+func (tr *ReferenceInputBlob) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ReferenceInputBlob
+func (tr *ReferenceInputBlob) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ReferenceInputBlob using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ReferenceInputBlob) LateInitialize(attrs []byte) (bool, error) {
+	params := &ReferenceInputBlobParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ReferenceInputBlob) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this StreamInputBlob
+func (mg *StreamInputBlob) GetTerraformResourceType() string {
+	return "azurerm_stream_analytics_stream_input_blob"
+}
+
+// GetConnectionDetailsMapping for this StreamInputBlob
+func (tr *StreamInputBlob) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"storage_account_key": "spec.forProvider.storageAccountKeySecretRef"}
+}
+
+// GetObservation of this StreamInputBlob
+func (tr *StreamInputBlob) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this StreamInputBlob
+func (tr *StreamInputBlob) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this StreamInputBlob
+func (tr *StreamInputBlob) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this StreamInputBlob
+func (tr *StreamInputBlob) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this StreamInputBlob
+func (tr *StreamInputBlob) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this StreamInputBlob using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *StreamInputBlob) LateInitialize(attrs []byte) (bool, error) {
+	params := &StreamInputBlobParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *StreamInputBlob) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this StreamInputEventHub
+func (mg *StreamInputEventHub) GetTerraformResourceType() string {
+	return "azurerm_stream_analytics_stream_input_eventhub"
+}
+
+// GetConnectionDetailsMapping for this StreamInputEventHub
+func (tr *StreamInputEventHub) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"shared_access_policy_key": "spec.forProvider.sharedAccessPolicyKeySecretRef"}
+}
+
+// GetObservation of this StreamInputEventHub
+func (tr *StreamInputEventHub) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this StreamInputEventHub
+func (tr *StreamInputEventHub) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this StreamInputEventHub
+func (tr *StreamInputEventHub) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this StreamInputEventHub
+func (tr *StreamInputEventHub) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this StreamInputEventHub
+func (tr *StreamInputEventHub) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this StreamInputEventHub using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *StreamInputEventHub) LateInitialize(attrs []byte) (bool, error) {
+	params := &StreamInputEventHubParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *StreamInputEventHub) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this StreamInputIOTHub
+func (mg *StreamInputIOTHub) GetTerraformResourceType() string {
+	return "azurerm_stream_analytics_stream_input_iothub"
+}
+
+// GetConnectionDetailsMapping for this StreamInputIOTHub
+func (tr *StreamInputIOTHub) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"shared_access_policy_key": "spec.forProvider.sharedAccessPolicyKeySecretRef"}
+}
+
+// GetObservation of this StreamInputIOTHub
+func (tr *StreamInputIOTHub) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this StreamInputIOTHub
+func (tr *StreamInputIOTHub) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this StreamInputIOTHub
+func (tr *StreamInputIOTHub) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this StreamInputIOTHub
+func (tr *StreamInputIOTHub) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this StreamInputIOTHub
+func (tr *StreamInputIOTHub) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this StreamInputIOTHub using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *StreamInputIOTHub) LateInitialize(attrs []byte) (bool, error) {
+	params := &StreamInputIOTHubParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *StreamInputIOTHub) GetTerraformSchemaVersion() int {
 	return 1
 }
