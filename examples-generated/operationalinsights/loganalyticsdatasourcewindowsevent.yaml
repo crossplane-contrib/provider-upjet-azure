@@ -1,0 +1,54 @@
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: LogAnalyticsDataSourceWindowsEvent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticsdatasourcewindowsevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    eventLogName: Application
+    eventTypes:
+    - Error
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    workspaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticsdatasourcewindowsevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticsdatasourcewindowsevent
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

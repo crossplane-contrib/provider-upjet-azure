@@ -322,6 +322,27 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 	// operationalinsights
 	"azurerm_log_analytics_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.OperationalInsights/workspaces/{{ .external_name }}"),
+	// Log Analytics Data Export Rule can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/dataExports/dataExport1
+	"azurerm_log_analytics_data_export_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_resource_id }}/dataExports/{{ .external_name }}"),
+	// Log Analytics Windows Event DataSources can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/dataSources/datasource1
+	"azurerm_log_analytics_datasource_windows_event": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.OperationalInsights/workspaces/{{ .parameters.workspace_name }}/dataSources/{{ .external_name }}"),
+	// Log Analytics Windows Performance Counter DataSources can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/dataSources/datasource1
+	"azurerm_log_analytics_datasource_windows_performance_counter": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.OperationalInsights/workspaces/{{ .parameters.workspace_name }}/dataSources/{{ .external_name }}"),
+	// Log Analytics Workspaces can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.OperationalInsights/workspaces/workspace1/linkedServices/Automation
+	"azurerm_log_analytics_linked_service": config.TemplatedStringAsIdentifier("", "{{ .parameters.workspace_id }}/linkedServices/{{ .external_name }}"),
+	// Log Analytics Linked Storage Accounts can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/linkedStorageAccounts/{dataSourceType}
+	"azurerm_log_analytics_linked_storage_account": config.IdentifierFromProvider,
+	// Log Analytics Saved Searches can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.OperationalInsights/workspaces/workspace1/savedSearches/search1
+	"azurerm_log_analytics_saved_search": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/savedSearches/{{ .external_name }}"),
+	// Log Analytics Solutions can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.OperationsManagement/solutions/solution1
+	"azurerm_log_analytics_solution": config.IdentifierFromProvider,
 
 	// insights
 	"azurerm_application_insights": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Insights/components/{{ .external_name }}"),
@@ -850,6 +871,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// ServiceBus Topic authorization rules can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/topics/topic1/authorizationRules/rule1
 	"azurerm_servicebus_topic_authorization_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.topic_id }}/authorizationRules/{{ .external_name }}"),
+
+	// portal
+	//
+	// Dashboards can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Portal/dashboards/00000000-0000-0000-0000-000000000000
+	"azurerm_portal_dashboard": config.IdentifierFromProvider,
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {

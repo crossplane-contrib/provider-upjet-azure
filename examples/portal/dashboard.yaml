@@ -1,0 +1,60 @@
+apiVersion: portal.azure.upbound.io/v1beta1
+kind: Dashboard
+metadata:
+  annotations:
+    meta.upbound.io/example-id: portal/v1beta1/dashboard
+  labels:
+    testing.upbound.io/example-name: my-board
+  name: my-board
+spec:
+  forProvider:
+    dashboardProperties: |-
+      ${jsonencode({
+         "lenses": {
+              "0": {
+                  "order": 0,
+                  "parts": {
+                      "0": {
+                          "position": {
+                              "x": 0,
+                              "y": 0,
+                              "rowSpan": 2,
+                              "colSpan": 3
+                          },
+                          "metadata": {
+                              "inputs": [],
+                              "type": "Extension/HubsExtension/PartType/MarkdownPart",
+                              "settings": {
+                                  "content": {
+                                      "settings": {
+                                          "content": "https://portal.azure.com",
+                                          "subtitle": "",
+                                          "title": ""
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+        })}
+    location: West Europe
+    name: my-cool-dashboard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-portal
+    tags:
+      source: terraform
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: portal/v1beta1/dashboard
+  labels:
+    testing.upbound.io/example-name: rg-portal
+  name: rg-portal
+spec:
+  forProvider:
+    location: West Europe

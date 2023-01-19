@@ -26,6 +26,7 @@ import (
 	"github.com/upbound/provider-azure/config/alertsmanagement"
 	"github.com/upbound/provider-azure/config/apimanagement"
 	"github.com/upbound/provider-azure/config/authorization"
+	"github.com/upbound/provider-azure/config/automation"
 	"github.com/upbound/provider-azure/config/base"
 	"github.com/upbound/provider-azure/config/cache"
 	"github.com/upbound/provider-azure/config/common"
@@ -183,6 +184,7 @@ func GetProvider() *tjconfig.Provider {
 		consumption.Configure,
 		streamanalytics.Configure,
 		costmanagement.Configure,
+		automation.Configure,
 	} {
 		configure(pc)
 	}

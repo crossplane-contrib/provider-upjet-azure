@@ -1,0 +1,68 @@
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: LogAnalyticsDataExportRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticsdataexportrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    destinationResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sampleacc0001
+    enabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
+    tableNames:
+    - Heartbeat
+    workspaceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticsdataexportrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
+    retentionInDays: 30
+    sku: PerGB2018
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticsdataexportrule
+  labels:
+    testing.upbound.io/example-name: rg-operationalinsights
+  name: rg-operationalinsights
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticsdataexportrule
+  labels:
+    testing.upbound.io/example-name: sampleacc0001
+  name: sampleacc0001
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
