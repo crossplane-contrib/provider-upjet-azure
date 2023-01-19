@@ -353,6 +353,7 @@ import (
 	loganalyticssavedsearch "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticssavedsearch"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
 	loganalyticssolution "github.com/upbound/provider-azure/internal/controller/operationsmanagement/loganalyticssolution"
+	subscriptionpolicyremediation "github.com/upbound/provider-azure/internal/controller/policyinsights/subscriptionpolicyremediation"
 	dashboard "github.com/upbound/provider-azure/internal/controller/portal/dashboard"
 	powerbiembedded "github.com/upbound/provider-azure/internal/controller/powerbidedicated/powerbiembedded"
 	providerconfig "github.com/upbound/provider-azure/internal/controller/providerconfig"
@@ -433,7 +434,14 @@ import (
 	managedprivateendpoint "github.com/upbound/provider-azure/internal/controller/streamanalytics/managedprivateendpoint"
 	outputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputblob"
 	outputfunction "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputfunction"
+	outputmssql "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputmssql"
+	outputservicebusqueue "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputservicebusqueue"
+	outputservicebustopic "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputservicebustopic"
 	outputsynapse "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputsynapse"
+	referenceinputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/referenceinputblob"
+	streaminputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputblob"
+	streaminputeventhub "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputeventhub"
+	streaminputiothub "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputiothub"
 	serviceplan "github.com/upbound/provider-azure/internal/controller/web/serviceplan"
 )
 
@@ -785,6 +793,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loganalyticssavedsearch.Setup,
 		workspaceoperationalinsights.Setup,
 		loganalyticssolution.Setup,
+		subscriptionpolicyremediation.Setup,
 		dashboard.Setup,
 		powerbiembedded.Setup,
 		providerconfig.Setup,
@@ -865,7 +874,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedprivateendpoint.Setup,
 		outputblob.Setup,
 		outputfunction.Setup,
+		outputmssql.Setup,
+		outputservicebusqueue.Setup,
+		outputservicebustopic.Setup,
 		outputsynapse.Setup,
+		referenceinputblob.Setup,
+		streaminputblob.Setup,
+		streaminputeventhub.Setup,
+		streaminputiothub.Setup,
 		serviceplan.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
