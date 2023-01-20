@@ -88,8 +88,18 @@ type SubscriptionCostManagementExportParameters struct {
 	RecurrenceType *string `json:"recurrenceType" tf:"recurrence_type,omitempty"`
 
 	// The id of the subscription on which to create an export. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SubscriptionID *string `json:"subscriptionId" tf:"subscription_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.Subscription
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
+	// Reference to a Subscription in azure to populate subscriptionId.
+	// +kubebuilder:validation:Optional
+	SubscriptionIDRef *v1.Reference `json:"subscriptionIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subscription in azure to populate subscriptionId.
+	// +kubebuilder:validation:Optional
+	SubscriptionIDSelector *v1.Selector `json:"subscriptionIdSelector,omitempty" tf:"-"`
 }
 
 // SubscriptionCostManagementExportSpec defines the desired state of SubscriptionCostManagementExport
