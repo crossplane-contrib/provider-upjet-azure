@@ -84,6 +84,21 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 		mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
+		Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubscriptionList{},
+			Managed: &v1beta11.Subscription{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubscriptionID")
+	}
+	mg.Spec.ForProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubscriptionIDRef = rsp.ResolvedReference
 
 	return nil
 }

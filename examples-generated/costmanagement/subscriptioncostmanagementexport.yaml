@@ -20,7 +20,9 @@ spec:
     recurrencePeriodEndDate: "2020-09-18T00:00:00Z"
     recurrencePeriodStartDate: "2020-08-18T00:00:00Z"
     recurrenceType: Monthly
-    subscriptionId: ${data.azurerm_subscription.example.id}
+    subscriptionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_subscription
 
 ---
 
