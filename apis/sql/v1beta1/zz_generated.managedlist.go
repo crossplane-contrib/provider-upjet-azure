@@ -7,6 +7,51 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this ActiveDirectoryAdministratorList.
+func (l *ActiveDirectoryAdministratorList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DatabaseList.
+func (l *DatabaseList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ElasticPoolList.
+func (l *ElasticPoolList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this FirewallRuleList.
+func (l *FirewallRuleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MSSQLDatabaseExtendedAuditingPolicyList.
+func (l *MSSQLDatabaseExtendedAuditingPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this MSSQLDatabaseList.
 func (l *MSSQLDatabaseList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -18,6 +63,15 @@ func (l *MSSQLDatabaseList) GetItems() []resource.Managed {
 
 // GetItems of this MSSQLFailoverGroupList.
 func (l *MSSQLFailoverGroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MSSQLFirewallRuleList.
+func (l *MSSQLFirewallRuleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -90,6 +144,15 @@ func (l *MSSQLServerDNSAliasList) GetItems() []resource.Managed {
 
 // GetItems of this MSSQLServerList.
 func (l *MSSQLServerList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MSSQLServerSecurityAlertPolicyList.
+func (l *MSSQLServerSecurityAlertPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

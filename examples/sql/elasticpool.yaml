@@ -1,0 +1,68 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: ElasticPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/elasticpool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dbDtuMax: 5
+    dbDtuMin: 0
+    dtu: 50
+    edition: Basic
+    location: West Europe
+    poolSize: 5000
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqlrg
+    serverName: mssqlserv
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/elasticpool
+  labels:
+    testing.upbound.io/example-name: mssqlrg
+  name: mssqlrg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/elasticpool
+  labels:
+    testing.upbound.io/example-name: mssqlserv
+  name: mssqlserv
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqlrg
+    version: "12.0"
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123

@@ -358,8 +358,14 @@ import (
 	iotsecuritydevicegroup "github.com/upbound/provider-azure/internal/controller/security/iotsecuritydevicegroup"
 	iotsecuritysolution "github.com/upbound/provider-azure/internal/controller/security/iotsecuritysolution"
 	servicebusnamespace "github.com/upbound/provider-azure/internal/controller/servicebus/servicebusnamespace"
+	activedirectoryadministratorsql "github.com/upbound/provider-azure/internal/controller/sql/activedirectoryadministrator"
+	databasesql "github.com/upbound/provider-azure/internal/controller/sql/database"
+	elasticpool "github.com/upbound/provider-azure/internal/controller/sql/elasticpool"
+	firewallrulesql "github.com/upbound/provider-azure/internal/controller/sql/firewallrule"
 	mssqldatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqldatabase"
+	mssqldatabaseextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/sql/mssqldatabaseextendedauditingpolicy"
 	mssqlfailovergroup "github.com/upbound/provider-azure/internal/controller/sql/mssqlfailovergroup"
+	mssqlfirewallrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlfirewallrule"
 	mssqlmanageddatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanageddatabase"
 	mssqlmanagedinstance "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanagedinstance"
 	mssqlmanagedinstanceactivedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanagedinstanceactivedirectoryadministrator"
@@ -368,6 +374,7 @@ import (
 	mssqloutboundfirewallrule "github.com/upbound/provider-azure/internal/controller/sql/mssqloutboundfirewallrule"
 	mssqlserver "github.com/upbound/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlserverdnsalias "github.com/upbound/provider-azure/internal/controller/sql/mssqlserverdnsalias"
+	mssqlserversecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/sql/mssqlserversecurityalertpolicy"
 	mssqlservertransparentdataencryption "github.com/upbound/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	mssqlvirtualnetworkrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
 	accountstorage "github.com/upbound/provider-azure/internal/controller/storage/account"
@@ -751,8 +758,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iotsecuritydevicegroup.Setup,
 		iotsecuritysolution.Setup,
 		servicebusnamespace.Setup,
+		activedirectoryadministratorsql.Setup,
+		databasesql.Setup,
+		elasticpool.Setup,
+		firewallrulesql.Setup,
 		mssqldatabase.Setup,
+		mssqldatabaseextendedauditingpolicy.Setup,
 		mssqlfailovergroup.Setup,
+		mssqlfirewallrule.Setup,
 		mssqlmanageddatabase.Setup,
 		mssqlmanagedinstance.Setup,
 		mssqlmanagedinstanceactivedirectoryadministrator.Setup,
@@ -761,6 +774,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mssqloutboundfirewallrule.Setup,
 		mssqlserver.Setup,
 		mssqlserverdnsalias.Setup,
+		mssqlserversecurityalertpolicy.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		mssqlvirtualnetworkrule.Setup,
 		accountstorage.Setup,

@@ -1,0 +1,34 @@
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: ActiveDirectoryAdministrator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/activedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    login: sqladmin
+    objectId: ${data.azurerm_client_config.current.object_id}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverName: ${azurerm_sql_server.example.name}
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/activedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
