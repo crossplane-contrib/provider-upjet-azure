@@ -314,7 +314,16 @@ import (
 	watcherflowlog "github.com/upbound/provider-azure/internal/controller/network/watcherflowlog"
 	notificationhub "github.com/upbound/provider-azure/internal/controller/notificationhubs/notificationhub"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
+	powerbiembedded "github.com/upbound/provider-azure/internal/controller/powerbidedicated/powerbiembedded"
 	providerconfig "github.com/upbound/provider-azure/internal/controller/providerconfig"
+	accountpurview "github.com/upbound/provider-azure/internal/controller/purview/account"
+	backupcontainerstorageaccount "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupcontainerstorageaccount"
+	backuppolicyfileshare "github.com/upbound/provider-azure/internal/controller/recoveryservices/backuppolicyfileshare"
+	backuppolicyvm "github.com/upbound/provider-azure/internal/controller/recoveryservices/backuppolicyvm"
+	backupprotectedfileshare "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedfileshare"
+	backupprotectedvm "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedvm"
+	siterecoveryfabric "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryfabric"
+	vaultrecoveryservices "github.com/upbound/provider-azure/internal/controller/recoveryservices/vault"
 	resourcegrouptemplatedeployment "github.com/upbound/provider-azure/internal/controller/resources/resourcegrouptemplatedeployment"
 	advancedthreatprotection "github.com/upbound/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/provider-azure/internal/controller/security/iotsecuritydevicegroup"
@@ -669,7 +678,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		watcherflowlog.Setup,
 		notificationhub.Setup,
 		workspaceoperationalinsights.Setup,
+		powerbiembedded.Setup,
 		providerconfig.Setup,
+		accountpurview.Setup,
+		backupcontainerstorageaccount.Setup,
+		backuppolicyfileshare.Setup,
+		backuppolicyvm.Setup,
+		backupprotectedfileshare.Setup,
+		backupprotectedvm.Setup,
+		siterecoveryfabric.Setup,
+		vaultrecoveryservices.Setup,
 		resourcegrouptemplatedeployment.Setup,
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,

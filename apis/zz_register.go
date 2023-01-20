@@ -52,6 +52,9 @@ import (
 	v1beta1network "github.com/upbound/provider-azure/apis/network/v1beta1"
 	v1beta1notificationhubs "github.com/upbound/provider-azure/apis/notificationhubs/v1beta1"
 	v1beta1operationalinsights "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
+	v1beta1powerbidedicated "github.com/upbound/provider-azure/apis/powerbidedicated/v1beta1"
+	v1beta1purview "github.com/upbound/provider-azure/apis/purview/v1beta1"
+	v1beta1recoveryservices "github.com/upbound/provider-azure/apis/recoveryservices/v1beta1"
 	v1beta1resources "github.com/upbound/provider-azure/apis/resources/v1beta1"
 	v1beta1security "github.com/upbound/provider-azure/apis/security/v1beta1"
 	v1beta1servicebus "github.com/upbound/provider-azure/apis/servicebus/v1beta1"
@@ -110,6 +113,9 @@ func init() {
 		v1beta1network.SchemeBuilder.AddToScheme,
 		v1beta1notificationhubs.SchemeBuilder.AddToScheme,
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,
+		v1beta1powerbidedicated.SchemeBuilder.AddToScheme,
+		v1beta1purview.SchemeBuilder.AddToScheme,
+		v1beta1recoveryservices.SchemeBuilder.AddToScheme,
 		v1beta1resources.SchemeBuilder.AddToScheme,
 		v1beta1security.SchemeBuilder.AddToScheme,
 		v1beta1servicebus.SchemeBuilder.AddToScheme,

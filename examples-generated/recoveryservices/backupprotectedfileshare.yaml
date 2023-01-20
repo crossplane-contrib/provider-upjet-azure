@@ -1,0 +1,142 @@
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: BackupProtectedFileShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedfileshare
+  labels:
+    testing.upbound.io/example-name: share1
+  name: share1
+spec:
+  forProvider:
+    backupPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vault
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceFileShareNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceStorageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: protection-container
+
+---
+
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: BackupContainerStorageAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedfileshare
+  labels:
+    testing.upbound.io/example-name: protection-container
+  name: protection-container
+spec:
+  forProvider:
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sa
+
+---
+
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: BackupPolicyFileShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedfileshare
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backup:
+    - frequency: Daily
+      time: "23:00"
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionDaily:
+    - count: 10
+
+---
+
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedfileshare
+  labels:
+    testing.upbound.io/example-name: vault
+  name: vault
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedfileshare
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedfileshare
+  labels:
+    testing.upbound.io/example-name: sa
+  name: sa
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Share
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/backupprotectedfileshare
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    quota: 1
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
