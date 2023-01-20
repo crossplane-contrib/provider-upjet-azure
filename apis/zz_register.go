@@ -32,6 +32,7 @@ import (
 	v1beta1costmanagement "github.com/upbound/provider-azure/apis/costmanagement/v1beta1"
 	v1beta1databoxedge "github.com/upbound/provider-azure/apis/databoxedge/v1beta1"
 	v1beta1databricks "github.com/upbound/provider-azure/apis/databricks/v1beta1"
+	v1beta1datafactory "github.com/upbound/provider-azure/apis/datafactory/v1beta1"
 	v1beta1dataprotection "github.com/upbound/provider-azure/apis/dataprotection/v1beta1"
 	v1beta1datashare "github.com/upbound/provider-azure/apis/datashare/v1beta1"
 	v1beta1dbformariadb "github.com/upbound/provider-azure/apis/dbformariadb/v1beta1"
@@ -93,6 +94,7 @@ func init() {
 		v1beta1costmanagement.SchemeBuilder.AddToScheme,
 		v1beta1databoxedge.SchemeBuilder.AddToScheme,
 		v1beta1databricks.SchemeBuilder.AddToScheme,
+		v1beta1datafactory.SchemeBuilder.AddToScheme,
 		v1beta1dataprotection.SchemeBuilder.AddToScheme,
 		v1beta1datashare.SchemeBuilder.AddToScheme,
 		v1beta1dbformariadb.SchemeBuilder.AddToScheme,

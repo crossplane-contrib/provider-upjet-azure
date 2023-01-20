@@ -1,0 +1,62 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: DataSetMySQL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetmysql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetmysql-factory
+    linkedServiceName: anonymous
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetmysql
+  labels:
+    testing.upbound.io/example-name: datasetmysql-factory
+  name: datasetmysql-factory
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetmysql-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetmysql
+  labels:
+    testing.upbound.io/example-name: datasetmysql-rg
+  name: datasetmysql-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceOdbc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetmysql
+  labels:
+    testing.upbound.io/example-name: anonymous
+  name: anonymous
+spec:
+  forProvider:
+    connectionString: Driver={SQL Server};Server=test;Database=test;Uid=test;Pwd=test;
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetmysql-factory

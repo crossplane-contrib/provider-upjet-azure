@@ -144,6 +144,22 @@ import (
 	device "github.com/upbound/provider-azure/internal/controller/databoxedge/device"
 	workspace "github.com/upbound/provider-azure/internal/controller/databricks/workspace"
 	workspacecustomermanagedkey "github.com/upbound/provider-azure/internal/controller/databricks/workspacecustomermanagedkey"
+	customdataset "github.com/upbound/provider-azure/internal/controller/datafactory/customdataset"
+	dataflow "github.com/upbound/provider-azure/internal/controller/datafactory/dataflow"
+	datasetazureblob "github.com/upbound/provider-azure/internal/controller/datafactory/datasetazureblob"
+	datasetbinary "github.com/upbound/provider-azure/internal/controller/datafactory/datasetbinary"
+	datasetcosmosdbsqlapi "github.com/upbound/provider-azure/internal/controller/datafactory/datasetcosmosdbsqlapi"
+	datasetdelimitedtext "github.com/upbound/provider-azure/internal/controller/datafactory/datasetdelimitedtext"
+	datasethttp "github.com/upbound/provider-azure/internal/controller/datafactory/datasethttp"
+	datasetjson "github.com/upbound/provider-azure/internal/controller/datafactory/datasetjson"
+	datasetmysql "github.com/upbound/provider-azure/internal/controller/datafactory/datasetmysql"
+	datasetparquet "github.com/upbound/provider-azure/internal/controller/datafactory/datasetparquet"
+	datasetpostgresql "github.com/upbound/provider-azure/internal/controller/datafactory/datasetpostgresql"
+	datasetsnowflake "github.com/upbound/provider-azure/internal/controller/datafactory/datasetsnowflake"
+	factory "github.com/upbound/provider-azure/internal/controller/datafactory/factory"
+	integrationruntimeazure "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazure"
+	integrationruntimeazuressis "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazuressis"
+	linkedserviceodbc "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceodbc"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backupvault "github.com/upbound/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/provider-azure/internal/controller/datashare/account"
@@ -508,6 +524,22 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		device.Setup,
 		workspace.Setup,
 		workspacecustomermanagedkey.Setup,
+		customdataset.Setup,
+		dataflow.Setup,
+		datasetazureblob.Setup,
+		datasetbinary.Setup,
+		datasetcosmosdbsqlapi.Setup,
+		datasetdelimitedtext.Setup,
+		datasethttp.Setup,
+		datasetjson.Setup,
+		datasetmysql.Setup,
+		datasetparquet.Setup,
+		datasetpostgresql.Setup,
+		datasetsnowflake.Setup,
+		factory.Setup,
+		integrationruntimeazure.Setup,
+		integrationruntimeazuressis.Setup,
+		linkedserviceodbc.Setup,
 		backuppolicyblobstorage.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,

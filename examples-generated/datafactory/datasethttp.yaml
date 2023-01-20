@@ -1,0 +1,51 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: DataSetHTTP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasethttp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    linkedServiceName: ${azurerm_data_factory_linked_service_web.example.name}
+    relativeUrl: http://www.bing.com
+    requestBody: foo=bar
+    requestMethod: POST
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasethttp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasethttp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

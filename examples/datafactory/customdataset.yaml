@@ -1,0 +1,110 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: CustomDataSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/customdataset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    additionalProperties:
+      bar: test2
+      foo: test1
+    annotations:
+    - test1
+    - test2
+    - test3
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: customdataset-factory
+    description: test description
+    folder: testFolder
+    linkedService:
+    - name: anonymous
+      parameters:
+        key1: value1
+    parameters:
+      Bar: Test2
+      foo: test1
+    schemaJson: |
+      {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              }
+            }
+          },
+          "age": {
+            "type": "integer"
+          }
+        }
+      }
+    type: Json
+    typePropertiesJson: |
+      {
+        "location": {
+          "container":"customdatasetcontainer",
+          "fileName":"foo.txt",
+          "folderPath": "foo/bar/",
+          "type":"AzureBlobStorageLocation"
+        },
+        "encodingName":"UTF-8"
+      }
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/customdataset
+  labels:
+    testing.upbound.io/example-name: customdataset-factory
+  name: customdataset-factory
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: customdataset-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/customdataset
+  labels:
+    testing.upbound.io/example-name: customdataset-rg
+  name: customdataset-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceOdbc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/customdataset
+  labels:
+    testing.upbound.io/example-name: anonymous
+  name: anonymous
+spec:
+  forProvider:
+    connectionString: Driver={SQL Server};Server=test;Database=test;Uid=test;Pwd=test;
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: customdataset-factory

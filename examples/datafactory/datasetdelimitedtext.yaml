@@ -1,0 +1,73 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: DataSetDelimitedText
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetdelimitedtext
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    columnDelimiter: ','
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: delimitedtext-factory
+    httpServerLocation:
+    - filename: foo.txt
+      path: foo/bar/
+      relativeUrl: /fizz/buzz/
+    encoding: UTF-8
+    escapeCharacter: f
+    firstRowAsHeader: true
+    linkedServiceName: anonymous
+    nullValue: "NULL"
+    quoteCharacter: x
+    rowDelimiter: NEW
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetdelimitedtext
+  labels:
+    testing.upbound.io/example-name: delimitedtext-factory
+  name: delimitedtext-factory
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: delimitedtext-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetdelimitedtext
+  labels:
+    testing.upbound.io/example-name: delimitedtext-rg
+  name: delimitedtext-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceOdbc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetdelimitedtext
+  labels:
+    testing.upbound.io/example-name: anonymous
+  name: anonymous
+spec:
+  forProvider:
+    connectionString: Driver={SQL Server};Server=test;Database=test;Uid=test;Pwd=test;
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: delimitedtext-factory

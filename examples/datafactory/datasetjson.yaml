@@ -1,0 +1,67 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: DataSetJSON
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetjson
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetjson-factory
+    encoding: UTF-8
+    httpServerLocation:
+    - filename: foo.txt
+      path: foo/bar/
+      relativeUrl: /fizz/buzz/
+    linkedServiceName: anonymous
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetjson
+  labels:
+    testing.upbound.io/example-name: datasetjson-factory
+  name: datasetjson-factory
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetjson-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetjson
+  labels:
+    testing.upbound.io/example-name: datasetjson-rg
+  name: datasetjson-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceOdbc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetjson
+  labels:
+    testing.upbound.io/example-name: anonymous
+  name: anonymous
+spec:
+  forProvider:
+    connectionString: Driver={SQL Server};Server=test;Database=test;Uid=test;Pwd=test;
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasetjson-factory
