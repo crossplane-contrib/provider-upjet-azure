@@ -75,3 +75,39 @@ spec:
 
 ---
 
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    enablePartitioning: true
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: QueueAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devices/v1beta1/iothubendpointservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    listen: false
+    manage: false
+    queueIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    send: true
+
+---
+
