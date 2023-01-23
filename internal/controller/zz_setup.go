@@ -357,6 +357,15 @@ import (
 	advancedthreatprotection "github.com/upbound/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/provider-azure/internal/controller/security/iotsecuritydevicegroup"
 	iotsecuritysolution "github.com/upbound/provider-azure/internal/controller/security/iotsecuritysolution"
+	securitycenterassessment "github.com/upbound/provider-azure/internal/controller/security/securitycenterassessment"
+	securitycenterassessmentpolicy "github.com/upbound/provider-azure/internal/controller/security/securitycenterassessmentpolicy"
+	securitycenterautoprovisioning "github.com/upbound/provider-azure/internal/controller/security/securitycenterautoprovisioning"
+	securitycentercontact "github.com/upbound/provider-azure/internal/controller/security/securitycentercontact"
+	securitycenterservervulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/security/securitycenterservervulnerabilityassessment"
+	securitycenterservervulnerabilityassessmentvirtualmachine "github.com/upbound/provider-azure/internal/controller/security/securitycenterservervulnerabilityassessmentvirtualmachine"
+	securitycentersetting "github.com/upbound/provider-azure/internal/controller/security/securitycentersetting"
+	securitycentersubscriptionpricing "github.com/upbound/provider-azure/internal/controller/security/securitycentersubscriptionpricing"
+	securitycenterworkspace "github.com/upbound/provider-azure/internal/controller/security/securitycenterworkspace"
 	servicebusnamespace "github.com/upbound/provider-azure/internal/controller/servicebus/servicebusnamespace"
 	activedirectoryadministratorsql "github.com/upbound/provider-azure/internal/controller/sql/activedirectoryadministrator"
 	databasesql "github.com/upbound/provider-azure/internal/controller/sql/database"
@@ -757,6 +766,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,
 		iotsecuritysolution.Setup,
+		securitycenterassessment.Setup,
+		securitycenterassessmentpolicy.Setup,
+		securitycenterautoprovisioning.Setup,
+		securitycentercontact.Setup,
+		securitycenterservervulnerabilityassessment.Setup,
+		securitycenterservervulnerabilityassessmentvirtualmachine.Setup,
+		securitycentersetting.Setup,
+		securitycentersubscriptionpricing.Setup,
+		securitycenterworkspace.Setup,
 		servicebusnamespace.Setup,
 		activedirectoryadministratorsql.Setup,
 		databasesql.Setup,
