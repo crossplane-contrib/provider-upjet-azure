@@ -562,37 +562,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.ServiceFabric/managedClusters/clusterName1
 	"azurerm_service_fabric_managed_cluster": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ServiceFabric/managedClusters/{{ .external_name }}"),
 
-	// servicebus
-	//
-	// ServiceBus Namespace authorization rules can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/authorizationRules/rule1
-	"azurerm_servicebus_namespace_authorization_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/authorizationRules/{{ .external_name }}"),
-	// Service Bus DR configs can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/disasterRecoveryConfigs/config1
-	"azurerm_servicebus_namespace_disaster_recovery_config": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/disasterRecoveryConfigs/{{ .external_name }}"),
-	// Service Bus Namespace can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/sbns1
-	// TODO: Check documentation, it seems there is a bug
-	"azurerm_servicebus_namespace_network_rule_set": config.IdentifierFromProvider,
-	// Service Bus Queue can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1/queues/snqueue1
-	"azurerm_servicebus_queue": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/queues/{{ .external_name }}"),
-	// ServiceBus Queue Authorization Rules can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/queues/queue1/authorizationRules/rule1
-	"azurerm_servicebus_queue_authorization_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.queue_id }}/authorizationRules/{{ .external_name }}"),
-	// Service Bus Subscriptions can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1/topics/sntopic1/subscriptions/sbsub1
-	"azurerm_servicebus_subscription": config.TemplatedStringAsIdentifier("name", "{{ .parameters.topic_id }}/subscriptions/{{ .external_name }}"),
-	// Service Bus Subscription Rule can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1/topics/sntopic1/subscriptions/sbsub1/rules/sbrule1
-	"azurerm_servicebus_subscription_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.subscription_id }}/rules/{{ .external_name }}"),
-	// Service Bus Topics can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ServiceBus/namespaces/sbns1/topics/sntopic1
-	"azurerm_servicebus_topic": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/topics/{{ .external_name }}"),
-	// ServiceBus Topic authorization rules can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ServiceBus/namespaces/namespace1/topics/topic1/authorizationRules/rule1
-	"azurerm_servicebus_topic_authorization_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.topic_id }}/authorizationRules/{{ .external_name }}"),
-
 	// servicefabric
 	//
 	// Service Fabric Clusters can be imported using the resource id

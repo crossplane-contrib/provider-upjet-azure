@@ -1,0 +1,50 @@
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: servicebus/v1beta1/queue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    maxMessageSizeInKilobytes: 1024
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: queue-namespace
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/queue
+  labels:
+    testing.upbound.io/example-name: queue-rg
+  name: queue-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/queue
+  labels:
+    testing.upbound.io/example-name: queue-namespace
+  name: queue-namespace
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: queue-rg
+    capacity: 1
+    sku: Premium
+    tags:
+      source: test

@@ -366,7 +366,16 @@ import (
 	securitycentersetting "github.com/upbound/provider-azure/internal/controller/security/securitycentersetting"
 	securitycentersubscriptionpricing "github.com/upbound/provider-azure/internal/controller/security/securitycentersubscriptionpricing"
 	securitycenterworkspace "github.com/upbound/provider-azure/internal/controller/security/securitycenterworkspace"
+	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/namespaceauthorizationrule"
+	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/servicebus/namespacedisasterrecoveryconfig"
+	namespacenetworkruleset "github.com/upbound/provider-azure/internal/controller/servicebus/namespacenetworkruleset"
+	queue "github.com/upbound/provider-azure/internal/controller/servicebus/queue"
+	queueauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/queueauthorizationrule"
 	servicebusnamespace "github.com/upbound/provider-azure/internal/controller/servicebus/servicebusnamespace"
+	subscriptionservicebus "github.com/upbound/provider-azure/internal/controller/servicebus/subscription"
+	subscriptionrule "github.com/upbound/provider-azure/internal/controller/servicebus/subscriptionrule"
+	topic "github.com/upbound/provider-azure/internal/controller/servicebus/topic"
+	topicauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/topicauthorizationrule"
 	activedirectoryadministratorsql "github.com/upbound/provider-azure/internal/controller/sql/activedirectoryadministrator"
 	databasesql "github.com/upbound/provider-azure/internal/controller/sql/database"
 	elasticpool "github.com/upbound/provider-azure/internal/controller/sql/elasticpool"
@@ -395,7 +404,7 @@ import (
 	encryptionscope "github.com/upbound/provider-azure/internal/controller/storage/encryptionscope"
 	managementpolicy "github.com/upbound/provider-azure/internal/controller/storage/managementpolicy"
 	objectreplication "github.com/upbound/provider-azure/internal/controller/storage/objectreplication"
-	queue "github.com/upbound/provider-azure/internal/controller/storage/queue"
+	queuestorage "github.com/upbound/provider-azure/internal/controller/storage/queue"
 	share "github.com/upbound/provider-azure/internal/controller/storage/share"
 	tablestorage "github.com/upbound/provider-azure/internal/controller/storage/table"
 	hpccache "github.com/upbound/provider-azure/internal/controller/storagecache/hpccache"
@@ -775,7 +784,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitycentersetting.Setup,
 		securitycentersubscriptionpricing.Setup,
 		securitycenterworkspace.Setup,
+		namespaceauthorizationrule.Setup,
+		namespacedisasterrecoveryconfig.Setup,
+		namespacenetworkruleset.Setup,
+		queue.Setup,
+		queueauthorizationrule.Setup,
 		servicebusnamespace.Setup,
+		subscriptionservicebus.Setup,
+		subscriptionrule.Setup,
+		topic.Setup,
+		topicauthorizationrule.Setup,
 		activedirectoryadministratorsql.Setup,
 		databasesql.Setup,
 		elasticpool.Setup,
@@ -804,7 +822,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		encryptionscope.Setup,
 		managementpolicy.Setup,
 		objectreplication.Setup,
-		queue.Setup,
+		queuestorage.Setup,
 		share.Setup,
 		tablestorage.Setup,
 		hpccache.Setup,

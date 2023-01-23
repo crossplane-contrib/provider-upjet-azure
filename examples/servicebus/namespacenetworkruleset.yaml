@@ -1,0 +1,100 @@
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: NamespaceNetworkRuleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacenetworkruleset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    defaultAction: Deny
+    ipRules:
+    - 1.1.1.1
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: namespacenetworkruleset-nspace
+    networkRules:
+    - ignoreMissingVnetServiceEndpoint: false
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: namespacenetworkruleset-sn
+    publicNetworkAccessEnabled: true
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacenetworkruleset
+  labels:
+    testing.upbound.io/example-name: namespacenetworkruleset-rg
+  name: namespacenetworkruleset-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacenetworkruleset
+  labels:
+    testing.upbound.io/example-name: namespacenetworkruleset-nspace
+  name: namespacenetworkruleset-nspace
+spec:
+  forProvider:
+    capacity: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: namespacenetworkruleset-rg
+    sku: Premium
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacenetworkruleset
+  labels:
+    testing.upbound.io/example-name: namespacenetworkruleset-sn
+  name: namespacenetworkruleset-sn
+spec:
+  forProvider:
+    addressPrefixes:
+    - 172.17.0.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: namespacenetworkruleset-rg
+    serviceEndpoints:
+    - Microsoft.ServiceBus
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: namespacenetworkruleset-vn
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacenetworkruleset
+  labels:
+    testing.upbound.io/example-name: namespacenetworkruleset-vn
+  name: namespacenetworkruleset-vn
+spec:
+  forProvider:
+    addressSpace:
+    - 172.17.0.0/16
+    dnsServers:
+    - 10.0.0.4
+    - 10.0.0.5
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: namespacenetworkruleset-rg
