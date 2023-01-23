@@ -204,3 +204,597 @@ func (mg *IOTSecuritySolution) SetPublishConnectionDetailsTo(r *xpv1.PublishConn
 func (mg *IOTSecuritySolution) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SecurityCenterAssessment.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SecurityCenterAssessment) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SecurityCenterAssessment.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SecurityCenterAssessment) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityCenterAssessment.
+func (mg *SecurityCenterAssessment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SecurityCenterAssessmentPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SecurityCenterAssessmentPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SecurityCenterAssessmentPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SecurityCenterAssessmentPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityCenterAssessmentPolicy.
+func (mg *SecurityCenterAssessmentPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SecurityCenterAutoProvisioning.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SecurityCenterAutoProvisioning) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SecurityCenterAutoProvisioning.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SecurityCenterAutoProvisioning) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityCenterAutoProvisioning.
+func (mg *SecurityCenterAutoProvisioning) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SecurityCenterContact.
+func (mg *SecurityCenterContact) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityCenterContact.
+func (mg *SecurityCenterContact) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SecurityCenterContact.
+func (mg *SecurityCenterContact) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SecurityCenterContact.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SecurityCenterContact) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityCenterContact.
+func (mg *SecurityCenterContact) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityCenterContact.
+func (mg *SecurityCenterContact) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityCenterContact.
+func (mg *SecurityCenterContact) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityCenterContact.
+func (mg *SecurityCenterContact) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SecurityCenterContact.
+func (mg *SecurityCenterContact) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SecurityCenterContact.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SecurityCenterContact) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityCenterContact.
+func (mg *SecurityCenterContact) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityCenterContact.
+func (mg *SecurityCenterContact) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SecurityCenterServerVulnerabilityAssessment.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SecurityCenterServerVulnerabilityAssessment) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SecurityCenterServerVulnerabilityAssessment.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SecurityCenterServerVulnerabilityAssessment) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityCenterServerVulnerabilityAssessment.
+func (mg *SecurityCenterServerVulnerabilityAssessment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine.
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SecurityCenterSetting.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SecurityCenterSetting) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SecurityCenterSetting.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SecurityCenterSetting) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityCenterSetting.
+func (mg *SecurityCenterSetting) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SecurityCenterSubscriptionPricing.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SecurityCenterSubscriptionPricing) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SecurityCenterSubscriptionPricing.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SecurityCenterSubscriptionPricing) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityCenterSubscriptionPricing.
+func (mg *SecurityCenterSubscriptionPricing) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SecurityCenterWorkspace.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SecurityCenterWorkspace) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SecurityCenterWorkspace.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SecurityCenterWorkspace) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SecurityCenterWorkspace.
+func (mg *SecurityCenterWorkspace) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

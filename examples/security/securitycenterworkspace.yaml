@@ -1,0 +1,46 @@
+apiVersion: security.azure.upbound.io/v1beta1
+kind: SecurityCenterWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterworkspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    scope: "${data.azurerm_client_config.current.subscription_resource_id}"
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: securitycenterworkspace-ws
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterworkspace
+  labels:
+    testing.upbound.io/example-name: securitycenterworkspace-ws
+  name: securitycenterworkspace-ws
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: securitycenterworkspace-rg
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterworkspace
+  labels:
+    testing.upbound.io/example-name: securitycenterworkspace-rg
+  name: securitycenterworkspace-rg
+spec:
+  forProvider:
+    location: West Europe

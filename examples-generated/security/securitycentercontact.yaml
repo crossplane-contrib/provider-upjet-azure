@@ -1,0 +1,18 @@
+apiVersion: security.azure.upbound.io/v1beta1
+kind: SecurityCenterContact
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycentercontact
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    alertNotifications: true
+    alertsToAdmins: true
+    email: contact@example.com
+    name: contact
+    phone: +1-555-555-5555
+
+---
+

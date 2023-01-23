@@ -736,37 +736,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Search/searchServices/service1
 	"azurerm_search_service": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Search/searchServices/{{ .external_name }}"),
 
-	// security
-	//
-	// Security Assessment can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.Compute/virtualMachineScaleSets/vmss1/providers/Microsoft.Security/assessments/00000000-0000-0000-0000-000000000000
-	"azurerm_security_center_assessment": config.IdentifierFromProvider,
-	// Security Assessments Policy can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Security/assessmentMetadata/metadata1
-	"azurerm_security_center_assessment_policy": config.IdentifierFromProvider,
-	// Security Center Auto Provisioning can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Security/autoProvisioningSettings/default
-	"azurerm_security_center_auto_provisioning": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Security/autoProvisioningSettings/default"),
-	// The contact can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Security/securityContacts/default1
-	"azurerm_security_center_contact": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Security/securityContacts/default1"),
-	// DEPRECATED
-	// Server Vulnerability Assessments can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group-name/providers/Microsoft.Compute/virtualMachines/vm-name/providers/Microsoft.Security/serverVulnerabilityAssessments/Default
-	"azurerm_security_center_server_vulnerability_assessment": config.IdentifierFromProvider,
-	// Server Vulnerability Assessments can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group-name/providers/Microsoft.Compute/virtualMachines/vm-name/providers/Microsoft.Security/serverVulnerabilityAssessments/Default
-	"azurerm_security_center_server_vulnerability_assessment_virtual_machine": config.TemplatedStringAsIdentifier("", "{{ .parameters.virtual_machine_id }}/providers/Microsoft.Security/serverVulnerabilityAssessments/Default"),
-	// The setting can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Security/settings/<setting_name>
-	"azurerm_security_center_setting": config.TemplatedStringAsIdentifier("setting_name", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Security/settings/{{ .external_name }}"),
-	// The pricing tier can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Security/pricings/<resource_type>
-	"azurerm_security_center_subscription_pricing": config.IdentifierFromProvider,
-	// The contact can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Security/workspaceSettings/default
-	"azurerm_security_center_workspace": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Security/workspaceSettings/default"),
-
 	// securityinsights
 	//
 	// Sentinel Fusion Alert Rules can be imported using the resource id
