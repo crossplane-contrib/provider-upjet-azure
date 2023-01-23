@@ -1,0 +1,52 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: DataSetParquet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetparquet
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    httpServerLocation:
+    - filename: fizz.txt
+      path: foo/bar/
+      relativeUrl: http://www.bing.com
+    linkedServiceName: ${azurerm_data_factory_linked_service_web.example.name}
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetparquet
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetparquet
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
