@@ -1,0 +1,151 @@
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: IOTHubDataConnection
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: kusto/v1beta1/iothubdataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: iexample
+spec:
+  forProvider:
+    name: iexample
+    clusterNameRef:
+      name: kcluster
+    consumerGroupSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dataFormat: JSON
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventSystemProperties:
+    - message-id
+    - to
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    mappingRuleName: my-table-mapping
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharedAccessPolicyNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/iothubdataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: iexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 1
+      name: S1
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubConsumerGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/iothubdataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: iexample
+spec:
+  forProvider:
+    eventhubEndpointName: events
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubSharedAccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/iothubdataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: iexample
+spec:
+  forProvider:
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    registryRead: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/iothubdataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: kcluster
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 2
+      name: Standard_D13_v2
+
+---
+
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/iothubdataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: kexample
+spec:
+  forProvider:
+    clusterNameRef:
+      name: kcluster
+    hotCachePeriod: P7D
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    softDeletePeriod: P31D
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/iothubdataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: kusto-example
+spec:
+  forProvider:
+    location: West Europe
+

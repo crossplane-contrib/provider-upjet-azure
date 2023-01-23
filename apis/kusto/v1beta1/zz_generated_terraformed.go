@@ -13,6 +13,80 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this AttachedDatabaseConfiguration
+func (mg *AttachedDatabaseConfiguration) GetTerraformResourceType() string {
+	return "azurerm_kusto_attached_database_configuration"
+}
+
+// GetConnectionDetailsMapping for this AttachedDatabaseConfiguration
+func (tr *AttachedDatabaseConfiguration) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this AttachedDatabaseConfiguration
+func (tr *AttachedDatabaseConfiguration) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this AttachedDatabaseConfiguration
+func (tr *AttachedDatabaseConfiguration) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this AttachedDatabaseConfiguration
+func (tr *AttachedDatabaseConfiguration) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this AttachedDatabaseConfiguration
+func (tr *AttachedDatabaseConfiguration) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this AttachedDatabaseConfiguration
+func (tr *AttachedDatabaseConfiguration) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this AttachedDatabaseConfiguration using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *AttachedDatabaseConfiguration) LateInitialize(attrs []byte) (bool, error) {
+	params := &AttachedDatabaseConfigurationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *AttachedDatabaseConfiguration) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Cluster
 func (mg *Cluster) GetTerraformResourceType() string {
 	return "azurerm_kusto_cluster"
@@ -87,6 +161,80 @@ func (tr *Cluster) GetTerraformSchemaVersion() int {
 	return 1
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ClusterPrincipalAssignment
+func (mg *ClusterPrincipalAssignment) GetTerraformResourceType() string {
+	return "azurerm_kusto_cluster_principal_assignment"
+}
+
+// GetConnectionDetailsMapping for this ClusterPrincipalAssignment
+func (tr *ClusterPrincipalAssignment) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ClusterPrincipalAssignment
+func (tr *ClusterPrincipalAssignment) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ClusterPrincipalAssignment
+func (tr *ClusterPrincipalAssignment) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ClusterPrincipalAssignment
+func (tr *ClusterPrincipalAssignment) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ClusterPrincipalAssignment
+func (tr *ClusterPrincipalAssignment) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ClusterPrincipalAssignment
+func (tr *ClusterPrincipalAssignment) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ClusterPrincipalAssignment using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ClusterPrincipalAssignment) LateInitialize(attrs []byte) (bool, error) {
+	params := &ClusterPrincipalAssignmentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ClusterPrincipalAssignment) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Database
 func (mg *Database) GetTerraformResourceType() string {
 	return "azurerm_kusto_database"
@@ -158,5 +306,301 @@ func (tr *Database) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Database) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this DatabasePrincipalAssignment
+func (mg *DatabasePrincipalAssignment) GetTerraformResourceType() string {
+	return "azurerm_kusto_database_principal_assignment"
+}
+
+// GetConnectionDetailsMapping for this DatabasePrincipalAssignment
+func (tr *DatabasePrincipalAssignment) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this DatabasePrincipalAssignment
+func (tr *DatabasePrincipalAssignment) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this DatabasePrincipalAssignment
+func (tr *DatabasePrincipalAssignment) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this DatabasePrincipalAssignment
+func (tr *DatabasePrincipalAssignment) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this DatabasePrincipalAssignment
+func (tr *DatabasePrincipalAssignment) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this DatabasePrincipalAssignment
+func (tr *DatabasePrincipalAssignment) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this DatabasePrincipalAssignment using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *DatabasePrincipalAssignment) LateInitialize(attrs []byte) (bool, error) {
+	params := &DatabasePrincipalAssignmentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *DatabasePrincipalAssignment) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this EventGridDataConnection
+func (mg *EventGridDataConnection) GetTerraformResourceType() string {
+	return "azurerm_kusto_eventgrid_data_connection"
+}
+
+// GetConnectionDetailsMapping for this EventGridDataConnection
+func (tr *EventGridDataConnection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this EventGridDataConnection
+func (tr *EventGridDataConnection) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this EventGridDataConnection
+func (tr *EventGridDataConnection) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this EventGridDataConnection
+func (tr *EventGridDataConnection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this EventGridDataConnection
+func (tr *EventGridDataConnection) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this EventGridDataConnection
+func (tr *EventGridDataConnection) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this EventGridDataConnection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *EventGridDataConnection) LateInitialize(attrs []byte) (bool, error) {
+	params := &EventGridDataConnectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *EventGridDataConnection) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this EventHubDataConnection
+func (mg *EventHubDataConnection) GetTerraformResourceType() string {
+	return "azurerm_kusto_eventhub_data_connection"
+}
+
+// GetConnectionDetailsMapping for this EventHubDataConnection
+func (tr *EventHubDataConnection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this EventHubDataConnection
+func (tr *EventHubDataConnection) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this EventHubDataConnection
+func (tr *EventHubDataConnection) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this EventHubDataConnection
+func (tr *EventHubDataConnection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this EventHubDataConnection
+func (tr *EventHubDataConnection) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this EventHubDataConnection
+func (tr *EventHubDataConnection) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this EventHubDataConnection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *EventHubDataConnection) LateInitialize(attrs []byte) (bool, error) {
+	params := &EventHubDataConnectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *EventHubDataConnection) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this IOTHubDataConnection
+func (mg *IOTHubDataConnection) GetTerraformResourceType() string {
+	return "azurerm_kusto_iothub_data_connection"
+}
+
+// GetConnectionDetailsMapping for this IOTHubDataConnection
+func (tr *IOTHubDataConnection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this IOTHubDataConnection
+func (tr *IOTHubDataConnection) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this IOTHubDataConnection
+func (tr *IOTHubDataConnection) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this IOTHubDataConnection
+func (tr *IOTHubDataConnection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this IOTHubDataConnection
+func (tr *IOTHubDataConnection) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this IOTHubDataConnection
+func (tr *IOTHubDataConnection) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this IOTHubDataConnection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *IOTHubDataConnection) LateInitialize(attrs []byte) (bool, error) {
+	params := &IOTHubDataConnectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *IOTHubDataConnection) GetTerraformSchemaVersion() int {
 	return 1
 }

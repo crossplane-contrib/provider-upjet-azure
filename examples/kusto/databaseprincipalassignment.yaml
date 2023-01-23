@@ -1,0 +1,78 @@
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: DatabasePrincipalAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Require principalId and tenantId to be specified."
+    meta.upbound.io/example-id: kusto/v1beta1/databaseprincipalassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterNameRef:
+      name: kcluster
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    principalId: 6e821fa4-8419-416b-bc43-900b9ad6809a
+    principalType: App
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    role: Viewer
+    tenantId: b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
+
+---
+
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/databaseprincipalassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: kcluster
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 2
+      name: Standard_D13_v2
+
+---
+
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/databaseprincipalassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: kdb
+spec:
+  forProvider:
+    clusterNameRef:
+      name: kcluster
+    hotCachePeriod: P7D
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    softDeletePeriod: P31D
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/databaseprincipalassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: kusto-example
+spec:
+  forProvider:
+    location: West Europe
