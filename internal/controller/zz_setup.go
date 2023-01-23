@@ -319,16 +319,23 @@ import (
 	subnetnetworksecuritygroupassociation "github.com/upbound/provider-azure/internal/controller/network/subnetnetworksecuritygroupassociation"
 	subnetroutetableassociation "github.com/upbound/provider-azure/internal/controller/network/subnetroutetableassociation"
 	subnetserviceendpointstoragepolicy "github.com/upbound/provider-azure/internal/controller/network/subnetserviceendpointstoragepolicy"
+	trafficmanagerprofile "github.com/upbound/provider-azure/internal/controller/network/trafficmanagerprofile"
 	virtualhub "github.com/upbound/provider-azure/internal/controller/network/virtualhub"
 	virtualnetwork "github.com/upbound/provider-azure/internal/controller/network/virtualnetwork"
 	virtualnetworkgateway "github.com/upbound/provider-azure/internal/controller/network/virtualnetworkgateway"
 	virtualnetworkgatewayconnection "github.com/upbound/provider-azure/internal/controller/network/virtualnetworkgatewayconnection"
 	virtualnetworkpeering "github.com/upbound/provider-azure/internal/controller/network/virtualnetworkpeering"
 	virtualwan "github.com/upbound/provider-azure/internal/controller/network/virtualwan"
+	vpngateway "github.com/upbound/provider-azure/internal/controller/network/vpngateway"
+	vpngatewayconnection "github.com/upbound/provider-azure/internal/controller/network/vpngatewayconnection"
 	vpnserverconfiguration "github.com/upbound/provider-azure/internal/controller/network/vpnserverconfiguration"
+	vpnsite "github.com/upbound/provider-azure/internal/controller/network/vpnsite"
 	watcher "github.com/upbound/provider-azure/internal/controller/network/watcher"
 	watcherflowlog "github.com/upbound/provider-azure/internal/controller/network/watcherflowlog"
+	webapplicationfirewallpolicy "github.com/upbound/provider-azure/internal/controller/network/webapplicationfirewallpolicy"
+	authorizationrulenotificationhubs "github.com/upbound/provider-azure/internal/controller/notificationhubs/authorizationrule"
 	notificationhub "github.com/upbound/provider-azure/internal/controller/notificationhubs/notificationhub"
+	notificationhubnamespace "github.com/upbound/provider-azure/internal/controller/notificationhubs/notificationhubnamespace"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
 	powerbiembedded "github.com/upbound/provider-azure/internal/controller/powerbidedicated/powerbiembedded"
 	providerconfig "github.com/upbound/provider-azure/internal/controller/providerconfig"
@@ -699,16 +706,23 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetnetworksecuritygroupassociation.Setup,
 		subnetroutetableassociation.Setup,
 		subnetserviceendpointstoragepolicy.Setup,
+		trafficmanagerprofile.Setup,
 		virtualhub.Setup,
 		virtualnetwork.Setup,
 		virtualnetworkgateway.Setup,
 		virtualnetworkgatewayconnection.Setup,
 		virtualnetworkpeering.Setup,
 		virtualwan.Setup,
+		vpngateway.Setup,
+		vpngatewayconnection.Setup,
 		vpnserverconfiguration.Setup,
+		vpnsite.Setup,
 		watcher.Setup,
 		watcherflowlog.Setup,
+		webapplicationfirewallpolicy.Setup,
+		authorizationrulenotificationhubs.Setup,
 		notificationhub.Setup,
+		notificationhubnamespace.Setup,
 		workspaceoperationalinsights.Setup,
 		powerbiembedded.Setup,
 		providerconfig.Setup,

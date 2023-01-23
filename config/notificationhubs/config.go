@@ -25,4 +25,8 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_notification_hub", func(r *config.Resource) {
 		r.Kind = "NotificationHub"
 	})
+
+	p.AddResourceConfigurator("azurerm_notification_hub_namespace", func(r *config.Resource) {
+		r.Kind = "NotificationHubNamespace"
+	})
 }

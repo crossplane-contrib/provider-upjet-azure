@@ -1,0 +1,31 @@
+apiVersion: notificationhubs.azure.upbound.io/v1beta1
+kind: NotificationHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhubnamespace
+  labels:
+    testing.upbound.io/example-name: example
+  name: hubnamesapce
+spec:
+  forProvider:
+    location: West Europe
+    namespaceType: Messaging
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Free
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhubnamespace
+  labels:
+    testing.upbound.io/example-name: example
+  name: notif-example
+spec:
+  forProvider:
+    location: West Europe
+

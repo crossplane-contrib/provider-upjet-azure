@@ -664,8 +664,44 @@ func (l *SubnetServiceEndpointStoragePolicyList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this TrafficManagerProfileList.
+func (l *TrafficManagerProfileList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPNGatewayConnectionList.
+func (l *VPNGatewayConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPNGatewayList.
+func (l *VPNGatewayList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VPNServerConfigurationList.
 func (l *VPNServerConfigurationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this VPNSiteList.
+func (l *VPNSiteList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -738,6 +774,15 @@ func (l *WatcherFlowLogList) GetItems() []resource.Managed {
 
 // GetItems of this WatcherList.
 func (l *WatcherList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WebApplicationFirewallPolicyList.
+func (l *WebApplicationFirewallPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

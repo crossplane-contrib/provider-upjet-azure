@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: notificationhubs.notificationhubs.azure.upbound.io
+  name: vpngateways.network.azure.upbound.io
 spec:
-  group: notificationhubs.azure.upbound.io
+  group: network.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: NotificationHub
-    listKind: NotificationHubList
-    plural: notificationhubs
-    singular: notificationhub
+    kind: VPNGateway
+    listKind: VPNGatewayList
+    plural: vpngateways
+    singular: vpngateway
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: NotificationHub is the Schema for the NotificationHubs API. Manages
-          a Notification Hub within a Notification Hub Namespace.
+        description: VPNGateway is the Schema for the VPNGateways API. Manages a VPN
+          Gateway within a Virtual Hub.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: NotificationHubSpec defines the desired state of NotificationHub
+            description: VPNGatewaySpec defines the desired state of VPNGateway
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,168 +64,66 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  apnsCredential:
-                    description: A apns_credential block as defined below.
+                  bgpRouteTranslationForNatEnabled:
+                    description: Is BGP route translation for NAT on this VPN Gateway
+                      enabled? Defaults to false.
+                    type: boolean
+                  bgpSettings:
+                    description: A bgp_settings block as defined below.
                     items:
                       properties:
-                        applicationMode:
-                          description: The Application Mode which defines which server
-                            the APNS Messages should be sent to. Possible values are
-                            Production and Sandbox.
-                          type: string
-                        bundleId:
-                          description: The Bundle ID of the iOS/macOS application
-                            to send push notifications for, such as com.hashicorp.example.
-                          type: string
-                        keyId:
-                          description: The Apple Push Notifications Service (APNS)
-                            Key.
-                          type: string
-                        teamId:
-                          description: The ID of the team the Token.
-                          type: string
-                        tokenSecretRef:
-                          description: The Push Token associated with the Apple Developer
-                            Account. This is the contents of the key downloaded from
-                            the Apple Developer Portal between the -----BEGIN PRIVATE
-                            KEY----- and -----END PRIVATE KEY----- blocks.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
+                        asn:
+                          description: The ASN of the BGP Speaker. Changing this forces
+                            a new resource to be created.
+                          type: number
+                        instance0BgpPeeringAddress:
+                          description: An instance_bgp_peering_address block as defined
+                            below.
+                          items:
+                            properties:
+                              customIps:
+                                description: A list of custom BGP peering addresses
+                                  to assign to this instance.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - customIps
+                            type: object
+                          type: array
+                        instance1BgpPeeringAddress:
+                          description: An instance_bgp_peering_address block as defined
+                            below.
+                          items:
+                            properties:
+                              customIps:
+                                description: A list of custom BGP peering addresses
+                                  to assign to this instance.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - customIps
+                            type: object
+                          type: array
+                        peerWeight:
+                          description: The weight added to Routes learned from this
+                            BGP Speaker. Changing this forces a new resource to be
+                            created.
+                          type: number
                       required:
-                      - applicationMode
-                      - bundleId
-                      - keyId
-                      - teamId
-                      - tokenSecretRef
-                      type: object
-                    type: array
-                  gcmCredential:
-                    description: A gcm_credential block as defined below.
-                    items:
-                      properties:
-                        apiKeySecretRef:
-                          description: The API Key associated with the Google Cloud
-                            Messaging service.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
-                      required:
-                      - apiKeySecretRef
+                      - asn
+                      - peerWeight
                       type: object
                     type: array
                   location:
-                    description: The Azure Region in which this Notification Hub Namespace
-                      exists. Changing this forces a new resource to be created.
+                    description: The Azure location where this VPN Gateway should
+                      be created. Changing this forces a new resource to be created.
                     type: string
-                  namespaceName:
-                    description: The name of the Notification Hub Namespace in which
-                      to create this Notification Hub. Changing this forces a new
-                      resource to be created.
-                    type: string
-                  namespaceNameRef:
-                    description: Reference to a NotificationHubNamespace in notificationhubs
-                      to populate namespaceName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  namespaceNameSelector:
-                    description: Selector for a NotificationHubNamespace in notificationhubs
-                      to populate namespaceName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   resourceGroupName:
-                    description: The name of the Resource Group in which the Notification
-                      Hub Namespace exists. Changing this forces a new resource to
-                      be created.
+                    description: The Name of the Resource Group in which this VPN
+                      Gateway should be created. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -302,10 +200,103 @@ spec:
                             type: string
                         type: object
                     type: object
+                  routingPreference:
+                    description: Azure routing preference lets you to choose how your
+                      traffic routes between Azure and the internet. You can choose
+                      to route traffic either via the Microsoft network (default value,
+                      Microsoft Network), or via the ISP network (public internet,
+                      set to Internet). More context of the configuration can be found
+                      in the Microsoft Docs to create a VPN Gateway. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  scaleUnit:
+                    description: The Scale Unit for this VPN Gateway. Defaults to
+                      1.
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags to assign to the resource.
+                    description: A mapping of tags to assign to the VPN Gateway.
+                    type: object
+                  virtualHubId:
+                    description: The ID of the Virtual Hub within which this VPN Gateway
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  virtualHubIdRef:
+                    description: Reference to a VirtualHub in network to populate
+                      virtualHubId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  virtualHubIdSelector:
+                    description: Selector for a VirtualHub in network to populate
+                      virtualHubId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
                     type: object
                 required:
                 - location
@@ -482,12 +473,68 @@ spec:
             - forProvider
             type: object
           status:
-            description: NotificationHubStatus defines the observed state of NotificationHub.
+            description: VPNGatewayStatus defines the observed state of VPNGateway.
             properties:
               atProvider:
                 properties:
+                  bgpSettings:
+                    description: A bgp_settings block as defined below.
+                    items:
+                      properties:
+                        bgpPeeringAddress:
+                          description: The Address which should be used for the BGP
+                            Peering.
+                          type: string
+                        instance0BgpPeeringAddress:
+                          description: An instance_bgp_peering_address block as defined
+                            below.
+                          items:
+                            properties:
+                              defaultIps:
+                                description: The list of default BGP peering addresses
+                                  which belong to the pre-defined VPN Gateway IP configuration.
+                                items:
+                                  type: string
+                                type: array
+                              ipConfigurationId:
+                                description: The pre-defined id of VPN Gateway IP
+                                  Configuration.
+                                type: string
+                              tunnelIps:
+                                description: The list of tunnel public IP addresses
+                                  which belong to the pre-defined VPN Gateway IP configuration.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        instance1BgpPeeringAddress:
+                          description: An instance_bgp_peering_address block as defined
+                            below.
+                          items:
+                            properties:
+                              defaultIps:
+                                description: The list of default BGP peering addresses
+                                  which belong to the pre-defined VPN Gateway IP configuration.
+                                items:
+                                  type: string
+                                type: array
+                              ipConfigurationId:
+                                description: The pre-defined id of VPN Gateway IP
+                                  Configuration.
+                                type: string
+                              tunnelIps:
+                                description: The list of tunnel public IP addresses
+                                  which belong to the pre-defined VPN Gateway IP configuration.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
-                    description: The ID of the Notification Hub.
+                    description: The ID of the VPN Gateway.
                     type: string
                 type: object
               conditions:
