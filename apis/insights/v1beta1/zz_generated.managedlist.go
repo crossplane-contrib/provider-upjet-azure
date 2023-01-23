@@ -34,6 +34,24 @@ func (l *MonitorActionGroupList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this MonitorActivityLogAlertList.
+func (l *MonitorActivityLogAlertList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MonitorAutoscaleSettingList.
+func (l *MonitorAutoscaleSettingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this MonitorMetricAlertList.
 func (l *MonitorMetricAlertList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -54,6 +72,24 @@ func (l *MonitorPrivateLinkScopeList) GetItems() []resource.Managed {
 
 // GetItems of this MonitorPrivateLinkScopedServiceList.
 func (l *MonitorPrivateLinkScopedServiceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MonitorScheduledQueryRulesAlertList.
+func (l *MonitorScheduledQueryRulesAlertList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MonitorScheduledQueryRulesLogList.
+func (l *MonitorScheduledQueryRulesLogList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

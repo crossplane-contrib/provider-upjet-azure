@@ -81,4 +81,15 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_monitor_diagnostic_setting", func(r *config.Resource) {
+		r.References["target_resource_id"] = config.Reference{
+			Type:      "Vault",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["storage_account_id"] = config.Reference{
+			Type:      rconfig.StorageAccountReferencePath,
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

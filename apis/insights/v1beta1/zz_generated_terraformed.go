@@ -235,6 +235,154 @@ func (tr *MonitorActionGroup) GetTerraformSchemaVersion() int {
 	return 1
 }
 
+// GetTerraformResourceType returns Terraform resource type for this MonitorActivityLogAlert
+func (mg *MonitorActivityLogAlert) GetTerraformResourceType() string {
+	return "azurerm_monitor_activity_log_alert"
+}
+
+// GetConnectionDetailsMapping for this MonitorActivityLogAlert
+func (tr *MonitorActivityLogAlert) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this MonitorActivityLogAlert
+func (tr *MonitorActivityLogAlert) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MonitorActivityLogAlert
+func (tr *MonitorActivityLogAlert) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MonitorActivityLogAlert
+func (tr *MonitorActivityLogAlert) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MonitorActivityLogAlert
+func (tr *MonitorActivityLogAlert) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MonitorActivityLogAlert
+func (tr *MonitorActivityLogAlert) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MonitorActivityLogAlert using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MonitorActivityLogAlert) LateInitialize(attrs []byte) (bool, error) {
+	params := &MonitorActivityLogAlertParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MonitorActivityLogAlert) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this MonitorAutoscaleSetting
+func (mg *MonitorAutoscaleSetting) GetTerraformResourceType() string {
+	return "azurerm_monitor_autoscale_setting"
+}
+
+// GetConnectionDetailsMapping for this MonitorAutoscaleSetting
+func (tr *MonitorAutoscaleSetting) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this MonitorAutoscaleSetting
+func (tr *MonitorAutoscaleSetting) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MonitorAutoscaleSetting
+func (tr *MonitorAutoscaleSetting) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MonitorAutoscaleSetting
+func (tr *MonitorAutoscaleSetting) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MonitorAutoscaleSetting
+func (tr *MonitorAutoscaleSetting) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MonitorAutoscaleSetting
+func (tr *MonitorAutoscaleSetting) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MonitorAutoscaleSetting using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MonitorAutoscaleSetting) LateInitialize(attrs []byte) (bool, error) {
+	params := &MonitorAutoscaleSettingParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MonitorAutoscaleSetting) GetTerraformSchemaVersion() int {
+	return 2
+}
+
 // GetTerraformResourceType returns Terraform resource type for this MonitorMetricAlert
 func (mg *MonitorMetricAlert) GetTerraformResourceType() string {
 	return "azurerm_monitor_metric_alert"
@@ -455,4 +603,152 @@ func (tr *MonitorPrivateLinkScopedService) LateInitialize(attrs []byte) (bool, e
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *MonitorPrivateLinkScopedService) GetTerraformSchemaVersion() int {
 	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this MonitorScheduledQueryRulesAlert
+func (mg *MonitorScheduledQueryRulesAlert) GetTerraformResourceType() string {
+	return "azurerm_monitor_scheduled_query_rules_alert"
+}
+
+// GetConnectionDetailsMapping for this MonitorScheduledQueryRulesAlert
+func (tr *MonitorScheduledQueryRulesAlert) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this MonitorScheduledQueryRulesAlert
+func (tr *MonitorScheduledQueryRulesAlert) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MonitorScheduledQueryRulesAlert
+func (tr *MonitorScheduledQueryRulesAlert) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MonitorScheduledQueryRulesAlert
+func (tr *MonitorScheduledQueryRulesAlert) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MonitorScheduledQueryRulesAlert
+func (tr *MonitorScheduledQueryRulesAlert) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MonitorScheduledQueryRulesAlert
+func (tr *MonitorScheduledQueryRulesAlert) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MonitorScheduledQueryRulesAlert using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MonitorScheduledQueryRulesAlert) LateInitialize(attrs []byte) (bool, error) {
+	params := &MonitorScheduledQueryRulesAlertParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MonitorScheduledQueryRulesAlert) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this MonitorScheduledQueryRulesLog
+func (mg *MonitorScheduledQueryRulesLog) GetTerraformResourceType() string {
+	return "azurerm_monitor_scheduled_query_rules_log"
+}
+
+// GetConnectionDetailsMapping for this MonitorScheduledQueryRulesLog
+func (tr *MonitorScheduledQueryRulesLog) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this MonitorScheduledQueryRulesLog
+func (tr *MonitorScheduledQueryRulesLog) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MonitorScheduledQueryRulesLog
+func (tr *MonitorScheduledQueryRulesLog) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MonitorScheduledQueryRulesLog
+func (tr *MonitorScheduledQueryRulesLog) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MonitorScheduledQueryRulesLog
+func (tr *MonitorScheduledQueryRulesLog) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MonitorScheduledQueryRulesLog
+func (tr *MonitorScheduledQueryRulesLog) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MonitorScheduledQueryRulesLog using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MonitorScheduledQueryRulesLog) LateInitialize(attrs []byte) (bool, error) {
+	params := &MonitorScheduledQueryRulesLogParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MonitorScheduledQueryRulesLog) GetTerraformSchemaVersion() int {
+	return 1
 }

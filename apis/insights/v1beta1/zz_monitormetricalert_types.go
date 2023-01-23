@@ -13,30 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ActionObservation struct {
-}
-
-type ActionParameters struct {
-
-	// The ID of the Action Group can be sourced from the
-	// +crossplane:generate:reference:type=MonitorActionGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
-
-	// Reference to a MonitorActionGroup to populate actionGroupId.
-	// +kubebuilder:validation:Optional
-	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
-
-	// Selector for a MonitorActionGroup to populate actionGroupId.
-	// +kubebuilder:validation:Optional
-	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
-
-	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
-	// +kubebuilder:validation:Optional
-	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
-}
-
 type ApplicationInsightsWebTestLocationAvailabilityCriteriaObservation struct {
 }
 
@@ -53,40 +29,6 @@ type ApplicationInsightsWebTestLocationAvailabilityCriteriaParameters struct {
 	// The ID of the Application Insights Web Test.
 	// +kubebuilder:validation:Required
 	WebTestID *string `json:"webTestId" tf:"web_test_id,omitempty"`
-}
-
-type CriteriaObservation struct {
-}
-
-type CriteriaParameters struct {
-
-	// The statistic that runs over the metric values. Possible values are Average, Count, Minimum, Maximum and Total.
-	// +kubebuilder:validation:Required
-	Aggregation *string `json:"aggregation" tf:"aggregation,omitempty"`
-
-	// One or more dimension blocks as defined below.
-	// +kubebuilder:validation:Optional
-	Dimension []DimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
-
-	// One of the metric names to be monitored.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
-
-	// One of the metric namespaces to be monitored.
-	// +kubebuilder:validation:Required
-	MetricNamespace *string `json:"metricNamespace" tf:"metric_namespace,omitempty"`
-
-	// The criteria operator. Possible values are Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan and LessThanOrEqual.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
-
-	// Skip the metric validation to allow creating an alert rule on a custom metric that isn't yet emitted? Defaults to false.
-	// +kubebuilder:validation:Optional
-	SkipMetricValidation *bool `json:"skipMetricValidation,omitempty" tf:"skip_metric_validation,omitempty"`
-
-	// The criteria threshold value that activates the alert.
-	// +kubebuilder:validation:Required
-	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 }
 
 type DimensionObservation struct {
@@ -171,6 +113,64 @@ type DynamicCriteriaParameters struct {
 	SkipMetricValidation *bool `json:"skipMetricValidation,omitempty" tf:"skip_metric_validation,omitempty"`
 }
 
+type MonitorMetricAlertActionObservation struct {
+}
+
+type MonitorMetricAlertActionParameters struct {
+
+	// The ID of the Action Group can be sourced from the
+	// +crossplane:generate:reference:type=MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
+
+	// Reference to a MonitorActionGroup to populate actionGroupId.
+	// +kubebuilder:validation:Optional
+	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a MonitorActionGroup to populate actionGroupId.
+	// +kubebuilder:validation:Optional
+	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
+
+	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
+	// +kubebuilder:validation:Optional
+	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
+}
+
+type MonitorMetricAlertCriteriaObservation struct {
+}
+
+type MonitorMetricAlertCriteriaParameters struct {
+
+	// The statistic that runs over the metric values. Possible values are Average, Count, Minimum, Maximum and Total.
+	// +kubebuilder:validation:Required
+	Aggregation *string `json:"aggregation" tf:"aggregation,omitempty"`
+
+	// One or more dimension blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Dimension []DimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
+
+	// One of the metric names to be monitored.
+	// +kubebuilder:validation:Required
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+
+	// One of the metric namespaces to be monitored.
+	// +kubebuilder:validation:Required
+	MetricNamespace *string `json:"metricNamespace" tf:"metric_namespace,omitempty"`
+
+	// The criteria operator. Possible values are Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan and LessThanOrEqual.
+	// +kubebuilder:validation:Required
+	Operator *string `json:"operator" tf:"operator,omitempty"`
+
+	// Skip the metric validation to allow creating an alert rule on a custom metric that isn't yet emitted? Defaults to false.
+	// +kubebuilder:validation:Optional
+	SkipMetricValidation *bool `json:"skipMetricValidation,omitempty" tf:"skip_metric_validation,omitempty"`
+
+	// The criteria threshold value that activates the alert.
+	// +kubebuilder:validation:Required
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
+}
+
 type MonitorMetricAlertObservation struct {
 
 	// The ID of the metric alert.
@@ -181,7 +181,7 @@ type MonitorMetricAlertParameters struct {
 
 	// One or more action blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
+	Action []MonitorMetricAlertActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A application_insights_web_test_location_availability_criteria block as defined below.
 	// +kubebuilder:validation:Optional
@@ -193,7 +193,7 @@ type MonitorMetricAlertParameters struct {
 
 	// One or more (static) criteria blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Criteria []CriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+	Criteria []MonitorMetricAlertCriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// The description of this Metric Alert.
 	// +kubebuilder:validation:Optional
