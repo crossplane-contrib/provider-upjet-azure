@@ -2,7 +2,6 @@ apiVersion: notificationhubs.azure.upbound.io/v1beta1
 kind: NotificationHub
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource needs a active NotificationHub Namespace."
     meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhub
   labels:
     testing.upbound.io/example-name: example
@@ -10,10 +9,31 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-    namespaceName: upbound
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: notificationhubs.azure.upbound.io/v1beta1
+kind: NotificationHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: hubnamesapce
+spec:
+  forProvider:
+    location: West Europe
+    namespaceType: Messaging
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Free
 
 ---
 
@@ -21,7 +41,6 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource is dependency of NotificationHub."
     meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhub
   labels:
     testing.upbound.io/example-name: example
