@@ -362,6 +362,8 @@ import (
 	siterecoveryfabric "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryfabric"
 	vaultrecoveryservices "github.com/upbound/provider-azure/internal/controller/recoveryservices/vault"
 	resourcegrouptemplatedeployment "github.com/upbound/provider-azure/internal/controller/resources/resourcegrouptemplatedeployment"
+	subscriptiontemplatedeployment "github.com/upbound/provider-azure/internal/controller/resources/subscriptiontemplatedeployment"
+	servicesearch "github.com/upbound/provider-azure/internal/controller/search/service"
 	advancedthreatprotection "github.com/upbound/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/provider-azure/internal/controller/security/iotsecuritydevicegroup"
 	iotsecuritysolution "github.com/upbound/provider-azure/internal/controller/security/iotsecuritysolution"
@@ -788,6 +790,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		siterecoveryfabric.Setup,
 		vaultrecoveryservices.Setup,
 		resourcegrouptemplatedeployment.Setup,
+		subscriptiontemplatedeployment.Setup,
+		servicesearch.Setup,
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,
 		iotsecuritysolution.Setup,

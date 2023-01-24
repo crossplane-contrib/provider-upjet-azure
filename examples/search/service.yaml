@@ -1,0 +1,29 @@
+apiVersion: search.azure.upbound.io/v1beta1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: search/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: search-example
+  name: search-example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: search-rg
+    sku: standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: search/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: search-rg
+  name: search-rg
+spec:
+  forProvider:
+    location: West Europe
