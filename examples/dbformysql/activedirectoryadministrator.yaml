@@ -1,0 +1,72 @@
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: ActiveDirectoryAdministrator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/activedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    login: sqladmin
+    objectId: d949679c-f7ed-4e18-a8ac-0f5560ed3fdc
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tenantId: b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
+
+---
+
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/activedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: adexample
+spec:
+  forProvider:
+    administratorLogin: mysqladminun
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: B_Gen5_2
+    sslEnforcementEnabled: true
+    storageMb: 5120
+    version: "5.7"
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: dGVzdFBhc3N3b3JkITEyMw==
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/activedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: adexample
+spec:
+  forProvider:
+    location: West Europe
+
+

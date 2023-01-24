@@ -39,6 +39,7 @@ import (
 	v1beta1dbformysql "github.com/upbound/provider-azure/apis/dbformysql/v1beta1"
 	v1beta1dbforpostgresql "github.com/upbound/provider-azure/apis/dbforpostgresql/v1beta1"
 	v1beta1devices "github.com/upbound/provider-azure/apis/devices/v1beta1"
+	v1beta1digitaltwins "github.com/upbound/provider-azure/apis/digitaltwins/v1beta1"
 	v1beta1eventhub "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
 	v1beta1insights "github.com/upbound/provider-azure/apis/insights/v1beta1"
 	v1beta1iotcentral "github.com/upbound/provider-azure/apis/iotcentral/v1beta1"
@@ -62,6 +63,7 @@ import (
 	v1beta1sql "github.com/upbound/provider-azure/apis/sql/v1beta1"
 	v1beta1storage "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	v1beta1storagecache "github.com/upbound/provider-azure/apis/storagecache/v1beta1"
+	v1beta1storagepool "github.com/upbound/provider-azure/apis/storagepool/v1beta1"
 	v1beta1storagesync "github.com/upbound/provider-azure/apis/storagesync/v1beta1"
 	v1beta1streamanalytics "github.com/upbound/provider-azure/apis/streamanalytics/v1beta1"
 	v1alpha1 "github.com/upbound/provider-azure/apis/v1alpha1"
@@ -101,6 +103,7 @@ func init() {
 		v1beta1dbformysql.SchemeBuilder.AddToScheme,
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
+		v1beta1digitaltwins.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
 		v1beta1insights.SchemeBuilder.AddToScheme,
 		v1beta1iotcentral.SchemeBuilder.AddToScheme,
@@ -124,6 +127,7 @@ func init() {
 		v1beta1sql.SchemeBuilder.AddToScheme,
 		v1beta1storage.SchemeBuilder.AddToScheme,
 		v1beta1storagecache.SchemeBuilder.AddToScheme,
+		v1beta1storagepool.SchemeBuilder.AddToScheme,
 		v1beta1storagesync.SchemeBuilder.AddToScheme,
 		v1beta1streamanalytics.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,

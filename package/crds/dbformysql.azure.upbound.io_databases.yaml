@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: springcloudappmysqlassociations.appplatform.azure.upbound.io
+  name: databases.dbformysql.azure.upbound.io
 spec:
-  group: appplatform.azure.upbound.io
+  group: dbformysql.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: SpringCloudAppMySQLAssociation
-    listKind: SpringCloudAppMySQLAssociationList
-    plural: springcloudappmysqlassociations
-    singular: springcloudappmysqlassociation
+    kind: Database
+    listKind: DatabaseList
+    plural: databases
+    singular: database
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SpringCloudAppMySQLAssociation is the Schema for the SpringCloudAppMySQLAssociations
-          API. Associates a
+        description: Database is the Schema for the Databases API. Manages a MySQL
+          Database within a MySQL Server.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,8 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: SpringCloudAppMySQLAssociationSpec defines the desired state
-              of SpringCloudAppMySQLAssociation
+            description: DatabaseSpec defines the desired state of Database
             properties:
               deletionPolicy:
                 default: Delete
@@ -65,188 +64,23 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  databaseName:
-                    description: Specifies the name of the MySQL Database which the
-                      Spring Cloud App should be associated with.
-                    type: string
-                  databaseNameRef:
-                    description: Reference to a Database in dbformysql to populate
-                      databaseName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  databaseNameSelector:
-                    description: Selector for a Database in dbformysql to populate
-                      databaseName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  mysqlServerId:
-                    description: Specifies the ID of the MySQL Server. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  mysqlServerIdRef:
-                    description: Reference to a Server in dbformysql to populate mysqlServerId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  mysqlServerIdSelector:
-                    description: Selector for a Server in dbformysql to populate mysqlServerId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  passwordSecretRef:
-                    description: Specifies the password which should be used when
-                      connecting to the MySQL Database from the Spring Cloud App.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  springCloudAppId:
-                    description: Specifies the ID of the Spring Cloud Application
-                      where this Association is created. Changing this forces a new
+                  charset:
+                    description: Specifies the Charset for the MySQL Database, which
+                      needs to be a valid MySQL Charset. Changing this forces a new
                       resource to be created.
                     type: string
-                  springCloudAppIdRef:
-                    description: Reference to a SpringCloudApp in appplatform to populate
-                      springCloudAppId.
+                  collation:
+                    description: Specifies the Collation for the MySQL Database, which
+                      needs to be a valid MySQL Collation. Changing this forces a
+                      new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which the MySQL
+                      Server exists. Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -279,9 +113,9 @@ spec:
                     required:
                     - name
                     type: object
-                  springCloudAppIdSelector:
-                    description: Selector for a SpringCloudApp in appplatform to populate
-                      springCloudAppId.
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -319,12 +153,12 @@ spec:
                             type: string
                         type: object
                     type: object
-                  username:
-                    description: Specifies the username which should be used when
-                      connecting to the MySQL Database from the Spring Cloud App.
+                  serverName:
+                    description: Specifies the name of the MySQL Server. Changing
+                      this forces a new resource to be created.
                     type: string
-                  usernameRef:
-                    description: Reference to a Server in dbformysql to populate username.
+                  serverNameRef:
+                    description: Reference to a Server in dbformysql to populate serverName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -357,8 +191,8 @@ spec:
                     required:
                     - name
                     type: object
-                  usernameSelector:
-                    description: Selector for a Server in dbformysql to populate username.
+                  serverNameSelector:
+                    description: Selector for a Server in dbformysql to populate serverName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -397,7 +231,8 @@ spec:
                         type: object
                     type: object
                 required:
-                - passwordSecretRef
+                - charset
+                - collation
                 type: object
               providerConfigRef:
                 default:
@@ -571,13 +406,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: SpringCloudAppMySQLAssociationStatus defines the observed
-              state of SpringCloudAppMySQLAssociation.
+            description: DatabaseStatus defines the observed state of Database.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Spring Cloud Application MySQL Association.
+                    description: The ID of the MySQL Database.
                     type: string
                 type: object
               conditions:
