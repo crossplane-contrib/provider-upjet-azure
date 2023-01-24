@@ -1,0 +1,11 @@
+apiVersion: security.azure.upbound.io/v1beta1
+kind: SecurityCenterAutoProvisioning
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterautoprovisioning
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    autoProvision: "On"

@@ -1,0 +1,141 @@
+apiVersion: security.azure.upbound.io/v1beta1
+kind: SecurityCenterAssessment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterassessment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assessmentPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-security-policy
+    status:
+    - code: Healthy
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: securitycenterassessment-vm
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: LinuxVirtualMachineScaleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterassessment
+  labels:
+    testing.upbound.io/example-name: securitycenterassessment-vm
+  name: securitycenterassessment-vm
+spec:
+  forProvider:
+    disablePasswordAuthentication: false
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    adminUsername: testadmin
+    instances: 1
+    location: West Europe
+    networkInterface:
+    - ipConfiguration:
+      - name: internal
+        primary: true
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: securitycenterassessment-sn
+      name: example
+      primary: true
+    osDisk:
+    - caching: ReadWrite
+      storageAccountType: Standard_LRS
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: securitycenterassessment-rg
+    sku: Standard_F2
+    sourceImageReference:
+    - offer: UbuntuServer
+      publisher: Canonical
+      sku: 16.04-LTS
+      version: latest
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterassessment
+  labels:
+    testing.upbound.io/example-name: securitycenterassessment-rg
+  name: securitycenterassessment-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: security.azure.upbound.io/v1beta1
+kind: SecurityCenterAssessmentPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterassessment
+  labels:
+    testing.upbound.io/example-name: example-security-policy
+  name: example-security-policy
+spec:
+  forProvider:
+    description: Test Description
+    displayName: Test Display Name
+    severity: Medium
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterassessment
+  labels:
+    testing.upbound.io/example-name: securitycenterassessment-sn
+  name: securitycenterassessment-sn
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: securitycenterassessment-rg
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: securitycenterassessment-vn
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/securitycenterassessment
+  labels:
+    testing.upbound.io/example-name: securitycenterassessment-vn
+  name: securitycenterassessment-vn
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: securitycenterassessment-rg
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: dGVzdFBhc3N3b3JkITEyMw==

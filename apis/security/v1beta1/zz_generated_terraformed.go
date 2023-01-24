@@ -234,3 +234,669 @@ func (tr *IOTSecuritySolution) LateInitialize(attrs []byte) (bool, error) {
 func (tr *IOTSecuritySolution) GetTerraformSchemaVersion() int {
 	return 1
 }
+
+// GetTerraformResourceType returns Terraform resource type for this SecurityCenterAssessment
+func (mg *SecurityCenterAssessment) GetTerraformResourceType() string {
+	return "azurerm_security_center_assessment"
+}
+
+// GetConnectionDetailsMapping for this SecurityCenterAssessment
+func (tr *SecurityCenterAssessment) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SecurityCenterAssessment
+func (tr *SecurityCenterAssessment) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SecurityCenterAssessment
+func (tr *SecurityCenterAssessment) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SecurityCenterAssessment
+func (tr *SecurityCenterAssessment) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SecurityCenterAssessment
+func (tr *SecurityCenterAssessment) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SecurityCenterAssessment
+func (tr *SecurityCenterAssessment) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SecurityCenterAssessment using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SecurityCenterAssessment) LateInitialize(attrs []byte) (bool, error) {
+	params := &SecurityCenterAssessmentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SecurityCenterAssessment) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SecurityCenterAssessmentPolicy
+func (mg *SecurityCenterAssessmentPolicy) GetTerraformResourceType() string {
+	return "azurerm_security_center_assessment_policy"
+}
+
+// GetConnectionDetailsMapping for this SecurityCenterAssessmentPolicy
+func (tr *SecurityCenterAssessmentPolicy) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SecurityCenterAssessmentPolicy
+func (tr *SecurityCenterAssessmentPolicy) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SecurityCenterAssessmentPolicy
+func (tr *SecurityCenterAssessmentPolicy) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SecurityCenterAssessmentPolicy
+func (tr *SecurityCenterAssessmentPolicy) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SecurityCenterAssessmentPolicy
+func (tr *SecurityCenterAssessmentPolicy) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SecurityCenterAssessmentPolicy
+func (tr *SecurityCenterAssessmentPolicy) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SecurityCenterAssessmentPolicy using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SecurityCenterAssessmentPolicy) LateInitialize(attrs []byte) (bool, error) {
+	params := &SecurityCenterAssessmentPolicyParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SecurityCenterAssessmentPolicy) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SecurityCenterAutoProvisioning
+func (mg *SecurityCenterAutoProvisioning) GetTerraformResourceType() string {
+	return "azurerm_security_center_auto_provisioning"
+}
+
+// GetConnectionDetailsMapping for this SecurityCenterAutoProvisioning
+func (tr *SecurityCenterAutoProvisioning) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SecurityCenterAutoProvisioning
+func (tr *SecurityCenterAutoProvisioning) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SecurityCenterAutoProvisioning
+func (tr *SecurityCenterAutoProvisioning) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SecurityCenterAutoProvisioning
+func (tr *SecurityCenterAutoProvisioning) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SecurityCenterAutoProvisioning
+func (tr *SecurityCenterAutoProvisioning) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SecurityCenterAutoProvisioning
+func (tr *SecurityCenterAutoProvisioning) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SecurityCenterAutoProvisioning using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SecurityCenterAutoProvisioning) LateInitialize(attrs []byte) (bool, error) {
+	params := &SecurityCenterAutoProvisioningParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SecurityCenterAutoProvisioning) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SecurityCenterContact
+func (mg *SecurityCenterContact) GetTerraformResourceType() string {
+	return "azurerm_security_center_contact"
+}
+
+// GetConnectionDetailsMapping for this SecurityCenterContact
+func (tr *SecurityCenterContact) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SecurityCenterContact
+func (tr *SecurityCenterContact) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SecurityCenterContact
+func (tr *SecurityCenterContact) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SecurityCenterContact
+func (tr *SecurityCenterContact) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SecurityCenterContact
+func (tr *SecurityCenterContact) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SecurityCenterContact
+func (tr *SecurityCenterContact) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SecurityCenterContact using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SecurityCenterContact) LateInitialize(attrs []byte) (bool, error) {
+	params := &SecurityCenterContactParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SecurityCenterContact) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SecurityCenterServerVulnerabilityAssessment
+func (mg *SecurityCenterServerVulnerabilityAssessment) GetTerraformResourceType() string {
+	return "azurerm_security_center_server_vulnerability_assessment"
+}
+
+// GetConnectionDetailsMapping for this SecurityCenterServerVulnerabilityAssessment
+func (tr *SecurityCenterServerVulnerabilityAssessment) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SecurityCenterServerVulnerabilityAssessment
+func (tr *SecurityCenterServerVulnerabilityAssessment) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SecurityCenterServerVulnerabilityAssessment
+func (tr *SecurityCenterServerVulnerabilityAssessment) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SecurityCenterServerVulnerabilityAssessment
+func (tr *SecurityCenterServerVulnerabilityAssessment) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SecurityCenterServerVulnerabilityAssessment
+func (tr *SecurityCenterServerVulnerabilityAssessment) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SecurityCenterServerVulnerabilityAssessment
+func (tr *SecurityCenterServerVulnerabilityAssessment) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SecurityCenterServerVulnerabilityAssessment using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SecurityCenterServerVulnerabilityAssessment) LateInitialize(attrs []byte) (bool, error) {
+	params := &SecurityCenterServerVulnerabilityAssessmentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SecurityCenterServerVulnerabilityAssessment) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SecurityCenterServerVulnerabilityAssessmentVirtualMachine
+func (mg *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetTerraformResourceType() string {
+	return "azurerm_security_center_server_vulnerability_assessment_virtual_machine"
+}
+
+// GetConnectionDetailsMapping for this SecurityCenterServerVulnerabilityAssessmentVirtualMachine
+func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine
+func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SecurityCenterServerVulnerabilityAssessmentVirtualMachine
+func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine
+func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SecurityCenterServerVulnerabilityAssessmentVirtualMachine
+func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SecurityCenterServerVulnerabilityAssessmentVirtualMachine
+func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SecurityCenterServerVulnerabilityAssessmentVirtualMachine using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) LateInitialize(attrs []byte) (bool, error) {
+	params := &SecurityCenterServerVulnerabilityAssessmentVirtualMachineParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SecurityCenterSetting
+func (mg *SecurityCenterSetting) GetTerraformResourceType() string {
+	return "azurerm_security_center_setting"
+}
+
+// GetConnectionDetailsMapping for this SecurityCenterSetting
+func (tr *SecurityCenterSetting) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SecurityCenterSetting
+func (tr *SecurityCenterSetting) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SecurityCenterSetting
+func (tr *SecurityCenterSetting) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SecurityCenterSetting
+func (tr *SecurityCenterSetting) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SecurityCenterSetting
+func (tr *SecurityCenterSetting) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SecurityCenterSetting
+func (tr *SecurityCenterSetting) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SecurityCenterSetting using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SecurityCenterSetting) LateInitialize(attrs []byte) (bool, error) {
+	params := &SecurityCenterSettingParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SecurityCenterSetting) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SecurityCenterSubscriptionPricing
+func (mg *SecurityCenterSubscriptionPricing) GetTerraformResourceType() string {
+	return "azurerm_security_center_subscription_pricing"
+}
+
+// GetConnectionDetailsMapping for this SecurityCenterSubscriptionPricing
+func (tr *SecurityCenterSubscriptionPricing) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SecurityCenterSubscriptionPricing
+func (tr *SecurityCenterSubscriptionPricing) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SecurityCenterSubscriptionPricing
+func (tr *SecurityCenterSubscriptionPricing) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SecurityCenterSubscriptionPricing
+func (tr *SecurityCenterSubscriptionPricing) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SecurityCenterSubscriptionPricing
+func (tr *SecurityCenterSubscriptionPricing) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SecurityCenterSubscriptionPricing
+func (tr *SecurityCenterSubscriptionPricing) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SecurityCenterSubscriptionPricing using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SecurityCenterSubscriptionPricing) LateInitialize(attrs []byte) (bool, error) {
+	params := &SecurityCenterSubscriptionPricingParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SecurityCenterSubscriptionPricing) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SecurityCenterWorkspace
+func (mg *SecurityCenterWorkspace) GetTerraformResourceType() string {
+	return "azurerm_security_center_workspace"
+}
+
+// GetConnectionDetailsMapping for this SecurityCenterWorkspace
+func (tr *SecurityCenterWorkspace) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SecurityCenterWorkspace
+func (tr *SecurityCenterWorkspace) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SecurityCenterWorkspace
+func (tr *SecurityCenterWorkspace) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SecurityCenterWorkspace
+func (tr *SecurityCenterWorkspace) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SecurityCenterWorkspace
+func (tr *SecurityCenterWorkspace) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SecurityCenterWorkspace
+func (tr *SecurityCenterWorkspace) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SecurityCenterWorkspace using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SecurityCenterWorkspace) LateInitialize(attrs []byte) (bool, error) {
+	params := &SecurityCenterWorkspaceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SecurityCenterWorkspace) GetTerraformSchemaVersion() int {
+	return 0
+}
