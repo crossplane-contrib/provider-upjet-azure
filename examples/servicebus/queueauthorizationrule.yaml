@@ -1,0 +1,70 @@
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: QueueAuthorizationRule
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: servicebus/v1beta1/queueauthorizationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    listen: true
+    manage: false
+    queueIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: queueauthorizationrule-queue
+    send: true
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/queueauthorizationrule
+  labels:
+    testing.upbound.io/example-name: queueauthorizationrule-rg
+  name: queueauthorizationrule-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/queueauthorizationrule
+  labels:
+    testing.upbound.io/example-name: queueauthorizationrule-namespace
+  name: queueauthorizationrule-namespace
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: queueauthorizationrule-rg
+    capacity: 1
+    sku: Premium
+    tags:
+      source: test
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: servicebus/v1beta1/queueauthorizationrule
+  labels:
+    testing.upbound.io/example-name: queueauthorizationrule-queue
+  name: queueauthorizationrule-queue
+spec:
+  forProvider:
+    maxMessageSizeInKilobytes: 1024
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: queueauthorizationrule-namespace

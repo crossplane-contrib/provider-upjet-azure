@@ -1,0 +1,93 @@
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: NamespaceDisasterRecoveryConfig
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: examplerecoveryconfig
+  name: examplerecoveryconfig
+spec:
+  forProvider:
+    aliasAuthorizationRuleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: recoveryconfig-rule
+    partnerNamespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary-ns
+    primaryNamespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary-ns
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: recoveryconfigrgroup
+  name: recoveryconfigrgroup
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: primary-ns
+  name: primary-ns
+spec:
+  forProvider:
+    capacity: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: recoveryconfigrgroup
+    sku: Premium
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: secondary-ns
+  name: secondary-ns
+spec:
+  forProvider:
+    capacity: 1
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: recoveryconfigrgroup
+    sku: Premium
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: NamespaceAuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: recoveryconfig-rule
+  name: recoveryconfig-rule
+spec:
+  forProvider:
+    listen: true
+    manage: false
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary-ns
+    send: true
