@@ -173,7 +173,9 @@ import (
 	firewallrule "github.com/upbound/provider-azure/internal/controller/dbformariadb/firewallrule"
 	serverdbformariadb "github.com/upbound/provider-azure/internal/controller/dbformariadb/server"
 	virtualnetworkrule "github.com/upbound/provider-azure/internal/controller/dbformariadb/virtualnetworkrule"
+	activedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/dbformysql/activedirectoryadministrator"
 	configurationdbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/configuration"
+	databasedbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/database"
 	firewallruledbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/firewallrule"
 	flexibledatabase "github.com/upbound/provider-azure/internal/controller/dbformysql/flexibledatabase"
 	flexibleserver "github.com/upbound/provider-azure/internal/controller/dbformysql/flexibleserver"
@@ -181,7 +183,7 @@ import (
 	flexibleserverfirewallrule "github.com/upbound/provider-azure/internal/controller/dbformysql/flexibleserverfirewallrule"
 	serverdbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/server"
 	virtualnetworkruledbformysql "github.com/upbound/provider-azure/internal/controller/dbformysql/virtualnetworkrule"
-	activedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/activedirectoryadministrator"
+	activedirectoryadministratordbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/activedirectoryadministrator"
 	configurationdbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/configuration"
 	databasedbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/database"
 	firewallruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/firewallrule"
@@ -205,6 +207,7 @@ import (
 	iothubfallbackroute "github.com/upbound/provider-azure/internal/controller/devices/iothubfallbackroute"
 	iothubroute "github.com/upbound/provider-azure/internal/controller/devices/iothubroute"
 	iothubsharedaccesspolicy "github.com/upbound/provider-azure/internal/controller/devices/iothubsharedaccesspolicy"
+	instance "github.com/upbound/provider-azure/internal/controller/digitaltwins/instance"
 	authorizationrule "github.com/upbound/provider-azure/internal/controller/eventhub/authorizationrule"
 	consumergroup "github.com/upbound/provider-azure/internal/controller/eventhub/consumergroup"
 	eventhub "github.com/upbound/provider-azure/internal/controller/eventhub/eventhub"
@@ -422,6 +425,7 @@ import (
 	hpccacheblobnfstarget "github.com/upbound/provider-azure/internal/controller/storagecache/hpccacheblobnfstarget"
 	hpccacheblobtarget "github.com/upbound/provider-azure/internal/controller/storagecache/hpccacheblobtarget"
 	hpccachenfstarget "github.com/upbound/provider-azure/internal/controller/storagecache/hpccachenfstarget"
+	diskpool "github.com/upbound/provider-azure/internal/controller/storagepool/diskpool"
 	storagesync "github.com/upbound/provider-azure/internal/controller/storagesync/storagesync"
 	clusterstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/cluster"
 	functionjavascriptuda "github.com/upbound/provider-azure/internal/controller/streamanalytics/functionjavascriptuda"
@@ -601,7 +605,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		firewallrule.Setup,
 		serverdbformariadb.Setup,
 		virtualnetworkrule.Setup,
+		activedirectoryadministrator.Setup,
 		configurationdbformysql.Setup,
+		databasedbformysql.Setup,
 		firewallruledbformysql.Setup,
 		flexibledatabase.Setup,
 		flexibleserver.Setup,
@@ -609,7 +615,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		flexibleserverfirewallrule.Setup,
 		serverdbformysql.Setup,
 		virtualnetworkruledbformysql.Setup,
-		activedirectoryadministrator.Setup,
+		activedirectoryadministratordbforpostgresql.Setup,
 		configurationdbforpostgresql.Setup,
 		databasedbforpostgresql.Setup,
 		firewallruledbforpostgresql.Setup,
@@ -633,6 +639,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iothubfallbackroute.Setup,
 		iothubroute.Setup,
 		iothubsharedaccesspolicy.Setup,
+		instance.Setup,
 		authorizationrule.Setup,
 		consumergroup.Setup,
 		eventhub.Setup,
@@ -850,6 +857,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		hpccacheblobnfstarget.Setup,
 		hpccacheblobtarget.Setup,
 		hpccachenfstarget.Setup,
+		diskpool.Setup,
 		storagesync.Setup,
 		clusterstreamanalytics.Setup,
 		functionjavascriptuda.Setup,

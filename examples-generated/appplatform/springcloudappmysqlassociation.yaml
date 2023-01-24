@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    databaseName: ${azurerm_mysql_database.example.name}
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     mysqlServerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -20,6 +22,27 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     usernameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    charset: utf8
+    collation: utf8_unicode_ci
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 

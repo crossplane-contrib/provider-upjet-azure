@@ -172,6 +172,22 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
+		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
+		To: reference.To{
+			List:    &v1beta12.DatabaseList{},
+			Managed: &v1beta12.Database{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
+	}
+	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MySQLServerID),
 		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.MySQLServerIDRef,
