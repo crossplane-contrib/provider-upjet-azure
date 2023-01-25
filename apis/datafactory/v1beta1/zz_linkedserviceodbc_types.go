@@ -13,10 +13,10 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BasicAuthenticationObservation struct {
+type LinkedServiceOdbcBasicAuthenticationObservation struct {
 }
 
-type BasicAuthenticationParameters struct {
+type LinkedServiceOdbcBasicAuthenticationParameters struct {
 
 	// The password associated with the username, which can be used to authenticate to the ODBC endpoint.
 	// +kubebuilder:validation:Required
@@ -45,7 +45,7 @@ type LinkedServiceOdbcParameters struct {
 
 	// A basic_authentication block as defined below.
 	// +kubebuilder:validation:Optional
-	BasicAuthentication []BasicAuthenticationParameters `json:"basicAuthentication,omitempty" tf:"basic_authentication,omitempty"`
+	BasicAuthentication []LinkedServiceOdbcBasicAuthenticationParameters `json:"basicAuthentication,omitempty" tf:"basic_authentication,omitempty"`
 
 	// The connection string in which to authenticate with ODBC.
 	// +kubebuilder:validation:Required

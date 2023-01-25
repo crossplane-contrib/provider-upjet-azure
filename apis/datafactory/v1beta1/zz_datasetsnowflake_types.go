@@ -52,8 +52,17 @@ type DataSetSnowflakeParameters struct {
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
-	// +kubebuilder:validation:Required
-	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceSnowflake
+	// +kubebuilder:validation:Optional
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Reference to a LinkedServiceSnowflake in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedServiceSnowflake in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Dataset Snowflake.
 	// +kubebuilder:validation:Optional

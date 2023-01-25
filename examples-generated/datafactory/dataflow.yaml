@@ -73,7 +73,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     encoding: UTF-8
-    linkedServiceName: linked_service
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -95,7 +97,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     encoding: UTF-8
-    linkedServiceName: linked_service
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

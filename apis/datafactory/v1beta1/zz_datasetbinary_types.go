@@ -108,8 +108,17 @@ type DataSetBinaryParameters struct {
 	HTTPServerLocation []HTTPServerLocationParameters `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Binary Dataset with.
-	// +kubebuilder:validation:Required
-	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceSFTP
+	// +kubebuilder:validation:Optional
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Reference to a LinkedServiceSFTP in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedServiceSFTP in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies a list of parameters to associate with the Data Factory Binary Dataset.
 	// +kubebuilder:validation:Optional

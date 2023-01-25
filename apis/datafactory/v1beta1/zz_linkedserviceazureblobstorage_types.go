@@ -19,8 +19,17 @@ type KeyVaultSASTokenObservation struct {
 type KeyVaultSASTokenParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +kubebuilder:validation:Required
-	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceKeyVault
+	// +kubebuilder:validation:Optional
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores the SAS token.
 	// +kubebuilder:validation:Required
@@ -116,8 +125,17 @@ type ServicePrincipalLinkedKeyVaultKeyObservation struct {
 type ServicePrincipalLinkedKeyVaultKeyParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +kubebuilder:validation:Required
-	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceKeyVault
+	// +kubebuilder:validation:Optional
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores the Service Principal key.
 	// +kubebuilder:validation:Required

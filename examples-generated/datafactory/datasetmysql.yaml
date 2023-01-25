@@ -11,7 +11,9 @@ spec:
     dataFactoryIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    linkedServiceName: ${azurerm_data_factory_linked_service_mysql.example.name}
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -27,6 +29,23 @@ spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceMySQL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetmysql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connectionString: Server=test;Port=3306;Database=test;User=test;SSLMode=1;UseSystemTrustStore=0;Password=test
+    dataFactoryIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 

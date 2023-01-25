@@ -1,0 +1,66 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceAzureSearch
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuresearch
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azuresrch-factory
+    searchServiceKeySelector:
+      matchLabels:
+        testing.upbound.io/example-name: azuresrch-service
+    url: "https://www.example.com"
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuresearch
+  labels:
+    testing.upbound.io/example-name: azuresrch-factory
+  name: azuresrch-factory
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azuresrch-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuresearch
+  labels:
+    testing.upbound.io/example-name: azuresrch-rg
+  name: azuresrch-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: search.azure.upbound.io/v1beta1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuresearch
+  labels:
+    testing.upbound.io/example-name: azuresrch-service
+  name: azuresrch-service
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azuresrch-rg
+    sku: standard
