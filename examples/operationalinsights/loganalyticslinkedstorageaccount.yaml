@@ -1,0 +1,64 @@
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: LogAnalyticsLinkedStorageAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticslinkedstorageaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataSourceType: CustomLogs
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
+    storageAccountIdsRefs:
+    - name: sampleacc001
+    workspaceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticslinkedstorageaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
+    sku: PerGB2018
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticslinkedstorageaccount
+  labels:
+    testing.upbound.io/example-name: rg-operationalinsights
+  name: rg-operationalinsights
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: operationalinsights/v1beta1/loganalyticslinkedstorageaccount
+  labels:
+    testing.upbound.io/example-name: sampleacc001
+  name: sampleacc001
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-operationalinsights
