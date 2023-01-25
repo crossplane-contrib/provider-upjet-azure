@@ -1243,6 +1243,16 @@ func (in *SpringCloudAppMySQLAssociationParameters) DeepCopyInto(out *SpringClou
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MySQLServerID != nil {
 		in, out := &in.MySQLServerID, &out.MySQLServerID
 		*out = new(string)
