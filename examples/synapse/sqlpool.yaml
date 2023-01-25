@@ -1,0 +1,89 @@
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: SQLPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpool
+  labels:
+    testing.upbound.io/example-name: sqlpool-label
+  name: sqlpool
+spec:
+  forProvider:
+    createMode: Default
+    skuName: DW100c
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sqlkpool-synapse-ws-label
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpool
+  labels:
+    testing.upbound.io/example-name: security-alert-resource-group-label
+  name: security-alert-resource-group-rg
+spec:
+  forProvider:
+    location: South Central US
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpool
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: accountnameabcdef
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: South Central US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: security-alert-resource-group-label
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpool
+  labels:
+    testing.upbound.io/example-name: file-system-label
+  name: file-system
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpool
+  labels:
+    testing.upbound.io/example-name: sqlkpool-synapse-ws-label
+  name: sqlpool-synapse-ws-12345
+spec:
+  forProvider:
+    identity:
+      - type: SystemAssigned
+    location: South Central US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: security-alert-resource-group-label
+    sqlAdministratorLogin: sqladminuser
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: file-system-label

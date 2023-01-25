@@ -64,8 +64,18 @@ type OutputSynapseParameters struct {
 	Table *string `json:"table" tf:"table,omitempty"`
 
 	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	User *string `json:"user" tf:"user,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("sql_administrator_login",false)
+	// +kubebuilder:validation:Optional
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
+
+	// Reference to a Workspace in synapse to populate user.
+	// +kubebuilder:validation:Optional
+	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in synapse to populate user.
+	// +kubebuilder:validation:Optional
+	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 }
 
 // OutputSynapseSpec defines the desired state of OutputSynapse

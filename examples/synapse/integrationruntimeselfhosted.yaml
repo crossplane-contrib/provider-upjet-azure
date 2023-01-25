@@ -1,0 +1,87 @@
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: IntegrationRuntimeSelfHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
+  labels:
+    testing.upbound.io/example-name: example
+  name: integrationruntimeselfhosted
+spec:
+  forProvider:
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: integration-ws-label
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
+  labels:
+    testing.upbound.io/example-name: integration-rg-label
+  name: integration-rg
+spec:
+  forProvider:
+    location: UAE North
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: integruntimeaccountab
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: UAE North
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: integration-rg-label
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
+  labels:
+    testing.upbound.io/example-name: file-system-label
+  name: file-system
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeselfhosted
+  labels:
+    testing.upbound.io/example-name: integration-ws-label
+  name: integration-ws
+spec:
+  forProvider:
+    identity:
+      - type: SystemAssigned
+    location: UAE North
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: integration-rg-label
+    sqlAdministratorLogin: sqladminuser
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: file-system-label
