@@ -1,0 +1,63 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceSFTP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicesftp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authenticationType: Basic
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicesftp-fct
+    host: http://www.example.com
+    passwordSecretRef:
+      key: example-key
+      name: example-name
+      namespace: upbound-system
+    port: 22
+    username: foo
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicesftp
+  labels:
+    testing.upbound.io/example-name: linkedservicesftp-fct
+  name: linkedservicesftp-fct
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicesftp-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicesftp
+  labels:
+    testing.upbound.io/example-name: linkedservicesftp-rg
+  name: linkedservicesftp-rg
+spec:
+  forProvider:
+    location: West Europe
+
+--- 
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkMTIzIQ==

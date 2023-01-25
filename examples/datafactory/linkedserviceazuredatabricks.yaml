@@ -1,0 +1,100 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceAzureDatabricks
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuredatabricks
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adbDomain: https://example.com
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azuredatabricks-factory
+    description: ADB Linked Service via MSI
+    accessTokenSecretRef:
+      key: example-key
+      name: example-name
+      namespace: upbound-system
+    newClusterConfig:
+    - clusterVersion: 5.5.x-gpu-scala2.11
+      customTags:
+        custom_tag1: sct_value_1
+        custom_tag2: sct_value_2
+      driverNodeType: Standard_NC12
+      initScripts:
+      - init.sh
+      - init2.sh
+      logDestination: dbfs:/logs
+      maxNumberOfWorkers: 5
+      minNumberOfWorkers: 1
+      nodeType: Standard_NC12
+      sparkConfig:
+        config1: value1
+        config2: value2
+      sparkEnvironmentVariables:
+        envVar1: value1
+        envVar2: value2
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuredatabricks
+  labels:
+    testing.upbound.io/example-name: azuredatabricks-factory
+  name: azuredatabricks-factory
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azuredatabricks-rg
+
+---
+
+apiVersion: databricks.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuredatabricks
+  labels:
+    testing.upbound.io/example-name: azuredatabricks-ws
+  name: azuredatabricks-ws
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azuredatabricks-rg
+    sku: standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazuredatabricks
+  labels:
+    testing.upbound.io/example-name: azuredatabricks-rg
+  name: azuredatabricks-rg
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: RGVmYXVsdEVuZHBvaW50c1Byb3RvY29sPWh0dHBzO0FjY291bnROYW1lPXN0b3JhZ2U7QWNjb3VudEtleT1rZXk7RW5kcG9pbnRTdWZmaXg9Y29yZS53aW5kb3dzLm5ldA==

@@ -1,0 +1,67 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceKeyVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekeyvault
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekeyvault-df
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lkservicekvltkvlt
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekeyvault
+  labels:
+    testing.upbound.io/example-name: linkedservicekeyvault-df
+  name: linkedservicekeyvault-df
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekeyvault-rg
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekeyvault
+  labels:
+    testing.upbound.io/example-name: lkservicekvltkvlt
+  name: lkservicekvltkvlt
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicekeyvault-rg
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicekeyvault
+  labels:
+    testing.upbound.io/example-name: linkedservicekeyvault-rg
+  name: linkedservicekeyvault-rg
+spec:
+  forProvider:
+    location: West Europe

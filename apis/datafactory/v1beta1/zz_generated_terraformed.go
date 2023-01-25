@@ -1345,6 +1345,894 @@ func (tr *LinkedServiceAzureBlobStorage) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceAzureDatabricks
+func (mg *LinkedServiceAzureDatabricks) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_azure_databricks"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceAzureDatabricks
+func (tr *LinkedServiceAzureDatabricks) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"access_token": "spec.forProvider.accessTokenSecretRef"}
+}
+
+// GetObservation of this LinkedServiceAzureDatabricks
+func (tr *LinkedServiceAzureDatabricks) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceAzureDatabricks
+func (tr *LinkedServiceAzureDatabricks) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceAzureDatabricks
+func (tr *LinkedServiceAzureDatabricks) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceAzureDatabricks
+func (tr *LinkedServiceAzureDatabricks) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceAzureDatabricks
+func (tr *LinkedServiceAzureDatabricks) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceAzureDatabricks using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceAzureDatabricks) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceAzureDatabricksParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceAzureDatabricks) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceAzureFileStorage
+func (mg *LinkedServiceAzureFileStorage) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_azure_file_storage"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceAzureFileStorage
+func (tr *LinkedServiceAzureFileStorage) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef", "password": "spec.forProvider.passwordSecretRef"}
+}
+
+// GetObservation of this LinkedServiceAzureFileStorage
+func (tr *LinkedServiceAzureFileStorage) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceAzureFileStorage
+func (tr *LinkedServiceAzureFileStorage) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceAzureFileStorage
+func (tr *LinkedServiceAzureFileStorage) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceAzureFileStorage
+func (tr *LinkedServiceAzureFileStorage) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceAzureFileStorage
+func (tr *LinkedServiceAzureFileStorage) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceAzureFileStorage using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceAzureFileStorage) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceAzureFileStorageParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceAzureFileStorage) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceAzureFunction
+func (mg *LinkedServiceAzureFunction) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_azure_function"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceAzureFunction
+func (tr *LinkedServiceAzureFunction) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"key": "spec.forProvider.keySecretRef"}
+}
+
+// GetObservation of this LinkedServiceAzureFunction
+func (tr *LinkedServiceAzureFunction) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceAzureFunction
+func (tr *LinkedServiceAzureFunction) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceAzureFunction
+func (tr *LinkedServiceAzureFunction) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceAzureFunction
+func (tr *LinkedServiceAzureFunction) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceAzureFunction
+func (tr *LinkedServiceAzureFunction) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceAzureFunction using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceAzureFunction) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceAzureFunctionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceAzureFunction) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceAzureSearch
+func (mg *LinkedServiceAzureSearch) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_azure_search"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceAzureSearch
+func (tr *LinkedServiceAzureSearch) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedServiceAzureSearch
+func (tr *LinkedServiceAzureSearch) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceAzureSearch
+func (tr *LinkedServiceAzureSearch) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceAzureSearch
+func (tr *LinkedServiceAzureSearch) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceAzureSearch
+func (tr *LinkedServiceAzureSearch) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceAzureSearch
+func (tr *LinkedServiceAzureSearch) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceAzureSearch using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceAzureSearch) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceAzureSearchParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceAzureSearch) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceAzureSQLDatabase
+func (mg *LinkedServiceAzureSQLDatabase) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_azure_sql_database"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceAzureSQLDatabase
+func (tr *LinkedServiceAzureSQLDatabase) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedServiceAzureSQLDatabase
+func (tr *LinkedServiceAzureSQLDatabase) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceAzureSQLDatabase
+func (tr *LinkedServiceAzureSQLDatabase) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceAzureSQLDatabase
+func (tr *LinkedServiceAzureSQLDatabase) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceAzureSQLDatabase
+func (tr *LinkedServiceAzureSQLDatabase) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceAzureSQLDatabase
+func (tr *LinkedServiceAzureSQLDatabase) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceAzureSQLDatabase using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceAzureSQLDatabase) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceAzureSQLDatabaseParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceAzureSQLDatabase) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceAzureTableStorage
+func (mg *LinkedServiceAzureTableStorage) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_azure_table_storage"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceAzureTableStorage
+func (tr *LinkedServiceAzureTableStorage) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef"}
+}
+
+// GetObservation of this LinkedServiceAzureTableStorage
+func (tr *LinkedServiceAzureTableStorage) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceAzureTableStorage
+func (tr *LinkedServiceAzureTableStorage) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceAzureTableStorage
+func (tr *LinkedServiceAzureTableStorage) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceAzureTableStorage
+func (tr *LinkedServiceAzureTableStorage) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceAzureTableStorage
+func (tr *LinkedServiceAzureTableStorage) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceAzureTableStorage using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceAzureTableStorage) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceAzureTableStorageParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceAzureTableStorage) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceCosmosDB
+func (mg *LinkedServiceCosmosDB) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_cosmosdb"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceCosmosDB
+func (tr *LinkedServiceCosmosDB) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"account_key": "spec.forProvider.accountKeySecretRef", "connection_string": "spec.forProvider.connectionStringSecretRef"}
+}
+
+// GetObservation of this LinkedServiceCosmosDB
+func (tr *LinkedServiceCosmosDB) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceCosmosDB
+func (tr *LinkedServiceCosmosDB) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceCosmosDB
+func (tr *LinkedServiceCosmosDB) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceCosmosDB
+func (tr *LinkedServiceCosmosDB) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceCosmosDB
+func (tr *LinkedServiceCosmosDB) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceCosmosDB using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceCosmosDB) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceCosmosDBParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceCosmosDB) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceDataLakeStorageGen2
+func (mg *LinkedServiceDataLakeStorageGen2) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_data_lake_storage_gen2"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceDataLakeStorageGen2
+func (tr *LinkedServiceDataLakeStorageGen2) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedServiceDataLakeStorageGen2
+func (tr *LinkedServiceDataLakeStorageGen2) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceDataLakeStorageGen2
+func (tr *LinkedServiceDataLakeStorageGen2) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceDataLakeStorageGen2
+func (tr *LinkedServiceDataLakeStorageGen2) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceDataLakeStorageGen2
+func (tr *LinkedServiceDataLakeStorageGen2) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceDataLakeStorageGen2
+func (tr *LinkedServiceDataLakeStorageGen2) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceDataLakeStorageGen2 using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceDataLakeStorageGen2) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceDataLakeStorageGen2Parameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceDataLakeStorageGen2) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceKeyVault
+func (mg *LinkedServiceKeyVault) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_key_vault"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceKeyVault
+func (tr *LinkedServiceKeyVault) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedServiceKeyVault
+func (tr *LinkedServiceKeyVault) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceKeyVault
+func (tr *LinkedServiceKeyVault) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceKeyVault
+func (tr *LinkedServiceKeyVault) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceKeyVault
+func (tr *LinkedServiceKeyVault) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceKeyVault
+func (tr *LinkedServiceKeyVault) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceKeyVault using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceKeyVault) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceKeyVaultParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceKeyVault) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceKusto
+func (mg *LinkedServiceKusto) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_kusto"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceKusto
+func (tr *LinkedServiceKusto) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"service_principal_key": "spec.forProvider.servicePrincipalKeySecretRef"}
+}
+
+// GetObservation of this LinkedServiceKusto
+func (tr *LinkedServiceKusto) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceKusto
+func (tr *LinkedServiceKusto) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceKusto
+func (tr *LinkedServiceKusto) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceKusto
+func (tr *LinkedServiceKusto) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceKusto
+func (tr *LinkedServiceKusto) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceKusto using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceKusto) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceKustoParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceKusto) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceMySQL
+func (mg *LinkedServiceMySQL) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_mysql"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceMySQL
+func (tr *LinkedServiceMySQL) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedServiceMySQL
+func (tr *LinkedServiceMySQL) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceMySQL
+func (tr *LinkedServiceMySQL) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceMySQL
+func (tr *LinkedServiceMySQL) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceMySQL
+func (tr *LinkedServiceMySQL) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceMySQL
+func (tr *LinkedServiceMySQL) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceMySQL using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceMySQL) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceMySQLParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceMySQL) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceOData
+func (mg *LinkedServiceOData) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_odata"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceOData
+func (tr *LinkedServiceOData) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"basic_authentication[*].password": "spec.forProvider.basicAuthentication[*].passwordSecretRef"}
+}
+
+// GetObservation of this LinkedServiceOData
+func (tr *LinkedServiceOData) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceOData
+func (tr *LinkedServiceOData) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceOData
+func (tr *LinkedServiceOData) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceOData
+func (tr *LinkedServiceOData) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceOData
+func (tr *LinkedServiceOData) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceOData using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceOData) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceODataParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceOData) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this LinkedServiceOdbc
 func (mg *LinkedServiceOdbc) GetTerraformResourceType() string {
 	return "azurerm_data_factory_linked_service_odbc"
@@ -1416,6 +2304,524 @@ func (tr *LinkedServiceOdbc) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *LinkedServiceOdbc) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServicePostgreSQL
+func (mg *LinkedServicePostgreSQL) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_postgresql"
+}
+
+// GetConnectionDetailsMapping for this LinkedServicePostgreSQL
+func (tr *LinkedServicePostgreSQL) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedServicePostgreSQL
+func (tr *LinkedServicePostgreSQL) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServicePostgreSQL
+func (tr *LinkedServicePostgreSQL) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServicePostgreSQL
+func (tr *LinkedServicePostgreSQL) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServicePostgreSQL
+func (tr *LinkedServicePostgreSQL) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServicePostgreSQL
+func (tr *LinkedServicePostgreSQL) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServicePostgreSQL using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServicePostgreSQL) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServicePostgreSQLParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServicePostgreSQL) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceSFTP
+func (mg *LinkedServiceSFTP) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_sftp"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceSFTP
+func (tr *LinkedServiceSFTP) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+}
+
+// GetObservation of this LinkedServiceSFTP
+func (tr *LinkedServiceSFTP) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceSFTP
+func (tr *LinkedServiceSFTP) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceSFTP
+func (tr *LinkedServiceSFTP) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceSFTP
+func (tr *LinkedServiceSFTP) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceSFTP
+func (tr *LinkedServiceSFTP) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceSFTP using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceSFTP) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceSFTPParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceSFTP) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceSnowflake
+func (mg *LinkedServiceSnowflake) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_snowflake"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceSnowflake
+func (tr *LinkedServiceSnowflake) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedServiceSnowflake
+func (tr *LinkedServiceSnowflake) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceSnowflake
+func (tr *LinkedServiceSnowflake) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceSnowflake
+func (tr *LinkedServiceSnowflake) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceSnowflake
+func (tr *LinkedServiceSnowflake) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceSnowflake
+func (tr *LinkedServiceSnowflake) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceSnowflake using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceSnowflake) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceSnowflakeParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceSnowflake) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceSQLServer
+func (mg *LinkedServiceSQLServer) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_sql_server"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceSQLServer
+func (tr *LinkedServiceSQLServer) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedServiceSQLServer
+func (tr *LinkedServiceSQLServer) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceSQLServer
+func (tr *LinkedServiceSQLServer) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceSQLServer
+func (tr *LinkedServiceSQLServer) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceSQLServer
+func (tr *LinkedServiceSQLServer) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceSQLServer
+func (tr *LinkedServiceSQLServer) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceSQLServer using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceSQLServer) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceSQLServerParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceSQLServer) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceSynapse
+func (mg *LinkedServiceSynapse) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_synapse"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceSynapse
+func (tr *LinkedServiceSynapse) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedServiceSynapse
+func (tr *LinkedServiceSynapse) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceSynapse
+func (tr *LinkedServiceSynapse) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceSynapse
+func (tr *LinkedServiceSynapse) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceSynapse
+func (tr *LinkedServiceSynapse) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceSynapse
+func (tr *LinkedServiceSynapse) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceSynapse using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceSynapse) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceSynapseParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceSynapse) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceWeb
+func (mg *LinkedServiceWeb) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_web"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceWeb
+func (tr *LinkedServiceWeb) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+}
+
+// GetObservation of this LinkedServiceWeb
+func (tr *LinkedServiceWeb) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceWeb
+func (tr *LinkedServiceWeb) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceWeb
+func (tr *LinkedServiceWeb) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceWeb
+func (tr *LinkedServiceWeb) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceWeb
+func (tr *LinkedServiceWeb) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceWeb using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceWeb) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceWebParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceWeb) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ManagedPrivateEndpoint
+func (mg *ManagedPrivateEndpoint) GetTerraformResourceType() string {
+	return "azurerm_data_factory_managed_private_endpoint"
+}
+
+// GetConnectionDetailsMapping for this ManagedPrivateEndpoint
+func (tr *ManagedPrivateEndpoint) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ManagedPrivateEndpoint
+func (tr *ManagedPrivateEndpoint) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ManagedPrivateEndpoint
+func (tr *ManagedPrivateEndpoint) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ManagedPrivateEndpoint
+func (tr *ManagedPrivateEndpoint) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ManagedPrivateEndpoint
+func (tr *ManagedPrivateEndpoint) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ManagedPrivateEndpoint
+func (tr *ManagedPrivateEndpoint) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ManagedPrivateEndpoint using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ManagedPrivateEndpoint) LateInitialize(attrs []byte) (bool, error) {
+	params := &ManagedPrivateEndpointParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ManagedPrivateEndpoint) GetTerraformSchemaVersion() int {
 	return 0
 }
 
