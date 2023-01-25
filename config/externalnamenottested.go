@@ -609,6 +609,12 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Threat Intelligence Data Connectors can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
 	"azurerm_sentinel_data_connector_threat_intelligence": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// Sentinel Fusion Alert Rules can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/alertRules/rule1
+	"azurerm_sentinel_alert_rule_fusion": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/alertRules/{{ .external_name }}"),
+	// Sentinel Machine Learning Behavior Analytics Rules can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/alertRules/rule1
+	"azurerm_sentinel_alert_rule_machine_learning_behavior_analytics": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}//providers/Microsoft.SecurityInsights/alertRules/{{ .external_name }}"),
 
 	// sentinel
 	//
@@ -737,9 +743,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Management Group Template Deployments can be imported using the resource id
 	// /providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Resources/deployments/deploy1
 	"azurerm_management_group_template_deployment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.management_group_id }}/providers/Microsoft.Resources/deployments/{{ .external_name }}"),
-	// Subscription Template Deployments can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deployments/template1
-	"azurerm_subscription_template_deployment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Resources/deployments/{{ .external_name }}"),
 	// No Import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"azurerm_template_deployment": config.IdentifierFromProvider,
@@ -753,14 +756,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Search/searchServices/service1
 	"azurerm_search_service": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Search/searchServices/{{ .external_name }}"),
 
-	// securityinsights
-	//
-	// Sentinel Fusion Alert Rules can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/alertRules/rule1
-	"azurerm_sentinel_alert_rule_fusion": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/alertRules/{{ .external_name }}"),
-	// Sentinel Machine Learning Behavior Analytics Rules can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/alertRules/rule1
-	"azurerm_sentinel_alert_rule_machine_learning_behavior_analytics": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}//providers/Microsoft.SecurityInsights/alertRules/{{ .external_name }}"),
 	// datamigration
 	//
 	// Database Migration Projects can be imported using the resource id
