@@ -1,0 +1,89 @@
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: FirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
+  labels:
+    testing.upbound.io/example-name: example
+  name: firewallrule
+spec:
+  forProvider:
+    endIpAddress: 255.255.255.255
+    startIpAddress: 0.0.0.0
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: firewall-ws-label
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
+  labels:
+    testing.upbound.io/example-name: firewall-rg-label
+  name: firewall-rg
+spec:
+  forProvider:
+    location: North Central US
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: firewallaccounta
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: North Central US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: firewall-rg-label
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
+  labels:
+    testing.upbound.io/example-name: file-system-label
+  name: file-system
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
+  labels:
+    testing.upbound.io/example-name: firewall-ws-label
+  name: firewall-ws
+spec:
+  forProvider:
+    identity:
+      - type: SystemAssigned
+    location: North Central US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: firewall-rg-label
+    sqlAdministratorLogin: sqladminuser
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: file-system-label

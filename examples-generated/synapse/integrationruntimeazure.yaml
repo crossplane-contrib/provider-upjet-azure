@@ -1,27 +1,15 @@
-apiVersion: streamanalytics.azure.upbound.io/v1beta1
-kind: OutputSynapse
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: IntegrationRuntimeAzure
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    database: master
-    passwordSecretRef:
-      key: attribute.sql_administrator_login_password
-      name: example-synapse-workspace
-      namespace: upbound-system
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: azurerm_stream_analytics_job
-    server: ${azurerm_synapse_workspace.example.connectivity_endpoints["sqlOnDemand"]}
-    streamAnalyticsJobNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: azurerm_stream_analytics_job
-    table: ExampleTable
-    userSelector:
+    location: West Europe
+    synapseWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
@@ -31,7 +19,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -45,18 +33,33 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    accountKind: StorageV2
     accountReplicationType: LRS
     accountTier: Standard
-    isHnsEnabled: "true"
     location: West Europe
     resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
@@ -66,7 +69,7 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: DataLakeGen2FileSystem
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -79,10 +82,28 @@ spec:
 ---
 
 apiVersion: synapse.azure.upbound.io/v1beta1
+kind: FirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endIpAddress: 255.255.255.255
+    startIpAddress: 0.0.0.0
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/integrationruntimeazure
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -91,6 +112,7 @@ spec:
     identity:
     - type: SystemAssigned
     location: West Europe
+    managedVirtualNetworkEnabled: true
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

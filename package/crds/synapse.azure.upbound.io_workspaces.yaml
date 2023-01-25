@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: outputsynapses.streamanalytics.azure.upbound.io
+  name: workspaces.synapse.azure.upbound.io
 spec:
-  group: streamanalytics.azure.upbound.io
+  group: synapse.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: OutputSynapse
-    listKind: OutputSynapseList
-    plural: outputsynapses
-    singular: outputsynapse
+    kind: Workspace
+    listKind: WorkspaceList
+    plural: workspaces
+    singular: workspace
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: OutputSynapse is the Schema for the OutputSynapses API. Manages
-          a Stream Analytics Output to an Azure Synapse Analytics Workspace.
+        description: Workspace is the Schema for the Workspaces API. Manages a Synapse
+          Workspace.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: OutputSynapseSpec defines the desired state of OutputSynapse
+            description: WorkspaceSpec defines the desired state of Workspace
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,31 +64,392 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  database:
-                    description: The name of the Azure SQL database. Changing this
-                      forces a new resource to be created.
+                  aadAdmin:
+                    description: An aad_admin block as defined below. Conflicts with
+                      customer_managed_key.
+                    items:
+                      properties:
+                        login:
+                          description: The login name of the Azure AD Administrator
+                            of this Synapse Workspace.
+                          type: string
+                        objectId:
+                          description: The object id of the Azure AD Administrator
+                            of this Synapse Workspace.
+                          type: string
+                        tenantId:
+                          description: The tenant id of the Azure AD Administrator
+                            of this Synapse Workspace.
+                          type: string
+                      type: object
+                    type: array
+                  azureDevopsRepo:
+                    description: An azure_devops_repo block as defined below.
+                    items:
+                      properties:
+                        accountName:
+                          description: Specifies the Azure DevOps account name.
+                          type: string
+                        branchName:
+                          description: Specifies the collaboration branch of the repository
+                            to get code from.
+                          type: string
+                        lastCommitId:
+                          description: The last commit ID.
+                          type: string
+                        projectName:
+                          description: Specifies the name of the Azure DevOps project.
+                          type: string
+                        repositoryName:
+                          description: Specifies the name of the git repository.
+                          type: string
+                        rootFolder:
+                          description: Specifies the root folder within the repository.
+                            Set to / for the top level.
+                          type: string
+                        tenantId:
+                          description: the ID of the tenant for the Azure DevOps account.
+                          type: string
+                      required:
+                      - accountName
+                      - branchName
+                      - projectName
+                      - repositoryName
+                      - rootFolder
+                      type: object
+                    type: array
+                  computeSubnetId:
+                    description: Subnet ID used for computes in workspace Changing
+                      this forces a new resource to be created.
                     type: string
-                  passwordSecretRef:
-                    description: The password that will be used to connect to the
-                      Azure SQL database.
+                  computeSubnetIdRef:
+                    description: Reference to a Subnet in network to populate computeSubnetId.
                     properties:
-                      key:
-                        description: The key to select.
-                        type: string
                       name:
-                        description: Name of the secret.
+                        description: Name of the referenced object.
                         type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
                     required:
-                    - key
                     - name
-                    - namespace
                     type: object
+                  computeSubnetIdSelector:
+                    description: Selector for a Subnet in network to populate computeSubnetId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below. Conflicts
+                      with aad_admin.
+                    items:
+                      properties:
+                        keyName:
+                          description: An identifier for the key. Name needs to match
+                            the name of the key used with the azurerm_synapse_workspace_key
+                            resource. Defaults to "cmk" if not specified.
+                          type: string
+                        keyVersionlessId:
+                          description: The Azure Key Vault Key Versionless ID to be
+                            used as the Customer Managed Key (CMK) for double encryption
+                            (e.g. https://example-keyvault.vault.azure.net/type/cmk/).
+                          type: string
+                        keyVersionlessIdRef:
+                          description: Reference to a Key in keyvault to populate
+                            keyVersionlessId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        keyVersionlessIdSelector:
+                          description: Selector for a Key in keyvault to populate
+                            keyVersionlessId.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
+                  dataExfiltrationProtectionEnabled:
+                    description: Is data exfiltration protection enabled in this workspace?
+                      If set to true, managed_virtual_network_enabled must also be
+                      set to true. Changing this forces a new resource to be created.
+                    type: boolean
+                  githubRepo:
+                    description: A github_repo block as defined below.
+                    items:
+                      properties:
+                        accountName:
+                          description: Specifies the GitHub account name.
+                          type: string
+                        branchName:
+                          description: Specifies the collaboration branch of the repository
+                            to get code from.
+                          type: string
+                        gitUrl:
+                          description: 'Specifies the GitHub Enterprise host name.
+                            For example: https://github.mydomain.com.'
+                          type: string
+                        lastCommitId:
+                          description: The last commit ID.
+                          type: string
+                        repositoryName:
+                          description: Specifies the name of the git repository.
+                          type: string
+                        rootFolder:
+                          description: Specifies the root folder within the repository.
+                            Set to / for the top level.
+                          type: string
+                      required:
+                      - accountName
+                      - branchName
+                      - repositoryName
+                      - rootFolder
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Synapse Workspace.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be associated with this Synapse Workspace.
+                            Possible values are SystemAssigned, UserAssigned and SystemAssigned,
+                            UserAssigned (to enable both).
+                          type: string
+                      required:
+                      - type
+                      type: object
+                    type: array
+                  linkingAllowedForAadTenantIds:
+                    description: Allowed AAD Tenant Ids For Linking.
+                    items:
+                      type: string
+                    type: array
+                  location:
+                    description: Specifies the Azure Region where the synapse Workspace
+                      should exist. Changing this forces a new resource to be created.
+                    type: string
+                  managedResourceGroupName:
+                    description: Workspace managed resource group. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  managedResourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      managedResourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  managedResourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      managedResourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  managedVirtualNetworkEnabled:
+                    description: Is Virtual Network enabled for all computes in this
+                      workspace?  Changing this forces a new resource to be created.
+                    type: boolean
+                  publicNetworkAccessEnabled:
+                    description: Whether public network access is allowed for the
+                      Cognitive Account. Defaults to true.
+                    type: boolean
+                  purviewId:
+                    description: The ID of purview account.
+                    type: string
                   resourceGroupName:
-                    description: The name of the Resource Group where the Stream Analytics
-                      Job exists. Changing this forces a new resource to be created.
+                    description: Specifies the name of the Resource Group where the
+                      synapse Workspace should exist. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -165,16 +526,59 @@ spec:
                             type: string
                         type: object
                     type: object
-                  server:
-                    description: The name of the SQL server containing the Azure SQL
-                      database. Changing this forces a new resource to be created.
+                  sqlAadAdmin:
+                    description: An sql_aad_admin block as defined below.
+                    items:
+                      properties:
+                        login:
+                          description: The login name of the Azure AD Administrator
+                            of this Synapse Workspace SQL.
+                          type: string
+                        objectId:
+                          description: The object id of the Azure AD Administrator
+                            of this Synapse Workspace SQL.
+                          type: string
+                        tenantId:
+                          description: The tenant id of the Azure AD Administrator
+                            of this Synapse Workspace SQL.
+                          type: string
+                      type: object
+                    type: array
+                  sqlAdministratorLogin:
+                    description: Specifies The login name of the SQL administrator.
+                      Changing this forces a new resource to be created. If this is
+                      not provided aad_admin or customer_managed_key must be provided.
                     type: string
-                  streamAnalyticsJobName:
-                    description: The name of the Stream Analytics Job. Changing this
-                      forces a new resource to be created.
+                  sqlAdministratorLoginPasswordSecretRef:
+                    description: The Password associated with the sql_administrator_login
+                      for the SQL administrator. If this is not provided aad_admin
+                      or customer_managed_key must be provided.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  sqlIdentityControlEnabled:
+                    description: Are pipelines (running as workspace's system assigned
+                      identity) allowed to access SQL pools?
+                    type: boolean
+                  storageDataLakeGen2FilesystemId:
+                    description: Specifies the ID of storage data lake gen2 filesystem
+                      resource. Changing this forces a new resource to be created.
                     type: string
-                  streamAnalyticsJobNameRef:
-                    description: Reference to a Job to populate streamAnalyticsJobName.
+                  storageDataLakeGen2FilesystemIdRef:
+                    description: Reference to a DataLakeGen2FileSystem in storage
+                      to populate storageDataLakeGen2FilesystemId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -207,8 +611,9 @@ spec:
                     required:
                     - name
                     type: object
-                  streamAnalyticsJobNameSelector:
-                    description: Selector for a Job to populate streamAnalyticsJobName.
+                  storageDataLakeGen2FilesystemIdSelector:
+                    description: Selector for a DataLakeGen2FileSystem in storage
+                      to populate storageDataLakeGen2FilesystemId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -246,93 +651,14 @@ spec:
                             type: string
                         type: object
                     type: object
-                  table:
-                    description: The name of the table in the Azure SQL database.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  user:
-                    description: The user name that will be used to connect to the
-                      Azure SQL database. Changing this forces a new resource to be
-                      created.
-                    type: string
-                  userRef:
-                    description: Reference to a Workspace in synapse to populate user.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  userSelector:
-                    description: Selector for a Workspace in synapse to populate user.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Synapse Workspace.
                     type: object
                 required:
-                - database
-                - passwordSecretRef
-                - server
-                - table
+                - location
                 type: object
               providerConfigRef:
                 default:
@@ -506,14 +832,34 @@ spec:
             - forProvider
             type: object
           status:
-            description: OutputSynapseStatus defines the observed state of OutputSynapse.
+            description: WorkspaceStatus defines the observed state of Workspace.
             properties:
               atProvider:
                 properties:
+                  connectivityEndpoints:
+                    additionalProperties:
+                      type: string
+                    description: A list of Connectivity endpoints for this Synapse
+                      Workspace.
+                    type: object
                   id:
-                    description: The ID of the Stream Analytics Output to an Azure
-                      Synapse Analytics Workspace.
+                    description: The ID of the synapse Workspace.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        principalId:
+                          description: The Principal ID for the Service Principal
+                            associated with the Managed Service Identity of this Synapse
+                            Workspace.
+                          type: string
+                        tenantId:
+                          description: The Tenant ID for the Service Principal associated
+                            with the Managed Service Identity of this Synapse Workspace.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
