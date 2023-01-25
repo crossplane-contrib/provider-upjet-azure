@@ -489,12 +489,84 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Data Factory SQL Server Table Datasets can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/datasets/example
 	"azurerm_data_factory_dataset_sql_server": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/datasets/{{ .external_name }}"),
-	// Data Factory Azure Integration Runtimes can be imported using the resource id
+	// Data Factories can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/integrationruntimes/example
-	"azurerm_data_factory_integration_runtime_azure": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/integrationruntimes/{{ .external_name }}"),
-	// Data Factory Azure-SSIS Integration Runtimes can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/integrationruntimes/example
-	"azurerm_data_factory_integration_runtime_azure_ssis": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/integrationruntimes/{{ .external_name }}"),
+	"azurerm_data_factory_integration_runtime_self_hosted": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/integrationruntimes/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_custom_service": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_azure_blob_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_azure_databricks": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_azure_file_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_azure_function": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_azure_search": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Azure SQL Database Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_azure_sql_database": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_azure_table_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_cosmosdb": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Data Lake Storage Gen2 Linked Services can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_data_lake_storage_gen2": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Key Vault Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_key_vault": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_kusto": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory MySQL Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_mysql": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory OData Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_odata": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory PostgreSQL Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_postgresql": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_sftp": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Snowflake Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_snowflake": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory SQL Server Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_sql_server": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Synapse Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_synapse": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Linked Service's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
+	"azurerm_data_factory_linked_service_web": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
+	// Data Factory Managed Private Endpoint can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/managedVirtualNetworks/default/managedPrivateEndpoints/endpoint1
+	"azurerm_data_factory_managed_private_endpoint": config.IdentifierFromProvider,
+	// Data Factory Pipeline's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/pipelines/example
+	"azurerm_data_factory_pipeline": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/pipelines/{{ .external_name }}"),
+	// Data Factory Blob Event Trigger can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/triggers/example
+	"azurerm_data_factory_trigger_blob_event": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/triggers/{{ .external_name }}"),
+	// Data Factory Custom Event Trigger can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/triggers/example
+	"azurerm_data_factory_trigger_custom_event": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/triggers/{{ .external_name }}"),
+	// Data Factory Schedule Trigger can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/triggers/example
+	"azurerm_data_factory_trigger_schedule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/triggers/{{ .external_name }}"),
 
 	// databoxedge
 	//
@@ -689,4 +761,21 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Sentinel Machine Learning Behavior Analytics Rules can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/alertRules/rule1
 	"azurerm_sentinel_alert_rule_machine_learning_behavior_analytics": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}//providers/Microsoft.SecurityInsights/alertRules/{{ .external_name }}"),
+	// datamigration
+	//
+	// Database Migration Projects can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.DataMigration/services/example-dms/projects/project1
+	"azurerm_database_migration_project": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataMigration/services/{{ .parameters.service_name }}/projects/{{ .external_name }}"),
+	// Database Migration Services can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.DataMigration/services/database_migration_service1
+	"azurerm_database_migration_service": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataMigration/services/{{ .external_name }}"),
+
+	// dataprotection
+	//
+	// Backup Instance Blob Storages can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DataProtection/backupVaults/vault1/backupInstances/backupInstance1
+	"azurerm_data_protection_backup_instance_blob_storage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.vault_id }}/backupInstances/{{ .external_name }}"),
+	// Backup Instance Disks can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DataProtection/backupVaults/vault1/backupInstances/backupInstance1
+	"azurerm_data_protection_backup_instance_disk": config.TemplatedStringAsIdentifier("name", "{{ .parameters.vault_id }}/backupInstances/{{ .external_name }}"),
 }
