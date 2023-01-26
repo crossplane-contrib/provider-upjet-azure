@@ -379,6 +379,8 @@ import (
 	securitycentersetting "github.com/upbound/provider-azure/internal/controller/security/securitycentersetting"
 	securitycentersubscriptionpricing "github.com/upbound/provider-azure/internal/controller/security/securitycentersubscriptionpricing"
 	securitycenterworkspace "github.com/upbound/provider-azure/internal/controller/security/securitycenterworkspace"
+	sentinelautomationrule "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelautomationrule"
+	sentinelwatchlist "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelwatchlist"
 	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/namespaceauthorizationrule"
 	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/servicebus/namespacedisasterrecoveryconfig"
 	namespacenetworkruleset "github.com/upbound/provider-azure/internal/controller/servicebus/namespacenetworkruleset"
@@ -389,6 +391,11 @@ import (
 	subscriptionrule "github.com/upbound/provider-azure/internal/controller/servicebus/subscriptionrule"
 	topic "github.com/upbound/provider-azure/internal/controller/servicebus/topic"
 	topicauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/topicauthorizationrule"
+	clusterservicefabric "github.com/upbound/provider-azure/internal/controller/servicefabric/cluster"
+	managedcluster "github.com/upbound/provider-azure/internal/controller/servicefabric/managedcluster"
+	networkacl "github.com/upbound/provider-azure/internal/controller/signalrservice/networkacl"
+	servicesignalrservice "github.com/upbound/provider-azure/internal/controller/signalrservice/service"
+	managedapplicationdefinition "github.com/upbound/provider-azure/internal/controller/solutions/managedapplicationdefinition"
 	mssqldatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqldatabase"
 	mssqlfailovergroup "github.com/upbound/provider-azure/internal/controller/sql/mssqlfailovergroup"
 	mssqlmanageddatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanageddatabase"
@@ -804,6 +811,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitycentersetting.Setup,
 		securitycentersubscriptionpricing.Setup,
 		securitycenterworkspace.Setup,
+		sentinelautomationrule.Setup,
+		sentinelwatchlist.Setup,
 		namespaceauthorizationrule.Setup,
 		namespacedisasterrecoveryconfig.Setup,
 		namespacenetworkruleset.Setup,
@@ -814,6 +823,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subscriptionrule.Setup,
 		topic.Setup,
 		topicauthorizationrule.Setup,
+		clusterservicefabric.Setup,
+		managedcluster.Setup,
+		networkacl.Setup,
+		servicesignalrservice.Setup,
+		managedapplicationdefinition.Setup,
 		mssqldatabase.Setup,
 		mssqlfailovergroup.Setup,
 		mssqlmanageddatabase.Setup,
