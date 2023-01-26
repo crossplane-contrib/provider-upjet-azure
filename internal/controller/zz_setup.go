@@ -162,7 +162,26 @@ import (
 	integrationruntimeselfhosted "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeselfhosted"
 	linkedcustomservice "github.com/upbound/provider-azure/internal/controller/datafactory/linkedcustomservice"
 	linkedserviceazureblobstorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazureblobstorage"
+	linkedserviceazuredatabricks "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazuredatabricks"
+	linkedserviceazurefilestorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazurefilestorage"
+	linkedserviceazurefunction "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazurefunction"
+	linkedserviceazuresearch "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazuresearch"
+	linkedserviceazuresqldatabase "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazuresqldatabase"
+	linkedserviceazuretablestorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazuretablestorage"
+	linkedservicecosmosdb "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicecosmosdb"
+	linkedservicedatalakestoragegen2 "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicedatalakestoragegen2"
+	linkedservicekeyvault "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicekeyvault"
+	linkedservicekusto "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicekusto"
+	linkedservicemysql "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicemysql"
+	linkedserviceodata "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceodata"
 	linkedserviceodbc "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceodbc"
+	linkedservicepostgresql "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicepostgresql"
+	linkedservicesftp "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicesftp"
+	linkedservicesnowflake "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicesnowflake"
+	linkedservicesqlserver "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicesqlserver"
+	linkedservicesynapse "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicesynapse"
+	linkedserviceweb "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceweb"
+	managedprivateendpoint "github.com/upbound/provider-azure/internal/controller/datafactory/managedprivateendpoint"
 	pipeline "github.com/upbound/provider-azure/internal/controller/datafactory/pipeline"
 	triggerblobevent "github.com/upbound/provider-azure/internal/controller/datafactory/triggerblobevent"
 	triggerschedule "github.com/upbound/provider-azure/internal/controller/datafactory/triggerschedule"
@@ -430,7 +449,7 @@ import (
 	clusterstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/cluster"
 	functionjavascriptuda "github.com/upbound/provider-azure/internal/controller/streamanalytics/functionjavascriptuda"
 	job "github.com/upbound/provider-azure/internal/controller/streamanalytics/job"
-	managedprivateendpoint "github.com/upbound/provider-azure/internal/controller/streamanalytics/managedprivateendpoint"
+	managedprivateendpointstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/managedprivateendpoint"
 	outputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputblob"
 	outputfunction "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputfunction"
 	outputmssql "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputmssql"
@@ -601,7 +620,26 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		integrationruntimeselfhosted.Setup,
 		linkedcustomservice.Setup,
 		linkedserviceazureblobstorage.Setup,
+		linkedserviceazuredatabricks.Setup,
+		linkedserviceazurefilestorage.Setup,
+		linkedserviceazurefunction.Setup,
+		linkedserviceazuresearch.Setup,
+		linkedserviceazuresqldatabase.Setup,
+		linkedserviceazuretablestorage.Setup,
+		linkedservicecosmosdb.Setup,
+		linkedservicedatalakestoragegen2.Setup,
+		linkedservicekeyvault.Setup,
+		linkedservicekusto.Setup,
+		linkedservicemysql.Setup,
+		linkedserviceodata.Setup,
 		linkedserviceodbc.Setup,
+		linkedservicepostgresql.Setup,
+		linkedservicesftp.Setup,
+		linkedservicesnowflake.Setup,
+		linkedservicesqlserver.Setup,
+		linkedservicesynapse.Setup,
+		linkedserviceweb.Setup,
+		managedprivateendpoint.Setup,
 		pipeline.Setup,
 		triggerblobevent.Setup,
 		triggerschedule.Setup,
@@ -869,7 +907,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		clusterstreamanalytics.Setup,
 		functionjavascriptuda.Setup,
 		job.Setup,
-		managedprivateendpoint.Setup,
+		managedprivateendpointstreamanalytics.Setup,
 		outputblob.Setup,
 		outputfunction.Setup,
 		outputmssql.Setup,

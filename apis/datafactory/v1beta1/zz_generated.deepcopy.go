@@ -1202,6 +1202,16 @@ func (in *DataSetBinaryParameters) DeepCopyInto(out *DataSetBinaryParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
 		*out = make(map[string]*string, len(*in))
@@ -1412,6 +1422,16 @@ func (in *DataSetCosmosDBSQLAPIParameters) DeepCopyInto(out *DataSetCosmosDBSQLA
 		in, out := &in.LinkedServiceName, &out.LinkedServiceName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
@@ -1830,6 +1850,16 @@ func (in *DataSetDelimitedTextParameters) DeepCopyInto(out *DataSetDelimitedText
 		*out = new(string)
 		**out = **in
 	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.NullValue != nil {
 		in, out := &in.NullValue, &out.NullValue
 		*out = new(string)
@@ -2095,6 +2125,16 @@ func (in *DataSetHTTPParameters) DeepCopyInto(out *DataSetHTTPParameters) {
 		in, out := &in.LinkedServiceName, &out.LinkedServiceName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
@@ -2496,6 +2536,16 @@ func (in *DataSetJSONParameters) DeepCopyInto(out *DataSetJSONParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
 		*out = make(map[string]*string, len(*in))
@@ -2746,6 +2796,16 @@ func (in *DataSetMySQLParameters) DeepCopyInto(out *DataSetMySQLParameters) {
 		in, out := &in.LinkedServiceName, &out.LinkedServiceName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
@@ -3202,6 +3262,16 @@ func (in *DataSetParquetParameters) DeepCopyInto(out *DataSetParquetParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
 		*out = make(map[string]*string, len(*in))
@@ -3452,6 +3522,16 @@ func (in *DataSetPostgreSQLParameters) DeepCopyInto(out *DataSetPostgreSQLParame
 		in, out := &in.LinkedServiceName, &out.LinkedServiceName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
@@ -3708,6 +3788,16 @@ func (in *DataSetSnowflakeParameters) DeepCopyInto(out *DataSetSnowflakeParamete
 		in, out := &in.LinkedServiceName, &out.LinkedServiceName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
@@ -4436,6 +4526,56 @@ func (in *IdentityParameters) DeepCopy() *IdentityParameters {
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *InstancePoolObservation) DeepCopyInto(out *InstancePoolObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new InstancePoolObservation.
+func (in *InstancePoolObservation) DeepCopy() *InstancePoolObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(InstancePoolObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *InstancePoolParameters) DeepCopyInto(out *InstancePoolParameters) {
+	*out = *in
+	if in.ClusterVersion != nil {
+		in, out := &in.ClusterVersion, &out.ClusterVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.InstancePoolID != nil {
+		in, out := &in.InstancePoolID, &out.InstancePoolID
+		*out = new(string)
+		**out = **in
+	}
+	if in.MaxNumberOfWorkers != nil {
+		in, out := &in.MaxNumberOfWorkers, &out.MaxNumberOfWorkers
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MinNumberOfWorkers != nil {
+		in, out := &in.MinNumberOfWorkers, &out.MinNumberOfWorkers
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new InstancePoolParameters.
+func (in *InstancePoolParameters) DeepCopy() *InstancePoolParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(InstancePoolParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *IntegrationRuntimeAzure) DeepCopyInto(out *IntegrationRuntimeAzure) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
@@ -5056,6 +5196,86 @@ func (in *IntegrationRuntimeSelfHostedStatus) DeepCopy() *IntegrationRuntimeSelf
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *KeyVaultConnectionStringObservation) DeepCopyInto(out *KeyVaultConnectionStringObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new KeyVaultConnectionStringObservation.
+func (in *KeyVaultConnectionStringObservation) DeepCopy() *KeyVaultConnectionStringObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(KeyVaultConnectionStringObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *KeyVaultConnectionStringParameters) DeepCopyInto(out *KeyVaultConnectionStringParameters) {
+	*out = *in
+	if in.LinkedServiceName != nil {
+		in, out := &in.LinkedServiceName, &out.LinkedServiceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretName != nil {
+		in, out := &in.SecretName, &out.SecretName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new KeyVaultConnectionStringParameters.
+func (in *KeyVaultConnectionStringParameters) DeepCopy() *KeyVaultConnectionStringParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(KeyVaultConnectionStringParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *KeyVaultKeyObservation) DeepCopyInto(out *KeyVaultKeyObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new KeyVaultKeyObservation.
+func (in *KeyVaultKeyObservation) DeepCopy() *KeyVaultKeyObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(KeyVaultKeyObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *KeyVaultKeyParameters) DeepCopyInto(out *KeyVaultKeyParameters) {
+	*out = *in
+	if in.LinkedServiceName != nil {
+		in, out := &in.LinkedServiceName, &out.LinkedServiceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretName != nil {
+		in, out := &in.SecretName, &out.SecretName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new KeyVaultKeyParameters.
+func (in *KeyVaultKeyParameters) DeepCopy() *KeyVaultKeyParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(KeyVaultKeyParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *KeyVaultLicenseObservation) DeepCopyInto(out *KeyVaultLicenseObservation) {
 	*out = *in
 }
@@ -5197,6 +5417,16 @@ func (in *KeyVaultSASTokenParameters) DeepCopyInto(out *KeyVaultSASTokenParamete
 		in, out := &in.LinkedServiceName, &out.LinkedServiceName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SecretName != nil {
 		in, out := &in.SecretName, &out.SecretName
@@ -5670,6 +5900,2747 @@ func (in *LinkedServiceAzureBlobStorageStatus) DeepCopy() *LinkedServiceAzureBlo
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureDatabricks) DeepCopyInto(out *LinkedServiceAzureDatabricks) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureDatabricks.
+func (in *LinkedServiceAzureDatabricks) DeepCopy() *LinkedServiceAzureDatabricks {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureDatabricks)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureDatabricks) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureDatabricksKeyVaultPasswordObservation) DeepCopyInto(out *LinkedServiceAzureDatabricksKeyVaultPasswordObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureDatabricksKeyVaultPasswordObservation.
+func (in *LinkedServiceAzureDatabricksKeyVaultPasswordObservation) DeepCopy() *LinkedServiceAzureDatabricksKeyVaultPasswordObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureDatabricksKeyVaultPasswordObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureDatabricksKeyVaultPasswordParameters) DeepCopyInto(out *LinkedServiceAzureDatabricksKeyVaultPasswordParameters) {
+	*out = *in
+	if in.LinkedServiceName != nil {
+		in, out := &in.LinkedServiceName, &out.LinkedServiceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretName != nil {
+		in, out := &in.SecretName, &out.SecretName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureDatabricksKeyVaultPasswordParameters.
+func (in *LinkedServiceAzureDatabricksKeyVaultPasswordParameters) DeepCopy() *LinkedServiceAzureDatabricksKeyVaultPasswordParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureDatabricksKeyVaultPasswordParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureDatabricksList) DeepCopyInto(out *LinkedServiceAzureDatabricksList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceAzureDatabricks, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureDatabricksList.
+func (in *LinkedServiceAzureDatabricksList) DeepCopy() *LinkedServiceAzureDatabricksList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureDatabricksList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureDatabricksList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureDatabricksObservation) DeepCopyInto(out *LinkedServiceAzureDatabricksObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureDatabricksObservation.
+func (in *LinkedServiceAzureDatabricksObservation) DeepCopy() *LinkedServiceAzureDatabricksObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureDatabricksObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureDatabricksParameters) DeepCopyInto(out *LinkedServiceAzureDatabricksParameters) {
+	*out = *in
+	if in.AccessTokenSecretRef != nil {
+		in, out := &in.AccessTokenSecretRef, &out.AccessTokenSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AdbDomain != nil {
+		in, out := &in.AdbDomain, &out.AdbDomain
+		*out = new(string)
+		**out = **in
+	}
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.ExistingClusterID != nil {
+		in, out := &in.ExistingClusterID, &out.ExistingClusterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.InstancePool != nil {
+		in, out := &in.InstancePool, &out.InstancePool
+		*out = make([]InstancePoolParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultPassword != nil {
+		in, out := &in.KeyVaultPassword, &out.KeyVaultPassword
+		*out = make([]LinkedServiceAzureDatabricksKeyVaultPasswordParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.MsiWorkSpaceResourceID != nil {
+		in, out := &in.MsiWorkSpaceResourceID, &out.MsiWorkSpaceResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.MsiWorkSpaceResourceIDRef != nil {
+		in, out := &in.MsiWorkSpaceResourceIDRef, &out.MsiWorkSpaceResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.MsiWorkSpaceResourceIDSelector != nil {
+		in, out := &in.MsiWorkSpaceResourceIDSelector, &out.MsiWorkSpaceResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NewClusterConfig != nil {
+		in, out := &in.NewClusterConfig, &out.NewClusterConfig
+		*out = make([]NewClusterConfigParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureDatabricksParameters.
+func (in *LinkedServiceAzureDatabricksParameters) DeepCopy() *LinkedServiceAzureDatabricksParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureDatabricksParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureDatabricksSpec) DeepCopyInto(out *LinkedServiceAzureDatabricksSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureDatabricksSpec.
+func (in *LinkedServiceAzureDatabricksSpec) DeepCopy() *LinkedServiceAzureDatabricksSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureDatabricksSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureDatabricksStatus) DeepCopyInto(out *LinkedServiceAzureDatabricksStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureDatabricksStatus.
+func (in *LinkedServiceAzureDatabricksStatus) DeepCopy() *LinkedServiceAzureDatabricksStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureDatabricksStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFileStorage) DeepCopyInto(out *LinkedServiceAzureFileStorage) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFileStorage.
+func (in *LinkedServiceAzureFileStorage) DeepCopy() *LinkedServiceAzureFileStorage {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFileStorage)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureFileStorage) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFileStorageKeyVaultPasswordObservation) DeepCopyInto(out *LinkedServiceAzureFileStorageKeyVaultPasswordObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFileStorageKeyVaultPasswordObservation.
+func (in *LinkedServiceAzureFileStorageKeyVaultPasswordObservation) DeepCopy() *LinkedServiceAzureFileStorageKeyVaultPasswordObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFileStorageKeyVaultPasswordObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFileStorageKeyVaultPasswordParameters) DeepCopyInto(out *LinkedServiceAzureFileStorageKeyVaultPasswordParameters) {
+	*out = *in
+	if in.LinkedServiceName != nil {
+		in, out := &in.LinkedServiceName, &out.LinkedServiceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretName != nil {
+		in, out := &in.SecretName, &out.SecretName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFileStorageKeyVaultPasswordParameters.
+func (in *LinkedServiceAzureFileStorageKeyVaultPasswordParameters) DeepCopy() *LinkedServiceAzureFileStorageKeyVaultPasswordParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFileStorageKeyVaultPasswordParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFileStorageList) DeepCopyInto(out *LinkedServiceAzureFileStorageList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceAzureFileStorage, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFileStorageList.
+func (in *LinkedServiceAzureFileStorageList) DeepCopy() *LinkedServiceAzureFileStorageList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFileStorageList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureFileStorageList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFileStorageObservation) DeepCopyInto(out *LinkedServiceAzureFileStorageObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFileStorageObservation.
+func (in *LinkedServiceAzureFileStorageObservation) DeepCopy() *LinkedServiceAzureFileStorageObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFileStorageObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFileStorageParameters) DeepCopyInto(out *LinkedServiceAzureFileStorageParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	out.ConnectionStringSecretRef = in.ConnectionStringSecretRef
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.FileShare != nil {
+		in, out := &in.FileShare, &out.FileShare
+		*out = new(string)
+		**out = **in
+	}
+	if in.Host != nil {
+		in, out := &in.Host, &out.Host
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultPassword != nil {
+		in, out := &in.KeyVaultPassword, &out.KeyVaultPassword
+		*out = make([]LinkedServiceAzureFileStorageKeyVaultPasswordParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.UserID != nil {
+		in, out := &in.UserID, &out.UserID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFileStorageParameters.
+func (in *LinkedServiceAzureFileStorageParameters) DeepCopy() *LinkedServiceAzureFileStorageParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFileStorageParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFileStorageSpec) DeepCopyInto(out *LinkedServiceAzureFileStorageSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFileStorageSpec.
+func (in *LinkedServiceAzureFileStorageSpec) DeepCopy() *LinkedServiceAzureFileStorageSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFileStorageSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFileStorageStatus) DeepCopyInto(out *LinkedServiceAzureFileStorageStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFileStorageStatus.
+func (in *LinkedServiceAzureFileStorageStatus) DeepCopy() *LinkedServiceAzureFileStorageStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFileStorageStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFunction) DeepCopyInto(out *LinkedServiceAzureFunction) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFunction.
+func (in *LinkedServiceAzureFunction) DeepCopy() *LinkedServiceAzureFunction {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFunction)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureFunction) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFunctionList) DeepCopyInto(out *LinkedServiceAzureFunctionList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceAzureFunction, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFunctionList.
+func (in *LinkedServiceAzureFunctionList) DeepCopy() *LinkedServiceAzureFunctionList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFunctionList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureFunctionList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFunctionObservation) DeepCopyInto(out *LinkedServiceAzureFunctionObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFunctionObservation.
+func (in *LinkedServiceAzureFunctionObservation) DeepCopy() *LinkedServiceAzureFunctionObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFunctionObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFunctionParameters) DeepCopyInto(out *LinkedServiceAzureFunctionParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeySecretRef != nil {
+		in, out := &in.KeySecretRef, &out.KeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.KeyVaultKey != nil {
+		in, out := &in.KeyVaultKey, &out.KeyVaultKey
+		*out = make([]KeyVaultKeyParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.URL != nil {
+		in, out := &in.URL, &out.URL
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFunctionParameters.
+func (in *LinkedServiceAzureFunctionParameters) DeepCopy() *LinkedServiceAzureFunctionParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFunctionParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFunctionSpec) DeepCopyInto(out *LinkedServiceAzureFunctionSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFunctionSpec.
+func (in *LinkedServiceAzureFunctionSpec) DeepCopy() *LinkedServiceAzureFunctionSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFunctionSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureFunctionStatus) DeepCopyInto(out *LinkedServiceAzureFunctionStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureFunctionStatus.
+func (in *LinkedServiceAzureFunctionStatus) DeepCopy() *LinkedServiceAzureFunctionStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureFunctionStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSQLDatabase) DeepCopyInto(out *LinkedServiceAzureSQLDatabase) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSQLDatabase.
+func (in *LinkedServiceAzureSQLDatabase) DeepCopy() *LinkedServiceAzureSQLDatabase {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSQLDatabase)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureSQLDatabase) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSQLDatabaseKeyVaultPasswordObservation) DeepCopyInto(out *LinkedServiceAzureSQLDatabaseKeyVaultPasswordObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSQLDatabaseKeyVaultPasswordObservation.
+func (in *LinkedServiceAzureSQLDatabaseKeyVaultPasswordObservation) DeepCopy() *LinkedServiceAzureSQLDatabaseKeyVaultPasswordObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSQLDatabaseKeyVaultPasswordObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters) DeepCopyInto(out *LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters) {
+	*out = *in
+	if in.LinkedServiceName != nil {
+		in, out := &in.LinkedServiceName, &out.LinkedServiceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretName != nil {
+		in, out := &in.SecretName, &out.SecretName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters.
+func (in *LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters) DeepCopy() *LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSQLDatabaseList) DeepCopyInto(out *LinkedServiceAzureSQLDatabaseList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceAzureSQLDatabase, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSQLDatabaseList.
+func (in *LinkedServiceAzureSQLDatabaseList) DeepCopy() *LinkedServiceAzureSQLDatabaseList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSQLDatabaseList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureSQLDatabaseList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSQLDatabaseObservation) DeepCopyInto(out *LinkedServiceAzureSQLDatabaseObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSQLDatabaseObservation.
+func (in *LinkedServiceAzureSQLDatabaseObservation) DeepCopy() *LinkedServiceAzureSQLDatabaseObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSQLDatabaseObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSQLDatabaseParameters) DeepCopyInto(out *LinkedServiceAzureSQLDatabaseParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.ConnectionString != nil {
+		in, out := &in.ConnectionString, &out.ConnectionString
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultConnectionString != nil {
+		in, out := &in.KeyVaultConnectionString, &out.KeyVaultConnectionString
+		*out = make([]KeyVaultConnectionStringParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.KeyVaultPassword != nil {
+		in, out := &in.KeyVaultPassword, &out.KeyVaultPassword
+		*out = make([]LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.ServicePrincipalID != nil {
+		in, out := &in.ServicePrincipalID, &out.ServicePrincipalID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServicePrincipalKey != nil {
+		in, out := &in.ServicePrincipalKey, &out.ServicePrincipalKey
+		*out = new(string)
+		**out = **in
+	}
+	if in.TenantID != nil {
+		in, out := &in.TenantID, &out.TenantID
+		*out = new(string)
+		**out = **in
+	}
+	if in.UseManagedIdentity != nil {
+		in, out := &in.UseManagedIdentity, &out.UseManagedIdentity
+		*out = new(bool)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSQLDatabaseParameters.
+func (in *LinkedServiceAzureSQLDatabaseParameters) DeepCopy() *LinkedServiceAzureSQLDatabaseParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSQLDatabaseParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSQLDatabaseSpec) DeepCopyInto(out *LinkedServiceAzureSQLDatabaseSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSQLDatabaseSpec.
+func (in *LinkedServiceAzureSQLDatabaseSpec) DeepCopy() *LinkedServiceAzureSQLDatabaseSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSQLDatabaseSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSQLDatabaseStatus) DeepCopyInto(out *LinkedServiceAzureSQLDatabaseStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSQLDatabaseStatus.
+func (in *LinkedServiceAzureSQLDatabaseStatus) DeepCopy() *LinkedServiceAzureSQLDatabaseStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSQLDatabaseStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSearch) DeepCopyInto(out *LinkedServiceAzureSearch) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSearch.
+func (in *LinkedServiceAzureSearch) DeepCopy() *LinkedServiceAzureSearch {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSearch)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureSearch) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSearchList) DeepCopyInto(out *LinkedServiceAzureSearchList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceAzureSearch, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSearchList.
+func (in *LinkedServiceAzureSearchList) DeepCopy() *LinkedServiceAzureSearchList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSearchList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureSearchList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSearchObservation) DeepCopyInto(out *LinkedServiceAzureSearchObservation) {
+	*out = *in
+	if in.EncryptedCredential != nil {
+		in, out := &in.EncryptedCredential, &out.EncryptedCredential
+		*out = new(string)
+		**out = **in
+	}
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSearchObservation.
+func (in *LinkedServiceAzureSearchObservation) DeepCopy() *LinkedServiceAzureSearchObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSearchObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSearchParameters) DeepCopyInto(out *LinkedServiceAzureSearchParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.SearchServiceKey != nil {
+		in, out := &in.SearchServiceKey, &out.SearchServiceKey
+		*out = new(string)
+		**out = **in
+	}
+	if in.SearchServiceKeyRef != nil {
+		in, out := &in.SearchServiceKeyRef, &out.SearchServiceKeyRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SearchServiceKeySelector != nil {
+		in, out := &in.SearchServiceKeySelector, &out.SearchServiceKeySelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.URL != nil {
+		in, out := &in.URL, &out.URL
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSearchParameters.
+func (in *LinkedServiceAzureSearchParameters) DeepCopy() *LinkedServiceAzureSearchParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSearchParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSearchSpec) DeepCopyInto(out *LinkedServiceAzureSearchSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSearchSpec.
+func (in *LinkedServiceAzureSearchSpec) DeepCopy() *LinkedServiceAzureSearchSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSearchSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureSearchStatus) DeepCopyInto(out *LinkedServiceAzureSearchStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureSearchStatus.
+func (in *LinkedServiceAzureSearchStatus) DeepCopy() *LinkedServiceAzureSearchStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureSearchStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureTableStorage) DeepCopyInto(out *LinkedServiceAzureTableStorage) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureTableStorage.
+func (in *LinkedServiceAzureTableStorage) DeepCopy() *LinkedServiceAzureTableStorage {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureTableStorage)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureTableStorage) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureTableStorageList) DeepCopyInto(out *LinkedServiceAzureTableStorageList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceAzureTableStorage, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureTableStorageList.
+func (in *LinkedServiceAzureTableStorageList) DeepCopy() *LinkedServiceAzureTableStorageList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureTableStorageList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceAzureTableStorageList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureTableStorageObservation) DeepCopyInto(out *LinkedServiceAzureTableStorageObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureTableStorageObservation.
+func (in *LinkedServiceAzureTableStorageObservation) DeepCopy() *LinkedServiceAzureTableStorageObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureTableStorageObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureTableStorageParameters) DeepCopyInto(out *LinkedServiceAzureTableStorageParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	out.ConnectionStringSecretRef = in.ConnectionStringSecretRef
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureTableStorageParameters.
+func (in *LinkedServiceAzureTableStorageParameters) DeepCopy() *LinkedServiceAzureTableStorageParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureTableStorageParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureTableStorageSpec) DeepCopyInto(out *LinkedServiceAzureTableStorageSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureTableStorageSpec.
+func (in *LinkedServiceAzureTableStorageSpec) DeepCopy() *LinkedServiceAzureTableStorageSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureTableStorageSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceAzureTableStorageStatus) DeepCopyInto(out *LinkedServiceAzureTableStorageStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceAzureTableStorageStatus.
+func (in *LinkedServiceAzureTableStorageStatus) DeepCopy() *LinkedServiceAzureTableStorageStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceAzureTableStorageStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceCosmosDB) DeepCopyInto(out *LinkedServiceCosmosDB) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceCosmosDB.
+func (in *LinkedServiceCosmosDB) DeepCopy() *LinkedServiceCosmosDB {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceCosmosDB)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceCosmosDB) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceCosmosDBList) DeepCopyInto(out *LinkedServiceCosmosDBList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceCosmosDB, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceCosmosDBList.
+func (in *LinkedServiceCosmosDBList) DeepCopy() *LinkedServiceCosmosDBList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceCosmosDBList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceCosmosDBList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceCosmosDBObservation) DeepCopyInto(out *LinkedServiceCosmosDBObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceCosmosDBObservation.
+func (in *LinkedServiceCosmosDBObservation) DeepCopy() *LinkedServiceCosmosDBObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceCosmosDBObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceCosmosDBParameters) DeepCopyInto(out *LinkedServiceCosmosDBParameters) {
+	*out = *in
+	if in.AccountEndpoint != nil {
+		in, out := &in.AccountEndpoint, &out.AccountEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.AccountKeySecretRef != nil {
+		in, out := &in.AccountKeySecretRef, &out.AccountKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.ConnectionStringSecretRef != nil {
+		in, out := &in.ConnectionStringSecretRef, &out.ConnectionStringSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Database != nil {
+		in, out := &in.Database, &out.Database
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceCosmosDBParameters.
+func (in *LinkedServiceCosmosDBParameters) DeepCopy() *LinkedServiceCosmosDBParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceCosmosDBParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceCosmosDBSpec) DeepCopyInto(out *LinkedServiceCosmosDBSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceCosmosDBSpec.
+func (in *LinkedServiceCosmosDBSpec) DeepCopy() *LinkedServiceCosmosDBSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceCosmosDBSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceCosmosDBStatus) DeepCopyInto(out *LinkedServiceCosmosDBStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceCosmosDBStatus.
+func (in *LinkedServiceCosmosDBStatus) DeepCopy() *LinkedServiceCosmosDBStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceCosmosDBStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceDataLakeStorageGen2) DeepCopyInto(out *LinkedServiceDataLakeStorageGen2) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceDataLakeStorageGen2.
+func (in *LinkedServiceDataLakeStorageGen2) DeepCopy() *LinkedServiceDataLakeStorageGen2 {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceDataLakeStorageGen2)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceDataLakeStorageGen2) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceDataLakeStorageGen2List) DeepCopyInto(out *LinkedServiceDataLakeStorageGen2List) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceDataLakeStorageGen2, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceDataLakeStorageGen2List.
+func (in *LinkedServiceDataLakeStorageGen2List) DeepCopy() *LinkedServiceDataLakeStorageGen2List {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceDataLakeStorageGen2List)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceDataLakeStorageGen2List) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceDataLakeStorageGen2Observation) DeepCopyInto(out *LinkedServiceDataLakeStorageGen2Observation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceDataLakeStorageGen2Observation.
+func (in *LinkedServiceDataLakeStorageGen2Observation) DeepCopy() *LinkedServiceDataLakeStorageGen2Observation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceDataLakeStorageGen2Observation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceDataLakeStorageGen2Parameters) DeepCopyInto(out *LinkedServiceDataLakeStorageGen2Parameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.ServicePrincipalID != nil {
+		in, out := &in.ServicePrincipalID, &out.ServicePrincipalID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServicePrincipalKey != nil {
+		in, out := &in.ServicePrincipalKey, &out.ServicePrincipalKey
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageAccountKey != nil {
+		in, out := &in.StorageAccountKey, &out.StorageAccountKey
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tenant != nil {
+		in, out := &in.Tenant, &out.Tenant
+		*out = new(string)
+		**out = **in
+	}
+	if in.URL != nil {
+		in, out := &in.URL, &out.URL
+		*out = new(string)
+		**out = **in
+	}
+	if in.UseManagedIdentity != nil {
+		in, out := &in.UseManagedIdentity, &out.UseManagedIdentity
+		*out = new(bool)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceDataLakeStorageGen2Parameters.
+func (in *LinkedServiceDataLakeStorageGen2Parameters) DeepCopy() *LinkedServiceDataLakeStorageGen2Parameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceDataLakeStorageGen2Parameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceDataLakeStorageGen2Spec) DeepCopyInto(out *LinkedServiceDataLakeStorageGen2Spec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceDataLakeStorageGen2Spec.
+func (in *LinkedServiceDataLakeStorageGen2Spec) DeepCopy() *LinkedServiceDataLakeStorageGen2Spec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceDataLakeStorageGen2Spec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceDataLakeStorageGen2Status) DeepCopyInto(out *LinkedServiceDataLakeStorageGen2Status) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceDataLakeStorageGen2Status.
+func (in *LinkedServiceDataLakeStorageGen2Status) DeepCopy() *LinkedServiceDataLakeStorageGen2Status {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceDataLakeStorageGen2Status)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKeyVault) DeepCopyInto(out *LinkedServiceKeyVault) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKeyVault.
+func (in *LinkedServiceKeyVault) DeepCopy() *LinkedServiceKeyVault {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKeyVault)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceKeyVault) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKeyVaultList) DeepCopyInto(out *LinkedServiceKeyVaultList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceKeyVault, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKeyVaultList.
+func (in *LinkedServiceKeyVaultList) DeepCopy() *LinkedServiceKeyVaultList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKeyVaultList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceKeyVaultList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKeyVaultObservation) DeepCopyInto(out *LinkedServiceKeyVaultObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKeyVaultObservation.
+func (in *LinkedServiceKeyVaultObservation) DeepCopy() *LinkedServiceKeyVaultObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKeyVaultObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKeyVaultParameters) DeepCopyInto(out *LinkedServiceKeyVaultParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultID != nil {
+		in, out := &in.KeyVaultID, &out.KeyVaultID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultIDRef != nil {
+		in, out := &in.KeyVaultIDRef, &out.KeyVaultIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KeyVaultIDSelector != nil {
+		in, out := &in.KeyVaultIDSelector, &out.KeyVaultIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKeyVaultParameters.
+func (in *LinkedServiceKeyVaultParameters) DeepCopy() *LinkedServiceKeyVaultParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKeyVaultParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKeyVaultSpec) DeepCopyInto(out *LinkedServiceKeyVaultSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKeyVaultSpec.
+func (in *LinkedServiceKeyVaultSpec) DeepCopy() *LinkedServiceKeyVaultSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKeyVaultSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKeyVaultStatus) DeepCopyInto(out *LinkedServiceKeyVaultStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKeyVaultStatus.
+func (in *LinkedServiceKeyVaultStatus) DeepCopy() *LinkedServiceKeyVaultStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKeyVaultStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKusto) DeepCopyInto(out *LinkedServiceKusto) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKusto.
+func (in *LinkedServiceKusto) DeepCopy() *LinkedServiceKusto {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKusto)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceKusto) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKustoList) DeepCopyInto(out *LinkedServiceKustoList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceKusto, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKustoList.
+func (in *LinkedServiceKustoList) DeepCopy() *LinkedServiceKustoList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKustoList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceKustoList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKustoObservation) DeepCopyInto(out *LinkedServiceKustoObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKustoObservation.
+func (in *LinkedServiceKustoObservation) DeepCopy() *LinkedServiceKustoObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKustoObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKustoParameters) DeepCopyInto(out *LinkedServiceKustoParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KustoDatabaseName != nil {
+		in, out := &in.KustoDatabaseName, &out.KustoDatabaseName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KustoDatabaseNameRef != nil {
+		in, out := &in.KustoDatabaseNameRef, &out.KustoDatabaseNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KustoDatabaseNameSelector != nil {
+		in, out := &in.KustoDatabaseNameSelector, &out.KustoDatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KustoEndpoint != nil {
+		in, out := &in.KustoEndpoint, &out.KustoEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.KustoEndpointRef != nil {
+		in, out := &in.KustoEndpointRef, &out.KustoEndpointRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KustoEndpointSelector != nil {
+		in, out := &in.KustoEndpointSelector, &out.KustoEndpointSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.ServicePrincipalID != nil {
+		in, out := &in.ServicePrincipalID, &out.ServicePrincipalID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServicePrincipalKeySecretRef != nil {
+		in, out := &in.ServicePrincipalKeySecretRef, &out.ServicePrincipalKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.Tenant != nil {
+		in, out := &in.Tenant, &out.Tenant
+		*out = new(string)
+		**out = **in
+	}
+	if in.UseManagedIdentity != nil {
+		in, out := &in.UseManagedIdentity, &out.UseManagedIdentity
+		*out = new(bool)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKustoParameters.
+func (in *LinkedServiceKustoParameters) DeepCopy() *LinkedServiceKustoParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKustoParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKustoSpec) DeepCopyInto(out *LinkedServiceKustoSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKustoSpec.
+func (in *LinkedServiceKustoSpec) DeepCopy() *LinkedServiceKustoSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKustoSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceKustoStatus) DeepCopyInto(out *LinkedServiceKustoStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceKustoStatus.
+func (in *LinkedServiceKustoStatus) DeepCopy() *LinkedServiceKustoStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceKustoStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceMySQL) DeepCopyInto(out *LinkedServiceMySQL) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceMySQL.
+func (in *LinkedServiceMySQL) DeepCopy() *LinkedServiceMySQL {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceMySQL)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceMySQL) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceMySQLList) DeepCopyInto(out *LinkedServiceMySQLList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceMySQL, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceMySQLList.
+func (in *LinkedServiceMySQLList) DeepCopy() *LinkedServiceMySQLList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceMySQLList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceMySQLList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceMySQLObservation) DeepCopyInto(out *LinkedServiceMySQLObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceMySQLObservation.
+func (in *LinkedServiceMySQLObservation) DeepCopy() *LinkedServiceMySQLObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceMySQLObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceMySQLParameters) DeepCopyInto(out *LinkedServiceMySQLParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.ConnectionString != nil {
+		in, out := &in.ConnectionString, &out.ConnectionString
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceMySQLParameters.
+func (in *LinkedServiceMySQLParameters) DeepCopy() *LinkedServiceMySQLParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceMySQLParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceMySQLSpec) DeepCopyInto(out *LinkedServiceMySQLSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceMySQLSpec.
+func (in *LinkedServiceMySQLSpec) DeepCopy() *LinkedServiceMySQLSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceMySQLSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceMySQLStatus) DeepCopyInto(out *LinkedServiceMySQLStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceMySQLStatus.
+func (in *LinkedServiceMySQLStatus) DeepCopy() *LinkedServiceMySQLStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceMySQLStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceOData) DeepCopyInto(out *LinkedServiceOData) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceOData.
+func (in *LinkedServiceOData) DeepCopy() *LinkedServiceOData {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceOData)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceOData) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceODataList) DeepCopyInto(out *LinkedServiceODataList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceOData, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceODataList.
+func (in *LinkedServiceODataList) DeepCopy() *LinkedServiceODataList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceODataList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceODataList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceODataObservation) DeepCopyInto(out *LinkedServiceODataObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceODataObservation.
+func (in *LinkedServiceODataObservation) DeepCopy() *LinkedServiceODataObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceODataObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceODataParameters) DeepCopyInto(out *LinkedServiceODataParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.BasicAuthentication != nil {
+		in, out := &in.BasicAuthentication, &out.BasicAuthentication
+		*out = make([]BasicAuthenticationParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.URL != nil {
+		in, out := &in.URL, &out.URL
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceODataParameters.
+func (in *LinkedServiceODataParameters) DeepCopy() *LinkedServiceODataParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceODataParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceODataSpec) DeepCopyInto(out *LinkedServiceODataSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceODataSpec.
+func (in *LinkedServiceODataSpec) DeepCopy() *LinkedServiceODataSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceODataSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceODataStatus) DeepCopyInto(out *LinkedServiceODataStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceODataStatus.
+func (in *LinkedServiceODataStatus) DeepCopy() *LinkedServiceODataStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceODataStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *LinkedServiceObservation) DeepCopyInto(out *LinkedServiceObservation) {
 	*out = *in
 }
@@ -5709,6 +8680,42 @@ func (in *LinkedServiceOdbc) DeepCopyObject() runtime.Object {
 		return c
 	}
 	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceOdbcBasicAuthenticationObservation) DeepCopyInto(out *LinkedServiceOdbcBasicAuthenticationObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceOdbcBasicAuthenticationObservation.
+func (in *LinkedServiceOdbcBasicAuthenticationObservation) DeepCopy() *LinkedServiceOdbcBasicAuthenticationObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceOdbcBasicAuthenticationObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceOdbcBasicAuthenticationParameters) DeepCopyInto(out *LinkedServiceOdbcBasicAuthenticationParameters) {
+	*out = *in
+	out.PasswordSecretRef = in.PasswordSecretRef
+	if in.Username != nil {
+		in, out := &in.Username, &out.Username
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceOdbcBasicAuthenticationParameters.
+func (in *LinkedServiceOdbcBasicAuthenticationParameters) DeepCopy() *LinkedServiceOdbcBasicAuthenticationParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceOdbcBasicAuthenticationParameters)
+	in.DeepCopyInto(out)
+	return out
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
@@ -5794,7 +8801,7 @@ func (in *LinkedServiceOdbcParameters) DeepCopyInto(out *LinkedServiceOdbcParame
 	}
 	if in.BasicAuthentication != nil {
 		in, out := &in.BasicAuthentication, &out.BasicAuthentication
-		*out = make([]BasicAuthenticationParameters, len(*in))
+		*out = make([]LinkedServiceOdbcBasicAuthenticationParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -5936,6 +8943,1643 @@ func (in *LinkedServiceParameters) DeepCopy() *LinkedServiceParameters {
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServicePostgreSQL) DeepCopyInto(out *LinkedServicePostgreSQL) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServicePostgreSQL.
+func (in *LinkedServicePostgreSQL) DeepCopy() *LinkedServicePostgreSQL {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServicePostgreSQL)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServicePostgreSQL) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServicePostgreSQLList) DeepCopyInto(out *LinkedServicePostgreSQLList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServicePostgreSQL, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServicePostgreSQLList.
+func (in *LinkedServicePostgreSQLList) DeepCopy() *LinkedServicePostgreSQLList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServicePostgreSQLList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServicePostgreSQLList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServicePostgreSQLObservation) DeepCopyInto(out *LinkedServicePostgreSQLObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServicePostgreSQLObservation.
+func (in *LinkedServicePostgreSQLObservation) DeepCopy() *LinkedServicePostgreSQLObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServicePostgreSQLObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServicePostgreSQLParameters) DeepCopyInto(out *LinkedServicePostgreSQLParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.ConnectionString != nil {
+		in, out := &in.ConnectionString, &out.ConnectionString
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServicePostgreSQLParameters.
+func (in *LinkedServicePostgreSQLParameters) DeepCopy() *LinkedServicePostgreSQLParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServicePostgreSQLParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServicePostgreSQLSpec) DeepCopyInto(out *LinkedServicePostgreSQLSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServicePostgreSQLSpec.
+func (in *LinkedServicePostgreSQLSpec) DeepCopy() *LinkedServicePostgreSQLSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServicePostgreSQLSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServicePostgreSQLStatus) DeepCopyInto(out *LinkedServicePostgreSQLStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServicePostgreSQLStatus.
+func (in *LinkedServicePostgreSQLStatus) DeepCopy() *LinkedServicePostgreSQLStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServicePostgreSQLStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSFTP) DeepCopyInto(out *LinkedServiceSFTP) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSFTP.
+func (in *LinkedServiceSFTP) DeepCopy() *LinkedServiceSFTP {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSFTP)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceSFTP) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSFTPList) DeepCopyInto(out *LinkedServiceSFTPList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceSFTP, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSFTPList.
+func (in *LinkedServiceSFTPList) DeepCopy() *LinkedServiceSFTPList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSFTPList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceSFTPList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSFTPObservation) DeepCopyInto(out *LinkedServiceSFTPObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSFTPObservation.
+func (in *LinkedServiceSFTPObservation) DeepCopy() *LinkedServiceSFTPObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSFTPObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSFTPParameters) DeepCopyInto(out *LinkedServiceSFTPParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.AuthenticationType != nil {
+		in, out := &in.AuthenticationType, &out.AuthenticationType
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.Host != nil {
+		in, out := &in.Host, &out.Host
+		*out = new(string)
+		**out = **in
+	}
+	if in.HostKeyFingerprint != nil {
+		in, out := &in.HostKeyFingerprint, &out.HostKeyFingerprint
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	out.PasswordSecretRef = in.PasswordSecretRef
+	if in.Port != nil {
+		in, out := &in.Port, &out.Port
+		*out = new(float64)
+		**out = **in
+	}
+	if in.SkipHostKeyValidation != nil {
+		in, out := &in.SkipHostKeyValidation, &out.SkipHostKeyValidation
+		*out = new(bool)
+		**out = **in
+	}
+	if in.Username != nil {
+		in, out := &in.Username, &out.Username
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSFTPParameters.
+func (in *LinkedServiceSFTPParameters) DeepCopy() *LinkedServiceSFTPParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSFTPParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSFTPSpec) DeepCopyInto(out *LinkedServiceSFTPSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSFTPSpec.
+func (in *LinkedServiceSFTPSpec) DeepCopy() *LinkedServiceSFTPSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSFTPSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSFTPStatus) DeepCopyInto(out *LinkedServiceSFTPStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSFTPStatus.
+func (in *LinkedServiceSFTPStatus) DeepCopy() *LinkedServiceSFTPStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSFTPStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServer) DeepCopyInto(out *LinkedServiceSQLServer) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServer.
+func (in *LinkedServiceSQLServer) DeepCopy() *LinkedServiceSQLServer {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServer)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceSQLServer) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServerKeyVaultConnectionStringObservation) DeepCopyInto(out *LinkedServiceSQLServerKeyVaultConnectionStringObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServerKeyVaultConnectionStringObservation.
+func (in *LinkedServiceSQLServerKeyVaultConnectionStringObservation) DeepCopy() *LinkedServiceSQLServerKeyVaultConnectionStringObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServerKeyVaultConnectionStringObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServerKeyVaultConnectionStringParameters) DeepCopyInto(out *LinkedServiceSQLServerKeyVaultConnectionStringParameters) {
+	*out = *in
+	if in.LinkedServiceName != nil {
+		in, out := &in.LinkedServiceName, &out.LinkedServiceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecretName != nil {
+		in, out := &in.SecretName, &out.SecretName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServerKeyVaultConnectionStringParameters.
+func (in *LinkedServiceSQLServerKeyVaultConnectionStringParameters) DeepCopy() *LinkedServiceSQLServerKeyVaultConnectionStringParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServerKeyVaultConnectionStringParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServerKeyVaultPasswordObservation) DeepCopyInto(out *LinkedServiceSQLServerKeyVaultPasswordObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServerKeyVaultPasswordObservation.
+func (in *LinkedServiceSQLServerKeyVaultPasswordObservation) DeepCopy() *LinkedServiceSQLServerKeyVaultPasswordObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServerKeyVaultPasswordObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServerKeyVaultPasswordParameters) DeepCopyInto(out *LinkedServiceSQLServerKeyVaultPasswordParameters) {
+	*out = *in
+	if in.LinkedServiceName != nil {
+		in, out := &in.LinkedServiceName, &out.LinkedServiceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecretName != nil {
+		in, out := &in.SecretName, &out.SecretName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServerKeyVaultPasswordParameters.
+func (in *LinkedServiceSQLServerKeyVaultPasswordParameters) DeepCopy() *LinkedServiceSQLServerKeyVaultPasswordParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServerKeyVaultPasswordParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServerList) DeepCopyInto(out *LinkedServiceSQLServerList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceSQLServer, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServerList.
+func (in *LinkedServiceSQLServerList) DeepCopy() *LinkedServiceSQLServerList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServerList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceSQLServerList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServerObservation) DeepCopyInto(out *LinkedServiceSQLServerObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServerObservation.
+func (in *LinkedServiceSQLServerObservation) DeepCopy() *LinkedServiceSQLServerObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServerObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServerParameters) DeepCopyInto(out *LinkedServiceSQLServerParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.ConnectionString != nil {
+		in, out := &in.ConnectionString, &out.ConnectionString
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultConnectionString != nil {
+		in, out := &in.KeyVaultConnectionString, &out.KeyVaultConnectionString
+		*out = make([]LinkedServiceSQLServerKeyVaultConnectionStringParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.KeyVaultPassword != nil {
+		in, out := &in.KeyVaultPassword, &out.KeyVaultPassword
+		*out = make([]LinkedServiceSQLServerKeyVaultPasswordParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.UserName != nil {
+		in, out := &in.UserName, &out.UserName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServerParameters.
+func (in *LinkedServiceSQLServerParameters) DeepCopy() *LinkedServiceSQLServerParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServerParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServerSpec) DeepCopyInto(out *LinkedServiceSQLServerSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServerSpec.
+func (in *LinkedServiceSQLServerSpec) DeepCopy() *LinkedServiceSQLServerSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServerSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSQLServerStatus) DeepCopyInto(out *LinkedServiceSQLServerStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSQLServerStatus.
+func (in *LinkedServiceSQLServerStatus) DeepCopy() *LinkedServiceSQLServerStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSQLServerStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSnowflake) DeepCopyInto(out *LinkedServiceSnowflake) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSnowflake.
+func (in *LinkedServiceSnowflake) DeepCopy() *LinkedServiceSnowflake {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSnowflake)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceSnowflake) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSnowflakeKeyVaultPasswordObservation) DeepCopyInto(out *LinkedServiceSnowflakeKeyVaultPasswordObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSnowflakeKeyVaultPasswordObservation.
+func (in *LinkedServiceSnowflakeKeyVaultPasswordObservation) DeepCopy() *LinkedServiceSnowflakeKeyVaultPasswordObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSnowflakeKeyVaultPasswordObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSnowflakeKeyVaultPasswordParameters) DeepCopyInto(out *LinkedServiceSnowflakeKeyVaultPasswordParameters) {
+	*out = *in
+	if in.LinkedServiceName != nil {
+		in, out := &in.LinkedServiceName, &out.LinkedServiceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecretName != nil {
+		in, out := &in.SecretName, &out.SecretName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSnowflakeKeyVaultPasswordParameters.
+func (in *LinkedServiceSnowflakeKeyVaultPasswordParameters) DeepCopy() *LinkedServiceSnowflakeKeyVaultPasswordParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSnowflakeKeyVaultPasswordParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSnowflakeList) DeepCopyInto(out *LinkedServiceSnowflakeList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceSnowflake, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSnowflakeList.
+func (in *LinkedServiceSnowflakeList) DeepCopy() *LinkedServiceSnowflakeList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSnowflakeList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceSnowflakeList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSnowflakeObservation) DeepCopyInto(out *LinkedServiceSnowflakeObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSnowflakeObservation.
+func (in *LinkedServiceSnowflakeObservation) DeepCopy() *LinkedServiceSnowflakeObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSnowflakeObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSnowflakeParameters) DeepCopyInto(out *LinkedServiceSnowflakeParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.ConnectionString != nil {
+		in, out := &in.ConnectionString, &out.ConnectionString
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultPassword != nil {
+		in, out := &in.KeyVaultPassword, &out.KeyVaultPassword
+		*out = make([]LinkedServiceSnowflakeKeyVaultPasswordParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSnowflakeParameters.
+func (in *LinkedServiceSnowflakeParameters) DeepCopy() *LinkedServiceSnowflakeParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSnowflakeParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSnowflakeSpec) DeepCopyInto(out *LinkedServiceSnowflakeSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSnowflakeSpec.
+func (in *LinkedServiceSnowflakeSpec) DeepCopy() *LinkedServiceSnowflakeSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSnowflakeSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSnowflakeStatus) DeepCopyInto(out *LinkedServiceSnowflakeStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSnowflakeStatus.
+func (in *LinkedServiceSnowflakeStatus) DeepCopy() *LinkedServiceSnowflakeStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSnowflakeStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSynapse) DeepCopyInto(out *LinkedServiceSynapse) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSynapse.
+func (in *LinkedServiceSynapse) DeepCopy() *LinkedServiceSynapse {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSynapse)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceSynapse) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSynapseKeyVaultPasswordObservation) DeepCopyInto(out *LinkedServiceSynapseKeyVaultPasswordObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSynapseKeyVaultPasswordObservation.
+func (in *LinkedServiceSynapseKeyVaultPasswordObservation) DeepCopy() *LinkedServiceSynapseKeyVaultPasswordObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSynapseKeyVaultPasswordObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSynapseKeyVaultPasswordParameters) DeepCopyInto(out *LinkedServiceSynapseKeyVaultPasswordParameters) {
+	*out = *in
+	if in.LinkedServiceName != nil {
+		in, out := &in.LinkedServiceName, &out.LinkedServiceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecretName != nil {
+		in, out := &in.SecretName, &out.SecretName
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSynapseKeyVaultPasswordParameters.
+func (in *LinkedServiceSynapseKeyVaultPasswordParameters) DeepCopy() *LinkedServiceSynapseKeyVaultPasswordParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSynapseKeyVaultPasswordParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSynapseList) DeepCopyInto(out *LinkedServiceSynapseList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceSynapse, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSynapseList.
+func (in *LinkedServiceSynapseList) DeepCopy() *LinkedServiceSynapseList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSynapseList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceSynapseList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSynapseObservation) DeepCopyInto(out *LinkedServiceSynapseObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSynapseObservation.
+func (in *LinkedServiceSynapseObservation) DeepCopy() *LinkedServiceSynapseObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSynapseObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSynapseParameters) DeepCopyInto(out *LinkedServiceSynapseParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.ConnectionString != nil {
+		in, out := &in.ConnectionString, &out.ConnectionString
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KeyVaultPassword != nil {
+		in, out := &in.KeyVaultPassword, &out.KeyVaultPassword
+		*out = make([]LinkedServiceSynapseKeyVaultPasswordParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSynapseParameters.
+func (in *LinkedServiceSynapseParameters) DeepCopy() *LinkedServiceSynapseParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSynapseParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSynapseSpec) DeepCopyInto(out *LinkedServiceSynapseSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSynapseSpec.
+func (in *LinkedServiceSynapseSpec) DeepCopy() *LinkedServiceSynapseSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSynapseSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceSynapseStatus) DeepCopyInto(out *LinkedServiceSynapseStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceSynapseStatus.
+func (in *LinkedServiceSynapseStatus) DeepCopy() *LinkedServiceSynapseStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceSynapseStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceWeb) DeepCopyInto(out *LinkedServiceWeb) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceWeb.
+func (in *LinkedServiceWeb) DeepCopy() *LinkedServiceWeb {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceWeb)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceWeb) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceWebList) DeepCopyInto(out *LinkedServiceWebList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]LinkedServiceWeb, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceWebList.
+func (in *LinkedServiceWebList) DeepCopy() *LinkedServiceWebList {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceWebList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *LinkedServiceWebList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceWebObservation) DeepCopyInto(out *LinkedServiceWebObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceWebObservation.
+func (in *LinkedServiceWebObservation) DeepCopy() *LinkedServiceWebObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceWebObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceWebParameters) DeepCopyInto(out *LinkedServiceWebParameters) {
+	*out = *in
+	if in.AdditionalProperties != nil {
+		in, out := &in.AdditionalProperties, &out.AdditionalProperties
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.Annotations != nil {
+		in, out := &in.Annotations, &out.Annotations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.AuthenticationType != nil {
+		in, out := &in.AuthenticationType, &out.AuthenticationType
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationRuntimeName != nil {
+		in, out := &in.IntegrationRuntimeName, &out.IntegrationRuntimeName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.URL != nil {
+		in, out := &in.URL, &out.URL
+		*out = new(string)
+		**out = **in
+	}
+	if in.Username != nil {
+		in, out := &in.Username, &out.Username
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceWebParameters.
+func (in *LinkedServiceWebParameters) DeepCopy() *LinkedServiceWebParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceWebParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceWebSpec) DeepCopyInto(out *LinkedServiceWebSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceWebSpec.
+func (in *LinkedServiceWebSpec) DeepCopy() *LinkedServiceWebSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceWebSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *LinkedServiceWebStatus) DeepCopyInto(out *LinkedServiceWebStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new LinkedServiceWebStatus.
+func (in *LinkedServiceWebStatus) DeepCopy() *LinkedServiceWebStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(LinkedServiceWebStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *ManagedPrivateEndpoint) DeepCopyInto(out *ManagedPrivateEndpoint) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
+	in.Spec.DeepCopyInto(&out.Spec)
+	in.Status.DeepCopyInto(&out.Status)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ManagedPrivateEndpoint.
+func (in *ManagedPrivateEndpoint) DeepCopy() *ManagedPrivateEndpoint {
+	if in == nil {
+		return nil
+	}
+	out := new(ManagedPrivateEndpoint)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *ManagedPrivateEndpoint) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *ManagedPrivateEndpointList) DeepCopyInto(out *ManagedPrivateEndpointList) {
+	*out = *in
+	out.TypeMeta = in.TypeMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
+	if in.Items != nil {
+		in, out := &in.Items, &out.Items
+		*out = make([]ManagedPrivateEndpoint, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ManagedPrivateEndpointList.
+func (in *ManagedPrivateEndpointList) DeepCopy() *ManagedPrivateEndpointList {
+	if in == nil {
+		return nil
+	}
+	out := new(ManagedPrivateEndpointList)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyObject is an autogenerated deepcopy function, copying the receiver, creating a new runtime.Object.
+func (in *ManagedPrivateEndpointList) DeepCopyObject() runtime.Object {
+	if c := in.DeepCopy(); c != nil {
+		return c
+	}
+	return nil
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *ManagedPrivateEndpointObservation) DeepCopyInto(out *ManagedPrivateEndpointObservation) {
+	*out = *in
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ManagedPrivateEndpointObservation.
+func (in *ManagedPrivateEndpointObservation) DeepCopy() *ManagedPrivateEndpointObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(ManagedPrivateEndpointObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *ManagedPrivateEndpointParameters) DeepCopyInto(out *ManagedPrivateEndpointParameters) {
+	*out = *in
+	if in.DataFactoryID != nil {
+		in, out := &in.DataFactoryID, &out.DataFactoryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataFactoryIDRef != nil {
+		in, out := &in.DataFactoryIDRef, &out.DataFactoryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataFactoryIDSelector != nil {
+		in, out := &in.DataFactoryIDSelector, &out.DataFactoryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.Fqdns != nil {
+		in, out := &in.Fqdns, &out.Fqdns
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubresourceName != nil {
+		in, out := &in.SubresourceName, &out.SubresourceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.TargetResourceID != nil {
+		in, out := &in.TargetResourceID, &out.TargetResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.TargetResourceIDRef != nil {
+		in, out := &in.TargetResourceIDRef, &out.TargetResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetResourceIDSelector != nil {
+		in, out := &in.TargetResourceIDSelector, &out.TargetResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ManagedPrivateEndpointParameters.
+func (in *ManagedPrivateEndpointParameters) DeepCopy() *ManagedPrivateEndpointParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(ManagedPrivateEndpointParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *ManagedPrivateEndpointSpec) DeepCopyInto(out *ManagedPrivateEndpointSpec) {
+	*out = *in
+	in.ResourceSpec.DeepCopyInto(&out.ResourceSpec)
+	in.ForProvider.DeepCopyInto(&out.ForProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ManagedPrivateEndpointSpec.
+func (in *ManagedPrivateEndpointSpec) DeepCopy() *ManagedPrivateEndpointSpec {
+	if in == nil {
+		return nil
+	}
+	out := new(ManagedPrivateEndpointSpec)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *ManagedPrivateEndpointStatus) DeepCopyInto(out *ManagedPrivateEndpointStatus) {
+	*out = *in
+	in.ResourceStatus.DeepCopyInto(&out.ResourceStatus)
+	in.AtProvider.DeepCopyInto(&out.AtProvider)
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ManagedPrivateEndpointStatus.
+func (in *ManagedPrivateEndpointStatus) DeepCopy() *ManagedPrivateEndpointStatus {
+	if in == nil {
+		return nil
+	}
+	out := new(ManagedPrivateEndpointStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MonthlyObservation) DeepCopyInto(out *MonthlyObservation) {
 	*out = *in
 }
@@ -5971,6 +10615,122 @@ func (in *MonthlyParameters) DeepCopy() *MonthlyParameters {
 		return nil
 	}
 	out := new(MonthlyParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *NewClusterConfigObservation) DeepCopyInto(out *NewClusterConfigObservation) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new NewClusterConfigObservation.
+func (in *NewClusterConfigObservation) DeepCopy() *NewClusterConfigObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(NewClusterConfigObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *NewClusterConfigParameters) DeepCopyInto(out *NewClusterConfigParameters) {
+	*out = *in
+	if in.ClusterVersion != nil {
+		in, out := &in.ClusterVersion, &out.ClusterVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.CustomTags != nil {
+		in, out := &in.CustomTags, &out.CustomTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.DriverNodeType != nil {
+		in, out := &in.DriverNodeType, &out.DriverNodeType
+		*out = new(string)
+		**out = **in
+	}
+	if in.InitScripts != nil {
+		in, out := &in.InitScripts, &out.InitScripts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.LogDestination != nil {
+		in, out := &in.LogDestination, &out.LogDestination
+		*out = new(string)
+		**out = **in
+	}
+	if in.MaxNumberOfWorkers != nil {
+		in, out := &in.MaxNumberOfWorkers, &out.MaxNumberOfWorkers
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MinNumberOfWorkers != nil {
+		in, out := &in.MinNumberOfWorkers, &out.MinNumberOfWorkers
+		*out = new(float64)
+		**out = **in
+	}
+	if in.NodeType != nil {
+		in, out := &in.NodeType, &out.NodeType
+		*out = new(string)
+		**out = **in
+	}
+	if in.SparkConfig != nil {
+		in, out := &in.SparkConfig, &out.SparkConfig
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.SparkEnvironmentVariables != nil {
+		in, out := &in.SparkEnvironmentVariables, &out.SparkEnvironmentVariables
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new NewClusterConfigParameters.
+func (in *NewClusterConfigParameters) DeepCopy() *NewClusterConfigParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(NewClusterConfigParameters)
 	in.DeepCopyInto(out)
 	return out
 }
@@ -6602,6 +11362,16 @@ func (in *ServicePrincipalLinkedKeyVaultKeyParameters) DeepCopyInto(out *Service
 		in, out := &in.LinkedServiceName, &out.LinkedServiceName
 		*out = new(string)
 		**out = **in
+	}
+	if in.LinkedServiceNameRef != nil {
+		in, out := &in.LinkedServiceNameRef, &out.LinkedServiceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LinkedServiceNameSelector != nil {
+		in, out := &in.LinkedServiceNameSelector, &out.LinkedServiceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SecretName != nil {
 		in, out := &in.SecretName, &out.SecretName

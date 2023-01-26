@@ -16,7 +16,9 @@ spec:
     - filename: foo.txt
       path: foo/bar/
       relativeUrl: /fizz/buzz/
-    linkedServiceName: ${azurerm_data_factory_linked_service_web.example.name}
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -34,6 +36,24 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceWeb
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/datasetjson
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authenticationType: Anonymous
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    url: https://www.bing.com
 
 ---
 

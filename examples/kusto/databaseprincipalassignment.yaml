@@ -14,13 +14,13 @@ spec:
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    principalId: 6e821fa4-8419-416b-bc43-900b9ad6809a
+    principalId: ${azurerm_data_factory.example.identity.0.principal_id}
     principalType: App
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     role: Viewer
-    tenantId: b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
+    tenantId: ${azurerm_data_factory.example.identity.0.principal_id}
 
 ---
 

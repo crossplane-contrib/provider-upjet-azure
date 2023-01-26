@@ -1,0 +1,46 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceSynapse
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicesynapse
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connectionString: Integrated Security=False;Data Source=test;Initial Catalog=test;User
+      ID=test;Password=test
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicesynapse-fct
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicesynapse
+  labels:
+    testing.upbound.io/example-name: linkedservicesynapse-fct
+  name: linkedservicesynapse-fct
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservicesynapse-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicesynapse
+  labels:
+    testing.upbound.io/example-name: linkedservicesynapse-rg
+  name: linkedservicesynapse-rg
+spec:
+  forProvider:
+    location: West Europe

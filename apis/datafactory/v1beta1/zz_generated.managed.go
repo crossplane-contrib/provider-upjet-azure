@@ -1195,6 +1195,798 @@ func (mg *LinkedServiceAzureBlobStorage) SetWriteConnectionSecretToReference(r *
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceAzureDatabricks.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureDatabricks) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceAzureDatabricks.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureDatabricks) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceAzureFileStorage.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureFileStorage) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceAzureFileStorage.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureFileStorage) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceAzureFunction.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureFunction) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceAzureFunction.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureFunction) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceAzureSQLDatabase.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureSQLDatabase) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceAzureSQLDatabase.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureSQLDatabase) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceAzureSearch.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureSearch) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceAzureSearch.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureSearch) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceAzureTableStorage.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureTableStorage) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceAzureTableStorage.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceAzureTableStorage) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceCosmosDB.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceCosmosDB) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceCosmosDB.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceCosmosDB) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceDataLakeStorageGen2.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceDataLakeStorageGen2) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceDataLakeStorageGen2.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceDataLakeStorageGen2) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceKeyVault.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceKeyVault) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceKeyVault.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceKeyVault) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceKusto.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceKusto) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceKusto.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceKusto) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceMySQL.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceMySQL) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceMySQL.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceMySQL) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceOData.
+func (mg *LinkedServiceOData) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceOData.
+func (mg *LinkedServiceOData) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceOData.
+func (mg *LinkedServiceOData) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceOData.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceOData) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceOData.
+func (mg *LinkedServiceOData) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceOData.
+func (mg *LinkedServiceOData) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceOData.
+func (mg *LinkedServiceOData) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceOData.
+func (mg *LinkedServiceOData) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceOData.
+func (mg *LinkedServiceOData) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceOData.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceOData) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceOData.
+func (mg *LinkedServiceOData) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceOData.
+func (mg *LinkedServiceOData) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this LinkedServiceOdbc.
 func (mg *LinkedServiceOdbc) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -1258,6 +2050,468 @@ func (mg *LinkedServiceOdbc) SetPublishConnectionDetailsTo(r *xpv1.PublishConnec
 
 // SetWriteConnectionSecretToReference of this LinkedServiceOdbc.
 func (mg *LinkedServiceOdbc) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServicePostgreSQL.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServicePostgreSQL) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServicePostgreSQL.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServicePostgreSQL) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceSFTP.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceSFTP) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceSFTP.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceSFTP) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceSQLServer.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceSQLServer) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceSQLServer.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceSQLServer) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceSnowflake.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceSnowflake) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceSnowflake.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceSnowflake) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceSynapse.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceSynapse) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceSynapse.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceSynapse) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceWeb.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceWeb) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceWeb.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceWeb) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ManagedPrivateEndpoint.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ManagedPrivateEndpoint) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ManagedPrivateEndpoint.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ManagedPrivateEndpoint) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
