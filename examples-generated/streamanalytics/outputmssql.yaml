@@ -8,7 +8,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    database: ${azurerm_sql_database.example.name}
+    databaseSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: example-output-sql
     passwordSecretRef:
       key: attribute.administrator_login_password
@@ -41,6 +43,28 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputmssql
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    collation: SQL_LATIN1_GENERAL_CP1_CI_AS
+    createMode: Default
+    location: West Europe
+    maxSizeBytes: "268435456000"
+    requestedServiceObjectiveName: S0
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverName: example-server
 
 ---
 

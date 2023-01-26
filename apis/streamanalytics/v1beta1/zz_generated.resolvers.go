@@ -280,6 +280,22 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Database),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatabaseRef,
+		Selector:     mg.Spec.ForProvider.DatabaseSelector,
+		To: reference.To{
+			List:    &v1beta12.DatabaseList{},
+			Managed: &v1beta12.Database{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Database")
+	}
+	mg.Spec.ForProvider.Database = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,

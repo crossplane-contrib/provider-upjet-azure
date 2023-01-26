@@ -26,8 +26,17 @@ type OutputMSSQLParameters struct {
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The MS SQL database name where the reference table exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Database *string `json:"database" tf:"database,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.Database
+	// +kubebuilder:validation:Optional
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// Reference to a Database in sql to populate database.
+	// +kubebuilder:validation:Optional
+	DatabaseRef *v1.Reference `json:"databaseRef,omitempty" tf:"-"`
+
+	// Selector for a Database in sql to populate database.
+	// +kubebuilder:validation:Optional
+	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// The max batch count to write to the SQL Database. Defaults to 10000. Possible values are between 1 and 1073741824.
 	// +kubebuilder:validation:Optional

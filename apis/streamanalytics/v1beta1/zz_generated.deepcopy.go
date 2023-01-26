@@ -1393,6 +1393,16 @@ func (in *OutputMSSQLParameters) DeepCopyInto(out *OutputMSSQLParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseRef != nil {
+		in, out := &in.DatabaseRef, &out.DatabaseRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseSelector != nil {
+		in, out := &in.DatabaseSelector, &out.DatabaseSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MaxBatchCount != nil {
 		in, out := &in.MaxBatchCount, &out.MaxBatchCount
 		*out = new(float64)

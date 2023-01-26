@@ -1,0 +1,36 @@
+apiVersion: servicefabric.azure.upbound.io/v1beta1
+kind: ManagedCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicefabric/v1beta1/managedcluster
+  labels:
+    testing.upbound.io/example-name: sfexamplemc
+  name: sfexamplemc
+spec:
+  forProvider:
+    clientConnectionPort: 12345
+    httpGatewayPort: 4567
+    lbRule:
+    - backendPort: 38080
+      frontendPort: 80
+      probeProtocol: http
+      probeRequestPath: /test
+      protocol: tcp
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-servicefabric
+    username: UserName123
+    password: UserName123
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicefabric/v1beta1/managedcluster
+  labels:
+    testing.upbound.io/example-name: rg-servicefabric
+  name: rg-servicefabric
+spec:
+  forProvider:
+    location: West Europe

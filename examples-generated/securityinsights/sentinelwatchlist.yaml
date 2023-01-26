@@ -1,0 +1,77 @@
+apiVersion: securityinsights.azure.upbound.io/v1beta1
+kind: SentinelWatchlist
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelwatchlist
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: example-wl
+    itemSearchKey: Key
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationsmanagement.azure.upbound.io/v1beta1
+kind: LogAnalyticsSolution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelwatchlist
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    plan:
+    - product: OMSGallery/SecurityInsights
+      publisher: Microsoft
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    solutionName: SecurityInsights
+    workspaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    workspaceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelwatchlist
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelwatchlist
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
