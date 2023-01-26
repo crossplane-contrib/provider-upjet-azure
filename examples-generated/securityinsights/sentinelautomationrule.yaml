@@ -1,0 +1,81 @@
+apiVersion: securityinsights.azure.upbound.io/v1beta1
+kind: SentinelAutomationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelautomationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    actionIncident:
+    - order: 1
+      status: Active
+    displayName: automation_rule1
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentinel
+    name: 56094f72-ac3f-40e7-a0c0-47bd95f70336
+    order: 1
+
+---
+
+apiVersion: operationsmanagement.azure.upbound.io/v1beta1
+kind: LogAnalyticsSolution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelautomationrule
+  labels:
+    testing.upbound.io/example-name: sentinel
+  name: sentinel
+spec:
+  forProvider:
+    location: west europe
+    plan:
+    - product: OMSGallery/SecurityInsights
+      publisher: Microsoft
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    solutionName: SecurityInsights
+    workspaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    workspaceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelautomationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelautomationrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: west europe
+
+---
+
