@@ -1,0 +1,31 @@
+apiVersion: eventgrid.azure.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta1/topic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topic-rg
+    tags:
+      environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventgrid/v1beta1/topic
+  labels:
+    testing.upbound.io/example-name: topic-rg
+  name: topic-rg
+spec:
+  forProvider:
+    location: West Europe
+

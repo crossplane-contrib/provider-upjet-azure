@@ -1,0 +1,69 @@
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: NamespaceDisasterRecoveryConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: recoveryconf
+  name: recoveryconf
+spec:
+  forProvider:
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary-ns
+    partnerNamespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary-ns
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ns-recovery-rg
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: primary-ns
+  name: primary-ns
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ns-recovery-rg
+    sku: Standard
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: secondary-ns
+  name: secondary-ns
+spec:
+  forProvider:
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ns-recovery-rg
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespacedisasterrecoveryconfig
+  labels:
+    testing.upbound.io/example-name: ns-recovery-rg
+  name: ns-recovery-rg
+spec:
+  forProvider:
+    location: West Europe

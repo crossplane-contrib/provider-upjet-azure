@@ -11,6 +11,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta12 "github.com/upbound/provider-azure/apis/databricks/v1beta1"
+	v1beta17 "github.com/upbound/provider-azure/apis/eventgrid/v1beta1"
 	v1beta14 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	v1beta15 "github.com/upbound/provider-azure/apis/kusto/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/network/v1beta1"
@@ -1556,6 +1557,67 @@ func (mg *TriggerBlobEvent) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataFactoryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DataFactoryIDRef,
+		Selector:     mg.Spec.ForProvider.DataFactoryIDSelector,
+		To: reference.To{
+			List:    &FactoryList{},
+			Managed: &Factory{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DataFactoryID")
+	}
+	mg.Spec.ForProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataFactoryIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventGridTopicID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.EventGridTopicIDRef,
+		Selector:     mg.Spec.ForProvider.EventGridTopicIDSelector,
+		To: reference.To{
+			List:    &v1beta17.TopicList{},
+			Managed: &v1beta17.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventGridTopicID")
+	}
+	mg.Spec.ForProvider.EventGridTopicID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventGridTopicIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Pipeline); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Pipeline[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.Pipeline[i3].NameRef,
+			Selector:     mg.Spec.ForProvider.Pipeline[i3].NameSelector,
+			To: reference.To{
+				List:    &PipelineList{},
+				Managed: &Pipeline{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Pipeline[i3].Name")
+		}
+		mg.Spec.ForProvider.Pipeline[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Pipeline[i3].NameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
