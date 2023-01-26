@@ -99,6 +99,27 @@ spec:
 
 ---
 
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedCustomService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/dataflow
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: AzureBlobStorage
+    typePropertiesJson: |
+      {
+        "connectionString": "${azurerm_storage_account.example.primary_connection_string}"
+      }
+
+---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:

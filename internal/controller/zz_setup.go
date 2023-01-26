@@ -159,7 +159,13 @@ import (
 	factory "github.com/upbound/provider-azure/internal/controller/datafactory/factory"
 	integrationruntimeazure "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazure"
 	integrationruntimeazuressis "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazuressis"
+	integrationruntimeselfhosted "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeselfhosted"
+	linkedcustomservice "github.com/upbound/provider-azure/internal/controller/datafactory/linkedcustomservice"
+	linkedserviceazureblobstorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazureblobstorage"
 	linkedserviceodbc "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceodbc"
+	pipeline "github.com/upbound/provider-azure/internal/controller/datafactory/pipeline"
+	triggerblobevent "github.com/upbound/provider-azure/internal/controller/datafactory/triggerblobevent"
+	triggerschedule "github.com/upbound/provider-azure/internal/controller/datafactory/triggerschedule"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backupvault "github.com/upbound/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/provider-azure/internal/controller/datashare/account"
@@ -580,7 +586,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		factory.Setup,
 		integrationruntimeazure.Setup,
 		integrationruntimeazuressis.Setup,
+		integrationruntimeselfhosted.Setup,
+		linkedcustomservice.Setup,
+		linkedserviceazureblobstorage.Setup,
 		linkedserviceodbc.Setup,
+		pipeline.Setup,
+		triggerblobevent.Setup,
+		triggerschedule.Setup,
 		backuppolicyblobstorage.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,

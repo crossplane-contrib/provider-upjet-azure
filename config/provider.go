@@ -36,6 +36,7 @@ import (
 	"github.com/upbound/provider-azure/config/containerservice"
 	"github.com/upbound/provider-azure/config/cosmosdb"
 	"github.com/upbound/provider-azure/config/costmanagement"
+	"github.com/upbound/provider-azure/config/datafactory"
 	"github.com/upbound/provider-azure/config/dataprotection"
 	"github.com/upbound/provider-azure/config/datashare"
 	"github.com/upbound/provider-azure/config/dbformysql"
@@ -163,6 +164,7 @@ func GetProvider() *tjconfig.Provider {
 		operationalinsights.Configure,
 		insights.Configure,
 		devices.Configure,
+		datafactory.Configure,
 		apimanagement.Configure,
 		logic.Configure,
 		security.Configure,

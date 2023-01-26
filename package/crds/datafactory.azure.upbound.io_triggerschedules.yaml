@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: datasetazureblobs.datafactory.azure.upbound.io
+  name: triggerschedules.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: DataSetAzureBlob
-    listKind: DataSetAzureBlobList
-    plural: datasetazureblobs
-    singular: datasetazureblob
+    kind: TriggerSchedule
+    listKind: TriggerScheduleList
+    plural: triggerschedules
+    singular: triggerschedule
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataSetAzureBlob is the Schema for the DataSetAzureBlobs API.
-          Manages an Azure Blob Dataset inside an Azure Data Factory.
+        description: TriggerSchedule is the Schema for the TriggerSchedules API. Manages
+          a Trigger Schedule inside a Azure Data Factory.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: DataSetAzureBlobSpec defines the desired state of DataSetAzureBlob
+            description: TriggerScheduleSpec defines the desired state of TriggerSchedule
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,15 +64,13 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset.
-                    type: object
+                  activated:
+                    description: Specifies if the Data Factory Schedule Trigger is
+                      activated. Defaults to true.
+                    type: boolean
                   annotations:
                     description: List of tags that can be used for describing the
-                      Data Factory Dataset.
+                      Data Factory Schedule Trigger.
                     items:
                       type: string
                     type: array
@@ -156,30 +154,44 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description for the Data Factory Dataset.
+                    description: The Schedule Trigger's description.
                     type: string
-                  dynamicFilenameEnabled:
-                    description: Is the filename using dynamic expression, function
-                      or system variables? Defaults to false.
-                    type: boolean
-                  dynamicPathEnabled:
-                    description: Is the path using dynamic expression, function or
-                      system variables? Defaults to false.
-                    type: boolean
-                  filename:
-                    description: The filename of the Azure Blob.
+                  endTime:
+                    description: The time the Schedule Trigger should end. The time
+                      will be represented in UTC.
                     type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
+                  frequency:
+                    description: The trigger frequency. Valid values include Minute,
+                      Hour, Day, Week, Month. Defaults to Minute.
                     type: string
-                  linkedServiceName:
-                    description: The Data Factory Linked Service name in which to
-                      associate the Dataset with.
+                  interval:
+                    description: The interval for how often the trigger occurs. This
+                      defaults to 1.
+                    type: number
+                  pipeline:
+                    description: block as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: Reference pipeline name.
+                          type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: The pipeline parameters that the trigger will
+                            act upon.
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  pipelineName:
+                    description: The Data Factory Pipeline name that the trigger will
+                      act on.
                     type: string
-                  linkedServiceNameRef:
-                    description: Reference to a LinkedServiceAzureBlobStorage in datafactory
-                      to populate linkedServiceName.
+                  pipelineNameRef:
+                    description: Reference to a Pipeline in datafactory to populate
+                      pipelineName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -212,9 +224,9 @@ spec:
                     required:
                     - name
                     type: object
-                  linkedServiceNameSelector:
-                    description: Selector for a LinkedServiceAzureBlobStorage in datafactory
-                      to populate linkedServiceName.
+                  pipelineNameSelector:
+                    description: Selector for a Pipeline in datafactory to populate
+                      pipelineName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -252,35 +264,74 @@ spec:
                             type: string
                         type: object
                     type: object
-                  parameters:
+                  pipelineParameters:
                     additionalProperties:
                       type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset.
+                    description: The pipeline parameters that the trigger will act
+                      upon.
                     type: object
-                  path:
-                    description: The path of the Azure Blob.
-                    type: string
-                  schemaColumn:
-                    description: A schema_column block as defined below.
+                  schedule:
+                    description: A schedule block as defined below, which further
+                      specifies the recurrence schedule for the trigger. A schedule
+                      is capable of limiting or increasing the number of trigger executions
+                      specified by the frequency and interval properties.
                     items:
                       properties:
-                        description:
-                          description: The description of the column.
-                          type: string
-                        name:
-                          description: The name of the column.
-                          type: string
-                        type:
-                          description: Type of the column. Valid values are Byte,
-                            Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal,
-                            Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan.
-                            Please note these values are case sensitive.
-                          type: string
-                      required:
-                      - name
+                        daysOfMonth:
+                          description: Day(s) of the month on which the trigger is
+                            scheduled. This value can be specified with a monthly
+                            frequency only.
+                          items:
+                            type: number
+                          type: array
+                        daysOfWeek:
+                          description: Days of the week on which the trigger is scheduled.
+                            This value can be specified only with a weekly frequency.
+                          items:
+                            type: string
+                          type: array
+                        hours:
+                          description: Hours of the day on which the trigger is scheduled.
+                          items:
+                            type: number
+                          type: array
+                        minutes:
+                          description: Minutes of the hour on which the trigger is
+                            scheduled.
+                          items:
+                            type: number
+                          type: array
+                        monthly:
+                          description: A monthly block as documented below, which
+                            specifies the days of the month on which the trigger is
+                            scheduled. The value can be specified only with a monthly
+                            frequency.
+                          items:
+                            properties:
+                              week:
+                                description: The occurrence of the specified day during
+                                  the month. For example, a monthly property with
+                                  weekday and week values of Sunday, -1 means the
+                                  last Sunday of the month.
+                                type: number
+                              weekday:
+                                description: The day of the week on which the trigger
+                                  runs. For example, a monthly property with a weekday
+                                  value of Sunday means every Sunday of the month.
+                                type: string
+                            required:
+                            - weekday
+                            type: object
+                          type: array
                       type: object
                     type: array
+                  startTime:
+                    description: The time the Schedule Trigger will start. This defaults
+                      to the current time. The time will be represented in UTC.
+                    type: string
+                  timeZone:
+                    description: The timezone of the start/end time.
+                    type: string
                 type: object
               providerConfigRef:
                 default:
@@ -454,12 +505,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: DataSetAzureBlobStatus defines the observed state of DataSetAzureBlob.
+            description: TriggerScheduleStatus defines the observed state of TriggerSchedule.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Data Factory Dataset.
+                    description: The ID of the Data Factory Schedule Trigger.
                     type: string
                 type: object
               conditions:
