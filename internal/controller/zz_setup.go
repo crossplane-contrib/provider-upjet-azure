@@ -240,9 +240,13 @@ import (
 	applicationinsights "github.com/upbound/provider-azure/internal/controller/insights/applicationinsights"
 	applicationinsightsapikey "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsapikey"
 	monitoractiongroup "github.com/upbound/provider-azure/internal/controller/insights/monitoractiongroup"
+	monitoractivitylogalert "github.com/upbound/provider-azure/internal/controller/insights/monitoractivitylogalert"
+	monitorautoscalesetting "github.com/upbound/provider-azure/internal/controller/insights/monitorautoscalesetting"
 	monitormetricalert "github.com/upbound/provider-azure/internal/controller/insights/monitormetricalert"
 	monitorprivatelinkscope "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscope"
 	monitorprivatelinkscopedservice "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscopedservice"
+	monitorscheduledqueryrulesalert "github.com/upbound/provider-azure/internal/controller/insights/monitorscheduledqueryrulesalert"
+	monitorscheduledqueryruleslog "github.com/upbound/provider-azure/internal/controller/insights/monitorscheduledqueryruleslog"
 	application "github.com/upbound/provider-azure/internal/controller/iotcentral/application"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/keyvault/accesspolicy"
 	certificatekeyvault "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"
@@ -698,9 +702,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		applicationinsights.Setup,
 		applicationinsightsapikey.Setup,
 		monitoractiongroup.Setup,
+		monitoractivitylogalert.Setup,
+		monitorautoscalesetting.Setup,
 		monitormetricalert.Setup,
 		monitorprivatelinkscope.Setup,
 		monitorprivatelinkscopedservice.Setup,
+		monitorscheduledqueryrulesalert.Setup,
+		monitorscheduledqueryruleslog.Setup,
 		application.Setup,
 		accesspolicy.Setup,
 		certificatekeyvault.Setup,

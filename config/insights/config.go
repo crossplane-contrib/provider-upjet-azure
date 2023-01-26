@@ -28,4 +28,16 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+	p.AddResourceConfigurator("azurerm_monitor_activity_log_alert", func(r *config.Resource) {
+		r.References["scopes"] = config.Reference{
+			Type:      "github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+	p.AddResourceConfigurator("azurerm_monitor_scheduled_query_rules_alert", func(r *config.Resource) {
+		r.References["action.action_group"] = config.Reference{
+			Type:      "MonitorActionGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

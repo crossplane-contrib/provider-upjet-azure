@@ -1,0 +1,58 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorScheduledQueryRulesLog
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorscheduledqueryruleslog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    criteria:
+    - dimension:
+      - name: Computer
+        operator: Include
+        values:
+        - targetVM
+      metricName: Average_% Idle Time
+    dataSourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: Scheduled query rule LogToMetric example
+    enabled: true
+    location: West Europe
+    name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-monitor
+    tags:
+      foo: bar
+---
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorscheduledqueryruleslog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-monitor
+    retentionInDays: 30
+    sku: PerGB2018
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorscheduledqueryruleslog
+  labels:
+    testing.upbound.io/example-name: rg-monitor
+  name: rg-monitor
+spec:
+  forProvider:
+    location: West Europe
