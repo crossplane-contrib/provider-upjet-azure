@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: datasetazureblobs.datafactory.azure.upbound.io
+  name: triggerblobevents.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: DataSetAzureBlob
-    listKind: DataSetAzureBlobList
-    plural: datasetazureblobs
-    singular: datasetazureblob
+    kind: TriggerBlobEvent
+    listKind: TriggerBlobEventList
+    plural: triggerblobevents
+    singular: triggerblobevent
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataSetAzureBlob is the Schema for the DataSetAzureBlobs API.
-          Manages an Azure Blob Dataset inside an Azure Data Factory.
+        description: TriggerBlobEvent is the Schema for the TriggerBlobEvents API.
+          Manages a Blob Event Trigger inside an Azure Data Factory.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: DataSetAzureBlobSpec defines the desired state of DataSetAzureBlob
+            description: TriggerBlobEventSpec defines the desired state of TriggerBlobEvent
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,21 +64,33 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  activated:
+                    description: Specifies if the Data Factory Blob Event Trigger
+                      is activated. Defaults to true.
+                    type: boolean
                   additionalProperties:
                     additionalProperties:
                       type: string
                     description: A map of additional properties to associate with
-                      the Data Factory Dataset.
+                      the Data Factory Blob Event Trigger.
                     type: object
                   annotations:
                     description: List of tags that can be used for describing the
-                      Data Factory Dataset.
+                      Data Factory Blob Event Trigger.
                     items:
                       type: string
                     type: array
+                  blobPathBeginsWith:
+                    description: The pattern that blob path starts with for trigger
+                      to fire.
+                    type: string
+                  blobPathEndsWith:
+                    description: The pattern that blob path ends with for trigger
+                      to fire.
+                    type: string
                   dataFactoryId:
-                    description: The Data Factory ID in which to associate the Linked
-                      Service with. Changing this forces a new resource.
+                    description: The ID of Data Factory in which to associate the
+                      Trigger with. Changing this forces a new resource.
                     type: string
                   dataFactoryIdRef:
                     description: Reference to a Factory in datafactory to populate
@@ -156,30 +168,117 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description for the Data Factory Dataset.
+                    description: The description for the Data Factory Blob Event Trigger.
                     type: string
-                  dynamicFilenameEnabled:
-                    description: Is the filename using dynamic expression, function
-                      or system variables? Defaults to false.
+                  events:
+                    description: List of events that will fire this trigger. Possible
+                      values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted.
+                    items:
+                      type: string
+                    type: array
+                  ignoreEmptyBlobs:
+                    description: are blobs with zero bytes ignored?
                     type: boolean
-                  dynamicPathEnabled:
-                    description: Is the path using dynamic expression, function or
-                      system variables? Defaults to false.
-                    type: boolean
-                  filename:
-                    description: The filename of the Azure Blob.
+                  pipeline:
+                    description: One or more pipeline blocks as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The Data Factory Pipeline name that the trigger
+                            will act on.
+                          type: string
+                        nameRef:
+                          description: Reference to a Pipeline in datafactory to populate
+                            name.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        nameSelector:
+                          description: Selector for a Pipeline in datafactory to populate
+                            name.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: The Data Factory Pipeline parameters that the
+                            trigger will act on.
+                          type: object
+                      type: object
+                    type: array
+                  storageAccountId:
+                    description: The ID of Storage Account in which blob event will
+                      be listened. Changing this forces a new resource.
                     type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
-                    type: string
-                  linkedServiceName:
-                    description: The Data Factory Linked Service name in which to
-                      associate the Dataset with.
-                    type: string
-                  linkedServiceNameRef:
-                    description: Reference to a LinkedServiceAzureBlobStorage in datafactory
-                      to populate linkedServiceName.
+                  storageAccountIdRef:
+                    description: Reference to a Account in storage to populate storageAccountId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -212,9 +311,8 @@ spec:
                     required:
                     - name
                     type: object
-                  linkedServiceNameSelector:
-                    description: Selector for a LinkedServiceAzureBlobStorage in datafactory
-                      to populate linkedServiceName.
+                  storageAccountIdSelector:
+                    description: Selector for a Account in storage to populate storageAccountId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -252,35 +350,9 @@ spec:
                             type: string
                         type: object
                     type: object
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset.
-                    type: object
-                  path:
-                    description: The path of the Azure Blob.
-                    type: string
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        description:
-                          description: The description of the column.
-                          type: string
-                        name:
-                          description: The name of the column.
-                          type: string
-                        type:
-                          description: Type of the column. Valid values are Byte,
-                            Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal,
-                            Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan.
-                            Please note these values are case sensitive.
-                          type: string
-                      required:
-                      - name
-                      type: object
-                    type: array
+                required:
+                - events
+                - pipeline
                 type: object
               providerConfigRef:
                 default:
@@ -454,12 +526,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: DataSetAzureBlobStatus defines the observed state of DataSetAzureBlob.
+            description: TriggerBlobEventStatus defines the observed state of TriggerBlobEvent.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Data Factory Dataset.
+                    description: The ID of the Data Factory Blob Event Trigger.
                     type: string
                 type: object
               conditions:

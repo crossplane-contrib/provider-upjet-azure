@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: datasetazureblobs.datafactory.azure.upbound.io
+  name: integrationruntimeselfhosteds.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: DataSetAzureBlob
-    listKind: DataSetAzureBlobList
-    plural: datasetazureblobs
-    singular: datasetazureblob
+    kind: IntegrationRuntimeSelfHosted
+    listKind: IntegrationRuntimeSelfHostedList
+    plural: integrationruntimeselfhosteds
+    singular: integrationruntimeselfhosted
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataSetAzureBlob is the Schema for the DataSetAzureBlobs API.
-          Manages an Azure Blob Dataset inside an Azure Data Factory.
+        description: IntegrationRuntimeSelfHosted is the Schema for the IntegrationRuntimeSelfHosteds
+          API. Manages a Data Factory Self-hosted Integration Runtime.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: DataSetAzureBlobSpec defines the desired state of DataSetAzureBlob
+            description: IntegrationRuntimeSelfHostedSpec defines the desired state
+              of IntegrationRuntimeSelfHosted
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,18 +65,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset.
-                    items:
-                      type: string
-                    type: array
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Linked
                       Service with. Changing this forces a new resource.
@@ -156,129 +145,19 @@ spec:
                         type: object
                     type: object
                   description:
-                    description: The description for the Data Factory Dataset.
+                    description: Integration runtime description.
                     type: string
-                  dynamicFilenameEnabled:
-                    description: Is the filename using dynamic expression, function
-                      or system variables? Defaults to false.
-                    type: boolean
-                  dynamicPathEnabled:
-                    description: Is the path using dynamic expression, function or
-                      system variables? Defaults to false.
-                    type: boolean
-                  filename:
-                    description: The filename of the Azure Blob.
-                    type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
-                    type: string
-                  linkedServiceName:
-                    description: The Data Factory Linked Service name in which to
-                      associate the Dataset with.
-                    type: string
-                  linkedServiceNameRef:
-                    description: Reference to a LinkedServiceAzureBlobStorage in datafactory
-                      to populate linkedServiceName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  linkedServiceNameSelector:
-                    description: Selector for a LinkedServiceAzureBlobStorage in datafactory
-                      to populate linkedServiceName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset.
-                    type: object
-                  path:
-                    description: The path of the Azure Blob.
-                    type: string
-                  schemaColumn:
-                    description: A schema_column block as defined below.
+                  rbacAuthorization:
+                    description: A rbac_authorization block as defined below.
                     items:
                       properties:
-                        description:
-                          description: The description of the column.
-                          type: string
-                        name:
-                          description: The name of the column.
-                          type: string
-                        type:
-                          description: Type of the column. Valid values are Byte,
-                            Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal,
-                            Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan.
-                            Please note these values are case sensitive.
+                        resourceId:
+                          description: The resource identifier of the integration
+                            runtime to be shared. Changing this forces a new Data
+                            Factory to be created.
                           type: string
                       required:
-                      - name
+                      - resourceId
                       type: object
                     type: array
                 type: object
@@ -454,12 +333,20 @@ spec:
             - forProvider
             type: object
           status:
-            description: DataSetAzureBlobStatus defines the observed state of DataSetAzureBlob.
+            description: IntegrationRuntimeSelfHostedStatus defines the observed state
+              of IntegrationRuntimeSelfHosted.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Data Factory Dataset.
+                    description: The ID of the Data Factory.
+                    type: string
+                  primaryAuthorizationKey:
+                    description: The primary integration runtime authentication key.
+                    type: string
+                  secondaryAuthorizationKey:
+                    description: The secondary integration runtime authentication
+                      key.
                     type: string
                 type: object
               conditions:

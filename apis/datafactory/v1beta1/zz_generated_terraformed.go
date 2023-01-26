@@ -1123,6 +1123,228 @@ func (tr *IntegrationRuntimeAzureSSIS) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this IntegrationRuntimeSelfHosted
+func (mg *IntegrationRuntimeSelfHosted) GetTerraformResourceType() string {
+	return "azurerm_data_factory_integration_runtime_self_hosted"
+}
+
+// GetConnectionDetailsMapping for this IntegrationRuntimeSelfHosted
+func (tr *IntegrationRuntimeSelfHosted) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this IntegrationRuntimeSelfHosted
+func (tr *IntegrationRuntimeSelfHosted) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this IntegrationRuntimeSelfHosted
+func (tr *IntegrationRuntimeSelfHosted) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this IntegrationRuntimeSelfHosted
+func (tr *IntegrationRuntimeSelfHosted) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this IntegrationRuntimeSelfHosted
+func (tr *IntegrationRuntimeSelfHosted) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this IntegrationRuntimeSelfHosted
+func (tr *IntegrationRuntimeSelfHosted) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this IntegrationRuntimeSelfHosted using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *IntegrationRuntimeSelfHosted) LateInitialize(attrs []byte) (bool, error) {
+	params := &IntegrationRuntimeSelfHostedParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *IntegrationRuntimeSelfHosted) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedCustomService
+func (mg *LinkedCustomService) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_custom_service"
+}
+
+// GetConnectionDetailsMapping for this LinkedCustomService
+func (tr *LinkedCustomService) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this LinkedCustomService
+func (tr *LinkedCustomService) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedCustomService
+func (tr *LinkedCustomService) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedCustomService
+func (tr *LinkedCustomService) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedCustomService
+func (tr *LinkedCustomService) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedCustomService
+func (tr *LinkedCustomService) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedCustomService using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedCustomService) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedCustomServiceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedCustomService) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this LinkedServiceAzureBlobStorage
+func (mg *LinkedServiceAzureBlobStorage) GetTerraformResourceType() string {
+	return "azurerm_data_factory_linked_service_azure_blob_storage"
+}
+
+// GetConnectionDetailsMapping for this LinkedServiceAzureBlobStorage
+func (tr *LinkedServiceAzureBlobStorage) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef", "sas_uri": "spec.forProvider.sasUriSecretRef", "service_endpoint": "spec.forProvider.serviceEndpointSecretRef"}
+}
+
+// GetObservation of this LinkedServiceAzureBlobStorage
+func (tr *LinkedServiceAzureBlobStorage) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this LinkedServiceAzureBlobStorage
+func (tr *LinkedServiceAzureBlobStorage) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this LinkedServiceAzureBlobStorage
+func (tr *LinkedServiceAzureBlobStorage) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this LinkedServiceAzureBlobStorage
+func (tr *LinkedServiceAzureBlobStorage) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this LinkedServiceAzureBlobStorage
+func (tr *LinkedServiceAzureBlobStorage) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this LinkedServiceAzureBlobStorage using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *LinkedServiceAzureBlobStorage) LateInitialize(attrs []byte) (bool, error) {
+	params := &LinkedServiceAzureBlobStorageParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *LinkedServiceAzureBlobStorage) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this LinkedServiceOdbc
 func (mg *LinkedServiceOdbc) GetTerraformResourceType() string {
 	return "azurerm_data_factory_linked_service_odbc"
@@ -1194,5 +1416,229 @@ func (tr *LinkedServiceOdbc) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *LinkedServiceOdbc) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this Pipeline
+func (mg *Pipeline) GetTerraformResourceType() string {
+	return "azurerm_data_factory_pipeline"
+}
+
+// GetConnectionDetailsMapping for this Pipeline
+func (tr *Pipeline) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this Pipeline
+func (tr *Pipeline) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this Pipeline
+func (tr *Pipeline) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this Pipeline
+func (tr *Pipeline) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this Pipeline
+func (tr *Pipeline) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this Pipeline
+func (tr *Pipeline) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this Pipeline using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *Pipeline) LateInitialize(attrs []byte) (bool, error) {
+	params := &PipelineParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *Pipeline) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this TriggerBlobEvent
+func (mg *TriggerBlobEvent) GetTerraformResourceType() string {
+	return "azurerm_data_factory_trigger_blob_event"
+}
+
+// GetConnectionDetailsMapping for this TriggerBlobEvent
+func (tr *TriggerBlobEvent) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TriggerBlobEvent
+func (tr *TriggerBlobEvent) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TriggerBlobEvent
+func (tr *TriggerBlobEvent) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TriggerBlobEvent
+func (tr *TriggerBlobEvent) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TriggerBlobEvent
+func (tr *TriggerBlobEvent) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TriggerBlobEvent
+func (tr *TriggerBlobEvent) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TriggerBlobEvent using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TriggerBlobEvent) LateInitialize(attrs []byte) (bool, error) {
+	params := &TriggerBlobEventParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TriggerBlobEvent) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this TriggerSchedule
+func (mg *TriggerSchedule) GetTerraformResourceType() string {
+	return "azurerm_data_factory_trigger_schedule"
+}
+
+// GetConnectionDetailsMapping for this TriggerSchedule
+func (tr *TriggerSchedule) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TriggerSchedule
+func (tr *TriggerSchedule) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TriggerSchedule
+func (tr *TriggerSchedule) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TriggerSchedule
+func (tr *TriggerSchedule) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TriggerSchedule
+func (tr *TriggerSchedule) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TriggerSchedule
+func (tr *TriggerSchedule) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TriggerSchedule using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TriggerSchedule) LateInitialize(attrs []byte) (bool, error) {
+	params := &TriggerScheduleParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("Pipeline"))
+	opts = append(opts, resource.WithNameFilter("PipelineName"))
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TriggerSchedule) GetTerraformSchemaVersion() int {
 	return 0
 }
