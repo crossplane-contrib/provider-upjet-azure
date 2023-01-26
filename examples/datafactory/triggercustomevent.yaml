@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
   labels:
-    testing.upbound.io/example-name: custeventexample
-  name: custeventexample
+    testing.upbound.io/example-name: example
+  name: tceexample
 spec:
   forProvider:
     additionalProperties:
@@ -17,18 +17,16 @@ spec:
     - example3
     dataFactoryIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: triggercustomevent-fct
+        testing.upbound.io/example-name: example
     description: example description
-    eventgridTopicIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: triggertopic
+    eventgridTopicId: ${azurerm_eventgrid_topic.example.id}
     events:
     - event1
     - event2
     pipeline:
     - nameSelector:
         matchLabels:
-          testing.upbound.io/example-name: triggercustomevent-ppl
+          testing.upbound.io/example-name: example
       parameters:
         Env: Prod
     subjectBeginsWith: abc
@@ -42,14 +40,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
   labels:
-    testing.upbound.io/example-name: triggercustomevent-fct
-  name: triggercustomevent-fct
+    testing.upbound.io/example-name: example
+  name: tceexample
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: triggercustomevent-rg
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -59,30 +57,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
   labels:
-    testing.upbound.io/example-name: triggercustomevent-ppl
-  name: triggercustomevent-ppl
+    testing.upbound.io/example-name: example
+  name: tceexample
 spec:
   forProvider:
     dataFactoryIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: triggercustomevent-fct
-
----
-
-apiVersion: eventgrid.azure.upbound.io/v1beta1
-kind: Topic
-metadata:
-  annotations:
-    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
-  labels:
-    testing.upbound.io/example-name: triggertopic
-  name: triggertopic
-spec:
-  forProvider:
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: triggercustomevent-rg
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -92,8 +73,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
   labels:
-    testing.upbound.io/example-name: triggercustomevent-rg
-  name: triggercustomevent-rg
+    testing.upbound.io/example-name: example
+  name: tceexample
 spec:
   forProvider:
     location: West Europe

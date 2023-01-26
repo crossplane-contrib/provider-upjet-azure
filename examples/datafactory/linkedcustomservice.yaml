@@ -2,7 +2,7 @@ apiVersion: datafactory.azure.upbound.io/v1beta1
 kind: LinkedCustomService
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "The resource require account connecton string to be specified."
+    upjet.upbound.io/manual-intervention: "The resource require account connectopn string to be specified."
     meta.upbound.io/example-id: datafactory/v1beta1/linkedcustomservice
   labels:
     testing.upbound.io/example-name: example

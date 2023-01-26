@@ -162,6 +162,9 @@ import (
 	integrationruntimeselfhosted "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeselfhosted"
 	linkedcustomservice "github.com/upbound/provider-azure/internal/controller/datafactory/linkedcustomservice"
 	linkedserviceazureblobstorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazureblobstorage"
+	integrationruntimeselfhosted "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeselfhosted"
+	linkedcustomservice "github.com/upbound/provider-azure/internal/controller/datafactory/linkedcustomservice"
+	linkedserviceazureblobstorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazureblobstorage"
 	linkedserviceazuredatabricks "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazuredatabricks"
 	linkedserviceazurefilestorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazurefilestorage"
 	linkedserviceazurefunction "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazurefunction"
@@ -175,6 +178,10 @@ import (
 	linkedservicemysql "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicemysql"
 	linkedserviceodata "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceodata"
 	linkedserviceodbc "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceodbc"
+	pipeline "github.com/upbound/provider-azure/internal/controller/datafactory/pipeline"
+	triggerblobevent "github.com/upbound/provider-azure/internal/controller/datafactory/triggerblobevent"
+	triggercustomevent "github.com/upbound/provider-azure/internal/controller/datafactory/triggercustomevent"
+	triggerschedule "github.com/upbound/provider-azure/internal/controller/datafactory/triggerschedule"
 	linkedservicepostgresql "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicepostgresql"
 	linkedservicesftp "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicesftp"
 	linkedservicesnowflake "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicesnowflake"
@@ -639,6 +646,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		integrationruntimeselfhosted.Setup,
 		linkedcustomservice.Setup,
 		linkedserviceazureblobstorage.Setup,
+		integrationruntimeselfhosted.Setup,
+		linkedcustomservice.Setup,
+		linkedserviceazureblobstorage.Setup,
 		linkedserviceazuredatabricks.Setup,
 		linkedserviceazurefilestorage.Setup,
 		linkedserviceazurefunction.Setup,
@@ -652,17 +662,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		linkedservicemysql.Setup,
 		linkedserviceodata.Setup,
 		linkedserviceodbc.Setup,
-		linkedservicepostgresql.Setup,
-		linkedservicesftp.Setup,
-		linkedservicesnowflake.Setup,
-		linkedservicesqlserver.Setup,
-		linkedservicesynapse.Setup,
-		linkedserviceweb.Setup,
-		managedprivateendpoint.Setup,
-		pipeline.Setup,
-		triggerblobevent.Setup,
-		triggercustomevent.Setup,
-		triggerschedule.Setup,
 		backuppolicyblobstorage.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,

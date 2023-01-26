@@ -169,6 +169,33 @@ func (l *LinkedServiceAzureBlobStorageList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this IntegrationRuntimeSelfHostedList.
+func (l *IntegrationRuntimeSelfHostedList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this LinkedCustomServiceList.
+func (l *LinkedCustomServiceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this LinkedServiceAzureBlobStorageList.
+func (l *LinkedServiceAzureBlobStorageList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this LinkedServiceAzureDatabricksList.
 func (l *LinkedServiceAzureDatabricksList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -279,6 +306,42 @@ func (l *LinkedServiceODataList) GetItems() []resource.Managed {
 
 // GetItems of this LinkedServiceOdbcList.
 func (l *LinkedServiceOdbcList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PipelineList.
+func (l *PipelineList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TriggerBlobEventList.
+func (l *TriggerBlobEventList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TriggerCustomEventList.
+func (l *TriggerCustomEventList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TriggerScheduleList.
+func (l *TriggerScheduleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

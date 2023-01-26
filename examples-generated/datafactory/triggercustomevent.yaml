@@ -19,9 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     description: example description
-    eventgridTopicIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
+    eventgridTopicId: ${azurerm_eventgrid_topic.example.id}
     events:
     - event1
     - event2
@@ -64,23 +62,6 @@ metadata:
 spec:
   forProvider:
     dataFactoryIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
-apiVersion: eventgrid.azure.upbound.io/v1beta1
-kind: Topic
-metadata:
-  annotations:
-    meta.upbound.io/example-id: datafactory/v1beta1/triggercustomevent
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    location: West Europe
-    resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
