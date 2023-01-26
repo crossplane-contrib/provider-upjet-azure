@@ -10,7 +10,11 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta15 "github.com/upbound/provider-azure/apis/devices/v1beta1"
+	v1beta14 "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	v1beta13 "github.com/upbound/provider-azure/apis/servicebus/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/sql/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -268,12 +272,546 @@ func (mg *OutputFunction) ResolveReferences(ctx context.Context, c client.Reader
 	return nil
 }
 
+// ResolveReferences of this OutputMSSQL.
+func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Server),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ServerRef,
+		Selector:     mg.Spec.ForProvider.ServerSelector,
+		To: reference.To{
+			List:    &v1beta12.MSSQLServerList{},
+			Managed: &v1beta12.MSSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Server")
+	}
+	mg.Spec.ForProvider.Server = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Table),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.TableRef,
+		Selector:     mg.Spec.ForProvider.TableSelector,
+		To: reference.To{
+			List:    &v1beta11.TableList{},
+			Managed: &v1beta11.Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Table")
+	}
+	mg.Spec.ForProvider.Table = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TableRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this OutputServiceBusQueue.
+func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.QueueNameRef,
+		Selector:     mg.Spec.ForProvider.QueueNameSelector,
+		To: reference.To{
+			List:    &v1beta13.QueueList{},
+			Managed: &v1beta13.Queue{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.QueueName")
+	}
+	mg.Spec.ForProvider.QueueName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.QueueNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceBusNamespace),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
+		Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
+		To: reference.To{
+			List:    &v1beta13.ServiceBusNamespaceList{},
+			Managed: &v1beta13.ServiceBusNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceBusNamespace")
+	}
+	mg.Spec.ForProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this OutputServiceBusTopic.
+func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceBusNamespace),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
+		Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
+		To: reference.To{
+			List:    &v1beta13.ServiceBusNamespaceList{},
+			Managed: &v1beta13.ServiceBusNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceBusNamespace")
+	}
+	mg.Spec.ForProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TopicName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.TopicNameRef,
+		Selector:     mg.Spec.ForProvider.TopicNameSelector,
+		To: reference.To{
+			List:    &v1beta13.TopicList{},
+			Managed: &v1beta13.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TopicName")
+	}
+	mg.Spec.ForProvider.TopicName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TopicNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this OutputSynapse.
 func (mg *OutputSynapse) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ReferenceInputBlob.
+func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
+	}
+	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StorageContainerNameRef,
+		Selector:     mg.Spec.ForProvider.StorageContainerNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ContainerList{},
+			Managed: &v1beta11.Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageContainerName")
+	}
+	mg.Spec.ForProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageContainerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this StreamInputBlob.
+func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
+	}
+	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StorageContainerNameRef,
+		Selector:     mg.Spec.ForProvider.StorageContainerNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ContainerList{},
+			Managed: &v1beta11.Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageContainerName")
+	}
+	mg.Spec.ForProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageContainerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this StreamInputEventHub.
+func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubConsumerGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.EventHubConsumerGroupNameRef,
+		Selector:     mg.Spec.ForProvider.EventHubConsumerGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta14.ConsumerGroupList{},
+			Managed: &v1beta14.ConsumerGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubConsumerGroupName")
+	}
+	mg.Spec.ForProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.EventHubNameRef,
+		Selector:     mg.Spec.ForProvider.EventHubNameSelector,
+		To: reference.To{
+			List:    &v1beta14.EventHubList{},
+			Managed: &v1beta14.EventHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubName")
+	}
+	mg.Spec.ForProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceBusNamespace),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
+		Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
+		To: reference.To{
+			List:    &v1beta14.EventHubNamespaceList{},
+			Managed: &v1beta14.EventHubNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceBusNamespace")
+	}
+	mg.Spec.ForProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this StreamInputIOTHub.
+func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubConsumerGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.EventHubConsumerGroupNameRef,
+		Selector:     mg.Spec.ForProvider.EventHubConsumerGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta14.ConsumerGroupList{},
+			Managed: &v1beta14.ConsumerGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubConsumerGroupName")
+	}
+	mg.Spec.ForProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubNamespace),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.IOTHubNamespaceRef,
+		Selector:     mg.Spec.ForProvider.IOTHubNamespaceSelector,
+		To: reference.To{
+			List:    &v1beta15.IOTHubList{},
+			Managed: &v1beta15.IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubNamespace")
+	}
+	mg.Spec.ForProvider.IOTHubNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubNamespaceRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
