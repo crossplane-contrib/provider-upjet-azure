@@ -1,21 +1,19 @@
 apiVersion: datafactory.azure.upbound.io/v1beta1
-kind: DataSetAzureBlob
+kind: TriggerSchedule
 metadata:
   annotations:
-    meta.upbound.io/example-id: datafactory/v1beta1/datasetazureblob
+    meta.upbound.io/example-id: datafactory/v1beta1/triggerschedule
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: tsexample
 spec:
   forProvider:
     dataFactoryIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    filename: bar.png
-    linkedServiceNameSelector:
+    pipelineNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    path: foo
 
 ---
 
@@ -23,10 +21,10 @@ apiVersion: datafactory.azure.upbound.io/v1beta1
 kind: Factory
 metadata:
   annotations:
-    meta.upbound.io/example-id: datafactory/v1beta1/datasetazureblob
+    meta.upbound.io/example-id: datafactory/v1beta1/triggerschedule
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: tsexample
 spec:
   forProvider:
     location: West Europe
@@ -37,19 +35,15 @@ spec:
 ---
 
 apiVersion: datafactory.azure.upbound.io/v1beta1
-kind: LinkedServiceAzureBlobStorage
+kind: Pipeline
 metadata:
   annotations:
-    meta.upbound.io/example-id: datafactory/v1beta1/datasetazureblob
+    meta.upbound.io/example-id: datafactory/v1beta1/triggerschedule
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: tsexample
 spec:
   forProvider:
-    connectionStringSecretRef:
-      key: attribute.example.primary_connection_string
-      name: example-
-      namespace: upbound-system
     dataFactoryIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -60,13 +54,11 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: datafactory/v1beta1/datasetazureblob
+    meta.upbound.io/example-id: datafactory/v1beta1/triggerschedule
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: tsexample
 spec:
   forProvider:
     location: West Europe
-
----
 

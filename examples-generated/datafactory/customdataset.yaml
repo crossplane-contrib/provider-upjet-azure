@@ -21,7 +21,9 @@ spec:
     description: test description
     folder: testFolder
     linkedService:
-    - name: ${azurerm_data_factory_linked_custom_service.example.name}
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
       parameters:
         key1: value1
     parameters:
@@ -77,6 +79,27 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedCustomService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/customdataset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: AzureBlobStorage
+    typePropertiesJson: |
+      {
+        "connectionString":"${azurerm_storage_account.example.primary_connection_string}"
+      }
 
 ---
 
