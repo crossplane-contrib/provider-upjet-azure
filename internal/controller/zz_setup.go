@@ -184,6 +184,7 @@ import (
 	managedprivateendpoint "github.com/upbound/provider-azure/internal/controller/datafactory/managedprivateendpoint"
 	pipeline "github.com/upbound/provider-azure/internal/controller/datafactory/pipeline"
 	triggerblobevent "github.com/upbound/provider-azure/internal/controller/datafactory/triggerblobevent"
+	triggercustomevent "github.com/upbound/provider-azure/internal/controller/datafactory/triggercustomevent"
 	triggerschedule "github.com/upbound/provider-azure/internal/controller/datafactory/triggerschedule"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backupvault "github.com/upbound/provider-azure/internal/controller/dataprotection/backupvault"
@@ -233,10 +234,17 @@ import (
 	iothubroute "github.com/upbound/provider-azure/internal/controller/devices/iothubroute"
 	iothubsharedaccesspolicy "github.com/upbound/provider-azure/internal/controller/devices/iothubsharedaccesspolicy"
 	instance "github.com/upbound/provider-azure/internal/controller/digitaltwins/instance"
+	domain "github.com/upbound/provider-azure/internal/controller/eventgrid/domain"
+	domaintopic "github.com/upbound/provider-azure/internal/controller/eventgrid/domaintopic"
+	eventsubscription "github.com/upbound/provider-azure/internal/controller/eventgrid/eventsubscription"
+	systemtopic "github.com/upbound/provider-azure/internal/controller/eventgrid/systemtopic"
+	topic "github.com/upbound/provider-azure/internal/controller/eventgrid/topic"
 	authorizationrule "github.com/upbound/provider-azure/internal/controller/eventhub/authorizationrule"
 	consumergroup "github.com/upbound/provider-azure/internal/controller/eventhub/consumergroup"
 	eventhub "github.com/upbound/provider-azure/internal/controller/eventhub/eventhub"
 	eventhubnamespace "github.com/upbound/provider-azure/internal/controller/eventhub/eventhubnamespace"
+	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/eventhub/namespaceauthorizationrule"
+	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/eventhub/namespacedisasterrecoveryconfig"
 	applicationinsights "github.com/upbound/provider-azure/internal/controller/insights/applicationinsights"
 	applicationinsightsapikey "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsapikey"
 	monitoractiongroup "github.com/upbound/provider-azure/internal/controller/insights/monitoractiongroup"
@@ -411,15 +419,15 @@ import (
 	securitycenterworkspace "github.com/upbound/provider-azure/internal/controller/security/securitycenterworkspace"
 	sentinelautomationrule "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelautomationrule"
 	sentinelwatchlist "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelwatchlist"
-	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/namespaceauthorizationrule"
-	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/servicebus/namespacedisasterrecoveryconfig"
+	namespaceauthorizationruleservicebus "github.com/upbound/provider-azure/internal/controller/servicebus/namespaceauthorizationrule"
+	namespacedisasterrecoveryconfigservicebus "github.com/upbound/provider-azure/internal/controller/servicebus/namespacedisasterrecoveryconfig"
 	namespacenetworkruleset "github.com/upbound/provider-azure/internal/controller/servicebus/namespacenetworkruleset"
 	queue "github.com/upbound/provider-azure/internal/controller/servicebus/queue"
 	queueauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/queueauthorizationrule"
 	servicebusnamespace "github.com/upbound/provider-azure/internal/controller/servicebus/servicebusnamespace"
 	subscriptionservicebus "github.com/upbound/provider-azure/internal/controller/servicebus/subscription"
 	subscriptionrule "github.com/upbound/provider-azure/internal/controller/servicebus/subscriptionrule"
-	topic "github.com/upbound/provider-azure/internal/controller/servicebus/topic"
+	topicservicebus "github.com/upbound/provider-azure/internal/controller/servicebus/topic"
 	topicauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/topicauthorizationrule"
 	clusterservicefabric "github.com/upbound/provider-azure/internal/controller/servicefabric/cluster"
 	managedcluster "github.com/upbound/provider-azure/internal/controller/servicefabric/managedcluster"
@@ -660,6 +668,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedprivateendpoint.Setup,
 		pipeline.Setup,
 		triggerblobevent.Setup,
+		triggercustomevent.Setup,
 		triggerschedule.Setup,
 		backuppolicyblobstorage.Setup,
 		backupvault.Setup,
@@ -709,10 +718,17 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iothubroute.Setup,
 		iothubsharedaccesspolicy.Setup,
 		instance.Setup,
+		domain.Setup,
+		domaintopic.Setup,
+		eventsubscription.Setup,
+		systemtopic.Setup,
+		topic.Setup,
 		authorizationrule.Setup,
 		consumergroup.Setup,
 		eventhub.Setup,
 		eventhubnamespace.Setup,
+		namespaceauthorizationrule.Setup,
+		namespacedisasterrecoveryconfig.Setup,
 		applicationinsights.Setup,
 		applicationinsightsapikey.Setup,
 		monitoractiongroup.Setup,
@@ -887,15 +903,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitycenterworkspace.Setup,
 		sentinelautomationrule.Setup,
 		sentinelwatchlist.Setup,
-		namespaceauthorizationrule.Setup,
-		namespacedisasterrecoveryconfig.Setup,
+		namespaceauthorizationruleservicebus.Setup,
+		namespacedisasterrecoveryconfigservicebus.Setup,
 		namespacenetworkruleset.Setup,
 		queue.Setup,
 		queueauthorizationrule.Setup,
 		servicebusnamespace.Setup,
 		subscriptionservicebus.Setup,
 		subscriptionrule.Setup,
-		topic.Setup,
+		topicservicebus.Setup,
 		topicauthorizationrule.Setup,
 		clusterservicefabric.Setup,
 		managedcluster.Setup,
