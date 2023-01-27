@@ -2647,6 +2647,72 @@ func (mg *TriggerBlobEvent) SetWriteConnectionSecretToReference(r *xpv1.SecretRe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this TriggerCustomEvent.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *TriggerCustomEvent) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this TriggerCustomEvent.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *TriggerCustomEvent) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this TriggerSchedule.
 func (mg *TriggerSchedule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

@@ -33,6 +33,31 @@ spec:
 
 ---
 
+apiVersion: eventgrid.azure.upbound.io/v1beta1
+kind: EventSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/eventgriddataconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    eventDeliverySchema: EventGridSchema
+    eventhubEndpointId: ${azurerm_eventhub.example.id}
+    includedEventTypes:
+    - Microsoft.Storage.BlobCreated
+    - Microsoft.Storage.BlobRenamed
+    name: eventgrid-example
+    retryPolicy:
+    - eventTimeToLive: 144
+      maxDeliveryAttempts: 10
+    scopeSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
 apiVersion: eventhub.azure.upbound.io/v1beta1
 kind: EventHub
 metadata:

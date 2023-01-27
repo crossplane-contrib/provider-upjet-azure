@@ -40,6 +40,7 @@ import (
 	v1beta1dbforpostgresql "github.com/upbound/provider-azure/apis/dbforpostgresql/v1beta1"
 	v1beta1devices "github.com/upbound/provider-azure/apis/devices/v1beta1"
 	v1beta1digitaltwins "github.com/upbound/provider-azure/apis/digitaltwins/v1beta1"
+	v1beta1eventgrid "github.com/upbound/provider-azure/apis/eventgrid/v1beta1"
 	v1beta1eventhub "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
 	v1beta1insights "github.com/upbound/provider-azure/apis/insights/v1beta1"
 	v1beta1iotcentral "github.com/upbound/provider-azure/apis/iotcentral/v1beta1"
@@ -112,6 +113,7 @@ func init() {
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1digitaltwins.SchemeBuilder.AddToScheme,
+		v1beta1eventgrid.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
 		v1beta1insights.SchemeBuilder.AddToScheme,
 		v1beta1iotcentral.SchemeBuilder.AddToScheme,
