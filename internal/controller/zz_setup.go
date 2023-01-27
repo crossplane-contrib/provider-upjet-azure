@@ -58,6 +58,7 @@ import (
 	springcloudjavadeployment "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudjavadeployment"
 	springcloudservice "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudservice"
 	springcloudstorage "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudstorage"
+	provider "github.com/upbound/provider-azure/internal/controller/attestation/provider"
 	managementlock "github.com/upbound/provider-azure/internal/controller/authorization/managementlock"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
@@ -542,6 +543,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		springcloudjavadeployment.Setup,
 		springcloudservice.Setup,
 		springcloudstorage.Setup,
+		provider.Setup,
 		managementlock.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,

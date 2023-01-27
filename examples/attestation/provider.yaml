@@ -1,0 +1,29 @@
+apiVersion: attestation.azure.upbound.io/v1beta1
+kind: Provider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: attestation/v1beta1/provider
+  labels:
+    testing.upbound.io/example-name: example
+  name: provex
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: attestation/v1beta1/provider
+  labels:
+    testing.upbound.io/example-name: example
+  name: provex
+spec:
+  forProvider:
+    location: West Europe
+
