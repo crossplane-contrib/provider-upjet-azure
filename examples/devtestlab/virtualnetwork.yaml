@@ -1,0 +1,51 @@
+apiVersion: devtestlab.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta1/virtualnetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: lvnexample
+spec:
+  forProvider:
+    name: lvnexample
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: devtestlab.azure.upbound.io/v1beta1
+kind: Lab
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta1/virtualnetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: lvnexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Sydney: Australia
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta1/virtualnetwork
+  labels:
+    testing.upbound.io/example-name: example
+  name: lvnexample
+spec:
+  forProvider:
+    location: West Europe
+

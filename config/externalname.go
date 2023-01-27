@@ -1107,6 +1107,30 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventGrid/topics/topic1
 	"azurerm_eventgrid_topic": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventGrid/topics/{{ .external_name }}"),
 
+	// devtest
+	//
+	// An existing Dev Test Global Shutdown Schedule can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.DevTestLab/schedules/shutdown-computevm-SampleVM
+	"azurerm_dev_test_global_vm_shutdown_schedule": config.IdentifierFromProvider,
+	// Dev Test Labs can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DevTestLab/labs/lab1
+	"azurerm_dev_test_lab": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DevTestLab/labs/{{ .external_name }}"),
+	// Dev Test Linux Virtual Machines can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DevTestLab/labs/lab1/virtualmachines/machine1
+	"azurerm_dev_test_linux_virtual_machine": config.IdentifierFromProvider,
+	// Dev Test Policies can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DevTestLab/labs/lab1/policysets/default/policies/policy1
+	"azurerm_dev_test_policy": config.IdentifierFromProvider,
+	// DevTest Schedule's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.DevTestLab/labs/myDevTestLab/schedules/labvmautostart
+	"azurerm_dev_test_schedule": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DevTestLab/labs/{{ .parameters.lab_name }}/schedules/{{ .external_name }}"),
+	// DevTest Virtual Networks can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DevTestLab/labs/lab1/virtualnetworks/network1
+	"azurerm_dev_test_virtual_network": config.IdentifierFromProvider,
+	// DevTest Windows Virtual Machines can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DevTestLab/labs/lab1/virtualmachines/machine1
+	"azurerm_dev_test_windows_virtual_machine": config.IdentifierFromProvider,
+
 	// eventhub
 	//
 	// EventHub Namespace Authorization Rules can be imported using the resource id
