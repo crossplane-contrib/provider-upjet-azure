@@ -1,0 +1,70 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
+kind: Gen2Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/gen2environment
+  labels:
+    testing.upbound.io/example-name: example
+  name: gentwoenv
+spec:
+  forProvider:
+    idProperties:
+    - id
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gentwoenv-rg-label
+    skuName: L1
+    storage:
+    - keySecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: storage-label
+    warmStoreDataRetentionTime: P30D
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: g2dpXyPOGUyevGjHsUdarVZgWJbxz3FQRF008866IMGnMGxSQgOXinjZSfBfvgIymD4YyUgUnn2oyP+AStgONd4A==
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/gen2environment
+  labels:
+    testing.upbound.io/example-name: gentwoenv-rg-label
+  name: gentwoenv-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/gen2environment
+  labels:
+    testing.upbound.io/example-name: storage-label
+  name: gentwoenvstorage
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gentwoenv-rg-label

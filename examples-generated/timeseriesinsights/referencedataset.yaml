@@ -1,0 +1,53 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
+kind: ReferenceDataSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/referencedataset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    keyProperty:
+    - name: keyProperty1
+      type: String
+    location: West Europe
+    timeSeriesInsightsEnvironmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
+kind: StandardEnvironment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/referencedataset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataRetentionTime: P30D
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S1_1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/referencedataset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

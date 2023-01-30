@@ -13,20 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CustomHeaderObservation struct {
-}
-
-type CustomHeaderParameters struct {
-
-	// The name of the Traffic Manager profile. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// The value of custom header. Applicable for HTTP and HTTPS protocol.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
-}
-
 type DNSConfigObservation struct {
 }
 
@@ -41,6 +27,20 @@ type DNSConfigParameters struct {
 	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 }
 
+type MonitorConfigCustomHeaderObservation struct {
+}
+
+type MonitorConfigCustomHeaderParameters struct {
+
+	// The name of the Traffic Manager profile. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The value of custom header. Applicable for HTTP and HTTPS protocol.
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
 type MonitorConfigObservation struct {
 }
 
@@ -48,7 +48,7 @@ type MonitorConfigParameters struct {
 
 	// One or more custom_header blocks as defined below.
 	// +kubebuilder:validation:Optional
-	CustomHeader []CustomHeaderParameters `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
+	CustomHeader []MonitorConfigCustomHeaderParameters `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
 
 	// A list of status code ranges in the format of 100-101.
 	// +kubebuilder:validation:Optional
