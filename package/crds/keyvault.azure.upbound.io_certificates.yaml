@@ -108,7 +108,8 @@ spec:
                       type: object
                     type: array
                   certificatePolicy:
-                    description: A certificate_policy block as defined below.
+                    description: A certificate_policy block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         issuerParameters:
@@ -248,7 +249,8 @@ spec:
                                 type: string
                               subjectAlternativeNames:
                                 description: A subject_alternative_names block as
-                                  defined below.
+                                  defined below. Changing this forces a new resource
+                                  to be created.
                                 items:
                                   properties:
                                     dnsNames:

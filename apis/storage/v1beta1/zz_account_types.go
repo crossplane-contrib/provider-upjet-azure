@@ -107,11 +107,11 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 
-	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2.  Defaults to StorageV2.
+	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Defaults to StorageV2.
 	// +kubebuilder:validation:Optional
 	AccountKind *string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
 
-	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS. Changing this forces a new resource to be created when types LRS, GRS and RAGRS are changed to ZRS, GZRS or RAGZRS and vice versa.
+	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
 	// +kubebuilder:validation:Required
 	AccountReplicationType *string `json:"accountReplicationType" tf:"account_replication_type,omitempty"`
 
@@ -122,6 +122,10 @@ type AccountParameters struct {
 	// Allow or disallow nested items within this Account to opt into being public. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowNestedItemsToBePublic *bool `json:"allowNestedItemsToBePublic,omitempty" tf:"allow_nested_items_to_be_public,omitempty"`
+
+	// Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet. Possible values are AAD and PrivateLink.
+	// +kubebuilder:validation:Optional
+	AllowedCopyScope *string `json:"allowedCopyScope,omitempty" tf:"allowed_copy_scope,omitempty"`
 
 	// A azure_files_authentication block as defined below.
 	// +kubebuilder:validation:Optional
@@ -151,8 +155,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Boolean flag which forces HTTPS if enabled, see here
-	// for more information. Defaults to true.
+	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
 
@@ -160,7 +163,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// An immutability_policy block as defined below.
+	// An immutability_policy block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ImmutabilityPolicy []ImmutabilityPolicyParameters `json:"immutabilityPolicy,omitempty" tf:"immutability_policy,omitempty"`
 
@@ -289,7 +292,7 @@ type AzureFilesAuthenticationParameters struct {
 	// +kubebuilder:validation:Optional
 	ActiveDirectory []ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
-	// Specifies the directory service used. Possible values are AADDS and AD.
+	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
 	// +kubebuilder:validation:Required
 	DirectoryType *string `json:"directoryType" tf:"directory_type,omitempty"`
 }
@@ -327,7 +330,7 @@ type BlobPropertiesParameters struct {
 	// +kubebuilder:validation:Optional
 	LastAccessTimeEnabled *bool `json:"lastAccessTimeEnabled,omitempty" tf:"last_access_time_enabled,omitempty"`
 
-	// A restore_policy block as defined below. This must be used together with delete_retention_policy set and versioning_enabled set to true.
+	// A restore_policy block as defined below. This must be used together with delete_retention_policy set, versioning_enabled and change_feed_enabled set to true.
 	// +kubebuilder:validation:Optional
 	RestorePolicy []RestorePolicyParameters `json:"restorePolicy,omitempty" tf:"restore_policy,omitempty"`
 
@@ -416,7 +419,7 @@ type HourMetricsObservation struct {
 
 type HourMetricsParameters struct {
 
-	// Indicates whether minute metrics are enabled for the Queue service. Changing this forces a new resource.
+	// Indicates whether minute metrics are enabled for the Queue service.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -424,11 +427,11 @@ type HourMetricsParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeApis *bool `json:"includeApis,omitempty" tf:"include_apis,omitempty"`
 
-	// Specifies the number of days that logs will be retained. Changing this forces a new resource.
+	// Specifies the number of days that logs will be retained.
 	// +kubebuilder:validation:Optional
 	RetentionPolicyDays *float64 `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
 
-	// The version of storage analytics to configure. Changing this forces a new resource.
+	// The version of storage analytics to configure.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -484,15 +487,15 @@ type LoggingParameters struct {
 	// +kubebuilder:validation:Required
 	Read *bool `json:"read" tf:"read,omitempty"`
 
-	// Specifies the number of days that logs will be retained. Changing this forces a new resource.
+	// Specifies the number of days that logs will be retained.
 	// +kubebuilder:validation:Optional
 	RetentionPolicyDays *float64 `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
 
-	// The version of storage analytics to configure. Changing this forces a new resource.
+	// The version of storage analytics to configure.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 
-	// Indicates whether all write requests should be logged. Changing this forces a new resource.
+	// Indicates whether all write requests should be logged.
 	// +kubebuilder:validation:Required
 	Write *bool `json:"write" tf:"write,omitempty"`
 }
@@ -502,7 +505,7 @@ type MinuteMetricsObservation struct {
 
 type MinuteMetricsParameters struct {
 
-	// Indicates whether minute metrics are enabled for the Queue service. Changing this forces a new resource.
+	// Indicates whether minute metrics are enabled for the Queue service.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -510,11 +513,11 @@ type MinuteMetricsParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeApis *bool `json:"includeApis,omitempty" tf:"include_apis,omitempty"`
 
-	// Specifies the number of days that logs will be retained. Changing this forces a new resource.
+	// Specifies the number of days that logs will be retained.
 	// +kubebuilder:validation:Optional
 	RetentionPolicyDays *float64 `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
 
-	// The version of storage analytics to configure. Changing this forces a new resource.
+	// The version of storage analytics to configure.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }

@@ -55,7 +55,7 @@ type LinkedServiceDataLakeStorageGen2Parameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The service principal id with which to authenticate against the Azure Data Lake Storage Gen2 account.  Incompatible with storage_account_key and use_managed_identity.
+	// The service principal id with which to authenticate against the Azure Data Lake Storage Gen2 account. Incompatible with storage_account_key and use_managed_identity.
 	// +kubebuilder:validation:Optional
 	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
 
@@ -63,7 +63,7 @@ type LinkedServiceDataLakeStorageGen2Parameters struct {
 	// +kubebuilder:validation:Optional
 	ServicePrincipalKey *string `json:"servicePrincipalKey,omitempty" tf:"service_principal_key,omitempty"`
 
-	// The Storage Account Key with which to authenticate against the Azure Data Lake Storage Gen2 account.  Incompatible with service_principal_id, service_principal_key, tenant and use_managed_identity.
+	// The Storage Account Key with which to authenticate against the Azure Data Lake Storage Gen2 account. Incompatible with service_principal_id, service_principal_key, tenant and use_managed_identity.
 	// +kubebuilder:validation:Optional
 	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
 

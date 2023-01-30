@@ -1574,7 +1574,7 @@ func (mg *IdentityProviderTwitter) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IdentityProviderTwitter
 func (tr *IdentityProviderTwitter) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"api_secret_key": "spec.forProvider.apiSecretKeySecretRef"}
+	return map[string]string{"api_key": "spec.forProvider.apiKeySecretRef", "api_secret_key": "spec.forProvider.apiSecretKeySecretRef"}
 }
 
 // GetObservation of this IdentityProviderTwitter

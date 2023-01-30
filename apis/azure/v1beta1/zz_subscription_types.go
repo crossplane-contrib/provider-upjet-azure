@@ -43,7 +43,7 @@ type SubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The workload type of the Subscription.  Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
+	// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
 	// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
 	// +kubebuilder:validation:Optional
 	Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`

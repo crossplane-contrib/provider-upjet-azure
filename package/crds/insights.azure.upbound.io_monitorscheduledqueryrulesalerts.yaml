@@ -260,12 +260,12 @@ spec:
                     description: The description of the scheduled query rule.
                     type: string
                   enabled:
-                    description: Whether this scheduled query rule is enabled.  Default
+                    description: Whether this scheduled query rule is enabled. Default
                       is true.
                     type: boolean
                   frequency:
                     description: Frequency (in minutes) at which rule condition should
-                      be evaluated.  Values must be between 5 and 1440 (inclusive).
+                      be evaluated. Values must be between 5 and 1440 (inclusive).
                     type: number
                   location:
                     description: Specifies the Azure Region where the resource should
@@ -373,12 +373,12 @@ spec:
                     type: object
                   throttling:
                     description: Time (in minutes) for which Alerts should be throttled
-                      or suppressed.  Values must be between 0 and 10000 (inclusive).
+                      or suppressed. Values must be between 0 and 10000 (inclusive).
                     type: number
                   timeWindow:
                     description: Time window for which data needs to be fetched for
-                      query (must be greater than or equal to frequency).  Values
-                      must be between 5 and 2880 (inclusive).
+                      query (must be greater than or equal to frequency). Values must
+                      be between 5 and 2880 (inclusive).
                     type: number
                   trigger:
                     description: A trigger block as defined below.
@@ -403,7 +403,7 @@ spec:
                                 type: string
                               threshold:
                                 description: Result or count threshold based on which
-                                  rule should be triggered.  Values must be between
+                                  rule should be triggered. Values must be between
                                   0 and 10000 inclusive.
                                 type: number
                             required:
@@ -419,7 +419,7 @@ spec:
                           type: string
                         threshold:
                           description: Result or count threshold based on which rule
-                            should be triggered.  Values must be between 0 and 10000
+                            should be triggered. Values must be between 0 and 10000
                             inclusive.
                           type: number
                       required:

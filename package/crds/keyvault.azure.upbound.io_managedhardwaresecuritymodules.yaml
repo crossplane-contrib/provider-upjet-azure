@@ -100,7 +100,7 @@ spec:
                     type: boolean
                   purgeProtectionEnabled:
                     description: Is Purge Protection enabled for this Key Vault Managed
-                      Hardware Security Module?  Changing this forces a new resource
+                      Hardware Security Module? Changing this forces a new resource
                       to be created.
                     type: boolean
                   resourceGroupName:

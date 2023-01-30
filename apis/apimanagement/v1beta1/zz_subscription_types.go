@@ -38,7 +38,7 @@ type SubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
-	// Determines whether tracing can be enabled.  Defaults to true.
+	// Determines whether tracing can be enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
 

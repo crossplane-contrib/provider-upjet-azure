@@ -65,9 +65,7 @@ type QueueParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxDeliveryCount *float64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
 
-	// Integer value which controls the maximum size of
-	// a message allowed on the queue for Premium SKU. For supported values see the "Large messages support"
-	// section of this document.
+	// Integer value which controls the maximum size of a message allowed on the queue for Premium SKU. For supported values see the "Large messages support" section of this document.
 	// +kubebuilder:validation:Optional
 	MaxMessageSizeInKilobytes *float64 `json:"maxMessageSizeInKilobytes,omitempty" tf:"max_message_size_in_kilobytes,omitempty"`
 

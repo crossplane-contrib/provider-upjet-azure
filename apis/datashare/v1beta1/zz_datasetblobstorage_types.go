@@ -59,7 +59,7 @@ type DataSetBlobStorageParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
 
-	// A storage_account block as defined below.
+	// A storage_account block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	StorageAccount []StorageAccountParameters `json:"storageAccount" tf:"storage_account,omitempty"`
 }

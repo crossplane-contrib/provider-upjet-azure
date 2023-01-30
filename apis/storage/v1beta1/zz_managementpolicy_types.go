@@ -171,7 +171,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	ChangeTierToArchiveAfterDaysSinceCreation *float64 `json:"changeTierToArchiveAfterDaysSinceCreation,omitempty" tf:"change_tier_to_archive_after_days_since_creation,omitempty"`
 
-	// The age in days creation create to  tier blob version to cool storage. Must be between 0 and 99999. Defaults to -1.
+	// The age in days creation create to tier blob version to cool storage. Must be between 0 and 99999. Defaults to -1.
 	// +kubebuilder:validation:Optional
 	ChangeTierToCoolAfterDaysSinceCreation *float64 `json:"changeTierToCoolAfterDaysSinceCreation,omitempty" tf:"change_tier_to_cool_after_days_since_creation,omitempty"`
 
@@ -193,7 +193,7 @@ type VersionParameters struct {
 	// +kubebuilder:validation:Optional
 	ChangeTierToArchiveAfterDaysSinceCreation *float64 `json:"changeTierToArchiveAfterDaysSinceCreation,omitempty" tf:"change_tier_to_archive_after_days_since_creation,omitempty"`
 
-	// The age in days creation create to  tier blob version to cool storage. Must be between 0 and 99999. Defaults to -1.
+	// The age in days creation create to tier blob version to cool storage. Must be between 0 and 99999. Defaults to -1.
 	// +kubebuilder:validation:Optional
 	ChangeTierToCoolAfterDaysSinceCreation *float64 `json:"changeTierToCoolAfterDaysSinceCreation,omitempty" tf:"change_tier_to_cool_after_days_since_creation,omitempty"`
 

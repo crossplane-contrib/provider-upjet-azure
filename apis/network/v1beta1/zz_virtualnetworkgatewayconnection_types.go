@@ -32,29 +32,23 @@ type IpsecPolicyObservation struct {
 
 type IpsecPolicyParameters struct {
 
-	// The DH group used in IKE phase 1 for initial SA. Valid
-	// options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24,
-	// ECP256, ECP384, or None.
+	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
 	// +kubebuilder:validation:Required
 	DhGroup *string `json:"dhGroup" tf:"dh_group,omitempty"`
 
-	// The IKE encryption algorithm. Valid
-	// options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
+	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
 	// +kubebuilder:validation:Required
 	IkeEncryption *string `json:"ikeEncryption" tf:"ike_encryption,omitempty"`
 
-	// The IKE integrity algorithm. Valid
-	// options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
+	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
 	// +kubebuilder:validation:Required
 	IkeIntegrity *string `json:"ikeIntegrity" tf:"ike_integrity,omitempty"`
 
-	// The IPSec encryption algorithm. Valid
-	// options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
+	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
 	// +kubebuilder:validation:Required
 	IpsecEncryption *string `json:"ipsecEncryption" tf:"ipsec_encryption,omitempty"`
 
-	// The IPSec integrity algorithm. Valid
-	// options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
+	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
 	// +kubebuilder:validation:Required
 	IpsecIntegrity *string `json:"ipsecIntegrity" tf:"ipsec_integrity,omitempty"`
 
@@ -64,13 +58,11 @@ type IpsecPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	PfsGroup *string `json:"pfsGroup" tf:"pfs_group,omitempty"`
 
-	// The IPSec SA payload size in KB. Must be at least
-	// 1024 KB. Defaults to 102400000 KB.
+	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
 	// +kubebuilder:validation:Optional
 	SaDatasize *float64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
 
-	// The IPSec SA lifetime in seconds. Must be at least
-	// 300 seconds. Defaults to 27000 seconds.
+	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
 	// +kubebuilder:validation:Optional
 	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
 }
@@ -97,9 +89,7 @@ type VirtualNetworkGatewayConnectionObservation struct {
 
 type VirtualNetworkGatewayConnectionParameters struct {
 
-	// The authorization key associated with the
-	// Express Route Circuit. This field is required only if the type is an
-	// ExpressRoute connection.
+	// The authorization key associated with the Express Route Circuit. This field is required only if the type is an ExpressRoute connection.
 	// +kubebuilder:validation:Optional
 	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
@@ -126,8 +116,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
 
-	// If true, BGP (Border Gateway Protocol) is enabled
-	// for this connection. Defaults to false.
+	// If true, BGP (Border Gateway Protocol) is enabled for this connection. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableBGP *bool `json:"enableBgp,omitempty" tf:"enable_bgp,omitempty"`
 
@@ -153,8 +142,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalAzureIPAddressEnabled *bool `json:"localAzureIpAddressEnabled,omitempty" tf:"local_azure_ip_address_enabled,omitempty"`
 
-	// The ID of the local network gateway
-	// when creating Site-to-Site connection (i.e. when type is IPsec).
+	// The ID of the local network gateway when creating Site-to-Site connection (i.e. when type is IPsec).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.LocalNetworkGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -203,8 +191,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
 
-	// The shared IPSec key. A key could be provided if a
-	// Site-to-Site, VNet-to-VNet or ExpressRoute connection is created.
+	// The shared IPSec key. A key could be provided if a Site-to-Site, VNet-to-VNet or ExpressRoute connection is created.
 	// +kubebuilder:validation:Optional
 	SharedKeySecretRef *v1.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
 
@@ -222,9 +209,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// If true, policy-based traffic
-	// selectors are enabled for this connection. Enabling policy-based traffic
-	// selectors requires an ipsec_policy block. Defaults to false.
+	// If true, policy-based traffic selectors are enabled for this connection. Enabling policy-based traffic selectors requires an ipsec_policy block. Defaults to false.
 	// +kubebuilder:validation:Optional
 	UsePolicyBasedTrafficSelectors *bool `json:"usePolicyBasedTrafficSelectors,omitempty" tf:"use_policy_based_traffic_selectors,omitempty"`
 

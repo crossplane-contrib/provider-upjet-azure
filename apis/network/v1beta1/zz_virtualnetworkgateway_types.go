@@ -65,8 +65,7 @@ type RootCertificateParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The SHA1 thumbprint of the certificate to be
-	// revoked.
+	// The SHA1 thumbprint of the certificate to be revoked.
 	// +kubebuilder:validation:Required
 	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
@@ -89,9 +88,7 @@ type VPNClientConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AADTenant *string `json:"aadTenant,omitempty" tf:"aad_tenant,omitempty"`
 
-	// The address space out of which IP addresses for
-	// vpn clients will be taken. You can provide more than one address space, e.g.
-	// in CIDR notation.
+	// The address space out of which IP addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation.
 	// +kubebuilder:validation:Required
 	AddressSpace []*string `json:"addressSpace" tf:"address_space,omitempty"`
 
@@ -137,8 +134,7 @@ type VirtualNetworkGatewayBGPSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
 
-	// The weight added to routes which have been learned
-	// through BGP peering. Valid values can be between 0 and 100.
+	// The weight added to routes which have been learned through BGP peering. Valid values can be between 0 and 100.
 	// +kubebuilder:validation:Optional
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 
@@ -152,18 +148,15 @@ type VirtualNetworkGatewayIPConfigurationObservation struct {
 
 type VirtualNetworkGatewayIPConfigurationParameters struct {
 
-	// A user-defined name of the IP configuration. Defaults to vnetGatewayConfig. Changing this forces a new resource to be created.
+	// A user-defined name of the IP configuration. Defaults to vnetGatewayConfig.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Defines how the private IP address
-	// of the gateways virtual interface is assigned. Valid options are Static or
-	// Dynamic. Defaults to Dynamic.
+	// Defines how the private IP address of the gateways virtual interface is assigned. Valid options are Static or Dynamic. Defaults to Dynamic.
 	// +kubebuilder:validation:Optional
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
-	// The ID of the public IP address to associate
-	// with the Virtual Network Gateway.
+	// The ID of the public IP address to associate with the Virtual Network Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -177,10 +170,7 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
-	// The ID of the gateway subnet of a virtual network in
-	// which the virtual network gateway will be created. It is mandatory that
-	// the associated subnet is named GatewaySubnet. Therefore, each virtual
-	// network can contain at most a single Virtual Network Gateway.
+	// The ID of the gateway subnet of a virtual network in which the virtual network gateway will be created. It is mandatory that the associated subnet is named GatewaySubnet. Therefore, each virtual network can contain at most a single Virtual Network Gateway.
 	// +crossplane:generate:reference:type=Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -207,10 +197,7 @@ type VirtualNetworkGatewayObservation struct {
 
 type VirtualNetworkGatewayParameters struct {
 
-	// If true, an active-active Virtual Network Gateway
-	// will be created. An active-active gateway requires a HighPerformance or an
-	// UltraPerformance SKU. If false, an active-standby gateway will be created.
-	// Defaults to false.
+	// If true, an active-active Virtual Network Gateway will be created. An active-active gateway requires a HighPerformance or an UltraPerformance SKU. If false, an active-standby gateway will be created. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ActiveActive *bool `json:"activeActive,omitempty" tf:"active_active,omitempty"`
 
@@ -218,14 +205,11 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	BGPSettings []VirtualNetworkGatewayBGPSettingsParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 
+	// A custom_route block as defined below. Specifies a custom routes address space for a virtual network gateway and a VpnClient.
 	// +kubebuilder:validation:Optional
 	CustomRoute []CustomRouteParameters `json:"customRoute,omitempty" tf:"custom_route,omitempty"`
 
-	// The ID of the local network gateway
-	// through which outbound Internet traffic from the virtual network in which the
-	// gateway is created will be routed (forced tunnelling). Refer to the
-	// Azure documentation on forced tunnelling.
-	// If not specified, forced tunnelling is disabled.
+	// The ID of the local network gateway through which outbound Internet traffic from the virtual network in which the gateway is created will be routed (forced tunnelling). Refer to the Azure documentation on forced tunnelling. If not specified, forced tunnelling is disabled.
 	// +kubebuilder:validation:Optional
 	DefaultLocalNetworkGatewayID *string `json:"defaultLocalNetworkGatewayId,omitempty" tf:"default_local_network_gateway_id,omitempty"`
 
@@ -233,8 +217,7 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// If true, BGP (Border Gateway Protocol) will be enabled
-	// for this Virtual Network Gateway. Defaults to false.
+	// If true, BGP (Border Gateway Protocol) will be enabled for this Virtual Network Gateway. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableBGP *bool `json:"enableBgp,omitempty" tf:"enable_bgp,omitempty"`
 
@@ -270,13 +253,7 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Configuration of the size and capacity of the virtual network
-	// gateway. Valid options are Basic, Standard, HighPerformance, UltraPerformance,
-	// ErGw1AZ, ErGw2AZ, ErGw3AZ, VpnGw1, VpnGw2, VpnGw3, VpnGw4,VpnGw5, VpnGw1AZ,
-	// VpnGw2AZ, VpnGw3AZ,VpnGw4AZ and VpnGw5AZ and depend on the type, vpn_type and
-	// generation arguments.
-	// A PolicyBased gateway only supports the Basic SKU. Further, the UltraPerformance
-	// SKU is only supported by an ExpressRoute gateway.
+	// Configuration of the size and capacity of the virtual network gateway. Valid options are Basic, Standard, HighPerformance, UltraPerformance, ErGw1AZ, ErGw2AZ, ErGw3AZ, VpnGw1, VpnGw2, VpnGw3, VpnGw4,VpnGw5, VpnGw1AZ, VpnGw2AZ, VpnGw3AZ,VpnGw4AZ and VpnGw5AZ and depend on the type, vpn_type and generation arguments. A PolicyBased gateway only supports the Basic SKU. Further, the UltraPerformance SKU is only supported by an ExpressRoute gateway.
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 

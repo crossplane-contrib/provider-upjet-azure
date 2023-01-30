@@ -66,7 +66,7 @@ spec:
               forProvider:
                 properties:
                   allowForwardedTraffic:
-                    description: Controls if forwarded traffic from  VMs in the remote
+                    description: Controls if forwarded traffic from VMs in the remote
                       virtual network is allowed. Defaults to false.
                     type: boolean
                   allowGatewayTransit:
@@ -79,7 +79,7 @@ spec:
                     type: boolean
                   remoteVirtualNetworkId:
                     description: The full Azure resource ID of the remote virtual
-                      network.  Changing this forces a new resource to be created.
+                      network. Changing this forces a new resource to be created.
                     type: string
                   remoteVirtualNetworkIdRef:
                     description: Reference to a VirtualNetwork to populate remoteVirtualNetworkId.

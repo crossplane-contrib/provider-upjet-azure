@@ -95,7 +95,7 @@ type LinkedServiceAzureDatabricksParameters struct {
 	// +kubebuilder:validation:Optional
 	ExistingClusterID *string `json:"existingClusterId,omitempty" tf:"existing_cluster_id,omitempty"`
 
-	// Leverages an instance pool within the linked ADB instance as defined by  instance_pool block below.
+	// Leverages an instance pool within the linked ADB instance as defined by instance_pool block below.
 	// +kubebuilder:validation:Optional
 	InstancePool []InstancePoolParameters `json:"instancePool,omitempty" tf:"instance_pool,omitempty"`
 
@@ -121,7 +121,7 @@ type LinkedServiceAzureDatabricksParameters struct {
 	// +kubebuilder:validation:Optional
 	MsiWorkSpaceResourceIDSelector *v1.Selector `json:"msiWorkSpaceResourceIdSelector,omitempty" tf:"-"`
 
-	// Creates new clusters within the linked ADB instance as defined in the  new_cluster_config block below.
+	// Creates new clusters within the linked ADB instance as defined in the new_cluster_config block below.
 	// +kubebuilder:validation:Optional
 	NewClusterConfig []NewClusterConfigParameters `json:"newClusterConfig,omitempty" tf:"new_cluster_config,omitempty"`
 

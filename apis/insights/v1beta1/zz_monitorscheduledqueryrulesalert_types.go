@@ -80,11 +80,11 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Whether this scheduled query rule is enabled.  Default is true.
+	// Whether this scheduled query rule is enabled. Default is true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Frequency (in minutes) at which rule condition should be evaluated.  Values must be between 5 and 1440 (inclusive).
+	// Frequency (in minutes) at which rule condition should be evaluated. Values must be between 5 and 1440 (inclusive).
 	// +kubebuilder:validation:Required
 	Frequency *float64 `json:"frequency" tf:"frequency,omitempty"`
 
@@ -125,11 +125,11 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Time (in minutes) for which Alerts should be throttled or suppressed.  Values must be between 0 and 10000 (inclusive).
+	// Time (in minutes) for which Alerts should be throttled or suppressed. Values must be between 0 and 10000 (inclusive).
 	// +kubebuilder:validation:Optional
 	Throttling *float64 `json:"throttling,omitempty" tf:"throttling,omitempty"`
 
-	// Time window for which data needs to be fetched for query (must be greater than or equal to frequency).  Values must be between 5 and 2880 (inclusive).
+	// Time window for which data needs to be fetched for query (must be greater than or equal to frequency). Values must be between 5 and 2880 (inclusive).
 	// +kubebuilder:validation:Required
 	TimeWindow *float64 `json:"timeWindow" tf:"time_window,omitempty"`
 
@@ -155,7 +155,7 @@ type TriggerMetricTriggerParameters struct {
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
-	// Result or count threshold based on which rule should be triggered.  Values must be between 0 and 10000 inclusive.
+	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
 	// +kubebuilder:validation:Required
 	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 }
@@ -173,7 +173,7 @@ type TriggerParameters struct {
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 
-	// Result or count threshold based on which rule should be triggered.  Values must be between 0 and 10000 inclusive.
+	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
 	// +kubebuilder:validation:Required
 	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 }

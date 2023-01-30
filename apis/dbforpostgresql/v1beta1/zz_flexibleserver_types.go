@@ -31,6 +31,20 @@ type AuthenticationParameters struct {
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
+type CustomerManagedKeyObservation struct {
+}
+
+type CustomerManagedKeyParameters struct {
+
+	// The ID of the Key Vault Key.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
+	// +kubebuilder:validation:Optional
+	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
+}
+
 type FlexibleServerObservation struct {
 
 	// The FQDN of the PostgreSQL Flexible Server.
@@ -38,6 +52,10 @@ type FlexibleServerObservation struct {
 
 	// The ID of the PostgreSQL Flexible Server.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Is public network access enabled?
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -65,6 +83,10 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
+	// A customer_managed_key block as defined below.
+	// +kubebuilder:validation:Optional
+	CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+
 	// The ID of the virtual network subnet to create the PostgreSQL Flexible Server. The provided subnet should not have any other resource deployed in it and this subnet will be delegated to the PostgreSQL Flexible Server, if not already delegated. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
@@ -86,6 +108,10 @@ type FlexibleServerParameters struct {
 	// A high_availability block as defined below.
 	// +kubebuilder:validation:Optional
 	HighAvailability []HighAvailabilityParameters `json:"highAvailability,omitempty" tf:"high_availability,omitempty"`
+
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Required
@@ -163,6 +189,26 @@ type HighAvailabilityParameters struct {
 	// Specifies the Availability Zone in which the standby Flexible Server should be located.
 	// +kubebuilder:validation:Optional
 	StandbyAvailabilityZone *string `json:"standbyAvailabilityZone,omitempty" tf:"standby_availability_zone,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// The ID of the PostgreSQL Flexible Server.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service. Required if used together with customer_managed_key block.
+	// +kubebuilder:validation:Optional
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Should be set to UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MaintenanceWindowObservation struct {

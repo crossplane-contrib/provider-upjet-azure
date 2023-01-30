@@ -84,9 +84,11 @@ spec:
                           type: string
                         useSystemAssignedIdentity:
                           description: Indicate that system assigned identity should
-                            be used or not. At this time the only possible value is
-                            true. Defaults to true.
+                            be used or not. Defaults to true.
                           type: boolean
+                        userAssignedIdentityId:
+                          description: The ID of the Recovery Services Vault.
+                          type: string
                       required:
                       - infrastructureEncryptionEnabled
                       - keyId
@@ -96,19 +98,34 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this App Configuration.
+                          items:
+                            type: string
+                          type: array
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Recovery Services Vault.
-                            The only possible value is SystemAssigned.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       required:
                       - type
                       type: object
                     type: array
+                  immutability:
+                    description: 'Immutability Settings of vault, possible values
+                      include: Locked, Unlocked and Disabled.'
+                    type: string
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  publicNetworkAccessEnabled:
+                    description: Is it enabled to access the vault from public networks.
+                      Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the Recovery Services Vault. Changing this forces a new resource

@@ -54,7 +54,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Backup []BackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
-	// The capabilities which should be enabled for this Cosmos DB account. Value is a capabilities block as defined below. Changing this forces a new resource to be created.
+	// The capabilities which should be enabled for this Cosmos DB account. Value is a capabilities block as defined below.
 	// +kubebuilder:validation:Optional
 	Capabilities []CapabilitiesParameters `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
@@ -74,7 +74,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or start with UserAssignedIdentity. Defaults to FirstPartyIdentity.
+	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or start with UserAssignedIdentity.
 	// +kubebuilder:validation:Optional
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
@@ -247,7 +247,7 @@ type CorsRuleParameters struct {
 	// +kubebuilder:validation:Required
 	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
-	// A list of HTTP headers that are allowed to be executed by the origin. Valid options are  DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
+	// A list of HTTP headers that are allowed to be executed by the origin. Valid options are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
 	// +kubebuilder:validation:Required
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
@@ -290,7 +290,7 @@ type GeoLocationParameters struct {
 	// +kubebuilder:validation:Required
 	FailoverPriority *float64 `json:"failoverPriority" tf:"failover_priority,omitempty"`
 
-	// The name of the Azure region to host replicated data. Changing this forces a new resource to be created.
+	// The name of the Azure region to host replicated data.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 

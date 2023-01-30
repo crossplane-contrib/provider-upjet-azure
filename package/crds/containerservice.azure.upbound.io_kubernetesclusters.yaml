@@ -154,9 +154,105 @@ spec:
                           type: object
                       type: object
                     type: array
+                  apiServerAccessProfile:
+                    description: An api_server_access_profile block as defined below.
+                    items:
+                      properties:
+                        authorizedIpRanges:
+                          description: Set of authorized IP ranges to allow access
+                            to API server, e.g. ["198.51.100.0/24"].
+                          items:
+                            type: string
+                          type: array
+                        subnetId:
+                          description: The ID of the Subnet where the API server endpoint
+                            is delegated to.
+                          type: string
+                        subnetIdRef:
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        subnetIdSelector:
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        vnetIntegrationEnabled:
+                          description: Should API Server VNet Integration be enabled?
+                            For more details please visit Use API Server VNet Integration.
+                          type: boolean
+                      type: object
+                    type: array
                   apiServerAuthorizedIpRanges:
-                    description: Set of authorized IP ranges to allow access to API
-                      server, e.g. ["198.51.100.0/24"].
                     items:
                       type: string
                     type: array
@@ -323,12 +419,12 @@ spec:
                           type: boolean
                         enableHostEncryption:
                           description: Should the nodes in the Default Node Pool have
-                            host encryption enabled?  Changing this forces a new resource
+                            host encryption enabled? Changing this forces a new resource
                             to be created.
                           type: boolean
                         enableNodePublicIp:
                           description: Should nodes in this Node Pool have a Public
-                            IP Address?  Changing this forces a new resource to be
+                            IP Address? Changing this forces a new resource to be
                             created.
                           type: boolean
                         fipsEnabled:
@@ -342,7 +438,8 @@ spec:
                             a new resource to be created.
                           type: string
                         kubeletConfig:
-                          description: A kubelet_config block as defined below.
+                          description: A kubelet_config block as defined below. Changing
+                            this forces a new resource to be created.
                           items:
                             properties:
                               allowedUnsafeSysctls:
@@ -407,7 +504,8 @@ spec:
                             values are OS and Temporary.
                           type: string
                         linuxOsConfig:
-                          description: A linux_os_config block as defined below.
+                          description: A linux_os_config block as defined below. Changing
+                            this forces a new resource to be created.
                           items:
                             properties:
                               swapFileSizeMb:
@@ -622,6 +720,19 @@ spec:
                           description: A map of Kubernetes labels which should be
                             applied to nodes in the Default Node Pool.
                           type: object
+                        nodeNetworkProfile:
+                          description: A node_network_profile block as documented
+                            below.
+                          items:
+                            properties:
+                              nodePublicIpTags:
+                                additionalProperties:
+                                  type: string
+                                description: Specifies a mapping of tags to the instance-level
+                                  public IPs.
+                                type: object
+                            type: object
+                          type: array
                         nodePublicIpPrefixId:
                           description: Resource ID for the Public IP Addresses Prefix
                             for the nodes in this Node Pool. enable_node_public_ip
@@ -630,7 +741,8 @@ spec:
                           type: string
                         nodeTaints:
                           description: A list of the taints added to new nodes during
-                            node pool create and scale.
+                            node pool create and scale. Changing this forces a new
+                            resource to be created.
                           items:
                             type: string
                           type: array
@@ -1094,6 +1206,31 @@ spec:
                           type: object
                       type: object
                     type: array
+                  keyManagementService:
+                    description: A key_management_service block as defined below.
+                      For more details, please visit Key Management Service (KMS)
+                      etcd encryption to an AKS cluster.
+                    items:
+                      properties:
+                        keyVaultKeyId:
+                          description: Identifier of Azure Key Vault key. See key
+                            identifier format for more details. When Azure Key Vault
+                            key management service is enabled, this field is required
+                            and must be a valid key identifier. When enabled is false,
+                            leave the field empty.
+                          type: string
+                        keyVaultNetworkAccess:
+                          description: Network access of the key vault Network access
+                            of key vault. The possible values are Public and Private.
+                            Public means the key vault allows public access from all
+                            networks. Private means the key vault disables public
+                            access and enables private link. The default value is
+                            Public.
+                          type: string
+                      required:
+                      - keyVaultKeyId
+                      type: object
+                    type: array
                   keyVaultSecretsProvider:
                     description: A key_vault_secrets_provider block as defined below.
                       For more details, please visit Azure Keyvault Secrets Provider
@@ -1111,24 +1248,26 @@ spec:
                       type: object
                     type: array
                   kubeletIdentity:
-                    description: A kubelet_identity block as defined below. Changing
-                      this forces a new resource to be created.
+                    description: A kubelet_identity block as defined below.
                     items:
                       properties:
                         clientId:
                           description: The Client ID of the user-defined Managed Identity
                             to be assigned to the Kubelets. If not specified a Managed
-                            Identity is created automatically.
+                            Identity is created automatically. Changing this forces
+                            a new resource to be created.
                           type: string
                         objectId:
                           description: The Object ID of the user-defined Managed Identity
                             assigned to the Kubelets.If not specified a Managed Identity
-                            is created automatically.
+                            is created automatically. Changing this forces a new resource
+                            to be created.
                           type: string
                         userAssignedIdentityId:
                           description: The ID of the User Assigned Identity assigned
                             to the Kubelets. If not specified a Managed Identity is
-                            created automatically.
+                            created automatically. Changing this forces a new resource
+                            to be created.
                           type: string
                       type: object
                     type: array
@@ -1254,7 +1393,8 @@ spec:
                       type: object
                     type: array
                   networkProfile:
-                    description: A network_profile block as defined below.
+                    description: A network_profile block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         dnsServiceIp:
@@ -1284,7 +1424,8 @@ spec:
                         loadBalancerProfile:
                           description: A load_balancer_profile block as defined below.
                             This can only be specified when load_balancer_sku is set
-                            to standard.
+                            to standard. Changing this forces a new resource to be
+                            created.
                           items:
                             properties:
                               idleTimeoutInMinutes:
@@ -1335,7 +1476,8 @@ spec:
                           description: A nat_gateway_profile block as defined below.
                             This can only be specified when load_balancer_sku is set
                             to standard and outbound_type is set to managedNATGateway
-                            or userAssignedNATGateway.
+                            or userAssignedNATGateway. Changing this forces a new
+                            resource to be created.
                           items:
                             properties:
                               idleTimeoutInMinutes:
@@ -1409,7 +1551,8 @@ spec:
                     type: array
                   nodeResourceGroup:
                     description: The auto-generated Resource Group which contains
-                      the resources for this Managed Kubernetes Cluster.
+                      the resources for this Managed Kubernetes Cluster. Changing
+                      this forces a new resource to be created.
                     type: string
                   oidcIssuerEnabled:
                     description: Enable or Disable the OIDC issuer URL
@@ -2028,13 +2171,15 @@ spec:
                       type: object
                     type: array
                   networkProfile:
-                    description: A network_profile block as defined below.
+                    description: A network_profile block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         loadBalancerProfile:
                           description: A load_balancer_profile block as defined below.
                             This can only be specified when load_balancer_sku is set
-                            to standard.
+                            to standard. Changing this forces a new resource to be
+                            created.
                           items:
                             properties:
                               effectiveOutboundIps:
@@ -2049,7 +2194,8 @@ spec:
                           description: A nat_gateway_profile block as defined below.
                             This can only be specified when load_balancer_sku is set
                             to standard and outbound_type is set to managedNATGateway
-                            or userAssignedNATGateway.
+                            or userAssignedNATGateway. Changing this forces a new
+                            resource to be created.
                           items:
                             properties:
                               effectiveOutboundIps:

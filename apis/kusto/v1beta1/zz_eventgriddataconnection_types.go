@@ -94,7 +94,7 @@ type EventGridDataConnectionParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id.  For user assigned identity (UAI) provide the UAI resource Id.
+	// Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id. For user assigned identity (UAI) provide the UAI resource Id.
 	// +kubebuilder:validation:Optional
 	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
 

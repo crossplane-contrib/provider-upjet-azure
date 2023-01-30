@@ -18,7 +18,7 @@ type CriteriaDimensionObservation struct {
 
 type CriteriaDimensionParameters struct {
 
-	// Name of the dimension. Changing this forces a new resource to be created.
+	// Name of the dimension.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -40,7 +40,7 @@ type MonitorScheduledQueryRulesLogCriteriaParameters struct {
 	// +kubebuilder:validation:Required
 	Dimension []CriteriaDimensionParameters `json:"dimension" tf:"dimension,omitempty"`
 
-	// Name of the metric.  Supported metrics are listed in the Azure Monitor Microsoft.OperationalInsights/workspaces metrics namespace.
+	// Name of the metric. Supported metrics are listed in the Azure Monitor Microsoft.OperationalInsights/workspaces metrics namespace.
 	// +kubebuilder:validation:Required
 	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 }
@@ -79,7 +79,7 @@ type MonitorScheduledQueryRulesLogParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Whether this scheduled query rule is enabled.  Default is true.
+	// Whether this scheduled query rule is enabled. Default is true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 

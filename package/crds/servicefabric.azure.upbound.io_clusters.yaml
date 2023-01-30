@@ -183,8 +183,7 @@ spec:
                       the Version of the Cluster Code of the cluster.
                     type: string
                   diagnosticsConfig:
-                    description: A diagnostics_config block as defined below. Changing
-                      this forces a new resource to be created.
+                    description: A diagnostics_config block as defined below.
                     items:
                       properties:
                         blobEndpoint:
@@ -320,8 +319,8 @@ spec:
                             services (workload) should run.
                           type: object
                         reverseProxyEndpointPort:
-                          description: The Port used for the Reverse Proxy Endpoint  for
-                            this Node Type. Changing this will upgrade the cluster.
+                          description: The Port used for the Reverse Proxy Endpoint
+                            for this Node Type. Changing this will upgrade the cluster.
                           type: number
                       required:
                       - clientEndpointPort

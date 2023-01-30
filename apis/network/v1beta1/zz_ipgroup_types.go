@@ -15,7 +15,13 @@ import (
 
 type IPGroupObservation struct {
 
-	// The ID of the IP Group.
+	// A firewall_ids block as defined below.
+	FirewallIds []*string `json:"firewallIds,omitempty" tf:"firewall_ids,omitempty"`
+
+	// A firewall_policy_ids block as defined below.
+	FirewallPolicyIds []*string `json:"firewallPolicyIds,omitempty" tf:"firewall_policy_ids,omitempty"`
+
+	// The ID of the IP group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 

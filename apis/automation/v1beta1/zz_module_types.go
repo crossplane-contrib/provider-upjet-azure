@@ -18,9 +18,11 @@ type HashObservation struct {
 
 type HashParameters struct {
 
+	// Specifies the algorithm used for the hash content.
 	// +kubebuilder:validation:Required
 	Algorithm *string `json:"algorithm" tf:"algorithm,omitempty"`
 
+	// The hash value of the content.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -30,6 +32,7 @@ type ModuleLinkObservation struct {
 
 type ModuleLinkParameters struct {
 
+	// A hash block as defined below.
 	// +kubebuilder:validation:Optional
 	Hash []HashParameters `json:"hash,omitempty" tf:"hash,omitempty"`
 
@@ -59,7 +62,7 @@ type ModuleParameters struct {
 	// +kubebuilder:validation:Optional
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
-	// The published Module link.
+	// A module_link block as defined below.
 	// +kubebuilder:validation:Required
 	ModuleLink []ModuleLinkParameters `json:"moduleLink" tf:"module_link,omitempty"`
 

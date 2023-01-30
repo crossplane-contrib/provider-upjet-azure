@@ -162,8 +162,7 @@ spec:
                             (such as ApiManagement, AzureBackup or AzureMonitor) format.
                           type: string
                         name:
-                          description: The name of the route. Changing this forces
-                            a new resource to be created.
+                          description: The name of the route.
                           type: string
                         nextHopInIpAddress:
                           description: Contains the IP address packets should be forwarded

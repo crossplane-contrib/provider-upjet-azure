@@ -80,7 +80,7 @@ spec:
                     type: array
                   additionalUnattendContent:
                     description: One or more additional_unattend_content blocks as
-                      defined below.
+                      defined below. Changing this forces a new resource to be created.
                     items:
                       properties:
                         contentSecretRef:
@@ -437,7 +437,8 @@ spec:
                           type: string
                         tag:
                           description: The IP Tag associated with the Public IP, such
-                            as SQL or Storage.
+                            as SQL or Storage. Changing this forces a new resource
+                            to be created.
                           type: string
                       required:
                       - packageReferenceId
@@ -575,16 +576,20 @@ spec:
                                       type: number
                                     ipTag:
                                       description: One or more ip_tag blocks as defined
-                                        above.
+                                        above. Changing this forces a new resource
+                                        to be created.
                                       items:
                                         properties:
                                           tag:
                                             description: The IP Tag associated with
                                               the Public IP, such as SQL or Storage.
+                                              Changing this forces a new resource
+                                              to be created.
                                             type: string
                                           type:
                                             description: The Type of IP Tag, such
-                                              as FirstPartyUsage.
+                                              as FirstPartyUsage. Changing this forces
+                                              a new resource to be created.
                                             type: string
                                         required:
                                         - tag
@@ -794,7 +799,8 @@ spec:
                       to true.
                     type: boolean
                   plan:
-                    description: A plan block as defined below.
+                    description: A plan block as defined below. Changing this forces
+                      a new resource to be created.
                     items:
                       properties:
                         name:
@@ -919,7 +925,8 @@ spec:
                   rollingUpgradePolicy:
                     description: A rolling_upgrade_policy block as defined below.
                       This is Required and can only be specified when upgrade_mode
-                      is set to Automatic or Rolling.
+                      is set to Automatic or Rolling. Changing this forces a new resource
+                      to be created.
                     items:
                       properties:
                         crossZoneUpgradesEnabled:
@@ -1046,11 +1053,13 @@ spec:
                       properties:
                         offer:
                           description: Specifies the offer of the image used to create
-                            the virtual machines.
+                            the virtual machines. Changing this forces a new resource
+                            to be created.
                           type: string
                         publisher:
                           description: Specifies the publisher of the image used to
-                            create the virtual machines.
+                            create the virtual machines. Changing this forces a new
+                            resource to be created.
                           type: string
                         sku:
                           description: Specifies the SKU of the image used to create
@@ -1154,6 +1163,7 @@ spec:
                     type: boolean
                   winrmListener:
                     description: One or more winrm_listener blocks as defined below.
+                      Changing this forces a new resource to be created.
                     items:
                       properties:
                         certificateUrl:

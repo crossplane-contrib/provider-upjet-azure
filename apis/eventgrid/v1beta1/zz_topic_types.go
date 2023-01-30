@@ -118,11 +118,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	InboundIPRule []TopicInboundIPRuleParameters `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
 
-	// A input_mapping_default_values block as defined below.
+	// A input_mapping_default_values block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	InputMappingDefaultValues []TopicInputMappingDefaultValuesParameters `json:"inputMappingDefaultValues,omitempty" tf:"input_mapping_default_values,omitempty"`
 
-	// A input_mapping_fields block as defined below.
+	// A input_mapping_fields block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	InputMappingFields []TopicInputMappingFieldsParameters `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty"`
 

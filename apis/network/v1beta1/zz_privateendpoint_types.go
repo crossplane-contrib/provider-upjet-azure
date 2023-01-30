@@ -51,7 +51,7 @@ type PrivateDNSZoneGroupObservation struct {
 
 type PrivateDNSZoneGroupParameters struct {
 
-	// Specifies the Name of the Private DNS Zone Group. Changing this forces a new private_dns_zone_group resource to be created.
+	// Specifies the Name of the Private DNS Zone Group.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -88,8 +88,8 @@ type PrivateEndpointIPConfigurationParameters struct {
 	PrivateIPAddress *string `json:"privateIpAddress" tf:"private_ip_address,omitempty"`
 
 	// Specifies the subresource this IP address applies to. subresource_names corresponds to group_id. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SubresourceName *string `json:"subresourceName" tf:"subresource_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 }
 
 type PrivateEndpointNetworkInterfaceObservation struct {
@@ -129,7 +129,7 @@ type PrivateEndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomNetworkInterfaceName *string `json:"customNetworkInterfaceName,omitempty" tf:"custom_network_interface_name,omitempty"`
 
-	// One or more ip_configuration blocks as defined below. This allows a static IP address to be set for this Private Endpoint, otherwise an address is dynamically allocated from the Subnet. Changing this forces a new resource to be created.
+	// One or more ip_configuration blocks as defined below. This allows a static IP address to be set for this Private Endpoint, otherwise an address is dynamically allocated from the Subnet.
 	// +kubebuilder:validation:Optional
 	IPConfiguration []PrivateEndpointIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 

@@ -61,7 +61,7 @@ type SQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The throughput of SQL database (RU/s). Must be set in increments of 100. The minimum value is 400.  Do not set when azurerm_cosmosdb_account is configured with EnableServerless capability.
+	// The throughput of SQL database (RU/s). Must be set in increments of 100. The minimum value is 400. Do not set when azurerm_cosmosdb_account is configured with EnableServerless capability.
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }

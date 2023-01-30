@@ -21,29 +21,23 @@ type TopicObservation struct {
 
 type TopicParameters struct {
 
-	// The ISO 8601 timespan duration of the idle interval after which the
-	// Topic is automatically deleted, minimum of 5 minutes.
+	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes.
 	// +kubebuilder:validation:Optional
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
-	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no
-	// TTL value is set on the message itself.
+	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself.
 	// +kubebuilder:validation:Optional
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
 
-	// The ISO 8601 timespan duration during which
-	// duplicates can be detected. Defaults to 10 minutes. (PT10M)
+	// The ISO 8601 timespan duration during which duplicates can be detected. Defaults to 10 minutes. (PT10M)
 	// +kubebuilder:validation:Optional
 	DuplicateDetectionHistoryTimeWindow *string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty"`
 
-	// Boolean flag which controls if server-side
-	// batched operations are enabled. Defaults to false.
+	// Boolean flag which controls if server-side batched operations are enabled.
 	// +kubebuilder:validation:Optional
 	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
 
-	// Boolean flag which controls whether Express Entities
-	// are enabled. An express topic holds a message in memory temporarily before writing
-	// it to persistent storage. Defaults to false.
+	// Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
 	// +kubebuilder:validation:Optional
 	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
 
@@ -53,15 +47,11 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
 
-	// Integer value which controls the maximum size of
-	// a message allowed on the topic for Premium SKU. For supported values see the "Large messages support"
-	// section of this document.
+	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document.
 	// +kubebuilder:validation:Optional
 	MaxMessageSizeInKilobytes *float64 `json:"maxMessageSizeInKilobytes,omitempty" tf:"max_message_size_in_kilobytes,omitempty"`
 
-	// Integer value which controls the size of
-	// memory allocated for the topic. For supported values see the "Queue/topic size"
-	// section of this document.
+	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document.
 	// +kubebuilder:validation:Optional
 	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
 
@@ -90,8 +80,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// Boolean flag which controls whether the Topic
-	// supports ordering. Defaults to false.
+	// Boolean flag which controls whether the Topic supports ordering.
 	// +kubebuilder:validation:Optional
 	SupportOrdering *bool `json:"supportOrdering,omitempty" tf:"support_ordering,omitempty"`
 }

@@ -106,7 +106,7 @@ type NetworkParameters struct {
 	// +kubebuilder:validation:Required
 	CidrRanges []*string `json:"cidrRanges" tf:"cidr_ranges,omitempty"`
 
-	// Ingress read time out in seconds. Changing this forces a new resource to be created.
+	// Ingress read time out in seconds.
 	// +kubebuilder:validation:Optional
 	ReadTimeoutSeconds *float64 `json:"readTimeoutSeconds,omitempty" tf:"read_timeout_seconds,omitempty"`
 
@@ -156,7 +156,7 @@ type RepositoryParameters struct {
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
-	// A name to identify on the Git repository, required only if repos exists. Changing this forces a new resource to be created.
+	// A name to identify on the Git repository, required only if repos exists.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

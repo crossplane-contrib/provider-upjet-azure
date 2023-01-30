@@ -98,6 +98,7 @@ spec:
                     type: array
                   inputMappingDefaultValues:
                     description: A input_mapping_default_values block as defined below.
+                      Changing this forces a new resource to be created.
                     items:
                       properties:
                         dataVersion:
@@ -118,7 +119,8 @@ spec:
                       type: object
                     type: array
                   inputMappingFields:
-                    description: A input_mapping_fields block as defined below.
+                    description: A input_mapping_fields block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         dataVersion:

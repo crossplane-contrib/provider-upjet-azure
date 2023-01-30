@@ -71,15 +71,12 @@ spec:
                     type: string
                   accountKind:
                     description: Defines the Kind of account. Valid options are BlobStorage,
-                      BlockBlobStorage, FileStorage, Storage and StorageV2.  Defaults
+                      BlockBlobStorage, FileStorage, Storage and StorageV2. Defaults
                       to StorageV2.
                     type: string
                   accountReplicationType:
                     description: Defines the type of replication to use for this storage
                       account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
-                      Changing this forces a new resource to be created when types
-                      LRS, GRS and RAGRS are changed to ZRS, GZRS or RAGZRS and vice
-                      versa.
                     type: string
                   accountTier:
                     description: Defines the Tier to use for this storage account.
@@ -91,6 +88,11 @@ spec:
                     description: Allow or disallow nested items within this Account
                       to opt into being public. Defaults to true.
                     type: boolean
+                  allowedCopyScope:
+                    description: Restrict copy to and from Storage Accounts within
+                      an AAD tenant or with Private Links to the same VNet. Possible
+                      values are AAD and PrivateLink.
+                    type: string
                   azureFilesAuthentication:
                     description: A azure_files_authentication block as defined below.
                     items:
@@ -131,7 +133,7 @@ spec:
                           type: array
                         directoryType:
                           description: Specifies the directory service used. Possible
-                            values are AADDS and AD.
+                            values are AADDS, AD and AADKERB.
                           type: string
                       required:
                       - directoryType
@@ -229,8 +231,8 @@ spec:
                           type: boolean
                         restorePolicy:
                           description: A restore_policy block as defined below. This
-                            must be used together with delete_retention_policy set
-                            and versioning_enabled set to true.
+                            must be used together with delete_retention_policy set,
+                            versioning_enabled and change_feed_enabled set to true.
                           items:
                             properties:
                               days:
@@ -318,7 +320,8 @@ spec:
                       type: object
                     type: array
                   immutabilityPolicy:
-                    description: An immutability_policy block as defined below.
+                    description: An immutability_policy block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         allowProtectedAppendWrites:
@@ -483,8 +486,7 @@ spec:
                             properties:
                               enabled:
                                 description: Indicates whether minute metrics are
-                                  enabled for the Queue service. Changing this forces
-                                  a new resource.
+                                  enabled for the Queue service.
                                 type: boolean
                               includeApis:
                                 description: Indicates whether metrics should generate
@@ -492,11 +494,10 @@ spec:
                                 type: boolean
                               retentionPolicyDays:
                                 description: Specifies the number of days that logs
-                                  will be retained. Changing this forces a new resource.
+                                  will be retained.
                                 type: number
                               version:
                                 description: The version of storage analytics to configure.
-                                  Changing this forces a new resource.
                                 type: string
                             required:
                             - enabled
@@ -517,15 +518,14 @@ spec:
                                 type: boolean
                               retentionPolicyDays:
                                 description: Specifies the number of days that logs
-                                  will be retained. Changing this forces a new resource.
+                                  will be retained.
                                 type: number
                               version:
                                 description: The version of storage analytics to configure.
-                                  Changing this forces a new resource.
                                 type: string
                               write:
                                 description: Indicates whether all write requests
-                                  should be logged. Changing this forces a new resource.
+                                  should be logged.
                                 type: boolean
                             required:
                             - delete
@@ -540,8 +540,7 @@ spec:
                             properties:
                               enabled:
                                 description: Indicates whether minute metrics are
-                                  enabled for the Queue service. Changing this forces
-                                  a new resource.
+                                  enabled for the Queue service.
                                 type: boolean
                               includeApis:
                                 description: Indicates whether metrics should generate
@@ -549,11 +548,10 @@ spec:
                                 type: boolean
                               retentionPolicyDays:
                                 description: Specifies the number of days that logs
-                                  will be retained. Changing this forces a new resource.
+                                  will be retained.
                                 type: number
                               version:
                                 description: The version of storage analytics to configure.
-                                  Changing this forces a new resource.
                                 type: string
                             required:
                             - enabled

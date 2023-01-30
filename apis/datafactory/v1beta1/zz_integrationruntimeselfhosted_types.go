@@ -45,7 +45,7 @@ type IntegrationRuntimeSelfHostedParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A rbac_authorization block as defined below.
+	// A rbac_authorization block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RbacAuthorization []RbacAuthorizationParameters `json:"rbacAuthorization,omitempty" tf:"rbac_authorization,omitempty"`
 }
@@ -55,7 +55,7 @@ type RbacAuthorizationObservation struct {
 
 type RbacAuthorizationParameters struct {
 
-	// The resource identifier of the integration runtime to be shared. Changing this forces a new Data Factory to be created.
+	// The resource identifier of the integration runtime to be shared.
 	// +kubebuilder:validation:Required
 	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
 }

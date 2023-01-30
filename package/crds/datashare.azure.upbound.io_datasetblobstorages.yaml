@@ -231,7 +231,8 @@ spec:
                       Share Blob Storage Dataset to be created.
                     type: string
                   storageAccount:
-                    description: A storage_account block as defined below.
+                    description: A storage_account block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         name:

@@ -99,6 +99,19 @@ spec:
                       GeoRestore, and Replica. Changing this forces a new MySQL Flexible
                       Server to be created.
                     type: string
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below.
+                    items:
+                      properties:
+                        keyVaultKeyId:
+                          description: The ID of the Key Vault Key.
+                          type: string
+                        primaryUserAssignedIdentityId:
+                          description: Specifies the primary user managed identity
+                            id for a Customer Managed Key. Should be added with identity_ids.
+                          type: string
+                      type: object
+                    type: array
                   delegatedSubnetId:
                     description: The ID of the virtual network subnet to create the
                       MySQL Flexible Server. Changing this forces a new MySQL Flexible
@@ -197,6 +210,28 @@ spec:
                           type: string
                       required:
                       - mode
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this API Management Service. Required
+                            if used together with customer_managed_key block as defined
+                            below.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this API Management Service.
+                            Should be set to UserAssigned, SystemAssigned, UserAssigned
+                            (to enable both).
+                          type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   location:
@@ -619,6 +654,18 @@ spec:
                   id:
                     description: The ID of the MySQL Flexible Server.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        principalId:
+                          description: The ID of the MySQL Flexible Server.
+                          type: string
+                        tenantId:
+                          description: The ID of the MySQL Flexible Server.
+                          type: string
+                      type: object
+                    type: array
                   publicNetworkAccessEnabled:
                     description: Is the public network access enabled?
                     type: boolean

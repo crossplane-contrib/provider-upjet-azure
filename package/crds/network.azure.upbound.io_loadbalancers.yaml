@@ -80,7 +80,6 @@ spec:
                           type: string
                         name:
                           description: Specifies the name of the frontend IP configuration.
-                            Changing this forces a new resource to be created.
                           type: string
                         privateIpAddress:
                           description: Private IP Address to assign to the Load Balancer.
@@ -264,7 +263,6 @@ spec:
                         zones:
                           description: Specifies a list of Availability Zones in which
                             the IP Address for this Load Balancer should be located.
-                            Changing this forces a new Load Balancer to be created.
                           items:
                             type: string
                           type: array

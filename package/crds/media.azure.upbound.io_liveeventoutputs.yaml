@@ -242,6 +242,9 @@ spec:
                       Live Output to be created.
                     type: string
                   outputSnapTimeInSeconds:
+                    description: The initial timestamp that the live output will start
+                      at, any content before this value will not be archived. Changing
+                      this forces a new Live Output to be created.
                     type: number
                 required:
                 - archiveWindowDuration

@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: blob-storage-output
+    name: service-bus-topic-output
     propertyColumns:
     - col1
     - col2

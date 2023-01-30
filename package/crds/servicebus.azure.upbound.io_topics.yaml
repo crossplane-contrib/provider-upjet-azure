@@ -79,12 +79,12 @@ spec:
                     type: string
                   enableBatchedOperations:
                     description: Boolean flag which controls if server-side batched
-                      operations are enabled. Defaults to false.
+                      operations are enabled.
                     type: boolean
                   enableExpress:
                     description: Boolean flag which controls whether Express Entities
                       are enabled. An express topic holds a message in memory temporarily
-                      before writing it to persistent storage. Defaults to false.
+                      before writing it to persistent storage.
                     type: boolean
                   enablePartitioning:
                     description: Boolean flag which controls whether to enable Changing
@@ -194,7 +194,7 @@ spec:
                     type: string
                   supportOrdering:
                     description: Boolean flag which controls whether the Topic supports
-                      ordering. Defaults to false.
+                      ordering.
                     type: boolean
                 type: object
               providerConfigRef:

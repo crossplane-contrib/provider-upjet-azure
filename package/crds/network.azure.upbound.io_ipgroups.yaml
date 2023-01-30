@@ -336,8 +336,18 @@ spec:
             properties:
               atProvider:
                 properties:
+                  firewallIds:
+                    description: A firewall_ids block as defined below.
+                    items:
+                      type: string
+                    type: array
+                  firewallPolicyIds:
+                    description: A firewall_policy_ids block as defined below.
+                    items:
+                      type: string
+                    type: array
                   id:
-                    description: The ID of the IP Group.
+                    description: The ID of the IP group.
                     type: string
                 type: object
               conditions:
