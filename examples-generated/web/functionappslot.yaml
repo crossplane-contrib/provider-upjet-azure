@@ -1,57 +1,8 @@
-apiVersion: streamanalytics.azure.upbound.io/v1beta1
-kind: OutputFunction
-metadata:
-  annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    apiKeySecretRef:
-      key: example-key
-      name: example-secret
-      namespace: upbound-system
-    functionAppSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    functionName: examplefunctionname
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    streamAnalyticsJobNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
 apiVersion: web.azure.upbound.io/v1beta1
-kind: AppServicePlan
+kind: FunctionAppSlot
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    kind: FunctionApp
-    location: West Europe
-    reserved: true
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    sku:
-    - size: Y1
-      tier: Dynamic
-
----
-
-apiVersion: web.azure.upbound.io/v1beta1
-kind: FunctionApp
-metadata:
-  annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
+    meta.upbound.io/example-id: web/v1beta1/functionappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -60,9 +11,10 @@ spec:
     appServicePlanIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    functionAppNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     location: West Europe
-    name: examplefunctionapp
-    osType: linux
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -73,7 +25,54 @@ spec:
     storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    version: ~3
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: AppServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - size: S1
+      tier: Standard
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: FunctionApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    appServicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    name: test-azure-functions
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: upbound-system
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -81,7 +80,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
+    meta.upbound.io/example-id: web/v1beta1/functionappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -95,7 +94,7 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
+    meta.upbound.io/example-id: web/v1beta1/functionappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -107,28 +106,6 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-
-apiVersion: streamanalytics.azure.upbound.io/v1beta1
-kind: Job
-metadata:
-  annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputfunction
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    streamingUnits: 3
-    transformationQuery: |2
-          SELECT *
-          INTO [YourOutputAlias]
-          FROM [YourInputAlias]
 
 ---
 

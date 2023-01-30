@@ -1220,6 +1220,16 @@ func (in *OutputFunctionParameters) DeepCopyInto(out *OutputFunctionParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.FunctionAppRef != nil {
+		in, out := &in.FunctionAppRef, &out.FunctionAppRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FunctionAppSelector != nil {
+		in, out := &in.FunctionAppSelector, &out.FunctionAppSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.FunctionName != nil {
 		in, out := &in.FunctionName, &out.FunctionName
 		*out = new(string)

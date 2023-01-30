@@ -519,7 +519,13 @@ import (
 	workspaceaadadmin "github.com/upbound/provider-azure/internal/controller/synapse/workspaceaadadmin"
 	workspaceextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspaceextendedauditingpolicy"
 	workspacesecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspacesecurityalertpolicy"
+	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
+	appservicesourcecontroltoken "github.com/upbound/provider-azure/internal/controller/web/appservicesourcecontroltoken"
+	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
+	functionappslot "github.com/upbound/provider-azure/internal/controller/web/functionappslot"
+	linuxwebapp "github.com/upbound/provider-azure/internal/controller/web/linuxwebapp"
 	serviceplan "github.com/upbound/provider-azure/internal/controller/web/serviceplan"
+	sourcecontroltoken "github.com/upbound/provider-azure/internal/controller/web/sourcecontroltoken"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -1036,7 +1042,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		workspaceaadadmin.Setup,
 		workspaceextendedauditingpolicy.Setup,
 		workspacesecurityalertpolicy.Setup,
+		appserviceplan.Setup,
+		appservicesourcecontroltoken.Setup,
+		functionapp.Setup,
+		functionappslot.Setup,
+		linuxwebapp.Setup,
 		serviceplan.Setup,
+		sourcecontroltoken.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

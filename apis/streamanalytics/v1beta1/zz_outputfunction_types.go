@@ -34,8 +34,18 @@ type OutputFunctionParameters struct {
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
 	// The name of the Function App.
-	// +kubebuilder:validation:Required
-	FunctionApp *string `json:"functionApp" tf:"function_app,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.FunctionApp
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +kubebuilder:validation:Optional
+	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
+
+	// Reference to a FunctionApp in web to populate functionApp.
+	// +kubebuilder:validation:Optional
+	FunctionAppRef *v1.Reference `json:"functionAppRef,omitempty" tf:"-"`
+
+	// Selector for a FunctionApp in web to populate functionApp.
+	// +kubebuilder:validation:Optional
+	FunctionAppSelector *v1.Selector `json:"functionAppSelector,omitempty" tf:"-"`
 
 	// The name of the function in the Function App.
 	// +kubebuilder:validation:Required

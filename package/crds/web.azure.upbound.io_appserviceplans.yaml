@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: outputfunctions.streamanalytics.azure.upbound.io
+  name: appserviceplans.web.azure.upbound.io
 spec:
-  group: streamanalytics.azure.upbound.io
+  group: web.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: OutputFunction
-    listKind: OutputFunctionList
-    plural: outputfunctions
-    singular: outputfunction
+    kind: AppServicePlan
+    listKind: AppServicePlanList
+    plural: appserviceplans
+    singular: appserviceplan
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: OutputFunction is the Schema for the OutputFunctions API. Manages
-          a Stream Analytics Output Function.
+        description: AppServicePlan is the Schema for the AppServicePlans API. Manages
+          an App Service Plan component.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: OutputFunctionSpec defines the desired state of OutputFunction
+            description: AppServicePlanSpec defines the desired state of AppServicePlan
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,114 +64,40 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  apiKeySecretRef:
-                    description: The API key for the Function.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  batchMaxCount:
-                    description: The maximum number of events in each batch that's
-                      sent to the function. Defaults to 100.
-                    type: number
-                  batchMaxInBytes:
-                    description: The maximum batch size in bytes that's sent to the
-                      function. Defaults to 262144 (256 kB).
-                    type: number
-                  functionApp:
-                    description: The name of the Function App.
+                  appServiceEnvironmentId:
+                    description: The ID of the App Service Environment where the App
+                      Service Plan should be located. Changing forces a new resource
+                      to be created.
                     type: string
-                  functionAppRef:
-                    description: Reference to a FunctionApp in web to populate functionApp.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  functionAppSelector:
-                    description: Selector for a FunctionApp in web to populate functionApp.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  functionName:
-                    description: The name of the function in the Function App.
+                  isXenon:
+                    type: boolean
+                  kind:
+                    description: The kind of the App Service Plan to create. Possible
+                      values are Windows (also available as App), Linux, elastic (for
+                      Premium Consumption), xenon and FunctionApp (for a Consumption
+                      Plan). Defaults to Windows. Changing this forces a new resource
+                      to be created.
                     type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  maximumElasticWorkerCount:
+                    description: The maximum number of total workers allowed for this
+                      ElasticScaleEnabled App Service Plan.
+                    type: number
+                  perSiteScaling:
+                    description: Can Apps assigned to this App Service Plan be scaled
+                      independently? If set to false apps assigned to this plan will
+                      scale to all instances of the plan.
+                    type: boolean
+                  reserved:
+                    description: Is this App Service Plan Reserved.
+                    type: boolean
                   resourceGroupName:
-                    description: The name of the Resource Group where the Stream Analytics
-                      Output should exist. Changing this forces a new resource to
-                      be created.
+                    description: The name of the resource group in which to create
+                      the App Service Plan component. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -248,88 +174,37 @@ spec:
                             type: string
                         type: object
                     type: object
-                  streamAnalyticsJobName:
-                    description: The name of the Stream Analytics Job. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  streamAnalyticsJobNameRef:
-                    description: Reference to a Job in streamanalytics to populate
-                      streamAnalyticsJobName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  streamAnalyticsJobNameSelector:
-                    description: Selector for a Job in streamanalytics to populate
-                      streamAnalyticsJobName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
+                  sku:
+                    description: A sku block as documented below.
+                    items:
+                      properties:
+                        capacity:
+                          description: Specifies the number of workers associated
+                            with this App Service Plan.
+                          type: number
+                        size:
+                          description: Specifies the plan's instance size.
                           type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
+                        tier:
+                          description: Specifies the plan's pricing tier.
+                          type: string
+                      required:
+                      - size
+                      - tier
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
+                  zoneRedundant:
+                    description: Specifies if the App Service Plan should be Zone
+                      Redundant. Changing this forces a new resource to be created.
+                    type: boolean
                 required:
-                - apiKeySecretRef
-                - functionName
+                - location
+                - sku
                 type: object
               providerConfigRef:
                 default:
@@ -503,13 +378,17 @@ spec:
             - forProvider
             type: object
           status:
-            description: OutputFunctionStatus defines the observed state of OutputFunction.
+            description: AppServicePlanStatus defines the observed state of AppServicePlan.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Stream Analytics Output Function.
+                    description: The ID of the App Service Plan component.
                     type: string
+                  maximumNumberOfWorkers:
+                    description: The maximum number of workers supported with the
+                      App Service Plan's sku.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.
