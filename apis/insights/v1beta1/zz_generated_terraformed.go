@@ -87,6 +87,80 @@ func (tr *ApplicationInsights) GetTerraformSchemaVersion() int {
 	return 1
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ApplicationInsightsAnalyticsItem
+func (mg *ApplicationInsightsAnalyticsItem) GetTerraformResourceType() string {
+	return "azurerm_application_insights_analytics_item"
+}
+
+// GetConnectionDetailsMapping for this ApplicationInsightsAnalyticsItem
+func (tr *ApplicationInsightsAnalyticsItem) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ApplicationInsightsAnalyticsItem
+func (tr *ApplicationInsightsAnalyticsItem) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ApplicationInsightsAnalyticsItem
+func (tr *ApplicationInsightsAnalyticsItem) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ApplicationInsightsAnalyticsItem
+func (tr *ApplicationInsightsAnalyticsItem) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ApplicationInsightsAnalyticsItem
+func (tr *ApplicationInsightsAnalyticsItem) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ApplicationInsightsAnalyticsItem
+func (tr *ApplicationInsightsAnalyticsItem) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ApplicationInsightsAnalyticsItem using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ApplicationInsightsAnalyticsItem) LateInitialize(attrs []byte) (bool, error) {
+	params := &ApplicationInsightsAnalyticsItemParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ApplicationInsightsAnalyticsItem) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this ApplicationInsightsAPIKey
 func (mg *ApplicationInsightsAPIKey) GetTerraformResourceType() string {
 	return "azurerm_application_insights_api_key"
@@ -158,6 +232,80 @@ func (tr *ApplicationInsightsAPIKey) LateInitialize(attrs []byte) (bool, error) 
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ApplicationInsightsAPIKey) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ApplicationInsightsSmartDetectionRule
+func (mg *ApplicationInsightsSmartDetectionRule) GetTerraformResourceType() string {
+	return "azurerm_application_insights_smart_detection_rule"
+}
+
+// GetConnectionDetailsMapping for this ApplicationInsightsSmartDetectionRule
+func (tr *ApplicationInsightsSmartDetectionRule) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ApplicationInsightsSmartDetectionRule
+func (tr *ApplicationInsightsSmartDetectionRule) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ApplicationInsightsSmartDetectionRule
+func (tr *ApplicationInsightsSmartDetectionRule) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ApplicationInsightsSmartDetectionRule
+func (tr *ApplicationInsightsSmartDetectionRule) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ApplicationInsightsSmartDetectionRule
+func (tr *ApplicationInsightsSmartDetectionRule) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ApplicationInsightsSmartDetectionRule
+func (tr *ApplicationInsightsSmartDetectionRule) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ApplicationInsightsSmartDetectionRule using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ApplicationInsightsSmartDetectionRule) LateInitialize(attrs []byte) (bool, error) {
+	params := &ApplicationInsightsSmartDetectionRuleParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ApplicationInsightsSmartDetectionRule) GetTerraformSchemaVersion() int {
 	return 1
 }
 

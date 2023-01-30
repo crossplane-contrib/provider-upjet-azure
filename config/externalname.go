@@ -365,6 +365,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Scheduled Query Rule Log can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Insights/scheduledQueryRules/myrulename
 	"azurerm_monitor_scheduled_query_rules_log": config.IdentifierFromProvider,
+	// Application Insights Analytics Items can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Insights/components/mycomponent1/analyticsItems/11111111-1111-1111-1111-111111111111
+	"azurerm_application_insights_analytics_item": config.IdentifierFromProvider,
+	// Application Insights Smart Detection Rules can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Insights/components/mycomponent1/smartDetectionRule/myrule1
+	"azurerm_application_insights_smart_detection_rule": config.IdentifierFromProvider,
 
 	// logic
 	"azurerm_integration_service_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logic/integrationServiceEnvironments/{{ .external_name }}"),
@@ -1139,6 +1145,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// EventHubs can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventHub/namespaces/namespace1/disasterRecoveryConfigs/config1
 	"azurerm_eventhub_namespace_disaster_recovery_config": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventHub/namespaces/{{ .parameters.namespace_name }}/disasterRecoveryConfigs/{{ .external_name }}"),
+
+	// elastic
+	//
+	// Elasticsearch's can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Elastic/monitors/monitor1
+	"azurerm_elastic_cloud_elasticsearch": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Elastic/monitors/{{ .external_name }}"),
+
+	// healthcareapis
+	//
+	// Healthcare Service can be imported using the resourceid
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource_group/providers/Microsoft.HealthcareApis/services/service_name
+	"azurerm_healthcare_service": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.HealthcareApis/services/{{ .external_name }}"),
 
 	// datamigration
 	//

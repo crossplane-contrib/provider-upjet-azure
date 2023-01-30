@@ -531,12 +531,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Search/searchServices/service1
 	"azurerm_search_service": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Search/searchServices/{{ .external_name }}"),
 
-	// elastic
-	//
-	// Elasticsearch's can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Elastic/monitors/monitor1
-	"azurerm_elastic_cloud_elasticsearch": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Elastic/monitors/{{ .external_name }}"),
-
 	// function
 	//
 	// a Function App Active Slot can be imported using the resource id
@@ -596,24 +590,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Healthcare Workspaces can be imported using the resourceid
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.HealthcareApis/workspaces/workspace1
 	"azurerm_healthcare_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.HealthcareApis/workspaces/{{ .external_name }}"),
-
-	// healthcareapis
-	//
-	// Healthcare Service can be imported using the resourceid
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource_group/providers/Microsoft.HealthcareApis/services/service_name
-	"azurerm_healthcare_service": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.HealthcareApis/services/{{ .external_name }}"),
-
-	// insights
-	//
-	// Application Insights Analytics Items can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Insights/components/mycomponent1/analyticsItems/11111111-1111-1111-1111-111111111111
-	"azurerm_application_insights_analytics_item": config.IdentifierFromProvider,
-	// Application Insights API keys can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Insights/components/instance1/apiKeys/00000000-0000-0000-0000-000000000000
-	"azurerm_application_insights_api_key": config.IdentifierFromProvider,
-	// Application Insights Smart Detection Rules can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Insights/components/mycomponent1/smartDetectionRule/myrule1
-	"azurerm_application_insights_smart_detection_rule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.application_insights_id }}/smartDetectionRule/{{ .external_name }}"),
 
 	// app
 	//
