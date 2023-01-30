@@ -103,6 +103,10 @@ type SentinelAutomationRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// A JSON array of one or more condition JSON objects as is defined here.
+	// +kubebuilder:validation:Optional
+	ConditionJSON *string `json:"conditionJson,omitempty" tf:"condition_json,omitempty"`
+
 	// The display name which should be used for this Sentinel Automation Rule.
 	// +kubebuilder:validation:Required
 	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
@@ -136,6 +140,14 @@ type SentinelAutomationRuleParameters struct {
 	// The order of this Sentinel Automation Rule. Possible values varies between 1 and 1000.
 	// +kubebuilder:validation:Required
 	Order *float64 `json:"order" tf:"order,omitempty"`
+
+	// Specifies what triggers this automation rule. Possible values are Alerts and Incidents. Defaults to Incidents.
+	// +kubebuilder:validation:Optional
+	TriggersOn *string `json:"triggersOn,omitempty" tf:"triggers_on,omitempty"`
+
+	// Specifies when will this automation rule be triggered. Possible values are Created and Updated. Defaults to Created.
+	// +kubebuilder:validation:Optional
+	TriggersWhen *string `json:"triggersWhen,omitempty" tf:"triggers_when,omitempty"`
 }
 
 // SentinelAutomationRuleSpec defines the desired state of SentinelAutomationRule

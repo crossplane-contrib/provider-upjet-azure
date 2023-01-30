@@ -22,13 +22,11 @@ type BGPSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Asn *float64 `json:"asn" tf:"asn,omitempty"`
 
-	// The BGP peering address and BGP identifier
-	// of this BGP speaker.
+	// The BGP peering address and BGP identifier of this BGP speaker.
 	// +kubebuilder:validation:Required
 	BGPPeeringAddress *string `json:"bgpPeeringAddress" tf:"bgp_peering_address,omitempty"`
 
-	// The weight added to routes learned from this
-	// BGP speaker.
+	// The weight added to routes learned from this BGP speaker.
 	// +kubebuilder:validation:Optional
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 }
@@ -41,13 +39,11 @@ type LocalNetworkGatewayObservation struct {
 
 type LocalNetworkGatewayParameters struct {
 
-	// The list of string CIDRs representing the
-	// address spaces the gateway exposes.
+	// The list of string CIDRs representing the address spaces the gateway exposes.
 	// +kubebuilder:validation:Optional
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
-	// A bgp_settings block as defined below containing the
-	// Local Network Gateway's BGP speaker settings.
+	// A bgp_settings block as defined below containing the Local Network Gateway's BGP speaker settings.
 	// +kubebuilder:validation:Optional
 	BGPSettings []BGPSettingsParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 

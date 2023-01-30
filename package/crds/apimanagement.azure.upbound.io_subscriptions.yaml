@@ -65,7 +65,7 @@ spec:
               forProvider:
                 properties:
                   allowTracing:
-                    description: Determines whether tracing can be enabled.  Defaults
+                    description: Determines whether tracing can be enabled. Defaults
                       to true.
                     type: boolean
                   apiId:

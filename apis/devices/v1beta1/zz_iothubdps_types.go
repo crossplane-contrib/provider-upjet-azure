@@ -99,7 +99,7 @@ type IPFilterRuleObservation struct {
 
 type IPFilterRuleParameters struct {
 
-	// The desired action for requests captured by this rule. Possible values are  Accept, Reject
+	// The desired action for requests captured by this rule. Possible values are Accept, Reject
 	// +kubebuilder:validation:Required
 	Action *string `json:"action" tf:"action,omitempty"`
 

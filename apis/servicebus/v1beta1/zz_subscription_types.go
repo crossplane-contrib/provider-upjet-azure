@@ -78,7 +78,7 @@ type SubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ForwardTo *string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
 
-	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or  P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S .
+	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S .
 	// +kubebuilder:validation:Optional
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 

@@ -108,8 +108,8 @@ spec:
                       configured to use a 2 tuple hash to map traffic to available
                       servers. SourceIPProtocol – The load balancer is configured
                       to use a 3 tuple hash to map traffic to available servers. Also
-                      known as Session Persistence, where  the options are called
-                      None, Client IP and Client IP and Protocol respectively.'
+                      known as Session Persistence, where the options are called None,
+                      Client IP and Client IP and Protocol respectively.'
                     type: string
                   loadbalancerId:
                     description: The ID of the Load Balancer in which to create the

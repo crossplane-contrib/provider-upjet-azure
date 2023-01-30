@@ -36,7 +36,7 @@ type IPConfigurationPublicIPAddressParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
 
-	// One or more ip_tag blocks as defined above.
+	// One or more ip_tag blocks as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	IPTag []PublicIPAddressIPTagParameters `json:"ipTag,omitempty" tf:"ip_tag,omitempty"`
 
@@ -66,11 +66,11 @@ type LinuxConfigurationAdminSSHKeyObservation struct {
 
 type LinuxConfigurationAdminSSHKeyParameters struct {
 
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format. Changing this forces a new resource to be created.
+	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
 	// +kubebuilder:validation:Required
 	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
 
-	// The Username for which this Public SSH Key should be configured. Changing this forces a new resource to be created.
+	// The Username for which this Public SSH Key should be configured.
 	// +kubebuilder:validation:Required
 	Username *string `json:"username" tf:"username,omitempty"`
 }
@@ -92,7 +92,7 @@ type LinuxConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
-	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix.
+	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ComputerNamePrefix *string `json:"computerNamePrefix,omitempty" tf:"computer_name_prefix,omitempty"`
 
@@ -204,7 +204,7 @@ type OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairObservation struct
 
 type OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairParameters struct {
 
-	// Should the automatic instance repair be enabled on this Orchestrated Virtual Machine Scale Set? Possible values are true and false. Defaults to false.
+	// Should the automatic instance repair be enabled on this Orchestrated Virtual Machine Scale Set? Possible values are true and false.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
@@ -395,7 +395,7 @@ type OrchestratedVirtualMachineScaleSetOsDiskParameters struct {
 	// +kubebuilder:validation:Required
 	Caching *string `json:"caching" tf:"caching,omitempty"`
 
-	// A diff_disk_settings block as defined above.
+	// A diff_disk_settings block as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DiffDiskSettings []OrchestratedVirtualMachineScaleSetOsDiskDiffDiskSettingsParameters `json:"diffDiskSettings,omitempty" tf:"diff_disk_settings,omitempty"`
 
@@ -490,7 +490,7 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	OsProfile []OsProfileParameters `json:"osProfile,omitempty" tf:"os_profile,omitempty"`
 
-	// A plan block as documented below.
+	// A plan block as documented below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Plan []OrchestratedVirtualMachineScaleSetPlanParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
@@ -633,11 +633,11 @@ type PublicIPAddressIPTagObservation struct {
 
 type PublicIPAddressIPTagParameters struct {
 
-	// The IP Tag associated with the Public IP, such as SQL or Storage.
+	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Tag *string `json:"tag" tf:"tag,omitempty"`
 
-	// The Type of IP Tag, such as FirstPartyUsage.
+	// The Type of IP Tag, such as FirstPartyUsage. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -655,7 +655,7 @@ type WindowsConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
-	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix.
+	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ComputerNamePrefix *string `json:"computerNamePrefix,omitempty" tf:"computer_name_prefix,omitempty"`
 
@@ -687,7 +687,7 @@ type WindowsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
-	// One or more winrm_listener blocks as defined below.
+	// One or more winrm_listener blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	WinrmListener []WinrmListenerParameters `json:"winrmListener,omitempty" tf:"winrm_listener,omitempty"`
 }
@@ -725,11 +725,11 @@ type WinrmListenerObservation struct {
 
 type WinrmListenerParameters struct {
 
-	// The Secret URL of a Key Vault Certificate, which must be specified when protocol is set to Https.
+	// The Secret URL of a Key Vault Certificate, which must be specified when protocol is set to Https. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	CertificateURL *string `json:"certificateUrl,omitempty" tf:"certificate_url,omitempty"`
 
-	// Specifies the protocol of listener. Possible values are Http or Https
+	// Specifies the protocol of listener. Possible values are Http or Https. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }

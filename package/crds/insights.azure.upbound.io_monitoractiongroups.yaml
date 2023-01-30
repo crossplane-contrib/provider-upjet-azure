@@ -69,8 +69,7 @@ spec:
                     items:
                       properties:
                         name:
-                          description: The name of the ARM role receiver. Changing
-                            this forces a new resource to be created.
+                          description: The name of the ARM role receiver.
                           type: string
                         roleId:
                           description: The arm role id.
@@ -97,7 +96,6 @@ spec:
                           type: boolean
                         name:
                           description: The name of the automation runbook receiver.
-                            Changing this forces a new resource to be created.
                           type: string
                         runbookName:
                           description: The name for this runbook.
@@ -132,8 +130,7 @@ spec:
                             receiver.
                           type: string
                         name:
-                          description: The name of the Azure app push receiver. Changing
-                            this forces a new resource to be created.
+                          description: The name of the Azure app push receiver.
                           type: string
                       required:
                       - emailAddress
@@ -156,8 +153,7 @@ spec:
                             to.
                           type: string
                         name:
-                          description: The name of the Azure Function receiver. Changing
-                            this forces a new resource to be created.
+                          description: The name of the Azure Function receiver.
                           type: string
                         useCommonAlertSchema:
                           description: Enables or disables the common alert schema.
@@ -179,8 +175,7 @@ spec:
                         name:
                           description: The name of the email receiver. Names must
                             be unique (case-insensitive) across all receivers within
-                            an action group. Changing this forces a new resource to
-                            be created.
+                            an action group.
                           type: string
                         useCommonAlertSchema:
                           description: Enables or disables the common alert schema.
@@ -211,8 +206,7 @@ spec:
                           type: string
                         name:
                           description: The name of the EventHub Receiver, must be
-                            unique within action group. Changing this forces a new
-                            resource to be created.
+                            unique within action group.
                           type: string
                         subscriptionId:
                           description: The ID for the subscription containing this
@@ -239,8 +233,7 @@ spec:
                             connection.
                           type: string
                         name:
-                          description: The name of the ITSM receiver. Changing this
-                            forces a new resource to be created.
+                          description: The name of the ITSM receiver.
                           type: string
                         region:
                           description: The region of the workspace.
@@ -272,8 +265,7 @@ spec:
                           description: The callback url where HTTP request sent to.
                           type: string
                         name:
-                          description: The name of the logic app receiver. Changing
-                            this forces a new resource to be created.
+                          description: The name of the logic app receiver.
                           type: string
                         resourceId:
                           description: The Azure resource ID of the logic app.
@@ -381,8 +373,7 @@ spec:
                         name:
                           description: The name of the SMS receiver. Names must be
                             unique (case-insensitive) across all receivers within
-                            an action group. Changing this forces a new resource to
-                            be created.
+                            an action group.
                           type: string
                         phoneNumber:
                           description: The phone number of the SMS receiver.
@@ -406,8 +397,7 @@ spec:
                           description: The country code of the voice receiver.
                           type: string
                         name:
-                          description: The name of the voice receiver. Changing this
-                            forces a new resource to be created.
+                          description: The name of the voice receiver.
                           type: string
                         phoneNumber:
                           description: The phone number of the voice receiver.
@@ -443,8 +433,7 @@ spec:
                         name:
                           description: The name of the webhook receiver. Names must
                             be unique (case-insensitive) across all receivers within
-                            an action group. Changing this forces a new resource to
-                            be created.
+                            an action group.
                           type: string
                         serviceUri:
                           description: The URI where webhooks should be sent.

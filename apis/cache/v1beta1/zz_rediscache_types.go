@@ -96,7 +96,7 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// The minimum TLS version.  Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
+	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 

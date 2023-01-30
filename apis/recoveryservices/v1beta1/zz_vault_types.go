@@ -26,9 +26,13 @@ type EncryptionParameters struct {
 	// +kubebuilder:validation:Required
 	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 
-	// Indicate that system assigned identity should be used or not. At this time the only possible value is true. Defaults to true.
+	// Indicate that system assigned identity should be used or not. Defaults to true.
 	// +kubebuilder:validation:Optional
 	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
+
+	// The ID of the Recovery Services Vault.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -42,7 +46,11 @@ type IdentityObservation struct {
 
 type IdentityParameters struct {
 
-	// Specifies the type of Managed Service Identity that should be configured on this Recovery Services Vault. The only possible value is SystemAssigned.
+	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
+	// +kubebuilder:validation:Optional
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Recovery Services Vault. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -71,9 +79,17 @@ type VaultParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// Immutability Settings of vault, possible values include: Locked, Unlocked and Disabled.
+	// +kubebuilder:validation:Optional
+	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
+
+	// Is it enabled to access the vault from public networks. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Recovery Services Vault. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

@@ -148,7 +148,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterCodeVersion *string `json:"clusterCodeVersion,omitempty" tf:"cluster_code_version,omitempty"`
 
-	// A diagnostics_config block as defined below. Changing this forces a new resource to be created.
+	// A diagnostics_config block as defined below.
 	// +kubebuilder:validation:Optional
 	DiagnosticsConfig []DiagnosticsConfigParameters `json:"diagnosticsConfig,omitempty" tf:"diagnostics_config,omitempty"`
 
@@ -371,7 +371,7 @@ type NodeTypeParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
 
-	// The Port used for the Reverse Proxy Endpoint  for this Node Type. Changing this will upgrade the cluster.
+	// The Port used for the Reverse Proxy Endpoint for this Node Type. Changing this will upgrade the cluster.
 	// +kubebuilder:validation:Optional
 	ReverseProxyEndpointPort *float64 `json:"reverseProxyEndpointPort,omitempty" tf:"reverse_proxy_endpoint_port,omitempty"`
 }

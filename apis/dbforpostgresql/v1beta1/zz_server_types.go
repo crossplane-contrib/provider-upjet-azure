@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type IdentityObservation struct {
+type ServerIdentityObservation struct {
 
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
@@ -22,7 +22,7 @@ type IdentityObservation struct {
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
-type IdentityParameters struct {
+type ServerIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Server. The only possible value is SystemAssigned.
 	// +kubebuilder:validation:Required
@@ -39,7 +39,7 @@ type ServerObservation struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []ServerIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
 
 type ServerParameters struct {
@@ -74,7 +74,7 @@ type ServerParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []ServerIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether or not infrastructure is encrypted for this server. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

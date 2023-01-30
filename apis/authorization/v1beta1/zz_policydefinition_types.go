@@ -36,9 +36,7 @@ type PolicyDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
-	// The metadata for the policy definition. This
-	// is a JSON string representing additional metadata that should be stored
-	// with the policy definition.
+	// The metadata for the policy definition. This is a JSON string representing additional metadata that should be stored with the policy definition.
 	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
@@ -46,14 +44,11 @@ type PolicyDefinitionParameters struct {
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
-	// Parameters for the policy definition. This field
-	// is a JSON string that allows you to parameterize your policy definition.
+	// Parameters for the policy definition. This field is a JSON string that allows you to parameterize your policy definition.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The policy rule for the policy definition. This
-	// is a JSON string representing the rule that contains an if and
-	// a then block.
+	// The policy rule for the policy definition. This is a JSON string representing the rule that contains an if and a then block.
 	// +kubebuilder:validation:Optional
 	PolicyRule *string `json:"policyRule,omitempty" tf:"policy_rule,omitempty"`
 

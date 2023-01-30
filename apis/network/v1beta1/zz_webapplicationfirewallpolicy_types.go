@@ -164,7 +164,7 @@ type PolicySettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	FileUploadLimitInMb *float64 `json:"fileUploadLimitInMb,omitempty" tf:"file_upload_limit_in_mb,omitempty"`
 
-	// The Maximum Request Body Size in KB.  Accepted values are in the range 8 to 2000. Defaults to 128.
+	// The Maximum Request Body Size in KB. Accepted values are in the range 8 to 2000. Defaults to 128.
 	// +kubebuilder:validation:Optional
 	MaxRequestBodySizeInKb *float64 `json:"maxRequestBodySizeInKb,omitempty" tf:"max_request_body_size_in_kb,omitempty"`
 

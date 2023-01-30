@@ -34,7 +34,7 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
 
-	// Specifies the name of the frontend IP configuration. Changing this forces a new resource to be created.
+	// Specifies the name of the frontend IP configuration.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -82,7 +82,7 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// Specifies a list of Availability Zones in which the IP Address for this Load Balancer should be located. Changing this forces a new Load Balancer to be created.
+	// Specifies a list of Availability Zones in which the IP Address for this Load Balancer should be located.
 	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }

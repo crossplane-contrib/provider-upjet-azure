@@ -406,7 +406,7 @@ spec:
                     type: string
                   managedIdentityResourceId:
                     description: Empty for non-managed identity based data connection.
-                      For system assigned identity, provide cluster resource Id.  For
+                      For system assigned identity, provide cluster resource Id. For
                       user assigned identity (UAI) provide the UAI resource Id.
                     type: string
                   mappingRuleName:

@@ -137,7 +137,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateFromSnapshotResourceIDSelector *v1.Selector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
 
-	// A data_protection_replication block as defined below.
+	// A data_protection_replication block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DataProtectionReplication []DataProtectionReplicationParameters `json:"dataProtectionReplication,omitempty" tf:"data_protection_replication,omitempty"`
 
@@ -229,7 +229,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Required
 	VolumePath *string `json:"volumePath" tf:"volume_path,omitempty"`
 
-	// Specifies the Availability Zone in which the Volume should be located. Possible values are 1, 2 and 3. This feature is currently in preview, for more information on how to enable it, please refer to Manage availability zone volume placement for Azure NetApp Files
+	// Specifies the Availability Zone in which the Volume should be located. Possible values are 1, 2 and 3. Changing this forces a new resource to be created. This feature is currently in preview, for more information on how to enable it, please refer to Manage availability zone volume placement for Azure NetApp Files.
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }

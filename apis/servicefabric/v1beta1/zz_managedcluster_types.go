@@ -252,9 +252,9 @@ type ManagedClusterParameters struct {
 
 	// Administrator password for the VMs that will be created as part of this cluster.
 	// +kubebuilder:validation:Optional
-	Password *string `json:"password,omitempty" tf:"password,omitempty"`
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
-	// The name of the Resource Group where the Resource Group should exist.
+	// The name of the Resource Group where the Resource Group should exist. Changing this forces a new Resource Group to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -267,7 +267,7 @@ type ManagedClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// SKU for this cluster.  Changing this forces a new resource to be created. Default is Basic, allowed values are either Basic or Standard.
+	// SKU for this cluster. Changing this forces a new resource to be created. Default is Basic, allowed values are either Basic or Standard.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 

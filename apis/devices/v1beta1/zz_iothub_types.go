@@ -60,7 +60,7 @@ type EndpointObservation struct {
 	// Maximum number of bytes for each blob written to storage. Value should be between 10485760(10MB) and 524288000(500MB). Default value is 314572800(300MB). This attribute is applicable for endpoint type AzureIotHub.StorageContainer.
 	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
 
-	// The name of the endpoint. The name must be unique across endpoint types. The following names are reserved:  events, operationsMonitoringEvents, fileNotifications and $default.
+	// The name of the endpoint. The name must be unique across endpoint types. The following names are reserved: events, operationsMonitoringEvents, fileNotifications and $default.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The resource group in which the endpoint will be created.

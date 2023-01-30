@@ -144,15 +144,19 @@ spec:
                         type: object
                     type: object
                   moduleLink:
-                    description: The published Module link.
+                    description: A module_link block as defined below.
                     items:
                       properties:
                         hash:
+                          description: A hash block as defined below.
                           items:
                             properties:
                               algorithm:
+                                description: Specifies the algorithm used for the
+                                  hash content.
                                 type: string
                               value:
+                                description: The hash value of the content.
                                 type: string
                             required:
                             - algorithm

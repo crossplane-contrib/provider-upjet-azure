@@ -125,7 +125,7 @@ type BudgetResourceGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 
-	// The time covered by a budget. Tracking of the amount will be reset based on the time grain. Must be one of BillingAnnual, BillingMonth, BillingQuarter, Annually, Monthly and Quarterly. Defaults to Monthly.
+	// The time covered by a budget. Tracking of the amount will be reset based on the time grain. Must be one of BillingAnnual, BillingMonth, BillingQuarter, Annually, Monthly and Quarterly. Defaults to Monthly. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TimeGrain *string `json:"timeGrain,omitempty" tf:"time_grain,omitempty"`
 

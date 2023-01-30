@@ -254,6 +254,7 @@ spec:
                       below, which allows force-tunnelling of traffic to be performed
                       by the firewall. Adding or removing this block or changing the
                       subnet_id in an existing block forces a new resource to be created.
+                      Changing this forces a new resource to be created.
                     items:
                       properties:
                         name:
@@ -438,7 +439,7 @@ spec:
                     type: object
                   skuName:
                     description: SKU name of the Firewall. Possible values are AZFW_Hub
-                      and AZFW_VNet.  Changing this forces a new resource to be created.
+                      and AZFW_VNet. Changing this forces a new resource to be created.
                     type: string
                   skuTier:
                     description: SKU tier of the Firewall. Possible values are Premium,
@@ -675,6 +676,7 @@ spec:
                       below, which allows force-tunnelling of traffic to be performed
                       by the firewall. Adding or removing this block or changing the
                       subnet_id in an existing block forces a new resource to be created.
+                      Changing this forces a new resource to be created.
                     items:
                       properties:
                         privateIpAddress:

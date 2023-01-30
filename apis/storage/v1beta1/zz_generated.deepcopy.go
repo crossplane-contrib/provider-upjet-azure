@@ -618,6 +618,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AllowedCopyScope != nil {
+		in, out := &in.AllowedCopyScope, &out.AllowedCopyScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.AzureFilesAuthentication != nil {
 		in, out := &in.AzureFilesAuthentication, &out.AzureFilesAuthentication
 		*out = make([]AzureFilesAuthenticationParameters, len(*in))
@@ -3356,6 +3361,11 @@ func (in *QueueObservation) DeepCopyInto(out *QueueObservation) {
 	*out = *in
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceManagerID != nil {
+		in, out := &in.ResourceManagerID, &out.ResourceManagerID
 		*out = new(string)
 		**out = **in
 	}

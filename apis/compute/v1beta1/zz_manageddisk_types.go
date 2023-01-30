@@ -110,7 +110,7 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	GalleryImageReferenceID *string `json:"galleryImageReferenceId,omitempty" tf:"gallery_image_reference_id,omitempty"`
 
-	// The HyperV Generation of the Disk when the source of an Import or Copy operation targets a source that contains an operating system. Possible values are V1 and V2. Changing this forces a new resource to be created.
+	// The HyperV Generation of the Disk when the source of an Import or Copy operation targets a source that contains an operating system. Possible values are V1 and V2. For ImportSecure it must be set to V2. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
@@ -138,7 +138,7 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	OnDemandBurstingEnabled *bool `json:"onDemandBurstingEnabled,omitempty" tf:"on_demand_bursting_enabled,omitempty"`
 
-	// Specify a value when the source of an Import or Copy operation targets a source that contains an operating system. Valid values are Linux or Windows.
+	// Specify a value when the source of an Import, ImportSecure or Copy operation targets a source that contains an operating system. Valid values are Linux or Windows.
 	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
@@ -163,7 +163,7 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	SecureVMDiskEncryptionSetID *string `json:"secureVmDiskEncryptionSetId,omitempty" tf:"secure_vm_disk_encryption_set_id,omitempty"`
 
-	// Security Type of the Managed Disk when it is used for a Confidential VM. Possible values are ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey, ConfidentialVM_DiskEncryptedWithPlatformKey and ConfidentialVM_DiskEncryptedWithCustomerKey. Changing this forces a new resource to be created.
+	// Security Type of the Managed Disk when it is used for a Confidential VM. Possible values are VMGuestStateOnlyEncryptedWithPlatformKey, ConfidentialVM_DiskEncryptedWithPlatformKey and ConfidentialVM_DiskEncryptedWithCustomerKey. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SecurityType *string `json:"securityType,omitempty" tf:"security_type,omitempty"`
 
@@ -181,11 +181,11 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceResourceIDSelector *v1.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 
-	// URI to a valid VHD file to be used when create_option is Import. Changing this forces a new resource to be created.
+	// URI to a valid VHD file to be used when create_option is Import or ImportSecure. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
-	// The ID of the Storage Account where the source_uri is located. Required when create_option is set to Import.  Changing this forces a new resource to be created.
+	// The ID of the Storage Account where the source_uri is located. Required when create_option is set to Import or ImportSecure. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 

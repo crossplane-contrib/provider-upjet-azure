@@ -80,7 +80,7 @@ spec:
                           type: number
                         hourInterval:
                           description: Interval in hour at which backup is triggered.
-                            Possible values are 4, 6, 8 and 12. This is used  when
+                            Possible values are 4, 6, 8 and 12. This is used when
                             frequency is Hourly.
                           type: number
                         time:

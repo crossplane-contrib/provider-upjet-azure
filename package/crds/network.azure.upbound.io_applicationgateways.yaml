@@ -1194,8 +1194,8 @@ spec:
                             within this Application Gateway
                           type: string
                         passwordSecretRef:
-                          description: Password for the pfx file specified in data.  Required
-                            if data is set.
+                          description: Password for the pfx file specified in data.
+                            Required if data is set.
                           properties:
                             key:
                               description: The key to select.
@@ -1216,7 +1216,7 @@ spec:
                       type: object
                     type: array
                   sslPolicy:
-                    description: a ssl policy block as defined below.
+                    description: a ssl_policy block as defined below.
                     items:
                       properties:
                         cipherSuites:
@@ -1241,13 +1241,13 @@ spec:
                         disabledProtocols:
                           description: A list of SSL Protocols which should be disabled
                             on this Application Gateway. Possible values are TLSv1_0,
-                            TLSv1_1 and TLSv1_2.
+                            TLSv1_1, TLSv1_2 and TLSv1_3.
                           items:
                             type: string
                           type: array
                         minProtocolVersion:
                           description: The minimal TLS version. Possible values are
-                            TLSv1_0, TLSv1_1 and TLSv1_2.
+                            TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
                           type: string
                         policyName:
                           description: The Name of the Policy e.g AppGwSslPolicy20170401S.
@@ -1257,7 +1257,7 @@ spec:
                           type: string
                         policyType:
                           description: The Type of the Policy. Possible values are
-                            Predefined and Custom.
+                            Predefined, Custom and CustomV2.
                           type: string
                       type: object
                     type: array
@@ -1270,7 +1270,7 @@ spec:
                             within this Application Gateway.
                           type: string
                         sslPolicy:
-                          description: a ssl policy block as defined below.
+                          description: a ssl_policy block as defined below.
                           items:
                             properties:
                               cipherSuites:
@@ -1295,13 +1295,13 @@ spec:
                               disabledProtocols:
                                 description: A list of SSL Protocols which should
                                   be disabled on this Application Gateway. Possible
-                                  values are TLSv1_0, TLSv1_1 and TLSv1_2.
+                                  values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
                                 items:
                                   type: string
                                 type: array
                               minProtocolVersion:
                                 description: The minimal TLS version. Possible values
-                                  are TLSv1_0, TLSv1_1 and TLSv1_2.
+                                  are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
                                 type: string
                               policyName:
                                 description: The Name of the Policy e.g AppGwSslPolicy20170401S.
@@ -1312,7 +1312,7 @@ spec:
                                 type: string
                               policyType:
                                 description: The Type of the Policy. Possible values
-                                  are Predefined and Custom.
+                                  are Predefined, Custom and CustomV2.
                                 type: string
                             type: object
                           type: array
@@ -1323,8 +1323,8 @@ spec:
                             type: string
                           type: array
                         verifyClientCertIssuerDn:
-                          description: Should client certificate issuer DN be verified?  Defaults
-                            to false.
+                          description: Should client certificate issuer DN be verified?
+                            Defaults to false.
                           type: boolean
                       required:
                       - name
@@ -1555,11 +1555,11 @@ spec:
                             values are Detection and Prevention.
                           type: string
                         maxRequestBodySizeKb:
-                          description: The Maximum Request Body Size in KB.  Accepted
-                            values are in the range 1KB to 128KB.  Defaults to 128KB.
+                          description: The Maximum Request Body Size in KB. Accepted
+                            values are in the range 1KB to 128KB. Defaults to 128KB.
                           type: number
                         requestBodyCheck:
-                          description: Is Request Body Inspection enabled?  Defaults
+                          description: Is Request Body Inspection enabled? Defaults
                             to true.
                           type: boolean
                         ruleSetType:

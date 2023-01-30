@@ -8,7 +8,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiKey: "00000000000000000000000000000000"
+    apiKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
     apiManagementNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

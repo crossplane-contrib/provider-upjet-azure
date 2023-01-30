@@ -80,7 +80,7 @@ spec:
                   eventsLateArrivalMaxDelayInSeconds:
                     description: Specifies the maximum tolerable delay in seconds
                       where events arriving late could be included. Supported range
-                      is -1 (indefinite) to 1814399 (20d 23h 59m 59s).  Default is
+                      is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is
                       0.
                     type: number
                   eventsOutOfOrderMaxDelayInSeconds:
@@ -91,7 +91,7 @@ spec:
                   eventsOutOfOrderPolicy:
                     description: Specifies the policy which should be applied to events
                       which arrive out of order in the input event stream. Possible
-                      values are Adjust and Drop.  Default is Adjust.
+                      values are Adjust and Drop. Default is Adjust.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -150,7 +150,7 @@ spec:
                       which arrive at the output and cannot be written to the external
                       storage due to being malformed (such as missing column values,
                       column values of wrong type or size). Possible values are Drop
-                      and Stop.  Default is Drop.
+                      and Stop. Default is Drop.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Stream Analytics

@@ -164,8 +164,7 @@ spec:
                       values are at least -1. -1 means the Cassandra table never expires.
                     type: number
                   schema:
-                    description: A schema block as defined below. Changing this forces
-                      a new resource to be created.
+                    description: A schema block as defined below.
                     items:
                       properties:
                         clusterKey:

@@ -160,6 +160,10 @@ spec:
                       - values
                       type: object
                     type: array
+                  conditionJson:
+                    description: A JSON array of one or more condition JSON objects
+                      as is defined here.
+                    type: string
                   displayName:
                     description: The display name which should be used for this Sentinel
                       Automation Rule.
@@ -261,6 +265,14 @@ spec:
                     description: The order of this Sentinel Automation Rule. Possible
                       values varies between 1 and 1000.
                     type: number
+                  triggersOn:
+                    description: Specifies what triggers this automation rule. Possible
+                      values are Alerts and Incidents. Defaults to Incidents.
+                    type: string
+                  triggersWhen:
+                    description: Specifies when will this automation rule be triggered.
+                      Possible values are Created and Updated. Defaults to Created.
+                    type: string
                 required:
                 - displayName
                 - name

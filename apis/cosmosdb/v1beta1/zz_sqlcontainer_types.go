@@ -153,7 +153,7 @@ type SQLContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
-	// The default time to live of Analytical Storage for this SQL container. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time. Changing this forces a new Cosmos DB SQL Container to be created when removing analytical_storage_ttl on an existing Cosmos DB SQL Container.
+	// The default time to live of Analytical Storage for this SQL container. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
 	// +kubebuilder:validation:Optional
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
@@ -161,7 +161,7 @@ type SQLContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []SQLContainerAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
-	// A conflict_resolution_policy blocks as defined below.
+	// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ConflictResolutionPolicy []SQLContainerConflictResolutionPolicyParameters `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
 

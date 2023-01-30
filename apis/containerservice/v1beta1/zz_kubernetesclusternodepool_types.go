@@ -81,6 +81,16 @@ type KubernetesClusterNodePoolLinuxOsConfigParameters struct {
 	TransparentHugePageEnabled *string `json:"transparentHugePageEnabled,omitempty" tf:"transparent_huge_page_enabled,omitempty"`
 }
 
+type KubernetesClusterNodePoolNodeNetworkProfileObservation struct {
+}
+
+type KubernetesClusterNodePoolNodeNetworkProfileParameters struct {
+
+	// Specifies a mapping of tags to the instance-level public IPs.
+	// +kubebuilder:validation:Optional
+	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
+}
+
 type KubernetesClusterNodePoolObservation struct {
 
 	// The ID of the Kubernetes Cluster Node Pool.
@@ -101,11 +111,11 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableAutoScaling *bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty"`
 
-	// Should the nodes in this Node Pool have host encryption enabled?  Changing this forces a new resource to be created.
+	// Should the nodes in this Node Pool have host encryption enabled? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnableHostEncryption *bool `json:"enableHostEncryption,omitempty" tf:"enable_host_encryption,omitempty"`
 
-	// Should each node have a Public IP Address?   Changing this forces a new resource to be created.
+	// Should each node have a Public IP Address? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnableNodePublicIP *bool `json:"enableNodePublicIp,omitempty" tf:"enable_node_public_ip,omitempty"`
 
@@ -121,7 +131,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
 
-	// A kubelet_config block as defined below.
+	// A kubelet_config block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	KubeletConfig []KubernetesClusterNodePoolKubeletConfigParameters `json:"kubeletConfig,omitempty" tf:"kubelet_config,omitempty"`
 
@@ -143,7 +153,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	KubernetesClusterIDSelector *v1.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
 
-	// A linux_os_config block as defined below.
+	// A linux_os_config block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	LinuxOsConfig []KubernetesClusterNodePoolLinuxOsConfigParameters `json:"linuxOsConfig,omitempty" tf:"linux_os_config,omitempty"`
 
@@ -174,6 +184,10 @@ type KubernetesClusterNodePoolParameters struct {
 	// A map of Kubernetes labels which should be applied to nodes in this Node Pool.
 	// +kubebuilder:validation:Optional
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
+
+	// A node_network_profile block as documented below.
+	// +kubebuilder:validation:Optional
+	NodeNetworkProfile []KubernetesClusterNodePoolNodeNetworkProfileParameters `json:"nodeNetworkProfile,omitempty" tf:"node_network_profile,omitempty"`
 
 	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. enable_node_public_ip should be true. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -263,7 +277,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 
-	// A windows_profile block as documented below.
+	// A windows_profile block as documented below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	WindowsProfile []KubernetesClusterNodePoolWindowsProfileParameters `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
 

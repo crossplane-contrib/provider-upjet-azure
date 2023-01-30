@@ -94,7 +94,7 @@ func (mg *ManagedCluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ManagedCluster
 func (tr *ManagedCluster) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
 }
 
 // GetObservation of this ManagedCluster

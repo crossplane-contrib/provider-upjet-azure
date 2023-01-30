@@ -228,6 +228,7 @@ spec:
                     type: object
                   dataProtectionReplication:
                     description: A data_protection_replication block as defined below.
+                      Changing this forces a new resource to be created.
                     items:
                       properties:
                         endpointType:
@@ -741,10 +742,11 @@ spec:
                     type: string
                   zone:
                     description: Specifies the Availability Zone in which the Volume
-                      should be located. Possible values are 1, 2 and 3. This feature
-                      is currently in preview, for more information on how to enable
-                      it, please refer to Manage availability zone volume placement
-                      for Azure NetApp Files
+                      should be located. Possible values are 1, 2 and 3. Changing
+                      this forces a new resource to be created. This feature is currently
+                      in preview, for more information on how to enable it, please
+                      refer to Manage availability zone volume placement for Azure
+                      NetApp Files.
                     type: string
                 required:
                 - location

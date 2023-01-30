@@ -58,7 +58,7 @@ type LoggerParameters struct {
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
-	// An application_insights block as documented below.
+	// An application_insights block as documented below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ApplicationInsights []ApplicationInsightsParameters `json:"applicationInsights,omitempty" tf:"application_insights,omitempty"`
 
@@ -70,7 +70,7 @@ type LoggerParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// An eventhub block as documented below.
+	// An eventhub block as documented below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EventHub []EventHubParameters `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
 

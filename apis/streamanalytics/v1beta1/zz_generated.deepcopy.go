@@ -1724,7 +1724,11 @@ func (in *OutputServiceBusQueueParameters) DeepCopyInto(out *OutputServiceBusQue
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.SharedAccessPolicyKeySecretRef = in.SharedAccessPolicyKeySecretRef
+	if in.SharedAccessPolicyKeySecretRef != nil {
+		in, out := &in.SharedAccessPolicyKeySecretRef, &out.SharedAccessPolicyKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.SharedAccessPolicyName != nil {
 		in, out := &in.SharedAccessPolicyName, &out.SharedAccessPolicyName
 		*out = new(string)
@@ -1996,7 +2000,11 @@ func (in *OutputServiceBusTopicParameters) DeepCopyInto(out *OutputServiceBusTop
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	out.SharedAccessPolicyKeySecretRef = in.SharedAccessPolicyKeySecretRef
+	if in.SharedAccessPolicyKeySecretRef != nil {
+		in, out := &in.SharedAccessPolicyKeySecretRef, &out.SharedAccessPolicyKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.SharedAccessPolicyName != nil {
 		in, out := &in.SharedAccessPolicyName, &out.SharedAccessPolicyName
 		*out = new(string)

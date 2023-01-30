@@ -64,6 +64,7 @@ type LiveEventOutputParameters struct {
 	// +kubebuilder:validation:Optional
 	ManifestName *string `json:"manifestName,omitempty" tf:"manifest_name,omitempty"`
 
+	// The initial timestamp that the live output will start at, any content before this value will not be archived. Changing this forces a new Live Output to be created.
 	// +kubebuilder:validation:Optional
 	OutputSnapTimeInSeconds *float64 `json:"outputSnapTimeInSeconds,omitempty" tf:"output_snap_time_in_seconds,omitempty"`
 }

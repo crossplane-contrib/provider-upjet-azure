@@ -83,7 +83,7 @@ type FrontdoorRulesEngineRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	MatchCondition []RuleMatchConditionParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
 
-	// The name of the rule. Changing this forces a new resource to be created.
+	// The name of the rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

@@ -34,11 +34,11 @@ type CaptureDescriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
-	// Specifies the amount of data built up in your EventHub before a Capture Operation occurs. Value should be between 10485760 and 524288000  bytes. Defaults to 314572800 bytes.
+	// Specifies the amount of data built up in your EventHub before a Capture Operation occurs. Value should be between 10485760 and 524288000 bytes. Defaults to 314572800 bytes.
 	// +kubebuilder:validation:Optional
 	SizeLimitInBytes *float64 `json:"sizeLimitInBytes,omitempty" tf:"size_limit_in_bytes,omitempty"`
 
-	// Specifies if empty files should not be emitted if no events occur during the Capture time window.  Defaults to false.
+	// Specifies if empty files should not be emitted if no events occur during the Capture time window. Defaults to false.
 	// +kubebuilder:validation:Optional
 	SkipEmptyArchives *bool `json:"skipEmptyArchives,omitempty" tf:"skip_empty_archives,omitempty"`
 }

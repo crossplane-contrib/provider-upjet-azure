@@ -97,7 +97,7 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	Certificate []CertificateCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// A certificate_policy block as defined below.
+	// A certificate_policy block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	CertificatePolicy []CertificatePolicyParameters `json:"certificatePolicy,omitempty" tf:"certificate_policy,omitempty"`
 
@@ -255,7 +255,7 @@ type X509CertificatePropertiesParameters struct {
 	// +kubebuilder:validation:Required
 	Subject *string `json:"subject" tf:"subject,omitempty"`
 
-	// A subject_alternative_names block as defined below.
+	// A subject_alternative_names block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SubjectAlternativeNames []SubjectAlternativeNamesParameters `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
