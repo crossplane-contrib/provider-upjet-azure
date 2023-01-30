@@ -1,0 +1,98 @@
+apiVersion: datamigration.azure.upbound.io/v1beta1
+kind: DatabaseMigrationProject
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datamigration/v1beta1/databasemigrationproject
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: dmpexample
+spec:
+  forProvider:
+    location: West Europe
+    name: example-dbms-project
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourcePlatform: SQL
+    targetPlatform: SQLDB
+
+---
+
+apiVersion: datamigration.azure.upbound.io/v1beta1
+kind: DatabaseMigrationService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datamigration/v1beta1/databasemigrationproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: dmpexample
+spec:
+  forProvider:
+    location: West Europe
+    name: example-dbms
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard_1vCores
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datamigration/v1beta1/databasemigrationproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: dmpexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datamigration/v1beta1/databasemigrationproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: dmpexample
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datamigration/v1beta1/databasemigrationproject
+  labels:
+    testing.upbound.io/example-name: example
+  name: dmpexample
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
