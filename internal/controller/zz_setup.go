@@ -240,6 +240,7 @@ import (
 	iothubroute "github.com/upbound/provider-azure/internal/controller/devices/iothubroute"
 	iothubsharedaccesspolicy "github.com/upbound/provider-azure/internal/controller/devices/iothubsharedaccesspolicy"
 	instance "github.com/upbound/provider-azure/internal/controller/digitaltwins/instance"
+	cloudelasticsearch "github.com/upbound/provider-azure/internal/controller/elastic/cloudelasticsearch"
 	domain "github.com/upbound/provider-azure/internal/controller/eventgrid/domain"
 	domaintopic "github.com/upbound/provider-azure/internal/controller/eventgrid/domaintopic"
 	eventsubscription "github.com/upbound/provider-azure/internal/controller/eventgrid/eventsubscription"
@@ -251,8 +252,11 @@ import (
 	eventhubnamespace "github.com/upbound/provider-azure/internal/controller/eventhub/eventhubnamespace"
 	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/eventhub/namespaceauthorizationrule"
 	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/eventhub/namespacedisasterrecoveryconfig"
+	healthcareservice "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcareservice"
 	applicationinsights "github.com/upbound/provider-azure/internal/controller/insights/applicationinsights"
+	applicationinsightsanalyticsitem "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsanalyticsitem"
 	applicationinsightsapikey "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsapikey"
+	applicationinsightssmartdetectionrule "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightssmartdetectionrule"
 	monitoractiongroup "github.com/upbound/provider-azure/internal/controller/insights/monitoractiongroup"
 	monitoractivitylogalert "github.com/upbound/provider-azure/internal/controller/insights/monitoractivitylogalert"
 	monitorautoscalesetting "github.com/upbound/provider-azure/internal/controller/insights/monitorautoscalesetting"
@@ -723,6 +727,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iothubroute.Setup,
 		iothubsharedaccesspolicy.Setup,
 		instance.Setup,
+		cloudelasticsearch.Setup,
 		domain.Setup,
 		domaintopic.Setup,
 		eventsubscription.Setup,
@@ -734,8 +739,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventhubnamespace.Setup,
 		namespaceauthorizationrule.Setup,
 		namespacedisasterrecoveryconfig.Setup,
+		healthcareservice.Setup,
 		applicationinsights.Setup,
+		applicationinsightsanalyticsitem.Setup,
 		applicationinsightsapikey.Setup,
+		applicationinsightssmartdetectionrule.Setup,
 		monitoractiongroup.Setup,
 		monitoractivitylogalert.Setup,
 		monitorautoscalesetting.Setup,
