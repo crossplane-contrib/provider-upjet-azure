@@ -10,13 +10,14 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
-	v1beta16 "github.com/upbound/provider-azure/apis/devices/v1beta1"
-	v1beta15 "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
+	v1beta17 "github.com/upbound/provider-azure/apis/devices/v1beta1"
+	v1beta16 "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
-	v1beta13 "github.com/upbound/provider-azure/apis/servicebus/v1beta1"
-	v1beta12 "github.com/upbound/provider-azure/apis/sql/v1beta1"
+	v1beta14 "github.com/upbound/provider-azure/apis/servicebus/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/sql/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/storage/v1beta1"
-	v1beta14 "github.com/upbound/provider-azure/apis/synapse/v1beta1"
+	v1beta15 "github.com/upbound/provider-azure/apis/synapse/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/web/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -239,6 +240,22 @@ func (mg *OutputFunction) ResolveReferences(ctx context.Context, c client.Reader
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionApp),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.ForProvider.FunctionAppRef,
+		Selector:     mg.Spec.ForProvider.FunctionAppSelector,
+		To: reference.To{
+			List:    &v1beta12.FunctionAppList{},
+			Managed: &v1beta12.FunctionApp{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FunctionApp")
+	}
+	mg.Spec.ForProvider.FunctionApp = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FunctionAppRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
@@ -302,8 +319,8 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.ServerRef,
 		Selector:     mg.Spec.ForProvider.ServerSelector,
 		To: reference.To{
-			List:    &v1beta12.MSSQLServerList{},
-			Managed: &v1beta12.MSSQLServer{},
+			List:    &v1beta13.MSSQLServerList{},
+			Managed: &v1beta13.MSSQLServer{},
 		},
 	})
 	if err != nil {
@@ -360,8 +377,8 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		Reference:    mg.Spec.ForProvider.QueueNameRef,
 		Selector:     mg.Spec.ForProvider.QueueNameSelector,
 		To: reference.To{
-			List:    &v1beta13.QueueList{},
-			Managed: &v1beta13.Queue{},
+			List:    &v1beta14.QueueList{},
+			Managed: &v1beta14.Queue{},
 		},
 	})
 	if err != nil {
@@ -392,8 +409,8 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 		Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
 		Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
 		To: reference.To{
-			List:    &v1beta13.ServiceBusNamespaceList{},
-			Managed: &v1beta13.ServiceBusNamespace{},
+			List:    &v1beta14.ServiceBusNamespaceList{},
+			Managed: &v1beta14.ServiceBusNamespace{},
 		},
 	})
 	if err != nil {
@@ -450,8 +467,8 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
 		Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
 		To: reference.To{
-			List:    &v1beta13.ServiceBusNamespaceList{},
-			Managed: &v1beta13.ServiceBusNamespace{},
+			List:    &v1beta14.ServiceBusNamespaceList{},
+			Managed: &v1beta14.ServiceBusNamespace{},
 		},
 	})
 	if err != nil {
@@ -482,8 +499,8 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 		Reference:    mg.Spec.ForProvider.TopicNameRef,
 		Selector:     mg.Spec.ForProvider.TopicNameSelector,
 		To: reference.To{
-			List:    &v1beta13.TopicList{},
-			Managed: &v1beta13.Topic{},
+			List:    &v1beta14.TopicList{},
+			Managed: &v1beta14.Topic{},
 		},
 	})
 	if err != nil {
@@ -540,8 +557,8 @@ func (mg *OutputSynapse) ResolveReferences(ctx context.Context, c client.Reader)
 		Reference:    mg.Spec.ForProvider.UserRef,
 		Selector:     mg.Spec.ForProvider.UserSelector,
 		To: reference.To{
-			List:    &v1beta14.WorkspaceList{},
-			Managed: &v1beta14.Workspace{},
+			List:    &v1beta15.WorkspaceList{},
+			Managed: &v1beta15.Workspace{},
 		},
 	})
 	if err != nil {
@@ -714,8 +731,8 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		Reference:    mg.Spec.ForProvider.EventHubConsumerGroupNameRef,
 		Selector:     mg.Spec.ForProvider.EventHubConsumerGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta15.ConsumerGroupList{},
-			Managed: &v1beta15.ConsumerGroup{},
+			List:    &v1beta16.ConsumerGroupList{},
+			Managed: &v1beta16.ConsumerGroup{},
 		},
 	})
 	if err != nil {
@@ -730,8 +747,8 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		Reference:    mg.Spec.ForProvider.EventHubNameRef,
 		Selector:     mg.Spec.ForProvider.EventHubNameSelector,
 		To: reference.To{
-			List:    &v1beta15.EventHubList{},
-			Managed: &v1beta15.EventHub{},
+			List:    &v1beta16.EventHubList{},
+			Managed: &v1beta16.EventHub{},
 		},
 	})
 	if err != nil {
@@ -762,8 +779,8 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 		Reference:    mg.Spec.ForProvider.ServiceBusNamespaceRef,
 		Selector:     mg.Spec.ForProvider.ServiceBusNamespaceSelector,
 		To: reference.To{
-			List:    &v1beta15.EventHubNamespaceList{},
-			Managed: &v1beta15.EventHubNamespace{},
+			List:    &v1beta16.EventHubNamespaceList{},
+			Managed: &v1beta16.EventHubNamespace{},
 		},
 	})
 	if err != nil {
@@ -804,8 +821,8 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		Reference:    mg.Spec.ForProvider.EventHubConsumerGroupNameRef,
 		Selector:     mg.Spec.ForProvider.EventHubConsumerGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta15.ConsumerGroupList{},
-			Managed: &v1beta15.ConsumerGroup{},
+			List:    &v1beta16.ConsumerGroupList{},
+			Managed: &v1beta16.ConsumerGroup{},
 		},
 	})
 	if err != nil {
@@ -820,8 +837,8 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		Reference:    mg.Spec.ForProvider.IOTHubNamespaceRef,
 		Selector:     mg.Spec.ForProvider.IOTHubNamespaceSelector,
 		To: reference.To{
-			List:    &v1beta16.IOTHubList{},
-			Managed: &v1beta16.IOTHub{},
+			List:    &v1beta17.IOTHubList{},
+			Managed: &v1beta17.IOTHub{},
 		},
 	})
 	if err != nil {
