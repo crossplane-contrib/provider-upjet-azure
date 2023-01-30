@@ -74,6 +74,7 @@ import (
 	credential "github.com/upbound/provider-azure/internal/controller/automation/credential"
 	module "github.com/upbound/provider-azure/internal/controller/automation/module"
 	variablebool "github.com/upbound/provider-azure/internal/controller/automation/variablebool"
+	variabledatetime "github.com/upbound/provider-azure/internal/controller/automation/variabledatetime"
 	variableint "github.com/upbound/provider-azure/internal/controller/automation/variableint"
 	variablestring "github.com/upbound/provider-azure/internal/controller/automation/variablestring"
 	resourcegroup "github.com/upbound/provider-azure/internal/controller/azure/resourcegroup"
@@ -417,6 +418,9 @@ import (
 	subnetnetworksecuritygroupassociation "github.com/upbound/provider-azure/internal/controller/network/subnetnetworksecuritygroupassociation"
 	subnetroutetableassociation "github.com/upbound/provider-azure/internal/controller/network/subnetroutetableassociation"
 	subnetserviceendpointstoragepolicy "github.com/upbound/provider-azure/internal/controller/network/subnetserviceendpointstoragepolicy"
+	trafficmanagerazureendpoint "github.com/upbound/provider-azure/internal/controller/network/trafficmanagerazureendpoint"
+	trafficmanagerexternalendpoint "github.com/upbound/provider-azure/internal/controller/network/trafficmanagerexternalendpoint"
+	trafficmanagernestedendpoint "github.com/upbound/provider-azure/internal/controller/network/trafficmanagernestedendpoint"
 	trafficmanagerprofile "github.com/upbound/provider-azure/internal/controller/network/trafficmanagerprofile"
 	virtualhub "github.com/upbound/provider-azure/internal/controller/network/virtualhub"
 	virtualnetworknetwork "github.com/upbound/provider-azure/internal/controller/network/virtualnetwork"
@@ -559,6 +563,10 @@ import (
 	workspaceextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspaceextendedauditingpolicy"
 	workspacesecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspacesecurityalertpolicy"
 	workspacevulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/synapse/workspacevulnerabilityassessment"
+	eventsourceiothub "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/eventsourceiothub"
+	gen2environment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/gen2environment"
+	referencedataset "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/referencedataset"
+	standardenvironment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/standardenvironment"
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
 	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
 	functionappslot "github.com/upbound/provider-azure/internal/controller/web/functionappslot"
@@ -639,6 +647,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		credential.Setup,
 		module.Setup,
 		variablebool.Setup,
+		variabledatetime.Setup,
 		variableint.Setup,
 		variablestring.Setup,
 		resourcegroup.Setup,
@@ -982,6 +991,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetnetworksecuritygroupassociation.Setup,
 		subnetroutetableassociation.Setup,
 		subnetserviceendpointstoragepolicy.Setup,
+		trafficmanagerazureendpoint.Setup,
+		trafficmanagerexternalendpoint.Setup,
+		trafficmanagernestedendpoint.Setup,
 		trafficmanagerprofile.Setup,
 		virtualhub.Setup,
 		virtualnetworknetwork.Setup,
@@ -1124,6 +1136,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		workspaceextendedauditingpolicy.Setup,
 		workspacesecurityalertpolicy.Setup,
 		workspacevulnerabilityassessment.Setup,
+		eventsourceiothub.Setup,
+		gen2environment.Setup,
+		referencedataset.Setup,
+		standardenvironment.Setup,
 		appserviceplan.Setup,
 		functionapp.Setup,
 		functionappslot.Setup,

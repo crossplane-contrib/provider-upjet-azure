@@ -5563,6 +5563,228 @@ func (tr *SubnetServiceEndpointStoragePolicy) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this TrafficManagerAzureEndpoint
+func (mg *TrafficManagerAzureEndpoint) GetTerraformResourceType() string {
+	return "azurerm_traffic_manager_azure_endpoint"
+}
+
+// GetConnectionDetailsMapping for this TrafficManagerAzureEndpoint
+func (tr *TrafficManagerAzureEndpoint) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TrafficManagerAzureEndpoint
+func (tr *TrafficManagerAzureEndpoint) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TrafficManagerAzureEndpoint
+func (tr *TrafficManagerAzureEndpoint) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TrafficManagerAzureEndpoint
+func (tr *TrafficManagerAzureEndpoint) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TrafficManagerAzureEndpoint
+func (tr *TrafficManagerAzureEndpoint) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TrafficManagerAzureEndpoint
+func (tr *TrafficManagerAzureEndpoint) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TrafficManagerAzureEndpoint using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TrafficManagerAzureEndpoint) LateInitialize(attrs []byte) (bool, error) {
+	params := &TrafficManagerAzureEndpointParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TrafficManagerAzureEndpoint) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this TrafficManagerExternalEndpoint
+func (mg *TrafficManagerExternalEndpoint) GetTerraformResourceType() string {
+	return "azurerm_traffic_manager_external_endpoint"
+}
+
+// GetConnectionDetailsMapping for this TrafficManagerExternalEndpoint
+func (tr *TrafficManagerExternalEndpoint) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TrafficManagerExternalEndpoint
+func (tr *TrafficManagerExternalEndpoint) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TrafficManagerExternalEndpoint
+func (tr *TrafficManagerExternalEndpoint) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TrafficManagerExternalEndpoint
+func (tr *TrafficManagerExternalEndpoint) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TrafficManagerExternalEndpoint
+func (tr *TrafficManagerExternalEndpoint) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TrafficManagerExternalEndpoint
+func (tr *TrafficManagerExternalEndpoint) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TrafficManagerExternalEndpoint using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TrafficManagerExternalEndpoint) LateInitialize(attrs []byte) (bool, error) {
+	params := &TrafficManagerExternalEndpointParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TrafficManagerExternalEndpoint) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this TrafficManagerNestedEndpoint
+func (mg *TrafficManagerNestedEndpoint) GetTerraformResourceType() string {
+	return "azurerm_traffic_manager_nested_endpoint"
+}
+
+// GetConnectionDetailsMapping for this TrafficManagerNestedEndpoint
+func (tr *TrafficManagerNestedEndpoint) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TrafficManagerNestedEndpoint
+func (tr *TrafficManagerNestedEndpoint) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TrafficManagerNestedEndpoint
+func (tr *TrafficManagerNestedEndpoint) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TrafficManagerNestedEndpoint
+func (tr *TrafficManagerNestedEndpoint) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TrafficManagerNestedEndpoint
+func (tr *TrafficManagerNestedEndpoint) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TrafficManagerNestedEndpoint
+func (tr *TrafficManagerNestedEndpoint) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TrafficManagerNestedEndpoint using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TrafficManagerNestedEndpoint) LateInitialize(attrs []byte) (bool, error) {
+	params := &TrafficManagerNestedEndpointParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TrafficManagerNestedEndpoint) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this TrafficManagerProfile
 func (mg *TrafficManagerProfile) GetTerraformResourceType() string {
 	return "azurerm_traffic_manager_profile"

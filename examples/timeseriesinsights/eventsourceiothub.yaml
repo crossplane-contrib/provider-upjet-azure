@@ -1,0 +1,153 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
+kind: EventSourceIOTHub
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "sharedAccessKeyName cannot be obtained and need to be hardcoded"
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceiothub
+  labels:
+    testing.upbound.io/example-name: example
+  name: eventsourceiothub
+spec:
+  forProvider:
+    consumerGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iothubconsumergroup-label
+    environmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: gentwoenv-label
+    eventSourceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iothub-label
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iothub-label
+    location: West Europe
+    sharedAccessKeyName: ${azurerm_iothub.example.shared_access_policy.0.key_name}
+    sharedAccessKeySecretRef:
+      key: example-key
+      name: example-iothub
+      namespace: upbound-system
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-iothub
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: T4dQFBLKEf28cGzSwrFI2pL6egeYUyGKMldQIhutT4o=
+
+---
+
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
+kind: Gen2Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceiothub
+  labels:
+    testing.upbound.io/example-name: gentwoenv-label
+  name: gentwoenv
+spec:
+  forProvider:
+    idProperties:
+      - id
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: eventsource-rg-label
+    skuName: L1
+    storage:
+      - keySecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        nameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: storage-label
+    warmStoreDataRetentionTime: P30D
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: HxEqJCD5m/eiuUzbZwS/ljmcmUHczPfmehFP9NO++mgXaVcUk+XqAKZMkKwN+9WpEgBlGXiOaYJ8+AStUzHS6w==
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceiothub
+  labels:
+    testing.upbound.io/example-name: iothub-label
+  name: iothubabc
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: eventsource-rg-label
+    sku:
+    - capacity: 1
+      name: "B1"
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta1
+kind: IOTHubConsumerGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceiothub
+  labels:
+    testing.upbound.io/example-name: iothubconsumergroup-label
+  name: iothubconsumergroupabc
+spec:
+  forProvider:
+    eventhubEndpointName: events
+    iothubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: iothub-label
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: eventsource-rg-label
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceiothub
+  labels:
+    testing.upbound.io/example-name: eventsource-rg-label
+  name: eventsource-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceiothub
+  labels:
+    testing.upbound.io/example-name: storage-label
+  name: eventsourceaccounta
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: eventsource-rg-label

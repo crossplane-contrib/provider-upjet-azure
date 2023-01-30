@@ -1,0 +1,49 @@
+apiVersion: automation.azure.upbound.io/v1beta1
+kind: VariableDateTime
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/variabledatetime
+  labels:
+    testing.upbound.io/example-name: example
+  name: variabledatetime
+spec:
+  forProvider:
+    automationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: variabledatetine-rg-label
+    value: "2019-04-24T21:40:54.074Z"
+
+---
+
+apiVersion: automation.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/variabledatetime
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: variabledatetineaccounta
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: variabledatetine-rg-label
+    skuName: Basic
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/variabledatetime
+  labels:
+    testing.upbound.io/example-name: variabledatetine-rg-label
+  name: variabledatetine-rg
+spec:
+  forProvider:
+    location: West Europe

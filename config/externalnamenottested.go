@@ -154,8 +154,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"azurerm_automation_webhook": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Automation/automationAccounts/{{ .parameters.automation_account_name }}/schedules/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Automation/automationAccounts/account1/schedules/schedule1
 	"azurerm_automation_schedule": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Automation/automationAccounts/{{ .parameters.automation_account_name }}/schedules/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/tfex-example-rg/providers/Microsoft.Automation/automationAccounts/tfex-example-account/variables/tfex-example-var
-	"azurerm_automation_variable_datetime": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Automation/automationAccounts/{{ .parameters.automation_account_name }}/variables/{{ .external_name }}"),
 
 	// botservice
 	//
@@ -544,23 +542,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.TimeSeriesInsights/environments/environment1/accessPolicies/example
 	"azurerm_iot_time_series_insights_access_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.time_series_insights_environment_id }}/accessPolicies/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.TimeSeriesInsights/environments/environment1/eventSources/example
-	"azurerm_iot_time_series_insights_event_source_iothub": config.TemplatedStringAsIdentifier("name", "{{ .parameters.environment_id }}/eventSources/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.TimeSeriesInsights/environments/example
-	"azurerm_iot_time_series_insights_gen2_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.TimeSeriesInsights/environments/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.TimeSeriesInsights/environments/example/referenceDataSets/example
-	"azurerm_iot_time_series_insights_reference_data_set": config.TemplatedStringAsIdentifier("name", "{{ .parameters.time_series_insights_environment_id }}/referenceDataSets/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.TimeSeriesInsights/environments/example
-	"azurerm_iot_time_series_insights_standard_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.TimeSeriesInsights/environments/{{ .external_name }}"),
-
-	// traffic
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resources/providers/Microsoft.Network/trafficManagerProfiles/example-profile/AzureEndpoints/example-endpoint
-	"azurerm_traffic_manager_azure_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.profile_id }}/AzureEndpoints/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-group/providers/Microsoft.Network/trafficManagerProfiles/example-profile/ExternalEndpoints/example-endpoint
-	"azurerm_traffic_manager_external_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.profile_id }}/ExternalEndpoints/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-resources/providers/Microsoft.Network/trafficManagerProfiles/example-profile/NestedEndpoints/example-endpoint
-	"azurerm_traffic_manager_nested_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.profile_id }}/NestedEndpoints/{{ .external_name }}"),
 
 	// vpn
 	//

@@ -1,0 +1,79 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: TrafficManagerAzureEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagerazureendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: trafficmanagerazureendpoint
+spec:
+  forProvider:
+    profileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: trafficmanagerprofile-label
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: publicip-label
+    weight: 100
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagerazureendpoint
+  labels:
+    testing.upbound.io/example-name: publicip-label
+  name: publicip
+spec:
+  forProvider:
+    allocationMethod: Static
+    domainNameLabel: example-public-ip-qwerty
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: trafficmanagerazureendpoint-rg-label
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagerazureendpoint
+  labels:
+    testing.upbound.io/example-name: trafficmanagerazureendpoint-rg-label
+  name: trafficmanagerazureendpoint-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: TrafficManagerProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/trafficmanagerazureendpoint
+  labels:
+    testing.upbound.io/example-name: trafficmanagerprofile-label
+  name: trafficmanagerprofile
+spec:
+  forProvider:
+    dnsConfig:
+    - relativeName: example-profile-qwerty-a
+      ttl: 100
+    monitorConfig:
+    - intervalInSeconds: 30
+      path: /
+      port: 80
+      protocol: HTTP
+      timeoutInSeconds: 9
+      toleratedNumberOfFailures: 3
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: trafficmanagerazureendpoint-rg-label
+    tags:
+      environment: Production
+    trafficRoutingMethod: Weighted

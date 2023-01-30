@@ -4825,6 +4825,204 @@ func (mg *SubnetServiceEndpointStoragePolicy) SetWriteConnectionSecretToReferenc
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this TrafficManagerAzureEndpoint.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *TrafficManagerAzureEndpoint) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this TrafficManagerAzureEndpoint.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *TrafficManagerAzureEndpoint) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this TrafficManagerExternalEndpoint.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *TrafficManagerExternalEndpoint) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this TrafficManagerExternalEndpoint.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *TrafficManagerExternalEndpoint) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this TrafficManagerNestedEndpoint.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *TrafficManagerNestedEndpoint) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this TrafficManagerNestedEndpoint.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *TrafficManagerNestedEndpoint) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this TrafficManagerProfile.
 func (mg *TrafficManagerProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
