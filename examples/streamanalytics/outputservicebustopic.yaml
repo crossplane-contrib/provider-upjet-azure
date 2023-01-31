@@ -97,7 +97,7 @@ metadata:
   name: stopicexample
 spec:
   forProvider:
-    enablePartitioning: true
+    enablePartitioning: false
     namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
