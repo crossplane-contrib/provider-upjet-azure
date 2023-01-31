@@ -4,14 +4,14 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "This resource needs manual patching for the private_service_connection.private_connection_resource_id field."
+    meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
     location: West Europe
     privateServiceConnection:
     - isManualConnection: false
       name: example-privateserviceconnection
-      privateConnectionResourceIdRef: # Ref to PrivateLinkService
-        name: example
+      privateConnectionResourceId: <resource ID> # ID of the PrivateLinkService below
     resourceGroupNameRef:
       name: loadbalancerrg
     subnetIdRef:
@@ -24,6 +24,7 @@ metadata:
   name: loadbalancerrg
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
     location: "West Europe"
@@ -37,6 +38,7 @@ metadata:
   name: example-vn-for-lb
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
     location: West Europe
@@ -55,6 +57,7 @@ metadata:
   name: service
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
     enforcePrivateLinkServiceNetworkPolicies: true
@@ -72,6 +75,7 @@ metadata:
   name: endpoint
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
     enforcePrivateLinkEndpointNetworkPolicies: true
@@ -89,6 +93,7 @@ metadata:
   name: publicipforlb
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
     sku: Standard
@@ -106,6 +111,7 @@ metadata:
   name: testloadbalancer
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
     sku: Standard
@@ -124,6 +130,7 @@ metadata:
   name: example
   annotations:
     upjet.upbound.io/manual-intervention: "The dependent resource PrivateEndpoint needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: network/v1beta1/privateendpoint
 spec:
   forProvider:
     loadBalancerFrontendIpConfigurationIds:
