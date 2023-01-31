@@ -187,7 +187,12 @@ import (
 	triggerblobevent "github.com/upbound/provider-azure/internal/controller/datafactory/triggerblobevent"
 	triggercustomevent "github.com/upbound/provider-azure/internal/controller/datafactory/triggercustomevent"
 	triggerschedule "github.com/upbound/provider-azure/internal/controller/datafactory/triggerschedule"
+	databasemigrationproject "github.com/upbound/provider-azure/internal/controller/datamigration/databasemigrationproject"
+	databasemigrationservice "github.com/upbound/provider-azure/internal/controller/datamigration/databasemigrationservice"
+	backupinstanceblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstanceblobstorage"
+	backupinstancedisk "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancedisk"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
+	backuppolicydisk "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicydisk"
 	backupvault "github.com/upbound/provider-azure/internal/controller/dataprotection/backupvault"
 	accountdatashare "github.com/upbound/provider-azure/internal/controller/datashare/account"
 	datasetblobstorage "github.com/upbound/provider-azure/internal/controller/datashare/datasetblobstorage"
@@ -665,7 +670,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		triggerblobevent.Setup,
 		triggercustomevent.Setup,
 		triggerschedule.Setup,
+		databasemigrationproject.Setup,
+		databasemigrationservice.Setup,
+		backupinstanceblobstorage.Setup,
+		backupinstancedisk.Setup,
 		backuppolicyblobstorage.Setup,
+		backuppolicydisk.Setup,
 		backupvault.Setup,
 		accountdatashare.Setup,
 		datasetblobstorage.Setup,

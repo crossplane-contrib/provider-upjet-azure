@@ -13,6 +13,154 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this BackupInstanceBlobStorage
+func (mg *BackupInstanceBlobStorage) GetTerraformResourceType() string {
+	return "azurerm_data_protection_backup_instance_blob_storage"
+}
+
+// GetConnectionDetailsMapping for this BackupInstanceBlobStorage
+func (tr *BackupInstanceBlobStorage) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this BackupInstanceBlobStorage
+func (tr *BackupInstanceBlobStorage) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this BackupInstanceBlobStorage
+func (tr *BackupInstanceBlobStorage) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this BackupInstanceBlobStorage
+func (tr *BackupInstanceBlobStorage) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this BackupInstanceBlobStorage
+func (tr *BackupInstanceBlobStorage) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this BackupInstanceBlobStorage
+func (tr *BackupInstanceBlobStorage) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this BackupInstanceBlobStorage using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *BackupInstanceBlobStorage) LateInitialize(attrs []byte) (bool, error) {
+	params := &BackupInstanceBlobStorageParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *BackupInstanceBlobStorage) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this BackupInstanceDisk
+func (mg *BackupInstanceDisk) GetTerraformResourceType() string {
+	return "azurerm_data_protection_backup_instance_disk"
+}
+
+// GetConnectionDetailsMapping for this BackupInstanceDisk
+func (tr *BackupInstanceDisk) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this BackupInstanceDisk
+func (tr *BackupInstanceDisk) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this BackupInstanceDisk
+func (tr *BackupInstanceDisk) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this BackupInstanceDisk
+func (tr *BackupInstanceDisk) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this BackupInstanceDisk
+func (tr *BackupInstanceDisk) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this BackupInstanceDisk
+func (tr *BackupInstanceDisk) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this BackupInstanceDisk using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *BackupInstanceDisk) LateInitialize(attrs []byte) (bool, error) {
+	params := &BackupInstanceDiskParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *BackupInstanceDisk) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this BackupPolicyBlobStorage
 func (mg *BackupPolicyBlobStorage) GetTerraformResourceType() string {
 	return "azurerm_data_protection_backup_policy_blob_storage"
@@ -84,6 +232,80 @@ func (tr *BackupPolicyBlobStorage) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *BackupPolicyBlobStorage) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this BackupPolicyDisk
+func (mg *BackupPolicyDisk) GetTerraformResourceType() string {
+	return "azurerm_data_protection_backup_policy_disk"
+}
+
+// GetConnectionDetailsMapping for this BackupPolicyDisk
+func (tr *BackupPolicyDisk) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this BackupPolicyDisk
+func (tr *BackupPolicyDisk) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this BackupPolicyDisk
+func (tr *BackupPolicyDisk) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this BackupPolicyDisk
+func (tr *BackupPolicyDisk) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this BackupPolicyDisk
+func (tr *BackupPolicyDisk) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this BackupPolicyDisk
+func (tr *BackupPolicyDisk) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this BackupPolicyDisk using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *BackupPolicyDisk) LateInitialize(attrs []byte) (bool, error) {
+	params := &BackupPolicyDiskParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *BackupPolicyDisk) GetTerraformSchemaVersion() int {
 	return 0
 }
 

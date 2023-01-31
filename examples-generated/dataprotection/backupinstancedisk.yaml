@@ -1,0 +1,132 @@
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupInstanceDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancedisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backupPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    diskIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    snapshotResourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupPolicyDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancedisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+    - R/2021-05-19T06:33:16+00:00/PT4H
+    defaultRetentionDuration: P7D
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancedisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: ManagedDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancedisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    createOption: Empty
+    diskSizeGb: "1"
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountType: Standard_LRS
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancedisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancedisk
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Disk Snapshot Contributor
+    scope: ${azurerm_resource_group.example.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancedisk
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Disk Backup Reader
+    scope: ${azurerm_managed_disk.example.id}
+
+---
+
