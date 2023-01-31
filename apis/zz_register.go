@@ -41,6 +41,7 @@ import (
 	v1beta1dbformysql "github.com/upbound/provider-azure/apis/dbformysql/v1beta1"
 	v1beta1dbforpostgresql "github.com/upbound/provider-azure/apis/dbforpostgresql/v1beta1"
 	v1beta1devices "github.com/upbound/provider-azure/apis/devices/v1beta1"
+	v1beta1devtestlab "github.com/upbound/provider-azure/apis/devtestlab/v1beta1"
 	v1beta1digitaltwins "github.com/upbound/provider-azure/apis/digitaltwins/v1beta1"
 	v1beta1eventgrid "github.com/upbound/provider-azure/apis/eventgrid/v1beta1"
 	v1beta1eventhub "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
@@ -116,6 +117,7 @@ func init() {
 		v1beta1dbformysql.SchemeBuilder.AddToScheme,
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
+		v1beta1devtestlab.SchemeBuilder.AddToScheme,
 		v1beta1digitaltwins.SchemeBuilder.AddToScheme,
 		v1beta1eventgrid.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,

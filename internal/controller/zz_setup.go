@@ -239,6 +239,13 @@ import (
 	iothubfallbackroute "github.com/upbound/provider-azure/internal/controller/devices/iothubfallbackroute"
 	iothubroute "github.com/upbound/provider-azure/internal/controller/devices/iothubroute"
 	iothubsharedaccesspolicy "github.com/upbound/provider-azure/internal/controller/devices/iothubsharedaccesspolicy"
+	globalvmshutdownschedule "github.com/upbound/provider-azure/internal/controller/devtestlab/globalvmshutdownschedule"
+	lab "github.com/upbound/provider-azure/internal/controller/devtestlab/lab"
+	linuxvirtualmachinedevtestlab "github.com/upbound/provider-azure/internal/controller/devtestlab/linuxvirtualmachine"
+	policydevtestlab "github.com/upbound/provider-azure/internal/controller/devtestlab/policy"
+	schedule "github.com/upbound/provider-azure/internal/controller/devtestlab/schedule"
+	virtualnetwork "github.com/upbound/provider-azure/internal/controller/devtestlab/virtualnetwork"
+	windowsvirtualmachinedevtestlab "github.com/upbound/provider-azure/internal/controller/devtestlab/windowsvirtualmachine"
 	instance "github.com/upbound/provider-azure/internal/controller/digitaltwins/instance"
 	domain "github.com/upbound/provider-azure/internal/controller/eventgrid/domain"
 	domaintopic "github.com/upbound/provider-azure/internal/controller/eventgrid/domaintopic"
@@ -373,7 +380,7 @@ import (
 	subnetserviceendpointstoragepolicy "github.com/upbound/provider-azure/internal/controller/network/subnetserviceendpointstoragepolicy"
 	trafficmanagerprofile "github.com/upbound/provider-azure/internal/controller/network/trafficmanagerprofile"
 	virtualhub "github.com/upbound/provider-azure/internal/controller/network/virtualhub"
-	virtualnetwork "github.com/upbound/provider-azure/internal/controller/network/virtualnetwork"
+	virtualnetworknetwork "github.com/upbound/provider-azure/internal/controller/network/virtualnetwork"
 	virtualnetworkgateway "github.com/upbound/provider-azure/internal/controller/network/virtualnetworkgateway"
 	virtualnetworkgatewayconnection "github.com/upbound/provider-azure/internal/controller/network/virtualnetworkgatewayconnection"
 	virtualnetworkpeering "github.com/upbound/provider-azure/internal/controller/network/virtualnetworkpeering"
@@ -722,6 +729,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iothubfallbackroute.Setup,
 		iothubroute.Setup,
 		iothubsharedaccesspolicy.Setup,
+		globalvmshutdownschedule.Setup,
+		lab.Setup,
+		linuxvirtualmachinedevtestlab.Setup,
+		policydevtestlab.Setup,
+		schedule.Setup,
+		virtualnetwork.Setup,
+		windowsvirtualmachinedevtestlab.Setup,
 		instance.Setup,
 		domain.Setup,
 		domaintopic.Setup,
@@ -856,7 +870,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subnetserviceendpointstoragepolicy.Setup,
 		trafficmanagerprofile.Setup,
 		virtualhub.Setup,
-		virtualnetwork.Setup,
+		virtualnetworknetwork.Setup,
 		virtualnetworkgateway.Setup,
 		virtualnetworkgatewayconnection.Setup,
 		virtualnetworkpeering.Setup,
