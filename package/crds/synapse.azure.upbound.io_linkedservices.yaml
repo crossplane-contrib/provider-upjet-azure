@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: outputsynapses.streamanalytics.azure.upbound.io
+  name: linkedservices.synapse.azure.upbound.io
 spec:
-  group: streamanalytics.azure.upbound.io
+  group: synapse.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: OutputSynapse
-    listKind: OutputSynapseList
-    plural: outputsynapses
-    singular: outputsynapse
+    kind: LinkedService
+    listKind: LinkedServiceList
+    plural: linkedservices
+    singular: linkedservice
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: OutputSynapse is the Schema for the OutputSynapses API. Manages
-          a Stream Analytics Output to an Azure Synapse Analytics Workspace.
+        description: LinkedService is the Schema for the LinkedServices API. Manages
+          a Linked Service (connection) between a resource and Azure Synapse. This
+          is a generic resource that supports all different Linked Service Types.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +52,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: OutputSynapseSpec defines the desired state of OutputSynapse
+            description: LinkedServiceSpec defines the desired state of LinkedService
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,35 +65,128 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  database:
-                    description: The name of the Azure SQL database. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  passwordSecretRef:
-                    description: The password that will be used to connect to the
-                      Azure SQL database.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Synapse Linked Service.
                     type: object
-                  resourceGroupName:
-                    description: The name of the Resource Group where the Stream Analytics
-                      Job exists. Changing this forces a new resource to be created.
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Synapse Linked Service.
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    description: The description for the Synapse Linked Service.
                     type: string
-                  resourceGroupNameRef:
-                    description: Reference to a ResourceGroup in azure to populate
-                      resourceGroupName.
+                  integrationRuntime:
+                    description: A integration_runtime block as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The integration runtime reference to associate
+                            with the Synapse Linked Service.
+                          type: string
+                        nameRef:
+                          description: Reference to a IntegrationRuntimeAzure in synapse
+                            to populate name.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        nameSelector:
+                          description: Selector for a IntegrationRuntimeAzure in synapse
+                            to populate name.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: A map of parameters to associate with the integration
+                            runtime.
+                          type: object
+                      type: object
+                    type: array
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Synapse
+                      Linked Service.
+                    type: object
+                  synapseWorkspaceId:
+                    description: The Synapse Workspace ID in which to associate the
+                      Linked Service with. Changing this forces a new Synapse Linked
+                      Service to be created.
+                    type: string
+                  synapseWorkspaceIdRef:
+                    description: Reference to a Workspace in synapse to populate synapseWorkspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -125,9 +219,8 @@ spec:
                     required:
                     - name
                     type: object
-                  resourceGroupNameSelector:
-                    description: Selector for a ResourceGroup in azure to populate
-                      resourceGroupName.
+                  synapseWorkspaceIdSelector:
+                    description: Selector for a Workspace in synapse to populate synapseWorkspaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -165,174 +258,36 @@ spec:
                             type: string
                         type: object
                     type: object
-                  server:
-                    description: The name of the SQL server containing the Azure SQL
-                      database. Changing this forces a new resource to be created.
+                  type:
+                    description: The type of data stores that will be connected to
+                      Synapse. Valid Values include AmazonMWS, AmazonRdsForOracle,
+                      AmazonRdsForSqlServer, AmazonRedshift, AmazonS3, AzureBatch,
+                      AzureBlobFS, AzureBlobStorage, AzureDataExplorer, AzureDataLakeAnalytics,
+                      AzureDataLakeStore, AzureDatabricks, AzureDatabricksDeltaLake,
+                      AzureFileStorage, AzureFunction, AzureKeyVault, AzureML, AzureMLService,
+                      AzureMariaDB, AzureMySql, AzurePostgreSql, AzureSqlDW, AzureSqlDatabase,
+                      AzureSqlMI, AzureSearch, AzureStorage, AzureTableStorage, Cassandra,
+                      CommonDataServiceForApps, Concur, CosmosDb, CosmosDbMongoDbApi,
+                      Couchbase, CustomDataSource, Db2, Drill, Dynamics, DynamicsAX,
+                      DynamicsCrm, Eloqua, FileServer, FtpServer, GoogleAdWords, GoogleBigQuery,
+                      GoogleCloudStorage, Greenplum, HBase, HDInsight, HDInsightOnDemand,
+                      HttpServer, Hdfs, Hive, Hubspot, Impala, Informix, Jira, LinkedService,
+                      Magento, MariaDB, Marketo, MicrosoftAccess, MongoDb, MongoDbAtlas,
+                      MongoDbV2, MySql, Netezza, OData, Odbc, Office365, Oracle, OracleServiceCloud,
+                      Paypal, Phoenix, PostgreSql, Presto, QuickBooks, Responsys,
+                      RestService, SqlServer, Salesforce, SalesforceMarketingCloud,
+                      SalesforceServiceCloud, SapBW, SapCloudForCustomer, SapEcc,
+                      SapHana, SapOpenHub, SapTable, ServiceNow, Sftp, SharePointOnlineList,
+                      Shopify, Snowflake, Spark, Square, Sybase, Teradata, Vertica,
+                      Web, Xero, Zoho.
                     type: string
-                  streamAnalyticsJobName:
-                    description: The name of the Stream Analytics Job. Changing this
-                      forces a new resource to be created.
+                  typePropertiesJson:
+                    description: A JSON object that contains the properties of the
+                      Synapse Linked Service.
                     type: string
-                  streamAnalyticsJobNameRef:
-                    description: Reference to a Job to populate streamAnalyticsJobName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  streamAnalyticsJobNameSelector:
-                    description: Selector for a Job to populate streamAnalyticsJobName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  table:
-                    description: The name of the table in the Azure SQL database.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  user:
-                    description: The user name that will be used to connect to the
-                      Azure SQL database. Changing this forces a new resource to be
-                      created.
-                    type: string
-                  userRef:
-                    description: Reference to a Workspace in synapse to populate user.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  userSelector:
-                    description: Selector for a Workspace in synapse to populate user.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                 required:
-                - database
-                - passwordSecretRef
-                - server
-                - table
+                - type
+                - typePropertiesJson
                 type: object
               providerConfigRef:
                 default:
@@ -506,13 +461,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: OutputSynapseStatus defines the observed state of OutputSynapse.
+            description: LinkedServiceStatus defines the observed state of LinkedService.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Stream Analytics Output to an Azure
-                      Synapse Analytics Workspace.
+                    description: The ID of the Synapse Linked Service.
                     type: string
                 type: object
               conditions:

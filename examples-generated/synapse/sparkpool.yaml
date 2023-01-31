@@ -1,29 +1,35 @@
-apiVersion: streamanalytics.azure.upbound.io/v1beta1
-kind: OutputSynapse
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: SparkPool
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sparkpool
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    database: master
-    passwordSecretRef:
-      key: attribute.sql_administrator_login_password
-      name: example-synapse-workspace
-      namespace: upbound-system
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: azurerm_stream_analytics_job
-    server: ${azurerm_synapse_workspace.example.connectivity_endpoints["sqlOnDemand"]}
-    streamAnalyticsJobNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: azurerm_stream_analytics_job
-    table: ExampleTable
-    userSelector:
+    autoPause:
+    - delayInMinutes: 15
+    autoScale:
+    - maxNodeCount: 50
+      minNodeCount: 3
+    cacheSize: 100
+    libraryRequirement:
+    - content: |
+        appnope==0.1.0
+        beautifulsoup4==4.6.3
+      filename: requirements.txt
+    nodeSize: Small
+    nodeSizeFamily: MemoryOptimized
+    sparkConfig:
+    - content: |
+        spark.shuffle.spill                true
+      filename: config.txt
+    synapseWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    tags:
+      ENV: Production
 
 ---
 
@@ -31,7 +37,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sparkpool
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -45,7 +51,7 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sparkpool
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -66,7 +72,7 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: DataLakeGen2FileSystem
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sparkpool
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -82,7 +88,7 @@ apiVersion: synapse.azure.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sparkpool
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -496,6 +496,22 @@ import (
 	streaminputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputblob"
 	streaminputeventhub "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputeventhub"
 	streaminputiothub "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputiothub"
+	firewallrulesynapse "github.com/upbound/provider-azure/internal/controller/synapse/firewallrule"
+	integrationruntimeazuresynapse "github.com/upbound/provider-azure/internal/controller/synapse/integrationruntimeazure"
+	integrationruntimeselfhostedsynapse "github.com/upbound/provider-azure/internal/controller/synapse/integrationruntimeselfhosted"
+	linkedservice "github.com/upbound/provider-azure/internal/controller/synapse/linkedservice"
+	managedprivateendpointsynapse "github.com/upbound/provider-azure/internal/controller/synapse/managedprivateendpoint"
+	privatelinkhub "github.com/upbound/provider-azure/internal/controller/synapse/privatelinkhub"
+	sparkpool "github.com/upbound/provider-azure/internal/controller/synapse/sparkpool"
+	sqlpool "github.com/upbound/provider-azure/internal/controller/synapse/sqlpool"
+	sqlpoolextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/synapse/sqlpoolextendedauditingpolicy"
+	sqlpoolsecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/synapse/sqlpoolsecurityalertpolicy"
+	sqlpoolworkloadclassifier "github.com/upbound/provider-azure/internal/controller/synapse/sqlpoolworkloadclassifier"
+	sqlpoolworkloadgroup "github.com/upbound/provider-azure/internal/controller/synapse/sqlpoolworkloadgroup"
+	workspacesynapse "github.com/upbound/provider-azure/internal/controller/synapse/workspace"
+	workspaceaadadmin "github.com/upbound/provider-azure/internal/controller/synapse/workspaceaadadmin"
+	workspaceextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspaceextendedauditingpolicy"
+	workspacesecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspacesecurityalertpolicy"
 	serviceplan "github.com/upbound/provider-azure/internal/controller/web/serviceplan"
 )
 
@@ -990,6 +1006,22 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		streaminputblob.Setup,
 		streaminputeventhub.Setup,
 		streaminputiothub.Setup,
+		firewallrulesynapse.Setup,
+		integrationruntimeazuresynapse.Setup,
+		integrationruntimeselfhostedsynapse.Setup,
+		linkedservice.Setup,
+		managedprivateendpointsynapse.Setup,
+		privatelinkhub.Setup,
+		sparkpool.Setup,
+		sqlpool.Setup,
+		sqlpoolextendedauditingpolicy.Setup,
+		sqlpoolsecurityalertpolicy.Setup,
+		sqlpoolworkloadclassifier.Setup,
+		sqlpoolworkloadgroup.Setup,
+		workspacesynapse.Setup,
+		workspaceaadadmin.Setup,
+		workspaceextendedauditingpolicy.Setup,
+		workspacesecurityalertpolicy.Setup,
 		serviceplan.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

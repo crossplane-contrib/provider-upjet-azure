@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: outputsynapses.streamanalytics.azure.upbound.io
+  name: sqlpoolworkloadgroups.synapse.azure.upbound.io
 spec:
-  group: streamanalytics.azure.upbound.io
+  group: synapse.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: OutputSynapse
-    listKind: OutputSynapseList
-    plural: outputsynapses
-    singular: outputsynapse
+    kind: SQLPoolWorkloadGroup
+    listKind: SQLPoolWorkloadGroupList
+    plural: sqlpoolworkloadgroups
+    singular: sqlpoolworkloadgroup
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: OutputSynapse is the Schema for the OutputSynapses API. Manages
-          a Stream Analytics Output to an Azure Synapse Analytics Workspace.
+        description: SQLPoolWorkloadGroup is the Schema for the SQLPoolWorkloadGroups
+          API. Manages a Synapse SQL Pool Workload Group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: OutputSynapseSpec defines the desired state of OutputSynapse
+            description: SQLPoolWorkloadGroupSpec defines the desired state of SQLPoolWorkloadGroup
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,35 +64,32 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  database:
-                    description: The name of the Azure SQL database. Changing this
-                      forces a new resource to be created.
+                  importance:
+                    description: The workload group importance level. Defaults to
+                      normal.
                     type: string
-                  passwordSecretRef:
-                    description: The password that will be used to connect to the
-                      Azure SQL database.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  resourceGroupName:
-                    description: The name of the Resource Group where the Stream Analytics
-                      Job exists. Changing this forces a new resource to be created.
+                  maxResourcePercent:
+                    description: The workload group cap percentage resource.
+                    type: number
+                  maxResourcePercentPerRequest:
+                    description: The workload group request maximum grant percentage.
+                      Defaults to 3.
+                    type: number
+                  minResourcePercent:
+                    description: The workload group minimum percentage resource.
+                    type: number
+                  minResourcePercentPerRequest:
+                    description: The workload group request minimum grant percentage.
+                    type: number
+                  queryExecutionTimeoutInSeconds:
+                    description: The workload group query execution timeout.
+                    type: number
+                  sqlPoolId:
+                    description: The ID of the Synapse SQL Pool. Changing this forces
+                      a new Synapse SQL Pool Workload Group to be created.
                     type: string
-                  resourceGroupNameRef:
-                    description: Reference to a ResourceGroup in azure to populate
-                      resourceGroupName.
+                  sqlPoolIdRef:
+                    description: Reference to a SQLPool in synapse to populate sqlPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -125,172 +122,8 @@ spec:
                     required:
                     - name
                     type: object
-                  resourceGroupNameSelector:
-                    description: Selector for a ResourceGroup in azure to populate
-                      resourceGroupName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  server:
-                    description: The name of the SQL server containing the Azure SQL
-                      database. Changing this forces a new resource to be created.
-                    type: string
-                  streamAnalyticsJobName:
-                    description: The name of the Stream Analytics Job. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  streamAnalyticsJobNameRef:
-                    description: Reference to a Job to populate streamAnalyticsJobName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  streamAnalyticsJobNameSelector:
-                    description: Selector for a Job to populate streamAnalyticsJobName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  table:
-                    description: The name of the table in the Azure SQL database.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  user:
-                    description: The user name that will be used to connect to the
-                      Azure SQL database. Changing this forces a new resource to be
-                      created.
-                    type: string
-                  userRef:
-                    description: Reference to a Workspace in synapse to populate user.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  userSelector:
-                    description: Selector for a Workspace in synapse to populate user.
+                  sqlPoolIdSelector:
+                    description: Selector for a SQLPool in synapse to populate sqlPoolId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -329,10 +162,8 @@ spec:
                         type: object
                     type: object
                 required:
-                - database
-                - passwordSecretRef
-                - server
-                - table
+                - maxResourcePercent
+                - minResourcePercent
                 type: object
               providerConfigRef:
                 default:
@@ -506,13 +337,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: OutputSynapseStatus defines the observed state of OutputSynapse.
+            description: SQLPoolWorkloadGroupStatus defines the observed state of
+              SQLPoolWorkloadGroup.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Stream Analytics Output to an Azure
-                      Synapse Analytics Workspace.
+                    description: The ID of the Synapse SQL Pool Workload Group.
                     type: string
                 type: object
               conditions:

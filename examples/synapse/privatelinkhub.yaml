@@ -1,0 +1,28 @@
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: PrivateLinkHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/privatelinkhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: privatelinkhub
+spec:
+  forProvider:
+    location: North Central US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: privatelinkhub-rg-label
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/privatelinkhub
+  labels:
+    testing.upbound.io/example-name: privatelinkhub-rg-label
+  name: privatelinkhub-rg
+spec:
+  forProvider:
+    location: North Central US

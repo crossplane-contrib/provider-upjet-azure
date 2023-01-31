@@ -1,27 +1,20 @@
-apiVersion: streamanalytics.azure.upbound.io/v1beta1
-kind: OutputSynapse
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: SQLPoolWorkloadClassifier
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    database: master
-    passwordSecretRef:
-      key: attribute.sql_administrator_login_password
-      name: example-synapse-workspace
-      namespace: upbound-system
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: azurerm_stream_analytics_job
-    server: ${azurerm_synapse_workspace.example.connectivity_endpoints["sqlOnDemand"]}
-    streamAnalyticsJobNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: azurerm_stream_analytics_job
-    table: ExampleTable
-    userSelector:
+    context: example_context
+    endTime: "14:00"
+    importance: high
+    label: example_label
+    memberName: dbo
+    startTime: "12:00"
+    workloadGroupIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
@@ -31,7 +24,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -45,16 +38,15 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    accountKind: StorageV2
+    accountKind: BlobStorage
     accountReplicationType: LRS
     accountTier: Standard
-    isHnsEnabled: "true"
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -66,7 +58,7 @@ apiVersion: storage.azure.upbound.io/v1beta1
 kind: DataLakeGen2FileSystem
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -79,10 +71,50 @@ spec:
 ---
 
 apiVersion: synapse.azure.upbound.io/v1beta1
+kind: SQLPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    createMode: Default
+    skuName: DW100c
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: SQLPoolWorkloadGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    importance: normal
+    maxResourcePercent: 100
+    maxResourcePercentPerRequest: 3
+    minResourcePercent: 0
+    minResourcePercentPerRequest: 3
+    queryExecutionTimeoutInSeconds: 0
+    sqlPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
-    meta.upbound.io/example-id: streamanalytics/v1beta1/outputsynapse
+    meta.upbound.io/example-id: synapse/v1beta1/sqlpoolworkloadclassifier
   labels:
     testing.upbound.io/example-name: example
   name: example

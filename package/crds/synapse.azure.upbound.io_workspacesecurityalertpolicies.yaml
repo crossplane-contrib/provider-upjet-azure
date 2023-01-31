@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: outputsynapses.streamanalytics.azure.upbound.io
+  name: workspacesecurityalertpolicies.synapse.azure.upbound.io
 spec:
-  group: streamanalytics.azure.upbound.io
+  group: synapse.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: OutputSynapse
-    listKind: OutputSynapseList
-    plural: outputsynapses
-    singular: outputsynapse
+    kind: WorkspaceSecurityAlertPolicy
+    listKind: WorkspaceSecurityAlertPolicyList
+    plural: workspacesecurityalertpolicies
+    singular: workspacesecurityalertpolicy
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: OutputSynapse is the Schema for the OutputSynapses API. Manages
-          a Stream Analytics Output to an Azure Synapse Analytics Workspace.
+        description: WorkspaceSecurityAlertPolicy is the Schema for the WorkspaceSecurityAlertPolicys
+          API. Manages a Security Alert Policy for a Synapse Workspace.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: OutputSynapseSpec defines the desired state of OutputSynapse
+            description: WorkspaceSecurityAlertPolicySpec defines the desired state
+              of WorkspaceSecurityAlertPolicy
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,13 +65,36 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  database:
-                    description: The name of the Azure SQL database. Changing this
-                      forces a new resource to be created.
+                  disabledAlerts:
+                    description: 'Specifies an array of alerts that are disabled.
+                      Allowed values are: Sql_Injection, Sql_Injection_Vulnerability,
+                      Access_Anomaly, Data_Exfiltration, Unsafe_Action.'
+                    items:
+                      type: string
+                    type: array
+                  emailAccountAdminsEnabled:
+                    description: Boolean flag which specifies if the alert is sent
+                      to the account administrators or not. Defaults to false.
+                    type: boolean
+                  emailAddresses:
+                    description: Specifies an array of email addresses to which the
+                      alert is sent.
+                    items:
+                      type: string
+                    type: array
+                  policyState:
+                    description: Specifies the state of the policy, whether it is
+                      enabled or disabled or a policy has not been applied yet on
+                      the specific workspace. Possible values are Disabled, Enabled
+                      and New.
                     type: string
-                  passwordSecretRef:
-                    description: The password that will be used to connect to the
-                      Azure SQL database.
+                  retentionDays:
+                    description: Specifies the number of days to keep in the Threat
+                      Detection audit logs. Defaults to 0.
+                    type: number
+                  storageAccountAccessKeySecretRef:
+                    description: Specifies the identifier key of the Threat Detection
+                      audit storage account.
                     properties:
                       key:
                         description: The key to select.
@@ -86,13 +110,12 @@ spec:
                     - name
                     - namespace
                     type: object
-                  resourceGroupName:
-                    description: The name of the Resource Group where the Stream Analytics
-                      Job exists. Changing this forces a new resource to be created.
+                  storageEndpoint:
+                    description: Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net).
+                      This blob storage will hold all Threat Detection audit logs.
                     type: string
-                  resourceGroupNameRef:
-                    description: Reference to a ResourceGroup in azure to populate
-                      resourceGroupName.
+                  storageEndpointRef:
+                    description: Reference to a Account in storage to populate storageEndpoint.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -125,9 +148,8 @@ spec:
                     required:
                     - name
                     type: object
-                  resourceGroupNameSelector:
-                    description: Selector for a ResourceGroup in azure to populate
-                      resourceGroupName.
+                  storageEndpointSelector:
+                    description: Selector for a Account in storage to populate storageEndpoint.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -165,16 +187,12 @@ spec:
                             type: string
                         type: object
                     type: object
-                  server:
-                    description: The name of the SQL server containing the Azure SQL
-                      database. Changing this forces a new resource to be created.
+                  synapseWorkspaceId:
+                    description: Specifies the ID of the Synapse Workspace. Changing
+                      this forces a new resource to be created.
                     type: string
-                  streamAnalyticsJobName:
-                    description: The name of the Stream Analytics Job. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  streamAnalyticsJobNameRef:
-                    description: Reference to a Job to populate streamAnalyticsJobName.
+                  synapseWorkspaceIdRef:
+                    description: Reference to a Workspace in synapse to populate synapseWorkspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -207,90 +225,8 @@ spec:
                     required:
                     - name
                     type: object
-                  streamAnalyticsJobNameSelector:
-                    description: Selector for a Job to populate streamAnalyticsJobName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  table:
-                    description: The name of the table in the Azure SQL database.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  user:
-                    description: The user name that will be used to connect to the
-                      Azure SQL database. Changing this forces a new resource to be
-                      created.
-                    type: string
-                  userRef:
-                    description: Reference to a Workspace in synapse to populate user.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  userSelector:
-                    description: Selector for a Workspace in synapse to populate user.
+                  synapseWorkspaceIdSelector:
+                    description: Selector for a Workspace in synapse to populate synapseWorkspaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -329,10 +265,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - database
-                - passwordSecretRef
-                - server
-                - table
+                - policyState
                 type: object
               providerConfigRef:
                 default:
@@ -506,13 +439,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: OutputSynapseStatus defines the observed state of OutputSynapse.
+            description: WorkspaceSecurityAlertPolicyStatus defines the observed state
+              of WorkspaceSecurityAlertPolicy.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Stream Analytics Output to an Azure
-                      Synapse Analytics Workspace.
+                    description: The ID of the Synapse Workspace Security Alert Policy.
                     type: string
                 type: object
               conditions:
