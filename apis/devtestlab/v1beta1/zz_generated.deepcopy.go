@@ -1936,11 +1936,7 @@ func (in *WindowsVirtualMachineParameters) DeepCopyInto(out *WindowsVirtualMachi
 		*out = new(string)
 		**out = **in
 	}
-	if in.Password != nil {
-		in, out := &in.Password, &out.Password
-		*out = new(string)
-		**out = **in
-	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)

@@ -69,7 +69,7 @@ type NotificationSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
-	// Whether to enable pre-shutdown notifications. Possible values are true and false. Defaults to false
+	// Whether to enable pre-shutdown notifications. Possible values are true and false.
 	// +kubebuilder:validation:Required
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 

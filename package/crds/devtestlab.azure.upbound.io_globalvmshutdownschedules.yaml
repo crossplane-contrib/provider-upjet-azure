@@ -90,7 +90,7 @@ spec:
                           type: string
                         enabled:
                           description: Whether to enable pre-shutdown notifications.
-                            Possible values are true and false. Defaults to false
+                            Possible values are true and false.
                           type: boolean
                         timeInMinutes:
                           description: Time in minutes between 15 and 120 before a

@@ -1841,6 +1841,11 @@ func (in *SQLPoolParameters) DeepCopyInto(out *SQLPoolParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.GeoBackupPolicyEnabled != nil {
+		in, out := &in.GeoBackupPolicyEnabled, &out.GeoBackupPolicyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.RecoveryDatabaseID != nil {
 		in, out := &in.RecoveryDatabaseID, &out.RecoveryDatabaseID
 		*out = new(string)

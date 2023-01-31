@@ -47,11 +47,15 @@ type SQLPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	DataEncrypted *bool `json:"dataEncrypted,omitempty" tf:"data_encrypted,omitempty"`
 
+	// Is geo-backup policy enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
+	GeoBackupPolicyEnabled *bool `json:"geoBackupPolicyEnabled,omitempty" tf:"geo_backup_policy_enabled,omitempty"`
+
 	// The ID of the Synapse SQL Pool or SQL Database which is to back up, only applicable when create_mode is set to Recovery. Changing this forces a new Synapse SQL Pool to be created.
 	// +kubebuilder:validation:Optional
 	RecoveryDatabaseID *string `json:"recoveryDatabaseId,omitempty" tf:"recovery_database_id,omitempty"`
 
-	// A restore block as defined below. only applicable when create_mode is set to PointInTimeRestore.
+	// A restore block as defined below. only applicable when create_mode is set to PointInTimeRestore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Restore []RestoreParameters `json:"restore,omitempty" tf:"restore,omitempty"`
 

@@ -25,7 +25,10 @@ spec:
     location: West Europe
     name: example-vm03
     notes: Some notes about this Virtual Machine.
-    password: Pa$w0rd1234!
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
