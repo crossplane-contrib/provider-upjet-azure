@@ -140,7 +140,7 @@ type WindowsVirtualMachineParameters struct {
 
 	// The Password associated with the username used to login to this Virtual Machine. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
-	Password *string `json:"password" tf:"password,omitempty"`
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

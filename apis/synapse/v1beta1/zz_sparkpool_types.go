@@ -133,7 +133,7 @@ type SparkPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	SparkLogFolder *string `json:"sparkLogFolder,omitempty" tf:"spark_log_folder,omitempty"`
 
-	// The Apache Spark version. Possible values are 2.4 and 3.1 and 3.2. Defaults to 2.4.
+	// The Apache Spark version. Possible values are 2.4 , 3.1 , 3.2 and 3.3. Defaults to 2.4.
 	// +kubebuilder:validation:Optional
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 

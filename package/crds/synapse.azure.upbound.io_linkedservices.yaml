@@ -261,8 +261,9 @@ spec:
                   type:
                     description: The type of data stores that will be connected to
                       Synapse. Valid Values include AmazonMWS, AmazonRdsForOracle,
-                      AmazonRdsForSqlServer, AmazonRedshift, AmazonS3, AzureBatch,
-                      AzureBlobFS, AzureBlobStorage, AzureDataExplorer, AzureDataLakeAnalytics,
+                      AmazonRdsForSqlServer, AmazonRedshift, AmazonS3, AzureBatch.
+                      Changing this forces a new resource to be created. AzureBlobFS,
+                      AzureBlobStorage, AzureDataExplorer, AzureDataLakeAnalytics,
                       AzureDataLakeStore, AzureDatabricks, AzureDatabricksDeltaLake,
                       AzureFileStorage, AzureFunction, AzureKeyVault, AzureML, AzureMLService,
                       AzureMariaDB, AzureMySql, AzurePostgreSql, AzureSqlDW, AzureSqlDatabase,
