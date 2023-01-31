@@ -40,6 +40,7 @@ metadata:
   name: example-servicebus-namespace
   namespace: upbound-system
   annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
     uptest.upbound.io/pre-delete-hook: testhooks/delete-queue.sh
 type: Opaque
 data:
@@ -51,6 +52,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
     meta.upbound.io/example-id: streamanalytics/v1beta1/outputservicebusqueue
   labels:
     testing.upbound.io/example-name: example
@@ -65,6 +67,7 @@ apiVersion: servicebus.azure.upbound.io/v1beta1
 kind: ServiceBusNamespace
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
     meta.upbound.io/example-id: streamanalytics/v1beta1/outputservicebusqueue
   labels:
     testing.upbound.io/example-name: example
@@ -83,6 +86,7 @@ apiVersion: servicebus.azure.upbound.io/v1beta1
 kind: Queue
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
     meta.upbound.io/example-id: streamanalytics/v1beta1/outputservicebusqueue
   labels:
     testing.upbound.io/example-name: example
@@ -101,6 +105,7 @@ apiVersion: streamanalytics.azure.upbound.io/v1beta1
 kind: Job
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
     meta.upbound.io/example-id: streamanalytics/v1beta1/outputservicebusqueue
   labels:
     testing.upbound.io/example-name: example
