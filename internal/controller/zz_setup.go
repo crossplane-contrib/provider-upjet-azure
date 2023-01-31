@@ -281,7 +281,16 @@ import (
 	eventhubnamespace "github.com/upbound/provider-azure/internal/controller/eventhub/eventhubnamespace"
 	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/eventhub/namespaceauthorizationrule"
 	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/eventhub/namespacedisasterrecoveryconfig"
+	hadoopcluster "github.com/upbound/provider-azure/internal/controller/hdinsight/hadoopcluster"
+	hbasecluster "github.com/upbound/provider-azure/internal/controller/hdinsight/hbasecluster"
+	interactivequerycluster "github.com/upbound/provider-azure/internal/controller/hdinsight/interactivequerycluster"
+	kafkacluster "github.com/upbound/provider-azure/internal/controller/hdinsight/kafkacluster"
+	sparkcluster "github.com/upbound/provider-azure/internal/controller/hdinsight/sparkcluster"
+	healthbot "github.com/upbound/provider-azure/internal/controller/healthbot/healthbot"
+	healthcaredicomservice "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcaredicomservice"
+	healthcarefhirservice "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcarefhirservice"
 	healthcareservice "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcareservice"
+	healthcareworkspace "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcareworkspace"
 	applicationinsights "github.com/upbound/provider-azure/internal/controller/insights/applicationinsights"
 	applicationinsightsanalyticsitem "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsanalyticsitem"
 	applicationinsightsapikey "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsapikey"
@@ -877,7 +886,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventhubnamespace.Setup,
 		namespaceauthorizationrule.Setup,
 		namespacedisasterrecoveryconfig.Setup,
+		hadoopcluster.Setup,
+		hbasecluster.Setup,
+		interactivequerycluster.Setup,
+		kafkacluster.Setup,
+		sparkcluster.Setup,
+		healthbot.Setup,
+		healthcaredicomservice.Setup,
+		healthcarefhirservice.Setup,
 		healthcareservice.Setup,
+		healthcareworkspace.Setup,
 		applicationinsights.Setup,
 		applicationinsightsanalyticsitem.Setup,
 		applicationinsightsapikey.Setup,
