@@ -43,8 +43,10 @@ import (
 	v1beta1devices "github.com/upbound/provider-azure/apis/devices/v1beta1"
 	v1beta1devtestlab "github.com/upbound/provider-azure/apis/devtestlab/v1beta1"
 	v1beta1digitaltwins "github.com/upbound/provider-azure/apis/digitaltwins/v1beta1"
+	v1beta1elastic "github.com/upbound/provider-azure/apis/elastic/v1beta1"
 	v1beta1eventgrid "github.com/upbound/provider-azure/apis/eventgrid/v1beta1"
 	v1beta1eventhub "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
+	v1beta1healthcareapis "github.com/upbound/provider-azure/apis/healthcareapis/v1beta1"
 	v1beta1insights "github.com/upbound/provider-azure/apis/insights/v1beta1"
 	v1beta1iotcentral "github.com/upbound/provider-azure/apis/iotcentral/v1beta1"
 	v1beta1keyvault "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
@@ -119,8 +121,10 @@ func init() {
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1devtestlab.SchemeBuilder.AddToScheme,
 		v1beta1digitaltwins.SchemeBuilder.AddToScheme,
+		v1beta1elastic.SchemeBuilder.AddToScheme,
 		v1beta1eventgrid.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
+		v1beta1healthcareapis.SchemeBuilder.AddToScheme,
 		v1beta1insights.SchemeBuilder.AddToScheme,
 		v1beta1iotcentral.SchemeBuilder.AddToScheme,
 		v1beta1keyvault.SchemeBuilder.AddToScheme,

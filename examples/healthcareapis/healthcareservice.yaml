@@ -1,0 +1,44 @@
+apiVersion: healthcareapis.azure.upbound.io/v1beta1
+kind: HealthcareService
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Long running resource. Time to time updating healthcareservice status takes too long."
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcareservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: hstest
+spec:
+  forProvider:
+    authenticationConfiguration:
+    - audience: https://azurehealthcareapis.com/
+      smartProxyEnabled: true
+    corsConfiguration:
+    - allowCredentials: true
+      allowedMethods:
+      - GET
+      - PUT
+      allowedOrigins:
+      - http://www.example.com
+      - http://www.example2.com
+      maxAgeInSeconds: 500
+    cosmosdbThroughput: 2000
+    kind: fhir-R4
+    location: westus2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elastic/v1beta1/healthcareservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: hstest
+spec:
+  forProvider:
+    location: West Europe
+
