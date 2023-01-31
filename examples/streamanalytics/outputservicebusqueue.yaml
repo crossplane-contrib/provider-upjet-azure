@@ -79,6 +79,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     sku: Premium
+    capacity: 1
 
 ---
 
@@ -94,7 +95,7 @@ metadata:
 spec:
   forProvider:
     maxMessageSizeInKilobytes: 1024
-    enablePartitioning: true
+    enablePartitioning: false
     namespaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
