@@ -1,0 +1,27 @@
+apiVersion: healthbot.azure.upbound.io/v1beta1
+kind: HealthBot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthbot/v1beta1/healthbot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rghealthbot
+    skuName: F0
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthbot/v1beta1/healthbot
+  labels:
+    testing.upbound.io/example-name: rghealthbot
+  name: rghealthbot
+spec:
+  forProvider:
+    location: West Europe

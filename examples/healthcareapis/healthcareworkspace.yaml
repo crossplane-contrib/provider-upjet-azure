@@ -1,0 +1,26 @@
+apiVersion: healthcareapis.azure.upbound.io/v1beta1
+kind: HealthcareWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcareworkspace
+  labels:
+    testing.upbound.io/example-name: rghealthcareworkspace
+  name: rghealthcareworkspace
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rghealthcareworkspace
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcareworkspace
+  labels:
+    testing.upbound.io/example-name: rghealthcareworkspace
+  name: rghealthcareworkspace
+spec:
+  forProvider:
+    location: West Europe
