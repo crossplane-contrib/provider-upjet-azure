@@ -21,8 +21,24 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: rg-servicefabric
     username: UserName123
-    password: UserName123
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+
 ---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: UserName123
+
+---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
