@@ -7,6 +7,138 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this AppActionCustom.
+func (mg *AppActionCustom) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppActionCustom.
+func (mg *AppActionCustom) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppActionCustom.
+func (mg *AppActionCustom) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppActionCustom.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppActionCustom) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppActionCustom.
+func (mg *AppActionCustom) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppActionCustom.
+func (mg *AppActionCustom) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppActionCustom.
+func (mg *AppActionCustom) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppActionCustom.
+func (mg *AppActionCustom) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppActionCustom.
+func (mg *AppActionCustom) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppActionCustom.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppActionCustom) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppActionCustom.
+func (mg *AppActionCustom) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppActionCustom.
+func (mg *AppActionCustom) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AppActionHTTP.
+func (mg *AppActionHTTP) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppActionHTTP.
+func (mg *AppActionHTTP) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppActionHTTP.
+func (mg *AppActionHTTP) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppActionHTTP.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppActionHTTP) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppActionHTTP.
+func (mg *AppActionHTTP) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppActionHTTP.
+func (mg *AppActionHTTP) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppActionHTTP.
+func (mg *AppActionHTTP) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppActionHTTP.
+func (mg *AppActionHTTP) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppActionHTTP.
+func (mg *AppActionHTTP) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppActionHTTP.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppActionHTTP) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppActionHTTP.
+func (mg *AppActionHTTP) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppActionHTTP.
+func (mg *AppActionHTTP) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this AppIntegrationAccount.
 func (mg *AppIntegrationAccount) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -136,6 +268,402 @@ func (mg *AppIntegrationAccountBatchConfiguration) SetPublishConnectionDetailsTo
 
 // SetWriteConnectionSecretToReference of this AppIntegrationAccountBatchConfiguration.
 func (mg *AppIntegrationAccountBatchConfiguration) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppIntegrationAccountSchema.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccountSchema) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppIntegrationAccountSchema.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccountSchema) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppIntegrationAccountSession.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccountSession) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppIntegrationAccountSession.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccountSession) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AppTriggerCustom.
+func (mg *AppTriggerCustom) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppTriggerCustom.
+func (mg *AppTriggerCustom) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppTriggerCustom.
+func (mg *AppTriggerCustom) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppTriggerCustom.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppTriggerCustom) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppTriggerCustom.
+func (mg *AppTriggerCustom) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppTriggerCustom.
+func (mg *AppTriggerCustom) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppTriggerCustom.
+func (mg *AppTriggerCustom) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppTriggerCustom.
+func (mg *AppTriggerCustom) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppTriggerCustom.
+func (mg *AppTriggerCustom) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppTriggerCustom.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppTriggerCustom) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppTriggerCustom.
+func (mg *AppTriggerCustom) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppTriggerCustom.
+func (mg *AppTriggerCustom) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppTriggerHTTPRequest.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppTriggerHTTPRequest) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppTriggerHTTPRequest.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppTriggerHTTPRequest) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppTriggerRecurrence.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppTriggerRecurrence) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppTriggerRecurrence.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppTriggerRecurrence) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AppWorkflow.
+func (mg *AppWorkflow) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppWorkflow.
+func (mg *AppWorkflow) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppWorkflow.
+func (mg *AppWorkflow) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppWorkflow.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppWorkflow) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppWorkflow.
+func (mg *AppWorkflow) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppWorkflow.
+func (mg *AppWorkflow) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppWorkflow.
+func (mg *AppWorkflow) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppWorkflow.
+func (mg *AppWorkflow) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppWorkflow.
+func (mg *AppWorkflow) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppWorkflow.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppWorkflow) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppWorkflow.
+func (mg *AppWorkflow) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppWorkflow.
+func (mg *AppWorkflow) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

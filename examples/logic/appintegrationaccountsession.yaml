@@ -1,0 +1,53 @@
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppIntegrationAccountSession
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appintegrationaccountsession
+  labels:
+    testing.upbound.io/example-name: exampleaccountsession
+  name: exampleaccountsession
+spec:
+  forProvider:
+    content: |2
+       {
+             "controlNumber": "1234"
+          }
+    integrationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ia
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appintsession-rg
+
+---
+
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppIntegrationAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appintegrationaccountsession
+  labels:
+    testing.upbound.io/example-name: example-ia
+  name: example-ia
+spec:
+  forProvider:
+    location: West Europe
+    name: example-ia
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appintsession-rg
+    skuName: Basic
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appintegrationaccountsession
+  labels:
+    testing.upbound.io/example-name: appintsession-rg
+  name: appintsession-rg
+spec:
+  forProvider:
+    location: West Europe

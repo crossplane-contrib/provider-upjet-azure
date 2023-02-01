@@ -1,0 +1,28 @@
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppWorkflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appworkflow
+  labels:
+    testing.upbound.io/example-name: appworkflowexample
+  name: appworkflowexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appworkflowrg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appworkflow
+  labels:
+    testing.upbound.io/example-name: appworkflowrg
+  name: appworkflowrg
+spec:
+  forProvider:
+    location: West Europe
