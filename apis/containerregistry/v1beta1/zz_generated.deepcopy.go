@@ -456,6 +456,16 @@ func (in *EncryptionParameters) DeepCopyInto(out *EncryptionParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IdentityClientIDRef != nil {
+		in, out := &in.IdentityClientIDRef, &out.IdentityClientIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IdentityClientIDSelector != nil {
+		in, out := &in.IdentityClientIDSelector, &out.IdentityClientIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.KeyVaultKeyID != nil {
 		in, out := &in.KeyVaultKeyID, &out.KeyVaultKeyID
 		*out = new(string)

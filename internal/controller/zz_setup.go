@@ -301,9 +301,14 @@ import (
 	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/logic/apptriggerrecurrence"
 	appworkflow "github.com/upbound/provider-azure/internal/controller/logic/appworkflow"
 	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
+	userassignedidentity "github.com/upbound/provider-azure/internal/controller/managedidentity/userassignedidentity"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
+	accountmaps "github.com/upbound/provider-azure/internal/controller/maps/account"
+	creator "github.com/upbound/provider-azure/internal/controller/maps/creator"
 	marketplaceagreement "github.com/upbound/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
 	asset "github.com/upbound/provider-azure/internal/controller/media/asset"
+	assetfilter "github.com/upbound/provider-azure/internal/controller/media/assetfilter"
+	contentkeypolicy "github.com/upbound/provider-azure/internal/controller/media/contentkeypolicy"
 	liveevent "github.com/upbound/provider-azure/internal/controller/media/liveevent"
 	liveeventoutput "github.com/upbound/provider-azure/internal/controller/media/liveeventoutput"
 	servicesaccount "github.com/upbound/provider-azure/internal/controller/media/servicesaccount"
@@ -831,9 +836,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerrecurrence.Setup,
 		appworkflow.Setup,
 		integrationserviceenvironment.Setup,
+		userassignedidentity.Setup,
 		managementgroup.Setup,
+		accountmaps.Setup,
+		creator.Setup,
 		marketplaceagreement.Setup,
 		asset.Setup,
+		assetfilter.Setup,
+		contentkeypolicy.Setup,
 		liveevent.Setup,
 		liveeventoutput.Setup,
 		servicesaccount.Setup,

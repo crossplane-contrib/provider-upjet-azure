@@ -1280,6 +1280,30 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Logic App Workflows can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Logic/workflows/workflow1
 	"azurerm_logic_app_workflow": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logic/workflows/{{ .external_name }}"),
+
+	// managedidentity
+	//
+	// An existing User Assigned Identity can be imported into Terraform using the resource
+	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}
+	"azurerm_user_assigned_identity": config.IdentifierFromProvider,
+
+	// maps
+	//
+	// A Maps Account can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Maps/accounts/my-maps-account
+	"azurerm_maps_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Maps/accounts/{{ .external_name }}"),
+	// An Azure Maps Creators can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Maps/accounts/account1/creators/creator1
+	"azurerm_maps_creator": config.TemplatedStringAsIdentifier("name", "{{ .parameters.maps_account_id }}/creators/{{ .external_name }}"),
+
+	// media
+	//
+	// Asset Filters can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Media/mediaServices/account1/assets/asset1/assetFilters/filter1
+	"azurerm_media_asset_filter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.asset_id }}/assetFilters/{{ .external_name }}"),
+	// Content Key Policy can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Media/mediaServices/account1/contentKeyPolicies/policy1
+	"azurerm_media_content_key_policy": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaServices/{{ .parameters.media_services_account_name }}/contentKeyPolicies/{{ .external_name }}"),
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
