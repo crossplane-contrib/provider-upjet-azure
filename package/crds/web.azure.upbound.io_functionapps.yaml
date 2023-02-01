@@ -389,13 +389,12 @@ spec:
                     items:
                       properties:
                         name:
-                          description: The name of the Connection String. Changing
-                            this forces a new resource to be created.
+                          description: The name of the Connection String.
                           type: string
                         type:
                           description: The type of the Connection String. Possible
                             values are APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub,
-                            PostgreSQL, RedisCache, ServiceBus, SQLAzure and  SQLServer.
+                            PostgreSQL, RedisCache, ServiceBus, SQLAzure and SQLServer.
                           type: string
                         valueSecretRef:
                           description: The value for the Connection String.

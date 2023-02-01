@@ -58,6 +58,10 @@ type ApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
+	// The version of Go to use. Possible values include 1.18, and 1.19.
+	// +kubebuilder:validation:Optional
+	GoVersion *string `json:"goVersion,omitempty" tf:"go_version,omitempty"`
+
 	// The Java server type. Possible values include JAVA, TOMCAT, and JBOSSEAP.
 	// +kubebuilder:validation:Optional
 	JavaServer *string `json:"javaServer,omitempty" tf:"java_server,omitempty"`
@@ -66,7 +70,7 @@ type ApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaServerVersion *string `json:"javaServerVersion,omitempty" tf:"java_server_version,omitempty"`
 
-	// The Version of Java to use. Supported versions of Java vary depending on the java_server and java_server_version, as well as security and fixes to major versions. Please see Azure documentation for the latest information.
+	// The Version of Java to use. Possible values include 8, 11, and 17.
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -78,7 +82,7 @@ type ApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
-	// The version of Python to run. Possible values include 3.7, 3.8, 3.9 and 3.10.
+	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10 and 3.11.
 	// +kubebuilder:validation:Optional
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
@@ -767,7 +771,7 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and  1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -783,7 +787,7 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmIPRestriction []LinuxWebAppSiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
-	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and  1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
