@@ -513,7 +513,6 @@ import (
 	workspaceextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspaceextendedauditingpolicy"
 	workspacesecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspacesecurityalertpolicy"
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
-	appservicesourcecontroltoken "github.com/upbound/provider-azure/internal/controller/web/appservicesourcecontroltoken"
 	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
 	functionappslot "github.com/upbound/provider-azure/internal/controller/web/functionappslot"
 	linuxwebapp "github.com/upbound/provider-azure/internal/controller/web/linuxwebapp"
@@ -1029,7 +1028,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		workspaceextendedauditingpolicy.Setup,
 		workspacesecurityalertpolicy.Setup,
 		appserviceplan.Setup,
-		appservicesourcecontroltoken.Setup,
 		functionapp.Setup,
 		functionappslot.Setup,
 		linuxwebapp.Setup,
