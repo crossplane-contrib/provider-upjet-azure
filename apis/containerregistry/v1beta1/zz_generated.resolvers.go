@@ -10,8 +10,10 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/managedidentity/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -122,6 +124,24 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Encryption); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption[i3].IdentityClientID),
+			Extract:      resource.ExtractParamPath("client_id", true),
+			Reference:    mg.Spec.ForProvider.Encryption[i3].IdentityClientIDRef,
+			Selector:     mg.Spec.ForProvider.Encryption[i3].IdentityClientIDSelector,
+			To: reference.To{
+				List:    &v1beta12.UserAssignedIdentityList{},
+				Managed: &v1beta12.UserAssignedIdentity{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Encryption[i3].IdentityClientID")
+		}
+		mg.Spec.ForProvider.Encryption[i3].IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Encryption[i3].IdentityClientIDRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkRuleSet); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkRuleSet[i3].VirtualNetwork); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

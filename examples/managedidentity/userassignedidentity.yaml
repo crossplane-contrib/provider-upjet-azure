@@ -1,0 +1,29 @@
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: managedidentity/v1beta1/userassignedidentity
+  labels:
+    testing.upbound.io/example-name: exmplemanagidentity
+  name: exmplemanagidentity
+spec:
+  forProvider:
+    location: West Europe
+    name: exmplemanagidentity
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: managidentity-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: managedidentity/v1beta1/userassignedidentity
+  labels:
+    testing.upbound.io/example-name: managidentity-rg
+  name: managidentity-rg
+spec:
+  forProvider:
+    location: West Europe
