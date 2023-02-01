@@ -102,6 +102,8 @@ var skipList = []string{
 	"azurerm_virtual_machine_data_disk_attachment",
 	"azurerm_virtual_machine_scale_set_extension",
 	"azurerm_sql_server",
+	"azurerm_video_analyzer",
+	"azurerm_video_analyzer_edge_module",
 	// irrelevant
 	"azurerm_virtual_desktop_application",
 	"azurerm_virtual_desktop_host_pool",
