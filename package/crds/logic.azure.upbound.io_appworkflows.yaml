@@ -181,7 +181,7 @@ spec:
                     type: array
                   integrationServiceEnvironmentId:
                     description: The ID of the Integration Service Environment to
-                      which this Logic App Workflow belongs.  Changing this forces
+                      which this Logic App Workflow belongs. Changing this forces
                       a new Logic App Workflow to be created.
                     type: string
                   location:
