@@ -1,0 +1,53 @@
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppTriggerHTTPRequest
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggerhttprequest
+  labels:
+    testing.upbound.io/example-name: apptrgrhttprequestexample
+  name: apptrgrhttprequestexample
+spec:
+  forProvider:
+    logicAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptrgrhttprequest-aw
+    schema: |
+      {
+          "type": "object",
+          "properties": {
+              "hello": {
+                  "type": "string"
+              }
+          }
+      }
+
+---
+
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppWorkflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggerhttprequest
+  labels:
+    testing.upbound.io/example-name: apptrgrhttprequest-aw
+  name: apptrgrhttprequest-aw
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptrgrhttprequest-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggerhttprequest
+  labels:
+    testing.upbound.io/example-name: apptrgrhttprequest-rg
+  name: apptrgrhttprequest-rg
+spec:
+  forProvider:
+    location: West Europe

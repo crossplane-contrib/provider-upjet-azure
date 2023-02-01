@@ -1229,6 +1229,33 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_linux_web_app": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Web/sites/{{ .external_name }}"),
 	// /providers/Microsoft.Web/sourceControls/GitHub
 	"azurerm_source_control_token": config.IdentifierFromProvider,
+
+	// logic
+	//
+	// Logic App Custom Actions can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Logic/workflows/workflow1/actions/custom1
+	"azurerm_logic_app_action_custom": config.TemplatedStringAsIdentifier("name", "{{ .parameters.logic_app_id }}/actions/{{ .external_name }}"),
+	// Logic App HTTP Actions can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Logic/workflows/workflow1/actions/webhook1
+	"azurerm_logic_app_action_http": config.TemplatedStringAsIdentifier("name", "{{ .parameters.logic_app_id }}/actions/{{ .external_name }}"),
+	// Logic App Integration Account Schemas can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logic/integrationAccounts/account1/schemas/schema1
+	"azurerm_logic_app_integration_account_schema": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logic/integrationAccounts/{{ .parameters.integration_account_name }}/schemas/{{ .external_name }}"),
+	// Logic App Integration Account Sessions can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logic/integrationAccounts/account1/sessions/session1
+	"azurerm_logic_app_integration_account_session": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logic/integrationAccounts/{{ .parameters.integration_account_name }}/sessions/{{ .external_name }}"),
+	// Logic App Custom Triggers can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Logic/workflows/workflow1/triggers/custom1
+	"azurerm_logic_app_trigger_custom": config.TemplatedStringAsIdentifier("name", "{{ .parameters.logic_app_id }}/triggers/{{ .external_name }}"),
+	// Logic App HTTP Request Triggers can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Logic/workflows/workflow1/triggers/request1
+	"azurerm_logic_app_trigger_http_request": config.TemplatedStringAsIdentifier("name", "{{ .parameters.logic_app_id }}/triggers/{{ .external_name }}"),
+	// Logic App Recurrence Triggers can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Logic/workflows/workflow1/triggers/daily
+	"azurerm_logic_app_trigger_recurrence": config.TemplatedStringAsIdentifier("name", "{{ .parameters.logic_app_id }}/triggers/{{ .external_name }}"),
+	// Logic App Workflows can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Logic/workflows/workflow1
+	"azurerm_logic_app_workflow": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logic/workflows/{{ .external_name }}"),
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {

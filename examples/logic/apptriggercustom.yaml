@@ -1,0 +1,52 @@
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppTriggerCustom
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggercustom
+  labels:
+    testing.upbound.io/example-name: apptriggercustomexample
+  name: apptriggercustomexample
+spec:
+  forProvider:
+    body: |
+      {
+        "recurrence": {
+          "frequency": "Day",
+          "interval": 1
+        },
+        "type": "Recurrence"
+      }
+    logicAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptriggercustom-aw
+
+---
+
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppWorkflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggercustom
+  labels:
+    testing.upbound.io/example-name: apptriggercustom-aw
+  name: apptriggercustom-aw
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptriggercustom-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggercustom
+  labels:
+    testing.upbound.io/example-name: apptriggercustom-rg
+  name: apptriggercustom-rg
+spec:
+  forProvider:
+    location: West Europe

@@ -290,8 +290,16 @@ import (
 	eventgriddataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventgriddataconnection"
 	eventhubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventhubdataconnection"
 	iothubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/iothubdataconnection"
+	appactioncustom "github.com/upbound/provider-azure/internal/controller/logic/appactioncustom"
+	appactionhttp "github.com/upbound/provider-azure/internal/controller/logic/appactionhttp"
 	appintegrationaccount "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccount"
 	appintegrationaccountbatchconfiguration "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccountbatchconfiguration"
+	appintegrationaccountschema "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccountschema"
+	appintegrationaccountsession "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccountsession"
+	apptriggercustom "github.com/upbound/provider-azure/internal/controller/logic/apptriggercustom"
+	apptriggerhttprequest "github.com/upbound/provider-azure/internal/controller/logic/apptriggerhttprequest"
+	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/logic/apptriggerrecurrence"
+	appworkflow "github.com/upbound/provider-azure/internal/controller/logic/appworkflow"
 	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
 	marketplaceagreement "github.com/upbound/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
@@ -806,8 +814,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventgriddataconnection.Setup,
 		eventhubdataconnection.Setup,
 		iothubdataconnection.Setup,
+		appactioncustom.Setup,
+		appactionhttp.Setup,
 		appintegrationaccount.Setup,
 		appintegrationaccountbatchconfiguration.Setup,
+		appintegrationaccountschema.Setup,
+		appintegrationaccountsession.Setup,
+		apptriggercustom.Setup,
+		apptriggerhttprequest.Setup,
+		apptriggerrecurrence.Setup,
+		appworkflow.Setup,
 		integrationserviceenvironment.Setup,
 		managementgroup.Setup,
 		marketplaceagreement.Setup,

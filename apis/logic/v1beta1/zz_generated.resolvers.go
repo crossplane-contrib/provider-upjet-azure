@@ -15,6 +15,58 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this AppActionCustom.
+func (mg *AppActionCustom) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicAppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LogicAppIDRef,
+		Selector:     mg.Spec.ForProvider.LogicAppIDSelector,
+		To: reference.To{
+			List:    &AppWorkflowList{},
+			Managed: &AppWorkflow{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogicAppID")
+	}
+	mg.Spec.ForProvider.LogicAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogicAppIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AppActionHTTP.
+func (mg *AppActionHTTP) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicAppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LogicAppIDRef,
+		Selector:     mg.Spec.ForProvider.LogicAppIDSelector,
+		To: reference.To{
+			List:    &AppWorkflowList{},
+			Managed: &AppWorkflow{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogicAppID")
+	}
+	mg.Spec.ForProvider.LogicAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogicAppIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this AppIntegrationAccount.
 func (mg *AppIntegrationAccount) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -63,6 +115,194 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences(ctx context
 	}
 	mg.Spec.ForProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IntegrationAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IntegrationAccountName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.ForProvider.IntegrationAccountNameRef,
+		Selector:     mg.Spec.ForProvider.IntegrationAccountNameSelector,
+		To: reference.To{
+			List:    &AppIntegrationAccountList{},
+			Managed: &AppIntegrationAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IntegrationAccountName")
+	}
+	mg.Spec.ForProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IntegrationAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IntegrationAccountName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.ForProvider.IntegrationAccountNameRef,
+		Selector:     mg.Spec.ForProvider.IntegrationAccountNameSelector,
+		To: reference.To{
+			List:    &AppIntegrationAccountList{},
+			Managed: &AppIntegrationAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IntegrationAccountName")
+	}
+	mg.Spec.ForProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IntegrationAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AppTriggerCustom.
+func (mg *AppTriggerCustom) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicAppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LogicAppIDRef,
+		Selector:     mg.Spec.ForProvider.LogicAppIDSelector,
+		To: reference.To{
+			List:    &AppWorkflowList{},
+			Managed: &AppWorkflow{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogicAppID")
+	}
+	mg.Spec.ForProvider.LogicAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogicAppIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicAppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LogicAppIDRef,
+		Selector:     mg.Spec.ForProvider.LogicAppIDSelector,
+		To: reference.To{
+			List:    &AppWorkflowList{},
+			Managed: &AppWorkflow{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogicAppID")
+	}
+	mg.Spec.ForProvider.LogicAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogicAppIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogicAppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.LogicAppIDRef,
+		Selector:     mg.Spec.ForProvider.LogicAppIDSelector,
+		To: reference.To{
+			List:    &AppWorkflowList{},
+			Managed: &AppWorkflow{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogicAppID")
+	}
+	mg.Spec.ForProvider.LogicAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogicAppIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AppWorkflow.
+func (mg *AppWorkflow) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),

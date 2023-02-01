@@ -1,0 +1,46 @@
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppTriggerRecurrence
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggerrecurrence
+  labels:
+    testing.upbound.io/example-name: apptrgrecurrenceexample
+  name: apptrgrecurrenceexample
+spec:
+  forProvider:
+    frequency: Day
+    interval: 1
+    logicAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptrgrecurrence-aw
+
+---
+
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppWorkflow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggerrecurrence
+  labels:
+    testing.upbound.io/example-name: apptrgrecurrence-aw
+  name: apptrgrecurrence-aw
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apptrgrecurrence-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/apptriggerrecurrence
+  labels:
+    testing.upbound.io/example-name: apptrgrecurrence-rg
+  name: apptrgrecurrence-rg
+spec:
+  forProvider:
+    location: West Europe
