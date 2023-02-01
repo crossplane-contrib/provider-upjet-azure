@@ -7,6 +7,24 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this AppActionCustomList.
+func (l *AppActionCustomList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AppActionHTTPList.
+func (l *AppActionHTTPList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this AppIntegrationAccountBatchConfigurationList.
 func (l *AppIntegrationAccountBatchConfigurationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -18,6 +36,60 @@ func (l *AppIntegrationAccountBatchConfigurationList) GetItems() []resource.Mana
 
 // GetItems of this AppIntegrationAccountList.
 func (l *AppIntegrationAccountList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AppIntegrationAccountSchemaList.
+func (l *AppIntegrationAccountSchemaList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AppIntegrationAccountSessionList.
+func (l *AppIntegrationAccountSessionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AppTriggerCustomList.
+func (l *AppTriggerCustomList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AppTriggerHTTPRequestList.
+func (l *AppTriggerHTTPRequestList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AppTriggerRecurrenceList.
+func (l *AppTriggerRecurrenceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AppWorkflowList.
+func (l *AppWorkflowList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
