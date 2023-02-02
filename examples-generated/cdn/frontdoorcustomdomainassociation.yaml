@@ -1,0 +1,19 @@
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorCustomDomainAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorCustomDomainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contoso
+    cdnFrontdoorRouteIdsRefs:
+    - name: contoso
+    - name: fabrikam
+
+---
+
