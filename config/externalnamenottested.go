@@ -924,12 +924,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.Compute/virtualMachineScaleSets/vmss1/providers/Microsoft.Maintenance/configurationAssignments/assign1
 	"azurerm_maintenance_assignment_virtual_machine_scale_set": config.TemplatedStringAsIdentifier("", "{{ .parameters.maintenance_configuration_id }}/configurationAssignments/default"),
 
-	// managedidentity
-	//
-	// An existing User Assigned Identity can be imported into Terraform using the resource
-	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{resourceName}
-	"azurerm_user_assigned_identity": config.IdentifierFromProvider,
-
 	// managedservices
 	//
 	// Lighthouse Assignments can be imported using the resource id
@@ -938,33 +932,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Lighthouse Definitions can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ManagedServices/registrationDefinitions/00000000-0000-0000-0000-000000000000
 	"azurerm_lighthouse_definition": config.IdentifierFromProvider,
-
-	// maps
-	//
-	// A Maps Account can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Maps/accounts/my-maps-account
-	"azurerm_maps_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Maps/accounts/{{ .external_name }}"),
-	// An Azure Maps Creators can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Maps/accounts/account1/creators/creator1
-	"azurerm_maps_creator": config.TemplatedStringAsIdentifier("name", "{{ .parameters.maps_account_id }}/creators/{{ .external_name }}"),
-
-	// marketplaceordering
-	//
-	// Marketplace Agreement can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.MarketplaceOrdering/agreements/publisher1/offers/offer1/plans/plan1
-	"azurerm_marketplace_agreement": config.IdentifierFromProvider,
-
-	// media
-	//
-	// Media Assets can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Media/mediaServices/account1/assets/asset1
-	"azurerm_media_asset": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaServices/{{ .parameters.media_services_account_name }}/assets/{{ .external_name }}"),
-	// Asset Filters can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Media/mediaServices/account1/assets/asset1/assetFilters/filter1
-	"azurerm_media_asset_filter": config.TemplatedStringAsIdentifier("name", "{{ .parameters.asset_id }}/assetFilters/{{ .external_name }}"),
-	// Content Key Policy can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Media/mediaServices/account1/contentKeyPolicies/policy1
-	"azurerm_media_content_key_policy": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaServices/{{ .parameters.media_services_account_name }}/contentKeyPolicies/{{ .external_name }}"),
 
 	// resource_deployment
 	//
