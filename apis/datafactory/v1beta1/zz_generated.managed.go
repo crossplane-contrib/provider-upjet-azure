@@ -733,6 +733,72 @@ func (mg *DataSetPostgreSQL) SetWriteConnectionSecretToReference(r *xpv1.SecretR
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this DataSetSQLServerTable.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *DataSetSQLServerTable) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this DataSetSQLServerTable.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *DataSetSQLServerTable) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this DataSetSnowflake.
 func (mg *DataSetSnowflake) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -994,6 +1060,72 @@ func (mg *IntegrationRuntimeAzureSSIS) SetPublishConnectionDetailsTo(r *xpv1.Pub
 
 // SetWriteConnectionSecretToReference of this IntegrationRuntimeAzureSSIS.
 func (mg *IntegrationRuntimeAzureSSIS) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this IntegrationRuntimeManaged.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *IntegrationRuntimeManaged) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this IntegrationRuntimeManaged.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *IntegrationRuntimeManaged) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
@@ -1654,6 +1786,72 @@ func (mg *LinkedServiceCosmosDB) SetPublishConnectionDetailsTo(r *xpv1.PublishCo
 
 // SetWriteConnectionSecretToReference of this LinkedServiceCosmosDB.
 func (mg *LinkedServiceCosmosDB) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinkedServiceCosmosDBMongoapi.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinkedServiceCosmosDBMongoapi) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinkedServiceCosmosDBMongoapi.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinkedServiceCosmosDBMongoapi) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

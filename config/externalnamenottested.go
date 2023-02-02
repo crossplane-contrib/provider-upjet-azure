@@ -676,24 +676,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Cdn/profiles/profile1/securityPolicies/policy1
 	"azurerm_cdn_frontdoor_security_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cdn_frontdoor_profile_id }}/securityPolicies/{{ .external_name }}"),
 
-	// cognitive_deployment
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/deployments/deployment1
-	"azurerm_cognitive_deployment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cognitive_account_id }}/deployments/{{ .external_name }}"),
-
-	// container_registry
-	//
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"azurerm_container_registry_task_schedule_run_now": config.IdentifierFromProvider,
-	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.ContainerRegistry/registries/registry1/tokens/token1/passwords/password
-	"azurerm_container_registry_token_password": config.IdentifierFromProvider,
-
-	// cosmo_db
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DocumentDB/databaseAccounts/account1/services/SqlDedicatedGateway
-	"azurerm_cosmosdb_sql_dedicated_gateway": config.TemplatedStringAsIdentifier("", "{{ .parameters.cosmosdb_account_id }}/services/SqlDedicatedGateway"),
-
 	// dashboard_grafana
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Dashboard/grafana/workspace1
@@ -701,14 +683,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// data_factory
 	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/datasets/example
-	"azurerm_data_factory_dataset_sql_server_table": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/datasets/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/dataflows/example
 	"azurerm_data_factory_flowlet_data_flow": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/dataflows/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/integrationruntimes/example
-	"azurerm_data_factory_integration_runtime_managed": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/integrationruntimes/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.DataFactory/factories/example/linkedservices/example
-	"azurerm_data_factory_linked_service_cosmosdb_mongoapi": config.TemplatedStringAsIdentifier("name", "{{ .parameters.data_factory_id }}/linkedservices/{{ .external_name }}"),
 
 	// data_protection
 	//

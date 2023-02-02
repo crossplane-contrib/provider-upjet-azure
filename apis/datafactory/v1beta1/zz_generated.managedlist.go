@@ -106,6 +106,15 @@ func (l *DataSetPostgreSQLList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this DataSetSQLServerTableList.
+func (l *DataSetSQLServerTableList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DataSetSnowflakeList.
 func (l *DataSetSnowflakeList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -135,6 +144,15 @@ func (l *IntegrationRuntimeAzureList) GetItems() []resource.Managed {
 
 // GetItems of this IntegrationRuntimeAzureSSISList.
 func (l *IntegrationRuntimeAzureSSISList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this IntegrationRuntimeManagedList.
+func (l *IntegrationRuntimeManagedList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -225,6 +243,15 @@ func (l *LinkedServiceAzureTableStorageList) GetItems() []resource.Managed {
 
 // GetItems of this LinkedServiceCosmosDBList.
 func (l *LinkedServiceCosmosDBList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this LinkedServiceCosmosDBMongoapiList.
+func (l *LinkedServiceCosmosDBMongoapiList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
