@@ -123,6 +123,7 @@ import (
 	webhook "github.com/upbound/provider-azure/internal/controller/containerregistry/webhook"
 	kubernetescluster "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetescluster"
 	kubernetesclusternodepool "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
+	kubernetesfleetmanager "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesfleetmanager"
 	accountcosmosdb "github.com/upbound/provider-azure/internal/controller/cosmosdb/account"
 	cassandracluster "github.com/upbound/provider-azure/internal/controller/cosmosdb/cassandracluster"
 	cassandradatacenter "github.com/upbound/provider-azure/internal/controller/cosmosdb/cassandradatacenter"
@@ -239,6 +240,8 @@ import (
 	iothubfallbackroute "github.com/upbound/provider-azure/internal/controller/devices/iothubfallbackroute"
 	iothubroute "github.com/upbound/provider-azure/internal/controller/devices/iothubroute"
 	iothubsharedaccesspolicy "github.com/upbound/provider-azure/internal/controller/devices/iothubsharedaccesspolicy"
+	iothubdeviceupdateaccount "github.com/upbound/provider-azure/internal/controller/deviceupdate/iothubdeviceupdateaccount"
+	iothubdeviceupdateinstance "github.com/upbound/provider-azure/internal/controller/deviceupdate/iothubdeviceupdateinstance"
 	globalvmshutdownschedule "github.com/upbound/provider-azure/internal/controller/devtestlab/globalvmshutdownschedule"
 	lab "github.com/upbound/provider-azure/internal/controller/devtestlab/lab"
 	linuxvirtualmachinedevtestlab "github.com/upbound/provider-azure/internal/controller/devtestlab/linuxvirtualmachine"
@@ -273,6 +276,7 @@ import (
 	monitorscheduledqueryrulesalert "github.com/upbound/provider-azure/internal/controller/insights/monitorscheduledqueryrulesalert"
 	monitorscheduledqueryruleslog "github.com/upbound/provider-azure/internal/controller/insights/monitorscheduledqueryruleslog"
 	application "github.com/upbound/provider-azure/internal/controller/iotcentral/application"
+	applicationnetworkruleset "github.com/upbound/provider-azure/internal/controller/iotcentral/applicationnetworkruleset"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/keyvault/accesspolicy"
 	certificatekeyvault "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"
 	certificateissuer "github.com/upbound/provider-azure/internal/controller/keyvault/certificateissuer"
@@ -284,6 +288,7 @@ import (
 	vault "github.com/upbound/provider-azure/internal/controller/keyvault/vault"
 	attacheddatabaseconfiguration "github.com/upbound/provider-azure/internal/controller/kusto/attacheddatabaseconfiguration"
 	clusterkusto "github.com/upbound/provider-azure/internal/controller/kusto/cluster"
+	clustermanagedprivateendpoint "github.com/upbound/provider-azure/internal/controller/kusto/clustermanagedprivateendpoint"
 	clusterprincipalassignment "github.com/upbound/provider-azure/internal/controller/kusto/clusterprincipalassignment"
 	databasekusto "github.com/upbound/provider-azure/internal/controller/kusto/database"
 	databaseprincipalassignment "github.com/upbound/provider-azure/internal/controller/kusto/databaseprincipalassignment"
@@ -652,6 +657,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		webhook.Setup,
 		kubernetescluster.Setup,
 		kubernetesclusternodepool.Setup,
+		kubernetesfleetmanager.Setup,
 		accountcosmosdb.Setup,
 		cassandracluster.Setup,
 		cassandradatacenter.Setup,
@@ -768,6 +774,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		iothubfallbackroute.Setup,
 		iothubroute.Setup,
 		iothubsharedaccesspolicy.Setup,
+		iothubdeviceupdateaccount.Setup,
+		iothubdeviceupdateinstance.Setup,
 		globalvmshutdownschedule.Setup,
 		lab.Setup,
 		linuxvirtualmachinedevtestlab.Setup,
@@ -802,6 +810,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		monitorscheduledqueryrulesalert.Setup,
 		monitorscheduledqueryruleslog.Setup,
 		application.Setup,
+		applicationnetworkruleset.Setup,
 		accesspolicy.Setup,
 		certificatekeyvault.Setup,
 		certificateissuer.Setup,
@@ -813,6 +822,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vault.Setup,
 		attacheddatabaseconfiguration.Setup,
 		clusterkusto.Setup,
+		clustermanagedprivateendpoint.Setup,
 		clusterprincipalassignment.Setup,
 		databasekusto.Setup,
 		databaseprincipalassignment.Setup,
