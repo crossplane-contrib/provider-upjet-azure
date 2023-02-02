@@ -51,7 +51,7 @@ type AppTriggerRecurrenceParameters struct {
 	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
-	// Specifies the time zone for this trigger.  Supported time zone options are listed here
+	// Specifies the time zone for this trigger. Supported time zone options are listed here
 	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }

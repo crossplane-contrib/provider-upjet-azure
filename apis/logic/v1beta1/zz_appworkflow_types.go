@@ -84,7 +84,7 @@ type AppWorkflowParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The ID of the Integration Service Environment to which this Logic App Workflow belongs.  Changing this forces a new Logic App Workflow to be created.
+	// The ID of the Integration Service Environment to which this Logic App Workflow belongs. Changing this forces a new Logic App Workflow to be created.
 	// +kubebuilder:validation:Optional
 	IntegrationServiceEnvironmentID *string `json:"integrationServiceEnvironmentId,omitempty" tf:"integration_service_environment_id,omitempty"`
 
