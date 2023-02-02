@@ -1,0 +1,19 @@
+apiVersion: containerservice.azure.upbound.io/v1beta1
+kind: KubernetesFleetManager
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerservice/v1beta1/kubernetesfleetmanager
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    hubProfile:
+    - dnsPrefix: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

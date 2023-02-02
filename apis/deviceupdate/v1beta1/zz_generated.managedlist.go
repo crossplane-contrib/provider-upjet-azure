@@ -7,8 +7,8 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
-// GetItems of this ApplicationList.
-func (l *ApplicationList) GetItems() []resource.Managed {
+// GetItems of this IOTHubDeviceUpdateAccountList.
+func (l *IOTHubDeviceUpdateAccountList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -16,8 +16,8 @@ func (l *ApplicationList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ApplicationNetworkRuleSetList.
-func (l *ApplicationNetworkRuleSetList) GetItems() []resource.Managed {
+// GetItems of this IOTHubDeviceUpdateInstanceList.
+func (l *IOTHubDeviceUpdateInstanceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

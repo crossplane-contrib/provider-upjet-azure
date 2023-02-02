@@ -138,3 +138,69 @@ func (mg *KubernetesClusterNodePool) SetPublishConnectionDetailsTo(r *xpv1.Publi
 func (mg *KubernetesClusterNodePool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this KubernetesFleetManager.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *KubernetesFleetManager) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this KubernetesFleetManager.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *KubernetesFleetManager) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
