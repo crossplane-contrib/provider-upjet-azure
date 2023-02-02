@@ -1,0 +1,42 @@
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      ENV: example
+---
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgfrontdoorendpoint
+    skuName: Standard_AzureFrontDoor
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorendpoint
+  labels:
+    testing.upbound.io/example-name: rgfrontdoorendpoint
+  name: rgfrontdoorendpoint
+spec:
+  forProvider:
+    location: West Europe
