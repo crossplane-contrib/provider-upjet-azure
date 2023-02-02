@@ -115,6 +115,15 @@ func (l *ManagedDiskList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ManagedDiskSASTokenList.
+func (l *ManagedDiskSASTokenList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this OrchestratedVirtualMachineScaleSetList.
 func (l *OrchestratedVirtualMachineScaleSetList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
