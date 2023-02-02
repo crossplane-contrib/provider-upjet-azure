@@ -281,6 +281,32 @@ func (mg *Token) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this TokenPassword.
+func (mg *TokenPassword) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerRegistryTokenID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ContainerRegistryTokenIDRef,
+		Selector:     mg.Spec.ForProvider.ContainerRegistryTokenIDSelector,
+		To: reference.To{
+			List:    &TokenList{},
+			Managed: &Token{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerRegistryTokenID")
+	}
+	mg.Spec.ForProvider.ContainerRegistryTokenID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerRegistryTokenIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Webhook.
 func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

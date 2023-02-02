@@ -132,6 +132,7 @@ import (
 	registry "github.com/upbound/provider-azure/internal/controller/containerregistry/registry"
 	scopemap "github.com/upbound/provider-azure/internal/controller/containerregistry/scopemap"
 	token "github.com/upbound/provider-azure/internal/controller/containerregistry/token"
+	tokenpassword "github.com/upbound/provider-azure/internal/controller/containerregistry/tokenpassword"
 	webhook "github.com/upbound/provider-azure/internal/controller/containerregistry/webhook"
 	kubernetescluster "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetescluster"
 	kubernetesclusternodepool "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
@@ -147,6 +148,7 @@ import (
 	mongodatabase "github.com/upbound/provider-azure/internal/controller/cosmosdb/mongodatabase"
 	sqlcontainer "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqlcontainer"
 	sqldatabase "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqldatabase"
+	sqldedicatedgateway "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqldedicatedgateway"
 	sqlfunction "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqlfunction"
 	sqlroleassignment "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqlroleassignment"
 	sqlroledefinition "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqlroledefinition"
@@ -170,9 +172,11 @@ import (
 	datasetparquet "github.com/upbound/provider-azure/internal/controller/datafactory/datasetparquet"
 	datasetpostgresql "github.com/upbound/provider-azure/internal/controller/datafactory/datasetpostgresql"
 	datasetsnowflake "github.com/upbound/provider-azure/internal/controller/datafactory/datasetsnowflake"
+	datasetsqlservertable "github.com/upbound/provider-azure/internal/controller/datafactory/datasetsqlservertable"
 	factory "github.com/upbound/provider-azure/internal/controller/datafactory/factory"
 	integrationruntimeazure "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazure"
 	integrationruntimeazuressis "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeazuressis"
+	integrationruntimemanaged "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimemanaged"
 	integrationruntimeselfhosted "github.com/upbound/provider-azure/internal/controller/datafactory/integrationruntimeselfhosted"
 	linkedcustomservice "github.com/upbound/provider-azure/internal/controller/datafactory/linkedcustomservice"
 	linkedserviceazureblobstorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazureblobstorage"
@@ -183,6 +187,7 @@ import (
 	linkedserviceazuresqldatabase "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazuresqldatabase"
 	linkedserviceazuretablestorage "github.com/upbound/provider-azure/internal/controller/datafactory/linkedserviceazuretablestorage"
 	linkedservicecosmosdb "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicecosmosdb"
+	linkedservicecosmosdbmongoapi "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicecosmosdbmongoapi"
 	linkedservicedatalakestoragegen2 "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicedatalakestoragegen2"
 	linkedservicekeyvault "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicekeyvault"
 	linkedservicekusto "github.com/upbound/provider-azure/internal/controller/datafactory/linkedservicekusto"
@@ -204,9 +209,11 @@ import (
 	databasemigrationservice "github.com/upbound/provider-azure/internal/controller/datamigration/databasemigrationservice"
 	backupinstanceblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstanceblobstorage"
 	backupinstancedisk "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancedisk"
+	backupinstancepostgresql "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancepostgresql"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backuppolicydisk "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicydisk"
 	backupvault "github.com/upbound/provider-azure/internal/controller/dataprotection/backupvault"
+	resourceguard "github.com/upbound/provider-azure/internal/controller/dataprotection/resourceguard"
 	accountdatashare "github.com/upbound/provider-azure/internal/controller/datashare/account"
 	datasetblobstorage "github.com/upbound/provider-azure/internal/controller/datashare/datasetblobstorage"
 	datasetdatalakegen2 "github.com/upbound/provider-azure/internal/controller/datashare/datasetdatalakegen2"
@@ -713,6 +720,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		registry.Setup,
 		scopemap.Setup,
 		token.Setup,
+		tokenpassword.Setup,
 		webhook.Setup,
 		kubernetescluster.Setup,
 		kubernetesclusternodepool.Setup,
@@ -728,6 +736,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mongodatabase.Setup,
 		sqlcontainer.Setup,
 		sqldatabase.Setup,
+		sqldedicatedgateway.Setup,
 		sqlfunction.Setup,
 		sqlroleassignment.Setup,
 		sqlroledefinition.Setup,
@@ -751,9 +760,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		datasetparquet.Setup,
 		datasetpostgresql.Setup,
 		datasetsnowflake.Setup,
+		datasetsqlservertable.Setup,
 		factory.Setup,
 		integrationruntimeazure.Setup,
 		integrationruntimeazuressis.Setup,
+		integrationruntimemanaged.Setup,
 		integrationruntimeselfhosted.Setup,
 		linkedcustomservice.Setup,
 		linkedserviceazureblobstorage.Setup,
@@ -764,6 +775,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		linkedserviceazuresqldatabase.Setup,
 		linkedserviceazuretablestorage.Setup,
 		linkedservicecosmosdb.Setup,
+		linkedservicecosmosdbmongoapi.Setup,
 		linkedservicedatalakestoragegen2.Setup,
 		linkedservicekeyvault.Setup,
 		linkedservicekusto.Setup,
@@ -785,9 +797,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		databasemigrationservice.Setup,
 		backupinstanceblobstorage.Setup,
 		backupinstancedisk.Setup,
+		backupinstancepostgresql.Setup,
 		backuppolicyblobstorage.Setup,
 		backuppolicydisk.Setup,
 		backupvault.Setup,
+		resourceguard.Setup,
 		accountdatashare.Setup,
 		datasetblobstorage.Setup,
 		datasetdatalakegen2.Setup,

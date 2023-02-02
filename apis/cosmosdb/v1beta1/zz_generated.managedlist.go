@@ -106,6 +106,15 @@ func (l *SQLDatabaseList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SQLDedicatedGatewayList.
+func (l *SQLDedicatedGatewayList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SQLFunctionList.
 func (l *SQLFunctionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
