@@ -205,6 +205,72 @@ func (mg *BackupPolicyVM) SetWriteConnectionSecretToReference(r *xpv1.SecretRefe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this BackupPolicyVMWorkload.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *BackupPolicyVMWorkload) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this BackupPolicyVMWorkload.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *BackupPolicyVMWorkload) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this BackupProtectedFileShare.
 func (mg *BackupProtectedFileShare) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

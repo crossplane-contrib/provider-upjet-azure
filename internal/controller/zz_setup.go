@@ -428,6 +428,7 @@ import (
 	backupcontainerstorageaccount "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupcontainerstorageaccount"
 	backuppolicyfileshare "github.com/upbound/provider-azure/internal/controller/recoveryservices/backuppolicyfileshare"
 	backuppolicyvm "github.com/upbound/provider-azure/internal/controller/recoveryservices/backuppolicyvm"
+	backuppolicyvmworkload "github.com/upbound/provider-azure/internal/controller/recoveryservices/backuppolicyvmworkload"
 	backupprotectedfileshare "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedfileshare"
 	backupprotectedvm "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedvm"
 	siterecoveryfabric "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryfabric"
@@ -956,6 +957,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		backupcontainerstorageaccount.Setup,
 		backuppolicyfileshare.Setup,
 		backuppolicyvm.Setup,
+		backuppolicyvmworkload.Setup,
 		backupprotectedfileshare.Setup,
 		backupprotectedvm.Setup,
 		siterecoveryfabric.Setup,
