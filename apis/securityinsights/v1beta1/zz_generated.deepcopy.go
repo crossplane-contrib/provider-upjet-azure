@@ -284,6 +284,11 @@ func (in *SentinelAutomationRuleParameters) DeepCopyInto(out *SentinelAutomation
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ConditionJSON != nil {
+		in, out := &in.ConditionJSON, &out.ConditionJSON
+		*out = new(string)
+		**out = **in
+	}
 	if in.DisplayName != nil {
 		in, out := &in.DisplayName, &out.DisplayName
 		*out = new(string)
@@ -322,6 +327,16 @@ func (in *SentinelAutomationRuleParameters) DeepCopyInto(out *SentinelAutomation
 	if in.Order != nil {
 		in, out := &in.Order, &out.Order
 		*out = new(float64)
+		**out = **in
+	}
+	if in.TriggersOn != nil {
+		in, out := &in.TriggersOn, &out.TriggersOn
+		*out = new(string)
+		**out = **in
+	}
+	if in.TriggersWhen != nil {
+		in, out := &in.TriggersWhen, &out.TriggersWhen
+		*out = new(string)
 		**out = **in
 	}
 }

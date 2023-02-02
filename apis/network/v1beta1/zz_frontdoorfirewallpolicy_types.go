@@ -30,7 +30,7 @@ type CustomRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	MatchCondition []MatchConditionParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
 
-	// Gets name of the resource that is unique within a policy. This name can be used to access the resource. Changing this forces a new resource to be created.
+	// Gets name of the resource that is unique within a policy. This name can be used to access the resource.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

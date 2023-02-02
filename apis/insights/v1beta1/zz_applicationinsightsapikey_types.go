@@ -35,8 +35,7 @@ type ApplicationInsightsAPIKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
-	// Specifies the name of the Application Insights API key. Changing this forces a
-	// new resource to be created.
+	// Specifies the name of the Application Insights API key. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

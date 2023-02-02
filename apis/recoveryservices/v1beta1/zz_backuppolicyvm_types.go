@@ -26,7 +26,7 @@ type BackupPolicyVMBackupParameters struct {
 	// +kubebuilder:validation:Optional
 	HourDuration *float64 `json:"hourDuration,omitempty" tf:"hour_duration,omitempty"`
 
-	// Interval in hour at which backup is triggered. Possible values are 4, 6, 8 and 12. This is used  when frequency is Hourly.
+	// Interval in hour at which backup is triggered. Possible values are 4, 6, 8 and 12. This is used when frequency is Hourly.
 	// +kubebuilder:validation:Optional
 	HourInterval *float64 `json:"hourInterval,omitempty" tf:"hour_interval,omitempty"`
 

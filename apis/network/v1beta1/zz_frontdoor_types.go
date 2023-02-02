@@ -63,7 +63,7 @@ type BackendPoolHealthProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
-	// Specifies the name of the Health Probe. Changing this forces a new resource to be created.
+	// Specifies the name of the Health Probe.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -92,7 +92,7 @@ type BackendPoolLoadBalancingParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalLatencyMilliseconds *float64 `json:"additionalLatencyMilliseconds,omitempty" tf:"additional_latency_milliseconds,omitempty"`
 
-	// Specifies the name of the Load Balancer. Changing this forces a new resource to be created.
+	// Specifies the name of the Load Balancer.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -125,7 +125,7 @@ type BackendPoolParameters struct {
 	// +kubebuilder:validation:Required
 	LoadBalancingName *string `json:"loadBalancingName" tf:"load_balancing_name,omitempty"`
 
-	// Specifies the name of the Backend Pool. Changing this forces a new resource to be created.
+	// Specifies the name of the Backend Pool.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -310,7 +310,7 @@ type FrontendEndpointParameters struct {
 	// +kubebuilder:validation:Required
 	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
-	// Specifies the name of the frontend_endpoint. Changing this forces a new resource to be created.
+	// Specifies the name of the frontend_endpoint.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -351,7 +351,7 @@ type RoutingRuleParameters struct {
 	// +kubebuilder:validation:Required
 	FrontendEndpoints []*string `json:"frontendEndpoints" tf:"frontend_endpoints,omitempty"`
 
-	// Specifies the name of the Routing Rule. Changing this forces a new resource to be created.
+	// Specifies the name of the Routing Rule.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

@@ -39,7 +39,7 @@ type PublicIPParameters struct {
 	// +kubebuilder:validation:Optional
 	DDOSProtectionPlanID *string `json:"ddosProtectionPlanId,omitempty" tf:"ddos_protection_plan_id,omitempty"`
 
-	// Label for the Domain Name. Will be used to make up the FQDN.  If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
+	// Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
 	// +kubebuilder:validation:Optional
 	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
 

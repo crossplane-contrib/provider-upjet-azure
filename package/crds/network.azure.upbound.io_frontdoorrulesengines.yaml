@@ -309,8 +309,7 @@ spec:
                             type: object
                           type: array
                         name:
-                          description: The name of the rule. Changing this forces
-                            a new resource to be created.
+                          description: The name of the rule.
                           type: string
                         priority:
                           description: Priority of the rule, must be unique per rules

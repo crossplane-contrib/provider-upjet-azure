@@ -226,7 +226,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	OptimizationType *string `json:"optimizationType,omitempty" tf:"optimization_type,omitempty"`
 
-	// The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options. Each origin block supports fields documented below.
+	// The set of origins of the CDN endpoint. When multiple origins exist, the first origin will be used as primary and rest will be used as failover options. Each origin block supports fields documented below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Origin []OriginParameters `json:"origin" tf:"origin,omitempty"`
 

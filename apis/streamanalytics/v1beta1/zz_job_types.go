@@ -56,7 +56,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s).  Default is 0.
+	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 0.
 	// +kubebuilder:validation:Optional
 	EventsLateArrivalMaxDelayInSeconds *float64 `json:"eventsLateArrivalMaxDelayInSeconds,omitempty" tf:"events_late_arrival_max_delay_in_seconds,omitempty"`
 
@@ -64,7 +64,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	EventsOutOfOrderMaxDelayInSeconds *float64 `json:"eventsOutOfOrderMaxDelayInSeconds,omitempty" tf:"events_out_of_order_max_delay_in_seconds,omitempty"`
 
-	// Specifies the policy which should be applied to events which arrive out of order in the input event stream. Possible values are Adjust and Drop.  Default is Adjust.
+	// Specifies the policy which should be applied to events which arrive out of order in the input event stream. Possible values are Adjust and Drop. Default is Adjust.
 	// +kubebuilder:validation:Optional
 	EventsOutOfOrderPolicy *string `json:"eventsOutOfOrderPolicy,omitempty" tf:"events_out_of_order_policy,omitempty"`
 
@@ -80,7 +80,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// Specifies the policy which should be applied to events which arrive at the output and cannot be written to the external storage due to being malformed (such as missing column values, column values of wrong type or size). Possible values are Drop and Stop.  Default is Drop.
+	// Specifies the policy which should be applied to events which arrive at the output and cannot be written to the external storage due to being malformed (such as missing column values, column values of wrong type or size). Possible values are Drop and Stop. Default is Drop.
 	// +kubebuilder:validation:Optional
 	OutputErrorPolicy *string `json:"outputErrorPolicy,omitempty" tf:"output_error_policy,omitempty"`
 

@@ -36,7 +36,7 @@ type ArmRoleReceiverObservation struct {
 
 type ArmRoleReceiverParameters struct {
 
-	// The name of the ARM role receiver. Changing this forces a new resource to be created.
+	// The name of the ARM role receiver.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -62,7 +62,7 @@ type AutomationRunBookReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	IsGlobalRunBook *bool `json:"isGlobalRunbook" tf:"is_global_runbook,omitempty"`
 
-	// The name of the automation runbook receiver. Changing this forces a new resource to be created.
+	// The name of the automation runbook receiver.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -92,7 +92,7 @@ type AzureAppPushReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
-	// The name of the Azure app push receiver. Changing this forces a new resource to be created.
+	// The name of the Azure app push receiver.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -114,7 +114,7 @@ type AzureFunctionReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	HTTPTriggerURL *string `json:"httpTriggerUrl" tf:"http_trigger_url,omitempty"`
 
-	// The name of the Azure Function receiver. Changing this forces a new resource to be created.
+	// The name of the Azure Function receiver.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -132,7 +132,7 @@ type EmailReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
-	// The name of the email receiver. Names must be unique (case-insensitive) across all receivers within an action group. Changing this forces a new resource to be created.
+	// The name of the email receiver. Names must be unique (case-insensitive) across all receivers within an action group.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -158,7 +158,7 @@ type EventHubReceiverParameters struct {
 	// +kubebuilder:validation:Optional
 	EventHubNamespace *string `json:"eventHubNamespace,omitempty" tf:"event_hub_namespace,omitempty"`
 
-	// The name of the EventHub Receiver, must be unique within action group. Changing this forces a new resource to be created.
+	// The name of the EventHub Receiver, must be unique within action group.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -184,7 +184,7 @@ type ItsmReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	ConnectionID *string `json:"connectionId" tf:"connection_id,omitempty"`
 
-	// The name of the ITSM receiver. Changing this forces a new resource to be created.
+	// The name of the ITSM receiver.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -210,7 +210,7 @@ type LogicAppReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	CallbackURL *string `json:"callbackUrl" tf:"callback_url,omitempty"`
 
-	// The name of the logic app receiver. Changing this forces a new resource to be created.
+	// The name of the logic app receiver.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -310,7 +310,7 @@ type SMSReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	CountryCode *string `json:"countryCode" tf:"country_code,omitempty"`
 
-	// The name of the SMS receiver. Names must be unique (case-insensitive) across all receivers within an action group. Changing this forces a new resource to be created.
+	// The name of the SMS receiver. Names must be unique (case-insensitive) across all receivers within an action group.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -328,7 +328,7 @@ type VoiceReceiverParameters struct {
 	// +kubebuilder:validation:Required
 	CountryCode *string `json:"countryCode" tf:"country_code,omitempty"`
 
-	// The name of the voice receiver. Changing this forces a new resource to be created.
+	// The name of the voice receiver.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -346,7 +346,7 @@ type WebhookReceiverParameters struct {
 	// +kubebuilder:validation:Optional
 	AADAuth []AADAuthParameters `json:"aadAuth,omitempty" tf:"aad_auth,omitempty"`
 
-	// The name of the webhook receiver. Names must be unique (case-insensitive) across all receivers within an action group. Changing this forces a new resource to be created.
+	// The name of the webhook receiver. Names must be unique (case-insensitive) across all receivers within an action group.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 

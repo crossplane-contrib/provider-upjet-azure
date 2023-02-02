@@ -80,8 +80,7 @@ spec:
                           items:
                             properties:
                               name:
-                                description: Name of the dimension. Changing this
-                                  forces a new resource to be created.
+                                description: Name of the dimension.
                                 type: string
                               operator:
                                 description: Operator for dimension values, - 'Include'.
@@ -97,8 +96,8 @@ spec:
                             type: object
                           type: array
                         metricName:
-                          description: Name of the metric.  Supported metrics are
-                            listed in the Azure Monitor Microsoft.OperationalInsights/workspaces
+                          description: Name of the metric. Supported metrics are listed
+                            in the Azure Monitor Microsoft.OperationalInsights/workspaces
                             metrics namespace.
                           type: string
                       required:
@@ -189,7 +188,7 @@ spec:
                     description: The description of the scheduled query rule.
                     type: string
                   enabled:
-                    description: Whether this scheduled query rule is enabled.  Default
+                    description: Whether this scheduled query rule is enabled. Default
                       is true.
                     type: boolean
                   location:

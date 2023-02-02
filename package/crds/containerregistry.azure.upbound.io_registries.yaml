@@ -70,12 +70,12 @@ spec:
                     type: boolean
                   anonymousPullEnabled:
                     description: Whether allows anonymous (unauthenticated) pull access
-                      to this Container Registry?  This is only supported on resources
+                      to this Container Registry? This is only supported on resources
                       with the Standard or Premium SKU.
                     type: boolean
                   dataEndpointEnabled:
                     description: Whether to enable dedicated data endpoints for this
-                      Container Registry?  This is only supported on resources with
+                      Container Registry? This is only supported on resources with
                       the Premium SKU.
                     type: boolean
                   encryption:
@@ -106,8 +106,7 @@ spec:
                       properties:
                         location:
                           description: A location where the container registry should
-                            be geo-replicated. Changing this forces a new resource
-                            to be created.
+                            be geo-replicated.
                           type: string
                         regionalEndpointEnabled:
                           description: Whether regional endpoint is enabled for this
@@ -380,7 +379,7 @@ spec:
                     type: array
                   sku:
                     description: The SKU name of the container registry. Possible
-                      values are  Basic, Standard and Premium.
+                      values are Basic, Standard and Premium.
                     type: string
                   tags:
                     additionalProperties:

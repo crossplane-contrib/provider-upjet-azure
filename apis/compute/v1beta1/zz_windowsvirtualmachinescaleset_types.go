@@ -18,11 +18,11 @@ type IPConfigurationPublicIPAddressIPTagObservation struct {
 
 type IPConfigurationPublicIPAddressIPTagParameters struct {
 
-	// The IP Tag associated with the Public IP, such as SQL or Storage.
+	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Tag *string `json:"tag" tf:"tag,omitempty"`
 
-	// The Type of IP Tag, such as FirstPartyUsage.
+	// The Type of IP Tag, such as FirstPartyUsage. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -36,7 +36,7 @@ type NetworkInterfaceIPConfigurationPublicIPAddressParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
 
-	// One or more ip_tag blocks as defined above.
+	// One or more ip_tag blocks as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	IPTag []IPConfigurationPublicIPAddressIPTagParameters `json:"ipTag,omitempty" tf:"ip_tag,omitempty"`
 
@@ -267,7 +267,7 @@ type WindowsVirtualMachineScaleSetGalleryApplicationsParameters struct {
 	// +kubebuilder:validation:Required
 	PackageReferenceID *string `json:"packageReferenceId" tf:"package_reference_id,omitempty"`
 
-	// The IP Tag associated with the Public IP, such as SQL or Storage.
+	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 }
@@ -449,7 +449,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalCapabilities []WindowsVirtualMachineScaleSetAdditionalCapabilitiesParameters `json:"additionalCapabilities,omitempty" tf:"additional_capabilities,omitempty"`
 
-	// One or more additional_unattend_content blocks as defined below.
+	// One or more additional_unattend_content blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	AdditionalUnattendContent []WindowsVirtualMachineScaleSetAdditionalUnattendContentParameters `json:"additionalUnattendContent,omitempty" tf:"additional_unattend_content,omitempty"`
 
@@ -568,7 +568,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Overprovision *bool `json:"overprovision,omitempty" tf:"overprovision,omitempty"`
 
-	// A plan block as defined below.
+	// A plan block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Plan []WindowsVirtualMachineScaleSetPlanParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
@@ -601,7 +601,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// A rolling_upgrade_policy block as defined below. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling.
+	// A rolling_upgrade_policy block as defined below. This is Required and can only be specified when upgrade_mode is set to Automatic or Rolling. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RollingUpgradePolicy []WindowsVirtualMachineScaleSetRollingUpgradePolicyParameters `json:"rollingUpgradePolicy,omitempty" tf:"rolling_upgrade_policy,omitempty"`
 
@@ -668,7 +668,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	VtpmEnabled *bool `json:"vtpmEnabled,omitempty" tf:"vtpm_enabled,omitempty"`
 
-	// One or more winrm_listener blocks as defined below.
+	// One or more winrm_listener blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	WinrmListener []WindowsVirtualMachineScaleSetWinrmListenerParameters `json:"winrmListener,omitempty" tf:"winrm_listener,omitempty"`
 
@@ -776,11 +776,11 @@ type WindowsVirtualMachineScaleSetSourceImageReferenceObservation struct {
 
 type WindowsVirtualMachineScaleSetSourceImageReferenceParameters struct {
 
-	// Specifies the offer of the image used to create the virtual machines.
+	// Specifies the offer of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Offer *string `json:"offer" tf:"offer,omitempty"`
 
-	// Specifies the publisher of the image used to create the virtual machines.
+	// Specifies the publisher of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 

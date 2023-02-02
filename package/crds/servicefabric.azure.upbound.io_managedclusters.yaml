@@ -298,13 +298,28 @@ spec:
                       - vmSize
                       type: object
                     type: array
-                  password:
+                  passwordSecretRef:
                     description: Administrator password for the VMs that will be created
                       as part of this cluster.
-                    type: string
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   resourceGroupName:
                     description: The name of the Resource Group where the Resource
-                      Group should exist.
+                      Group should exist. Changing this forces a new Resource Group
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -382,7 +397,7 @@ spec:
                         type: object
                     type: object
                   sku:
-                    description: SKU for this cluster.  Changing this forces a new
+                    description: SKU for this cluster. Changing this forces a new
                       resource to be created. Default is Basic, allowed values are
                       either Basic or Standard.
                     type: string

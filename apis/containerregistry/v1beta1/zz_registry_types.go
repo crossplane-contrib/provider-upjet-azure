@@ -36,7 +36,7 @@ type GeoreplicationsObservation struct {
 
 type GeoreplicationsParameters struct {
 
-	// A location where the container registry should be geo-replicated. Changing this forces a new resource to be created.
+	// A location where the container registry should be geo-replicated.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
@@ -127,11 +127,11 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	AdminEnabled *bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
 
-	// Whether allows anonymous (unauthenticated) pull access to this Container Registry?  This is only supported on resources with the Standard or Premium SKU.
+	// Whether allows anonymous (unauthenticated) pull access to this Container Registry? This is only supported on resources with the Standard or Premium SKU.
 	// +kubebuilder:validation:Optional
 	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
 
-	// Whether to enable dedicated data endpoints for this Container Registry?  This is only supported on resources with the Premium SKU.
+	// Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.
 	// +kubebuilder:validation:Optional
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
 
@@ -188,7 +188,7 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
-	// The SKU name of the container registry. Possible values are  Basic, Standard and Premium.
+	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 

@@ -84,7 +84,7 @@ spec:
                         enabled:
                           description: Should the automatic instance repair be enabled
                             on this Orchestrated Virtual Machine Scale Set? Possible
-                            values are true and false. Defaults to false.
+                            values are true and false.
                           type: boolean
                         gracePeriod:
                           description: Amount of time for which automatic repairs
@@ -397,16 +397,20 @@ spec:
                                       type: number
                                     ipTag:
                                       description: One or more ip_tag blocks as defined
-                                        above.
+                                        above. Changing this forces a new resource
+                                        to be created.
                                       items:
                                         properties:
                                           tag:
                                             description: The IP Tag associated with
                                               the Public IP, such as SQL or Storage.
+                                              Changing this forces a new resource
+                                              to be created.
                                             type: string
                                           type:
                                             description: The Type of IP Tag, such
-                                              as FirstPartyUsage.
+                                              as FirstPartyUsage. Changing this forces
+                                              a new resource to be created.
                                             type: string
                                         required:
                                         - tag
@@ -560,6 +564,7 @@ spec:
                           type: string
                         diffDiskSettings:
                           description: A diff_disk_settings block as defined above.
+                            Changing this forces a new resource to be created.
                           items:
                             properties:
                               option:
@@ -655,13 +660,11 @@ spec:
                                     publicKey:
                                       description: The Public Key which should be
                                         used for authentication, which needs to be
-                                        at least 2048-bit and in ssh-rsa format. Changing
-                                        this forces a new resource to be created.
+                                        at least 2048-bit and in ssh-rsa format.
                                       type: string
                                     username:
                                       description: The Username for which this Public
-                                        SSH Key should be configured. Changing this
-                                        forces a new resource to be created.
+                                        SSH Key should be configured.
                                       type: string
                                   required:
                                   - publicKey
@@ -679,7 +682,8 @@ spec:
                                   If unspecified this defaults to the value for the
                                   name field. If the value of the name field is not
                                   a valid computer_name_prefix, then you must specify
-                                  computer_name_prefix.
+                                  computer_name_prefix. Changing this forces a new
+                                  resource to be created.
                                 type: string
                               disablePasswordAuthentication:
                                 description: When an admin_password is specified disable_password_authentication
@@ -771,7 +775,8 @@ spec:
                                   If unspecified this defaults to the value for the
                                   name field. If the value of the name field is not
                                   a valid computer_name_prefix, then you must specify
-                                  computer_name_prefix.
+                                  computer_name_prefix. Changing this forces a new
+                                  resource to be created.
                                 type: string
                               enableAutomaticUpdates:
                                 description: Are automatic updates enabled for this
@@ -842,17 +847,20 @@ spec:
                                 type: string
                               winrmListener:
                                 description: One or more winrm_listener blocks as
-                                  defined below.
+                                  defined below. Changing this forces a new resource
+                                  to be created.
                                 items:
                                   properties:
                                     certificateUrl:
                                       description: The Secret URL of a Key Vault Certificate,
                                         which must be specified when protocol is set
-                                        to Https.
+                                        to Https. Changing this forces a new resource
+                                        to be created.
                                       type: string
                                     protocol:
                                       description: Specifies the protocol of listener.
-                                        Possible values are Http or Https
+                                        Possible values are Http or Https. Changing
+                                        this forces a new resource to be created.
                                       type: string
                                   required:
                                   - protocol
@@ -866,7 +874,8 @@ spec:
                       type: object
                     type: array
                   plan:
-                    description: A plan block as documented below.
+                    description: A plan block as documented below. Changing this forces
+                      a new resource to be created.
                     items:
                       properties:
                         name:

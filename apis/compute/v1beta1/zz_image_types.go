@@ -30,7 +30,7 @@ type DataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
 
-	// Specifies the ID of the managed disk resource that you want to use to create the image.
+	// Specifies the ID of the managed disk resource that you want to use to create the image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
@@ -60,7 +60,7 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// One or more os_disk elements as defined below.
+	// One or more os_disk elements as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	OsDisk []OsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
@@ -86,7 +86,7 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Is zone resiliency enabled?  Defaults to false.  Changing this forces a new resource to be created.
+	// Is zone resiliency enabled? Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ZoneResilient *bool `json:"zoneResilient,omitempty" tf:"zone_resilient,omitempty"`
 }
@@ -96,7 +96,7 @@ type OsDiskObservation struct {
 
 type OsDiskParameters struct {
 
-	// Specifies the URI in Azure storage of the blob that you want to use to create the image.
+	// Specifies the URI in Azure storage of the blob that you want to use to create the image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 

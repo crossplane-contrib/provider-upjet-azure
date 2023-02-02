@@ -148,13 +148,13 @@ spec:
                     description: Integration runtime description.
                     type: string
                   rbacAuthorization:
-                    description: A rbac_authorization block as defined below.
+                    description: A rbac_authorization block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         resourceId:
                           description: The resource identifier of the integration
-                            runtime to be shared. Changing this forces a new Data
-                            Factory to be created.
+                            runtime to be shared.
                           type: string
                       required:
                       - resourceId

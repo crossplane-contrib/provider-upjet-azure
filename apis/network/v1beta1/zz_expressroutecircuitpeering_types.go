@@ -134,7 +134,7 @@ type MicrosoftPeeringConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 
-	// The Routing Registry against which the AS number and prefixes are registered.  For example:  ARIN, RIPE, AFRINIC etc. Defaults to NONE.
+	// The Routing Registry against which the AS number and prefixes are registered. For example: ARIN, RIPE, AFRINIC etc. Defaults to NONE.
 	// +kubebuilder:validation:Optional
 	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }
@@ -152,7 +152,7 @@ type MicrosoftPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 
-	// The Routing Registry against which the AS number and prefixes are registered.  For example:  ARIN, RIPE, AFRINIC etc. Defaults to NONE.
+	// The Routing Registry against which the AS number and prefixes are registered. For example: ARIN, RIPE, AFRINIC etc. Defaults to NONE.
 	// +kubebuilder:validation:Optional
 	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }

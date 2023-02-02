@@ -88,7 +88,7 @@ spec:
                                   Microsoft.Network/publicIPAddresses/read, Microsoft.Network/virtualNetworks/read,
                                   Microsoft.Network/virtualNetworks/subnets/action,
                                   Microsoft.Network/virtualNetworks/subnets/join/action,
-                                  Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
+                                  Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action,
                                   and Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action.
                                 items:
                                   type: string
@@ -110,8 +110,8 @@ spec:
                                   Microsoft.Sql/servers, Microsoft.StoragePool/diskPools,
                                   Microsoft.StreamAnalytics/streamingJobs, Microsoft.Synapse/workspaces,
                                   Microsoft.Web/hostingEnvironments, Microsoft.Web/serverFarms,
-                                  Microsoft.Orbital/orbitalGateways, NGINX.NGINXPLUS/nginxDeployments
-                                  and PaloAltoNetworks.Cloudngfw/firewalls.
+                                  Microsoft.Orbital/orbitalGateways, NGINX.NGINXPLUS/nginxDeployments,
+                                  PaloAltoNetworks.Cloudngfw/firewalls, and Qumulo.Storage/fileSystems.
                                 type: string
                             required:
                             - name
@@ -227,7 +227,7 @@ spec:
                     description: 'The list of Service endpoints to associate with
                       the subnet. Possible values include: Microsoft.AzureActiveDirectory,
                       Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub,
-                      Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage
+                      Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage,
                       and Microsoft.Web.'
                     items:
                       type: string

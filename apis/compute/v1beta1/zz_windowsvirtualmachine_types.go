@@ -357,7 +357,7 @@ type WindowsVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	VtpmEnabled *bool `json:"vtpmEnabled,omitempty" tf:"vtpm_enabled,omitempty"`
 
-	// One or more winrm_listener blocks as defined below.
+	// One or more winrm_listener blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	WinrmListener []WindowsVirtualMachineWinrmListenerParameters `json:"winrmListener,omitempty" tf:"winrm_listener,omitempty"`
 
@@ -417,19 +417,19 @@ type WindowsVirtualMachineSourceImageReferenceObservation struct {
 
 type WindowsVirtualMachineSourceImageReferenceParameters struct {
 
-	// Specifies the offer of the image used to create the virtual machines.
+	// Specifies the offer of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Offer *string `json:"offer" tf:"offer,omitempty"`
 
-	// Specifies the publisher of the image used to create the virtual machines.
+	// Specifies the publisher of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
-	// Specifies the SKU of the image used to create the virtual machines.
+	// Specifies the SKU of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 
-	// Specifies the version of the image used to create the virtual machines.
+	// Specifies the version of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }
@@ -457,7 +457,7 @@ type WindowsVirtualMachineWinrmListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateURL *string `json:"certificateUrl,omitempty" tf:"certificate_url,omitempty"`
 
-	// Specifies the protocol of listener. Possible values are Http or Https
+	// Specifies the protocol of listener. Possible values are Http or Https. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }

@@ -32,7 +32,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	CmkForQueryForced *bool `json:"cmkForQueryForced,omitempty" tf:"cmk_for_query_forced,omitempty"`
 
-	// The workspace daily quota for ingestion in GB.  Defaults to -1 (unlimited) if omitted.
+	// The workspace daily quota for ingestion in GB. Defaults to -1 (unlimited) if omitted.
 	// +kubebuilder:validation:Optional
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
 
@@ -44,11 +44,15 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	InternetQueryEnabled *bool `json:"internetQueryEnabled,omitempty" tf:"internet_query_enabled,omitempty"`
 
+	// Specifies if the log Analytics workspace should enforce authentication using Azure AD. Defaults to false.
+	// +kubebuilder:validation:Optional
+	LocalAuthenticationDisabled *bool `json:"localAuthenticationDisabled,omitempty" tf:"local_authentication_disabled,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// The capacity reservation level in GB for this workspace.  Must be in increments of 100  between 100 and 5000.
+	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
 	// +kubebuilder:validation:Optional
 	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
 

@@ -13,6 +13,34 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type APIServerAccessProfileObservation struct {
+}
+
+type APIServerAccessProfileParameters struct {
+
+	// Set of authorized IP ranges to allow access to API server, e.g. ["198.51.100.0/24"].
+	// +kubebuilder:validation:Optional
+	AuthorizedIPRanges []*string `json:"authorizedIpRanges,omitempty" tf:"authorized_ip_ranges,omitempty"`
+
+	// The ID of the Subnet where the API server endpoint is delegated to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// Should API Server VNet Integration be enabled? For more details please visit Use API Server VNet Integration.
+	// +kubebuilder:validation:Optional
+	VnetIntegrationEnabled *bool `json:"vnetIntegrationEnabled,omitempty" tf:"vnet_integration_enabled,omitempty"`
+}
+
 type AciConnectorLinuxObservation struct {
 }
 
@@ -171,11 +199,11 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableAutoScaling *bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty"`
 
-	// Should the nodes in the Default Node Pool have host encryption enabled?  Changing this forces a new resource to be created.
+	// Should the nodes in the Default Node Pool have host encryption enabled? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnableHostEncryption *bool `json:"enableHostEncryption,omitempty" tf:"enable_host_encryption,omitempty"`
 
-	// Should nodes in this Node Pool have a Public IP Address?  Changing this forces a new resource to be created.
+	// Should nodes in this Node Pool have a Public IP Address? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnableNodePublicIP *bool `json:"enableNodePublicIp,omitempty" tf:"enable_node_public_ip,omitempty"`
 
@@ -187,7 +215,7 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
 
-	// A kubelet_config block as defined below.
+	// A kubelet_config block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	KubeletConfig []KubeletConfigParameters `json:"kubeletConfig,omitempty" tf:"kubelet_config,omitempty"`
 
@@ -195,7 +223,7 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	KubeletDiskType *string `json:"kubeletDiskType,omitempty" tf:"kubelet_disk_type,omitempty"`
 
-	// A linux_os_config block as defined below.
+	// A linux_os_config block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	LinuxOsConfig []LinuxOsConfigParameters `json:"linuxOsConfig,omitempty" tf:"linux_os_config,omitempty"`
 
@@ -227,11 +255,15 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
+	// A node_network_profile block as documented below.
+	// +kubebuilder:validation:Optional
+	NodeNetworkProfile []NodeNetworkProfileParameters `json:"nodeNetworkProfile,omitempty" tf:"node_network_profile,omitempty"`
+
 	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. enable_node_public_ip should be true. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NodePublicIPPrefixID *string `json:"nodePublicIpPrefixId,omitempty" tf:"node_public_ip_prefix_id,omitempty"`
 
-	// A list of the taints added to new nodes during node pool create and scale.
+	// A list of the taints added to new nodes during node pool create and scale. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NodeTaints []*string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
 
@@ -429,6 +461,21 @@ type IngressApplicationGatewayParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
+type KeyManagementServiceObservation struct {
+}
+
+type KeyManagementServiceParameters struct {
+
+	// Identifier of Azure Key Vault key. See key identifier format for more details. When Azure Key Vault key management service is enabled, this field is required and must be a valid key identifier. When enabled is false, leave the field empty.
+	// +kubebuilder:validation:Required
+	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
+
+	// Network access of the key vault
+	// Network access of key vault. The possible values are Public and Private. Public means the key vault allows public access from all networks. Private means the key vault disables public access and enables private link. The default value is Public.
+	// +kubebuilder:validation:Optional
+	KeyVaultNetworkAccess *string `json:"keyVaultNetworkAccess,omitempty" tf:"key_vault_network_access,omitempty"`
+}
+
 type KeyVaultSecretsProviderObservation struct {
 
 	// An secret_identity block is exported. The exported attributes are defined below.
@@ -521,15 +568,15 @@ type KubeletIdentityObservation struct {
 
 type KubeletIdentityParameters struct {
 
-	// The Client ID of the user-defined Managed Identity to be assigned to the Kubelets. If not specified a Managed Identity is created automatically.
+	// The Client ID of the user-defined Managed Identity to be assigned to the Kubelets. If not specified a Managed Identity is created automatically. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically.
+	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
-	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically.
+	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
@@ -557,7 +604,7 @@ type KubernetesClusterObservation struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretsProvider []KeyVaultSecretsProviderObservation `json:"keyVaultSecretsProvider,omitempty" tf:"key_vault_secrets_provider,omitempty"`
 
-	// A network_profile block as defined below.
+	// A network_profile block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NetworkProfile []NetworkProfileObservation `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
 
@@ -577,7 +624,10 @@ type KubernetesClusterObservation struct {
 
 type KubernetesClusterParameters struct {
 
-	// Set of authorized IP ranges to allow access to API server, e.g. ["198.51.100.0/24"].
+	// An api_server_access_profile block as defined below.
+	// +kubebuilder:validation:Optional
+	APIServerAccessProfile []APIServerAccessProfileParameters `json:"apiServerAccessProfile,omitempty" tf:"api_server_access_profile,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	APIServerAuthorizedIPRanges []*string `json:"apiServerAuthorizedIpRanges,omitempty" tf:"api_server_authorized_ip_ranges,omitempty"`
 
@@ -648,11 +698,15 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	IngressApplicationGateway []IngressApplicationGatewayParameters `json:"ingressApplicationGateway,omitempty" tf:"ingress_application_gateway,omitempty"`
 
+	// A key_management_service block as defined below. For more details, please visit Key Management Service (KMS) etcd encryption to an AKS cluster.
+	// +kubebuilder:validation:Optional
+	KeyManagementService []KeyManagementServiceParameters `json:"keyManagementService,omitempty" tf:"key_management_service,omitempty"`
+
 	// A key_vault_secrets_provider block as defined below. For more details, please visit Azure Keyvault Secrets Provider for AKS.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretsProvider []KeyVaultSecretsProviderParameters `json:"keyVaultSecretsProvider,omitempty" tf:"key_vault_secrets_provider,omitempty"`
 
-	// A kubelet_identity block as defined below. Changing this forces a new resource to be created.
+	// A kubelet_identity block as defined below.
 	// +kubebuilder:validation:Optional
 	KubeletIdentity []KubeletIdentityParameters `json:"kubeletIdentity,omitempty" tf:"kubelet_identity,omitempty"`
 
@@ -684,11 +738,11 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MonitorMetrics []MonitorMetricsParameters `json:"monitorMetrics,omitempty" tf:"monitor_metrics,omitempty"`
 
-	// A network_profile block as defined below.
+	// A network_profile block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NetworkProfile []NetworkProfileParameters `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
 
-	// The auto-generated Resource Group which contains the resources for this Managed Kubernetes Cluster.
+	// The auto-generated Resource Group which contains the resources for this Managed Kubernetes Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NodeResourceGroup *string `json:"nodeResourceGroup,omitempty" tf:"node_resource_group,omitempty"`
 
@@ -910,11 +964,11 @@ type NATGatewayProfileParameters struct {
 
 type NetworkProfileObservation struct {
 
-	// A load_balancer_profile block as defined below. This can only be specified when load_balancer_sku is set to standard.
+	// A load_balancer_profile block as defined below. This can only be specified when load_balancer_sku is set to standard. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	LoadBalancerProfile []LoadBalancerProfileObservation `json:"loadBalancerProfile,omitempty" tf:"load_balancer_profile,omitempty"`
 
-	// A nat_gateway_profile block as defined below. This can only be specified when load_balancer_sku is set to standard and outbound_type is set to managedNATGateway or userAssignedNATGateway.
+	// A nat_gateway_profile block as defined below. This can only be specified when load_balancer_sku is set to standard and outbound_type is set to managedNATGateway or userAssignedNATGateway. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NATGatewayProfile []NATGatewayProfileObservation `json:"natGatewayProfile,omitempty" tf:"nat_gateway_profile,omitempty"`
 }
@@ -937,7 +991,7 @@ type NetworkProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	IPVersions []*string `json:"ipVersions,omitempty" tf:"ip_versions,omitempty"`
 
-	// A load_balancer_profile block as defined below. This can only be specified when load_balancer_sku is set to standard.
+	// A load_balancer_profile block as defined below. This can only be specified when load_balancer_sku is set to standard. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	LoadBalancerProfile []LoadBalancerProfileParameters `json:"loadBalancerProfile,omitempty" tf:"load_balancer_profile,omitempty"`
 
@@ -945,7 +999,7 @@ type NetworkProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerSku *string `json:"loadBalancerSku,omitempty" tf:"load_balancer_sku,omitempty"`
 
-	// A nat_gateway_profile block as defined below. This can only be specified when load_balancer_sku is set to standard and outbound_type is set to managedNATGateway or userAssignedNATGateway.
+	// A nat_gateway_profile block as defined below. This can only be specified when load_balancer_sku is set to standard and outbound_type is set to managedNATGateway or userAssignedNATGateway. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NATGatewayProfile []NATGatewayProfileParameters `json:"natGatewayProfile,omitempty" tf:"nat_gateway_profile,omitempty"`
 
@@ -984,6 +1038,16 @@ type NetworkProfileParameters struct {
 	// A list of CIDRs to use for Kubernetes services. For single-stack networking a single IPv4 CIDR is expected. For dual-stack networking an IPv4 and IPv6 CIDR are expected. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ServiceCidrs []*string `json:"serviceCidrs,omitempty" tf:"service_cidrs,omitempty"`
+}
+
+type NodeNetworkProfileObservation struct {
+}
+
+type NodeNetworkProfileParameters struct {
+
+	// Specifies a mapping of tags to the instance-level public IPs.
+	// +kubebuilder:validation:Optional
+	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
 
 type NotAllowedObservation struct {

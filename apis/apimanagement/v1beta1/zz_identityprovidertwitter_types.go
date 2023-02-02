@@ -23,7 +23,7 @@ type IdentityProviderTwitterParameters struct {
 
 	// App Consumer API key for Twitter.
 	// +kubebuilder:validation:Required
-	APIKey *string `json:"apiKey" tf:"api_key,omitempty"`
+	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The Name of the API Management Service where this Twitter Identity Provider should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management

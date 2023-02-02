@@ -95,7 +95,7 @@ type VirtualNetworkSubnetObservation struct {
 	// The ID of this subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the subnet. Changing this forces a new resource to be created.
+	// The name of the subnet.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Network Security Group to associate with the subnet. (Referenced by id, ie. azurerm_network_security_group.example.id)

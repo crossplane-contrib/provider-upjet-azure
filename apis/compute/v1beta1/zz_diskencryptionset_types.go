@@ -92,7 +92,7 @@ type IdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// The type of Managed Service Identity that is configured on this Disk Encryption Set.  Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// The type of Managed Service Identity that is configured on this Disk Encryption Set. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

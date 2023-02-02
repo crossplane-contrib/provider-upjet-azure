@@ -23,6 +23,24 @@ func (mg *KubernetesCluster) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.APIServerAccessProfile); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetIDRef,
+			Selector:     mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetID")
+		}
+		mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.APIServerAccessProfile[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.AciConnectorLinux); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AciConnectorLinux[i3].SubnetName),

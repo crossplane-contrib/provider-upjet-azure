@@ -197,7 +197,7 @@ type ApplicationGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	SSLCertificate []SSLCertificateParameters `json:"sslCertificate,omitempty" tf:"ssl_certificate,omitempty"`
 
-	// a ssl policy block as defined below.
+	// a ssl_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	SSLPolicy []SSLPolicyParameters `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
@@ -1044,7 +1044,7 @@ type SSLCertificateParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Password for the pfx file specified in data.  Required if data is set.
+	// Password for the pfx file specified in data. Required if data is set.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
@@ -1058,20 +1058,19 @@ type SSLPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	CipherSuites []*string `json:"cipherSuites,omitempty" tf:"cipher_suites,omitempty"`
 
-	// A list of SSL Protocols which should be disabled on this Application Gateway. Possible values are TLSv1_0, TLSv1_1 and TLSv1_2.
+	// A list of SSL Protocols which should be disabled on this Application Gateway. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
 	// +kubebuilder:validation:Optional
 	DisabledProtocols []*string `json:"disabledProtocols,omitempty" tf:"disabled_protocols,omitempty"`
 
-	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1 and TLSv1_2.
+	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
 	// +kubebuilder:validation:Optional
 	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
 
-	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and
-	// are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
 	// +kubebuilder:validation:Optional
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
-	// The Type of the Policy. Possible values are Predefined and Custom.
+	// The Type of the Policy. Possible values are Predefined, Custom and CustomV2.
 	// +kubebuilder:validation:Optional
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
@@ -1088,7 +1087,7 @@ type SSLProfileParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// a ssl policy block as defined below.
+	// a ssl_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	SSLPolicy []SSLProfileSSLPolicyParameters `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
@@ -1096,7 +1095,7 @@ type SSLProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	TrustedClientCertificateNames []*string `json:"trustedClientCertificateNames,omitempty" tf:"trusted_client_certificate_names,omitempty"`
 
-	// Should client certificate issuer DN be verified?  Defaults to false.
+	// Should client certificate issuer DN be verified? Defaults to false.
 	// +kubebuilder:validation:Optional
 	VerifyClientCertIssuerDn *bool `json:"verifyClientCertIssuerDn,omitempty" tf:"verify_client_cert_issuer_dn,omitempty"`
 }
@@ -1110,20 +1109,19 @@ type SSLProfileSSLPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	CipherSuites []*string `json:"cipherSuites,omitempty" tf:"cipher_suites,omitempty"`
 
-	// A list of SSL Protocols which should be disabled on this Application Gateway. Possible values are TLSv1_0, TLSv1_1 and TLSv1_2.
+	// A list of SSL Protocols which should be disabled on this Application Gateway. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
 	// +kubebuilder:validation:Optional
 	DisabledProtocols []*string `json:"disabledProtocols,omitempty" tf:"disabled_protocols,omitempty"`
 
-	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1 and TLSv1_2.
+	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
 	// +kubebuilder:validation:Optional
 	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
 
-	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and
-	// are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
 	// +kubebuilder:validation:Optional
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
-	// The Type of the Policy. Possible values are Predefined and Custom.
+	// The Type of the Policy. Possible values are Predefined, Custom and CustomV2.
 	// +kubebuilder:validation:Optional
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
@@ -1280,11 +1278,11 @@ type WafConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	FirewallMode *string `json:"firewallMode" tf:"firewall_mode,omitempty"`
 
-	// The Maximum Request Body Size in KB.  Accepted values are in the range 1KB to 128KB.  Defaults to 128KB.
+	// The Maximum Request Body Size in KB. Accepted values are in the range 1KB to 128KB. Defaults to 128KB.
 	// +kubebuilder:validation:Optional
 	MaxRequestBodySizeKb *float64 `json:"maxRequestBodySizeKb,omitempty" tf:"max_request_body_size_kb,omitempty"`
 
-	// Is Request Body Inspection enabled?  Defaults to true.
+	// Is Request Body Inspection enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
 

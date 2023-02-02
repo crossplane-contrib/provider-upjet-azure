@@ -190,7 +190,7 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
-	// One or more admin_ssh_key blocks as defined below.
+	// One or more admin_ssh_key blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	AdminSSHKey []AdminSSHKeyParameters `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
 
@@ -411,19 +411,19 @@ type SourceImageReferenceObservation struct {
 
 type SourceImageReferenceParameters struct {
 
-	// Specifies the offer of the image used to create the virtual machines.
+	// Specifies the offer of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Offer *string `json:"offer" tf:"offer,omitempty"`
 
-	// Specifies the publisher of the image used to create the virtual machines.
+	// Specifies the publisher of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
-	// Specifies the SKU of the image used to create the virtual machines.
+	// Specifies the SKU of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Sku *string `json:"sku" tf:"sku,omitempty"`
 
-	// Specifies the version of the image used to create the virtual machines.
+	// Specifies the version of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	Version *string `json:"version" tf:"version,omitempty"`
 }

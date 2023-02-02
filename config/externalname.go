@@ -1215,9 +1215,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Web/serverfarms/instance1
 	"azurerm_app_service_plan": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Web/serverfarms/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Web/sites/instance1/slots/staging/config/virtualNetwork
-	// DEPRECATED
+	// DEPRECATED: azurerm_service_plan should be used instead
 	// App Service Source Control Token's can be imported using the type
-	"azurerm_app_service_source_control_token": config.IdentifierFromProvider,
+	// "azurerm_app_service_source_control_token": config.IdentifierFromProvider,
 	// DEPRECATED
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Web/sites/functionapp1
 	"azurerm_function_app": config.IdentifierFromProvider,

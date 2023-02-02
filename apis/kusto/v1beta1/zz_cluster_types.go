@@ -47,7 +47,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DiskEncryptionEnabled *bool `json:"diskEncryptionEnabled,omitempty" tf:"disk_encryption_enabled,omitempty"`
 
-	// Is the cluster's double encryption enabled?  Changing this forces a new resource to be created.
+	// Is the cluster's double encryption enabled? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DoubleEncryptionEnabled *bool `json:"doubleEncryptionEnabled,omitempty" tf:"double_encryption_enabled,omitempty"`
 

@@ -18,9 +18,11 @@ type BackendRequestDataMaskingHeadersObservation struct {
 
 type BackendRequestDataMaskingHeadersParameters struct {
 
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
+	// The name of the header or the query parameter to mask.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -30,9 +32,11 @@ type BackendRequestDataMaskingObservation struct {
 
 type BackendRequestDataMaskingParameters struct {
 
+	// A headers block as defined below.
 	// +kubebuilder:validation:Optional
 	Headers []BackendRequestDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
+	// A query_params block as defined below.
 	// +kubebuilder:validation:Optional
 	QueryParams []BackendRequestDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
@@ -42,9 +46,11 @@ type BackendRequestDataMaskingQueryParamsObservation struct {
 
 type BackendRequestDataMaskingQueryParamsParameters struct {
 
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
+	// The name of the header or the query parameter to mask.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -54,9 +60,11 @@ type BackendResponseDataMaskingHeadersObservation struct {
 
 type BackendResponseDataMaskingHeadersParameters struct {
 
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
+	// The name of the header or the query parameter to mask.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -66,9 +74,11 @@ type BackendResponseDataMaskingQueryParamsObservation struct {
 
 type BackendResponseDataMaskingQueryParamsParameters struct {
 
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
+	// The name of the header or the query parameter to mask.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -82,6 +92,7 @@ type DiagnosticBackendRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
 
+	// A data_masking block as defined below.
 	// +kubebuilder:validation:Optional
 	DataMasking []BackendRequestDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
@@ -95,9 +106,11 @@ type DiagnosticBackendResponseDataMaskingObservation struct {
 
 type DiagnosticBackendResponseDataMaskingParameters struct {
 
+	// A headers block as defined below.
 	// +kubebuilder:validation:Optional
 	Headers []BackendResponseDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
+	// A query_params block as defined below.
 	// +kubebuilder:validation:Optional
 	QueryParams []BackendResponseDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
@@ -111,6 +124,7 @@ type DiagnosticBackendResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
 
+	// A data_masking block as defined below.
 	// +kubebuilder:validation:Optional
 	DataMasking []DiagnosticBackendResponseDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
@@ -124,9 +138,11 @@ type DiagnosticFrontendRequestDataMaskingHeadersObservation struct {
 
 type DiagnosticFrontendRequestDataMaskingHeadersParameters struct {
 
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
+	// The name of the header or the query parameter to mask.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -136,9 +152,11 @@ type DiagnosticFrontendRequestDataMaskingObservation struct {
 
 type DiagnosticFrontendRequestDataMaskingParameters struct {
 
+	// A headers block as defined below.
 	// +kubebuilder:validation:Optional
 	Headers []DiagnosticFrontendRequestDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
+	// A query_params block as defined below.
 	// +kubebuilder:validation:Optional
 	QueryParams []DiagnosticFrontendRequestDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
@@ -148,9 +166,11 @@ type DiagnosticFrontendRequestDataMaskingQueryParamsObservation struct {
 
 type DiagnosticFrontendRequestDataMaskingQueryParamsParameters struct {
 
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
+	// The name of the header or the query parameter to mask.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -164,6 +184,7 @@ type DiagnosticFrontendRequestParameters struct {
 	// +kubebuilder:validation:Optional
 	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
 
+	// A data_masking block as defined below.
 	// +kubebuilder:validation:Optional
 	DataMasking []DiagnosticFrontendRequestDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
@@ -177,9 +198,11 @@ type DiagnosticFrontendResponseDataMaskingHeadersObservation struct {
 
 type DiagnosticFrontendResponseDataMaskingHeadersParameters struct {
 
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
+	// The name of the header or the query parameter to mask.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -189,9 +212,11 @@ type DiagnosticFrontendResponseDataMaskingObservation struct {
 
 type DiagnosticFrontendResponseDataMaskingParameters struct {
 
+	// A headers block as defined below.
 	// +kubebuilder:validation:Optional
 	Headers []DiagnosticFrontendResponseDataMaskingHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
+	// A query_params block as defined below.
 	// +kubebuilder:validation:Optional
 	QueryParams []DiagnosticFrontendResponseDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
@@ -201,9 +226,11 @@ type DiagnosticFrontendResponseDataMaskingQueryParamsObservation struct {
 
 type DiagnosticFrontendResponseDataMaskingQueryParamsParameters struct {
 
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 
+	// The name of the header or the query parameter to mask.
 	// +kubebuilder:validation:Required
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -217,6 +244,7 @@ type DiagnosticFrontendResponseParameters struct {
 	// +kubebuilder:validation:Optional
 	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
 
+	// A data_masking block as defined below.
 	// +kubebuilder:validation:Optional
 	DataMasking []DiagnosticFrontendResponseDataMaskingParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 

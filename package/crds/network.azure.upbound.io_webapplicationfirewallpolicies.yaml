@@ -312,7 +312,7 @@ spec:
                             are in the range 1 to 4000. Defaults to 100.
                           type: number
                         maxRequestBodySizeInKb:
-                          description: The Maximum Request Body Size in KB.  Accepted
+                          description: The Maximum Request Body Size in KB. Accepted
                             values are in the range 8 to 2000. Defaults to 128.
                           type: number
                         mode:

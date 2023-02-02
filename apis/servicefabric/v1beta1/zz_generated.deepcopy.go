@@ -1395,9 +1395,9 @@ func (in *ManagedClusterParameters) DeepCopyInto(out *ManagedClusterParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.Password != nil {
-		in, out := &in.Password, &out.Password
-		*out = new(string)
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ResourceGroupName != nil {

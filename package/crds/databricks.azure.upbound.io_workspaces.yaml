@@ -81,8 +81,7 @@ spec:
                           type: string
                         noPublicIp:
                           description: Are public IP Addresses not allowed? Possible
-                            values are true or false. Defaults to false. Changing
-                            this forces a new resource to be created.
+                            values are true or false. Defaults to false.
                           type: boolean
                         privateSubnetName:
                           description: The name of the Private Subnet within the Virtual
@@ -298,8 +297,7 @@ spec:
                       encryption? If true this enables the Managed Identity for the
                       managed storage account. Possible values are true or false.
                       Defaults to false. This field is only valid if the Databricks
-                      Workspace sku is set to premium. Changing this forces a new
-                      resource to be created.
+                      Workspace sku is set to premium.
                     type: boolean
                   infrastructureEncryptionEnabled:
                     description: Is the Databricks File System root file system enabled
@@ -318,6 +316,14 @@ spec:
                       resource has to be created. Changing this forces a new resource
                       to be created.
                     type: string
+                  managedDiskCmkKeyVaultKeyId:
+                    description: Customer managed encryption properties for the Databricks
+                      Workspace managed disks.
+                    type: string
+                  managedDiskCmkRotationToLatestVersionEnabled:
+                    description: Whether customer managed keys for disk encryption
+                      will automatically be rotated to the latest version.
+                    type: boolean
                   managedResourceGroupName:
                     description: The name of the resource group where Azure should
                       place the managed Databricks resources. Changing this forces
@@ -400,21 +406,18 @@ spec:
                     type: object
                   managedServicesCmkKeyVaultKeyId:
                     description: Customer managed encryption properties for the Databricks
-                      Workspace managed resources(e.g. Notebooks and Artifacts). Changing
-                      this forces a new resource to be created.
+                      Workspace managed resources(e.g. Notebooks and Artifacts).
                     type: string
                   networkSecurityGroupRulesRequired:
                     description: Does the data plane (clusters) to control plane communication
                       happen over private link endpoint only or publicly? Possible
                       values AllRules, NoAzureDatabricksRules or NoAzureServiceRules.
                       Required when public_network_access_enabled is set to false.
-                      Changing this forces a new resource to be created.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Allow public access for accessing workspace. Set
                       value to false to access workspace only via private link endpoint.
-                      Possible values include true or false. Defaults to true. Changing
-                      this forces a new resource to be created.
+                      Possible values include true or false. Defaults to true.
                     type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group in which the Databricks
@@ -498,8 +501,7 @@ spec:
                     type: object
                   sku:
                     description: The sku to use for the Databricks Workspace. Possible
-                      values are standard, premium, or trial. Changing this can force
-                      a new resource to be created in some circumstances.
+                      values are standard, premium, or trial.
                     type: string
                   tags:
                     additionalProperties:
@@ -686,10 +688,32 @@ spec:
             properties:
               atProvider:
                 properties:
+                  diskEncryptionSetId:
+                    description: The ID of Managed Disk Encryption Set created by
+                      the Databricks Workspace.
+                    type: string
                   id:
                     description: The ID of the Databricks Workspace in the Azure management
                       plane.
                     type: string
+                  managedDiskIdentity:
+                    description: A managed_disk_identity block as documented below.
+                    items:
+                      properties:
+                        principalId:
+                          description: The principal UUID for the internal databricks
+                            disks identity needed to provide access to the workspace
+                            for enabling Customer Managed Keys.
+                          type: string
+                        tenantId:
+                          description: The UUID of the tenant where the internal databricks
+                            disks identity was created.
+                          type: string
+                        type:
+                          description: The type of the internal databricks disks identity.
+                          type: string
+                      type: object
+                    type: array
                   managedResourceGroupId:
                     description: The ID of the Managed Resource Group created by the
                       Databricks Workspace.

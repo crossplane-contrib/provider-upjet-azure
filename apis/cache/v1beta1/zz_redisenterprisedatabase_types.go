@@ -33,7 +33,7 @@ type RedisEnterpriseDatabaseObservation struct {
 	// The ID of the Redis Enterprise Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A module block as defined below.
+	// A module block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Module []ModuleObservation `json:"module,omitempty" tf:"module,omitempty"`
 }
@@ -74,7 +74,7 @@ type RedisEnterpriseDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
 
-	// A module block as defined below.
+	// A module block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Module []ModuleParameters `json:"module,omitempty" tf:"module,omitempty"`
 

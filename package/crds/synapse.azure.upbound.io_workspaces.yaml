@@ -437,7 +437,7 @@ spec:
                     type: object
                   managedVirtualNetworkEnabled:
                     description: Is Virtual Network enabled for all computes in this
-                      workspace?  Changing this forces a new resource to be created.
+                      workspace? Changing this forces a new resource to be created.
                     type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the

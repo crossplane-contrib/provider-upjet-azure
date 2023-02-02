@@ -162,8 +162,9 @@ spec:
                   hyperVGeneration:
                     description: The HyperV Generation of the Disk when the source
                       of an Import or Copy operation targets a source that contains
-                      an operating system. Possible values are V1 and V2. Changing
-                      this forces a new resource to be created.
+                      an operating system. Possible values are V1 and V2. For ImportSecure
+                      it must be set to V2. Changing this forces a new resource to
+                      be created.
                     type: string
                   imageReferenceId:
                     description: ID of an existing platform/marketplace disk image
@@ -194,9 +195,9 @@ spec:
                       Managed Disk.
                     type: boolean
                   osType:
-                    description: Specify a value when the source of an Import or Copy
-                      operation targets a source that contains an operating system.
-                      Valid values are Linux or Windows.
+                    description: Specify a value when the source of an Import, ImportSecure
+                      or Copy operation targets a source that contains an operating
+                      system. Valid values are Linux or Windows.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether it is allowed to access the disk via public
@@ -290,7 +291,7 @@ spec:
                     type: string
                   securityType:
                     description: Security Type of the Managed Disk when it is used
-                      for a Confidential VM. Possible values are ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey,
+                      for a Confidential VM. Possible values are VMGuestStateOnlyEncryptedWithPlatformKey,
                       ConfidentialVM_DiskEncryptedWithPlatformKey and ConfidentialVM_DiskEncryptedWithCustomerKey.
                       Changing this forces a new resource to be created.
                     type: string
@@ -377,12 +378,13 @@ spec:
                     type: object
                   sourceUri:
                     description: URI to a valid VHD file to be used when create_option
-                      is Import. Changing this forces a new resource to be created.
+                      is Import or ImportSecure. Changing this forces a new resource
+                      to be created.
                     type: string
                   storageAccountId:
                     description: The ID of the Storage Account where the source_uri
-                      is located. Required when create_option is set to Import.  Changing
-                      this forces a new resource to be created.
+                      is located. Required when create_option is set to Import or
+                      ImportSecure. Changing this forces a new resource to be created.
                     type: string
                   storageAccountType:
                     description: The type of storage to use for the managed disk.

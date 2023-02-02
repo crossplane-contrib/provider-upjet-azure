@@ -251,7 +251,8 @@ spec:
                   restorePointInTime:
                     description: Specifies the point in time (ISO8601 format) of the
                       source database that will be restored to create the new database.
-                      This property is only settable for create_mode= PointInTimeRestore  databases.
+                      This property is only settable for create_mode= PointInTimeRestore
+                      databases.
                     type: string
                   sampleName:
                     description: Specifies the name of the sample schema to apply
@@ -355,8 +356,7 @@ spec:
                     description: Specifies the name of the SKU used by the database.
                       For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0,
                       P2 ,DW100c, DS100. Changing this from the HyperScale service
-                      tier to another service tier will force a new resource to be
-                      created.
+                      tier to another service tier will create a new resource.
                     type: string
                   storageAccountType:
                     description: Specifies the storage account type used to store

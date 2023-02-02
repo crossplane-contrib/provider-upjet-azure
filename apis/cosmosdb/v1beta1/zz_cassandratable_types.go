@@ -57,7 +57,7 @@ type CassandraTableParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
-	// A schema block as defined below. Changing this forces a new resource to be created.
+	// A schema block as defined below.
 	// +kubebuilder:validation:Required
 	Schema []SchemaParameters `json:"schema" tf:"schema,omitempty"`
 

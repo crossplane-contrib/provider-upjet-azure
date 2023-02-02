@@ -24,7 +24,10 @@ spec:
         testing.upbound.io/example-name: example
     location: West Europe
     notes: Some notes about this Virtual Machine.
-    password: Pa$w0rd1234!
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -34,10 +37,24 @@ spec:
 
 ---
 
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource needs a manual patching and is thus skipped."
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: Pa$w0rd1234!
+
+---
+
 apiVersion: devtestlab.azure.upbound.io/v1beta1
 kind: Lab
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource needs a manual patching and is thus skipped."
     meta.upbound.io/example-id: devtestlab/v1beta1/windowsvirtualmachine
   labels:
     testing.upbound.io/example-name: example
@@ -57,6 +74,7 @@ apiVersion: devtestlab.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource needs a manual patching and is thus skipped."
     meta.upbound.io/example-id: devtestlab/v1beta1/windowsvirtualmachine
   labels:
     testing.upbound.io/example-name: example
@@ -80,6 +98,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource needs a manual patching and is thus skipped."
     meta.upbound.io/example-id: devtestlab/v1beta1/windowsvirtualmachine
     uptest.upbound.io/pre-delete-hook: testhooks/delete-network.sh
   labels:

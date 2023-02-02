@@ -158,8 +158,7 @@ spec:
                                 type: string
                               name:
                                 description: A name to identify on the Git repository,
-                                  required only if repos exists. Changing this forces
-                                  a new resource to be created.
+                                  required only if repos exists.
                                 type: string
                               pattern:
                                 description: An array of strings used to match an
@@ -425,8 +424,7 @@ spec:
                             type: string
                           type: array
                         readTimeoutSeconds:
-                          description: Ingress read time out in seconds. Changing
-                            this forces a new resource to be created.
+                          description: Ingress read time out in seconds.
                           type: number
                         serviceRuntimeNetworkResourceGroup:
                           description: Specifies the Name of the resource group containing

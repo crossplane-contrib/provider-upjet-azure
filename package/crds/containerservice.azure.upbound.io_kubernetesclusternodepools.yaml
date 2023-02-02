@@ -78,10 +78,10 @@ spec:
                     type: boolean
                   enableHostEncryption:
                     description: Should the nodes in this Node Pool have host encryption
-                      enabled?  Changing this forces a new resource to be created.
+                      enabled? Changing this forces a new resource to be created.
                     type: boolean
                   enableNodePublicIp:
-                    description: Should each node have a Public IP Address?   Changing
+                    description: Should each node have a Public IP Address? Changing
                       this forces a new resource to be created.
                     type: boolean
                   evictionPolicy:
@@ -101,7 +101,8 @@ spec:
                       forces a new resource to be created.
                     type: string
                   kubeletConfig:
-                    description: A kubelet_config block as defined below.
+                    description: A kubelet_config block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         allowedUnsafeSysctls:
@@ -238,7 +239,8 @@ spec:
                         type: object
                     type: object
                   linuxOsConfig:
-                    description: A linux_os_config block as defined below.
+                    description: A linux_os_config block as defined below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         swapFileSizeMb:
@@ -449,6 +451,18 @@ spec:
                     description: A map of Kubernetes labels which should be applied
                       to nodes in this Node Pool.
                     type: object
+                  nodeNetworkProfile:
+                    description: A node_network_profile block as documented below.
+                    items:
+                      properties:
+                        nodePublicIpTags:
+                          additionalProperties:
+                            type: string
+                          description: Specifies a mapping of tags to the instance-level
+                            public IPs.
+                          type: object
+                      type: object
+                    type: array
                   nodePublicIpPrefixId:
                     description: Resource ID for the Public IP Addresses Prefix for
                       the nodes in this Node Pool. enable_node_public_ip should be
@@ -698,7 +712,8 @@ spec:
                         type: object
                     type: object
                   windowsProfile:
-                    description: A windows_profile block as documented below.
+                    description: A windows_profile block as documented below. Changing
+                      this forces a new resource to be created.
                     items:
                       properties:
                         outboundNatEnabled:

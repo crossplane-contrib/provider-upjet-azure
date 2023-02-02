@@ -186,7 +186,7 @@ spec:
                     type: string
                   instancePool:
                     description: Leverages an instance pool within the linked ADB
-                      instance as defined by  instance_pool block below.
+                      instance as defined by instance_pool block below.
                     items:
                       properties:
                         clusterVersion:
@@ -313,7 +313,7 @@ spec:
                     type: object
                   newClusterConfig:
                     description: Creates new clusters within the linked ADB instance
-                      as defined in the  new_cluster_config block below.
+                      as defined in the new_cluster_config block below.
                     items:
                       properties:
                         clusterVersion:

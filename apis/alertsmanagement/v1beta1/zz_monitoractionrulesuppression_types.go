@@ -218,7 +218,7 @@ type ScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	RecurrenceMonthly []*float64 `json:"recurrenceMonthly,omitempty" tf:"recurrence_monthly,omitempty"`
 
-	// specifies the list of dayOfWeek to recurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and  Saturday.
+	// specifies the list of dayOfWeek to recurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
 	// +kubebuilder:validation:Optional
 	RecurrenceWeekly []*string `json:"recurrenceWeekly,omitempty" tf:"recurrence_weekly,omitempty"`
 

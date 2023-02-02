@@ -79,6 +79,9 @@ spec:
                   dataEncrypted:
                     description: Is transparent data encryption enabled?
                     type: boolean
+                  geoBackupPolicyEnabled:
+                    description: Is geo-backup policy enabled? Defaults to true.
+                    type: boolean
                   recoveryDatabaseId:
                     description: The ID of the Synapse SQL Pool or SQL Database which
                       is to back up, only applicable when create_mode is set to Recovery.
@@ -86,7 +89,8 @@ spec:
                     type: string
                   restore:
                     description: A restore block as defined below. only applicable
-                      when create_mode is set to PointInTimeRestore.
+                      when create_mode is set to PointInTimeRestore. Changing this
+                      forces a new resource to be created.
                     items:
                       properties:
                         pointInTime:

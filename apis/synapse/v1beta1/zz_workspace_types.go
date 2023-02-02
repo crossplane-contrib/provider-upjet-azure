@@ -231,7 +231,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Is Virtual Network enabled for all computes in this workspace?  Changing this forces a new resource to be created.
+	// Is Virtual Network enabled for all computes in this workspace? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ManagedVirtualNetworkEnabled *bool `json:"managedVirtualNetworkEnabled,omitempty" tf:"managed_virtual_network_enabled,omitempty"`
 

@@ -170,8 +170,8 @@ spec:
                                 type: number
                               routingRegistryName:
                                 description: 'The Routing Registry against which the
-                                  AS number and prefixes are registered.  For example:  ARIN,
-                                  RIPE, AFRINIC etc. Defaults to NONE.'
+                                  AS number and prefixes are registered. For example:
+                                  ARIN, RIPE, AFRINIC etc. Defaults to NONE.'
                                 type: string
                             type: object
                           type: array
@@ -207,7 +207,7 @@ spec:
                           type: number
                         routingRegistryName:
                           description: 'The Routing Registry against which the AS
-                            number and prefixes are registered.  For example:  ARIN,
+                            number and prefixes are registered. For example: ARIN,
                             RIPE, AFRINIC etc. Defaults to NONE.'
                           type: string
                       required:

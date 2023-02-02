@@ -76,7 +76,7 @@ type ApplicationRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 
-	// Boolean specifying if TLS shall be terminated (true) or not (false). Must be  true when using destination_urls. Needs Premium SKU for Firewall Policy.
+	// Boolean specifying if TLS shall be terminated (true) or not (false). Must be true when using destination_urls. Needs Premium SKU for Firewall Policy.
 	// +kubebuilder:validation:Optional
 	TerminateTLS *bool `json:"terminateTls,omitempty" tf:"terminate_tls,omitempty"`
 

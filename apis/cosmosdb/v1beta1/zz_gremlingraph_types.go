@@ -80,7 +80,7 @@ type GremlinGraphParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings []GremlinGraphAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
-	// A conflict_resolution_policy blocks as defined below.
+	// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ConflictResolutionPolicy []ConflictResolutionPolicyParameters `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
 

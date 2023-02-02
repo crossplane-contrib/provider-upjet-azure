@@ -63,13 +63,13 @@ type OutputServiceBusTopicParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceBusNamespaceSelector *v1.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
-	// The shared access policy key for the specified shared access policy.
-	// +kubebuilder:validation:Required
-	SharedAccessPolicyKeySecretRef v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef" tf:"-"`
+	// The shared access policy key for the specified shared access policy. Required if authentication_mode is ConnectionString.
+	// +kubebuilder:validation:Optional
+	SharedAccessPolicyKeySecretRef *v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
-	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
-	// +kubebuilder:validation:Required
-	SharedAccessPolicyName *string `json:"sharedAccessPolicyName" tf:"shared_access_policy_name,omitempty"`
+	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required if authentication_mode is ConnectionString.
+	// +kubebuilder:validation:Optional
+	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Job

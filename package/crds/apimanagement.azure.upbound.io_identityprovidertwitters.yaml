@@ -65,9 +65,23 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  apiKey:
+                  apiKeySecretRef:
                     description: App Consumer API key for Twitter.
-                    type: string
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   apiManagementName:
                     description: The Name of the API Management Service where this
                       Twitter Identity Provider should be created. Changing this forces
@@ -245,7 +259,7 @@ spec:
                         type: object
                     type: object
                 required:
-                - apiKey
+                - apiKeySecretRef
                 - apiSecretKeySecretRef
                 type: object
               providerConfigRef:
