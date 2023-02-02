@@ -965,4 +965,97 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Content Key Policy can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Media/mediaServices/account1/contentKeyPolicies/policy1
 	"azurerm_media_content_key_policy": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaServices/{{ .parameters.media_services_account_name }}/contentKeyPolicies/{{ .external_name }}"),
+
+	// resource_deployment
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Resources/deploymentScripts/script1
+	"azurerm_resource_deployment_script_azure_cli": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Resources/deploymentScripts/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Resources/deploymentScripts/script1
+	"azurerm_resource_deployment_script_azure_power_shell": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Resources/deploymentScripts/{{ .external_name }}"),
+
+	// resource_group
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.PolicyInsights/remediations/remediation1
+	"azurerm_resource_group_policy_remediation": config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.PolicyInsights/remediations/{{ .external_name }}"),
+
+	// route
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/routeTables/mytable1/routes/myroute1
+	"azurerm_route": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/routeTables/{{ .parameters.route_table_name }}/routes/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/routeFilters/routeFilter1
+	"azurerm_route_filter": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/routeFilters/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1
+	"azurerm_route_map": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_hub_id }}/routeMaps/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/routeServer1
+	"azurerm_route_server": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualHubs/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/routeServer1/bgpConnections/connection1
+	"azurerm_route_server_bgp_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.route_server_id }}/bgpConnections/{{ .external_name }}"),
+
+	// search
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Search/searchServices/service1/sharedPrivateLinkResources/resource1
+	"azurerm_search_shared_private_link_service": config.TemplatedStringAsIdentifier("name", "{{ .parameters.search_service_id }}/sharedPrivateLinkResources/{{ .external_name }}"),
+
+	// sentinel
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/alertRules/rule1
+	"azurerm_sentinel_alert_rule_ms_security_incident": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/alertRules/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/alertRules/rule1
+	"azurerm_sentinel_alert_rule_nrt": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/alertRules/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_dynamics_365": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_iot": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_microsoft_threat_protection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_office_365_project": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_office_atp": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_office_irm": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/dataConnectors/dc1
+	"azurerm_sentinel_data_connector_office_power_bi": config.TemplatedStringAsIdentifier("name", "{{ .parameters.log_analytics_workspace_id }}/providers/Microsoft.SecurityInsights/dataConnectors/{{ .external_name }}"),
+
+	// signalr
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.SignalRService/signalR/signalr1/sharedPrivateLinkResources/resource1
+	"azurerm_signalr_shared_private_link_resource": config.TemplatedStringAsIdentifier("name", "{{ .parameters.signalr_service_id }}/sharedPrivateLinkResources/{{ .external_name }}"),
+
+	// site_recovery
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group-name/providers/Microsoft.RecoveryServices/vaults/recovery-vault-name/replicationFabrics/primary-fabric-name/replicationNetworks/azureNetwork/replicationNetworkMappings/mapping-name
+	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
+	"azurerm_site_recovery_network_mapping": config.IdentifierFromProvider,
+
+	// spring_cloud
+	//
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resourceGroup1/providers/Microsoft.AppPlatform/Spring/service1/applicationAccelerators/default
+	"azurerm_spring_cloud_accelerator": config.TemplatedStringAsIdentifier("name", "{{ .parameters.spring_cloud_service_id }}/applicationAccelerators/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.AppPlatform/spring/service1/apiPortals/apiPortal1/domains/domain1
+	"azurerm_spring_cloud_api_portal_custom_domain": config.TemplatedStringAsIdentifier("name", "{{ .parameters.spring_cloud_api_portal_id }}/domains/{{ .external_name }}"),
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resourceGroup1/providers/Microsoft.AppPlatform/spring/service1/applicationLiveViews/default
+	"azurerm_spring_cloud_application_live_view": config.TemplatedStringAsIdentifier("name", "{{ .parameters.spring_cloud_service_id }}/applicationLiveViews/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AppPlatform/Spring/springcloud/apps/springcloudapp/deployments/deployment/providers/Microsoft.ServiceLinker/linkers/serviceconnector1
+	"azurerm_spring_cloud_connection": config.IdentifierFromProvider,
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.AppPlatform/Spring/spring1/applicationAccelerators/default/customizedAccelerators/customizedAccelerator1
+	"azurerm_spring_cloud_customized_accelerator": config.TemplatedStringAsIdentifier("name", "{{ .parameters.spring_cloud_accelerator_id }}/customizedAccelerators/{{ .external_name }}"),
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resourceGroup1/providers/Microsoft.AppPlatform/Spring/service1/DevToolPortals/default
+	"azurerm_spring_cloud_dev_tool_portal": config.TemplatedStringAsIdentifier("name", "{{ .parameters.spring_cloud_service_id }}/DevToolPortals/{{ .external_name }}"),
+
+	// static_site
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Web/staticSites/my-static-site1
+	"azurerm_static_site": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Web/staticSites/{{ .external_name }}"),
+
+	// storage
+	//
+	// https://account1.dfs.core.windows.net/fileSystem1/path
+	"azurerm_storage_data_lake_gen2_path": config.IdentifierFromProvider,
+	// https://tomdevsa20.file.core.windows.net/share1/directory1
+	"azurerm_storage_share_directory": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StorageSync/storageSyncServices/sync1/syncGroups/syncgroup1/cloudEndpoints/cloudEndpoint1
+	"azurerm_storage_sync_cloud_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_sync_group_id }}/cloudEndpoints/{{ .external_name }}"),
+	// https://example.table.core.windows.net/table1(PartitionKey='samplepartition',RowKey='samplerow')
+	"azurerm_storage_table_entity": config.IdentifierFromProvider,
 }
