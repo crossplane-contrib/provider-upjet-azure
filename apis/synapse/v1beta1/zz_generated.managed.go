@@ -403,6 +403,72 @@ func (mg *PrivateLinkHub) SetWriteConnectionSecretToReference(r *xpv1.SecretRefe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this RoleAssignment.
+func (mg *RoleAssignment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this RoleAssignment.
+func (mg *RoleAssignment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this RoleAssignment.
+func (mg *RoleAssignment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this RoleAssignment.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *RoleAssignment) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this RoleAssignment.
+func (mg *RoleAssignment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this RoleAssignment.
+func (mg *RoleAssignment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this RoleAssignment.
+func (mg *RoleAssignment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this RoleAssignment.
+func (mg *RoleAssignment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this RoleAssignment.
+func (mg *RoleAssignment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this RoleAssignment.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *RoleAssignment) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this RoleAssignment.
+func (mg *RoleAssignment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this RoleAssignment.
+func (mg *RoleAssignment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SQLPool.
 func (mg *SQLPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -1060,5 +1126,71 @@ func (mg *WorkspaceSecurityAlertPolicy) SetPublishConnectionDetailsTo(r *xpv1.Pu
 
 // SetWriteConnectionSecretToReference of this WorkspaceSecurityAlertPolicy.
 func (mg *WorkspaceSecurityAlertPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this WorkspaceVulnerabilityAssessment.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *WorkspaceVulnerabilityAssessment) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this WorkspaceVulnerabilityAssessment.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *WorkspaceVulnerabilityAssessment) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

@@ -61,6 +61,15 @@ func (l *PrivateLinkHubList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this RoleAssignmentList.
+func (l *RoleAssignmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SQLPoolExtendedAuditingPolicyList.
 func (l *SQLPoolExtendedAuditingPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -144,6 +153,15 @@ func (l *WorkspaceList) GetItems() []resource.Managed {
 
 // GetItems of this WorkspaceSecurityAlertPolicyList.
 func (l *WorkspaceSecurityAlertPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkspaceVulnerabilityAssessmentList.
+func (l *WorkspaceVulnerabilityAssessmentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

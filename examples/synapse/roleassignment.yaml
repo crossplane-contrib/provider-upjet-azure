@@ -1,0 +1,112 @@
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "principalId cannot be obtained and need to be hardcoded"
+    meta.upbound.io/example-id: synapse/v1beta1/roleassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: roleassignment
+spec:
+  forProvider:
+    principalId: ${data.azurerm_client_config.current.object_id}
+    roleName: Synapse SQL Administrator
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role-workspace-label
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/roleassignment
+  labels:
+    testing.upbound.io/example-name: roleassignment-rg-label
+  name: roleassignment-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/roleassignment
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: accountforroleassignment
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: roleassignment-rg-label
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/roleassignment
+  labels:
+    testing.upbound.io/example-name: file-system-label
+  name: file-system
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: FirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/roleassignment
+  labels:
+    testing.upbound.io/example-name: rule-label
+  name: rule
+spec:
+  forProvider:
+    endIpAddress: 255.255.255.255
+    startIpAddress: 0.0.0.0
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role-workspace-label
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/roleassignment
+  labels:
+    testing.upbound.io/example-name: role-workspace-label
+  name: role-workspace
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: roleassignment-rg-label
+    sqlAdministratorLogin: sqladminuser
+    sqlAdministratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: file-system-label
