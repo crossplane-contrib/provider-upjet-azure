@@ -547,6 +547,7 @@ import (
 	linkedservice "github.com/upbound/provider-azure/internal/controller/synapse/linkedservice"
 	managedprivateendpointsynapse "github.com/upbound/provider-azure/internal/controller/synapse/managedprivateendpoint"
 	privatelinkhub "github.com/upbound/provider-azure/internal/controller/synapse/privatelinkhub"
+	roleassignmentsynapse "github.com/upbound/provider-azure/internal/controller/synapse/roleassignment"
 	sparkpool "github.com/upbound/provider-azure/internal/controller/synapse/sparkpool"
 	sqlpool "github.com/upbound/provider-azure/internal/controller/synapse/sqlpool"
 	sqlpoolextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/synapse/sqlpoolextendedauditingpolicy"
@@ -557,6 +558,7 @@ import (
 	workspaceaadadmin "github.com/upbound/provider-azure/internal/controller/synapse/workspaceaadadmin"
 	workspaceextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspaceextendedauditingpolicy"
 	workspacesecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspacesecurityalertpolicy"
+	workspacevulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/synapse/workspacevulnerabilityassessment"
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
 	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
 	functionappslot "github.com/upbound/provider-azure/internal/controller/web/functionappslot"
@@ -1110,6 +1112,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		linkedservice.Setup,
 		managedprivateendpointsynapse.Setup,
 		privatelinkhub.Setup,
+		roleassignmentsynapse.Setup,
 		sparkpool.Setup,
 		sqlpool.Setup,
 		sqlpoolextendedauditingpolicy.Setup,
@@ -1120,6 +1123,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		workspaceaadadmin.Setup,
 		workspaceextendedauditingpolicy.Setup,
 		workspacesecurityalertpolicy.Setup,
+		workspacevulnerabilityassessment.Setup,
 		appserviceplan.Setup,
 		functionapp.Setup,
 		functionappslot.Setup,

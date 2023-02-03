@@ -208,6 +208,32 @@ func (mg *PrivateLinkHub) ResolveReferences(ctx context.Context, c client.Reader
 	return nil
 }
 
+// ResolveReferences of this RoleAssignment.
+func (mg *RoleAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SynapseWorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SynapseWorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.SynapseWorkspaceIDSelector,
+		To: reference.To{
+			List:    &WorkspaceList{},
+			Managed: &Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SynapseWorkspaceID")
+	}
+	mg.Spec.ForProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SQLPool.
 func (mg *SQLPool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -594,6 +620,32 @@ func (mg *WorkspaceSecurityAlertPolicy) ResolveReferences(ctx context.Context, c
 	}
 	mg.Spec.ForProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this WorkspaceVulnerabilityAssessment.
+func (mg *WorkspaceVulnerabilityAssessment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceSecurityAlertPolicyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.WorkspaceSecurityAlertPolicyIDRef,
+		Selector:     mg.Spec.ForProvider.WorkspaceSecurityAlertPolicyIDSelector,
+		To: reference.To{
+			List:    &WorkspaceSecurityAlertPolicyList{},
+			Managed: &WorkspaceSecurityAlertPolicy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceSecurityAlertPolicyID")
+	}
+	mg.Spec.ForProvider.WorkspaceSecurityAlertPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceSecurityAlertPolicyIDRef = rsp.ResolvedReference
 
 	return nil
 }

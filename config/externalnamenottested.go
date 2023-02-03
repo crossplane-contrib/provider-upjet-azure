@@ -262,9 +262,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// synapse
 	//
-	// Synapse Role Assignment can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1|000000000000
-	"azurerm_synapse_role_assignment": config.IdentifierFromProvider,
 	// Synapse SQL Pool Vulnerability Assessment can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/sqlPools/sqlPool1/vulnerabilityAssessments/default
 	"azurerm_synapse_sql_pool_vulnerability_assessment": config.TemplatedStringAsIdentifier("", "{{ .parameters.sql_pool_id }}/vulnerabilityAssessments/default"),
@@ -542,11 +539,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"azurerm_app_service_slot_custom_hostname_binding": config.TemplatedStringAsIdentifier("hostname", "{{ .parameters.app_service_slot_id }}/hostNameBindings/{{ .external_name }}"),
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1/slots/slot1
 	"azurerm_app_service_source_control_slot": config.IdentifierFromProvider,
-
-	// synapse
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Synapse/workspaces/workspace1/vulnerabilityAssessments/default
-	"azurerm_synapse_workspace_vulnerability_assessment": config.IdentifierFromProvider,
 
 	// timeseriesinsights
 	//
