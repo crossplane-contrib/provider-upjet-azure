@@ -1,0 +1,80 @@
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: ClusterManagedPrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/clustermanagedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    groupId: blob
+    privateLinkResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    privateLinkResourceRegionSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    requestMessage: Please Approve
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: kusto.azure.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/clustermanagedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 1
+      name: Dev(No SLA)_Standard_D11_v2
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/clustermanagedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/clustermanagedprivateendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

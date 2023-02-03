@@ -849,37 +849,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.TimeSeriesInsights/environments/environment1/eventSources/example
 	"azurerm_iot_time_series_insights_event_source_eventhub": config.TemplatedStringAsIdentifier("name", "{{ .parameters.environment_id }}/eventSources/{{ .external_name }}"),
 
-	// iotcentral
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.IoTCentral/iotApps/app1
-	"azurerm_iotcentral_application_network_rule_set": config.IdentifierFromProvider,
-
-	// iothub
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Devices/iotHubs/example/certificates/example
-	"azurerm_iothub_certificate": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/iotHubs/{{ .parameters.iothub_name }}/certificates/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DeviceUpdate/accounts/account1
-	"azurerm_iothub_device_update_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DeviceUpdate/accounts/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.DeviceUpdate/accounts/account1/instances/instance1
-	"azurerm_iothub_device_update_instance": config.TemplatedStringAsIdentifier("name", "{{ .parameters.device_update_account_id }}/instances/{{ .external_name }}"),
-
-	// key_vault
-	//
-	// https://example-keyvault.vault.azure.net/certificates/contacts
-	"azurerm_key_vault_certificate_contacts": config.IdentifierFromProvider,
-
-	// kubernetes_fleet
-	//
-	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}
-	"azurerm_kubernetes_fleet_manager": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerService/fleets/{{ .external_name }}"),
-
-	// kusto
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Kusto/Clusters/cluster1/ManagedPrivateEndpoints/managedPrivateEndpoint1
-	"azurerm_kusto_cluster_managed_private_endpoint": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Kusto/Clusters/{{ .parameters.cluster_name }}/ManagedPrivateEndpoints/{{ .external_name }}"),
-	// Sentinel Fusion Alert Rules can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.OperationalInsights/workspaces/workspace1/providers/Microsoft.SecurityInsights/alertRules/rule1
-
 	// logz
 	//
 	// logz Monitors can be imported using the resource id
@@ -1042,6 +1011,16 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"azurerm_virtual_desktop_host_pool_registration_info": config.TemplatedStringAsIdentifier("", "{{ .parameters.hostpool_id }}/registrationInfo/default"),
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/plan1
 	"azurerm_virtual_desktop_scaling_plan": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/scalingPlans/{{ .external_name }}"),
+
+	// key_vault
+	//
+	// https://example-keyvault.vault.azure.net/certificates/contacts
+	"azurerm_key_vault_certificate_contacts": config.IdentifierFromProvider,
+
+	// iothub
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Devices/iotHubs/example/certificates/example
+	"azurerm_iothub_certificate": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/iotHubs/{{ .parameters.iothub_name }}/certificates/{{ .external_name }}"),
 
 	// virtual_hub
 	//
