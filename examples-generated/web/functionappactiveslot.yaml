@@ -66,3 +66,49 @@ spec:
 
 ---
 
+apiVersion: web.azure.upbound.io/v1beta1
+kind: WindowsFunctionApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteConfig:
+    - {}
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: WindowsFunctionAppSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    functionAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteConfig:
+    - {}
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

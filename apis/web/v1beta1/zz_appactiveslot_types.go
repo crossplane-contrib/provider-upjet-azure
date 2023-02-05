@@ -32,16 +32,16 @@ type AppActiveSlotParameters struct {
 
 	// The ID of the Slot to swap with Production.
 	// The ID of the Slot to swap with `Production`.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.LinuxWebAppSlot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.WindowsWebAppSlot
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SlotID *string `json:"slotId,omitempty" tf:"slot_id,omitempty"`
 
-	// Reference to a LinuxWebAppSlot in web to populate slotId.
+	// Reference to a WindowsWebAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
 	SlotIDRef *v1.Reference `json:"slotIdRef,omitempty" tf:"-"`
 
-	// Selector for a LinuxWebAppSlot in web to populate slotId.
+	// Selector for a WindowsWebAppSlot in web to populate slotId.
 	// +kubebuilder:validation:Optional
 	SlotIDSelector *v1.Selector `json:"slotIdSelector,omitempty" tf:"-"`
 }

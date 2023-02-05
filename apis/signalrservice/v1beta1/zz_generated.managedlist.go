@@ -51,3 +51,12 @@ func (l *WebPubsubList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this WebPubsubNetworkACLList.
+func (l *WebPubsubNetworkACLList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: appactiveslots.web.azure.upbound.io
+  name: webpubsubnetworkacls.signalrservice.azure.upbound.io
 spec:
-  group: web.azure.upbound.io
+  group: signalrservice.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: AppActiveSlot
-    listKind: AppActiveSlotList
-    plural: appactiveslots
-    singular: appactiveslot
+    kind: WebPubsubNetworkACL
+    listKind: WebPubsubNetworkACLList
+    plural: webpubsubnetworkacls
+    singular: webpubsubnetworkacl
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: AppActiveSlot is the Schema for the AppActiveSlots API. Manages
-          a Web App Active Slot.
+        description: WebPubsubNetworkACL is the Schema for the WebPubsubNetworkACLs
+          API. Manages the Network ACL for a Web Pubsub service.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: AppActiveSlotSpec defines the desired state of AppActiveSlot
+            description: WebPubsubNetworkACLSpec defines the desired state of WebPubsubNetworkACL
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,21 +64,140 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  overwriteNetworkConfig:
-                    description: The swap action should overwrite the Production slot's
-                      network configuration with the configuration from this slot.
-                      Defaults to true. Changing this forces a new resource to be
-                      created. The swap action should overwrite the Production slot's
-                      network configuration with the configuration from this slot.
-                      Defaults to `true`.
-                    type: boolean
-                  slotId:
-                    description: The ID of the Slot to swap with Production. The ID
-                      of the Slot to swap with `Production`.
+                  defaultAction:
+                    description: The default action to control the network access
+                      when no other rule matches. Possible values are Allow and Deny.
+                      Defaults to Deny.
                     type: string
-                  slotIdRef:
-                    description: Reference to a WindowsWebAppSlot in web to populate
-                      slotId.
+                  privateEndpoint:
+                    description: A private_endpoint block as defined below.
+                    items:
+                      properties:
+                        allowedRequestTypes:
+                          description: The allowed request types for the Private Endpoint
+                            Connection. Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                        deniedRequestTypes:
+                          description: The denied request types for the Private Endpoint
+                            Connection. Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                        id:
+                          description: The ID of the Private Endpoint which is based
+                            on the Web Pubsub service.
+                          type: string
+                        idRef:
+                          description: Reference to a PrivateEndpoint in network to
+                            populate id.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        idSelector:
+                          description: Selector for a PrivateEndpoint in network to
+                            populate id.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
+                  publicNetwork:
+                    description: A public_network block as defined below.
+                    items:
+                      properties:
+                        allowedRequestTypes:
+                          description: The allowed request types for the public network.
+                            Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                        deniedRequestTypes:
+                          description: The denied request types for the public network.
+                            Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  webPubsubId:
+                    description: The ID of the Web Pubsub service. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  webPubsubIdRef:
+                    description: Reference to a WebPubsub in signalrservice to populate
+                      webPubsubId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,9 +230,9 @@ spec:
                     required:
                     - name
                     type: object
-                  slotIdSelector:
-                    description: Selector for a WindowsWebAppSlot in web to populate
-                      slotId.
+                  webPubsubIdSelector:
+                    description: Selector for a WebPubsub in signalrservice to populate
+                      webPubsubId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -151,6 +270,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - publicNetwork
                 type: object
               providerConfigRef:
                 default:
@@ -324,16 +445,12 @@ spec:
             - forProvider
             type: object
           status:
-            description: AppActiveSlotStatus defines the observed state of AppActiveSlot.
+            description: WebPubsubNetworkACLStatus defines the observed state of WebPubsubNetworkACL.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Web App Active Slot
-                    type: string
-                  lastSuccessfulSwap:
-                    description: The timestamp of the last successful swap with Production.
-                      The timestamp of the last successful swap with `Production`
+                    description: The ID of the Web Pubsub service.
                     type: string
                 type: object
               conditions:

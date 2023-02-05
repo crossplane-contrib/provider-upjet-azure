@@ -200,3 +200,47 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	return nil
 }
+
+// ResolveReferences of this WebPubsubNetworkACL.
+func (mg *WebPubsubNetworkACL) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateEndpoint); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpoint[i3].ID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.PrivateEndpoint[i3].IDRef,
+			Selector:     mg.Spec.ForProvider.PrivateEndpoint[i3].IDSelector,
+			To: reference.To{
+				List:    &v1beta1.PrivateEndpointList{},
+				Managed: &v1beta1.PrivateEndpoint{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PrivateEndpoint[i3].ID")
+		}
+		mg.Spec.ForProvider.PrivateEndpoint[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PrivateEndpoint[i3].IDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebPubsubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.WebPubsubIDRef,
+		Selector:     mg.Spec.ForProvider.WebPubsubIDSelector,
+		To: reference.To{
+			List:    &WebPubsubList{},
+			Managed: &WebPubsub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WebPubsubID")
+	}
+	mg.Spec.ForProvider.WebPubsubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WebPubsubIDRef = rsp.ResolvedReference
+
+	return nil
+}

@@ -979,3 +979,303 @@ func (tr *AppActiveSlot) LateInitialize(attrs []byte) (bool, error) {
 func (tr *AppActiveSlot) GetTerraformSchemaVersion() int {
 	return 0
 }
+
+// GetTerraformResourceType returns Terraform resource type for this WindowsFunctionApp
+func (mg *WindowsFunctionApp) GetTerraformResourceType() string {
+	return "azurerm_windows_function_app"
+}
+
+// GetConnectionDetailsMapping for this WindowsFunctionApp
+func (tr *WindowsFunctionApp) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "spec.forProvider.authSettings[*].activeDirectory[*].clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "spec.forProvider.authSettings[*].facebook[*].appSecretSecretRef", "auth_settings[*].github[*].client_secret": "spec.forProvider.authSettings[*].github[*].clientSecretSecretRef", "auth_settings[*].google[*].client_secret": "spec.forProvider.authSettings[*].google[*].clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "spec.forProvider.authSettings[*].microsoft[*].clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "spec.forProvider.authSettings[*].twitter[*].consumerSecretSecretRef", "backup[*].storage_account_url": "spec.forProvider.backup[*].storageAccountUrlSecretRef", "connection_string[*].value": "spec.forProvider.connectionString[*].valueSecretRef", "custom_domain_verification_id": "status.atProvider.customDomainVerificationId", "site_config[*].application_insights_connection_string": "spec.forProvider.siteConfig[*].applicationInsightsConnectionStringSecretRef", "site_config[*].application_insights_key": "spec.forProvider.siteConfig[*].applicationInsightsKeySecretRef", "storage_account[*].access_key": "spec.forProvider.storageAccount[*].accessKeySecretRef", "storage_account_access_key": "spec.forProvider.storageAccountAccessKeySecretRef"}
+}
+
+// GetObservation of this WindowsFunctionApp
+func (tr *WindowsFunctionApp) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this WindowsFunctionApp
+func (tr *WindowsFunctionApp) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this WindowsFunctionApp
+func (tr *WindowsFunctionApp) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this WindowsFunctionApp
+func (tr *WindowsFunctionApp) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this WindowsFunctionApp
+func (tr *WindowsFunctionApp) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this WindowsFunctionApp using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *WindowsFunctionApp) LateInitialize(attrs []byte) (bool, error) {
+	params := &WindowsFunctionAppParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("KeyVaultReferenceIdentityID"))
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *WindowsFunctionApp) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this WindowsFunctionAppSlot
+func (mg *WindowsFunctionAppSlot) GetTerraformResourceType() string {
+	return "azurerm_windows_function_app_slot"
+}
+
+// GetConnectionDetailsMapping for this WindowsFunctionAppSlot
+func (tr *WindowsFunctionAppSlot) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "spec.forProvider.authSettings[*].activeDirectory[*].clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "spec.forProvider.authSettings[*].facebook[*].appSecretSecretRef", "auth_settings[*].github[*].client_secret": "spec.forProvider.authSettings[*].github[*].clientSecretSecretRef", "auth_settings[*].google[*].client_secret": "spec.forProvider.authSettings[*].google[*].clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "spec.forProvider.authSettings[*].microsoft[*].clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "spec.forProvider.authSettings[*].twitter[*].consumerSecretSecretRef", "backup[*].storage_account_url": "spec.forProvider.backup[*].storageAccountUrlSecretRef", "connection_string[*].value": "spec.forProvider.connectionString[*].valueSecretRef", "custom_domain_verification_id": "status.atProvider.customDomainVerificationId", "site_config[*].application_insights_connection_string": "spec.forProvider.siteConfig[*].applicationInsightsConnectionStringSecretRef", "site_config[*].application_insights_key": "spec.forProvider.siteConfig[*].applicationInsightsKeySecretRef", "storage_account[*].access_key": "spec.forProvider.storageAccount[*].accessKeySecretRef", "storage_account_access_key": "spec.forProvider.storageAccountAccessKeySecretRef"}
+}
+
+// GetObservation of this WindowsFunctionAppSlot
+func (tr *WindowsFunctionAppSlot) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this WindowsFunctionAppSlot
+func (tr *WindowsFunctionAppSlot) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this WindowsFunctionAppSlot
+func (tr *WindowsFunctionAppSlot) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this WindowsFunctionAppSlot
+func (tr *WindowsFunctionAppSlot) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this WindowsFunctionAppSlot
+func (tr *WindowsFunctionAppSlot) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this WindowsFunctionAppSlot using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *WindowsFunctionAppSlot) LateInitialize(attrs []byte) (bool, error) {
+	params := &WindowsFunctionAppSlotParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("KeyVaultReferenceIdentityID"))
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *WindowsFunctionAppSlot) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this WindowsWebApp
+func (mg *WindowsWebApp) GetTerraformResourceType() string {
+	return "azurerm_windows_web_app"
+}
+
+// GetConnectionDetailsMapping for this WindowsWebApp
+func (tr *WindowsWebApp) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "spec.forProvider.authSettings[*].activeDirectory[*].clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "spec.forProvider.authSettings[*].facebook[*].appSecretSecretRef", "auth_settings[*].github[*].client_secret": "spec.forProvider.authSettings[*].github[*].clientSecretSecretRef", "auth_settings[*].google[*].client_secret": "spec.forProvider.authSettings[*].google[*].clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "spec.forProvider.authSettings[*].microsoft[*].clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "spec.forProvider.authSettings[*].twitter[*].consumerSecretSecretRef", "backup[*].storage_account_url": "spec.forProvider.backup[*].storageAccountUrlSecretRef", "connection_string[*].value": "spec.forProvider.connectionString[*].valueSecretRef", "custom_domain_verification_id": "status.atProvider.customDomainVerificationId", "logs[*].http_logs[*].azure_blob_storage[*].sas_url": "spec.forProvider.logs[*].httpLogs[*].azureBlobStorage[*].sasUrlSecretRef", "storage_account[*].access_key": "spec.forProvider.storageAccount[*].accessKeySecretRef"}
+}
+
+// GetObservation of this WindowsWebApp
+func (tr *WindowsWebApp) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this WindowsWebApp
+func (tr *WindowsWebApp) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this WindowsWebApp
+func (tr *WindowsWebApp) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this WindowsWebApp
+func (tr *WindowsWebApp) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this WindowsWebApp
+func (tr *WindowsWebApp) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this WindowsWebApp using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *WindowsWebApp) LateInitialize(attrs []byte) (bool, error) {
+	params := &WindowsWebAppParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("KeyVaultReferenceIdentityID"))
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *WindowsWebApp) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this WindowsWebAppSlot
+func (mg *WindowsWebAppSlot) GetTerraformResourceType() string {
+	return "azurerm_windows_web_app_slot"
+}
+
+// GetConnectionDetailsMapping for this WindowsWebAppSlot
+func (tr *WindowsWebAppSlot) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "spec.forProvider.authSettings[*].activeDirectory[*].clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "spec.forProvider.authSettings[*].facebook[*].appSecretSecretRef", "auth_settings[*].github[*].client_secret": "spec.forProvider.authSettings[*].github[*].clientSecretSecretRef", "auth_settings[*].google[*].client_secret": "spec.forProvider.authSettings[*].google[*].clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "spec.forProvider.authSettings[*].microsoft[*].clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "spec.forProvider.authSettings[*].twitter[*].consumerSecretSecretRef", "backup[*].storage_account_url": "spec.forProvider.backup[*].storageAccountUrlSecretRef", "connection_string[*].value": "spec.forProvider.connectionString[*].valueSecretRef", "custom_domain_verification_id": "status.atProvider.customDomainVerificationId", "logs[*].http_logs[*].azure_blob_storage[*].sas_url": "spec.forProvider.logs[*].httpLogs[*].azureBlobStorage[*].sasUrlSecretRef", "storage_account[*].access_key": "spec.forProvider.storageAccount[*].accessKeySecretRef"}
+}
+
+// GetObservation of this WindowsWebAppSlot
+func (tr *WindowsWebAppSlot) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this WindowsWebAppSlot
+func (tr *WindowsWebAppSlot) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this WindowsWebAppSlot
+func (tr *WindowsWebAppSlot) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this WindowsWebAppSlot
+func (tr *WindowsWebAppSlot) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this WindowsWebAppSlot
+func (tr *WindowsWebAppSlot) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this WindowsWebAppSlot using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *WindowsWebAppSlot) LateInitialize(attrs []byte) (bool, error) {
+	params := &WindowsWebAppSlotParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("KeyVaultReferenceIdentityID"))
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *WindowsWebAppSlot) GetTerraformSchemaVersion() int {
+	return 0
+}

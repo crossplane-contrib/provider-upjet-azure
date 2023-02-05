@@ -1,16 +1,18 @@
 apiVersion: web.azure.upbound.io/v1beta1
-kind: AppActiveSlot
+kind: WindowsWebAppSlot
 metadata:
   annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+    meta.upbound.io/example-id: web/v1beta1/windowswebappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    slotIdSelector:
+    appServiceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    siteConfig:
+    - {}
 
 ---
 
@@ -18,7 +20,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+    meta.upbound.io/example-id: web/v1beta1/windowswebappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -32,7 +34,7 @@ apiVersion: web.azure.upbound.io/v1beta1
 kind: ServicePlan
 metadata:
   annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+    meta.upbound.io/example-id: web/v1beta1/windowswebappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -51,7 +53,7 @@ apiVersion: web.azure.upbound.io/v1beta1
 kind: WindowsWebApp
 metadata:
   annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+    meta.upbound.io/example-id: web/v1beta1/windowswebappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -62,24 +64,6 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     servicePlanIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    siteConfig:
-    - {}
-
----
-
-apiVersion: web.azure.upbound.io/v1beta1
-kind: WindowsWebAppSlot
-metadata:
-  annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    appServiceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     siteConfig:

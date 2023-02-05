@@ -1,14 +1,19 @@
 apiVersion: web.azure.upbound.io/v1beta1
-kind: AppActiveSlot
+kind: WindowsFunctionAppSlot
 metadata:
   annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    slotIdSelector:
+    functionAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteConfig:
+    - {}
+    storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
@@ -18,7 +23,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -32,7 +37,7 @@ apiVersion: web.azure.upbound.io/v1beta1
 kind: ServicePlan
 metadata:
   annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -43,15 +48,34 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: P1v2
+    skuName: Y1
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionappslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
 apiVersion: web.azure.upbound.io/v1beta1
-kind: WindowsWebApp
+kind: WindowsFunctionApp
 metadata:
   annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionappslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -66,24 +90,9 @@ spec:
         testing.upbound.io/example-name: example
     siteConfig:
     - {}
-
----
-
-apiVersion: web.azure.upbound.io/v1beta1
-kind: WindowsWebAppSlot
-metadata:
-  annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    appServiceIdSelector:
+    storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    siteConfig:
-    - {}
 
 ---
 

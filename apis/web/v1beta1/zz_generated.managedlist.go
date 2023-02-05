@@ -123,3 +123,39 @@ func (l *StaticSiteList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this WindowsFunctionAppList.
+func (l *WindowsFunctionAppList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WindowsFunctionAppSlotList.
+func (l *WindowsFunctionAppSlotList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WindowsWebAppList.
+func (l *WindowsWebAppList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WindowsWebAppSlotList.
+func (l *WindowsWebAppSlotList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

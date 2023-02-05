@@ -1,0 +1,93 @@
+apiVersion: web.azure.upbound.io/v1beta1
+kind: WindowsFunctionApp
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionapp
+  labels:
+    testing.upbound.io/example-name: example
+  name: windowsfunctionappnameaa
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionapp-rg
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionapp-sp
+    siteConfig:
+      - {}
+    storageAccountAccessKeySecretRef:
+      key: example-key
+      name: example-name
+      namespace: upbound-system
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionappacc
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: bXJ06E6nNnr/j4kemUlz2B/n4MqILTG9MwQdIuXY4gQmillkI7nt5heqaYEDXH2JV2DG4lwwpK86+ASt2+ta+Q==
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionapp
+  labels:
+    testing.upbound.io/example-name: winfunctionapp-rg
+  name: winfunctionapp-rg
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionapp
+  labels:
+    testing.upbound.io/example-name: winfunctionapp-sp
+  name: winfunctionapp-rg
+spec:
+  forProvider:
+    location: East US
+    osType: Windows
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionapp-rg
+    skuName: S1
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: web/v1beta1/windowsfunctionapp
+  labels:
+    testing.upbound.io/example-name: winfunctionappacc
+  name: winfunctionappacc
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: winfunctionapp-rg
