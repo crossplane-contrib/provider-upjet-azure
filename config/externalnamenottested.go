@@ -670,15 +670,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.TimeSeriesInsights/environments/environment1/eventSources/example
 	"azurerm_iot_time_series_insights_event_source_eventhub": config.TemplatedStringAsIdentifier("name", "{{ .parameters.environment_id }}/eventSources/{{ .external_name }}"),
 
-	// logz
-	//
-	// logz Monitors can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logz/monitors/monitor1
-	"azurerm_logz_monitor": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logz/monitors/{{ .external_name }}"),
-	// logz Tag Rules can be imported using the resource id
-	//  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logz/monitors/monitor1/tagRules/ruleSet1
-	"azurerm_logz_tag_rule": config.TemplatedStringAsIdentifier("", "{{ .parameters.logz_monitor_id }}/tagRules/default"),
-
 	// machinelearningservices
 	//
 	// Machine Learning Workspace can be imported using the resource id
@@ -864,33 +855,12 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1/slots/slot1
 	"azurerm_windows_web_app_slot": config.TemplatedStringAsIdentifier("name", "{{ .parameters.app_service_id }}/slots/{{ .external_name }}"),
 
-	// logz
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logz/monitors/monitor1/accounts/subAccount1
-	"azurerm_logz_sub_account": config.TemplatedStringAsIdentifier("name", "{{ .parameters.logz_monitor_id }}/accounts/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logz/monitors/monitor1/accounts/subAccount1/tagRules/ruleSet1
-	"azurerm_logz_sub_account_tag_rule": config.IdentifierFromProvider,
-
-	// media_job
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.Media/mediaServices/account1/transforms/transform1/jobs/job1
-	"azurerm_media_job": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaServices/{{ .parameters.media_services_account_name }}/transforms/{{ .parameters.transform_name }}/jobs/{{ .external_name }}"),
-
 	// mssql
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/acceptanceTestResourceGroup1/providers/Microsoft.Sql/managedInstances/instance1/securityAlertPolicies/Default
 	"azurerm_mssql_managed_instance_security_alert_policy": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Sql/managedInstances/{{ .parameters.managed_instance_name }}/securityAlertPolicies/{{ .external_name }}"),
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.Sql/managedInstances/instance1/encryptionProtector/current
 	"azurerm_mssql_managed_instance_transparent_data_encryption": config.TemplatedStringAsIdentifier("", "{{ .parameters.managed_instance_id }}/encryptionProtector/current"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Sql/servers/sqlServer1/devOpsAuditingSettings/default
-	"azurerm_mssql_server_microsoft_support_auditing_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/devOpsAuditingSettings/default"),
-
-	// network_manager
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/networkManagers/networkManager1
-	"azurerm_network_manager": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/networkManagers/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/networkManagers/networkManager1/networkGroups/networkGroup1
-	"azurerm_network_manager_network_group": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/networkGroups/{{ .external_name }}"),
 
 	// nginx
 	//

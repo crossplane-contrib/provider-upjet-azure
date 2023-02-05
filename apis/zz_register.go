@@ -57,6 +57,7 @@ import (
 	v1beta1kusto "github.com/upbound/provider-azure/apis/kusto/v1beta1"
 	v1beta1labservices "github.com/upbound/provider-azure/apis/labservices/v1beta1"
 	v1beta1logic "github.com/upbound/provider-azure/apis/logic/v1beta1"
+	v1beta1logz "github.com/upbound/provider-azure/apis/logz/v1beta1"
 	v1beta1managedidentity "github.com/upbound/provider-azure/apis/managedidentity/v1beta1"
 	v1beta1management "github.com/upbound/provider-azure/apis/management/v1beta1"
 	v1beta1maps "github.com/upbound/provider-azure/apis/maps/v1beta1"
@@ -145,6 +146,7 @@ func init() {
 		v1beta1kusto.SchemeBuilder.AddToScheme,
 		v1beta1labservices.SchemeBuilder.AddToScheme,
 		v1beta1logic.SchemeBuilder.AddToScheme,
+		v1beta1logz.SchemeBuilder.AddToScheme,
 		v1beta1managedidentity.SchemeBuilder.AddToScheme,
 		v1beta1management.SchemeBuilder.AddToScheme,
 		v1beta1maps.SchemeBuilder.AddToScheme,

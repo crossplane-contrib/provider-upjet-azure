@@ -345,6 +345,10 @@ import (
 	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/logic/apptriggerrecurrence"
 	appworkflow "github.com/upbound/provider-azure/internal/controller/logic/appworkflow"
 	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
+	monitor "github.com/upbound/provider-azure/internal/controller/logz/monitor"
+	subaccount "github.com/upbound/provider-azure/internal/controller/logz/subaccount"
+	subaccounttagrule "github.com/upbound/provider-azure/internal/controller/logz/subaccounttagrule"
+	tagrule "github.com/upbound/provider-azure/internal/controller/logz/tagrule"
 	federatedidentitycredential "github.com/upbound/provider-azure/internal/controller/managedidentity/federatedidentitycredential"
 	userassignedidentity "github.com/upbound/provider-azure/internal/controller/managedidentity/userassignedidentity"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
@@ -354,6 +358,7 @@ import (
 	asset "github.com/upbound/provider-azure/internal/controller/media/asset"
 	assetfilter "github.com/upbound/provider-azure/internal/controller/media/assetfilter"
 	contentkeypolicy "github.com/upbound/provider-azure/internal/controller/media/contentkeypolicy"
+	job "github.com/upbound/provider-azure/internal/controller/media/job"
 	liveevent "github.com/upbound/provider-azure/internal/controller/media/liveevent"
 	liveeventoutput "github.com/upbound/provider-azure/internal/controller/media/liveeventoutput"
 	servicesaccount "github.com/upbound/provider-azure/internal/controller/media/servicesaccount"
@@ -408,6 +413,8 @@ import (
 	loadbalancerprobe "github.com/upbound/provider-azure/internal/controller/network/loadbalancerprobe"
 	loadbalancerrule "github.com/upbound/provider-azure/internal/controller/network/loadbalancerrule"
 	localnetworkgateway "github.com/upbound/provider-azure/internal/controller/network/localnetworkgateway"
+	manager "github.com/upbound/provider-azure/internal/controller/network/manager"
+	managernetworkgroup "github.com/upbound/provider-azure/internal/controller/network/managernetworkgroup"
 	natgateway "github.com/upbound/provider-azure/internal/controller/network/natgateway"
 	natgatewaypublicipassociation "github.com/upbound/provider-azure/internal/controller/network/natgatewaypublicipassociation"
 	natgatewaypublicipprefixassociation "github.com/upbound/provider-azure/internal/controller/network/natgatewaypublicipprefixassociation"
@@ -543,6 +550,7 @@ import (
 	mssqloutboundfirewallrule "github.com/upbound/provider-azure/internal/controller/sql/mssqloutboundfirewallrule"
 	mssqlserver "github.com/upbound/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlserverdnsalias "github.com/upbound/provider-azure/internal/controller/sql/mssqlserverdnsalias"
+	mssqlservermicrosoftsupportauditingpolicy "github.com/upbound/provider-azure/internal/controller/sql/mssqlservermicrosoftsupportauditingpolicy"
 	mssqlservertransparentdataencryption "github.com/upbound/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	mssqlvirtualnetworkrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
 	accountstorage "github.com/upbound/provider-azure/internal/controller/storage/account"
@@ -569,7 +577,7 @@ import (
 	storagesync "github.com/upbound/provider-azure/internal/controller/storagesync/storagesync"
 	clusterstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/cluster"
 	functionjavascriptuda "github.com/upbound/provider-azure/internal/controller/streamanalytics/functionjavascriptuda"
-	job "github.com/upbound/provider-azure/internal/controller/streamanalytics/job"
+	jobstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/job"
 	managedprivateendpointstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/managedprivateendpoint"
 	outputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputblob"
 	outputeventhub "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputeventhub"
@@ -959,6 +967,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerrecurrence.Setup,
 		appworkflow.Setup,
 		integrationserviceenvironment.Setup,
+		monitor.Setup,
+		subaccount.Setup,
+		subaccounttagrule.Setup,
+		tagrule.Setup,
 		federatedidentitycredential.Setup,
 		userassignedidentity.Setup,
 		managementgroup.Setup,
@@ -968,6 +980,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		asset.Setup,
 		assetfilter.Setup,
 		contentkeypolicy.Setup,
+		job.Setup,
 		liveevent.Setup,
 		liveeventoutput.Setup,
 		servicesaccount.Setup,
@@ -1022,6 +1035,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancerprobe.Setup,
 		loadbalancerrule.Setup,
 		localnetworkgateway.Setup,
+		manager.Setup,
+		managernetworkgroup.Setup,
 		natgateway.Setup,
 		natgatewaypublicipassociation.Setup,
 		natgatewaypublicipprefixassociation.Setup,
@@ -1157,6 +1172,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mssqloutboundfirewallrule.Setup,
 		mssqlserver.Setup,
 		mssqlserverdnsalias.Setup,
+		mssqlservermicrosoftsupportauditingpolicy.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		mssqlvirtualnetworkrule.Setup,
 		accountstorage.Setup,
@@ -1183,7 +1199,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		storagesync.Setup,
 		clusterstreamanalytics.Setup,
 		functionjavascriptuda.Setup,
-		job.Setup,
+		jobstreamanalytics.Setup,
 		managedprivateendpointstreamanalytics.Setup,
 		outputblob.Setup,
 		outputeventhub.Setup,

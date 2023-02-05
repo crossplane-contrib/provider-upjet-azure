@@ -126,6 +126,100 @@ func (mg *ContentKeyPolicy) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
+// ResolveReferences of this Job.
+func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.InputAsset); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InputAsset[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.InputAsset[i3].NameRef,
+			Selector:     mg.Spec.ForProvider.InputAsset[i3].NameSelector,
+			To: reference.To{
+				List:    &AssetList{},
+				Managed: &Asset{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.InputAsset[i3].Name")
+		}
+		mg.Spec.ForProvider.InputAsset[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.InputAsset[i3].NameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.MediaServicesAccountNameRef,
+		Selector:     mg.Spec.ForProvider.MediaServicesAccountNameSelector,
+		To: reference.To{
+			List:    &ServicesAccountList{},
+			Managed: &ServicesAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MediaServicesAccountName")
+	}
+	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OutputAsset); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OutputAsset[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.OutputAsset[i3].NameRef,
+			Selector:     mg.Spec.ForProvider.OutputAsset[i3].NameSelector,
+			To: reference.To{
+				List:    &AssetList{},
+				Managed: &Asset{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OutputAsset[i3].Name")
+		}
+		mg.Spec.ForProvider.OutputAsset[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OutputAsset[i3].NameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransformName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.TransformNameRef,
+		Selector:     mg.Spec.ForProvider.TransformNameSelector,
+		To: reference.To{
+			List:    &TransformList{},
+			Managed: &Transform{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TransformName")
+	}
+	mg.Spec.ForProvider.TransformName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransformNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this LiveEvent.
 func (mg *LiveEvent) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
