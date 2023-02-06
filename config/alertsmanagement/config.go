@@ -18,4 +18,20 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+	p.AddResourceConfigurator("azurerm_monitor_alert_processing_rule_action_group", func(r *config.Resource) {
+		r.References["add_action_group_ids"] = config.Reference{
+			Type:      "github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["scopes"] = config.Reference{
+			Type:      "github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+	p.AddResourceConfigurator("azurerm_monitor_alert_processing_rule_suppression", func(r *config.Resource) {
+		r.References["scopes"] = config.Reference{
+			Type:      "github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

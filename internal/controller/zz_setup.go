@@ -11,6 +11,8 @@ import (
 
 	monitoractionruleactiongroup "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionruleactiongroup"
 	monitoractionrulesuppression "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionrulesuppression"
+	monitoralertprocessingruleactiongroup "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoralertprocessingruleactiongroup"
+	monitoralertprocessingrulesuppression "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoralertprocessingrulesuppression"
 	monitorsmartdetectoralertrule "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitorsmartdetectoralertrule"
 	server "github.com/upbound/provider-azure/internal/controller/analysisservices/server"
 	api "github.com/upbound/provider-azure/internal/controller/apimanagement/api"
@@ -279,10 +281,14 @@ import (
 	monitoractiongroup "github.com/upbound/provider-azure/internal/controller/insights/monitoractiongroup"
 	monitoractivitylogalert "github.com/upbound/provider-azure/internal/controller/insights/monitoractivitylogalert"
 	monitorautoscalesetting "github.com/upbound/provider-azure/internal/controller/insights/monitorautoscalesetting"
+	monitordatacollectionendpoint "github.com/upbound/provider-azure/internal/controller/insights/monitordatacollectionendpoint"
+	monitordatacollectionrule "github.com/upbound/provider-azure/internal/controller/insights/monitordatacollectionrule"
+	monitordatacollectionruleassociation "github.com/upbound/provider-azure/internal/controller/insights/monitordatacollectionruleassociation"
 	monitormetricalert "github.com/upbound/provider-azure/internal/controller/insights/monitormetricalert"
 	monitorprivatelinkscope "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscope"
 	monitorprivatelinkscopedservice "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscopedservice"
 	monitorscheduledqueryrulesalert "github.com/upbound/provider-azure/internal/controller/insights/monitorscheduledqueryrulesalert"
+	monitorscheduledqueryrulesalertv2 "github.com/upbound/provider-azure/internal/controller/insights/monitorscheduledqueryrulesalertv2"
 	monitorscheduledqueryruleslog "github.com/upbound/provider-azure/internal/controller/insights/monitorscheduledqueryruleslog"
 	application "github.com/upbound/provider-azure/internal/controller/iotcentral/application"
 	applicationnetworkruleset "github.com/upbound/provider-azure/internal/controller/iotcentral/applicationnetworkruleset"
@@ -304,10 +310,12 @@ import (
 	eventgriddataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventgriddataconnection"
 	eventhubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventhubdataconnection"
 	iothubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/iothubdataconnection"
+	labserviceplan "github.com/upbound/provider-azure/internal/controller/labservices/labserviceplan"
 	appactioncustom "github.com/upbound/provider-azure/internal/controller/logic/appactioncustom"
 	appactionhttp "github.com/upbound/provider-azure/internal/controller/logic/appactionhttp"
 	appintegrationaccount "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccount"
 	appintegrationaccountbatchconfiguration "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccountbatchconfiguration"
+	appintegrationaccountpartner "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccountpartner"
 	appintegrationaccountschema "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccountschema"
 	appintegrationaccountsession "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccountsession"
 	apptriggercustom "github.com/upbound/provider-azure/internal/controller/logic/apptriggercustom"
@@ -431,6 +439,8 @@ import (
 	loganalyticsdatasourcewindowsperformancecounter "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticsdatasourcewindowsperformancecounter"
 	loganalyticslinkedservice "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticslinkedservice"
 	loganalyticslinkedstorageaccount "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticslinkedstorageaccount"
+	loganalyticsquerypack "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticsquerypack"
+	loganalyticsquerypackquery "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticsquerypackquery"
 	loganalyticssavedsearch "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticssavedsearch"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
 	loganalyticssolution "github.com/upbound/provider-azure/internal/controller/operationsmanagement/loganalyticssolution"
@@ -561,6 +571,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		monitoractionruleactiongroup.Setup,
 		monitoractionrulesuppression.Setup,
+		monitoralertprocessingruleactiongroup.Setup,
+		monitoralertprocessingrulesuppression.Setup,
 		monitorsmartdetectoralertrule.Setup,
 		server.Setup,
 		api.Setup,
@@ -829,10 +841,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		monitoractiongroup.Setup,
 		monitoractivitylogalert.Setup,
 		monitorautoscalesetting.Setup,
+		monitordatacollectionendpoint.Setup,
+		monitordatacollectionrule.Setup,
+		monitordatacollectionruleassociation.Setup,
 		monitormetricalert.Setup,
 		monitorprivatelinkscope.Setup,
 		monitorprivatelinkscopedservice.Setup,
 		monitorscheduledqueryrulesalert.Setup,
+		monitorscheduledqueryrulesalertv2.Setup,
 		monitorscheduledqueryruleslog.Setup,
 		application.Setup,
 		applicationnetworkruleset.Setup,
@@ -854,10 +870,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventgriddataconnection.Setup,
 		eventhubdataconnection.Setup,
 		iothubdataconnection.Setup,
+		labserviceplan.Setup,
 		appactioncustom.Setup,
 		appactionhttp.Setup,
 		appintegrationaccount.Setup,
 		appintegrationaccountbatchconfiguration.Setup,
+		appintegrationaccountpartner.Setup,
 		appintegrationaccountschema.Setup,
 		appintegrationaccountsession.Setup,
 		apptriggercustom.Setup,
@@ -981,6 +999,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loganalyticsdatasourcewindowsperformancecounter.Setup,
 		loganalyticslinkedservice.Setup,
 		loganalyticslinkedstorageaccount.Setup,
+		loganalyticsquerypack.Setup,
+		loganalyticsquerypackquery.Setup,
 		loganalyticssavedsearch.Setup,
 		workspaceoperationalinsights.Setup,
 		loganalyticssolution.Setup,

@@ -13,10 +13,10 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CriteriaDimensionObservation struct {
+type MonitorScheduledQueryRulesLogCriteriaDimensionObservation struct {
 }
 
-type CriteriaDimensionParameters struct {
+type MonitorScheduledQueryRulesLogCriteriaDimensionParameters struct {
 
 	// Name of the dimension.
 	// +kubebuilder:validation:Required
@@ -38,7 +38,7 @@ type MonitorScheduledQueryRulesLogCriteriaParameters struct {
 
 	// A dimension block as defined below.
 	// +kubebuilder:validation:Required
-	Dimension []CriteriaDimensionParameters `json:"dimension" tf:"dimension,omitempty"`
+	Dimension []MonitorScheduledQueryRulesLogCriteriaDimensionParameters `json:"dimension" tf:"dimension,omitempty"`
 
 	// Name of the metric. Supported metrics are listed in the Azure Monitor Microsoft.OperationalInsights/workspaces metrics namespace.
 	// +kubebuilder:validation:Required

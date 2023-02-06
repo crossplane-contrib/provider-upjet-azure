@@ -84,6 +84,108 @@ func (mg *MonitorActionRuleSuppression) ResolveReferences(ctx context.Context, c
 	return nil
 }
 
+// ResolveReferences of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AddActionGroupIds),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.ForProvider.AddActionGroupIdsRefs,
+		Selector:      mg.Spec.ForProvider.AddActionGroupIdsSelector,
+		To: reference.To{
+			List:    &v1beta1.MonitorActionGroupList{},
+			Managed: &v1beta1.MonitorActionGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AddActionGroupIds")
+	}
+	mg.Spec.ForProvider.AddActionGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.AddActionGroupIdsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scopes),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.ForProvider.ScopesRefs,
+		Selector:      mg.Spec.ForProvider.ScopesSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Scopes")
+	}
+	mg.Spec.ForProvider.Scopes = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ScopesRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Scopes),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.ForProvider.ScopesRefs,
+		Selector:      mg.Spec.ForProvider.ScopesSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Scopes")
+	}
+	mg.Spec.ForProvider.Scopes = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ScopesRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
 // ResolveReferences of this MonitorSmartDetectorAlertRule.
 func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

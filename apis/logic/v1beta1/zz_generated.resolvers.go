@@ -135,6 +135,48 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences(ctx context
 	return nil
 }
 
+// ResolveReferences of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IntegrationAccountName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.ForProvider.IntegrationAccountNameRef,
+		Selector:     mg.Spec.ForProvider.IntegrationAccountNameSelector,
+		To: reference.To{
+			List:    &AppIntegrationAccountList{},
+			Managed: &AppIntegrationAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IntegrationAccountName")
+	}
+	mg.Spec.ForProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IntegrationAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this AppIntegrationAccountSchema.
 func (mg *AppIntegrationAccountSchema) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

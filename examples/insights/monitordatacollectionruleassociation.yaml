@@ -1,0 +1,169 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorDataCollectionRuleAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionruleassociation
+  labels:
+    testing.upbound.io/example-name: example1
+  name: mdcraexample
+spec:
+  forProvider:
+    dataCollectionRuleIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: example
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: LinuxVirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta1/monitordatacollectionruleassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: mdcraexample
+spec:
+  forProvider:
+    adminSshKey:
+    - publicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+wWK73dCr+jgQOAxNsHAnNNNMEMWOHYEccp6wJm2gotpr9katuF/ZAdou5AaW1C61slRkHRkpRRX9FA9CYBiitZgvCCz+3nWNN7l/Up54Zps/pHWGZLHNJZRYyAB6j5yVLMVHIHriY49d/GZTZVNB8GoJv9Gakwc/fuEZYYl4YDFiGMBP///TzlI4jhiJzjKnEvqPFki5p2ZRJqcbCiF4pJrxUQR/RXqVFQdbRLZgYfJ8xGB878RENq3yQ39d8dVOkq4edbkzwcUmwwwkYVPIoDGsYLaRHnG+To7FvMeyO7xDVQkMKzopTQV8AuKpyvpqu0a9pWOMaiCyDytO7GGN you@me.com
+      username: adminuser
+    adminUsername: adminuser
+    disablePasswordAuthentication: true
+    location: West Europe
+    networkInterfaceIdsRefs:
+    - name: mdcraexample
+    osDisk:
+    - caching: ReadWrite
+      name: myosdisk-example
+      storageAccountType: Standard_LRS
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    size: Standard_B2s
+    sourceImageReference:
+    - offer: UbuntuServer
+      publisher: Canonical
+      sku: 16.04-LTS
+      version: latest
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorDataCollectionEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionruleassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: mdcraexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorDataCollectionRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionruleassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: mdcraexample
+spec:
+  forProvider:
+    dataFlow:
+    - destinations:
+      - example-destination-metrics
+      streams:
+      - Microsoft-InsightsMetrics
+    destinations:
+    - azureMonitorMetrics:
+      - name: example-destination-metrics
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionruleassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: mdcraexample
+spec:
+  forProvider:
+    ipConfiguration:
+    - name: internal
+      privateIpAddressAllocation: Dynamic
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionruleassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: mdcraexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionruleassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: mdcraexample
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionruleassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: mdcraexample
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
