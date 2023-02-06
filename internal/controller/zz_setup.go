@@ -476,7 +476,9 @@ import (
 	securitycentersetting "github.com/upbound/provider-azure/internal/controller/security/securitycentersetting"
 	securitycentersubscriptionpricing "github.com/upbound/provider-azure/internal/controller/security/securitycentersubscriptionpricing"
 	securitycenterworkspace "github.com/upbound/provider-azure/internal/controller/security/securitycenterworkspace"
+	sentinelalertrulemssecurityincident "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelalertrulemssecurityincident"
 	sentinelautomationrule "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelautomationrule"
+	sentineldataconnectoriot "github.com/upbound/provider-azure/internal/controller/securityinsights/sentineldataconnectoriot"
 	sentinelwatchlist "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelwatchlist"
 	namespaceauthorizationruleservicebus "github.com/upbound/provider-azure/internal/controller/servicebus/namespaceauthorizationrule"
 	namespacedisasterrecoveryconfigservicebus "github.com/upbound/provider-azure/internal/controller/servicebus/namespacedisasterrecoveryconfig"
@@ -1049,7 +1051,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitycentersetting.Setup,
 		securitycentersubscriptionpricing.Setup,
 		securitycenterworkspace.Setup,
+		sentinelalertrulemssecurityincident.Setup,
 		sentinelautomationrule.Setup,
+		sentineldataconnectoriot.Setup,
 		sentinelwatchlist.Setup,
 		namespaceauthorizationruleservicebus.Setup,
 		namespacedisasterrecoveryconfigservicebus.Setup,

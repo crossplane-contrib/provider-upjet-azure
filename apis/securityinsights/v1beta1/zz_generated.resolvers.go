@@ -14,8 +14,60 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this SentinelAlertRuleMSSecurityIncident.
+func (mg *SentinelAlertRuleMSSecurityIncident) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+		Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+		Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.LogAnalyticsSolutionList{},
+			Managed: &v1beta1.LogAnalyticsSolution{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
+	}
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SentinelAutomationRule.
 func (mg *SentinelAutomationRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+		Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+		Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.LogAnalyticsSolutionList{},
+			Managed: &v1beta1.LogAnalyticsSolution{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
+	}
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SentinelDataConnectorIOT.
+func (mg *SentinelDataConnectorIOT) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
