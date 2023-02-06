@@ -1,0 +1,36 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorDataCollectionEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: monitor_data_collection_endpoint example
+    kind: Windows
+    location: West Europe
+    publicNetworkAccessEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      foo: bar
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

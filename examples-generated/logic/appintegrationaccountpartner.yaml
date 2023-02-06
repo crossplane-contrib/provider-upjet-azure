@@ -1,0 +1,55 @@
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppIntegrationAccountPartner
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appintegrationaccountpartner
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    businessIdentity:
+    - qualifier: ZZ
+      value: AA
+    integrationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppIntegrationAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appintegrationaccountpartner
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-ia
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appintegrationaccountpartner
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

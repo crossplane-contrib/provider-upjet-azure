@@ -276,6 +276,58 @@ func (mg *LogAnalyticsLinkedStorageAccount) ResolveReferences(ctx context.Contex
 	return nil
 }
 
+// ResolveReferences of this LogAnalyticsQueryPack.
+func (mg *LogAnalyticsQueryPack) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this LogAnalyticsQueryPackQuery.
+func (mg *LogAnalyticsQueryPackQuery) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueryPackID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.QueryPackIDRef,
+		Selector:     mg.Spec.ForProvider.QueryPackIDSelector,
+		To: reference.To{
+			List:    &LogAnalyticsQueryPackList{},
+			Managed: &LogAnalyticsQueryPack{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.QueryPackID")
+	}
+	mg.Spec.ForProvider.QueryPackID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.QueryPackIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this LogAnalyticsSavedSearch.
 func (mg *LogAnalyticsSavedSearch) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

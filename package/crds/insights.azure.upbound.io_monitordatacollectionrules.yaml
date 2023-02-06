@@ -1,0 +1,714 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: monitordatacollectionrules.insights.azure.upbound.io
+spec:
+  group: insights.azure.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - azure
+    kind: MonitorDataCollectionRule
+    listKind: MonitorDataCollectionRuleList
+    plural: monitordatacollectionrules
+    singular: monitordatacollectionrule
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: MonitorDataCollectionRule is the Schema for the MonitorDataCollectionRules
+          API. Manages a Data Collection Rule.
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: MonitorDataCollectionRuleSpec defines the desired state of
+              MonitorDataCollectionRule
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  dataFlow:
+                    description: One or more data_flow blocks as defined below.
+                    items:
+                      properties:
+                        destinations:
+                          description: Specifies a list of destination names. A azure_monitor_metrics
+                            data source only allows for stream of kind Microsoft-InsightsMetrics.
+                          items:
+                            type: string
+                          type: array
+                        streams:
+                          description: Specifies a list of streams. Possible values
+                            include but not limited to Microsoft-Event, Microsoft-InsightsMetrics,
+                            Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
+                          items:
+                            type: string
+                          type: array
+                      required:
+                      - destinations
+                      - streams
+                      type: object
+                    type: array
+                  dataSources:
+                    description: A data_sources block as defined below. This property
+                      is optional and can be omitted if the rule is meant to be used
+                      via direct calls to the provisioned endpoint.
+                    items:
+                      properties:
+                        extension:
+                          description: One or more extension blocks as defined below.
+                          items:
+                            properties:
+                              extensionJson:
+                                description: A JSON String which specifies the extension
+                                  setting.
+                                type: string
+                              extensionName:
+                                description: The name of the VM extension.
+                                type: string
+                              inputDataSources:
+                                description: 'Specifies a list of data sources this
+                                  extension needs data from. An item should be a name
+                                  of a supported data source which produces only one
+                                  stream. Supported data sources type: performance_counter,
+                                  windows_event_log,and syslog.'
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to. Possible values include but not limited to Microsoft-Event,and
+                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
+                                  and Microsoft-SecurityEvent.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - extensionName
+                            - name
+                            - streams
+                            type: object
+                          type: array
+                        performanceCounter:
+                          description: One or more performance_counter blocks as defined
+                            below.
+                          items:
+                            properties:
+                              counterSpecifiers:
+                                description: Specifies a list of specifier names of
+                                  the performance counters you want to collect. Use
+                                  a wildcard * to collect counters for all instances.
+                                  To get a list of performance counters on Windows,
+                                  run the command typeperf.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              samplingFrequencyInSeconds:
+                                description: The number of seconds between consecutive
+                                  counter measurements (samples). The value should
+                                  be integer between 1 and 300 inclusive.
+                                type: number
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to. Possible values include but not limited to Microsoft-Event,and
+                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
+                                  and Microsoft-SecurityEvent.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - counterSpecifiers
+                            - name
+                            - samplingFrequencyInSeconds
+                            - streams
+                            type: object
+                          type: array
+                        syslog:
+                          description: One or more syslog blocks as defined below.
+                          items:
+                            properties:
+                              facilityNames:
+                                description: Specifies a list of facility names. Use
+                                  a wildcard * to collect logs for all facility names.
+                                  Possible values are auth, authpriv, cron, daemon,
+                                  kern, lpr, mail, mark, news, syslog, user, uucp,
+                                  local0, local1, local2, local3, local4, local5,
+                                  local6, local7,and *.
+                                items:
+                                  type: string
+                                type: array
+                              logLevels:
+                                description: Specifies a list of log levels. Use a
+                                  wildcard * to collect logs for all log levels. Possible
+                                  values are Debug, Info, Notice, Warning, Error,
+                                  Critical, Alert, Emergency,and *.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to. Possible values include but not limited to Microsoft-Event,and
+                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
+                                  and Microsoft-SecurityEvent.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - facilityNames
+                            - logLevels
+                            - name
+                            type: object
+                          type: array
+                        windowsEventLog:
+                          description: One or more windows_event_log blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to. Possible values include but not limited to Microsoft-Event,and
+                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
+                                  and Microsoft-SecurityEvent.
+                                items:
+                                  type: string
+                                type: array
+                              xPathQueries:
+                                description: Specifies a list of Windows Event Log
+                                  queries in XPath expression.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - name
+                            - streams
+                            - xPathQueries
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: The description of the Data Collection Rule.
+                    type: string
+                  destinations:
+                    description: A destinations block as defined below.
+                    items:
+                      properties:
+                        azureMonitorMetrics:
+                          description: A azure_monitor_metrics block as defined above.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        logAnalytics:
+                          description: One or more log_analytics blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              workspaceResourceId:
+                                description: The ID of a Log Analytic Workspace resource.
+                                type: string
+                              workspaceResourceIdRef:
+                                description: Reference to a Workspace in operationalinsights
+                                  to populate workspaceResourceId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              workspaceResourceIdSelector:
+                                description: Selector for a Workspace in operationalinsights
+                                  to populate workspaceResourceId.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  kind:
+                    description: The kind of the Data Collection Rule. Possible values
+                      are Linux and Windows. A rule of kind Linux does not allow for
+                      windows_event_log data sources. And a rule of kind Windows does
+                      not allow for syslog data sources. If kind is not specified,
+                      all kinds of data sources are allowed.
+                    type: string
+                  location:
+                    description: The Azure Region where the Data Collection Rule should
+                      exist. Changing this forces a new Data Collection Rule to be
+                      created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Data Collection
+                      Rule should exist. Changing this forces a new Data Collection
+                      Rule to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Data Collection Rule.
+                    type: object
+                required:
+                - dataFlow
+                - destinations
+                - location
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: MonitorDataCollectionRuleStatus defines the observed state
+              of MonitorDataCollectionRule.
+            properties:
+              atProvider:
+                properties:
+                  id:
+                    description: The ID of the Data Collection Rule.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

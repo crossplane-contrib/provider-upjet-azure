@@ -1,0 +1,130 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorDataCollectionRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFlow:
+    - destinations:
+      - test-destination-metrics
+      streams:
+      - Microsoft-InsightsMetrics
+    - destinations:
+      - test-destination-log
+      streams:
+      - Microsoft-InsightsMetrics
+      - Microsoft-Syslog
+      - Microsoft-Perf
+    dataSources:
+    - extension:
+      - extensionJson: |-
+          ${jsonencode({
+                  a = 1
+                  b = "hello"
+                })}
+        extensionName: test-extension-name
+        inputDataSources:
+        - test-datasource-wineventlog
+        name: test-datasource-extension
+        streams:
+        - Microsoft-WindowsEvent
+      performanceCounter:
+      - counterSpecifiers:
+        - Processor(*)\% Processor Time
+        name: test-datasource-perfcounter
+        samplingFrequencyInSeconds: 10
+        streams:
+        - Microsoft-Perf
+        - Microsoft-InsightsMetrics
+      syslog:
+      - facilityNames:
+        - '*'
+        logLevels:
+        - '*'
+        name: test-datasource-syslog
+      windowsEventLog:
+      - name: test-datasource-wineventlog
+        streams:
+        - Microsoft-WindowsEvent
+        xPathQueries:
+        - '*[System/Level=1]'
+    description: data collection rule example
+    destinations:
+    - azureMonitorMetrics:
+      - name: test-destination-metrics
+      logAnalytics:
+      - name: test-destination-log
+        workspaceResourceIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      foo: bar
+
+---
+
+apiVersion: operationsmanagement.azure.upbound.io/v1beta1
+kind: LogAnalyticsSolution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    plan:
+    - product: OMSGallery/WindowsEventForwarding
+      publisher: Microsoft
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    solutionName: WindowsEventForwarding
+    workspaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    workspaceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
