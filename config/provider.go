@@ -29,6 +29,7 @@ import (
 	"github.com/upbound/provider-azure/config/automation"
 	"github.com/upbound/provider-azure/config/base"
 	"github.com/upbound/provider-azure/config/cache"
+	"github.com/upbound/provider-azure/config/cdn"
 	"github.com/upbound/provider-azure/config/common"
 	"github.com/upbound/provider-azure/config/compute"
 	"github.com/upbound/provider-azure/config/consumption"
@@ -132,6 +133,8 @@ var skipList = []string{
 	"azurerm_disk_pool_iscsi_target",
 	// DEPRECATED: azurerm_service_plan should be used instead
 	"azurerm_app_service_source_control_token",
+	// DEPRECATED:
+	"azurerm_cdn_frontdoor_route_disable_link_to_default_domain",
 }
 
 // GetProvider returns provider configuration
@@ -193,6 +196,7 @@ func GetProvider() *tjconfig.Provider {
 		costmanagement.Configure,
 		automation.Configure,
 		web.Configure,
+		cdn.Configure,
 	} {
 		configure(pc)
 	}

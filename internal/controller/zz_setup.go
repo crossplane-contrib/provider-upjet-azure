@@ -94,6 +94,15 @@ import (
 	redisfirewallrule "github.com/upbound/provider-azure/internal/controller/cache/redisfirewallrule"
 	redislinkedserver "github.com/upbound/provider-azure/internal/controller/cache/redislinkedserver"
 	endpoint "github.com/upbound/provider-azure/internal/controller/cdn/endpoint"
+	frontdoorcustomdomain "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorcustomdomain"
+	frontdoorcustomdomainassociation "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorcustomdomainassociation"
+	frontdoorendpoint "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorendpoint"
+	frontdoororigin "github.com/upbound/provider-azure/internal/controller/cdn/frontdoororigin"
+	frontdoororigingroup "github.com/upbound/provider-azure/internal/controller/cdn/frontdoororigingroup"
+	frontdoorprofile "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorprofile"
+	frontdoorroute "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorroute"
+	frontdoorrule "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorrule"
+	frontdoorruleset "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorruleset"
 	profile "github.com/upbound/provider-azure/internal/controller/cdn/profile"
 	accountcognitiveservices "github.com/upbound/provider-azure/internal/controller/cognitiveservices/account"
 	service "github.com/upbound/provider-azure/internal/controller/communication/service"
@@ -628,6 +637,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		redisfirewallrule.Setup,
 		redislinkedserver.Setup,
 		endpoint.Setup,
+		frontdoorcustomdomain.Setup,
+		frontdoorcustomdomainassociation.Setup,
+		frontdoorendpoint.Setup,
+		frontdoororigin.Setup,
+		frontdoororigingroup.Setup,
+		frontdoorprofile.Setup,
+		frontdoorroute.Setup,
+		frontdoorrule.Setup,
+		frontdoorruleset.Setup,
 		profile.Setup,
 		accountcognitiveservices.Setup,
 		service.Setup,
