@@ -52,6 +52,24 @@ func (l *LogAnalyticsLinkedStorageAccountList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this LogAnalyticsQueryPackList.
+func (l *LogAnalyticsQueryPackList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this LogAnalyticsQueryPackQueryList.
+func (l *LogAnalyticsQueryPackQueryList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this LogAnalyticsSavedSearchList.
 func (l *LogAnalyticsSavedSearchList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

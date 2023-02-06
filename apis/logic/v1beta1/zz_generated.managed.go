@@ -271,6 +271,72 @@ func (mg *AppIntegrationAccountBatchConfiguration) SetWriteConnectionSecretToRef
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AppIntegrationAccountPartner.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccountPartner) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AppIntegrationAccountPartner.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AppIntegrationAccountPartner) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this AppIntegrationAccountSchema.
 func (mg *AppIntegrationAccountSchema) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

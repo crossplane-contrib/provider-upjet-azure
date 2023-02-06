@@ -139,6 +139,138 @@ func (mg *MonitorActionRuleSuppression) SetWriteConnectionSecretToReference(r *x
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MonitorAlertProcessingRuleActionGroup.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MonitorAlertProcessingRuleActionGroup) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MonitorAlertProcessingRuleActionGroup.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MonitorAlertProcessingRuleActionGroup) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleActionGroup.
+func (mg *MonitorAlertProcessingRuleActionGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MonitorAlertProcessingRuleSuppression.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MonitorAlertProcessingRuleSuppression) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MonitorAlertProcessingRuleSuppression.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MonitorAlertProcessingRuleSuppression) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MonitorAlertProcessingRuleSuppression.
+func (mg *MonitorAlertProcessingRuleSuppression) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MonitorSmartDetectorAlertRule.
 func (mg *MonitorSmartDetectorAlertRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

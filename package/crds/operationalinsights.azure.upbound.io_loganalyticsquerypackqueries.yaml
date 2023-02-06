@@ -1,0 +1,503 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: loganalyticsquerypackqueries.operationalinsights.azure.upbound.io
+spec:
+  group: operationalinsights.azure.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - azure
+    kind: LogAnalyticsQueryPackQuery
+    listKind: LogAnalyticsQueryPackQueryList
+    plural: loganalyticsquerypackqueries
+    singular: loganalyticsquerypackquery
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: LogAnalyticsQueryPackQuery is the Schema for the LogAnalyticsQueryPackQuerys
+          API. Manages a Log Analytics Query Pack Query.
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: LogAnalyticsQueryPackQuerySpec defines the desired state
+              of LogAnalyticsQueryPackQuery
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  additionalSettingsJson:
+                    description: The additional properties that can be set for the
+                      Log Analytics Query Pack Query.
+                    type: string
+                  body:
+                    description: The body of the Log Analytics Query Pack Query.
+                    type: string
+                  categories:
+                    description: A list of the related categories for the function.
+                      Possible values are applications, audit, container, databases,
+                      desktopanalytics, management, monitor, network, resources, security,
+                      virtualmachines, windowsvirtualdesktop and workloads.
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    description: The description of the Log Analytics Query Pack Query.
+                    type: string
+                  displayName:
+                    description: The unique display name for the query within the
+                      Log Analytics Query Pack.
+                    type: string
+                  name:
+                    description: An unique UUID/GUID which identifies this Log Analytics
+                      Query Pack Query - one will be generated if not specified. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  queryPackId:
+                    description: The ID of the Log Analytics Query Pack. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  queryPackIdRef:
+                    description: Reference to a LogAnalyticsQueryPack in operationalinsights
+                      to populate queryPackId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  queryPackIdSelector:
+                    description: Selector for a LogAnalyticsQueryPack in operationalinsights
+                      to populate queryPackId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  resourceTypes:
+                    description: A list of the related resource types for the function.
+                      Possible values are default, microsoft.aad/domainservices, microsoft.aadiam/tenants,
+                      microsoft.agfoodplatform/farmbeats, microsoft.analysisservices/servers,
+                      microsoft.apimanagement/service, microsoft.appconfiguration/configurationstores,
+                      microsoft.appplatform/spring, microsoft.attestation/attestationproviders,
+                      microsoft.authorization/tenants, microsoft.automation/automationaccounts,
+                      microsoft.autonomousdevelopmentplatform/accounts, microsoft.azurestackhci/virtualmachines,
+                      microsoft.batch/batchaccounts, microsoft.blockchain/blockchainmembers,
+                      microsoft.botservice/botservices, microsoft.cache/redis, microsoft.cdn/profiles,
+                      microsoft.cognitiveservices/accounts, microsoft.communication/communicationservices,
+                      microsoft.compute/virtualmachines, microsoft.compute/virtualmachinescalesets,
+                      microsoft.connectedcache/cachenodes, microsoft.connectedvehicle/platformaccounts,
+                      microsoft.conenctedvmwarevsphere/virtualmachines, microsoft.containerregistry/registries,
+                      microsoft.containerservice/managedclusters, microsoft.d365customerinsights/instances,
+                      microsoft.dashboard/grafana, microsoft.databricks/workspaces,
+                      microsoft.datacollaboration/workspaces, microsoft.datafactory/factories,
+                      microsoft.datalakeanalytics/accounts, microsoft.datalakestore/accounts,
+                      microsoft.datashare/accounts, microsoft.dbformariadb/servers,
+                      microsoft.dbformysql/servers, microsoft.dbforpostgresql/flexibleservers,
+                      microsoft.dbforpostgresql/servers, microsoft.dbforpostgresql/serversv2,
+                      microsoft.digitaltwins/digitaltwinsinstances, microsoft.documentdb/cassandraclusters,
+                      microsoft.documentdb/databaseaccounts, microsoft.desktopvirtualization/applicationgroups,
+                      microsoft.desktopvirtualization/hostpools, microsoft.desktopvirtualization/workspaces,
+                      microsoft.devices/iothubs, microsoft.devices/provisioningservices,
+                      microsoft.dynamics/fraudprotection/purchase, microsoft.eventgrid/domains,
+                      microsoft.eventgrid/topics, microsoft.eventgrid/partnernamespaces,
+                      microsoft.eventgrid/partnertopics, microsoft.eventgrid/systemtopics,
+                      microsoft.eventhub/namespaces, microsoft.experimentation/experimentworkspaces,
+                      microsoft.hdinsight/clusters, microsoft.healthcareapis/services,
+                      microsoft.informationprotection/datasecuritymanagement, microsoft.intune/operations,
+                      microsoft.insights/autoscalesettings, microsoft.insights/components,
+                      microsoft.insights/workloadmonitoring, microsoft.keyvault/vaults,
+                      microsoft.kubernetes/connectedclusters, microsoft.kusto/clusters,
+                      microsoft.loadtestservice/loadtests, microsoft.logic/workflows,
+                      microsoft.machinelearningservices/workspaces, microsoft.media/mediaservices,
+                      microsoft.netapp/netappaccounts/capacitypools, microsoft.network/applicationgateways,
+                      microsoft.network/azurefirewalls, microsoft.network/bastionhosts,
+                      microsoft.network/expressroutecircuits, microsoft.network/frontdoors,
+                      microsoft.network/loadbalancers, microsoft.network/networkinterfaces,
+                      microsoft.network/networksecuritygroups, microsoft.network/networksecurityperimeters,
+                      microsoft.network/networkwatchers/connectionmonitors, microsoft.network/networkwatchers/trafficanalytics,
+                      microsoft.network/publicipaddresses, microsoft.network/trafficmanagerprofiles,
+                      microsoft.network/virtualnetworks, microsoft.network/virtualnetworkgateways,
+                      microsoft.network/vpngateways, microsoft.networkfunction/azuretrafficcollectors,
+                      microsoft.openenergyplatform/energyservices, microsoft.openlogisticsplatform/workspaces,
+                      microsoft.operationalinsights/workspaces, microsoft.powerbi/tenants,
+                      microsoft.powerbi/tenants/workspaces, microsoft.powerbidedicated/capacities,
+                      microsoft.purview/accounts, microsoft.recoveryservices/vaults,
+                      microsoft.resources/azureactivity, microsoft.scvmm/virtualmachines,
+                      microsoft.search/searchservices, microsoft.security/antimalwaresettings,
+                      microsoft.securityinsights/amazon, microsoft.securityinsights/anomalies,
+                      microsoft.securityinsights/cef, microsoft.securityinsights/datacollection,
+                      microsoft.securityinsights/dnsnormalized, microsoft.securityinsights/mda,
+                      microsoft.securityinsights/mde, microsoft.securityinsights/mdi,
+                      microsoft.securityinsights/mdo, microsoft.securityinsights/networksessionnormalized,
+                      microsoft.securityinsights/office365, microsoft.securityinsights/purview,
+                      microsoft.securityinsights/securityinsights, microsoft.securityinsights/securityinsights/mcas,
+                      microsoft.securityinsights/tvm, microsoft.securityinsights/watchlists,
+                      microsoft.servicebus/namespaces, microsoft.servicefabric/clusters,
+                      microsoft.signalrservice/signalr, microsoft.signalrservice/webpubsub,
+                      microsoft.sql/managedinstances, microsoft.sql/servers, microsoft.sql/servers/databases,
+                      microsoft.storage/storageaccounts, microsoft.storagecache/caches,
+                      microsoft.streamanalytics/streamingjobs, microsoft.synapse/workspaces,
+                      microsoft.timeseriesinsights/environments, microsoft.videoindexer/accounts,
+                      microsoft.web/sites, microsoft.workloadmonitor/monitors, resourcegroup
+                      and subscription.
+                    items:
+                      type: string
+                    type: array
+                  solutions:
+                    description: A list of the related Log Analytics solutions for
+                      the function. Possible values are AADDomainServices, ADAssessment,
+                      ADAssessmentPlus, ADReplication, ADSecurityAssessment, AlertManagement,
+                      AntiMalware, ApplicationInsights, AzureAssessment, AzureSecurityOfThings,
+                      AzureSentinelDSRE, AzureSentinelPrivatePreview, BehaviorAnalyticsInsights,
+                      ChangeTracking, CompatibilityAssessment, ContainerInsights,
+                      Containers, CustomizedWindowsEventsFiltering, DeviceHealthProd,
+                      DnsAnalytics, ExchangeAssessment, ExchangeOnlineAssessment,
+                      IISAssessmentPlus, InfrastructureInsights, InternalWindowsEvent,
+                      LogManagement, Microsoft365Analytics, NetworkMonitoring, SCCMAssessmentPlus,
+                      SCOMAssessment, SCOMAssessmentPlus, Security, SecurityCenter,
+                      SecurityCenterFree, SecurityInsights, ServiceMap, SfBAssessment,
+                      SfBOnlineAssessment, SharePointOnlineAssessment, SPAssessment,
+                      SQLAdvancedThreatProtection, SQLAssessment, SQLAssessmentPlus,
+                      SQLDataClassification, SQLThreatDetection, SQLVulnerabilityAssessment,
+                      SurfaceHub, Updates, VMInsights, WEFInternalUat, WEF_10x, WEF_10xDSRE,
+                      WaaSUpdateInsights, WinLog, WindowsClientAssessmentPlus, WindowsEventForwarding,
+                      WindowsFirewall, WindowsServerAssessment, WireData and WireData2.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Log Analytics Query Pack Query.
+                    type: object
+                required:
+                - body
+                - displayName
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: LogAnalyticsQueryPackQueryStatus defines the observed state
+              of LogAnalyticsQueryPackQuery.
+            properties:
+              atProvider:
+                properties:
+                  id:
+                    description: The ID of the Log Analytics Query Pack Query.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

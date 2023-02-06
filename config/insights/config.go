@@ -40,4 +40,10 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+	p.AddResourceConfigurator("azurerm_monitor_scheduled_query_rules_alert_v2", func(r *config.Resource) {
+		r.References["scopes"] = config.Reference{
+			Type:      "ApplicationInsights",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

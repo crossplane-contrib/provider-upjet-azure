@@ -469,6 +469,204 @@ func (mg *MonitorAutoscaleSetting) SetWriteConnectionSecretToReference(r *xpv1.S
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MonitorDataCollectionEndpoint.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MonitorDataCollectionEndpoint) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MonitorDataCollectionEndpoint.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MonitorDataCollectionEndpoint) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MonitorDataCollectionRule.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MonitorDataCollectionRule) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MonitorDataCollectionRule.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MonitorDataCollectionRule) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MonitorDataCollectionRuleAssociation.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MonitorDataCollectionRuleAssociation) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MonitorDataCollectionRuleAssociation.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MonitorDataCollectionRuleAssociation) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MonitorMetricAlert.
 func (mg *MonitorMetricAlert) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -730,6 +928,72 @@ func (mg *MonitorScheduledQueryRulesAlert) SetPublishConnectionDetailsTo(r *xpv1
 
 // SetWriteConnectionSecretToReference of this MonitorScheduledQueryRulesAlert.
 func (mg *MonitorScheduledQueryRulesAlert) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MonitorScheduledQueryRulesAlertV2.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MonitorScheduledQueryRulesAlertV2) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MonitorScheduledQueryRulesAlertV2.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MonitorScheduledQueryRulesAlertV2) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
