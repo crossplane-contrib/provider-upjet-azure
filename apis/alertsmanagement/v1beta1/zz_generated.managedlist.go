@@ -25,6 +25,24 @@ func (l *MonitorActionRuleSuppressionList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this MonitorAlertProcessingRuleActionGroupList.
+func (l *MonitorAlertProcessingRuleActionGroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MonitorAlertProcessingRuleSuppressionList.
+func (l *MonitorAlertProcessingRuleSuppressionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this MonitorSmartDetectorAlertRuleList.
 func (l *MonitorSmartDetectorAlertRuleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
