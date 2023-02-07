@@ -604,3 +604,225 @@ func (tr *SiteRecoveryFabric) LateInitialize(attrs []byte) (bool, error) {
 func (tr *SiteRecoveryFabric) GetTerraformSchemaVersion() int {
 	return 0
 }
+
+// GetTerraformResourceType returns Terraform resource type for this SiteRecoveryProtectionContainer
+func (mg *SiteRecoveryProtectionContainer) GetTerraformResourceType() string {
+	return "azurerm_site_recovery_protection_container"
+}
+
+// GetConnectionDetailsMapping for this SiteRecoveryProtectionContainer
+func (tr *SiteRecoveryProtectionContainer) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SiteRecoveryProtectionContainer
+func (tr *SiteRecoveryProtectionContainer) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SiteRecoveryProtectionContainer
+func (tr *SiteRecoveryProtectionContainer) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SiteRecoveryProtectionContainer
+func (tr *SiteRecoveryProtectionContainer) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SiteRecoveryProtectionContainer
+func (tr *SiteRecoveryProtectionContainer) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SiteRecoveryProtectionContainer
+func (tr *SiteRecoveryProtectionContainer) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SiteRecoveryProtectionContainer using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SiteRecoveryProtectionContainer) LateInitialize(attrs []byte) (bool, error) {
+	params := &SiteRecoveryProtectionContainerParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SiteRecoveryProtectionContainer) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SiteRecoveryProtectionContainerMapping
+func (mg *SiteRecoveryProtectionContainerMapping) GetTerraformResourceType() string {
+	return "azurerm_site_recovery_protection_container_mapping"
+}
+
+// GetConnectionDetailsMapping for this SiteRecoveryProtectionContainerMapping
+func (tr *SiteRecoveryProtectionContainerMapping) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SiteRecoveryProtectionContainerMapping
+func (tr *SiteRecoveryProtectionContainerMapping) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SiteRecoveryProtectionContainerMapping
+func (tr *SiteRecoveryProtectionContainerMapping) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SiteRecoveryProtectionContainerMapping
+func (tr *SiteRecoveryProtectionContainerMapping) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SiteRecoveryProtectionContainerMapping
+func (tr *SiteRecoveryProtectionContainerMapping) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SiteRecoveryProtectionContainerMapping
+func (tr *SiteRecoveryProtectionContainerMapping) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SiteRecoveryProtectionContainerMapping using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SiteRecoveryProtectionContainerMapping) LateInitialize(attrs []byte) (bool, error) {
+	params := &SiteRecoveryProtectionContainerMappingParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SiteRecoveryProtectionContainerMapping) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SiteRecoveryReplicationPolicy
+func (mg *SiteRecoveryReplicationPolicy) GetTerraformResourceType() string {
+	return "azurerm_site_recovery_replication_policy"
+}
+
+// GetConnectionDetailsMapping for this SiteRecoveryReplicationPolicy
+func (tr *SiteRecoveryReplicationPolicy) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SiteRecoveryReplicationPolicy
+func (tr *SiteRecoveryReplicationPolicy) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SiteRecoveryReplicationPolicy
+func (tr *SiteRecoveryReplicationPolicy) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SiteRecoveryReplicationPolicy
+func (tr *SiteRecoveryReplicationPolicy) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SiteRecoveryReplicationPolicy
+func (tr *SiteRecoveryReplicationPolicy) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SiteRecoveryReplicationPolicy
+func (tr *SiteRecoveryReplicationPolicy) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SiteRecoveryReplicationPolicy using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SiteRecoveryReplicationPolicy) LateInitialize(attrs []byte) (bool, error) {
+	params := &SiteRecoveryReplicationPolicyParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SiteRecoveryReplicationPolicy) GetTerraformSchemaVersion() int {
+	return 0
+}

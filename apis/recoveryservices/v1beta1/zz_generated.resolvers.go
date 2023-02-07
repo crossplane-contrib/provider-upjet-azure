@@ -389,6 +389,212 @@ func (mg *SiteRecoveryFabric) ResolveReferences(ctx context.Context, c client.Re
 	return nil
 }
 
+// ResolveReferences of this SiteRecoveryProtectionContainer.
+func (mg *SiteRecoveryProtectionContainer) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryFabricName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RecoveryFabricNameRef,
+		Selector:     mg.Spec.ForProvider.RecoveryFabricNameSelector,
+		To: reference.To{
+			List:    &SiteRecoveryFabricList{},
+			Managed: &SiteRecoveryFabric{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryFabricName")
+	}
+	mg.Spec.ForProvider.RecoveryFabricName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryFabricNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
+		Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryVaultName")
+	}
+	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SiteRecoveryProtectionContainerMapping.
+func (mg *SiteRecoveryProtectionContainerMapping) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryFabricName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RecoveryFabricNameRef,
+		Selector:     mg.Spec.ForProvider.RecoveryFabricNameSelector,
+		To: reference.To{
+			List:    &SiteRecoveryFabricList{},
+			Managed: &SiteRecoveryFabric{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryFabricName")
+	}
+	mg.Spec.ForProvider.RecoveryFabricName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryFabricNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryReplicationPolicyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RecoveryReplicationPolicyIDRef,
+		Selector:     mg.Spec.ForProvider.RecoveryReplicationPolicyIDSelector,
+		To: reference.To{
+			List:    &SiteRecoveryReplicationPolicyList{},
+			Managed: &SiteRecoveryReplicationPolicy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryReplicationPolicyID")
+	}
+	mg.Spec.ForProvider.RecoveryReplicationPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryReplicationPolicyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoverySourceProtectionContainerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RecoverySourceProtectionContainerNameRef,
+		Selector:     mg.Spec.ForProvider.RecoverySourceProtectionContainerNameSelector,
+		To: reference.To{
+			List:    &SiteRecoveryProtectionContainerList{},
+			Managed: &SiteRecoveryProtectionContainer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RecoverySourceProtectionContainerName")
+	}
+	mg.Spec.ForProvider.RecoverySourceProtectionContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoverySourceProtectionContainerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryTargetProtectionContainerID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RecoveryTargetProtectionContainerIDRef,
+		Selector:     mg.Spec.ForProvider.RecoveryTargetProtectionContainerIDSelector,
+		To: reference.To{
+			List:    &SiteRecoveryProtectionContainerList{},
+			Managed: &SiteRecoveryProtectionContainer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryTargetProtectionContainerID")
+	}
+	mg.Spec.ForProvider.RecoveryTargetProtectionContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryTargetProtectionContainerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
+		Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryVaultName")
+	}
+	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SiteRecoveryReplicationPolicy.
+func (mg *SiteRecoveryReplicationPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RecoveryVaultName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.RecoveryVaultNameRef,
+		Selector:     mg.Spec.ForProvider.RecoveryVaultNameSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RecoveryVaultName")
+	}
+	mg.Spec.ForProvider.RecoveryVaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RecoveryVaultNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Vault.
 func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
