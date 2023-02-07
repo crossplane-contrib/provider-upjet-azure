@@ -457,6 +457,80 @@ func (tr *DataLakeGen2FileSystem) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this DataLakeGen2Path
+func (mg *DataLakeGen2Path) GetTerraformResourceType() string {
+	return "azurerm_storage_data_lake_gen2_path"
+}
+
+// GetConnectionDetailsMapping for this DataLakeGen2Path
+func (tr *DataLakeGen2Path) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this DataLakeGen2Path
+func (tr *DataLakeGen2Path) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this DataLakeGen2Path
+func (tr *DataLakeGen2Path) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this DataLakeGen2Path
+func (tr *DataLakeGen2Path) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this DataLakeGen2Path
+func (tr *DataLakeGen2Path) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this DataLakeGen2Path
+func (tr *DataLakeGen2Path) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this DataLakeGen2Path using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *DataLakeGen2Path) LateInitialize(attrs []byte) (bool, error) {
+	params := &DataLakeGen2PathParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *DataLakeGen2Path) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this EncryptionScope
 func (mg *EncryptionScope) GetTerraformResourceType() string {
 	return "azurerm_storage_encryption_scope"
@@ -827,6 +901,80 @@ func (tr *Share) GetTerraformSchemaVersion() int {
 	return 2
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ShareDirectory
+func (mg *ShareDirectory) GetTerraformResourceType() string {
+	return "azurerm_storage_share_directory"
+}
+
+// GetConnectionDetailsMapping for this ShareDirectory
+func (tr *ShareDirectory) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ShareDirectory
+func (tr *ShareDirectory) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ShareDirectory
+func (tr *ShareDirectory) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ShareDirectory
+func (tr *ShareDirectory) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ShareDirectory
+func (tr *ShareDirectory) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ShareDirectory
+func (tr *ShareDirectory) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ShareDirectory using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ShareDirectory) LateInitialize(attrs []byte) (bool, error) {
+	params := &ShareDirectoryParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ShareDirectory) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Table
 func (mg *Table) GetTerraformResourceType() string {
 	return "azurerm_storage_table"
@@ -899,4 +1047,78 @@ func (tr *Table) LateInitialize(attrs []byte) (bool, error) {
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Table) GetTerraformSchemaVersion() int {
 	return 2
+}
+
+// GetTerraformResourceType returns Terraform resource type for this TableEntity
+func (mg *TableEntity) GetTerraformResourceType() string {
+	return "azurerm_storage_table_entity"
+}
+
+// GetConnectionDetailsMapping for this TableEntity
+func (tr *TableEntity) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this TableEntity
+func (tr *TableEntity) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this TableEntity
+func (tr *TableEntity) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this TableEntity
+func (tr *TableEntity) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this TableEntity
+func (tr *TableEntity) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this TableEntity
+func (tr *TableEntity) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this TableEntity using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *TableEntity) LateInitialize(attrs []byte) (bool, error) {
+	params := &TableEntityParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *TableEntity) GetTerraformSchemaVersion() int {
+	return 0
 }

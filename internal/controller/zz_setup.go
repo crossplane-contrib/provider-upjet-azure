@@ -417,6 +417,11 @@ import (
 	profilenetwork "github.com/upbound/provider-azure/internal/controller/network/profile"
 	publicip "github.com/upbound/provider-azure/internal/controller/network/publicip"
 	publicipprefix "github.com/upbound/provider-azure/internal/controller/network/publicipprefix"
+	route "github.com/upbound/provider-azure/internal/controller/network/route"
+	routefilter "github.com/upbound/provider-azure/internal/controller/network/routefilter"
+	routemap "github.com/upbound/provider-azure/internal/controller/network/routemap"
+	routeserver "github.com/upbound/provider-azure/internal/controller/network/routeserver"
+	routeserverbgpconnection "github.com/upbound/provider-azure/internal/controller/network/routeserverbgpconnection"
 	routetable "github.com/upbound/provider-azure/internal/controller/network/routetable"
 	securitygroup "github.com/upbound/provider-azure/internal/controller/network/securitygroup"
 	securityrule "github.com/upbound/provider-azure/internal/controller/network/securityrule"
@@ -526,12 +531,15 @@ import (
 	blobinventorypolicy "github.com/upbound/provider-azure/internal/controller/storage/blobinventorypolicy"
 	container "github.com/upbound/provider-azure/internal/controller/storage/container"
 	datalakegen2filesystem "github.com/upbound/provider-azure/internal/controller/storage/datalakegen2filesystem"
+	datalakegen2path "github.com/upbound/provider-azure/internal/controller/storage/datalakegen2path"
 	encryptionscope "github.com/upbound/provider-azure/internal/controller/storage/encryptionscope"
 	managementpolicy "github.com/upbound/provider-azure/internal/controller/storage/managementpolicy"
 	objectreplication "github.com/upbound/provider-azure/internal/controller/storage/objectreplication"
 	queuestorage "github.com/upbound/provider-azure/internal/controller/storage/queue"
 	share "github.com/upbound/provider-azure/internal/controller/storage/share"
+	sharedirectory "github.com/upbound/provider-azure/internal/controller/storage/sharedirectory"
 	tablestorage "github.com/upbound/provider-azure/internal/controller/storage/table"
+	tableentity "github.com/upbound/provider-azure/internal/controller/storage/tableentity"
 	hpccache "github.com/upbound/provider-azure/internal/controller/storagecache/hpccache"
 	hpccacheaccesspolicy "github.com/upbound/provider-azure/internal/controller/storagecache/hpccacheaccesspolicy"
 	hpccacheblobnfstarget "github.com/upbound/provider-azure/internal/controller/storagecache/hpccacheblobnfstarget"
@@ -998,6 +1006,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		profilenetwork.Setup,
 		publicip.Setup,
 		publicipprefix.Setup,
+		route.Setup,
+		routefilter.Setup,
+		routemap.Setup,
+		routeserver.Setup,
+		routeserverbgpconnection.Setup,
 		routetable.Setup,
 		securitygroup.Setup,
 		securityrule.Setup,
@@ -1107,12 +1120,15 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		blobinventorypolicy.Setup,
 		container.Setup,
 		datalakegen2filesystem.Setup,
+		datalakegen2path.Setup,
 		encryptionscope.Setup,
 		managementpolicy.Setup,
 		objectreplication.Setup,
 		queuestorage.Setup,
 		share.Setup,
+		sharedirectory.Setup,
 		tablestorage.Setup,
+		tableentity.Setup,
 		hpccache.Setup,
 		hpccacheaccesspolicy.Setup,
 		hpccacheblobnfstarget.Setup,

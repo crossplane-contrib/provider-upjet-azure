@@ -1,0 +1,18 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteServerBGPConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/routeserverbgpconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    peerAsn: 65501
+    peerIp: 169.254.21.5
+    routeServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

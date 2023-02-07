@@ -1,0 +1,80 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteMap
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/routemap
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    rule:
+    - action:
+      - parameter:
+        - asPath:
+          - "22334"
+        type: Add
+      matchCriterion:
+      - matchCondition: Contains
+        routePrefix:
+        - 10.0.0.0/8
+      name: rule1
+      nextStepIfMatched: Continue
+    virtualHubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/routemap
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/routemap
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    addressPrefix: 10.0.1.0/24
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualWanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualWAN
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/routemap
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

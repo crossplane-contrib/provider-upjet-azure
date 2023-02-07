@@ -61,6 +61,15 @@ func (l *DataLakeGen2FileSystemList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this DataLakeGen2PathList.
+func (l *DataLakeGen2PathList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this EncryptionScopeList.
 func (l *EncryptionScopeList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -97,8 +106,26 @@ func (l *QueueList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ShareDirectoryList.
+func (l *ShareDirectoryList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ShareList.
 func (l *ShareList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this TableEntityList.
+func (l *TableEntityList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

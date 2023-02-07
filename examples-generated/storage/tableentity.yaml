@@ -1,0 +1,73 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: TableEntity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/tableentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    entity:
+      example: example
+    partitionKey: examplepartition
+    rowKey: examplerow
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tableNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/tableentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/tableentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/tableentity
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: myexampletable
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

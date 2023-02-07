@@ -1,0 +1,52 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/route
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefix: 10.1.0.0/16
+    nextHopType: VnetLocal
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    routeTableNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/route
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/route
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
