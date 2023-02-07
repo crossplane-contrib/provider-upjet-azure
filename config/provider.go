@@ -55,6 +55,7 @@ import (
 	"github.com/upbound/provider-azure/config/notificationhubs"
 	"github.com/upbound/provider-azure/config/operationalinsights"
 	"github.com/upbound/provider-azure/config/postgresql"
+	"github.com/upbound/provider-azure/config/relay"
 	"github.com/upbound/provider-azure/config/resource"
 	"github.com/upbound/provider-azure/config/security"
 	"github.com/upbound/provider-azure/config/servicebus"
@@ -196,6 +197,7 @@ func GetProvider() *tjconfig.Provider {
 		costmanagement.Configure,
 		automation.Configure,
 		web.Configure,
+		relay.Configure,
 		cdn.Configure,
 	} {
 		configure(pc)
