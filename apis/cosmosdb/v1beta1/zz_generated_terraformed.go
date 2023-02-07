@@ -828,6 +828,80 @@ func (tr *SQLDatabase) GetTerraformSchemaVersion() int {
 	return 1
 }
 
+// GetTerraformResourceType returns Terraform resource type for this SQLDedicatedGateway
+func (mg *SQLDedicatedGateway) GetTerraformResourceType() string {
+	return "azurerm_cosmosdb_sql_dedicated_gateway"
+}
+
+// GetConnectionDetailsMapping for this SQLDedicatedGateway
+func (tr *SQLDedicatedGateway) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SQLDedicatedGateway
+func (tr *SQLDedicatedGateway) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SQLDedicatedGateway
+func (tr *SQLDedicatedGateway) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SQLDedicatedGateway
+func (tr *SQLDedicatedGateway) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SQLDedicatedGateway
+func (tr *SQLDedicatedGateway) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SQLDedicatedGateway
+func (tr *SQLDedicatedGateway) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SQLDedicatedGateway using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SQLDedicatedGateway) LateInitialize(attrs []byte) (bool, error) {
+	params := &SQLDedicatedGatewayParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SQLDedicatedGateway) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this SQLFunction
 func (mg *SQLFunction) GetTerraformResourceType() string {
 	return "azurerm_cosmosdb_sql_function"

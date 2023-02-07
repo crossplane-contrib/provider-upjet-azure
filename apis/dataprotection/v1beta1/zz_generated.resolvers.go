@@ -11,6 +11,8 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta12 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/compute/v1beta1"
+	v1beta14 "github.com/upbound/provider-azure/apis/dbforpostgresql/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	v1beta1 "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
@@ -149,6 +151,64 @@ func (mg *BackupInstanceDisk) ResolveReferences(ctx context.Context, c client.Re
 	return nil
 }
 
+// ResolveReferences of this BackupInstancePostgreSQL.
+func (mg *BackupInstancePostgreSQL) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID),
+		Extract:      resource.ExtractParamPath("versionless_id", true),
+		Reference:    mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretIDRef,
+		Selector:     mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretIDSelector,
+		To: reference.To{
+			List:    &v1beta13.SecretList{},
+			Managed: &v1beta13.Secret{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID")
+	}
+	mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseCredentialKeyVaultSecretIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DatabaseIDRef,
+		Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
+		To: reference.To{
+			List:    &v1beta14.DatabaseList{},
+			Managed: &v1beta14.Database{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseID")
+	}
+	mg.Spec.ForProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VaultIDRef,
+		Selector:     mg.Spec.ForProvider.VaultIDSelector,
+		To: reference.To{
+			List:    &BackupVaultList{},
+			Managed: &BackupVault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VaultID")
+	}
+	mg.Spec.ForProvider.VaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this BackupPolicyBlobStorage.
 func (mg *BackupPolicyBlobStorage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -203,6 +263,32 @@ func (mg *BackupPolicyDisk) ResolveReferences(ctx context.Context, c client.Read
 
 // ResolveReferences of this BackupVault.
 func (mg *BackupVault) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta12.ResourceGroupList{},
+			Managed: &v1beta12.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ResourceGuard.
+func (mg *ResourceGuard) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse

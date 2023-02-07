@@ -1,0 +1,52 @@
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceCosmosDBMongoapi
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicecosmosdbmongoapi
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connectionStringSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    database: foo
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicecosmosdbmongoapi
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedservicecosmosdbmongoapi
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

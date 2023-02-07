@@ -513,6 +513,32 @@ func (mg *SQLDatabase) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this SQLDedicatedGateway.
+func (mg *SQLDedicatedGateway) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosDBAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.CosmosDBAccountIDRef,
+		Selector:     mg.Spec.ForProvider.CosmosDBAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CosmosDBAccountID")
+	}
+	mg.Spec.ForProvider.CosmosDBAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CosmosDBAccountIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SQLFunction.
 func (mg *SQLFunction) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
