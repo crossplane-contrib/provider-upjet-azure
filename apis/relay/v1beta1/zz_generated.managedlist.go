@@ -7,8 +7,8 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
-// GetItems of this ResourcePolicyRemediationList.
-func (l *ResourcePolicyRemediationList) GetItems() []resource.Managed {
+// GetItems of this EventRelayNamespaceList.
+func (l *EventRelayNamespaceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -16,8 +16,8 @@ func (l *ResourcePolicyRemediationList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this SubscriptionPolicyRemediationList.
-func (l *SubscriptionPolicyRemediationList) GetItems() []resource.Managed {
+// GetItems of this NamespaceAuthorizationRuleList.
+func (l *NamespaceAuthorizationRuleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

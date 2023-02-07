@@ -448,6 +448,7 @@ import (
 	loganalyticssavedsearch "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticssavedsearch"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
 	loganalyticssolution "github.com/upbound/provider-azure/internal/controller/operationsmanagement/loganalyticssolution"
+	resourcepolicyremediation "github.com/upbound/provider-azure/internal/controller/policyinsights/resourcepolicyremediation"
 	subscriptionpolicyremediation "github.com/upbound/provider-azure/internal/controller/policyinsights/subscriptionpolicyremediation"
 	dashboard "github.com/upbound/provider-azure/internal/controller/portal/dashboard"
 	powerbiembedded "github.com/upbound/provider-azure/internal/controller/powerbidedicated/powerbiembedded"
@@ -460,7 +461,12 @@ import (
 	backupprotectedfileshare "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedfileshare"
 	backupprotectedvm "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedvm"
 	siterecoveryfabric "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryfabric"
+	siterecoveryprotectioncontainer "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryprotectioncontainer"
+	siterecoveryprotectioncontainermapping "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryprotectioncontainermapping"
+	siterecoveryreplicationpolicy "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryreplicationpolicy"
 	vaultrecoveryservices "github.com/upbound/provider-azure/internal/controller/recoveryservices/vault"
+	eventrelaynamespace "github.com/upbound/provider-azure/internal/controller/relay/eventrelaynamespace"
+	namespaceauthorizationrulerelay "github.com/upbound/provider-azure/internal/controller/relay/namespaceauthorizationrule"
 	resourcegrouptemplatedeployment "github.com/upbound/provider-azure/internal/controller/resources/resourcegrouptemplatedeployment"
 	subscriptiontemplatedeployment "github.com/upbound/provider-azure/internal/controller/resources/subscriptiontemplatedeployment"
 	servicesearch "github.com/upbound/provider-azure/internal/controller/search/service"
@@ -1016,6 +1022,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loganalyticssavedsearch.Setup,
 		workspaceoperationalinsights.Setup,
 		loganalyticssolution.Setup,
+		resourcepolicyremediation.Setup,
 		subscriptionpolicyremediation.Setup,
 		dashboard.Setup,
 		powerbiembedded.Setup,
@@ -1028,7 +1035,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		backupprotectedfileshare.Setup,
 		backupprotectedvm.Setup,
 		siterecoveryfabric.Setup,
+		siterecoveryprotectioncontainer.Setup,
+		siterecoveryprotectioncontainermapping.Setup,
+		siterecoveryreplicationpolicy.Setup,
 		vaultrecoveryservices.Setup,
+		eventrelaynamespace.Setup,
+		namespaceauthorizationrulerelay.Setup,
 		resourcegrouptemplatedeployment.Setup,
 		subscriptiontemplatedeployment.Setup,
 		servicesearch.Setup,
