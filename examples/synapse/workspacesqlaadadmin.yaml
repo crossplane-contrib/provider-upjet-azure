@@ -1,0 +1,180 @@
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: WorkspaceSQLAADAdmin
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires one more Access Policy with real ID"
+    meta.upbound.io/example-id: synapse/v1beta1/workspacesqlaadadmin
+  labels:
+    testing.upbound.io/example-name: wssqlaadadminexample
+  name: wssqlaadadminexample
+spec:
+  forProvider:
+    login: AzureAD Admin
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: wssqlaadadmin-ws
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires one more Access Policy with real ID"
+    meta.upbound.io/example-id: synapse/v1beta1/workspacesqlaadadmin
+  labels:
+    testing.upbound.io/example-name: wssqlaadadmin-vault
+  name: wssqlaadadmin-vault
+spec:
+  forProvider:
+    location: West Europe
+    purgeProtectionEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: wssqlaadadmin-rg
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires one more Access Policy with real ID"
+    meta.upbound.io/example-id: synapse/v1beta1/workspacesqlaadadmin
+  labels:
+    testing.upbound.io/example-name: deployer
+  name: deployer
+spec:
+  forProvider:
+    keyPermissions:
+    - Create
+    - Get
+    - Delete
+    - Purge
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: wssqlaadadmin-vault
+    objectId: ${data.azurerm_client_config.current.object_id}
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires one more Access Policy with real ID"
+    meta.upbound.io/example-id: synapse/v1beta1/workspacesqlaadadmin
+  labels:
+    testing.upbound.io/example-name: wssqlaadadmin-key
+  name: wssqlaadadmin-key
+spec:
+  forProvider:
+    keyOpts:
+    - unwrapKey
+    - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: wssqlaadadmin-vault
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires one more Access Policy with real ID"
+    meta.upbound.io/example-id: synapse/v1beta1/workspacesqlaadadmin
+  labels:
+    testing.upbound.io/example-name: wssqlaadadmin-rg
+  name: wssqlaadadmin-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires one more Access Policy with real ID"
+    meta.upbound.io/example-id: synapse/v1beta1/workspacesqlaadadmin
+  labels:
+    testing.upbound.io/example-name: wssqlaadadminaccount
+  name: wssqlaadadminaccount
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: wssqlaadadmin-rg
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires one more Access Policy with real ID"
+    meta.upbound.io/example-id: synapse/v1beta1/workspacesqlaadadmin
+  labels:
+    testing.upbound.io/example-name: wssqlaadadmin-datalake
+  name: wssqlaadadmin-datalake
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: wssqlaadadminaccount
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "This resource requires one more Access Policy with real ID"
+    meta.upbound.io/example-id: synapse/v1beta1/workspacesqlaadadmin
+  labels:
+    testing.upbound.io/example-name: wssqlaadadmin-ws
+  name: wssqlaadadmin-ws
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: wssqlaadadmin-rg
+    sqlAdministratorLogin: sqladminuser
+    sqlAdministratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: wssqlaadadmin-datalake
+    tags:
+      Env: production
+
+--- 
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkMTIzIQ==

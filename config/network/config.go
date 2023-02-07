@@ -630,4 +630,11 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_virtual_network", func(r *config.Resource) {
 		r.UseAsync = false
 	})
+
+	p.AddResourceConfigurator("azurerm_virtual_hub_connection", func(r *config.Resource) {
+		r.References["routing.associated_route_table_id"] = config.Reference{
+			TerraformName: "azurerm_virtual_hub_route_table",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

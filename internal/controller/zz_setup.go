@@ -450,6 +450,11 @@ import (
 	trafficmanagernestedendpoint "github.com/upbound/provider-azure/internal/controller/network/trafficmanagernestedendpoint"
 	trafficmanagerprofile "github.com/upbound/provider-azure/internal/controller/network/trafficmanagerprofile"
 	virtualhub "github.com/upbound/provider-azure/internal/controller/network/virtualhub"
+	virtualhubconnection "github.com/upbound/provider-azure/internal/controller/network/virtualhubconnection"
+	virtualhubip "github.com/upbound/provider-azure/internal/controller/network/virtualhubip"
+	virtualhubroutetable "github.com/upbound/provider-azure/internal/controller/network/virtualhubroutetable"
+	virtualhubroutetableroute "github.com/upbound/provider-azure/internal/controller/network/virtualhubroutetableroute"
+	virtualhubsecuritypartnerprovider "github.com/upbound/provider-azure/internal/controller/network/virtualhubsecuritypartnerprovider"
 	virtualnetworknetwork "github.com/upbound/provider-azure/internal/controller/network/virtualnetwork"
 	virtualnetworkgateway "github.com/upbound/provider-azure/internal/controller/network/virtualnetworkgateway"
 	virtualnetworkgatewayconnection "github.com/upbound/provider-azure/internal/controller/network/virtualnetworkgatewayconnection"
@@ -574,12 +579,14 @@ import (
 	job "github.com/upbound/provider-azure/internal/controller/streamanalytics/job"
 	managedprivateendpointstreamanalytics "github.com/upbound/provider-azure/internal/controller/streamanalytics/managedprivateendpoint"
 	outputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputblob"
+	outputeventhub "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputeventhub"
 	outputfunction "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputfunction"
 	outputmssql "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputmssql"
 	outputservicebusqueue "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputservicebusqueue"
 	outputservicebustopic "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputservicebustopic"
 	outputsynapse "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputsynapse"
 	referenceinputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/referenceinputblob"
+	referenceinputmssql "github.com/upbound/provider-azure/internal/controller/streamanalytics/referenceinputmssql"
 	streaminputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputblob"
 	streaminputeventhub "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputeventhub"
 	streaminputiothub "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputiothub"
@@ -600,6 +607,7 @@ import (
 	workspaceaadadmin "github.com/upbound/provider-azure/internal/controller/synapse/workspaceaadadmin"
 	workspaceextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspaceextendedauditingpolicy"
 	workspacesecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspacesecurityalertpolicy"
+	workspacesqlaadadmin "github.com/upbound/provider-azure/internal/controller/synapse/workspacesqlaadadmin"
 	workspacevulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/synapse/workspacevulnerabilityassessment"
 	eventsourceiothub "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/eventsourceiothub"
 	gen2environment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/gen2environment"
@@ -1061,6 +1069,11 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		trafficmanagernestedendpoint.Setup,
 		trafficmanagerprofile.Setup,
 		virtualhub.Setup,
+		virtualhubconnection.Setup,
+		virtualhubip.Setup,
+		virtualhubroutetable.Setup,
+		virtualhubroutetableroute.Setup,
+		virtualhubsecuritypartnerprovider.Setup,
 		virtualnetworknetwork.Setup,
 		virtualnetworkgateway.Setup,
 		virtualnetworkgatewayconnection.Setup,
@@ -1185,12 +1198,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		job.Setup,
 		managedprivateendpointstreamanalytics.Setup,
 		outputblob.Setup,
+		outputeventhub.Setup,
 		outputfunction.Setup,
 		outputmssql.Setup,
 		outputservicebusqueue.Setup,
 		outputservicebustopic.Setup,
 		outputsynapse.Setup,
 		referenceinputblob.Setup,
+		referenceinputmssql.Setup,
 		streaminputblob.Setup,
 		streaminputeventhub.Setup,
 		streaminputiothub.Setup,
@@ -1211,6 +1226,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		workspaceaadadmin.Setup,
 		workspaceextendedauditingpolicy.Setup,
 		workspacesecurityalertpolicy.Setup,
+		workspacesqlaadadmin.Setup,
 		workspacevulnerabilityassessment.Setup,
 		eventsourceiothub.Setup,
 		gen2environment.Setup,

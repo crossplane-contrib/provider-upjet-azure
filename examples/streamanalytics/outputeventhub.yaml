@@ -1,0 +1,122 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: OutputEventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputeventhub
+  labels:
+    testing.upbound.io/example-name: outputeventhubexample
+  name: outputeventhubexample
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: outputeventhub-eh
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: outputeventhub-rg
+    serialization:
+    - type: Avro
+    servicebusNamespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: outputeventhub-ns
+    sharedAccessPolicyKeySecretRef:
+      key: example-key
+      name: example-name
+      namespace: upbound-system
+    sharedAccessPolicyName: RootManageSharedAccessKey
+    streamAnalyticsJobName: outputeventhub-job
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputeventhub
+  labels:
+    testing.upbound.io/example-name: outputeventhub-eh
+  name: outputeventhub-eh
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: outputeventhub-ns
+    partitionCount: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: outputeventhub-rg
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputeventhub
+  labels:
+    testing.upbound.io/example-name: outputeventhub-ns
+  name: outputeventhub-ns
+spec:
+  forProvider:
+    capacity: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: outputeventhub-rg
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputeventhub
+  labels:
+    testing.upbound.io/example-name: outputeventhub-rg
+  name: outputeventhub-rg
+spec:
+  forProvider:
+    location: West Europe
+
+--- 
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkMTIzIQ==
+
+---
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputeventhub
+  labels:
+    testing.upbound.io/example-name: outputeventhub-job
+  name: outputeventhub-job
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: outputeventhub-rg
+    streamingUnits: 3
+    tags:
+      environment: example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]

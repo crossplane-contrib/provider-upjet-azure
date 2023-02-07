@@ -52,6 +52,15 @@ func (l *OutputBlobList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this OutputEventHubList.
+func (l *OutputEventHubList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this OutputFunctionList.
 func (l *OutputFunctionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -99,6 +108,15 @@ func (l *OutputSynapseList) GetItems() []resource.Managed {
 
 // GetItems of this ReferenceInputBlobList.
 func (l *ReferenceInputBlobList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ReferenceInputMSSQLList.
+func (l *ReferenceInputMSSQLList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
