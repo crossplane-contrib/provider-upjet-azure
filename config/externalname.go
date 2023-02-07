@@ -1465,6 +1465,28 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_monitor_data_collection_rule_association": config.TemplatedStringAsIdentifier("name", "{{ .parameters.target_resource_id }}/providers/Microsoft.Insights/dataCollectionRuleAssociations/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Insights/scheduledQueryRules/rule1
 	"azurerm_monitor_scheduled_query_rules_alert_v2": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Insights/scheduledQueryRules/{{ .external_name }}"),
+
+	// route
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/routeTables/mytable1/routes/myroute1
+	"azurerm_route": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/routeTables/{{ .parameters.route_table_name }}/routes/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/routeFilters/routeFilter1
+	"azurerm_route_filter": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/routeFilters/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1
+	"azurerm_route_map": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_hub_id }}/routeMaps/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/routeServer1
+	"azurerm_route_server": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/virtualHubs/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/routeServer1/bgpConnections/connection1
+	"azurerm_route_server_bgp_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.route_server_id }}/bgpConnections/{{ .external_name }}"),
+
+	// storage
+	//
+	// https://account1.dfs.core.windows.net/fileSystem1/path
+	"azurerm_storage_data_lake_gen2_path": config.IdentifierFromProvider,
+	// https://tomdevsa20.file.core.windows.net/share1/directory1
+	"azurerm_storage_share_directory": config.IdentifierFromProvider,
+	// https://example.table.core.windows.net/table1(PartitionKey='samplepartition',RowKey='samplerow')
+	"azurerm_storage_table_entity": config.IdentifierFromProvider,
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
