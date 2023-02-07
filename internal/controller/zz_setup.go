@@ -553,7 +553,10 @@ import (
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
 	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
 	functionappslot "github.com/upbound/provider-azure/internal/controller/web/functionappslot"
+	linuxfunctionapp "github.com/upbound/provider-azure/internal/controller/web/linuxfunctionapp"
+	linuxfunctionappslot "github.com/upbound/provider-azure/internal/controller/web/linuxfunctionappslot"
 	linuxwebapp "github.com/upbound/provider-azure/internal/controller/web/linuxwebapp"
+	linuxwebappslot "github.com/upbound/provider-azure/internal/controller/web/linuxwebappslot"
 	serviceplan "github.com/upbound/provider-azure/internal/controller/web/serviceplan"
 	sourcecontroltoken "github.com/upbound/provider-azure/internal/controller/web/sourcecontroltoken"
 )
@@ -1106,7 +1109,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		appserviceplan.Setup,
 		functionapp.Setup,
 		functionappslot.Setup,
+		linuxfunctionapp.Setup,
+		linuxfunctionappslot.Setup,
 		linuxwebapp.Setup,
+		linuxwebappslot.Setup,
 		serviceplan.Setup,
 		sourcecontroltoken.Setup,
 	} {

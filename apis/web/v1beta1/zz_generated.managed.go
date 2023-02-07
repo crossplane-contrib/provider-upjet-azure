@@ -205,6 +205,138 @@ func (mg *FunctionAppSlot) SetWriteConnectionSecretToReference(r *xpv1.SecretRef
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinuxFunctionApp.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinuxFunctionApp) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinuxFunctionApp.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinuxFunctionApp) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinuxFunctionAppSlot.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinuxFunctionAppSlot) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinuxFunctionAppSlot.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinuxFunctionAppSlot) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this LinuxWebApp.
 func (mg *LinuxWebApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -268,6 +400,72 @@ func (mg *LinuxWebApp) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDe
 
 // SetWriteConnectionSecretToReference of this LinuxWebApp.
 func (mg *LinuxWebApp) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this LinuxWebAppSlot.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *LinuxWebAppSlot) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this LinuxWebAppSlot.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *LinuxWebAppSlot) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

@@ -34,8 +34,35 @@ func (l *FunctionAppSlotList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this LinuxFunctionAppList.
+func (l *LinuxFunctionAppList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this LinuxFunctionAppSlotList.
+func (l *LinuxFunctionAppSlotList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this LinuxWebAppList.
 func (l *LinuxWebAppList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this LinuxWebAppSlotList.
+func (l *LinuxWebAppSlotList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
