@@ -85,6 +85,7 @@ import (
 	v1beta1storagesync "github.com/upbound/provider-azure/apis/storagesync/v1beta1"
 	v1beta1streamanalytics "github.com/upbound/provider-azure/apis/streamanalytics/v1beta1"
 	v1beta1synapse "github.com/upbound/provider-azure/apis/synapse/v1beta1"
+	v1beta1timeseriesinsights "github.com/upbound/provider-azure/apis/timeseriesinsights/v1beta1"
 	v1alpha1 "github.com/upbound/provider-azure/apis/v1alpha1"
 	v1beta1apis "github.com/upbound/provider-azure/apis/v1beta1"
 	v1beta1web "github.com/upbound/provider-azure/apis/web/v1beta1"
@@ -168,6 +169,7 @@ func init() {
 		v1beta1storagesync.SchemeBuilder.AddToScheme,
 		v1beta1streamanalytics.SchemeBuilder.AddToScheme,
 		v1beta1synapse.SchemeBuilder.AddToScheme,
+		v1beta1timeseriesinsights.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1apis.SchemeBuilder.AddToScheme,
 		v1beta1web.SchemeBuilder.AddToScheme,

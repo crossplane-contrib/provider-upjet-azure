@@ -1,0 +1,30 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
+kind: StandardEnvironment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/standardenvironment
+  labels:
+    testing.upbound.io/example-name: example
+  name: standardenvironment
+spec:
+  forProvider:
+    dataRetentionTime: P1D
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: standardenvironment-rg-label
+    skuName: S1_1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/standardenvironment
+  labels:
+    testing.upbound.io/example-name: standardenvironment-rg-label
+  name: standardenvironment-rg
+spec:
+  forProvider:
+    location: West Europe

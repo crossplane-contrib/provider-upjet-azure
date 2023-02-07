@@ -2977,6 +2977,116 @@ func (mg *SubnetServiceEndpointStoragePolicy) ResolveReferences(ctx context.Cont
 	return nil
 }
 
+// ResolveReferences of this TrafficManagerAzureEndpoint.
+func (mg *TrafficManagerAzureEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ProfileIDRef,
+		Selector:     mg.Spec.ForProvider.ProfileIDSelector,
+		To: reference.To{
+			List:    &TrafficManagerProfileList{},
+			Managed: &TrafficManagerProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ProfileID")
+	}
+	mg.Spec.ForProvider.ProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ProfileIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
+		Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
+		To: reference.To{
+			List:    &PublicIPList{},
+			Managed: &PublicIP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetResourceID")
+	}
+	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this TrafficManagerExternalEndpoint.
+func (mg *TrafficManagerExternalEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ProfileIDRef,
+		Selector:     mg.Spec.ForProvider.ProfileIDSelector,
+		To: reference.To{
+			List:    &TrafficManagerProfileList{},
+			Managed: &TrafficManagerProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ProfileID")
+	}
+	mg.Spec.ForProvider.ProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ProfileIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this TrafficManagerNestedEndpoint.
+func (mg *TrafficManagerNestedEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ProfileIDRef,
+		Selector:     mg.Spec.ForProvider.ProfileIDSelector,
+		To: reference.To{
+			List:    &TrafficManagerProfileList{},
+			Managed: &TrafficManagerProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ProfileID")
+	}
+	mg.Spec.ForProvider.ProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ProfileIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
+		Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
+		To: reference.To{
+			List:    &TrafficManagerProfileList{},
+			Managed: &TrafficManagerProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetResourceID")
+	}
+	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this TrafficManagerProfile.
 func (mg *TrafficManagerProfile) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
