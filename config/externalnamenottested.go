@@ -792,22 +792,15 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StorageSync/storageSyncServices/sync1/syncGroups/syncgroup1/cloudEndpoints/cloudEndpoint1
 	"azurerm_storage_sync_cloud_endpoint": config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_sync_group_id }}/cloudEndpoints/{{ .external_name }}"),
+	// https://example.table.core.windows.net/table1(PartitionKey='samplepartition',RowKey='samplerow')
+	"azurerm_storage_table_entity": config.IdentifierFromProvider,
 
 	// stream_analytics
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingjobs/job1/schedule/default
 	"azurerm_stream_analytics_job_schedule": config.TemplatedStringAsIdentifier("", "{{ .parameters.stream_analytics_job_id }}/schedule/default"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/outputs/output1
-	"azurerm_stream_analytics_output_eventhub": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/inputs/input1
-	"azurerm_stream_analytics_reference_input_mssql": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_name }}/inputs/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/inputs/input1
 	"azurerm_stream_analytics_stream_input_eventhub_v2": config.TemplatedStringAsIdentifier("name", "{{ .parameters.stream_analytics_job_id }}/inputs/{{ .external_name }}"),
-
-	// synapse_workspace
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1/sqlAdministrators/activeDirectory
-	"azurerm_synapse_workspace_sql_aad_admin": config.TemplatedStringAsIdentifier("", "{{ .parameters.synapse_workspace_id }}/sqlAdministrators/activeDirectory"),
 
 	// virtual_desktop
 	//
@@ -825,19 +818,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Devices/iotHubs/example/certificates/example
 	"azurerm_iothub_certificate": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Devices/iotHubs/{{ .parameters.iothub_name }}/certificates/{{ .external_name }}"),
-
-	// virtual_hub
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/hub1/hubVirtualNetworkConnections/connection1
-	"azurerm_virtual_hub_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_hub_id }}/hubVirtualNetworkConnections/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/virtualHub1/ipConfigurations/ipConfig1
-	"azurerm_virtual_hub_ip": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_hub_id }}/ipConfigurations/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/routeTable1
-	"azurerm_virtual_hub_route_table": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_hub_id }}/hubRouteTables/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/routeTable1/routes/routeName
-	"azurerm_virtual_hub_route_table_route": config.TemplatedStringAsIdentifier("name", "{{ .parameters.route_table_id }}/routes/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/securityPartnerProviders/securityPartnerProvider1
-	"azurerm_virtual_hub_security_partner_provider": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/securityPartnerProviders/{{ .external_name }}"),
 
 	// virtual_machine
 	//

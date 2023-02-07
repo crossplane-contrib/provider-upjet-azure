@@ -5749,6 +5749,336 @@ func (mg *VirtualHub) SetWriteConnectionSecretToReference(r *xpv1.SecretReferenc
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VirtualHubConnection.
+func (mg *VirtualHubConnection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VirtualHubConnection.
+func (mg *VirtualHubConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this VirtualHubConnection.
+func (mg *VirtualHubConnection) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this VirtualHubConnection.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *VirtualHubConnection) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this VirtualHubConnection.
+func (mg *VirtualHubConnection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VirtualHubConnection.
+func (mg *VirtualHubConnection) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualHubConnection.
+func (mg *VirtualHubConnection) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VirtualHubConnection.
+func (mg *VirtualHubConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this VirtualHubConnection.
+func (mg *VirtualHubConnection) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this VirtualHubConnection.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *VirtualHubConnection) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VirtualHubConnection.
+func (mg *VirtualHubConnection) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualHubConnection.
+func (mg *VirtualHubConnection) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this VirtualHubIP.
+func (mg *VirtualHubIP) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VirtualHubIP.
+func (mg *VirtualHubIP) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this VirtualHubIP.
+func (mg *VirtualHubIP) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this VirtualHubIP.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *VirtualHubIP) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this VirtualHubIP.
+func (mg *VirtualHubIP) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VirtualHubIP.
+func (mg *VirtualHubIP) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualHubIP.
+func (mg *VirtualHubIP) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VirtualHubIP.
+func (mg *VirtualHubIP) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this VirtualHubIP.
+func (mg *VirtualHubIP) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this VirtualHubIP.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *VirtualHubIP) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VirtualHubIP.
+func (mg *VirtualHubIP) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualHubIP.
+func (mg *VirtualHubIP) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this VirtualHubRouteTable.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *VirtualHubRouteTable) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this VirtualHubRouteTable.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *VirtualHubRouteTable) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this VirtualHubRouteTableRoute.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *VirtualHubRouteTableRoute) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this VirtualHubRouteTableRoute.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *VirtualHubRouteTableRoute) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this VirtualHubSecurityPartnerProvider.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *VirtualHubSecurityPartnerProvider) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this VirtualHubSecurityPartnerProvider.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *VirtualHubSecurityPartnerProvider) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VirtualNetwork.
 func (mg *VirtualNetwork) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

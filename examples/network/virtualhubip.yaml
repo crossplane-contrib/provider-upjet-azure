@@ -1,0 +1,113 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHubIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubip
+  labels:
+    testing.upbound.io/example-name: examplevhubip
+  name: examplevhubip
+spec:
+  forProvider:
+    privateIpAddress: 10.5.1.18
+    privateIpAllocationMethod: Static
+    publicIpAddressIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubip-ip
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: routeserversubnet
+    virtualHubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubip-vh
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubip
+  labels:
+    testing.upbound.io/example-name: virtualhubip-ip
+  name: virtualhubip-ip
+spec:
+  forProvider:
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubip-rg
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubip
+  labels:
+    testing.upbound.io/example-name: virtualhubip-rg
+  name: virtualhubip-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubip
+  labels:
+    testing.upbound.io/example-name: routeserversubnet
+  name: routeserversubnet
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.5.1.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubip-rg
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubip-vn
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHub
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: network/v1beta1/virtualhubip
+  labels:
+    testing.upbound.io/example-name: virtualhubip-vh
+  name: virtualhubip-vh
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubip-rg
+    sku: Standard
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubip
+  labels:
+    testing.upbound.io/example-name: virtualhubip-vn
+  name: virtualhubip-vn
+spec:
+  forProvider:
+    addressSpace:
+    - 10.5.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubip-rg

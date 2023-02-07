@@ -90,4 +90,10 @@ func Configure(p *config.Provider) {
 			Type: "Job",
 		}
 	})
+	p.AddResourceConfigurator("azurerm_stream_analytics_stream_input_eventhub_v2", func(r *config.Resource) {
+		r.References["stream_analytics_job_id"] = config.Reference{
+			TerraformName: "azurerm_stream_analytics_job",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }
