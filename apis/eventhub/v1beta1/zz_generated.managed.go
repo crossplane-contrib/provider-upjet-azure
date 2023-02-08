@@ -402,3 +402,69 @@ func (mg *NamespaceDisasterRecoveryConfig) SetPublishConnectionDetailsTo(r *xpv1
 func (mg *NamespaceDisasterRecoveryConfig) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this NamespaceSchemaGroup.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *NamespaceSchemaGroup) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this NamespaceSchemaGroup.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *NamespaceSchemaGroup) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

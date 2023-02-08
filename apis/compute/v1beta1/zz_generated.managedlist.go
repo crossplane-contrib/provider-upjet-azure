@@ -43,6 +43,24 @@ func (l *DiskEncryptionSetList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this GalleryApplicationList.
+func (l *GalleryApplicationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this GalleryApplicationVersionList.
+func (l *GalleryApplicationVersionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ImageList.
 func (l *ImageList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

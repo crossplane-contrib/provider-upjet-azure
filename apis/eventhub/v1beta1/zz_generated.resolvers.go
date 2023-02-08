@@ -319,3 +319,29 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 
 	return nil
 }
+
+// ResolveReferences of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.NamespaceIDRef,
+		Selector:     mg.Spec.ForProvider.NamespaceIDSelector,
+		To: reference.To{
+			List:    &EventHubNamespaceList{},
+			Managed: &EventHubNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceID")
+	}
+	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
