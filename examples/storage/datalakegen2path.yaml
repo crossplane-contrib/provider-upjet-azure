@@ -1,0 +1,72 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2Path
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Long running resource which cause Uptest flaky results."
+    meta.upbound.io/example-id: storage/v1beta1/datalakegen2path
+  labels:
+    testing.upbound.io/example-name: example
+  name: dlgpexample
+spec:
+  forProvider:
+    filesystemNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    path: example
+    resource: directory
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/datalakegen2path
+  labels:
+    testing.upbound.io/example-name: example
+  name: dlgpexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/datalakegen2path
+  labels:
+    testing.upbound.io/example-name: example
+  name: dlgpexample
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/datalakegen2path
+  labels:
+    testing.upbound.io/example-name: example
+  name: dlgpexample
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+

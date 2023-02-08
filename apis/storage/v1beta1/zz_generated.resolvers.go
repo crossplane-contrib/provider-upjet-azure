@@ -205,6 +205,48 @@ func (mg *DataLakeGen2FileSystem) ResolveReferences(ctx context.Context, c clien
 	return nil
 }
 
+// ResolveReferences of this DataLakeGen2Path.
+func (mg *DataLakeGen2Path) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FileSystemName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.FileSystemNameRef,
+		Selector:     mg.Spec.ForProvider.FileSystemNameSelector,
+		To: reference.To{
+			List:    &DataLakeGen2FileSystemList{},
+			Managed: &DataLakeGen2FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FileSystemName")
+	}
+	mg.Spec.ForProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FileSystemNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
+	}
+	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this EncryptionScope.
 func (mg *EncryptionScope) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -387,6 +429,48 @@ func (mg *Share) ResolveReferences(ctx context.Context, c client.Reader) error {
 	return nil
 }
 
+// ResolveReferences of this ShareDirectory.
+func (mg *ShareDirectory) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ShareNameRef,
+		Selector:     mg.Spec.ForProvider.ShareNameSelector,
+		To: reference.To{
+			List:    &ShareList{},
+			Managed: &Share{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ShareName")
+	}
+	mg.Spec.ForProvider.ShareName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
+	}
+	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Table.
 func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -409,6 +493,48 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this TableEntity.
+func (mg *TableEntity) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
+	}
+	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.ForProvider.TableNameRef,
+		Selector:     mg.Spec.ForProvider.TableNameSelector,
+		To: reference.To{
+			List:    &TableList{},
+			Managed: &Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TableName")
+	}
+	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -592,6 +592,51 @@ func (l *PublicIPPrefixList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this RouteFilterList.
+func (l *RouteFilterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this RouteList.
+func (l *RouteList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this RouteMapList.
+func (l *RouteMapList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this RouteServerBGPConnectionList.
+func (l *RouteServerBGPConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this RouteServerList.
+func (l *RouteServerList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this RouteTableList.
 func (l *RouteTableList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
