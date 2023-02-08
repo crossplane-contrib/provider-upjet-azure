@@ -10,8 +10,51 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this FederatedIdentityCredential.
+func (mg *FederatedIdentityCredential) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ParentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ParentIDRef,
+		Selector:     mg.Spec.ForProvider.ParentIDSelector,
+		To: reference.To{
+			List:    &UserAssignedIdentityList{},
+			Managed: &UserAssignedIdentity{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ParentID")
+	}
+	mg.Spec.ForProvider.ParentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ParentIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this UserAssignedIdentity.
 func (mg *UserAssignedIdentity) ResolveReferences(ctx context.Context, c client.Reader) error {

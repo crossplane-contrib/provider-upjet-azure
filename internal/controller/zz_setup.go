@@ -113,6 +113,8 @@ import (
 	dedicatedhost "github.com/upbound/provider-azure/internal/controller/compute/dedicatedhost"
 	diskaccess "github.com/upbound/provider-azure/internal/controller/compute/diskaccess"
 	diskencryptionset "github.com/upbound/provider-azure/internal/controller/compute/diskencryptionset"
+	galleryapplication "github.com/upbound/provider-azure/internal/controller/compute/galleryapplication"
+	galleryapplicationversion "github.com/upbound/provider-azure/internal/controller/compute/galleryapplicationversion"
 	image "github.com/upbound/provider-azure/internal/controller/compute/image"
 	linuxvirtualmachine "github.com/upbound/provider-azure/internal/controller/compute/linuxvirtualmachine"
 	linuxvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/linuxvirtualmachinescaleset"
@@ -158,6 +160,7 @@ import (
 	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/resourcegroupcostmanagementexport"
 	subscriptioncostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/subscriptioncostmanagementexport"
 	device "github.com/upbound/provider-azure/internal/controller/databoxedge/device"
+	accessconnector "github.com/upbound/provider-azure/internal/controller/databricks/accessconnector"
 	workspace "github.com/upbound/provider-azure/internal/controller/databricks/workspace"
 	workspacecustomermanagedkey "github.com/upbound/provider-azure/internal/controller/databricks/workspacecustomermanagedkey"
 	customdataset "github.com/upbound/provider-azure/internal/controller/datafactory/customdataset"
@@ -281,6 +284,8 @@ import (
 	eventhubnamespace "github.com/upbound/provider-azure/internal/controller/eventhub/eventhubnamespace"
 	namespaceauthorizationrule "github.com/upbound/provider-azure/internal/controller/eventhub/namespaceauthorizationrule"
 	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/eventhub/namespacedisasterrecoveryconfig"
+	namespaceschemagroup "github.com/upbound/provider-azure/internal/controller/eventhub/namespaceschemagroup"
+	serverfluidrelay "github.com/upbound/provider-azure/internal/controller/fluidrelay/server"
 	hadoopcluster "github.com/upbound/provider-azure/internal/controller/hdinsight/hadoopcluster"
 	hbasecluster "github.com/upbound/provider-azure/internal/controller/hdinsight/hbasecluster"
 	interactivequerycluster "github.com/upbound/provider-azure/internal/controller/hdinsight/interactivequerycluster"
@@ -340,6 +345,7 @@ import (
 	apptriggerrecurrence "github.com/upbound/provider-azure/internal/controller/logic/apptriggerrecurrence"
 	appworkflow "github.com/upbound/provider-azure/internal/controller/logic/appworkflow"
 	integrationserviceenvironment "github.com/upbound/provider-azure/internal/controller/logic/integrationserviceenvironment"
+	federatedidentitycredential "github.com/upbound/provider-azure/internal/controller/managedidentity/federatedidentitycredential"
 	userassignedidentity "github.com/upbound/provider-azure/internal/controller/managedidentity/userassignedidentity"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
 	accountmaps "github.com/upbound/provider-azure/internal/controller/maps/account"
@@ -718,6 +724,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		dedicatedhost.Setup,
 		diskaccess.Setup,
 		diskencryptionset.Setup,
+		galleryapplication.Setup,
+		galleryapplicationversion.Setup,
 		image.Setup,
 		linuxvirtualmachine.Setup,
 		linuxvirtualmachinescaleset.Setup,
@@ -763,6 +771,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		resourcegroupcostmanagementexport.Setup,
 		subscriptioncostmanagementexport.Setup,
 		device.Setup,
+		accessconnector.Setup,
 		workspace.Setup,
 		workspacecustomermanagedkey.Setup,
 		customdataset.Setup,
@@ -886,6 +895,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventhubnamespace.Setup,
 		namespaceauthorizationrule.Setup,
 		namespacedisasterrecoveryconfig.Setup,
+		namespaceschemagroup.Setup,
+		serverfluidrelay.Setup,
 		hadoopcluster.Setup,
 		hbasecluster.Setup,
 		interactivequerycluster.Setup,
@@ -945,6 +956,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		apptriggerrecurrence.Setup,
 		appworkflow.Setup,
 		integrationserviceenvironment.Setup,
+		federatedidentitycredential.Setup,
 		userassignedidentity.Setup,
 		managementgroup.Setup,
 		accountmaps.Setup,

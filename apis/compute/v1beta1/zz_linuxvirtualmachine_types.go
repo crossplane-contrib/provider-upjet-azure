@@ -71,10 +71,10 @@ type DiffDiskSettingsParameters struct {
 	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
 }
 
-type GalleryApplicationObservation struct {
+type LinuxVirtualMachineGalleryApplicationObservation struct {
 }
 
-type GalleryApplicationParameters struct {
+type LinuxVirtualMachineGalleryApplicationParameters struct {
 
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	// +kubebuilder:validation:Optional
@@ -252,7 +252,7 @@ type LinuxVirtualMachineParameters struct {
 
 	// A gallery_application block as defined below.
 	// +kubebuilder:validation:Optional
-	GalleryApplication []GalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
+	GalleryApplication []LinuxVirtualMachineGalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional

@@ -648,11 +648,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DataProtection/resourceGuards/resourceGuard1
 	"azurerm_data_protection_resource_guard": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DataProtection/resourceGuards/{{ .external_name }}"),
 
-	// databricks
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Databricks/accessConnectors/connector1
-	"azurerm_databricks_access_connector": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Databricks/accessConnectors/{{ .external_name }}"),
-
 	// datadog_monitor
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Datadog/monitors/monitor1
@@ -666,28 +661,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DigitalTwins/digitalTwinsInstances/dt1/timeSeriesDatabaseConnections/connection1
 	"azurerm_digital_twins_time_series_database_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.digital_twins_id }}/timeSeriesDatabaseConnections/{{ .external_name }}"),
-
-	// eventhub
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventHub/namespaces/namespace1/schemaGroups/group1
-	"azurerm_eventhub_namespace_schema_group": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/schemaGroups/{{ .external_name }}"),
-
-	// federated_identity
-	//
-	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{parentIdentityName}/federatedIdentityCredentials/{resourceName}
-	"azurerm_federated_identity_credential": config.TemplatedStringAsIdentifier("name", "{{ .parameters.parent_id }}/federatedIdentityCredentials/{{ .external_name }}"),
-
-	// fluid_relay
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.FluidRelay/fluidRelayServers/server1
-	"azurerm_fluid_relay_server": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.FluidRelay/fluidRelayServers/{{ .external_name }}"),
-
-	// gallery
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/galleries/gallery1/applications/galleryApplication1
-	"azurerm_gallery_application": config.TemplatedStringAsIdentifier("name", "{{ .parameters.gallery_id }}/applications/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/galleries/gallery1/applications/galleryApplication1/versions/galleryApplicationVersion1
-	"azurerm_gallery_application_version": config.TemplatedStringAsIdentifier("name", "{{ .parameters.gallery_application_id }}/versions/{{ .external_name }}"),
 
 	// healthcare
 	//

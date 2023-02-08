@@ -199,6 +199,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Arguments make up the ID.
 	"azurerm_marketplace_agreement": config.IdentifierFromProvider,
 	"azurerm_dedicated_host":        config.TemplatedStringAsIdentifier("name", "{{ .parameters.dedicated_host_group_id }}/hosts/{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/galleries/gallery1/applications/galleryApplication1
+	"azurerm_gallery_application": config.TemplatedStringAsIdentifier("name", "{{ .parameters.gallery_id }}/applications/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/galleries/gallery1/applications/galleryApplication1/versions/galleryApplicationVersion1
+	"azurerm_gallery_application_version": config.IdentifierFromProvider,
 
 	// cdn
 	//
@@ -286,6 +290,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_eventhub":                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventHub/namespaces/{{ .parameters.namespace_name }}/eventhubs/{{ .external_name }}"),
 	"azurerm_eventhub_consumer_group":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventHub/namespaces/{{ .parameters.namespace_name }}/eventhubs/{{ .parameters.eventhub_name }}/consumerGroups/{{ .external_name }}"),
 	"azurerm_eventhub_authorization_rule": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.EventHub/namespaces/{{ .parameters.namespace_name }}/eventhubs/{{ .parameters.eventhub_name }}/authorizationRules/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.EventHub/namespaces/namespace1/schemaGroups/group1
+	"azurerm_eventhub_namespace_schema_group": config.TemplatedStringAsIdentifier("name", "{{ .parameters.namespace_id }}/schemaGroups/{{ .external_name }}"),
 
 	// iotcentral
 	//
@@ -897,6 +903,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Databricks Workspace Customer Managed Key can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Databricks/workspaces/workspace1
 	"azurerm_databricks_workspace_customer_managed_key": config.TemplatedStringAsIdentifier("", "{{ .parameters.workspace_id }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Databricks/accessConnectors/connector1
+	"azurerm_databricks_access_connector": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Databricks/accessConnectors/{{ .external_name }}"),
 
 	// purview
 	//
@@ -1529,6 +1537,16 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Healthcare Workspaces can be imported using the resourceid
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.HealthcareApis/workspaces/workspace1
 	"azurerm_healthcare_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.HealthcareApis/workspaces/{{ .external_name }}"),
+
+	// fluid_relay
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.FluidRelay/fluidRelayServers/server1
+	"azurerm_fluid_relay_server": config.IdentifierFromProvider,
+
+	// federated_identity
+	//
+	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{parentIdentityName}/federatedIdentityCredentials/{resourceName}
+	"azurerm_federated_identity_credential": config.TemplatedStringAsIdentifier("name", "{{ .parameters.parent_id }}/federatedIdentityCredentials/{{ .external_name }}"),
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {

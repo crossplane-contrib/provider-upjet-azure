@@ -1,0 +1,47 @@
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: NamespaceSchemaGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespaceschemagroup
+  labels:
+    testing.upbound.io/example-name: testschemagroup
+  name: testschemagroup
+spec:
+  forProvider:
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: namespaceschemagroup-ns
+    schemaCompatibility: Forward
+    schemaType: Avro
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespaceschemagroup
+  labels:
+    testing.upbound.io/example-name: namespaceschemagroup-ns
+  name: namespaceschemagroup-ns
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: namespaceschemagroup-rg
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eventhub/v1beta1/namespaceschemagroup
+  labels:
+    testing.upbound.io/example-name: namespaceschemagroup-rg
+  name: namespaceschemagroup-rg
+spec:
+  forProvider:
+    location: East US

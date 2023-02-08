@@ -11,8 +11,9 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
-	v1beta12 "github.com/upbound/provider-azure/apis/network/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	v1beta12 "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -111,6 +112,95 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 	return nil
 }
 
+// ResolveReferences of this GalleryApplication.
+func (mg *GalleryApplication) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GalleryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.GalleryIDRef,
+		Selector:     mg.Spec.ForProvider.GalleryIDSelector,
+		To: reference.To{
+			List:    &SharedImageGalleryList{},
+			Managed: &SharedImageGallery{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GalleryID")
+	}
+	mg.Spec.ForProvider.GalleryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GalleryIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this GalleryApplicationVersion.
+func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GalleryApplicationID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.GalleryApplicationIDRef,
+		Selector:     mg.Spec.ForProvider.GalleryApplicationIDSelector,
+		To: reference.To{
+			List:    &GalleryApplicationList{},
+			Managed: &GalleryApplication{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GalleryApplicationID")
+	}
+	mg.Spec.ForProvider.GalleryApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GalleryApplicationIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Source); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source[i3].MediaLink),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.Source[i3].MediaLinkRef,
+			Selector:     mg.Spec.ForProvider.Source[i3].MediaLinkSelector,
+			To: reference.To{
+				List:    &v1beta12.BlobList{},
+				Managed: &v1beta12.Blob{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Source[i3].MediaLink")
+		}
+		mg.Spec.ForProvider.Source[i3].MediaLink = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Source[i3].MediaLinkRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.TargetRegion); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetRegion[i3].Name),
+			Extract:      resource.ExtractParamPath("location", false),
+			Reference:    mg.Spec.ForProvider.TargetRegion[i3].NameRef,
+			Selector:     mg.Spec.ForProvider.TargetRegion[i3].NameSelector,
+			To: reference.To{
+				List:    &GalleryApplicationList{},
+				Managed: &GalleryApplication{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.TargetRegion[i3].Name")
+		}
+		mg.Spec.ForProvider.TargetRegion[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.TargetRegion[i3].NameRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this Image.
 func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -151,8 +241,8 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 		References:    mg.Spec.ForProvider.NetworkInterfaceIdsRefs,
 		Selector:      mg.Spec.ForProvider.NetworkInterfaceIdsSelector,
 		To: reference.To{
-			List:    &v1beta12.NetworkInterfaceList{},
-			Managed: &v1beta12.NetworkInterface{},
+			List:    &v1beta13.NetworkInterfaceList{},
+			Managed: &v1beta13.NetworkInterface{},
 		},
 	})
 	if err != nil {
@@ -195,8 +285,8 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 				Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta12.SubnetList{},
-					Managed: &v1beta12.Subnet{},
+					List:    &v1beta13.SubnetList{},
+					Managed: &v1beta13.Subnet{},
 				},
 			})
 			if err != nil {
@@ -283,8 +373,8 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 				Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta12.SubnetList{},
-					Managed: &v1beta12.Subnet{},
+					List:    &v1beta13.SubnetList{},
+					Managed: &v1beta13.Subnet{},
 				},
 			})
 			if err != nil {
@@ -449,8 +539,8 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 				Reference:    mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta12.SubnetList{},
-					Managed: &v1beta12.Subnet{},
+					List:    &v1beta13.SubnetList{},
+					Managed: &v1beta13.Subnet{},
 				},
 			})
 			if err != nil {
