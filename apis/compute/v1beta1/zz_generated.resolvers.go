@@ -555,7 +555,24 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkInterfaceIds),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.ForProvider.NetworkInterfaceIdsRefs,
+		Selector:      mg.Spec.ForProvider.NetworkInterfaceIdsSelector,
+		To: reference.To{
+			List:    &v1beta13.NetworkInterfaceList{},
+			Managed: &v1beta13.NetworkInterface{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkInterfaceIds")
+	}
+	mg.Spec.ForProvider.NetworkInterfaceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.NetworkInterfaceIdsRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),

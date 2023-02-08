@@ -48,6 +48,7 @@ import (
 	v1beta1eventgrid "github.com/upbound/provider-azure/apis/eventgrid/v1beta1"
 	v1beta1eventhub "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
 	v1beta1fluidrelay "github.com/upbound/provider-azure/apis/fluidrelay/v1beta1"
+	v1beta1guestconfiguration "github.com/upbound/provider-azure/apis/guestconfiguration/v1beta1"
 	v1beta1hdinsight "github.com/upbound/provider-azure/apis/hdinsight/v1beta1"
 	v1beta1healthbot "github.com/upbound/provider-azure/apis/healthbot/v1beta1"
 	v1beta1healthcareapis "github.com/upbound/provider-azure/apis/healthcareapis/v1beta1"
@@ -69,6 +70,7 @@ import (
 	v1beta1notificationhubs "github.com/upbound/provider-azure/apis/notificationhubs/v1beta1"
 	v1beta1operationalinsights "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
 	v1beta1operationsmanagement "github.com/upbound/provider-azure/apis/operationsmanagement/v1beta1"
+	v1beta1orbital "github.com/upbound/provider-azure/apis/orbital/v1beta1"
 	v1beta1policyinsights "github.com/upbound/provider-azure/apis/policyinsights/v1beta1"
 	v1beta1portal "github.com/upbound/provider-azure/apis/portal/v1beta1"
 	v1beta1powerbidedicated "github.com/upbound/provider-azure/apis/powerbidedicated/v1beta1"
@@ -138,6 +140,7 @@ func init() {
 		v1beta1eventgrid.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
 		v1beta1fluidrelay.SchemeBuilder.AddToScheme,
+		v1beta1guestconfiguration.SchemeBuilder.AddToScheme,
 		v1beta1hdinsight.SchemeBuilder.AddToScheme,
 		v1beta1healthbot.SchemeBuilder.AddToScheme,
 		v1beta1healthcareapis.SchemeBuilder.AddToScheme,
@@ -159,6 +162,7 @@ func init() {
 		v1beta1notificationhubs.SchemeBuilder.AddToScheme,
 		v1beta1operationalinsights.SchemeBuilder.AddToScheme,
 		v1beta1operationsmanagement.SchemeBuilder.AddToScheme,
+		v1beta1orbital.SchemeBuilder.AddToScheme,
 		v1beta1policyinsights.SchemeBuilder.AddToScheme,
 		v1beta1portal.SchemeBuilder.AddToScheme,
 		v1beta1powerbidedicated.SchemeBuilder.AddToScheme,

@@ -265,8 +265,18 @@ type WindowsVirtualMachineParameters struct {
 	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
 
 	// . A list of Network Interface IDs which should be attached to this Virtual Machine. The first Network Interface ID in this list will be the Primary Network Interface on the Virtual Machine.
-	// +kubebuilder:validation:Required
-	NetworkInterfaceIds []*string `json:"networkInterfaceIds" tf:"network_interface_ids,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
+
+	// References to NetworkInterface in network to populate networkInterfaceIds.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIdsRefs []v1.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of NetworkInterface in network to populate networkInterfaceIds.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
 	// A os_disk block as defined below.
 	// +kubebuilder:validation:Required
