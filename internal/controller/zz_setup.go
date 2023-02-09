@@ -125,6 +125,7 @@ import (
 	frontdoorrule "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorrule"
 	frontdoorruleset "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorruleset"
 	profile "github.com/upbound/provider-azure/internal/controller/cdn/profile"
+	appservicecertificateorder "github.com/upbound/provider-azure/internal/controller/certificateregistration/appservicecertificateorder"
 	accountcognitiveservices "github.com/upbound/provider-azure/internal/controller/cognitiveservices/account"
 	service "github.com/upbound/provider-azure/internal/controller/communication/service"
 	availabilityset "github.com/upbound/provider-azure/internal/controller/compute/availabilityset"
@@ -812,6 +813,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		frontdoorrule.Setup,
 		frontdoorruleset.Setup,
 		profile.Setup,
+		appservicecertificateorder.Setup,
 		accountcognitiveservices.Setup,
 		service.Setup,
 		availabilityset.Setup,

@@ -1,0 +1,30 @@
+apiVersion: certificateregistration.azure.upbound.io/v1beta1
+kind: AppServiceCertificateOrder
+metadata:
+  annotations:
+    meta.upbound.io/example-id: certificateregistration/v1beta1/appservicecertificateorder
+  labels:
+    testing.upbound.io/example-name: example
+  name: certordername
+spec:
+  forProvider:
+    distinguishedName: CN=example.com
+    location: global
+    productType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: certificateregistration/v1beta1/appservicecertificateorder
+  labels:
+    testing.upbound.io/example-name: example
+  name: cert-rg
+spec:
+  forProvider:
+    location: West Europe
