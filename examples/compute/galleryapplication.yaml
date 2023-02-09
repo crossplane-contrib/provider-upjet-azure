@@ -1,0 +1,46 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: GalleryApplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/galleryapplication
+  labels:
+    testing.upbound.io/example-name: galleryapplicationexample
+  name: galleryapplicationexample
+spec:
+  forProvider:
+    galleryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: galleryapplicationig
+    location: West Europe
+    supportedOsType: Linux
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/galleryapplication
+  labels:
+    testing.upbound.io/example-name: galleryapplication-rg
+  name: galleryapplication-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: SharedImageGallery
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/galleryapplication
+  labels:
+    testing.upbound.io/example-name: galleryapplicationig
+  name: galleryapplicationig
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: galleryapplication-rg

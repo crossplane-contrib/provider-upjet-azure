@@ -47,6 +47,7 @@ import (
 	v1beta1elastic "github.com/upbound/provider-azure/apis/elastic/v1beta1"
 	v1beta1eventgrid "github.com/upbound/provider-azure/apis/eventgrid/v1beta1"
 	v1beta1eventhub "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
+	v1beta1fluidrelay "github.com/upbound/provider-azure/apis/fluidrelay/v1beta1"
 	v1beta1hdinsight "github.com/upbound/provider-azure/apis/hdinsight/v1beta1"
 	v1beta1healthbot "github.com/upbound/provider-azure/apis/healthbot/v1beta1"
 	v1beta1healthcareapis "github.com/upbound/provider-azure/apis/healthcareapis/v1beta1"
@@ -134,6 +135,7 @@ func init() {
 		v1beta1elastic.SchemeBuilder.AddToScheme,
 		v1beta1eventgrid.SchemeBuilder.AddToScheme,
 		v1beta1eventhub.SchemeBuilder.AddToScheme,
+		v1beta1fluidrelay.SchemeBuilder.AddToScheme,
 		v1beta1hdinsight.SchemeBuilder.AddToScheme,
 		v1beta1healthbot.SchemeBuilder.AddToScheme,
 		v1beta1healthcareapis.SchemeBuilder.AddToScheme,
