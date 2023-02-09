@@ -1339,6 +1339,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_linux_web_app": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Web/sites/{{ .external_name }}"),
 	// /providers/Microsoft.Web/sourceControls/GitHub
 	"azurerm_source_control_token": config.IdentifierFromProvider,
+	// a Function App Active Slot can be imported using the resource id
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1
+	"azurerm_function_app_active_slot": config.IdentifierFromProvider,
+	// a Function App Function can be imported using the resource id
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1/functions/function1
+	"azurerm_function_app_function": config.IdentifierFromProvider,
 
 	// logic
 	//

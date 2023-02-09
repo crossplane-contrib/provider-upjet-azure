@@ -162,6 +162,154 @@ func (tr *FunctionApp) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this FunctionAppActiveSlot
+func (mg *FunctionAppActiveSlot) GetTerraformResourceType() string {
+	return "azurerm_function_app_active_slot"
+}
+
+// GetConnectionDetailsMapping for this FunctionAppActiveSlot
+func (tr *FunctionAppActiveSlot) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FunctionAppActiveSlot
+func (tr *FunctionAppActiveSlot) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FunctionAppActiveSlot
+func (tr *FunctionAppActiveSlot) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FunctionAppActiveSlot
+func (tr *FunctionAppActiveSlot) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FunctionAppActiveSlot
+func (tr *FunctionAppActiveSlot) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FunctionAppActiveSlot
+func (tr *FunctionAppActiveSlot) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this FunctionAppActiveSlot using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FunctionAppActiveSlot) LateInitialize(attrs []byte) (bool, error) {
+	params := &FunctionAppActiveSlotParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FunctionAppActiveSlot) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this FunctionAppFunction
+func (mg *FunctionAppFunction) GetTerraformResourceType() string {
+	return "azurerm_function_app_function"
+}
+
+// GetConnectionDetailsMapping for this FunctionAppFunction
+func (tr *FunctionAppFunction) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FunctionAppFunction
+func (tr *FunctionAppFunction) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FunctionAppFunction
+func (tr *FunctionAppFunction) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FunctionAppFunction
+func (tr *FunctionAppFunction) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FunctionAppFunction
+func (tr *FunctionAppFunction) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FunctionAppFunction
+func (tr *FunctionAppFunction) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this FunctionAppFunction using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FunctionAppFunction) LateInitialize(attrs []byte) (bool, error) {
+	params := &FunctionAppFunctionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FunctionAppFunction) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this FunctionAppSlot
 func (mg *FunctionAppSlot) GetTerraformResourceType() string {
 	return "azurerm_function_app_slot"

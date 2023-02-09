@@ -608,6 +608,8 @@ import (
 	standardenvironment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/standardenvironment"
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
 	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
+	functionappactiveslot "github.com/upbound/provider-azure/internal/controller/web/functionappactiveslot"
+	functionappfunction "github.com/upbound/provider-azure/internal/controller/web/functionappfunction"
 	functionappslot "github.com/upbound/provider-azure/internal/controller/web/functionappslot"
 	linuxfunctionapp "github.com/upbound/provider-azure/internal/controller/web/linuxfunctionapp"
 	linuxfunctionappslot "github.com/upbound/provider-azure/internal/controller/web/linuxfunctionappslot"
@@ -1220,6 +1222,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		standardenvironment.Setup,
 		appserviceplan.Setup,
 		functionapp.Setup,
+		functionappactiveslot.Setup,
+		functionappfunction.Setup,
 		functionappslot.Setup,
 		linuxfunctionapp.Setup,
 		linuxfunctionappslot.Setup,

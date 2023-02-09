@@ -141,6 +141,58 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this FunctionAppActiveSlot.
+func (mg *FunctionAppActiveSlot) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SlotID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SlotIDRef,
+		Selector:     mg.Spec.ForProvider.SlotIDSelector,
+		To: reference.To{
+			List:    &LinuxFunctionAppSlotList{},
+			Managed: &LinuxFunctionAppSlot{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SlotID")
+	}
+	mg.Spec.ForProvider.SlotID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SlotIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this FunctionAppFunction.
+func (mg *FunctionAppFunction) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionAppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.FunctionAppIDRef,
+		Selector:     mg.Spec.ForProvider.FunctionAppIDSelector,
+		To: reference.To{
+			List:    &LinuxFunctionAppList{},
+			Managed: &LinuxFunctionApp{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FunctionAppID")
+	}
+	mg.Spec.ForProvider.FunctionAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FunctionAppIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this FunctionAppSlot.
 func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
