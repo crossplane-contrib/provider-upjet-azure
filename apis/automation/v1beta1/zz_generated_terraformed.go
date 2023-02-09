@@ -88,6 +88,80 @@ func (tr *Account) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ConnectionType
+func (mg *ConnectionType) GetTerraformResourceType() string {
+	return "azurerm_automation_connection_type"
+}
+
+// GetConnectionDetailsMapping for this ConnectionType
+func (tr *ConnectionType) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ConnectionType
+func (tr *ConnectionType) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ConnectionType
+func (tr *ConnectionType) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ConnectionType
+func (tr *ConnectionType) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ConnectionType
+func (tr *ConnectionType) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ConnectionType
+func (tr *ConnectionType) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ConnectionType using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ConnectionType) LateInitialize(attrs []byte) (bool, error) {
+	params := &ConnectionTypeParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ConnectionType) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Credential
 func (mg *Credential) GetTerraformResourceType() string {
 	return "azurerm_automation_credential"
@@ -159,6 +233,80 @@ func (tr *Credential) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Credential) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this HybridRunBookWorkerGroup
+func (mg *HybridRunBookWorkerGroup) GetTerraformResourceType() string {
+	return "azurerm_automation_hybrid_runbook_worker_group"
+}
+
+// GetConnectionDetailsMapping for this HybridRunBookWorkerGroup
+func (tr *HybridRunBookWorkerGroup) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HybridRunBookWorkerGroup
+func (tr *HybridRunBookWorkerGroup) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HybridRunBookWorkerGroup
+func (tr *HybridRunBookWorkerGroup) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HybridRunBookWorkerGroup
+func (tr *HybridRunBookWorkerGroup) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HybridRunBookWorkerGroup
+func (tr *HybridRunBookWorkerGroup) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HybridRunBookWorkerGroup
+func (tr *HybridRunBookWorkerGroup) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HybridRunBookWorkerGroup using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HybridRunBookWorkerGroup) LateInitialize(attrs []byte) (bool, error) {
+	params := &HybridRunBookWorkerGroupParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HybridRunBookWorkerGroup) GetTerraformSchemaVersion() int {
 	return 0
 }
 
