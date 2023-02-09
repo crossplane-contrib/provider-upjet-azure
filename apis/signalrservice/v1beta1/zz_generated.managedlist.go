@@ -24,3 +24,12 @@ func (l *ServiceList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this SignalrSharedPrivateLinkResourceList.
+func (l *SignalrSharedPrivateLinkResourceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

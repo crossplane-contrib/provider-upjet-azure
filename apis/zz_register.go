@@ -83,6 +83,7 @@ import (
 	v1beta1servicefabric "github.com/upbound/provider-azure/apis/servicefabric/v1beta1"
 	v1beta1signalrservice "github.com/upbound/provider-azure/apis/signalrservice/v1beta1"
 	v1beta1solutions "github.com/upbound/provider-azure/apis/solutions/v1beta1"
+	v1beta1spring "github.com/upbound/provider-azure/apis/spring/v1beta1"
 	v1beta1sql "github.com/upbound/provider-azure/apis/sql/v1beta1"
 	v1beta1storage "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	v1beta1storagecache "github.com/upbound/provider-azure/apis/storagecache/v1beta1"
@@ -172,6 +173,7 @@ func init() {
 		v1beta1servicefabric.SchemeBuilder.AddToScheme,
 		v1beta1signalrservice.SchemeBuilder.AddToScheme,
 		v1beta1solutions.SchemeBuilder.AddToScheme,
+		v1beta1spring.SchemeBuilder.AddToScheme,
 		v1beta1sql.SchemeBuilder.AddToScheme,
 		v1beta1storage.SchemeBuilder.AddToScheme,
 		v1beta1storagecache.SchemeBuilder.AddToScheme,

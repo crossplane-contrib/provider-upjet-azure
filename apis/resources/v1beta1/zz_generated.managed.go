@@ -7,6 +7,138 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ResourceDeploymentScriptAzureCli.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ResourceDeploymentScriptAzureCli) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ResourceDeploymentScriptAzureCli.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ResourceDeploymentScriptAzureCli) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ResourceDeploymentScriptAzurePowerShell.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ResourceDeploymentScriptAzurePowerShell.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ResourceGroupTemplateDeployment.
 func (mg *ResourceGroupTemplateDeployment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

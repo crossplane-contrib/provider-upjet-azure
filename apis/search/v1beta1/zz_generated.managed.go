@@ -72,3 +72,69 @@ func (mg *Service) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetail
 func (mg *Service) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SharedPrivateLinkService.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SharedPrivateLinkService) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SharedPrivateLinkService.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SharedPrivateLinkService) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SharedPrivateLinkService.
+func (mg *SharedPrivateLinkService) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

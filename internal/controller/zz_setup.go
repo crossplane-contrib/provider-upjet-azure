@@ -50,6 +50,7 @@ import (
 	subscription "github.com/upbound/provider-azure/internal/controller/apimanagement/subscription"
 	tag "github.com/upbound/provider-azure/internal/controller/apimanagement/tag"
 	user "github.com/upbound/provider-azure/internal/controller/apimanagement/user"
+	springcloudaccelerator "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudaccelerator"
 	springcloudactivedeployment "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudactivedeployment"
 	springcloudapp "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudapp"
 	springcloudappcosmosdbassociation "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudappcosmosdbassociation"
@@ -57,6 +58,8 @@ import (
 	springcloudappredisassociation "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudappredisassociation"
 	springcloudcertificate "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudcertificate"
 	springcloudcustomdomain "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudcustomdomain"
+	springcloudcustomizedaccelerator "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudcustomizedaccelerator"
+	springclouddevtoolportal "github.com/upbound/provider-azure/internal/controller/appplatform/springclouddevtoolportal"
 	springcloudjavadeployment "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudjavadeployment"
 	springcloudservice "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudservice"
 	springcloudstorage "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudstorage"
@@ -507,15 +510,19 @@ import (
 	backupprotectedfileshare "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedfileshare"
 	backupprotectedvm "github.com/upbound/provider-azure/internal/controller/recoveryservices/backupprotectedvm"
 	siterecoveryfabric "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryfabric"
+	siterecoverynetworkmapping "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoverynetworkmapping"
 	siterecoveryprotectioncontainer "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryprotectioncontainer"
 	siterecoveryprotectioncontainermapping "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryprotectioncontainermapping"
 	siterecoveryreplicationpolicy "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryreplicationpolicy"
 	vaultrecoveryservices "github.com/upbound/provider-azure/internal/controller/recoveryservices/vault"
 	eventrelaynamespace "github.com/upbound/provider-azure/internal/controller/relay/eventrelaynamespace"
 	namespaceauthorizationrulerelay "github.com/upbound/provider-azure/internal/controller/relay/namespaceauthorizationrule"
+	resourcedeploymentscriptazurecli "github.com/upbound/provider-azure/internal/controller/resources/resourcedeploymentscriptazurecli"
+	resourcedeploymentscriptazurepowershell "github.com/upbound/provider-azure/internal/controller/resources/resourcedeploymentscriptazurepowershell"
 	resourcegrouptemplatedeployment "github.com/upbound/provider-azure/internal/controller/resources/resourcegrouptemplatedeployment"
 	subscriptiontemplatedeployment "github.com/upbound/provider-azure/internal/controller/resources/subscriptiontemplatedeployment"
 	servicesearch "github.com/upbound/provider-azure/internal/controller/search/service"
+	sharedprivatelinkservice "github.com/upbound/provider-azure/internal/controller/search/sharedprivatelinkservice"
 	advancedthreatprotection "github.com/upbound/provider-azure/internal/controller/security/advancedthreatprotection"
 	iotsecuritydevicegroup "github.com/upbound/provider-azure/internal/controller/security/iotsecuritydevicegroup"
 	iotsecuritysolution "github.com/upbound/provider-azure/internal/controller/security/iotsecuritysolution"
@@ -546,7 +553,9 @@ import (
 	managedcluster "github.com/upbound/provider-azure/internal/controller/servicefabric/managedcluster"
 	networkacl "github.com/upbound/provider-azure/internal/controller/signalrservice/networkacl"
 	servicesignalrservice "github.com/upbound/provider-azure/internal/controller/signalrservice/service"
+	signalrsharedprivatelinkresource "github.com/upbound/provider-azure/internal/controller/signalrservice/signalrsharedprivatelinkresource"
 	managedapplicationdefinition "github.com/upbound/provider-azure/internal/controller/solutions/managedapplicationdefinition"
+	cloudapplicationliveview "github.com/upbound/provider-azure/internal/controller/spring/cloudapplicationliveview"
 	mssqldatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqldatabase"
 	mssqlfailovergroup "github.com/upbound/provider-azure/internal/controller/sql/mssqlfailovergroup"
 	mssqlfirewallrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlfirewallrule"
@@ -633,6 +642,7 @@ import (
 	linuxwebappslot "github.com/upbound/provider-azure/internal/controller/web/linuxwebappslot"
 	serviceplan "github.com/upbound/provider-azure/internal/controller/web/serviceplan"
 	sourcecontroltoken "github.com/upbound/provider-azure/internal/controller/web/sourcecontroltoken"
+	staticsite "github.com/upbound/provider-azure/internal/controller/web/staticsite"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -680,6 +690,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subscription.Setup,
 		tag.Setup,
 		user.Setup,
+		springcloudaccelerator.Setup,
 		springcloudactivedeployment.Setup,
 		springcloudapp.Setup,
 		springcloudappcosmosdbassociation.Setup,
@@ -687,6 +698,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		springcloudappredisassociation.Setup,
 		springcloudcertificate.Setup,
 		springcloudcustomdomain.Setup,
+		springcloudcustomizedaccelerator.Setup,
+		springclouddevtoolportal.Setup,
 		springcloudjavadeployment.Setup,
 		springcloudservice.Setup,
 		springcloudstorage.Setup,
@@ -1137,15 +1150,19 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		backupprotectedfileshare.Setup,
 		backupprotectedvm.Setup,
 		siterecoveryfabric.Setup,
+		siterecoverynetworkmapping.Setup,
 		siterecoveryprotectioncontainer.Setup,
 		siterecoveryprotectioncontainermapping.Setup,
 		siterecoveryreplicationpolicy.Setup,
 		vaultrecoveryservices.Setup,
 		eventrelaynamespace.Setup,
 		namespaceauthorizationrulerelay.Setup,
+		resourcedeploymentscriptazurecli.Setup,
+		resourcedeploymentscriptazurepowershell.Setup,
 		resourcegrouptemplatedeployment.Setup,
 		subscriptiontemplatedeployment.Setup,
 		servicesearch.Setup,
+		sharedprivatelinkservice.Setup,
 		advancedthreatprotection.Setup,
 		iotsecuritydevicegroup.Setup,
 		iotsecuritysolution.Setup,
@@ -1176,7 +1193,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedcluster.Setup,
 		networkacl.Setup,
 		servicesignalrservice.Setup,
+		signalrsharedprivatelinkresource.Setup,
 		managedapplicationdefinition.Setup,
+		cloudapplicationliveview.Setup,
 		mssqldatabase.Setup,
 		mssqlfailovergroup.Setup,
 		mssqlfirewallrule.Setup,
@@ -1263,6 +1282,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		linuxwebappslot.Setup,
 		serviceplan.Setup,
 		sourcecontroltoken.Setup,
+		staticsite.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

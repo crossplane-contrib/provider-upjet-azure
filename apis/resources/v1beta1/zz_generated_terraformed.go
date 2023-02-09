@@ -13,6 +13,154 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this ResourceDeploymentScriptAzureCli
+func (mg *ResourceDeploymentScriptAzureCli) GetTerraformResourceType() string {
+	return "azurerm_resource_deployment_script_azure_cli"
+}
+
+// GetConnectionDetailsMapping for this ResourceDeploymentScriptAzureCli
+func (tr *ResourceDeploymentScriptAzureCli) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"environment_variable[*].secure_value": "spec.forProvider.environmentVariable[*].secureValueSecretRef", "storage_account[*].key": "spec.forProvider.storageAccount[*].keySecretRef"}
+}
+
+// GetObservation of this ResourceDeploymentScriptAzureCli
+func (tr *ResourceDeploymentScriptAzureCli) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ResourceDeploymentScriptAzureCli
+func (tr *ResourceDeploymentScriptAzureCli) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ResourceDeploymentScriptAzureCli
+func (tr *ResourceDeploymentScriptAzureCli) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ResourceDeploymentScriptAzureCli
+func (tr *ResourceDeploymentScriptAzureCli) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ResourceDeploymentScriptAzureCli
+func (tr *ResourceDeploymentScriptAzureCli) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ResourceDeploymentScriptAzureCli using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ResourceDeploymentScriptAzureCli) LateInitialize(attrs []byte) (bool, error) {
+	params := &ResourceDeploymentScriptAzureCliParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ResourceDeploymentScriptAzureCli) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ResourceDeploymentScriptAzurePowerShell
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetTerraformResourceType() string {
+	return "azurerm_resource_deployment_script_azure_power_shell"
+}
+
+// GetConnectionDetailsMapping for this ResourceDeploymentScriptAzurePowerShell
+func (tr *ResourceDeploymentScriptAzurePowerShell) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"environment_variable[*].secure_value": "spec.forProvider.environmentVariable[*].secureValueSecretRef", "storage_account[*].key": "spec.forProvider.storageAccount[*].keySecretRef"}
+}
+
+// GetObservation of this ResourceDeploymentScriptAzurePowerShell
+func (tr *ResourceDeploymentScriptAzurePowerShell) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ResourceDeploymentScriptAzurePowerShell
+func (tr *ResourceDeploymentScriptAzurePowerShell) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ResourceDeploymentScriptAzurePowerShell
+func (tr *ResourceDeploymentScriptAzurePowerShell) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ResourceDeploymentScriptAzurePowerShell
+func (tr *ResourceDeploymentScriptAzurePowerShell) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ResourceDeploymentScriptAzurePowerShell
+func (tr *ResourceDeploymentScriptAzurePowerShell) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ResourceDeploymentScriptAzurePowerShell using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ResourceDeploymentScriptAzurePowerShell) LateInitialize(attrs []byte) (bool, error) {
+	params := &ResourceDeploymentScriptAzurePowerShellParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ResourceDeploymentScriptAzurePowerShell) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this ResourceGroupTemplateDeployment
 func (mg *ResourceGroupTemplateDeployment) GetTerraformResourceType() string {
 	return "azurerm_resource_group_template_deployment"
