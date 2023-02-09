@@ -7,8 +7,26 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this SentinelAlertRuleFusionList.
+func (l *SentinelAlertRuleFusionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SentinelAlertRuleMSSecurityIncidentList.
 func (l *SentinelAlertRuleMSSecurityIncidentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SentinelAlertRuleMachineLearningBehaviorAnalyticsList.
+func (l *SentinelAlertRuleMachineLearningBehaviorAnalyticsList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -27,6 +45,15 @@ func (l *SentinelAutomationRuleList) GetItems() []resource.Managed {
 
 // GetItems of this SentinelDataConnectorIOTList.
 func (l *SentinelDataConnectorIOTList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SentinelLogAnalyticsWorkspaceOnboardingList.
+func (l *SentinelLogAnalyticsWorkspaceOnboardingList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

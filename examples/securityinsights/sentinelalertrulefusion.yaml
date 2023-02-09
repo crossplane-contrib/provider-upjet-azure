@@ -1,0 +1,74 @@
+apiVersion: securityinsights.azure.upbound.io/v1beta1
+kind: SentinelAlertRuleFusion
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulefusion
+  labels:
+    testing.upbound.io/example-name: examplesentertrulefusion
+  name: examplesentertrulefusion
+spec:
+  forProvider:
+    name: examplesentertrulefusion
+    alertRuleTemplateGuid: f71aba3d-28fb-450b-b192-4e76a83015c8
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-ls
+
+---
+
+apiVersion: operationsmanagement.azure.upbound.io/v1beta1
+kind: LogAnalyticsSolution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulefusion
+  labels:
+    testing.upbound.io/example-name: sentertrulefusion-ls
+  name: sentertrulefusion-ls
+spec:
+  forProvider:
+    location: West Europe
+    plan:
+    - product: OMSGallery/SecurityInsights
+      publisher: Microsoft
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-rg
+    solutionName: SecurityInsights
+    workspaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-ws
+    workspaceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-ws
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulefusion
+  labels:
+    testing.upbound.io/example-name: sentertrulefusion-ws
+  name: sentertrulefusion-ws
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sentertrulefusion-rg
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulefusion
+  labels:
+    testing.upbound.io/example-name: sentertrulefusion-rg
+  name: sentertrulefusion-rg
+spec:
+  forProvider:
+    location: West Europe
