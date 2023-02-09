@@ -361,8 +361,8 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.DatabaseRef,
 		Selector:     mg.Spec.ForProvider.DatabaseSelector,
 		To: reference.To{
-			List:    &v1beta12.DatabaseList{},
-			Managed: &v1beta12.Database{},
+			List:    &v1beta14.DatabaseList{},
+			Managed: &v1beta14.Database{},
 		},
 	})
 	if err != nil {

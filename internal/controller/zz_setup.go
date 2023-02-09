@@ -538,7 +538,6 @@ import (
 	elasticpool "github.com/upbound/provider-azure/internal/controller/sql/elasticpool"
 	firewallrulesql "github.com/upbound/provider-azure/internal/controller/sql/firewallrule"
 	mssqldatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqldatabase"
-	mssqldatabaseextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/sql/mssqldatabaseextendedauditingpolicy"
 	mssqlfailovergroup "github.com/upbound/provider-azure/internal/controller/sql/mssqlfailovergroup"
 	mssqlfirewallrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlfirewallrule"
 	mssqlmanageddatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanageddatabase"
@@ -549,7 +548,6 @@ import (
 	mssqloutboundfirewallrule "github.com/upbound/provider-azure/internal/controller/sql/mssqloutboundfirewallrule"
 	mssqlserver "github.com/upbound/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlserverdnsalias "github.com/upbound/provider-azure/internal/controller/sql/mssqlserverdnsalias"
-	mssqlserversecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/sql/mssqlserversecurityalertpolicy"
 	mssqlservertransparentdataencryption "github.com/upbound/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	mssqlvirtualnetworkrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
 	accountstorage "github.com/upbound/provider-azure/internal/controller/storage/account"
@@ -615,6 +613,8 @@ import (
 	standardenvironment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/standardenvironment"
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
 	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
+	functionappactiveslot "github.com/upbound/provider-azure/internal/controller/web/functionappactiveslot"
+	functionappfunction "github.com/upbound/provider-azure/internal/controller/web/functionappfunction"
 	functionappslot "github.com/upbound/provider-azure/internal/controller/web/functionappslot"
 	linuxfunctionapp "github.com/upbound/provider-azure/internal/controller/web/linuxfunctionapp"
 	linuxfunctionappslot "github.com/upbound/provider-azure/internal/controller/web/linuxfunctionappslot"
@@ -1157,7 +1157,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		elasticpool.Setup,
 		firewallrulesql.Setup,
 		mssqldatabase.Setup,
-		mssqldatabaseextendedauditingpolicy.Setup,
 		mssqlfailovergroup.Setup,
 		mssqlfirewallrule.Setup,
 		mssqlmanageddatabase.Setup,
@@ -1168,7 +1167,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mssqloutboundfirewallrule.Setup,
 		mssqlserver.Setup,
 		mssqlserverdnsalias.Setup,
-		mssqlserversecurityalertpolicy.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		mssqlvirtualnetworkrule.Setup,
 		accountstorage.Setup,
@@ -1234,6 +1232,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		standardenvironment.Setup,
 		appserviceplan.Setup,
 		functionapp.Setup,
+		functionappactiveslot.Setup,
+		functionappfunction.Setup,
 		functionappslot.Setup,
 		linuxfunctionapp.Setup,
 		linuxfunctionappslot.Setup,

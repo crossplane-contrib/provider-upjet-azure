@@ -63,11 +63,11 @@ type DatabaseObservation struct {
 
 type DatabaseParameters struct {
 
-	// The name of the collation. Applies only if create_mode is Default.  Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new resource to be created.
+	// The name of the collation. Applies only if create_mode is Default. Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// Specifies how to create the database. Valid values are: Default, Copy, OnlineSecondary, NonReadableSecondary,  PointInTimeRestore, Recovery, Restore or RestoreLongTermRetentionBackup. Must be Default to create a new database. Defaults to Default. Please see Azure SQL Database REST API
+	// Specifies how to create the database. Valid values are: Default, Copy, OnlineSecondary, NonReadableSecondary, PointInTimeRestore, Recovery, Restore or RestoreLongTermRetentionBackup. Must be Default to create a new database. Defaults to Default. Please see Azure SQL Database REST API
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
@@ -87,7 +87,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
-	// The maximum size that the database can grow to. Applies only if create_mode is Default.  Please see Azure SQL database models.
+	// The maximum size that the database can grow to. Applies only if create_mode is Default. Please see Azure SQL database models.
 	// +kubebuilder:validation:Optional
 	MaxSizeBytes *string `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty"`
 
@@ -107,7 +107,7 @@ type DatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	RequestedServiceObjectiveName *string `json:"requestedServiceObjectiveName,omitempty" tf:"requested_service_objective_name,omitempty"`
 
-	// The name of the resource group in which to create the database.  This must be the same as Database Server resource group currently. Changing this forces a new resource to be created.
+	// The name of the resource group in which to create the database. This must be the same as Database Server resource group currently. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`

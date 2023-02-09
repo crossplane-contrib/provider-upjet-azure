@@ -1,20 +1,16 @@
-apiVersion: sql.azure.upbound.io/v1beta1
-kind: Database
+apiVersion: web.azure.upbound.io/v1beta1
+kind: FunctionAppActiveSlot
 metadata:
   annotations:
-    meta.upbound.io/example-id: sql/v1beta1/database
+    meta.upbound.io/example-id: web/v1beta1/functionappactiveslot
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    location: West Europe
-    resourceGroupNameSelector:
+    slotIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    serverName: ${azurerm_sql_server.example.name}
-    tags:
-      environment: production
 
 ---
 
@@ -22,7 +18,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: sql/v1beta1/database
+    meta.upbound.io/example-id: web/v1beta1/functionappactiveslot
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -32,11 +28,30 @@ spec:
 
 ---
 
+apiVersion: web.azure.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionappactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    osType: Windows
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Y1
+
+---
+
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: sql/v1beta1/database
+    meta.upbound.io/example-id: web/v1beta1/functionappactiveslot
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -65,12 +65,12 @@ spec:
                 properties:
                   collation:
                     description: The name of the collation. Applies only if create_mode
-                      is Default.  Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS.
-                      Changing this forces a new resource to be created.
+                      is Default. Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing
+                      this forces a new resource to be created.
                     type: string
                   createMode:
                     description: 'Specifies how to create the database. Valid values
-                      are: Default, Copy, OnlineSecondary, NonReadableSecondary,  PointInTimeRestore,
+                      are: Default, Copy, OnlineSecondary, NonReadableSecondary, PointInTimeRestore,
                       Recovery, Restore or RestoreLongTermRetentionBackup. Must be
                       Default to create a new database. Defaults to Default. Please
                       see Azure SQL Database REST API'
@@ -157,7 +157,7 @@ spec:
                     type: string
                   maxSizeBytes:
                     description: The maximum size that the database can grow to. Applies
-                      only if create_mode is Default.  Please see Azure SQL database
+                      only if create_mode is Default. Please see Azure SQL database
                       models.
                     type: string
                   maxSizeGb:
@@ -182,7 +182,7 @@ spec:
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the database.  This must be the same as Database Server resource
+                      the database. This must be the same as Database Server resource
                       group currently. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupNameRef:
