@@ -3485,6 +3485,252 @@ func (mg *VirtualHub) ResolveReferences(ctx context.Context, c client.Reader) er
 	return nil
 }
 
+// ResolveReferences of this VirtualHubConnection.
+func (mg *VirtualHubConnection) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RemoteVirtualNetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RemoteVirtualNetworkIDRef,
+		Selector:     mg.Spec.ForProvider.RemoteVirtualNetworkIDSelector,
+		To: reference.To{
+			List:    &VirtualNetworkList{},
+			Managed: &VirtualNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RemoteVirtualNetworkID")
+	}
+	mg.Spec.ForProvider.RemoteVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RemoteVirtualNetworkIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Routing); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Routing[i3].AssociatedRouteTableID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.Routing[i3].AssociatedRouteTableIDRef,
+			Selector:     mg.Spec.ForProvider.Routing[i3].AssociatedRouteTableIDSelector,
+			To: reference.To{
+				List:    &VirtualHubRouteTableList{},
+				Managed: &VirtualHubRouteTable{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Routing[i3].AssociatedRouteTableID")
+		}
+		mg.Spec.ForProvider.Routing[i3].AssociatedRouteTableID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Routing[i3].AssociatedRouteTableIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualHubIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualHubIDSelector,
+		To: reference.To{
+			List:    &VirtualHubList{},
+			Managed: &VirtualHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualHubID")
+	}
+	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VirtualHubIP.
+func (mg *VirtualHubIP) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PublicIPAddressID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PublicIPAddressIDRef,
+		Selector:     mg.Spec.ForProvider.PublicIPAddressIDSelector,
+		To: reference.To{
+			List:    &PublicIPList{},
+			Managed: &PublicIP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PublicIPAddressID")
+	}
+	mg.Spec.ForProvider.PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PublicIPAddressIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SubnetIDRef,
+		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &SubnetList{},
+			Managed: &Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
+	}
+	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualHubIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualHubIDSelector,
+		To: reference.To{
+			List:    &VirtualHubList{},
+			Managed: &VirtualHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualHubID")
+	}
+	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VirtualHubRouteTable.
+func (mg *VirtualHubRouteTable) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Route); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Route[i3].NextHop),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.Route[i3].NextHopRef,
+			Selector:     mg.Spec.ForProvider.Route[i3].NextHopSelector,
+			To: reference.To{
+				List:    &VirtualHubConnectionList{},
+				Managed: &VirtualHubConnection{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Route[i3].NextHop")
+		}
+		mg.Spec.ForProvider.Route[i3].NextHop = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Route[i3].NextHopRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualHubIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualHubIDSelector,
+		To: reference.To{
+			List:    &VirtualHubList{},
+			Managed: &VirtualHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualHubID")
+	}
+	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VirtualHubRouteTableRoute.
+func (mg *VirtualHubRouteTableRoute) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NextHop),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.NextHopRef,
+		Selector:     mg.Spec.ForProvider.NextHopSelector,
+		To: reference.To{
+			List:    &VirtualHubConnectionList{},
+			Managed: &VirtualHubConnection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NextHop")
+	}
+	mg.Spec.ForProvider.NextHop = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NextHopRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RouteTableID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RouteTableIDRef,
+		Selector:     mg.Spec.ForProvider.RouteTableIDSelector,
+		To: reference.To{
+			List:    &VirtualHubRouteTableList{},
+			Managed: &VirtualHubRouteTable{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RouteTableID")
+	}
+	mg.Spec.ForProvider.RouteTableID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RouteTableIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VirtualHubSecurityPartnerProvider.
+func (mg *VirtualHubSecurityPartnerProvider) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualHubIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualHubIDSelector,
+		To: reference.To{
+			List:    &VirtualHubList{},
+			Managed: &VirtualHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualHubID")
+	}
+	mg.Spec.ForProvider.VirtualHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualHubIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this VirtualNetwork.
 func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

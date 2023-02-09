@@ -1063,6 +1063,72 @@ func (mg *WorkspaceExtendedAuditingPolicy) SetWriteConnectionSecretToReference(r
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this WorkspaceSQLAADAdmin.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *WorkspaceSQLAADAdmin) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this WorkspaceSQLAADAdmin.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *WorkspaceSQLAADAdmin) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkspaceSQLAADAdmin.
+func (mg *WorkspaceSQLAADAdmin) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this WorkspaceSecurityAlertPolicy.
 func (mg *WorkspaceSecurityAlertPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

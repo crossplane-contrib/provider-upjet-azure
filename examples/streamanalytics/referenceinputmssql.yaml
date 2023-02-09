@@ -1,0 +1,125 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: ReferenceInputMSSQL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/referenceinputmssql
+  labels:
+    testing.upbound.io/example-name: refinputmssqlexample
+  name: refinputmssqlexample
+spec:
+  forProvider:
+    databaseSelector:
+      matchLabels:
+        testing.upbound.io/example-name: refinputmssql-sqldb
+    fullSnapshotQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]
+    passwordSecretRef:
+      key: example-key
+      name: example-name
+      namespace: upbound-system
+    refreshIntervalDuration: "00:20:00"
+    refreshType: RefreshPeriodicallyWithFull
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: refinputmssql-rg
+    serverSelector:
+      matchLabels:
+        testing.upbound.io/example-name: refinputmssql-sqlsrv
+    streamAnalyticsJobName: refinputmssql-job
+    username: exampleuser
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/referenceinputmssql
+  labels:
+    testing.upbound.io/example-name: refinputmssql-sqldb
+  name: refinputmssql-sqldb
+spec:
+  forProvider:
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: refinputmssql-sqlsrv
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/referenceinputmssql
+  labels:
+    testing.upbound.io/example-name: refinputmssql-sqlsrv
+  name: refinputmssql-sqlsrv
+spec:
+  forProvider:
+    administratorLogin: exampleuser
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-name
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: refinputmssql-rg
+    version: "12.0"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/referenceinputmssql
+  labels:
+    testing.upbound.io/example-name: refinputmssql-rg
+  name: refinputmssql-rg
+spec:
+  forProvider:
+    location: West Europe
+
+--- 
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkMTIzIQ==
+
+---
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/referenceinputmssql
+  labels:
+    testing.upbound.io/example-name: refinputmssql-job
+  name: refinputmssql-job
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: refinputmssql-rg
+    streamingUnits: 3
+    tags:
+      environment: example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]

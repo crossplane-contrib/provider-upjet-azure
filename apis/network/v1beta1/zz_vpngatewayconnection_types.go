@@ -27,20 +27,6 @@ type CustomBGPAddressParameters struct {
 	IPConfigurationID *string `json:"ipConfigurationId" tf:"ip_configuration_id,omitempty"`
 }
 
-type RoutingPropagatedRouteTableObservation struct {
-}
-
-type RoutingPropagatedRouteTableParameters struct {
-
-	// A list of labels to assign to this route table.
-	// +kubebuilder:validation:Optional
-	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
-
-	// A list of Route Table IDs to associated with this VPN Gateway Connection.
-	// +kubebuilder:validation:Required
-	RouteTableIds []*string `json:"routeTableIds" tf:"route_table_ids,omitempty"`
-}
-
 type VPNGatewayConnectionObservation struct {
 
 	// The ID of the VPN Gateway Connection.
@@ -113,7 +99,21 @@ type VPNGatewayConnectionRoutingParameters struct {
 
 	// A propagated_route_table block as defined below.
 	// +kubebuilder:validation:Optional
-	PropagatedRouteTable []RoutingPropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+	PropagatedRouteTable []VPNGatewayConnectionRoutingPropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+}
+
+type VPNGatewayConnectionRoutingPropagatedRouteTableObservation struct {
+}
+
+type VPNGatewayConnectionRoutingPropagatedRouteTableParameters struct {
+
+	// A list of labels to assign to this route table.
+	// +kubebuilder:validation:Optional
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// A list of Route Table IDs to associated with this VPN Gateway Connection.
+	// +kubebuilder:validation:Required
+	RouteTableIds []*string `json:"routeTableIds" tf:"route_table_ids,omitempty"`
 }
 
 type VPNGatewayConnectionTrafficSelectorPolicyObservation struct {

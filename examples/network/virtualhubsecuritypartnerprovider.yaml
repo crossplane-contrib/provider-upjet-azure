@@ -1,0 +1,95 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHubSecurityPartnerProvider
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: network/v1beta1/virtualhubsecuritypartnerprovider
+  labels:
+    testing.upbound.io/example-name: examplevhubpartnerprovider
+  name: examplevhubpartnerprovider
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubpartnerprovider-rg
+    securityProviderName: IBoss
+    tags:
+      ENV: Prod
+    virtualHubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubpartnerprovider-vh
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubsecuritypartnerprovider
+  labels:
+    testing.upbound.io/example-name: vhubpartnerprovider-rg
+  name: vhubpartnerprovider-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHub
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: network/v1beta1/virtualhubsecuritypartnerprovider
+  labels:
+    testing.upbound.io/example-name: vhubpartnerprovider-vh
+  name: vhubpartnerprovider-vh
+spec:
+  forProvider:
+    addressPrefix: 10.0.2.0/24
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubpartnerprovider-rg
+    virtualWanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubpartnerprovider-vwan
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualWAN
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubsecuritypartnerprovider
+  labels:
+    testing.upbound.io/example-name: vhubpartnerprovider-vwan
+  name: vhubpartnerprovider-vwan
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubpartnerprovider-rg
+
+--- 
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VPNGateway
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: network/v1beta1/virtualhubsecuritypartnerprovider
+  labels:
+    testing.upbound.io/example-name: vhubpartnerprovider-vg
+  name: vhubpartnerprovider-vg
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubpartnerprovider-rg
+    virtualHubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: vhubpartnerprovider-vh

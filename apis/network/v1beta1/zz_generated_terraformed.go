@@ -6303,6 +6303,376 @@ func (tr *VirtualHub) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this VirtualHubConnection
+func (mg *VirtualHubConnection) GetTerraformResourceType() string {
+	return "azurerm_virtual_hub_connection"
+}
+
+// GetConnectionDetailsMapping for this VirtualHubConnection
+func (tr *VirtualHubConnection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VirtualHubConnection
+func (tr *VirtualHubConnection) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VirtualHubConnection
+func (tr *VirtualHubConnection) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VirtualHubConnection
+func (tr *VirtualHubConnection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VirtualHubConnection
+func (tr *VirtualHubConnection) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VirtualHubConnection
+func (tr *VirtualHubConnection) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VirtualHubConnection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VirtualHubConnection) LateInitialize(attrs []byte) (bool, error) {
+	params := &VirtualHubConnectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VirtualHubConnection) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this VirtualHubIP
+func (mg *VirtualHubIP) GetTerraformResourceType() string {
+	return "azurerm_virtual_hub_ip"
+}
+
+// GetConnectionDetailsMapping for this VirtualHubIP
+func (tr *VirtualHubIP) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VirtualHubIP
+func (tr *VirtualHubIP) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VirtualHubIP
+func (tr *VirtualHubIP) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VirtualHubIP
+func (tr *VirtualHubIP) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VirtualHubIP
+func (tr *VirtualHubIP) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VirtualHubIP
+func (tr *VirtualHubIP) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VirtualHubIP using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VirtualHubIP) LateInitialize(attrs []byte) (bool, error) {
+	params := &VirtualHubIPParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VirtualHubIP) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this VirtualHubRouteTable
+func (mg *VirtualHubRouteTable) GetTerraformResourceType() string {
+	return "azurerm_virtual_hub_route_table"
+}
+
+// GetConnectionDetailsMapping for this VirtualHubRouteTable
+func (tr *VirtualHubRouteTable) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VirtualHubRouteTable
+func (tr *VirtualHubRouteTable) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VirtualHubRouteTable
+func (tr *VirtualHubRouteTable) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VirtualHubRouteTable
+func (tr *VirtualHubRouteTable) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VirtualHubRouteTable
+func (tr *VirtualHubRouteTable) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VirtualHubRouteTable
+func (tr *VirtualHubRouteTable) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VirtualHubRouteTable using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VirtualHubRouteTable) LateInitialize(attrs []byte) (bool, error) {
+	params := &VirtualHubRouteTableParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VirtualHubRouteTable) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this VirtualHubRouteTableRoute
+func (mg *VirtualHubRouteTableRoute) GetTerraformResourceType() string {
+	return "azurerm_virtual_hub_route_table_route"
+}
+
+// GetConnectionDetailsMapping for this VirtualHubRouteTableRoute
+func (tr *VirtualHubRouteTableRoute) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VirtualHubRouteTableRoute
+func (tr *VirtualHubRouteTableRoute) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VirtualHubRouteTableRoute
+func (tr *VirtualHubRouteTableRoute) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VirtualHubRouteTableRoute
+func (tr *VirtualHubRouteTableRoute) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VirtualHubRouteTableRoute
+func (tr *VirtualHubRouteTableRoute) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VirtualHubRouteTableRoute
+func (tr *VirtualHubRouteTableRoute) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VirtualHubRouteTableRoute using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VirtualHubRouteTableRoute) LateInitialize(attrs []byte) (bool, error) {
+	params := &VirtualHubRouteTableRouteParameters_2{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VirtualHubRouteTableRoute) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this VirtualHubSecurityPartnerProvider
+func (mg *VirtualHubSecurityPartnerProvider) GetTerraformResourceType() string {
+	return "azurerm_virtual_hub_security_partner_provider"
+}
+
+// GetConnectionDetailsMapping for this VirtualHubSecurityPartnerProvider
+func (tr *VirtualHubSecurityPartnerProvider) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this VirtualHubSecurityPartnerProvider
+func (tr *VirtualHubSecurityPartnerProvider) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this VirtualHubSecurityPartnerProvider
+func (tr *VirtualHubSecurityPartnerProvider) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this VirtualHubSecurityPartnerProvider
+func (tr *VirtualHubSecurityPartnerProvider) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this VirtualHubSecurityPartnerProvider
+func (tr *VirtualHubSecurityPartnerProvider) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this VirtualHubSecurityPartnerProvider
+func (tr *VirtualHubSecurityPartnerProvider) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this VirtualHubSecurityPartnerProvider using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *VirtualHubSecurityPartnerProvider) LateInitialize(attrs []byte) (bool, error) {
+	params := &VirtualHubSecurityPartnerProviderParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *VirtualHubSecurityPartnerProvider) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this VirtualNetwork
 func (mg *VirtualNetwork) GetTerraformResourceType() string {
 	return "azurerm_virtual_network"

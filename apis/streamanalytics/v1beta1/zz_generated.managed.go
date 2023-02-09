@@ -337,6 +337,72 @@ func (mg *OutputBlob) SetWriteConnectionSecretToReference(r *xpv1.SecretReferenc
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this OutputEventHub.
+func (mg *OutputEventHub) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this OutputEventHub.
+func (mg *OutputEventHub) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this OutputEventHub.
+func (mg *OutputEventHub) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this OutputEventHub.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *OutputEventHub) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this OutputEventHub.
+func (mg *OutputEventHub) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this OutputEventHub.
+func (mg *OutputEventHub) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this OutputEventHub.
+func (mg *OutputEventHub) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this OutputEventHub.
+func (mg *OutputEventHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this OutputEventHub.
+func (mg *OutputEventHub) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this OutputEventHub.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *OutputEventHub) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this OutputEventHub.
+func (mg *OutputEventHub) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this OutputEventHub.
+func (mg *OutputEventHub) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this OutputFunction.
 func (mg *OutputFunction) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -730,6 +796,72 @@ func (mg *ReferenceInputBlob) SetPublishConnectionDetailsTo(r *xpv1.PublishConne
 
 // SetWriteConnectionSecretToReference of this ReferenceInputBlob.
 func (mg *ReferenceInputBlob) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ReferenceInputMSSQL.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ReferenceInputMSSQL) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ReferenceInputMSSQL.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ReferenceInputMSSQL) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
