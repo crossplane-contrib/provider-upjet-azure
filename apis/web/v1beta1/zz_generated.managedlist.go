@@ -16,6 +16,24 @@ func (l *AppServicePlanList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this FunctionAppActiveSlotList.
+func (l *FunctionAppActiveSlotList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this FunctionAppFunctionList.
+func (l *FunctionAppFunctionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this FunctionAppList.
 func (l *FunctionAppList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
