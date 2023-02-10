@@ -16,6 +16,24 @@ func (l *AvailabilitySetList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this CapacityReservationGroupList.
+func (l *CapacityReservationGroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this CapacityReservationList.
+func (l *CapacityReservationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DedicatedHostList.
 func (l *DedicatedHostList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

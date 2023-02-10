@@ -1,0 +1,49 @@
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsightsWorkbook
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/applicationinsightsworkbook
+  labels:
+    testing.upbound.io/example-name: exampleappinsightsworkbook
+  name: exampleappinsightsworkbook
+spec:
+  forProvider:
+    name: 93636960-a974-11ed-afa1-0242ac120002
+    dataJson: |-
+      ${jsonencode({
+          "version" = "Notebook/1.0",
+          "items" = [
+            {
+              "type" = 1,
+              "content" = {
+                "json" = "Test2022"
+              },
+              "name" = "text - 0"
+            }
+          ],
+          "isLocked" = false,
+          "fallbackResourceIds" = [
+            "Azure Monitor"
+          ]
+        })}
+    displayName: workbook1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appinsightsworkbook-rg
+    tags:
+      ENV: Test
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/applicationinsightsworkbook
+  labels:
+    testing.upbound.io/example-name: appinsightsworkbook-rg
+  name: appinsightsworkbook-rg
+spec:
+  forProvider:
+    location: West Europe

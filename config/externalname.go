@@ -203,6 +203,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_gallery_application": config.TemplatedStringAsIdentifier("name", "{{ .parameters.gallery_id }}/applications/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/galleries/gallery1/applications/galleryApplication1/versions/galleryApplicationVersion1
 	"azurerm_gallery_application_version": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/capacityReservationGroups/capacityReservationGroup1/capacityReservations/capacityReservation1
+	"azurerm_capacity_reservation": config.TemplatedStringAsIdentifier("name", "{{ .parameters.capacity_reservation_group_id }}/capacityReservations/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/capacityReservationGroups/capacityReservationGroup1
+	"azurerm_capacity_reservation_group": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Compute/capacityReservationGroups/{{ .external_name }}"),
 
 	// cdn
 	//
@@ -413,6 +417,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Application Insights Smart Detection Rules can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Insights/components/mycomponent1/smartDetectionRule/myrule1
 	"azurerm_application_insights_smart_detection_rule": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Insights/webTests/my_test
+	"azurerm_application_insights_web_test": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Insights/workbooks/resource1
+	"azurerm_application_insights_workbook": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Insights/workbookTemplates/resource1
+	"azurerm_application_insights_workbook_template": config.IdentifierFromProvider,
 
 	// logic
 	"azurerm_integration_service_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logic/integrationServiceEnvironments/{{ .external_name }}"),

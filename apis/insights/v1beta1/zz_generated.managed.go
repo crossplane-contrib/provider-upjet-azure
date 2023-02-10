@@ -271,6 +271,204 @@ func (mg *ApplicationInsightsSmartDetectionRule) SetWriteConnectionSecretToRefer
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ApplicationInsightsWebTest.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsWebTest) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ApplicationInsightsWebTest.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsWebTest) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ApplicationInsightsWorkbook.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsWorkbook) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ApplicationInsightsWorkbook.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsWorkbook) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ApplicationInsightsWorkbookTemplate.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsWorkbookTemplate) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ApplicationInsightsWorkbookTemplate.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsWorkbookTemplate) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MonitorActionGroup.
 func (mg *MonitorActionGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
