@@ -139,6 +139,138 @@ func (mg *HealthcareFHIRService) SetWriteConnectionSecretToReference(r *xpv1.Sec
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this HealthcareMedtechService.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *HealthcareMedtechService) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this HealthcareMedtechService.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *HealthcareMedtechService) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this HealthcareMedtechServiceFHIRDestination.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *HealthcareMedtechServiceFHIRDestination) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this HealthcareMedtechServiceFHIRDestination.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *HealthcareMedtechServiceFHIRDestination) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this HealthcareService.
 func (mg *HealthcareService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

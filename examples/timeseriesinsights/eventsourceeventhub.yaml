@@ -1,0 +1,205 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
+kind: EventSourceEventHub
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Depends on resource with manual intervention"
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: esehexample
+spec:
+  forProvider:
+    consumerGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    environmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventSourceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharedAccessKeyNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharedAccessKeySecretRef:
+      key: example-key
+      name: example-eventhub-authorization-rule
+      namespace: upbound-system
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-eventhub-authorization-rule
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: T4dQFBLKEf28cGzSwrFI2pL6egeYUyGKMldQIhutT4o=
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: esehexample
+spec:
+  forProvider:
+    messageRetention: 7
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionCount: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: AuthorizationRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: esehexample
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    listen: true
+    manage: false
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    send: false
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: ConsumerGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: esehexample
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: esehexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
+kind: Gen2Environment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Resource require account primary key."
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: esehexample
+spec:
+  forProvider:
+    idProperties:
+    - id
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: L1
+    storage:
+    - keySecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    warmStoreDataRetentionTime: P30D
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: wdxZSZG/AznGVni1Wa2h23i3cXDMfaN5Tfkq2ZE11i+prq8iJYM2mSzu6q6pRpyAS2lB51EBLS5H+AStbglnRg==
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: esehexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta1/eventsourceeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: esehexample
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

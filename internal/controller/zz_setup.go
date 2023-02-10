@@ -301,6 +301,8 @@ import (
 	healthbot "github.com/upbound/provider-azure/internal/controller/healthbot/healthbot"
 	healthcaredicomservice "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcaredicomservice"
 	healthcarefhirservice "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcarefhirservice"
+	healthcaremedtechservice "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcaremedtechservice"
+	healthcaremedtechservicefhirdestination "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcaremedtechservicefhirdestination"
 	healthcareservice "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcareservice"
 	healthcareworkspace "github.com/upbound/provider-azure/internal/controller/healthcareapis/healthcareworkspace"
 	applicationinsights "github.com/upbound/provider-azure/internal/controller/insights/applicationinsights"
@@ -627,6 +629,7 @@ import (
 	workspacesecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/synapse/workspacesecurityalertpolicy"
 	workspacesqlaadadmin "github.com/upbound/provider-azure/internal/controller/synapse/workspacesqlaadadmin"
 	workspacevulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/synapse/workspacevulnerabilityassessment"
+	eventsourceeventhub "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/eventsourceeventhub"
 	eventsourceiothub "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/eventsourceiothub"
 	gen2environment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/gen2environment"
 	referencedataset "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/referencedataset"
@@ -941,6 +944,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		healthbot.Setup,
 		healthcaredicomservice.Setup,
 		healthcarefhirservice.Setup,
+		healthcaremedtechservice.Setup,
+		healthcaremedtechservicefhirdestination.Setup,
 		healthcareservice.Setup,
 		healthcareworkspace.Setup,
 		applicationinsights.Setup,
@@ -1267,6 +1272,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		workspacesecurityalertpolicy.Setup,
 		workspacesqlaadadmin.Setup,
 		workspacevulnerabilityassessment.Setup,
+		eventsourceeventhub.Setup,
 		eventsourceiothub.Setup,
 		gen2environment.Setup,
 		referencedataset.Setup,

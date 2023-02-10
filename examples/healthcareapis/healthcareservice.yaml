@@ -34,7 +34,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: elastic/v1beta1/healthcareservice
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcareservice
   labels:
     testing.upbound.io/example-name: example
   name: hstest

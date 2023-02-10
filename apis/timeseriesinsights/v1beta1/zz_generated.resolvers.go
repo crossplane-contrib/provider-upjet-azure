@@ -9,12 +9,119 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
-	v1beta1 "github.com/upbound/provider-azure/apis/devices/v1beta1"
-	v1beta12 "github.com/upbound/provider-azure/apis/storage/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/provider-azure/apis/devices/v1beta1"
+	v1beta1 "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this EventSourceEventHub.
+func (mg *EventSourceEventHub) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConsumerGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ConsumerGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ConsumerGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ConsumerGroupList{},
+			Managed: &v1beta1.ConsumerGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ConsumerGroupName")
+	}
+	mg.Spec.ForProvider.ConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ConsumerGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnvironmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.EnvironmentIDRef,
+		Selector:     mg.Spec.ForProvider.EnvironmentIDSelector,
+		To: reference.To{
+			List:    &Gen2EnvironmentList{},
+			Managed: &Gen2Environment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EnvironmentID")
+	}
+	mg.Spec.ForProvider.EnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EnvironmentIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.EventHubNameRef,
+		Selector:     mg.Spec.ForProvider.EventHubNameSelector,
+		To: reference.To{
+			List:    &v1beta1.EventHubList{},
+			Managed: &v1beta1.EventHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubName")
+	}
+	mg.Spec.ForProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventSourceResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.EventSourceResourceIDRef,
+		Selector:     mg.Spec.ForProvider.EventSourceResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.EventHubList{},
+			Managed: &v1beta1.EventHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventSourceResourceID")
+	}
+	mg.Spec.ForProvider.EventSourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventSourceResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.NamespaceNameRef,
+		Selector:     mg.Spec.ForProvider.NamespaceNameSelector,
+		To: reference.To{
+			List:    &v1beta1.EventHubNamespaceList{},
+			Managed: &v1beta1.EventHubNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceName")
+	}
+	mg.Spec.ForProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SharedAccessKeyName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.SharedAccessKeyNameRef,
+		Selector:     mg.Spec.ForProvider.SharedAccessKeyNameSelector,
+		To: reference.To{
+			List:    &v1beta1.AuthorizationRuleList{},
+			Managed: &v1beta1.AuthorizationRule{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SharedAccessKeyName")
+	}
+	mg.Spec.ForProvider.SharedAccessKeyName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SharedAccessKeyNameRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this EventSourceIOTHub.
 func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -29,8 +136,8 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		Reference:    mg.Spec.ForProvider.ConsumerGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ConsumerGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.IOTHubConsumerGroupList{},
-			Managed: &v1beta1.IOTHubConsumerGroup{},
+			List:    &v1beta11.IOTHubConsumerGroupList{},
+			Managed: &v1beta11.IOTHubConsumerGroup{},
 		},
 	})
 	if err != nil {
@@ -61,8 +168,8 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		Reference:    mg.Spec.ForProvider.EventSourceResourceIDRef,
 		Selector:     mg.Spec.ForProvider.EventSourceResourceIDSelector,
 		To: reference.To{
-			List:    &v1beta1.IOTHubList{},
-			Managed: &v1beta1.IOTHub{},
+			List:    &v1beta11.IOTHubList{},
+			Managed: &v1beta11.IOTHub{},
 		},
 	})
 	if err != nil {
@@ -77,8 +184,8 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 		Reference:    mg.Spec.ForProvider.IOTHubNameRef,
 		Selector:     mg.Spec.ForProvider.IOTHubNameSelector,
 		To: reference.To{
-			List:    &v1beta1.IOTHubList{},
-			Managed: &v1beta1.IOTHub{},
+			List:    &v1beta11.IOTHubList{},
+			Managed: &v1beta11.IOTHub{},
 		},
 	})
 	if err != nil {
@@ -103,8 +210,8 @@ func (mg *Gen2Environment) ResolveReferences(ctx context.Context, c client.Reade
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta12.ResourceGroupList{},
+			Managed: &v1beta12.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -120,8 +227,8 @@ func (mg *Gen2Environment) ResolveReferences(ctx context.Context, c client.Reade
 			Reference:    mg.Spec.ForProvider.Storage[i3].NameRef,
 			Selector:     mg.Spec.ForProvider.Storage[i3].NameSelector,
 			To: reference.To{
-				List:    &v1beta12.AccountList{},
-				Managed: &v1beta12.Account{},
+				List:    &v1beta13.AccountList{},
+				Managed: &v1beta13.Account{},
 			},
 		})
 		if err != nil {
@@ -174,8 +281,8 @@ func (mg *StandardEnvironment) ResolveReferences(ctx context.Context, c client.R
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta12.ResourceGroupList{},
+			Managed: &v1beta12.ResourceGroup{},
 		},
 	})
 	if err != nil {

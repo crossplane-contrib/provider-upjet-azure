@@ -1639,6 +1639,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Sql/servers/sqlServer1/devOpsAuditingSettings/default
 	"azurerm_mssql_server_microsoft_support_auditing_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/devOpsAuditingSettings/default"),
+
+	// healthcare
+	//
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotConnectors/iotconnector1
+	"azurerm_healthcare_medtech_service": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/iotConnectors/{{ .external_name }}"),
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.HealthcareApis/workspaces/workspace1/iotConnectors/iotconnector1/fhirDestinations/destination1
+	"azurerm_healthcare_medtech_service_fhir_destination": config.TemplatedStringAsIdentifier("name", "{{ .parameters.medtech_service_id }}/fhirDestinations/{{ .external_name }}"),
+
+	// iot
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.TimeSeriesInsights/environments/environment1/eventSources/example
+	"azurerm_iot_time_series_insights_event_source_eventhub": config.TemplatedStringAsIdentifier("name", "{{ .parameters.environment_id }}/eventSources/{{ .external_name }}"),
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {

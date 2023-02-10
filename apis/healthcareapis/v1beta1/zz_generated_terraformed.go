@@ -161,6 +161,154 @@ func (tr *HealthcareFHIRService) GetTerraformSchemaVersion() int {
 	return 1
 }
 
+// GetTerraformResourceType returns Terraform resource type for this HealthcareMedtechService
+func (mg *HealthcareMedtechService) GetTerraformResourceType() string {
+	return "azurerm_healthcare_medtech_service"
+}
+
+// GetConnectionDetailsMapping for this HealthcareMedtechService
+func (tr *HealthcareMedtechService) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HealthcareMedtechService
+func (tr *HealthcareMedtechService) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HealthcareMedtechService
+func (tr *HealthcareMedtechService) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HealthcareMedtechService
+func (tr *HealthcareMedtechService) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HealthcareMedtechService
+func (tr *HealthcareMedtechService) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HealthcareMedtechService
+func (tr *HealthcareMedtechService) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HealthcareMedtechService using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HealthcareMedtechService) LateInitialize(attrs []byte) (bool, error) {
+	params := &HealthcareMedtechServiceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HealthcareMedtechService) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this HealthcareMedtechServiceFHIRDestination
+func (mg *HealthcareMedtechServiceFHIRDestination) GetTerraformResourceType() string {
+	return "azurerm_healthcare_medtech_service_fhir_destination"
+}
+
+// GetConnectionDetailsMapping for this HealthcareMedtechServiceFHIRDestination
+func (tr *HealthcareMedtechServiceFHIRDestination) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this HealthcareMedtechServiceFHIRDestination
+func (tr *HealthcareMedtechServiceFHIRDestination) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this HealthcareMedtechServiceFHIRDestination
+func (tr *HealthcareMedtechServiceFHIRDestination) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this HealthcareMedtechServiceFHIRDestination
+func (tr *HealthcareMedtechServiceFHIRDestination) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this HealthcareMedtechServiceFHIRDestination
+func (tr *HealthcareMedtechServiceFHIRDestination) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this HealthcareMedtechServiceFHIRDestination
+func (tr *HealthcareMedtechServiceFHIRDestination) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this HealthcareMedtechServiceFHIRDestination using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *HealthcareMedtechServiceFHIRDestination) LateInitialize(attrs []byte) (bool, error) {
+	params := &HealthcareMedtechServiceFHIRDestinationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *HealthcareMedtechServiceFHIRDestination) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this HealthcareService
 func (mg *HealthcareService) GetTerraformResourceType() string {
 	return "azurerm_healthcare_service"

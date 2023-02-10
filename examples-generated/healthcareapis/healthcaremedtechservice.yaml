@@ -1,0 +1,50 @@
+apiVersion: healthcareapis.azure.upbound.io/v1beta1
+kind: HealthcareMedtechService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservice
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    deviceMappingJson: |
+      {
+          "templateType": "CollectionContent",
+          "template": [
+                      {
+                        "templateType": "JsonPathContent",
+                        "template": {
+                          "typeName": "heartrate",
+                          "typeMatchExpression": "$..[?(@heartrate)]",
+                          "deviceIdExpression": "$.deviceid",
+                          "timestampExpression": "$.measurementdatetime",
+                          "values": [
+                            {
+                              "required": "true",
+                              "valueExpression": "$.heartrate",
+                              "valueName": "hr"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+      }
+    eventhubConsumerGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubNamespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identity:
+    - type: SystemAssigned
+    location: east us
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
