@@ -583,6 +583,7 @@ import (
 	managedapplicationdefinition "github.com/upbound/provider-azure/internal/controller/solutions/managedapplicationdefinition"
 	cloudapplicationliveview "github.com/upbound/provider-azure/internal/controller/spring/cloudapplicationliveview"
 	mssqldatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqldatabase"
+	mssqldatabaseextendedauditingpolicy "github.com/upbound/provider-azure/internal/controller/sql/mssqldatabaseextendedauditingpolicy"
 	mssqlfailovergroup "github.com/upbound/provider-azure/internal/controller/sql/mssqlfailovergroup"
 	mssqlfirewallrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlfirewallrule"
 	mssqlmanageddatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanageddatabase"
@@ -594,6 +595,7 @@ import (
 	mssqlserver "github.com/upbound/provider-azure/internal/controller/sql/mssqlserver"
 	mssqlserverdnsalias "github.com/upbound/provider-azure/internal/controller/sql/mssqlserverdnsalias"
 	mssqlservermicrosoftsupportauditingpolicy "github.com/upbound/provider-azure/internal/controller/sql/mssqlservermicrosoftsupportauditingpolicy"
+	mssqlserversecurityalertpolicy "github.com/upbound/provider-azure/internal/controller/sql/mssqlserversecurityalertpolicy"
 	mssqlservertransparentdataencryption "github.com/upbound/provider-azure/internal/controller/sql/mssqlservertransparentdataencryption"
 	mssqlvirtualnetworkrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
 	accountstorage "github.com/upbound/provider-azure/internal/controller/storage/account"
@@ -1251,6 +1253,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedapplicationdefinition.Setup,
 		cloudapplicationliveview.Setup,
 		mssqldatabase.Setup,
+		mssqldatabaseextendedauditingpolicy.Setup,
 		mssqlfailovergroup.Setup,
 		mssqlfirewallrule.Setup,
 		mssqlmanageddatabase.Setup,
@@ -1262,6 +1265,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mssqlserver.Setup,
 		mssqlserverdnsalias.Setup,
 		mssqlservermicrosoftsupportauditingpolicy.Setup,
+		mssqlserversecurityalertpolicy.Setup,
 		mssqlservertransparentdataencryption.Setup,
 		mssqlvirtualnetworkrule.Setup,
 		accountstorage.Setup,

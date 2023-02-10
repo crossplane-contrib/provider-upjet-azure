@@ -7,6 +7,15 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this MSSQLDatabaseExtendedAuditingPolicyList.
+func (l *MSSQLDatabaseExtendedAuditingPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this MSSQLDatabaseList.
 func (l *MSSQLDatabaseList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -108,6 +117,15 @@ func (l *MSSQLServerList) GetItems() []resource.Managed {
 
 // GetItems of this MSSQLServerMicrosoftSupportAuditingPolicyList.
 func (l *MSSQLServerMicrosoftSupportAuditingPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MSSQLServerSecurityAlertPolicyList.
+func (l *MSSQLServerSecurityAlertPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

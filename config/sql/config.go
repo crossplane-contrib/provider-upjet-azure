@@ -154,4 +154,10 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_mssql_server_security_alert_policy", func(r *config.Resource) {
+		r.References["server_name"] = config.Reference{
+			Type: "MSSQLServer",
+		}
+	})
 }
