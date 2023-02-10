@@ -3639,6 +3639,154 @@ func (tr *NetworkInterfaceSecurityGroupAssociation) GetTerraformSchemaVersion() 
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this Manager
+func (mg *Manager) GetTerraformResourceType() string {
+	return "azurerm_network_manager"
+}
+
+// GetConnectionDetailsMapping for this Manager
+func (tr *Manager) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this Manager
+func (tr *Manager) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this Manager
+func (tr *Manager) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this Manager
+func (tr *Manager) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this Manager
+func (tr *Manager) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this Manager
+func (tr *Manager) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this Manager using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *Manager) LateInitialize(attrs []byte) (bool, error) {
+	params := &ManagerParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *Manager) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ManagerNetworkGroup
+func (mg *ManagerNetworkGroup) GetTerraformResourceType() string {
+	return "azurerm_network_manager_network_group"
+}
+
+// GetConnectionDetailsMapping for this ManagerNetworkGroup
+func (tr *ManagerNetworkGroup) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ManagerNetworkGroup
+func (tr *ManagerNetworkGroup) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ManagerNetworkGroup
+func (tr *ManagerNetworkGroup) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ManagerNetworkGroup
+func (tr *ManagerNetworkGroup) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ManagerNetworkGroup
+func (tr *ManagerNetworkGroup) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ManagerNetworkGroup
+func (tr *ManagerNetworkGroup) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ManagerNetworkGroup using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ManagerNetworkGroup) LateInitialize(attrs []byte) (bool, error) {
+	params := &ManagerNetworkGroupParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ManagerNetworkGroup) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this PacketCapture
 func (mg *PacketCapture) GetTerraformResourceType() string {
 	return "azurerm_network_packet_capture"

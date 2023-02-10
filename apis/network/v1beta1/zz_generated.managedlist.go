@@ -376,6 +376,24 @@ func (l *LocalNetworkGatewayList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ManagerList.
+func (l *ManagerList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ManagerNetworkGroupList.
+func (l *ManagerNetworkGroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this NATGatewayList.
 func (l *NATGatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

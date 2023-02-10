@@ -1,0 +1,35 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Manager
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/manager
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: example network manager
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgmanager
+    scope:
+    - subscriptionIds:
+      - ${data.azurerm_client_config.current.subscription_resource_id}
+    scopeAccesses:
+    - Connectivity
+    - SecurityAdmin
+    tags:
+      foo: bar
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/manager
+  labels:
+    testing.upbound.io/example-name: rgmanager
+  name: example
+spec:
+  forProvider:
+    location: West Europe

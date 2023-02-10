@@ -10,9 +10,10 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
-	v1beta12 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+	v1beta12 "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -360,6 +361,48 @@ func (mg *MSSQLServerDNSAlias) ResolveReferences(ctx context.Context, c client.R
 	return nil
 }
 
+// ResolveReferences of this MSSQLServerMicrosoftSupportAuditingPolicy.
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BlobStorageEndpoint),
+		Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
+		Reference:    mg.Spec.ForProvider.BlobStorageEndpointRef,
+		Selector:     mg.Spec.ForProvider.BlobStorageEndpointSelector,
+		To: reference.To{
+			List:    &v1beta12.AccountList{},
+			Managed: &v1beta12.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.BlobStorageEndpoint")
+	}
+	mg.Spec.ForProvider.BlobStorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.BlobStorageEndpointRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ServerIDRef,
+		Selector:     mg.Spec.ForProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &MSSQLServerList{},
+			Managed: &MSSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
+	}
+	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this MSSQLServerTransparentDataEncryption.
 func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -373,8 +416,8 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 		Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
 		To: reference.To{
-			List:    &v1beta12.KeyList{},
-			Managed: &v1beta12.Key{},
+			List:    &v1beta13.KeyList{},
+			Managed: &v1beta13.Key{},
 		},
 	})
 	if err != nil {

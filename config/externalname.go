@@ -1551,6 +1551,36 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_stream_analytics_output_eventhub": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_name }}/outputs/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.StreamAnalytics/streamingJobs/job1/inputs/input1
 	"azurerm_stream_analytics_reference_input_mssql": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.StreamAnalytics/streamingJobs/{{ .parameters.stream_analytics_job_name }}/inputs/{{ .external_name }}"),
+
+	// logz
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logz/monitors/monitor1/accounts/subAccount1
+	"azurerm_logz_sub_account": config.TemplatedStringAsIdentifier("name", "{{ .parameters.logz_monitor_id }}/accounts/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logz/monitors/monitor1/accounts/subAccount1/tagRules/ruleSet1
+	"azurerm_logz_sub_account_tag_rule": config.IdentifierFromProvider,
+	// logz Monitors can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logz/monitors/monitor1
+	"azurerm_logz_monitor": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logz/monitors/{{ .external_name }}"),
+	// logz Tag Rules can be imported using the resource id
+	//  /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Logz/monitors/monitor1/tagRules/ruleSet1
+	"azurerm_logz_tag_rule": config.TemplatedStringAsIdentifier("", "{{ .parameters.logz_monitor_id }}/tagRules/default"),
+
+	// media_job
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.Media/mediaServices/account1/transforms/transform1/jobs/job1
+	"azurerm_media_job": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaServices/{{ .parameters.media_services_account_name }}/transforms/{{ .parameters.transform_name }}/jobs/{{ .external_name }}"),
+
+	// network_manager
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/networkManagers/networkManager1
+	"azurerm_network_manager": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/networkManagers/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/networkManagers/networkManager1/networkGroups/networkGroup1
+	"azurerm_network_manager_network_group": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/networkGroups/{{ .external_name }}"),
+
+	// mssql
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Sql/servers/sqlServer1/devOpsAuditingSettings/default
+	"azurerm_mssql_server_microsoft_support_auditing_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.server_id }}/devOpsAuditingSettings/default"),
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
