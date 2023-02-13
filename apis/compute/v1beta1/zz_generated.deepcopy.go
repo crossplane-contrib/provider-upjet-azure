@@ -8314,6 +8314,18 @@ func (in *WindowsVirtualMachineParameters) DeepCopyInto(out *WindowsVirtualMachi
 			}
 		}
 	}
+	if in.NetworkInterfaceIdsRefs != nil {
+		in, out := &in.NetworkInterfaceIdsRefs, &out.NetworkInterfaceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.NetworkInterfaceIdsSelector != nil {
+		in, out := &in.NetworkInterfaceIdsSelector, &out.NetworkInterfaceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.OsDisk != nil {
 		in, out := &in.OsDisk, &out.OsDisk
 		*out = make([]WindowsVirtualMachineOsDiskParameters, len(*in))

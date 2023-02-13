@@ -293,6 +293,7 @@ import (
 	namespacedisasterrecoveryconfig "github.com/upbound/provider-azure/internal/controller/eventhub/namespacedisasterrecoveryconfig"
 	namespaceschemagroup "github.com/upbound/provider-azure/internal/controller/eventhub/namespaceschemagroup"
 	serverfluidrelay "github.com/upbound/provider-azure/internal/controller/fluidrelay/server"
+	policyvirtualmachineconfigurationassignment "github.com/upbound/provider-azure/internal/controller/guestconfiguration/policyvirtualmachineconfigurationassignment"
 	hadoopcluster "github.com/upbound/provider-azure/internal/controller/hdinsight/hadoopcluster"
 	hbasecluster "github.com/upbound/provider-azure/internal/controller/hdinsight/hbasecluster"
 	interactivequerycluster "github.com/upbound/provider-azure/internal/controller/hdinsight/interactivequerycluster"
@@ -442,6 +443,7 @@ import (
 	privatednscnamerecord "github.com/upbound/provider-azure/internal/controller/network/privatednscnamerecord"
 	privatednsmxrecord "github.com/upbound/provider-azure/internal/controller/network/privatednsmxrecord"
 	privatednsptrrecord "github.com/upbound/provider-azure/internal/controller/network/privatednsptrrecord"
+	privatednsresolver "github.com/upbound/provider-azure/internal/controller/network/privatednsresolver"
 	privatednssrvrecord "github.com/upbound/provider-azure/internal/controller/network/privatednssrvrecord"
 	privatednstxtrecord "github.com/upbound/provider-azure/internal/controller/network/privatednstxtrecord"
 	privatednszone "github.com/upbound/provider-azure/internal/controller/network/privatednszone"
@@ -499,6 +501,7 @@ import (
 	loganalyticssavedsearch "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticssavedsearch"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
 	loganalyticssolution "github.com/upbound/provider-azure/internal/controller/operationsmanagement/loganalyticssolution"
+	spacecraft "github.com/upbound/provider-azure/internal/controller/orbital/spacecraft"
 	resourcepolicyremediation "github.com/upbound/provider-azure/internal/controller/policyinsights/resourcepolicyremediation"
 	subscriptionpolicyremediation "github.com/upbound/provider-azure/internal/controller/policyinsights/subscriptionpolicyremediation"
 	dashboard "github.com/upbound/provider-azure/internal/controller/portal/dashboard"
@@ -939,6 +942,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		namespacedisasterrecoveryconfig.Setup,
 		namespaceschemagroup.Setup,
 		serverfluidrelay.Setup,
+		policyvirtualmachineconfigurationassignment.Setup,
 		hadoopcluster.Setup,
 		hbasecluster.Setup,
 		interactivequerycluster.Setup,
@@ -1088,6 +1092,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		privatednscnamerecord.Setup,
 		privatednsmxrecord.Setup,
 		privatednsptrrecord.Setup,
+		privatednsresolver.Setup,
 		privatednssrvrecord.Setup,
 		privatednstxtrecord.Setup,
 		privatednszone.Setup,
@@ -1145,6 +1150,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loganalyticssavedsearch.Setup,
 		workspaceoperationalinsights.Setup,
 		loganalyticssolution.Setup,
+		spacecraft.Setup,
 		resourcepolicyremediation.Setup,
 		subscriptionpolicyremediation.Setup,
 		dashboard.Setup,
