@@ -128,8 +128,10 @@ import (
 	manageddisk "github.com/upbound/provider-azure/internal/controller/compute/manageddisk"
 	orchestratedvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/orchestratedvirtualmachinescaleset"
 	proximityplacementgroup "github.com/upbound/provider-azure/internal/controller/compute/proximityplacementgroup"
+	sharedimage "github.com/upbound/provider-azure/internal/controller/compute/sharedimage"
 	sharedimagegallery "github.com/upbound/provider-azure/internal/controller/compute/sharedimagegallery"
 	snapshot "github.com/upbound/provider-azure/internal/controller/compute/snapshot"
+	sshpublickey "github.com/upbound/provider-azure/internal/controller/compute/sshpublickey"
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
 	ledger "github.com/upbound/provider-azure/internal/controller/confidentialledger/ledger"
@@ -777,8 +779,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		manageddisk.Setup,
 		orchestratedvirtualmachinescaleset.Setup,
 		proximityplacementgroup.Setup,
+		sharedimage.Setup,
 		sharedimagegallery.Setup,
 		snapshot.Setup,
+		sshpublickey.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
 		ledger.Setup,
