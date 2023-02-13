@@ -1,0 +1,52 @@
+apiVersion: automation.azure.upbound.io/v1beta1
+kind: ConnectionType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/connectiontype
+  labels:
+    testing.upbound.io/example-name: example
+  name: actexample
+spec:
+  forProvider:
+    name: actexample
+    automationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    field:
+    - name: example
+      type: string
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: automation.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/connectiontype
+  labels:
+    testing.upbound.io/example-name: example
+  name: actexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Basic
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/connectiontype
+  labels:
+    testing.upbound.io/example-name: example
+  name: actexample
+spec:
+  forProvider:
+    location: West Europe

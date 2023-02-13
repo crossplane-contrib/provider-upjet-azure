@@ -16,8 +16,26 @@ func (l *AccountList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ConnectionTypeList.
+func (l *ConnectionTypeList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this CredentialList.
 func (l *CredentialList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this HybridRunBookWorkerGroupList.
+func (l *HybridRunBookWorkerGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

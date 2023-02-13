@@ -71,7 +71,9 @@ import (
 	subscriptionpolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyassignment"
 	subscriptionpolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyexemption"
 	account "github.com/upbound/provider-azure/internal/controller/automation/account"
+	connectiontype "github.com/upbound/provider-azure/internal/controller/automation/connectiontype"
 	credential "github.com/upbound/provider-azure/internal/controller/automation/credential"
+	hybridrunbookworkergroup "github.com/upbound/provider-azure/internal/controller/automation/hybridrunbookworkergroup"
 	module "github.com/upbound/provider-azure/internal/controller/automation/module"
 	variablebool "github.com/upbound/provider-azure/internal/controller/automation/variablebool"
 	variabledatetime "github.com/upbound/provider-azure/internal/controller/automation/variabledatetime"
@@ -693,7 +695,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subscriptionpolicyassignment.Setup,
 		subscriptionpolicyexemption.Setup,
 		account.Setup,
+		connectiontype.Setup,
 		credential.Setup,
+		hybridrunbookworkergroup.Setup,
 		module.Setup,
 		variablebool.Setup,
 		variabledatetime.Setup,
