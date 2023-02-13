@@ -1,0 +1,73 @@
+apiVersion: signalrservice.azure.upbound.io/v1beta1
+kind: SignalrSharedPrivateLinkResource
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Long running resource which causes Uptest flaky results"
+    meta.upbound.io/example-id: signalrservice/v1beta1/signalrsharedprivatelinkresource
+  labels:
+    testing.upbound.io/example-name: example
+  name: ssplrexample
+spec:
+  forProvider:
+    name: ssplrexample
+    signalrServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subResourceName: vault
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/signalrsharedprivatelinkresource
+  labels:
+    testing.upbound.io/example-name: example
+  name: ssplrexample
+spec:
+  forProvider:
+    location: east us
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: standard
+    softDeleteRetentionDays: 7
+    tenantId: b9925bc4-8383-4c37-b9d2-fa456d1bb1c7
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/signalrsharedprivatelinkresource
+  labels:
+    testing.upbound.io/example-name: example
+  name: ssplrexample
+spec:
+  forProvider:
+    location: east us
+
+---
+
+apiVersion: signalrservice.azure.upbound.io/v1beta1
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/signalrsharedprivatelinkresource
+  labels:
+    testing.upbound.io/example-name: example
+  name: ssplrexample
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 1
+      name: Standard_S1

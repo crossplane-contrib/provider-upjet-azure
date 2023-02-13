@@ -22,6 +22,32 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this SpringCloudAccelerator.
+func (mg *SpringCloudAccelerator) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
+		Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
+		To: reference.To{
+			List:    &SpringCloudServiceList{},
+			Managed: &SpringCloudService{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
+	}
+	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SpringCloudActiveDeployment.
 func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -376,6 +402,58 @@ func (mg *SpringCloudCustomDomain) ResolveReferences(ctx context.Context, c clie
 	}
 	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SpringCloudCustomizedAccelerator.
+func (mg *SpringCloudCustomizedAccelerator) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAcceleratorID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SpringCloudAcceleratorIDRef,
+		Selector:     mg.Spec.ForProvider.SpringCloudAcceleratorIDSelector,
+		To: reference.To{
+			List:    &SpringCloudAcceleratorList{},
+			Managed: &SpringCloudAccelerator{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAcceleratorID")
+	}
+	mg.Spec.ForProvider.SpringCloudAcceleratorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAcceleratorIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SpringCloudDevToolPortal.
+func (mg *SpringCloudDevToolPortal) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SpringCloudServiceIDRef,
+		Selector:     mg.Spec.ForProvider.SpringCloudServiceIDSelector,
+		To: reference.To{
+			List:    &SpringCloudServiceList{},
+			Managed: &SpringCloudService{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudServiceID")
+	}
+	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 
 	return nil
 }

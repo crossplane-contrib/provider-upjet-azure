@@ -138,3 +138,69 @@ func (mg *Service) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetail
 func (mg *Service) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SignalrSharedPrivateLinkResource.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SignalrSharedPrivateLinkResource) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SignalrSharedPrivateLinkResource.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SignalrSharedPrivateLinkResource) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

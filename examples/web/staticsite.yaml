@@ -1,0 +1,29 @@
+apiVersion: web.azure.upbound.io/v1beta1
+kind: StaticSite
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Resource causes Uptest flaky results"
+    meta.upbound.io/example-id: web/v1beta1/staticsite
+  labels:
+    testing.upbound.io/example-name: example
+  name: ssiteex
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: spring/v1beta1/staticsite
+  labels:
+    testing.upbound.io/example-name: example
+  name: ssiteex
+spec:
+  forProvider:
+    location: West Europe

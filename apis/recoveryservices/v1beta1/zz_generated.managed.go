@@ -469,6 +469,72 @@ func (mg *SiteRecoveryFabric) SetWriteConnectionSecretToReference(r *xpv1.Secret
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SiteRecoveryNetworkMapping.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SiteRecoveryNetworkMapping) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SiteRecoveryNetworkMapping.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SiteRecoveryNetworkMapping) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SiteRecoveryProtectionContainer.
 func (mg *SiteRecoveryProtectionContainer) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

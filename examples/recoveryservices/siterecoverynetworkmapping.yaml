@@ -1,0 +1,152 @@
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: SiteRecoveryNetworkMapping
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoverynetworkmapping
+  labels:
+    testing.upbound.io/example-name: recovery-mapping
+  name: srnmexample
+spec:
+  forProvider:
+    name: srnmexample
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: srnmexample
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    sourceNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+    sourceRecoveryFabricName: psrnmexample
+    targetNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    targetRecoveryFabricName: ssrnmexample
+
+---
+
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoverynetworkmapping
+  labels:
+    testing.upbound.io/example-name: srnmexample
+  name: vsrnmexample
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoverynetworkmapping
+  labels:
+    testing.upbound.io/example-name: primary
+  name: psrnmexample
+spec:
+  forProvider:
+    location: West US
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoverynetworkmapping
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: ssrnmexample
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: SiteRecoveryFabric
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoverynetworkmapping
+  labels:
+    testing.upbound.io/example-name: primary
+  name: psrnmexample
+spec:
+  forProvider:
+    location: West US
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: srnmexample
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+
+---
+
+apiVersion: recoveryservices.azure.upbound.io/v1beta1
+kind: SiteRecoveryFabric
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoverynetworkmapping
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: ssrnmexample
+spec:
+  forProvider:
+    location: East US
+    recoveryVaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: srnmexample
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoverynetworkmapping
+  labels:
+    testing.upbound.io/example-name: primary
+  name: psrnmexample
+spec:
+  forProvider:
+    addressSpace:
+    - 192.168.1.0/24
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: primary
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: recoveryservices/v1beta1/siterecoverynetworkmapping
+  labels:
+    testing.upbound.io/example-name: secondary
+  name: ssrnmexample
+spec:
+  forProvider:
+    addressSpace:
+    - 192.168.2.0/24
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: secondary
+
+

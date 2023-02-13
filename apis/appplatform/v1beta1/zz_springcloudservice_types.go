@@ -166,7 +166,7 @@ type RepositoryParameters struct {
 
 	// A ssh_auth block as defined below.
 	// +kubebuilder:validation:Optional
-	SSHAuth []SSHAuthParameters `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
+	SSHAuth []RepositorySSHAuthParameters `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
 
 	// An array of strings used to search subdirectories of the Git repository.
 	// +kubebuilder:validation:Optional
@@ -175,6 +175,28 @@ type RepositoryParameters struct {
 	// The URI of the Git repository that's used as the Config Server back end should be started with http://, https://, git@, or ssh://.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
+}
+
+type RepositorySSHAuthObservation struct {
+}
+
+type RepositorySSHAuthParameters struct {
+
+	// The host key algorithm, should be ssh-dss, ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521. Required only if host-key exists.
+	// +kubebuilder:validation:Optional
+	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
+
+	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
+	// +kubebuilder:validation:Optional
+	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
+
+	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
+	// +kubebuilder:validation:Required
+	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+
+	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
+	// +kubebuilder:validation:Optional
+	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
 }
 
 type RequiredNetworkTrafficRulesObservation struct {
@@ -196,28 +218,6 @@ type RequiredNetworkTrafficRulesObservation struct {
 }
 
 type RequiredNetworkTrafficRulesParameters struct {
-}
-
-type SSHAuthObservation struct {
-}
-
-type SSHAuthParameters struct {
-
-	// The host key algorithm, should be ssh-dss, ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521. Required only if host-key exists.
-	// +kubebuilder:validation:Optional
-	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
-
-	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
-	// +kubebuilder:validation:Optional
-	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
-
-	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
-	// +kubebuilder:validation:Required
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
-
-	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
-	// +kubebuilder:validation:Optional
-	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
 }
 
 type SpringCloudServiceObservation struct {
