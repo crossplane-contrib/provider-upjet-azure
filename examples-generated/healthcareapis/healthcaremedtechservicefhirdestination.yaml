@@ -1,0 +1,47 @@
+apiVersion: healthcareapis.azure.upbound.io/v1beta1
+kind: HealthcareMedtechServiceFHIRDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservicefhirdestination
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    destinationFhirMappingJson: |2
+        {
+                  "templateType": "CollectionFhirTemplate",
+                  "template": [
+                    {
+                      "templateType": "CodeValueFhir",
+                      "template": {
+                        "codes": [
+                          {
+                            "code": "8867-4",
+                            "system": "http://loinc.org",
+                            "display": "Heart rate"
+                          }
+                        ],
+                        "periodInterval": 60,
+                        "typeName": "heartrate",
+                        "value": {
+                          "defaultPeriod": 5000,
+                          "unit": "count/min",
+                          "valueName": "hr",
+                          "valueType": "SampledData"
+                        }
+                      }
+                    }
+                  ]
+        }
+    destinationFhirServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    destinationIdentityResolutionType: Create
+    location: east us
+    medtechServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+

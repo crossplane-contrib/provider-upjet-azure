@@ -25,6 +25,24 @@ func (l *HealthcareFHIRServiceList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this HealthcareMedtechServiceFHIRDestinationList.
+func (l *HealthcareMedtechServiceFHIRDestinationList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this HealthcareMedtechServiceList.
+func (l *HealthcareMedtechServiceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this HealthcareServiceList.
 func (l *HealthcareServiceList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

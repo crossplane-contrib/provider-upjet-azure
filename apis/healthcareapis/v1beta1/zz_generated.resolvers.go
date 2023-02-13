@@ -10,6 +10,8 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
+	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -78,6 +80,122 @@ func (mg *HealthcareFHIRService) ResolveReferences(ctx context.Context, c client
 	}
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubConsumerGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.EventHubConsumerGroupNameRef,
+		Selector:     mg.Spec.ForProvider.EventHubConsumerGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ConsumerGroupList{},
+			Managed: &v1beta11.ConsumerGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubConsumerGroupName")
+	}
+	mg.Spec.ForProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.EventHubNameRef,
+		Selector:     mg.Spec.ForProvider.EventHubNameSelector,
+		To: reference.To{
+			List:    &v1beta11.EventHubList{},
+			Managed: &v1beta11.EventHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubName")
+	}
+	mg.Spec.ForProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHubNamespaceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.EventHubNamespaceNameRef,
+		Selector:     mg.Spec.ForProvider.EventHubNamespaceNameSelector,
+		To: reference.To{
+			List:    &v1beta11.EventHubNamespaceList{},
+			Managed: &v1beta11.EventHubNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EventHubNamespaceName")
+	}
+	mg.Spec.ForProvider.EventHubNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.EventHubNamespaceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
+		To: reference.To{
+			List:    &HealthcareWorkspaceList{},
+			Managed: &HealthcareWorkspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
+	}
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationFHIRServiceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DestinationFHIRServiceIDRef,
+		Selector:     mg.Spec.ForProvider.DestinationFHIRServiceIDSelector,
+		To: reference.To{
+			List:    &HealthcareFHIRServiceList{},
+			Managed: &HealthcareFHIRService{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DestinationFHIRServiceID")
+	}
+	mg.Spec.ForProvider.DestinationFHIRServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DestinationFHIRServiceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MedtechServiceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.MedtechServiceIDRef,
+		Selector:     mg.Spec.ForProvider.MedtechServiceIDSelector,
+		To: reference.To{
+			List:    &HealthcareMedtechServiceList{},
+			Managed: &HealthcareMedtechService{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MedtechServiceID")
+	}
+	mg.Spec.ForProvider.MedtechServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MedtechServiceIDRef = rsp.ResolvedReference
 
 	return nil
 }

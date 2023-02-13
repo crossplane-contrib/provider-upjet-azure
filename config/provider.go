@@ -43,6 +43,7 @@ import (
 	"github.com/upbound/provider-azure/config/dbformysql"
 	"github.com/upbound/provider-azure/config/devices"
 	"github.com/upbound/provider-azure/config/eventhub"
+	"github.com/upbound/provider-azure/config/healthcareapis"
 	"github.com/upbound/provider-azure/config/insights"
 	"github.com/upbound/provider-azure/config/keyvault"
 	"github.com/upbound/provider-azure/config/kusto"
@@ -177,6 +178,7 @@ func GetProvider() *tjconfig.Provider {
 		devices.Configure,
 		datafactory.Configure,
 		apimanagement.Configure,
+		healthcareapis.Configure,
 		logic.Configure,
 		security.Configure,
 		base.Configure,
