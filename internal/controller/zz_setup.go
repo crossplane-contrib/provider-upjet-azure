@@ -544,6 +544,7 @@ import (
 	managedapplicationdefinition "github.com/upbound/provider-azure/internal/controller/solutions/managedapplicationdefinition"
 	mssqldatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqldatabase"
 	mssqlfailovergroup "github.com/upbound/provider-azure/internal/controller/sql/mssqlfailovergroup"
+	mssqlfirewallrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlfirewallrule"
 	mssqlmanageddatabase "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanageddatabase"
 	mssqlmanagedinstance "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanagedinstance"
 	mssqlmanagedinstanceactivedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/sql/mssqlmanagedinstanceactivedirectoryadministrator"
@@ -1168,6 +1169,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managedapplicationdefinition.Setup,
 		mssqldatabase.Setup,
 		mssqlfailovergroup.Setup,
+		mssqlfirewallrule.Setup,
 		mssqlmanageddatabase.Setup,
 		mssqlmanagedinstance.Setup,
 		mssqlmanagedinstanceactivedirectoryadministrator.Setup,

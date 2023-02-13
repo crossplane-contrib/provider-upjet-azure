@@ -105,6 +105,32 @@ func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Re
 	return nil
 }
 
+// ResolveReferences of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ServerIDRef,
+		Selector:     mg.Spec.ForProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &MSSQLServerList{},
+			Managed: &MSSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerID")
+	}
+	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this MSSQLManagedDatabase.
 func (mg *MSSQLManagedDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

@@ -139,6 +139,72 @@ func (mg *MSSQLFailoverGroup) SetWriteConnectionSecretToReference(r *xpv1.Secret
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLFirewallRule.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLFirewallRule) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLFirewallRule.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLFirewallRule) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MSSQLManagedDatabase.
 func (mg *MSSQLManagedDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
