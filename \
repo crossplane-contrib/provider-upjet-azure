@@ -1,0 +1,120 @@
+Adding  securityinsights (2) resources
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Author:    steperchuk <steperchuk@gmail.com>
+#
+# interactive rebase in progress; onto fd7b196a
+# Last command done (1 command done):
+#    pick 1e150b23 Adding  securityinsights (2) resources
+# No commands remaining.
+# You are currently rebasing branch 'issue-343' on 'fd7b196a'.
+#
+# Changes to be committed:
+#	deleted:    apis/alertsmanagement/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/analysisservices/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/apimanagement/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/appplatform/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/attestation/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/authorization/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/automation/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/azurestackhci/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/botservice/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/cache/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/cdn/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/cognitiveservices/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/communication/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/compute/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/confidentialledger/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/consumption/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/containerregistry/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/containerservice/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/cosmosdb/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/costmanagement/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/databoxedge/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/databricks/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/datafactory/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/datamigration/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/dataprotection/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/datashare/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/dbformariadb/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/dbformysql/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/dbforpostgresql/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/devices/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/deviceupdate/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/devtestlab/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/digitaltwins/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/elastic/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/eventgrid/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/eventhub/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/fluidrelay/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/hdinsight/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/healthbot/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/healthcareapis/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/insights/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/iotcentral/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/keyvault/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/kusto/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/labservices/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/logic/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/logz/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/managedidentity/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/management/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/maps/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/media/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/mixedreality/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/netapp/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/network/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/notificationhubs/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/operationalinsights/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/operationsmanagement/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/policyinsights/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/portal/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/powerbidedicated/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/purview/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/recoveryservices/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/relay/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/resources/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/search/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/security/v1beta1/zz_generated.resolvers.go
+#	modified:   apis/securityinsights/v1beta1/zz_generated.deepcopy.go
+#	modified:   apis/securityinsights/v1beta1/zz_generated.managed.go
+#	modified:   apis/securityinsights/v1beta1/zz_generated.managedlist.go
+#	deleted:    apis/securityinsights/v1beta1/zz_generated.resolvers.go
+#	modified:   apis/securityinsights/v1beta1/zz_generated_terraformed.go
+#	new file:   apis/securityinsights/v1beta1/zz_sentinelalertrulefusion_types.go
+#	new file:   apis/securityinsights/v1beta1/zz_sentinelalertrulemachinelearningbehavioranalytics_types.go
+#	new file:   apis/securityinsights/v1beta1/zz_sentinelloganalyticsworkspaceonboarding_types.go
+#	deleted:    apis/servicebus/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/servicefabric/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/signalrservice/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/solutions/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/sql/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/storage/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/storagecache/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/storagepool/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/storagesync/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/streamanalytics/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/synapse/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/timeseriesinsights/v1beta1/zz_generated.resolvers.go
+#	deleted:    apis/v1beta1/zz_generated.pc.go
+#	deleted:    apis/v1beta1/zz_generated.pcu.go
+#	deleted:    apis/v1beta1/zz_generated.pculist.go
+#	deleted:    apis/web/v1beta1/zz_generated.resolvers.go
+#	modified:   config/externalname.go
+#	modified:   config/externalnamenottested.go
+#	modified:   config/generated.lst
+#	new file:   examples-generated/securityinsights/sentinelalertrulefusion.yaml
+#	new file:   examples-generated/securityinsights/sentinelalertrulemachinelearningbehavioranalytics.yaml
+#	new file:   examples/securityinsights/sentinelalertrulefusion.yaml
+#	new file:   examples/securityinsights/sentinelalertrulemachinelearningbehavioranalytics.yaml
+#	new file:   examples/securityinsights/sentinelalertrulescheduled.yaml
+#	new file:   internal/controller/securityinsights/sentinelalertrulefusion/zz_controller.go
+#	new file:   internal/controller/securityinsights/sentinelalertrulemachinelearningbehavioranalytics/zz_controller.go
+#	new file:   internal/controller/securityinsights/sentinelloganalyticsworkspaceonboarding/zz_controller.go
+#	modified:   internal/controller/zz_setup.go
+#	new file:   package/crds/securityinsights.azure.upbound.io_sentinelalertrulefusions.yaml
+#	new file:   package/crds/securityinsights.azure.upbound.io_sentinelalertrulemachinelearningbehavioranalytics.yaml
+#	new file:   package/crds/securityinsights.azure.upbound.io_sentinelloganalyticsworkspaceonboardings.yaml
+#

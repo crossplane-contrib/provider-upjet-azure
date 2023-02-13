@@ -43,6 +43,33 @@ func (l *ApplicationInsightsSmartDetectionRuleList) GetItems() []resource.Manage
 	return items
 }
 
+// GetItems of this ApplicationInsightsWebTestList.
+func (l *ApplicationInsightsWebTestList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ApplicationInsightsWorkbookList.
+func (l *ApplicationInsightsWorkbookList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ApplicationInsightsWorkbookTemplateList.
+func (l *ApplicationInsightsWorkbookTemplateList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this MonitorActionGroupList.
 func (l *MonitorActionGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

@@ -112,6 +112,8 @@ import (
 	accountcognitiveservices "github.com/upbound/provider-azure/internal/controller/cognitiveservices/account"
 	service "github.com/upbound/provider-azure/internal/controller/communication/service"
 	availabilityset "github.com/upbound/provider-azure/internal/controller/compute/availabilityset"
+	capacityreservation "github.com/upbound/provider-azure/internal/controller/compute/capacityreservation"
+	capacityreservationgroup "github.com/upbound/provider-azure/internal/controller/compute/capacityreservationgroup"
 	dedicatedhost "github.com/upbound/provider-azure/internal/controller/compute/dedicatedhost"
 	diskaccess "github.com/upbound/provider-azure/internal/controller/compute/diskaccess"
 	diskencryptionset "github.com/upbound/provider-azure/internal/controller/compute/diskencryptionset"
@@ -302,6 +304,9 @@ import (
 	applicationinsightsanalyticsitem "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsanalyticsitem"
 	applicationinsightsapikey "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsapikey"
 	applicationinsightssmartdetectionrule "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightssmartdetectionrule"
+	applicationinsightswebtest "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightswebtest"
+	applicationinsightsworkbook "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsworkbook"
+	applicationinsightsworkbooktemplate "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsworkbooktemplate"
 	monitoractiongroup "github.com/upbound/provider-azure/internal/controller/insights/monitoractiongroup"
 	monitoractivitylogalert "github.com/upbound/provider-azure/internal/controller/insights/monitoractivitylogalert"
 	monitorautoscalesetting "github.com/upbound/provider-azure/internal/controller/insights/monitorautoscalesetting"
@@ -737,6 +742,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accountcognitiveservices.Setup,
 		service.Setup,
 		availabilityset.Setup,
+		capacityreservation.Setup,
+		capacityreservationgroup.Setup,
 		dedicatedhost.Setup,
 		diskaccess.Setup,
 		diskencryptionset.Setup,
@@ -927,6 +934,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		applicationinsightsanalyticsitem.Setup,
 		applicationinsightsapikey.Setup,
 		applicationinsightssmartdetectionrule.Setup,
+		applicationinsightswebtest.Setup,
+		applicationinsightsworkbook.Setup,
+		applicationinsightsworkbooktemplate.Setup,
 		monitoractiongroup.Setup,
 		monitoractivitylogalert.Setup,
 		monitorautoscalesetting.Setup,

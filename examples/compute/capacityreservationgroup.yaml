@@ -1,0 +1,28 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: CapacityReservationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/capacityreservationgroup
+  labels:
+    testing.upbound.io/example-name: examplecapacityreservgr
+  name: examplecapacityreservgr
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: capacityreservgr-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/capacityreservationgroup
+  labels:
+    testing.upbound.io/example-name: capacityreservgr-rg
+  name: capacityreservgr-rg
+spec:
+  forProvider:
+    location: West Europe

@@ -309,6 +309,228 @@ func (tr *ApplicationInsightsSmartDetectionRule) GetTerraformSchemaVersion() int
 	return 1
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ApplicationInsightsWebTest
+func (mg *ApplicationInsightsWebTest) GetTerraformResourceType() string {
+	return "azurerm_application_insights_web_test"
+}
+
+// GetConnectionDetailsMapping for this ApplicationInsightsWebTest
+func (tr *ApplicationInsightsWebTest) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ApplicationInsightsWebTest
+func (tr *ApplicationInsightsWebTest) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ApplicationInsightsWebTest
+func (tr *ApplicationInsightsWebTest) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ApplicationInsightsWebTest
+func (tr *ApplicationInsightsWebTest) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ApplicationInsightsWebTest
+func (tr *ApplicationInsightsWebTest) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ApplicationInsightsWebTest
+func (tr *ApplicationInsightsWebTest) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ApplicationInsightsWebTest using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ApplicationInsightsWebTest) LateInitialize(attrs []byte) (bool, error) {
+	params := &ApplicationInsightsWebTestParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ApplicationInsightsWebTest) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ApplicationInsightsWorkbook
+func (mg *ApplicationInsightsWorkbook) GetTerraformResourceType() string {
+	return "azurerm_application_insights_workbook"
+}
+
+// GetConnectionDetailsMapping for this ApplicationInsightsWorkbook
+func (tr *ApplicationInsightsWorkbook) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ApplicationInsightsWorkbook
+func (tr *ApplicationInsightsWorkbook) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ApplicationInsightsWorkbook
+func (tr *ApplicationInsightsWorkbook) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ApplicationInsightsWorkbook
+func (tr *ApplicationInsightsWorkbook) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ApplicationInsightsWorkbook
+func (tr *ApplicationInsightsWorkbook) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ApplicationInsightsWorkbook
+func (tr *ApplicationInsightsWorkbook) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ApplicationInsightsWorkbook using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ApplicationInsightsWorkbook) LateInitialize(attrs []byte) (bool, error) {
+	params := &ApplicationInsightsWorkbookParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ApplicationInsightsWorkbook) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ApplicationInsightsWorkbookTemplate
+func (mg *ApplicationInsightsWorkbookTemplate) GetTerraformResourceType() string {
+	return "azurerm_application_insights_workbook_template"
+}
+
+// GetConnectionDetailsMapping for this ApplicationInsightsWorkbookTemplate
+func (tr *ApplicationInsightsWorkbookTemplate) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ApplicationInsightsWorkbookTemplate
+func (tr *ApplicationInsightsWorkbookTemplate) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ApplicationInsightsWorkbookTemplate
+func (tr *ApplicationInsightsWorkbookTemplate) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ApplicationInsightsWorkbookTemplate
+func (tr *ApplicationInsightsWorkbookTemplate) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ApplicationInsightsWorkbookTemplate
+func (tr *ApplicationInsightsWorkbookTemplate) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ApplicationInsightsWorkbookTemplate
+func (tr *ApplicationInsightsWorkbookTemplate) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ApplicationInsightsWorkbookTemplate using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ApplicationInsightsWorkbookTemplate) LateInitialize(attrs []byte) (bool, error) {
+	params := &ApplicationInsightsWorkbookTemplateParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ApplicationInsightsWorkbookTemplate) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this MonitorActionGroup
 func (mg *MonitorActionGroup) GetTerraformResourceType() string {
 	return "azurerm_monitor_action_group"
