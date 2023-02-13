@@ -7,6 +7,72 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SentinelAlertRuleFusion.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SentinelAlertRuleFusion) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SentinelAlertRuleFusion.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SentinelAlertRuleFusion) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SentinelAlertRuleMSSecurityIncident.
 func (mg *SentinelAlertRuleMSSecurityIncident) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -70,6 +136,72 @@ func (mg *SentinelAlertRuleMSSecurityIncident) SetPublishConnectionDetailsTo(r *
 
 // SetWriteConnectionSecretToReference of this SentinelAlertRuleMSSecurityIncident.
 func (mg *SentinelAlertRuleMSSecurityIncident) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
@@ -202,6 +334,72 @@ func (mg *SentinelDataConnectorIOT) SetPublishConnectionDetailsTo(r *xpv1.Publis
 
 // SetWriteConnectionSecretToReference of this SentinelDataConnectorIOT.
 func (mg *SentinelDataConnectorIOT) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SentinelLogAnalyticsWorkspaceOnboarding.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SentinelLogAnalyticsWorkspaceOnboarding.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

@@ -9,13 +9,66 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta1 "github.com/upbound/provider-azure/apis/operationsmanagement/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+		Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+		Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.LogAnalyticsSolutionList{},
+			Managed: &v1beta1.LogAnalyticsSolution{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
+	}
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SentinelAlertRuleMSSecurityIncident.
 func (mg *SentinelAlertRuleMSSecurityIncident) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
+		Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+		Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.LogAnalyticsSolutionList{},
+			Managed: &v1beta1.LogAnalyticsSolution{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LogAnalyticsWorkspaceID")
+	}
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
@@ -88,6 +141,32 @@ func (mg *SentinelDataConnectorIOT) ResolveReferences(ctx context.Context, c cli
 	}
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }
