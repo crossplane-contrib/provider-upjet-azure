@@ -168,6 +168,7 @@ import (
 	table "github.com/upbound/provider-azure/internal/controller/cosmosdb/table"
 	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/resourcegroupcostmanagementexport"
 	subscriptioncostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/subscriptioncostmanagementexport"
+	customprovider "github.com/upbound/provider-azure/internal/controller/customproviders/customprovider"
 	device "github.com/upbound/provider-azure/internal/controller/databoxedge/device"
 	accessconnector "github.com/upbound/provider-azure/internal/controller/databricks/accessconnector"
 	workspace "github.com/upbound/provider-azure/internal/controller/databricks/workspace"
@@ -820,6 +821,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		table.Setup,
 		resourcegroupcostmanagementexport.Setup,
 		subscriptioncostmanagementexport.Setup,
+		customprovider.Setup,
 		device.Setup,
 		accessconnector.Setup,
 		workspace.Setup,

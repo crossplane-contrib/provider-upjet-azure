@@ -1681,6 +1681,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/assignment1
 	"azurerm_policy_virtual_machine_configuration_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_machine_id }}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{{ .external_name }}"),
+
+	// customproviders
+	//
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example/providers/Microsoft.CustomProviders/resourceProviders/example
+	"azurerm_custom_provider": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.CustomProviders/resourceProviders/{{ .external_name }}"),
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
