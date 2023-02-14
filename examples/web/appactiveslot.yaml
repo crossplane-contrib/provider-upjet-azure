@@ -1,0 +1,88 @@
+apiVersion: web.azure.upbound.io/v1beta1
+kind: AppActiveSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: exampleappactiveslot
+  name: exampleappactiveslot
+spec:
+  forProvider:
+    slotIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appactiveslot-lsl
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: LinuxWebAppSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: appactiveslot-lsl
+  name: appactiveslot-lsl
+spec:
+  forProvider:
+    name: appactiveslot
+    appServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appactiveslot-lwa
+    siteConfig:
+    - {}
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: LinuxWebApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: appactiveslot-lwa
+  name: appactiveslot-lwa
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appactiveslot-rg
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appactiveslot-sp
+    siteConfig:
+    - {}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: appactiveslot-rg
+  name: appactiveslot-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: appactiveslot-sp
+  name: appactiveslot-sp
+spec:
+  forProvider:
+    location: West Europe
+    osType: Windows
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appactiveslot-rg
+    skuName: P1v2
+
