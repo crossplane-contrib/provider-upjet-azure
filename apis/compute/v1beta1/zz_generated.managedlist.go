@@ -133,8 +133,26 @@ func (l *ProximityPlacementGroupList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SSHPublicKeyList.
+func (l *SSHPublicKeyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SharedImageGalleryList.
 func (l *SharedImageGalleryList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SharedImageList.
+func (l *SharedImageList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
