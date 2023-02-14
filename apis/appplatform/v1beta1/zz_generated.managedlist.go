@@ -7,6 +7,15 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this SpringCloudAPIPortalList.
+func (l *SpringCloudAPIPortalList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SpringCloudAcceleratorList.
 func (l *SpringCloudAcceleratorList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -61,8 +70,53 @@ func (l *SpringCloudAppRedisAssociationList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SpringCloudBuildDeploymentList.
+func (l *SpringCloudBuildDeploymentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SpringCloudBuildPackBindingList.
+func (l *SpringCloudBuildPackBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SpringCloudBuilderList.
+func (l *SpringCloudBuilderList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SpringCloudCertificateList.
 func (l *SpringCloudCertificateList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SpringCloudConfigurationServiceList.
+func (l *SpringCloudConfigurationServiceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SpringCloudContainerDeploymentList.
+func (l *SpringCloudContainerDeploymentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -90,6 +144,24 @@ func (l *SpringCloudCustomizedAcceleratorList) GetItems() []resource.Managed {
 
 // GetItems of this SpringCloudDevToolPortalList.
 func (l *SpringCloudDevToolPortalList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SpringCloudGatewayCustomDomainList.
+func (l *SpringCloudGatewayCustomDomainList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SpringCloudGatewayList.
+func (l *SpringCloudGatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

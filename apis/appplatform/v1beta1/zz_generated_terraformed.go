@@ -161,6 +161,80 @@ func (tr *SpringCloudActiveDeployment) GetTerraformSchemaVersion() int {
 	return 1
 }
 
+// GetTerraformResourceType returns Terraform resource type for this SpringCloudAPIPortal
+func (mg *SpringCloudAPIPortal) GetTerraformResourceType() string {
+	return "azurerm_spring_cloud_api_portal"
+}
+
+// GetConnectionDetailsMapping for this SpringCloudAPIPortal
+func (tr *SpringCloudAPIPortal) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SpringCloudAPIPortal
+func (tr *SpringCloudAPIPortal) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SpringCloudAPIPortal
+func (tr *SpringCloudAPIPortal) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SpringCloudAPIPortal
+func (tr *SpringCloudAPIPortal) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SpringCloudAPIPortal
+func (tr *SpringCloudAPIPortal) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SpringCloudAPIPortal
+func (tr *SpringCloudAPIPortal) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SpringCloudAPIPortal using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SpringCloudAPIPortal) LateInitialize(attrs []byte) (bool, error) {
+	params := &SpringCloudAPIPortalParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SpringCloudAPIPortal) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudApp
 func (mg *SpringCloudApp) GetTerraformResourceType() string {
 	return "azurerm_spring_cloud_app"
@@ -457,6 +531,228 @@ func (tr *SpringCloudAppRedisAssociation) GetTerraformSchemaVersion() int {
 	return 1
 }
 
+// GetTerraformResourceType returns Terraform resource type for this SpringCloudBuildDeployment
+func (mg *SpringCloudBuildDeployment) GetTerraformResourceType() string {
+	return "azurerm_spring_cloud_build_deployment"
+}
+
+// GetConnectionDetailsMapping for this SpringCloudBuildDeployment
+func (tr *SpringCloudBuildDeployment) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SpringCloudBuildDeployment
+func (tr *SpringCloudBuildDeployment) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SpringCloudBuildDeployment
+func (tr *SpringCloudBuildDeployment) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SpringCloudBuildDeployment
+func (tr *SpringCloudBuildDeployment) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SpringCloudBuildDeployment
+func (tr *SpringCloudBuildDeployment) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SpringCloudBuildDeployment
+func (tr *SpringCloudBuildDeployment) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SpringCloudBuildDeployment using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SpringCloudBuildDeployment) LateInitialize(attrs []byte) (bool, error) {
+	params := &SpringCloudBuildDeploymentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SpringCloudBuildDeployment) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SpringCloudBuildPackBinding
+func (mg *SpringCloudBuildPackBinding) GetTerraformResourceType() string {
+	return "azurerm_spring_cloud_build_pack_binding"
+}
+
+// GetConnectionDetailsMapping for this SpringCloudBuildPackBinding
+func (tr *SpringCloudBuildPackBinding) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SpringCloudBuildPackBinding
+func (tr *SpringCloudBuildPackBinding) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SpringCloudBuildPackBinding
+func (tr *SpringCloudBuildPackBinding) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SpringCloudBuildPackBinding
+func (tr *SpringCloudBuildPackBinding) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SpringCloudBuildPackBinding
+func (tr *SpringCloudBuildPackBinding) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SpringCloudBuildPackBinding
+func (tr *SpringCloudBuildPackBinding) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SpringCloudBuildPackBinding using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SpringCloudBuildPackBinding) LateInitialize(attrs []byte) (bool, error) {
+	params := &SpringCloudBuildPackBindingParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SpringCloudBuildPackBinding) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SpringCloudBuilder
+func (mg *SpringCloudBuilder) GetTerraformResourceType() string {
+	return "azurerm_spring_cloud_builder"
+}
+
+// GetConnectionDetailsMapping for this SpringCloudBuilder
+func (tr *SpringCloudBuilder) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SpringCloudBuilder
+func (tr *SpringCloudBuilder) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SpringCloudBuilder
+func (tr *SpringCloudBuilder) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SpringCloudBuilder
+func (tr *SpringCloudBuilder) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SpringCloudBuilder
+func (tr *SpringCloudBuilder) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SpringCloudBuilder
+func (tr *SpringCloudBuilder) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SpringCloudBuilder using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SpringCloudBuilder) LateInitialize(attrs []byte) (bool, error) {
+	params := &SpringCloudBuilderParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SpringCloudBuilder) GetTerraformSchemaVersion() int {
+	return 1
+}
+
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudCertificate
 func (mg *SpringCloudCertificate) GetTerraformResourceType() string {
 	return "azurerm_spring_cloud_certificate"
@@ -528,6 +824,154 @@ func (tr *SpringCloudCertificate) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudCertificate) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SpringCloudConfigurationService
+func (mg *SpringCloudConfigurationService) GetTerraformResourceType() string {
+	return "azurerm_spring_cloud_configuration_service"
+}
+
+// GetConnectionDetailsMapping for this SpringCloudConfigurationService
+func (tr *SpringCloudConfigurationService) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"repository[*].password": "spec.forProvider.repository[*].passwordSecretRef", "repository[*].private_key": "spec.forProvider.repository[*].privateKeySecretRef"}
+}
+
+// GetObservation of this SpringCloudConfigurationService
+func (tr *SpringCloudConfigurationService) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SpringCloudConfigurationService
+func (tr *SpringCloudConfigurationService) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SpringCloudConfigurationService
+func (tr *SpringCloudConfigurationService) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SpringCloudConfigurationService
+func (tr *SpringCloudConfigurationService) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SpringCloudConfigurationService
+func (tr *SpringCloudConfigurationService) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SpringCloudConfigurationService using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SpringCloudConfigurationService) LateInitialize(attrs []byte) (bool, error) {
+	params := &SpringCloudConfigurationServiceParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SpringCloudConfigurationService) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SpringCloudContainerDeployment
+func (mg *SpringCloudContainerDeployment) GetTerraformResourceType() string {
+	return "azurerm_spring_cloud_container_deployment"
+}
+
+// GetConnectionDetailsMapping for this SpringCloudContainerDeployment
+func (tr *SpringCloudContainerDeployment) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SpringCloudContainerDeployment
+func (tr *SpringCloudContainerDeployment) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SpringCloudContainerDeployment
+func (tr *SpringCloudContainerDeployment) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SpringCloudContainerDeployment
+func (tr *SpringCloudContainerDeployment) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SpringCloudContainerDeployment
+func (tr *SpringCloudContainerDeployment) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SpringCloudContainerDeployment
+func (tr *SpringCloudContainerDeployment) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SpringCloudContainerDeployment using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SpringCloudContainerDeployment) LateInitialize(attrs []byte) (bool, error) {
+	params := &SpringCloudContainerDeploymentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SpringCloudContainerDeployment) GetTerraformSchemaVersion() int {
 	return 1
 }
 
@@ -751,6 +1195,154 @@ func (tr *SpringCloudDevToolPortal) LateInitialize(attrs []byte) (bool, error) {
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudDevToolPortal) GetTerraformSchemaVersion() int {
 	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SpringCloudGateway
+func (mg *SpringCloudGateway) GetTerraformResourceType() string {
+	return "azurerm_spring_cloud_gateway"
+}
+
+// GetConnectionDetailsMapping for this SpringCloudGateway
+func (tr *SpringCloudGateway) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"sensitive_environment_variables": "spec.forProvider.sensitiveEnvironmentVariablesSecretRef"}
+}
+
+// GetObservation of this SpringCloudGateway
+func (tr *SpringCloudGateway) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SpringCloudGateway
+func (tr *SpringCloudGateway) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SpringCloudGateway
+func (tr *SpringCloudGateway) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SpringCloudGateway
+func (tr *SpringCloudGateway) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SpringCloudGateway
+func (tr *SpringCloudGateway) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SpringCloudGateway using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SpringCloudGateway) LateInitialize(attrs []byte) (bool, error) {
+	params := &SpringCloudGatewayParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SpringCloudGateway) GetTerraformSchemaVersion() int {
+	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this SpringCloudGatewayCustomDomain
+func (mg *SpringCloudGatewayCustomDomain) GetTerraformResourceType() string {
+	return "azurerm_spring_cloud_gateway_custom_domain"
+}
+
+// GetConnectionDetailsMapping for this SpringCloudGatewayCustomDomain
+func (tr *SpringCloudGatewayCustomDomain) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this SpringCloudGatewayCustomDomain
+func (tr *SpringCloudGatewayCustomDomain) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this SpringCloudGatewayCustomDomain
+func (tr *SpringCloudGatewayCustomDomain) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this SpringCloudGatewayCustomDomain
+func (tr *SpringCloudGatewayCustomDomain) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this SpringCloudGatewayCustomDomain
+func (tr *SpringCloudGatewayCustomDomain) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this SpringCloudGatewayCustomDomain
+func (tr *SpringCloudGatewayCustomDomain) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this SpringCloudGatewayCustomDomain using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *SpringCloudGatewayCustomDomain) LateInitialize(attrs []byte) (bool, error) {
+	params := &SpringCloudGatewayCustomDomainParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *SpringCloudGatewayCustomDomain) GetTerraformSchemaVersion() int {
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudJavaDeployment
