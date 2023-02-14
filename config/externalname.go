@@ -1353,6 +1353,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// a Function App Function can be imported using the resource id
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1/functions/function1
 	"azurerm_function_app_function": config.IdentifierFromProvider,
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1
+	"azurerm_web_app_active_slot": config.IdentifierFromProvider,
 
 	// logic
 	//

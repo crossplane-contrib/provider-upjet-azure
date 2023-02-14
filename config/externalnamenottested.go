@@ -749,8 +749,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// web_app
 	//
-	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1
-	"azurerm_web_app_active_slot": config.IdentifierFromProvider,
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1/hybridConnectionNamespaces/hybridConnectionNamespace1/relays/relay1
 	"azurerm_web_app_hybrid_connection": config.IdentifierFromProvider,
 

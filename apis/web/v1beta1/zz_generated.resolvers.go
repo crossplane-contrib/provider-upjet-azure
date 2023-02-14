@@ -17,6 +17,32 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this AppActiveSlot.
+func (mg *AppActiveSlot) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SlotID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SlotIDRef,
+		Selector:     mg.Spec.ForProvider.SlotIDSelector,
+		To: reference.To{
+			List:    &LinuxWebAppSlotList{},
+			Managed: &LinuxWebAppSlot{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SlotID")
+	}
+	mg.Spec.ForProvider.SlotID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SlotIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this AppServicePlan.
 func (mg *AppServicePlan) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

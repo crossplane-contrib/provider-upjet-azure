@@ -642,6 +642,7 @@ import (
 	gen2environment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/gen2environment"
 	referencedataset "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/referencedataset"
 	standardenvironment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/standardenvironment"
+	appactiveslot "github.com/upbound/provider-azure/internal/controller/web/appactiveslot"
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
 	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
 	functionappactiveslot "github.com/upbound/provider-azure/internal/controller/web/functionappactiveslot"
@@ -1293,6 +1294,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		gen2environment.Setup,
 		referencedataset.Setup,
 		standardenvironment.Setup,
+		appactiveslot.Setup,
 		appserviceplan.Setup,
 		functionapp.Setup,
 		functionappactiveslot.Setup,
