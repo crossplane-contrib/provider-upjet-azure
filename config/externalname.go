@@ -1233,6 +1233,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.SignalRService/signalR/signalr1
 	// TODO: Check documentation, it seems there is a bug
 	"azurerm_signalr_service_network_acl": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.SignalRService/webPubSub/pubsub1
+	"azurerm_web_pubsub": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.SignalRService/webPubSub/webPubSub1/hubs/webPubSubhub1
+	"azurerm_web_pubsub_hub": config.IdentifierFromProvider,
 
 	// service
 	//

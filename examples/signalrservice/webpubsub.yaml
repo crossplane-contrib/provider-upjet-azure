@@ -1,0 +1,34 @@
+apiVersion: signalrservice.azure.upbound.io/v1beta1
+kind: WebPubsub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/webpubsub
+  labels:
+    testing.upbound.io/example-name: examplewebpubsub
+  name: examplewebpubsub
+spec:
+  forProvider:
+    name: examplewebpubsub
+    capacity: 1
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    publicNetworkAccessEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: webpubsub-rg
+    sku: Standard_S1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/webpubsub
+  labels:
+    testing.upbound.io/example-name: webpubsub-rg
+  name: webpubsub-rg
+spec:
+  forProvider:
+    location: West Europe

@@ -721,10 +721,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// web_pubsub
 	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.SignalRService/webPubSub/pubsub1
-	"azurerm_web_pubsub": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.SignalRService/webPubSub/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.SignalRService/webPubSub/webPubSub1/hubs/webPubSubhub1
-	"azurerm_web_pubsub_hub": config.TemplatedStringAsIdentifier("name", "{{ .parameters.web_pubsub_id }}/hubs/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.SignalRService/webPubSub/webpubsub1
 	// TODO: Bug in documentation. Normalize external_name while testing
 	"azurerm_web_pubsub_network_acl": config.IdentifierFromProvider,

@@ -1,0 +1,82 @@
+apiVersion: signalrservice.azure.upbound.io/v1beta1
+kind: WebPubsubHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/webpubsubhub
+  labels:
+    testing.upbound.io/example-name: examplewebpubsubhub
+  name: examplewebpubsubhub
+spec:
+  forProvider:
+    name: examplewebpubsubhub
+    anonymousConnectionsEnabled: true
+    eventHandler:
+    - systemEvents:
+      - connect
+      - connected
+      urlTemplate: https://test.com/api/{hub}/{event}
+      userEventPattern: '*'
+    - auth:
+      - managedIdentityIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: webpubsubhub-id
+      systemEvents:
+      - connected
+      urlTemplate: https://test.com/api/{hub}/{event}
+      userEventPattern: event1, event2
+    webPubsubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: webpubsubhub-wp
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/webpubsubhub
+  labels:
+    testing.upbound.io/example-name: webpubsubhub-rg
+  name: webpubsubhub-rg
+spec:
+  forProvider:
+    location: east us
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/webpubsubhub
+  labels:
+    testing.upbound.io/example-name: webpubsubhub-id
+  name: webpubsubhub-id
+spec:
+  forProvider:
+    location: east us
+    name: tfex-uai
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: webpubsubhub-rg
+
+---
+
+apiVersion: signalrservice.azure.upbound.io/v1beta1
+kind: WebPubsub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/webpubsubhub
+  labels:
+    testing.upbound.io/example-name: webpubsubhub-wp
+  name: webpubsubhub-wp
+spec:
+  forProvider:
+    name: webpubsubhub-wp
+    capacity: 1
+    location: east us
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: webpubsubhub-rg
+    sku: Standard_S1
+
