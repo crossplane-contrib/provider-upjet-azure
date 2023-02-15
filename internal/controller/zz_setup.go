@@ -346,6 +346,7 @@ import (
 	applicationnetworkruleset "github.com/upbound/provider-azure/internal/controller/iotcentral/applicationnetworkruleset"
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/keyvault/accesspolicy"
 	certificatekeyvault "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"
+	certificatecontacts "github.com/upbound/provider-azure/internal/controller/keyvault/certificatecontacts"
 	certificateissuer "github.com/upbound/provider-azure/internal/controller/keyvault/certificateissuer"
 	key "github.com/upbound/provider-azure/internal/controller/keyvault/key"
 	managedhardwaresecuritymodule "github.com/upbound/provider-azure/internal/controller/keyvault/managedhardwaresecuritymodule"
@@ -1022,6 +1023,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		applicationnetworkruleset.Setup,
 		accesspolicy.Setup,
 		certificatekeyvault.Setup,
+		certificatecontacts.Setup,
 		certificateissuer.Setup,
 		key.Setup,
 		managedhardwaresecuritymodule.Setup,

@@ -319,6 +319,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_key_vault_managed_storage_account_sas_token_definition": config.TemplatedStringAsIdentifier("name", "{{ .parameters.managed_storage_account_id }}/sas/{{ .external_name }}"),
 	"azurerm_key_vault_managed_hardware_security_module":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.KeyVault/managedHSMs/{{ .external_name }}"),
 	"azurerm_key_vault_access_policy":                                keyVaultAccessPolicy(),
+	// Key Vault Certificate Contacts can be imported using the resource id
+	// https://example-keyvault.vault.azure.net/certificates/contacts
+	"azurerm_key_vault_certificate_contacts": config.IdentifierFromProvider,
 
 	// kusto
 	"azurerm_kusto_cluster":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Kusto/clusters/{{ .external_name }}"),

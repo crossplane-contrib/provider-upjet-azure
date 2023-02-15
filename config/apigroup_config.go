@@ -29,6 +29,7 @@ var (
 		"azurerm_key_vault_secret":                                       "keyvault",
 		"azurerm_key_vault_managed_storage_account":                      "keyvault",
 		"azurerm_key_vault_managed_storage_account_sas_token_definition": "keyvault",
+		"azurerm_key_vault_certificate_contacts":                         "keyvault",
 		"azurerm_resource_provider_registration":                         "policyinsights",
 		"azurerm_storage_blob":                                           "storage",
 		"azurerm_storage_container":                                      "storage",

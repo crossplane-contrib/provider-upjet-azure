@@ -5,7 +5,7 @@ metadata:
     meta.upbound.io/example-id: devices/v1beta1/iothubcertificate
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     certificateContentSecretRef:
@@ -61,7 +61,7 @@ metadata:
     meta.upbound.io/example-id: devices/v1beta1/iothubcertificate
   labels:
     testing.upbound.io/example-name: example
-  name: example-iothubcertificate
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
@@ -81,7 +81,7 @@ metadata:
     meta.upbound.io/example-id: devices/v1beta1/iothubcertificate
   labels:
     testing.upbound.io/example-name: example
-  name: example-iothubcertificate
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

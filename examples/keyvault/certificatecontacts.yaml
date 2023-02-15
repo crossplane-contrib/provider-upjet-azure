@@ -1,0 +1,79 @@
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: CertificateContacts
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificatecontacts
+    upjet.upbound.io/manual-intervention: "This resource depends on existing resource(AccessPolicy in this example)"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    contact:
+    - email: example@example.com
+      name: example
+      phone: "01234567890"
+    - email: example2@example.com
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificatecontacts
+    upjet.upbound.io/manual-intervention: "This resource is dependency of CertificateContacts. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: test-certificatecontacts
+spec:
+  forProvider:
+    certificatePermissions:
+    - ManageContacts
+    keyPermissions:
+    - Create
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${data.azurerm_client_config.current.object_id}
+    secretPermissions:
+    - Set
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificatecontacts
+    upjet.upbound.io/manual-intervention: "This resource is dependency of CertificateContacts. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: test-certificatecontacts
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificatecontacts
+    upjet.upbound.io/manual-intervention: "This resource is dependency of CertificateContacts. This resource is skipping because parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example
+  name: test-certificatecontacts
+spec:
+  forProvider:
+    location: West Europe
