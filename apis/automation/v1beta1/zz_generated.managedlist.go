@@ -16,6 +16,24 @@ func (l *AccountList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ConnectionClassicCertificateList.
+func (l *ConnectionClassicCertificateList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ConnectionList.
+func (l *ConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ConnectionTypeList.
 func (l *ConnectionTypeList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -52,6 +70,24 @@ func (l *ModuleList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this RunBookList.
+func (l *RunBookList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ScheduleList.
+func (l *ScheduleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this VariableBoolList.
 func (l *VariableBoolList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -81,6 +117,15 @@ func (l *VariableIntList) GetItems() []resource.Managed {
 
 // GetItems of this VariableStringList.
 func (l *VariableStringList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WebhookList.
+func (l *WebhookList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

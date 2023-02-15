@@ -1,8 +1,8 @@
 apiVersion: automation.azure.upbound.io/v1beta1
-kind: Schedule
+kind: Connection
 metadata:
   annotations:
-    meta.upbound.io/example-id: automation/v1beta1/schedule
+    meta.upbound.io/example-id: automation/v1beta1/connection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -11,19 +11,23 @@ spec:
     automationAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    description: This is an example schedule
-    frequency: Week
-    interval: 1
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    timezone: Australia/Perth
+    type: AzureServicePrincipal
+    values:
+      ApplicationId: 00000000-0000-0000-0000-000000000000
+      CertificateThumbprint: sample-certificate-thumbprint
+      SubscriptionId: ${data.azurerm_client_config.example.subscription_id}
+      TenantId: ${data.azurerm_client_config.example.tenant_id}
+
 ---
+
 apiVersion: automation.azure.upbound.io/v1beta1
 kind: Account
 metadata:
   annotations:
-    meta.upbound.io/example-id: automation/v1beta1/schedule
+    meta.upbound.io/example-id: automation/v1beta1/connection
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -34,17 +38,20 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: Basic
-    tags:
-      environment: development
+
 ---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: automation/v1beta1/schedule
+    meta.upbound.io/example-id: automation/v1beta1/connection
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     location: West Europe
+
+---
+
