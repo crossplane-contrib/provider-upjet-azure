@@ -273,6 +273,7 @@ import (
 	serverkey "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/serverkey"
 	virtualnetworkruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/virtualnetworkrule"
 	iothub "github.com/upbound/provider-azure/internal/controller/devices/iothub"
+	iothubcertificate "github.com/upbound/provider-azure/internal/controller/devices/iothubcertificate"
 	iothubconsumergroup "github.com/upbound/provider-azure/internal/controller/devices/iothubconsumergroup"
 	iothubdps "github.com/upbound/provider-azure/internal/controller/devices/iothubdps"
 	iothubdpscertificate "github.com/upbound/provider-azure/internal/controller/devices/iothubdpscertificate"
@@ -948,6 +949,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		serverkey.Setup,
 		virtualnetworkruledbforpostgresql.Setup,
 		iothub.Setup,
+		iothubcertificate.Setup,
 		iothubconsumergroup.Setup,
 		iothubdps.Setup,
 		iothubdpscertificate.Setup,
