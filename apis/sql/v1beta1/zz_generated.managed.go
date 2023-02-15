@@ -73,6 +73,72 @@ func (mg *MSSQLDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretRefer
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLDatabaseExtendedAuditingPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLDatabaseExtendedAuditingPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MSSQLFailoverGroup.
 func (mg *MSSQLFailoverGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -796,6 +862,72 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetPublishConnectionDetails
 
 // SetWriteConnectionSecretToReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
 func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLServerSecurityAlertPolicy.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLServerSecurityAlertPolicy) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLServerSecurityAlertPolicy.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLServerSecurityAlertPolicy) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

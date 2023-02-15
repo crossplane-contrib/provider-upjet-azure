@@ -9,11 +9,11 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta13 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
-	v1beta11 "github.com/upbound/provider-azure/apis/network/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
-	v1beta12 "github.com/upbound/provider-azure/apis/storage/v1beta1"
+	v1beta1 "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -40,6 +40,48 @@ func (mg *MSSQLDatabase) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DatabaseIDRef,
+		Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
+		To: reference.To{
+			List:    &MSSQLDatabaseList{},
+			Managed: &MSSQLDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseID")
+	}
+	mg.Spec.ForProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageEndpoint),
+		Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
+		Reference:    mg.Spec.ForProvider.StorageEndpointRef,
+		Selector:     mg.Spec.ForProvider.StorageEndpointSelector,
+		To: reference.To{
+			List:    &v1beta1.AccountList{},
+			Managed: &v1beta1.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageEndpoint")
+	}
+	mg.Spec.ForProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageEndpointRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -186,8 +228,8 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -202,8 +244,8 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 		Reference:    mg.Spec.ForProvider.SubnetIDRef,
 		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
@@ -348,8 +390,8 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -400,8 +442,8 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 		Reference:    mg.Spec.ForProvider.BlobStorageEndpointRef,
 		Selector:     mg.Spec.ForProvider.BlobStorageEndpointSelector,
 		To: reference.To{
-			List:    &v1beta12.AccountList{},
-			Managed: &v1beta12.Account{},
+			List:    &v1beta1.AccountList{},
+			Managed: &v1beta1.Account{},
 		},
 	})
 	if err != nil {
@@ -425,6 +467,64 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 	}
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ServerNameRef,
+		Selector:     mg.Spec.ForProvider.ServerNameSelector,
+		To: reference.To{
+			List:    &MSSQLServerList{},
+			Managed: &MSSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerName")
+	}
+	mg.Spec.ForProvider.ServerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageEndpoint),
+		Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
+		Reference:    mg.Spec.ForProvider.StorageEndpointRef,
+		Selector:     mg.Spec.ForProvider.StorageEndpointSelector,
+		To: reference.To{
+			List:    &v1beta1.AccountList{},
+			Managed: &v1beta1.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageEndpoint")
+	}
+	mg.Spec.ForProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageEndpointRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -500,8 +600,8 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 		Reference:    mg.Spec.ForProvider.SubnetIDRef,
 		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
