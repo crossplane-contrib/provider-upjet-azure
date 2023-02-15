@@ -17,8 +17,13 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    startTime: "2014-04-15T18:00:15+02:00"
     timezone: Australia/Perth
+    weekDays:
+    - Friday
+
 ---
+
 apiVersion: automation.azure.upbound.io/v1beta1
 kind: Account
 metadata:
@@ -34,9 +39,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: Basic
-    tags:
-      environment: development
+
 ---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
@@ -48,3 +53,6 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+
+---
+

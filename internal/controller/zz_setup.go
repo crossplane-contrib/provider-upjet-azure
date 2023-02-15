@@ -82,14 +82,19 @@ import (
 	subscriptionpolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyassignment"
 	subscriptionpolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyexemption"
 	account "github.com/upbound/provider-azure/internal/controller/automation/account"
+	connection "github.com/upbound/provider-azure/internal/controller/automation/connection"
+	connectionclassiccertificate "github.com/upbound/provider-azure/internal/controller/automation/connectionclassiccertificate"
 	connectiontype "github.com/upbound/provider-azure/internal/controller/automation/connectiontype"
 	credential "github.com/upbound/provider-azure/internal/controller/automation/credential"
 	hybridrunbookworkergroup "github.com/upbound/provider-azure/internal/controller/automation/hybridrunbookworkergroup"
 	module "github.com/upbound/provider-azure/internal/controller/automation/module"
+	runbook "github.com/upbound/provider-azure/internal/controller/automation/runbook"
+	schedule "github.com/upbound/provider-azure/internal/controller/automation/schedule"
 	variablebool "github.com/upbound/provider-azure/internal/controller/automation/variablebool"
 	variabledatetime "github.com/upbound/provider-azure/internal/controller/automation/variabledatetime"
 	variableint "github.com/upbound/provider-azure/internal/controller/automation/variableint"
 	variablestring "github.com/upbound/provider-azure/internal/controller/automation/variablestring"
+	webhook "github.com/upbound/provider-azure/internal/controller/automation/webhook"
 	resourcegroup "github.com/upbound/provider-azure/internal/controller/azure/resourcegroup"
 	resourceproviderregistration "github.com/upbound/provider-azure/internal/controller/azure/resourceproviderregistration"
 	subscriptionazure "github.com/upbound/provider-azure/internal/controller/azure/subscription"
@@ -152,7 +157,7 @@ import (
 	scopemap "github.com/upbound/provider-azure/internal/controller/containerregistry/scopemap"
 	token "github.com/upbound/provider-azure/internal/controller/containerregistry/token"
 	tokenpassword "github.com/upbound/provider-azure/internal/controller/containerregistry/tokenpassword"
-	webhook "github.com/upbound/provider-azure/internal/controller/containerregistry/webhook"
+	webhookcontainerregistry "github.com/upbound/provider-azure/internal/controller/containerregistry/webhook"
 	kubernetescluster "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetescluster"
 	kubernetesclusternodepool "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
 	kubernetesfleetmanager "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesfleetmanager"
@@ -286,7 +291,7 @@ import (
 	lab "github.com/upbound/provider-azure/internal/controller/devtestlab/lab"
 	linuxvirtualmachinedevtestlab "github.com/upbound/provider-azure/internal/controller/devtestlab/linuxvirtualmachine"
 	policydevtestlab "github.com/upbound/provider-azure/internal/controller/devtestlab/policy"
-	schedule "github.com/upbound/provider-azure/internal/controller/devtestlab/schedule"
+	scheduledevtestlab "github.com/upbound/provider-azure/internal/controller/devtestlab/schedule"
 	virtualnetwork "github.com/upbound/provider-azure/internal/controller/devtestlab/virtualnetwork"
 	windowsvirtualmachinedevtestlab "github.com/upbound/provider-azure/internal/controller/devtestlab/windowsvirtualmachine"
 	instance "github.com/upbound/provider-azure/internal/controller/digitaltwins/instance"
@@ -743,14 +748,19 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subscriptionpolicyassignment.Setup,
 		subscriptionpolicyexemption.Setup,
 		account.Setup,
+		connection.Setup,
+		connectionclassiccertificate.Setup,
 		connectiontype.Setup,
 		credential.Setup,
 		hybridrunbookworkergroup.Setup,
 		module.Setup,
+		runbook.Setup,
+		schedule.Setup,
 		variablebool.Setup,
 		variabledatetime.Setup,
 		variableint.Setup,
 		variablestring.Setup,
+		webhook.Setup,
 		resourcegroup.Setup,
 		resourceproviderregistration.Setup,
 		subscriptionazure.Setup,
@@ -813,7 +823,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		scopemap.Setup,
 		token.Setup,
 		tokenpassword.Setup,
-		webhook.Setup,
+		webhookcontainerregistry.Setup,
 		kubernetescluster.Setup,
 		kubernetesclusternodepool.Setup,
 		kubernetesfleetmanager.Setup,
@@ -947,7 +957,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		lab.Setup,
 		linuxvirtualmachinedevtestlab.Setup,
 		policydevtestlab.Setup,
-		schedule.Setup,
+		scheduledevtestlab.Setup,
 		virtualnetwork.Setup,
 		windowsvirtualmachinedevtestlab.Setup,
 		instance.Setup,

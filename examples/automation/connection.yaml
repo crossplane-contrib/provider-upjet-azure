@@ -1,0 +1,50 @@
+apiVersion: automation.azure.upbound.io/v1beta1
+kind: Connection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/connection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    automationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampleacc0001
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgconnection
+    type: AzureServicePrincipal
+    values:
+      ApplicationId: 00000000-0000-0000-0000-000000000000
+      CertificateThumbprint: sample-certificate-thumbprint
+      SubscriptionId: ${data.azurerm_client_config.current.subscription_id}
+      TenantId: ${data.azurerm_client_config.current.tenant_id}
+---
+apiVersion: automation.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/connection
+  labels:
+    testing.upbound.io/example-name: exampleacc0001
+  name: exampleacc0001
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgconnection
+    skuName: Basic
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/connection
+  labels:
+    testing.upbound.io/example-name: rgconnection
+  name: rgconnection
+spec:
+  forProvider:
+    location: West Europe
