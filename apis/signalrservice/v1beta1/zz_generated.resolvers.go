@@ -11,6 +11,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta12 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/managedidentity/v1beta1"
 	v1beta1 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -124,6 +125,78 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	}
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this WebPubsub.
+func (mg *WebPubsub) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this WebPubsubHub.
+func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EventHandler); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.EventHandler[i3].Auth); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDRef,
+				Selector:     mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDSelector,
+				To: reference.To{
+					List:    &v1beta13.UserAssignedIdentityList{},
+					Managed: &v1beta13.UserAssignedIdentity{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityID")
+			}
+			mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebPubsubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.WebPubsubIDRef,
+		Selector:     mg.Spec.ForProvider.WebPubsubIDSelector,
+		To: reference.To{
+			List:    &WebPubsubList{},
+			Managed: &WebPubsub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WebPubsubID")
+	}
+	mg.Spec.ForProvider.WebPubsubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WebPubsubIDRef = rsp.ResolvedReference
 
 	return nil
 }
