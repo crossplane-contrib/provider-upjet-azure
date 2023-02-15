@@ -7,6 +7,72 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SpringCloudAPIPortal.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SpringCloudAPIPortal) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SpringCloudAPIPortal.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SpringCloudAPIPortal) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SpringCloudAccelerator.
 func (mg *SpringCloudAccelerator) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -403,6 +469,204 @@ func (mg *SpringCloudAppRedisAssociation) SetWriteConnectionSecretToReference(r 
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SpringCloudBuildDeployment.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SpringCloudBuildDeployment) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SpringCloudBuildDeployment.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SpringCloudBuildDeployment) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SpringCloudBuildPackBinding.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SpringCloudBuildPackBinding) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SpringCloudBuildPackBinding.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SpringCloudBuildPackBinding) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SpringCloudBuilder.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SpringCloudBuilder) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SpringCloudBuilder.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SpringCloudBuilder) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SpringCloudCertificate.
 func (mg *SpringCloudCertificate) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -466,6 +730,138 @@ func (mg *SpringCloudCertificate) SetPublishConnectionDetailsTo(r *xpv1.PublishC
 
 // SetWriteConnectionSecretToReference of this SpringCloudCertificate.
 func (mg *SpringCloudCertificate) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SpringCloudConfigurationService.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SpringCloudConfigurationService) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SpringCloudConfigurationService.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SpringCloudConfigurationService) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SpringCloudContainerDeployment.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SpringCloudContainerDeployment) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SpringCloudContainerDeployment.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SpringCloudContainerDeployment) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
@@ -664,6 +1060,138 @@ func (mg *SpringCloudDevToolPortal) SetPublishConnectionDetailsTo(r *xpv1.Publis
 
 // SetWriteConnectionSecretToReference of this SpringCloudDevToolPortal.
 func (mg *SpringCloudDevToolPortal) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SpringCloudGateway.
+func (mg *SpringCloudGateway) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SpringCloudGateway.
+func (mg *SpringCloudGateway) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SpringCloudGateway.
+func (mg *SpringCloudGateway) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SpringCloudGateway.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SpringCloudGateway) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SpringCloudGateway.
+func (mg *SpringCloudGateway) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SpringCloudGateway.
+func (mg *SpringCloudGateway) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SpringCloudGateway.
+func (mg *SpringCloudGateway) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SpringCloudGateway.
+func (mg *SpringCloudGateway) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SpringCloudGateway.
+func (mg *SpringCloudGateway) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SpringCloudGateway.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SpringCloudGateway) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SpringCloudGateway.
+func (mg *SpringCloudGateway) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SpringCloudGateway.
+func (mg *SpringCloudGateway) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SpringCloudGatewayCustomDomain.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SpringCloudGatewayCustomDomain) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SpringCloudGatewayCustomDomain.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SpringCloudGatewayCustomDomain) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

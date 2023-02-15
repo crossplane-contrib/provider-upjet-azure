@@ -13,20 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type QuotaObservation struct {
-}
-
-type QuotaParameters struct {
-
-	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
-	// +kubebuilder:validation:Optional
-	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
-
-	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
-	// +kubebuilder:validation:Optional
-	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
-}
-
 type SpringCloudJavaDeploymentObservation struct {
 
 	// The ID of the Spring Cloud Deployment.
@@ -49,7 +35,7 @@ type SpringCloudJavaDeploymentParameters struct {
 
 	// A quota block as defined below.
 	// +kubebuilder:validation:Optional
-	Quota []QuotaParameters `json:"quota,omitempty" tf:"quota,omitempty"`
+	Quota []SpringCloudJavaDeploymentQuotaParameters `json:"quota,omitempty" tf:"quota,omitempty"`
 
 	// Specifies the runtime version of the Spring Cloud Deployment. Possible Values are Java_8, Java_11 and Java_17. Defaults to Java_8.
 	// +kubebuilder:validation:Optional
@@ -68,6 +54,20 @@ type SpringCloudJavaDeploymentParameters struct {
 	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
 	// +kubebuilder:validation:Optional
 	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
+}
+
+type SpringCloudJavaDeploymentQuotaObservation struct {
+}
+
+type SpringCloudJavaDeploymentQuotaParameters struct {
+
+	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
+	// +kubebuilder:validation:Optional
+	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
+
+	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
+	// +kubebuilder:validation:Optional
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
 // SpringCloudJavaDeploymentSpec defines the desired state of SpringCloudJavaDeployment

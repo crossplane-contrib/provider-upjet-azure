@@ -28,7 +28,7 @@ type ConfigServerGitSettingParameters struct {
 
 	// One or more repository blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Repository []RepositoryParameters `json:"repository,omitempty" tf:"repository,omitempty"`
+	Repository []ConfigServerGitSettingRepositoryParameters `json:"repository,omitempty" tf:"repository,omitempty"`
 
 	// A ssh_auth block as defined below.
 	// +kubebuilder:validation:Optional
@@ -39,6 +39,40 @@ type ConfigServerGitSettingParameters struct {
 	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
 
 	// The URI of the default Git repository used as the Config Server back end, should be started with http://, https://, git@, or ssh://.
+	// +kubebuilder:validation:Required
+	URI *string `json:"uri" tf:"uri,omitempty"`
+}
+
+type ConfigServerGitSettingRepositoryObservation struct {
+}
+
+type ConfigServerGitSettingRepositoryParameters struct {
+
+	// A http_basic_auth block as defined below.
+	// +kubebuilder:validation:Optional
+	HTTPBasicAuth []RepositoryHTTPBasicAuthParameters `json:"httpBasicAuth,omitempty" tf:"http_basic_auth,omitempty"`
+
+	// The default label of the Git repository, should be the branch name, tag name, or commit-id of the repository.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// A name to identify on the Git repository, required only if repos exists.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// An array of strings used to match an application name. For each pattern, use the {application}/{profile} format with wildcards.
+	// +kubebuilder:validation:Optional
+	Pattern []*string `json:"pattern,omitempty" tf:"pattern,omitempty"`
+
+	// A ssh_auth block as defined below.
+	// +kubebuilder:validation:Optional
+	SSHAuth []RepositorySSHAuthParameters `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
+
+	// An array of strings used to search subdirectories of the Git repository.
+	// +kubebuilder:validation:Optional
+	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
+
+	// The URI of the Git repository that's used as the Config Server back end should be started with http://, https://, git@, or ssh://.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -141,40 +175,6 @@ type RepositoryHTTPBasicAuthParameters struct {
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	// +kubebuilder:validation:Required
 	Username *string `json:"username" tf:"username,omitempty"`
-}
-
-type RepositoryObservation struct {
-}
-
-type RepositoryParameters struct {
-
-	// A http_basic_auth block as defined below.
-	// +kubebuilder:validation:Optional
-	HTTPBasicAuth []RepositoryHTTPBasicAuthParameters `json:"httpBasicAuth,omitempty" tf:"http_basic_auth,omitempty"`
-
-	// The default label of the Git repository, should be the branch name, tag name, or commit-id of the repository.
-	// +kubebuilder:validation:Optional
-	Label *string `json:"label,omitempty" tf:"label,omitempty"`
-
-	// A name to identify on the Git repository, required only if repos exists.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
-
-	// An array of strings used to match an application name. For each pattern, use the {application}/{profile} format with wildcards.
-	// +kubebuilder:validation:Optional
-	Pattern []*string `json:"pattern,omitempty" tf:"pattern,omitempty"`
-
-	// A ssh_auth block as defined below.
-	// +kubebuilder:validation:Optional
-	SSHAuth []RepositorySSHAuthParameters `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
-
-	// An array of strings used to search subdirectories of the Git repository.
-	// +kubebuilder:validation:Optional
-	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
-
-	// The URI of the Git repository that's used as the Config Server back end should be started with http://, https://, git@, or ssh://.
-	// +kubebuilder:validation:Required
-	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type RepositorySSHAuthObservation struct {

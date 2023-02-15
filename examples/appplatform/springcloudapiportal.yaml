@@ -1,0 +1,48 @@
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudAPIPortal
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: default
+spec:
+  forProvider:
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: scapexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: scapexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0
+
+

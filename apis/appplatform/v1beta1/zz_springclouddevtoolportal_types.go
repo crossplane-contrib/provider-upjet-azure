@@ -53,13 +53,13 @@ type SpringCloudDevToolPortalParameters struct {
 
 	// A sso block as defined below.
 	// +kubebuilder:validation:Optional
-	Sso []SsoParameters `json:"sso,omitempty" tf:"sso,omitempty"`
+	Sso []SpringCloudDevToolPortalSsoParameters `json:"sso,omitempty" tf:"sso,omitempty"`
 }
 
-type SsoObservation struct {
+type SpringCloudDevToolPortalSsoObservation struct {
 }
 
-type SsoParameters struct {
+type SpringCloudDevToolPortalSsoParameters struct {
 
 	// Specifies the public identifier for the application.
 	// +kubebuilder:validation:Optional
