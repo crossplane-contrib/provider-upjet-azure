@@ -160,4 +160,19 @@ func Configure(p *config.Provider) {
 			Type: "MSSQLServer",
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_mssql_elasticpool", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"max_size_bytes"},
+		}
+		r.References["server_name"] = config.Reference{
+			Type: "MSSQLServer",
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_mssql_database_vulnerability_assessment_rule_baseline", func(r *config.Resource) {
+		r.References["database_name"] = config.Reference{
+			Type: "MSSQLDatabase",
+		}
+	})
 }

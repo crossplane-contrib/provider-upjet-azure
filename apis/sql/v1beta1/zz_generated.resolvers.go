@@ -86,6 +86,90 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 	return nil
 }
 
+// ResolveReferences of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DatabaseNameRef,
+		Selector:     mg.Spec.ForProvider.DatabaseNameSelector,
+		To: reference.To{
+			List:    &MSSQLDatabaseList{},
+			Managed: &MSSQLDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseName")
+	}
+	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerVulnerabilityAssessmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ServerVulnerabilityAssessmentIDRef,
+		Selector:     mg.Spec.ForProvider.ServerVulnerabilityAssessmentIDSelector,
+		To: reference.To{
+			List:    &MSSQLServerVulnerabilityAssessmentList{},
+			Managed: &MSSQLServerVulnerabilityAssessment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerVulnerabilityAssessmentID")
+	}
+	mg.Spec.ForProvider.ServerVulnerabilityAssessmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerVulnerabilityAssessmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ServerNameRef,
+		Selector:     mg.Spec.ForProvider.ServerNameSelector,
+		To: reference.To{
+			List:    &MSSQLServerList{},
+			Managed: &MSSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerName")
+	}
+	mg.Spec.ForProvider.ServerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this MSSQLFailoverGroup.
 func (mg *MSSQLFailoverGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -169,6 +253,58 @@ func (mg *MSSQLFirewallRule) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DatabaseIDRef,
+		Selector:     mg.Spec.ForProvider.DatabaseIDSelector,
+		To: reference.To{
+			List:    &MSSQLDatabaseList{},
+			Managed: &MSSQLDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseID")
+	}
+	mg.Spec.ForProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.JobAgentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.JobAgentIDRef,
+		Selector:     mg.Spec.ForProvider.JobAgentIDSelector,
+		To: reference.To{
+			List:    &MSSQLJobAgentList{},
+			Managed: &MSSQLJobAgent{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.JobAgentID")
+	}
+	mg.Spec.ForProvider.JobAgentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.JobAgentIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -567,6 +703,32 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 	}
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSecurityAlertPolicyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ServerSecurityAlertPolicyIDRef,
+		Selector:     mg.Spec.ForProvider.ServerSecurityAlertPolicyIDSelector,
+		To: reference.To{
+			List:    &MSSQLServerSecurityAlertPolicyList{},
+			Managed: &MSSQLServerSecurityAlertPolicy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServerSecurityAlertPolicyID")
+	}
+	mg.Spec.ForProvider.ServerSecurityAlertPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServerSecurityAlertPolicyIDRef = rsp.ResolvedReference
 
 	return nil
 }

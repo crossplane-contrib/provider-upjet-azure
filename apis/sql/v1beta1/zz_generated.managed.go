@@ -139,6 +139,138 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetWriteConnectionSecretToReferen
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLElasticPool.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLElasticPool) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLElasticPool.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLElasticPool) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MSSQLFailoverGroup.
 func (mg *MSSQLFailoverGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -268,6 +400,138 @@ func (mg *MSSQLFirewallRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnec
 
 // SetWriteConnectionSecretToReference of this MSSQLFirewallRule.
 func (mg *MSSQLFirewallRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLJobAgent.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLJobAgent) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLJobAgent.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLJobAgent) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLJobCredential.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLJobCredential) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLJobCredential.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLJobCredential) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
@@ -994,6 +1258,72 @@ func (mg *MSSQLServerTransparentDataEncryption) SetPublishConnectionDetailsTo(r 
 
 // SetWriteConnectionSecretToReference of this MSSQLServerTransparentDataEncryption.
 func (mg *MSSQLServerTransparentDataEncryption) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MSSQLServerVulnerabilityAssessment.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MSSQLServerVulnerabilityAssessment) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MSSQLServerVulnerabilityAssessment.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MSSQLServerVulnerabilityAssessment) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

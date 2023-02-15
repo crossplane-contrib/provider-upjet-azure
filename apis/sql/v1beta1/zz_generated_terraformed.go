@@ -161,6 +161,155 @@ func (tr *MSSQLDatabaseExtendedAuditingPolicy) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetTerraformResourceType() string {
+	return "azurerm_mssql_database_vulnerability_assessment_rule_baseline"
+}
+
+// GetConnectionDetailsMapping for this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline
+func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline
+func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline
+func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline
+func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline
+func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline
+func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) LateInitialize(attrs []byte) (bool, error) {
+	params := &MSSQLDatabaseVulnerabilityAssessmentRuleBaselineParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this MSSQLElasticPool
+func (mg *MSSQLElasticPool) GetTerraformResourceType() string {
+	return "azurerm_mssql_elasticpool"
+}
+
+// GetConnectionDetailsMapping for this MSSQLElasticPool
+func (tr *MSSQLElasticPool) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this MSSQLElasticPool
+func (tr *MSSQLElasticPool) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MSSQLElasticPool
+func (tr *MSSQLElasticPool) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MSSQLElasticPool
+func (tr *MSSQLElasticPool) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MSSQLElasticPool
+func (tr *MSSQLElasticPool) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MSSQLElasticPool
+func (tr *MSSQLElasticPool) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MSSQLElasticPool using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MSSQLElasticPool) LateInitialize(attrs []byte) (bool, error) {
+	params := &MSSQLElasticPoolParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("MaxSizeBytes"))
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MSSQLElasticPool) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this MSSQLFailoverGroup
 func (mg *MSSQLFailoverGroup) GetTerraformResourceType() string {
 	return "azurerm_mssql_failover_group"
@@ -306,6 +455,154 @@ func (tr *MSSQLFirewallRule) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *MSSQLFirewallRule) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this MSSQLJobAgent
+func (mg *MSSQLJobAgent) GetTerraformResourceType() string {
+	return "azurerm_mssql_job_agent"
+}
+
+// GetConnectionDetailsMapping for this MSSQLJobAgent
+func (tr *MSSQLJobAgent) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this MSSQLJobAgent
+func (tr *MSSQLJobAgent) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MSSQLJobAgent
+func (tr *MSSQLJobAgent) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MSSQLJobAgent
+func (tr *MSSQLJobAgent) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MSSQLJobAgent
+func (tr *MSSQLJobAgent) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MSSQLJobAgent
+func (tr *MSSQLJobAgent) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MSSQLJobAgent using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MSSQLJobAgent) LateInitialize(attrs []byte) (bool, error) {
+	params := &MSSQLJobAgentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MSSQLJobAgent) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this MSSQLJobCredential
+func (mg *MSSQLJobCredential) GetTerraformResourceType() string {
+	return "azurerm_mssql_job_credential"
+}
+
+// GetConnectionDetailsMapping for this MSSQLJobCredential
+func (tr *MSSQLJobCredential) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+}
+
+// GetObservation of this MSSQLJobCredential
+func (tr *MSSQLJobCredential) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MSSQLJobCredential
+func (tr *MSSQLJobCredential) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MSSQLJobCredential
+func (tr *MSSQLJobCredential) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MSSQLJobCredential
+func (tr *MSSQLJobCredential) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MSSQLJobCredential
+func (tr *MSSQLJobCredential) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MSSQLJobCredential using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MSSQLJobCredential) LateInitialize(attrs []byte) (bool, error) {
+	params := &MSSQLJobCredentialParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MSSQLJobCredential) GetTerraformSchemaVersion() int {
 	return 0
 }
 
@@ -1121,6 +1418,80 @@ func (tr *MSSQLServerTransparentDataEncryption) LateInitialize(attrs []byte) (bo
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *MSSQLServerTransparentDataEncryption) GetTerraformSchemaVersion() int {
 	return 1
+}
+
+// GetTerraformResourceType returns Terraform resource type for this MSSQLServerVulnerabilityAssessment
+func (mg *MSSQLServerVulnerabilityAssessment) GetTerraformResourceType() string {
+	return "azurerm_mssql_server_vulnerability_assessment"
+}
+
+// GetConnectionDetailsMapping for this MSSQLServerVulnerabilityAssessment
+func (tr *MSSQLServerVulnerabilityAssessment) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"storage_account_access_key": "spec.forProvider.storageAccountAccessKeySecretRef", "storage_container_sas_key": "spec.forProvider.storageContainerSasKeySecretRef"}
+}
+
+// GetObservation of this MSSQLServerVulnerabilityAssessment
+func (tr *MSSQLServerVulnerabilityAssessment) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this MSSQLServerVulnerabilityAssessment
+func (tr *MSSQLServerVulnerabilityAssessment) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this MSSQLServerVulnerabilityAssessment
+func (tr *MSSQLServerVulnerabilityAssessment) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this MSSQLServerVulnerabilityAssessment
+func (tr *MSSQLServerVulnerabilityAssessment) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this MSSQLServerVulnerabilityAssessment
+func (tr *MSSQLServerVulnerabilityAssessment) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this MSSQLServerVulnerabilityAssessment using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *MSSQLServerVulnerabilityAssessment) LateInitialize(attrs []byte) (bool, error) {
+	params := &MSSQLServerVulnerabilityAssessmentParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *MSSQLServerVulnerabilityAssessment) GetTerraformSchemaVersion() int {
+	return 0
 }
 
 // GetTerraformResourceType returns Terraform resource type for this MSSQLVirtualNetworkRule
