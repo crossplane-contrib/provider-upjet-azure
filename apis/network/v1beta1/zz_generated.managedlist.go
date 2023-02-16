@@ -385,8 +385,35 @@ func (l *ManagerList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this ManagerManagementGroupConnectionList.
+func (l *ManagerManagementGroupConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ManagerNetworkGroupList.
 func (l *ManagerNetworkGroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ManagerStaticMemberList.
+func (l *ManagerStaticMemberList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ManagerSubscriptionConnectionList.
+func (l *ManagerSubscriptionConnectionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -567,6 +594,15 @@ func (l *PrivateDNSZoneList) GetItems() []resource.Managed {
 
 // GetItems of this PrivateDNSZoneVirtualNetworkLinkList.
 func (l *PrivateDNSZoneVirtualNetworkLinkList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PrivateEndpointApplicationSecurityGroupAssociationList.
+func (l *PrivateEndpointApplicationSecurityGroupAssociationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

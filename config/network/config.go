@@ -637,4 +637,11 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_network_manager_static_member", func(r *config.Resource) {
+		r.References["target_virtual_network_id"] = config.Reference{
+			Type:      "VirtualNetwork",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

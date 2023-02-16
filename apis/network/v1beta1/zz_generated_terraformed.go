@@ -3713,6 +3713,80 @@ func (tr *Manager) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this ManagerManagementGroupConnection
+func (mg *ManagerManagementGroupConnection) GetTerraformResourceType() string {
+	return "azurerm_network_manager_management_group_connection"
+}
+
+// GetConnectionDetailsMapping for this ManagerManagementGroupConnection
+func (tr *ManagerManagementGroupConnection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ManagerManagementGroupConnection
+func (tr *ManagerManagementGroupConnection) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ManagerManagementGroupConnection
+func (tr *ManagerManagementGroupConnection) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ManagerManagementGroupConnection
+func (tr *ManagerManagementGroupConnection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ManagerManagementGroupConnection
+func (tr *ManagerManagementGroupConnection) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ManagerManagementGroupConnection
+func (tr *ManagerManagementGroupConnection) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ManagerManagementGroupConnection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ManagerManagementGroupConnection) LateInitialize(attrs []byte) (bool, error) {
+	params := &ManagerManagementGroupConnectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ManagerManagementGroupConnection) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this ManagerNetworkGroup
 func (mg *ManagerNetworkGroup) GetTerraformResourceType() string {
 	return "azurerm_network_manager_network_group"
@@ -3784,6 +3858,154 @@ func (tr *ManagerNetworkGroup) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ManagerNetworkGroup) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ManagerStaticMember
+func (mg *ManagerStaticMember) GetTerraformResourceType() string {
+	return "azurerm_network_manager_static_member"
+}
+
+// GetConnectionDetailsMapping for this ManagerStaticMember
+func (tr *ManagerStaticMember) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ManagerStaticMember
+func (tr *ManagerStaticMember) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ManagerStaticMember
+func (tr *ManagerStaticMember) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ManagerStaticMember
+func (tr *ManagerStaticMember) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ManagerStaticMember
+func (tr *ManagerStaticMember) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ManagerStaticMember
+func (tr *ManagerStaticMember) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ManagerStaticMember using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ManagerStaticMember) LateInitialize(attrs []byte) (bool, error) {
+	params := &ManagerStaticMemberParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ManagerStaticMember) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this ManagerSubscriptionConnection
+func (mg *ManagerSubscriptionConnection) GetTerraformResourceType() string {
+	return "azurerm_network_manager_subscription_connection"
+}
+
+// GetConnectionDetailsMapping for this ManagerSubscriptionConnection
+func (tr *ManagerSubscriptionConnection) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this ManagerSubscriptionConnection
+func (tr *ManagerSubscriptionConnection) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this ManagerSubscriptionConnection
+func (tr *ManagerSubscriptionConnection) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this ManagerSubscriptionConnection
+func (tr *ManagerSubscriptionConnection) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this ManagerSubscriptionConnection
+func (tr *ManagerSubscriptionConnection) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this ManagerSubscriptionConnection
+func (tr *ManagerSubscriptionConnection) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this ManagerSubscriptionConnection using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *ManagerSubscriptionConnection) LateInitialize(attrs []byte) (bool, error) {
+	params := &ManagerSubscriptionConnectionParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *ManagerSubscriptionConnection) GetTerraformSchemaVersion() int {
 	return 0
 }
 
@@ -5116,6 +5338,80 @@ func (tr *PrivateEndpoint) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *PrivateEndpoint) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this PrivateEndpointApplicationSecurityGroupAssociation
+func (mg *PrivateEndpointApplicationSecurityGroupAssociation) GetTerraformResourceType() string {
+	return "azurerm_private_endpoint_application_security_group_association"
+}
+
+// GetConnectionDetailsMapping for this PrivateEndpointApplicationSecurityGroupAssociation
+func (tr *PrivateEndpointApplicationSecurityGroupAssociation) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this PrivateEndpointApplicationSecurityGroupAssociation
+func (tr *PrivateEndpointApplicationSecurityGroupAssociation) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this PrivateEndpointApplicationSecurityGroupAssociation
+func (tr *PrivateEndpointApplicationSecurityGroupAssociation) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this PrivateEndpointApplicationSecurityGroupAssociation
+func (tr *PrivateEndpointApplicationSecurityGroupAssociation) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this PrivateEndpointApplicationSecurityGroupAssociation
+func (tr *PrivateEndpointApplicationSecurityGroupAssociation) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this PrivateEndpointApplicationSecurityGroupAssociation
+func (tr *PrivateEndpointApplicationSecurityGroupAssociation) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this PrivateEndpointApplicationSecurityGroupAssociation using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *PrivateEndpointApplicationSecurityGroupAssociation) LateInitialize(attrs []byte) (bool, error) {
+	params := &PrivateEndpointApplicationSecurityGroupAssociationParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *PrivateEndpointApplicationSecurityGroupAssociation) GetTerraformSchemaVersion() int {
 	return 0
 }
 

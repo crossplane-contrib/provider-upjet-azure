@@ -1,0 +1,49 @@
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: AccountLocalUser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/accountlocaluser
+  labels:
+    testing.upbound.io/example-name: example
+  name: aluexample
+spec:
+  forProvider:
+    sshPasswordEnabled: false
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/accountlocaluser
+  labels:
+    testing.upbound.io/example-name: example
+  name: aluexample
+spec:
+  forProvider:
+    location: WestEurope
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta1/accountlocaluser
+  labels:
+    testing.upbound.io/example-name: example
+  name: aluexample
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: WestEurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
