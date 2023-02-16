@@ -1,0 +1,83 @@
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLJobAgent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqljobagent
+  labels:
+    testing.upbound.io/example-name: examplemssqljobagent
+  name: examplemssqljobagent
+spec:
+  forProvider:
+    databaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqljobagent-db
+    location: northeurope
+    name: example-job-agent
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLDatabase
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: sql/v1beta1/mssqljobagent
+  labels:
+    testing.upbound.io/example-name: mssqljobagent-db
+  name: mssqljobagent-db
+spec:
+  forProvider:
+    collation: SQL_Latin1_General_CP1_CI_AS
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqljobagent-srv
+    skuName: S1
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqljobagent
+  labels:
+    testing.upbound.io/example-name: mssqljobagent-srv
+  name: mssqljobagent-srv
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: northeurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqljobagent-rg
+    version: "12.0"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqljobagent
+  labels:
+    testing.upbound.io/example-name: mssqljobagent-rg
+  name: mssqljobcred-rg
+spec:
+  forProvider:
+    location: northeurope
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkITEyMw==
