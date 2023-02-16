@@ -3,6 +3,7 @@ kind: IOTHubCertificate
 metadata:
   annotations:
     meta.upbound.io/example-id: devices/v1beta1/iothubcertificate
+    upjet.upbound.io/manual-intervention: "Please see https://github.com/hashicorp/terraform-provider-azurerm/issues/20041"
   labels:
     testing.upbound.io/example-name: example
   name: example-${Rand.RFC1123Subdomain}
@@ -31,25 +32,20 @@ type: Opaque
 stringData: 
   example-cer: |-
     -----BEGIN CERTIFICATE-----
-    MIIDbzCCAlegAwIBAgIJAIzjRD36sIbbMA0GCSqGSIb3DQEBCwUAME0xCzAJBgNV
-    BAYTAlVTMRMwEQYDVQQIDApTb21lLVN0YXRlMRIwEAYDVQQKDAl0ZXJyYWZvcm0x
-    FTATBgNVBAMMDHRlcnJhZm9ybS5pbzAgFw0xNzA0MjEyMDA1MjdaGA8yMTE3MDMy
-    ODIwMDUyN1owTTELMAkGA1UEBhMCVVMxEzARBgNVBAgMClNvbWUtU3RhdGUxEjAQ
-    BgNVBAoMCXRlcnJhZm9ybTEVMBMGA1UEAwwMdGVycmFmb3JtLmlvMIIBIjANBgkq
-    hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3L9L5szT4+FLykTFNyyPjy/k3BQTYAfR
-    QzP2dhnsuUKm3cdPC0NyZ+wEXIUGhoDO2YG6EYChOl8fsDqDOjloSUGKqYw++nlp
-    HIuUgJx8IxxG2XkALCjFU7EmF+w7kn76d0ezpEIYxnLP+KG2DVornoEt1aLhv1ML
-    mpgEZZPhDbMSLhSYWeTVRMayXLwqtfgnDumQSB+8d/1JuJqrSI4pD12JozVThzb6
-    hsjfb6RMX4epPmrGn0PbTPEEA6awmsxBCXB0s13nNQt/O0hLM2agwvAyozilQV+s
-    616Ckgk6DJoUkqZhDy7vPYMIRSr98fBws6zkrV6tTLjmD8xAvobePQIDAQABo1Aw
-    TjAdBgNVHQ4EFgQUXIqO421zMMmbcRRX9wctZFCQuPIwHwYDVR0jBBgwFoAUXIqO
-    421zMMmbcRRX9wctZFCQuPIwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOC
-    AQEAr82NeT3BYJOKLlUL6Om5LjUF66ewcJjG9ltdvyQwVneMcq7t5UAPxgChzqNR
-    Vk4da8PzkXpjBJyWezHupdJNX3XqeUk2kSxqQ6/gmhqvfI3y7djrwoO6jvMEY26W
-    qtkTNORWDP3THJJVimC3zV+KMU5UBVrEzhOVhHSU709lBP75o0BBn3xGsPqSq9k8
-    IotIFfyAc6a+XP3+ZMpvh7wqAUml7vWa5wlcXExCx39h1balfDSLGNC4swWPCp9A
-    MnQR0p+vMay9hNP1Eh+9QYUai14d5KS3cFV+KxE1cJR5HD/iLltnnOEbpMsB0eVO
-    ZWkFvE7Y5lW0oVSAfin5TwTJMQ==
+    MIICljCCAX4CCQCaPK30HegP7TANBgkqhkiG9w0BAQsFADANMQswCQYDVQQGEwJk
+    ZTAeFw0yMjEyMDYyMTE3MzNaFw0zMjEyMDMyMTE3MzNaMA0xCzAJBgNVBAYTAmRl
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtnxiilFOwyrYBYcu6HYe
+    3L5B2tC3Q9GqwBfIniPCONgPhzb/vpFXqra0uwi0HI1DI52pzCxB4cbj6i74MMX1
+    i6KwaiRS+bFhEHflFXcuU2c4OkLsTx8LhGXMJoVhsP6DDUTzoT1/GEfATc2K4Xxn
+    0pfRkswE6ZScQ81fodqIZTzcCGOW/2a+GQiR45aePihZVDBugDlN0KZdyQvXOs5H
+    EE2DwfP1s1GB2MeA+uZBBxNjWj5vKAyCKGrhKgF+jDHN6OX4/SgpOnhWDqqrVeQE
+    aYsbPfHEfRd6aXPf8b6PvbPRr4FG+MR3qwwqQudmhD44YIW2qj9XlgU2a0ZnG9p4
+    PwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBHCBQvmq3T8vK7BES5AF15MF83y3oB
+    jsjRXGhVy/auUSKYwCd8Oji5QJL+drQddk+Z/mRd5EFeiBqbUUiK6I4ArAzamE8u
+    VppNsVDMwepqcQafSzu8wm4/zI2PFHp2G4cUjz9jH85C6vEbOGt8m8T2hrRbG/Wr
+    FIRgJl2RYX4FNkJJ/dpxomPkWc+hIt59YFUrNqf0dubRxZuUYA8iC5a40tA5Fqaq
+    0LSvK5UbE0BoD9HEcFP+duwp+8ZE1dOWY11TnkUkLLd9klgxepyMjyEoInetsHxT
+    Jkwjr/Q/rTbKQwInAY9P/IOundWd7lknL8V/y1CB6awl//r6K/WBybEp
     -----END CERTIFICATE-----
 
 ---
@@ -59,6 +55,7 @@ kind: IOTHub
 metadata:
   annotations:
     meta.upbound.io/example-id: devices/v1beta1/iothubcertificate
+    upjet.upbound.io/manual-intervention: "This resource is dependency of IOTHubCertificate. This resource is skipping because parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example-${Rand.RFC1123Subdomain}
@@ -79,6 +76,7 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: devices/v1beta1/iothubcertificate
+    upjet.upbound.io/manual-intervention: "This resource is dependency of IOTHubCertificate. This resource is skipping because parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example-${Rand.RFC1123Subdomain}
