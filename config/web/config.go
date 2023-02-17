@@ -52,4 +52,24 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"key_vault_reference_identity_id"},
 		}
 	})
+	p.AddResourceConfigurator("azurerm_windows_function_app", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"key_vault_reference_identity_id"},
+		}
+	})
+	p.AddResourceConfigurator("azurerm_windows_function_app_slot", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"key_vault_reference_identity_id"},
+		}
+	})
+	p.AddResourceConfigurator("azurerm_windows_web_app", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"key_vault_reference_identity_id"},
+		}
+	})
+	p.AddResourceConfigurator("azurerm_windows_web_app_slot", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"key_vault_reference_identity_id"},
+		}
+	})
 }

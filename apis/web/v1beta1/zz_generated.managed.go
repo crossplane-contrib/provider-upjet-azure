@@ -864,3 +864,267 @@ func (mg *StaticSite) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDet
 func (mg *StaticSite) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this WindowsFunctionApp.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *WindowsFunctionApp) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this WindowsFunctionApp.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *WindowsFunctionApp) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this WindowsFunctionAppSlot.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *WindowsFunctionAppSlot) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this WindowsFunctionAppSlot.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *WindowsFunctionAppSlot) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WindowsWebApp.
+func (mg *WindowsWebApp) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WindowsWebApp.
+func (mg *WindowsWebApp) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this WindowsWebApp.
+func (mg *WindowsWebApp) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this WindowsWebApp.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *WindowsWebApp) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this WindowsWebApp.
+func (mg *WindowsWebApp) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WindowsWebApp.
+func (mg *WindowsWebApp) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WindowsWebApp.
+func (mg *WindowsWebApp) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WindowsWebApp.
+func (mg *WindowsWebApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this WindowsWebApp.
+func (mg *WindowsWebApp) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this WindowsWebApp.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *WindowsWebApp) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WindowsWebApp.
+func (mg *WindowsWebApp) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WindowsWebApp.
+func (mg *WindowsWebApp) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this WindowsWebAppSlot.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *WindowsWebAppSlot) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this WindowsWebAppSlot.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *WindowsWebAppSlot) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}

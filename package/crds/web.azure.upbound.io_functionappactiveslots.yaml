@@ -77,7 +77,7 @@ spec:
                       of the Slot to swap with `Production`.
                     type: string
                   slotIdRef:
-                    description: Reference to a LinuxFunctionAppSlot in web to populate
+                    description: Reference to a WindowsFunctionAppSlot in web to populate
                       slotId.
                     properties:
                       name:
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   slotIdSelector:
-                    description: Selector for a LinuxFunctionAppSlot in web to populate
+                    description: Selector for a WindowsFunctionAppSlot in web to populate
                       slotId.
                     properties:
                       matchControllerRef:
