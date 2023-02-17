@@ -271,6 +271,72 @@ func (mg *ApplicationInsightsSmartDetectionRule) SetWriteConnectionSecretToRefer
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this ApplicationInsightsStandardWebTest.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsStandardWebTest) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this ApplicationInsightsStandardWebTest.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *ApplicationInsightsStandardWebTest) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ApplicationInsightsWebTest.
 func (mg *ApplicationInsightsWebTest) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

@@ -79,4 +79,10 @@ func Configure(p *config.Provider) {
 			Type: "ServicesAccount",
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_media_services_account_filter", func(r *config.Resource) {
+		r.References["media_services_account_name"] = config.Reference{
+			Type: "ServicesAccount",
+		}
+	})
 }

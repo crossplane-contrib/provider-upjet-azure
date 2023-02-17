@@ -1,0 +1,96 @@
+apiVersion: orbital.azure.upbound.io/v1beta1
+kind: ContactProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: orbital/v1beta1/contactprofile
+  labels:
+    testing.upbound.io/example-name: examplecontactprofile
+  name: examplecontactprofile
+spec:
+  forProvider:
+    autoTracking: disabled
+    links:
+    - channels:
+      - bandwidthMhz: 100
+        centerFrequencyMhz: 101
+        endPoint:
+        - endPointName: AQUA_command
+          ipAddress: 10.0.1.0
+          port: "49513"
+          protocol: TCP
+        name: channelname
+      direction: Uplink
+      name: RHCP_UL
+      polarization: RHCP
+    location: West US
+    minimumVariableContactDuration: PT1M
+    networkConfigurationSubnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contactprofile-sn
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contactprofile-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: orbital/v1beta1/contactprofile
+  labels:
+    testing.upbound.io/example-name: contactprofile-rg
+  name: contactprofile-rg
+spec:
+  forProvider:
+    location: West US
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: orbital/v1beta1/contactprofile
+  labels:
+    testing.upbound.io/example-name: contactprofile-sn
+  name: contactprofile-sn
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/24
+    delegation:
+    - name: orbitalgateway
+      serviceDelegation:
+      - actions:
+        - Microsoft.Network/publicIPAddresses/join/action
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        - Microsoft.Network/virtualNetworks/read
+        - Microsoft.Network/publicIPAddresses/read
+        name: Microsoft.Orbital/orbitalGateways
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contactprofile-rg
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contactprofile-vn
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: orbital/v1beta1/contactprofile
+  labels:
+    testing.upbound.io/example-name: contactprofile-vn
+  name: contactprofile-vn
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contactprofile-rg
+

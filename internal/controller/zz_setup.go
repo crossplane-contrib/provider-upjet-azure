@@ -180,6 +180,7 @@ import (
 	sqlstoredprocedure "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqlstoredprocedure"
 	sqltrigger "github.com/upbound/provider-azure/internal/controller/cosmosdb/sqltrigger"
 	table "github.com/upbound/provider-azure/internal/controller/cosmosdb/table"
+	costanomalyalert "github.com/upbound/provider-azure/internal/controller/costmanagement/costanomalyalert"
 	resourcegroupcostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/resourcegroupcostmanagementexport"
 	subscriptioncostmanagementexport "github.com/upbound/provider-azure/internal/controller/costmanagement/subscriptioncostmanagementexport"
 	customprovider "github.com/upbound/provider-azure/internal/controller/customproviders/customprovider"
@@ -328,6 +329,7 @@ import (
 	applicationinsightsanalyticsitem "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsanalyticsitem"
 	applicationinsightsapikey "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsapikey"
 	applicationinsightssmartdetectionrule "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightssmartdetectionrule"
+	applicationinsightsstandardwebtest "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsstandardwebtest"
 	applicationinsightswebtest "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightswebtest"
 	applicationinsightsworkbook "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsworkbook"
 	applicationinsightsworkbooktemplate "github.com/upbound/provider-azure/internal/controller/insights/applicationinsightsworkbooktemplate"
@@ -364,6 +366,7 @@ import (
 	eventgriddataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventgriddataconnection"
 	eventhubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/eventhubdataconnection"
 	iothubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/iothubdataconnection"
+	labservicelab "github.com/upbound/provider-azure/internal/controller/labservices/labservicelab"
 	labserviceplan "github.com/upbound/provider-azure/internal/controller/labservices/labserviceplan"
 	appactioncustom "github.com/upbound/provider-azure/internal/controller/logic/appactioncustom"
 	appactionhttp "github.com/upbound/provider-azure/internal/controller/logic/appactionhttp"
@@ -394,6 +397,7 @@ import (
 	liveevent "github.com/upbound/provider-azure/internal/controller/media/liveevent"
 	liveeventoutput "github.com/upbound/provider-azure/internal/controller/media/liveeventoutput"
 	servicesaccount "github.com/upbound/provider-azure/internal/controller/media/servicesaccount"
+	servicesaccountfilter "github.com/upbound/provider-azure/internal/controller/media/servicesaccountfilter"
 	streamingendpoint "github.com/upbound/provider-azure/internal/controller/media/streamingendpoint"
 	streaminglocator "github.com/upbound/provider-azure/internal/controller/media/streaminglocator"
 	streamingpolicy "github.com/upbound/provider-azure/internal/controller/media/streamingpolicy"
@@ -524,6 +528,7 @@ import (
 	loganalyticssavedsearch "github.com/upbound/provider-azure/internal/controller/operationalinsights/loganalyticssavedsearch"
 	workspaceoperationalinsights "github.com/upbound/provider-azure/internal/controller/operationalinsights/workspace"
 	loganalyticssolution "github.com/upbound/provider-azure/internal/controller/operationsmanagement/loganalyticssolution"
+	contactprofile "github.com/upbound/provider-azure/internal/controller/orbital/contactprofile"
 	spacecraft "github.com/upbound/provider-azure/internal/controller/orbital/spacecraft"
 	resourcepolicyremediation "github.com/upbound/provider-azure/internal/controller/policyinsights/resourcepolicyremediation"
 	subscriptionpolicyremediation "github.com/upbound/provider-azure/internal/controller/policyinsights/subscriptionpolicyremediation"
@@ -868,6 +873,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		sqlstoredprocedure.Setup,
 		sqltrigger.Setup,
 		table.Setup,
+		costanomalyalert.Setup,
 		resourcegroupcostmanagementexport.Setup,
 		subscriptioncostmanagementexport.Setup,
 		customprovider.Setup,
@@ -1016,6 +1022,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		applicationinsightsanalyticsitem.Setup,
 		applicationinsightsapikey.Setup,
 		applicationinsightssmartdetectionrule.Setup,
+		applicationinsightsstandardwebtest.Setup,
 		applicationinsightswebtest.Setup,
 		applicationinsightsworkbook.Setup,
 		applicationinsightsworkbooktemplate.Setup,
@@ -1052,6 +1059,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		eventgriddataconnection.Setup,
 		eventhubdataconnection.Setup,
 		iothubdataconnection.Setup,
+		labservicelab.Setup,
 		labserviceplan.Setup,
 		appactioncustom.Setup,
 		appactionhttp.Setup,
@@ -1082,6 +1090,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		liveevent.Setup,
 		liveeventoutput.Setup,
 		servicesaccount.Setup,
+		servicesaccountfilter.Setup,
 		streamingendpoint.Setup,
 		streaminglocator.Setup,
 		streamingpolicy.Setup,
@@ -1212,6 +1221,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loganalyticssavedsearch.Setup,
 		workspaceoperationalinsights.Setup,
 		loganalyticssolution.Setup,
+		contactprofile.Setup,
 		spacecraft.Setup,
 		resourcepolicyremediation.Setup,
 		subscriptionpolicyremediation.Setup,

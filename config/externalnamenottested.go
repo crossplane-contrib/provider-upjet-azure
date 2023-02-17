@@ -684,11 +684,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Nginx.NginxPlus/nginxDeployments/dep1
 	"azurerm_nginx_deployment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Nginx.NginxPlus/nginxDeployments/{{ .external_name }}"),
 
-	// orbital_contact
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Orbital/contactProfiles/contactProfile1
-	"azurerm_orbital_contact_profile": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Orbital/contactProfiles/{{ .external_name }}"),
-
 	// postgres
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/myserver/administrators/objectId
@@ -707,20 +702,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/dnsForwardingRulesets/dnsForwardingRuleset1/virtualNetworkLinks/virtualNetworkLink1
 	"azurerm_private_dns_resolver_virtual_network_link": config.TemplatedStringAsIdentifier("name", "{{ .parameters.dns_forwarding_ruleset_id }}/virtualNetworkLinks/{{ .external_name }}"),
 
-	// applicationinsights
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Insights/webTests/appinsightswebtest
-	"azurerm_application_insights_standard_web_test": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Insights/webTests/{{ .external_name }}"),
-
-	// costmanagement
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/scheduledActions/dailyanomalybyresourcegroup
-	"azurerm_cost_anomaly_alert": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.CostManagement/scheduledActions/{{ .external_name }}"),
-
 	// labservice
 	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.LabServices/labs/lab1
-	"azurerm_lab_service_lab": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.LabServices/labs/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.LabServices/labs/lab1/schedules/schedule1
 	"azurerm_lab_service_schedule": config.TemplatedStringAsIdentifier("name", "{{ .parameters.lab_id }}/schedules/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.LabServices/labs/lab1/users/user1
@@ -730,11 +713,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.MachineLearningServices/workspaces/mlw1/datastores/datastore1
 	"azurerm_machine_learning_datastore_blobstorage": config.TemplatedStringAsIdentifier("name", "{{ .parameters.workspace_id }}/datastores/{{ .external_name }}"),
-
-	// media
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Media/mediaServices/account1/accountFilters/filter1
-	"azurerm_media_services_account_filter": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Media/mediaServices/{{ .parameters.media_services_account_name }}/accountFilters/{{ .external_name }}"),
 
 	// network
 	//
