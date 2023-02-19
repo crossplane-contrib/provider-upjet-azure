@@ -53,6 +53,7 @@ import (
 	springcloudaccelerator "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudaccelerator"
 	springcloudactivedeployment "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudactivedeployment"
 	springcloudapiportal "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudapiportal"
+	springcloudapiportalcustomdomain "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudapiportalcustomdomain"
 	springcloudapp "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudapp"
 	springcloudappcosmosdbassociation "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudappcosmosdbassociation"
 	springcloudappmysqlassociation "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudappmysqlassociation"
@@ -588,6 +589,7 @@ import (
 	topicauthorizationrule "github.com/upbound/provider-azure/internal/controller/servicebus/topicauthorizationrule"
 	clusterservicefabric "github.com/upbound/provider-azure/internal/controller/servicefabric/cluster"
 	managedcluster "github.com/upbound/provider-azure/internal/controller/servicefabric/managedcluster"
+	springcloudconnection "github.com/upbound/provider-azure/internal/controller/servicelinker/springcloudconnection"
 	networkacl "github.com/upbound/provider-azure/internal/controller/signalrservice/networkacl"
 	servicesignalrservice "github.com/upbound/provider-azure/internal/controller/signalrservice/service"
 	signalrsharedprivatelinkresource "github.com/upbound/provider-azure/internal/controller/signalrservice/signalrsharedprivatelinkresource"
@@ -747,6 +749,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		springcloudaccelerator.Setup,
 		springcloudactivedeployment.Setup,
 		springcloudapiportal.Setup,
+		springcloudapiportalcustomdomain.Setup,
 		springcloudapp.Setup,
 		springcloudappcosmosdbassociation.Setup,
 		springcloudappmysqlassociation.Setup,
@@ -1282,6 +1285,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		topicauthorizationrule.Setup,
 		clusterservicefabric.Setup,
 		managedcluster.Setup,
+		springcloudconnection.Setup,
 		networkacl.Setup,
 		servicesignalrservice.Setup,
 		signalrsharedprivatelinkresource.Setup,

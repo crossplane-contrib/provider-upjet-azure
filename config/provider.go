@@ -25,6 +25,7 @@ import (
 
 	"github.com/upbound/provider-azure/config/alertsmanagement"
 	"github.com/upbound/provider-azure/config/apimanagement"
+	"github.com/upbound/provider-azure/config/appplatform"
 	"github.com/upbound/provider-azure/config/authorization"
 	"github.com/upbound/provider-azure/config/automation"
 	"github.com/upbound/provider-azure/config/base"
@@ -215,6 +216,7 @@ func GetProvider() *tjconfig.Provider {
 		cdn.Configure,
 		certificateregistration.Configure,
 		orbital.Configure,
+		appplatform.Configure,
 	} {
 		configure(pc)
 	}

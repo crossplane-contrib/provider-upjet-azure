@@ -27,7 +27,24 @@ func (mg *SpringCloudAPIPortal) ResolveReferences(ctx context.Context, c client.
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.GatewayIds),
+		Extract:       resource.ExtractResourceID(),
+		References:    mg.Spec.ForProvider.GatewayIdsRefs,
+		Selector:      mg.Spec.ForProvider.GatewayIdsSelector,
+		To: reference.To{
+			List:    &SpringCloudGatewayList{},
+			Managed: &SpringCloudGateway{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GatewayIds")
+	}
+	mg.Spec.ForProvider.GatewayIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.GatewayIdsRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudServiceID),
@@ -44,6 +61,32 @@ func (mg *SpringCloudAPIPortal) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SpringCloudAPIPortalID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SpringCloudAPIPortalIDRef,
+		Selector:     mg.Spec.ForProvider.SpringCloudAPIPortalIDSelector,
+		To: reference.To{
+			List:    &SpringCloudAPIPortalList{},
+			Managed: &SpringCloudAPIPortal{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SpringCloudAPIPortalID")
+	}
+	mg.Spec.ForProvider.SpringCloudAPIPortalID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SpringCloudAPIPortalIDRef = rsp.ResolvedReference
 
 	return nil
 }

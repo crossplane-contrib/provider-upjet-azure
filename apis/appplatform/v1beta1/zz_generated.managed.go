@@ -73,6 +73,72 @@ func (mg *SpringCloudAPIPortal) SetWriteConnectionSecretToReference(r *xpv1.Secr
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this SpringCloudAPIPortalCustomDomain.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *SpringCloudAPIPortalCustomDomain) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this SpringCloudAPIPortalCustomDomain.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *SpringCloudAPIPortalCustomDomain) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SpringCloudAccelerator.
 func (mg *SpringCloudAccelerator) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
