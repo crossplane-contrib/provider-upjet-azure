@@ -25,8 +25,18 @@ type SpringCloudAPIPortalObservation struct {
 type SpringCloudAPIPortalParameters struct {
 
 	// Specifies a list of Spring Cloud Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudGateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GatewayIds []*string `json:"gatewayIds,omitempty" tf:"gateway_ids,omitempty"`
+
+	// References to SpringCloudGateway in appplatform to populate gatewayIds.
+	// +kubebuilder:validation:Optional
+	GatewayIdsRefs []v1.Reference `json:"gatewayIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SpringCloudGateway in appplatform to populate gatewayIds.
+	// +kubebuilder:validation:Optional
+	GatewayIdsSelector *v1.Selector `json:"gatewayIdsSelector,omitempty" tf:"-"`
 
 	// is only https is allowed?
 	// +kubebuilder:validation:Optional

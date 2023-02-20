@@ -577,13 +577,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ManagedServices/registrationDefinitions/00000000-0000-0000-0000-000000000000
 	"azurerm_lighthouse_definition": config.IdentifierFromProvider,
 
-	// spring_cloud
-	//
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.AppPlatform/spring/service1/apiPortals/apiPortal1/domains/domain1
-	"azurerm_spring_cloud_api_portal_custom_domain": config.TemplatedStringAsIdentifier("name", "{{ .parameters.spring_cloud_api_portal_id }}/domains/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AppPlatform/Spring/springcloud/apps/springcloudapp/deployments/deployment/providers/Microsoft.ServiceLinker/linkers/serviceconnector1
-	"azurerm_spring_cloud_connection": config.IdentifierFromProvider,
-
 	// resource_group
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.PolicyInsights/remediations/remediation1

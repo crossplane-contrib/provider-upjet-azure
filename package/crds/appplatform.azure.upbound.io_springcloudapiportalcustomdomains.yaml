@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: springcloudapiportals.appplatform.azure.upbound.io
+  name: springcloudapiportalcustomdomains.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: SpringCloudAPIPortal
-    listKind: SpringCloudAPIPortalList
-    plural: springcloudapiportals
-    singular: springcloudapiportal
+    kind: SpringCloudAPIPortalCustomDomain
+    listKind: SpringCloudAPIPortalCustomDomainList
+    plural: springcloudapiportalcustomdomains
+    singular: springcloudapiportalcustomdomain
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: SpringCloudAPIPortal is the Schema for the SpringCloudAPIPortals
-          API. Manages a Spring Cloud API Portal.
+        description: SpringCloudAPIPortalCustomDomain is the Schema for the SpringCloudAPIPortalCustomDomains
+          API. Manages a Spring Cloud API Portal Domain.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +51,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: SpringCloudAPIPortalSpec defines the desired state of SpringCloudAPIPortal
+            description: SpringCloudAPIPortalCustomDomainSpec defines the desired
+              state of SpringCloudAPIPortalCustomDomain
             properties:
               deletionPolicy:
                 default: Delete
@@ -64,107 +65,18 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  gatewayIds:
-                    description: Specifies a list of Spring Cloud Gateway.
-                    items:
-                      type: string
-                    type: array
-                  gatewayIdsRefs:
-                    description: References to SpringCloudGateway in appplatform to
-                      populate gatewayIds.
-                    items:
-                      description: A Reference to a named object.
-                      properties:
-                        name:
-                          description: Name of the referenced object.
-                          type: string
-                        policy:
-                          description: Policies for referencing.
-                          properties:
-                            resolution:
-                              default: Required
-                              description: Resolution specifies whether resolution
-                                of this reference is required. The default is 'Required',
-                                which means the reconcile will fail if the reference
-                                cannot be resolved. 'Optional' means this reference
-                                will be a no-op if it cannot be resolved.
-                              enum:
-                              - Required
-                              - Optional
-                              type: string
-                            resolve:
-                              description: Resolve specifies when this reference should
-                                be resolved. The default is 'IfNotPresent', which
-                                will attempt to resolve the reference only when the
-                                corresponding field is not present. Use 'Always' to
-                                resolve the reference on every reconcile.
-                              enum:
-                              - Always
-                              - IfNotPresent
-                              type: string
-                          type: object
-                      required:
-                      - name
-                      type: object
-                    type: array
-                  gatewayIdsSelector:
-                    description: Selector for a list of SpringCloudGateway in appplatform
-                      to populate gatewayIds.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  httpsOnlyEnabled:
-                    description: is only https is allowed?
-                    type: boolean
-                  instanceCount:
-                    description: Specifies the required instance count of the Spring
-                      Cloud API Portal. Possible Values are between 1 and 500. Defaults
-                      to 1 if not specified.
-                    type: number
-                  publicNetworkAccessEnabled:
-                    description: Is the public network access enabled?
-                    type: boolean
-                  springCloudServiceId:
-                    description: The ID of the Spring Cloud Service. Changing this
-                      forces a new Spring Cloud API Portal to be created.
+                  name:
+                    description: The name which should be used for this Spring Cloud
+                      API Portal Domain. Changing this forces a new Spring Cloud API
+                      Portal Domain to be created.
                     type: string
-                  springCloudServiceIdRef:
-                    description: Reference to a SpringCloudService in appplatform
-                      to populate springCloudServiceId.
+                  springCloudApiPortalId:
+                    description: The ID of the Spring Cloud API Portal. Changing this
+                      forces a new Spring Cloud API Portal Domain to be created.
+                    type: string
+                  springCloudApiPortalIdRef:
+                    description: Reference to a SpringCloudAPIPortal in appplatform
+                      to populate springCloudApiPortalId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -197,9 +109,9 @@ spec:
                     required:
                     - name
                     type: object
-                  springCloudServiceIdSelector:
-                    description: Selector for a SpringCloudService in appplatform
-                      to populate springCloudServiceId.
+                  springCloudApiPortalIdSelector:
+                    description: Selector for a SpringCloudAPIPortal in appplatform
+                      to populate springCloudApiPortalId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -237,28 +149,12 @@ spec:
                             type: string
                         type: object
                     type: object
-                  sso:
-                    description: A sso block as defined below.
-                    items:
-                      properties:
-                        clientId:
-                          description: The public identifier for the application.
-                          type: string
-                        clientSecret:
-                          description: The secret known only to the application and
-                            the authorization server.
-                          type: string
-                        issuerUri:
-                          description: The URI of Issuer Identifier.
-                          type: string
-                        scope:
-                          description: It defines the specific actions applications
-                            can be allowed to do on a user's behalf.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
+                  thumbprint:
+                    description: Specifies the thumbprint of the Spring Cloud Certificate
+                      that binds to the Spring Cloud API Portal Domain.
+                    type: string
+                required:
+                - name
                 type: object
               providerConfigRef:
                 default:
@@ -432,16 +328,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: SpringCloudAPIPortalStatus defines the observed state of
-              SpringCloudAPIPortal.
+            description: SpringCloudAPIPortalCustomDomainStatus defines the observed
+              state of SpringCloudAPIPortalCustomDomain.
             properties:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Spring Cloud API Portal.
-                    type: string
-                  url:
-                    description: TODO.
+                    description: The ID of the Spring Cloud API Portal Domain.
                     type: string
                 type: object
               conditions:

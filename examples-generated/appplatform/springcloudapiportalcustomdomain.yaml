@@ -1,27 +1,17 @@
 apiVersion: appplatform.azure.upbound.io/v1beta1
-kind: SpringCloudAPIPortal
+kind: SpringCloudAPIPortalCustomDomain
 metadata:
   annotations:
-    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportal
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
-    gatewayIdsRefs:
-    - name: example
-    httpsOnlyEnabled: false
-    instanceCount: 1
-    publicNetworkAccessEnabled: true
-    springCloudServiceIdSelector:
+    name: example.com
+    springCloudApiPortalIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    sso:
-    - clientId: test
-      clientSecret: secret
-      issuerUri: https://www.example.com/issueToken
-      scope:
-      - read
 
 ---
 
@@ -29,7 +19,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportal
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -40,10 +30,28 @@ spec:
 ---
 
 apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudAPIPortal
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    gatewayIdsRefs:
+    - name: example
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
 kind: SpringCloudGateway
 metadata:
   annotations:
-    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportal
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -59,7 +67,7 @@ apiVersion: appplatform.azure.upbound.io/v1beta1
 kind: SpringCloudService
 metadata:
   annotations:
-    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportal
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudapiportalcustomdomain
   labels:
     testing.upbound.io/example-name: example
   name: example
