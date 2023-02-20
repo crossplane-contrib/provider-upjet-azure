@@ -43,6 +43,15 @@ func (l *ApplicationInsightsSmartDetectionRuleList) GetItems() []resource.Manage
 	return items
 }
 
+// GetItems of this ApplicationInsightsStandardWebTestList.
+func (l *ApplicationInsightsStandardWebTestList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ApplicationInsightsWebTestList.
 func (l *ApplicationInsightsWebTestList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

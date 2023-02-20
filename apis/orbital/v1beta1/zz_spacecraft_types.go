@@ -13,10 +13,10 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type LinksObservation struct {
+type SpacecraftLinksObservation struct {
 }
 
-type LinksParameters struct {
+type SpacecraftLinksParameters struct {
 
 	// Bandwidth in Mhz.
 	// +kubebuilder:validation:Required
@@ -49,7 +49,7 @@ type SpacecraftParameters struct {
 
 	// A links block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
-	Links []LinksParameters `json:"links" tf:"links,omitempty"`
+	Links []SpacecraftLinksParameters `json:"links" tf:"links,omitempty"`
 
 	// The location where the Spacecraft exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required

@@ -56,6 +56,7 @@ import (
 	"github.com/upbound/provider-azure/config/network"
 	"github.com/upbound/provider-azure/config/notificationhubs"
 	"github.com/upbound/provider-azure/config/operationalinsights"
+	"github.com/upbound/provider-azure/config/orbital"
 	"github.com/upbound/provider-azure/config/postgresql"
 	"github.com/upbound/provider-azure/config/relay"
 	"github.com/upbound/provider-azure/config/resource"
@@ -213,6 +214,7 @@ func GetProvider() *tjconfig.Provider {
 		relay.Configure,
 		cdn.Configure,
 		certificateregistration.Configure,
+		orbital.Configure,
 	} {
 		configure(pc)
 	}
