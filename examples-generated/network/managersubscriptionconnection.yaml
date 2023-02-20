@@ -1,0 +1,54 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ManagerSubscriptionConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managersubscriptionconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: example
+    networkManagerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subscriptionId: ${data.azurerm_subscription.current.id}
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Manager
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managersubscriptionconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scope:
+    - subscriptionIds:
+      - ${data.azurerm_subscription.current.id}
+    scopeAccesses:
+    - SecurityAdmin
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managersubscriptionconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

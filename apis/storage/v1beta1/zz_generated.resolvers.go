@@ -41,6 +41,50 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this AccountLocalUser.
+func (mg *AccountLocalUser) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PermissionScope); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionScope[i3].ResourceName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.PermissionScope[i3].ResourceNameRef,
+			Selector:     mg.Spec.ForProvider.PermissionScope[i3].ResourceNameSelector,
+			To: reference.To{
+				List:    &ContainerList{},
+				Managed: &Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PermissionScope[i3].ResourceName")
+		}
+		mg.Spec.ForProvider.PermissionScope[i3].ResourceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.PermissionScope[i3].ResourceNameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
+	}
+	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this AccountNetworkRules.
 func (mg *AccountNetworkRules) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

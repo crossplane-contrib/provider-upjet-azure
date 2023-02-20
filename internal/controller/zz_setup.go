@@ -445,7 +445,10 @@ import (
 	loadbalancerrule "github.com/upbound/provider-azure/internal/controller/network/loadbalancerrule"
 	localnetworkgateway "github.com/upbound/provider-azure/internal/controller/network/localnetworkgateway"
 	manager "github.com/upbound/provider-azure/internal/controller/network/manager"
+	managermanagementgroupconnection "github.com/upbound/provider-azure/internal/controller/network/managermanagementgroupconnection"
 	managernetworkgroup "github.com/upbound/provider-azure/internal/controller/network/managernetworkgroup"
+	managerstaticmember "github.com/upbound/provider-azure/internal/controller/network/managerstaticmember"
+	managersubscriptionconnection "github.com/upbound/provider-azure/internal/controller/network/managersubscriptionconnection"
 	natgateway "github.com/upbound/provider-azure/internal/controller/network/natgateway"
 	natgatewaypublicipassociation "github.com/upbound/provider-azure/internal/controller/network/natgatewaypublicipassociation"
 	natgatewaypublicipprefixassociation "github.com/upbound/provider-azure/internal/controller/network/natgatewaypublicipprefixassociation"
@@ -467,6 +470,7 @@ import (
 	privatednszone "github.com/upbound/provider-azure/internal/controller/network/privatednszone"
 	privatednszonevirtualnetworklink "github.com/upbound/provider-azure/internal/controller/network/privatednszonevirtualnetworklink"
 	privateendpoint "github.com/upbound/provider-azure/internal/controller/network/privateendpoint"
+	privateendpointapplicationsecuritygroupassociation "github.com/upbound/provider-azure/internal/controller/network/privateendpointapplicationsecuritygroupassociation"
 	privatelinkservice "github.com/upbound/provider-azure/internal/controller/network/privatelinkservice"
 	profilenetwork "github.com/upbound/provider-azure/internal/controller/network/profile"
 	publicip "github.com/upbound/provider-azure/internal/controller/network/publicip"
@@ -607,6 +611,7 @@ import (
 	mssqlservervulnerabilityassessment "github.com/upbound/provider-azure/internal/controller/sql/mssqlservervulnerabilityassessment"
 	mssqlvirtualnetworkrule "github.com/upbound/provider-azure/internal/controller/sql/mssqlvirtualnetworkrule"
 	accountstorage "github.com/upbound/provider-azure/internal/controller/storage/account"
+	accountlocaluser "github.com/upbound/provider-azure/internal/controller/storage/accountlocaluser"
 	accountnetworkrules "github.com/upbound/provider-azure/internal/controller/storage/accountnetworkrules"
 	blob "github.com/upbound/provider-azure/internal/controller/storage/blob"
 	blobinventorypolicy "github.com/upbound/provider-azure/internal/controller/storage/blobinventorypolicy"
@@ -1127,7 +1132,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancerrule.Setup,
 		localnetworkgateway.Setup,
 		manager.Setup,
+		managermanagementgroupconnection.Setup,
 		managernetworkgroup.Setup,
+		managerstaticmember.Setup,
+		managersubscriptionconnection.Setup,
 		natgateway.Setup,
 		natgatewaypublicipassociation.Setup,
 		natgatewaypublicipprefixassociation.Setup,
@@ -1149,6 +1157,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		privatednszone.Setup,
 		privatednszonevirtualnetworklink.Setup,
 		privateendpoint.Setup,
+		privateendpointapplicationsecuritygroupassociation.Setup,
 		privatelinkservice.Setup,
 		profilenetwork.Setup,
 		publicip.Setup,
@@ -1289,6 +1298,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mssqlservervulnerabilityassessment.Setup,
 		mssqlvirtualnetworkrule.Setup,
 		accountstorage.Setup,
+		accountlocaluser.Setup,
 		accountnetworkrules.Setup,
 		blob.Setup,
 		blobinventorypolicy.Setup,

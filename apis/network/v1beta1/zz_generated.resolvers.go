@@ -11,9 +11,10 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
-	v1beta13 "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/management/v1beta1"
+	v1beta14 "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
-	v1beta12 "github.com/upbound/provider-azure/apis/storage/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -1693,8 +1694,118 @@ func (mg *Manager) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this ManagerManagementGroupConnection.
+func (mg *ManagerManagementGroupConnection) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
+		Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta12.ManagementGroupList{},
+			Managed: &v1beta12.ManagementGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagementGroupID")
+	}
+	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkManagerID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.NetworkManagerIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkManagerIDSelector,
+		To: reference.To{
+			List:    &ManagerList{},
+			Managed: &Manager{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkManagerID")
+	}
+	mg.Spec.ForProvider.NetworkManagerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkManagerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ManagerNetworkGroup.
 func (mg *ManagerNetworkGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkManagerID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.NetworkManagerIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkManagerIDSelector,
+		To: reference.To{
+			List:    &ManagerList{},
+			Managed: &Manager{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkManagerID")
+	}
+	mg.Spec.ForProvider.NetworkManagerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkManagerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ManagerStaticMember.
+func (mg *ManagerStaticMember) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.NetworkGroupIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkGroupIDSelector,
+		To: reference.To{
+			List:    &ManagerNetworkGroupList{},
+			Managed: &ManagerNetworkGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkGroupID")
+	}
+	mg.Spec.ForProvider.NetworkGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetVirtualNetworkID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.TargetVirtualNetworkIDRef,
+		Selector:     mg.Spec.ForProvider.TargetVirtualNetworkIDSelector,
+		To: reference.To{
+			List:    &VirtualNetworkList{},
+			Managed: &VirtualNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetVirtualNetworkID")
+	}
+	mg.Spec.ForProvider.TargetVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetVirtualNetworkIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ManagerSubscriptionConnection.
+func (mg *ManagerSubscriptionConnection) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
@@ -2087,8 +2198,8 @@ func (mg *PacketCapture) ResolveReferences(ctx context.Context, c client.Reader)
 			Reference:    mg.Spec.ForProvider.StorageLocation[i3].StorageAccountIDRef,
 			Selector:     mg.Spec.ForProvider.StorageLocation[i3].StorageAccountIDSelector,
 			To: reference.To{
-				List:    &v1beta12.AccountList{},
-				Managed: &v1beta12.Account{},
+				List:    &v1beta13.AccountList{},
+				Managed: &v1beta13.Account{},
 			},
 		})
 		if err != nil {
@@ -2637,6 +2748,48 @@ func (mg *PrivateEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this PrivateEndpointApplicationSecurityGroupAssociation.
+func (mg *PrivateEndpointApplicationSecurityGroupAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationSecurityGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ApplicationSecurityGroupIDRef,
+		Selector:     mg.Spec.ForProvider.ApplicationSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &ApplicationSecurityGroupList{},
+			Managed: &ApplicationSecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationSecurityGroupID")
+	}
+	mg.Spec.ForProvider.ApplicationSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApplicationSecurityGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateEndpointID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PrivateEndpointIDRef,
+		Selector:     mg.Spec.ForProvider.PrivateEndpointIDSelector,
+		To: reference.To{
+			List:    &PrivateEndpointList{},
+			Managed: &PrivateEndpoint{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrivateEndpointID")
+	}
+	mg.Spec.ForProvider.PrivateEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrivateEndpointIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -4158,8 +4311,8 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 		Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 		Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
 		To: reference.To{
-			List:    &v1beta12.AccountList{},
-			Managed: &v1beta12.Account{},
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
 		},
 	})
 	if err != nil {
@@ -4175,8 +4328,8 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.TrafficAnalytics[i3].WorkspaceIDRef,
 			Selector:     mg.Spec.ForProvider.TrafficAnalytics[i3].WorkspaceIDSelector,
 			To: reference.To{
-				List:    &v1beta13.WorkspaceList{},
-				Managed: &v1beta13.Workspace{},
+				List:    &v1beta14.WorkspaceList{},
+				Managed: &v1beta14.Workspace{},
 			},
 		})
 		if err != nil {
@@ -4193,8 +4346,8 @@ func (mg *WatcherFlowLog) ResolveReferences(ctx context.Context, c client.Reader
 			Reference:    mg.Spec.ForProvider.TrafficAnalytics[i3].WorkspaceResourceIDRef,
 			Selector:     mg.Spec.ForProvider.TrafficAnalytics[i3].WorkspaceResourceIDSelector,
 			To: reference.To{
-				List:    &v1beta13.WorkspaceList{},
-				Managed: &v1beta13.Workspace{},
+				List:    &v1beta14.WorkspaceList{},
+				Managed: &v1beta14.Workspace{},
 			},
 		})
 		if err != nil {

@@ -1,0 +1,72 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ManagerStaticMember
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managerstaticmember
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    networkGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    target_network_id: ${azurerm_virtual_network.example.id}
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Manager
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managerstaticmember
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: example network manager
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scope:
+    - subscriptionIds:
+      - ${data.azurerm_subscription.current.id}
+    scopeAccesses:
+    - Connectivity
+    - SecurityAdmin
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: ManagerNetworkGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managerstaticmember
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: example network group
+    networkManagerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/managerstaticmember
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+

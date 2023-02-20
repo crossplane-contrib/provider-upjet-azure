@@ -743,16 +743,8 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// network
 	//
-	// /providers/Microsoft.Management/managementGroups/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/networkManagerConnections/networkManagerConnection1
-	"azurerm_network_manager_management_group_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.management_group_id }}/providers/Microsoft.Network/networkManagerConnections/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/networkManagers/networkManager1/scopeConnections/scopeConnection1
 	"azurerm_network_manager_scope_connection": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_manager_id }}/scopeConnections/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.Network/networkManagers/networkManager1/networkGroups/networkGroup1/staticMembers/staticMember1
-	"azurerm_network_manager_static_member": config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_group_id }}/staticMembers/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/networkManagerConnections/networkManagerConnection1
-	"azurerm_network_manager_subscription_connection": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Network/networkManagerConnections/{{ .external_name }}"),
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/privateEndpoints/endpoints1|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Network/applicationSecurityGroups/securityGroup1
-	"azurerm_private_endpoint_application_security_group_association": config.IdentifierFromProvider,
 
 	// orbital
 	//
@@ -770,9 +762,4 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// /subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/groupName/providers/Microsoft.RecoveryServices/vaults/vaultName/replicationRecoveryPlans/planName
 	"azurerm_site_recovery_replication_recovery_plan": config.TemplatedStringAsIdentifier("name", "{{ .parameters.recovery_vault_id }}/replicationRecoveryPlans/{{ .external_name }}"),
-
-	// storage
-	//
-	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Storage/storageAccounts/storageAccount1/localUsers/user1
-	"azurerm_storage_account_local_user": config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/localUsers/{{ .external_name }}"),
 }
