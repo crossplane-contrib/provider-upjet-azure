@@ -511,6 +511,7 @@ import (
 	vpngateway "github.com/upbound/provider-azure/internal/controller/network/vpngateway"
 	vpngatewayconnection "github.com/upbound/provider-azure/internal/controller/network/vpngatewayconnection"
 	vpnserverconfiguration "github.com/upbound/provider-azure/internal/controller/network/vpnserverconfiguration"
+	vpnserverconfigurationpolicygroup "github.com/upbound/provider-azure/internal/controller/network/vpnserverconfigurationpolicygroup"
 	vpnsite "github.com/upbound/provider-azure/internal/controller/network/vpnsite"
 	watcher "github.com/upbound/provider-azure/internal/controller/network/watcher"
 	watcherflowlog "github.com/upbound/provider-azure/internal/controller/network/watcherflowlog"
@@ -1204,6 +1205,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		vpngateway.Setup,
 		vpngatewayconnection.Setup,
 		vpnserverconfiguration.Setup,
+		vpnserverconfigurationpolicygroup.Setup,
 		vpnsite.Setup,
 		watcher.Setup,
 		watcherflowlog.Setup,

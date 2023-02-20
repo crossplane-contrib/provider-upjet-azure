@@ -1,0 +1,61 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VPNServerConfigurationPolicyGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/vpnserverconfigurationpolicygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policy:
+    - name: policy1
+      type: RadiusAzureGroupId
+      value: 6ad1bd08
+    vpnServerConfigurationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/vpnserverconfigurationpolicygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VPNServerConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/vpnserverconfigurationpolicygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    radius:
+    - server:
+      - address: 10.105.1.1
+        score: 15
+        secretSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vpnAuthenticationTypes:
+    - Radius
+
+---
+
