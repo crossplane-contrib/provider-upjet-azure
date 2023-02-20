@@ -9,10 +9,11 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
-	v1beta11 "github.com/upbound/provider-azure/apis/network/v1beta1"
+	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
-	v1beta12 "github.com/upbound/provider-azure/apis/storage/v1beta1"
+	v1beta1 "github.com/upbound/provider-azure/apis/relay/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/storage/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -43,6 +44,48 @@ func (mg *AppActiveSlot) ResolveReferences(ctx context.Context, c client.Reader)
 	return nil
 }
 
+// ResolveReferences of this AppHybridConnection.
+func (mg *AppHybridConnection) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RelayID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RelayIDRef,
+		Selector:     mg.Spec.ForProvider.RelayIDSelector,
+		To: reference.To{
+			List:    &v1beta1.HybridConnectionList{},
+			Managed: &v1beta1.HybridConnection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RelayID")
+	}
+	mg.Spec.ForProvider.RelayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RelayIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebAppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.WebAppIDRef,
+		Selector:     mg.Spec.ForProvider.WebAppIDSelector,
+		To: reference.To{
+			List:    &WindowsWebAppList{},
+			Managed: &WindowsWebApp{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WebAppID")
+	}
+	mg.Spec.ForProvider.WebAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WebAppIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this AppServicePlan.
 func (mg *AppServicePlan) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -56,8 +99,8 @@ func (mg *AppServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -98,8 +141,8 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -116,8 +159,8 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -136,8 +179,8 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -154,8 +197,8 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 		To: reference.To{
-			List:    &v1beta12.AccountList{},
-			Managed: &v1beta12.Account{},
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
 		},
 	})
 	if err != nil {
@@ -264,8 +307,8 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -282,8 +325,8 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -302,8 +345,8 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -320,8 +363,8 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 		To: reference.To{
-			List:    &v1beta12.AccountList{},
-			Managed: &v1beta12.Account{},
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
 		},
 	})
 	if err != nil {
@@ -346,8 +389,8 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -380,8 +423,8 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -400,8 +443,8 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -418,8 +461,8 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 		To: reference.To{
-			List:    &v1beta12.AccountList{},
-			Managed: &v1beta12.Account{},
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
 		},
 	})
 	if err != nil {
@@ -434,8 +477,8 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 		Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
@@ -478,8 +521,8 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -498,8 +541,8 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -516,8 +559,8 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 		To: reference.To{
-			List:    &v1beta12.AccountList{},
-			Managed: &v1beta12.Account{},
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
 		},
 	})
 	if err != nil {
@@ -532,8 +575,8 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 		Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
@@ -558,8 +601,8 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -592,8 +635,8 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -612,8 +655,8 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -630,8 +673,8 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
@@ -674,8 +717,8 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -694,8 +737,8 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -712,8 +755,8 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 		Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
@@ -738,8 +781,8 @@ func (mg *ServicePlan) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -764,8 +807,8 @@ func (mg *StaticSite) ResolveReferences(ctx context.Context, c client.Reader) er
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -790,8 +833,8 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -824,8 +867,8 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -844,8 +887,8 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -862,8 +905,8 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 		To: reference.To{
-			List:    &v1beta12.AccountList{},
-			Managed: &v1beta12.Account{},
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
 		},
 	})
 	if err != nil {
@@ -878,8 +921,8 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 		Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
@@ -922,8 +965,8 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -942,8 +985,8 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -960,8 +1003,8 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 		Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
 		Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
 		To: reference.To{
-			List:    &v1beta12.AccountList{},
-			Managed: &v1beta12.Account{},
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
 		},
 	})
 	if err != nil {
@@ -976,8 +1019,8 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 		Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
@@ -1002,8 +1045,8 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -1036,8 +1079,8 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -1056,8 +1099,8 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -1074,8 +1117,8 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 		Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {
@@ -1118,8 +1161,8 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -1138,8 +1181,8 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 				Reference:    mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
 				Selector:     mg.Spec.ForProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
 				To: reference.To{
-					List:    &v1beta11.SubnetList{},
-					Managed: &v1beta11.Subnet{},
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
 				},
 			})
 			if err != nil {
@@ -1156,8 +1199,8 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 		Reference:    mg.Spec.ForProvider.VirtualNetworkSubnetIDRef,
 		Selector:     mg.Spec.ForProvider.VirtualNetworkSubnetIDSelector,
 		To: reference.To{
-			List:    &v1beta11.SubnetList{},
-			Managed: &v1beta11.Subnet{},
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
 		},
 	})
 	if err != nil {

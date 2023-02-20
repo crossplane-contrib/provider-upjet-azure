@@ -1,0 +1,111 @@
+apiVersion: web.azure.upbound.io/v1beta1
+kind: AppHybridConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/apphybridconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    hostname: myhostname.example
+    port: 8081
+    relayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apphybridconn-rc
+    webAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apphybridconn-wa
+
+---
+
+apiVersion: relay.azure.upbound.io/v1beta1
+kind: HybridConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/apphybridconnection
+  labels:
+    testing.upbound.io/example-name: apphybridconn-rc
+  name: apphybridconn-rc
+spec:
+  forProvider:
+    name: apphybridconnrc
+    relayNamespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apphybridconn-rn
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apphybridconn-rg
+
+---
+
+apiVersion: relay.azure.upbound.io/v1beta1
+kind: EventRelayNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/apphybridconnection
+  labels:
+    testing.upbound.io/example-name: apphybridconn-rn
+  name: apphybridconn-rn
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apphybridconn-rg
+    skuName: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/apphybridconnection
+  labels:
+    testing.upbound.io/example-name: apphybridconn-rg
+  name: apphybridconn-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/apphybridconnection
+  labels:
+    testing.upbound.io/example-name: apphybridconn-sp
+  name: apphybridconn-sp
+spec:
+  forProvider:
+    location: West Europe
+    osType: Windows
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apphybridconn-rg
+    skuName: S1
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: WindowsWebApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/apphybridconnection
+  labels:
+    testing.upbound.io/example-name: apphybridconn-wa
+  name: apphybridconn-wa
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apphybridconn-rg
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: apphybridconn-sp
+    siteConfig:
+    - {}

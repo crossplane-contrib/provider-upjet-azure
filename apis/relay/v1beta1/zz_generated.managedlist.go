@@ -16,6 +16,24 @@ func (l *EventRelayNamespaceList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this HybridConnectionAuthorizationRuleList.
+func (l *HybridConnectionAuthorizationRuleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this HybridConnectionList.
+func (l *HybridConnectionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this NamespaceAuthorizationRuleList.
 func (l *NamespaceAuthorizationRuleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
