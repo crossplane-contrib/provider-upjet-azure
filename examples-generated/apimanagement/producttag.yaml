@@ -1,0 +1,96 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: ProductTag
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementName: ${data.azurerm_api_management.example.name}
+    apiManagementProductIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    nameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_resource_group
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Product
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    approvalRequired: true
+    displayName: Test Product
+    published: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subscriptionRequired: true
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Tag
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_api_management
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/producttag
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
