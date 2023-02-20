@@ -3648,6 +3648,32 @@ func (mg *VPNServerConfiguration) ResolveReferences(ctx context.Context, c clien
 	return nil
 }
 
+// ResolveReferences of this VPNServerConfigurationPolicyGroup.
+func (mg *VPNServerConfigurationPolicyGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPNServerConfigurationID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VPNServerConfigurationIDRef,
+		Selector:     mg.Spec.ForProvider.VPNServerConfigurationIDSelector,
+		To: reference.To{
+			List:    &VPNServerConfigurationList{},
+			Managed: &VPNServerConfiguration{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPNServerConfigurationID")
+	}
+	mg.Spec.ForProvider.VPNServerConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VPNServerConfigurationIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this VPNSite.
 func (mg *VPNSite) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
