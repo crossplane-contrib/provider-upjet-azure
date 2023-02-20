@@ -22,6 +22,7 @@ import (
 	v1beta1botservice "github.com/upbound/provider-azure/apis/botservice/v1beta1"
 	v1beta1cache "github.com/upbound/provider-azure/apis/cache/v1beta1"
 	v1beta1cdn "github.com/upbound/provider-azure/apis/cdn/v1beta1"
+	v1beta1certificateregistration "github.com/upbound/provider-azure/apis/certificateregistration/v1beta1"
 	v1beta1cognitiveservices "github.com/upbound/provider-azure/apis/cognitiveservices/v1beta1"
 	v1beta1communication "github.com/upbound/provider-azure/apis/communication/v1beta1"
 	v1beta1compute "github.com/upbound/provider-azure/apis/compute/v1beta1"
@@ -115,6 +116,7 @@ func init() {
 		v1beta1botservice.SchemeBuilder.AddToScheme,
 		v1beta1cache.SchemeBuilder.AddToScheme,
 		v1beta1cdn.SchemeBuilder.AddToScheme,
+		v1beta1certificateregistration.SchemeBuilder.AddToScheme,
 		v1beta1cognitiveservices.SchemeBuilder.AddToScheme,
 		v1beta1communication.SchemeBuilder.AddToScheme,
 		v1beta1compute.SchemeBuilder.AddToScheme,

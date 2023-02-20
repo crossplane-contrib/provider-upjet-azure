@@ -30,6 +30,7 @@ import (
 	"github.com/upbound/provider-azure/config/base"
 	"github.com/upbound/provider-azure/config/cache"
 	"github.com/upbound/provider-azure/config/cdn"
+	"github.com/upbound/provider-azure/config/certificateregistration"
 	"github.com/upbound/provider-azure/config/common"
 	"github.com/upbound/provider-azure/config/compute"
 	"github.com/upbound/provider-azure/config/consumption"
@@ -211,6 +212,7 @@ func GetProvider() *tjconfig.Provider {
 		web.Configure,
 		relay.Configure,
 		cdn.Configure,
+		certificateregistration.Configure,
 	} {
 		configure(pc)
 	}
