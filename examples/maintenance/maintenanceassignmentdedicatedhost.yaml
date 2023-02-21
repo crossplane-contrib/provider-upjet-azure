@@ -1,0 +1,44 @@
+apiVersion: maintenance.azure.upbound.io/v1beta1
+kind: MaintenanceAssignmentDedicatedHost
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentdedicatedhost
+    upjet.upbound.io/manual-intervention: "This resource requires DedicatedHost resource which need manual intervention."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dedicatedHostId: <DedicatedHostId>
+    location: West Europe
+    maintenanceConfigurationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: maintenance.azure.upbound.io/v1beta1
+kind: MaintenanceConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentdedicatedhost
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: maintenancehost
+    scope: Host
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceassignmentdedicatedhost
+  labels:
+    testing.upbound.io/example-name: maintenancehost
+  name: maintenancehost
+spec:
+  forProvider:
+    location: West Europe

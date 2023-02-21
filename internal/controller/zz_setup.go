@@ -141,6 +141,7 @@ import (
 	linuxvirtualmachine "github.com/upbound/provider-azure/internal/controller/compute/linuxvirtualmachine"
 	linuxvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/linuxvirtualmachinescaleset"
 	manageddisk "github.com/upbound/provider-azure/internal/controller/compute/manageddisk"
+	manageddisksastoken "github.com/upbound/provider-azure/internal/controller/compute/manageddisksastoken"
 	orchestratedvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/orchestratedvirtualmachinescaleset"
 	proximityplacementgroup "github.com/upbound/provider-azure/internal/controller/compute/proximityplacementgroup"
 	sharedimage "github.com/upbound/provider-azure/internal/controller/compute/sharedimage"
@@ -385,6 +386,10 @@ import (
 	subaccount "github.com/upbound/provider-azure/internal/controller/logz/subaccount"
 	subaccounttagrule "github.com/upbound/provider-azure/internal/controller/logz/subaccounttagrule"
 	tagrule "github.com/upbound/provider-azure/internal/controller/logz/tagrule"
+	workspacemachinelearningservices "github.com/upbound/provider-azure/internal/controller/machinelearningservices/workspace"
+	maintenanceassignmentdedicatedhost "github.com/upbound/provider-azure/internal/controller/maintenance/maintenanceassignmentdedicatedhost"
+	maintenanceassignmentvirtualmachine "github.com/upbound/provider-azure/internal/controller/maintenance/maintenanceassignmentvirtualmachine"
+	maintenanceconfiguration "github.com/upbound/provider-azure/internal/controller/maintenance/maintenanceconfiguration"
 	federatedidentitycredential "github.com/upbound/provider-azure/internal/controller/managedidentity/federatedidentitycredential"
 	userassignedidentity "github.com/upbound/provider-azure/internal/controller/managedidentity/userassignedidentity"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
@@ -837,6 +842,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		linuxvirtualmachine.Setup,
 		linuxvirtualmachinescaleset.Setup,
 		manageddisk.Setup,
+		manageddisksastoken.Setup,
 		orchestratedvirtualmachinescaleset.Setup,
 		proximityplacementgroup.Setup,
 		sharedimage.Setup,
@@ -1081,6 +1087,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subaccount.Setup,
 		subaccounttagrule.Setup,
 		tagrule.Setup,
+		workspacemachinelearningservices.Setup,
+		maintenanceassignmentdedicatedhost.Setup,
+		maintenanceassignmentvirtualmachine.Setup,
+		maintenanceconfiguration.Setup,
 		federatedidentitycredential.Setup,
 		userassignedidentity.Setup,
 		managementgroup.Setup,

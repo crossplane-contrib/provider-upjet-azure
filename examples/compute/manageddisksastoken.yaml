@@ -1,0 +1,45 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: ManagedDiskSASToken
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/manageddisksastoken
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    accessLevel: Read
+    durationInSeconds: 300
+    managedDiskIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+---
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: ManagedDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/manageddisksastoken
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    createOption: Empty
+    diskSizeGb: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: manageddisk
+    storageAccountType: Standard_LRS
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/manageddisksastoken
+  labels:
+    testing.upbound.io/example-name: manageddisk
+  name: manageddisk
+spec:
+  forProvider:
+    location: West Europe
