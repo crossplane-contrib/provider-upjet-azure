@@ -91,4 +91,14 @@ func Configure(p *config.Provider) {
 			Type: "Management",
 		}
 	})
+	p.AddResourceConfigurator("azurerm_api_management_gateway_api", func(r *config.Resource) {
+		r.References["gateway_id"] = config.Reference{
+			Type:      "Gateway",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["api_id"] = config.Reference{
+			Type:      "API",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

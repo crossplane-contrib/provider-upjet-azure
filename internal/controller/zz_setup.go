@@ -31,6 +31,7 @@ import (
 	diagnostic "github.com/upbound/provider-azure/internal/controller/apimanagement/diagnostic"
 	emailtemplate "github.com/upbound/provider-azure/internal/controller/apimanagement/emailtemplate"
 	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
+	gatewayapi "github.com/upbound/provider-azure/internal/controller/apimanagement/gatewayapi"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovideraad"
 	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidergoogle"
@@ -46,6 +47,7 @@ import (
 	product "github.com/upbound/provider-azure/internal/controller/apimanagement/product"
 	productapi "github.com/upbound/provider-azure/internal/controller/apimanagement/productapi"
 	productpolicy "github.com/upbound/provider-azure/internal/controller/apimanagement/productpolicy"
+	producttag "github.com/upbound/provider-azure/internal/controller/apimanagement/producttag"
 	rediscache "github.com/upbound/provider-azure/internal/controller/apimanagement/rediscache"
 	subscription "github.com/upbound/provider-azure/internal/controller/apimanagement/subscription"
 	tag "github.com/upbound/provider-azure/internal/controller/apimanagement/tag"
@@ -735,6 +737,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		diagnostic.Setup,
 		emailtemplate.Setup,
 		gateway.Setup,
+		gatewayapi.Setup,
 		identityprovideraad.Setup,
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
@@ -750,6 +753,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		product.Setup,
 		productapi.Setup,
 		productpolicy.Setup,
+		producttag.Setup,
 		rediscache.Setup,
 		subscription.Setup,
 		tag.Setup,

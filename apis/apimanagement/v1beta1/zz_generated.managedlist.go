@@ -142,6 +142,15 @@ func (l *EmailTemplateList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this GatewayAPIList.
+func (l *GatewayAPIList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this GatewayList.
 func (l *GatewayList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -279,6 +288,15 @@ func (l *ProductList) GetItems() []resource.Managed {
 
 // GetItems of this ProductPolicyList.
 func (l *ProductPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ProductTagList.
+func (l *ProductTagList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
