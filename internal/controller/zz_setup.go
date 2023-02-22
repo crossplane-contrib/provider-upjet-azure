@@ -50,6 +50,7 @@ import (
 	subscription "github.com/upbound/provider-azure/internal/controller/apimanagement/subscription"
 	tag "github.com/upbound/provider-azure/internal/controller/apimanagement/tag"
 	user "github.com/upbound/provider-azure/internal/controller/apimanagement/user"
+	configuration "github.com/upbound/provider-azure/internal/controller/appconfiguration/configuration"
 	springcloudaccelerator "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudaccelerator"
 	springcloudactivedeployment "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudactivedeployment"
 	springcloudapiportal "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudapiportal"
@@ -250,7 +251,7 @@ import (
 	datasetkustocluster "github.com/upbound/provider-azure/internal/controller/datashare/datasetkustocluster"
 	datasetkustodatabase "github.com/upbound/provider-azure/internal/controller/datashare/datasetkustodatabase"
 	datashare "github.com/upbound/provider-azure/internal/controller/datashare/datashare"
-	configuration "github.com/upbound/provider-azure/internal/controller/dbformariadb/configuration"
+	configurationdbformariadb "github.com/upbound/provider-azure/internal/controller/dbformariadb/configuration"
 	database "github.com/upbound/provider-azure/internal/controller/dbformariadb/database"
 	firewallrule "github.com/upbound/provider-azure/internal/controller/dbformariadb/firewallrule"
 	serverdbformariadb "github.com/upbound/provider-azure/internal/controller/dbformariadb/server"
@@ -751,6 +752,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subscription.Setup,
 		tag.Setup,
 		user.Setup,
+		configuration.Setup,
 		springcloudaccelerator.Setup,
 		springcloudactivedeployment.Setup,
 		springcloudapiportal.Setup,
@@ -951,7 +953,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		datasetkustocluster.Setup,
 		datasetkustodatabase.Setup,
 		datashare.Setup,
-		configuration.Setup,
+		configurationdbformariadb.Setup,
 		database.Setup,
 		firewallrule.Setup,
 		serverdbformariadb.Setup,

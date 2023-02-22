@@ -1816,6 +1816,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Maintenance Assignment can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.Maintenance/configurationAssignments/assign1
 	"azurerm_maintenance_assignment_virtual_machine": config.TemplatedStringAsIdentifier("", "{{ .parameters.virtual_machine_id }}/providers/Microsoft.Maintenance/configurationAssignments/default"),
+
+	// appconfiguration
+	//
+	// App Configurations can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.AppConfiguration/configurationStores/appConf1
+	"azurerm_app_configuration": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.AppConfiguration/configurationStores/{{ .external_name }}"),
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {

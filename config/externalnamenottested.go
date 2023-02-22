@@ -45,10 +45,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	"azurerm_api_management_identity_provider_aadb2c": config.IdentifierFromProvider,
 
 	// appconfiguration
-	//
-	// App Configurations can be imported using the resource id
-	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.AppConfiguration/configurationStores/appConf1
-	"azurerm_app_configuration": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.AppConfiguration/configurationStores/{{ .external_name }}"),
 	// There are two different syntaxes:
 	// App Configuration Features can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.AppConfiguration/configurationStores/appConf1/AppConfigurationFeature/appConfFeature1/Label/label1
