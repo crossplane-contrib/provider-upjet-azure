@@ -1,22 +1,22 @@
 apiVersion: relay.azure.upbound.io/v1beta1
-kind: NamespaceAuthorizationRule
+kind: HybridConnection
 metadata:
   annotations:
-    meta.upbound.io/example-id: relay/v1beta1/namespaceauthorizationrule
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnection
   labels:
     testing.upbound.io/example-name: example
-  name: namespaceauthorizationrule
+  name: example
 spec:
   forProvider:
-    listen: true
-    manage: false
-    namespaceNameSelector:
+    name: acctestrnhc-%d
+    relayNamespaceNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    requiresClientAuthorization: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    send: true
+    userMetadata: testmetadata
 
 ---
 
@@ -24,10 +24,10 @@ apiVersion: relay.azure.upbound.io/v1beta1
 kind: EventRelayNamespace
 metadata:
   annotations:
-    meta.upbound.io/example-id: relay/v1beta1/namespaceauthorizationrule
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnection
   labels:
     testing.upbound.io/example-name: example
-  name: eventrelaynamespace
+  name: example
 spec:
   forProvider:
     location: West Europe
@@ -35,6 +35,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: Standard
+    tags:
+      source: terraform
 
 ---
 
@@ -42,10 +44,13 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: relay/v1beta1/namespaceauthorizationrule
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnection
   labels:
     testing.upbound.io/example-name: example
-  name: rule-rg
+  name: example
 spec:
   forProvider:
     location: West Europe
+
+---
+

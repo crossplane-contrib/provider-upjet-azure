@@ -556,6 +556,8 @@ import (
 	siterecoveryreplicationpolicy "github.com/upbound/provider-azure/internal/controller/recoveryservices/siterecoveryreplicationpolicy"
 	vaultrecoveryservices "github.com/upbound/provider-azure/internal/controller/recoveryservices/vault"
 	eventrelaynamespace "github.com/upbound/provider-azure/internal/controller/relay/eventrelaynamespace"
+	hybridconnection "github.com/upbound/provider-azure/internal/controller/relay/hybridconnection"
+	hybridconnectionauthorizationrule "github.com/upbound/provider-azure/internal/controller/relay/hybridconnectionauthorizationrule"
 	namespaceauthorizationrulerelay "github.com/upbound/provider-azure/internal/controller/relay/namespaceauthorizationrule"
 	resourcedeploymentscriptazurecli "github.com/upbound/provider-azure/internal/controller/resources/resourcedeploymentscriptazurecli"
 	resourcedeploymentscriptazurepowershell "github.com/upbound/provider-azure/internal/controller/resources/resourcedeploymentscriptazurepowershell"
@@ -688,6 +690,7 @@ import (
 	referencedataset "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/referencedataset"
 	standardenvironment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/standardenvironment"
 	appactiveslot "github.com/upbound/provider-azure/internal/controller/web/appactiveslot"
+	apphybridconnection "github.com/upbound/provider-azure/internal/controller/web/apphybridconnection"
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
 	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
 	functionappactiveslot "github.com/upbound/provider-azure/internal/controller/web/functionappactiveslot"
@@ -1257,6 +1260,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		siterecoveryreplicationpolicy.Setup,
 		vaultrecoveryservices.Setup,
 		eventrelaynamespace.Setup,
+		hybridconnection.Setup,
+		hybridconnectionauthorizationrule.Setup,
 		namespaceauthorizationrulerelay.Setup,
 		resourcedeploymentscriptazurecli.Setup,
 		resourcedeploymentscriptazurepowershell.Setup,
@@ -1389,6 +1394,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		referencedataset.Setup,
 		standardenvironment.Setup,
 		appactiveslot.Setup,
+		apphybridconnection.Setup,
 		appserviceplan.Setup,
 		functionapp.Setup,
 		functionappactiveslot.Setup,

@@ -1,0 +1,51 @@
+apiVersion: relay.azure.upbound.io/v1beta1
+kind: HybridConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnection
+  labels:
+    testing.upbound.io/example-name: examplehybridconnection
+  name: examplehybridconnection
+spec:
+  forProvider:
+    name: examplehybridconnection
+    relayNamespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hybridconnection-rn
+    requiresClientAuthorization: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hybridconnection-rg
+    userMetadata: testmetadata
+
+---
+
+apiVersion: relay.azure.upbound.io/v1beta1
+kind: EventRelayNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnection
+  labels:
+    testing.upbound.io/example-name: hybridconnection-rn
+  name: hybridconnection-rn
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: hybridconnection-rg
+    skuName: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: relay/v1beta1/hybridconnection
+  labels:
+    testing.upbound.io/example-name: hybridconnection-rg
+  name: hybridconnection-rg
+spec:
+  forProvider:
+    location: West Europe
