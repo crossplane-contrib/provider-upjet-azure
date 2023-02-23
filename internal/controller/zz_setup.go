@@ -390,6 +390,9 @@ import (
 	subaccount "github.com/upbound/provider-azure/internal/controller/logz/subaccount"
 	subaccounttagrule "github.com/upbound/provider-azure/internal/controller/logz/subaccounttagrule"
 	tagrule "github.com/upbound/provider-azure/internal/controller/logz/tagrule"
+	computecluster "github.com/upbound/provider-azure/internal/controller/machinelearningservices/computecluster"
+	computeinstance "github.com/upbound/provider-azure/internal/controller/machinelearningservices/computeinstance"
+	synapsespark "github.com/upbound/provider-azure/internal/controller/machinelearningservices/synapsespark"
 	workspacemachinelearningservices "github.com/upbound/provider-azure/internal/controller/machinelearningservices/workspace"
 	maintenanceassignmentdedicatedhost "github.com/upbound/provider-azure/internal/controller/maintenance/maintenanceassignmentdedicatedhost"
 	maintenanceassignmentvirtualmachine "github.com/upbound/provider-azure/internal/controller/maintenance/maintenanceassignmentvirtualmachine"
@@ -1099,6 +1102,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		subaccount.Setup,
 		subaccounttagrule.Setup,
 		tagrule.Setup,
+		computecluster.Setup,
+		computeinstance.Setup,
+		synapsespark.Setup,
 		workspacemachinelearningservices.Setup,
 		maintenanceassignmentdedicatedhost.Setup,
 		maintenanceassignmentvirtualmachine.Setup,

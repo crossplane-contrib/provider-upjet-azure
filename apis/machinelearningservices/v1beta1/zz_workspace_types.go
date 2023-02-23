@@ -61,7 +61,7 @@ type EncryptionParameters struct {
 	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
-type IdentityObservation struct {
+type WorkspaceIdentityObservation struct {
 
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
@@ -70,7 +70,7 @@ type IdentityObservation struct {
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
-type IdentityParameters struct {
+type WorkspaceIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
 	// +kubebuilder:validation:Optional
@@ -91,7 +91,7 @@ type WorkspaceObservation struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Required
-	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []WorkspaceIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
 
 type WorkspaceParameters struct {
@@ -132,7 +132,7 @@ type WorkspaceParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Required
-	Identity []IdentityParameters `json:"identity" tf:"identity,omitempty"`
+	Identity []WorkspaceIdentityParameters `json:"identity" tf:"identity,omitempty"`
 
 	// The compute name for image build of the Machine Learning Workspace.
 	// +kubebuilder:validation:Optional
