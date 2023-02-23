@@ -32,6 +32,7 @@ import (
 	emailtemplate "github.com/upbound/provider-azure/internal/controller/apimanagement/emailtemplate"
 	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
 	gatewayapi "github.com/upbound/provider-azure/internal/controller/apimanagement/gatewayapi"
+	globalschema "github.com/upbound/provider-azure/internal/controller/apimanagement/globalschema"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovideraad"
 	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidergoogle"
@@ -738,6 +739,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		emailtemplate.Setup,
 		gateway.Setup,
 		gatewayapi.Setup,
+		globalschema.Setup,
 		identityprovideraad.Setup,
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
