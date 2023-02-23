@@ -262,6 +262,48 @@ func (mg *FunctionAppFunction) ResolveReferences(ctx context.Context, c client.R
 	return nil
 }
 
+// ResolveReferences of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FunctionAppID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.FunctionAppIDRef,
+		Selector:     mg.Spec.ForProvider.FunctionAppIDSelector,
+		To: reference.To{
+			List:    &WindowsFunctionAppList{},
+			Managed: &WindowsFunctionApp{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FunctionAppID")
+	}
+	mg.Spec.ForProvider.FunctionAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FunctionAppIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RelayID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.RelayIDRef,
+		Selector:     mg.Spec.ForProvider.RelayIDSelector,
+		To: reference.To{
+			List:    &v1beta1.HybridConnectionList{},
+			Managed: &v1beta1.HybridConnection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RelayID")
+	}
+	mg.Spec.ForProvider.RelayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RelayIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this FunctionAppSlot.
 func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

@@ -18,6 +18,8 @@ package web
 
 import (
 	"github.com/upbound/upjet/pkg/config"
+
+	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 // Configure configures web group
@@ -70,6 +72,12 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_windows_web_app_slot", func(r *config.Resource) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"key_vault_reference_identity_id"},
+		}
+	})
+	p.AddResourceConfigurator("azurerm_function_app_hybrid_connection", func(r *config.Resource) {
+		r.References["function_app_id"] = config.Reference{
+			TerraformName: "azurerm_windows_function_app",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }

@@ -699,6 +699,7 @@ import (
 	functionapp "github.com/upbound/provider-azure/internal/controller/web/functionapp"
 	functionappactiveslot "github.com/upbound/provider-azure/internal/controller/web/functionappactiveslot"
 	functionappfunction "github.com/upbound/provider-azure/internal/controller/web/functionappfunction"
+	functionapphybridconnection "github.com/upbound/provider-azure/internal/controller/web/functionapphybridconnection"
 	functionappslot "github.com/upbound/provider-azure/internal/controller/web/functionappslot"
 	linuxfunctionapp "github.com/upbound/provider-azure/internal/controller/web/linuxfunctionapp"
 	linuxfunctionappslot "github.com/upbound/provider-azure/internal/controller/web/linuxfunctionappslot"
@@ -1407,6 +1408,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		functionapp.Setup,
 		functionappactiveslot.Setup,
 		functionappfunction.Setup,
+		functionapphybridconnection.Setup,
 		functionappslot.Setup,
 		linuxfunctionapp.Setup,
 		linuxfunctionappslot.Setup,
