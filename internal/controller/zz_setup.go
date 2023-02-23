@@ -31,6 +31,7 @@ import (
 	diagnostic "github.com/upbound/provider-azure/internal/controller/apimanagement/diagnostic"
 	emailtemplate "github.com/upbound/provider-azure/internal/controller/apimanagement/emailtemplate"
 	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
+	globalschema "github.com/upbound/provider-azure/internal/controller/apimanagement/globalschema"
 	identityprovideraad "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovideraad"
 	identityproviderfacebook "github.com/upbound/provider-azure/internal/controller/apimanagement/identityproviderfacebook"
 	identityprovidergoogle "github.com/upbound/provider-azure/internal/controller/apimanagement/identityprovidergoogle"
@@ -733,6 +734,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		diagnostic.Setup,
 		emailtemplate.Setup,
 		gateway.Setup,
+		globalschema.Setup,
 		identityprovideraad.Setup,
 		identityproviderfacebook.Setup,
 		identityprovidergoogle.Setup,
