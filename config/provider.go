@@ -95,6 +95,7 @@ var skipList = []string{
 	"azurerm_dedicated_host_group",
 	"azurerm_storage_disks_pool",
 	"azurerm_storage_sync_group",
+	"azurerm_storage_sync_cloud_endpoint", // depends on azurerm_storage_sync_group
 	"azurerm_virtual_desktop_application_group",
 	// associated with non-generated
 	"azurerm_virtual_desktop_workspace_application_group_association",
@@ -119,10 +120,13 @@ var skipList = []string{
 	"azurerm_sql_database",
 	"azurerm_sql_elasticpool",
 	"azurerm_sql_firewall_rule",
+	"azurerm_site_recovery_replicated_vm", // depends on azurerm_virtual_machine
 	// irrelevant
 	"azurerm_virtual_desktop_application",
 	"azurerm_virtual_desktop_host_pool",
 	"azurerm_virtual_desktop_workspace",
+	"azurerm_virtual_desktop_scaling_plan",                // depends on azurerm_virtual_desktop_host_pool
+	"azurerm_virtual_desktop_host_pool_registration_info", // depends on azurerm_virtual_desktop_host_pool
 	// other upjet issues
 	"azurerm_container_registry_task",
 	"azurerm_dashboard",
@@ -138,6 +142,7 @@ var skipList = []string{
 	"azurerm_log_analytics_storage_insights",
 	"azurerm_virtual_hub_bgp_connection",
 	"azurerm_automation_dsc_configuration",
+	"azurerm_automation_dsc_nodeconfiguration", // depends on azurerm_automation_dsc_configuration
 	"azurerm_monitor_log_profile",
 	"azurerm_machine_learning_inference_cluster",
 	"azurerm_sql_failover_group",
