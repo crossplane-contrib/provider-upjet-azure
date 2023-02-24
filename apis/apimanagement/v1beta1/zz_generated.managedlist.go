@@ -160,6 +160,15 @@ func (l *GatewayList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this GlobalSchemaList.
+func (l *GlobalSchemaList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this IdentityProviderAADList.
 func (l *IdentityProviderAADList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
