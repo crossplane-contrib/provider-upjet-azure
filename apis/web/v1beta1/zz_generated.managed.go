@@ -403,6 +403,72 @@ func (mg *FunctionAppFunction) SetWriteConnectionSecretToReference(r *xpv1.Secre
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this FunctionAppHybridConnection.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *FunctionAppHybridConnection) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this FunctionAppHybridConnection.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *FunctionAppHybridConnection) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this FunctionAppSlot.
 func (mg *FunctionAppSlot) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
