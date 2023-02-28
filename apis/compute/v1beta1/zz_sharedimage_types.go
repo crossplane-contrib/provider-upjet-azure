@@ -65,6 +65,14 @@ type SharedImageParameters struct {
 	// +kubebuilder:validation:Optional
 	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
 
+	// Specifies if Confidential Virtual Machines enabled. It will enable all the features of trusted, with higher confidentiality features for isolate machines or encrypted data. Available for Gen2 machines. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ConfidentialVMEnabled *bool `json:"confidentialVmEnabled,omitempty" tf:"confidential_vm_enabled,omitempty"`
+
+	// Specifies if supports creation of both Confidential virtual machines and Gen2 virtual machines with standard security from a compatible Gen2 OS disk VHD or Gen2 Managed image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ConfidentialVMSupported *bool `json:"confidentialVmSupported,omitempty" tf:"confidential_vm_supported,omitempty"`
+
 	// A description of this Shared Image.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`

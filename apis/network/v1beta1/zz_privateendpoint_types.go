@@ -105,13 +105,17 @@ type PrivateEndpointNetworkInterfaceParameters struct {
 }
 
 type PrivateEndpointObservation struct {
+
+	// A custom_dns_configs block as defined below.
 	CustomDNSConfigs []CustomDNSConfigsObservation `json:"customDnsConfigs,omitempty" tf:"custom_dns_configs,omitempty"`
 
 	// The ID of the Private Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A network_interface block as defined below.
 	NetworkInterface []PrivateEndpointNetworkInterfaceObservation `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
+	// A private_dns_zone_configs block as defined below.
 	PrivateDNSZoneConfigs []PrivateDNSZoneConfigsObservation `json:"privateDnsZoneConfigs,omitempty" tf:"private_dns_zone_configs,omitempty"`
 
 	// A private_dns_zone_group block as defined below.

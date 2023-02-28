@@ -30,7 +30,7 @@ type EncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
 
-	// The ID of the Recovery Services Vault.
+	// Specifies the user assigned identity ID to be used.
 	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
@@ -66,6 +66,10 @@ type VaultObservation struct {
 }
 
 type VaultParameters struct {
+
+	// Whether to enable the Classic experience for VMware replication. If set to false VMware machines will be protected using the new stateless ASR replication appliance. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ClassicVMwareReplicationEnabled *bool `json:"classicVmwareReplicationEnabled,omitempty" tf:"classic_vmware_replication_enabled,omitempty"`
 
 	// Is cross region restore enabled for this Vault? Only can be true, when storage_mode_type is GeoRedundant. Defaults to false.
 	// +kubebuilder:validation:Optional

@@ -88,7 +88,7 @@ type RecurrenceParameters struct {
 	// +kubebuilder:validation:Optional
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
-	// The frequency of the schedule. Possible values are Day, Hour, Minute, Month, Second, Week and Year.
+	// The frequency of the schedule. Possible values are Day, Hour, Minute, Month, NotSpecified, Second, Week and Year.
 	// +kubebuilder:validation:Required
 	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
 

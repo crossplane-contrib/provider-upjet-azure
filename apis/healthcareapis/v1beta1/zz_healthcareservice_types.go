@@ -66,6 +66,7 @@ type HealthcareServiceObservation struct {
 
 type HealthcareServiceParameters struct {
 
+	// A set of Azure object IDs that are allowed to access the Service.
 	// +kubebuilder:validation:Optional
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 

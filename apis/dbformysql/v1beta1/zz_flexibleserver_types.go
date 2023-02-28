@@ -187,7 +187,7 @@ type IdentityObservation struct {
 
 type IdentityParameters struct {
 
-	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service. Required if used together with customer_managed_key block as defined below.
+	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service. Required if used together with customer_managed_key block.
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 

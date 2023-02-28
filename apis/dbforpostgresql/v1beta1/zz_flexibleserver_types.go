@@ -18,11 +18,11 @@ type AuthenticationObservation struct {
 
 type AuthenticationParameters struct {
 
-	// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server.
+	// Whether or not Active Directory authentication is allowed to access the PostgreSQL Flexible Server. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ActiveDirectoryAuthEnabled *bool `json:"activeDirectoryAuthEnabled,omitempty" tf:"active_directory_auth_enabled,omitempty"`
 
-	// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server.
+	// Whether or not password authentication is allowed to access the PostgreSQL Flexible Server. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PasswordAuthEnabled *bool `json:"passwordAuthEnabled,omitempty" tf:"password_auth_enabled,omitempty"`
 
@@ -63,11 +63,11 @@ type FlexibleServerObservation struct {
 
 type FlexibleServerParameters struct {
 
-	// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
 	// +kubebuilder:validation:Optional
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default.
+	// The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
 	// +kubebuilder:validation:Optional
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
@@ -79,11 +79,11 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default and PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// A customer_managed_key block as defined below.
+	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
@@ -139,6 +139,10 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
+	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
+	// +kubebuilder:validation:Optional
+	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
+
 	// The name of the Resource Group where the PostgreSQL Flexible Server should exist. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -156,7 +160,7 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
@@ -182,7 +186,7 @@ type HighAvailabilityObservation struct {
 
 type HighAvailabilityParameters struct {
 
-	// The high availability mode for the PostgreSQL Flexible Server. The only possible value is ZoneRedundant.
+	// The high availability mode for the PostgreSQL Flexible Server. Possible value are SameZone or ZoneRedundant.
 	// +kubebuilder:validation:Required
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 

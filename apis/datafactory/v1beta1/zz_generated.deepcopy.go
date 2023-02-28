@@ -6360,6 +6360,11 @@ func (in *LinkedServiceAzureBlobStorageParameters) DeepCopyInto(out *LinkedServi
 			}
 		}
 	}
+	if in.ConnectionStringInsecure != nil {
+		in, out := &in.ConnectionStringInsecure, &out.ConnectionStringInsecure
+		*out = new(string)
+		**out = **in
+	}
 	if in.ConnectionStringSecretRef != nil {
 		in, out := &in.ConnectionStringSecretRef, &out.ConnectionStringSecretRef
 		*out = new(v1.SecretKeySelector)

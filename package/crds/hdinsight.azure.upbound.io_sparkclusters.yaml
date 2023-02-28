@@ -96,6 +96,7 @@ spec:
                       type: object
                     type: array
                   diskEncryption:
+                    description: One or more disk_encryption block as defined below.
                     items:
                       properties:
                         encryptionAlgorithm:

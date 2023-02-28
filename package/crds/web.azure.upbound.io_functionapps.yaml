@@ -573,10 +573,8 @@ spec:
                             and Premium plan.
                           type: number
                         autoSwapSlotName:
-                          description: Specifies the name of the Function App. Changing
-                            this forces a new resource to be created. Limit the function
-                            name to 32 characters to avoid naming collisions. For
-                            more information about Function App naming rule.
+                          description: The name of the slot to automatically swap
+                            to during deployment
                           type: string
                         cors:
                           description: A cors block as defined below.

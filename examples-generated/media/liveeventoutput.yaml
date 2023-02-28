@@ -19,6 +19,7 @@ spec:
         testing.upbound.io/example-name: example
     manifestName: testmanifest
     outputSnapTimeInSeconds: 0
+    rewindWindowDuration: PT5M
 
 ---
 

@@ -22,7 +22,7 @@ type AccessControlParameters struct {
 	// +kubebuilder:validation:Optional
 	AkamaiSignatureHeaderAuthenticationKey []AkamaiSignatureHeaderAuthenticationKeyParameters `json:"akamaiSignatureHeaderAuthenticationKey,omitempty" tf:"akamai_signature_header_authentication_key,omitempty"`
 
-	// A ip block as defined below.
+	// A ip_allow block as defined below.
 	// +kubebuilder:validation:Optional
 	IPAllow []IPAllowParameters `json:"ipAllow,omitempty" tf:"ip_allow,omitempty"`
 }
@@ -54,13 +54,25 @@ type IPAllowParameters struct {
 	// +kubebuilder:validation:Optional
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The name which should be used for this Streaming Endpoint maximum length is 24. Changing this forces a new Streaming Endpoint to be created.
+	// The sku name of Streaming Endpoint.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The subnet mask prefix length (see CIDR notation).
 	// +kubebuilder:validation:Optional
 	SubnetPrefixLength *float64 `json:"subnetPrefixLength,omitempty" tf:"subnet_prefix_length,omitempty"`
+}
+
+type SkuObservation struct {
+
+	// The sku capacity of Streaming Endpoint.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// The sku name of Streaming Endpoint.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type SkuParameters struct {
 }
 
 type StreamingEndpointCrossSiteAccessPolicyObservation struct {
@@ -84,6 +96,9 @@ type StreamingEndpointObservation struct {
 
 	// The ID of the Streaming Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A sku block defined as below.
+	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 }
 
 type StreamingEndpointParameters struct {

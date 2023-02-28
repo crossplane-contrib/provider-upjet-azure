@@ -52,7 +52,11 @@ type LinkedServiceAzureBlobStorageParameters struct {
 	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
-	// The connection string. Conflicts with sas_uri and service_endpoint.
+	// The connection string sent insecurely. Conflicts with connection_string, sas_uri and service_endpoint.
+	// +kubebuilder:validation:Optional
+	ConnectionStringInsecure *string `json:"connectionStringInsecure,omitempty" tf:"connection_string_insecure,omitempty"`
+
+	// The connection string. Conflicts with connection_string_insecure, sas_uri and service_endpoint.
 	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
@@ -86,11 +90,11 @@ type LinkedServiceAzureBlobStorageParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The SAS URI. Conflicts with connection_string and service_endpoint.
+	// The SAS URI. Conflicts with connection_string_insecure, connection_string and service_endpoint.
 	// +kubebuilder:validation:Optional
 	SASURISecretRef *v1.SecretKeySelector `json:"sasuriSecretRef,omitempty" tf:"-"`
 
-	// The Service Endpoint. Conflicts with connection_string and sas_uri.
+	// The Service Endpoint. Conflicts with connection_string, connection_string_insecure and sas_uri.
 	// +kubebuilder:validation:Optional
 	ServiceEndpointSecretRef *v1.SecretKeySelector `json:"serviceEndpointSecretRef,omitempty" tf:"-"`
 

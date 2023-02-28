@@ -42,6 +42,9 @@ type APIServerAccessProfileParameters struct {
 }
 
 type AciConnectorLinuxObservation struct {
+
+	// A connector_identity block is exported. The exported attributes are defined below.
+	ConnectorIdentity []ConnectorIdentityObservation `json:"connectorIdentity,omitempty" tf:"connector_identity,omitempty"`
 }
 
 type AciConnectorLinuxParameters struct {
@@ -180,6 +183,31 @@ type AzureActiveDirectoryRoleBasedAccessControlParameters struct {
 	// The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
+type ConfidentialComputingObservation struct {
+}
+
+type ConfidentialComputingParameters struct {
+
+	// Should the SGX quote helper be enabled?
+	// +kubebuilder:validation:Required
+	SgxQuoteHelperEnabled *bool `json:"sgxQuoteHelperEnabled" tf:"sgx_quote_helper_enabled,omitempty"`
+}
+
+type ConnectorIdentityObservation struct {
+
+	// The Client ID of the user-defined Managed Identity used by the ACI Connector.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The Object ID of the user-defined Managed Identity used by the ACI Connector.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// The ID of the User Assigned Identity used by the ACI Connector.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+}
+
+type ConnectorIdentityParameters struct {
 }
 
 type DefaultNodePoolObservation struct {
@@ -470,8 +498,7 @@ type KeyManagementServiceParameters struct {
 	// +kubebuilder:validation:Required
 	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
 
-	// Network access of the key vault
-	// Network access of key vault. The possible values are Public and Private. Public means the key vault allows public access from all networks. Private means the key vault disables public access and enables private link. The default value is Public.
+	// Network access of the key vault Network access of key vault. The possible values are Public and Private. Public means the key vault allows public access from all networks. Private means the key vault disables public access and enables private link. The default value is Public.
 	// +kubebuilder:validation:Optional
 	KeyVaultNetworkAccess *string `json:"keyVaultNetworkAccess,omitempty" tf:"key_vault_network_access,omitempty"`
 }
@@ -583,6 +610,10 @@ type KubeletIdentityParameters struct {
 
 type KubernetesClusterObservation struct {
 
+	// A aci_connector_linux block as defined below. For more details, please visit Create and configure an AKS cluster to use virtual nodes.
+	// +kubebuilder:validation:Optional
+	AciConnectorLinux []AciConnectorLinuxObservation `json:"aciConnectorLinux,omitempty" tf:"aci_connector_linux,omitempty"`
+
 	// The FQDN of the Azure Kubernetes Managed Cluster.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
@@ -596,22 +627,22 @@ type KubernetesClusterObservation struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// A ingress_application_gateway block as defined below.
+	// An ingress_application_gateway block as defined below.
 	// +kubebuilder:validation:Optional
 	IngressApplicationGateway []IngressApplicationGatewayObservation `json:"ingressApplicationGateway,omitempty" tf:"ingress_application_gateway,omitempty"`
 
-	// A key_vault_secrets_provider block as defined below. For more details, please visit Azure Keyvault Secrets Provider for AKS.
+	// A key_vault_secrets_provider block as defined below.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretsProvider []KeyVaultSecretsProviderObservation `json:"keyVaultSecretsProvider,omitempty" tf:"key_vault_secrets_provider,omitempty"`
 
-	// A network_profile block as defined below. Changing this forces a new resource to be created.
+	// A network_profile block as defined below.
 	// +kubebuilder:validation:Optional
 	NetworkProfile []NetworkProfileObservation `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
 
 	// The OIDC issuer URL that is associated with the cluster.
 	OidcIssuerURL *string `json:"oidcIssuerUrl,omitempty" tf:"oidc_issuer_url,omitempty"`
 
-	// A oms_agent block as defined below.
+	// An oms_agent block as defined below.
 	// +kubebuilder:validation:Optional
 	OmsAgent []OmsAgentObservation `json:"omsAgent,omitempty" tf:"oms_agent,omitempty"`
 
@@ -650,6 +681,10 @@ type KubernetesClusterParameters struct {
 	// Should the Azure Policy Add-On be enabled? For more details please visit Understand Azure Policy for Azure Kubernetes Service
 	// +kubebuilder:validation:Optional
 	AzurePolicyEnabled *bool `json:"azurePolicyEnabled,omitempty" tf:"azure_policy_enabled,omitempty"`
+
+	// A confidential_computing block as defined below. For more details please the documentation
+	// +kubebuilder:validation:Optional
+	ConfidentialComputing []ConfidentialComputingParameters `json:"confidentialComputing,omitempty" tf:"confidential_computing,omitempty"`
 
 	// DNS prefix specified when creating the managed cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -694,7 +729,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageCleanerIntervalHours *float64 `json:"imageCleanerIntervalHours,omitempty" tf:"image_cleaner_interval_hours,omitempty"`
 
-	// A ingress_application_gateway block as defined below.
+	// An ingress_application_gateway block as defined below.
 	// +kubebuilder:validation:Optional
 	IngressApplicationGateway []IngressApplicationGatewayParameters `json:"ingressApplicationGateway,omitempty" tf:"ingress_application_gateway,omitempty"`
 
@@ -702,7 +737,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyManagementService []KeyManagementServiceParameters `json:"keyManagementService,omitempty" tf:"key_management_service,omitempty"`
 
-	// A key_vault_secrets_provider block as defined below. For more details, please visit Azure Keyvault Secrets Provider for AKS.
+	// A key_vault_secrets_provider block as defined below.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretsProvider []KeyVaultSecretsProviderParameters `json:"keyVaultSecretsProvider,omitempty" tf:"key_vault_secrets_provider,omitempty"`
 
@@ -738,7 +773,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MonitorMetrics []MonitorMetricsParameters `json:"monitorMetrics,omitempty" tf:"monitor_metrics,omitempty"`
 
-	// A network_profile block as defined below. Changing this forces a new resource to be created.
+	// A network_profile block as defined below.
 	// +kubebuilder:validation:Optional
 	NetworkProfile []NetworkProfileParameters `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
 
@@ -750,7 +785,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	OidcIssuerEnabled *bool `json:"oidcIssuerEnabled,omitempty" tf:"oidc_issuer_enabled,omitempty"`
 
-	// A oms_agent block as defined below.
+	// An oms_agent block as defined below.
 	// +kubebuilder:validation:Optional
 	OmsAgent []OmsAgentParameters `json:"omsAgent,omitempty" tf:"oms_agent,omitempty"`
 
@@ -968,7 +1003,7 @@ type NetworkProfileObservation struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerProfile []LoadBalancerProfileObservation `json:"loadBalancerProfile,omitempty" tf:"load_balancer_profile,omitempty"`
 
-	// A nat_gateway_profile block as defined below. This can only be specified when load_balancer_sku is set to standard and outbound_type is set to managedNATGateway or userAssignedNATGateway. Changing this forces a new resource to be created.
+	// A nat_gateway_profile block as defined below.
 	// +kubebuilder:validation:Optional
 	NATGatewayProfile []NATGatewayProfileObservation `json:"natGatewayProfile,omitempty" tf:"nat_gateway_profile,omitempty"`
 }
@@ -999,7 +1034,7 @@ type NetworkProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerSku *string `json:"loadBalancerSku,omitempty" tf:"load_balancer_sku,omitempty"`
 
-	// A nat_gateway_profile block as defined below. This can only be specified when load_balancer_sku is set to standard and outbound_type is set to managedNATGateway or userAssignedNATGateway. Changing this forces a new resource to be created.
+	// A nat_gateway_profile block as defined below.
 	// +kubebuilder:validation:Optional
 	NATGatewayProfile []NATGatewayProfileParameters `json:"natGatewayProfile,omitempty" tf:"nat_gateway_profile,omitempty"`
 
@@ -1045,7 +1080,7 @@ type NodeNetworkProfileObservation struct {
 
 type NodeNetworkProfileParameters struct {
 
-	// Specifies a mapping of tags to the instance-level public IPs.
+	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
@@ -1294,7 +1329,7 @@ type WebAppRoutingObservation struct {
 
 type WebAppRoutingParameters struct {
 
-	// Specifies the ID of the DNS Zone in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled.
+	// Specifies the ID of the DNS Zone in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. For Bring-Your-Own DNS zones this property should be set to an empty string "".
 	// +kubebuilder:validation:Required
 	DNSZoneID *string `json:"dnsZoneId" tf:"dns_zone_id,omitempty"`
 }

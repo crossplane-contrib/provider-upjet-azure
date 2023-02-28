@@ -28,7 +28,7 @@ type SubscriptionPolicyAssignmentIdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
+	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned or UserAssigned.
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

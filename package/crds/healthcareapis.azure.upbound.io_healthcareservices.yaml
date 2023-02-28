@@ -65,6 +65,8 @@ spec:
               forProvider:
                 properties:
                   accessPolicyObjectIds:
+                    description: A set of Azure object IDs that are allowed to access
+                      the Service.
                     items:
                       type: string
                     type: array

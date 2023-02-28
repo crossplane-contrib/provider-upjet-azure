@@ -173,6 +173,7 @@ type HBaseClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeIsolation []HBaseClusterComputeIsolationParameters `json:"computeIsolation,omitempty" tf:"compute_isolation,omitempty"`
 
+	// One or more disk_encryption block as defined below.
 	// +kubebuilder:validation:Optional
 	DiskEncryption []HBaseClusterDiskEncryptionParameters `json:"diskEncryption,omitempty" tf:"disk_encryption,omitempty"`
 

@@ -595,6 +595,7 @@ spec:
               atProvider:
                 properties:
                   customDnsConfigs:
+                    description: A custom_dns_configs block as defined below.
                     items:
                       properties:
                         fqdn:
@@ -612,6 +613,7 @@ spec:
                     description: The ID of the Private Endpoint.
                     type: string
                   networkInterface:
+                    description: A network_interface block as defined below.
                     items:
                       properties:
                         id:
@@ -625,6 +627,7 @@ spec:
                       type: object
                     type: array
                   privateDnsZoneConfigs:
+                    description: A private_dns_zone_configs block as defined below.
                     items:
                       properties:
                         id:

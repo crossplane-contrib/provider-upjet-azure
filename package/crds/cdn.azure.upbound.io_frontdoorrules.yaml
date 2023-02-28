@@ -234,9 +234,6 @@ spec:
                                   be redirected as. This overrides the configuration
                                   specified in the route to be associated with. Possible
                                   values include MatchRequest, HttpOnly or HttpsOnly.
-                                  Defaults to MatchRequest. Possible values include
-                                  HttpOnly, HttpsOnly or MatchRequest. Defaults to
-                                  MatchRequest.
                                 type: string
                               queryStringCachingBehavior:
                                 description: IncludeSpecifiedQueryStrings query strings

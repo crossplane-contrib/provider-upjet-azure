@@ -50,7 +50,7 @@ type MonitorScheduledQueryRulesAlertV2ActionObservation struct {
 
 type MonitorScheduledQueryRulesAlertV2ActionParameters struct {
 
-	// List of Action Group resource ids to invoke when the alert fires.
+	// List of Action Group resource IDs to invoke when the alert fires.
 	// +kubebuilder:validation:Optional
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
 
@@ -84,7 +84,7 @@ type MonitorScheduledQueryRulesAlertV2CriteriaParameters struct {
 	// +kubebuilder:validation:Required
 	Query *string `json:"query" tf:"query,omitempty"`
 
-	// Specifies the column containing the resource id. The content of the column must be an uri formatted as resource id.
+	// Specifies the column containing the resource ID. The content of the column must be an uri formatted as resource ID.
 	// +kubebuilder:validation:Optional
 	ResourceIDColumn *string `json:"resourceIdColumn,omitempty" tf:"resource_id_column,omitempty"`
 
@@ -102,7 +102,7 @@ type MonitorScheduledQueryRulesAlertV2Observation struct {
 	// The api-version used when creating this alert rule.
 	CreatedWithAPIVersion *string `json:"createdWithApiVersion,omitempty" tf:"created_with_api_version,omitempty"`
 
-	// The id of the Monitor Scheduled Query Rule.
+	// The ID of the Monitor Scheduled Query Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// True if this alert rule is a legacy Log Analytic Rule.
@@ -167,7 +167,7 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the list of resource ids that this scheduled query rule is scoped to. Changing this forces a new resource to be created.
+	// Specifies the list of resource IDs that this scheduled query rule is scoped to. Changing this forces a new resource to be created. Currently, the API supports exactly 1 resource ID in the scopes list.
 	// +crossplane:generate:reference:type=ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

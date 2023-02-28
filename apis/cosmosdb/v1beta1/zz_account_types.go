@@ -78,11 +78,11 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
-	// Enable automatic fail over for this Cosmos DB account.
+	// Enable automatic failover for this Cosmos DB account.
 	// +kubebuilder:validation:Optional
 	EnableAutomaticFailover *bool `json:"enableAutomaticFailover,omitempty" tf:"enable_automatic_failover,omitempty"`
 
-	// Enable Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
+	// Enable the Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnableFreeTier *bool `json:"enableFreeTier,omitempty" tf:"enable_free_tier,omitempty"`
 
@@ -94,7 +94,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Required
 	GeoLocation []GeoLocationParameters `json:"geoLocation" tf:"geo_location,omitempty"`
 
-	// CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IP's for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.
+	// CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.
 	// +kubebuilder:validation:Optional
 	IPRangeFilter *string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty"`
 
@@ -134,7 +134,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkACLBypassIds []*string `json:"networkAclBypassIds,omitempty" tf:"network_acl_bypass_ids,omitempty"`
 
-	// Specifies the Offer Type to use for this CosmosDB Account - currently this can only be set to Standard.
+	// Specifies the Offer Type to use for this CosmosDB Account; currently, this can only be set to Standard.
 	// +kubebuilder:validation:Required
 	OfferType *string `json:"offerType" tf:"offer_type,omitempty"`
 
@@ -191,7 +191,7 @@ type BackupParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionInHours *float64 `json:"retentionInHours,omitempty" tf:"retention_in_hours,omitempty"`
 
-	// The storage redundancy which is used to indicate type of backup residency. This is configurable only when type is Periodic. Possible values are Geo, Local and Zone.
+	// The storage redundancy is used to indicate the type of backup residency. This is configurable only when type is Periodic. Possible values are Geo, Local and Zone.
 	// +kubebuilder:validation:Optional
 	StorageRedundancy *string `json:"storageRedundancy,omitempty" tf:"storage_redundancy,omitempty"`
 
@@ -205,7 +205,7 @@ type CapabilitiesObservation struct {
 
 type CapabilitiesParameters struct {
 
-	// Specifies the name of the CosmosDB Account. Changing this forces a new resource to be created.
+	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -229,11 +229,11 @@ type ConsistencyPolicyParameters struct {
 	// +kubebuilder:validation:Required
 	ConsistencyLevel *string `json:"consistencyLevel" tf:"consistency_level,omitempty"`
 
-	// When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level is set to BoundedStaleness.
+	// When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. The accepted range for this value is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level is set to BoundedStaleness.
 	// +kubebuilder:validation:Optional
 	MaxIntervalInSeconds *float64 `json:"maxIntervalInSeconds,omitempty" tf:"max_interval_in_seconds,omitempty"`
 
-	// When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 10 – 2147483647. Defaults to 100. Required when consistency_level is set to BoundedStaleness.
+	// When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. The accepted range for this value is 10 – 2147483647. Defaults to 100. Required when consistency_level is set to BoundedStaleness.
 	// +kubebuilder:validation:Optional
 	MaxStalenessPrefix *float64 `json:"maxStalenessPrefix,omitempty" tf:"max_staleness_prefix,omitempty"`
 }

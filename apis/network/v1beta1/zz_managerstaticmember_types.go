@@ -38,7 +38,7 @@ type ManagerStaticMemberParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkGroupIDSelector *v1.Selector `json:"networkGroupIdSelector,omitempty" tf:"-"`
 
-	// The ID of the Network Manager Static Member.
+	// Specifies the Resource ID of the Virtual Network using as the Static Member. Changing this forces a new Network Manager Static Member to be created.
 	// +crossplane:generate:reference:type=VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

@@ -18,7 +18,7 @@ type QueueObservation struct {
 	// The ID of the Storage Queue.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the Storage Queue.
+	// The Resource Manager ID of this Storage Queue.
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
 }
 

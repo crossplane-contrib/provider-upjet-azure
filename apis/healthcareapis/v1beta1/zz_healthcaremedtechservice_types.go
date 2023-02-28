@@ -92,6 +92,7 @@ type HealthcareMedtechServiceParameters struct {
 	// +kubebuilder:validation:Required
 	Location *string `json:"location" tf:"location,omitempty"`
 
+	// A mapping of tags to assign to the Healthcare Med Tech Service.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 

@@ -96,6 +96,7 @@ spec:
                       type: object
                     type: array
                   diskEncryption:
+                    description: One or more disk_encryption block as defined below.
                     items:
                       properties:
                         encryptionAlgorithm:
@@ -501,16 +502,19 @@ spec:
                                 - namespace
                                 type: object
                               scriptActions:
+                                description: The script action which will run on the
+                                  cluster. Changing this forces a new resource to
+                                  be created.
                                 items:
                                   properties:
                                     name:
-                                      description: Specifies the name for this HDInsight
-                                        Kafka Cluster. Changing this forces a new
-                                        resource to be created.
+                                      description: The name of the script action.
                                       type: string
                                     parameters:
+                                      description: The parameters for the script provided.
                                       type: string
                                     uri:
+                                      description: The URI to the script.
                                       type: string
                                   required:
                                   - name
@@ -682,16 +686,19 @@ spec:
                                 - namespace
                                 type: object
                               scriptActions:
+                                description: The script action which will run on the
+                                  cluster. Changing this forces a new resource to
+                                  be created.
                                 items:
                                   properties:
                                     name:
-                                      description: Specifies the name for this HDInsight
-                                        Kafka Cluster. Changing this forces a new
-                                        resource to be created.
+                                      description: The name of the script action.
                                       type: string
                                     parameters:
+                                      description: The parameters for the script provided.
                                       type: string
                                     uri:
+                                      description: The URI to the script.
                                       type: string
                                   required:
                                   - name
@@ -869,16 +876,19 @@ spec:
                                 - namespace
                                 type: object
                               scriptActions:
+                                description: The script action which will run on the
+                                  cluster. Changing this forces a new resource to
+                                  be created.
                                 items:
                                   properties:
                                     name:
-                                      description: Specifies the name for this HDInsight
-                                        Kafka Cluster. Changing this forces a new
-                                        resource to be created.
+                                      description: The name of the script action.
                                       type: string
                                     parameters:
+                                      description: The parameters for the script provided.
                                       type: string
                                     uri:
+                                      description: The URI to the script.
                                       type: string
                                   required:
                                   - name
@@ -1056,16 +1066,19 @@ spec:
                                 - namespace
                                 type: object
                               scriptActions:
+                                description: The script action which will run on the
+                                  cluster. Changing this forces a new resource to
+                                  be created.
                                 items:
                                   properties:
                                     name:
-                                      description: Specifies the name for this HDInsight
-                                        Kafka Cluster. Changing this forces a new
-                                        resource to be created.
+                                      description: The name of the script action.
                                       type: string
                                     parameters:
+                                      description: The parameters for the script provided.
                                       type: string
                                     uri:
+                                      description: The URI to the script.
                                       type: string
                                   required:
                                   - name

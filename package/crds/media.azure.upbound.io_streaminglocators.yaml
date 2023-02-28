@@ -183,6 +183,13 @@ spec:
                     description: The end time of the Streaming Locator. Changing this
                       forces a new Streaming Locator to be created.
                     type: string
+                  filterNames:
+                    description: A list of names of asset or account filters which
+                      apply to this Streaming Locator. Changing this forces a new
+                      Streaming Locator to be created.
+                    items:
+                      type: string
+                    type: array
                   mediaServicesAccountName:
                     description: The Media Services account name. Changing this forces
                       a new Streaming Locator to be created.

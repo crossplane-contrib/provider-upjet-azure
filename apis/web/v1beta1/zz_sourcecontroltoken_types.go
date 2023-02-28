@@ -25,6 +25,7 @@ type SourceControlTokenParameters struct {
 	// +kubebuilder:validation:Required
 	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 
+	// The Access Token Secret.
 	// +kubebuilder:validation:Optional
 	TokenSecretSecretRef *v1.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
 

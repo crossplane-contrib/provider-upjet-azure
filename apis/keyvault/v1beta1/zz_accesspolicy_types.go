@@ -47,7 +47,7 @@ type AccessPolicyParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
-	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
+	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from  azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 

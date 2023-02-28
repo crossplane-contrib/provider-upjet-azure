@@ -68,7 +68,7 @@ type ScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// List of occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
+	// List of monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
 	// +kubebuilder:validation:Optional
 	MonthlyOccurrence []MonthlyOccurrenceParameters `json:"monthlyOccurrence,omitempty" tf:"monthly_occurrence,omitempty"`
 

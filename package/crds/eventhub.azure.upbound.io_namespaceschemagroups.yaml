@@ -65,8 +65,8 @@ spec:
               forProvider:
                 properties:
                   namespaceId:
-                    description: The ID of the EventHub Namespace. Changing this forces
-                      a new resource to be created.
+                    description: Specifies the ID of the EventHub Namespace. Changing
+                      this forces a new resource to be created.
                     type: string
                   namespaceIdRef:
                     description: Reference to a EventHubNamespace in eventhub to populate
@@ -144,13 +144,14 @@ spec:
                         type: object
                     type: object
                   schemaCompatibility:
-                    description: The compatibility of this schema group. Possible
-                      values are None, Backward, Forward. Changing this forces a new
-                      resource to be created.
+                    description: Specifies the compatibility of this schema group.
+                      Possible values are None, Backward, Forward. Changing this forces
+                      a new resource to be created.
                     type: string
                   schemaType:
-                    description: The Type of this schema group. Possible values are
-                      Avro, Unknown. Changing this forces a new resource to be created.
+                    description: Specifies the Type of this schema group. Possible
+                      values are Avro, Unknown. Changing this forces a new resource
+                      to be created.
                     type: string
                 required:
                 - schemaCompatibility

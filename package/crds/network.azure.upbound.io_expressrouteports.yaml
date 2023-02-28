@@ -68,6 +68,10 @@ spec:
                     description: Bandwidth of the Express Route Port in Gbps. Changing
                       this forces a new Express Route Port to be created.
                     type: number
+                  billingType:
+                    description: The billing type of the Express Route Port. Possible
+                      values are MeteredData and UnlimitedData.
+                    type: string
                   encapsulation:
                     description: 'The encapsulation method used for the Express Route
                       Port. Changing this forces a new Express Route Port to be created.

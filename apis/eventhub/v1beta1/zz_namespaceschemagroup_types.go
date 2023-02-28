@@ -21,7 +21,7 @@ type NamespaceSchemaGroupObservation struct {
 
 type NamespaceSchemaGroupParameters struct {
 
-	// The ID of the EventHub Namespace. Changing this forces a new resource to be created.
+	// Specifies the ID of the EventHub Namespace. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -35,11 +35,11 @@ type NamespaceSchemaGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// The compatibility of this schema group. Possible values are None, Backward, Forward. Changing this forces a new resource to be created.
+	// Specifies the compatibility of this schema group. Possible values are None, Backward, Forward. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	SchemaCompatibility *string `json:"schemaCompatibility" tf:"schema_compatibility,omitempty"`
 
-	// The Type of this schema group. Possible values are Avro, Unknown. Changing this forces a new resource to be created.
+	// Specifies the Type of this schema group. Possible values are Avro, Unknown. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	SchemaType *string `json:"schemaType" tf:"schema_type,omitempty"`
 }

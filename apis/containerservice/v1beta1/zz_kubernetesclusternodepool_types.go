@@ -86,7 +86,7 @@ type KubernetesClusterNodePoolNodeNetworkProfileObservation struct {
 
 type KubernetesClusterNodePoolNodeNetworkProfileParameters struct {
 
-	// Specifies a mapping of tags to the instance-level public IPs.
+	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
