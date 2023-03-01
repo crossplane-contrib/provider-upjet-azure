@@ -44,7 +44,7 @@ const (
 	keyOidcTokenFilePath        = "oidc_token_file_path"
 	keyUseOIDC                  = "use_oidc"
 	// Default OidcTokenFilePath
-	defaultOidcTokenFilePath    = "/var/run/secrets/azure/tokens/azure-identity-token"
+	defaultOidcTokenFilePath = "/var/run/secrets/azure/tokens/azure-identity-token"
 )
 
 var (
@@ -157,7 +157,7 @@ func oidcAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	if pc.Spec.ClientID != nil || len(*pc.Spec.TenantID) == 0 {
 		return errors.New(errClientIDNotSet)
 	}
-    // OIDC Token File Path defaults to a projected-volume path mounted in the pod running in the AKS cluster, when workload identity is enabled on the pod.
+	// OIDC Token File Path defaults to a projected-volume path mounted in the pod running in the AKS cluster, when workload identity is enabled on the pod.
 	ps.Configuration[keyOidcTokenFilePath] = defaultOidcTokenFilePath
 	if pc.Spec.OidcTokenFilePath != nil {
 		ps.Configuration[keyOidcTokenFilePath] = *pc.Spec.OidcTokenFilePath
