@@ -40,11 +40,14 @@ const (
 	keyMSIEndpoint              = "msi_endpoint"
 	keyClientSecret             = "client_secret"
 	keyEnvironment              = "environment"
+	keyOidcTokenFilePath        = "oidc_token_file_path"
+	keyUseOIDC                  = "use_oidc"
 )
 
 var (
 	credentialsSourceUserAssignedManagedIdentity   xpv1.CredentialsSource = "UserAssignedManagedIdentity"
 	credentialsSourceSystemAssignedManagedIdentity xpv1.CredentialsSource = "SystemAssignedManagedIdentity"
+	credentialsSourceOIDCTokenFile                 xpv1.CredentialsSource = "OIDCTokenFile"
 )
 
 // TerraformSetupBuilder returns Terraform setup with provider specific
@@ -89,6 +92,8 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		switch pc.Spec.Credentials.Source { //nolint:exhaustive
 		case credentialsSourceSystemAssignedManagedIdentity, credentialsSourceUserAssignedManagedIdentity:
 			err = msiAuth(pc, &ps)
+		case credentialsSourceOIDCTokenFile:
+			err = oidcAuth(pc, &ps)
 		default:
 			err = spAuth(ctx, pc, &ps, client)
 		}
@@ -137,4 +142,26 @@ func msiAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
 	}
 	return nil
+}
+
+func oidcAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
+	if pc.Spec.SubscriptionID == nil || len(*pc.Spec.SubscriptionID) == 0 {
+		return errors.New(errSubscriptionIDNotSet)
+	}
+	if pc.Spec.TenantID == nil || len(*pc.Spec.TenantID) == 0 {
+		return errors.New(errTenantIDNotSet)
+	}
+	if pc.Spec.ClientID != nil {
+		ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	}
+	if pc.Spec.OidcTokenFilePath != nil {
+		ps.Configuration[keyOidcTokenFilePath] = *pc.Spec.OidcTokenFilePath
+	}
+	ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
+	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
+	ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	ps.Configuration[keyOidcTokenFilePath] = *pc.Spec.OidcTokenFilePath
+	ps.Configuration[keyUseOIDC] = "true"
+	return nil
+
 }
