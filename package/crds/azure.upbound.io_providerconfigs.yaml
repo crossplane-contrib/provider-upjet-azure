@@ -101,6 +101,7 @@ spec:
                     - Secret
                     - UserAssignedManagedIdentity
                     - SystemAssignedManagedIdentity
+                    - OIDCTokenFile
                     type: string
                 required:
                 - source
@@ -113,6 +114,10 @@ spec:
               msiEndpoint:
                 description: MSIEndpoint is the optional path to a custom endpoint
                   for Managed Service Identity.
+                type: string
+              oidcTokenFilePath:
+                description: OIDCTokenFilePath is the optional path to a token file
+                  that allows to access a managed identity.
                 type: string
               subscriptionID:
                 description: SubscriptionID is the Azure subscription ID to be used.
