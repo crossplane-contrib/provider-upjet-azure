@@ -158,7 +158,7 @@ func oidcAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 		return errors.New(errClientIDNotSet)
 	}
     // OIDC Token File Path defaults to a projected-volume path mounted in the pod running in the AKS cluster, when workload identity is enabled on the pod.
-	ps.Configuration[keyOidcTokenFilePath] =
+	ps.Configuration[keyOidcTokenFilePath] = defaultOidcTokenFilePath
 	if pc.Spec.OidcTokenFilePath != nil {
 		ps.Configuration[keyOidcTokenFilePath] = *pc.Spec.OidcTokenFilePath
 	}
