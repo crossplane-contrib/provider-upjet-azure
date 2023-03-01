@@ -25,6 +25,7 @@ const (
 	errUnmarshalCredentials = "cannot unmarshal Azure credentials as JSON"
 	errSubscriptionIDNotSet = "subscription ID must be set in ProviderConfig when credential source is InjectedIdentity"
 	errTenantIDNotSet       = "tenant ID must be set in ProviderConfig when credential source is InjectedIdentity"
+	errClientIDNotSet       = "Client ID must be set in ProviderConfig when credential source is OIDCTokenFile"
 	// Azure service principal credentials file JSON keys
 	keyAzureSubscriptionID = "subscriptionId"
 	keyAzureClientID       = "clientId"
@@ -42,6 +43,8 @@ const (
 	keyEnvironment              = "environment"
 	keyOidcTokenFilePath        = "oidc_token_file_path"
 	keyUseOIDC                  = "use_oidc"
+	// Default OidcTokenFilePath
+	defaultOidcTokenFilePath    = "/var/run/secrets/azure/tokens/azure-identity-token"
 )
 
 var (
@@ -151,16 +154,17 @@ func oidcAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	if pc.Spec.TenantID == nil || len(*pc.Spec.TenantID) == 0 {
 		return errors.New(errTenantIDNotSet)
 	}
-	if pc.Spec.ClientID != nil {
-		ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	if pc.Spec.ClientID != nil || len(*pc.Spec.TenantID) == 0 {
+		return errors.New(errClientIDNotSet)
 	}
+    // OIDC Token File Path defaults to a projected-volume path mounted in the pod running in the AKS cluster, when workload identity is enabled on the pod.
+	ps.Configuration[keyOidcTokenFilePath] =
 	if pc.Spec.OidcTokenFilePath != nil {
 		ps.Configuration[keyOidcTokenFilePath] = *pc.Spec.OidcTokenFilePath
 	}
 	ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
 	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
 	ps.Configuration[keyClientID] = *pc.Spec.ClientID
-	ps.Configuration[keyOidcTokenFilePath] = *pc.Spec.OidcTokenFilePath
 	ps.Configuration[keyUseOIDC] = "true"
 	return nil
 
