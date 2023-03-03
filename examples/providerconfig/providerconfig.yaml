@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-azure-creds
+  namespace: upbound-system
+type: Opaque
+data:
+  creds: <base64-encoded service principal credentials document>
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: example-azure-creds
+      namespace: upbound-system
+      key: creds

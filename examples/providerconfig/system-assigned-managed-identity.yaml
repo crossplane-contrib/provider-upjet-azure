@@ -1,0 +1,9 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: SystemAssignedManagedIdentity
+  subscriptionID: <subscription ID>
+  tenantID: <tenant ID>
