@@ -228,6 +228,7 @@ type KafkaClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeIsolation []KafkaClusterComputeIsolationParameters `json:"computeIsolation,omitempty" tf:"compute_isolation,omitempty"`
 
+	// One or more disk_encryption block as defined below.
 	// +kubebuilder:validation:Optional
 	DiskEncryption []KafkaClusterDiskEncryptionParameters `json:"diskEncryption,omitempty" tf:"disk_encryption,omitempty"`
 
@@ -318,6 +319,7 @@ type KafkaClusterRolesHeadNodeParameters struct {
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ScriptActions []KafkaClusterRolesHeadNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -353,13 +355,15 @@ type KafkaClusterRolesHeadNodeScriptActionsObservation struct {
 
 type KafkaClusterRolesHeadNodeScriptActionsParameters struct {
 
-	// Specifies the name for this HDInsight Kafka Cluster. Changing this forces a new resource to be created.
+	// The name of the script action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The parameters for the script provided.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The URI to the script.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -403,6 +407,7 @@ type KafkaClusterRolesWorkerNodeParameters struct {
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ScriptActions []KafkaClusterRolesWorkerNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -442,13 +447,15 @@ type KafkaClusterRolesWorkerNodeScriptActionsObservation struct {
 
 type KafkaClusterRolesWorkerNodeScriptActionsParameters struct {
 
-	// Specifies the name for this HDInsight Kafka Cluster. Changing this forces a new resource to be created.
+	// The name of the script action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The parameters for the script provided.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The URI to the script.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -466,6 +473,7 @@ type KafkaClusterRolesZookeeperNodeParameters struct {
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ScriptActions []KafkaClusterRolesZookeeperNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -501,13 +509,15 @@ type KafkaClusterRolesZookeeperNodeScriptActionsObservation struct {
 
 type KafkaClusterRolesZookeeperNodeScriptActionsParameters struct {
 
-	// Specifies the name for this HDInsight Kafka Cluster. Changing this forces a new resource to be created.
+	// The name of the script action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The parameters for the script provided.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The URI to the script.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -613,6 +623,7 @@ type KafkaManagementNodeParameters struct {
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
+	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ScriptActions []KafkaManagementNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -648,13 +659,15 @@ type KafkaManagementNodeScriptActionsObservation struct {
 
 type KafkaManagementNodeScriptActionsParameters struct {
 
-	// Specifies the name for this HDInsight Kafka Cluster. Changing this forces a new resource to be created.
+	// The name of the script action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// The parameters for the script provided.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The URI to the script.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }

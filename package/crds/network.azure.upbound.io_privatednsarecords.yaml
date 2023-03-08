@@ -154,6 +154,7 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   ttl:
+                    description: The Time To Live (TTL) of the DNS record in seconds.
                     type: number
                   zoneName:
                     description: Specifies the Private DNS Zone where the resource

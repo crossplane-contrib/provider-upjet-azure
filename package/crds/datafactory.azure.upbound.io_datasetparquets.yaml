@@ -109,9 +109,11 @@ spec:
                   compressionCodec:
                     description: The compression codec used to read/write text files.
                       Valid values are bzip2, gzip, deflate, ZipDeflate, TarGzip,
-                      Tar, snappy, or lz4. Please note these values are case sensitive.
+                      Tar, snappy, or lz4. Please note these values are case-sensitive.
                     type: string
                   compressionLevel:
+                    description: Specifies the compression level. Possible values
+                      are Optimal and Fastest,
                     type: string
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Dataset

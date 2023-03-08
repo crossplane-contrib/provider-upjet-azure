@@ -376,6 +376,14 @@ spec:
                             type: string
                         type: object
                     type: object
+                  streamOptions:
+                    description: A list of options to use for the LiveEvent. Possible
+                      values are Default, LowLatency, LowLatencyV2. Please see more
+                      at this document. Changing this forces a new resource to be
+                      created.
+                    items:
+                      type: string
+                    type: array
                   tags:
                     additionalProperties:
                       type: string

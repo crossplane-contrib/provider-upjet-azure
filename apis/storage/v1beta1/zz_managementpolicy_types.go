@@ -154,8 +154,8 @@ type RuleParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// A filters block as documented below.
-	// +kubebuilder:validation:Optional
-	Filters []FiltersParameters `json:"filters,omitempty" tf:"filters,omitempty"`
+	// +kubebuilder:validation:Required
+	Filters []FiltersParameters `json:"filters" tf:"filters,omitempty"`
 
 	// The name of the rule. Rule name is case-sensitive. It must be unique within a policy.
 	// +kubebuilder:validation:Required

@@ -459,7 +459,8 @@ spec:
                           additionalProperties:
                             type: string
                           description: Specifies a mapping of tags to the instance-level
-                            public IPs.
+                            public IPs. Changing this forces a new resource to be
+                            created.
                           type: object
                       type: object
                     type: array

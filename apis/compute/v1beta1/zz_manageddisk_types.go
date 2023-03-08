@@ -163,7 +163,7 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	SecureVMDiskEncryptionSetID *string `json:"secureVmDiskEncryptionSetId,omitempty" tf:"secure_vm_disk_encryption_set_id,omitempty"`
 
-	// Security Type of the Managed Disk when it is used for a Confidential VM. Possible values are VMGuestStateOnlyEncryptedWithPlatformKey, ConfidentialVM_DiskEncryptedWithPlatformKey and ConfidentialVM_DiskEncryptedWithCustomerKey. Changing this forces a new resource to be created.
+	// Security Type of the Managed Disk when it is used for a Confidential VM. Possible values are ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey, ConfidentialVM_DiskEncryptedWithPlatformKey and ConfidentialVM_DiskEncryptedWithCustomerKey. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SecurityType *string `json:"securityType,omitempty" tf:"security_type,omitempty"`
 

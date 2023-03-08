@@ -232,7 +232,7 @@ func (tr *ClusterManagedPrivateEndpoint) LateInitialize(attrs []byte) (bool, err
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ClusterManagedPrivateEndpoint) GetTerraformSchemaVersion() int {
-	return 1
+	return 2
 }
 
 // GetTerraformResourceType returns Terraform resource type for this ClusterPrincipalAssignment

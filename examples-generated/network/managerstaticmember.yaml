@@ -11,7 +11,9 @@ spec:
     networkGroupIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    target_network_id: ${azurerm_virtual_network.example.id}
+    targetVirtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

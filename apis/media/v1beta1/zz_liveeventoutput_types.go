@@ -67,6 +67,9 @@ type LiveEventOutputParameters struct {
 	// The initial timestamp that the live output will start at, any content before this value will not be archived. Changing this forces a new Live Output to be created.
 	// +kubebuilder:validation:Optional
 	OutputSnapTimeInSeconds *float64 `json:"outputSnapTimeInSeconds,omitempty" tf:"output_snap_time_in_seconds,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RewindWindowDuration *string `json:"rewindWindowDuration,omitempty" tf:"rewind_window_duration,omitempty"`
 }
 
 // LiveEventOutputSpec defines the desired state of LiveEventOutput

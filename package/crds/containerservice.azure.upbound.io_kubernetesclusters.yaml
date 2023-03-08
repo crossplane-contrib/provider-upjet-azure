@@ -401,6 +401,18 @@ spec:
                       details please visit Understand Azure Policy for Azure Kubernetes
                       Service
                     type: boolean
+                  confidentialComputing:
+                    description: A confidential_computing block as defined below.
+                      For more details please the documentation
+                    items:
+                      properties:
+                        sgxQuoteHelperEnabled:
+                          description: Should the SGX quote helper be enabled?
+                          type: boolean
+                      required:
+                      - sgxQuoteHelperEnabled
+                      type: object
+                    type: array
                   defaultNodePool:
                     description: A default_node_pool block as defined below.
                     items:
@@ -729,7 +741,8 @@ spec:
                                 additionalProperties:
                                   type: string
                                 description: Specifies a mapping of tags to the instance-level
-                                  public IPs.
+                                  public IPs. Changing this forces a new resource
+                                  to be created.
                                 type: object
                             type: object
                           type: array
@@ -1100,7 +1113,7 @@ spec:
                       be cleaned up. Defaults to 48.
                     type: number
                   ingressApplicationGateway:
-                    description: A ingress_application_gateway block as defined below.
+                    description: An ingress_application_gateway block as defined below.
                     items:
                       properties:
                         gatewayId:
@@ -1233,8 +1246,6 @@ spec:
                     type: array
                   keyVaultSecretsProvider:
                     description: A key_vault_secrets_provider block as defined below.
-                      For more details, please visit Azure Keyvault Secrets Provider
-                      for AKS.
                     items:
                       properties:
                         secretRotationEnabled:
@@ -1393,8 +1404,7 @@ spec:
                       type: object
                     type: array
                   networkProfile:
-                    description: A network_profile block as defined below. Changing
-                      this forces a new resource to be created.
+                    description: A network_profile block as defined below.
                     items:
                       properties:
                         dnsServiceIp:
@@ -1474,10 +1484,6 @@ spec:
                           type: string
                         natGatewayProfile:
                           description: A nat_gateway_profile block as defined below.
-                            This can only be specified when load_balancer_sku is set
-                            to standard and outbound_type is set to managedNATGateway
-                            or userAssignedNATGateway. Changing this forces a new
-                            resource to be created.
                           items:
                             properties:
                               idleTimeoutInMinutes:
@@ -1558,7 +1564,7 @@ spec:
                     description: Enable or Disable the OIDC issuer URL
                     type: boolean
                   omsAgent:
-                    description: A oms_agent block as defined below.
+                    description: An oms_agent block as defined below.
                     items:
                       properties:
                         logAnalyticsWorkspaceId:
@@ -1834,7 +1840,8 @@ spec:
                         dnsZoneId:
                           description: Specifies the ID of the DNS Zone in which DNS
                             entries are created for applications deployed to the cluster
-                            when Web App Routing is enabled.
+                            when Web App Routing is enabled. For Bring-Your-Own DNS
+                            zones this property should be set to an empty string "".
                           type: string
                       required:
                       - dnsZoneId
@@ -2090,6 +2097,33 @@ spec:
             properties:
               atProvider:
                 properties:
+                  aciConnectorLinux:
+                    description: A aci_connector_linux block as defined below. For
+                      more details, please visit Create and configure an AKS cluster
+                      to use virtual nodes.
+                    items:
+                      properties:
+                        connectorIdentity:
+                          description: A connector_identity block is exported. The
+                            exported attributes are defined below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The Client ID of the user-defined Managed
+                                  Identity used by the ACI Connector.
+                                type: string
+                              objectId:
+                                description: The Object ID of the user-defined Managed
+                                  Identity used by the ACI Connector.
+                                type: string
+                              userAssignedIdentityId:
+                                description: The ID of the User Assigned Identity
+                                  used by the ACI Connector.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   fqdn:
                     description: The FQDN of the Azure Kubernetes Managed Cluster.
                     type: string
@@ -2115,7 +2149,7 @@ spec:
                       type: object
                     type: array
                   ingressApplicationGateway:
-                    description: A ingress_application_gateway block as defined below.
+                    description: An ingress_application_gateway block as defined below.
                     items:
                       properties:
                         effectiveGatewayId:
@@ -2145,8 +2179,6 @@ spec:
                     type: array
                   keyVaultSecretsProvider:
                     description: A key_vault_secrets_provider block as defined below.
-                      For more details, please visit Azure Keyvault Secrets Provider
-                      for AKS.
                     items:
                       properties:
                         secretIdentity:
@@ -2171,8 +2203,7 @@ spec:
                       type: object
                     type: array
                   networkProfile:
-                    description: A network_profile block as defined below. Changing
-                      this forces a new resource to be created.
+                    description: A network_profile block as defined below.
                     items:
                       properties:
                         loadBalancerProfile:
@@ -2192,10 +2223,6 @@ spec:
                           type: array
                         natGatewayProfile:
                           description: A nat_gateway_profile block as defined below.
-                            This can only be specified when load_balancer_sku is set
-                            to standard and outbound_type is set to managedNATGateway
-                            or userAssignedNATGateway. Changing this forces a new
-                            resource to be created.
                           items:
                             properties:
                               effectiveOutboundIps:
@@ -2212,7 +2239,7 @@ spec:
                     description: The OIDC issuer URL that is associated with the cluster.
                     type: string
                   omsAgent:
-                    description: A oms_agent block as defined below.
+                    description: An oms_agent block as defined below.
                     items:
                       properties:
                         omsAgentIdentity:

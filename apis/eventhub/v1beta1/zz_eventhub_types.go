@@ -97,7 +97,7 @@ type EventHubParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
-	// Specifies the current number of shards on the Event Hub.
+	// Specifies the current number of shards on the Event Hub. Changing this will force-recreate the resource.
 	// +kubebuilder:validation:Required
 	PartitionCount *float64 `json:"partitionCount" tf:"partition_count,omitempty"`
 

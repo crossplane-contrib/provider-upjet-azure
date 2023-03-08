@@ -173,6 +173,10 @@ type LiveEventParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A list of options to use for the LiveEvent. Possible values are Default, LowLatency, LowLatencyV2. Please see more at this document. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	StreamOptions []*string `json:"streamOptions,omitempty" tf:"stream_options,omitempty"`
+
 	// A mapping of tags which should be assigned to the Live Event.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

@@ -18,7 +18,7 @@ type AccountObservation struct {
 	// The ID of the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An identity block as defined below..
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -159,7 +159,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
 
-	// An identity block as defined below..
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -318,7 +318,7 @@ type BlobPropertiesParameters struct {
 	// +kubebuilder:validation:Optional
 	CorsRule []CorsRuleParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 
-	// The API Version which should be used by default for requests to the Data Plane API if an incoming request doesn't specify an API Version. Defaults to 2020-06-12.
+	// The API Version which should be used by default for requests to the Data Plane API if an incoming request doesn't specify an API Version.
 	// +kubebuilder:validation:Optional
 	DefaultServiceVersion *string `json:"defaultServiceVersion,omitempty" tf:"default_service_version,omitempty"`
 

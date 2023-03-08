@@ -65,7 +65,9 @@ spec:
               forProvider:
                 properties:
                   apiManagementId:
-                    description: The ID of the API Management Gateway.
+                    description: The ID of the API Management Resource in which the
+                      gateway will be created. Changing this forces a new API Management
+                      Gateway resource to be created.
                     type: string
                   apiManagementIdRef:
                     description: Reference to a Management in apimanagement to populate

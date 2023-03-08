@@ -2778,6 +2778,17 @@ func (in *FilterParameters) DeepCopyInto(out *FilterParameters) {
 			}
 		}
 	}
+	if in.ExcludePrefixes != nil {
+		in, out := &in.ExcludePrefixes, &out.ExcludePrefixes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.IncludeBlobVersions != nil {
 		in, out := &in.IncludeBlobVersions, &out.IncludeBlobVersions
 		*out = new(bool)

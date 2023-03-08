@@ -11,6 +11,8 @@ spec:
     assetNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    filterNames:
+    - ${azurerm_media_services_account_filter.example.name}
     mediaServicesAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -71,7 +71,8 @@ spec:
                       Tech Service Fhir Destination.
                     type: string
                   destinationFhirServiceId:
-                    description: The ID of the Healthcare Med Tech Service Fhir Destination.
+                    description: Specifies the destination fhir service id of the
+                      Med Tech Service Fhir Destination.
                     type: string
                   destinationFhirServiceIdRef:
                     description: Reference to a HealthcareFHIRService to populate

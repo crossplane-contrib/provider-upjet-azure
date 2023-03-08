@@ -239,6 +239,7 @@ type SparkClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeIsolation []SparkClusterComputeIsolationParameters `json:"computeIsolation,omitempty" tf:"compute_isolation,omitempty"`
 
+	// One or more disk_encryption block as defined below.
 	// +kubebuilder:validation:Optional
 	DiskEncryption []SparkClusterDiskEncryptionParameters `json:"diskEncryption,omitempty" tf:"disk_encryption,omitempty"`
 

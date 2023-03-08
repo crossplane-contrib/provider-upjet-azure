@@ -56,6 +56,10 @@ type ExpressRoutePortParameters struct {
 	// +kubebuilder:validation:Required
 	BandwidthInGbps *float64 `json:"bandwidthInGbps" tf:"bandwidth_in_gbps,omitempty"`
 
+	// The billing type of the Express Route Port. Possible values are MeteredData and UnlimitedData.
+	// +kubebuilder:validation:Optional
+	BillingType *string `json:"billingType,omitempty" tf:"billing_type,omitempty"`
+
 	// The encapsulation method used for the Express Route Port. Changing this forces a new Express Route Port to be created. Possible values are: Dot1Q, QinQ.
 	// +kubebuilder:validation:Required
 	Encapsulation *string `json:"encapsulation" tf:"encapsulation,omitempty"`

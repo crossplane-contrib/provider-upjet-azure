@@ -25,7 +25,7 @@ type HealthcareMedtechServiceFHIRDestinationParameters struct {
 	// +kubebuilder:validation:Required
 	DestinationFHIRMappingJSON *string `json:"destinationFhirMappingJson" tf:"destination_fhir_mapping_json,omitempty"`
 
-	// The ID of the Healthcare Med Tech Service Fhir Destination.
+	// Specifies the destination fhir service id of the Med Tech Service Fhir Destination.
 	// +crossplane:generate:reference:type=HealthcareFHIRService
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

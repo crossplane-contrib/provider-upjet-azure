@@ -7525,6 +7525,16 @@ func (in *SharedImageParameters) DeepCopyInto(out *SharedImageParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ConfidentialVMEnabled != nil {
+		in, out := &in.ConfidentialVMEnabled, &out.ConfidentialVMEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ConfidentialVMSupported != nil {
+		in, out := &in.ConfidentialVMSupported, &out.ConfidentialVMSupported
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)

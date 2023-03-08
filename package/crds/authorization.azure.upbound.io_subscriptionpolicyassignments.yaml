@@ -89,7 +89,7 @@ spec:
                         type:
                           description: The Type of Managed Identity which should be
                             added to this Policy Definition. Possible values are SystemAssigned
-                            and UserAssigned.
+                            or UserAssigned.
                           type: string
                       required:
                       - type

@@ -219,8 +219,7 @@ spec:
                         identityIds:
                           description: A list of User Assigned Managed Identity IDs
                             to be assigned to this API Management Service. Required
-                            if used together with customer_managed_key block as defined
-                            below.
+                            if used together with customer_managed_key block.
                           items:
                             type: string
                           type: array

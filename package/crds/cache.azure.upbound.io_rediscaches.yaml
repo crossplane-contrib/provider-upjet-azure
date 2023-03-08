@@ -109,8 +109,8 @@ spec:
                     items:
                       properties:
                         dayOfWeek:
-                          description: possible values include Monday, Tuesday, Wednesday
-                            etc.
+                          description: the Weekday name - possible values include
+                            Monday, Tuesday, Wednesday etc.
                           type: string
                         maintenanceWindow:
                           description: The ISO 8601 timespan which specifies the amount

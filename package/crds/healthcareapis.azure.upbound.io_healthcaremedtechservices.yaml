@@ -323,6 +323,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the Healthcare Med
+                      Tech Service.
                     type: object
                   workspaceId:
                     description: Specifies the id of the Healthcare Workspace where

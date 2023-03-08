@@ -152,6 +152,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  expressRouteGatewayBypassEnabled:
+                    description: Specified whether Fast Path is enabled for Virtual
+                      Wan Firewall Hub. Defaults to false.
+                    type: boolean
                   expressRouteGatewayId:
                     description: The ID of the Express Route Gateway that this Express
                       Route Connection connects with. Changing this forces a new resource
@@ -237,6 +241,14 @@ spec:
                         associatedRouteTableId:
                           description: The ID of the Virtual Hub Route Table associated
                             with this Express Route Connection.
+                          type: string
+                        inboundRouteMapId:
+                          description: The ID of the Route Map associated with this
+                            Express Route Connection for inbound routes.
+                          type: string
+                        outboundRouteMapId:
+                          description: The ID of the Route Map associated with this
+                            Express Route Connection for outbound routes.
                           type: string
                         propagatedRouteTable:
                           description: A propagated_route_table block as defined below.

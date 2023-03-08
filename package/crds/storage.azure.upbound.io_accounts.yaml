@@ -211,7 +211,7 @@ spec:
                         defaultServiceVersion:
                           description: The API Version which should be used by default
                             for requests to the Data Plane API if an incoming request
-                            doesn't specify an API Version. Defaults to 2020-06-12.
+                            doesn't specify an API Version.
                           type: string
                         deleteRetentionPolicy:
                           description: A delete_retention_policy block as defined
@@ -300,7 +300,7 @@ spec:
                       for more information. Defaults to true.
                     type: boolean
                   identity:
-                    description: An identity block as defined below..
+                    description: An identity block as defined below.
                     items:
                       properties:
                         identityIds:
@@ -989,7 +989,7 @@ spec:
                     description: The ID of the Storage Account.
                     type: string
                   identity:
-                    description: An identity block as defined below..
+                    description: An identity block as defined below.
                     items:
                       properties:
                         principalId:

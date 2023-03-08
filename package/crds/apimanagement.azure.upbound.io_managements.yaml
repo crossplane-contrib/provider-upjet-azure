@@ -242,6 +242,41 @@ spec:
                       request to the gateway? This is only supported when SKU type
                       is Consumption.
                     type: boolean
+                  delegation:
+                    description: A delegation block as defined below.
+                    items:
+                      properties:
+                        subscriptionsEnabled:
+                          description: Should subscription requests be delegated to
+                            an external url? Defaults to false.
+                          type: boolean
+                        url:
+                          description: The delegation URL.
+                          type: string
+                        userRegistrationEnabled:
+                          description: Should user registration requests be delegated
+                            to an external url? Defaults to false.
+                          type: boolean
+                        validationKeySecretRef:
+                          description: A base64-encoded validation key to validate,
+                            that a request is coming from Azure API Management.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      type: object
+                    type: array
                   gatewayDisabled:
                     description: Disable the gateway in main region? This is only
                       supported when additional_location is set.

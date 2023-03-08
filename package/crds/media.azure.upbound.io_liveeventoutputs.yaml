@@ -246,6 +246,8 @@ spec:
                       at, any content before this value will not be archived. Changing
                       this forces a new Live Output to be created.
                     type: number
+                  rewindWindowDuration:
+                    type: string
                 required:
                 - archiveWindowDuration
                 type: object

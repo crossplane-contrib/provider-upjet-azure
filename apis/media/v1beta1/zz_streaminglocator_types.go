@@ -76,6 +76,10 @@ type StreamingLocatorParameters struct {
 	// +kubebuilder:validation:Optional
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
+	// A list of names of asset or account filters which apply to this Streaming Locator. Changing this forces a new Streaming Locator to be created.
+	// +kubebuilder:validation:Optional
+	FilterNames []*string `json:"filterNames,omitempty" tf:"filter_names,omitempty"`
+
 	// The Media Services account name. Changing this forces a new Streaming Locator to be created.
 	// +crossplane:generate:reference:type=ServicesAccount
 	// +kubebuilder:validation:Optional

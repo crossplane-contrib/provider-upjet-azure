@@ -673,6 +673,8 @@ spec:
                             Disabled.'
                           type: string
                         healthCheckPath:
+                          description: Path which will be checked for this function
+                            app health.
                           type: string
                         http2Enabled:
                           description: Specifies whether or not the HTTP2 protocol
@@ -684,11 +686,11 @@ spec:
                           items:
                             properties:
                               action:
-                                description: Does this restriction Allow or Deny access
-                                  for this IP range. Defaults to Allow.
+                                description: Allow or Deny access for this IP range.
+                                  Defaults to Allow.
                                 type: string
                               headers:
-                                description: The headers for this specific ip_restriction
+                                description: The headers for this specific scm_ip_restriction
                                   as defined below.
                                 items:
                                   properties:
@@ -724,8 +726,7 @@ spec:
                                   in CIDR notation.
                                 type: string
                               name:
-                                description: Specifies the name of the Function App.
-                                  Changing this forces a new resource to be created.
+                                description: The name for this IP Restriction.
                                 type: string
                               priority:
                                 description: The priority for this IP Restriction.
@@ -822,8 +823,8 @@ spec:
                             type: object
                           type: array
                         javaVersion:
-                          description: The runtime version associated with the Function
-                            App. Defaults to ~1.
+                          description: Java version hosted by the function app in
+                            Azure. Possible values are 1.8, 11 & 17 (In-Preview).
                           type: string
                         linuxFxVersion:
                           description: Linux App Framework and version for the AppService,
@@ -844,14 +845,16 @@ spec:
                             to false.
                           type: boolean
                         scmIpRestriction:
+                          description: A List of objects representing IP restrictions
+                            as defined below.
                           items:
                             properties:
                               action:
-                                description: Does this restriction Allow or Deny access
-                                  for this IP range. Defaults to Allow.
+                                description: Allow or Deny access for this IP range.
+                                  Defaults to Allow.
                                 type: string
                               headers:
-                                description: The headers for this specific ip_restriction
+                                description: The headers for this specific scm_ip_restriction
                                   as defined below.
                                 items:
                                   properties:
@@ -887,8 +890,7 @@ spec:
                                   in CIDR notation.
                                 type: string
                               name:
-                                description: Specifies the name of the Function App.
-                                  Changing this forces a new resource to be created.
+                                description: The name for this IP Restriction.
                                 type: string
                               priority:
                                 description: The priority for this IP Restriction.
@@ -985,8 +987,15 @@ spec:
                             type: object
                           type: array
                         scmType:
+                          description: 'The type of Source Control used by this function
+                            App. Valid values include: BitBucketGit, BitBucketHg,
+                            CodePlexGit, CodePlexHg, Dropbox, ExternalGit, ExternalHg,
+                            GitHub, LocalGit, None (default), OneDrive, Tfs, VSO,
+                            and VSTSRM.'
                           type: string
                         scmUseMainIpRestriction:
+                          description: IP security restrictions for scm to use main.
+                            Defaults to false.
                           type: boolean
                         use32BitWorkerProcess:
                           description: Should the Function App run in 32 bit mode,

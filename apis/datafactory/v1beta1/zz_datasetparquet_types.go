@@ -89,10 +89,11 @@ type DataSetParquetParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureBlobStorageLocation []DataSetParquetAzureBlobStorageLocationParameters `json:"azureBlobStorageLocation,omitempty" tf:"azure_blob_storage_location,omitempty"`
 
-	// The compression codec used to read/write text files. Valid values are bzip2, gzip, deflate, ZipDeflate, TarGzip, Tar, snappy, or lz4. Please note these values are case sensitive.
+	// The compression codec used to read/write text files. Valid values are bzip2, gzip, deflate, ZipDeflate, TarGzip, Tar, snappy, or lz4. Please note these values are case-sensitive.
 	// +kubebuilder:validation:Optional
 	CompressionCodec *string `json:"compressionCodec,omitempty" tf:"compression_codec,omitempty"`
 
+	// Specifies the compression level. Possible values are Optimal and Fastest,
 	// +kubebuilder:validation:Optional
 	CompressionLevel *string `json:"compressionLevel,omitempty" tf:"compression_level,omitempty"`
 

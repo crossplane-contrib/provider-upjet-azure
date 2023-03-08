@@ -434,7 +434,7 @@ spec:
                     type: array
                   imageBuildComputeName:
                     description: The compute name for image build of the Machine Learning
-                      Workspace. Changing this forces a new resource to be created.
+                      Workspace.
                     type: string
                   keyVaultId:
                     description: The ID of key vault associated with this Machine

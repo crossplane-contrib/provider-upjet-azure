@@ -85,6 +85,7 @@ spec:
                             format: https://{Azure-AD-endpoint}/{tenant-id}.'
                           type: string
                         smartProxyEnabled:
+                          description: Whether smart proxy is enabled.
                           type: boolean
                       required:
                       - audience
@@ -179,8 +180,9 @@ spec:
                       type: object
                     type: array
                   resourceGroupName:
-                    description: Specifies the name of the Healthcare FHIR Service.
-                      Changing this forces a new Healthcare FHIR Service to be created.
+                    description: Specifies the name of the Resource Group in which
+                      to create the Healthcare FHIR Service. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -260,6 +262,8 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the Healthcare FHIR
+                      Service.
                     type: object
                   workspaceId:
                     description: Specifies the id of the Healthcare Workspace where

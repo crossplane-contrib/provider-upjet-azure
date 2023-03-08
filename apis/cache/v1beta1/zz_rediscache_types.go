@@ -38,7 +38,7 @@ type PatchScheduleObservation struct {
 
 type PatchScheduleParameters struct {
 
-	// possible values include Monday, Tuesday, Wednesday etc.
+	// the Weekday name - possible values include Monday, Tuesday, Wednesday etc.
 	// +kubebuilder:validation:Required
 	DayOfWeek *string `json:"dayOfWeek" tf:"day_of_week,omitempty"`
 

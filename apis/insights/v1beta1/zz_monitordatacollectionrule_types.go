@@ -178,7 +178,7 @@ type PerformanceCounterObservation struct {
 
 type PerformanceCounterParameters struct {
 
-	// Specifies a list of specifier names of the performance counters you want to collect. Use a wildcard * to collect counters for all instances. To get a list of performance counters on Windows, run the command typeperf.
+	// Specifies a list of specifier names of the performance counters you want to collect. To get a list of performance counters on Windows, run the command typeperf. Please see this document for more information.
 	// +kubebuilder:validation:Required
 	CounterSpecifiers []*string `json:"counterSpecifiers" tf:"counter_specifiers,omitempty"`
 
@@ -186,7 +186,7 @@ type PerformanceCounterParameters struct {
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive.
+	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
 	// +kubebuilder:validation:Required
 	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds" tf:"sampling_frequency_in_seconds,omitempty"`
 
@@ -230,7 +230,7 @@ type WindowsEventLogParameters struct {
 	// +kubebuilder:validation:Required
 	Streams []*string `json:"streams" tf:"streams,omitempty"`
 
-	// Specifies a list of Windows Event Log queries in XPath expression.
+	// Specifies a list of Windows Event Log queries in XPath expression. Please see this document for more information.
 	// +kubebuilder:validation:Required
 	XPathQueries []*string `json:"xPathQueries" tf:"x_path_queries,omitempty"`
 }

@@ -134,7 +134,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Required
 	Identity []IdentityParameters `json:"identity" tf:"identity,omitempty"`
 
-	// The compute name for image build of the Machine Learning Workspace. Changing this forces a new resource to be created.
+	// The compute name for image build of the Machine Learning Workspace.
 	// +kubebuilder:validation:Optional
 	ImageBuildComputeName *string `json:"imageBuildComputeName,omitempty" tf:"image_build_compute_name,omitempty"`
 

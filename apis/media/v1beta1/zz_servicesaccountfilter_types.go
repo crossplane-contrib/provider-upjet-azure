@@ -97,7 +97,7 @@ type ServicesAccountFilterTrackSelectionObservation struct {
 
 type ServicesAccountFilterTrackSelectionParameters struct {
 
-	// One or more condition blocks as defined above.
+	// One or more selection blocks as defined above.
 	// +kubebuilder:validation:Required
 	Condition []TrackSelectionConditionParameters `json:"condition" tf:"condition,omitempty"`
 }

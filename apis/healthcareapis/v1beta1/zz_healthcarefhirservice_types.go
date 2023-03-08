@@ -53,6 +53,7 @@ type HealthcareFHIRServiceAuthenticationParameters struct {
 	// +kubebuilder:validation:Required
 	Authority *string `json:"authority" tf:"authority,omitempty"`
 
+	// Whether smart proxy is enabled.
 	// +kubebuilder:validation:Optional
 	SmartProxyEnabled *bool `json:"smartProxyEnabled,omitempty" tf:"smart_proxy_enabled,omitempty"`
 }
@@ -124,7 +125,7 @@ type HealthcareFHIRServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	OciArtifact []OciArtifactParameters `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
 
-	// Specifies the name of the Healthcare FHIR Service. Changing this forces a new Healthcare FHIR Service to be created.
+	// Specifies the name of the Resource Group in which to create the Healthcare FHIR Service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -137,6 +138,7 @@ type HealthcareFHIRServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A mapping of tags to assign to the Healthcare FHIR Service.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
