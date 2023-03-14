@@ -19,15 +19,15 @@ type AccessConnectorObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 }
 
 type AccessConnectorParameters struct {
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Required
-	Identity []IdentityParameters `json:"identity" tf:"identity,omitempty"`
+	// +kubebuilder:validation:Optional
+	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
@@ -53,10 +53,10 @@ type AccessConnectorParameters struct {
 
 type IdentityObservation struct {
 
-	// The object id of an existing principal. If not specified, a new system-assigned managed identity is created.
+	// The Principal ID associated with this system-assigned managed identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The tenant id in which the principal resides.
+	// The Tenant ID associated with this system-assigned managed identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 

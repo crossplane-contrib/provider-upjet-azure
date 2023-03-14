@@ -43,6 +43,10 @@ type ExpressRouteConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitPeeringIDSelector *v1.Selector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
 
+	// Specified whether Fast Path is enabled for Virtual Wan Firewall Hub. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ExpressRouteGatewayBypassEnabled *bool `json:"expressRouteGatewayBypassEnabled,omitempty" tf:"express_route_gateway_bypass_enabled,omitempty"`
+
 	// The ID of the Express Route Gateway that this Express Route Connection connects with. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=ExpressRouteGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -88,6 +92,14 @@ type RoutingParameters struct {
 	// The ID of the Virtual Hub Route Table associated with this Express Route Connection.
 	// +kubebuilder:validation:Optional
 	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
+
+	// The ID of the Route Map associated with this Express Route Connection for inbound routes.
+	// +kubebuilder:validation:Optional
+	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
+
+	// The ID of the Route Map associated with this Express Route Connection for outbound routes.
+	// +kubebuilder:validation:Optional
+	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
 
 	// A propagated_route_table block as defined below.
 	// +kubebuilder:validation:Optional

@@ -6405,6 +6405,11 @@ func (in *ExpressRouteConnectionParameters) DeepCopyInto(out *ExpressRouteConnec
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ExpressRouteGatewayBypassEnabled != nil {
+		in, out := &in.ExpressRouteGatewayBypassEnabled, &out.ExpressRouteGatewayBypassEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ExpressRouteGatewayID != nil {
 		in, out := &in.ExpressRouteGatewayID, &out.ExpressRouteGatewayID
 		*out = new(string)
@@ -6821,6 +6826,11 @@ func (in *ExpressRoutePortParameters) DeepCopyInto(out *ExpressRoutePortParamete
 	if in.BandwidthInGbps != nil {
 		in, out := &in.BandwidthInGbps, &out.BandwidthInGbps
 		*out = new(float64)
+		**out = **in
+	}
+	if in.BillingType != nil {
+		in, out := &in.BillingType, &out.BillingType
+		*out = new(string)
 		**out = **in
 	}
 	if in.Encapsulation != nil {
@@ -11501,6 +11511,11 @@ func (in *LoadBalancerBackendAddressPoolParameters) DeepCopyInto(out *LoadBalanc
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.VirtualNetworkID != nil {
+		in, out := &in.VirtualNetworkID, &out.VirtualNetworkID
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -23714,6 +23729,16 @@ func (in *RoutingParameters) DeepCopyInto(out *RoutingParameters) {
 	*out = *in
 	if in.AssociatedRouteTableID != nil {
 		in, out := &in.AssociatedRouteTableID, &out.AssociatedRouteTableID
+		*out = new(string)
+		**out = **in
+	}
+	if in.InboundRouteMapID != nil {
+		in, out := &in.InboundRouteMapID, &out.InboundRouteMapID
+		*out = new(string)
+		**out = **in
+	}
+	if in.OutboundRouteMapID != nil {
+		in, out := &in.OutboundRouteMapID, &out.OutboundRouteMapID
 		*out = new(string)
 		**out = **in
 	}

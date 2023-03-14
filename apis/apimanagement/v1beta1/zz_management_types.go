@@ -79,6 +79,28 @@ type CertificateParameters struct {
 	StoreName *string `json:"storeName" tf:"store_name,omitempty"`
 }
 
+type DelegationObservation struct {
+}
+
+type DelegationParameters struct {
+
+	// Should subscription requests be delegated to an external url? Defaults to false.
+	// +kubebuilder:validation:Optional
+	SubscriptionsEnabled *bool `json:"subscriptionsEnabled,omitempty" tf:"subscriptions_enabled,omitempty"`
+
+	// The delegation URL.
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// Should user registration requests be delegated to an external url? Defaults to false.
+	// +kubebuilder:validation:Optional
+	UserRegistrationEnabled *bool `json:"userRegistrationEnabled,omitempty" tf:"user_registration_enabled,omitempty"`
+
+	// A base64-encoded validation key to validate, that a request is coming from Azure API Management.
+	// +kubebuilder:validation:Optional
+	ValidationKeySecretRef *v1.SecretKeySelector `json:"validationKeySecretRef,omitempty" tf:"-"`
+}
+
 type DeveloperPortalObservation struct {
 
 	// The source of the certificate.
@@ -248,6 +270,10 @@ type ManagementParameters struct {
 	// Enforce a client certificate to be presented on each request to the gateway? This is only supported when SKU type is Consumption.
 	// +kubebuilder:validation:Optional
 	ClientCertificateEnabled *bool `json:"clientCertificateEnabled,omitempty" tf:"client_certificate_enabled,omitempty"`
+
+	// A delegation block as defined below.
+	// +kubebuilder:validation:Optional
+	Delegation []DelegationParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
 
 	// Disable the gateway in main region? This is only supported when additional_location is set.
 	// +kubebuilder:validation:Optional

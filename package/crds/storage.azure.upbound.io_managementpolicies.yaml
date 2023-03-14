@@ -243,6 +243,7 @@ spec:
                       required:
                       - actions
                       - enabled
+                      - filters
                       - name
                       type: object
                     type: array

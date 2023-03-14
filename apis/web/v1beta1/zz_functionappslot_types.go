@@ -370,6 +370,7 @@ type FunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
+	// Path which will be checked for this function app health.
 	// +kubebuilder:validation:Optional
 	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
 
@@ -381,7 +382,7 @@ type FunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	IPRestriction []SiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
-	// The runtime version associated with the Function App. Defaults to ~1.
+	// Java version hosted by the function app in Azure. Possible values are 1.8, 11 & 17 (In-Preview).
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
@@ -401,12 +402,15 @@ type FunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
 
+	// A List of objects representing IP restrictions as defined below.
 	// +kubebuilder:validation:Optional
 	ScmIPRestriction []SiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
+	// The type of Source Control used by this function App. Valid values include: BitBucketGit, BitBucketHg, CodePlexGit, CodePlexHg, Dropbox, ExternalGit, ExternalHg, GitHub, LocalGit, None (default), OneDrive, Tfs, VSO, and VSTSRM.
 	// +kubebuilder:validation:Optional
 	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
 
+	// IP security restrictions for scm to use main. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
@@ -476,11 +480,11 @@ type SiteConfigIPRestrictionObservation struct {
 
 type SiteConfigIPRestrictionParameters struct {
 
-	// Does this restriction Allow or Deny access for this IP range. Defaults to Allow.
+	// Allow or Deny access for this IP range. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
-	// The headers for this specific ip_restriction as defined below.
+	// The headers for this specific scm_ip_restriction as defined below.
 	// +kubebuilder:validation:Optional
 	Headers []IPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
 
@@ -488,7 +492,7 @@ type SiteConfigIPRestrictionParameters struct {
 	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
 
-	// Specifies the name of the Function App. Changing this forces a new resource to be created.
+	// The name for this IP Restriction.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name"`
 
@@ -542,11 +546,11 @@ type SiteConfigScmIPRestrictionObservation struct {
 
 type SiteConfigScmIPRestrictionParameters struct {
 
-	// Does this restriction Allow or Deny access for this IP range. Defaults to Allow.
+	// Allow or Deny access for this IP range. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
-	// The headers for this specific ip_restriction as defined below.
+	// The headers for this specific scm_ip_restriction as defined below.
 	// +kubebuilder:validation:Optional
 	Headers []SiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
 
@@ -554,7 +558,7 @@ type SiteConfigScmIPRestrictionParameters struct {
 	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
 
-	// Specifies the name of the Function App. Changing this forces a new resource to be created.
+	// The name for this IP Restriction.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name"`
 

@@ -185,8 +185,8 @@ spec:
                                 type: string
                               frequency:
                                 description: The frequency of the schedule. Possible
-                                  values are Day, Hour, Minute, Month, Second, Week
-                                  and Year.
+                                  values are Day, Hour, Minute, Month, NotSpecified,
+                                  Second, Week and Year.
                                 type: string
                               interval:
                                 description: The number of frequencys between runs.

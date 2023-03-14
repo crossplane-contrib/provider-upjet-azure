@@ -49,6 +49,10 @@ type FilterParameters struct {
 	// +kubebuilder:validation:Required
 	BlobTypes []*string `json:"blobTypes" tf:"blob_types,omitempty"`
 
+	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
+	// +kubebuilder:validation:Optional
+	ExcludePrefixes []*string `json:"excludePrefixes,omitempty" tf:"exclude_prefixes,omitempty"`
+
 	// Includes blob versions in blob inventory or not? Defaults to false.
 	// +kubebuilder:validation:Optional
 	IncludeBlobVersions *bool `json:"includeBlobVersions,omitempty" tf:"include_blob_versions,omitempty"`
@@ -61,7 +65,7 @@ type FilterParameters struct {
 	// +kubebuilder:validation:Optional
 	IncludeSnapshots *bool `json:"includeSnapshots,omitempty" tf:"include_snapshots,omitempty"`
 
-	// A set of strings for blob prefixes to be matched.
+	// A set of strings for blob prefixes to be matched. Maximum of 10 blob prefixes.
 	// +kubebuilder:validation:Optional
 	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 }

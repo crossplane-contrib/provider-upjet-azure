@@ -33,6 +33,8 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    streamOptions:
+    - LowLatency
     transcriptionLanguages:
     - en-US
     useStaticHostname: true

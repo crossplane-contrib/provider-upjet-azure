@@ -596,7 +596,7 @@ type RouteConfigurationOverrideActionParameters struct {
 	// +kubebuilder:validation:Optional
 	CompressionEnabled *bool `json:"compressionEnabled,omitempty" tf:"compression_enabled,omitempty"`
 
-	// The forwarding protocol the request will be redirected as. This overrides the configuration specified in the route to be associated with. Possible values include MatchRequest, HttpOnly or HttpsOnly. Defaults to MatchRequest. Possible values include HttpOnly, HttpsOnly or MatchRequest. Defaults to MatchRequest.
+	// The forwarding protocol the request will be redirected as. This overrides the configuration specified in the route to be associated with. Possible values include MatchRequest, HttpOnly or HttpsOnly.
 	// +kubebuilder:validation:Optional
 	ForwardingProtocol *string `json:"forwardingProtocol,omitempty" tf:"forwarding_protocol,omitempty"`
 

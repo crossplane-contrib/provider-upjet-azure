@@ -51,6 +51,9 @@ type BackupPolicyVMParameters struct {
 	// +kubebuilder:validation:Required
 	Backup []BackupPolicyVMBackupParameters `json:"backup" tf:"backup,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	InstantRestoreResourceGroup []InstantRestoreResourceGroupParameters `json:"instantRestoreResourceGroup,omitempty" tf:"instant_restore_resource_group,omitempty"`
+
 	// Specifies the instant restore retention range in days. Possible values are between 1 and 5 when policy_type is V1, and 1 to 30 when policy_type is V2.
 	// +kubebuilder:validation:Optional
 	InstantRestoreRetentionDays *float64 `json:"instantRestoreRetentionDays,omitempty" tf:"instant_restore_retention_days,omitempty"`
@@ -168,6 +171,18 @@ type BackupPolicyVMRetentionYearlyParameters struct {
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
 	// +kubebuilder:validation:Required
 	Weeks []*string `json:"weeks" tf:"weeks,omitempty"`
+}
+
+type InstantRestoreResourceGroupObservation struct {
+}
+
+type InstantRestoreResourceGroupParameters struct {
+
+	// +kubebuilder:validation:Required
+	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 // BackupPolicyVMSpec defines the desired state of BackupPolicyVM

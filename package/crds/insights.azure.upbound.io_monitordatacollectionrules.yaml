@@ -143,10 +143,10 @@ spec:
                             properties:
                               counterSpecifiers:
                                 description: Specifies a list of specifier names of
-                                  the performance counters you want to collect. Use
-                                  a wildcard * to collect counters for all instances.
-                                  To get a list of performance counters on Windows,
-                                  run the command typeperf.
+                                  the performance counters you want to collect. To
+                                  get a list of performance counters on Windows, run
+                                  the command typeperf. Please see this document for
+                                  more information.
                                 items:
                                   type: string
                                 type: array
@@ -159,7 +159,9 @@ spec:
                               samplingFrequencyInSeconds:
                                 description: The number of seconds between consecutive
                                   counter measurements (samples). The value should
-                                  be integer between 1 and 300 inclusive.
+                                  be integer between 1 and 300 inclusive. sampling_frequency_in_seconds
+                                  must be equal to 60 seconds for counters collected
+                                  with Microsoft-InsightsMetrics stream.
                                 type: number
                               streams:
                                 description: Specifies a list of streams that this
@@ -248,7 +250,8 @@ spec:
                                 type: array
                               xPathQueries:
                                 description: Specifies a list of Windows Event Log
-                                  queries in XPath expression.
+                                  queries in XPath expression. Please see this document
+                                  for more information.
                                 items:
                                   type: string
                                 type: array

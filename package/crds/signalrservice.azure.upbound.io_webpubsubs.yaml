@@ -404,6 +404,7 @@ spec:
               atProvider:
                 properties:
                   externalIp:
+                    description: The publicly accessible IP of the Web PubSub service.
                     type: string
                   hostname:
                     description: The FQDN of the Web PubSub service.

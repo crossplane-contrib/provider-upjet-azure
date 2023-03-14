@@ -167,7 +167,6 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                 required:
-                - identity
                 - location
                 type: object
               providerConfigRef:
@@ -355,12 +354,12 @@ spec:
                     items:
                       properties:
                         principalId:
-                          description: The object id of an existing principal. If
-                            not specified, a new system-assigned managed identity
-                            is created.
+                          description: The Principal ID associated with this system-assigned
+                            managed identity.
                           type: string
                         tenantId:
-                          description: The tenant id in which the principal resides.
+                          description: The Tenant ID associated with this system-assigned
+                            managed identity.
                           type: string
                       type: object
                     type: array

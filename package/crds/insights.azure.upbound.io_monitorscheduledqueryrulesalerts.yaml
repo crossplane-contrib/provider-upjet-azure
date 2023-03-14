@@ -280,7 +280,10 @@ spec:
                     type: string
                   queryType:
                     description: The type of query results. Possible values are ResultCount
-                      and Number. Default is ResultCount.
+                      and Number. Default is ResultCount. If set to Number, query
+                      must include an AggregatedValue column of a numeric type, for
+                      example, Heartbeat | summarize AggregatedValue = count() by
+                      bin(TimeGenerated, 5m).
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create

@@ -10,6 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
 	v1beta1 "github.com/upbound/provider-azure/apis/operationsmanagement/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -167,6 +168,22 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.WorkspaceNameRef,
+		Selector:     mg.Spec.ForProvider.WorkspaceNameSelector,
+		To: reference.To{
+			List:    &v1beta12.WorkspaceList{},
+			Managed: &v1beta12.Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceName")
+	}
+	mg.Spec.ForProvider.WorkspaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceNameRef = rsp.ResolvedReference
 
 	return nil
 }

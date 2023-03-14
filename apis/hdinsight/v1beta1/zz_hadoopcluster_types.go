@@ -114,6 +114,7 @@ type EdgeNodeObservation struct {
 
 type EdgeNodeParameters struct {
 
+	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster.
 	// +kubebuilder:validation:Optional
 	HTTPSEndpoints []HTTPSEndpointsParameters `json:"httpsEndpoints,omitempty" tf:"https_endpoints,omitempty"`
 
@@ -125,6 +126,7 @@ type EdgeNodeParameters struct {
 	// +kubebuilder:validation:Required
 	TargetInstanceCount *float64 `json:"targetInstanceCount" tf:"target_instance_count,omitempty"`
 
+	// A uninstall_script_actions block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	UninstallScriptActions []UninstallScriptActionsParameters `json:"uninstallScriptActions,omitempty" tf:"uninstall_script_actions,omitempty"`
 
@@ -213,6 +215,7 @@ type HadoopClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeIsolation []ComputeIsolationParameters `json:"computeIsolation,omitempty" tf:"compute_isolation,omitempty"`
 
+	// One or more disk_encryption block as defined below.
 	// +kubebuilder:validation:Optional
 	DiskEncryption []DiskEncryptionParameters `json:"diskEncryption,omitempty" tf:"disk_encryption,omitempty"`
 
@@ -353,7 +356,7 @@ type InstallScriptActionObservation struct {
 
 type InstallScriptActionParameters struct {
 
-	// The name of the uninstall script action. Changing this forces a new resource to be created.
+	// The name of the uninstall script action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -361,7 +364,7 @@ type InstallScriptActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The URI pointing to the script to run during the installation of the edge node. Changing this forces a new resource to be created.
+	// The URI pointing to the script to run during the installation of the edge node.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -493,7 +496,7 @@ type ScriptActionsObservation struct {
 
 type ScriptActionsParameters struct {
 
-	// The name of the uninstall script action. Changing this forces a new resource to be created.
+	// The name of the uninstall script action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -501,7 +504,7 @@ type ScriptActionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The URI pointing to the script to run during the installation of the edge node. Changing this forces a new resource to be created.
+	// The URI pointing to the script to run during the installation of the edge node.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -599,7 +602,7 @@ type UninstallScriptActionsObservation struct {
 
 type UninstallScriptActionsParameters struct {
 
-	// The name of the uninstall script action. Changing this forces a new resource to be created.
+	// The name of the uninstall script action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -607,7 +610,7 @@ type UninstallScriptActionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The URI pointing to the script to run during the installation of the edge node. Changing this forces a new resource to be created.
+	// The URI pointing to the script to run during the installation of the edge node.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -669,7 +672,7 @@ type WorkerNodeScriptActionsObservation struct {
 
 type WorkerNodeScriptActionsParameters struct {
 
-	// The name of the uninstall script action. Changing this forces a new resource to be created.
+	// The name of the uninstall script action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -677,7 +680,7 @@ type WorkerNodeScriptActionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The URI pointing to the script to run during the installation of the edge node. Changing this forces a new resource to be created.
+	// The URI pointing to the script to run during the installation of the edge node.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }
@@ -731,7 +734,7 @@ type ZookeeperNodeScriptActionsObservation struct {
 
 type ZookeeperNodeScriptActionsParameters struct {
 
-	// The name of the uninstall script action. Changing this forces a new resource to be created.
+	// The name of the uninstall script action.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -739,7 +742,7 @@ type ZookeeperNodeScriptActionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The URI pointing to the script to run during the installation of the edge node. Changing this forces a new resource to be created.
+	// The URI pointing to the script to run during the installation of the edge node.
 	// +kubebuilder:validation:Required
 	URI *string `json:"uri" tf:"uri,omitempty"`
 }

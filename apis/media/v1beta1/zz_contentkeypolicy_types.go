@@ -83,6 +83,7 @@ type ExplicitAnalogTelevisionOutputRestrictionObservation struct {
 
 type ExplicitAnalogTelevisionOutputRestrictionParameters struct {
 
+	// Indicates whether this restriction is enforced on a best effort basis. Possible values are true or false. Defaults to false.
 	// +kubebuilder:validation:Optional
 	BestEffortEnforced *bool `json:"bestEffortEnforced,omitempty" tf:"best_effort_enforced,omitempty"`
 

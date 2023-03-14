@@ -84,7 +84,7 @@ func (tr *RedisCache) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *RedisCache) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this RedisEnterpriseCluster
@@ -306,7 +306,7 @@ func (tr *RedisFirewallRule) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *RedisFirewallRule) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this RedisLinkedServer
@@ -380,5 +380,5 @@ func (tr *RedisLinkedServer) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *RedisLinkedServer) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

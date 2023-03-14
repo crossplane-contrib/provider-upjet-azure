@@ -487,7 +487,7 @@ type SiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AppScaleLimit *float64 `json:"appScaleLimit,omitempty" tf:"app_scale_limit,omitempty"`
 
-	// Specifies the name of the Function App. Changing this forces a new resource to be created. Limit the function name to 32 characters to avoid naming collisions. For more information about Function App naming rule.
+	// The name of the slot to automatically swap to during deployment
 	// +kubebuilder:validation:Optional
 	AutoSwapSlotName *string `json:"autoSwapSlotName,omitempty" tf:"auto_swap_slot_name,omitempty"`
 

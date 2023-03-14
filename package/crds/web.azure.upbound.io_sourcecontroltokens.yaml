@@ -82,8 +82,7 @@ spec:
                     - namespace
                     type: object
                   tokenSecretSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: The Access Token Secret.
                     properties:
                       key:
                         description: The key to select.

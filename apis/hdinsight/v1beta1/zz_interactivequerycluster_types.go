@@ -257,6 +257,7 @@ type InteractiveQueryClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeIsolation []InteractiveQueryClusterComputeIsolationParameters `json:"computeIsolation,omitempty" tf:"compute_isolation,omitempty"`
 
+	// A disk_encryption block as defined below.
 	// +kubebuilder:validation:Optional
 	DiskEncryption []InteractiveQueryClusterDiskEncryptionParameters `json:"diskEncryption,omitempty" tf:"disk_encryption,omitempty"`
 

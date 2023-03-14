@@ -56,6 +56,8 @@ type WebPubsubLiveTraceParameters struct {
 }
 
 type WebPubsubObservation struct {
+
+	// The publicly accessible IP of the Web PubSub service.
 	ExternalIP *string `json:"externalIp,omitempty" tf:"external_ip,omitempty"`
 
 	// The FQDN of the Web PubSub service.

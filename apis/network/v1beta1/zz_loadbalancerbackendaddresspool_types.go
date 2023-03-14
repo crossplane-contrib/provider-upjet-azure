@@ -50,6 +50,10 @@ type LoadBalancerBackendAddressPoolParameters struct {
 	// One or more tunnel_interface blocks as defined below.
 	// +kubebuilder:validation:Optional
 	TunnelInterface []TunnelInterfaceParameters `json:"tunnelInterface,omitempty" tf:"tunnel_interface,omitempty"`
+
+	// The ID of the Virtual Network within which the Backend Address Pool should exist.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type TunnelInterfaceObservation struct {

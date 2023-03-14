@@ -73,6 +73,18 @@ spec:
                       are x64 and Arm64. Defaults to x64. Changing this forces a new
                       resource to be created.
                     type: string
+                  confidentialVmEnabled:
+                    description: Specifies if Confidential Virtual Machines enabled.
+                      It will enable all the features of trusted, with higher confidentiality
+                      features for isolate machines or encrypted data. Available for
+                      Gen2 machines. Changing this forces a new resource to be created.
+                    type: boolean
+                  confidentialVmSupported:
+                    description: Specifies if supports creation of both Confidential
+                      virtual machines and Gen2 virtual machines with standard security
+                      from a compatible Gen2 OS disk VHD or Gen2 Managed image. Changing
+                      this forces a new resource to be created.
+                    type: boolean
                   description:
                     description: A description of this Shared Image.
                     type: string

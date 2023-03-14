@@ -48,10 +48,11 @@ type RevokedCertificateObservation struct {
 
 type RevokedCertificateParameters struct {
 
-	// A user-defined name of the revoked certificate. Changing this forces a new resource to be created.
+	// A user-defined name of the root certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Specifies the public data of the certificate.
 	// +kubebuilder:validation:Required
 	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 }
@@ -61,11 +62,11 @@ type RootCertificateObservation struct {
 
 type RootCertificateParameters struct {
 
-	// A user-defined name of the revoked certificate. Changing this forces a new resource to be created.
+	// A user-defined name of the root certificate.
 	// +kubebuilder:validation:Required
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The SHA1 thumbprint of the certificate to be revoked.
+	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers.
 	// +kubebuilder:validation:Required
 	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }

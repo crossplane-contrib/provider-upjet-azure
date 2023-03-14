@@ -78,9 +78,13 @@ spec:
                     items:
                       type: string
                     type: array
+                  connectionStringInsecure:
+                    description: The connection string sent insecurely. Conflicts
+                      with connection_string, sas_uri and service_endpoint.
+                    type: string
                   connectionStringSecretRef:
-                    description: The connection string. Conflicts with sas_uri and
-                      service_endpoint.
+                    description: The connection string. Conflicts with connection_string_insecure,
+                      sas_uri and service_endpoint.
                     properties:
                       key:
                         description: The key to select.
@@ -286,8 +290,8 @@ spec:
                       Linked Service.
                     type: object
                   sasuriSecretRef:
-                    description: The SAS URI. Conflicts with connection_string and
-                      service_endpoint.
+                    description: The SAS URI. Conflicts with connection_string_insecure,
+                      connection_string and service_endpoint.
                     properties:
                       key:
                         description: The key to select.
@@ -304,8 +308,8 @@ spec:
                     - namespace
                     type: object
                   serviceEndpointSecretRef:
-                    description: The Service Endpoint. Conflicts with connection_string
-                      and sas_uri.
+                    description: The Service Endpoint. Conflicts with connection_string,
+                      connection_string_insecure and sas_uri.
                     properties:
                       key:
                         description: The key to select.

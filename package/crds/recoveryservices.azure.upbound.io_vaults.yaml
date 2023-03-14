@@ -64,6 +64,12 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  classicVmwareReplicationEnabled:
+                    description: Whether to enable the Classic experience for VMware
+                      replication. If set to false VMware machines will be protected
+                      using the new stateless ASR replication appliance. Changing
+                      this forces a new resource to be created.
+                    type: boolean
                   crossRegionRestoreEnabled:
                     description: Is cross region restore enabled for this Vault? Only
                       can be true, when storage_mode_type is GeoRedundant. Defaults
@@ -87,7 +93,8 @@ spec:
                             be used or not. Defaults to true.
                           type: boolean
                         userAssignedIdentityId:
-                          description: The ID of the Recovery Services Vault.
+                          description: Specifies the user assigned identity ID to
+                            be used.
                           type: string
                       required:
                       - infrastructureEncryptionEnabled

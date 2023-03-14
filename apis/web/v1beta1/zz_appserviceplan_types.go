@@ -28,6 +28,7 @@ type AppServicePlanParameters struct {
 	// +kubebuilder:validation:Optional
 	AppServiceEnvironmentID *string `json:"appServiceEnvironmentId,omitempty" tf:"app_service_environment_id,omitempty"`
 
+	// Whether to create a xenon App Service Plan.
 	// +kubebuilder:validation:Optional
 	IsXenon *bool `json:"isXenon,omitempty" tf:"is_xenon,omitempty"`
 

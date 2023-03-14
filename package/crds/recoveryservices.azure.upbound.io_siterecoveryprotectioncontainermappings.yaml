@@ -66,6 +66,21 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  automaticUpdate:
+                    description: a automatic_update block defined as below.
+                    items:
+                      properties:
+                        automationAccountId:
+                          description: The automation account ID which holds the automatic
+                            update runbook and authenticates to Azure resources.
+                          type: string
+                        enabled:
+                          description: Should the Mobility service installed on Azure
+                            virtual machines be automatically updated. Defaults to
+                            false.
+                          type: boolean
+                      type: object
+                    type: array
                   recoveryFabricName:
                     description: Name of fabric that should contains the protection
                       container to map. Changing this forces a new resource to be

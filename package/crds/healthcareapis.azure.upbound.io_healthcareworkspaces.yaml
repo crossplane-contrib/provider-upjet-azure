@@ -152,6 +152,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
+                    description: A mapping of tags to assign to the Healthcare Workspace.
                     type: object
                 required:
                 - location

@@ -172,6 +172,10 @@ spec:
                       - type
                       type: object
                     type: array
+                  virtualNetworkId:
+                    description: The ID of the Virtual Network within which the Backend
+                      Address Pool should exist.
+                    type: string
                 type: object
               providerConfigRef:
                 default:

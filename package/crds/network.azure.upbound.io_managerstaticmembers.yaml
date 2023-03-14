@@ -144,7 +144,9 @@ spec:
                         type: object
                     type: object
                   targetVirtualNetworkId:
-                    description: The ID of the Network Manager Static Member.
+                    description: Specifies the Resource ID of the Virtual Network
+                      using as the Static Member. Changing this forces a new Network
+                      Manager Static Member to be created.
                     type: string
                   targetVirtualNetworkIdRef:
                     description: Reference to a VirtualNetwork to populate targetVirtualNetworkId.
