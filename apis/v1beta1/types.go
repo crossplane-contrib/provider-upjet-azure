@@ -43,12 +43,17 @@ type ProviderConfigSpec struct {
 	// "usgovernment", "german", and "china". Defaults to "public".
 	// +kubebuilder:validation:Optional
 	Environment *string `json:"environment,omitempty"`
+
+	// OIDCTokenFilePath is the optional path to a token file
+	// that allows to access a managed identity.
+	// +kubebuilder:validation:Optional
+	OidcTokenFilePath *string `json:"oidcTokenFilePath,omitempty"`
 }
 
 // ProviderCredentials required to authenticate.
 type ProviderCredentials struct {
 	// Source of the provider credentials.
-	// +kubebuilder:validation:Enum=None;Secret;UserAssignedManagedIdentity;SystemAssignedManagedIdentity
+	// +kubebuilder:validation:Enum=None;Secret;UserAssignedManagedIdentity;SystemAssignedManagedIdentity;OIDCTokenFile
 	Source xpv1.CredentialsSource `json:"source"`
 
 	xpv1.CommonCredentialSelectors `json:",inline"`
