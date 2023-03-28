@@ -58,6 +58,7 @@ func main() {
 		providerSource     = app.Flag("terraform-provider-source", "Terraform provider source.").Required().Envar("TERRAFORM_PROVIDER_SOURCE").String()
 		providerVersion    = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
 		nativeProviderPath = app.Flag("terraform-native-provider-path", "Terraform native provider path for shared execution.").Default("").Envar("TERRAFORM_NATIVE_PROVIDER_PATH").String()
+		pluginProcessTTL   = app.Flag("provider-ttl", "TTL for the native plugin processes before they are replaced. Changing the default may increase memory consumption.").Default("100").Int()
 
 		namespace                  = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		enableExternalSecretStores = app.Flag("enable-external-secret-stores", "Enable support for ExternalSecretStores.").Default("false").Envar("ENABLE_EXTERNAL_SECRET_STORES").Bool()
@@ -97,9 +98,9 @@ func main() {
 	// we do not use the shared gRPC server and default to the regular
 	// Terraform CLI behaviour (of forking a plugin process per invocation).
 	// This removes some complexity for setting up development environments.
-	var runner terraform.ProviderRunner = terraform.NewNoOpProviderRunner()
+	var scheduler terraform.ProviderScheduler = terraform.NewNoOpProviderScheduler()
 	if len(*nativeProviderPath) != 0 {
-		runner = terraform.NewSharedProvider(log, *nativeProviderPath, "registry.terraform.io/"+*providerSource)
+		scheduler = terraform.NewSharedProviderScheduler(log, *pluginProcessTTL, terraform.WithNativeProviderPath(*nativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*providerSource))
 	}
 
 	o := tjcontroller.Options{
@@ -111,8 +112,8 @@ func main() {
 			Features:                &feature.Flags{},
 		},
 		Provider:       config.GetProvider(),
-		WorkspaceStore: terraform.NewWorkspaceStore(log, terraform.WithProviderRunner(runner), terraform.WithProcessReportInterval(*pollInterval)),
-		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion),
+		WorkspaceStore: terraform.NewWorkspaceStore(log, terraform.WithDisableInit(len(*nativeProviderPath) != 0), terraform.WithProcessReportInterval(*pollInterval)),
+		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, scheduler),
 	}
 
 	if *enableExternalSecretStores {
