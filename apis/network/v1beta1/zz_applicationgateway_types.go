@@ -999,7 +999,7 @@ type RewriteRuleParameters struct {
 	// +kubebuilder:validation:Required
 	RuleSequence *float64 `json:"ruleSequence" tf:"rule_sequence,omitempty"`
 
-	// One url block as defined above
+	// One url block as defined below
 	// +kubebuilder:validation:Optional
 	URL []URLParameters `json:"url,omitempty" tf:"url,omitempty"`
 }

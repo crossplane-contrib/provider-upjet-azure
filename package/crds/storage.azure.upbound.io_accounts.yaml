@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: accounts.storage.azure.upbound.io
 spec:
@@ -389,8 +389,9 @@ spec:
                           type: string
                         ipRules:
                           description: List of public IP or IP ranges in CIDR Format.
-                            Only IPv4 addresses are allowed. Private IP address ranges
-                            (as defined in RFC 1918) are not allowed.
+                            Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs,
+                            and Private IP address ranges (as defined in RFC 1918),  are
+                            not allowed.
                           items:
                             type: string
                           type: array
@@ -1144,9 +1145,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

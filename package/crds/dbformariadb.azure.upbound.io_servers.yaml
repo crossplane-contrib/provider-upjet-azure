@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: servers.dbformariadb.azure.upbound.io
 spec:
@@ -294,6 +294,11 @@ spec:
                     description: Specifies if SSL should be enforced on connections.
                       Possible values are true and false.
                     type: boolean
+                  sslMinimalTlsVersionEnforced:
+                    description: The minimum TLS version to support on the sever.
+                      Possible values are TLSEnforcementDisabled, TLS1_0, TLS1_1,
+                      and TLS1_2. Defaults to TLS1_2.
+                    type: string
                   storageMb:
                     description: Max storage allowed for a server. Possible values
                       are between 5120 MB (5GB) and 1024000MB (1TB) for the Basic
@@ -541,9 +546,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

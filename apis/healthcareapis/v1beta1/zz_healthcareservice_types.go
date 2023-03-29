@@ -82,7 +82,7 @@ type HealthcareServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	CosmosDBKeyVaultKeyVersionlessID *string `json:"cosmosdbKeyVaultKeyVersionlessId,omitempty" tf:"cosmosdb_key_vault_key_versionless_id,omitempty"`
 
-	// The provisioned throughput for the backing database. Range of 400-10000. Defaults to 400.
+	// The provisioned throughput for the backing database. Range of 400-100000. Defaults to 1000.
 	// +kubebuilder:validation:Optional
 	CosmosDBThroughput *float64 `json:"cosmosdbThroughput,omitempty" tf:"cosmosdb_throughput,omitempty"`
 

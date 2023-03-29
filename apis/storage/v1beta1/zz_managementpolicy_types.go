@@ -36,6 +36,10 @@ type BaseBlobObservation struct {
 
 type BaseBlobParameters struct {
 
+	// Whether a blob should automatically be tiered from cool back to hot if it's accessed again after being tiered to cool. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AutoTierToHotFromCoolEnabled *bool `json:"autoTierToHotFromCoolEnabled,omitempty" tf:"auto_tier_to_hot_from_cool_enabled,omitempty"`
+
 	// The age in days after creation to delete the blob snapshot. Must be between 0 and 99999. Defaults to -1.
 	// +kubebuilder:validation:Optional
 	DeleteAfterDaysSinceCreationGreaterThan *float64 `json:"deleteAfterDaysSinceCreationGreaterThan,omitempty" tf:"delete_after_days_since_creation_greater_than,omitempty"`

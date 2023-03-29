@@ -502,6 +502,10 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// a priority_mix block as defined below
+	// +kubebuilder:validation:Optional
+	PriorityMix []PriorityMixParameters `json:"priorityMix,omitempty" tf:"priority_mix,omitempty"`
+
 	// The ID of the Proximity Placement Group which the Orchestrated Virtual Machine should be assigned to. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
@@ -626,6 +630,20 @@ type OsProfileParameters struct {
 	// A windows_configuration block as documented below.
 	// +kubebuilder:validation:Optional
 	WindowsConfiguration []WindowsConfigurationParameters `json:"windowsConfiguration,omitempty" tf:"windows_configuration,omitempty"`
+}
+
+type PriorityMixObservation struct {
+}
+
+type PriorityMixParameters struct {
+
+	// Specifies the base number of VMs of Regular priority that will be created before any VMs of priority Spot are created. Possible values are integers between 0 and 1000. Defaults to 0.
+	// +kubebuilder:validation:Optional
+	BaseRegularCount *float64 `json:"baseRegularCount,omitempty" tf:"base_regular_count,omitempty"`
+
+	// Specifies the desired percentage of VM instances that are of Regular priority after the base count has been reached. Possible values are integers between 0 and 100. Defaults to 0.
+	// +kubebuilder:validation:Optional
+	RegularPercentageAboveBase *float64 `json:"regularPercentageAboveBase,omitempty" tf:"regular_percentage_above_base,omitempty"`
 }
 
 type PublicIPAddressIPTagObservation struct {

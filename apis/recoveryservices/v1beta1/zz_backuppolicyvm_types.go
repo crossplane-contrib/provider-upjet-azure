@@ -51,6 +51,7 @@ type BackupPolicyVMParameters struct {
 	// +kubebuilder:validation:Required
 	Backup []BackupPolicyVMBackupParameters `json:"backup" tf:"backup,omitempty"`
 
+	// Specifies the instant restore resource group name as documented in the instant_restore_resource_group block below.
 	// +kubebuilder:validation:Optional
 	InstantRestoreResourceGroup []InstantRestoreResourceGroupParameters `json:"instantRestoreResourceGroup,omitempty" tf:"instant_restore_resource_group,omitempty"`
 
@@ -178,9 +179,11 @@ type InstantRestoreResourceGroupObservation struct {
 
 type InstantRestoreResourceGroupParameters struct {
 
+	// The prefix for the instant_restore_resource_group name.
 	// +kubebuilder:validation:Required
 	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
 
+	// The suffix for the instant_restore_resource_group name.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }

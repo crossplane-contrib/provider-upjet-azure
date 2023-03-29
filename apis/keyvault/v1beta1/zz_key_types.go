@@ -13,6 +13,20 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AutomaticObservation struct {
+}
+
+type AutomaticParameters struct {
+
+	// Rotate automatically at a duration after create as an ISO 8601 duration.
+	// +kubebuilder:validation:Optional
+	TimeAfterCreation *string `json:"timeAfterCreation,omitempty" tf:"time_after_creation,omitempty"`
+
+	// Rotate automatically at a duration before expiry as an ISO 8601 duration.
+	// +kubebuilder:validation:Optional
+	TimeBeforeExpiry *string `json:"timeBeforeExpiry,omitempty" tf:"time_before_expiry,omitempty"`
+}
+
 type KeyObservation struct {
 
 	// The RSA public exponent of this Key Vault Key.
@@ -89,9 +103,31 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 
+	// A rotation_policy block as defined below.
+	// +kubebuilder:validation:Optional
+	RotationPolicy []RotationPolicyParameters `json:"rotationPolicy,omitempty" tf:"rotation_policy,omitempty"`
+
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type RotationPolicyObservation struct {
+}
+
+type RotationPolicyParameters struct {
+
+	// An automatic block as defined below.
+	// +kubebuilder:validation:Optional
+	Automatic []AutomaticParameters `json:"automatic,omitempty" tf:"automatic,omitempty"`
+
+	// Expire a Key Vault Key after given duration as an ISO 8601 duration.
+	// +kubebuilder:validation:Optional
+	ExpireAfter *string `json:"expireAfter,omitempty" tf:"expire_after,omitempty"`
+
+	// Notify at a given duration before expiry as an ISO 8601 duration. Default is P30D.
+	// +kubebuilder:validation:Optional
+	NotifyBeforeExpiry *string `json:"notifyBeforeExpiry,omitempty" tf:"notify_before_expiry,omitempty"`
 }
 
 // KeySpec defines the desired state of Key

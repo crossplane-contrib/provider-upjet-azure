@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: expressroutecircuitpeerings.network.azure.upbound.io
 spec:
@@ -159,6 +159,12 @@ spec:
                           description: A microsoft_peering block as defined below.
                           items:
                             properties:
+                              advertisedCommunities:
+                                description: The communities of Bgp Peering specified
+                                  for microsoft peering.
+                                items:
+                                  type: string
+                                type: array
                               advertisedPublicPrefixes:
                                 description: A list of Advertised Public Prefixes.
                                 items:
@@ -196,6 +202,12 @@ spec:
                       for IPv4.
                     items:
                       properties:
+                        advertisedCommunities:
+                          description: The communities of Bgp Peering specified for
+                            microsoft peering.
+                          items:
+                            type: string
+                          type: array
                         advertisedPublicPrefixes:
                           description: A list of Advertised Public Prefixes.
                           items:
@@ -566,9 +578,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

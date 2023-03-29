@@ -53,6 +53,9 @@ type IdentityParameters struct {
 
 type ServiceBusNamespaceObservation struct {
 
+	// The URL to access the ServiceBus Namespace.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
 	// The ServiceBus Namespace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

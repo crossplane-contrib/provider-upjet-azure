@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: flexibleservers.dbforpostgresql.azure.upbound.io
 spec:
@@ -241,16 +241,16 @@ spec:
                       properties:
                         identityIds:
                           description: A list of User Assigned Managed Identity IDs
-                            to be assigned to this API Management Service. Required
+                            to be assigned to this PostgreSQL Flexible Server. Required
                             if used together with customer_managed_key block.
                           items:
                             type: string
                           type: array
                         type:
                           description: Specifies the type of Managed Service Identity
-                            that should be configured on this API Management Service.
-                            Should be set to UserAssigned, SystemAssigned, UserAssigned
-                            (to enable both).
+                            that should be configured on this PostgreSQL Flexible
+                            Server. Should be set to UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       required:
                       - type
@@ -725,9 +725,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

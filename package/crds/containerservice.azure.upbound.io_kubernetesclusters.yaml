@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: kubernetesclusters.containerservice.azure.upbound.io
 spec:
@@ -893,6 +893,10 @@ spec:
                             type: string
                           description: A mapping of tags to assign to the Node Pool.
                           type: object
+                        temporaryNameForRotation:
+                          description: Specifies the name of the temporary node pool
+                            used to cycle the default node pool for VM resizing.
+                          type: string
                         type:
                           description: The type of Node Pool which should be created.
                             Possible values are AvailabilitySet and VirtualMachineScaleSets.
@@ -920,7 +924,6 @@ spec:
                           type: array
                         vmSize:
                           description: The size of the Virtual Machine, such as Standard_DS2_v2.
-                            Changing this forces a new resource to be created.
                           type: string
                         vnetSubnetId:
                           description: The ID of a Subnet where the Kubernetes Node
@@ -1029,7 +1032,10 @@ spec:
                     type: string
                   dnsPrefix:
                     description: DNS prefix specified when creating the managed cluster.
-                      Changing this forces a new resource to be created.
+                      Possible values must begin and end with a letter or number,
+                      contain only letters, numbers, and hyphens and be between 1
+                      and 54 characters in length. Changing this forces a new resource
+                      to be created.
                     type: string
                   dnsPrefixPrivateCluster:
                     description: Specifies the DNS prefix to use with private clusters.
@@ -1249,7 +1255,8 @@ spec:
                     items:
                       properties:
                         secretRotationEnabled:
-                          description: Is secret rotation enabled?
+                          description: Should the secret store CSI driver on the AKS
+                            cluster be enabled?
                           type: boolean
                         secretRotationInterval:
                           description: The interval to poll for secret rotation. This
@@ -1557,8 +1564,7 @@ spec:
                     type: array
                   nodeResourceGroup:
                     description: The auto-generated Resource Group which contains
-                      the resources for this Managed Kubernetes Cluster. Changing
-                      this forces a new resource to be created.
+                      the resources for this Managed Kubernetes Cluster.
                     type: string
                   oidcIssuerEnabled:
                     description: Enable or Disable the OIDC issuer URL
@@ -1571,6 +1577,10 @@ spec:
                           description: The ID of the Log Analytics Workspace which
                             the OMS Agent should send data to.
                           type: string
+                        msiAuthForMonitoringEnabled:
+                          description: Is managed identity authentication for monitoring
+                            enabled?
+                          type: boolean
                       required:
                       - logAnalyticsWorkspaceId
                       type: object
@@ -1799,8 +1809,8 @@ spec:
                     type: array
                   skuTier:
                     description: The SKU Tier that should be used for this Kubernetes
-                      Cluster. Possible values are Free and Paid (which includes the
-                      Uptime SLA). Defaults to Free.
+                      Cluster. Possible values are Free, Paid and Standard (which
+                      includes the Uptime SLA). Defaults to Free.
                     type: string
                   storageProfile:
                     description: A storage_profile block as defined below.
@@ -1910,6 +1920,10 @@ spec:
                         kedaEnabled:
                           description: Specifies whether KEDA Autoscaler can be used
                             for workloads.
+                          type: boolean
+                        verticalPodAutoscalerEnabled:
+                          description: Specifies whether Vertical Pod Autoscaler should
+                            be enabled.
                           type: boolean
                       type: object
                     type: array
@@ -2235,6 +2249,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  nodeResourceGroupId:
+                    description: The ID of the Resource Group containing the resources
+                      for this Managed Kubernetes Cluster.
+                    type: string
                   oidcIssuerUrl:
                     description: The OIDC issuer URL that is associated with the cluster.
                     type: string
@@ -2273,6 +2291,18 @@ spec:
                       link has been enabled, which is only resolvable inside the Virtual
                       Network used by the Kubernetes Cluster.
                     type: string
+                  workloadAutoscalerProfile:
+                    description: A workload_autoscaler_profile block defined below.
+                    items:
+                      properties:
+                        verticalPodAutoscalerControlledValues:
+                          description: Which resources values should be controlled.
+                          type: string
+                        verticalPodAutoscalerUpdateMode:
+                          description: How the autoscaler applies changes to pod resources.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -2315,9 +2345,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

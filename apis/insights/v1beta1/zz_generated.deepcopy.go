@@ -3534,6 +3534,11 @@ func (in *MonitorActionGroupParameters) DeepCopyInto(out *MonitorActionGroupPara
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogicAppReceiver != nil {
 		in, out := &in.LogicAppReceiver, &out.LogicAppReceiver
 		*out = make([]LogicAppReceiverParameters, len(*in))

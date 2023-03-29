@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.8.0
+    controller-gen.kubebuilder.io/version: v0.11.1
   creationTimestamp: null
   name: orchestratedvirtualmachinescalesets.compute.azure.upbound.io
 spec:
@@ -907,6 +907,24 @@ spec:
                       Scale Set. Possible values are Regular and Spot. Defaults to
                       Regular. Changing this value forces a new resource.
                     type: string
+                  priorityMix:
+                    description: a priority_mix block as defined below
+                    items:
+                      properties:
+                        baseRegularCount:
+                          description: Specifies the base number of VMs of Regular
+                            priority that will be created before any VMs of priority
+                            Spot are created. Possible values are integers between
+                            0 and 1000. Defaults to 0.
+                          type: number
+                        regularPercentageAboveBase:
+                          description: Specifies the desired percentage of VM instances
+                            that are of Regular priority after the base count has
+                            been reached. Possible values are integers between 0 and
+                            100. Defaults to 0.
+                          type: number
+                      type: object
+                    type: array
                   proximityPlacementGroupId:
                     description: The ID of the Proximity Placement Group which the
                       Orchestrated Virtual Machine should be assigned to. Changing
@@ -1327,9 +1345,3 @@ spec:
     storage: true
     subresources:
       status: {}
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

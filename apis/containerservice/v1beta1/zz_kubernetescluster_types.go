@@ -341,6 +341,10 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Specifies the name of the temporary node pool used to cycle the default node pool for VM resizing.
+	// +kubebuilder:validation:Optional
+	TemporaryNameForRotation *string `json:"temporaryNameForRotation,omitempty" tf:"temporary_name_for_rotation,omitempty"`
+
 	// The type of Node Pool which should be created. Possible values are AvailabilitySet and VirtualMachineScaleSets. Defaults to VirtualMachineScaleSets. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -353,7 +357,7 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	UpgradeSettings []UpgradeSettingsParameters `json:"upgradeSettings,omitempty" tf:"upgrade_settings,omitempty"`
 
-	// The size of the Virtual Machine, such as Standard_DS2_v2. Changing this forces a new resource to be created.
+	// The size of the Virtual Machine, such as Standard_DS2_v2.
 	// +kubebuilder:validation:Required
 	VMSize *string `json:"vmSize" tf:"vm_size,omitempty"`
 
@@ -511,7 +515,7 @@ type KeyVaultSecretsProviderObservation struct {
 
 type KeyVaultSecretsProviderParameters struct {
 
-	// Is secret rotation enabled?
+	// Should the secret store CSI driver on the AKS cluster be enabled?
 	// +kubebuilder:validation:Optional
 	SecretRotationEnabled *bool `json:"secretRotationEnabled,omitempty" tf:"secret_rotation_enabled,omitempty"`
 
@@ -639,6 +643,9 @@ type KubernetesClusterObservation struct {
 	// +kubebuilder:validation:Optional
 	NetworkProfile []NetworkProfileObservation `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
 
+	// The ID of the Resource Group containing the resources for this Managed Kubernetes Cluster.
+	NodeResourceGroupID *string `json:"nodeResourceGroupId,omitempty" tf:"node_resource_group_id,omitempty"`
+
 	// The OIDC issuer URL that is associated with the cluster.
 	OidcIssuerURL *string `json:"oidcIssuerUrl,omitempty" tf:"oidc_issuer_url,omitempty"`
 
@@ -651,6 +658,10 @@ type KubernetesClusterObservation struct {
 
 	// The FQDN for the Kubernetes Cluster when private link has been enabled, which is only resolvable inside the Virtual Network used by the Kubernetes Cluster.
 	PrivateFqdn *string `json:"privateFqdn,omitempty" tf:"private_fqdn,omitempty"`
+
+	// A workload_autoscaler_profile block defined below.
+	// +kubebuilder:validation:Optional
+	WorkloadAutoscalerProfile []WorkloadAutoscalerProfileObservation `json:"workloadAutoscalerProfile,omitempty" tf:"workload_autoscaler_profile,omitempty"`
 }
 
 type KubernetesClusterParameters struct {
@@ -686,7 +697,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfidentialComputing []ConfidentialComputingParameters `json:"confidentialComputing,omitempty" tf:"confidential_computing,omitempty"`
 
-	// DNS prefix specified when creating the managed cluster. Changing this forces a new resource to be created.
+	// DNS prefix specified when creating the managed cluster. Possible values must begin and end with a letter or number, contain only letters, numbers, and hyphens and be between 1 and 54 characters in length. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
 
@@ -777,7 +788,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkProfile []NetworkProfileParameters `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
 
-	// The auto-generated Resource Group which contains the resources for this Managed Kubernetes Cluster. Changing this forces a new resource to be created.
+	// The auto-generated Resource Group which contains the resources for this Managed Kubernetes Cluster.
 	// +kubebuilder:validation:Optional
 	NodeResourceGroup *string `json:"nodeResourceGroup,omitempty" tf:"node_resource_group,omitempty"`
 
@@ -844,7 +855,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ServicePrincipal []ServicePrincipalParameters `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
 
-	// The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid (which includes the Uptime SLA). Defaults to Free.
+	// The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free, Paid and Standard (which includes the Uptime SLA). Defaults to Free.
 	// +kubebuilder:validation:Optional
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
@@ -1125,6 +1136,10 @@ type OmsAgentParameters struct {
 	// The ID of the Log Analytics Workspace which the OMS Agent should send data to.
 	// +kubebuilder:validation:Required
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId" tf:"log_analytics_workspace_id,omitempty"`
+
+	// Is managed identity authentication for monitoring enabled?
+	// +kubebuilder:validation:Optional
+	MsiAuthForMonitoringEnabled *bool `json:"msiAuthForMonitoringEnabled,omitempty" tf:"msi_auth_for_monitoring_enabled,omitempty"`
 }
 
 type SSHKeyObservation struct {
@@ -1357,6 +1372,12 @@ type WindowsProfileParameters struct {
 }
 
 type WorkloadAutoscalerProfileObservation struct {
+
+	// Which resources values should be controlled.
+	VerticalPodAutoscalerControlledValues *string `json:"verticalPodAutoscalerControlledValues,omitempty" tf:"vertical_pod_autoscaler_controlled_values,omitempty"`
+
+	// How the autoscaler applies changes to pod resources.
+	VerticalPodAutoscalerUpdateMode *string `json:"verticalPodAutoscalerUpdateMode,omitempty" tf:"vertical_pod_autoscaler_update_mode,omitempty"`
 }
 
 type WorkloadAutoscalerProfileParameters struct {
@@ -1364,6 +1385,10 @@ type WorkloadAutoscalerProfileParameters struct {
 	// Specifies whether KEDA Autoscaler can be used for workloads.
 	// +kubebuilder:validation:Optional
 	KedaEnabled *bool `json:"kedaEnabled,omitempty" tf:"keda_enabled,omitempty"`
+
+	// Specifies whether Vertical Pod Autoscaler should be enabled.
+	// +kubebuilder:validation:Optional
+	VerticalPodAutoscalerEnabled *bool `json:"verticalPodAutoscalerEnabled,omitempty" tf:"vertical_pod_autoscaler_enabled,omitempty"`
 }
 
 // KubernetesClusterSpec defines the desired state of KubernetesCluster
