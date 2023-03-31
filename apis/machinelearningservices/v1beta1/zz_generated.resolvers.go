@@ -9,14 +9,142 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta13 "github.com/upbound/provider-azure/apis/azure/v1beta1"
-	v1beta1 "github.com/upbound/provider-azure/apis/insights/v1beta1"
-	v1beta11 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
-	v1beta12 "github.com/upbound/provider-azure/apis/managedidentity/v1beta1"
-	v1beta14 "github.com/upbound/provider-azure/apis/storage/v1beta1"
+	v1beta15 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/insights/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
+	v1beta14 "github.com/upbound/provider-azure/apis/managedidentity/v1beta1"
+	v1beta1 "github.com/upbound/provider-azure/apis/network/v1beta1"
+	v1beta16 "github.com/upbound/provider-azure/apis/storage/v1beta1"
+	v1beta11 "github.com/upbound/provider-azure/apis/synapse/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this ComputeCluster.
+func (mg *ComputeCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MachineLearningWorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.MachineLearningWorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.MachineLearningWorkspaceIDSelector,
+		To: reference.To{
+			List:    &WorkspaceList{},
+			Managed: &Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MachineLearningWorkspaceID")
+	}
+	mg.Spec.ForProvider.MachineLearningWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MachineLearningWorkspaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SubnetResourceIDRef,
+		Selector:     mg.Spec.ForProvider.SubnetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetResourceID")
+	}
+	mg.Spec.ForProvider.SubnetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetResourceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ComputeInstance.
+func (mg *ComputeInstance) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MachineLearningWorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.MachineLearningWorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.MachineLearningWorkspaceIDSelector,
+		To: reference.To{
+			List:    &WorkspaceList{},
+			Managed: &Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MachineLearningWorkspaceID")
+	}
+	mg.Spec.ForProvider.MachineLearningWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MachineLearningWorkspaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SubnetResourceIDRef,
+		Selector:     mg.Spec.ForProvider.SubnetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetResourceID")
+	}
+	mg.Spec.ForProvider.SubnetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubnetResourceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SynapseSpark.
+func (mg *SynapseSpark) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MachineLearningWorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.MachineLearningWorkspaceIDRef,
+		Selector:     mg.Spec.ForProvider.MachineLearningWorkspaceIDSelector,
+		To: reference.To{
+			List:    &WorkspaceList{},
+			Managed: &Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MachineLearningWorkspaceID")
+	}
+	mg.Spec.ForProvider.MachineLearningWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MachineLearningWorkspaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SynapseSparkPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SynapseSparkPoolIDRef,
+		Selector:     mg.Spec.ForProvider.SynapseSparkPoolIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SparkPoolList{},
+			Managed: &v1beta11.SparkPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SynapseSparkPoolID")
+	}
+	mg.Spec.ForProvider.SynapseSparkPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SynapseSparkPoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
 
 // ResolveReferences of this Workspace.
 func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -31,8 +159,8 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		Reference:    mg.Spec.ForProvider.ApplicationInsightsIDRef,
 		Selector:     mg.Spec.ForProvider.ApplicationInsightsIDSelector,
 		To: reference.To{
-			List:    &v1beta1.ApplicationInsightsList{},
-			Managed: &v1beta1.ApplicationInsights{},
+			List:    &v1beta12.ApplicationInsightsList{},
+			Managed: &v1beta12.ApplicationInsights{},
 		},
 	})
 	if err != nil {
@@ -48,8 +176,8 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 			Reference:    mg.Spec.ForProvider.Encryption[i3].KeyIDRef,
 			Selector:     mg.Spec.ForProvider.Encryption[i3].KeyIDSelector,
 			To: reference.To{
-				List:    &v1beta11.KeyList{},
-				Managed: &v1beta11.Key{},
+				List:    &v1beta13.KeyList{},
+				Managed: &v1beta13.Key{},
 			},
 		})
 		if err != nil {
@@ -66,8 +194,8 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 			Reference:    mg.Spec.ForProvider.Encryption[i3].KeyVaultIDRef,
 			Selector:     mg.Spec.ForProvider.Encryption[i3].KeyVaultIDSelector,
 			To: reference.To{
-				List:    &v1beta11.VaultList{},
-				Managed: &v1beta11.Vault{},
+				List:    &v1beta13.VaultList{},
+				Managed: &v1beta13.Vault{},
 			},
 		})
 		if err != nil {
@@ -84,8 +212,8 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 			Reference:    mg.Spec.ForProvider.Encryption[i3].UserAssignedIdentityIDRef,
 			Selector:     mg.Spec.ForProvider.Encryption[i3].UserAssignedIdentityIDSelector,
 			To: reference.To{
-				List:    &v1beta12.UserAssignedIdentityList{},
-				Managed: &v1beta12.UserAssignedIdentity{},
+				List:    &v1beta14.UserAssignedIdentityList{},
+				Managed: &v1beta14.UserAssignedIdentity{},
 			},
 		})
 		if err != nil {
@@ -101,8 +229,8 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		Reference:    mg.Spec.ForProvider.KeyVaultIDRef,
 		Selector:     mg.Spec.ForProvider.KeyVaultIDSelector,
 		To: reference.To{
-			List:    &v1beta11.VaultList{},
-			Managed: &v1beta11.Vault{},
+			List:    &v1beta13.VaultList{},
+			Managed: &v1beta13.Vault{},
 		},
 	})
 	if err != nil {
@@ -117,8 +245,8 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		Reference:    mg.Spec.ForProvider.PrimaryUserAssignedIdentityRef,
 		Selector:     mg.Spec.ForProvider.PrimaryUserAssignedIdentitySelector,
 		To: reference.To{
-			List:    &v1beta12.UserAssignedIdentityList{},
-			Managed: &v1beta12.UserAssignedIdentity{},
+			List:    &v1beta14.UserAssignedIdentityList{},
+			Managed: &v1beta14.UserAssignedIdentity{},
 		},
 	})
 	if err != nil {
@@ -133,8 +261,8 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta13.ResourceGroupList{},
-			Managed: &v1beta13.ResourceGroup{},
+			List:    &v1beta15.ResourceGroupList{},
+			Managed: &v1beta15.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -149,8 +277,8 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 		Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
 		Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
 		To: reference.To{
-			List:    &v1beta14.AccountList{},
-			Managed: &v1beta14.Account{},
+			List:    &v1beta16.AccountList{},
+			Managed: &v1beta16.Account{},
 		},
 	})
 	if err != nil {
