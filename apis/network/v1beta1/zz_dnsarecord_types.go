@@ -20,6 +20,24 @@ type DNSARecordObservation struct {
 
 	// The DNS A Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of IPv4 Addresses. Conflicts with target_resource_id.
+	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
+
+	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Azure resource id of the target object. Conflicts with records.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
+	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 }
 
 type DNSARecordParameters struct {
@@ -42,8 +60,8 @@ type DNSARecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -101,8 +119,9 @@ type DNSARecordStatus struct {
 type DNSARecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DNSARecordSpec   `json:"spec"`
-	Status            DNSARecordStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	Spec   DNSARecordSpec   `json:"spec"`
+	Status DNSARecordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

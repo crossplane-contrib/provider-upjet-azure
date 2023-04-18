@@ -15,8 +15,23 @@ import (
 
 type IdentityProviderAADObservation struct {
 
+	// The Name of the API Management Service where this AAD Identity Provider should be created. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// List of allowed AAD Tenants.
+	AllowedTenants []*string `json:"allowedTenants,omitempty" tf:"allowed_tenants,omitempty"`
+
+	// Client Id of the Application in the AAD Identity Provider.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
 	// The ID of the API Management AAD Identity Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The AAD Tenant to use instead of Common when logging into Active Directory
+	SigninTenant *string `json:"signinTenant,omitempty" tf:"signin_tenant,omitempty"`
 }
 
 type IdentityProviderAADParameters struct {
@@ -35,15 +50,15 @@ type IdentityProviderAADParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// List of allowed AAD Tenants.
-	// +kubebuilder:validation:Required
-	AllowedTenants []*string `json:"allowedTenants" tf:"allowed_tenants,omitempty"`
+	// +kubebuilder:validation:Optional
+	AllowedTenants []*string `json:"allowedTenants,omitempty" tf:"allowed_tenants,omitempty"`
 
 	// Client Id of the Application in the AAD Identity Provider.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Client secret of the Application in the AAD Identity Provider.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -88,8 +103,11 @@ type IdentityProviderAADStatus struct {
 type IdentityProviderAAD struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IdentityProviderAADSpec   `json:"spec"`
-	Status            IdentityProviderAADStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.allowedTenants)",message="allowedTenants is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientId)",message="clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
+	Spec   IdentityProviderAADSpec   `json:"spec"`
+	Status IdentityProviderAADStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

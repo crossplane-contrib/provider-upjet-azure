@@ -20,6 +20,18 @@ type FrontdoorProfileObservation struct {
 
 	// The UUID of this Front Door Profile which will be sent in the HTTP Header as the X-Azure-FDID attribute.
 	ResourceGUID *string `json:"resourceGuid,omitempty" tf:"resource_guid,omitempty"`
+
+	// The name of the Resource Group where this Front Door Profile should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the maximum response timeout in seconds. Possible values are between 16 and 240 seconds (inclusive). Defaults to 120 seconds.
+	ResponseTimeoutSeconds *float64 `json:"responseTimeoutSeconds,omitempty" tf:"response_timeout_seconds,omitempty"`
+
+	// Specifies the SKU for this Front Door Profile. Possible values include Standard_AzureFrontDoor and Premium_AzureFrontDoor. Changing this forces a new resource to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// Specifies a mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FrontdoorProfileParameters struct {
@@ -42,8 +54,8 @@ type FrontdoorProfileParameters struct {
 	ResponseTimeoutSeconds *float64 `json:"responseTimeoutSeconds,omitempty" tf:"response_timeout_seconds,omitempty"`
 
 	// Specifies the SKU for this Front Door Profile. Possible values include Standard_AzureFrontDoor and Premium_AzureFrontDoor. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// Specifies a mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -74,8 +86,9 @@ type FrontdoorProfileStatus struct {
 type FrontdoorProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FrontdoorProfileSpec   `json:"spec"`
-	Status            FrontdoorProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	Spec   FrontdoorProfileSpec   `json:"spec"`
+	Status FrontdoorProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

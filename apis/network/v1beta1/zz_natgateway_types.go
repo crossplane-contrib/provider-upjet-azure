@@ -18,8 +18,26 @@ type NATGatewayObservation struct {
 	// The ID of the NAT Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The idle timeout which should be used in minutes. Defaults to 4.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+
+	// Specifies the supported Azure location where the NAT Gateway should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// The resource GUID property of the NAT Gateway.
 	ResourceGUID *string `json:"resourceGuid,omitempty" tf:"resource_guid,omitempty"`
+
+	// Specifies the name of the Resource Group in which the NAT Gateway should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The SKU which should be used. At this time the only supported value is Standard. Defaults to Standard.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies a list of Availability Zones in which this NAT Gateway should be located. Changing this forces a new NAT Gateway to be created.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type NATGatewayParameters struct {
@@ -29,8 +47,8 @@ type NATGatewayParameters struct {
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// Specifies the supported Azure location where the NAT Gateway should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group in which the NAT Gateway should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -82,8 +100,9 @@ type NATGatewayStatus struct {
 type NATGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NATGatewaySpec   `json:"spec"`
-	Status            NATGatewayStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   NATGatewaySpec   `json:"spec"`
+	Status NATGatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

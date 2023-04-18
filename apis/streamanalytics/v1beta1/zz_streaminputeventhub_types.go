@@ -15,8 +15,38 @@ import (
 
 type StreamInputEventHubObservation struct {
 
+	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
+	// The name of an Event Hub Consumer Group that should be used to read events from the Event Hub. Specifying distinct consumer group names for multiple inputs allows each of those inputs to receive the same events from the Event Hub. If not set the input will use the Event Hub's default consumer group.
+	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
+
+	// The name of the Event Hub.
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
 	// The ID of the Stream Analytics Stream Input EventHub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Stream Input EventHub. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The property the input Event Hub has been partitioned by.
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A serialization block as defined below.
+	Serialization []StreamInputEventHubSerializationObservation `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The namespace that is associated with the desired Event Hub, Service Bus Queue, Service Bus Topic, etc.
+	ServiceBusNamespace *string `json:"servicebusNamespace,omitempty" tf:"servicebus_namespace,omitempty"`
+
+	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
+	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 }
 
 type StreamInputEventHubParameters struct {
@@ -52,8 +82,8 @@ type StreamInputEventHubParameters struct {
 	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Input EventHub. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The property the input Event Hub has been partitioned by.
 	// +kubebuilder:validation:Optional
@@ -73,8 +103,8 @@ type StreamInputEventHubParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
-	// +kubebuilder:validation:Required
-	Serialization []StreamInputEventHubSerializationParameters `json:"serialization" tf:"serialization,omitempty"`
+	// +kubebuilder:validation:Optional
+	Serialization []StreamInputEventHubSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The namespace that is associated with the desired Event Hub, Service Bus Queue, Service Bus Topic, etc.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
@@ -112,6 +142,15 @@ type StreamInputEventHubParameters struct {
 }
 
 type StreamInputEventHubSerializationObservation struct {
+
+	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
+
+	// The serialization format used for incoming data streams. Possible values are Avro, Csv and Json.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StreamInputEventHubSerializationParameters struct {
@@ -153,8 +192,10 @@ type StreamInputEventHubStatus struct {
 type StreamInputEventHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamInputEventHubSpec   `json:"spec"`
-	Status            StreamInputEventHubStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serialization)",message="serialization is a required parameter"
+	Spec   StreamInputEventHubSpec   `json:"spec"`
+	Status StreamInputEventHubStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

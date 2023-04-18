@@ -15,15 +15,24 @@ import (
 
 type MSSQLFirewallRuleObservation struct {
 
+	// The ending IP address to allow through the firewall for this rule.
+	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
+
 	// The SQL Firewall Rule ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The resource ID of the SQL Server on which to create the Firewall Rule. Changing this forces a new resource to be created.
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// The starting IP address to allow through the firewall for this rule.
+	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
 
 type MSSQLFirewallRuleParameters struct {
 
 	// The ending IP address to allow through the firewall for this rule.
-	// +kubebuilder:validation:Required
-	EndIPAddress *string `json:"endIpAddress" tf:"end_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The resource ID of the SQL Server on which to create the Firewall Rule. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.MSSQLServer
@@ -40,8 +49,8 @@ type MSSQLFirewallRuleParameters struct {
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The starting IP address to allow through the firewall for this rule.
-	// +kubebuilder:validation:Required
-	StartIPAddress *string `json:"startIpAddress" tf:"start_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
 
 // MSSQLFirewallRuleSpec defines the desired state of MSSQLFirewallRule
@@ -68,8 +77,10 @@ type MSSQLFirewallRuleStatus struct {
 type MSSQLFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MSSQLFirewallRuleSpec   `json:"spec"`
-	Status            MSSQLFirewallRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endIpAddress)",message="endIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.startIpAddress)",message="startIpAddress is a required parameter"
+	Spec   MSSQLFirewallRuleSpec   `json:"spec"`
+	Status MSSQLFirewallRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,26 @@ import (
 
 type AccountLocalUserObservation struct {
 
+	// The home directory of the Storage Account Local User.
+	HomeDirectory *string `json:"homeDirectory,omitempty" tf:"home_directory,omitempty"`
+
 	// The ID of the Storage Account Local User.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more permission_scope blocks as defined below.
+	PermissionScope []PermissionScopeObservation `json:"permissionScope,omitempty" tf:"permission_scope,omitempty"`
+
+	// One or more ssh_authorized_key blocks as defined below. Changing this forces a new Storage Account Local User to be created.
+	SSHAuthorizedKey []SSHAuthorizedKeyObservation `json:"sshAuthorizedKey,omitempty" tf:"ssh_authorized_key,omitempty"`
+
+	// Specifies whether SSH Key Authentication is enabled. Defaults to false.
+	SSHKeyEnabled *bool `json:"sshKeyEnabled,omitempty" tf:"ssh_key_enabled,omitempty"`
+
+	// Specifies whether SSH Password Authentication is enabled. Defaults to false.
+	SSHPasswordEnabled *bool `json:"sshPasswordEnabled,omitempty" tf:"ssh_password_enabled,omitempty"`
+
+	// The ID of the Storage Account that this Storage Account Local User resides in. Changing this forces a new Storage Account Local User to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type AccountLocalUserParameters struct {
@@ -57,6 +75,15 @@ type AccountLocalUserParameters struct {
 }
 
 type PermissionScopeObservation struct {
+
+	// A permissions block as defined below.
+	Permissions []PermissionsObservation `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// The container name (when service is set to blob) or the file share name (when service is set to file), used by the Storage Account Local User.
+	ResourceName *string `json:"resourceName,omitempty" tf:"resource_name,omitempty"`
+
+	// The storage service used by this Storage Account Local User. Possible values are blob and file.
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type PermissionScopeParameters struct {
@@ -84,6 +111,21 @@ type PermissionScopeParameters struct {
 }
 
 type PermissionsObservation struct {
+
+	// (Defaults to 30 minutes) Used when creating the Storage Account Local User.
+	Create *bool `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (Defaults to 30 minutes) Used when deleting the Storage Account Local User.
+	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// Specifies if the Local User has the list permission for this scope. Defaults to false.
+	List *bool `json:"list,omitempty" tf:"list,omitempty"`
+
+	// (Defaults to 5 minutes) Used when retrieving the Storage Account Local User.
+	Read *bool `json:"read,omitempty" tf:"read,omitempty"`
+
+	// Specifies if the Local User has the write permission for this scope. Defaults to false.
+	Write *bool `json:"write,omitempty" tf:"write,omitempty"`
 }
 
 type PermissionsParameters struct {
@@ -110,6 +152,12 @@ type PermissionsParameters struct {
 }
 
 type SSHAuthorizedKeyObservation struct {
+
+	// The description of this SSH authorized key.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The public key value of this SSH authorized key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type SSHAuthorizedKeyParameters struct {

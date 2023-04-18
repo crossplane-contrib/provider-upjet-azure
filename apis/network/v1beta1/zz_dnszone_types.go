@@ -27,9 +27,14 @@ type DNSZoneObservation struct {
 	// The number of records already in the zone.
 	NumberOfRecordSets *float64 `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty"`
 
+	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// An soa_record block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SoaRecord []SoaRecordObservation `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DNSZoneParameters struct {
@@ -57,7 +62,35 @@ type DNSZoneParameters struct {
 }
 
 type SoaRecordObservation struct {
+
+	// The email contact for the SOA record.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The expire time for the SOA record. Defaults to 2419200.
+	ExpireTime *float64 `json:"expireTime,omitempty" tf:"expire_time,omitempty"`
+
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+
+	// The domain name of the authoritative name server for the SOA record.
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+
+	// The minimum Time To Live for the SOA record. By convention, it is used to determine the negative caching duration. Defaults to 300.
+	MinimumTTL *float64 `json:"minimumTtl,omitempty" tf:"minimum_ttl,omitempty"`
+
+	// The refresh time for the SOA record. Defaults to 3600.
+	RefreshTime *float64 `json:"refreshTime,omitempty" tf:"refresh_time,omitempty"`
+
+	// The retry time for the SOA record. Defaults to 300.
+	RetryTime *float64 `json:"retryTime,omitempty" tf:"retry_time,omitempty"`
+
+	// The serial number for the SOA record. Defaults to 1.
+	SerialNumber *float64 `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
+
+	// The Time To Live of the SOA Record in seconds. Defaults to 3600.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the Record Set.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SoaRecordParameters struct {

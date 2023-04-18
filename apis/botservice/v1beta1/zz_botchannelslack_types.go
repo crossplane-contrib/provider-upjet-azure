@@ -15,8 +15,23 @@ import (
 
 type BotChannelSlackObservation struct {
 
+	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
+	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
+
+	// The Client ID that will be used to authenticate with Slack.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
 	// The ID of the Slack Integration for a Bot Channel.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Slack Landing Page URL.
+	LandingPageURL *string `json:"landingPageUrl,omitempty" tf:"landing_page_url,omitempty"`
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type BotChannelSlackParameters struct {
@@ -36,11 +51,11 @@ type BotChannelSlackParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The Client ID that will be used to authenticate with Slack.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret that will be used to authenticate with Slack.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Slack Landing Page URL.
@@ -48,8 +63,8 @@ type BotChannelSlackParameters struct {
 	LandingPageURL *string `json:"landingPageUrl,omitempty" tf:"landing_page_url,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -69,7 +84,7 @@ type BotChannelSlackParameters struct {
 	SigningSecretSecretRef *v1.SecretKeySelector `json:"signingSecretSecretRef,omitempty" tf:"-"`
 
 	// The Verification Token that will be used to authenticate with Slack.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	VerificationTokenSecretRef v1.SecretKeySelector `json:"verificationTokenSecretRef" tf:"-"`
 }
 
@@ -97,8 +112,12 @@ type BotChannelSlackStatus struct {
 type BotChannelSlack struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotChannelSlackSpec   `json:"spec"`
-	Status            BotChannelSlackStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientId)",message="clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.verificationTokenSecretRef)",message="verificationTokenSecretRef is a required parameter"
+	Spec   BotChannelSlackSpec   `json:"spec"`
+	Status BotChannelSlackStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

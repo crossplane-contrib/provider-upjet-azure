@@ -41,6 +41,15 @@ type AccessPolicyParameters struct {
 }
 
 type ContactObservation struct {
+
+	// E-mail address of the contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// Name of the contact.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Phone number of the contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 
 type ContactParameters struct {
@@ -59,6 +68,18 @@ type ContactParameters struct {
 }
 
 type NetworkAclsObservation struct {
+
+	// Specifies which traffic can bypass the network rules. Possible values are AzureServices and None.
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
+	// The Default Action to use when no rules match from ip_rules / virtual_network_subnet_ids. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault.
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// One or more Subnet IDs which should be able to access this Key Vault.
+	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
 type NetworkAclsParameters struct {
@@ -85,8 +106,50 @@ type VaultObservation struct {
 	// A list of up to 1024 objects describing access policies, as described below.
 	AccessPolicy []AccessPolicyObservation `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
+	// One or more contact block as defined below.
+	Contact []ContactObservation `json:"contact,omitempty" tf:"contact,omitempty"`
+
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
+	EnableRbacAuthorization *bool `json:"enableRbacAuthorization,omitempty" tf:"enable_rbac_authorization,omitempty"`
+
+	// Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
+	EnabledForDeployment *bool `json:"enabledForDeployment,omitempty" tf:"enabled_for_deployment,omitempty"`
+
+	// Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.
+	EnabledForDiskEncryption *bool `json:"enabledForDiskEncryption,omitempty" tf:"enabled_for_disk_encryption,omitempty"`
+
+	// Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.
+	EnabledForTemplateDeployment *bool `json:"enabledForTemplateDeployment,omitempty" tf:"enabled_for_template_deployment,omitempty"`
+
 	// The ID of the Key Vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A network_acls block as defined below.
+	NetworkAcls []NetworkAclsObservation `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+
+	// Whether public network access is allowed for this Key Vault. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Is Purge Protection enabled for this Key Vault?
+	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
+
+	// The name of the resource group in which to create the Key Vault. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Name of the SKU used for this Key Vault. Possible values are standard and premium.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 (the default) days.
+	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
 	// The URI of the Key Vault, used for performing operations on keys and secrets.
 	VaultURI *string `json:"vaultUri,omitempty" tf:"vault_uri,omitempty"`
@@ -115,8 +178,8 @@ type VaultParameters struct {
 	EnabledForTemplateDeployment *bool `json:"enabledForTemplateDeployment,omitempty" tf:"enabled_for_template_deployment,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A network_acls block as defined below.
 	// +kubebuilder:validation:Optional
@@ -144,8 +207,8 @@ type VaultParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Name of the SKU used for this Key Vault. Possible values are standard and premium.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 (the default) days.
 	// +kubebuilder:validation:Optional
@@ -156,8 +219,8 @@ type VaultParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
-	// +kubebuilder:validation:Required
-	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 // VaultSpec defines the desired state of Vault
@@ -184,8 +247,11 @@ type VaultStatus struct {
 type Vault struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VaultSpec   `json:"spec"`
-	Status            VaultStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tenantId)",message="tenantId is a required parameter"
+	Spec   VaultSpec   `json:"spec"`
+	Status VaultStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

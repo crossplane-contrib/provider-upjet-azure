@@ -15,8 +15,38 @@ import (
 
 type GalleryApplicationVersionObservation struct {
 
+	// Should the Gallery Application reports health. Defaults to false.
+	EnableHealthCheck *bool `json:"enableHealthCheck,omitempty" tf:"enable_health_check,omitempty"`
+
+	// The end of life date in RFC3339 format of the Gallery Application Version.
+	EndOfLifeDate *string `json:"endOfLifeDate,omitempty" tf:"end_of_life_date,omitempty"`
+
+	// Should the Gallery Application Version be excluded from the latest filter? If set to true this Gallery Application Version won't be returned for the latest version. Defaults to false.
+	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
+
+	// The ID of the Gallery Application. Changing this forces a new resource to be created.
+	GalleryApplicationID *string `json:"galleryApplicationId,omitempty" tf:"gallery_application_id,omitempty"`
+
 	// The ID of the Gallery Application Version.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Gallery Application Version exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A manage_action block as defined below.
+	ManageAction []ManageActionObservation `json:"manageAction,omitempty" tf:"manage_action,omitempty"`
+
+	// The version name of the Gallery Application Version, such as 1.0.0. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A source block as defined below.
+	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
+
+	// A mapping of tags to assign to the Gallery Application Version.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// One or more target_region blocks as defined below.
+	TargetRegion []TargetRegionObservation `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
 
 type GalleryApplicationVersionParameters struct {
@@ -48,31 +78,40 @@ type GalleryApplicationVersionParameters struct {
 	GalleryApplicationIDSelector *v1.Selector `json:"galleryApplicationIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Gallery Application Version exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A manage_action block as defined below.
-	// +kubebuilder:validation:Required
-	ManageAction []ManageActionParameters `json:"manageAction" tf:"manage_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	ManageAction []ManageActionParameters `json:"manageAction,omitempty" tf:"manage_action,omitempty"`
 
 	// The version name of the Gallery Application Version, such as 1.0.0. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A source block as defined below.
-	// +kubebuilder:validation:Required
-	Source []SourceParameters `json:"source" tf:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 
 	// A mapping of tags to assign to the Gallery Application Version.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more target_region blocks as defined below.
-	// +kubebuilder:validation:Required
-	TargetRegion []TargetRegionParameters `json:"targetRegion" tf:"target_region,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetRegion []TargetRegionParameters `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
 
 type ManageActionObservation struct {
+
+	// The command to install the Gallery Application. Changing this forces a new resource to be created.
+	Install *string `json:"install,omitempty" tf:"install,omitempty"`
+
+	// The command to remove the Gallery Application. Changing this forces a new resource to be created.
+	Remove *string `json:"remove,omitempty" tf:"remove,omitempty"`
+
+	// The command to update the Gallery Application. Changing this forces a new resource to be created.
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
 }
 
 type ManageActionParameters struct {
@@ -91,6 +130,12 @@ type ManageActionParameters struct {
 }
 
 type SourceObservation struct {
+
+	// The Storage Blob URI of the default configuration. Changing this forces a new resource to be created.
+	DefaultConfigurationLink *string `json:"defaultConfigurationLink,omitempty" tf:"default_configuration_link,omitempty"`
+
+	// The Storage Blob URI of the source application package. Changing this forces a new resource to be created.
+	MediaLink *string `json:"mediaLink,omitempty" tf:"media_link,omitempty"`
 }
 
 type SourceParameters struct {
@@ -115,6 +160,15 @@ type SourceParameters struct {
 }
 
 type TargetRegionObservation struct {
+
+	// The Azure Region in which the Gallery Application Version exists.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The number of replicas of the Gallery Application Version to be created per region. Possible values are between 1 and 10.
+	RegionalReplicaCount *float64 `json:"regionalReplicaCount,omitempty" tf:"regional_replica_count,omitempty"`
+
+	// The storage account type for the Gallery Application Version. Possible values are Standard_LRS, Premium_LRS and Standard_ZRS. Defaults to Standard_LRS.
+	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 }
 
 type TargetRegionParameters struct {
@@ -166,8 +220,13 @@ type GalleryApplicationVersionStatus struct {
 type GalleryApplicationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GalleryApplicationVersionSpec   `json:"spec"`
-	Status            GalleryApplicationVersionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.manageAction)",message="manageAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.source)",message="source is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetRegion)",message="targetRegion is a required parameter"
+	Spec   GalleryApplicationVersionSpec   `json:"spec"`
+	Status GalleryApplicationVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,19 +15,31 @@ import (
 
 type FlexibleDatabaseObservation struct {
 
+	// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
+	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
+
+	// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
+	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
+
 	// The ID of the MySQL Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 }
 
 type FlexibleDatabaseParameters struct {
 
 	// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Charset *string `json:"charset" tf:"charset,omitempty"`
+	// +kubebuilder:validation:Optional
+	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
 	// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Collation *string `json:"collation" tf:"collation,omitempty"`
+	// +kubebuilder:validation:Optional
+	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -80,8 +92,10 @@ type FlexibleDatabaseStatus struct {
 type FlexibleDatabase struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FlexibleDatabaseSpec   `json:"spec"`
-	Status            FlexibleDatabaseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.charset)",message="charset is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.collation)",message="collation is a required parameter"
+	Spec   FlexibleDatabaseSpec   `json:"spec"`
+	Status FlexibleDatabaseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

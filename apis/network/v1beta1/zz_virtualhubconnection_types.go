@@ -14,6 +14,12 @@ import (
 )
 
 type RoutingPropagatedRouteTableObservation struct {
+
+	// The list of labels to assign to this route table.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// A list of Route Table IDs to associated with this Virtual Hub Connection.
+	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 }
 
 type RoutingPropagatedRouteTableParameters struct {
@@ -28,6 +34,15 @@ type RoutingPropagatedRouteTableParameters struct {
 }
 
 type StaticVnetRouteObservation struct {
+
+	// A list of CIDR Ranges which should be used as Address Prefixes.
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+
+	// The name which should be used for this Static Route.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The IP Address which should be used for the Next Hop.
+	NextHopIPAddress *string `json:"nextHopIpAddress,omitempty" tf:"next_hop_ip_address,omitempty"`
 }
 
 type StaticVnetRouteParameters struct {
@@ -49,6 +64,18 @@ type VirtualHubConnectionObservation struct {
 
 	// The ID of the Virtual Hub Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Should Internet Security be enabled to secure internet traffic? Defaults to false.
+	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
+
+	// The ID of the Virtual Network which the Virtual Hub should be connected to. Changing this forces a new resource to be created.
+	RemoteVirtualNetworkID *string `json:"remoteVirtualNetworkId,omitempty" tf:"remote_virtual_network_id,omitempty"`
+
+	// A routing block as defined below.
+	Routing []VirtualHubConnectionRoutingObservation `json:"routing,omitempty" tf:"routing,omitempty"`
+
+	// The ID of the Virtual Hub within which this connection should be created. Changing this forces a new resource to be created.
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 }
 
 type VirtualHubConnectionParameters struct {
@@ -91,6 +118,15 @@ type VirtualHubConnectionParameters struct {
 }
 
 type VirtualHubConnectionRoutingObservation struct {
+
+	// The ID of the route table associated with this Virtual Hub connection.
+	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
+
+	// A propagated_route_table block as defined below.
+	PropagatedRouteTable []RoutingPropagatedRouteTableObservation `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+
+	// A static_vnet_route block as defined below.
+	StaticVnetRoute []StaticVnetRouteObservation `json:"staticVnetRoute,omitempty" tf:"static_vnet_route,omitempty"`
 }
 
 type VirtualHubConnectionRoutingParameters struct {

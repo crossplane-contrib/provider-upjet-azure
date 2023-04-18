@@ -15,19 +15,25 @@ import (
 
 type SecurityCenterSettingObservation struct {
 
+	// Boolean flag to enable/disable data access.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The subscription security center setting id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The setting to manage. Possible values are MCAS , WDATP and SENTINEL. Changing this forces a new resource to be created.
+	SettingName *string `json:"settingName,omitempty" tf:"setting_name,omitempty"`
 }
 
 type SecurityCenterSettingParameters struct {
 
 	// Boolean flag to enable/disable data access.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The setting to manage. Possible values are MCAS , WDATP and SENTINEL. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SettingName *string `json:"settingName" tf:"setting_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SettingName *string `json:"settingName,omitempty" tf:"setting_name,omitempty"`
 }
 
 // SecurityCenterSettingSpec defines the desired state of SecurityCenterSetting
@@ -54,8 +60,10 @@ type SecurityCenterSettingStatus struct {
 type SecurityCenterSetting struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityCenterSettingSpec   `json:"spec"`
-	Status            SecurityCenterSettingStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.settingName)",message="settingName is a required parameter"
+	Spec   SecurityCenterSettingSpec   `json:"spec"`
+	Status SecurityCenterSettingStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -17,6 +17,11 @@ func (mg *HealthcareDICOMService) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HealthcareDICOMService.
+func (mg *HealthcareDICOMService) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HealthcareDICOMService.
 func (mg *HealthcareDICOMService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *HealthcareDICOMService) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HealthcareDICOMService.
 func (mg *HealthcareDICOMService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HealthcareDICOMService.
+func (mg *HealthcareDICOMService) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HealthcareDICOMService.
@@ -83,6 +93,11 @@ func (mg *HealthcareFHIRService) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HealthcareFHIRService.
+func (mg *HealthcareFHIRService) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HealthcareFHIRService.
 func (mg *HealthcareFHIRService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *HealthcareFHIRService) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HealthcareFHIRService.
 func (mg *HealthcareFHIRService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HealthcareFHIRService.
+func (mg *HealthcareFHIRService) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HealthcareFHIRService.
@@ -149,6 +169,11 @@ func (mg *HealthcareMedtechService) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HealthcareMedtechService.
 func (mg *HealthcareMedtechService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *HealthcareMedtechService) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HealthcareMedtechService.
 func (mg *HealthcareMedtechService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HealthcareMedtechService.
+func (mg *HealthcareMedtechService) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HealthcareMedtechService.
@@ -215,6 +245,11 @@ func (mg *HealthcareMedtechServiceFHIRDestination) GetDeletionPolicy() xpv1.Dele
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HealthcareMedtechServiceFHIRDestination.
 func (mg *HealthcareMedtechServiceFHIRDestination) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *HealthcareMedtechServiceFHIRDestination) SetConditions(c ...xpv1.Condi
 // SetDeletionPolicy of this HealthcareMedtechServiceFHIRDestination.
 func (mg *HealthcareMedtechServiceFHIRDestination) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HealthcareMedtechServiceFHIRDestination.
+func (mg *HealthcareMedtechServiceFHIRDestination) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HealthcareMedtechServiceFHIRDestination.
@@ -281,6 +321,11 @@ func (mg *HealthcareService) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HealthcareService.
+func (mg *HealthcareService) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HealthcareService.
 func (mg *HealthcareService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *HealthcareService) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HealthcareService.
 func (mg *HealthcareService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HealthcareService.
+func (mg *HealthcareService) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HealthcareService.
@@ -347,6 +397,11 @@ func (mg *HealthcareWorkspace) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HealthcareWorkspace.
+func (mg *HealthcareWorkspace) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HealthcareWorkspace.
 func (mg *HealthcareWorkspace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *HealthcareWorkspace) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HealthcareWorkspace.
 func (mg *HealthcareWorkspace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HealthcareWorkspace.
+func (mg *HealthcareWorkspace) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HealthcareWorkspace.

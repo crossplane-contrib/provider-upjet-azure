@@ -14,6 +14,9 @@ import (
 )
 
 type CorsObservation struct {
+
+	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 }
 
 type CorsParameters struct {
@@ -24,6 +27,18 @@ type CorsParameters struct {
 }
 
 type LiveTraceObservation struct {
+
+	// Whether the log category ConnectivityLogs is enabled? Defaults to true
+	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
+
+	// Whether the live trace is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether the log category HttpRequestLogs is enabled? Defaults to true
+	HTTPRequestLogsEnabled *bool `json:"httpRequestLogsEnabled,omitempty" tf:"http_request_logs_enabled,omitempty"`
+
+	// Whether the log category MessagingLogs is enabled? Defaults to true
+	MessagingLogsEnabled *bool `json:"messagingLogsEnabled,omitempty" tf:"messaging_logs_enabled,omitempty"`
 }
 
 type LiveTraceParameters struct {
@@ -47,6 +62,12 @@ type LiveTraceParameters struct {
 
 type ServiceObservation struct {
 
+	// Specifies if Connectivity Logs are enabled or not. Defaults to false.
+	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
+
+	// A cors block as documented below.
+	Cors []CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+
 	// The FQDN of the SignalR service.
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
@@ -56,11 +77,38 @@ type ServiceObservation struct {
 	// The publicly accessible IP of the SignalR service.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// A live_trace block as defined below.
+	LiveTrace []LiveTraceObservation `json:"liveTrace,omitempty" tf:"live_trace,omitempty"`
+
+	// Specifies if Live Trace is enabled or not. Defaults to false.
+	LiveTraceEnabled *bool `json:"liveTraceEnabled,omitempty" tf:"live_trace_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the SignalR service exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies if Messaging Logs are enabled or not. Defaults to false.
+	MessagingLogsEnabled *bool `json:"messagingLogsEnabled,omitempty" tf:"messaging_logs_enabled,omitempty"`
+
 	// The publicly accessible port of the SignalR service which is designed for browser/client use.
 	PublicPort *float64 `json:"publicPort,omitempty" tf:"public_port,omitempty"`
 
+	// The name of the resource group in which to create the SignalR service. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// The publicly accessible port of the SignalR service which is designed for customer server side use.
 	ServerPort *float64 `json:"serverPort,omitempty" tf:"server_port,omitempty"`
+
+	// Specifies the service mode. Possible values are Classic, Default and Serverless. Defaults to Default.
+	ServiceMode *string `json:"serviceMode,omitempty" tf:"service_mode,omitempty"`
+
+	// A sku block as documented below.
+	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// An upstream_endpoint block as documented below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
+	UpstreamEndpoint []UpstreamEndpointObservation `json:"upstreamEndpoint,omitempty" tf:"upstream_endpoint,omitempty"`
 }
 
 type ServiceParameters struct {
@@ -82,8 +130,8 @@ type ServiceParameters struct {
 	LiveTraceEnabled *bool `json:"liveTraceEnabled,omitempty" tf:"live_trace_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the SignalR service exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies if Messaging Logs are enabled or not. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -107,8 +155,8 @@ type ServiceParameters struct {
 	ServiceMode *string `json:"serviceMode,omitempty" tf:"service_mode,omitempty"`
 
 	// A sku block as documented below.
-	// +kubebuilder:validation:Required
-	Sku []SkuParameters `json:"sku" tf:"sku,omitempty"`
+	// +kubebuilder:validation:Optional
+	Sku []SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -120,6 +168,12 @@ type ServiceParameters struct {
 }
 
 type SkuObservation struct {
+
+	// Specifies the number of units associated with this SignalR service. Valid values are 1, 2, 5, 10, 20, 50 and 100.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// Specifies which tier to use. Valid values are Free_F1, Standard_S1 and Premium_P1.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type SkuParameters struct {
@@ -134,6 +188,18 @@ type SkuParameters struct {
 }
 
 type UpstreamEndpointObservation struct {
+
+	// The categories to match on, or * for all.
+	CategoryPattern []*string `json:"categoryPattern,omitempty" tf:"category_pattern,omitempty"`
+
+	// The events to match on, or * for all.
+	EventPattern []*string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
+
+	// The hubs to match on, or * for all.
+	HubPattern []*string `json:"hubPattern,omitempty" tf:"hub_pattern,omitempty"`
+
+	// The upstream URL Template. This can be a url or a template such as http://host.com/{hub}/api/{category}/{event}.
+	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
 }
 
 type UpstreamEndpointParameters struct {
@@ -179,8 +245,10 @@ type ServiceStatus struct {
 type Service struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceSpec   `json:"spec"`
-	Status            ServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)",message="sku is a required parameter"
+	Spec   ServiceSpec   `json:"spec"`
+	Status ServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

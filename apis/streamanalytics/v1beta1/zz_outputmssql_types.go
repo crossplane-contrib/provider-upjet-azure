@@ -15,8 +15,38 @@ import (
 
 type OutputMSSQLObservation struct {
 
+	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
+	// The MS SQL database name where the reference table exists. Changing this forces a new resource to be created.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
 	// The ID of the Stream Analytics Output Microsoft SQL Server Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The max batch count to write to the SQL Database. Defaults to 10000. Possible values are between 1 and 1073741824.
+	MaxBatchCount *float64 `json:"maxBatchCount,omitempty" tf:"max_batch_count,omitempty"`
+
+	// The max writer count for the SQL Database. Defaults to 1. Possible values are 0 which bases the writer count on the query partition and 1 which corresponds to a single writer.
+	MaxWriterCount *float64 `json:"maxWriterCount,omitempty" tf:"max_writer_count,omitempty"`
+
+	// The name of the Stream Output. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The SQL server url. Changing this forces a new resource to be created.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// Table in the database that the output points to. Changing this forces a new resource to be created.
+	Table *string `json:"table,omitempty" tf:"table,omitempty"`
+
+	// Username used to login to the Microsoft SQL Server. Changing this forces a new resource to be created. Required if authentication_mode is ConnectionString.
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type OutputMSSQLParameters struct {
@@ -26,8 +56,8 @@ type OutputMSSQLParameters struct {
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The MS SQL database name where the reference table exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Database *string `json:"database" tf:"database,omitempty"`
+	// +kubebuilder:validation:Optional
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The max batch count to write to the SQL Database. Defaults to 10000. Possible values are between 1 and 1073741824.
 	// +kubebuilder:validation:Optional
@@ -38,8 +68,8 @@ type OutputMSSQLParameters struct {
 	MaxWriterCount *float64 `json:"maxWriterCount,omitempty" tf:"max_writer_count,omitempty"`
 
 	// The name of the Stream Output. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Password used together with username, to login to the Microsoft SQL Server. Required if authentication_mode is ConnectionString.
 	// +kubebuilder:validation:Optional
@@ -126,8 +156,10 @@ type OutputMSSQLStatus struct {
 type OutputMSSQL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OutputMSSQLSpec   `json:"spec"`
-	Status            OutputMSSQLStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.database)",message="database is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   OutputMSSQLSpec   `json:"spec"`
+	Status OutputMSSQLStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

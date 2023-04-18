@@ -14,6 +14,15 @@ import (
 )
 
 type InstallPatchesObservation struct {
+
+	// A linux block as defined above. This property only applies when scope is set to InGuestPatch
+	Linux []LinuxObservation `json:"linux,omitempty" tf:"linux,omitempty"`
+
+	// Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed. Possible values are Always, IfRequired and Never. This property only applies when scope is set to InGuestPatch.
+	Reboot *string `json:"reboot,omitempty" tf:"reboot,omitempty"`
+
+	// A windows block as defined above. This property only applies when scope is set to InGuestPatch
+	Windows []WindowsObservation `json:"windows,omitempty" tf:"windows,omitempty"`
 }
 
 type InstallPatchesParameters struct {
@@ -32,6 +41,15 @@ type InstallPatchesParameters struct {
 }
 
 type LinuxObservation struct {
+
+	// List of Classification category of patches to be patched. Possible values are Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools and Updates.
+	ClassificationsToInclude []*string `json:"classificationsToInclude,omitempty" tf:"classifications_to_include,omitempty"`
+
+	// List of package names to be excluded from patching.
+	PackageNamesMaskToExclude []*string `json:"packageNamesMaskToExclude,omitempty" tf:"package_names_mask_to_exclude,omitempty"`
+
+	// List of package names to be included for patching.
+	PackageNamesMaskToInclude []*string `json:"packageNamesMaskToInclude,omitempty" tf:"package_names_mask_to_include,omitempty"`
 }
 
 type LinuxParameters struct {
@@ -53,6 +71,33 @@ type MaintenanceConfigurationObservation struct {
 
 	// The ID of the Maintenance Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The in guest user patch mode. Possible values are Platform or User. Must be specified when scope is InGuestPatch.
+	InGuestUserPatchMode *string `json:"inGuestUserPatchMode,omitempty" tf:"in_guest_user_patch_mode,omitempty"`
+
+	// An install_patches block as defined below.
+	InstallPatches []InstallPatchesObservation `json:"installPatches,omitempty" tf:"install_patches,omitempty"`
+
+	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of properties to assign to the resource.
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// The name of the Resource Group where the Maintenance Configuration should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The scope of the Maintenance Configuration. Possible values are Extension, Host, InGuestPatch, OSImage, SQLDB or SQLManagedInstance.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// A mapping of tags to assign to the resource. The key could not contain upper case letter.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
+	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
+
+	// A window block as defined below.
+	Window []WindowObservation `json:"window,omitempty" tf:"window,omitempty"`
 }
 
 type MaintenanceConfigurationParameters struct {
@@ -66,8 +111,8 @@ type MaintenanceConfigurationParameters struct {
 	InstallPatches []InstallPatchesParameters `json:"installPatches,omitempty" tf:"install_patches,omitempty"`
 
 	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of properties to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -87,8 +132,8 @@ type MaintenanceConfigurationParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The scope of the Maintenance Configuration. Possible values are Extension, Host, InGuestPatch, OSImage, SQLDB or SQLManagedInstance.
-	// +kubebuilder:validation:Required
-	Scope *string `json:"scope" tf:"scope,omitempty"`
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// A mapping of tags to assign to the resource. The key could not contain upper case letter.
 	// +kubebuilder:validation:Optional
@@ -104,6 +149,21 @@ type MaintenanceConfigurationParameters struct {
 }
 
 type WindowObservation struct {
+
+	// The duration of the maintenance window in HH:mm format.
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// Effective expiration date of the maintenance window in YYYY-MM-DD hh:mm format.
+	ExpirationDateTime *string `json:"expirationDateTime,omitempty" tf:"expiration_date_time,omitempty"`
+
+	// The rate at which a maintenance window is expected to recur. The rate can be expressed as daily, weekly, or monthly schedules.
+	RecurEvery *string `json:"recurEvery,omitempty" tf:"recur_every,omitempty"`
+
+	// Effective start date of the maintenance window in YYYY-MM-DD hh:mm format.
+	StartDateTime *string `json:"startDateTime,omitempty" tf:"start_date_time,omitempty"`
+
+	// The time zone for the maintenance window. A list of timezones can be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type WindowParameters struct {
@@ -130,6 +190,15 @@ type WindowParameters struct {
 }
 
 type WindowsObservation struct {
+
+	// List of Classification category of patches to be patched. Possible values are Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools and Updates.
+	ClassificationsToInclude []*string `json:"classificationsToInclude,omitempty" tf:"classifications_to_include,omitempty"`
+
+	// List of KB numbers to be excluded from patching.
+	KbNumbersToExclude []*string `json:"kbNumbersToExclude,omitempty" tf:"kb_numbers_to_exclude,omitempty"`
+
+	// List of KB numbers to be included for patching.
+	KbNumbersToInclude []*string `json:"kbNumbersToInclude,omitempty" tf:"kb_numbers_to_include,omitempty"`
 }
 
 type WindowsParameters struct {
@@ -171,8 +240,10 @@ type MaintenanceConfigurationStatus struct {
 type MaintenanceConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MaintenanceConfigurationSpec   `json:"spec"`
-	Status            MaintenanceConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)",message="scope is a required parameter"
+	Spec   MaintenanceConfigurationSpec   `json:"spec"`
+	Status MaintenanceConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

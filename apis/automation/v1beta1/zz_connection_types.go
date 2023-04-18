@@ -15,8 +15,23 @@ import (
 
 type ConnectionObservation struct {
 
+	// The name of the automation account in which the Connection is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// A description for this Connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The Automation Connection ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the Connection is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The type of the Connection - can be either builtin type such as Azure, AzureClassicCertificate, and AzureServicePrincipal, or a user defined types. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// A mapping of key value pairs passed to the connection. Different type needs different parameters in the values. Builtin types have required field values as below:
+	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ConnectionParameters struct {
@@ -52,12 +67,12 @@ type ConnectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The type of the Connection - can be either builtin type such as Azure, AzureClassicCertificate, and AzureServicePrincipal, or a user defined types. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A mapping of key value pairs passed to the connection. Different type needs different parameters in the values. Builtin types have required field values as below:
-	// +kubebuilder:validation:Required
-	Values map[string]*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 // ConnectionSpec defines the desired state of Connection
@@ -84,8 +99,10 @@ type ConnectionStatus struct {
 type Connection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConnectionSpec   `json:"spec"`
-	Status            ConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.values)",message="values is a required parameter"
+	Spec   ConnectionSpec   `json:"spec"`
+	Status ConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

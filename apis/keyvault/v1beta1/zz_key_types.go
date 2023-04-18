@@ -15,14 +15,35 @@ import (
 
 type KeyObservation struct {
 
+	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM. The API will default to P-256 if nothing is specified. Changing this forces a new resource to be created.
+	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
+
 	// The RSA public exponent of this Key Vault Key.
 	E *string `json:"e,omitempty" tf:"e,omitempty"`
+
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The Key Vault Key ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A list of JSON web key operations. Possible values include: decrypt, encrypt, sign, unwrapKey, verify and wrapKey. Please note these values are case sensitive.
+	KeyOpts []*string `json:"keyOpts,omitempty" tf:"key_opts,omitempty"`
+
+	// Specifies the Size of the RSA key to create in bytes. For example, 1024 or 2048. Note: This field is required if key_type is RSA or RSA-HSM. Changing this forces a new resource to be created.
+	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
+
+	// Specifies the Key Type to use for this Key Vault Key. Possible values are EC (Elliptic Curve), EC-HSM, RSA and RSA-HSM. Changing this forces a new resource to be created.
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
+
+	// The ID of the Key Vault where the Key should be created. Changing this forces a new resource to be created.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
 	// The RSA modulus of this Key Vault Key.
 	N *string `json:"n,omitempty" tf:"n,omitempty"`
+
+	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
+	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 
 	// The OpenSSH encoded public key of this Key Vault Key.
 	PublicKeyOpenssh *string `json:"publicKeyOpenssh,omitempty" tf:"public_key_openssh,omitempty"`
@@ -35,6 +56,9 @@ type KeyObservation struct {
 
 	// The Versionless ID of the Key Vault Key. This property allows other Azure Services (that support it) to auto-rotate their value when the Key Vault Key is updated.
 	ResourceVersionlessID *string `json:"resourceVersionlessId,omitempty" tf:"resource_versionless_id,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The current version of the Key Vault Key.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -60,16 +84,16 @@ type KeyParameters struct {
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// A list of JSON web key operations. Possible values include: decrypt, encrypt, sign, unwrapKey, verify and wrapKey. Please note these values are case sensitive.
-	// +kubebuilder:validation:Required
-	KeyOpts []*string `json:"keyOpts" tf:"key_opts,omitempty"`
+	// +kubebuilder:validation:Optional
+	KeyOpts []*string `json:"keyOpts,omitempty" tf:"key_opts,omitempty"`
 
 	// Specifies the Size of the RSA key to create in bytes. For example, 1024 or 2048. Note: This field is required if key_type is RSA or RSA-HSM. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
 
 	// Specifies the Key Type to use for this Key Vault Key. Possible values are EC (Elliptic Curve), EC-HSM, RSA and RSA-HSM. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	KeyType *string `json:"keyType" tf:"key_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
 	// The ID of the Key Vault where the Key should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Vault
@@ -118,8 +142,10 @@ type KeyStatus struct {
 type Key struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KeySpec   `json:"spec"`
-	Status            KeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyOpts)",message="keyOpts is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyType)",message="keyType is a required parameter"
+	Spec   KeySpec   `json:"spec"`
+	Status KeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

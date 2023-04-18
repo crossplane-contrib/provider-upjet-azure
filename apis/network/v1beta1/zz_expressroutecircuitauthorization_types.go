@@ -18,8 +18,15 @@ type ExpressRouteCircuitAuthorizationObservation struct {
 	// The authorization use status.
 	AuthorizationUseStatus *string `json:"authorizationUseStatus,omitempty" tf:"authorization_use_status,omitempty"`
 
+	// The name of the Express Route Circuit in which to create the Authorization. Changing this forces a new resource to be created.
+	ExpressRouteCircuitName *string `json:"expressRouteCircuitName,omitempty" tf:"express_route_circuit_name,omitempty"`
+
 	// The ID of the ExpressRoute Circuit Authorization.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which to Changing this forces a new resource to be created.
+	// create the ExpressRoute circuit. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type ExpressRouteCircuitAuthorizationParameters struct {

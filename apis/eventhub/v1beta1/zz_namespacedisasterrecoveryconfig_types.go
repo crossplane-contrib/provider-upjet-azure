@@ -17,6 +17,15 @@ type NamespaceDisasterRecoveryConfigObservation struct {
 
 	// The EventHub Namespace Disaster Recovery Config ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the primary EventHub Namespace to replicate. Changing this forces a new resource to be created.
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The ID of the EventHub Namespace to replicate to.
+	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
+
+	// The name of the resource group in which the Disaster Recovery Config exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type NamespaceDisasterRecoveryConfigParameters struct {

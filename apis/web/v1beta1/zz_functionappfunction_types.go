@@ -14,6 +14,14 @@ import (
 )
 
 type FileObservation struct {
+
+	// The content of the file. Changing this forces a new resource to be created.
+	// The content of the file.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The filename of the file to be uploaded. Changing this forces a new resource to be created.
+	// The filename of the file to be uploaded.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type FileParameters struct {
@@ -31,9 +39,24 @@ type FileParameters struct {
 
 type FunctionAppFunctionObservation struct {
 
+	// The config for this Function in JSON format.
+	// The config for this Function in JSON format.
+	ConfigJSON *string `json:"configJson,omitempty" tf:"config_json,omitempty"`
+
 	// The URL of the configuration JSON.
 	// The URL of the configuration JSON.
 	ConfigURL *string `json:"configUrl,omitempty" tf:"config_url,omitempty"`
+
+	// Should this function be enabled. Defaults to true.
+	// Should this function be enabled. Defaults to `true`.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A file block as detailed below. Changing this forces a new resource to be created.
+	File []FileObservation `json:"file,omitempty" tf:"file,omitempty"`
+
+	// The ID of the Function App in which this function should reside. Changing this forces a new resource to be created.
+	// The ID of the Function App in which this function should reside.
+	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
 
 	// The ID of the Function App Function
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -41,6 +64,14 @@ type FunctionAppFunctionObservation struct {
 	// The invocation URL.
 	// The invocation URL.
 	InvocationURL *string `json:"invocationUrl,omitempty" tf:"invocation_url,omitempty"`
+
+	// The language the Function is written in. Possible values are CSharp, Custom, Java, Javascript, Python, PowerShell, and TypeScript.
+	// The language the Function is written in.
+	Language *string `json:"language,omitempty" tf:"language,omitempty"`
+
+	// The name of the function. Changing this forces a new resource to be created.
+	// The name of the function.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Script root path URL.
 	// The Script root path URL.
@@ -53,6 +84,10 @@ type FunctionAppFunctionObservation struct {
 	// The URL for the Secrets File.
 	// The URL for the Secrets File.
 	SecretsFileURL *string `json:"secretsFileUrl,omitempty" tf:"secrets_file_url,omitempty"`
+
+	// The test data for the function.
+	// The test data for the function.
+	TestData *string `json:"testData,omitempty" tf:"test_data,omitempty"`
 
 	// The Test data URL.
 	// The Test data URL.
@@ -67,8 +102,8 @@ type FunctionAppFunctionParameters struct {
 
 	// The config for this Function in JSON format.
 	// The config for this Function in JSON format.
-	// +kubebuilder:validation:Required
-	ConfigJSON *string `json:"configJson" tf:"config_json,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConfigJSON *string `json:"configJson,omitempty" tf:"config_json,omitempty"`
 
 	// Should this function be enabled. Defaults to true.
 	// Should this function be enabled. Defaults to `true`.
@@ -101,8 +136,8 @@ type FunctionAppFunctionParameters struct {
 
 	// The name of the function. Changing this forces a new resource to be created.
 	// The name of the function.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The test data for the function.
 	// The test data for the function.
@@ -134,8 +169,10 @@ type FunctionAppFunctionStatus struct {
 type FunctionAppFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FunctionAppFunctionSpec   `json:"spec"`
-	Status            FunctionAppFunctionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configJson)",message="configJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   FunctionAppFunctionSpec   `json:"spec"`
+	Status FunctionAppFunctionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

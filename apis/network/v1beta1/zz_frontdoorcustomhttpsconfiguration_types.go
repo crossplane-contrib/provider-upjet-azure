@@ -15,6 +15,18 @@ import (
 
 type CustomHTTPSConfigurationObservation struct {
 
+	// The name of the Key Vault secret representing the full certificate PFX.
+	AzureKeyVaultCertificateSecretName *string `json:"azureKeyVaultCertificateSecretName,omitempty" tf:"azure_key_vault_certificate_secret_name,omitempty"`
+
+	// The version of the Key Vault secret representing the full certificate PFX.
+	AzureKeyVaultCertificateSecretVersion *string `json:"azureKeyVaultCertificateSecretVersion,omitempty" tf:"azure_key_vault_certificate_secret_version,omitempty"`
+
+	// The ID of the Key Vault containing the SSL certificate.
+	AzureKeyVaultCertificateVaultID *string `json:"azureKeyVaultCertificateVaultId,omitempty" tf:"azure_key_vault_certificate_vault_id,omitempty"`
+
+	// Certificate source to encrypted HTTPS traffic with. Allowed values are FrontDoor or AzureKeyVault. Defaults to FrontDoor.
+	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
+
 	// Minimum client TLS version supported.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
@@ -55,8 +67,13 @@ type CustomHTTPSConfigurationParameters struct {
 type FrontdoorCustomHTTPSConfigurationObservation struct {
 
 	// A custom_https_configuration block as defined above.
-	// +kubebuilder:validation:Optional
 	CustomHTTPSConfiguration []CustomHTTPSConfigurationObservation `json:"customHttpsConfiguration,omitempty" tf:"custom_https_configuration,omitempty"`
+
+	// Should the HTTPS protocol be enabled for this custom domain associated with the Front Door?
+	CustomHTTPSProvisioningEnabled *bool `json:"customHttpsProvisioningEnabled,omitempty" tf:"custom_https_provisioning_enabled,omitempty"`
+
+	// The ID of the Front Door Frontend Endpoint which this configuration refers to. Changing this forces a new resource to be created.
+	FrontendEndpointID *string `json:"frontendEndpointId,omitempty" tf:"frontend_endpoint_id,omitempty"`
 
 	// The ID of the Azure Front Door Custom HTTPS Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -69,12 +86,12 @@ type FrontdoorCustomHTTPSConfigurationParameters struct {
 	CustomHTTPSConfiguration []CustomHTTPSConfigurationParameters `json:"customHttpsConfiguration,omitempty" tf:"custom_https_configuration,omitempty"`
 
 	// Should the HTTPS protocol be enabled for this custom domain associated with the Front Door?
-	// +kubebuilder:validation:Required
-	CustomHTTPSProvisioningEnabled *bool `json:"customHttpsProvisioningEnabled" tf:"custom_https_provisioning_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	CustomHTTPSProvisioningEnabled *bool `json:"customHttpsProvisioningEnabled,omitempty" tf:"custom_https_provisioning_enabled,omitempty"`
 
 	// The ID of the Front Door Frontend Endpoint which this configuration refers to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	FrontendEndpointID *string `json:"frontendEndpointId" tf:"frontend_endpoint_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	FrontendEndpointID *string `json:"frontendEndpointId,omitempty" tf:"frontend_endpoint_id,omitempty"`
 }
 
 // FrontdoorCustomHTTPSConfigurationSpec defines the desired state of FrontdoorCustomHTTPSConfiguration
@@ -101,8 +118,10 @@ type FrontdoorCustomHTTPSConfigurationStatus struct {
 type FrontdoorCustomHTTPSConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FrontdoorCustomHTTPSConfigurationSpec   `json:"spec"`
-	Status            FrontdoorCustomHTTPSConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.customHttpsProvisioningEnabled)",message="customHttpsProvisioningEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frontendEndpointId)",message="frontendEndpointId is a required parameter"
+	Spec   FrontdoorCustomHTTPSConfigurationSpec   `json:"spec"`
+	Status FrontdoorCustomHTTPSConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

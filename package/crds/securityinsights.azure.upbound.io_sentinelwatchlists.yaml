@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: sentinelwatchlists.securityinsights.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -169,10 +173,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - displayName
-                - itemSearchKey
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -344,13 +360,48 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: displayName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)
+            - message: itemSearchKey is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.itemSearchKey)
           status:
             description: SentinelWatchlistStatus defines the observed state of SentinelWatchlist.
             properties:
               atProvider:
                 properties:
+                  defaultDuration:
+                    description: The default duration in ISO8601 duration form of
+                      this Sentinel Watchlist. Changing this forces a new Sentinel
+                      Watchlist to be created.
+                    type: string
+                  description:
+                    description: The description of this Sentinel Watchlist. Changing
+                      this forces a new Sentinel Watchlist to be created.
+                    type: string
+                  displayName:
+                    description: The display name of this Sentinel Watchlist. Changing
+                      this forces a new Sentinel Watchlist to be created.
+                    type: string
                   id:
                     description: The ID of the Sentinel Watchlist.
+                    type: string
+                  itemSearchKey:
+                    description: The key used to optimize query performance when using
+                      Watchlist for joins with other data. Changing this forces a
+                      new Sentinel Watchlist to be created.
+                    type: string
+                  labels:
+                    description: Specifies a list of labels related to this Sentinel
+                      Watchlist. Changing this forces a new Sentinel Watchlist to
+                      be created.
+                    items:
+                      type: string
+                    type: array
+                  logAnalyticsWorkspaceId:
+                    description: The ID of the Log Analytics Workspace where this
+                      Sentinel Watchlist resides in. Changing this forces a new Sentinel
+                      Watchlist to be created.
                     type: string
                 type: object
               conditions:

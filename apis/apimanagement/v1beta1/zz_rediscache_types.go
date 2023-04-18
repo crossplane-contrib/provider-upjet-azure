@@ -15,8 +15,20 @@ import (
 
 type RedisCacheObservation struct {
 
+	// The resource ID of the API Management Service from which to create this external cache. Changing this forces a new API Management Redis Cache to be created.
+	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
+
+	// The location where to use cache from. Possible values are default and valid Azure regions. Defaults to default.
+	CacheLocation *string `json:"cacheLocation,omitempty" tf:"cache_location,omitempty"`
+
+	// The description of the API Management Redis Cache.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the API Management Redis Cache.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The resource ID of the Cache for Redis.
+	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
 }
 
 type RedisCacheParameters struct {
@@ -40,7 +52,7 @@ type RedisCacheParameters struct {
 	CacheLocation *string `json:"cacheLocation,omitempty" tf:"cache_location,omitempty"`
 
 	// The connection string to the Cache for Redis.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The description of the API Management Redis Cache.
@@ -86,8 +98,9 @@ type RedisCacheStatus struct {
 type RedisCache struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RedisCacheSpec   `json:"spec"`
-	Status            RedisCacheStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.connectionStringSecretRef)",message="connectionStringSecretRef is a required parameter"
+	Spec   RedisCacheSpec   `json:"spec"`
+	Status RedisCacheStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

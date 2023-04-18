@@ -17,21 +17,33 @@ type FunctionJavascriptUdaObservation struct {
 
 	// The ID of the Stream Analytics JavaScript UDA Function.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more input blocks as defined below.
+	Input []InputObservation `json:"input,omitempty" tf:"input,omitempty"`
+
+	// An output block as defined below.
+	Output []OutputObservation `json:"output,omitempty" tf:"output,omitempty"`
+
+	// The JavaScript of this UDA Function.
+	Script *string `json:"script,omitempty" tf:"script,omitempty"`
+
+	// The resource ID of the Stream Analytics Job where this Function should be created. Changing this forces a new resource to be created.
+	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId,omitempty" tf:"stream_analytics_job_id,omitempty"`
 }
 
 type FunctionJavascriptUdaParameters struct {
 
 	// One or more input blocks as defined below.
-	// +kubebuilder:validation:Required
-	Input []InputParameters `json:"input" tf:"input,omitempty"`
+	// +kubebuilder:validation:Optional
+	Input []InputParameters `json:"input,omitempty" tf:"input,omitempty"`
 
 	// An output block as defined below.
-	// +kubebuilder:validation:Required
-	Output []OutputParameters `json:"output" tf:"output,omitempty"`
+	// +kubebuilder:validation:Optional
+	Output []OutputParameters `json:"output,omitempty" tf:"output,omitempty"`
 
 	// The JavaScript of this UDA Function.
-	// +kubebuilder:validation:Required
-	Script *string `json:"script" tf:"script,omitempty"`
+	// +kubebuilder:validation:Optional
+	Script *string `json:"script,omitempty" tf:"script,omitempty"`
 
 	// The resource ID of the Stream Analytics Job where this Function should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Job
@@ -49,6 +61,12 @@ type FunctionJavascriptUdaParameters struct {
 }
 
 type InputObservation struct {
+
+	// Is this input parameter a configuration parameter? Defaults to false.
+	ConfigurationParameter *bool `json:"configurationParameter,omitempty" tf:"configuration_parameter,omitempty"`
+
+	// The input data type of this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type InputParameters struct {
@@ -63,6 +81,9 @@ type InputParameters struct {
 }
 
 type OutputObservation struct {
+
+	// The output data type from this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OutputParameters struct {
@@ -96,8 +117,11 @@ type FunctionJavascriptUdaStatus struct {
 type FunctionJavascriptUda struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FunctionJavascriptUdaSpec   `json:"spec"`
-	Status            FunctionJavascriptUdaStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.input)",message="input is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.output)",message="output is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.script)",message="script is a required parameter"
+	Spec   FunctionJavascriptUdaSpec   `json:"spec"`
+	Status FunctionJavascriptUdaStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

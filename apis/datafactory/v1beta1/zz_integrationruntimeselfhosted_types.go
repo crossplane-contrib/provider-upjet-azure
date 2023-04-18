@@ -15,11 +15,20 @@ import (
 
 type IntegrationRuntimeSelfHostedObservation struct {
 
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// Integration runtime description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Factory.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The primary integration runtime authentication key.
 	PrimaryAuthorizationKey *string `json:"primaryAuthorizationKey,omitempty" tf:"primary_authorization_key,omitempty"`
+
+	// A rbac_authorization block as defined below. Changing this forces a new resource to be created.
+	RbacAuthorization []RbacAuthorizationObservation `json:"rbacAuthorization,omitempty" tf:"rbac_authorization,omitempty"`
 
 	// The secondary integration runtime authentication key.
 	SecondaryAuthorizationKey *string `json:"secondaryAuthorizationKey,omitempty" tf:"secondary_authorization_key,omitempty"`
@@ -51,6 +60,9 @@ type IntegrationRuntimeSelfHostedParameters struct {
 }
 
 type RbacAuthorizationObservation struct {
+
+	// The resource identifier of the integration runtime to be shared.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
 
 type RbacAuthorizationParameters struct {

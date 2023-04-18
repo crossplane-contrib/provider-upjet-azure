@@ -14,6 +14,21 @@ import (
 )
 
 type ActionsObservation struct {
+
+	// A request_header_action block as defined below.
+	RequestHeaderAction []RequestHeaderActionObservation `json:"requestHeaderAction,omitempty" tf:"request_header_action,omitempty"`
+
+	// A response_header_action block as defined below.
+	ResponseHeaderAction []ResponseHeaderActionObservation `json:"responseHeaderAction,omitempty" tf:"response_header_action,omitempty"`
+
+	// A route_configuration_override_action block as defined below.
+	RouteConfigurationOverrideAction []RouteConfigurationOverrideActionObservation `json:"routeConfigurationOverrideAction,omitempty" tf:"route_configuration_override_action,omitempty"`
+
+	// A url_redirect_action block as defined below. You may not have a url_redirect_action and a url_rewrite_action defined in the same actions block.
+	URLRedirectAction []ActionsURLRedirectActionObservation `json:"urlRedirectAction,omitempty" tf:"url_redirect_action,omitempty"`
+
+	// A url_rewrite_action block as defined below. You may not have a url_rewrite_action and a url_redirect_action defined in the same actions block.
+	URLRewriteAction []ActionsURLRewriteActionObservation `json:"urlRewriteAction,omitempty" tf:"url_rewrite_action,omitempty"`
 }
 
 type ActionsParameters struct {
@@ -40,6 +55,24 @@ type ActionsParameters struct {
 }
 
 type ActionsURLRedirectActionObservation struct {
+
+	// The fragment to use in the redirect. The value must be a string between 0 and 1024 characters in length, leave blank to preserve the incoming fragment. Defaults to an empty string. Defaults to "".
+	DestinationFragment *string `json:"destinationFragment,omitempty" tf:"destination_fragment,omitempty"`
+
+	// The host name you want the request to be redirected to. The value must be a string between 0 and 2048 characters in length, leave blank to preserve the incoming host.
+	DestinationHostName *string `json:"destinationHostname,omitempty" tf:"destination_hostname,omitempty"`
+
+	// The path to use in the redirect. The value must be a string and include the leading /, leave blank to preserve the incoming path. Defaults to an empty string. Defaults to "".
+	DestinationPath *string `json:"destinationPath,omitempty" tf:"destination_path,omitempty"`
+
+	// The query string used in the redirect URL. The value must be in the <key>=<value> or <key>={action_server_variable} format and must not include the leading ?, leave blank to preserve the incoming query string. Maximum allowed length for this field is 2048 characters. Defaults to an empty string. Defaults to "".
+	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
+
+	// The protocol the request will be redirected as. Possible values include MatchRequest, Http or Https. Defaults to MatchRequest.
+	RedirectProtocol *string `json:"redirectProtocol,omitempty" tf:"redirect_protocol,omitempty"`
+
+	// The response type to return to the requestor. Possible values include Moved, Found , TemporaryRedirect or PermanentRedirect.
+	RedirectType *string `json:"redirectType,omitempty" tf:"redirect_type,omitempty"`
 }
 
 type ActionsURLRedirectActionParameters struct {
@@ -70,6 +103,15 @@ type ActionsURLRedirectActionParameters struct {
 }
 
 type ActionsURLRewriteActionObservation struct {
+
+	// The destination path to use in the rewrite. The destination path overwrites the source pattern.
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Append the remaining path after the source pattern to the new destination path? Possible values true or false. Defaults to false.
+	PreserveUnmatchedPath *bool `json:"preserveUnmatchedPath,omitempty" tf:"preserve_unmatched_path,omitempty"`
+
+	// The source pattern in the URL path to replace. This uses prefix-based matching. For example, to match all URL paths use a forward slash "/" as the source pattern value.
+	SourcePattern *string `json:"sourcePattern,omitempty" tf:"source_pattern,omitempty"`
 }
 
 type ActionsURLRewriteActionParameters struct {
@@ -88,6 +130,15 @@ type ActionsURLRewriteActionParameters struct {
 }
 
 type ClientPortConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type ClientPortConditionParameters struct {
@@ -106,6 +157,21 @@ type ClientPortConditionParameters struct {
 }
 
 type ConditionsCookiesConditionObservation struct {
+
+	// A string value representing the name of the cookie.
+	CookieName *string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type ConditionsCookiesConditionParameters struct {
@@ -132,6 +198,15 @@ type ConditionsCookiesConditionParameters struct {
 }
 
 type ConditionsHTTPVersionConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type ConditionsHTTPVersionConditionParameters struct {
@@ -150,6 +225,63 @@ type ConditionsHTTPVersionConditionParameters struct {
 }
 
 type ConditionsObservation struct {
+
+	// A client_port_condition block as defined below.
+	ClientPortCondition []ClientPortConditionObservation `json:"clientPortCondition,omitempty" tf:"client_port_condition,omitempty"`
+
+	// A cookies_condition block as defined below.
+	CookiesCondition []ConditionsCookiesConditionObservation `json:"cookiesCondition,omitempty" tf:"cookies_condition,omitempty"`
+
+	// A http_version_condition block as defined below.
+	HTTPVersionCondition []ConditionsHTTPVersionConditionObservation `json:"httpVersionCondition,omitempty" tf:"http_version_condition,omitempty"`
+
+	// A host_name_condition block as defined below.
+	HostNameCondition []HostNameConditionObservation `json:"hostNameCondition,omitempty" tf:"host_name_condition,omitempty"`
+
+	// A is_device_condition block as defined below.
+	IsDeviceCondition []IsDeviceConditionObservation `json:"isDeviceCondition,omitempty" tf:"is_device_condition,omitempty"`
+
+	// A post_args_condition block as defined below.
+	PostArgsCondition []PostArgsConditionObservation `json:"postArgsCondition,omitempty" tf:"post_args_condition,omitempty"`
+
+	// A query_string_condition block as defined below.
+	QueryStringCondition []ConditionsQueryStringConditionObservation `json:"queryStringCondition,omitempty" tf:"query_string_condition,omitempty"`
+
+	// A remote_address_condition block as defined below.
+	RemoteAddressCondition []ConditionsRemoteAddressConditionObservation `json:"remoteAddressCondition,omitempty" tf:"remote_address_condition,omitempty"`
+
+	// A request_body_condition block as defined below.
+	RequestBodyCondition []ConditionsRequestBodyConditionObservation `json:"requestBodyCondition,omitempty" tf:"request_body_condition,omitempty"`
+
+	// A request_header_condition block as defined below.
+	RequestHeaderCondition []ConditionsRequestHeaderConditionObservation `json:"requestHeaderCondition,omitempty" tf:"request_header_condition,omitempty"`
+
+	// A request_method_condition block as defined below.
+	RequestMethodCondition []ConditionsRequestMethodConditionObservation `json:"requestMethodCondition,omitempty" tf:"request_method_condition,omitempty"`
+
+	// A request_scheme_condition block as defined below.
+	RequestSchemeCondition []ConditionsRequestSchemeConditionObservation `json:"requestSchemeCondition,omitempty" tf:"request_scheme_condition,omitempty"`
+
+	// A request_uri_condition block as defined below.
+	RequestURICondition []ConditionsRequestURIConditionObservation `json:"requestUriCondition,omitempty" tf:"request_uri_condition,omitempty"`
+
+	// A ssl_protocol_condition block as defined below.
+	SSLProtocolCondition []SSLProtocolConditionObservation `json:"sslProtocolCondition,omitempty" tf:"ssl_protocol_condition,omitempty"`
+
+	// A server_port_condition block as defined below.
+	ServerPortCondition []ServerPortConditionObservation `json:"serverPortCondition,omitempty" tf:"server_port_condition,omitempty"`
+
+	// A socket_address_condition block as defined below.
+	SocketAddressCondition []SocketAddressConditionObservation `json:"socketAddressCondition,omitempty" tf:"socket_address_condition,omitempty"`
+
+	// A url_file_extension_condition block as defined below.
+	URLFileExtensionCondition []ConditionsURLFileExtensionConditionObservation `json:"urlFileExtensionCondition,omitempty" tf:"url_file_extension_condition,omitempty"`
+
+	// A url_filename_condition block as defined below.
+	URLFilenameCondition []URLFilenameConditionObservation `json:"urlFilenameCondition,omitempty" tf:"url_filename_condition,omitempty"`
+
+	// A url_path_condition block as defined below.
+	URLPathCondition []ConditionsURLPathConditionObservation `json:"urlPathCondition,omitempty" tf:"url_path_condition,omitempty"`
 }
 
 type ConditionsParameters struct {
@@ -232,6 +364,18 @@ type ConditionsParameters struct {
 }
 
 type ConditionsQueryStringConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type ConditionsQueryStringConditionParameters struct {
@@ -254,6 +398,15 @@ type ConditionsQueryStringConditionParameters struct {
 }
 
 type ConditionsRemoteAddressConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type ConditionsRemoteAddressConditionParameters struct {
@@ -272,6 +425,18 @@ type ConditionsRemoteAddressConditionParameters struct {
 }
 
 type ConditionsRequestBodyConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type ConditionsRequestBodyConditionParameters struct {
@@ -294,6 +459,21 @@ type ConditionsRequestBodyConditionParameters struct {
 }
 
 type ConditionsRequestHeaderConditionObservation struct {
+
+	// The name of the header to modify.
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type ConditionsRequestHeaderConditionParameters struct {
@@ -320,6 +500,15 @@ type ConditionsRequestHeaderConditionParameters struct {
 }
 
 type ConditionsRequestMethodConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type ConditionsRequestMethodConditionParameters struct {
@@ -338,6 +527,15 @@ type ConditionsRequestMethodConditionParameters struct {
 }
 
 type ConditionsRequestSchemeConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type ConditionsRequestSchemeConditionParameters struct {
@@ -356,6 +554,18 @@ type ConditionsRequestSchemeConditionParameters struct {
 }
 
 type ConditionsRequestURIConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type ConditionsRequestURIConditionParameters struct {
@@ -378,6 +588,18 @@ type ConditionsRequestURIConditionParameters struct {
 }
 
 type ConditionsURLFileExtensionConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type ConditionsURLFileExtensionConditionParameters struct {
@@ -400,6 +622,18 @@ type ConditionsURLFileExtensionConditionParameters struct {
 }
 
 type ConditionsURLPathConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type ConditionsURLPathConditionParameters struct {
@@ -423,18 +657,33 @@ type ConditionsURLPathConditionParameters struct {
 
 type FrontdoorRuleObservation struct {
 
+	// An actions block as defined below.
+	Actions []ActionsObservation `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// If this rule is a match should the rules engine continue processing the remaining rules or stop? Possible values are Continue and Stop. Defaults to Continue.
+	BehaviorOnMatch *string `json:"behaviorOnMatch,omitempty" tf:"behavior_on_match,omitempty"`
+
+	// The resource ID of the Front Door Rule Set for this Front Door Rule. Changing this forces a new Front Door Rule to be created.
+	CdnFrontdoorRuleSetID *string `json:"cdnFrontdoorRuleSetId,omitempty" tf:"cdn_frontdoor_rule_set_id,omitempty"`
+
 	// The name of the Front Door Rule Set containing this Front Door Rule.
 	CdnFrontdoorRuleSetName *string `json:"cdnFrontdoorRuleSetName,omitempty" tf:"cdn_frontdoor_rule_set_name,omitempty"`
 
+	// A conditions block as defined below.
+	Conditions []ConditionsObservation `json:"conditions,omitempty" tf:"conditions,omitempty"`
+
 	// The ID of the Front Door Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The order in which the rules will be applied for the Front Door Endpoint. The order value should be sequential and begin at 1(e.g. 1, 2, 3...). A Front Door Rule with a lesser order value will be applied before a rule with a greater order value.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 }
 
 type FrontdoorRuleParameters struct {
 
 	// An actions block as defined below.
-	// +kubebuilder:validation:Required
-	Actions []ActionsParameters `json:"actions" tf:"actions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Actions []ActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// If this rule is a match should the rules engine continue processing the remaining rules or stop? Possible values are Continue and Stop. Defaults to Continue.
 	// +kubebuilder:validation:Optional
@@ -459,11 +708,23 @@ type FrontdoorRuleParameters struct {
 	Conditions []ConditionsParameters `json:"conditions,omitempty" tf:"conditions,omitempty"`
 
 	// The order in which the rules will be applied for the Front Door Endpoint. The order value should be sequential and begin at 1(e.g. 1, 2, 3...). A Front Door Rule with a lesser order value will be applied before a rule with a greater order value.
-	// +kubebuilder:validation:Required
-	Order *float64 `json:"order" tf:"order,omitempty"`
+	// +kubebuilder:validation:Optional
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 }
 
 type HostNameConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type HostNameConditionParameters struct {
@@ -486,6 +747,15 @@ type HostNameConditionParameters struct {
 }
 
 type IsDeviceConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type IsDeviceConditionParameters struct {
@@ -504,6 +774,21 @@ type IsDeviceConditionParameters struct {
 }
 
 type PostArgsConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A string value representing the name of the POST argument.
+	PostArgsName *string `json:"postArgsName,omitempty" tf:"post_args_name,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type PostArgsConditionParameters struct {
@@ -530,6 +815,15 @@ type PostArgsConditionParameters struct {
 }
 
 type RequestHeaderActionObservation struct {
+
+	// The action to be taken on the specified header_name. Possible values include Append, Overwrite or Delete.
+	HeaderAction *string `json:"headerAction,omitempty" tf:"header_action,omitempty"`
+
+	// The name of the header to modify.
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// The value to append or overwrite.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RequestHeaderActionParameters struct {
@@ -548,6 +842,15 @@ type RequestHeaderActionParameters struct {
 }
 
 type ResponseHeaderActionObservation struct {
+
+	// The action to be taken on the specified header_name. Possible values include Append, Overwrite or Delete.
+	HeaderAction *string `json:"headerAction,omitempty" tf:"header_action,omitempty"`
+
+	// The name of the header to modify.
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// The value to append or overwrite.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResponseHeaderActionParameters struct {
@@ -566,6 +869,27 @@ type ResponseHeaderActionParameters struct {
 }
 
 type RouteConfigurationOverrideActionObservation struct {
+
+	// HonorOrigin the Front Door will always honor origin response header directive. If the origin directive is missing, Front Door will cache contents anywhere from 1 to 3 days. OverrideAlways the TTL value returned from your Front Door Origin is overwritten with the value specified in the action. This behavior will only be applied if the response is cacheable. OverrideIfOriginMissing if no TTL value gets returned from your Front Door Origin, the rule sets the TTL to the value specified in the action. This behavior will only be applied if the response is cacheable. Disabled the Front Door will not cache the response contents, irrespective of Front Door Origin response directives. Possible values include HonorOrigin, OverrideAlways, OverrideIfOriginMissing or Disabled.
+	CacheBehavior *string `json:"cacheBehavior,omitempty" tf:"cache_behavior,omitempty"`
+
+	// When Cache behavior is set to Override or SetIfMissing, this field specifies the cache duration to use. The maximum duration is 366 days specified in the d.HH:MM:SS format(e.g. 365.23:59:59). If the desired maximum cache duration is less than 1 day then the maximum cache duration should be specified in the HH:MM:SS format(e.g. 23:59:59).
+	CacheDuration *string `json:"cacheDuration,omitempty" tf:"cache_duration,omitempty"`
+
+	// The Front Door Origin Group resource ID that the request should be routed to. This overrides the configuration specified in the Front Door Endpoint route.
+	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
+
+	// Should the Front Door dynamically compress the content? Possible values include true or false.
+	CompressionEnabled *bool `json:"compressionEnabled,omitempty" tf:"compression_enabled,omitempty"`
+
+	// The forwarding protocol the request will be redirected as. This overrides the configuration specified in the route to be associated with. Possible values include MatchRequest, HttpOnly or HttpsOnly.
+	ForwardingProtocol *string `json:"forwardingProtocol,omitempty" tf:"forwarding_protocol,omitempty"`
+
+	// IncludeSpecifiedQueryStrings query strings specified in the query_string_parameters field get included when the cache key gets generated. UseQueryString cache every unique URL, each unique URL will have its own cache key. IgnoreSpecifiedQueryStrings query strings specified in the query_string_parameters field get excluded when the cache key gets generated. IgnoreQueryString query strings aren't considered when the cache key gets generated. Possible values include IgnoreQueryString, UseQueryString, IgnoreSpecifiedQueryStrings or IncludeSpecifiedQueryStrings.
+	QueryStringCachingBehavior *string `json:"queryStringCachingBehavior,omitempty" tf:"query_string_caching_behavior,omitempty"`
+
+	// A list of query string parameter names.
+	QueryStringParameters []*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
 type RouteConfigurationOverrideActionParameters struct {
@@ -610,6 +934,15 @@ type RouteConfigurationOverrideActionParameters struct {
 }
 
 type SSLProtocolConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type SSLProtocolConditionParameters struct {
@@ -628,6 +961,15 @@ type SSLProtocolConditionParameters struct {
 }
 
 type ServerPortConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type ServerPortConditionParameters struct {
@@ -646,6 +988,15 @@ type ServerPortConditionParameters struct {
 }
 
 type SocketAddressConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
 type SocketAddressConditionParameters struct {
@@ -664,6 +1015,18 @@ type SocketAddressConditionParameters struct {
 }
 
 type URLFilenameConditionObservation struct {
+
+	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type URLFilenameConditionParameters struct {
@@ -709,8 +1072,10 @@ type FrontdoorRuleStatus struct {
 type FrontdoorRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FrontdoorRuleSpec   `json:"spec"`
-	Status            FrontdoorRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actions)",message="actions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.order)",message="order is a required parameter"
+	Spec   FrontdoorRuleSpec   `json:"spec"`
+	Status FrontdoorRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

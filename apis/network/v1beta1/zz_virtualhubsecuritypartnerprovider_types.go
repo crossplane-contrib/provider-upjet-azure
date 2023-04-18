@@ -17,13 +17,28 @@ type VirtualHubSecurityPartnerProviderObservation struct {
 
 	// The ID of the Security Partner Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Security Partner Provider should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Security Partner Provider should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The security provider name. Possible values are ZScaler, IBoss and Checkpoint is allowed. Changing this forces a new resource to be created.
+	SecurityProviderName *string `json:"securityProviderName,omitempty" tf:"security_provider_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Security Partner Provider.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the Virtual Hub within which this Security Partner Provider should be created. Changing this forces a new resource to be created.
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 }
 
 type VirtualHubSecurityPartnerProviderParameters struct {
 
 	// The Azure Region where the Security Partner Provider should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Security Partner Provider should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -39,8 +54,8 @@ type VirtualHubSecurityPartnerProviderParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The security provider name. Possible values are ZScaler, IBoss and Checkpoint is allowed. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SecurityProviderName *string `json:"securityProviderName" tf:"security_provider_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SecurityProviderName *string `json:"securityProviderName,omitempty" tf:"security_provider_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Security Partner Provider.
 	// +kubebuilder:validation:Optional
@@ -85,8 +100,10 @@ type VirtualHubSecurityPartnerProviderStatus struct {
 type VirtualHubSecurityPartnerProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualHubSecurityPartnerProviderSpec   `json:"spec"`
-	Status            VirtualHubSecurityPartnerProviderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.securityProviderName)",message="securityProviderName is a required parameter"
+	Spec   VirtualHubSecurityPartnerProviderSpec   `json:"spec"`
+	Status VirtualHubSecurityPartnerProviderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

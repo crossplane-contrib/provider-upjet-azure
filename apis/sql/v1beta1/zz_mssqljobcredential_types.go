@@ -17,6 +17,12 @@ type MSSQLJobCredentialObservation struct {
 
 	// The ID of the Elastic Job Credential.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Elastic Job Agent. Changing this forces a new Elastic Job Credential to be created.
+	JobAgentID *string `json:"jobAgentId,omitempty" tf:"job_agent_id,omitempty"`
+
+	// The username part of the credential.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type MSSQLJobCredentialParameters struct {
@@ -36,12 +42,12 @@ type MSSQLJobCredentialParameters struct {
 	JobAgentIDSelector *v1.Selector `json:"jobAgentIdSelector,omitempty" tf:"-"`
 
 	// The password part of the credential.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username part of the credential.
-	// +kubebuilder:validation:Required
-	Username *string `json:"username" tf:"username,omitempty"`
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 // MSSQLJobCredentialSpec defines the desired state of MSSQLJobCredential
@@ -68,8 +74,10 @@ type MSSQLJobCredentialStatus struct {
 type MSSQLJobCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MSSQLJobCredentialSpec   `json:"spec"`
-	Status            MSSQLJobCredentialStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.username)",message="username is a required parameter"
+	Spec   MSSQLJobCredentialSpec   `json:"spec"`
+	Status MSSQLJobCredentialStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

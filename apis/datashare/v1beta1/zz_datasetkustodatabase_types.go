@@ -23,6 +23,12 @@ type DataSetKustoDatabaseObservation struct {
 
 	// The location of the Kusto Cluster.
 	KustoClusterLocation *string `json:"kustoClusterLocation,omitempty" tf:"kusto_cluster_location,omitempty"`
+
+	// The resource ID of the Kusto Cluster Database to be shared with the receiver. Changing this forces a new Data Share Kusto Database Dataset to be created.
+	KustoDatabaseID *string `json:"kustoDatabaseId,omitempty" tf:"kusto_database_id,omitempty"`
+
+	// The resource ID of the Data Share where this Data Share Kusto Database Dataset should be created. Changing this forces a new Data Share Kusto Database Dataset to be created.
+	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`
 }
 
 type DataSetKustoDatabaseParameters struct {

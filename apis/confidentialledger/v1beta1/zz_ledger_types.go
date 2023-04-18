@@ -14,6 +14,15 @@ import (
 )
 
 type AzureadBasedServicePrincipalObservation struct {
+
+	// Specifies the Ledger Role to grant this AzureAD Service Principal. Possible values are Administrator, Contributor and Reader.
+	LedgerRoleName *string `json:"ledgerRoleName,omitempty" tf:"ledger_role_name,omitempty"`
+
+	// Specifies the Principal ID of the AzureAD Service Principal.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// Specifies the Tenant ID for this AzureAD Service Principal.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type AzureadBasedServicePrincipalParameters struct {
@@ -32,6 +41,12 @@ type AzureadBasedServicePrincipalParameters struct {
 }
 
 type CertificateBasedSecurityPrincipalObservation struct {
+
+	// Specifies the Ledger Role to grant this Certificate Security Principal. Possible values are Administrator, Contributor and Reader.
+	LedgerRoleName *string `json:"ledgerRoleName,omitempty" tf:"ledger_role_name,omitempty"`
+
+	// The public key, in PEM format, of the certificate used by this identity to authenticate with the Confidential Ledger.
+	PemPublicKey *string `json:"pemPublicKey,omitempty" tf:"pem_public_key,omitempty"`
 }
 
 type CertificateBasedSecurityPrincipalParameters struct {
@@ -47,6 +62,12 @@ type CertificateBasedSecurityPrincipalParameters struct {
 
 type LedgerObservation struct {
 
+	// A list of azuread_based_service_principal blocks as defined below.
+	AzureadBasedServicePrincipal []AzureadBasedServicePrincipalObservation `json:"azureadBasedServicePrincipal,omitempty" tf:"azuread_based_service_principal,omitempty"`
+
+	// A list of certificate_based_security_principal blocks as defined below.
+	CertificateBasedSecurityPrincipal []CertificateBasedSecurityPrincipalObservation `json:"certificateBasedSecurityPrincipal,omitempty" tf:"certificate_based_security_principal,omitempty"`
+
 	// The ID of this Confidential Ledger.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -55,25 +76,37 @@ type LedgerObservation struct {
 
 	// The Endpoint for this Confidential Ledger.
 	LedgerEndpoint *string `json:"ledgerEndpoint,omitempty" tf:"ledger_endpoint,omitempty"`
+
+	// Specifies the type of Confidential Ledger. Possible values are Private and Public. Changing this forces a new resource to be created.
+	LedgerType *string `json:"ledgerType,omitempty" tf:"ledger_type,omitempty"`
+
+	// Specifies the supported Azure location where the Confidential Ledger exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Confidential Ledger exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the Confidential Ledger.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LedgerParameters struct {
 
 	// A list of azuread_based_service_principal blocks as defined below.
-	// +kubebuilder:validation:Required
-	AzureadBasedServicePrincipal []AzureadBasedServicePrincipalParameters `json:"azureadBasedServicePrincipal" tf:"azuread_based_service_principal,omitempty"`
+	// +kubebuilder:validation:Optional
+	AzureadBasedServicePrincipal []AzureadBasedServicePrincipalParameters `json:"azureadBasedServicePrincipal,omitempty" tf:"azuread_based_service_principal,omitempty"`
 
 	// A list of certificate_based_security_principal blocks as defined below.
 	// +kubebuilder:validation:Optional
 	CertificateBasedSecurityPrincipal []CertificateBasedSecurityPrincipalParameters `json:"certificateBasedSecurityPrincipal,omitempty" tf:"certificate_based_security_principal,omitempty"`
 
 	// Specifies the type of Confidential Ledger. Possible values are Private and Public. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	LedgerType *string `json:"ledgerType" tf:"ledger_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	LedgerType *string `json:"ledgerType,omitempty" tf:"ledger_type,omitempty"`
 
 	// Specifies the supported Azure location where the Confidential Ledger exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Confidential Ledger exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -117,8 +150,11 @@ type LedgerStatus struct {
 type Ledger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LedgerSpec   `json:"spec"`
-	Status            LedgerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.azureadBasedServicePrincipal)",message="azureadBasedServicePrincipal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ledgerType)",message="ledgerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   LedgerSpec   `json:"spec"`
+	Status LedgerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

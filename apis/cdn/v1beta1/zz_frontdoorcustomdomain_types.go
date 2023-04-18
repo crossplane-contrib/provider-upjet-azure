@@ -15,11 +15,23 @@ import (
 
 type FrontdoorCustomDomainObservation struct {
 
+	// The ID of the Front Door Profile. Changing this forces a new Front Door Profile to be created.
+	CdnFrontdoorProfileID *string `json:"cdnFrontdoorProfileId,omitempty" tf:"cdn_frontdoor_profile_id,omitempty"`
+
+	// The ID of the Azure DNS Zone which should be used for this Front Door Custom Domain. If you are using Azure to host your DNS domains, you must delegate the domain provider's domain name system (DNS) to an Azure DNS Zone. For more information, see Delegate a domain to Azure DNS. Otherwise, if you're using your own domain provider to handle your DNS, you must validate the Front Door Custom Domain by creating the DNS TXT records manually.
+	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+
 	// The date time that the token expires.
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
+	// The host name of the domain. The host_name field must be the FQDN of your domain(e.g. contoso.fabrikam.com). Changing this forces a new Front Door Custom Domain to be created.
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+
 	// The ID of the Front Door Custom Domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A tls block as defined below.
+	TLS []TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// Challenge used for DNS TXT record or file based validation.
 	ValidationToken *string `json:"validationToken,omitempty" tf:"validation_token,omitempty"`
@@ -56,15 +68,24 @@ type FrontdoorCustomDomainParameters struct {
 	DNSZoneIDSelector *v1.Selector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
 	// The host name of the domain. The host_name field must be the FQDN of your domain(e.g. contoso.fabrikam.com). Changing this forces a new Front Door Custom Domain to be created.
-	// +kubebuilder:validation:Required
-	HostName *string `json:"hostName" tf:"host_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// A tls block as defined below.
-	// +kubebuilder:validation:Required
-	TLS []TLSParameters `json:"tls" tf:"tls,omitempty"`
+	// +kubebuilder:validation:Optional
+	TLS []TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
 type TLSObservation struct {
+
+	// Resource ID of the Front Door Secret.
+	CdnFrontdoorSecretID *string `json:"cdnFrontdoorSecretId,omitempty" tf:"cdn_frontdoor_secret_id,omitempty"`
+
+	// Defines the source of the SSL certificate. Possible values include CustomerCertificate and ManagedCertificate. Defaults to ManagedCertificate.
+	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
+
+	// TLS protocol version that will be used for Https. Possible values include TLS10 and TLS12. Defaults to TLS12.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 }
 
 type TLSParameters struct {
@@ -106,8 +127,10 @@ type FrontdoorCustomDomainStatus struct {
 type FrontdoorCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FrontdoorCustomDomainSpec   `json:"spec"`
-	Status            FrontdoorCustomDomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hostName)",message="hostName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tls)",message="tls is a required parameter"
+	Spec   FrontdoorCustomDomainSpec   `json:"spec"`
+	Status FrontdoorCustomDomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,6 +14,33 @@ import (
 )
 
 type CorrelationFilterObservation struct {
+
+	// Content type of the message.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Identifier of the correlation.
+	CorrelationID *string `json:"correlationId,omitempty" tf:"correlation_id,omitempty"`
+
+	// Application specific label.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Identifier of the message.
+	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
+
+	// A list of user defined properties to be included in the filter. Specified as a map of name/value pairs.
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// Address of the queue to reply to.
+	ReplyTo *string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
+
+	// Session identifier to reply to.
+	ReplyToSessionID *string `json:"replyToSessionId,omitempty" tf:"reply_to_session_id,omitempty"`
+
+	// Session identifier.
+	SessionID *string `json:"sessionId,omitempty" tf:"session_id,omitempty"`
+
+	// Address to send to.
+	To *string `json:"to,omitempty" tf:"to,omitempty"`
 }
 
 type CorrelationFilterParameters struct {
@@ -57,10 +84,25 @@ type CorrelationFilterParameters struct {
 
 type SubscriptionRuleObservation struct {
 
+	// Represents set of actions written in SQL language-based syntax that is performed against a BrokeredMessage.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A correlation_filter block as documented below to be evaluated against a BrokeredMessage. Required when filter_type is set to CorrelationFilter.
+	CorrelationFilter []CorrelationFilterObservation `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty"`
+
+	// Type of filter to be applied to a BrokeredMessage. Possible values are SqlFilter and CorrelationFilter.
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
+
 	// The ServiceBus Subscription Rule ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Represents a filter written in SQL language-based syntax that to be evaluated against a BrokeredMessage. Required when filter_type is set to SqlFilter.
+	SQLFilter *string `json:"sqlFilter,omitempty" tf:"sql_filter,omitempty"`
+
 	SQLFilterCompatibilityLevel *float64 `json:"sqlFilterCompatibilityLevel,omitempty" tf:"sql_filter_compatibility_level,omitempty"`
+
+	// The ID of the ServiceBus Subscription in which this Rule should be created. Changing this forces a new resource to be created.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type SubscriptionRuleParameters struct {
@@ -74,8 +116,8 @@ type SubscriptionRuleParameters struct {
 	CorrelationFilter []CorrelationFilterParameters `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty"`
 
 	// Type of filter to be applied to a BrokeredMessage. Possible values are SqlFilter and CorrelationFilter.
-	// +kubebuilder:validation:Required
-	FilterType *string `json:"filterType" tf:"filter_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
 
 	// Represents a filter written in SQL language-based syntax that to be evaluated against a BrokeredMessage. Required when filter_type is set to SqlFilter.
 	// +kubebuilder:validation:Optional
@@ -120,8 +162,9 @@ type SubscriptionRuleStatus struct {
 type SubscriptionRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubscriptionRuleSpec   `json:"spec"`
-	Status            SubscriptionRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.filterType)",message="filterType is a required parameter"
+	Spec   SubscriptionRuleSpec   `json:"spec"`
+	Status SubscriptionRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

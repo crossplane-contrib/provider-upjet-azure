@@ -15,8 +15,35 @@ import (
 
 type PolicyObservation struct {
 
+	// A description for the Policy.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Evaluation Type used for this Policy. Possible values include: 'AllowedValuesPolicy', 'MaxValuePolicy'. Changing this forces a new resource to be created.
+	EvaluatorType *string `json:"evaluatorType,omitempty" tf:"evaluator_type,omitempty"`
+
+	// The Fact Data for this Policy.
+	FactData *string `json:"factData,omitempty" tf:"fact_data,omitempty"`
+
 	// The ID of the Dev Test Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Dev Test Lab in which the Policy should be created. Changing this forces a new resource to be created.
+	LabName *string `json:"labName,omitempty" tf:"lab_name,omitempty"`
+
+	// Specifies the name of the Dev Test Policy. Possible values are GalleryImage, LabPremiumVmCount, LabTargetCost, LabVmCount, LabVmSize, UserOwnedLabPremiumVmCount, UserOwnedLabVmCount and UserOwnedLabVmCountInSubnet. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the name of the Policy Set within the Dev Test Lab where this policy should be created. Changing this forces a new resource to be created.
+	PolicySetName *string `json:"policySetName,omitempty" tf:"policy_set_name,omitempty"`
+
+	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Threshold for this Policy.
+	Threshold *string `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
 type PolicyParameters struct {
@@ -26,8 +53,8 @@ type PolicyParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Evaluation Type used for this Policy. Possible values include: 'AllowedValuesPolicy', 'MaxValuePolicy'. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	EvaluatorType *string `json:"evaluatorType" tf:"evaluator_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	EvaluatorType *string `json:"evaluatorType,omitempty" tf:"evaluator_type,omitempty"`
 
 	// The Fact Data for this Policy.
 	// +kubebuilder:validation:Optional
@@ -47,12 +74,12 @@ type PolicyParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Dev Test Policy. Possible values are GalleryImage, LabPremiumVmCount, LabTargetCost, LabVmCount, LabVmSize, UserOwnedLabPremiumVmCount, UserOwnedLabVmCount and UserOwnedLabVmCountInSubnet. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the Policy Set within the Dev Test Lab where this policy should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	PolicySetName *string `json:"policySetName" tf:"policy_set_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	PolicySetName *string `json:"policySetName,omitempty" tf:"policy_set_name,omitempty"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -72,8 +99,8 @@ type PolicyParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Threshold for this Policy.
-	// +kubebuilder:validation:Required
-	Threshold *string `json:"threshold" tf:"threshold,omitempty"`
+	// +kubebuilder:validation:Optional
+	Threshold *string `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
 // PolicySpec defines the desired state of Policy
@@ -100,8 +127,12 @@ type PolicyStatus struct {
 type Policy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PolicySpec   `json:"spec"`
-	Status            PolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.evaluatorType)",message="evaluatorType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policySetName)",message="policySetName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.threshold)",message="threshold is a required parameter"
+	Spec   PolicySpec   `json:"spec"`
+	Status PolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

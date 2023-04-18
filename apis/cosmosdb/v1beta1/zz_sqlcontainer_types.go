@@ -14,6 +14,12 @@ import (
 )
 
 type CompositeIndexIndexObservation struct {
+
+	// Order of the index. Possible values are Ascending or Descending.
+	Order *string `json:"order,omitempty" tf:"order,omitempty"`
+
+	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type CompositeIndexIndexParameters struct {
@@ -28,6 +34,9 @@ type CompositeIndexIndexParameters struct {
 }
 
 type ExcludedPathObservation struct {
+
+	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type ExcludedPathParameters struct {
@@ -38,6 +47,9 @@ type ExcludedPathParameters struct {
 }
 
 type IncludedPathObservation struct {
+
+	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type IncludedPathParameters struct {
@@ -48,6 +60,9 @@ type IncludedPathParameters struct {
 }
 
 type IndexingPolicyCompositeIndexObservation struct {
+
+	// One or more index blocks as defined below.
+	Index []CompositeIndexIndexObservation `json:"index,omitempty" tf:"index,omitempty"`
 }
 
 type IndexingPolicyCompositeIndexParameters struct {
@@ -59,8 +74,19 @@ type IndexingPolicyCompositeIndexParameters struct {
 
 type IndexingPolicyObservation struct {
 
+	// One or more composite_index blocks as defined below.
+	CompositeIndex []IndexingPolicyCompositeIndexObservation `json:"compositeIndex,omitempty" tf:"composite_index,omitempty"`
+
+	// One or more excluded_path blocks as defined below. Either included_path or excluded_path must contain the path /*
+	ExcludedPath []ExcludedPathObservation `json:"excludedPath,omitempty" tf:"excluded_path,omitempty"`
+
+	// One or more included_path blocks as defined below. Either included_path or excluded_path must contain the path /*
+	IncludedPath []IncludedPathObservation `json:"includedPath,omitempty" tf:"included_path,omitempty"`
+
+	// Indicates the indexing mode. Possible values include: consistent and none. Defaults to consistent.
+	IndexingMode *string `json:"indexingMode,omitempty" tf:"indexing_mode,omitempty"`
+
 	// One or more spatial_index blocks as defined below.
-	// +kubebuilder:validation:Optional
 	SpatialIndex []IndexingPolicySpatialIndexObservation `json:"spatialIndex,omitempty" tf:"spatial_index,omitempty"`
 }
 
@@ -89,6 +115,9 @@ type IndexingPolicyParameters struct {
 
 type IndexingPolicySpatialIndexObservation struct {
 
+	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
 	// A set of spatial types of the path.
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 }
@@ -101,6 +130,9 @@ type IndexingPolicySpatialIndexParameters struct {
 }
 
 type SQLContainerAutoscaleSettingsObservation struct {
+
+	// The maximum throughput of the SQL container (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
 type SQLContainerAutoscaleSettingsParameters struct {
@@ -111,6 +143,15 @@ type SQLContainerAutoscaleSettingsParameters struct {
 }
 
 type SQLContainerConflictResolutionPolicyObservation struct {
+
+	// The conflict resolution path in the case of LastWriterWins mode.
+	ConflictResolutionPath *string `json:"conflictResolutionPath,omitempty" tf:"conflict_resolution_path,omitempty"`
+
+	// The procedure to resolve conflicts in the case of Custom mode.
+	ConflictResolutionProcedure *string `json:"conflictResolutionProcedure,omitempty" tf:"conflict_resolution_procedure,omitempty"`
+
+	// Indicates the conflict resolution mode. Possible values include: LastWriterWins, Custom.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type SQLContainerConflictResolutionPolicyParameters struct {
@@ -130,12 +171,44 @@ type SQLContainerConflictResolutionPolicyParameters struct {
 
 type SQLContainerObservation struct {
 
+	// The name of the Cosmos DB Account to create the container within. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// The default time to live of Analytical Storage for this SQL container. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
+	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
+
+	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
+	AutoscaleSettings []SQLContainerAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+
+	// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
+	ConflictResolutionPolicy []SQLContainerConflictResolutionPolicyObservation `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
+
+	// The name of the Cosmos DB SQL Database to create the container within. Changing this forces a new resource to be created.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The default time to live of SQL container. If missing, items are not expired automatically. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
+	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
+
 	// The ID of the CosmosDB SQL Container.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An indexing_policy block as defined below.
-	// +kubebuilder:validation:Optional
 	IndexingPolicy []IndexingPolicyObservation `json:"indexingPolicy,omitempty" tf:"indexing_policy,omitempty"`
+
+	// Define a partition key. Changing this forces a new resource to be created.
+	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
+
+	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
+	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
+
+	// The name of the resource group in which the Cosmos DB SQL Container is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The throughput of SQL container (RU/s). Must be set in increments of 100. The minimum value is 400.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// One or more unique_key blocks as defined below. Changing this forces a new resource to be created.
+	UniqueKey []SQLContainerUniqueKeyObservation `json:"uniqueKey,omitempty" tf:"unique_key,omitempty"`
 }
 
 type SQLContainerParameters struct {
@@ -187,8 +260,8 @@ type SQLContainerParameters struct {
 	IndexingPolicy []IndexingPolicyParameters `json:"indexingPolicy,omitempty" tf:"indexing_policy,omitempty"`
 
 	// Define a partition key. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	PartitionKeyPath *string `json:"partitionKeyPath" tf:"partition_key_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
 
 	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
 	// +kubebuilder:validation:Optional
@@ -217,6 +290,9 @@ type SQLContainerParameters struct {
 }
 
 type SQLContainerUniqueKeyObservation struct {
+
+	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
+	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
 }
 
 type SQLContainerUniqueKeyParameters struct {
@@ -250,8 +326,9 @@ type SQLContainerStatus struct {
 type SQLContainer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLContainerSpec   `json:"spec"`
-	Status            SQLContainerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.partitionKeyPath)",message="partitionKeyPath is a required parameter"
+	Spec   SQLContainerSpec   `json:"spec"`
+	Status SQLContainerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

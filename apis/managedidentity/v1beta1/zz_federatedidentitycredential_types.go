@@ -15,19 +15,34 @@ import (
 
 type FederatedIdentityCredentialObservation struct {
 
+	// Specifies the audience for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
+
 	// The ID of the Federated Identity Credential.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the issuer of this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// Specifies parent ID of User Assigned Identity for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
+
+	// Specifies the name of the Resource Group within which this Federated Identity Credential should exist. Changing this forces a new Federated Identity Credential to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the subject for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
 type FederatedIdentityCredentialParameters struct {
 
 	// Specifies the audience for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
-	// +kubebuilder:validation:Required
-	Audience []*string `json:"audience" tf:"audience,omitempty"`
+	// +kubebuilder:validation:Optional
+	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// Specifies the issuer of this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
-	// +kubebuilder:validation:Required
-	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// Specifies parent ID of User Assigned Identity for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
@@ -57,8 +72,8 @@ type FederatedIdentityCredentialParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the subject for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
-	// +kubebuilder:validation:Required
-	Subject *string `json:"subject" tf:"subject,omitempty"`
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
 // FederatedIdentityCredentialSpec defines the desired state of FederatedIdentityCredential
@@ -85,8 +100,11 @@ type FederatedIdentityCredentialStatus struct {
 type FederatedIdentityCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FederatedIdentityCredentialSpec   `json:"spec"`
-	Status            FederatedIdentityCredentialStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.audience)",message="audience is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.issuer)",message="issuer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subject)",message="subject is a required parameter"
+	Spec   FederatedIdentityCredentialSpec   `json:"spec"`
+	Status FederatedIdentityCredentialStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

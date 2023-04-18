@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: schedules.automation.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -280,9 +284,22 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - frequency
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -454,14 +471,80 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: frequency is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frequency)
           status:
             description: ScheduleStatus defines the observed state of Schedule.
             properties:
               atProvider:
                 properties:
+                  automationAccountName:
+                    description: The name of the automation account in which the Schedule
+                      is created. Changing this forces a new resource to be created.
+                    type: string
+                  description:
+                    description: A description for this Schedule.
+                    type: string
+                  expiryTime:
+                    description: The end time of the schedule.
+                    type: string
+                  frequency:
+                    description: The frequency of the schedule. - can be either OneTime,
+                      Day, Hour, Week, or Month.
+                    type: string
                   id:
                     description: The Automation Schedule ID.
                     type: string
+                  interval:
+                    description: The number of frequencys between runs. Only valid
+                      when frequency is Day, Hour, Week, or Month and defaults to
+                      1.
+                    type: number
+                  monthDays:
+                    description: List of days of the month that the job should execute
+                      on. Must be between 1 and 31. -1 for last day of the month.
+                      Only valid when frequency is Month.
+                    items:
+                      type: number
+                    type: array
+                  monthlyOccurrence:
+                    description: List of monthly_occurrence blocks as defined below
+                      to specifies occurrences of days within a month. Only valid
+                      when frequency is Month. The monthly_occurrence block supports
+                      fields documented below.
+                    items:
+                      properties:
+                        day:
+                          description: Day of the occurrence. Must be one of Monday,
+                            Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+                          type: string
+                        occurrence:
+                          description: Occurrence of the week within the month. Must
+                            be between 1 and 5. -1 for last week within the month.
+                          type: number
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The name of the resource group in which the Schedule
+                      is created. Changing this forces a new resource to be created.
+                    type: string
+                  startTime:
+                    description: Start time of the schedule. Must be at least five
+                      minutes in the future. Defaults to seven minutes in the future
+                      from the time the resource is created.
+                    type: string
+                  timezone:
+                    description: 'The timezone of the start time. Defaults to UTC.
+                      For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows'
+                    type: string
+                  weekDays:
+                    description: List of days of the week that the job should execute
+                      on. Only valid when frequency is Week. Possible values are Monday,
+                      Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -15,8 +15,23 @@ import (
 
 type BotChannelMSTeamsObservation struct {
 
+	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
+	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
+
+	// Specifies the webhook for Microsoft Teams channel calls.
+	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
+
+	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
+	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
+
 	// The ID of the Microsoft Teams Integration for a Bot Channel.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type BotChannelMSTeamsParameters struct {
@@ -44,8 +59,8 @@ type BotChannelMSTeamsParameters struct {
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -85,8 +100,9 @@ type BotChannelMSTeamsStatus struct {
 type BotChannelMSTeams struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotChannelMSTeamsSpec   `json:"spec"`
-	Status            BotChannelMSTeamsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   BotChannelMSTeamsSpec   `json:"spec"`
+	Status BotChannelMSTeamsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

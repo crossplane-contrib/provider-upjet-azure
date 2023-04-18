@@ -17,13 +17,25 @@ type SecurityGroupObservation struct {
 
 	// The ID of the Network Security Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the network security group. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// List of objects representing security rules, as defined below.
+	SecurityRule []SecurityRuleObservation `json:"securityRule,omitempty" tf:"security_rule,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SecurityGroupParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the network security group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -48,6 +60,54 @@ type SecurityGroupParameters struct {
 }
 
 type SecurityRuleObservation struct {
+
+	// Specifies whether network traffic is allowed or denied. Possible values are Allow and Deny.
+	Access *string `json:"access,omitempty" tf:"access,omitempty"`
+
+	// A description for this rule. Restricted to 140 characters.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// CIDR or destination IP range or * to match any IP. Tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used. This is required if destination_address_prefixes is not specified.
+	DestinationAddressPrefix *string `json:"destinationAddressPrefix,omitempty" tf:"destination_address_prefix,omitempty"`
+
+	// List of destination address prefixes. Tags may not be used. This is required if destination_address_prefix is not specified.
+	DestinationAddressPrefixes []*string `json:"destinationAddressPrefixes,omitempty" tf:"destination_address_prefixes,omitempty"`
+
+	// A List of destination Application Security Group IDs
+	DestinationApplicationSecurityGroupIds []*string `json:"destinationApplicationSecurityGroupIds,omitempty" tf:"destination_application_security_group_ids,omitempty"`
+
+	// Destination Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if destination_port_ranges is not specified.
+	DestinationPortRange *string `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
+
+	// List of destination ports or port ranges. This is required if destination_port_range is not specified.
+	DestinationPortRanges []*string `json:"destinationPortRanges,omitempty" tf:"destination_port_ranges,omitempty"`
+
+	// The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are Inbound and Outbound.
+	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+
+	// The name of the security rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// Network protocol this rule applies to. Possible values include Tcp, Udp, Icmp, Esp, Ah or * (which matches all).
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// CIDR or source IP range or * to match any IP. Tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and ‘Internet’ can also be used. This is required if source_address_prefixes is not specified.
+	SourceAddressPrefix *string `json:"sourceAddressPrefix,omitempty" tf:"source_address_prefix,omitempty"`
+
+	// List of source address prefixes. Tags may not be used. This is required if source_address_prefix is not specified.
+	SourceAddressPrefixes []*string `json:"sourceAddressPrefixes,omitempty" tf:"source_address_prefixes,omitempty"`
+
+	// A List of source Application Security Group IDs
+	SourceApplicationSecurityGroupIds []*string `json:"sourceApplicationSecurityGroupIds,omitempty" tf:"source_application_security_group_ids,omitempty"`
+
+	// Source Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if source_port_ranges is not specified.
+	SourcePortRange *string `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
+
+	// List of source ports or port ranges. This is required if source_port_range is not specified.
+	SourcePortRanges []*string `json:"sourcePortRanges,omitempty" tf:"source_port_ranges,omitempty"`
 }
 
 type SecurityRuleParameters struct {
@@ -141,8 +201,9 @@ type SecurityGroupStatus struct {
 type SecurityGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityGroupSpec   `json:"spec"`
-	Status            SecurityGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   SecurityGroupSpec   `json:"spec"`
+	Status SecurityGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,6 +14,9 @@ import (
 )
 
 type DailyRecurrenceObservation struct {
+
+	// The time each day when the schedule takes effect.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
 
 type DailyRecurrenceParameters struct {
@@ -24,6 +27,9 @@ type DailyRecurrenceParameters struct {
 }
 
 type HourlyRecurrenceObservation struct {
+
+	// Minutes of the hour the schedule will run.
+	Minute *float64 `json:"minute,omitempty" tf:"minute,omitempty"`
 }
 
 type HourlyRecurrenceParameters struct {
@@ -34,6 +40,15 @@ type HourlyRecurrenceParameters struct {
 }
 
 type ScheduleNotificationSettingsObservation struct {
+
+	// The status of the notification. Possible values are Enabled and Disabled. Defaults to Disabled
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Time in minutes before event at which notification will be sent.
+	TimeInMinutes *float64 `json:"timeInMinutes,omitempty" tf:"time_in_minutes,omitempty"`
+
+	// The webhook URL to which the notification will be sent.
+	WebhookURL *string `json:"webhookUrl,omitempty" tf:"webhook_url,omitempty"`
 }
 
 type ScheduleNotificationSettingsParameters struct {
@@ -53,8 +68,41 @@ type ScheduleNotificationSettingsParameters struct {
 
 type ScheduleObservation struct {
 
+	// The properties of a daily schedule. If the schedule occurs once each day of the week, specify the daily recurrence. A daily_recurrence block as defined below.
+	DailyRecurrence []DailyRecurrenceObservation `json:"dailyRecurrence,omitempty" tf:"daily_recurrence,omitempty"`
+
+	// The properties of an hourly schedule. If the schedule occurs multiple times a day, specify the hourly recurrence. A hourly_recurrence block as defined below.
+	HourlyRecurrence []HourlyRecurrenceObservation `json:"hourlyRecurrence,omitempty" tf:"hourly_recurrence,omitempty"`
+
 	// The ID of the DevTest Schedule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the dev test lab. Changing this forces a new resource to be created.
+	LabName *string `json:"labName,omitempty" tf:"lab_name,omitempty"`
+
+	// The location where the schedule is created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The notification setting of a schedule. A notification_settings as defined below.
+	NotificationSettings []ScheduleNotificationSettingsObservation `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
+
+	// The name of the resource group in which to create the dev test lab schedule. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The status of this schedule. Possible values are Enabled and Disabled. Defaults to Disabled.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The task type of the schedule. Possible values include LabVmsShutdownTask and LabVmAutoStart.
+	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
+
+	// The time zone ID (e.g. Pacific Standard time).
+	TimeZoneID *string `json:"timeZoneId,omitempty" tf:"time_zone_id,omitempty"`
+
+	// The properties of a weekly schedule. If the schedule occurs only some days of the week, specify the weekly recurrence. A weekly_recurrence block as defined below.
+	WeeklyRecurrence []WeeklyRecurrenceObservation `json:"weeklyRecurrence,omitempty" tf:"weekly_recurrence,omitempty"`
 }
 
 type ScheduleParameters struct {
@@ -81,12 +129,12 @@ type ScheduleParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// The location where the schedule is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The notification setting of a schedule. A notification_settings as defined below.
-	// +kubebuilder:validation:Required
-	NotificationSettings []ScheduleNotificationSettingsParameters `json:"notificationSettings" tf:"notification_settings,omitempty"`
+	// +kubebuilder:validation:Optional
+	NotificationSettings []ScheduleNotificationSettingsParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// The name of the resource group in which to create the dev test lab schedule. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -110,12 +158,12 @@ type ScheduleParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The task type of the schedule. Possible values include LabVmsShutdownTask and LabVmAutoStart.
-	// +kubebuilder:validation:Required
-	TaskType *string `json:"taskType" tf:"task_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 
 	// The time zone ID (e.g. Pacific Standard time).
-	// +kubebuilder:validation:Required
-	TimeZoneID *string `json:"timeZoneId" tf:"time_zone_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TimeZoneID *string `json:"timeZoneId,omitempty" tf:"time_zone_id,omitempty"`
 
 	// The properties of a weekly schedule. If the schedule occurs only some days of the week, specify the weekly recurrence. A weekly_recurrence block as defined below.
 	// +kubebuilder:validation:Optional
@@ -123,6 +171,12 @@ type ScheduleParameters struct {
 }
 
 type WeeklyRecurrenceObservation struct {
+
+	// The time when the schedule takes effect.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+
+	// A list of days that this schedule takes effect . Possible values include Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 
 type WeeklyRecurrenceParameters struct {
@@ -160,8 +214,12 @@ type ScheduleStatus struct {
 type Schedule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ScheduleSpec   `json:"spec"`
-	Status            ScheduleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.notificationSettings)",message="notificationSettings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.taskType)",message="taskType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeZoneId)",message="timeZoneId is a required parameter"
+	Spec   ScheduleSpec   `json:"spec"`
+	Status ScheduleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

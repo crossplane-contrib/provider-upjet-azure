@@ -15,8 +15,32 @@ import (
 
 type MSSQLServerSecurityAlertPolicyObservation struct {
 
+	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
+
+	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
+
+	// Specifies an array of email addresses to which the alert is sent.
+	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
+
 	// The ID of the MS SQL Server Security Alert Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group that contains the MS SQL Server. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+
+	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
+	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 }
 
 type MSSQLServerSecurityAlertPolicyParameters struct {
@@ -64,8 +88,8 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
-	// +kubebuilder:validation:Required
-	State *string `json:"state" tf:"state,omitempty"`
+	// +kubebuilder:validation:Optional
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Specifies the identifier key of the Threat Detection audit storage account. This is mandatory when you use storage_endpoint to specify a storage account blob endpoint.
 	// +kubebuilder:validation:Optional
@@ -110,8 +134,9 @@ type MSSQLServerSecurityAlertPolicyStatus struct {
 type MSSQLServerSecurityAlertPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MSSQLServerSecurityAlertPolicySpec   `json:"spec"`
-	Status            MSSQLServerSecurityAlertPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.state)",message="state is a required parameter"
+	Spec   MSSQLServerSecurityAlertPolicySpec   `json:"spec"`
+	Status MSSQLServerSecurityAlertPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

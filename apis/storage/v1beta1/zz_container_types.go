@@ -15,6 +15,9 @@ import (
 
 type ContainerObservation struct {
 
+	// The Access Level configured for this Container. Possible values are blob, container or private. Defaults to private.
+	ContainerAccessType *string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty"`
+
 	// Is there an Immutability Policy configured on this Storage Container?
 	HasImmutabilityPolicy *bool `json:"hasImmutabilityPolicy,omitempty" tf:"has_immutability_policy,omitempty"`
 
@@ -24,8 +27,14 @@ type ContainerObservation struct {
 	// The ID of the Storage Container.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A mapping of MetaData for this Container. All metadata keys should be lowercase.
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
 	// The Resource Manager ID of this Storage Container.
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
+
+	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
 
 type ContainerParameters struct {

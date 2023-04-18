@@ -20,13 +20,25 @@ type HealthBotObservation struct {
 
 	// The ID of the resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies The Azure Region where the resource exists. Changing this force a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies The name of the Resource Group in which to create the Healthbot Service. changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name which should be used for the SKU of the service. Possible values are C0, F0 and S1.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the service.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type HealthBotParameters struct {
 
 	// Specifies The Azure Region where the resource exists. Changing this force a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies The name of the Resource Group in which to create the Healthbot Service. changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -42,8 +54,8 @@ type HealthBotParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name which should be used for the SKU of the service. Possible values are C0, F0 and S1.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the service.
 	// +kubebuilder:validation:Optional
@@ -74,8 +86,10 @@ type HealthBotStatus struct {
 type HealthBot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HealthBotSpec   `json:"spec"`
-	Status            HealthBotStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	Spec   HealthBotSpec   `json:"spec"`
+	Status HealthBotStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

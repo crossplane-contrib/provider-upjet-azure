@@ -15,8 +15,26 @@ import (
 
 type ConnectionClassicCertificateObservation struct {
 
+	// The name of the automation account in which the Connection is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// The name of the certificate asset.
+	CertificateAssetName *string `json:"certificateAssetName,omitempty" tf:"certificate_asset_name,omitempty"`
+
+	// A description for this Connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The Automation Connection ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the Connection is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The id of subscription.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
+	// The name of subscription.
+	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 }
 
 type ConnectionClassicCertificateParameters struct {
@@ -35,8 +53,8 @@ type ConnectionClassicCertificateParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the certificate asset.
-	// +kubebuilder:validation:Required
-	CertificateAssetName *string `json:"certificateAssetName" tf:"certificate_asset_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	CertificateAssetName *string `json:"certificateAssetName,omitempty" tf:"certificate_asset_name,omitempty"`
 
 	// A description for this Connection.
 	// +kubebuilder:validation:Optional
@@ -56,12 +74,12 @@ type ConnectionClassicCertificateParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The id of subscription.
-	// +kubebuilder:validation:Required
-	SubscriptionID *string `json:"subscriptionId" tf:"subscription_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The name of subscription.
-	// +kubebuilder:validation:Required
-	SubscriptionName *string `json:"subscriptionName" tf:"subscription_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 }
 
 // ConnectionClassicCertificateSpec defines the desired state of ConnectionClassicCertificate
@@ -88,8 +106,11 @@ type ConnectionClassicCertificateStatus struct {
 type ConnectionClassicCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConnectionClassicCertificateSpec   `json:"spec"`
-	Status            ConnectionClassicCertificateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateAssetName)",message="certificateAssetName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriptionId)",message="subscriptionId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriptionName)",message="subscriptionName is a required parameter"
+	Spec   ConnectionClassicCertificateSpec   `json:"spec"`
+	Status ConnectionClassicCertificateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

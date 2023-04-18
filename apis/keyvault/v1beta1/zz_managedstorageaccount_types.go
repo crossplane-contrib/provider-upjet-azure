@@ -17,6 +17,24 @@ type ManagedStorageAccountObservation struct {
 
 	// The ID of the Key Vault Managed Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Key Vault where the Managed Storage Account should be created. Changing this forces a new resource to be created.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Should Storage Account access key be regenerated periodically?
+	RegenerateKeyAutomatically *bool `json:"regenerateKeyAutomatically,omitempty" tf:"regenerate_key_automatically,omitempty"`
+
+	// How often Storage Account access key should be regenerated. Value needs to be in ISO 8601 duration format.
+	RegenerationPeriod *string `json:"regenerationPeriod,omitempty" tf:"regeneration_period,omitempty"`
+
+	// The ID of the Storage Account.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Which Storage Account access key that is managed by Key Vault. Possible values are key1 and key2.
+	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
+
+	// A mapping of tags which should be assigned to the Key Vault Managed Storage Account. Changing this forces a new resource to be created.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ManagedStorageAccountParameters struct {
@@ -58,8 +76,8 @@ type ManagedStorageAccountParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// Which Storage Account access key that is managed by Key Vault. Possible values are key1 and key2.
-	// +kubebuilder:validation:Required
-	StorageAccountKey *string `json:"storageAccountKey" tf:"storage_account_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
 
 	// A mapping of tags which should be assigned to the Key Vault Managed Storage Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -90,8 +108,9 @@ type ManagedStorageAccountStatus struct {
 type ManagedStorageAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagedStorageAccountSpec   `json:"spec"`
-	Status            ManagedStorageAccountStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageAccountKey)",message="storageAccountKey is a required parameter"
+	Spec   ManagedStorageAccountSpec   `json:"spec"`
+	Status ManagedStorageAccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

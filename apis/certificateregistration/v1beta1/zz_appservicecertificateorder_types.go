@@ -18,8 +18,17 @@ type AppServiceCertificateOrderObservation struct {
 	// Reasons why App Service Certificate is not renewable at the current moment.
 	AppServiceCertificateNotRenewableReasons []*string `json:"appServiceCertificateNotRenewableReasons,omitempty" tf:"app_service_certificate_not_renewable_reasons,omitempty"`
 
+	// true if the certificate should be automatically renewed when it expires; otherwise, false. Defaults to true.
+	AutoRenew *bool `json:"autoRenew,omitempty" tf:"auto_renew,omitempty"`
+
 	// State of the Key Vault secret. A certificates block as defined below.
 	Certificates []CertificatesObservation `json:"certificates,omitempty" tf:"certificates,omitempty"`
+
+	// Last CSR that was created for this order.
+	Csr *string `json:"csr,omitempty" tf:"csr,omitempty"`
+
+	// The Distinguished Name for the App Service Certificate Order.
+	DistinguishedName *string `json:"distinguishedName,omitempty" tf:"distinguished_name,omitempty"`
 
 	// Domain verification token.
 	DomainVerificationToken *string `json:"domainVerificationToken,omitempty" tf:"domain_verification_token,omitempty"`
@@ -36,6 +45,18 @@ type AppServiceCertificateOrderObservation struct {
 	// Whether the private key is external or not.
 	IsPrivateKeyExternal *bool `json:"isPrivateKeyExternal,omitempty" tf:"is_private_key_external,omitempty"`
 
+	// Certificate key size. Defaults to 2048.
+	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. Currently the only valid value is global.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Certificate product type, such as Standard or WildCard.
+	ProductType *string `json:"productType,omitempty" tf:"product_type,omitempty"`
+
+	// The name of the resource group in which to create the certificate. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// Certificate thumbprint for root certificate.
 	RootThumbprint *string `json:"rootThumbprint,omitempty" tf:"root_thumbprint,omitempty"`
 
@@ -44,6 +65,12 @@ type AppServiceCertificateOrderObservation struct {
 
 	// Current order status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Duration in years (must be between 1 and 3). Defaults to 1.
+	ValidityInYears *float64 `json:"validityInYears,omitempty" tf:"validity_in_years,omitempty"`
 }
 
 type AppServiceCertificateOrderParameters struct {
@@ -65,8 +92,8 @@ type AppServiceCertificateOrderParameters struct {
 	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. Currently the only valid value is global.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Certificate product type, such as Standard or WildCard.
 	// +kubebuilder:validation:Optional
@@ -136,8 +163,9 @@ type AppServiceCertificateOrderStatus struct {
 type AppServiceCertificateOrder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppServiceCertificateOrderSpec   `json:"spec"`
-	Status            AppServiceCertificateOrderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   AppServiceCertificateOrderSpec   `json:"spec"`
+	Status AppServiceCertificateOrderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

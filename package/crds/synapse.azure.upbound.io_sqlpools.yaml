@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: sqlpools.synapse.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -198,9 +202,22 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Synapse SQL Pool.
                     type: object
-                required:
-                - skuName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -372,14 +389,75 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: skuName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)
           status:
             description: SQLPoolStatus defines the observed state of SQLPool.
             properties:
               atProvider:
                 properties:
+                  collation:
+                    description: The name of the collation to use with this pool,
+                      only applicable when create_mode is set to Default. Azure default
+                      is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  createMode:
+                    description: 'Specifies how to create the SQL Pool. Valid values
+                      are: Default, Recovery or PointInTimeRestore. Must be Default
+                      to create a new database. Defaults to Default. Changing this
+                      forces a new resource to be created.'
+                    type: string
+                  dataEncrypted:
+                    description: Is transparent data encryption enabled?
+                    type: boolean
+                  geoBackupPolicyEnabled:
+                    description: Is geo-backup policy enabled? Defaults to true.
+                    type: boolean
                   id:
                     description: The ID of the Synapse SQL Pool.
                     type: string
+                  recoveryDatabaseId:
+                    description: The ID of the Synapse SQL Pool or SQL Database which
+                      is to back up, only applicable when create_mode is set to Recovery.
+                      Changing this forces a new Synapse SQL Pool to be created.
+                    type: string
+                  restore:
+                    description: A restore block as defined below. only applicable
+                      when create_mode is set to PointInTimeRestore. Changing this
+                      forces a new resource to be created.
+                    items:
+                      properties:
+                        pointInTime:
+                          description: Specifies the Snapshot time to restore formatted
+                            as an RFC3339 date string. Changing this forces a new
+                            Synapse SQL Pool to be created.
+                          type: string
+                        sourceDatabaseId:
+                          description: The ID of the Synapse SQL Pool or SQL Database
+                            which is to restore. Changing this forces a new Synapse
+                            SQL Pool to be created.
+                          type: string
+                      type: object
+                    type: array
+                  skuName:
+                    description: Specifies the SKU Name for this Synapse SQL Pool.
+                      Possible values are DW100c, DW200c, DW300c, DW400c, DW500c,
+                      DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c,
+                      DW7500c, DW10000c, DW15000c or DW30000c.
+                    type: string
+                  synapseWorkspaceId:
+                    description: The ID of Synapse Workspace within which this SQL
+                      Pool should be created. Changing this forces a new Synapse SQL
+                      Pool to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Synapse SQL Pool.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

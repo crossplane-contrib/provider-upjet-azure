@@ -15,19 +15,31 @@ import (
 
 type LogAnalyticsDataSourceWindowsEventObservation struct {
 
+	// Specifies the name of the Windows Event Log to collect events from.
+	EventLogName *string `json:"eventLogName,omitempty" tf:"event_log_name,omitempty"`
+
+	// Specifies an array of event types applied to the specified event log. Possible values include Error, Warning and Information.
+	EventTypes []*string `json:"eventTypes,omitempty" tf:"event_types,omitempty"`
+
 	// The ID of the Log Analytics Windows Event DataSource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group where the Log Analytics Windows Event DataSource should exist. Changing this forces a new Log Analytics Windows Event DataSource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the Log Analytics Workspace where the Log Analytics Windows Event DataSource should exist. Changing this forces a new Log Analytics Windows Event DataSource to be created.
+	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 }
 
 type LogAnalyticsDataSourceWindowsEventParameters struct {
 
 	// Specifies the name of the Windows Event Log to collect events from.
-	// +kubebuilder:validation:Required
-	EventLogName *string `json:"eventLogName" tf:"event_log_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventLogName *string `json:"eventLogName,omitempty" tf:"event_log_name,omitempty"`
 
 	// Specifies an array of event types applied to the specified event log. Possible values include Error, Warning and Information.
-	// +kubebuilder:validation:Required
-	EventTypes []*string `json:"eventTypes" tf:"event_types,omitempty"`
+	// +kubebuilder:validation:Optional
+	EventTypes []*string `json:"eventTypes,omitempty" tf:"event_types,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Windows Event DataSource should exist. Changing this forces a new Log Analytics Windows Event DataSource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -80,8 +92,10 @@ type LogAnalyticsDataSourceWindowsEventStatus struct {
 type LogAnalyticsDataSourceWindowsEvent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LogAnalyticsDataSourceWindowsEventSpec   `json:"spec"`
-	Status            LogAnalyticsDataSourceWindowsEventStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventLogName)",message="eventLogName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventTypes)",message="eventTypes is a required parameter"
+	Spec   LogAnalyticsDataSourceWindowsEventSpec   `json:"spec"`
+	Status LogAnalyticsDataSourceWindowsEventStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,29 @@ import (
 
 type APIVersionSetObservation struct {
 
+	// The name of the API Management Service in which the API Version Set should exist. May only contain alphanumeric characters and dashes up to 50 characters in length. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// The description of API Version Set.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The display name of this API Version Set.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the API Version Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group in which the parent API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the Header which should be read from Inbound Requests which defines the API Version.
+	VersionHeaderName *string `json:"versionHeaderName,omitempty" tf:"version_header_name,omitempty"`
+
+	// The name of the Query String which should be read from Inbound Requests which defines the API Version.
+	VersionQueryName *string `json:"versionQueryName,omitempty" tf:"version_query_name,omitempty"`
+
+	// Specifies where in an Inbound HTTP Request that the API Version should be read from. Possible values are Header, Query and Segment.
+	VersioningScheme *string `json:"versioningScheme,omitempty" tf:"versioning_scheme,omitempty"`
 }
 
 type APIVersionSetParameters struct {
@@ -39,8 +60,8 @@ type APIVersionSetParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The display name of this API Version Set.
-	// +kubebuilder:validation:Required
-	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The name of the Resource Group in which the parent API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -64,8 +85,8 @@ type APIVersionSetParameters struct {
 	VersionQueryName *string `json:"versionQueryName,omitempty" tf:"version_query_name,omitempty"`
 
 	// Specifies where in an Inbound HTTP Request that the API Version should be read from. Possible values are Header, Query and Segment.
-	// +kubebuilder:validation:Required
-	VersioningScheme *string `json:"versioningScheme" tf:"versioning_scheme,omitempty"`
+	// +kubebuilder:validation:Optional
+	VersioningScheme *string `json:"versioningScheme,omitempty" tf:"versioning_scheme,omitempty"`
 }
 
 // APIVersionSetSpec defines the desired state of APIVersionSet
@@ -92,8 +113,10 @@ type APIVersionSetStatus struct {
 type APIVersionSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              APIVersionSetSpec   `json:"spec"`
-	Status            APIVersionSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.versioningScheme)",message="versioningScheme is a required parameter"
+	Spec   APIVersionSetSpec   `json:"spec"`
+	Status APIVersionSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

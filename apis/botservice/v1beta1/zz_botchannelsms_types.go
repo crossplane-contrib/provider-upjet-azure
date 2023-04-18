@@ -15,8 +15,23 @@ import (
 
 type BotChannelSMSObservation struct {
 
+	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
+	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
+
 	// The ID of the SMS Integration for a Bot Channel.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The phone number for the SMS Channel.
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+
+	// The name of the resource group where the SMS Channel should be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The account security identifier (SID) for the SMS Channel.
+	SMSChannelAccountSecurityID *string `json:"smsChannelAccountSecurityId,omitempty" tf:"sms_channel_account_security_id,omitempty"`
 }
 
 type BotChannelSMSParameters struct {
@@ -36,12 +51,12 @@ type BotChannelSMSParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The phone number for the SMS Channel.
-	// +kubebuilder:validation:Required
-	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
+	// +kubebuilder:validation:Optional
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 
 	// The name of the resource group where the SMS Channel should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -57,11 +72,11 @@ type BotChannelSMSParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The account security identifier (SID) for the SMS Channel.
-	// +kubebuilder:validation:Required
-	SMSChannelAccountSecurityID *string `json:"smsChannelAccountSecurityId" tf:"sms_channel_account_security_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	SMSChannelAccountSecurityID *string `json:"smsChannelAccountSecurityId,omitempty" tf:"sms_channel_account_security_id,omitempty"`
 
 	// The authorization token for the SMS Channel.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	SMSChannelAuthTokenSecretRef v1.SecretKeySelector `json:"smsChannelAuthTokenSecretRef" tf:"-"`
 }
 
@@ -89,8 +104,12 @@ type BotChannelSMSStatus struct {
 type BotChannelSMS struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotChannelSMSSpec   `json:"spec"`
-	Status            BotChannelSMSStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.phoneNumber)",message="phoneNumber is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.smsChannelAccountSecurityId)",message="smsChannelAccountSecurityId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.smsChannelAuthTokenSecretRef)",message="smsChannelAuthTokenSecretRef is a required parameter"
+	Spec   BotChannelSMSSpec   `json:"spec"`
+	Status BotChannelSMSStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

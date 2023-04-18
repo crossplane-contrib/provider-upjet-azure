@@ -14,6 +14,12 @@ import (
 )
 
 type AudioAnalyzerPresetObservation struct {
+
+	// Possibles value are Basic or Standard. Determines the set of audio analysis operations to be performed.
+	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
+
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463. Possible values are ar-EG, ar-SY, de-DE, en-AU, en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.
+	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 }
 
 type AudioAnalyzerPresetParameters struct {
@@ -28,6 +34,9 @@ type AudioAnalyzerPresetParameters struct {
 }
 
 type BuiltinPresetObservation struct {
+
+	// The built-in preset to be used for encoding videos. The Possible values are AACGoodQualityAudio, AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental, CopyAllBitrateNonInterleaved, H265AdaptiveStreaming, H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p, H265SingleBitrate720p, H264MultipleBitrate1080p, H264MultipleBitrateSD, H264MultipleBitrate720p, H264SingleBitrate1080p, H264SingleBitrateSD and H264SingleBitrate720p.
+	PresetName *string `json:"presetName,omitempty" tf:"preset_name,omitempty"`
 }
 
 type BuiltinPresetParameters struct {
@@ -38,6 +47,9 @@ type BuiltinPresetParameters struct {
 }
 
 type FaceDetectorPresetObservation struct {
+
+	// Possibles value are SourceResolution or StandardDefinition. Specifies the maximum resolution at which your video is analyzed. The default behavior is SourceResolution which will keep the input video at its original resolution when analyzed. Using StandardDefinition will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to StandardDefinition will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected.
+	AnalysisResolution *string `json:"analysisResolution,omitempty" tf:"analysis_resolution,omitempty"`
 }
 
 type FaceDetectorPresetParameters struct {
@@ -48,6 +60,24 @@ type FaceDetectorPresetParameters struct {
 }
 
 type OutputObservation struct {
+
+	// A audio_analyzer_preset block as defined below.
+	AudioAnalyzerPreset []AudioAnalyzerPresetObservation `json:"audioAnalyzerPreset,omitempty" tf:"audio_analyzer_preset,omitempty"`
+
+	// A builtin_preset block as defined below.
+	BuiltinPreset []BuiltinPresetObservation `json:"builtinPreset,omitempty" tf:"builtin_preset,omitempty"`
+
+	// A face_detector_preset block as defined below.
+	FaceDetectorPreset []FaceDetectorPresetObservation `json:"faceDetectorPreset,omitempty" tf:"face_detector_preset,omitempty"`
+
+	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possibles value are StopProcessingJob or ContinueJob.
+	OnErrorAction *string `json:"onErrorAction,omitempty" tf:"on_error_action,omitempty"`
+
+	// Sets the relative priority of the TransformOutputs within a Transform. This sets the priority that the service uses for processing Transform Outputs. Possibles value are High, Normal or Low.
+	RelativePriority *string `json:"relativePriority,omitempty" tf:"relative_priority,omitempty"`
+
+	// A video_analyzer_preset block as defined below.
+	VideoAnalyzerPreset []VideoAnalyzerPresetObservation `json:"videoAnalyzerPreset,omitempty" tf:"video_analyzer_preset,omitempty"`
 }
 
 type OutputParameters struct {
@@ -79,8 +109,20 @@ type OutputParameters struct {
 
 type TransformObservation struct {
 
+	// An optional verbose description of the Transform.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Transform.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Media Services account name. Changing this forces a new Transform to be created.
+	MediaServicesAccountName *string `json:"mediaServicesAccountName,omitempty" tf:"media_services_account_name,omitempty"`
+
+	// One or more output blocks as defined below. At least one output must be defined.
+	Output []OutputObservation `json:"output,omitempty" tf:"output,omitempty"`
+
+	// The name of the Resource Group where the Transform should exist. Changing this forces a new Transform to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type TransformParameters struct {
@@ -121,6 +163,15 @@ type TransformParameters struct {
 }
 
 type VideoAnalyzerPresetObservation struct {
+
+	// Possibles value are Basic or Standard. Determines the set of audio analysis operations to be performed.
+	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
+
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463. Possible values are ar-EG, ar-SY, de-DE, en-AU, en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.
+	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
+
+	// Defines the type of insights that you want the service to generate. The allowed values are AudioInsightsOnly, VideoInsightsOnly, and AllInsights. If you set this to AllInsights and the input is audio only, then only audio insights are generated. Similarly if the input is video only, then only video insights are generated. It is recommended that you not use AudioInsightsOnly if you expect some of your inputs to be video only; or use VideoInsightsOnly if you expect some of your inputs to be audio only. Your Jobs in such conditions would error out.
+	InsightsType *string `json:"insightsType,omitempty" tf:"insights_type,omitempty"`
 }
 
 type VideoAnalyzerPresetParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: virtualwans.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -169,9 +173,22 @@ spec:
                     description: 'Specifies the Virtual WAN type. Possible Values
                       include: Basic and Standard. Defaults to Standard.'
                     type: string
-                required:
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -343,13 +360,46 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: VirtualWANStatus defines the observed state of VirtualWAN.
             properties:
               atProvider:
                 properties:
+                  allowBranchToBranchTraffic:
+                    description: Boolean flag to specify whether branch to branch
+                      traffic is allowed. Defaults to true.
+                    type: boolean
+                  disableVpnEncryption:
+                    description: Boolean flag to specify whether VPN encryption is
+                      disabled. Defaults to false.
+                    type: boolean
                   id:
                     description: The ID of the Virtual WAN.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  office365LocalBreakoutCategory:
+                    description: 'Specifies the Office365 local breakout category.
+                      Possible values include: Optimize, OptimizeAndAllow, All, None.
+                      Defaults to None.'
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Virtual WAN. Changing this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Virtual WAN.
+                    type: object
+                  type:
+                    description: 'Specifies the Virtual WAN type. Possible Values
+                      include: Basic and Standard. Defaults to Standard.'
                     type: string
                 type: object
               conditions:

@@ -15,12 +15,50 @@ import (
 
 type EventHubNamespaceObservation struct {
 
+	// Is Auto Inflate enabled for the EventHub Namespace?
+	AutoInflateEnabled *bool `json:"autoInflateEnabled,omitempty" tf:"auto_inflate_enabled,omitempty"`
+
+	// Specifies the Capacity / Throughput Units for a Standard SKU namespace. Default capacity has a maximum of 2, but can be increased in blocks of 2 on a committed purchase basis. Defaults to 1.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// Specifies the ID of the EventHub Dedicated Cluster where this Namespace should created. Changing this forces a new resource to be created.
+	DedicatedClusterID *string `json:"dedicatedClusterId,omitempty" tf:"dedicated_cluster_id,omitempty"`
+
 	// The EventHub Namespace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Is SAS authentication enabled for the EventHub Namespace? Defaults to true.
+	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 20.
+	MaximumThroughputUnits *float64 `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty"`
+
+	// The minimum supported TLS version for this EventHub Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default minimum TLS version is 1.2.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// A network_rulesets block as defined below.
+	NetworkRulesets []NetworkRulesetsObservation `json:"networkRulesets,omitempty" tf:"network_rulesets,omitempty"`
+
+	// Is public network access enabled for the EventHub Namespace? Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The name of the resource group in which to create the namespace. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Defines which tier to use. Valid options are Basic, Standard, and Premium. Please note that setting this field to Premium will force the creation of a new resource.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies if the EventHub Namespace should be Zone Redundant (created across Availability Zones). Changing this forces a new resource to be created. Defaults to false.
+	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
 type EventHubNamespaceParameters struct {
@@ -46,8 +84,8 @@ type EventHubNamespaceParameters struct {
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the maximum number of throughput units when Auto Inflate is Enabled. Valid values range from 1 - 20.
 	// +kubebuilder:validation:Optional
@@ -79,8 +117,8 @@ type EventHubNamespaceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Defines which tier to use. Valid options are Basic, Standard, and Premium. Please note that setting this field to Premium will force the creation of a new resource.
-	// +kubebuilder:validation:Required
-	Sku *string `json:"sku" tf:"sku,omitempty"`
+	// +kubebuilder:validation:Optional
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -92,6 +130,12 @@ type EventHubNamespaceParameters struct {
 }
 
 type IPRuleObservation struct {
+
+	// The action to take when the rule is matched. Possible values are Allow.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The IP mask to match on.
+	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
 }
 
 type IPRuleParameters struct {
@@ -107,11 +151,17 @@ type IPRuleParameters struct {
 
 type IdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this EventHub namespace.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Event Hub Namespace. Possible values are SystemAssigned or UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -126,6 +176,21 @@ type IdentityParameters struct {
 }
 
 type NetworkRulesetsObservation struct {
+
+	// The default action to take when a rule is not matched. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more ip_rule blocks as defined below.
+	IPRule []IPRuleObservation `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
+
+	// Is public network access enabled for the EventHub Namespace? Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Whether Trusted Microsoft Services are allowed to bypass firewall.
+	TrustedServiceAccessEnabled *bool `json:"trustedServiceAccessEnabled,omitempty" tf:"trusted_service_access_enabled,omitempty"`
+
+	// One or more virtual_network_rule blocks as defined below.
+	VirtualNetworkRule []VirtualNetworkRuleObservation `json:"virtualNetworkRule,omitempty" tf:"virtual_network_rule,omitempty"`
 }
 
 type NetworkRulesetsParameters struct {
@@ -152,6 +217,12 @@ type NetworkRulesetsParameters struct {
 }
 
 type VirtualNetworkRuleObservation struct {
+
+	// Are missing virtual network service endpoints ignored?
+	IgnoreMissingVirtualNetworkServiceEndpoint *bool `json:"ignoreMissingVirtualNetworkServiceEndpoint,omitempty" tf:"ignore_missing_virtual_network_service_endpoint,omitempty"`
+
+	// The id of the subnet to match on.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type VirtualNetworkRuleParameters struct {
@@ -199,8 +270,10 @@ type EventHubNamespaceStatus struct {
 type EventHubNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventHubNamespaceSpec   `json:"spec"`
-	Status            EventHubNamespaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)",message="sku is a required parameter"
+	Spec   EventHubNamespaceSpec   `json:"spec"`
+	Status EventHubNamespaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

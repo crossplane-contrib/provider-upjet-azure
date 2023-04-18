@@ -14,6 +14,12 @@ import (
 )
 
 type LinkedServiceSynapseKeyVaultPasswordObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault that stores Synapse password.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSynapseKeyVaultPasswordParameters struct {
@@ -38,8 +44,32 @@ type LinkedServiceSynapseKeyVaultPasswordParameters struct {
 
 type LinkedServiceSynapseObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service Synapse.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service Synapse.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The connection string in which to authenticate with the Synapse.
+	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service Synapse.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Factory Synapse Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service Synapse.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_password block as defined below. Use this argument to store Synapse password in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
+	KeyVaultPassword []LinkedServiceSynapseKeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service Synapse.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedServiceSynapseParameters struct {
@@ -53,8 +83,8 @@ type LinkedServiceSynapseParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The connection string in which to authenticate with the Synapse.
-	// +kubebuilder:validation:Required
-	ConnectionString *string `json:"connectionString" tf:"connection_string,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Factory
@@ -111,8 +141,9 @@ type LinkedServiceSynapseStatus struct {
 type LinkedServiceSynapse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkedServiceSynapseSpec   `json:"spec"`
-	Status            LinkedServiceSynapseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.connectionString)",message="connectionString is a required parameter"
+	Spec   LinkedServiceSynapseSpec   `json:"spec"`
+	Status LinkedServiceSynapseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

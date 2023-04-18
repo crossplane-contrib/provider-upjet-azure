@@ -15,8 +15,14 @@ import (
 
 type APIReleaseObservation struct {
 
+	// The ID of the API Management API. Changing this forces a new API Management API Release to be created.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
 	// The ID of the API Management API Release.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Release Notes.
+	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 }
 
 type APIReleaseParameters struct {

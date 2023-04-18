@@ -14,6 +14,12 @@ import (
 )
 
 type DelegationObservation struct {
+
+	// A name for this delegation.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A service_delegation block as defined below.
+	ServiceDelegation []ServiceDelegationObservation `json:"serviceDelegation,omitempty" tf:"service_delegation,omitempty"`
 }
 
 type DelegationParameters struct {
@@ -28,6 +34,12 @@ type DelegationParameters struct {
 }
 
 type ServiceDelegationObservation struct {
+
+	// A list of Actions which should be delegated. This list is specific to the service to delegate to. Possible values are Microsoft.Network/networkinterfaces/*, Microsoft.Network/publicIPAddresses/join/action, Microsoft.Network/publicIPAddresses/read, Microsoft.Network/virtualNetworks/read, Microsoft.Network/virtualNetworks/subnets/action, Microsoft.Network/virtualNetworks/subnets/join/action, Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action, and Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action.
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// The name of service to delegate to. Possible values are Microsoft.ApiManagement/service, Microsoft.AzureCosmosDB/clusters, Microsoft.BareMetal/AzureVMware, Microsoft.BareMetal/CrayServers, Microsoft.Batch/batchAccounts, Microsoft.ContainerInstance/containerGroups, Microsoft.ContainerService/managedClusters, Microsoft.Databricks/workspaces, Microsoft.DBforMySQL/flexibleServers, Microsoft.DBforMySQL/serversv2, Microsoft.DBforPostgreSQL/flexibleServers, Microsoft.DBforPostgreSQL/serversv2, Microsoft.DBforPostgreSQL/singleServers, Microsoft.HardwareSecurityModules/dedicatedHSMs, Microsoft.Kusto/clusters, Microsoft.Logic/integrationServiceEnvironments, Microsoft.LabServices/labplans, Microsoft.MachineLearningServices/workspaces, Microsoft.Netapp/volumes, Microsoft.Network/dnsResolvers, Microsoft.Network/managedResolvers, Microsoft.PowerPlatform/vnetaccesslinks, Microsoft.ServiceFabricMesh/networks, Microsoft.Sql/managedInstances, Microsoft.Sql/servers, Microsoft.StoragePool/diskPools, Microsoft.StreamAnalytics/streamingJobs, Microsoft.Synapse/workspaces, Microsoft.Web/hostingEnvironments, Microsoft.Web/serverFarms, Microsoft.Orbital/orbitalGateways, NGINX.NGINXPLUS/nginxDeployments, PaloAltoNetworks.Cloudngfw/firewalls, and Qumulo.Storage/fileSystems.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ServiceDelegationParameters struct {
@@ -43,15 +55,43 @@ type ServiceDelegationParameters struct {
 
 type SubnetObservation struct {
 
+	// The address prefixes to use for the subnet.
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+
+	// One or more delegation blocks as defined below.
+	Delegation []DelegationObservation `json:"delegation,omitempty" tf:"delegation,omitempty"`
+
+	EnforcePrivateLinkEndpointNetworkPolicies *bool `json:"enforcePrivateLinkEndpointNetworkPolicies,omitempty" tf:"enforce_private_link_endpoint_network_policies,omitempty"`
+
+	EnforcePrivateLinkServiceNetworkPolicies *bool `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
+
 	// The subnet ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Enable or Disable network policies for the private endpoint on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
+	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
+
+	// Enable or Disable network policies for the private link service on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
+	PrivateLinkServiceNetworkPoliciesEnabled *bool `json:"privateLinkServiceNetworkPoliciesEnabled,omitempty" tf:"private_link_service_network_policies_enabled,omitempty"`
+
+	// The name of the resource group in which to create the subnet. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The list of IDs of Service Endpoint Policies to associate with the subnet.
+	ServiceEndpointPolicyIds []*string `json:"serviceEndpointPolicyIds,omitempty" tf:"service_endpoint_policy_ids,omitempty"`
+
+	// The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage, and Microsoft.Web.
+	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
+
+	// The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created.
+	VirtualNetworkName *string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`
 }
 
 type SubnetParameters struct {
 
 	// The address prefixes to use for the subnet.
-	// +kubebuilder:validation:Required
-	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
 	// One or more delegation blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -130,8 +170,9 @@ type SubnetStatus struct {
 type Subnet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubnetSpec   `json:"spec"`
-	Status            SubnetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressPrefixes)",message="addressPrefixes is a required parameter"
+	Spec   SubnetSpec   `json:"spec"`
+	Status SubnetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

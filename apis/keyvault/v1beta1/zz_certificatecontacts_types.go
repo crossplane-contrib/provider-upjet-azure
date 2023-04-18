@@ -14,6 +14,15 @@ import (
 )
 
 type CertificateContactsContactObservation struct {
+
+	// E-mail address of the contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// Name of the contact.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Phone number of the contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 
 type CertificateContactsContactParameters struct {
@@ -33,15 +42,21 @@ type CertificateContactsContactParameters struct {
 
 type CertificateContactsObservation struct {
 
+	// One or more contact blocks as defined below.
+	Contact []CertificateContactsContactObservation `json:"contact,omitempty" tf:"contact,omitempty"`
+
 	// The ID of the Key Vault Certificate Contacts.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Key Vault. Changing this forces a new resource to be created.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 }
 
 type CertificateContactsParameters struct {
 
 	// One or more contact blocks as defined below.
-	// +kubebuilder:validation:Required
-	Contact []CertificateContactsContactParameters `json:"contact" tf:"contact,omitempty"`
+	// +kubebuilder:validation:Optional
+	Contact []CertificateContactsContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// The ID of the Key Vault. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
@@ -82,8 +97,9 @@ type CertificateContactsStatus struct {
 type CertificateContacts struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CertificateContactsSpec   `json:"spec"`
-	Status            CertificateContactsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.contact)",message="contact is a required parameter"
+	Spec   CertificateContactsSpec   `json:"spec"`
+	Status CertificateContactsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

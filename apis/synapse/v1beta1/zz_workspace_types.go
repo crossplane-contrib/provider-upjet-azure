@@ -14,6 +14,15 @@ import (
 )
 
 type AADAdminObservation struct {
+
+	// The login name of the Azure AD Administrator of this Synapse Workspace.
+	Login *string `json:"login,omitempty" tf:"login,omitempty"`
+
+	// The object id of the Azure AD Administrator of this Synapse Workspace.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// The tenant id of the Azure AD Administrator of this Synapse Workspace.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type AADAdminParameters struct {
@@ -32,6 +41,27 @@ type AADAdminParameters struct {
 }
 
 type AzureDevopsRepoObservation struct {
+
+	// Specifies the Azure DevOps account name.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Specifies the collaboration branch of the repository to get code from.
+	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+
+	// The last commit ID.
+	LastCommitID *string `json:"lastCommitId,omitempty" tf:"last_commit_id,omitempty"`
+
+	// Specifies the name of the Azure DevOps project.
+	ProjectName *string `json:"projectName,omitempty" tf:"project_name,omitempty"`
+
+	// Specifies the name of the git repository.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// Specifies the root folder within the repository. Set to / for the top level.
+	RootFolder *string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
+
+	// the ID of the tenant for the Azure DevOps account.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type AzureDevopsRepoParameters struct {
@@ -66,6 +96,12 @@ type AzureDevopsRepoParameters struct {
 }
 
 type CustomerManagedKeyObservation struct {
+
+	// An identifier for the key. Name needs to match the name of the key used with the azurerm_synapse_workspace_key resource. Defaults to "cmk" if not specified.
+	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
+
+	// The Azure Key Vault Key Versionless ID to be used as the Customer Managed Key (CMK) for double encryption (e.g. https://example-keyvault.vault.azure.net/type/cmk/).
+	KeyVersionlessID *string `json:"keyVersionlessId,omitempty" tf:"key_versionless_id,omitempty"`
 }
 
 type CustomerManagedKeyParameters struct {
@@ -90,6 +126,24 @@ type CustomerManagedKeyParameters struct {
 }
 
 type GithubRepoObservation struct {
+
+	// Specifies the GitHub account name.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Specifies the collaboration branch of the repository to get code from.
+	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+
+	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com.
+	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
+
+	// The last commit ID.
+	LastCommitID *string `json:"lastCommitId,omitempty" tf:"last_commit_id,omitempty"`
+
+	// Specifies the name of the git repository.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// Specifies the root folder within the repository. Set to / for the top level.
+	RootFolder *string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
 }
 
 type GithubRepoParameters struct {
@@ -121,11 +175,17 @@ type GithubRepoParameters struct {
 
 type IdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Synapse Workspace.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be associated with this Synapse Workspace. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -140,6 +200,15 @@ type IdentityParameters struct {
 }
 
 type SQLAADAdminObservation struct {
+
+	// The login name of the Azure AD Administrator of this Synapse Workspace SQL.
+	Login *string `json:"login,omitempty" tf:"login,omitempty"`
+
+	// The object id of the Azure AD Administrator of this Synapse Workspace SQL.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// The tenant id of the Azure AD Administrator of this Synapse Workspace SQL.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type SQLAADAdminParameters struct {
@@ -159,15 +228,68 @@ type SQLAADAdminParameters struct {
 
 type WorkspaceObservation struct {
 
+	// An aad_admin block as defined below. Conflicts with customer_managed_key.
+	AADAdmin []AADAdminObservation `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
+
+	// An azure_devops_repo block as defined below.
+	AzureDevopsRepo []AzureDevopsRepoObservation `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
+
+	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
+	ComputeSubnetID *string `json:"computeSubnetId,omitempty" tf:"compute_subnet_id,omitempty"`
+
 	// A list of Connectivity endpoints for this Synapse Workspace.
 	ConnectivityEndpoints map[string]*string `json:"connectivityEndpoints,omitempty" tf:"connectivity_endpoints,omitempty"`
+
+	// A customer_managed_key block as defined below. Conflicts with aad_admin.
+	CustomerManagedKey []CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+
+	// Is data exfiltration protection enabled in this workspace? If set to true, managed_virtual_network_enabled must also be set to true. Changing this forces a new resource to be created.
+	DataExfiltrationProtectionEnabled *bool `json:"dataExfiltrationProtectionEnabled,omitempty" tf:"data_exfiltration_protection_enabled,omitempty"`
+
+	// A github_repo block as defined below.
+	GithubRepo []GithubRepoObservation `json:"githubRepo,omitempty" tf:"github_repo,omitempty"`
 
 	// The ID of the synapse Workspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Allowed AAD Tenant Ids For Linking.
+	LinkingAllowedForAADTenantIds []*string `json:"linkingAllowedForAadTenantIds,omitempty" tf:"linking_allowed_for_aad_tenant_ids,omitempty"`
+
+	// Specifies the Azure Region where the synapse Workspace should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Workspace managed resource group. Changing this forces a new resource to be created.
+	ManagedResourceGroupName *string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
+
+	// Is Virtual Network enabled for all computes in this workspace? Changing this forces a new resource to be created.
+	ManagedVirtualNetworkEnabled *bool `json:"managedVirtualNetworkEnabled,omitempty" tf:"managed_virtual_network_enabled,omitempty"`
+
+	// Whether public network access is allowed for the Cognitive Account. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The ID of purview account.
+	PurviewID *string `json:"purviewId,omitempty" tf:"purview_id,omitempty"`
+
+	// Specifies the name of the Resource Group where the synapse Workspace should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// An sql_aad_admin block as defined below.
+	SQLAADAdmin []SQLAADAdminObservation `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
+
+	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
+	SQLAdministratorLogin *string `json:"sqlAdministratorLogin,omitempty" tf:"sql_administrator_login,omitempty"`
+
+	// Are pipelines (running as workspace's system assigned identity) allowed to access SQL pools?
+	SQLIdentityControlEnabled *bool `json:"sqlIdentityControlEnabled,omitempty" tf:"sql_identity_control_enabled,omitempty"`
+
+	// Specifies the ID of storage data lake gen2 filesystem resource. Changing this forces a new resource to be created.
+	StorageDataLakeGen2FileSystemID *string `json:"storageDataLakeGen2FilesystemId,omitempty" tf:"storage_data_lake_gen2_filesystem_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the Synapse Workspace.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type WorkspaceParameters struct {
@@ -215,8 +337,8 @@ type WorkspaceParameters struct {
 	LinkingAllowedForAADTenantIds []*string `json:"linkingAllowedForAadTenantIds,omitempty" tf:"linking_allowed_for_aad_tenant_ids,omitempty"`
 
 	// Specifies the Azure Region where the synapse Workspace should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Workspace managed resource group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -315,8 +437,9 @@ type WorkspaceStatus struct {
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkspaceSpec   `json:"spec"`
-	Status            WorkspaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   WorkspaceSpec   `json:"spec"`
+	Status WorkspaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,11 +15,35 @@ import (
 
 type LinkedServiceAzureSearchObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The encrypted credential to connect to Azure Search Service.
 	EncryptedCredential *string `json:"encryptedCredential,omitempty" tf:"encrypted_credential,omitempty"`
 
 	// The ID of the Data Factory Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The key of the Azure Search Service.
+	SearchServiceKey *string `json:"searchServiceKey,omitempty" tf:"search_service_key,omitempty"`
+
+	// The URL of the Search Service endpoint (e.g. https://{searchServiceName}.search.windows.net).
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type LinkedServiceAzureSearchParameters struct {
@@ -73,8 +97,8 @@ type LinkedServiceAzureSearchParameters struct {
 	SearchServiceKeySelector *v1.Selector `json:"searchServiceKeySelector,omitempty" tf:"-"`
 
 	// The URL of the Search Service endpoint (e.g. https://{searchServiceName}.search.windows.net).
-	// +kubebuilder:validation:Required
-	URL *string `json:"url" tf:"url,omitempty"`
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 // LinkedServiceAzureSearchSpec defines the desired state of LinkedServiceAzureSearch
@@ -101,8 +125,9 @@ type LinkedServiceAzureSearchStatus struct {
 type LinkedServiceAzureSearch struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkedServiceAzureSearchSpec   `json:"spec"`
-	Status            LinkedServiceAzureSearchStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.url)",message="url is a required parameter"
+	Spec   LinkedServiceAzureSearchSpec   `json:"spec"`
+	Status LinkedServiceAzureSearchStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: loganalyticssavedsearches.operationalinsights.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -174,11 +178,22 @@ spec:
                       Logs Analytics Saved Search. Changing this forces a new resource
                       to be created.
                     type: object
-                required:
-                - category
-                - displayName
-                - query
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -350,15 +365,56 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: category is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.category)
+            - message: displayName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)
+            - message: query is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.query)
           status:
             description: LogAnalyticsSavedSearchStatus defines the observed state
               of LogAnalyticsSavedSearch.
             properties:
               atProvider:
                 properties:
+                  category:
+                    description: The category that the Saved Search will be listed
+                      under. Changing this forces a new resource to be created.
+                    type: string
+                  displayName:
+                    description: The name that Saved Search will be displayed as.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  functionAlias:
+                    description: The function alias if the query serves as a function.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  functionParameters:
+                    description: The function parameters if the query serves as a
+                      function. Changing this forces a new resource to be created.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The Log Analytics Saved Search ID.
                     type: string
+                  logAnalyticsWorkspaceId:
+                    description: Specifies the ID of the Log Analytics Workspace that
+                      the Saved Search will be associated with. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  query:
+                    description: The query expression for the saved search. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Logs Analytics Saved Search. Changing this forces a new resource
+                      to be created.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

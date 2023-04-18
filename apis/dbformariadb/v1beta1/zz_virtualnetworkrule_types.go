@@ -17,6 +17,15 @@ type VirtualNetworkRuleObservation struct {
 
 	// The ID of the MariaDB Virtual Network Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group where the MariaDB server resides. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the SQL Server to which this MariaDB virtual network rule will be applied to. Changing this forces a new resource to be created.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// The ID of the subnet that the MariaDB server will be connected to.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type VirtualNetworkRuleParameters struct {

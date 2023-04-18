@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: topics.servicebus.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -197,6 +201,21 @@ spec:
                       ordering.
                     type: boolean
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -373,9 +392,66 @@ spec:
             properties:
               atProvider:
                 properties:
+                  autoDeleteOnIdle:
+                    description: The ISO 8601 timespan duration of the idle interval
+                      after which the Topic is automatically deleted, minimum of 5
+                      minutes.
+                    type: string
+                  defaultMessageTtl:
+                    description: The ISO 8601 timespan duration of TTL of messages
+                      sent to this topic if no TTL value is set on the message itself.
+                    type: string
+                  duplicateDetectionHistoryTimeWindow:
+                    description: The ISO 8601 timespan duration during which duplicates
+                      can be detected. Defaults to 10 minutes. (PT10M)
+                    type: string
+                  enableBatchedOperations:
+                    description: Boolean flag which controls if server-side batched
+                      operations are enabled.
+                    type: boolean
+                  enableExpress:
+                    description: Boolean flag which controls whether Express Entities
+                      are enabled. An express topic holds a message in memory temporarily
+                      before writing it to persistent storage.
+                    type: boolean
+                  enablePartitioning:
+                    description: Boolean flag which controls whether to enable Changing
+                      this forces a new resource to be created. the topic to be partitioned
+                      across multiple message brokers. Defaults to false. Changing
+                      this forces a new resource to be created.
+                    type: boolean
                   id:
                     description: The ServiceBus Topic ID.
                     type: string
+                  maxMessageSizeInKilobytes:
+                    description: Integer value which controls the maximum size of
+                      a message allowed on the topic for Premium SKU. For supported
+                      values see the "Large messages support" section of this document.
+                    type: number
+                  maxSizeInMegabytes:
+                    description: Integer value which controls the size of memory allocated
+                      for the topic. For supported values see the "Queue/topic size"
+                      section of this document.
+                    type: number
+                  namespaceId:
+                    description: The ID of the ServiceBus Namespace to create Changing
+                      this forces a new resource to be created. this topic in. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  requiresDuplicateDetection:
+                    description: Boolean flag which controls whether Changing this
+                      forces a new resource to be created. the Topic requires duplicate
+                      detection. Defaults to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
+                  status:
+                    description: The Status of the Service Bus Topic. Acceptable values
+                      are Active or Disabled. Defaults to Active.
+                    type: string
+                  supportOrdering:
+                    description: Boolean flag which controls whether the Topic supports
+                      ordering.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

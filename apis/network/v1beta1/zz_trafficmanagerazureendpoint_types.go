@@ -14,6 +14,12 @@ import (
 )
 
 type CustomHeaderObservation struct {
+
+	// The name of the custom header.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of custom header. Applicable for HTTP and HTTPS protocol.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type CustomHeaderParameters struct {
@@ -29,8 +35,32 @@ type CustomHeaderParameters struct {
 
 type TrafficManagerAzureEndpointObservation struct {
 
+	// One or more custom_header blocks as defined below.
+	CustomHeader []CustomHeaderObservation `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
+
+	// Is the endpoint enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A list of Geographic Regions used to distribute traffic, such as WORLD, UK or DE. The same location can't be specified in two endpoints. See the Geographic Hierarchies documentation for more information.
+	GeoMappings []*string `json:"geoMappings,omitempty" tf:"geo_mappings,omitempty"`
+
 	// The ID of the Azure Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the priority of this Endpoint, this must be specified for Profiles using the Priority traffic routing method. Supports values between 1 and 1000, with no Endpoints sharing the same value. If omitted the value will be computed in order of creation.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The ID of the Traffic Manager Profile that this Azure Endpoint should be created within. Changing this forces a new resource to be created.
+	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`
+
+	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
+	Subnet []TrafficManagerAzureEndpointSubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
+
+	// The ID of the Azure Resource which should be used as a target.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the Weighted traffic routing method. Valid values are between 1 and 1000.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TrafficManagerAzureEndpointParameters struct {
@@ -89,6 +119,15 @@ type TrafficManagerAzureEndpointParameters struct {
 }
 
 type TrafficManagerAzureEndpointSubnetObservation struct {
+
+	// The first IP Address in this subnet.
+	First *string `json:"first,omitempty" tf:"first,omitempty"`
+
+	// The last IP Address in this subnet.
+	Last *string `json:"last,omitempty" tf:"last,omitempty"`
+
+	// The block size (number of leading bits in the subnet mask).
+	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 type TrafficManagerAzureEndpointSubnetParameters struct {

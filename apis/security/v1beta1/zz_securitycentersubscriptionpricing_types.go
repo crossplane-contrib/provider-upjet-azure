@@ -17,6 +17,15 @@ type SecurityCenterSubscriptionPricingObservation struct {
 
 	// The subscription pricing ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The resource type this setting affects. Possible values are AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers and CloudPosture. Defaults to VirtualMachines
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Resource type pricing subplan. Contact your MSFT representative for possible values.
+	Subplan *string `json:"subplan,omitempty" tf:"subplan,omitempty"`
+
+	// The pricing tier to use. Possible values are Free and Standard.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type SecurityCenterSubscriptionPricingParameters struct {
@@ -30,8 +39,8 @@ type SecurityCenterSubscriptionPricingParameters struct {
 	Subplan *string `json:"subplan,omitempty" tf:"subplan,omitempty"`
 
 	// The pricing tier to use. Possible values are Free and Standard.
-	// +kubebuilder:validation:Required
-	Tier *string `json:"tier" tf:"tier,omitempty"`
+	// +kubebuilder:validation:Optional
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 // SecurityCenterSubscriptionPricingSpec defines the desired state of SecurityCenterSubscriptionPricing
@@ -58,8 +67,9 @@ type SecurityCenterSubscriptionPricingStatus struct {
 type SecurityCenterSubscriptionPricing struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityCenterSubscriptionPricingSpec   `json:"spec"`
-	Status            SecurityCenterSubscriptionPricingStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tier)",message="tier is a required parameter"
+	Spec   SecurityCenterSubscriptionPricingSpec   `json:"spec"`
+	Status SecurityCenterSubscriptionPricingStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

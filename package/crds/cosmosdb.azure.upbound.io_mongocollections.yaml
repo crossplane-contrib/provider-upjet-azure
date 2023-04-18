@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: mongocollections.cosmosdb.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -349,6 +353,21 @@ spec:
                       Must be set in increments of 100. The minimum value is 400.
                     type: number
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -525,8 +544,65 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accountName:
+                    description: The name of the Cosmos DB Account in which the Cosmos
+                      DB Mongo Collection is created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  analyticalStorageTtl:
+                    description: The default time to live of Analytical Storage for
+                      this Mongo Collection. If present and the value is set to -1,
+                      it is equal to infinity, and items don’t expire by default.
+                      If present and the value is set to some number n – items will
+                      expire n seconds after their last modified time.
+                    type: number
+                  autoscaleSettings:
+                    description: An autoscale_settings block as defined below.
+                    items:
+                      properties:
+                        maxThroughput:
+                          description: The maximum throughput of the MongoDB collection
+                            (RU/s). Must be between 1,000 and 1,000,000. Must be set
+                            in increments of 1,000. Conflicts with throughput.
+                          type: number
+                      type: object
+                    type: array
+                  databaseName:
+                    description: The name of the Cosmos DB Mongo Database in which
+                      the Cosmos DB Mongo Collection is created. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  defaultTtlSeconds:
+                    description: The default Time To Live in seconds. If the value
+                      is -1, items are not automatically expired.
+                    type: number
                   id:
                     description: The ID of the Cosmos DB Mongo Collection.
+                    type: string
+                  index:
+                    description: One or more index blocks as defined below.
+                    items:
+                      properties:
+                        keys:
+                          description: Specifies the list of user settable keys for
+                            each Cosmos DB Mongo Collection.
+                          items:
+                            type: string
+                          type: array
+                        unique:
+                          description: Is the index unique or not? Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The name of the resource group in which the Cosmos
+                      DB Mongo Collection is created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  shardKey:
+                    description: The name of the key to partition on for sharding.
+                      There must not be any other unique index keys. Changing this
+                      forces a new resource to be created.
                     type: string
                   systemIndexes:
                     description: One or more system_indexes blocks as defined below.
@@ -544,6 +620,10 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  throughput:
+                    description: The throughput of the MongoDB collection (RU/s).
+                      Must be set in increments of 100. The minimum value is 400.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

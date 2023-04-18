@@ -14,6 +14,27 @@ import (
 )
 
 type BackendObservation struct {
+
+	// Location of the backend (IP address or FQDN)
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// Enable or Disable use of this Backend Routing Rule. Permitted values are true or false. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The HTTP TCP port number. Possible values are between 1 - 65535.
+	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
+
+	// The HTTPS TCP port number. Possible values are between 1 - 65535.
+	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
+
+	// The value to use as the host header sent to the backend.
+	HostHeader *string `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
+
+	// Priority to use for load balancing. Higher priorities will not be used for load balancing if any lower priority backend is healthy. Defaults to 1.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// Weight of this endpoint for load balancing purposes. Defaults to 50.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type BackendParameters struct {
@@ -49,8 +70,26 @@ type BackendParameters struct {
 
 type BackendPoolHealthProbeObservation struct {
 
+	// Is this health probe enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of seconds between each Health Probe. Defaults to 120.
+	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
+
+	// Specifies the name of the Health Probe.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The path to use for the Health Probe. Default is /.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: Get and Head. Defaults to GET.
+	ProbeMethod *string `json:"probeMethod,omitempty" tf:"probe_method,omitempty"`
+
+	// Protocol scheme to use for the Health Probe. Possible values are Http and Https. Defaults to Http.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type BackendPoolHealthProbeParameters struct {
@@ -82,8 +121,20 @@ type BackendPoolHealthProbeParameters struct {
 
 type BackendPoolLoadBalancingObservation struct {
 
+	// The additional latency in milliseconds for probes to fall into the lowest latency bucket. Defaults to 0.
+	AdditionalLatencyMilliseconds *float64 `json:"additionalLatencyMilliseconds,omitempty" tf:"additional_latency_milliseconds,omitempty"`
+
 	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Load Balancer.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The number of samples to consider for load balancing decisions. Defaults to 4.
+	SampleSize *float64 `json:"sampleSize,omitempty" tf:"sample_size,omitempty"`
+
+	// The number of samples within the sample period that must succeed. Defaults to 2.
+	SuccessfulSamplesRequired *float64 `json:"successfulSamplesRequired,omitempty" tf:"successful_samples_required,omitempty"`
 }
 
 type BackendPoolLoadBalancingParameters struct {
@@ -107,8 +158,20 @@ type BackendPoolLoadBalancingParameters struct {
 
 type BackendPoolObservation struct {
 
+	// A backend block as defined below.
+	Backend []BackendObservation `json:"backend,omitempty" tf:"backend,omitempty"`
+
+	// Specifies the name of the backend_pool_health_probe block within this resource to use for this Backend Pool.
+	HealthProbeName *string `json:"healthProbeName,omitempty" tf:"health_probe_name,omitempty"`
+
 	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the backend_pool_load_balancing block within this resource to use for this Backend Pool.
+	LoadBalancingName *string `json:"loadBalancingName,omitempty" tf:"load_balancing_name,omitempty"`
+
+	// Specifies the name of the Backend Pool.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type BackendPoolParameters struct {
@@ -131,6 +194,12 @@ type BackendPoolParameters struct {
 }
 
 type BackendPoolSettingsObservation struct {
+
+	// Specifies the send and receive timeout on forwarding request to the backend. When the timeout is reached, the request fails and returns. Possible values are between 0 - 240. Defaults to 60.
+	BackendPoolsSendReceiveTimeoutSeconds *float64 `json:"backendPoolsSendReceiveTimeoutSeconds,omitempty" tf:"backend_pools_send_receive_timeout_seconds,omitempty"`
+
+	// Enforce certificate name check on HTTPS requests to all backend pools, this setting will have no effect on HTTP requests. Permitted values are true or false.
+	EnforceBackendPoolsCertificateNameCheck *bool `json:"enforceBackendPoolsCertificateNameCheck,omitempty" tf:"enforce_backend_pools_certificate_name_check,omitempty"`
 }
 
 type BackendPoolSettingsParameters struct {
@@ -160,6 +229,30 @@ type ExplicitResourceOrderParameters struct {
 }
 
 type ForwardingConfigurationObservation struct {
+
+	// Specifies the name of the Backend Pool to forward the incoming traffic to.
+	BackendPoolName *string `json:"backendPoolName,omitempty" tf:"backend_pool_name,omitempty"`
+
+	// Specify the caching duration (in ISO8601 notation e.g. P1DT2H for 1 day and 2 hours). Needs to be greater than 0 and smaller than 365 days. cache_duration works only in combination with cache_enabled set to true.
+	CacheDuration *string `json:"cacheDuration,omitempty" tf:"cache_duration,omitempty"`
+
+	// Specifies whether to Enable caching or not. Valid options are true or false. Defaults to false.
+	CacheEnabled *bool `json:"cacheEnabled,omitempty" tf:"cache_enabled,omitempty"`
+
+	// Defines cache behaviour in relation to query string parameters. Valid options are StripAll, StripAllExcept, StripOnly or StripNone. Defaults to StripAll.
+	CacheQueryParameterStripDirective *string `json:"cacheQueryParameterStripDirective,omitempty" tf:"cache_query_parameter_strip_directive,omitempty"`
+
+	// Specify query parameters (array). Works only in combination with cache_query_parameter_strip_directive set to StripAllExcept or StripOnly.
+	CacheQueryParameters []*string `json:"cacheQueryParameters,omitempty" tf:"cache_query_parameters,omitempty"`
+
+	// Whether to use dynamic compression when caching. Valid options are true or false. Defaults to false.
+	CacheUseDynamicCompression *bool `json:"cacheUseDynamicCompression,omitempty" tf:"cache_use_dynamic_compression,omitempty"`
+
+	// Path to use when constructing the request to forward to the backend. This functions as a URL Rewrite. Default behaviour preserves the URL path.
+	CustomForwardingPath *string `json:"customForwardingPath,omitempty" tf:"custom_forwarding_path,omitempty"`
+
+	// Protocol to use when redirecting. Valid options are HttpOnly, HttpsOnly, or MatchRequest. Defaults to HttpsOnly.
+	ForwardingProtocol *string `json:"forwardingProtocol,omitempty" tf:"forwarding_protocol,omitempty"`
 }
 
 type ForwardingConfigurationParameters struct {
@@ -200,22 +293,22 @@ type ForwardingConfigurationParameters struct {
 type FrontDoorObservation struct {
 
 	// A backend_pool block as defined below.
-	// +kubebuilder:validation:Required
 	BackendPool []BackendPoolObservation `json:"backendPool,omitempty" tf:"backend_pool,omitempty"`
 
 	// A backend_pool_health_probe block as defined below.
-	// +kubebuilder:validation:Required
 	BackendPoolHealthProbe []BackendPoolHealthProbeObservation `json:"backendPoolHealthProbe,omitempty" tf:"backend_pool_health_probe,omitempty"`
 
 	// A map/dictionary of Backend Pool Health Probe Names (key) to the Backend Pool Health Probe ID (value)
 	BackendPoolHealthProbes map[string]*string `json:"backendPoolHealthProbes,omitempty" tf:"backend_pool_health_probes,omitempty"`
 
 	// A backend_pool_load_balancing block as defined below.
-	// +kubebuilder:validation:Required
 	BackendPoolLoadBalancing []BackendPoolLoadBalancingObservation `json:"backendPoolLoadBalancing,omitempty" tf:"backend_pool_load_balancing,omitempty"`
 
 	// A map/dictionary of Backend Pool Load Balancing Setting Names (key) to the Backend Pool Load Balancing Setting ID (value)
 	BackendPoolLoadBalancingSettings map[string]*string `json:"backendPoolLoadBalancingSettings,omitempty" tf:"backend_pool_load_balancing_settings,omitempty"`
+
+	// A backend_pool_settings block as defined below.
+	BackendPoolSettings []BackendPoolSettingsObservation `json:"backendPoolSettings,omitempty" tf:"backend_pool_settings,omitempty"`
 
 	// A map/dictionary of Backend Pool Names (key) to the Backend Pool ID (value)
 	BackendPools map[string]*string `json:"backendPools,omitempty" tf:"backend_pools,omitempty"`
@@ -225,8 +318,10 @@ type FrontDoorObservation struct {
 
 	ExplicitResourceOrder []ExplicitResourceOrderObservation `json:"explicitResourceOrder,omitempty" tf:"explicit_resource_order,omitempty"`
 
+	// A friendly name for the Front Door service.
+	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
+
 	// A frontend_endpoint block as defined below.
-	// +kubebuilder:validation:Required
 	FrontendEndpoint []FrontendEndpointObservation `json:"frontendEndpoint,omitempty" tf:"frontend_endpoint,omitempty"`
 
 	// A map/dictionary of Frontend Endpoint Names (key) to the Frontend Endpoint ID (value)
@@ -238,27 +333,35 @@ type FrontDoorObservation struct {
 	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Should the Front Door Load Balancer be Enabled? Defaults to true.
+	LoadBalancerEnabled *bool `json:"loadBalancerEnabled,omitempty" tf:"load_balancer_enabled,omitempty"`
+
+	// Specifies the name of the Resource Group in which the Front Door service should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// A routing_rule block as defined below.
-	// +kubebuilder:validation:Required
 	RoutingRule []RoutingRuleObservation `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
 	// A map/dictionary of Routing Rule Names (key) to the Routing Rule ID (value)
 	RoutingRules map[string]*string `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FrontDoorParameters struct {
 
 	// A backend_pool block as defined below.
-	// +kubebuilder:validation:Required
-	BackendPool []BackendPoolParameters `json:"backendPool" tf:"backend_pool,omitempty"`
+	// +kubebuilder:validation:Optional
+	BackendPool []BackendPoolParameters `json:"backendPool,omitempty" tf:"backend_pool,omitempty"`
 
 	// A backend_pool_health_probe block as defined below.
-	// +kubebuilder:validation:Required
-	BackendPoolHealthProbe []BackendPoolHealthProbeParameters `json:"backendPoolHealthProbe" tf:"backend_pool_health_probe,omitempty"`
+	// +kubebuilder:validation:Optional
+	BackendPoolHealthProbe []BackendPoolHealthProbeParameters `json:"backendPoolHealthProbe,omitempty" tf:"backend_pool_health_probe,omitempty"`
 
 	// A backend_pool_load_balancing block as defined below.
-	// +kubebuilder:validation:Required
-	BackendPoolLoadBalancing []BackendPoolLoadBalancingParameters `json:"backendPoolLoadBalancing" tf:"backend_pool_load_balancing,omitempty"`
+	// +kubebuilder:validation:Optional
+	BackendPoolLoadBalancing []BackendPoolLoadBalancingParameters `json:"backendPoolLoadBalancing,omitempty" tf:"backend_pool_load_balancing,omitempty"`
 
 	// A backend_pool_settings block as defined below.
 	// +kubebuilder:validation:Optional
@@ -269,8 +372,8 @@ type FrontDoorParameters struct {
 	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
 
 	// A frontend_endpoint block as defined below.
-	// +kubebuilder:validation:Required
-	FrontendEndpoint []FrontendEndpointParameters `json:"frontendEndpoint" tf:"frontend_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	FrontendEndpoint []FrontendEndpointParameters `json:"frontendEndpoint,omitempty" tf:"frontend_endpoint,omitempty"`
 
 	// Should the Front Door Load Balancer be Enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -290,8 +393,8 @@ type FrontDoorParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A routing_rule block as defined below.
-	// +kubebuilder:validation:Required
-	RoutingRule []RoutingRuleParameters `json:"routingRule" tf:"routing_rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	RoutingRule []RoutingRuleParameters `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -300,8 +403,23 @@ type FrontDoorParameters struct {
 
 type FrontendEndpointObservation struct {
 
+	// Specifies the host name of the frontend_endpoint. Must be a domain name. In order to use a name.azurefd.net domain, the name value must match the Front Door name.
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+
 	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the frontend_endpoint.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Whether to allow session affinity on this host. Valid options are true or false Defaults to false.
+	SessionAffinityEnabled *bool `json:"sessionAffinityEnabled,omitempty" tf:"session_affinity_enabled,omitempty"`
+
+	// The TTL to use in seconds for session affinity, if applicable. Defaults to 0.
+	SessionAffinityTTLSeconds *float64 `json:"sessionAffinityTtlSeconds,omitempty" tf:"session_affinity_ttl_seconds,omitempty"`
+
+	// Defines the Web Application Firewall policy ID for each host.
+	WebApplicationFirewallPolicyLinkID *string `json:"webApplicationFirewallPolicyLinkId,omitempty" tf:"web_application_firewall_policy_link_id,omitempty"`
 }
 
 type FrontendEndpointParameters struct {
@@ -329,8 +447,29 @@ type FrontendEndpointParameters struct {
 
 type RoutingRuleObservation struct {
 
+	// Protocol schemes to match for the Backend Routing Rule. Possible values are Http and Https.
+	AcceptedProtocols []*string `json:"acceptedProtocols,omitempty" tf:"accepted_protocols,omitempty"`
+
+	// Enable or Disable use of this Backend Routing Rule. Permitted values are true or false. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A forwarding_configuration block as defined below.
+	ForwardingConfiguration []ForwardingConfigurationObservation `json:"forwardingConfiguration,omitempty" tf:"forwarding_configuration,omitempty"`
+
+	// The names of the frontend_endpoint blocks within this resource to associate with this routing_rule.
+	FrontendEndpoints []*string `json:"frontendEndpoints,omitempty" tf:"frontend_endpoints,omitempty"`
+
 	// The ID of the Azure Front Door Backend.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Routing Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The route patterns for the Backend Routing Rule.
+	PatternsToMatch []*string `json:"patternsToMatch,omitempty" tf:"patterns_to_match,omitempty"`
+
+	// A redirect_configuration block as defined below.
+	RedirectConfiguration []RoutingRuleRedirectConfigurationObservation `json:"redirectConfiguration,omitempty" tf:"redirect_configuration,omitempty"`
 }
 
 type RoutingRuleParameters struct {
@@ -365,6 +504,24 @@ type RoutingRuleParameters struct {
 }
 
 type RoutingRuleRedirectConfigurationObservation struct {
+
+	// The destination fragment in the portion of URL after '#'. Set this to add a fragment to the redirect URL.
+	CustomFragment *string `json:"customFragment,omitempty" tf:"custom_fragment,omitempty"`
+
+	// Set this to change the URL for the redirection.
+	CustomHost *string `json:"customHost,omitempty" tf:"custom_host,omitempty"`
+
+	// The path to retain as per the incoming request, or update in the URL for the redirection.
+	CustomPath *string `json:"customPath,omitempty" tf:"custom_path,omitempty"`
+
+	// Replace any existing query string from the incoming request URL.
+	CustomQueryString *string `json:"customQueryString,omitempty" tf:"custom_query_string,omitempty"`
+
+	// Protocol to use when redirecting. Valid options are HttpOnly, HttpsOnly, or MatchRequest.
+	RedirectProtocol *string `json:"redirectProtocol,omitempty" tf:"redirect_protocol,omitempty"`
+
+	// Status code for the redirect. Valida options are Moved, Found, TemporaryRedirect, PermanentRedirect.
+	RedirectType *string `json:"redirectType,omitempty" tf:"redirect_type,omitempty"`
 }
 
 type RoutingRuleRedirectConfigurationParameters struct {
@@ -418,8 +575,13 @@ type FrontDoorStatus struct {
 type FrontDoor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FrontDoorSpec   `json:"spec"`
-	Status            FrontDoorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backendPool)",message="backendPool is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backendPoolHealthProbe)",message="backendPoolHealthProbe is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backendPoolLoadBalancing)",message="backendPoolLoadBalancing is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frontendEndpoint)",message="frontendEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.routingRule)",message="routingRule is a required parameter"
+	Spec   FrontDoorSpec   `json:"spec"`
+	Status FrontDoorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: apioperations.apimanagement.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -821,11 +825,22 @@ spec:
                     description: The relative URL Template identifying the target
                       resource for this operation, which may include parameters.
                     type: string
-                required:
-                - displayName
-                - method
-                - urlTemplate
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -997,13 +1012,510 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: displayName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)
+            - message: method is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.method)
+            - message: urlTemplate is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.urlTemplate)
           status:
             description: APIOperationStatus defines the observed state of APIOperation.
             properties:
               atProvider:
                 properties:
+                  apiManagementName:
+                    description: The Name of the API Management Service where the
+                      API exists. Changing this forces a new resource to be created.
+                    type: string
+                  apiName:
+                    description: The name of the API within the API Management Service
+                      where this API Operation should be created. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  description:
+                    description: A description for this API Operation, which may include
+                      HTML formatting tags.
+                    type: string
+                  displayName:
+                    description: The Display Name for this API Management Operation.
+                    type: string
                   id:
                     description: The ID of the API Management API Operation.
+                    type: string
+                  method:
+                    description: The HTTP Method used for this API Management Operation,
+                      like GET, DELETE, PUT or POST - but not limited to these values.
+                    type: string
+                  request:
+                    description: A request block as defined below.
+                    items:
+                      properties:
+                        description:
+                          description: A description of the HTTP Request, which may
+                            include HTML tags.
+                          type: string
+                        header:
+                          description: One or more header blocks as defined above.
+                          items:
+                            properties:
+                              defaultValue:
+                                description: The default value for this Template Parameter.
+                                type: string
+                              description:
+                                description: A description of this Template Parameter.
+                                type: string
+                              example:
+                                description: One or more example blocks as defined
+                                  above.
+                                items:
+                                  properties:
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    externalValue:
+                                      description: A URL that points to the literal
+                                        example.
+                                      type: string
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    summary:
+                                      description: A short description for this example.
+                                      type: string
+                                    value:
+                                      description: The example of the representation.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The Name of this Template Parameter.
+                                type: string
+                              required:
+                                description: Is this Template Parameter Required?
+                                type: boolean
+                              schemaId:
+                                description: The name of the Schema.
+                                type: string
+                              type:
+                                description: The Type of this Template Parameter,
+                                  such as a string.
+                                type: string
+                              typeName:
+                                description: The type name defined by the Schema.
+                                type: string
+                              values:
+                                description: One or more acceptable values for this
+                                  Template Parameter.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        queryParameter:
+                          description: One or more query_parameter blocks as defined
+                            above.
+                          items:
+                            properties:
+                              defaultValue:
+                                description: The default value for this Template Parameter.
+                                type: string
+                              description:
+                                description: A description of this Template Parameter.
+                                type: string
+                              example:
+                                description: One or more example blocks as defined
+                                  above.
+                                items:
+                                  properties:
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    externalValue:
+                                      description: A URL that points to the literal
+                                        example.
+                                      type: string
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    summary:
+                                      description: A short description for this example.
+                                      type: string
+                                    value:
+                                      description: The example of the representation.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The Name of this Template Parameter.
+                                type: string
+                              required:
+                                description: Is this Template Parameter Required?
+                                type: boolean
+                              schemaId:
+                                description: The name of the Schema.
+                                type: string
+                              type:
+                                description: The Type of this Template Parameter,
+                                  such as a string.
+                                type: string
+                              typeName:
+                                description: The type name defined by the Schema.
+                                type: string
+                              values:
+                                description: One or more acceptable values for this
+                                  Template Parameter.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        representation:
+                          description: One or more representation blocks as defined
+                            below.
+                          items:
+                            properties:
+                              contentType:
+                                description: The Content Type of this representation,
+                                  such as application/json.
+                                type: string
+                              example:
+                                description: One or more example blocks as defined
+                                  above.
+                                items:
+                                  properties:
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    externalValue:
+                                      description: A URL that points to the literal
+                                        example.
+                                      type: string
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    summary:
+                                      description: A short description for this example.
+                                      type: string
+                                    value:
+                                      description: The example of the representation.
+                                      type: string
+                                  type: object
+                                type: array
+                              formParameter:
+                                description: One or more form_parameter block as defined
+                                  above.
+                                items:
+                                  properties:
+                                    defaultValue:
+                                      description: The default value for this Template
+                                        Parameter.
+                                      type: string
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    example:
+                                      description: One or more example blocks as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          description:
+                                            description: A description of this Template
+                                              Parameter.
+                                            type: string
+                                          externalValue:
+                                            description: A URL that points to the
+                                              literal example.
+                                            type: string
+                                          name:
+                                            description: The Name of this Template
+                                              Parameter.
+                                            type: string
+                                          summary:
+                                            description: A short description for this
+                                              example.
+                                            type: string
+                                          value:
+                                            description: The example of the representation.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    required:
+                                      description: Is this Template Parameter Required?
+                                      type: boolean
+                                    schemaId:
+                                      description: The name of the Schema.
+                                      type: string
+                                    type:
+                                      description: The Type of this Template Parameter,
+                                        such as a string.
+                                      type: string
+                                    typeName:
+                                      description: The type name defined by the Schema.
+                                      type: string
+                                    values:
+                                      description: One or more acceptable values for
+                                        this Template Parameter.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              schemaId:
+                                description: The name of the Schema.
+                                type: string
+                              typeName:
+                                description: The type name defined by the Schema.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The Name of the Resource Group in which the API Management
+                      Service exists. Changing this forces a new resource to be created.
+                    type: string
+                  response:
+                    description: One or more response blocks as defined below.
+                    items:
+                      properties:
+                        description:
+                          description: A description of the HTTP Response, which may
+                            include HTML tags.
+                          type: string
+                        header:
+                          description: One or more header blocks as defined above.
+                          items:
+                            properties:
+                              defaultValue:
+                                description: The default value for this Template Parameter.
+                                type: string
+                              description:
+                                description: A description of this Template Parameter.
+                                type: string
+                              example:
+                                description: One or more example blocks as defined
+                                  above.
+                                items:
+                                  properties:
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    externalValue:
+                                      description: A URL that points to the literal
+                                        example.
+                                      type: string
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    summary:
+                                      description: A short description for this example.
+                                      type: string
+                                    value:
+                                      description: The example of the representation.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The Name of this Template Parameter.
+                                type: string
+                              required:
+                                description: Is this Template Parameter Required?
+                                type: boolean
+                              schemaId:
+                                description: The name of the Schema.
+                                type: string
+                              type:
+                                description: The Type of this Template Parameter,
+                                  such as a string.
+                                type: string
+                              typeName:
+                                description: The type name defined by the Schema.
+                                type: string
+                              values:
+                                description: One or more acceptable values for this
+                                  Template Parameter.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        representation:
+                          description: One or more representation blocks as defined
+                            below.
+                          items:
+                            properties:
+                              contentType:
+                                description: The Content Type of this representation,
+                                  such as application/json.
+                                type: string
+                              example:
+                                description: One or more example blocks as defined
+                                  above.
+                                items:
+                                  properties:
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    externalValue:
+                                      description: A URL that points to the literal
+                                        example.
+                                      type: string
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    summary:
+                                      description: A short description for this example.
+                                      type: string
+                                    value:
+                                      description: The example of the representation.
+                                      type: string
+                                  type: object
+                                type: array
+                              formParameter:
+                                description: One or more form_parameter block as defined
+                                  above.
+                                items:
+                                  properties:
+                                    defaultValue:
+                                      description: The default value for this Template
+                                        Parameter.
+                                      type: string
+                                    description:
+                                      description: A description of this Template
+                                        Parameter.
+                                      type: string
+                                    example:
+                                      description: One or more example blocks as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          description:
+                                            description: A description of this Template
+                                              Parameter.
+                                            type: string
+                                          externalValue:
+                                            description: A URL that points to the
+                                              literal example.
+                                            type: string
+                                          name:
+                                            description: The Name of this Template
+                                              Parameter.
+                                            type: string
+                                          summary:
+                                            description: A short description for this
+                                              example.
+                                            type: string
+                                          value:
+                                            description: The example of the representation.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    name:
+                                      description: The Name of this Template Parameter.
+                                      type: string
+                                    required:
+                                      description: Is this Template Parameter Required?
+                                      type: boolean
+                                    schemaId:
+                                      description: The name of the Schema.
+                                      type: string
+                                    type:
+                                      description: The Type of this Template Parameter,
+                                        such as a string.
+                                      type: string
+                                    typeName:
+                                      description: The type name defined by the Schema.
+                                      type: string
+                                    values:
+                                      description: One or more acceptable values for
+                                        this Template Parameter.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              schemaId:
+                                description: The name of the Schema.
+                                type: string
+                              typeName:
+                                description: The type name defined by the Schema.
+                                type: string
+                            type: object
+                          type: array
+                        statusCode:
+                          description: The HTTP Status Code.
+                          type: number
+                      type: object
+                    type: array
+                  templateParameter:
+                    description: One or more template_parameter blocks as defined
+                      below.
+                    items:
+                      properties:
+                        defaultValue:
+                          description: The default value for this Template Parameter.
+                          type: string
+                        description:
+                          description: A description of this Template Parameter.
+                          type: string
+                        example:
+                          description: One or more example blocks as defined above.
+                          items:
+                            properties:
+                              description:
+                                description: A description of this Template Parameter.
+                                type: string
+                              externalValue:
+                                description: A URL that points to the literal example.
+                                type: string
+                              name:
+                                description: The Name of this Template Parameter.
+                                type: string
+                              summary:
+                                description: A short description for this example.
+                                type: string
+                              value:
+                                description: The example of the representation.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: The Name of this Template Parameter.
+                          type: string
+                        required:
+                          description: Is this Template Parameter Required?
+                          type: boolean
+                        schemaId:
+                          description: The name of the Schema.
+                          type: string
+                        type:
+                          description: The Type of this Template Parameter, such as
+                            a string.
+                          type: string
+                        typeName:
+                          description: The type name defined by the Schema.
+                          type: string
+                        values:
+                          description: One or more acceptable values for this Template
+                            Parameter.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  urlTemplate:
+                    description: The relative URL Template identifying the target
+                      resource for this operation, which may include parameters.
                     type: string
                 type: object
               conditions:

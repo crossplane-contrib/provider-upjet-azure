@@ -14,6 +14,12 @@ import (
 )
 
 type ConditionAlertRuleNameObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ConditionAlertRuleNameParameters struct {
@@ -28,6 +34,12 @@ type ConditionAlertRuleNameParameters struct {
 }
 
 type ConditionMonitorConditionObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ConditionMonitorConditionParameters struct {
@@ -42,6 +54,12 @@ type ConditionMonitorConditionParameters struct {
 }
 
 type ConditionSignalTypeObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ConditionSignalTypeParameters struct {
@@ -56,6 +74,12 @@ type ConditionSignalTypeParameters struct {
 }
 
 type ConditionTargetResourceGroupObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ConditionTargetResourceGroupParameters struct {
@@ -70,6 +94,12 @@ type ConditionTargetResourceGroupParameters struct {
 }
 
 type ConditionTargetResourceObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ConditionTargetResourceParameters struct {
@@ -84,6 +114,12 @@ type ConditionTargetResourceParameters struct {
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionAlertContextObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionAlertContextParameters struct {
@@ -98,6 +134,12 @@ type MonitorAlertProcessingRuleSuppressionConditionAlertContextParameters struct
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDParameters struct {
@@ -112,6 +154,12 @@ type MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDParameters struct 
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionDescriptionObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionDescriptionParameters struct {
@@ -126,6 +174,12 @@ type MonitorAlertProcessingRuleSuppressionConditionDescriptionParameters struct 
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionMonitorServiceObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionMonitorServiceParameters struct {
@@ -140,6 +194,39 @@ type MonitorAlertProcessingRuleSuppressionConditionMonitorServiceParameters stru
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionObservation struct {
+
+	// A alert_context block as defined above.
+	AlertContext []MonitorAlertProcessingRuleSuppressionConditionAlertContextObservation `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
+
+	// A alert_rule_id block as defined above.
+	AlertRuleID []MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDObservation `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
+
+	// A alert_rule_name block as defined above.
+	AlertRuleName []ConditionAlertRuleNameObservation `json:"alertRuleName,omitempty" tf:"alert_rule_name,omitempty"`
+
+	// A description block as defined below.
+	Description []MonitorAlertProcessingRuleSuppressionConditionDescriptionObservation `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A monitor_condition block as defined below.
+	MonitorCondition []ConditionMonitorConditionObservation `json:"monitorCondition,omitempty" tf:"monitor_condition,omitempty"`
+
+	// A monitor_service block as defined below.
+	MonitorService []MonitorAlertProcessingRuleSuppressionConditionMonitorServiceObservation `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
+
+	// A severity block as defined below.
+	Severity []MonitorAlertProcessingRuleSuppressionConditionSeverityObservation `json:"severity,omitempty" tf:"severity,omitempty"`
+
+	// A signal_type block as defined below.
+	SignalType []ConditionSignalTypeObservation `json:"signalType,omitempty" tf:"signal_type,omitempty"`
+
+	// A target_resource block as defined below.
+	TargetResource []ConditionTargetResourceObservation `json:"targetResource,omitempty" tf:"target_resource,omitempty"`
+
+	// A target_resource_group block as defined below.
+	TargetResourceGroup []ConditionTargetResourceGroupObservation `json:"targetResourceGroup,omitempty" tf:"target_resource_group,omitempty"`
+
+	// A target_resource_type block as defined below.
+	TargetResourceType []MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeObservation `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionParameters struct {
@@ -190,6 +277,12 @@ type MonitorAlertProcessingRuleSuppressionConditionParameters struct {
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionSeverityObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionSeverityParameters struct {
@@ -204,6 +297,12 @@ type MonitorAlertProcessingRuleSuppressionConditionSeverityParameters struct {
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeObservation struct {
+
+	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeParameters struct {
@@ -219,8 +318,29 @@ type MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeParameters 
 
 type MonitorAlertProcessingRuleSuppressionObservation struct {
 
+	// A condition block as defined below.
+	Condition []MonitorAlertProcessingRuleSuppressionConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// Specifies a description for the Alert Processing Rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Should the Alert Processing Rule be enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the Alert Processing Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group where the Alert Processing Rule should exist. Changing this forces a new Alert Processing Rule to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A schedule block as defined below.
+	Schedule []MonitorAlertProcessingRuleSuppressionScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// A list of resource IDs which will be the target of Alert Processing Rule.
+	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
+
+	// A mapping of tags which should be assigned to the Alert Processing Rule.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionParameters struct {
@@ -274,6 +394,18 @@ type MonitorAlertProcessingRuleSuppressionParameters struct {
 }
 
 type MonitorAlertProcessingRuleSuppressionScheduleObservation struct {
+
+	// Specifies the Alert Processing Rule effective start time (Y-m-d'T'H:M:S).
+	EffectiveFrom *string `json:"effectiveFrom,omitempty" tf:"effective_from,omitempty"`
+
+	// Specifies the Alert Processing Rule effective end time (Y-m-d'T'H:M:S).
+	EffectiveUntil *string `json:"effectiveUntil,omitempty" tf:"effective_until,omitempty"`
+
+	// A recurrence block as defined above.
+	Recurrence []ScheduleRecurrenceObservation `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
+
+	// The time zone (e.g. Pacific Standard time, Eastern Standard Time). Defaults to UTC. possible values are defined here.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type MonitorAlertProcessingRuleSuppressionScheduleParameters struct {
@@ -296,6 +428,12 @@ type MonitorAlertProcessingRuleSuppressionScheduleParameters struct {
 }
 
 type RecurrenceDailyObservation struct {
+
+	// Specifies the recurrence end time (H:M:S).
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
+	// Specifies the recurrence start time (H:M:S).
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
 type RecurrenceDailyParameters struct {
@@ -310,6 +448,15 @@ type RecurrenceDailyParameters struct {
 }
 
 type RecurrenceMonthlyObservation struct {
+
+	// Specifies a list of dayOfMonth to recurrence. Possible values are integers between 1 - 31.
+	DaysOfMonth []*float64 `json:"daysOfMonth,omitempty" tf:"days_of_month,omitempty"`
+
+	// Specifies the recurrence end time (H:M:S).
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
+	// Specifies the recurrence start time (H:M:S).
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
 type RecurrenceMonthlyParameters struct {
@@ -328,6 +475,15 @@ type RecurrenceMonthlyParameters struct {
 }
 
 type RecurrenceWeeklyObservation struct {
+
+	// Specifies a list of dayOfWeek to recurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, and Saturday.
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// Specifies the recurrence end time (H:M:S).
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
+	// Specifies the recurrence start time (H:M:S).
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
 type RecurrenceWeeklyParameters struct {
@@ -346,6 +502,15 @@ type RecurrenceWeeklyParameters struct {
 }
 
 type ScheduleRecurrenceObservation struct {
+
+	// One or more daily blocks as defined above.
+	Daily []RecurrenceDailyObservation `json:"daily,omitempty" tf:"daily,omitempty"`
+
+	// One or more monthly blocks as defined above.
+	Monthly []RecurrenceMonthlyObservation `json:"monthly,omitempty" tf:"monthly,omitempty"`
+
+	// One or more weekly blocks as defined below.
+	Weekly []RecurrenceWeeklyObservation `json:"weekly,omitempty" tf:"weekly,omitempty"`
 }
 
 type ScheduleRecurrenceParameters struct {

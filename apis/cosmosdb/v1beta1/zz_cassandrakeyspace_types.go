@@ -14,6 +14,9 @@ import (
 )
 
 type AutoscaleSettingsObservation struct {
+
+	// The maximum throughput of the Cassandra KeySpace (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
 type AutoscaleSettingsParameters struct {
@@ -25,8 +28,20 @@ type AutoscaleSettingsParameters struct {
 
 type CassandraKeySpaceObservation struct {
 
+	// The name of the Cosmos DB Cassandra KeySpace to create the table within. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// An autoscale_settings block as defined below.
+	AutoscaleSettings []AutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+
 	// the ID of the CosmosDB Cassandra KeySpace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the Cosmos DB Cassandra KeySpace is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The throughput of Cassandra KeySpace (RU/s). Must be set in increments of 100. The minimum value is 400.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 type CassandraKeySpaceParameters struct {

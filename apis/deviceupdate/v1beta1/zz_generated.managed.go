@@ -17,6 +17,11 @@ func (mg *IOTHubDeviceUpdateAccount) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubDeviceUpdateAccount.
+func (mg *IOTHubDeviceUpdateAccount) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubDeviceUpdateAccount.
 func (mg *IOTHubDeviceUpdateAccount) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *IOTHubDeviceUpdateAccount) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubDeviceUpdateAccount.
 func (mg *IOTHubDeviceUpdateAccount) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubDeviceUpdateAccount.
+func (mg *IOTHubDeviceUpdateAccount) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubDeviceUpdateAccount.
@@ -83,6 +93,11 @@ func (mg *IOTHubDeviceUpdateInstance) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubDeviceUpdateInstance.
+func (mg *IOTHubDeviceUpdateInstance) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubDeviceUpdateInstance.
 func (mg *IOTHubDeviceUpdateInstance) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *IOTHubDeviceUpdateInstance) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubDeviceUpdateInstance.
 func (mg *IOTHubDeviceUpdateInstance) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubDeviceUpdateInstance.
+func (mg *IOTHubDeviceUpdateInstance) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubDeviceUpdateInstance.

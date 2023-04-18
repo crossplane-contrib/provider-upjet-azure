@@ -17,13 +17,22 @@ type MaintenanceAssignmentVirtualMachineObservation struct {
 
 	// The ID of the Maintenance Assignment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.
+	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty" tf:"maintenance_configuration_id,omitempty"`
+
+	// Specifies the Virtual Machine ID to which the Maintenance Configuration will be assigned. Changing this forces a new resource to be created.
+	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
 }
 
 type MaintenanceAssignmentVirtualMachineParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/maintenance/v1beta1.MaintenanceConfiguration
@@ -78,8 +87,9 @@ type MaintenanceAssignmentVirtualMachineStatus struct {
 type MaintenanceAssignmentVirtualMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MaintenanceAssignmentVirtualMachineSpec   `json:"spec"`
-	Status            MaintenanceAssignmentVirtualMachineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   MaintenanceAssignmentVirtualMachineSpec   `json:"spec"`
+	Status MaintenanceAssignmentVirtualMachineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -18,6 +18,9 @@ type AccountObservation struct {
 	// The DSC Server Endpoint associated with this Automation Account.
 	DSCServerEndpoint *string `json:"dscServerEndpoint,omitempty" tf:"dsc_server_endpoint,omitempty"`
 
+	// An encryption block as defined below.
+	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
 	// The URL of automation hybrid service which is used for hybrid worker on-boarding With this Automation Account.
 	HybridServiceURL *string `json:"hybridServiceUrl,omitempty" tf:"hybrid_service_url,omitempty"`
 
@@ -25,10 +28,27 @@ type AccountObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// Whether requests using non-AAD authentication are blocked. Defaults to true.
+	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	PrivateEndpointConnection []PrivateEndpointConnectionObservation `json:"privateEndpointConnection,omitempty" tf:"private_endpoint_connection,omitempty"`
+
+	// Whether public network access is allowed for the container registry. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The name of the resource group in which the Automation Account is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The SKU of the account. Possible values are Basic and Free.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type AccountParameters struct {
@@ -46,8 +66,8 @@ type AccountParameters struct {
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether public network access is allowed for the container registry. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -67,8 +87,8 @@ type AccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the account. Possible values are Basic and Free.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -76,6 +96,15 @@ type AccountParameters struct {
 }
 
 type EncryptionObservation struct {
+
+	// The source of the encryption key. Possible values are Microsoft.Automation and Microsoft.Keyvault.
+	KeySource *string `json:"keySource,omitempty" tf:"key_source,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to Encrypt the data in this Automation Account.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The User Assigned Managed Identity ID to be used for accessing the Customer Managed Key for encryption.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type EncryptionParameters struct {
@@ -95,11 +124,17 @@ type EncryptionParameters struct {
 
 type IdentityObservation struct {
 
+	// The ID of the User Assigned Identity which should be assigned to this Automation Account.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of identity used for this Automation Account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -149,8 +184,10 @@ type AccountStatus struct {
 type Account struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AccountSpec   `json:"spec"`
-	Status            AccountStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	Spec   AccountSpec   `json:"spec"`
+	Status AccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

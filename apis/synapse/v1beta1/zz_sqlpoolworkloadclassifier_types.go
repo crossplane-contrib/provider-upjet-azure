@@ -15,8 +15,29 @@ import (
 
 type SQLPoolWorkloadClassifierObservation struct {
 
+	// Specifies the session context value that a request can be classified against.
+	Context *string `json:"context,omitempty" tf:"context,omitempty"`
+
+	// The workload classifier end time for classification. It's of the HH:MM format in UTC time zone.
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
 	// The ID of the Synapse SQL Pool Workload Classifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The workload classifier importance. The allowed values are low, below_normal, normal, above_normal and high.
+	Importance *string `json:"importance,omitempty" tf:"importance,omitempty"`
+
+	// Specifies the label value that a request can be classified against.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The workload classifier member name used to classified against.
+	MemberName *string `json:"memberName,omitempty" tf:"member_name,omitempty"`
+
+	// The workload classifier start time for classification. It's of the HH:MM format in UTC time zone.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// The ID of the Synapse SQL Pool Workload Group. Changing this forces a new Synapse SQL Pool Workload Classifier to be created.
+	WorkloadGroupID *string `json:"workloadGroupId,omitempty" tf:"workload_group_id,omitempty"`
 }
 
 type SQLPoolWorkloadClassifierParameters struct {
@@ -38,8 +59,8 @@ type SQLPoolWorkloadClassifierParameters struct {
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The workload classifier member name used to classified against.
-	// +kubebuilder:validation:Required
-	MemberName *string `json:"memberName" tf:"member_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MemberName *string `json:"memberName,omitempty" tf:"member_name,omitempty"`
 
 	// The workload classifier start time for classification. It's of the HH:MM format in UTC time zone.
 	// +kubebuilder:validation:Optional
@@ -84,8 +105,9 @@ type SQLPoolWorkloadClassifierStatus struct {
 type SQLPoolWorkloadClassifier struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLPoolWorkloadClassifierSpec   `json:"spec"`
-	Status            SQLPoolWorkloadClassifierStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.memberName)",message="memberName is a required parameter"
+	Spec   SQLPoolWorkloadClassifierSpec   `json:"spec"`
+	Status SQLPoolWorkloadClassifierStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

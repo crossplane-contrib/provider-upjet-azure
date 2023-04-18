@@ -14,6 +14,12 @@ import (
 )
 
 type MonthlyOccurrenceObservation struct {
+
+	// Day of the occurrence. Must be one of Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+	Day *string `json:"day,omitempty" tf:"day,omitempty"`
+
+	// Occurrence of the week within the month. Must be between 1 and 5. -1 for last week within the month.
+	Occurrence *float64 `json:"occurrence,omitempty" tf:"occurrence,omitempty"`
 }
 
 type MonthlyOccurrenceParameters struct {
@@ -29,8 +35,41 @@ type MonthlyOccurrenceParameters struct {
 
 type ScheduleObservation struct {
 
+	// The name of the automation account in which the Schedule is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// A description for this Schedule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The end time of the schedule.
+	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
+
+	// The frequency of the schedule. - can be either OneTime, Day, Hour, Week, or Month.
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
 	// The Automation Schedule ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The number of frequencys between runs. Only valid when frequency is Day, Hour, Week, or Month and defaults to 1.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// List of days of the month that the job should execute on. Must be between 1 and 31. -1 for last day of the month. Only valid when frequency is Month.
+	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
+
+	// List of monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
+	MonthlyOccurrence []MonthlyOccurrenceObservation `json:"monthlyOccurrence,omitempty" tf:"monthly_occurrence,omitempty"`
+
+	// The name of the resource group in which the Schedule is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Start time of the schedule. Must be at least five minutes in the future. Defaults to seven minutes in the future from the time the resource is created.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// The timezone of the start time. Defaults to UTC. For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+
+	// List of days of the week that the job should execute on. Only valid when frequency is Week. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 
 type ScheduleParameters struct {
@@ -57,8 +96,8 @@ type ScheduleParameters struct {
 	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
 
 	// The frequency of the schedule. - can be either OneTime, Day, Hour, Week, or Month.
-	// +kubebuilder:validation:Required
-	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
+	// +kubebuilder:validation:Optional
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// The number of frequencys between runs. Only valid when frequency is Day, Hour, Week, or Month and defaults to 1.
 	// +kubebuilder:validation:Optional
@@ -122,8 +161,9 @@ type ScheduleStatus struct {
 type Schedule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ScheduleSpec   `json:"spec"`
-	Status            ScheduleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frequency)",message="frequency is a required parameter"
+	Spec   ScheduleSpec   `json:"spec"`
+	Status ScheduleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

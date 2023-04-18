@@ -15,8 +15,17 @@ import (
 
 type ManagementGroupObservation struct {
 
+	// A friendly name for this Management Group. If not specified, this will be the same as the name.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the Management Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Parent Management Group.
+	ParentManagementGroupID *string `json:"parentManagementGroupId,omitempty" tf:"parent_management_group_id,omitempty"`
+
+	// A list of Subscription GUIDs which should be assigned to the Management Group.
+	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
 }
 
 type ManagementGroupParameters struct {

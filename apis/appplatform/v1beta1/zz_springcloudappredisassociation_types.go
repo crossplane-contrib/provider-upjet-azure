@@ -17,6 +17,18 @@ type SpringCloudAppRedisAssociationObservation struct {
 
 	// The ID of the Spring Cloud Application Redis Association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the Redis Cache access key.
+	RedisAccessKey *string `json:"redisAccessKey,omitempty" tf:"redis_access_key,omitempty"`
+
+	// Specifies the Redis Cache resource ID. Changing this forces a new resource to be created.
+	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
+
+	// Should SSL be used when connecting to Redis? Defaults to true.
+	SSLEnabled *bool `json:"sslEnabled,omitempty" tf:"ssl_enabled,omitempty"`
+
+	// Specifies the Spring Cloud Application resource ID in which the Association is created. Changing this forces a new resource to be created.
+	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
 }
 
 type SpringCloudAppRedisAssociationParameters struct {

@@ -17,6 +17,21 @@ type TagRuleObservation struct {
 
 	// The ID of the logz Tag Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Logz Monitor. Changing this forces a new logz Tag Rule to be created.
+	LogzMonitorID *string `json:"logzMonitorId,omitempty" tf:"logz_monitor_id,omitempty"`
+
+	// Whether AAD logs should be sent to the Monitor resource?
+	SendAADLogs *bool `json:"sendAadLogs,omitempty" tf:"send_aad_logs,omitempty"`
+
+	// Whether activity logs from Azure resources should be sent to the Monitor resource?
+	SendActivityLogs *bool `json:"sendActivityLogs,omitempty" tf:"send_activity_logs,omitempty"`
+
+	// Whether subscription logs should be sent to the Monitor resource?
+	SendSubscriptionLogs *bool `json:"sendSubscriptionLogs,omitempty" tf:"send_subscription_logs,omitempty"`
+
+	// One or more (up to 10) tag_filter blocks as defined below.
+	TagFilter []TagRuleTagFilterObservation `json:"tagFilter,omitempty" tf:"tag_filter,omitempty"`
 }
 
 type TagRuleParameters struct {
@@ -53,6 +68,15 @@ type TagRuleParameters struct {
 }
 
 type TagRuleTagFilterObservation struct {
+
+	// The action for a filtering tag. Possible values are Include and Exclude is allowed. Note that the Exclude takes priority over the Include.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The name of this tag_filter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of this tag_filter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TagRuleTagFilterParameters struct {

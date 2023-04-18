@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: diskencryptionsets.compute.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -265,10 +269,22 @@ spec:
                     description: A mapping of tags to assign to the Disk Encryption
                       Set.
                     type: object
-                required:
-                - identity
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -440,11 +456,30 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: identity is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identity)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: DiskEncryptionSetStatus defines the observed state of DiskEncryptionSet.
             properties:
               atProvider:
                 properties:
+                  autoKeyRotationEnabled:
+                    description: Boolean flag to specify whether Azure Disk Encryption
+                      Set automatically rotates encryption Key to latest version.
+                    type: boolean
+                  encryptionType:
+                    description: The type of key used to encrypt the data of the disk.
+                      Possible values are EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys
+                      and ConfidentialVmEncryptedWithCustomerKey. Defaults to EncryptionAtRestWithCustomerKey.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  federatedClientId:
+                    description: Multi-tenant application client id to access key
+                      vault in a different tenant.
+                    type: string
                   id:
                     description: The ID of the Disk Encryption Set.
                     type: string
@@ -452,6 +487,12 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Disk Encryption Set.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The (Client) ID of the Service Principal.
                           type: string
@@ -459,8 +500,33 @@ spec:
                           description: The ID of the Tenant the Service Principal
                             is assigned in.
                           type: string
+                        type:
+                          description: The type of Managed Service Identity that is
+                            configured on this Disk Encryption Set. Possible values
+                            are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+                            (to enable both).
+                          type: string
                       type: object
                     type: array
+                  keyVaultKeyId:
+                    description: Specifies the URL to a Key Vault Key (either from
+                      a Key Vault Key, or the Key URL for the Key Vault Secret).
+                    type: string
+                  location:
+                    description: Specifies the Azure Region where the Disk Encryption
+                      Set exists. Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: Specifies the name of the Resource Group where the
+                      Disk Encryption Set should exist. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Disk Encryption
+                      Set.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: springcloudjavadeployments.appplatform.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -182,6 +186,21 @@ spec:
                         type: object
                     type: object
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -359,8 +378,49 @@ spec:
             properties:
               atProvider:
                 properties:
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: Specifies the environment variables of the Spring
+                      Cloud Deployment as a map of key-value pairs.
+                    type: object
                   id:
                     description: The ID of the Spring Cloud Deployment.
+                    type: string
+                  instanceCount:
+                    description: Specifies the required instance count of the Spring
+                      Cloud Deployment. Possible Values are between 1 and 500. Defaults
+                      to 1 if not specified.
+                    type: number
+                  jvmOptions:
+                    description: Specifies the jvm option of the Spring Cloud Deployment.
+                    type: string
+                  quota:
+                    description: A quota block as defined below.
+                    items:
+                      properties:
+                        cpu:
+                          description: Specifies the required cpu of the Spring Cloud
+                            Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults
+                            to 1 if not specified.
+                          type: string
+                        memory:
+                          description: Specifies the required memory size of the Spring
+                            Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi,
+                            3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not
+                            specified.
+                          type: string
+                      type: object
+                    type: array
+                  runtimeVersion:
+                    description: Specifies the runtime version of the Spring Cloud
+                      Deployment. Possible Values are Java_8, Java_11 and Java_17.
+                      Defaults to Java_8.
+                    type: string
+                  springCloudAppId:
+                    description: Specifies the id of the Spring Cloud Application
+                      in which to create the Deployment. Changing this forces a new
+                      resource to be created.
                     type: string
                 type: object
               conditions:

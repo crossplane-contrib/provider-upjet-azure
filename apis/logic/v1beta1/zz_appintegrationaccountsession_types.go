@@ -15,15 +15,24 @@ import (
 
 type AppIntegrationAccountSessionObservation struct {
 
+	// The content of the Logic App Integration Account Session.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
 	// The ID of the Logic App Integration Account Session.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Session to be created.
+	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
+
+	// The name of the Resource Group where the Logic App Integration Account Session should exist. Changing this forces a new Logic App Integration Account Session to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type AppIntegrationAccountSessionParameters struct {
 
 	// The content of the Logic App Integration Account Session.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Session to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta1.AppIntegrationAccount
@@ -77,8 +86,9 @@ type AppIntegrationAccountSessionStatus struct {
 type AppIntegrationAccountSession struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppIntegrationAccountSessionSpec   `json:"spec"`
-	Status            AppIntegrationAccountSessionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)",message="content is a required parameter"
+	Spec   AppIntegrationAccountSessionSpec   `json:"spec"`
+	Status AppIntegrationAccountSessionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: gremlingraphs.cosmosdb.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -437,9 +441,22 @@ spec:
                       - paths
                       type: object
                     type: array
-                required:
-                - partitionKeyPath
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -611,11 +628,58 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: partitionKeyPath is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.partitionKeyPath)
           status:
             description: GremlinGraphStatus defines the observed state of GremlinGraph.
             properties:
               atProvider:
                 properties:
+                  accountName:
+                    description: The name of the CosmosDB Account to create the Gremlin
+                      Graph within. Changing this forces a new resource to be created.
+                    type: string
+                  autoscaleSettings:
+                    description: An autoscale_settings block as defined below. Requires
+                      partition_key_path to be set.
+                    items:
+                      properties:
+                        maxThroughput:
+                          description: The maximum throughput of the Gremlin graph
+                            (RU/s). Must be between 1,000 and 1,000,000. Must be set
+                            in increments of 1,000. Conflicts with throughput.
+                          type: number
+                      type: object
+                    type: array
+                  conflictResolutionPolicy:
+                    description: A conflict_resolution_policy blocks as defined below.
+                      Changing this forces a new resource to be created.
+                    items:
+                      properties:
+                        conflictResolutionPath:
+                          description: The conflict resolution path in the case of
+                            LastWriterWins mode.
+                          type: string
+                        conflictResolutionProcedure:
+                          description: The procedure to resolve conflicts in the case
+                            of custom mode.
+                          type: string
+                        mode:
+                          description: 'Indicates the conflict resolution mode. Possible
+                            values include: LastWriterWins, Custom.'
+                          type: string
+                      type: object
+                    type: array
+                  databaseName:
+                    description: The name of the Cosmos DB Graph Database in which
+                      the Cosmos DB Gremlin Graph is created. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  defaultTtl:
+                    description: The default time to live (TTL) of the Gremlin graph.
+                      If the value is missing or set to "-1", items don’t expire.
+                    type: number
                   id:
                     description: The ID of the CosmosDB Gremlin Graph.
                     type: string
@@ -624,16 +688,97 @@ spec:
                       more index_policy blocks as defined below.
                     items:
                       properties:
+                        automatic:
+                          description: Indicates if the indexing policy is automatic.
+                            Defaults to true.
+                          type: boolean
+                        compositeIndex:
+                          description: One or more composite_index blocks as defined
+                            below.
+                          items:
+                            properties:
+                              index:
+                                description: One or more index blocks as defined below.
+                                items:
+                                  properties:
+                                    order:
+                                      description: Order of the index. Possible values
+                                        are Ascending or Descending.
+                                      type: string
+                                    path:
+                                      description: Path for which the indexing behaviour
+                                        applies to. According to the service design,
+                                        all spatial types including LineString, MultiPolygon,
+                                        Point, and Polygon will be applied to the
+                                        path.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        excludedPaths:
+                          description: List of paths to exclude from indexing. Required
+                            if indexing_mode is Consistent or Lazy.
+                          items:
+                            type: string
+                          type: array
+                        includedPaths:
+                          description: List of paths to include in the indexing. Required
+                            if indexing_mode is Consistent or Lazy.
+                          items:
+                            type: string
+                          type: array
+                        indexingMode:
+                          description: 'Indicates the indexing mode. Possible values
+                            include: Consistent, Lazy, None.'
+                          type: string
                         spatialIndex:
                           description: One or more spatial_index blocks as defined
                             below.
                           items:
                             properties:
+                              path:
+                                description: Path for which the indexing behaviour
+                                  applies to. According to the service design, all
+                                  spatial types including LineString, MultiPolygon,
+                                  Point, and Polygon will be applied to the path.
+                                type: string
                               types:
                                 items:
                                   type: string
                                 type: array
                             type: object
+                          type: array
+                      type: object
+                    type: array
+                  partitionKeyPath:
+                    description: Define a partition key. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  partitionKeyVersion:
+                    description: Define a partition key version. Changing this forces
+                      a new resource to be created. Possible values are 1and 2. This
+                      should be set to 2 in order to use large partition keys.
+                    type: number
+                  resourceGroupName:
+                    description: The name of the resource group in which the Cosmos
+                      DB Gremlin Graph is created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  throughput:
+                    description: The throughput of the Gremlin graph (RU/s). Must
+                      be set in increments of 100. The minimum value is 400.
+                    type: number
+                  uniqueKey:
+                    description: One or more unique_key blocks as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        paths:
+                          description: A list of paths to use for this unique key.
+                            Changing this forces a new resource to be created.
+                          items:
+                            type: string
                           type: array
                       type: object
                     type: array

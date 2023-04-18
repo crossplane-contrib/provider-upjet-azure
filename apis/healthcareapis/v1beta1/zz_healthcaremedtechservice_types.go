@@ -20,6 +20,9 @@ type HealthcareMedtechServiceIdentityObservation struct {
 
 	// The Tenant ID associated with this System Assigned Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Healthcare Med Tech Service. Possible values are SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HealthcareMedtechServiceIdentityParameters struct {
@@ -31,19 +34,39 @@ type HealthcareMedtechServiceIdentityParameters struct {
 
 type HealthcareMedtechServiceObservation struct {
 
+	// Specifies the Device Mappings of the Med Tech Service.
+	DeviceMappingJSON *string `json:"deviceMappingJson,omitempty" tf:"device_mapping_json,omitempty"`
+
+	// Specifies the Consumer Group of the Event Hub to connect to.
+	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
+
+	// Specifies the name of the Event Hub to connect to.
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
+	// Specifies the namespace name of the Event Hub to connect to.
+	EventHubNamespaceName *string `json:"eventhubNamespaceName,omitempty" tf:"eventhub_namespace_name,omitempty"`
+
 	// The ID of the Healthcare Med Tech Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []HealthcareMedtechServiceIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the Azure Region where the Healthcare Med Tech Service should be created. Changing this forces a new Healthcare Med Tech Service to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the Healthcare Med Tech Service.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the id of the Healthcare Workspace where the Healthcare Med Tech Service should exist. Changing this forces a new Healthcare Med Tech Service to be created.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type HealthcareMedtechServiceParameters struct {
 
 	// Specifies the Device Mappings of the Med Tech Service.
-	// +kubebuilder:validation:Required
-	DeviceMappingJSON *string `json:"deviceMappingJson" tf:"device_mapping_json,omitempty"`
+	// +kubebuilder:validation:Optional
+	DeviceMappingJSON *string `json:"deviceMappingJson,omitempty" tf:"device_mapping_json,omitempty"`
 
 	// Specifies the Consumer Group of the Event Hub to connect to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.ConsumerGroup
@@ -89,8 +112,8 @@ type HealthcareMedtechServiceParameters struct {
 	Identity []HealthcareMedtechServiceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the Azure Region where the Healthcare Med Tech Service should be created. Changing this forces a new Healthcare Med Tech Service to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare Med Tech Service.
 	// +kubebuilder:validation:Optional
@@ -135,8 +158,10 @@ type HealthcareMedtechServiceStatus struct {
 type HealthcareMedtechService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HealthcareMedtechServiceSpec   `json:"spec"`
-	Status            HealthcareMedtechServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.deviceMappingJson)",message="deviceMappingJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   HealthcareMedtechServiceSpec   `json:"spec"`
+	Status HealthcareMedtechServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

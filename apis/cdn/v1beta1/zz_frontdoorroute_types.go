@@ -14,6 +14,18 @@ import (
 )
 
 type CacheObservation struct {
+
+	// Is content compression enabled? Possible values are true or false. Defaults to false.
+	CompressionEnabled *bool `json:"compressionEnabled,omitempty" tf:"compression_enabled,omitempty"`
+
+	// A list of one or more Content types (formerly known as MIME types) to compress. Possible values include application/eot, application/font, application/font-sfnt, application/javascript, application/json, application/opentype, application/otf, application/pkcs7-mime, application/truetype, application/ttf, application/vnd.ms-fontobject, application/xhtml+xml, application/xml, application/xml+rss, application/x-font-opentype, application/x-font-truetype, application/x-font-ttf, application/x-httpd-cgi, application/x-mpegurl, application/x-opentype, application/x-otf, application/x-perl, application/x-ttf, application/x-javascript, font/eot, font/ttf, font/otf, font/opentype, image/svg+xml, text/css, text/csv, text/html, text/javascript, text/js, text/plain, text/richtext, text/tab-separated-values, text/xml, text/x-script, text/x-component or text/x-java-source.
+	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
+
+	// Defines how the Front Door Route will cache requests that include query strings. Possible values include IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings or UseQueryString. Defaults it IgnoreQueryString.
+	QueryStringCachingBehavior *string `json:"queryStringCachingBehavior,omitempty" tf:"query_string_caching_behavior,omitempty"`
+
+	// Query strings to include or ignore.
+	QueryStrings []*string `json:"queryStrings,omitempty" tf:"query_strings,omitempty"`
 }
 
 type CacheParameters struct {
@@ -37,8 +49,47 @@ type CacheParameters struct {
 
 type FrontdoorRouteObservation struct {
 
+	// A cache block as defined below.
+	Cache []CacheObservation `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// The IDs of the Front Door Custom Domains which are associated with this Front Door Route.
+	CdnFrontdoorCustomDomainIds []*string `json:"cdnFrontdoorCustomDomainIds,omitempty" tf:"cdn_frontdoor_custom_domain_ids,omitempty"`
+
+	// The resource ID of the Front Door Endpoint where this Front Door Route should exist. Changing this forces a new Front Door Route to be created.
+	CdnFrontdoorEndpointID *string `json:"cdnFrontdoorEndpointId,omitempty" tf:"cdn_frontdoor_endpoint_id,omitempty"`
+
+	// The resource ID of the Front Door Origin Group where this Front Door Route should be created.
+	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
+
+	// One or more Front Door Origin resource IDs that this Front Door Route will link to.
+	CdnFrontdoorOriginIds []*string `json:"cdnFrontdoorOriginIds,omitempty" tf:"cdn_frontdoor_origin_ids,omitempty"`
+
+	// A directory path on the Front Door Origin that can be used to retrieve content (e.g. contoso.cloudapp.net/originpath).
+	CdnFrontdoorOriginPath *string `json:"cdnFrontdoorOriginPath,omitempty" tf:"cdn_frontdoor_origin_path,omitempty"`
+
+	// A list of the Front Door Rule Set IDs which should be assigned to this Front Door Route.
+	CdnFrontdoorRuleSetIds []*string `json:"cdnFrontdoorRuleSetIds,omitempty" tf:"cdn_frontdoor_rule_set_ids,omitempty"`
+
+	// Is this Front Door Route enabled? Possible values are true or false. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The Protocol that will be use when forwarding traffic to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+	ForwardingProtocol *string `json:"forwardingProtocol,omitempty" tf:"forwarding_protocol,omitempty"`
+
+	// Automatically redirect HTTP traffic to HTTPS traffic? Possible values are true or false. Defaults to true.
+	HTTPSRedirectEnabled *bool `json:"httpsRedirectEnabled,omitempty" tf:"https_redirect_enabled,omitempty"`
+
 	// The ID of the Front Door Route.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Should this Front Door Route be linked to the default endpoint? Possible values include true or false. Defaults to true.
+	LinkToDefaultDomain *bool `json:"linkToDefaultDomain,omitempty" tf:"link_to_default_domain,omitempty"`
+
+	// The route patterns of the rule.
+	PatternsToMatch []*string `json:"patternsToMatch,omitempty" tf:"patterns_to_match,omitempty"`
+
+	// One or more Protocols supported by this Front Door Route. Possible values are Http or Https.
+	SupportedProtocols []*string `json:"supportedProtocols,omitempty" tf:"supported_protocols,omitempty"`
 }
 
 type FrontdoorRouteParameters struct {
@@ -138,12 +189,12 @@ type FrontdoorRouteParameters struct {
 	LinkToDefaultDomain *bool `json:"linkToDefaultDomain,omitempty" tf:"link_to_default_domain,omitempty"`
 
 	// The route patterns of the rule.
-	// +kubebuilder:validation:Required
-	PatternsToMatch []*string `json:"patternsToMatch" tf:"patterns_to_match,omitempty"`
+	// +kubebuilder:validation:Optional
+	PatternsToMatch []*string `json:"patternsToMatch,omitempty" tf:"patterns_to_match,omitempty"`
 
 	// One or more Protocols supported by this Front Door Route. Possible values are Http or Https.
-	// +kubebuilder:validation:Required
-	SupportedProtocols []*string `json:"supportedProtocols" tf:"supported_protocols,omitempty"`
+	// +kubebuilder:validation:Optional
+	SupportedProtocols []*string `json:"supportedProtocols,omitempty" tf:"supported_protocols,omitempty"`
 }
 
 // FrontdoorRouteSpec defines the desired state of FrontdoorRoute
@@ -170,8 +221,10 @@ type FrontdoorRouteStatus struct {
 type FrontdoorRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FrontdoorRouteSpec   `json:"spec"`
-	Status            FrontdoorRouteStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.patternsToMatch)",message="patternsToMatch is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.supportedProtocols)",message="supportedProtocols is a required parameter"
+	Spec   FrontdoorRouteSpec   `json:"spec"`
+	Status FrontdoorRouteStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

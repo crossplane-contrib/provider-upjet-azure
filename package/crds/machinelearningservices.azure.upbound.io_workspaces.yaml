@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: workspaces.machinelearningservices.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -779,10 +783,22 @@ spec:
                       prevent you from using features provided by the v2 API. Defaults
                       to false.
                     type: boolean
-                required:
-                - identity
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -954,15 +970,59 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: identity is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identity)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: WorkspaceStatus defines the observed state of Workspace.
             properties:
               atProvider:
                 properties:
+                  applicationInsightsId:
+                    description: The ID of the Application Insights associated with
+                      this Machine Learning Workspace. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  containerRegistryId:
+                    description: The ID of the container registry associated with
+                      this Machine Learning Workspace. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  description:
+                    description: The description of this Machine Learning Workspace.
+                    type: string
                   discoveryUrl:
                     description: The url for the discovery service to identify regional
                       endpoints for machine learning experimentation services.
                     type: string
+                  encryption:
+                    description: An encryption block as defined below. Changing this
+                      forces a new resource to be created.
+                    items:
+                      properties:
+                        keyId:
+                          description: The Key Vault URI to access the encryption
+                            key.
+                          type: string
+                        keyVaultId:
+                          description: The ID of the keyVault where the customer owned
+                            encryption key is present.
+                          type: string
+                        userAssignedIdentityId:
+                          description: The Key Vault URI to access the encryption
+                            key.
+                          type: string
+                      type: object
+                    type: array
+                  friendlyName:
+                    description: Display name for this Machine Learning Workspace.
+                    type: string
+                  highBusinessImpact:
+                    description: Flag to signal High Business Impact (HBI) data in
+                      the workspace and reduce diagnostic data collected by the service
+                    type: boolean
                   id:
                     description: The ID of the Machine Learning Workspace.
                     type: string
@@ -970,6 +1030,12 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Machine Learning Workspace.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The Principal ID associated with this Managed
                             Service Identity.
@@ -978,8 +1044,65 @@ spec:
                           description: The Tenant ID associated with this Managed
                             Service Identity.
                           type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Machine Learning Workspace.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
+                          type: string
                       type: object
                     type: array
+                  imageBuildComputeName:
+                    description: The compute name for image build of the Machine Learning
+                      Workspace.
+                    type: string
+                  keyVaultId:
+                    description: The ID of key vault associated with this Machine
+                      Learning Workspace. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      Machine Learning Workspace should exist. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  primaryUserAssignedIdentity:
+                    description: The user assigned identity id that represents the
+                      workspace identity.
+                    type: string
+                  publicAccessBehindVirtualNetworkEnabled:
+                    description: Enable public access when this Machine Learning Workspace
+                      is behind a VNet. Changing this forces a new resource to be
+                      created.
+                    type: boolean
+                  publicNetworkAccessEnabled:
+                    description: Enable public access when this Machine Learning Workspace
+                      is behind VNet.
+                    type: boolean
+                  resourceGroupName:
+                    description: Specifies the name of the Resource Group in which
+                      the Machine Learning Workspace should exist. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  skuName:
+                    description: SKU/edition of the Machine Learning Workspace, possible
+                      values are Basic. Defaults to Basic.
+                    type: string
+                  storageAccountId:
+                    description: The ID of the Storage Account associated with this
+                      Machine Learning Workspace. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  v1LegacyModeEnabled:
+                    description: Enable V1 API features, enabling v1_legacy_mode may
+                      prevent you from using features provided by the v2 API. Defaults
+                      to false.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -15,8 +15,20 @@ import (
 
 type BotChannelLineObservation struct {
 
+	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
+	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
+
 	// The ID of the Line Integration for a Bot Channel.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more line_channel blocks as defined below.
+	LineChannel []LineChannelParameters `json:"lineChannel,omitempty" tf:"line_channel,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group where the Line Channel should be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type BotChannelLineParameters struct {
@@ -36,12 +48,12 @@ type BotChannelLineParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// One or more line_channel blocks as defined below.
-	// +kubebuilder:validation:Required
-	LineChannel []LineChannelParameters `json:"lineChannel" tf:"line_channel,omitempty"`
+	// +kubebuilder:validation:Optional
+	LineChannel []LineChannelParameters `json:"lineChannel,omitempty" tf:"line_channel,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the Line Channel should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -95,8 +107,10 @@ type BotChannelLineStatus struct {
 type BotChannelLine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotChannelLineSpec   `json:"spec"`
-	Status            BotChannelLineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lineChannel)",message="lineChannel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   BotChannelLineSpec   `json:"spec"`
+	Status BotChannelLineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -17,6 +17,18 @@ type NamespaceAuthorizationRuleObservation struct {
 
 	// The ServiceBus Topic ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Grants listen access to this this Authorization Rule. Defaults to false.
+	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
+
+	// Grants manage access to this this Authorization Rule. When this property is true - both listen and send must be too. Defaults to false.
+	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
+
+	// Specifies the ID of the ServiceBus Namespace. Changing this forces a new resource to be created.
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Grants send access to this this Authorization Rule. Defaults to false.
+	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 
 type NamespaceAuthorizationRuleParameters struct {

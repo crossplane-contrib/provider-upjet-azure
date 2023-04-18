@@ -14,6 +14,21 @@ import (
 )
 
 type BackupPolicyVMBackupObservation struct {
+
+	// Sets the backup frequency. Possible values are Hourly, Daily and Weekly.
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
+	// Duration of the backup window in hours. Possible values are between 4 and 24 This is used when frequency is Hourly.
+	HourDuration *float64 `json:"hourDuration,omitempty" tf:"hour_duration,omitempty"`
+
+	// Interval in hour at which backup is triggered. Possible values are 4, 6, 8 and 12. This is used when frequency is Hourly.
+	HourInterval *float64 `json:"hourInterval,omitempty" tf:"hour_interval,omitempty"`
+
+	// The time of day to perform the backup in 24hour format.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+
+	// The days of the week to perform backups on. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday. This is used when frequency is Weekly.
+	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
 type BackupPolicyVMBackupParameters struct {
@@ -41,15 +56,47 @@ type BackupPolicyVMBackupParameters struct {
 
 type BackupPolicyVMObservation struct {
 
+	// Configures the Policy backup frequency, times & days as documented in the backup block below.
+	Backup []BackupPolicyVMBackupObservation `json:"backup,omitempty" tf:"backup,omitempty"`
+
 	// The ID of the VM Backup Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	InstantRestoreResourceGroup []InstantRestoreResourceGroupObservation `json:"instantRestoreResourceGroup,omitempty" tf:"instant_restore_resource_group,omitempty"`
+
+	// Specifies the instant restore retention range in days. Possible values are between 1 and 5 when policy_type is V1, and 1 to 30 when policy_type is V2.
+	InstantRestoreRetentionDays *float64 `json:"instantRestoreRetentionDays,omitempty" tf:"instant_restore_retention_days,omitempty"`
+
+	// Type of the Backup Policy. Possible values are V1 and V2 where V2 stands for the Enhanced Policy. Defaults to V1. Changing this forces a new resource to be created.
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
+
+	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// The name of the resource group in which to create the policy. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Configures the policy daily retention as documented in the retention_daily block below. Required when backup frequency is Daily.
+	RetentionDaily []BackupPolicyVMRetentionDailyObservation `json:"retentionDaily,omitempty" tf:"retention_daily,omitempty"`
+
+	// Configures the policy monthly retention as documented in the retention_monthly block below.
+	RetentionMonthly []BackupPolicyVMRetentionMonthlyObservation `json:"retentionMonthly,omitempty" tf:"retention_monthly,omitempty"`
+
+	// Configures the policy weekly retention as documented in the retention_weekly block below. Required when backup frequency is Weekly.
+	RetentionWeekly []BackupPolicyVMRetentionWeeklyObservation `json:"retentionWeekly,omitempty" tf:"retention_weekly,omitempty"`
+
+	// Configures the policy yearly retention as documented in the retention_yearly block below.
+	RetentionYearly []BackupPolicyVMRetentionYearlyObservation `json:"retentionYearly,omitempty" tf:"retention_yearly,omitempty"`
+
+	// Specifies the timezone. the possible values are defined here. Defaults to UTC
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type BackupPolicyVMParameters struct {
 
 	// Configures the Policy backup frequency, times & days as documented in the backup block below.
-	// +kubebuilder:validation:Required
-	Backup []BackupPolicyVMBackupParameters `json:"backup" tf:"backup,omitempty"`
+	// +kubebuilder:validation:Optional
+	Backup []BackupPolicyVMBackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	InstantRestoreResourceGroup []InstantRestoreResourceGroupParameters `json:"instantRestoreResourceGroup,omitempty" tf:"instant_restore_resource_group,omitempty"`
@@ -110,6 +157,9 @@ type BackupPolicyVMParameters struct {
 }
 
 type BackupPolicyVMRetentionDailyObservation struct {
+
+	// The number of daily backups to keep. Must be between 7 and 9999.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 }
 
 type BackupPolicyVMRetentionDailyParameters struct {
@@ -120,6 +170,15 @@ type BackupPolicyVMRetentionDailyParameters struct {
 }
 
 type BackupPolicyVMRetentionMonthlyObservation struct {
+
+	// The number of monthly backups to keep. Must be between 1 and 9999
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+
+	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
+	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
 type BackupPolicyVMRetentionMonthlyParameters struct {
@@ -138,6 +197,12 @@ type BackupPolicyVMRetentionMonthlyParameters struct {
 }
 
 type BackupPolicyVMRetentionWeeklyObservation struct {
+
+	// The number of weekly backups to keep. Must be between 1 and 9999
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The weekday backups to retain. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
 type BackupPolicyVMRetentionWeeklyParameters struct {
@@ -152,6 +217,18 @@ type BackupPolicyVMRetentionWeeklyParameters struct {
 }
 
 type BackupPolicyVMRetentionYearlyObservation struct {
+
+	// The number of yearly backups to keep. Must be between 1 and 9999
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
+	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
+
+	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+
+	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
+	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
 type BackupPolicyVMRetentionYearlyParameters struct {
@@ -174,6 +251,9 @@ type BackupPolicyVMRetentionYearlyParameters struct {
 }
 
 type InstantRestoreResourceGroupObservation struct {
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type InstantRestoreResourceGroupParameters struct {
@@ -209,8 +289,9 @@ type BackupPolicyVMStatus struct {
 type BackupPolicyVM struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BackupPolicyVMSpec   `json:"spec"`
-	Status            BackupPolicyVMStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backup)",message="backup is a required parameter"
+	Spec   BackupPolicyVMSpec   `json:"spec"`
+	Status BackupPolicyVMStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

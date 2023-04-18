@@ -18,8 +18,23 @@ type RedisLinkedServerObservation struct {
 	// The ID of the Redis.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the linked Redis cache. Changing this forces a new Redis to be created.
+	LinkedRedisCacheID *string `json:"linkedRedisCacheId,omitempty" tf:"linked_redis_cache_id,omitempty"`
+
+	// The location of the linked Redis cache. Changing this forces a new Redis to be created.
+	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation,omitempty" tf:"linked_redis_cache_location,omitempty"`
+
 	// The name of the linked server.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Resource Group where the Redis caches exists. Changing this forces a new Redis to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The role of the linked Redis cache (eg "Secondary"). Changing this forces a new Redis to be created. Possible values are Primary and Secondary.
+	ServerRole *string `json:"serverRole,omitempty" tf:"server_role,omitempty"`
+
+	// The name of Redis cache to link with. Changing this forces a new Redis to be created. (eg The primary role)
+	TargetRedisCacheName *string `json:"targetRedisCacheName,omitempty" tf:"target_redis_cache_name,omitempty"`
 }
 
 type RedisLinkedServerParameters struct {
@@ -39,8 +54,8 @@ type RedisLinkedServerParameters struct {
 	LinkedRedisCacheIDSelector *v1.Selector `json:"linkedRedisCacheIdSelector,omitempty" tf:"-"`
 
 	// The location of the linked Redis cache. Changing this forces a new Redis to be created.
-	// +kubebuilder:validation:Required
-	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation" tf:"linked_redis_cache_location,omitempty"`
+	// +kubebuilder:validation:Optional
+	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation,omitempty" tf:"linked_redis_cache_location,omitempty"`
 
 	// The name of the Resource Group where the Redis caches exists. Changing this forces a new Redis to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -56,8 +71,8 @@ type RedisLinkedServerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The role of the linked Redis cache (eg "Secondary"). Changing this forces a new Redis to be created. Possible values are Primary and Secondary.
-	// +kubebuilder:validation:Required
-	ServerRole *string `json:"serverRole" tf:"server_role,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServerRole *string `json:"serverRole,omitempty" tf:"server_role,omitempty"`
 
 	// The name of Redis cache to link with. Changing this forces a new Redis to be created. (eg The primary role)
 	// +crossplane:generate:reference:type=RedisCache
@@ -97,8 +112,10 @@ type RedisLinkedServerStatus struct {
 type RedisLinkedServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RedisLinkedServerSpec   `json:"spec"`
-	Status            RedisLinkedServerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.linkedRedisCacheLocation)",message="linkedRedisCacheLocation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serverRole)",message="serverRole is a required parameter"
+	Spec   RedisLinkedServerSpec   `json:"spec"`
+	Status RedisLinkedServerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

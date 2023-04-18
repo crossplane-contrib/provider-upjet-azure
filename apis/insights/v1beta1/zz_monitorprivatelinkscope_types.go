@@ -17,6 +17,12 @@ type MonitorPrivateLinkScopeObservation struct {
 
 	// The ID of the Azure Monitor Private Link Scope.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group where the Azure Monitor Private Link Scope should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Azure Monitor Private Link Scope.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MonitorPrivateLinkScopeParameters struct {

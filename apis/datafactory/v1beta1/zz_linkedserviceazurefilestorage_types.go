@@ -14,6 +14,12 @@ import (
 )
 
 type LinkedServiceAzureFileStorageKeyVaultPasswordObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault that stores Azure File Storage password.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceAzureFileStorageKeyVaultPasswordParameters struct {
@@ -29,8 +35,38 @@ type LinkedServiceAzureFileStorageKeyVaultPasswordParameters struct {
 
 type LinkedServiceAzureFileStorageObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the file share.
+	FileShare *string `json:"fileShare,omitempty" tf:"file_share,omitempty"`
+
+	// The Host name of the server.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
 	// The ID of the Data Factory Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_password block as defined below. Use this argument to store Azure File Storage password in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
+	KeyVaultPassword []LinkedServiceAzureFileStorageKeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The user ID to log in the server.
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type LinkedServiceAzureFileStorageParameters struct {
@@ -44,7 +80,7 @@ type LinkedServiceAzureFileStorageParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The connection string.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -118,8 +154,9 @@ type LinkedServiceAzureFileStorageStatus struct {
 type LinkedServiceAzureFileStorage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkedServiceAzureFileStorageSpec   `json:"spec"`
-	Status            LinkedServiceAzureFileStorageStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.connectionStringSecretRef)",message="connectionStringSecretRef is a required parameter"
+	Spec   LinkedServiceAzureFileStorageSpec   `json:"spec"`
+	Status LinkedServiceAzureFileStorageStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

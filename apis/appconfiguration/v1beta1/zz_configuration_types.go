@@ -15,6 +15,9 @@ import (
 
 type ConfigurationObservation struct {
 
+	// An encryption block as defined below.
+	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
 	// The URL of the App Configuration.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
@@ -22,8 +25,13 @@ type ConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Whether local authentication methods is enabled. Defaults to true.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A primary_read_key block as defined below containing the primary read access key.
 	PrimaryReadKey []PrimaryReadKeyObservation `json:"primaryReadKey,omitempty" tf:"primary_read_key,omitempty"`
@@ -31,11 +39,29 @@ type ConfigurationObservation struct {
 	// A primary_write_key block as defined below containing the primary write access key.
 	PrimaryWriteKey []PrimaryWriteKeyObservation `json:"primaryWriteKey,omitempty" tf:"primary_write_key,omitempty"`
 
+	// The Public Network Access setting of the App Configuration. Possible values are Enabled and Disabled.
+	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
+
+	// Whether Purge Protection is enabled. This field only works for standard sku. Defaults to false.
+	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
+
+	// The name of the resource group in which to create the App Configuration. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// A secondary_read_key block as defined below containing the secondary read access key.
 	SecondaryReadKey []SecondaryReadKeyObservation `json:"secondaryReadKey,omitempty" tf:"secondary_read_key,omitempty"`
 
 	// A secondary_write_key block as defined below containing the secondary write access key.
 	SecondaryWriteKey []SecondaryWriteKeyObservation `json:"secondaryWriteKey,omitempty" tf:"secondary_write_key,omitempty"`
+
+	// The SKU name of the App Configuration. Possible values are free and standard.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// The number of days that items should be retained for once soft-deleted. This field only works for standard sku. This value can be between 1 and 7 days. Defaults to 7. Changing this forces a new resource to be created.
+	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -53,8 +79,8 @@ type ConfigurationParameters struct {
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Public Network Access setting of the App Configuration. Possible values are Enabled and Disabled.
 	// +kubebuilder:validation:Optional
@@ -91,6 +117,12 @@ type ConfigurationParameters struct {
 }
 
 type EncryptionObservation struct {
+
+	// Specifies the client id of the identity which will be used to access key vault.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// Specifies the URI of the key vault key used to encrypt data.
+	KeyVaultKeyIdentifier *string `json:"keyVaultKeyIdentifier,omitempty" tf:"key_vault_key_identifier,omitempty"`
 }
 
 type EncryptionParameters struct {
@@ -126,11 +158,17 @@ type EncryptionParameters struct {
 
 type IdentityObservation struct {
 
+	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -228,8 +266,9 @@ type ConfigurationStatus struct {
 type Configuration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConfigurationSpec   `json:"spec"`
-	Status            ConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   ConfigurationSpec   `json:"spec"`
+	Status ConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

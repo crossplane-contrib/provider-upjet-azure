@@ -15,8 +15,17 @@ import (
 
 type NotificationRecipientEmailObservation struct {
 
+	// The ID of the API Management Service from which to create this Notification Recipient Email. Changing this forces a new API Management Notification Recipient Email to be created.
+	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
+
+	// The recipient email address. Changing this forces a new API Management Notification Recipient Email to be created.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
 	// The ID of the API Management Notification Recipient Email.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient Email to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 }
 
 type NotificationRecipientEmailParameters struct {

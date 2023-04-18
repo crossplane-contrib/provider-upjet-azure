@@ -14,6 +14,18 @@ import (
 )
 
 type APNSCredentialObservation struct {
+
+	// The Application Mode which defines which server the APNS Messages should be sent to. Possible values are Production and Sandbox.
+	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
+
+	// The Bundle ID of the iOS/macOS application to send push notifications for, such as com.hashicorp.example.
+	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
+
+	// The Apple Push Notifications Service (APNS) Key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The ID of the team the Token.
+	TeamID *string `json:"teamId,omitempty" tf:"team_id,omitempty"`
 }
 
 type APNSCredentialParameters struct {
@@ -51,8 +63,26 @@ type GCMCredentialParameters struct {
 
 type NotificationHubObservation struct {
 
+	// A apns_credential block as defined below.
+	APNSCredential []APNSCredentialObservation `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
+
+	// A gcm_credential block as defined below.
+	GCMCredential []GCMCredentialParameters `json:"gcmCredential,omitempty" tf:"gcm_credential,omitempty"`
+
 	// The ID of the Notification Hub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region in which this Notification Hub Namespace exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Notification Hub Namespace in which to create this Notification Hub. Changing this forces a new resource to be created.
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The name of the Resource Group in which the Notification Hub Namespace exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type NotificationHubParameters struct {
@@ -66,8 +96,8 @@ type NotificationHubParameters struct {
 	GCMCredential []GCMCredentialParameters `json:"gcmCredential,omitempty" tf:"gcm_credential,omitempty"`
 
 	// The Azure Region in which this Notification Hub Namespace exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Notification Hub Namespace in which to create this Notification Hub. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/notificationhubs/v1beta1.NotificationHubNamespace
@@ -124,8 +154,9 @@ type NotificationHubStatus struct {
 type NotificationHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotificationHubSpec   `json:"spec"`
-	Status            NotificationHubStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   NotificationHubSpec   `json:"spec"`
+	Status NotificationHubStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

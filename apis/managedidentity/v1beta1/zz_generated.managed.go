@@ -17,6 +17,11 @@ func (mg *FederatedIdentityCredential) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FederatedIdentityCredential.
+func (mg *FederatedIdentityCredential) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FederatedIdentityCredential.
 func (mg *FederatedIdentityCredential) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *FederatedIdentityCredential) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FederatedIdentityCredential.
 func (mg *FederatedIdentityCredential) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FederatedIdentityCredential.
+func (mg *FederatedIdentityCredential) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FederatedIdentityCredential.
@@ -83,6 +93,11 @@ func (mg *UserAssignedIdentity) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this UserAssignedIdentity.
+func (mg *UserAssignedIdentity) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this UserAssignedIdentity.
 func (mg *UserAssignedIdentity) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *UserAssignedIdentity) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this UserAssignedIdentity.
 func (mg *UserAssignedIdentity) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this UserAssignedIdentity.
+func (mg *UserAssignedIdentity) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this UserAssignedIdentity.

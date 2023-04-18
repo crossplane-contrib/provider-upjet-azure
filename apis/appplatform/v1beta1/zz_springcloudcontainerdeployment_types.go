@@ -15,8 +15,38 @@ import (
 
 type SpringCloudContainerDeploymentObservation struct {
 
+	// A JSON object that contains the addon configurations of the Spring Cloud Container Deployment.
+	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
+
+	// Specifies the arguments to the entrypoint. The docker image's CMD is used if not specified.
+	Arguments []*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
+
+	// Specifies the entrypoint array. It will not be executed within a shell. The docker image's ENTRYPOINT is used if not specified.
+	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
+
+	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
+	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
+
 	// The ID of the Spring Cloud Container Deployment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Container image of the custom container. This should be in the form of <repository>:<tag> without the server name of the registry.
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
+
+	// Specifies the required instance count of the Spring Cloud Deployment. Possible Values are between 1 and 500. Defaults to 1 if not specified.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// Specifies the language framework of the container image. The only possible value is springboot.
+	LanguageFramework *string `json:"languageFramework,omitempty" tf:"language_framework,omitempty"`
+
+	// A quota block as defined below.
+	Quota []SpringCloudContainerDeploymentQuotaObservation `json:"quota,omitempty" tf:"quota,omitempty"`
+
+	// The name of the registry that contains the container image.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Container Deployment to be created.
+	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
 }
 
 type SpringCloudContainerDeploymentParameters struct {
@@ -38,8 +68,8 @@ type SpringCloudContainerDeploymentParameters struct {
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Container image of the custom container. This should be in the form of <repository>:<tag> without the server name of the registry.
-	// +kubebuilder:validation:Required
-	Image *string `json:"image" tf:"image,omitempty"`
+	// +kubebuilder:validation:Optional
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
 	// Specifies the required instance count of the Spring Cloud Deployment. Possible Values are between 1 and 500. Defaults to 1 if not specified.
 	// +kubebuilder:validation:Optional
@@ -54,8 +84,8 @@ type SpringCloudContainerDeploymentParameters struct {
 	Quota []SpringCloudContainerDeploymentQuotaParameters `json:"quota,omitempty" tf:"quota,omitempty"`
 
 	// The name of the registry that contains the container image.
-	// +kubebuilder:validation:Required
-	Server *string `json:"server" tf:"server,omitempty"`
+	// +kubebuilder:validation:Optional
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Container Deployment to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudApp
@@ -73,6 +103,12 @@ type SpringCloudContainerDeploymentParameters struct {
 }
 
 type SpringCloudContainerDeploymentQuotaObservation struct {
+
+	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
+	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
+
+	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
 type SpringCloudContainerDeploymentQuotaParameters struct {
@@ -110,8 +146,10 @@ type SpringCloudContainerDeploymentStatus struct {
 type SpringCloudContainerDeployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudContainerDeploymentSpec   `json:"spec"`
-	Status            SpringCloudContainerDeploymentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.image)",message="image is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.server)",message="server is a required parameter"
+	Spec   SpringCloudContainerDeploymentSpec   `json:"spec"`
+	Status SpringCloudContainerDeploymentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

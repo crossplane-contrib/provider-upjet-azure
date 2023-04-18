@@ -15,8 +15,20 @@ import (
 
 type WebPubsubNetworkACLObservation struct {
 
+	// The default action to control the network access when no other rule matches. Possible values are Allow and Deny. Defaults to Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
 	// The ID of the Web Pubsub service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A private_endpoint block as defined below.
+	PrivateEndpoint []WebPubsubNetworkACLPrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// A public_network block as defined below.
+	PublicNetwork []WebPubsubNetworkACLPublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
+
+	// The ID of the Web Pubsub service. Changing this forces a new resource to be created.
+	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
 }
 
 type WebPubsubNetworkACLParameters struct {
@@ -30,8 +42,8 @@ type WebPubsubNetworkACLParameters struct {
 	PrivateEndpoint []WebPubsubNetworkACLPrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// A public_network block as defined below.
-	// +kubebuilder:validation:Required
-	PublicNetwork []WebPubsubNetworkACLPublicNetworkParameters `json:"publicNetwork" tf:"public_network,omitempty"`
+	// +kubebuilder:validation:Optional
+	PublicNetwork []WebPubsubNetworkACLPublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
 	// The ID of the Web Pubsub service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/signalrservice/v1beta1.WebPubsub
@@ -49,6 +61,15 @@ type WebPubsubNetworkACLParameters struct {
 }
 
 type WebPubsubNetworkACLPrivateEndpointObservation struct {
+
+	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
+
+	// The denied request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
+
+	// The ID of the Private Endpoint which is based on the Web Pubsub service.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type WebPubsubNetworkACLPrivateEndpointParameters struct {
@@ -77,6 +98,12 @@ type WebPubsubNetworkACLPrivateEndpointParameters struct {
 }
 
 type WebPubsubNetworkACLPublicNetworkObservation struct {
+
+	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
+
+	// The denied request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 }
 
 type WebPubsubNetworkACLPublicNetworkParameters struct {
@@ -114,8 +141,9 @@ type WebPubsubNetworkACLStatus struct {
 type WebPubsubNetworkACL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WebPubsubNetworkACLSpec   `json:"spec"`
-	Status            WebPubsubNetworkACLStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publicNetwork)",message="publicNetwork is a required parameter"
+	Spec   WebPubsubNetworkACLSpec   `json:"spec"`
+	Status WebPubsubNetworkACLStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

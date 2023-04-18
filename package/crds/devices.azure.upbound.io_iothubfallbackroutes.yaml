@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: iothubfallbackroutes.devices.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -319,9 +323,22 @@ spec:
                       DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents,
                       Invalid, TwinChangeEvents.'
                     type: string
-                required:
-                - enabled
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -493,13 +510,45 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: enabled is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)
           status:
             description: IOTHubFallbackRouteStatus defines the observed state of IOTHubFallbackRoute.
             properties:
               atProvider:
                 properties:
+                  condition:
+                    description: 'The condition that is evaluated to apply the routing
+                      rule. If no condition is provided, it evaluates to true by default.
+                      For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.'
+                    type: string
+                  enabled:
+                    description: Used to specify whether the fallback route is enabled.
+                    type: boolean
+                  endpointNames:
+                    description: The endpoints to which messages that satisfy the
+                      condition are routed. Currently only 1 endpoint is allowed.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the IoTHub Fallback Route.
+                    type: string
+                  iothubName:
+                    description: The name of the IoTHub to which this Fallback Route
+                      belongs. Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group under which the IotHub
+                      Storage Container Endpoint resource has to be created. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  source:
+                    description: 'The source that the routing rule is to be applied
+                      to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents,
+                      DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents,
+                      Invalid, TwinChangeEvents.'
                     type: string
                 type: object
               conditions:

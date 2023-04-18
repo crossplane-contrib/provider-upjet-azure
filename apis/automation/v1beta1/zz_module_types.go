@@ -14,6 +14,12 @@ import (
 )
 
 type HashObservation struct {
+
+	// Specifies the algorithm used for the hash content.
+	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+
+	// The hash value of the content.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HashParameters struct {
@@ -28,6 +34,12 @@ type HashParameters struct {
 }
 
 type ModuleLinkObservation struct {
+
+	// A hash block as defined below.
+	Hash []HashObservation `json:"hash,omitempty" tf:"hash,omitempty"`
+
+	// The URI of the module content (zip or nupkg).
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ModuleLinkParameters struct {
@@ -43,8 +55,17 @@ type ModuleLinkParameters struct {
 
 type ModuleObservation struct {
 
+	// The name of the automation account in which the Module is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
 	// The Automation Module ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A module_link block as defined below.
+	ModuleLink []ModuleLinkObservation `json:"moduleLink,omitempty" tf:"module_link,omitempty"`
+
+	// The name of the resource group in which the Module is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type ModuleParameters struct {
@@ -63,8 +84,8 @@ type ModuleParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// A module_link block as defined below.
-	// +kubebuilder:validation:Required
-	ModuleLink []ModuleLinkParameters `json:"moduleLink" tf:"module_link,omitempty"`
+	// +kubebuilder:validation:Optional
+	ModuleLink []ModuleLinkParameters `json:"moduleLink,omitempty" tf:"module_link,omitempty"`
 
 	// The name of the resource group in which the Module is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -104,8 +125,9 @@ type ModuleStatus struct {
 type Module struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ModuleSpec   `json:"spec"`
-	Status            ModuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.moduleLink)",message="moduleLink is a required parameter"
+	Spec   ModuleSpec   `json:"spec"`
+	Status ModuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: mssqlfailovergroups.sql.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -339,10 +343,22 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
-                required:
-                - partnerServer
-                - readWriteEndpointFailoverPolicy
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -514,11 +530,22 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: partnerServer is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.partnerServer)
+            - message: readWriteEndpointFailoverPolicy is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.readWriteEndpointFailoverPolicy)
           status:
             description: MSSQLFailoverGroupStatus defines the observed state of MSSQLFailoverGroup.
             properties:
               atProvider:
                 properties:
+                  databases:
+                    description: A set of database names to include in the failover
+                      group.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the Failover Group.
                     type: string
@@ -526,6 +553,10 @@ spec:
                     description: A partner_server block as defined below.
                     items:
                       properties:
+                        id:
+                          description: The ID of a partner SQL server to include in
+                            the failover group.
+                          type: string
                         location:
                           description: The location of the partner server.
                           type: string
@@ -535,6 +566,37 @@ spec:
                           type: string
                       type: object
                     type: array
+                  readWriteEndpointFailoverPolicy:
+                    description: A read_write_endpoint_failover_policy block as defined
+                      below.
+                    items:
+                      properties:
+                        graceMinutes:
+                          description: The grace period in minutes, before failover
+                            with data loss is attempted for the read-write endpoint.
+                            Required when mode is Automatic.
+                          type: number
+                        mode:
+                          description: The failover policy of the read-write endpoint
+                            for the failover group. Possible values are Automatic
+                            or Manual.
+                          type: string
+                      type: object
+                    type: array
+                  readonlyEndpointFailoverPolicyEnabled:
+                    description: Whether failover is enabled for the readonly endpoint.
+                      Defaults to false.
+                    type: boolean
+                  serverId:
+                    description: The ID of the primary SQL Server on which to create
+                      the failover group. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

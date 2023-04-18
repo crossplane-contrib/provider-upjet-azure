@@ -15,8 +15,35 @@ import (
 
 type ProductObservation struct {
 
+	// The name of the API Management Service. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// Do subscribers need to be approved prior to being able to use the Product?
+	ApprovalRequired *bool `json:"approvalRequired,omitempty" tf:"approval_required,omitempty"`
+
+	// A description of this Product, which may include HTML formatting tags.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Display Name for this API Management Product.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the API Management Product.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Is this Product Published?
+	Published *bool `json:"published,omitempty" tf:"published,omitempty"`
+
+	// The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Is a Subscription required to access API's included in this Product? Defaults to true.
+	SubscriptionRequired *bool `json:"subscriptionRequired,omitempty" tf:"subscription_required,omitempty"`
+
+	// The number of subscriptions a user can have to this Product at the same time.
+	SubscriptionsLimit *float64 `json:"subscriptionsLimit,omitempty" tf:"subscriptions_limit,omitempty"`
+
+	// The Terms and Conditions for this Product, which must be accepted by Developers before they can begin the Subscription process.
+	Terms *string `json:"terms,omitempty" tf:"terms,omitempty"`
 }
 
 type ProductParameters struct {
@@ -43,12 +70,12 @@ type ProductParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Display Name for this API Management Product.
-	// +kubebuilder:validation:Required
-	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Is this Product Published?
-	// +kubebuilder:validation:Required
-	Published *bool `json:"published" tf:"published,omitempty"`
+	// +kubebuilder:validation:Optional
+	Published *bool `json:"published,omitempty" tf:"published,omitempty"`
 
 	// The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -100,8 +127,10 @@ type ProductStatus struct {
 type Product struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProductSpec   `json:"spec"`
-	Status            ProductStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.published)",message="published is a required parameter"
+	Spec   ProductSpec   `json:"spec"`
+	Status ProductStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

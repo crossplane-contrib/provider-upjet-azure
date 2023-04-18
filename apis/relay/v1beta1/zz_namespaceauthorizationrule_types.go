@@ -17,6 +17,21 @@ type NamespaceAuthorizationRuleObservation struct {
 
 	// The ID of the Azure Relay Namespace Authorization Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Grants listen access to this Authorization Rule. Defaults to false.
+	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
+
+	// Grants manage access to this Authorization Rule. When this property is true - both listen and send must be set to true too. Defaults to false.
+	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
+
+	// Name of the Azure Relay Namespace for which this Azure Relay Namespace Authorization Rule will be created. Changing this forces a new Azure Relay Namespace Authorization Rule to be created.
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The name of the Resource Group where the Azure Relay Namespace Authorization Rule should exist. Changing this forces a new Azure Relay Namespace Authorization Rule to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Grants send access to this Authorization Rule. Defaults to false.
+	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 
 type NamespaceAuthorizationRuleParameters struct {

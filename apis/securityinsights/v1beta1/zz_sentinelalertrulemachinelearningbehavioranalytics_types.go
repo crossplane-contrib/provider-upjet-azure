@@ -15,15 +15,27 @@ import (
 
 type SentinelAlertRuleMachineLearningBehaviorAnalyticsObservation struct {
 
+	// The GUID of the alert rule template which is used for this Sentinel Machine Learning Behavior Analytics Alert Rule. Changing this forces a new Sentinel Machine Learning Behavior Analytics Alert Rule to be created.
+	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid,omitempty" tf:"alert_rule_template_guid,omitempty"`
+
+	// Should this Sentinel Machine Learning Behavior Analytics Alert Rule be enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the Sentinel Machine Learning Behavior Analytics Alert Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Log Analytics Workspace this SentinelMachine Learning Behavior Analytics Alert Rule belongs to. Changing this forces a new Sentinel Machine Learning Behavior Analytics Alert Rule to be created.
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	// The name which should be used for this SentinelMachine Learning Behavior Analytics Alert Rule. Changing this forces a new Sentinel Machine Learning Behavior Analytics Alert Rule to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type SentinelAlertRuleMachineLearningBehaviorAnalyticsParameters struct {
 
 	// The GUID of the alert rule template which is used for this Sentinel Machine Learning Behavior Analytics Alert Rule. Changing this forces a new Sentinel Machine Learning Behavior Analytics Alert Rule to be created.
-	// +kubebuilder:validation:Required
-	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid" tf:"alert_rule_template_guid,omitempty"`
+	// +kubebuilder:validation:Optional
+	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid,omitempty" tf:"alert_rule_template_guid,omitempty"`
 
 	// Should this Sentinel Machine Learning Behavior Analytics Alert Rule be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -44,8 +56,8 @@ type SentinelAlertRuleMachineLearningBehaviorAnalyticsParameters struct {
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this SentinelMachine Learning Behavior Analytics Alert Rule. Changing this forces a new Sentinel Machine Learning Behavior Analytics Alert Rule to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 // SentinelAlertRuleMachineLearningBehaviorAnalyticsSpec defines the desired state of SentinelAlertRuleMachineLearningBehaviorAnalytics
@@ -72,8 +84,10 @@ type SentinelAlertRuleMachineLearningBehaviorAnalyticsStatus struct {
 type SentinelAlertRuleMachineLearningBehaviorAnalytics struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SentinelAlertRuleMachineLearningBehaviorAnalyticsSpec   `json:"spec"`
-	Status            SentinelAlertRuleMachineLearningBehaviorAnalyticsStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.alertRuleTemplateGuid)",message="alertRuleTemplateGuid is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SentinelAlertRuleMachineLearningBehaviorAnalyticsSpec   `json:"spec"`
+	Status SentinelAlertRuleMachineLearningBehaviorAnalyticsStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

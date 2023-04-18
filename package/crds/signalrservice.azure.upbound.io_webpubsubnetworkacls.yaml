@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: webpubsubnetworkacls.signalrservice.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -270,9 +274,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - publicNetwork
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -444,13 +461,69 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: publicNetwork is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publicNetwork)
           status:
             description: WebPubsubNetworkACLStatus defines the observed state of WebPubsubNetworkACL.
             properties:
               atProvider:
                 properties:
+                  defaultAction:
+                    description: The default action to control the network access
+                      when no other rule matches. Possible values are Allow and Deny.
+                      Defaults to Deny.
+                    type: string
                   id:
                     description: The ID of the Web Pubsub service.
+                    type: string
+                  privateEndpoint:
+                    description: A private_endpoint block as defined below.
+                    items:
+                      properties:
+                        allowedRequestTypes:
+                          description: The allowed request types for the Private Endpoint
+                            Connection. Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                        deniedRequestTypes:
+                          description: The denied request types for the Private Endpoint
+                            Connection. Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                        id:
+                          description: The ID of the Private Endpoint which is based
+                            on the Web Pubsub service.
+                          type: string
+                      type: object
+                    type: array
+                  publicNetwork:
+                    description: A public_network block as defined below.
+                    items:
+                      properties:
+                        allowedRequestTypes:
+                          description: The allowed request types for the public network.
+                            Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                        deniedRequestTypes:
+                          description: The denied request types for the public network.
+                            Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  webPubsubId:
+                    description: The ID of the Web Pubsub service. Changing this forces
+                      a new resource to be created.
                     type: string
                 type: object
               conditions:

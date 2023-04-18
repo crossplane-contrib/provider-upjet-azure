@@ -14,14 +14,30 @@ import (
 )
 
 type FirewallNetworkRuleCollectionObservation struct {
+
+	// Specifies the action the rule will apply to matching traffic. Possible values are Allow and Deny.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Specifies the name of the Firewall in which the Network Rule Collection should be created. Changing this forces a new resource to be created.
+	AzureFirewallName *string `json:"azureFirewallName,omitempty" tf:"azure_firewall_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// Specifies the name of the Resource Group in which the Firewall exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// One or more rule blocks as defined below.
+	Rule []FirewallNetworkRuleCollectionRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type FirewallNetworkRuleCollectionParameters struct {
 
 	// Specifies the action the rule will apply to matching traffic. Possible values are Allow and Deny.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Specifies the name of the Firewall in which the Network Rule Collection should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Firewall
@@ -37,8 +53,8 @@ type FirewallNetworkRuleCollectionParameters struct {
 	AzureFirewallNameSelector *v1.Selector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
 
 	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies the name of the Resource Group in which the Firewall exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -54,11 +70,38 @@ type FirewallNetworkRuleCollectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more rule blocks as defined below.
-	// +kubebuilder:validation:Required
-	Rule []FirewallNetworkRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rule []FirewallNetworkRuleCollectionRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type FirewallNetworkRuleCollectionRuleObservation struct {
+
+	// Specifies a description for the rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Either a list of destination IP addresses and/or IP ranges, or a list of destination Service Tags.
+	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
+
+	// A list of destination FQDNS for the rule.
+	DestinationFqdns []*string `json:"destinationFqdns,omitempty" tf:"destination_fqdns,omitempty"`
+
+	// A list of destination IP Group IDs for the rule.
+	DestinationIPGroups []*string `json:"destinationIpGroups,omitempty" tf:"destination_ip_groups,omitempty"`
+
+	// A list of destination ports.
+	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
+
+	// Specifies the name of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of protocols. Possible values are Any, ICMP, TCP and UDP.
+	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// A list of source IP addresses and/or IP ranges.
+	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
+
+	// A list of IP Group IDs for the rule.
+	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 }
 
 type FirewallNetworkRuleCollectionRuleParameters struct {
@@ -124,8 +167,11 @@ type FirewallNetworkRuleCollectionStatus struct {
 type FirewallNetworkRuleCollection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallNetworkRuleCollectionSpec   `json:"spec"`
-	Status            FirewallNetworkRuleCollectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.priority)",message="priority is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)",message="rule is a required parameter"
+	Spec   FirewallNetworkRuleCollectionSpec   `json:"spec"`
+	Status FirewallNetworkRuleCollectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

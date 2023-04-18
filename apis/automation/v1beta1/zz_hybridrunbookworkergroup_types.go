@@ -15,23 +15,35 @@ import (
 
 type HybridRunBookWorkerGroupObservation struct {
 
+	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// The name of resource type azurerm_automation_credential to use for hybrid worker.
+	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
+
 	// The ID of the Automation Hybrid Runbook Worker Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name which should be used for this Automation Account Runbook Worker Group. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type HybridRunBookWorkerGroupParameters struct {
 
 	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	AutomationAccountName *string `json:"automationAccountName" tf:"automation_account_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
 	// The name of resource type azurerm_automation_credential to use for hybrid worker.
 	// +kubebuilder:validation:Optional
 	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
 
 	// The name which should be used for this Automation Account Runbook Worker Group. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -71,8 +83,10 @@ type HybridRunBookWorkerGroupStatus struct {
 type HybridRunBookWorkerGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HybridRunBookWorkerGroupSpec   `json:"spec"`
-	Status            HybridRunBookWorkerGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.automationAccountName)",message="automationAccountName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   HybridRunBookWorkerGroupSpec   `json:"spec"`
+	Status HybridRunBookWorkerGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

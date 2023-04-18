@@ -15,27 +15,45 @@ import (
 
 type LogAnalyticsDataSourceWindowsPerformanceCounterObservation struct {
 
+	// The friendly name of the performance counter.
+	CounterName *string `json:"counterName,omitempty" tf:"counter_name,omitempty"`
+
 	// The ID of the Log Analytics Windows Performance Counter DataSource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the virtual machine instance to which the Windows Performance Counter DataSource be applied. Specify a * will apply to all instances.
+	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
+
+	// The time of sample interval in seconds. Supports values between 10 and 2147483647.
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The object name of the Log Analytics Windows Performance Counter DataSource.
+	ObjectName *string `json:"objectName,omitempty" tf:"object_name,omitempty"`
+
+	// The name of the Resource Group where the Log Analytics Windows Performance Counter DataSource should exist. Changing this forces a new Log Analytics Windows Performance Counter DataSource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the Log Analytics Workspace where the Log Analytics Windows Performance Counter DataSource should exist. Changing this forces a new Log Analytics Windows Performance Counter DataSource to be created.
+	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 }
 
 type LogAnalyticsDataSourceWindowsPerformanceCounterParameters struct {
 
 	// The friendly name of the performance counter.
-	// +kubebuilder:validation:Required
-	CounterName *string `json:"counterName" tf:"counter_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	CounterName *string `json:"counterName,omitempty" tf:"counter_name,omitempty"`
 
 	// The name of the virtual machine instance to which the Windows Performance Counter DataSource be applied. Specify a * will apply to all instances.
-	// +kubebuilder:validation:Required
-	InstanceName *string `json:"instanceName" tf:"instance_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// The time of sample interval in seconds. Supports values between 10 and 2147483647.
-	// +kubebuilder:validation:Required
-	IntervalSeconds *float64 `json:"intervalSeconds" tf:"interval_seconds,omitempty"`
+	// +kubebuilder:validation:Optional
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
 
 	// The object name of the Log Analytics Windows Performance Counter DataSource.
-	// +kubebuilder:validation:Required
-	ObjectName *string `json:"objectName" tf:"object_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ObjectName *string `json:"objectName,omitempty" tf:"object_name,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Windows Performance Counter DataSource should exist. Changing this forces a new Log Analytics Windows Performance Counter DataSource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -88,8 +106,12 @@ type LogAnalyticsDataSourceWindowsPerformanceCounterStatus struct {
 type LogAnalyticsDataSourceWindowsPerformanceCounter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LogAnalyticsDataSourceWindowsPerformanceCounterSpec   `json:"spec"`
-	Status            LogAnalyticsDataSourceWindowsPerformanceCounterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.counterName)",message="counterName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceName)",message="instanceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.intervalSeconds)",message="intervalSeconds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.objectName)",message="objectName is a required parameter"
+	Spec   LogAnalyticsDataSourceWindowsPerformanceCounterSpec   `json:"spec"`
+	Status LogAnalyticsDataSourceWindowsPerformanceCounterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

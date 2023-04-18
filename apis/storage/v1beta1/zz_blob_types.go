@@ -15,8 +15,48 @@ import (
 
 type BlobObservation struct {
 
+	// The access tier of the storage blob. Possible values are Archive, Cool and Hot.
+	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
+
+	// Controls the cache control header content of the response when blob is requested .
+	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+
+	// The MD5 sum of the blob contents. Cannot be defined if source_uri is defined, or if blob type is Append or Page. Changing this forces a new resource to be created.
+	ContentMd5 *string `json:"contentMd5,omitempty" tf:"content_md5,omitempty"`
+
+	// The content type of the storage blob. Cannot be defined if source_uri is defined. Defaults to application/octet-stream.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
 	// The ID of the Storage Blob.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A map of custom blob metadata.
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The number of workers per CPU core to run for concurrent uploads. Defaults to 8. Changing this forces a new resource to be created.
+	Parallelism *float64 `json:"parallelism,omitempty" tf:"parallelism,omitempty"`
+
+	// Used only for page blobs to specify the size in bytes of the blob to be created. Must be a multiple of 512. Defaults to 0. Changing this forces a new resource to be created.
+	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// An absolute path to a file on the local system. This field cannot be specified for Append blobs and cannot be specified if source_content or source_uri is specified. Changing this forces a new resource to be created.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The content for this blob which should be defined inline. This field can only be specified for Block blobs and cannot be specified if source or source_uri is specified. Changing this forces a new resource to be created.
+	SourceContent *string `json:"sourceContent,omitempty" tf:"source_content,omitempty"`
+
+	// The URI of an existing blob, or a file in the Azure File service, to use as the source contents for the blob to be created. Changing this forces a new resource to be created. This field cannot be specified for Append blobs and cannot be specified if source or source_content is specified.
+	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
+
+	// Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.
+	// Changing this forces a new resource to be created.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// The name of the storage container in which this blob should be created. Changing this forces a new resource to be created.
+	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
+
+	// The type of the storage blob to be created. Possible values are Append, Block or Page. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The URL of the blob
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -92,8 +132,8 @@ type BlobParameters struct {
 	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 
 	// The type of the storage blob to be created. Possible values are Append, Block or Page. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // BlobSpec defines the desired state of Blob
@@ -120,8 +160,9 @@ type BlobStatus struct {
 type Blob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BlobSpec   `json:"spec"`
-	Status            BlobStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   BlobSpec   `json:"spec"`
+	Status BlobStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

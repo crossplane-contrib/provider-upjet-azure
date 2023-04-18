@@ -15,15 +15,30 @@ import (
 
 type HealthcareMedtechServiceFHIRDestinationObservation struct {
 
+	// Specifies the destination Fhir mappings of the Med Tech Service Fhir Destination.
+	DestinationFHIRMappingJSON *string `json:"destinationFhirMappingJson,omitempty" tf:"destination_fhir_mapping_json,omitempty"`
+
+	// Specifies the destination fhir service id of the Med Tech Service Fhir Destination.
+	DestinationFHIRServiceID *string `json:"destinationFhirServiceId,omitempty" tf:"destination_fhir_service_id,omitempty"`
+
+	// Specifies the destination identity resolution type where the Healthcare Med Tech Service Fhir Destination should be created. Possible values are Create, Lookup.
+	DestinationIdentityResolutionType *string `json:"destinationIdentityResolutionType,omitempty" tf:"destination_identity_resolution_type,omitempty"`
+
 	// The ID of the Healthcare Med Tech Service Fhir Destination.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the Azure Region where the Healthcare Med Tech Service Fhir Destination should be created. Changing this forces a new Healthcare Med Tech Service Fhir Destination to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the Healthcare Med Tech Service where the Healthcare Med Tech Service Fhir Destination should exist. Changing this forces a new Healthcare Med Tech Service Fhir Destination to be created.
+	MedtechServiceID *string `json:"medtechServiceId,omitempty" tf:"medtech_service_id,omitempty"`
 }
 
 type HealthcareMedtechServiceFHIRDestinationParameters struct {
 
 	// Specifies the destination Fhir mappings of the Med Tech Service Fhir Destination.
-	// +kubebuilder:validation:Required
-	DestinationFHIRMappingJSON *string `json:"destinationFhirMappingJson" tf:"destination_fhir_mapping_json,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationFHIRMappingJSON *string `json:"destinationFhirMappingJson,omitempty" tf:"destination_fhir_mapping_json,omitempty"`
 
 	// Specifies the destination fhir service id of the Med Tech Service Fhir Destination.
 	// +crossplane:generate:reference:type=HealthcareFHIRService
@@ -40,12 +55,12 @@ type HealthcareMedtechServiceFHIRDestinationParameters struct {
 	DestinationFHIRServiceIDSelector *v1.Selector `json:"destinationFhirServiceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the destination identity resolution type where the Healthcare Med Tech Service Fhir Destination should be created. Possible values are Create, Lookup.
-	// +kubebuilder:validation:Required
-	DestinationIdentityResolutionType *string `json:"destinationIdentityResolutionType" tf:"destination_identity_resolution_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationIdentityResolutionType *string `json:"destinationIdentityResolutionType,omitempty" tf:"destination_identity_resolution_type,omitempty"`
 
 	// Specifies the Azure Region where the Healthcare Med Tech Service Fhir Destination should be created. Changing this forces a new Healthcare Med Tech Service Fhir Destination to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Healthcare Med Tech Service where the Healthcare Med Tech Service Fhir Destination should exist. Changing this forces a new Healthcare Med Tech Service Fhir Destination to be created.
 	// +crossplane:generate:reference:type=HealthcareMedtechService
@@ -86,8 +101,11 @@ type HealthcareMedtechServiceFHIRDestinationStatus struct {
 type HealthcareMedtechServiceFHIRDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HealthcareMedtechServiceFHIRDestinationSpec   `json:"spec"`
-	Status            HealthcareMedtechServiceFHIRDestinationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinationFhirMappingJson)",message="destinationFhirMappingJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinationIdentityResolutionType)",message="destinationIdentityResolutionType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   HealthcareMedtechServiceFHIRDestinationSpec   `json:"spec"`
+	Status HealthcareMedtechServiceFHIRDestinationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

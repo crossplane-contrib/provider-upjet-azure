@@ -17,6 +17,12 @@ type SubnetNATGatewayAssociationObservation struct {
 
 	// The ID of the Subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the NAT Gateway which should be associated with the Subnet. Changing this forces a new resource to be created.
+	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
+
+	// The ID of the Subnet. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type SubnetNATGatewayAssociationParameters struct {

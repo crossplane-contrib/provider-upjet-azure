@@ -14,6 +14,12 @@ import (
 )
 
 type RetentionPolicyObservation struct {
+
+	// The number of days to retain flow log records.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Boolean flag to enable/disable retention.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type RetentionPolicyParameters struct {
@@ -28,6 +34,21 @@ type RetentionPolicyParameters struct {
 }
 
 type TrafficAnalyticsObservation struct {
+
+	// Boolean flag to enable/disable traffic analytics.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// How frequently service should do flow analytics in minutes. Defaults to 60.
+	IntervalInMinutes *float64 `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
+
+	// The resource GUID of the attached workspace.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// The location of the attached workspace.
+	WorkspaceRegion *string `json:"workspaceRegion,omitempty" tf:"workspace_region,omitempty"`
+
+	// The resource ID of the attached workspace.
+	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 }
 
 type TrafficAnalyticsParameters struct {
@@ -75,15 +96,45 @@ type TrafficAnalyticsParameters struct {
 
 type WatcherFlowLogObservation struct {
 
+	// Should Network Flow Logging be Enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the Network Watcher.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the location of the Network Watcher.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the Network Security Group for which to enable flow logs for. Changing this forces a new resource to be created.
+	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
+
+	// The name of the Network Watcher. Changing this forces a new resource to be created.
+	NetworkWatcherName *string `json:"networkWatcherName,omitempty" tf:"network_watcher_name,omitempty"`
+
+	// The name of the resource group in which the Network Watcher was deployed. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A retention_policy block as documented below.
+	RetentionPolicy []RetentionPolicyObservation `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+
+	// The ID of the Storage Account where flow logs are stored.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the Network Watcher Flow Log.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A traffic_analytics block as documented below.
+	TrafficAnalytics []TrafficAnalyticsObservation `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
+
+	// The version (revision) of the flow log. Possible values are 1 and 2.
+	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type WatcherFlowLogParameters struct {
 
 	// Should Network Flow Logging be Enabled?
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the location of the Network Watcher.
 	// +kubebuilder:validation:Optional
@@ -130,8 +181,8 @@ type WatcherFlowLogParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A retention_policy block as documented below.
-	// +kubebuilder:validation:Required
-	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy" tf:"retention_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The ID of the Storage Account where flow logs are stored.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -184,8 +235,10 @@ type WatcherFlowLogStatus struct {
 type WatcherFlowLog struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WatcherFlowLogSpec   `json:"spec"`
-	Status            WatcherFlowLogStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.retentionPolicy)",message="retentionPolicy is a required parameter"
+	Spec   WatcherFlowLogSpec   `json:"spec"`
+	Status WatcherFlowLogStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

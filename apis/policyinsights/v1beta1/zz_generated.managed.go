@@ -17,6 +17,11 @@ func (mg *ResourcePolicyRemediation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ResourcePolicyRemediation.
+func (mg *ResourcePolicyRemediation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ResourcePolicyRemediation.
 func (mg *ResourcePolicyRemediation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *ResourcePolicyRemediation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ResourcePolicyRemediation.
 func (mg *ResourcePolicyRemediation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ResourcePolicyRemediation.
+func (mg *ResourcePolicyRemediation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ResourcePolicyRemediation.
@@ -83,6 +93,11 @@ func (mg *SubscriptionPolicyRemediation) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SubscriptionPolicyRemediation.
+func (mg *SubscriptionPolicyRemediation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SubscriptionPolicyRemediation.
 func (mg *SubscriptionPolicyRemediation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *SubscriptionPolicyRemediation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SubscriptionPolicyRemediation.
 func (mg *SubscriptionPolicyRemediation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SubscriptionPolicyRemediation.
+func (mg *SubscriptionPolicyRemediation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SubscriptionPolicyRemediation.

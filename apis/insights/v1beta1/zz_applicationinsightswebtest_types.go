@@ -14,9 +14,49 @@ import (
 )
 
 type ApplicationInsightsWebTestObservation struct {
+
+	// The ID of the Application Insights component on which the WebTest operates. Changing this forces a new resource to be created.
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
+	// An XML configuration specification for a WebTest (see here for more information).
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// Purpose/user defined descriptive test for this WebTest.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Is the test actively being monitored.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900. Defaults to 300.
+	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
+	// A list of where to physically run the tests from to give global coverage for accessibility of your application.
+	GeoLocations []*string `json:"geoLocations,omitempty" tf:"geo_locations,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The kind of web test that this web test watches. Choices are ping and multistep. Changing this forces a new resource to be created.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. It needs to correlate with location of parent resource (azurerm_application_insights).
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the Application Insights WebTest. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the resource group in which to create the Application Insights WebTest. Changing this forces a new resource
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Allow for retries should this WebTest fail.
+	RetryEnabled *bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
+
 	SyntheticMonitorID *string `json:"syntheticMonitorId,omitempty" tf:"synthetic_monitor_id,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Seconds until this WebTest will timeout and fail. Default is 30.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type ApplicationInsightsWebTestParameters struct {
@@ -36,8 +76,8 @@ type ApplicationInsightsWebTestParameters struct {
 	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// An XML configuration specification for a WebTest (see here for more information).
-	// +kubebuilder:validation:Required
-	Configuration *string `json:"configuration" tf:"configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Purpose/user defined descriptive test for this WebTest.
 	// +kubebuilder:validation:Optional
@@ -52,20 +92,20 @@ type ApplicationInsightsWebTestParameters struct {
 	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// A list of where to physically run the tests from to give global coverage for accessibility of your application.
-	// +kubebuilder:validation:Required
-	GeoLocations []*string `json:"geoLocations" tf:"geo_locations,omitempty"`
+	// +kubebuilder:validation:Optional
+	GeoLocations []*string `json:"geoLocations,omitempty" tf:"geo_locations,omitempty"`
 
 	// The kind of web test that this web test watches. Choices are ping and multistep. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Kind *string `json:"kind" tf:"kind,omitempty"`
+	// +kubebuilder:validation:Optional
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. It needs to correlate with location of parent resource (azurerm_application_insights).
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Application Insights WebTest. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which to create the Application Insights WebTest. Changing this forces a new resource
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -117,8 +157,13 @@ type ApplicationInsightsWebTestStatus struct {
 type ApplicationInsightsWebTest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationInsightsWebTestSpec   `json:"spec"`
-	Status            ApplicationInsightsWebTestStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configuration)",message="configuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.geoLocations)",message="geoLocations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.kind)",message="kind is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ApplicationInsightsWebTestSpec   `json:"spec"`
+	Status ApplicationInsightsWebTestStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,6 +14,12 @@ import (
 )
 
 type AccessControlObservation struct {
+
+	// One or more akamai_signature_header_authentication_key blocks as defined below.
+	AkamaiSignatureHeaderAuthenticationKey []AkamaiSignatureHeaderAuthenticationKeyObservation `json:"akamaiSignatureHeaderAuthenticationKey,omitempty" tf:"akamai_signature_header_authentication_key,omitempty"`
+
+	// A ip_allow block as defined below.
+	IPAllow []IPAllowObservation `json:"ipAllow,omitempty" tf:"ip_allow,omitempty"`
 }
 
 type AccessControlParameters struct {
@@ -28,6 +34,15 @@ type AccessControlParameters struct {
 }
 
 type AkamaiSignatureHeaderAuthenticationKeyObservation struct {
+
+	// Authentication key.
+	Base64Key *string `json:"base64Key,omitempty" tf:"base64_key,omitempty"`
+
+	// The expiration time of the authentication key.
+	Expiration *string `json:"expiration,omitempty" tf:"expiration,omitempty"`
+
+	// Identifier of the key.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 }
 
 type AkamaiSignatureHeaderAuthenticationKeyParameters struct {
@@ -46,6 +61,15 @@ type AkamaiSignatureHeaderAuthenticationKeyParameters struct {
 }
 
 type IPAllowObservation struct {
+
+	// The IP address to allow.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The sku name of Streaming Endpoint.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The subnet mask prefix length (see CIDR notation).
+	SubnetPrefixLength *float64 `json:"subnetPrefixLength,omitempty" tf:"subnet_prefix_length,omitempty"`
 }
 
 type IPAllowParameters struct {
@@ -76,6 +100,12 @@ type SkuParameters struct {
 }
 
 type StreamingEndpointCrossSiteAccessPolicyObservation struct {
+
+	// The content of clientaccesspolicy.xml used by Silverlight.
+	ClientAccessPolicy *string `json:"clientAccessPolicy,omitempty" tf:"client_access_policy,omitempty"`
+
+	// The content of crossdomain.xml used by Silverlight.
+	CrossDomainPolicy *string `json:"crossDomainPolicy,omitempty" tf:"cross_domain_policy,omitempty"`
 }
 
 type StreamingEndpointCrossSiteAccessPolicyParameters struct {
@@ -91,14 +121,56 @@ type StreamingEndpointCrossSiteAccessPolicyParameters struct {
 
 type StreamingEndpointObservation struct {
 
+	// A access_control block as defined below.
+	AccessControl []AccessControlObservation `json:"accessControl,omitempty" tf:"access_control,omitempty"`
+
+	// The flag indicates if the resource should be automatically started on creation.
+	AutoStartEnabled *bool `json:"autoStartEnabled,omitempty" tf:"auto_start_enabled,omitempty"`
+
+	// The CDN enabled flag.
+	CdnEnabled *bool `json:"cdnEnabled,omitempty" tf:"cdn_enabled,omitempty"`
+
+	// The CDN profile name.
+	CdnProfile *string `json:"cdnProfile,omitempty" tf:"cdn_profile,omitempty"`
+
+	// The CDN provider name. Supported value are StandardVerizon,PremiumVerizon and StandardAkamai
+	CdnProvider *string `json:"cdnProvider,omitempty" tf:"cdn_provider,omitempty"`
+
+	// A cross_site_access_policy block as defined below.
+	CrossSiteAccessPolicy []StreamingEndpointCrossSiteAccessPolicyObservation `json:"crossSiteAccessPolicy,omitempty" tf:"cross_site_access_policy,omitempty"`
+
+	// The custom host names of the streaming endpoint.
+	CustomHostNames []*string `json:"customHostNames,omitempty" tf:"custom_host_names,omitempty"`
+
+	// The streaming endpoint description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The host name of the Streaming Endpoint.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The ID of the Streaming Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Azure Region where the Streaming Endpoint should exist. Changing this forces a new Streaming Endpoint to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Max cache age in seconds.
+	MaxCacheAgeSeconds *float64 `json:"maxCacheAgeSeconds,omitempty" tf:"max_cache_age_seconds,omitempty"`
+
+	// The Media Services account name. Changing this forces a new Streaming Endpoint to be created.
+	MediaServicesAccountName *string `json:"mediaServicesAccountName,omitempty" tf:"media_services_account_name,omitempty"`
+
+	// The name of the Resource Group where the Streaming Endpoint should exist. Changing this forces a new Streaming Endpoint to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The number of scale units. To create a Standard Streaming Endpoint set 0. For Premium Streaming Endpoint valid values are between 1 and 10.
+	ScaleUnits *float64 `json:"scaleUnits,omitempty" tf:"scale_units,omitempty"`
+
 	// A sku block defined as below.
 	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags which should be assigned to the Streaming Endpoint.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type StreamingEndpointParameters struct {
@@ -136,8 +208,8 @@ type StreamingEndpointParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Azure Region where the Streaming Endpoint should exist. Changing this forces a new Streaming Endpoint to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Max cache age in seconds.
 	// +kubebuilder:validation:Optional
@@ -170,8 +242,8 @@ type StreamingEndpointParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The number of scale units. To create a Standard Streaming Endpoint set 0. For Premium Streaming Endpoint valid values are between 1 and 10.
-	// +kubebuilder:validation:Required
-	ScaleUnits *float64 `json:"scaleUnits" tf:"scale_units,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScaleUnits *float64 `json:"scaleUnits,omitempty" tf:"scale_units,omitempty"`
 
 	// A mapping of tags which should be assigned to the Streaming Endpoint.
 	// +kubebuilder:validation:Optional
@@ -202,8 +274,10 @@ type StreamingEndpointStatus struct {
 type StreamingEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamingEndpointSpec   `json:"spec"`
-	Status            StreamingEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scaleUnits)",message="scaleUnits is a required parameter"
+	Spec   StreamingEndpointSpec   `json:"spec"`
+	Status StreamingEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

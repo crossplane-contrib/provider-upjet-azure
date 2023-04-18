@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: iotsecuritydevicegroups.security.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -207,9 +211,22 @@ spec:
                       - type
                       type: object
                     type: array
-                required:
-                - name
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -381,15 +398,83 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: IOTSecurityDeviceGroupStatus defines the observed state of
               IOTSecurityDeviceGroup.
             properties:
               atProvider:
                 properties:
+                  allowRule:
+                    description: an allow_rule blocks as defined below.
+                    items:
+                      properties:
+                        connectionFromIpsNotAllowed:
+                          description: Specifies which IP is not allowed to be connected
+                            to in current device group for inbound connection.
+                          items:
+                            type: string
+                          type: array
+                        connectionToIpsNotAllowed:
+                          description: Specifies which IP is not allowed to be connected
+                            to in current device group for outbound connection.
+                          items:
+                            type: string
+                          type: array
+                        localUsersNotAllowed:
+                          description: Specifies which local user is not allowed to
+                            login in current device group.
+                          items:
+                            type: string
+                          type: array
+                        processesNotAllowed:
+                          description: Specifies which process is not allowed to be
+                            executed in current device group.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Iot Security Device Group resource.
                     type: string
+                  iothubId:
+                    description: The ID of the IoT Hub which to link the Security
+                      Device Group to. Changing this forces a new resource to be created.
+                    type: string
+                  name:
+                    description: Specifies the name of the Device Security Group.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  rangeRule:
+                    description: One or more range_rule blocks as defined below.
+                    items:
+                      properties:
+                        duration:
+                          description: Specifies the time range. represented in ISO
+                            8601 duration format.
+                          type: string
+                        max:
+                          description: The maximum threshold in the given time window.
+                          type: number
+                        min:
+                          description: The minimum threshold in the given time window.
+                          type: number
+                        type:
+                          description: The type of supported rule type. Possible Values
+                            are ActiveConnectionsNotInAllowedRange, AmqpC2DMessagesNotInAllowedRange,
+                            MqttC2DMessagesNotInAllowedRange, HttpC2DMessagesNotInAllowedRange,
+                            AmqpC2DRejectedMessagesNotInAllowedRange, MqttC2DRejectedMessagesNotInAllowedRange,
+                            HttpC2DRejectedMessagesNotInAllowedRange, AmqpD2CMessagesNotInAllowedRange,
+                            MqttD2CMessagesNotInAllowedRange, HttpD2CMessagesNotInAllowedRange,
+                            DirectMethodInvokesNotInAllowedRange, FailedLocalLoginsNotInAllowedRange,
+                            FileUploadsNotInAllowedRange, QueuePurgesNotInAllowedRange,
+                            TwinUpdatesNotInAllowedRange and UnauthorizedOperationsNotInAllowedRange.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

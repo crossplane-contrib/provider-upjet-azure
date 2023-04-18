@@ -15,8 +15,20 @@ import (
 
 type MSSQLServerMicrosoftSupportAuditingPolicyObservation struct {
 
+	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Microsoft support auditing logs.
+	BlobStorageEndpoint *string `json:"blobStorageEndpoint,omitempty" tf:"blob_storage_endpoint,omitempty"`
+
+	// Whether to enable the extended auditing policy. Possible values are true and false. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the MS SQL Server Microsoft Support Auditing Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Enable audit events to Azure Monitor? To enable server audit events to Azure Monitor, please enable its main database audit events to Azure Monitor. Defaults to true.
+	LogMonitoringEnabled *bool `json:"logMonitoringEnabled,omitempty" tf:"log_monitoring_enabled,omitempty"`
+
+	// The ID of the SQL Server to set the extended auditing policy. Changing this forces a new resource to be created.
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
 
 type MSSQLServerMicrosoftSupportAuditingPolicyParameters struct {

@@ -15,11 +15,17 @@ import (
 
 type SubscriptionPolicyAssignmentIdentityObservation struct {
 
+	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID of the Policy Assignment for this Subscription.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID of the Policy Assignment for this Subscription.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned or UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SubscriptionPolicyAssignmentIdentityParameters struct {
@@ -34,6 +40,12 @@ type SubscriptionPolicyAssignmentIdentityParameters struct {
 }
 
 type SubscriptionPolicyAssignmentNonComplianceMessageObservation struct {
+
+	// The non-compliance message text. When assigning policy sets (initiatives), unless policy_definition_reference_id is specified then this message will be the default for all policies.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// When assigning policy sets (initiatives), this is the ID of the policy definition that the non-compliance message applies to.
+	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
 }
 
 type SubscriptionPolicyAssignmentNonComplianceMessageParameters struct {
@@ -49,12 +61,41 @@ type SubscriptionPolicyAssignmentNonComplianceMessageParameters struct {
 
 type SubscriptionPolicyAssignmentObservation struct {
 
+	// A description which should be used for this Policy Assignment.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Display Name for this Policy Assignment.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Specifies if this Policy should be enforced or not? Defaults to true.
+	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
+
 	// The ID of the Subscription Policy Assignment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []SubscriptionPolicyAssignmentIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Policy Assignment should exist. Changing this forces a new Policy Assignment to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A JSON mapping of any Metadata for this Policy.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// One or more non_compliance_message blocks as defined below.
+	NonComplianceMessage []SubscriptionPolicyAssignmentNonComplianceMessageObservation `json:"nonComplianceMessage,omitempty" tf:"non_compliance_message,omitempty"`
+
+	// Specifies a list of Resource Scopes (for example a Subscription, or a Resource Group) within this Management Group which are excluded from this Policy.
+	NotScopes []*string `json:"notScopes,omitempty" tf:"not_scopes,omitempty"`
+
+	// A JSON mapping of any Parameters for this Policy.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
+	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
+
+	// The ID of the Subscription where this Policy Assignment should be created. Changing this forces a new Policy Assignment to be created.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type SubscriptionPolicyAssignmentParameters struct {
@@ -110,8 +151,8 @@ type SubscriptionPolicyAssignmentParameters struct {
 	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Subscription where this Policy Assignment should be created. Changing this forces a new Policy Assignment to be created.
-	// +kubebuilder:validation:Required
-	SubscriptionID *string `json:"subscriptionId" tf:"subscription_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 // SubscriptionPolicyAssignmentSpec defines the desired state of SubscriptionPolicyAssignment
@@ -138,8 +179,9 @@ type SubscriptionPolicyAssignmentStatus struct {
 type SubscriptionPolicyAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubscriptionPolicyAssignmentSpec   `json:"spec"`
-	Status            SubscriptionPolicyAssignmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriptionId)",message="subscriptionId is a required parameter"
+	Spec   SubscriptionPolicyAssignmentSpec   `json:"spec"`
+	Status SubscriptionPolicyAssignmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

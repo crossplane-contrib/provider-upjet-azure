@@ -15,8 +15,32 @@ import (
 
 type WebhookObservation struct {
 
+	// The name of the automation account in which the Webhook is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// Controls if Webhook is enabled. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Timestamp when the webhook expires. Changing this forces a new resource to be created.
+	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
+
 	// The Automation Webhook ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Webhook. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Map of input parameters passed to runbook.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The name of the resource group in which the Webhook is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Name of the Automation Runbook to execute by Webhook.
+	RunBookName *string `json:"runbookName,omitempty" tf:"runbook_name,omitempty"`
+
+	// Name of the hybrid worker group the Webhook job will run on.
+	RunOnWorkerGroup *string `json:"runOnWorkerGroup,omitempty" tf:"run_on_worker_group,omitempty"`
 }
 
 type WebhookParameters struct {
@@ -39,12 +63,12 @@ type WebhookParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Timestamp when the webhook expires. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ExpiryTime *string `json:"expiryTime" tf:"expiry_time,omitempty"`
+	// +kubebuilder:validation:Optional
+	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
 
 	// Specifies the name of the Webhook. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Map of input parameters passed to runbook.
 	// +kubebuilder:validation:Optional
@@ -110,8 +134,10 @@ type WebhookStatus struct {
 type Webhook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WebhookSpec   `json:"spec"`
-	Status            WebhookStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.expiryTime)",message="expiryTime is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   WebhookSpec   `json:"spec"`
+	Status WebhookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

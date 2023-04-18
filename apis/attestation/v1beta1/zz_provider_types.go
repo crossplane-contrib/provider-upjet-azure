@@ -21,6 +21,18 @@ type ProviderObservation struct {
 	// The ID of the Attestation Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Azure Region where the Attestation Provider should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A valid X.509 certificate (Section 4 of RFC4648). Changing this forces a new resource to be created.
+	PolicySigningCertificateData *string `json:"policySigningCertificateData,omitempty" tf:"policy_signing_certificate_data,omitempty"`
+
+	// The name of the Resource Group where the attestation provider should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Attestation Provider.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// Trust model used for the Attestation Service.
 	TrustModel *string `json:"trustModel,omitempty" tf:"trust_model,omitempty"`
 }
@@ -28,8 +40,8 @@ type ProviderObservation struct {
 type ProviderParameters struct {
 
 	// The Azure Region where the Attestation Provider should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A valid X.509 certificate (Section 4 of RFC4648). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -77,8 +89,9 @@ type ProviderStatus struct {
 type Provider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProviderSpec   `json:"spec"`
-	Status            ProviderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   ProviderSpec   `json:"spec"`
+	Status ProviderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

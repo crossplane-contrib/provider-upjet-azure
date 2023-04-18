@@ -15,15 +15,27 @@ import (
 
 type AppIntegrationAccountPartnerObservation struct {
 
+	// A business_identity block as documented below.
+	BusinessIdentity []BusinessIdentityObservation `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
+
 	// The ID of the Logic App Integration Account Partner.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Partner to be created.
+	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
+
+	// A JSON mapping of any Metadata for this Logic App Integration Account Partner.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name of the Resource Group where the Logic App Integration Account Partner should exist. Changing this forces a new Logic App Integration Account Partner to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type AppIntegrationAccountPartnerParameters struct {
 
 	// A business_identity block as documented below.
-	// +kubebuilder:validation:Required
-	BusinessIdentity []BusinessIdentityParameters `json:"businessIdentity" tf:"business_identity,omitempty"`
+	// +kubebuilder:validation:Optional
+	BusinessIdentity []BusinessIdentityParameters `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Partner to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta1.AppIntegrationAccount
@@ -58,6 +70,12 @@ type AppIntegrationAccountPartnerParameters struct {
 }
 
 type BusinessIdentityObservation struct {
+
+	// The authenticating body that provides unique business identities to organizations.
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// The value that identifies the documents that your logic apps receive.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type BusinessIdentityParameters struct {
@@ -95,8 +113,9 @@ type AppIntegrationAccountPartnerStatus struct {
 type AppIntegrationAccountPartner struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppIntegrationAccountPartnerSpec   `json:"spec"`
-	Status            AppIntegrationAccountPartnerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.businessIdentity)",message="businessIdentity is a required parameter"
+	Spec   AppIntegrationAccountPartnerSpec   `json:"spec"`
+	Status AppIntegrationAccountPartnerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

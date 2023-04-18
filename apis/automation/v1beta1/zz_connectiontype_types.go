@@ -15,8 +15,23 @@ import (
 
 type ConnectionTypeObservation struct {
 
+	// The name of the automation account in which the Connection is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// One or more field blocks as defined below. Changing this forces a new Automation to be created.
+	Field []FieldObservation `json:"field,omitempty" tf:"field,omitempty"`
+
 	// The the Automation Connection Type ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Whether the connection type is global. Changing this forces a new Automation to be created.
+	IsGlobal *bool `json:"isGlobal,omitempty" tf:"is_global,omitempty"`
+
+	// The name which should be used for this Automation Connection Type. Changing this forces a new Automation to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type ConnectionTypeParameters struct {
@@ -35,16 +50,16 @@ type ConnectionTypeParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// One or more field blocks as defined below. Changing this forces a new Automation to be created.
-	// +kubebuilder:validation:Required
-	Field []FieldParameters `json:"field" tf:"field,omitempty"`
+	// +kubebuilder:validation:Optional
+	Field []FieldParameters `json:"field,omitempty" tf:"field,omitempty"`
 
 	// Whether the connection type is global. Changing this forces a new Automation to be created.
 	// +kubebuilder:validation:Optional
 	IsGlobal *bool `json:"isGlobal,omitempty" tf:"is_global,omitempty"`
 
 	// The name which should be used for this Automation Connection Type. Changing this forces a new Automation to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -61,6 +76,18 @@ type ConnectionTypeParameters struct {
 }
 
 type FieldObservation struct {
+
+	// Whether to set the isEncrypted flag of the connection field definition.
+	IsEncrypted *bool `json:"isEncrypted,omitempty" tf:"is_encrypted,omitempty"`
+
+	// Whether to set the isOptional flag of the connection field definition.
+	IsOptional *bool `json:"isOptional,omitempty" tf:"is_optional,omitempty"`
+
+	// The name which should be used for this connection field definition.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of the connection field definition.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FieldParameters struct {
@@ -106,8 +133,10 @@ type ConnectionTypeStatus struct {
 type ConnectionType struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConnectionTypeSpec   `json:"spec"`
-	Status            ConnectionTypeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.field)",message="field is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ConnectionTypeSpec   `json:"spec"`
+	Status ConnectionTypeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

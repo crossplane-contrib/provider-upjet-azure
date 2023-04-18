@@ -14,6 +14,15 @@ import (
 )
 
 type BGPSettingsObservation struct {
+
+	// The BGP speaker's ASN.
+	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
+
+	// The BGP peering address and BGP identifier of this BGP speaker.
+	BGPPeeringAddress *string `json:"bgpPeeringAddress,omitempty" tf:"bgp_peering_address,omitempty"`
+
+	// The weight added to routes learned from this BGP speaker.
+	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 }
 
 type BGPSettingsParameters struct {
@@ -33,8 +42,29 @@ type BGPSettingsParameters struct {
 
 type LocalNetworkGatewayObservation struct {
 
+	// The list of string CIDRs representing the address spaces the gateway exposes.
+	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
+
+	// A bgp_settings block as defined below containing the Local Network Gateway's BGP speaker settings.
+	BGPSettings []BGPSettingsObservation `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
+
+	// The gateway IP address to connect with.
+	GatewayAddress *string `json:"gatewayAddress,omitempty" tf:"gateway_address,omitempty"`
+
+	// The gateway FQDN to connect with.
+	GatewayFqdn *string `json:"gatewayFqdn,omitempty" tf:"gateway_fqdn,omitempty"`
+
 	// The ID of the Local Network Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The location/region where the local network gateway is created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the local network gateway. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LocalNetworkGatewayParameters struct {
@@ -56,8 +86,8 @@ type LocalNetworkGatewayParameters struct {
 	GatewayFqdn *string `json:"gatewayFqdn,omitempty" tf:"gateway_fqdn,omitempty"`
 
 	// The location/region where the local network gateway is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the local network gateway. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -101,8 +131,9 @@ type LocalNetworkGatewayStatus struct {
 type LocalNetworkGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LocalNetworkGatewaySpec   `json:"spec"`
-	Status            LocalNetworkGatewayStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   LocalNetworkGatewaySpec   `json:"spec"`
+	Status LocalNetworkGatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

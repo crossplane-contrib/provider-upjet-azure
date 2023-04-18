@@ -17,6 +17,15 @@ type MSSQLVirtualNetworkRuleObservation struct {
 
 	// The ID of the SQL virtual network rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Create the virtual network rule before the subnet has the virtual network service endpoint enabled. Defaults to false.
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The resource ID of the SQL Server to which this SQL virtual network rule will be applied. Changing this forces a new resource to be created.
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// The ID of the subnet from which the SQL server will accept communications.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type MSSQLVirtualNetworkRuleParameters struct {

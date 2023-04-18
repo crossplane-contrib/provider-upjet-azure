@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: referencedatasets.timeseriesinsights.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -178,10 +182,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - keyProperty
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -353,14 +369,55 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: keyProperty is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyProperty)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: ReferenceDataSetStatus defines the observed state of ReferenceDataSet.
             properties:
               atProvider:
                 properties:
+                  dataStringComparisonBehavior:
+                    description: The comparison behavior that will be used to compare
+                      keys. Valid values include Ordinal and OrdinalIgnoreCase. Defaults
+                      to Ordinal. Changing this forces a new resource to be created.
+                    type: string
                   id:
                     description: The ID of the IoT Time Series Insights Reference
                       Data Set.
+                    type: string
+                  keyProperty:
+                    description: A key_property block as defined below. Changing this
+                      forces a new resource to be created.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the key property. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        type:
+                          description: The data type of the key property. Valid values
+                            include Bool, DateTime, Double, String. Changing this
+                            forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  timeSeriesInsightsEnvironmentId:
+                    description: The resource ID of the Azure IoT Time Series Insights
+                      Environment in which to create the Azure IoT Time Series Insights
+                      Reference Data Set. Changing this forces a new resource to be
+                      created.
                     type: string
                 type: object
               conditions:

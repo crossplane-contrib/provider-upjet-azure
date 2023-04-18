@@ -15,6 +15,12 @@ import (
 
 type APIOperationTagObservation struct {
 
+	// The ID of the API Management API Operation. Changing this forces a new API Management API Operation Tag to be created.
+	APIOperationID *string `json:"apiOperationId,omitempty" tf:"api_operation_id,omitempty"`
+
+	// The display name of the API Management API Operation Tag.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the API Management API Operation Tag.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -36,8 +42,8 @@ type APIOperationTagParameters struct {
 	APIOperationIDSelector *v1.Selector `json:"apiOperationIdSelector,omitempty" tf:"-"`
 
 	// The display name of the API Management API Operation Tag.
-	// +kubebuilder:validation:Required
-	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 }
 
 // APIOperationTagSpec defines the desired state of APIOperationTag
@@ -64,8 +70,9 @@ type APIOperationTagStatus struct {
 type APIOperationTag struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              APIOperationTagSpec   `json:"spec"`
-	Status            APIOperationTagStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	Spec   APIOperationTagSpec   `json:"spec"`
+	Status APIOperationTagStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

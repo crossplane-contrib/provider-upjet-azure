@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: queues.servicebus.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -223,6 +227,21 @@ spec:
                       Unknown. Note that Restoring is not accepted. Defaults to Active.
                     type: string
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -399,8 +418,91 @@ spec:
             properties:
               atProvider:
                 properties:
+                  autoDeleteOnIdle:
+                    description: The ISO 8601 timespan duration of the idle interval
+                      after which the Queue is automatically deleted, minimum of 5
+                      minutes.
+                    type: string
+                  deadLetteringOnMessageExpiration:
+                    description: Boolean flag which controls whether the Queue has
+                      dead letter support when a message expires. Defaults to false.
+                    type: boolean
+                  defaultMessageTtl:
+                    description: The ISO 8601 timespan duration of the TTL of messages
+                      sent to this queue. This is the default value used when TTL
+                      is not set on message itself.
+                    type: string
+                  duplicateDetectionHistoryTimeWindow:
+                    description: The ISO 8601 timespan duration during which duplicates
+                      can be detected. Defaults to 10 minutes (PT10M).
+                    type: string
+                  enableBatchedOperations:
+                    description: Boolean flag which controls whether server-side batched
+                      operations are enabled. Defaults to true.
+                    type: boolean
+                  enableExpress:
+                    description: Boolean flag which controls whether Express Entities
+                      are enabled. An express queue holds a message in memory temporarily
+                      before writing it to persistent storage. Defaults to false for
+                      Basic and Standard. For Premium, it MUST be set to false.
+                    type: boolean
+                  enablePartitioning:
+                    description: Boolean flag which controls whether to enable the
+                      queue to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created. Defaults to false
+                      for Basic and Standard.
+                    type: boolean
+                  forwardDeadLetteredMessagesTo:
+                    description: The name of a Queue or Topic to automatically forward
+                      dead lettered messages to.
+                    type: string
+                  forwardTo:
+                    description: The name of a Queue or Topic to automatically forward
+                      messages to. Please see the documentation for more information.
+                    type: string
                   id:
                     description: The ServiceBus Queue ID.
+                    type: string
+                  lockDuration:
+                    description: The ISO 8601 timespan duration of a peek-lock; that
+                      is, the amount of time that the message is locked for other
+                      receivers. Maximum value is 5 minutes. Defaults to 1 minute
+                      (PT1M).
+                    type: string
+                  maxDeliveryCount:
+                    description: Integer value which controls when a message is automatically
+                      dead lettered. Defaults to 10.
+                    type: number
+                  maxMessageSizeInKilobytes:
+                    description: Integer value which controls the maximum size of
+                      a message allowed on the queue for Premium SKU. For supported
+                      values see the "Large messages support" section of this document.
+                    type: number
+                  maxSizeInMegabytes:
+                    description: Integer value which controls the size of memory allocated
+                      for the queue. For supported values see the "Queue or topic
+                      size" section of Service Bus Quotas. Defaults to 1024.
+                    type: number
+                  namespaceId:
+                    description: The ID of the ServiceBus Namespace to create this
+                      queue in. Changing this forces a new resource to be created.
+                    type: string
+                  requiresDuplicateDetection:
+                    description: Boolean flag which controls whether the Queue requires
+                      duplicate detection. Changing this forces a new resource to
+                      be created. Defaults to false.
+                    type: boolean
+                  requiresSession:
+                    description: Boolean flag which controls whether the Queue requires
+                      sessions. This will allow ordered handling of unbounded sequences
+                      of related messages. With sessions enabled a queue can guarantee
+                      first-in-first-out delivery of messages. Changing this forces
+                      a new resource to be created. Defaults to false.
+                    type: boolean
+                  status:
+                    description: The status of the Queue. Possible values are Active,
+                      Creating, Deleting, Disabled, ReceiveDisabled, Renaming, SendDisabled,
+                      Unknown. Note that Restoring is not accepted. Defaults to Active.
                     type: string
                 type: object
               conditions:

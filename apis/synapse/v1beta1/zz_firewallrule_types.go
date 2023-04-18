@@ -15,19 +15,28 @@ import (
 
 type FirewallRuleObservation struct {
 
+	// The ending IP address to allow through the firewall for this rule.
+	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
+
 	// The Synapse Firewall Rule ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The starting IP address to allow through the firewall for this rule.
+	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
+
+	// The ID of the Synapse Workspace on which to create the Firewall Rule. Changing this forces a new resource to be created.
+	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
 }
 
 type FirewallRuleParameters struct {
 
 	// The ending IP address to allow through the firewall for this rule.
-	// +kubebuilder:validation:Required
-	EndIPAddress *string `json:"endIpAddress" tf:"end_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The starting IP address to allow through the firewall for this rule.
-	// +kubebuilder:validation:Required
-	StartIPAddress *string `json:"startIpAddress" tf:"start_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 
 	// The ID of the Synapse Workspace on which to create the Firewall Rule. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
@@ -68,8 +77,10 @@ type FirewallRuleStatus struct {
 type FirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallRuleSpec   `json:"spec"`
-	Status            FirewallRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endIpAddress)",message="endIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.startIpAddress)",message="startIpAddress is a required parameter"
+	Spec   FirewallRuleSpec   `json:"spec"`
+	Status FirewallRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

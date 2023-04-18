@@ -20,6 +20,18 @@ type AppTriggerHTTPRequestObservation struct {
 
 	// The ID of the HTTP Request Trigger within the Logic App Workflow.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
+	LogicAppID *string `json:"logicAppId,omitempty" tf:"logic_app_id,omitempty"`
+
+	// Specifies the HTTP Method which the request be using. Possible values include DELETE, GET, PATCH, POST or PUT.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// Specifies the Relative Path used for this Request.
+	RelativePath *string `json:"relativePath,omitempty" tf:"relative_path,omitempty"`
+
+	// A JSON Blob defining the Schema of the incoming request. This needs to be valid JSON.
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 type AppTriggerHTTPRequestParameters struct {
@@ -47,8 +59,8 @@ type AppTriggerHTTPRequestParameters struct {
 	RelativePath *string `json:"relativePath,omitempty" tf:"relative_path,omitempty"`
 
 	// A JSON Blob defining the Schema of the incoming request. This needs to be valid JSON.
-	// +kubebuilder:validation:Required
-	Schema *string `json:"schema" tf:"schema,omitempty"`
+	// +kubebuilder:validation:Optional
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
 // AppTriggerHTTPRequestSpec defines the desired state of AppTriggerHTTPRequest
@@ -75,8 +87,9 @@ type AppTriggerHTTPRequestStatus struct {
 type AppTriggerHTTPRequest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppTriggerHTTPRequestSpec   `json:"spec"`
-	Status            AppTriggerHTTPRequestStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schema)",message="schema is a required parameter"
+	Spec   AppTriggerHTTPRequestSpec   `json:"spec"`
+	Status AppTriggerHTTPRequestStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

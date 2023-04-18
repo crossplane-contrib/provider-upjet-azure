@@ -17,6 +17,11 @@ func (mg *SpringCloudConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudConnection.
+func (mg *SpringCloudConnection) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudConnection.
 func (mg *SpringCloudConnection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *SpringCloudConnection) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudConnection.
 func (mg *SpringCloudConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudConnection.
+func (mg *SpringCloudConnection) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudConnection.

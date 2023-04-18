@@ -17,6 +17,21 @@ type NamespaceAuthorizationRuleObservation struct {
 
 	// The EventHub Namespace Authorization Rule ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Grants listen access to this this Authorization Rule. Defaults to false.
+	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
+
+	// Grants manage access to this this Authorization Rule. When this property is true - both listen and send must be too. Defaults to false.
+	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
+
+	// Specifies the name of the EventHub Namespace. Changing this forces a new resource to be created.
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The name of the resource group in which the EventHub Namespace exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Grants send access to this this Authorization Rule. Defaults to false.
+	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 
 type NamespaceAuthorizationRuleParameters struct {

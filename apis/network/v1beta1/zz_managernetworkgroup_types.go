@@ -15,8 +15,14 @@ import (
 
 type ManagerNetworkGroupObservation struct {
 
+	// A description of the Network Manager Network Group.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Network Manager Network Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the Network Manager. Changing this forces a new Network Manager Network Group to be created.
+	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
 }
 
 type ManagerNetworkGroupParameters struct {

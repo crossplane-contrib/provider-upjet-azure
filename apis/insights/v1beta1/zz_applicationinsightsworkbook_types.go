@@ -15,12 +15,41 @@ import (
 
 type ApplicationInsightsWorkbookObservation struct {
 
+	// Workbook category, as defined by the user at creation time. There may be additional category types beyond the following: workbook, sentinel. Defaults to workbook.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// Configuration of this particular workbook. Configuration data is a string containing valid JSON.
+	DataJSON *string `json:"dataJson,omitempty" tf:"data_json,omitempty"`
+
+	// Specifies the description of the workbook.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the user-defined name (display name) of the workbook.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the Workbook.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Workbook to be created.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the Azure Region where the Workbook should exist. Changing this forces a new Workbook to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of this Workbook as a UUID/GUID. It should not contain any uppercase letters. Changing this forces a new Workbook to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the name of the Resource Group where the Workbook should exist. Changing this forces a new Workbook to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Resource ID for a source resource. It should not contain any uppercase letters. Defaults to azure monitor.
+	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
+
+	// Specifies the Resource Manager ID of the Storage Container when bring your own storage is used. Changing this forces a new Workbook to be created.
+	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the Workbook.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ApplicationInsightsWorkbookParameters struct {
@@ -30,28 +59,28 @@ type ApplicationInsightsWorkbookParameters struct {
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// Configuration of this particular workbook. Configuration data is a string containing valid JSON.
-	// +kubebuilder:validation:Required
-	DataJSON *string `json:"dataJson" tf:"data_json,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataJSON *string `json:"dataJson,omitempty" tf:"data_json,omitempty"`
 
 	// Specifies the description of the workbook.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the user-defined name (display name) of the workbook.
-	// +kubebuilder:validation:Required
-	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Workbook to be created.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the Azure Region where the Workbook should exist. Changing this forces a new Workbook to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of this Workbook as a UUID/GUID. It should not contain any uppercase letters. Changing this forces a new Workbook to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the Resource Group where the Workbook should exist. Changing this forces a new Workbook to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -81,11 +110,17 @@ type ApplicationInsightsWorkbookParameters struct {
 
 type IdentityObservation struct {
 
+	// The list of User Assigned Managed Identity IDs assigned to this Workbook. Changing this forces a new resource to be created.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID of the System Assigned Managed Service Identity that is configured on this Workbook.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID of the System Assigned Managed Service Identity that is configured on this Workbook.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of Managed Service Identity that is configured on this Workbook. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -123,8 +158,12 @@ type ApplicationInsightsWorkbookStatus struct {
 type ApplicationInsightsWorkbook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationInsightsWorkbookSpec   `json:"spec"`
-	Status            ApplicationInsightsWorkbookStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataJson)",message="dataJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ApplicationInsightsWorkbookSpec   `json:"spec"`
+	Status ApplicationInsightsWorkbookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

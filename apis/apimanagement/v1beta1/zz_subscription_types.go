@@ -15,8 +15,32 @@ import (
 
 type SubscriptionObservation struct {
 
+	// The ID of the API which should be assigned to this Subscription. Changing this forces a new resource to be created.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// The name of the API Management Service where this Subscription should be created. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// Determines whether tracing can be enabled. Defaults to true.
+	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
+
 	// The ID of the API Management Subscription.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Product which should be assigned to this Subscription. Changing this forces a new resource to be created.
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The state of this Subscription. Possible values are active, cancelled, expired, rejected, submitted and suspended. Defaults to submitted.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// An Identifier which should used as the ID of this Subscription. If not specified a new Subscription ID will be generated. Changing this forces a new resource to be created.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
+	// The ID of the User which should be assigned to this Subscription. Changing this forces a new resource to be created.
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type SubscriptionParameters struct {

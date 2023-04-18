@@ -15,6 +15,14 @@ import (
 
 type FunctionAppHybridConnectionObservation struct {
 
+	// The ID of the Function App for this Hybrid Connection. Changing this forces a new resource to be created.
+	// The ID of the Function App for this Hybrid Connection.
+	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
+
+	// The hostname of the endpoint.
+	// The hostname of the endpoint.
+	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
 	// The ID of the Function App Hybrid Connection
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -22,9 +30,21 @@ type FunctionAppHybridConnectionObservation struct {
 	// The name of the Relay Namespace.
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
+	// The port to use for the endpoint
+	// The port to use for the endpoint
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
+	// The ID of the Relay Hybrid Connection to use.
+	RelayID *string `json:"relayId,omitempty" tf:"relay_id,omitempty"`
+
 	// The name of the Relay in use.
 	// The name of the Relay in use.
 	RelayName *string `json:"relayName,omitempty" tf:"relay_name,omitempty"`
+
+	// The name of the Relay key with Send permission to use. Defaults to RootManageSharedAccessKey
+	// The name of the Relay key with `Send` permission to use. Defaults to `RootManageSharedAccessKey`
+	SendKeyName *string `json:"sendKeyName,omitempty" tf:"send_key_name,omitempty"`
 
 	// The Service Bus Namespace.
 	// The Service Bus Namespace.
@@ -54,13 +74,13 @@ type FunctionAppHybridConnectionParameters struct {
 
 	// The hostname of the endpoint.
 	// The hostname of the endpoint.
-	// +kubebuilder:validation:Required
-	HostName *string `json:"hostname" tf:"hostname,omitempty"`
+	// +kubebuilder:validation:Optional
+	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// The port to use for the endpoint
 	// The port to use for the endpoint
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
 	// The ID of the Relay Hybrid Connection to use.
@@ -107,8 +127,10 @@ type FunctionAppHybridConnectionStatus struct {
 type FunctionAppHybridConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FunctionAppHybridConnectionSpec   `json:"spec"`
-	Status            FunctionAppHybridConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.hostname)",message="hostname is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.port)",message="port is a required parameter"
+	Spec   FunctionAppHybridConnectionSpec   `json:"spec"`
+	Status FunctionAppHybridConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

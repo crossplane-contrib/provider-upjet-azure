@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: hpccacheaccesspolicies.storagecache.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -188,9 +192,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - accessRule
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -362,12 +379,61 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: accessRule is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accessRule)
           status:
             description: HPCCacheAccessPolicyStatus defines the observed state of
               HPCCacheAccessPolicy.
             properties:
               atProvider:
                 properties:
+                  accessRule:
+                    description: Up to three access_rule blocks as defined below.
+                    items:
+                      properties:
+                        access:
+                          description: 'The access level for this rule. Possible values
+                            are: rw, ro, no.'
+                          type: string
+                        anonymousGid:
+                          description: The anonymous GID used when root_squash_enabled
+                            is true.
+                          type: number
+                        anonymousUid:
+                          description: The anonymous UID used when root_squash_enabled
+                            is true.
+                          type: number
+                        filter:
+                          description: 'The filter applied to the scope for this rule.
+                            The filter''s format depends on its scope: default scope
+                            matches all clients and has no filter value; network scope
+                            takes a CIDR format; host takes an IP address or fully
+                            qualified domain name. If a client does not match any
+                            filter rule and there is no default rule, access is denied.'
+                          type: string
+                        rootSquashEnabled:
+                          description: Whether to enable root squash?
+                          type: boolean
+                        scope:
+                          description: 'The scope of this rule. The scope and (potentially)
+                            the filter determine which clients match the rule. Possible
+                            values are: default, network, host.'
+                          type: string
+                        submountAccessEnabled:
+                          description: Whether allow access to subdirectories under
+                            the root export?
+                          type: boolean
+                        suidEnabled:
+                          description: Whether SUID is allowed?
+                          type: boolean
+                      type: object
+                    type: array
+                  hpcCacheId:
+                    description: The ID of the HPC Cache that this HPC Cache Access
+                      Policy resides in. Changing this forces a new HPC Cache Access
+                      Policy to be created.
+                    type: string
                   id:
                     description: The ID of the HPC Cache Access Policy.
                     type: string

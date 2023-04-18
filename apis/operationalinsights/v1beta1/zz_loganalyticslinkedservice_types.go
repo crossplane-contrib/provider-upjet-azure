@@ -20,6 +20,18 @@ type LogAnalyticsLinkedServiceObservation struct {
 
 	// The generated name of the Linked Service. The format for this attribute is always <workspace name>/<linked service type>(e.g. workspace1/Automation or workspace1/Cluster)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the readable Resource that will be linked to the workspace. This should be used for linking to an Automation Account resource.
+	ReadAccessID *string `json:"readAccessId,omitempty" tf:"read_access_id,omitempty"`
+
+	// The name of the resource group in which the Log Analytics Linked Service is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The ID of the Log Analytics Workspace that will contain the Log Analytics Linked Service resource.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// The ID of the writable Resource that will be linked to the workspace. This should be used for linking to a Log Analytics Cluster resource.
+	WriteAccessID *string `json:"writeAccessId,omitempty" tf:"write_access_id,omitempty"`
 }
 
 type LogAnalyticsLinkedServiceParameters struct {

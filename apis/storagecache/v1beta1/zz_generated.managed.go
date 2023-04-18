@@ -17,6 +17,11 @@ func (mg *HPCCache) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HPCCache.
+func (mg *HPCCache) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HPCCache.
 func (mg *HPCCache) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *HPCCache) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HPCCache.
 func (mg *HPCCache) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HPCCache.
+func (mg *HPCCache) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HPCCache.
@@ -83,6 +93,11 @@ func (mg *HPCCacheAccessPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HPCCacheAccessPolicy.
+func (mg *HPCCacheAccessPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HPCCacheAccessPolicy.
 func (mg *HPCCacheAccessPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *HPCCacheAccessPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HPCCacheAccessPolicy.
 func (mg *HPCCacheAccessPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HPCCacheAccessPolicy.
+func (mg *HPCCacheAccessPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HPCCacheAccessPolicy.
@@ -149,6 +169,11 @@ func (mg *HPCCacheBlobNFSTarget) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HPCCacheBlobNFSTarget.
+func (mg *HPCCacheBlobNFSTarget) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HPCCacheBlobNFSTarget.
 func (mg *HPCCacheBlobNFSTarget) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *HPCCacheBlobNFSTarget) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HPCCacheBlobNFSTarget.
 func (mg *HPCCacheBlobNFSTarget) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HPCCacheBlobNFSTarget.
+func (mg *HPCCacheBlobNFSTarget) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HPCCacheBlobNFSTarget.
@@ -215,6 +245,11 @@ func (mg *HPCCacheBlobTarget) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HPCCacheBlobTarget.
+func (mg *HPCCacheBlobTarget) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HPCCacheBlobTarget.
 func (mg *HPCCacheBlobTarget) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *HPCCacheBlobTarget) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HPCCacheBlobTarget.
 func (mg *HPCCacheBlobTarget) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HPCCacheBlobTarget.
+func (mg *HPCCacheBlobTarget) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HPCCacheBlobTarget.
@@ -281,6 +321,11 @@ func (mg *HPCCacheNFSTarget) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HPCCacheNFSTarget.
+func (mg *HPCCacheNFSTarget) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HPCCacheNFSTarget.
 func (mg *HPCCacheNFSTarget) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *HPCCacheNFSTarget) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HPCCacheNFSTarget.
 func (mg *HPCCacheNFSTarget) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HPCCacheNFSTarget.
+func (mg *HPCCacheNFSTarget) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HPCCacheNFSTarget.

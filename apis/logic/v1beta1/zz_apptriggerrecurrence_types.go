@@ -15,19 +15,37 @@ import (
 
 type AppTriggerRecurrenceObservation struct {
 
+	// Specifies the Frequency at which this Trigger should be run. Possible values include Month, Week, Day, Hour, Minute and Second.
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
 	// The ID of the Recurrence Trigger within the Logic App Workflow.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies interval used for the Frequency, for example a value of 4 for interval and hour for frequency would run the Trigger every 4 hours.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
+	LogicAppID *string `json:"logicAppId,omitempty" tf:"logic_app_id,omitempty"`
+
+	// A schedule block as specified below.
+	Schedule []AppTriggerRecurrenceScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// Specifies the start date and time for this trigger in RFC3339 format: 2000-01-02T03:04:05Z.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// Specifies the time zone for this trigger. Supported time zone options are listed here
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type AppTriggerRecurrenceParameters struct {
 
 	// Specifies the Frequency at which this Trigger should be run. Possible values include Month, Week, Day, Hour, Minute and Second.
-	// +kubebuilder:validation:Required
-	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
+	// +kubebuilder:validation:Optional
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// Specifies interval used for the Frequency, for example a value of 4 for interval and hour for frequency would run the Trigger every 4 hours.
-	// +kubebuilder:validation:Required
-	Interval *float64 `json:"interval" tf:"interval,omitempty"`
+	// +kubebuilder:validation:Optional
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta1.AppWorkflow
@@ -57,6 +75,15 @@ type AppTriggerRecurrenceParameters struct {
 }
 
 type AppTriggerRecurrenceScheduleObservation struct {
+
+	// Specifies a list of hours when the trigger should run. Valid values are between 0 and 23.
+	AtTheseHours []*float64 `json:"atTheseHours,omitempty" tf:"at_these_hours,omitempty"`
+
+	// Specifies a list of minutes when the trigger should run. Valid values are between 0 and 59.
+	AtTheseMinutes []*float64 `json:"atTheseMinutes,omitempty" tf:"at_these_minutes,omitempty"`
+
+	// Specifies a list of days when the trigger should run. Valid values include Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday.
+	OnTheseDays []*string `json:"onTheseDays,omitempty" tf:"on_these_days,omitempty"`
 }
 
 type AppTriggerRecurrenceScheduleParameters struct {
@@ -98,8 +125,10 @@ type AppTriggerRecurrenceStatus struct {
 type AppTriggerRecurrence struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppTriggerRecurrenceSpec   `json:"spec"`
-	Status            AppTriggerRecurrenceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frequency)",message="frequency is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.interval)",message="interval is a required parameter"
+	Spec   AppTriggerRecurrenceSpec   `json:"spec"`
+	Status AppTriggerRecurrenceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

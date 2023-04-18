@@ -15,8 +15,17 @@ import (
 
 type FlexibleServerDatabaseObservation struct {
 
+	// Specifies the Charset for the Azure PostgreSQL Flexible Server Database, which needs to be a valid PostgreSQL Charset. Defaults to UTF8. Changing this forces a new Azure PostgreSQL Flexible Server Database to be created.
+	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
+
+	// Specifies the Collation for the Azure PostgreSQL Flexible Server Database, which needs to be a valid PostgreSQL Collation. Defaults to en_US.utf8. Changing this forces a new Azure PostgreSQL Flexible Server Database to be created.
+	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
+
 	// The ID of the Azure PostgreSQL Flexible Server Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Azure PostgreSQL Flexible Server from which to create this PostgreSQL Flexible Server Database. Changing this forces a new Azure PostgreSQL Flexible Server Database to be created.
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
 
 type FlexibleServerDatabaseParameters struct {

@@ -87,12 +87,27 @@ func (in *AppServiceCertificateOrderObservation) DeepCopyInto(out *AppServiceCer
 			}
 		}
 	}
+	if in.AutoRenew != nil {
+		in, out := &in.AutoRenew, &out.AutoRenew
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Certificates != nil {
 		in, out := &in.Certificates, &out.Certificates
 		*out = make([]CertificatesObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.Csr != nil {
+		in, out := &in.Csr, &out.Csr
+		*out = new(string)
+		**out = **in
+	}
+	if in.DistinguishedName != nil {
+		in, out := &in.DistinguishedName, &out.DistinguishedName
+		*out = new(string)
+		**out = **in
 	}
 	if in.DomainVerificationToken != nil {
 		in, out := &in.DomainVerificationToken, &out.DomainVerificationToken
@@ -119,6 +134,26 @@ func (in *AppServiceCertificateOrderObservation) DeepCopyInto(out *AppServiceCer
 		*out = new(bool)
 		**out = **in
 	}
+	if in.KeySize != nil {
+		in, out := &in.KeySize, &out.KeySize
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProductType != nil {
+		in, out := &in.ProductType, &out.ProductType
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
 	if in.RootThumbprint != nil {
 		in, out := &in.RootThumbprint, &out.RootThumbprint
 		*out = new(string)
@@ -132,6 +167,26 @@ func (in *AppServiceCertificateOrderObservation) DeepCopyInto(out *AppServiceCer
 	if in.Status != nil {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.ValidityInYears != nil {
+		in, out := &in.ValidityInYears, &out.ValidityInYears
+		*out = new(float64)
 		**out = **in
 	}
 }

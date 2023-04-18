@@ -17,6 +17,9 @@ type CloudApplicationLiveViewObservation struct {
 
 	// The ID of the Spring Cloud Application Live View.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Application Live View to be created.
+	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
 }
 
 type CloudApplicationLiveViewParameters struct {

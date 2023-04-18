@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: subscriptionpolicyassignments.authorization.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -216,9 +220,22 @@ spec:
                       should be created. Changing this forces a new Policy Assignment
                       to be created.
                     type: string
-                required:
-                - subscriptionId
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -390,12 +407,26 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: subscriptionId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriptionId)
           status:
             description: SubscriptionPolicyAssignmentStatus defines the observed state
               of SubscriptionPolicyAssignment.
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: A description which should be used for this Policy
+                      Assignment.
+                    type: string
+                  displayName:
+                    description: The Display Name for this Policy Assignment.
+                    type: string
+                  enforce:
+                    description: Specifies if this Policy should be enforced or not?
+                      Defaults to true.
+                    type: boolean
                   id:
                     description: The ID of the Subscription Policy Assignment.
                     type: string
@@ -403,6 +434,12 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of User Managed Identity IDs which should
+                            be assigned to the Policy Definition.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The Principal ID of the Policy Assignment for
                             this Subscription.
@@ -411,8 +448,57 @@ spec:
                           description: The Tenant ID of the Policy Assignment for
                             this Subscription.
                           type: string
+                        type:
+                          description: The Type of Managed Identity which should be
+                            added to this Policy Definition. Possible values are SystemAssigned
+                            or UserAssigned.
+                          type: string
                       type: object
                     type: array
+                  location:
+                    description: The Azure Region where the Policy Assignment should
+                      exist. Changing this forces a new Policy Assignment to be created.
+                    type: string
+                  metadata:
+                    description: A JSON mapping of any Metadata for this Policy.
+                    type: string
+                  nonComplianceMessage:
+                    description: One or more non_compliance_message blocks as defined
+                      below.
+                    items:
+                      properties:
+                        content:
+                          description: The non-compliance message text. When assigning
+                            policy sets (initiatives), unless policy_definition_reference_id
+                            is specified then this message will be the default for
+                            all policies.
+                          type: string
+                        policyDefinitionReferenceId:
+                          description: When assigning policy sets (initiatives), this
+                            is the ID of the policy definition that the non-compliance
+                            message applies to.
+                          type: string
+                      type: object
+                    type: array
+                  notScopes:
+                    description: Specifies a list of Resource Scopes (for example
+                      a Subscription, or a Resource Group) within this Management
+                      Group which are excluded from this Policy.
+                    items:
+                      type: string
+                    type: array
+                  parameters:
+                    description: A JSON mapping of any Parameters for this Policy.
+                    type: string
+                  policyDefinitionId:
+                    description: The ID of the Policy Definition or Policy Definition
+                      Set. Changing this forces a new Policy Assignment to be created.
+                    type: string
+                  subscriptionId:
+                    description: The ID of the Subscription where this Policy Assignment
+                      should be created. Changing this forces a new Policy Assignment
+                      to be created.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

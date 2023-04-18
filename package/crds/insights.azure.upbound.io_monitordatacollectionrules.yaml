@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: monitordatacollectionrules.insights.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -482,11 +486,22 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Data Collection Rule.
                     type: object
-                required:
-                - dataFlow
-                - destinations
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -658,15 +673,260 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: dataFlow is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataFlow)
+            - message: destinations is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinations)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: MonitorDataCollectionRuleStatus defines the observed state
               of MonitorDataCollectionRule.
             properties:
               atProvider:
                 properties:
+                  dataFlow:
+                    description: One or more data_flow blocks as defined below.
+                    items:
+                      properties:
+                        destinations:
+                          description: Specifies a list of destination names. A azure_monitor_metrics
+                            data source only allows for stream of kind Microsoft-InsightsMetrics.
+                          items:
+                            type: string
+                          type: array
+                        streams:
+                          description: Specifies a list of streams. Possible values
+                            include but not limited to Microsoft-Event, Microsoft-InsightsMetrics,
+                            Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  dataSources:
+                    description: A data_sources block as defined below. This property
+                      is optional and can be omitted if the rule is meant to be used
+                      via direct calls to the provisioned endpoint.
+                    items:
+                      properties:
+                        extension:
+                          description: One or more extension blocks as defined below.
+                          items:
+                            properties:
+                              extensionJson:
+                                description: A JSON String which specifies the extension
+                                  setting.
+                                type: string
+                              extensionName:
+                                description: The name of the VM extension.
+                                type: string
+                              inputDataSources:
+                                description: 'Specifies a list of data sources this
+                                  extension needs data from. An item should be a name
+                                  of a supported data source which produces only one
+                                  stream. Supported data sources type: performance_counter,
+                                  windows_event_log,and syslog.'
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to. Possible values include but not limited to Microsoft-Event,and
+                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
+                                  and Microsoft-SecurityEvent.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        performanceCounter:
+                          description: One or more performance_counter blocks as defined
+                            below.
+                          items:
+                            properties:
+                              counterSpecifiers:
+                                description: Specifies a list of specifier names of
+                                  the performance counters you want to collect. To
+                                  get a list of performance counters on Windows, run
+                                  the command typeperf. Please see this document for
+                                  more information.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              samplingFrequencyInSeconds:
+                                description: The number of seconds between consecutive
+                                  counter measurements (samples). The value should
+                                  be integer between 1 and 300 inclusive. sampling_frequency_in_seconds
+                                  must be equal to 60 seconds for counters collected
+                                  with Microsoft-InsightsMetrics stream.
+                                type: number
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to. Possible values include but not limited to Microsoft-Event,and
+                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
+                                  and Microsoft-SecurityEvent.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        syslog:
+                          description: One or more syslog blocks as defined below.
+                          items:
+                            properties:
+                              facilityNames:
+                                description: Specifies a list of facility names. Use
+                                  a wildcard * to collect logs for all facility names.
+                                  Possible values are auth, authpriv, cron, daemon,
+                                  kern, lpr, mail, mark, news, syslog, user, uucp,
+                                  local0, local1, local2, local3, local4, local5,
+                                  local6, local7,and *.
+                                items:
+                                  type: string
+                                type: array
+                              logLevels:
+                                description: Specifies a list of log levels. Use a
+                                  wildcard * to collect logs for all log levels. Possible
+                                  values are Debug, Info, Notice, Warning, Error,
+                                  Critical, Alert, Emergency,and *.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to. Possible values include but not limited to Microsoft-Event,and
+                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
+                                  and Microsoft-SecurityEvent.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        windowsEventLog:
+                          description: One or more windows_event_log blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to. Possible values include but not limited to Microsoft-Event,and
+                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
+                                  and Microsoft-SecurityEvent.
+                                items:
+                                  type: string
+                                type: array
+                              xPathQueries:
+                                description: Specifies a list of Windows Event Log
+                                  queries in XPath expression. Please see this document
+                                  for more information.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: The description of the Data Collection Rule.
+                    type: string
+                  destinations:
+                    description: A destinations block as defined below.
+                    items:
+                      properties:
+                        azureMonitorMetrics:
+                          description: A azure_monitor_metrics block as defined above.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                            type: object
+                          type: array
+                        logAnalytics:
+                          description: One or more log_analytics blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              workspaceResourceId:
+                                description: The ID of a Log Analytic Workspace resource.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Data Collection Rule.
                     type: string
+                  kind:
+                    description: The kind of the Data Collection Rule. Possible values
+                      are Linux and Windows. A rule of kind Linux does not allow for
+                      windows_event_log data sources. And a rule of kind Windows does
+                      not allow for syslog data sources. If kind is not specified,
+                      all kinds of data sources are allowed.
+                    type: string
+                  location:
+                    description: The Azure Region where the Data Collection Rule should
+                      exist. Changing this forces a new Data Collection Rule to be
+                      created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Data Collection
+                      Rule should exist. Changing this forces a new Data Collection
+                      Rule to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Data Collection Rule.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

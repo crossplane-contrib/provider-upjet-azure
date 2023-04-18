@@ -14,7 +14,26 @@ import (
 )
 
 type ClusterManagedPrivateEndpointObservation struct {
+
+	// The name of the Kusto Cluster. Changing this forces a new resource to be created.
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// The group id in which the managed private endpoint is created. Changing this forces a new resource to be created.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARM resource ID of the resource for which the managed private endpoint is created. Changing this forces a new resource to be created.
+	PrivateLinkResourceID *string `json:"privateLinkResourceId,omitempty" tf:"private_link_resource_id,omitempty"`
+
+	// The region of the resource to which the managed private endpoint is created. Changing this forces a new resource to be created.
+	PrivateLinkResourceRegion *string `json:"privateLinkResourceRegion,omitempty" tf:"private_link_resource_region,omitempty"`
+
+	// The user request message.
+	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
+
+	// Specifies the Resource Group where the Kusto Cluster should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type ClusterManagedPrivateEndpointParameters struct {
@@ -33,8 +52,8 @@ type ClusterManagedPrivateEndpointParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The group id in which the managed private endpoint is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	GroupID *string `json:"groupId" tf:"group_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
 	// The ARM resource ID of the resource for which the managed private endpoint is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -106,8 +125,9 @@ type ClusterManagedPrivateEndpointStatus struct {
 type ClusterManagedPrivateEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterManagedPrivateEndpointSpec   `json:"spec"`
-	Status            ClusterManagedPrivateEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupId)",message="groupId is a required parameter"
+	Spec   ClusterManagedPrivateEndpointSpec   `json:"spec"`
+	Status ClusterManagedPrivateEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

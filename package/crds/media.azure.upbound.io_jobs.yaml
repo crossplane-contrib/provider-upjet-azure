@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: jobs.media.azure.upbound.io
 spec:
@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -510,10 +514,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - inputAsset
-                - outputAsset
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -685,13 +701,90 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: inputAsset is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.inputAsset)
+            - message: outputAsset is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.outputAsset)
           status:
             description: JobStatus defines the observed state of Job.
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: Optional customer supplied description of the Job.
+                    type: string
                   id:
                     description: The ID of the Media Job.
+                    type: string
+                  inputAsset:
+                    description: A input_asset block as defined below. Changing this
+                      forces a new Media Job to be created.
+                    items:
+                      properties:
+                        label:
+                          description: A label that is assigned to a JobInputClip,
+                            that is used to satisfy a reference used in the Transform.
+                            For example, a Transform can be authored so as to take
+                            an image file with the label 'xyz' and apply it as an
+                            overlay onto the input video before it is encoded. When
+                            submitting a Job, exactly one of the JobInputs should
+                            be the image file, and it should have the label 'xyz'.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        name:
+                          description: The name of the input Asset. Changing this
+                            forces a new Media Job to be created.
+                          type: string
+                      type: object
+                    type: array
+                  mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Transform to be created.
+                    type: string
+                  outputAsset:
+                    description: One or more output_asset blocks as defined below.
+                      Changing this forces a new Media Job to be created.
+                    items:
+                      properties:
+                        label:
+                          description: A label that is assigned to a JobOutput in
+                            order to help uniquely identify it. This is useful when
+                            your Transform has more than one TransformOutput, whereby
+                            your Job has more than one JobOutput. In such cases, when
+                            you submit the Job, you will add two or more JobOutputs,
+                            in the same order as TransformOutputs in the Transform.
+                            Subsequently, when you retrieve the Job, either through
+                            events or on a GET request, you can use the label to easily
+                            identify the JobOutput. If a label is not provided, a
+                            default value of '{presetName}_{outputIndex}' will be
+                            used, where the preset name is the name of the preset
+                            in the corresponding TransformOutput and the output index
+                            is the relative index of the this JobOutput within the
+                            Job. Note that this index is the same as the relative
+                            index of the corresponding TransformOutput within its
+                            Transform. Changing this forces a new resource to be created.
+                          type: string
+                        name:
+                          description: The name of the output Asset. Changing this
+                            forces a new Media Job to be created.
+                          type: string
+                      type: object
+                    type: array
+                  priority:
+                    description: Priority with which the job should be processed.
+                      Higher priority jobs are processed before lower priority jobs.
+                      If not set, the default is normal. Changing this forces a new
+                      Media Job to be created. Possible values are High, Normal and
+                      Low.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Media Job
+                      should exist. Changing this forces a new Media Job to be created.
+                    type: string
+                  transformName:
+                    description: The Transform name. Changing this forces a new Media
+                      Job to be created.
                     type: string
                 type: object
               conditions:

@@ -17,6 +17,18 @@ type ShareDirectoryObservation struct {
 
 	// The ID of the Directory within the File Share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A mapping of metadata to assign to this Directory.
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the File Share where this Directory should be created. Changing this forces a new resource to be created.
+	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
+
+	// The name of the Storage Account within which the File Share is located. Changing this forces a new resource to be created.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
 
 type ShareDirectoryParameters struct {
@@ -26,8 +38,8 @@ type ShareDirectoryParameters struct {
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the File Share where this Directory should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Share
@@ -80,8 +92,9 @@ type ShareDirectoryStatus struct {
 type ShareDirectory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ShareDirectorySpec   `json:"spec"`
-	Status            ShareDirectoryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ShareDirectorySpec   `json:"spec"`
+	Status ShareDirectoryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

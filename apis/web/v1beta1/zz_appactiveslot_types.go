@@ -21,6 +21,14 @@ type AppActiveSlotObservation struct {
 	// The timestamp of the last successful swap with Production.
 	// The timestamp of the last successful swap with `Production`
 	LastSuccessfulSwap *string `json:"lastSuccessfulSwap,omitempty" tf:"last_successful_swap,omitempty"`
+
+	// The swap action should overwrite the Production slot's network configuration with the configuration from this slot. Defaults to true. Changing this forces a new resource to be created.
+	// The swap action should overwrite the Production slot's network configuration with the configuration from this slot. Defaults to `true`.
+	OverwriteNetworkConfig *bool `json:"overwriteNetworkConfig,omitempty" tf:"overwrite_network_config,omitempty"`
+
+	// The ID of the Slot to swap with Production.
+	// The ID of the Slot to swap with `Production`.
+	SlotID *string `json:"slotId,omitempty" tf:"slot_id,omitempty"`
 }
 
 type AppActiveSlotParameters struct {

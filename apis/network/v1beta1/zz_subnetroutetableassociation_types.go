@@ -17,6 +17,12 @@ type SubnetRouteTableAssociationObservation struct {
 
 	// The ID of the Subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Route Table which should be associated with the Subnet. Changing this forces a new resource to be created.
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
+	// The ID of the Subnet. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type SubnetRouteTableAssociationParameters struct {

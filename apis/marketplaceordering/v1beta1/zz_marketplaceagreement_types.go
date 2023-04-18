@@ -20,22 +20,31 @@ type MarketplaceAgreementObservation struct {
 
 	LicenseTextLink *string `json:"licenseTextLink,omitempty" tf:"license_text_link,omitempty"`
 
+	// The Offer of the Marketplace Image. Changing this forces a new resource to be created.
+	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+
+	// The Plan of the Marketplace Image. Changing this forces a new resource to be created.
+	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
+
 	PrivacyPolicyLink *string `json:"privacyPolicyLink,omitempty" tf:"privacy_policy_link,omitempty"`
+
+	// The Publisher of the Marketplace Image. Changing this forces a new resource to be created.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 }
 
 type MarketplaceAgreementParameters struct {
 
 	// The Offer of the Marketplace Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Offer *string `json:"offer" tf:"offer,omitempty"`
+	// +kubebuilder:validation:Optional
+	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
 
 	// The Plan of the Marketplace Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Plan *string `json:"plan" tf:"plan,omitempty"`
+	// +kubebuilder:validation:Optional
+	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// The Publisher of the Marketplace Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
+	// +kubebuilder:validation:Optional
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 }
 
 // MarketplaceAgreementSpec defines the desired state of MarketplaceAgreement
@@ -62,8 +71,11 @@ type MarketplaceAgreementStatus struct {
 type MarketplaceAgreement struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MarketplaceAgreementSpec   `json:"spec"`
-	Status            MarketplaceAgreementStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.offer)",message="offer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.plan)",message="plan is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publisher)",message="publisher is a required parameter"
+	Spec   MarketplaceAgreementSpec   `json:"spec"`
+	Status MarketplaceAgreementStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

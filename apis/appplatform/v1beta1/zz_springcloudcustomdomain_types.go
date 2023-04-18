@@ -15,8 +15,20 @@ import (
 
 type SpringCloudCustomDomainObservation struct {
 
+	// Specifies the name of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when thumbprint is specified
+	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
+
 	// The ID of the Spring Cloud Custom Domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Spring Cloud Custom Domain. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the resource ID of the Spring Cloud Application. Changing this forces a new resource to be created.
+	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
+
+	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when certificate_name is specified. Changing this forces a new resource to be created.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }
 
 type SpringCloudCustomDomainParameters struct {
@@ -26,8 +38,8 @@ type SpringCloudCustomDomainParameters struct {
 	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
 
 	// Specifies the name of the Spring Cloud Custom Domain. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the resource ID of the Spring Cloud Application. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudApp
@@ -72,8 +84,9 @@ type SpringCloudCustomDomainStatus struct {
 type SpringCloudCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudCustomDomainSpec   `json:"spec"`
-	Status            SpringCloudCustomDomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SpringCloudCustomDomainSpec   `json:"spec"`
+	Status SpringCloudCustomDomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

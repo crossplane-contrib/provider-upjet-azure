@@ -15,8 +15,20 @@ import (
 
 type SecurityCenterAssessmentObservation struct {
 
+	// A map of additional data to associate with the assessment.
+	AdditionalData map[string]*string `json:"additionalData,omitempty" tf:"additional_data,omitempty"`
+
+	// The ID of the security Assessment policy to apply to this resource. Changing this forces a new security Assessment to be created.
+	AssessmentPolicyID *string `json:"assessmentPolicyId,omitempty" tf:"assessment_policy_id,omitempty"`
+
 	// The ID of the Security Center Assessment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A status block as defined below.
+	Status []StatusObservation `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The ID of the target resource. Changing this forces a new security Assessment to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type SecurityCenterAssessmentParameters struct {
@@ -40,8 +52,8 @@ type SecurityCenterAssessmentParameters struct {
 	AssessmentPolicyIDSelector *v1.Selector `json:"assessmentPolicyIdSelector,omitempty" tf:"-"`
 
 	// A status block as defined below.
-	// +kubebuilder:validation:Required
-	Status []StatusParameters `json:"status" tf:"status,omitempty"`
+	// +kubebuilder:validation:Optional
+	Status []StatusParameters `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The ID of the target resource. Changing this forces a new security Assessment to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.LinuxVirtualMachineScaleSet
@@ -59,6 +71,15 @@ type SecurityCenterAssessmentParameters struct {
 }
 
 type StatusObservation struct {
+
+	// Specifies the cause of the assessment status.
+	Cause *string `json:"cause,omitempty" tf:"cause,omitempty"`
+
+	// Specifies the programmatic code of the assessment status. Possible values are Healthy, Unhealthy and NotApplicable.
+	Code *string `json:"code,omitempty" tf:"code,omitempty"`
+
+	// Specifies the human readable description of the assessment status.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 }
 
 type StatusParameters struct {
@@ -100,8 +121,9 @@ type SecurityCenterAssessmentStatus struct {
 type SecurityCenterAssessment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityCenterAssessmentSpec   `json:"spec"`
-	Status            SecurityCenterAssessmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.status)",message="status is a required parameter"
+	Spec   SecurityCenterAssessmentSpec   `json:"spec"`
+	Status SecurityCenterAssessmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

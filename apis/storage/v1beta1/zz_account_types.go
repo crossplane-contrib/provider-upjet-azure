@@ -15,12 +15,77 @@ import (
 
 type AccountObservation struct {
 
+	// Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot and Cool, defaults to Hot.
+	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
+
+	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Defaults to StorageV2.
+	AccountKind *string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
+
+	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
+	AccountReplicationType *string `json:"accountReplicationType,omitempty" tf:"account_replication_type,omitempty"`
+
+	// Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created.
+	AccountTier *string `json:"accountTier,omitempty" tf:"account_tier,omitempty"`
+
+	// Allow or disallow nested items within this Account to opt into being public. Defaults to true.
+	AllowNestedItemsToBePublic *bool `json:"allowNestedItemsToBePublic,omitempty" tf:"allow_nested_items_to_be_public,omitempty"`
+
+	// Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet. Possible values are AAD and PrivateLink.
+	AllowedCopyScope *string `json:"allowedCopyScope,omitempty" tf:"allowed_copy_scope,omitempty"`
+
+	// A azure_files_authentication block as defined below.
+	AzureFilesAuthentication []AzureFilesAuthenticationObservation `json:"azureFilesAuthentication,omitempty" tf:"azure_files_authentication,omitempty"`
+
+	// A blob_properties block as defined below.
+	BlobProperties []BlobPropertiesObservation `json:"blobProperties,omitempty" tf:"blob_properties,omitempty"`
+
+	// Should cross Tenant replication be enabled? Defaults to true.
+	CrossTenantReplicationEnabled *bool `json:"crossTenantReplicationEnabled,omitempty" tf:"cross_tenant_replication_enabled,omitempty"`
+
+	// A custom_domain block as documented below.
+	CustomDomain []CustomDomainObservation `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
+
+	// A customer_managed_key block as documented below.
+	CustomerManagedKey []CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+
+	// Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account. The default value is false
+	DefaultToOauthAuthentication *bool `json:"defaultToOauthAuthentication,omitempty" tf:"default_to_oauth_authentication,omitempty"`
+
+	// Specifies the Edge Zone within the Azure Region where this Storage Account should exist. Changing this forces a new Storage Account to be created.
+	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
+
+	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
+	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
+
 	// The ID of the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// An immutability_policy block as defined below. Changing this forces a new resource to be created.
+	ImmutabilityPolicy []ImmutabilityPolicyObservation `json:"immutabilityPolicy,omitempty" tf:"immutability_policy,omitempty"`
+
+	// Is infrastructure encryption enabled? Changing this forces a new resource to be created. Defaults to false.
+	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
+
+	// Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information). Changing this forces a new resource to be created.
+	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
+
+	// Is Large File Share Enabled?
+	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults to TLS1_2 for new storage accounts.
+	MinTLSVersion *string `json:"minTlsVersion,omitempty" tf:"min_tls_version,omitempty"`
+
+	// A network_rules block as documented below.
+	NetworkRules []NetworkRulesObservation `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
+
+	// Is NFSv3 protocol enabled? Changing this forces a new resource to be created. Defaults to false.
+	Nfsv3Enabled *bool `json:"nfsv3Enabled,omitempty" tf:"nfsv3_enabled,omitempty"`
 
 	// The endpoint URL for blob storage in the primary location.
 	PrimaryBlobEndpoint *string `json:"primaryBlobEndpoint,omitempty" tf:"primary_blob_endpoint,omitempty"`
@@ -61,6 +126,27 @@ type AccountObservation struct {
 	// The hostname with port if applicable for web storage in the primary location.
 	PrimaryWebHost *string `json:"primaryWebHost,omitempty" tf:"primary_web_host,omitempty"`
 
+	// Whether the public network access is enabled? Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The encryption type of the queue service. Possible values are Service and Account. Changing this forces a new resource to be created. Default value is Service.
+	QueueEncryptionKeyType *string `json:"queueEncryptionKeyType,omitempty" tf:"queue_encryption_key_type,omitempty"`
+
+	// A queue_properties block as defined below.
+	QueueProperties []QueuePropertiesObservation `json:"queueProperties,omitempty" tf:"queue_properties,omitempty"`
+
+	// The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A routing block as defined below.
+	Routing []RoutingObservation `json:"routing,omitempty" tf:"routing,omitempty"`
+
+	// A sas_policy block as defined below.
+	SASPolicy []SASPolicyObservation `json:"sasPolicy,omitempty" tf:"sas_policy,omitempty"`
+
+	// Boolean, enable SFTP for the storage account
+	SFTPEnabled *bool `json:"sftpEnabled,omitempty" tf:"sftp_enabled,omitempty"`
+
 	// The endpoint URL for blob storage in the secondary location.
 	SecondaryBlobEndpoint *string `json:"secondaryBlobEndpoint,omitempty" tf:"secondary_blob_endpoint,omitempty"`
 
@@ -99,6 +185,21 @@ type AccountObservation struct {
 
 	// The hostname with port if applicable for web storage in the secondary location.
 	SecondaryWebHost *string `json:"secondaryWebHost,omitempty" tf:"secondary_web_host,omitempty"`
+
+	// A share_properties block as defined below.
+	ShareProperties []SharePropertiesObservation `json:"shareProperties,omitempty" tf:"share_properties,omitempty"`
+
+	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is true.
+	SharedAccessKeyEnabled *bool `json:"sharedAccessKeyEnabled,omitempty" tf:"shared_access_key_enabled,omitempty"`
+
+	// A static_website block as defined below.
+	StaticWebsite []StaticWebsiteObservation `json:"staticWebsite,omitempty" tf:"static_website,omitempty"`
+
+	// The encryption type of the table service. Possible values are Service and Account. Changing this forces a new resource to be created. Default value is Service.
+	TableEncryptionKeyType *string `json:"tableEncryptionKeyType,omitempty" tf:"table_encryption_key_type,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type AccountParameters struct {
@@ -112,12 +213,12 @@ type AccountParameters struct {
 	AccountKind *string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
 
 	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
-	// +kubebuilder:validation:Required
-	AccountReplicationType *string `json:"accountReplicationType" tf:"account_replication_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccountReplicationType *string `json:"accountReplicationType,omitempty" tf:"account_replication_type,omitempty"`
 
 	// Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	AccountTier *string `json:"accountTier" tf:"account_tier,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccountTier *string `json:"accountTier,omitempty" tf:"account_tier,omitempty"`
 
 	// Allow or disallow nested items within this Account to opt into being public. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -180,8 +281,8 @@ type AccountParameters struct {
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults to TLS1_2 for new storage accounts.
 	// +kubebuilder:validation:Optional
@@ -254,6 +355,24 @@ type AccountParameters struct {
 }
 
 type ActiveDirectoryObservation struct {
+
+	// Specifies the domain GUID.
+	DomainGUID *string `json:"domainGuid,omitempty" tf:"domain_guid,omitempty"`
+
+	// Specifies the primary domain that the AD DNS server is authoritative for.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Specifies the security identifier (SID).
+	DomainSid *string `json:"domainSid,omitempty" tf:"domain_sid,omitempty"`
+
+	// Specifies the Active Directory forest.
+	ForestName *string `json:"forestName,omitempty" tf:"forest_name,omitempty"`
+
+	// Specifies the NetBIOS domain name.
+	NetbiosDomainName *string `json:"netbiosDomainName,omitempty" tf:"netbios_domain_name,omitempty"`
+
+	// Specifies the security identifier (SID) for Azure Storage.
+	StorageSid *string `json:"storageSid,omitempty" tf:"storage_sid,omitempty"`
 }
 
 type ActiveDirectoryParameters struct {
@@ -284,6 +403,12 @@ type ActiveDirectoryParameters struct {
 }
 
 type AzureFilesAuthenticationObservation struct {
+
+	// A active_directory block as defined below. Required when directory_type is AD.
+	ActiveDirectory []ActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
+	DirectoryType *string `json:"directoryType,omitempty" tf:"directory_type,omitempty"`
 }
 
 type AzureFilesAuthenticationParameters struct {
@@ -298,6 +423,33 @@ type AzureFilesAuthenticationParameters struct {
 }
 
 type BlobPropertiesObservation struct {
+
+	// Is the blob service properties for change feed events enabled? Default to false.
+	ChangeFeedEnabled *bool `json:"changeFeedEnabled,omitempty" tf:"change_feed_enabled,omitempty"`
+
+	// The duration of change feed events retention in days. The possible values are between 1 and 146000 days (400 years). Setting this to null (or omit this in the configuration file) indicates an infinite retention of the change feed.
+	ChangeFeedRetentionInDays *float64 `json:"changeFeedRetentionInDays,omitempty" tf:"change_feed_retention_in_days,omitempty"`
+
+	// A container_delete_retention_policy block as defined below.
+	ContainerDeleteRetentionPolicy []ContainerDeleteRetentionPolicyObservation `json:"containerDeleteRetentionPolicy,omitempty" tf:"container_delete_retention_policy,omitempty"`
+
+	// A cors_rule block as defined below.
+	CorsRule []CorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
+
+	// The API Version which should be used by default for requests to the Data Plane API if an incoming request doesn't specify an API Version.
+	DefaultServiceVersion *string `json:"defaultServiceVersion,omitempty" tf:"default_service_version,omitempty"`
+
+	// A delete_retention_policy block as defined below.
+	DeleteRetentionPolicy []DeleteRetentionPolicyObservation `json:"deleteRetentionPolicy,omitempty" tf:"delete_retention_policy,omitempty"`
+
+	// Is the last access time based tracking enabled? Default to false.
+	LastAccessTimeEnabled *bool `json:"lastAccessTimeEnabled,omitempty" tf:"last_access_time_enabled,omitempty"`
+
+	// A restore_policy block as defined below. This must be used together with delete_retention_policy set, versioning_enabled and change_feed_enabled set to true.
+	RestorePolicy []RestorePolicyObservation `json:"restorePolicy,omitempty" tf:"restore_policy,omitempty"`
+
+	// Is versioning enabled? Default to false.
+	VersioningEnabled *bool `json:"versioningEnabled,omitempty" tf:"versioning_enabled,omitempty"`
 }
 
 type BlobPropertiesParameters struct {
@@ -340,6 +492,9 @@ type BlobPropertiesParameters struct {
 }
 
 type ContainerDeleteRetentionPolicyObservation struct {
+
+	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
 
 type ContainerDeleteRetentionPolicyParameters struct {
@@ -350,6 +505,22 @@ type ContainerDeleteRetentionPolicyParameters struct {
 }
 
 type CorsRuleObservation struct {
+
+	// A list of headers that are allowed to be a part of the cross-origin request.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// A list of HTTP methods that are allowed to be executed by the origin. Valid options are
+	// DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A list of origin domains that will be allowed by CORS.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// A list of response headers that are exposed to CORS clients.
+	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+
+	// The number of seconds the client should cache a preflight response.
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
 type CorsRuleParameters struct {
@@ -377,6 +548,12 @@ type CorsRuleParameters struct {
 }
 
 type CustomDomainObservation struct {
+
+	// The Custom Domain Name to use for the Storage Account, which will be validated by Azure.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Should the Custom Domain Name be validated by using indirect CNAME validation?
+	UseSubdomain *bool `json:"useSubdomain,omitempty" tf:"use_subdomain,omitempty"`
 }
 
 type CustomDomainParameters struct {
@@ -391,6 +568,12 @@ type CustomDomainParameters struct {
 }
 
 type CustomerManagedKeyObservation struct {
+
+	// The ID of the Key Vault Key, supplying a version-less key ID will enable auto-rotation of this key.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of a user assigned identity.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type CustomerManagedKeyParameters struct {
@@ -405,6 +588,9 @@ type CustomerManagedKeyParameters struct {
 }
 
 type DeleteRetentionPolicyObservation struct {
+
+	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
 
 type DeleteRetentionPolicyParameters struct {
@@ -415,6 +601,18 @@ type DeleteRetentionPolicyParameters struct {
 }
 
 type HourMetricsObservation struct {
+
+	// Indicates whether minute metrics are enabled for the Queue service.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Indicates whether metrics should generate summary statistics for called API operations.
+	IncludeApis *bool `json:"includeApis,omitempty" tf:"include_apis,omitempty"`
+
+	// Specifies the number of days that logs will be retained.
+	RetentionPolicyDays *float64 `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
+
+	// The version of storage analytics to configure.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type HourMetricsParameters struct {
@@ -438,11 +636,17 @@ type HourMetricsParameters struct {
 
 type IdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Storage Account.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID for the Service Principal associated with the Identity of this Storage Account.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID for the Service Principal associated with the Identity of this Storage Account.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Storage Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -457,6 +661,15 @@ type IdentityParameters struct {
 }
 
 type ImmutabilityPolicyObservation struct {
+
+	// When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.
+	AllowProtectedAppendWrites *bool `json:"allowProtectedAppendWrites,omitempty" tf:"allow_protected_append_writes,omitempty"`
+
+	// The immutability period for the blobs in the container since the policy creation, in days.
+	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays,omitempty" tf:"period_since_creation_in_days,omitempty"`
+
+	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type ImmutabilityPolicyParameters struct {
@@ -475,6 +688,21 @@ type ImmutabilityPolicyParameters struct {
 }
 
 type LoggingObservation struct {
+
+	// (Defaults to 60 minutes) Used when deleting the Storage Account.
+	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (Defaults to 5 minutes) Used when retrieving the Storage Account.
+	Read *bool `json:"read,omitempty" tf:"read,omitempty"`
+
+	// Specifies the number of days that logs will be retained.
+	RetentionPolicyDays *float64 `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
+
+	// The version of storage analytics to configure.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Indicates whether all write requests should be logged.
+	Write *bool `json:"write,omitempty" tf:"write,omitempty"`
 }
 
 type LoggingParameters struct {
@@ -501,6 +729,18 @@ type LoggingParameters struct {
 }
 
 type MinuteMetricsObservation struct {
+
+	// Indicates whether minute metrics are enabled for the Queue service.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Indicates whether metrics should generate summary statistics for called API operations.
+	IncludeApis *bool `json:"includeApis,omitempty" tf:"include_apis,omitempty"`
+
+	// Specifies the number of days that logs will be retained.
+	RetentionPolicyDays *float64 `json:"retentionPolicyDays,omitempty" tf:"retention_policy_days,omitempty"`
+
+	// The version of storage analytics to configure.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type MinuteMetricsParameters struct {
@@ -523,6 +763,21 @@ type MinuteMetricsParameters struct {
 }
 
 type NetworkRulesObservation struct {
+
+	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
+	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// One or More private_link_access block as defined below.
+	PrivateLinkAccess []PrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
+
+	// A list of resource ids for subnets.
+	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
 type NetworkRulesParameters struct {
@@ -549,6 +804,12 @@ type NetworkRulesParameters struct {
 }
 
 type PrivateLinkAccessObservation struct {
+
+	// The resource id of the resource access rule to be granted access.
+	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
+
+	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
+	EndpointTenantID *string `json:"endpointTenantId,omitempty" tf:"endpoint_tenant_id,omitempty"`
 }
 
 type PrivateLinkAccessParameters struct {
@@ -563,6 +824,22 @@ type PrivateLinkAccessParameters struct {
 }
 
 type QueuePropertiesCorsRuleObservation struct {
+
+	// A list of headers that are allowed to be a part of the cross-origin request.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// A list of HTTP methods that are allowed to be executed by the origin. Valid options are
+	// DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A list of origin domains that will be allowed by CORS.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// A list of response headers that are exposed to CORS clients.
+	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+
+	// The number of seconds the client should cache a preflight response.
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
 type QueuePropertiesCorsRuleParameters struct {
@@ -590,6 +867,18 @@ type QueuePropertiesCorsRuleParameters struct {
 }
 
 type QueuePropertiesObservation struct {
+
+	// A cors_rule block as defined above.
+	CorsRule []QueuePropertiesCorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
+
+	// A hour_metrics block as defined below.
+	HourMetrics []HourMetricsObservation `json:"hourMetrics,omitempty" tf:"hour_metrics,omitempty"`
+
+	// A logging block as defined below.
+	Logging []LoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
+
+	// A minute_metrics block as defined below.
+	MinuteMetrics []MinuteMetricsObservation `json:"minuteMetrics,omitempty" tf:"minute_metrics,omitempty"`
 }
 
 type QueuePropertiesParameters struct {
@@ -612,6 +901,9 @@ type QueuePropertiesParameters struct {
 }
 
 type RestorePolicyObservation struct {
+
+	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
 
 type RestorePolicyParameters struct {
@@ -622,6 +914,9 @@ type RestorePolicyParameters struct {
 }
 
 type RetentionPolicyObservation struct {
+
+	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 }
 
 type RetentionPolicyParameters struct {
@@ -632,6 +927,15 @@ type RetentionPolicyParameters struct {
 }
 
 type RoutingObservation struct {
+
+	// Specifies the kind of network routing opted by the user. Possible values are InternetRouting and MicrosoftRouting. Defaults to MicrosoftRouting.
+	Choice *string `json:"choice,omitempty" tf:"choice,omitempty"`
+
+	// Should internet routing storage endpoints be published? Defaults to false.
+	PublishInternetEndpoints *bool `json:"publishInternetEndpoints,omitempty" tf:"publish_internet_endpoints,omitempty"`
+
+	// Should Microsoft routing storage endpoints be published? Defaults to false.
+	PublishMicrosoftEndpoints *bool `json:"publishMicrosoftEndpoints,omitempty" tf:"publish_microsoft_endpoints,omitempty"`
 }
 
 type RoutingParameters struct {
@@ -650,6 +954,12 @@ type RoutingParameters struct {
 }
 
 type SASPolicyObservation struct {
+
+	// The SAS expiration action. The only possible value is Log at this moment. Defaults to Log.
+	ExpirationAction *string `json:"expirationAction,omitempty" tf:"expiration_action,omitempty"`
+
+	// The SAS expiration period in format of DD.HH:MM:SS.
+	ExpirationPeriod *string `json:"expirationPeriod,omitempty" tf:"expiration_period,omitempty"`
 }
 
 type SASPolicyParameters struct {
@@ -664,6 +974,21 @@ type SASPolicyParameters struct {
 }
 
 type SMBObservation struct {
+
+	// A set of SMB authentication methods. Possible values are NTLMv2, and Kerberos.
+	AuthenticationTypes []*string `json:"authenticationTypes,omitempty" tf:"authentication_types,omitempty"`
+
+	// A set of SMB channel encryption. Possible values are AES-128-CCM, AES-128-GCM, and AES-256-GCM.
+	ChannelEncryptionType []*string `json:"channelEncryptionType,omitempty" tf:"channel_encryption_type,omitempty"`
+
+	// A set of Kerberos ticket encryption. Possible values are RC4-HMAC, and AES-256.
+	KerberosTicketEncryptionType []*string `json:"kerberosTicketEncryptionType,omitempty" tf:"kerberos_ticket_encryption_type,omitempty"`
+
+	// Indicates whether multichannel is enabled. Defaults to false. This is only supported on Premium storage accounts.
+	MultichannelEnabled *bool `json:"multichannelEnabled,omitempty" tf:"multichannel_enabled,omitempty"`
+
+	// A set of SMB protocol versions. Possible values are SMB2.1, SMB3.0, and SMB3.1.1.
+	Versions []*string `json:"versions,omitempty" tf:"versions,omitempty"`
 }
 
 type SMBParameters struct {
@@ -690,6 +1015,22 @@ type SMBParameters struct {
 }
 
 type SharePropertiesCorsRuleObservation struct {
+
+	// A list of headers that are allowed to be a part of the cross-origin request.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// A list of HTTP methods that are allowed to be executed by the origin. Valid options are
+	// DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A list of origin domains that will be allowed by CORS.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// A list of response headers that are exposed to CORS clients.
+	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+
+	// The number of seconds the client should cache a preflight response.
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
 type SharePropertiesCorsRuleParameters struct {
@@ -717,6 +1058,15 @@ type SharePropertiesCorsRuleParameters struct {
 }
 
 type SharePropertiesObservation struct {
+
+	// A cors_rule block as defined below.
+	CorsRule []SharePropertiesCorsRuleObservation `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
+
+	// A retention_policy block as defined below.
+	RetentionPolicy []RetentionPolicyObservation `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+
+	// A smb block as defined below.
+	SMB []SMBObservation `json:"smb,omitempty" tf:"smb,omitempty"`
 }
 
 type SharePropertiesParameters struct {
@@ -735,6 +1085,12 @@ type SharePropertiesParameters struct {
 }
 
 type StaticWebsiteObservation struct {
+
+	// The absolute path to a custom webpage that should be used when a request is made which does not correspond to an existing file.
+	Error404Document *string `json:"error404Document,omitempty" tf:"error_404_document,omitempty"`
+
+	// The webpage that Azure Storage serves for requests to the root of a website or any subfolder. For example, index.html. The value is case-sensitive.
+	IndexDocument *string `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
 }
 
 type StaticWebsiteParameters struct {
@@ -772,8 +1128,11 @@ type AccountStatus struct {
 type Account struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AccountSpec   `json:"spec"`
-	Status            AccountStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountReplicationType)",message="accountReplicationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accountTier)",message="accountTier is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   AccountSpec   `json:"spec"`
+	Status AccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -17,6 +17,11 @@ func (mg *BotChannelAlexa) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotChannelAlexa.
+func (mg *BotChannelAlexa) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotChannelAlexa.
 func (mg *BotChannelAlexa) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *BotChannelAlexa) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotChannelAlexa.
 func (mg *BotChannelAlexa) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotChannelAlexa.
+func (mg *BotChannelAlexa) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotChannelAlexa.
@@ -83,6 +93,11 @@ func (mg *BotChannelDirectLine) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotChannelDirectLine.
+func (mg *BotChannelDirectLine) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotChannelDirectLine.
 func (mg *BotChannelDirectLine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *BotChannelDirectLine) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotChannelDirectLine.
 func (mg *BotChannelDirectLine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotChannelDirectLine.
+func (mg *BotChannelDirectLine) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotChannelDirectLine.
@@ -149,6 +169,11 @@ func (mg *BotChannelLine) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotChannelLine.
+func (mg *BotChannelLine) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotChannelLine.
 func (mg *BotChannelLine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *BotChannelLine) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotChannelLine.
 func (mg *BotChannelLine) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotChannelLine.
+func (mg *BotChannelLine) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotChannelLine.
@@ -215,6 +245,11 @@ func (mg *BotChannelMSTeams) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotChannelMSTeams.
+func (mg *BotChannelMSTeams) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotChannelMSTeams.
 func (mg *BotChannelMSTeams) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *BotChannelMSTeams) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotChannelMSTeams.
 func (mg *BotChannelMSTeams) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotChannelMSTeams.
+func (mg *BotChannelMSTeams) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotChannelMSTeams.
@@ -281,6 +321,11 @@ func (mg *BotChannelSMS) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotChannelSMS.
+func (mg *BotChannelSMS) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotChannelSMS.
 func (mg *BotChannelSMS) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *BotChannelSMS) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotChannelSMS.
 func (mg *BotChannelSMS) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotChannelSMS.
+func (mg *BotChannelSMS) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotChannelSMS.
@@ -347,6 +397,11 @@ func (mg *BotChannelSlack) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotChannelSlack.
+func (mg *BotChannelSlack) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotChannelSlack.
 func (mg *BotChannelSlack) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *BotChannelSlack) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotChannelSlack.
 func (mg *BotChannelSlack) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotChannelSlack.
+func (mg *BotChannelSlack) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotChannelSlack.
@@ -413,6 +473,11 @@ func (mg *BotChannelWebChat) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotChannelWebChat.
+func (mg *BotChannelWebChat) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotChannelWebChat.
 func (mg *BotChannelWebChat) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *BotChannelWebChat) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotChannelWebChat.
 func (mg *BotChannelWebChat) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotChannelWebChat.
+func (mg *BotChannelWebChat) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotChannelWebChat.
@@ -479,6 +549,11 @@ func (mg *BotChannelsRegistration) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotChannelsRegistration.
+func (mg *BotChannelsRegistration) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotChannelsRegistration.
 func (mg *BotChannelsRegistration) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *BotChannelsRegistration) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotChannelsRegistration.
 func (mg *BotChannelsRegistration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotChannelsRegistration.
+func (mg *BotChannelsRegistration) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotChannelsRegistration.
@@ -545,6 +625,11 @@ func (mg *BotConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotConnection.
+func (mg *BotConnection) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotConnection.
 func (mg *BotConnection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *BotConnection) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotConnection.
 func (mg *BotConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotConnection.
+func (mg *BotConnection) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotConnection.
@@ -611,6 +701,11 @@ func (mg *BotWebApp) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BotWebApp.
+func (mg *BotWebApp) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BotWebApp.
 func (mg *BotWebApp) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -642,6 +737,11 @@ func (mg *BotWebApp) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BotWebApp.
 func (mg *BotWebApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BotWebApp.
+func (mg *BotWebApp) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BotWebApp.

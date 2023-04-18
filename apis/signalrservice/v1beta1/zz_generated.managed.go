@@ -17,6 +17,11 @@ func (mg *NetworkACL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this NetworkACL.
+func (mg *NetworkACL) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this NetworkACL.
 func (mg *NetworkACL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *NetworkACL) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this NetworkACL.
 func (mg *NetworkACL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this NetworkACL.
+func (mg *NetworkACL) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this NetworkACL.
@@ -83,6 +93,11 @@ func (mg *Service) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Service.
+func (mg *Service) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Service.
 func (mg *Service) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *Service) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Service.
 func (mg *Service) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Service.
+func (mg *Service) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Service.
@@ -149,6 +169,11 @@ func (mg *SignalrSharedPrivateLinkResource) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SignalrSharedPrivateLinkResource.
 func (mg *SignalrSharedPrivateLinkResource) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *SignalrSharedPrivateLinkResource) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SignalrSharedPrivateLinkResource.
 func (mg *SignalrSharedPrivateLinkResource) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SignalrSharedPrivateLinkResource.
+func (mg *SignalrSharedPrivateLinkResource) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SignalrSharedPrivateLinkResource.
@@ -215,6 +245,11 @@ func (mg *WebPubsub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this WebPubsub.
+func (mg *WebPubsub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this WebPubsub.
 func (mg *WebPubsub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *WebPubsub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this WebPubsub.
 func (mg *WebPubsub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this WebPubsub.
+func (mg *WebPubsub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this WebPubsub.
@@ -281,6 +321,11 @@ func (mg *WebPubsubHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this WebPubsubHub.
+func (mg *WebPubsubHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this WebPubsubHub.
 func (mg *WebPubsubHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *WebPubsubHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this WebPubsubHub.
 func (mg *WebPubsubHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this WebPubsubHub.
+func (mg *WebPubsubHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this WebPubsubHub.
@@ -347,6 +397,11 @@ func (mg *WebPubsubNetworkACL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this WebPubsubNetworkACL.
+func (mg *WebPubsubNetworkACL) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this WebPubsubNetworkACL.
 func (mg *WebPubsubNetworkACL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *WebPubsubNetworkACL) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this WebPubsubNetworkACL.
 func (mg *WebPubsubNetworkACL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this WebPubsubNetworkACL.
+func (mg *WebPubsubNetworkACL) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this WebPubsubNetworkACL.

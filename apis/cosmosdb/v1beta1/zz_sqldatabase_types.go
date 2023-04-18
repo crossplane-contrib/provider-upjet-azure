@@ -14,6 +14,9 @@ import (
 )
 
 type SQLDatabaseAutoscaleSettingsObservation struct {
+
+	// The maximum throughput of the SQL database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
 type SQLDatabaseAutoscaleSettingsParameters struct {
@@ -25,8 +28,20 @@ type SQLDatabaseAutoscaleSettingsParameters struct {
 
 type SQLDatabaseObservation struct {
 
+	// The name of the Cosmos DB SQL Database to create the table within. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// An autoscale_settings block as defined below.
+	AutoscaleSettings []SQLDatabaseAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+
 	// The ID of the CosmosDB SQL Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the Cosmos DB SQL Database is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The throughput of SQL database (RU/s). Must be set in increments of 100. The minimum value is 400. Do not set when azurerm_cosmosdb_account is configured with EnableServerless capability.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 type SQLDatabaseParameters struct {

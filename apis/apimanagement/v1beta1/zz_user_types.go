@@ -15,8 +15,32 @@ import (
 
 type UserObservation struct {
 
+	// The name of the API Management Service in which the User should be created. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// The kind of confirmation email which will be sent to this user. Possible values are invite and signup. Changing this forces a new resource to be created.
+	Confirmation *string `json:"confirmation,omitempty" tf:"confirmation,omitempty"`
+
+	// The email address associated with this user.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The first name for this user.
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+
 	// The ID of the API Management User.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The last name for this user.
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// A note about this user.
+	Note *string `json:"note,omitempty" tf:"note,omitempty"`
+
+	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The state of this user. Possible values are active, blocked and pending.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
 type UserParameters struct {
@@ -39,16 +63,16 @@ type UserParameters struct {
 	Confirmation *string `json:"confirmation,omitempty" tf:"confirmation,omitempty"`
 
 	// The email address associated with this user.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The first name for this user.
-	// +kubebuilder:validation:Required
-	FirstName *string `json:"firstName" tf:"first_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// The last name for this user.
-	// +kubebuilder:validation:Required
-	LastName *string `json:"lastName" tf:"last_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// A note about this user.
 	// +kubebuilder:validation:Optional
@@ -100,8 +124,11 @@ type UserStatus struct {
 type User struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserSpec   `json:"spec"`
-	Status            UserStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)",message="email is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.firstName)",message="firstName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lastName)",message="lastName is a required parameter"
+	Spec   UserSpec   `json:"spec"`
+	Status UserStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

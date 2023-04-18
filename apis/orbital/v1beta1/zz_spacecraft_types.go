@@ -14,6 +14,21 @@ import (
 )
 
 type SpacecraftLinksObservation struct {
+
+	// Bandwidth in Mhz.
+	BandwidthMhz *float64 `json:"bandwidthMhz,omitempty" tf:"bandwidth_mhz,omitempty"`
+
+	// Center frequency in Mhz.
+	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz,omitempty" tf:"center_frequency_mhz,omitempty"`
+
+	// Direction if the communication. Possible values are Uplink and Downlink.
+	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+
+	// Name of the link.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Polarization. Possible values are RHCP, LHCP, linearVertical and linearHorizontal.
+	Polarization *string `json:"polarization,omitempty" tf:"polarization,omitempty"`
 }
 
 type SpacecraftLinksParameters struct {
@@ -43,21 +58,42 @@ type SpacecraftObservation struct {
 
 	// The ID of the Spacecraft.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A links block as defined below. Changing this forces a new resource to be created.
+	Links []SpacecraftLinksObservation `json:"links,omitempty" tf:"links,omitempty"`
+
+	// The location where the Spacecraft exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// NORAD ID of the Spacecraft.
+	NoradID *string `json:"noradId,omitempty" tf:"norad_id,omitempty"`
+
+	// The name of the Resource Group where the Spacecraft exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Title of the two line elements (TLE).
+	TitleLine *string `json:"titleLine,omitempty" tf:"title_line,omitempty"`
+
+	// A list of the two line elements (TLE), the first string being the first of the TLE, the second string being the second line of the TLE. Changing this forces a new resource to be created.
+	TwoLineElements []*string `json:"twoLineElements,omitempty" tf:"two_line_elements,omitempty"`
 }
 
 type SpacecraftParameters struct {
 
 	// A links block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Links []SpacecraftLinksParameters `json:"links" tf:"links,omitempty"`
+	// +kubebuilder:validation:Optional
+	Links []SpacecraftLinksParameters `json:"links,omitempty" tf:"links,omitempty"`
 
 	// The location where the Spacecraft exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// NORAD ID of the Spacecraft.
-	// +kubebuilder:validation:Required
-	NoradID *string `json:"noradId" tf:"norad_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	NoradID *string `json:"noradId,omitempty" tf:"norad_id,omitempty"`
 
 	// The name of the Resource Group where the Spacecraft exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -77,12 +113,12 @@ type SpacecraftParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Title of the two line elements (TLE).
-	// +kubebuilder:validation:Required
-	TitleLine *string `json:"titleLine" tf:"title_line,omitempty"`
+	// +kubebuilder:validation:Optional
+	TitleLine *string `json:"titleLine,omitempty" tf:"title_line,omitempty"`
 
 	// A list of the two line elements (TLE), the first string being the first of the TLE, the second string being the second line of the TLE. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	TwoLineElements []*string `json:"twoLineElements" tf:"two_line_elements,omitempty"`
+	// +kubebuilder:validation:Optional
+	TwoLineElements []*string `json:"twoLineElements,omitempty" tf:"two_line_elements,omitempty"`
 }
 
 // SpacecraftSpec defines the desired state of Spacecraft
@@ -109,8 +145,13 @@ type SpacecraftStatus struct {
 type Spacecraft struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpacecraftSpec   `json:"spec"`
-	Status            SpacecraftStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.links)",message="links is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.noradId)",message="noradId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.titleLine)",message="titleLine is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.twoLineElements)",message="twoLineElements is a required parameter"
+	Spec   SpacecraftSpec   `json:"spec"`
+	Status SpacecraftStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

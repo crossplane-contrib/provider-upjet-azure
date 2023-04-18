@@ -17,6 +17,12 @@ type SubnetObservation struct {
 
 	// The name of the Subnet for this Virtual Network.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny.
+	UseInVirtualMachineCreation *string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
+
+	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny.
+	UsePublicIPAddress *string `json:"usePublicIpAddress,omitempty" tf:"use_public_ip_address,omitempty"`
 }
 
 type SubnetParameters struct {
@@ -32,12 +38,26 @@ type SubnetParameters struct {
 
 type VirtualNetworkObservation struct {
 
+	// A description for the Virtual Network.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Dev Test Virtual Network.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the name of the Dev Test Lab in which the Virtual Network should be created. Changing this forces a new resource to be created.
+	LabName *string `json:"labName,omitempty" tf:"lab_name,omitempty"`
+
+	// Specifies the name of the Dev Test Virtual Network. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// A subnet block as defined below.
-	// +kubebuilder:validation:Optional
 	Subnet []SubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The unique immutable identifier of the Dev Test Virtual Network.
 	UniqueIdentifier *string `json:"uniqueIdentifier,omitempty" tf:"unique_identifier,omitempty"`
@@ -63,8 +83,8 @@ type VirtualNetworkParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Dev Test Virtual Network. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -112,8 +132,9 @@ type VirtualNetworkStatus struct {
 type VirtualNetwork struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualNetworkSpec   `json:"spec"`
-	Status            VirtualNetworkStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   VirtualNetworkSpec   `json:"spec"`
+	Status VirtualNetworkStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

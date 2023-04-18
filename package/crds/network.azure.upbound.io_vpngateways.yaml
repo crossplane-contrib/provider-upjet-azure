@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: vpngateways.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -298,9 +302,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -472,15 +489,26 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: VPNGatewayStatus defines the observed state of VPNGateway.
             properties:
               atProvider:
                 properties:
+                  bgpRouteTranslationForNatEnabled:
+                    description: Is BGP route translation for NAT on this VPN Gateway
+                      enabled? Defaults to false.
+                    type: boolean
                   bgpSettings:
                     description: A bgp_settings block as defined below.
                     items:
                       properties:
+                        asn:
+                          description: The ASN of the BGP Speaker. Changing this forces
+                            a new resource to be created.
+                          type: number
                         bgpPeeringAddress:
                           description: The Address which should be used for the BGP
                             Peering.
@@ -490,6 +518,12 @@ spec:
                             below.
                           items:
                             properties:
+                              customIps:
+                                description: A list of custom BGP peering addresses
+                                  to assign to this instance.
+                                items:
+                                  type: string
+                                type: array
                               defaultIps:
                                 description: The list of default BGP peering addresses
                                   which belong to the pre-defined VPN Gateway IP configuration.
@@ -513,6 +547,12 @@ spec:
                             below.
                           items:
                             properties:
+                              customIps:
+                                description: A list of custom BGP peering addresses
+                                  to assign to this instance.
+                                items:
+                                  type: string
+                                type: array
                               defaultIps:
                                 description: The list of default BGP peering addresses
                                   which belong to the pre-defined VPN Gateway IP configuration.
@@ -531,10 +571,47 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        peerWeight:
+                          description: The weight added to Routes learned from this
+                            BGP Speaker. Changing this forces a new resource to be
+                            created.
+                          type: number
                       type: object
                     type: array
                   id:
                     description: The ID of the VPN Gateway.
+                    type: string
+                  location:
+                    description: The Azure location where this VPN Gateway should
+                      be created. Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The Name of the Resource Group in which this VPN
+                      Gateway should be created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  routingPreference:
+                    description: Azure routing preference lets you to choose how your
+                      traffic routes between Azure and the internet. You can choose
+                      to route traffic either via the Microsoft network (default value,
+                      Microsoft Network), or via the ISP network (public internet,
+                      set to Internet). More context of the configuration can be found
+                      in the Microsoft Docs to create a VPN Gateway. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  scaleUnit:
+                    description: The Scale Unit for this VPN Gateway. Defaults to
+                      1.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the VPN Gateway.
+                    type: object
+                  virtualHubId:
+                    description: The ID of the Virtual Hub within which this VPN Gateway
+                      should be created. Changing this forces a new resource to be
+                      created.
                     type: string
                 type: object
               conditions:

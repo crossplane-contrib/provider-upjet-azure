@@ -20,6 +20,9 @@ type MSSQLServerDNSAliasObservation struct {
 
 	// The ID of the MSSQL Server DNS Alias.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the mssql server. Changing this forces a new MSSQL Server DNS Alias to be created.
+	MSSQLServerID *string `json:"mssqlServerId,omitempty" tf:"mssql_server_id,omitempty"`
 }
 
 type MSSQLServerDNSAliasParameters struct {

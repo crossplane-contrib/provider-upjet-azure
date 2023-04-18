@@ -14,6 +14,15 @@ import (
 )
 
 type AmbariObservation struct {
+
+	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type AmbariParameters struct {
@@ -36,6 +45,12 @@ type AmbariParameters struct {
 }
 
 type AutoscaleObservation struct {
+
+	// A capacity block as defined below.
+	Capacity []CapacityObservation `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// A recurrence block as defined below.
+	Recurrence []RecurrenceObservation `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
 type AutoscaleParameters struct {
@@ -50,6 +65,12 @@ type AutoscaleParameters struct {
 }
 
 type CapacityObservation struct {
+
+	// The maximum number of worker nodes to autoscale to based on the cluster's activity.
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of worker nodes to autoscale to based on the cluster's activity.
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
 }
 
 type CapacityParameters struct {
@@ -64,6 +85,9 @@ type CapacityParameters struct {
 }
 
 type ComponentVersionObservation struct {
+
+	// The version of Hadoop which should be used for this HDInsight Hadoop Cluster. Changing this forces a new resource to be created.
+	Hadoop *string `json:"hadoop,omitempty" tf:"hadoop,omitempty"`
 }
 
 type ComponentVersionParameters struct {
@@ -74,6 +98,12 @@ type ComponentVersionParameters struct {
 }
 
 type ComputeIsolationObservation struct {
+
+	// This field indicates whether enable compute isolation or not. Possible values are true or false.
+	ComputeIsolationEnabled *bool `json:"computeIsolationEnabled,omitempty" tf:"compute_isolation_enabled,omitempty"`
+
+	// The name of the host SKU.
+	HostSku *string `json:"hostSku,omitempty" tf:"host_sku,omitempty"`
 }
 
 type ComputeIsolationParameters struct {
@@ -88,6 +118,18 @@ type ComputeIsolationParameters struct {
 }
 
 type DiskEncryptionObservation struct {
+
+	// This is an algorithm identifier for encryption. Possible values are RSA1_5, RSA-OAEP, RSA-OAEP-256.
+	EncryptionAlgorithm *string `json:"encryptionAlgorithm,omitempty" tf:"encryption_algorithm,omitempty"`
+
+	// This is indicator to show whether resource disk encryption is enabled.
+	EncryptionAtHostEnabled *bool `json:"encryptionAtHostEnabled,omitempty" tf:"encryption_at_host_enabled,omitempty"`
+
+	// The ID of the key vault key.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// This is the resource ID of Managed Identity used to access the key vault.
+	KeyVaultManagedIdentityID *string `json:"keyVaultManagedIdentityId,omitempty" tf:"key_vault_managed_identity_id,omitempty"`
 }
 
 type DiskEncryptionParameters struct {
@@ -110,6 +152,21 @@ type DiskEncryptionParameters struct {
 }
 
 type EdgeNodeObservation struct {
+
+	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster.
+	HTTPSEndpoints []HTTPSEndpointsObservation `json:"httpsEndpoints,omitempty" tf:"https_endpoints,omitempty"`
+
+	// A install_script_action block as defined below.
+	InstallScriptAction []InstallScriptActionObservation `json:"installScriptAction,omitempty" tf:"install_script_action,omitempty"`
+
+	// The number of instances which should be run for the Worker Nodes.
+	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
+
+	// A uninstall_script_actions block as defined below. Changing this forces a new resource to be created.
+	UninstallScriptActions []UninstallScriptActionsObservation `json:"uninstallScriptActions,omitempty" tf:"uninstall_script_actions,omitempty"`
+
+	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
+	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 }
 
 type EdgeNodeParameters struct {
@@ -136,6 +193,9 @@ type EdgeNodeParameters struct {
 }
 
 type ExtensionObservation struct {
+
+	// The workspace ID of the log analytics extension.
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 }
 
 type ExtensionParameters struct {
@@ -150,6 +210,9 @@ type ExtensionParameters struct {
 }
 
 type GatewayObservation struct {
+
+	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type GatewayParameters struct {
@@ -164,6 +227,21 @@ type GatewayParameters struct {
 }
 
 type HTTPSEndpointsObservation struct {
+
+	// A list of access modes for the application.
+	AccessModes []*string `json:"accessModes,omitempty" tf:"access_modes,omitempty"`
+
+	// The destination port to connect to.
+	DestinationPort *float64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
+
+	// The value indicates whether the gateway authentication is enabled or not.
+	DisableGatewayAuth *bool `json:"disableGatewayAuth,omitempty" tf:"disable_gateway_auth,omitempty"`
+
+	// The private ip address of the endpoint.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The application's subdomain suffix.
+	SubDomainSuffix *string `json:"subDomainSuffix,omitempty" tf:"sub_domain_suffix,omitempty"`
 }
 
 type HTTPSEndpointsParameters struct {
@@ -191,25 +269,79 @@ type HTTPSEndpointsParameters struct {
 
 type HadoopClusterObservation struct {
 
+	// Specifies the Version of HDInsights which should be used for this Cluster. Changing this forces a new resource to be created.
+	ClusterVersion *string `json:"clusterVersion,omitempty" tf:"cluster_version,omitempty"`
+
+	// A component_version block as defined below.
+	ComponentVersion []ComponentVersionObservation `json:"componentVersion,omitempty" tf:"component_version,omitempty"`
+
+	// A compute_isolation block as defined below.
+	ComputeIsolation []ComputeIsolationObservation `json:"computeIsolation,omitempty" tf:"compute_isolation,omitempty"`
+
+	// One or more disk_encryption block as defined below.
+	DiskEncryption []DiskEncryptionObservation `json:"diskEncryption,omitempty" tf:"disk_encryption,omitempty"`
+
+	// An extension block as defined below.
+	Extension []ExtensionObservation `json:"extension,omitempty" tf:"extension,omitempty"`
+
+	// A gateway block as defined below.
+	Gateway []GatewayObservation `json:"gateway,omitempty" tf:"gateway,omitempty"`
+
 	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster.
 	HTTPSEndpoint *string `json:"httpsEndpoint,omitempty" tf:"https_endpoint,omitempty"`
 
 	// The ID of the HDInsight Hadoop Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the Azure Region which this HDInsight Hadoop Cluster should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A metastores block as defined below.
+	Metastores []MetastoresObservation `json:"metastores,omitempty" tf:"metastores,omitempty"`
+
+	// A monitor block as defined below.
+	Monitor []MonitorObservation `json:"monitor,omitempty" tf:"monitor,omitempty"`
+
+	// A network block as defined below.
+	Network []NetworkObservation `json:"network,omitempty" tf:"network,omitempty"`
+
+	// Specifies the name of the Resource Group in which this HDInsight Hadoop Cluster should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A roles block as defined below.
+	Roles []RolesObservation `json:"roles,omitempty" tf:"roles,omitempty"`
+
 	// The SSH Connectivity Endpoint for this HDInsight Hadoop Cluster.
 	SSHEndpoint *string `json:"sshEndpoint,omitempty" tf:"ssh_endpoint,omitempty"`
+
+	// A security_profile block as defined below. Changing this forces a new resource to be created.
+	SecurityProfile []SecurityProfileObservation `json:"securityProfile,omitempty" tf:"security_profile,omitempty"`
+
+	// One or more storage_account block as defined below.
+	StorageAccount []StorageAccountObservation `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
+
+	// A storage_account_gen2 block as defined below.
+	StorageAccountGen2 []StorageAccountGen2Observation `json:"storageAccountGen2,omitempty" tf:"storage_account_gen2,omitempty"`
+
+	// The minimal supported TLS version. Possible values are 1.0, 1.1 or 1.2. Changing this forces a new resource to be created.
+	TLSMinVersion *string `json:"tlsMinVersion,omitempty" tf:"tls_min_version,omitempty"`
+
+	// A map of Tags which should be assigned to this HDInsight Hadoop Cluster.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the Tier which should be used for this HDInsight Hadoop Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type HadoopClusterParameters struct {
 
 	// Specifies the Version of HDInsights which should be used for this Cluster. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ClusterVersion *string `json:"clusterVersion" tf:"cluster_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClusterVersion *string `json:"clusterVersion,omitempty" tf:"cluster_version,omitempty"`
 
 	// A component_version block as defined below.
-	// +kubebuilder:validation:Required
-	ComponentVersion []ComponentVersionParameters `json:"componentVersion" tf:"component_version,omitempty"`
+	// +kubebuilder:validation:Optional
+	ComponentVersion []ComponentVersionParameters `json:"componentVersion,omitempty" tf:"component_version,omitempty"`
 
 	// A compute_isolation block as defined below.
 	// +kubebuilder:validation:Optional
@@ -224,12 +356,12 @@ type HadoopClusterParameters struct {
 	Extension []ExtensionParameters `json:"extension,omitempty" tf:"extension,omitempty"`
 
 	// A gateway block as defined below.
-	// +kubebuilder:validation:Required
-	Gateway []GatewayParameters `json:"gateway" tf:"gateway,omitempty"`
+	// +kubebuilder:validation:Optional
+	Gateway []GatewayParameters `json:"gateway,omitempty" tf:"gateway,omitempty"`
 
 	// Specifies the Azure Region which this HDInsight Hadoop Cluster should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A metastores block as defined below.
 	// +kubebuilder:validation:Optional
@@ -257,8 +389,8 @@ type HadoopClusterParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A roles block as defined below.
-	// +kubebuilder:validation:Required
-	Roles []RolesParameters `json:"roles" tf:"roles,omitempty"`
+	// +kubebuilder:validation:Optional
+	Roles []RolesParameters `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// A security_profile block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -281,11 +413,29 @@ type HadoopClusterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Tier which should be used for this HDInsight Hadoop Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Tier *string `json:"tier" tf:"tier,omitempty"`
+	// +kubebuilder:validation:Optional
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type HeadNodeObservation struct {
+
+	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+
+	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	ScriptActions []ScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
+	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+
+	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type HeadNodeParameters struct {
@@ -330,6 +480,15 @@ type HeadNodeParameters struct {
 }
 
 type HiveObservation struct {
+
+	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type HiveParameters struct {
@@ -352,6 +511,15 @@ type HiveParameters struct {
 }
 
 type InstallScriptActionObservation struct {
+
+	// The name of the uninstall script action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The parameters for the script.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The URI pointing to the script to run during the installation of the edge node.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type InstallScriptActionParameters struct {
@@ -370,6 +538,15 @@ type InstallScriptActionParameters struct {
 }
 
 type MetastoresObservation struct {
+
+	// An ambari block as defined below.
+	Ambari []AmbariObservation `json:"ambari,omitempty" tf:"ambari,omitempty"`
+
+	// A hive block as defined below.
+	Hive []HiveObservation `json:"hive,omitempty" tf:"hive,omitempty"`
+
+	// An oozie block as defined below.
+	Oozie []OozieObservation `json:"oozie,omitempty" tf:"oozie,omitempty"`
 }
 
 type MetastoresParameters struct {
@@ -388,6 +565,9 @@ type MetastoresParameters struct {
 }
 
 type MonitorObservation struct {
+
+	// The Operations Management Suite (OMS) workspace ID.
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 }
 
 type MonitorParameters struct {
@@ -402,6 +582,12 @@ type MonitorParameters struct {
 }
 
 type NetworkObservation struct {
+
+	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
+	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
+
+	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
 type NetworkParameters struct {
@@ -416,6 +602,15 @@ type NetworkParameters struct {
 }
 
 type OozieObservation struct {
+
+	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type OozieParameters struct {
@@ -438,6 +633,12 @@ type OozieParameters struct {
 }
 
 type RecurrenceObservation struct {
+
+	// A list of schedule blocks as defined below.
+	Schedule []ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The time zone for the autoscale schedule times.
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type RecurrenceParameters struct {
@@ -452,6 +653,18 @@ type RecurrenceParameters struct {
 }
 
 type RolesObservation struct {
+
+	// A edge_node block as defined below.
+	EdgeNode []EdgeNodeObservation `json:"edgeNode,omitempty" tf:"edge_node,omitempty"`
+
+	// A head_node block as defined above.
+	HeadNode []HeadNodeObservation `json:"headNode,omitempty" tf:"head_node,omitempty"`
+
+	// A worker_node block as defined below.
+	WorkerNode []WorkerNodeObservation `json:"workerNode,omitempty" tf:"worker_node,omitempty"`
+
+	// A zookeeper_node block as defined below.
+	ZookeeperNode []ZookeeperNodeObservation `json:"zookeeperNode,omitempty" tf:"zookeeper_node,omitempty"`
 }
 
 type RolesParameters struct {
@@ -474,6 +687,15 @@ type RolesParameters struct {
 }
 
 type ScheduleObservation struct {
+
+	// The days of the week to perform autoscale. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+	Days []*string `json:"days,omitempty" tf:"days,omitempty"`
+
+	// The number of instances which should be run for the Worker Nodes.
+	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
+
+	// The time of day to perform the autoscale in 24hour format.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
 
 type ScheduleParameters struct {
@@ -492,6 +714,15 @@ type ScheduleParameters struct {
 }
 
 type ScriptActionsObservation struct {
+
+	// The name of the uninstall script action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The parameters for the script.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The URI pointing to the script to run during the installation of the edge node.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ScriptActionsParameters struct {
@@ -510,6 +741,24 @@ type ScriptActionsParameters struct {
 }
 
 type SecurityProfileObservation struct {
+
+	// The resource ID of the Azure Active Directory Domain Service. Changing this forces a new resource to be created.
+	AaddsResourceID *string `json:"aaddsResourceId,omitempty" tf:"aadds_resource_id,omitempty"`
+
+	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
+	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
+
+	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
+	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
+
+	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
+	LdapsUrls []*string `json:"ldapsUrls,omitempty" tf:"ldaps_urls,omitempty"`
+
+	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
+	MsiResourceID *string `json:"msiResourceId,omitempty" tf:"msi_resource_id,omitempty"`
 }
 
 type SecurityProfileParameters struct {
@@ -544,6 +793,18 @@ type SecurityProfileParameters struct {
 }
 
 type StorageAccountGen2Observation struct {
+
+	// The ID of the Gen2 Filesystem. Changing this forces a new resource to be created.
+	FileSystemID *string `json:"filesystemId,omitempty" tf:"filesystem_id,omitempty"`
+
+	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
+	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+
+	// The ID of Managed Identity to use for accessing the Gen2 filesystem. Changing this forces a new resource to be created.
+	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
+
+	// The ID of the Storage Account. Changing this forces a new resource to be created.
+	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
 }
 
 type StorageAccountGen2Parameters struct {
@@ -566,6 +827,15 @@ type StorageAccountGen2Parameters struct {
 }
 
 type StorageAccountObservation struct {
+
+	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
+	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+
+	// The ID of the Storage Container. Changing this forces a new resource to be created.
+	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
+
+	// The ID of the Storage Account. Changing this forces a new resource to be created.
+	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
 }
 
 type StorageAccountParameters struct {
@@ -598,6 +868,15 @@ type StorageAccountParameters struct {
 }
 
 type UninstallScriptActionsObservation struct {
+
+	// The name of the uninstall script action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The parameters for the script.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The URI pointing to the script to run during the installation of the edge node.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type UninstallScriptActionsParameters struct {
@@ -616,6 +895,30 @@ type UninstallScriptActionsParameters struct {
 }
 
 type WorkerNodeObservation struct {
+
+	// A autoscale block as defined below.
+	Autoscale []AutoscaleObservation `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
+
+	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+
+	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	ScriptActions []WorkerNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// The number of instances which should be run for the Worker Nodes.
+	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
+
+	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
+	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+
+	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type WorkerNodeParameters struct {
@@ -668,6 +971,15 @@ type WorkerNodeParameters struct {
 }
 
 type WorkerNodeScriptActionsObservation struct {
+
+	// The name of the uninstall script action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The parameters for the script.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The URI pointing to the script to run during the installation of the edge node.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type WorkerNodeScriptActionsParameters struct {
@@ -686,6 +998,24 @@ type WorkerNodeScriptActionsParameters struct {
 }
 
 type ZookeeperNodeObservation struct {
+
+	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
+
+	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	ScriptActions []ZookeeperNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
+	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+
+	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type ZookeeperNodeParameters struct {
@@ -730,6 +1060,15 @@ type ZookeeperNodeParameters struct {
 }
 
 type ZookeeperNodeScriptActionsObservation struct {
+
+	// The name of the uninstall script action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The parameters for the script.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The URI pointing to the script to run during the installation of the edge node.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ZookeeperNodeScriptActionsParameters struct {
@@ -771,8 +1110,14 @@ type HadoopClusterStatus struct {
 type HadoopCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HadoopClusterSpec   `json:"spec"`
-	Status            HadoopClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clusterVersion)",message="clusterVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.componentVersion)",message="componentVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.gateway)",message="gateway is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.roles)",message="roles is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tier)",message="tier is a required parameter"
+	Spec   HadoopClusterSpec   `json:"spec"`
+	Status HadoopClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

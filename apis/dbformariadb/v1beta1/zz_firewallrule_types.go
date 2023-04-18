@@ -15,15 +15,27 @@ import (
 
 type FirewallRuleObservation struct {
 
+	// Specifies the End IP Address associated with this Firewall Rule.
+	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
+
 	// The ID of the MariaDB Firewall Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the MariaDB Server exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the name of the MariaDB Server. Changing this forces a new resource to be created.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// Specifies the Start IP Address associated with this Firewall Rule.
+	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
 
 type FirewallRuleParameters struct {
 
 	// Specifies the End IP Address associated with this Firewall Rule.
-	// +kubebuilder:validation:Required
-	EndIPAddress *string `json:"endIpAddress" tf:"end_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The name of the resource group in which the MariaDB Server exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -52,8 +64,8 @@ type FirewallRuleParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the Start IP Address associated with this Firewall Rule.
-	// +kubebuilder:validation:Required
-	StartIPAddress *string `json:"startIpAddress" tf:"start_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
 
 // FirewallRuleSpec defines the desired state of FirewallRule
@@ -80,8 +92,10 @@ type FirewallRuleStatus struct {
 type FirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallRuleSpec   `json:"spec"`
-	Status            FirewallRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endIpAddress)",message="endIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.startIpAddress)",message="startIpAddress is a required parameter"
+	Spec   FirewallRuleSpec   `json:"spec"`
+	Status FirewallRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

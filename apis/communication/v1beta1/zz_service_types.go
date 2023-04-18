@@ -15,6 +15,9 @@ import (
 
 type ServiceObservation struct {
 
+	// The location where the Communication service stores its data at rest. Possible values are Africa, Asia Pacific, Australia, Brazil, Canada, Europe, France, Germany, India, Japan, Korea, Norway, Switzerland, UAE, UK and United States. Defaults to United States.
+	DataLocation *string `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
+
 	// The ID of the Communication Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -24,11 +27,17 @@ type ServiceObservation struct {
 	// The primary key of the Communication Service.
 	PrimaryKey *string `json:"primaryKey,omitempty" tf:"primary_key,omitempty"`
 
+	// The name of the Resource Group where the Communication Service should exist. Changing this forces a new Communication Service to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// The secondary connection string of the Communication Service.
 	SecondaryConnectionString *string `json:"secondaryConnectionString,omitempty" tf:"secondary_connection_string,omitempty"`
 
 	// The secondary key of the Communication Service.
 	SecondaryKey *string `json:"secondaryKey,omitempty" tf:"secondary_key,omitempty"`
+
+	// A mapping of tags which should be assigned to the Communication Service.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ServiceParameters struct {

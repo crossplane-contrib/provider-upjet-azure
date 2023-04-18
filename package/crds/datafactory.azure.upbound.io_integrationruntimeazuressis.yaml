@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: integrationruntimeazuressis.datafactory.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -707,10 +711,22 @@ spec:
                           type: string
                       type: object
                     type: array
-                required:
-                - location
-                - nodeSize
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -882,16 +898,262 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: nodeSize is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeSize)
           status:
             description: IntegrationRuntimeAzureSSISStatus defines the observed state
               of IntegrationRuntimeAzureSSIS.
             properties:
               atProvider:
                 properties:
+                  catalogInfo:
+                    description: A catalog_info block as defined below.
+                    items:
+                      properties:
+                        administratorLogin:
+                          description: Administrator login name for the SQL Server.
+                          type: string
+                        dualStandbyPairName:
+                          description: The dual standby Azure-SSIS Integration Runtime
+                            pair with SSISDB failover.
+                          type: string
+                        elasticPoolName:
+                          description: The name of SQL elastic pool where the database
+                            will be created for the SSIS catalog. Mutually exclusive
+                            with pricing_tier.
+                          type: string
+                        pricingTier:
+                          description: 'Pricing tier for the database that will be
+                            created for the SSIS catalog. Valid values are: Basic,
+                            S0, S1, S2, S3, S4, S6, S7, S9, S12, P1, P2, P4, P6, P11,
+                            P15, GP_S_Gen5_1, GP_S_Gen5_2, GP_S_Gen5_4, GP_S_Gen5_6,
+                            GP_S_Gen5_8, GP_S_Gen5_10, GP_S_Gen5_12, GP_S_Gen5_14,
+                            GP_S_Gen5_16, GP_S_Gen5_18, GP_S_Gen5_20, GP_S_Gen5_24,
+                            GP_S_Gen5_32, GP_S_Gen5_40, GP_Gen5_2, GP_Gen5_4, GP_Gen5_6,
+                            GP_Gen5_8, GP_Gen5_10, GP_Gen5_12, GP_Gen5_14, GP_Gen5_16,
+                            GP_Gen5_18, GP_Gen5_20, GP_Gen5_24, GP_Gen5_32, GP_Gen5_40,
+                            GP_Gen5_80, BC_Gen5_2, BC_Gen5_4, BC_Gen5_6, BC_Gen5_8,
+                            BC_Gen5_10, BC_Gen5_12, BC_Gen5_14, BC_Gen5_16, BC_Gen5_18,
+                            BC_Gen5_20, BC_Gen5_24, BC_Gen5_32, BC_Gen5_40, BC_Gen5_80,
+                            HS_Gen5_2, HS_Gen5_4, HS_Gen5_6, HS_Gen5_8, HS_Gen5_10,
+                            HS_Gen5_12, HS_Gen5_14, HS_Gen5_16, HS_Gen5_18, HS_Gen5_20,
+                            HS_Gen5_24, HS_Gen5_32, HS_Gen5_40 and HS_Gen5_80. Mutually
+                            exclusive with elastic_pool_name.'
+                          type: string
+                        serverEndpoint:
+                          description: The endpoint of an Azure SQL Server that will
+                            be used to host the SSIS catalog.
+                          type: string
+                      type: object
+                    type: array
+                  customSetupScript:
+                    description: A custom_setup_script block as defined below.
+                    items:
+                      properties:
+                        blobContainerUri:
+                          description: The blob endpoint for the container which contains
+                            a custom setup script that will be run on every node on
+                            startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
+                            for more information.
+                          type: string
+                      type: object
+                    type: array
+                  dataFactoryId:
+                    description: The Data Factory ID in which to associate the Linked
+                      Service with. Changing this forces a new resource.
+                    type: string
+                  description:
+                    description: Integration runtime description.
+                    type: string
+                  edition:
+                    description: The Azure-SSIS Integration Runtime edition. Valid
+                      values are Standard and Enterprise. Defaults to Standard.
+                    type: string
+                  expressCustomSetup:
+                    description: An express_custom_setup block as defined below.
+                    items:
+                      properties:
+                        commandKey:
+                          description: One or more command_key blocks as defined below.
+                          items:
+                            properties:
+                              keyVaultPassword:
+                                description: A key_vault_secret_reference block as
+                                  defined below.
+                                items:
+                                  properties:
+                                    linkedServiceName:
+                                      description: Name of the Linked Service to associate
+                                        with the packages.
+                                      type: string
+                                    parameters:
+                                      additionalProperties:
+                                        type: string
+                                      description: A map of parameters to associate
+                                        with the Key Vault Data Factory Linked Service.
+                                      type: object
+                                    secretName:
+                                      description: Specifies the secret name in Azure
+                                        Key Vault.
+                                      type: string
+                                    secretVersion:
+                                      description: Specifies the secret version in
+                                        Azure Key Vault.
+                                      type: string
+                                  type: object
+                                type: array
+                              targetName:
+                                description: The target computer or domain name.
+                                type: string
+                              userName:
+                                description: The username for the target device.
+                                type: string
+                            type: object
+                          type: array
+                        component:
+                          description: One or more component blocks as defined below.
+                          items:
+                            properties:
+                              keyVaultLicense:
+                                description: A key_vault_secret_reference block as
+                                  defined below.
+                                items:
+                                  properties:
+                                    linkedServiceName:
+                                      description: Name of the Linked Service to associate
+                                        with the packages.
+                                      type: string
+                                    parameters:
+                                      additionalProperties:
+                                        type: string
+                                      description: A map of parameters to associate
+                                        with the Key Vault Data Factory Linked Service.
+                                      type: object
+                                    secretName:
+                                      description: Specifies the secret name in Azure
+                                        Key Vault.
+                                      type: string
+                                    secretVersion:
+                                      description: Specifies the secret version in
+                                        Azure Key Vault.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: Name of the package store.
+                                type: string
+                            type: object
+                          type: array
+                        environment:
+                          additionalProperties:
+                            type: string
+                          description: The Environment Variables for the Azure-SSIS
+                            Integration Runtime.
+                          type: object
+                        powershellVersion:
+                          description: The version of Azure Powershell installed for
+                            the Azure-SSIS Integration Runtime.
+                          type: string
+                      type: object
+                    type: array
+                  expressVnetIntegration:
+                    description: A express_vnet_integration block as defined below.
+                    items:
+                      properties:
+                        subnetId:
+                          description: id of the subnet to which the nodes of the
+                            Azure-SSIS Integration Runtime will be added.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Data Factory Azure-SSIS Integration
                       Runtime.
                     type: string
+                  licenseType:
+                    description: The type of the license that is used. Valid values
+                      are LicenseIncluded and BasePrice. Defaults to LicenseIncluded.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  maxParallelExecutionsPerNode:
+                    description: Defines the maximum parallel executions per node.
+                      Defaults to 1. Max is 16.
+                    type: number
+                  nodeSize:
+                    description: 'The size of the nodes on which the Azure-SSIS Integration
+                      Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3,
+                      Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3,
+                      Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3,
+                      Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2,
+                      Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2'
+                    type: string
+                  numberOfNodes:
+                    description: Number of nodes for the Azure-SSIS Integration Runtime.
+                      Max is 10. Defaults to 1.
+                    type: number
+                  packageStore:
+                    description: One or more package_store block as defined below.
+                    items:
+                      properties:
+                        linkedServiceName:
+                          description: Name of the Linked Service to associate with
+                            the packages.
+                          type: string
+                        name:
+                          description: Name of the package store.
+                          type: string
+                      type: object
+                    type: array
+                  proxy:
+                    description: A proxy block as defined below.
+                    items:
+                      properties:
+                        path:
+                          description: The path in the data store to be used when
+                            moving data between Self-Hosted and Azure-SSIS Integration
+                            Runtimes.
+                          type: string
+                        selfHostedIntegrationRuntimeName:
+                          description: Name of Self Hosted Integration Runtime as
+                            a proxy.
+                          type: string
+                        stagingStorageLinkedServiceName:
+                          description: Name of Azure Blob Storage linked service to
+                            reference the staging data store to be used when moving
+                            data between self-hosted and Azure-SSIS integration runtimes.
+                          type: string
+                      type: object
+                    type: array
+                  vnetIntegration:
+                    description: A vnet_integration block as defined below.
+                    items:
+                      properties:
+                        publicIps:
+                          description: Static public IP addresses for the Azure-SSIS
+                            Integration Runtime. The size must be 2.
+                          items:
+                            type: string
+                          type: array
+                        subnetId:
+                          description: id of the subnet to which the nodes of the
+                            Azure-SSIS Integration Runtime will be added.
+                          type: string
+                        subnetName:
+                          description: Name of the subnet to which the nodes of the
+                            Azure-SSIS Integration Runtime will be added.
+                          type: string
+                        vnetId:
+                          description: ID of the virtual network to which the nodes
+                            of the Azure-SSIS Integration Runtime will be added.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -14,6 +14,30 @@ import (
 )
 
 type CustomRuleObservation struct {
+
+	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, or Redirect.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Is the rule is enabled or disabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// One or more match_condition block defined below. Can support up to 10 match_condition blocks.
+	MatchCondition []MatchConditionObservation `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
+
+	// Gets name of the resource that is unique within a policy. This name can be used to access the resource.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority of the rule. Rules with a lower value will be evaluated before rules with a higher value. Defaults to 1.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The rate limit duration in minutes. Defaults to 1.
+	RateLimitDurationInMinutes *float64 `json:"rateLimitDurationInMinutes,omitempty" tf:"rate_limit_duration_in_minutes,omitempty"`
+
+	// The rate limit threshold. Defaults to 10.
+	RateLimitThreshold *float64 `json:"rateLimitThreshold,omitempty" tf:"rate_limit_threshold,omitempty"`
+
+	// The type of rule. Possible values are MatchRule or RateLimitRule.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CustomRuleParameters struct {
@@ -53,6 +77,18 @@ type CustomRuleParameters struct {
 
 type FrontdoorFirewallPolicyObservation struct {
 
+	// If a custom_rule block's action type is block, this is the response body. The body must be specified in base64 encoding.
+	CustomBlockResponseBody *string `json:"customBlockResponseBody,omitempty" tf:"custom_block_response_body,omitempty"`
+
+	// If a custom_rule block's action type is block, this is the response status code. Possible values are 200, 403, 405, 406, or 429.
+	CustomBlockResponseStatusCode *float64 `json:"customBlockResponseStatusCode,omitempty" tf:"custom_block_response_status_code,omitempty"`
+
+	// One or more custom_rule blocks as defined below.
+	CustomRule []CustomRuleObservation `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
+
+	// Is the policy a enabled state or disabled state. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The Frontend Endpoints associated with this Front Door Web Application Firewall policy.
 	FrontendEndpointIds []*string `json:"frontendEndpointIds,omitempty" tf:"frontend_endpoint_ids,omitempty"`
 
@@ -61,6 +97,21 @@ type FrontdoorFirewallPolicyObservation struct {
 
 	// The Azure Region where this Front Door Firewall Policy exists.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// One or more managed_rule blocks as defined below.
+	ManagedRule []ManagedRuleObservation `json:"managedRule,omitempty" tf:"managed_rule,omitempty"`
+
+	// The firewall policy mode. Possible values are Detection, Prevention and defaults to Prevention.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// If action type is redirect, this field represents redirect URL for the client.
+	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
+
+	// The name of the resource group. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the Web Application Firewall Policy.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FrontdoorFirewallPolicyParameters struct {
@@ -112,6 +163,15 @@ type FrontdoorFirewallPolicyParameters struct {
 }
 
 type ManagedRuleExclusionObservation struct {
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
 }
 
 type ManagedRuleExclusionParameters struct {
@@ -130,6 +190,18 @@ type ManagedRuleExclusionParameters struct {
 }
 
 type ManagedRuleObservation struct {
+
+	// One or more exclusion blocks as defined below.
+	Exclusion []ManagedRuleExclusionObservation `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+
+	// One or more override blocks as defined below.
+	Override []OverrideObservation `json:"override,omitempty" tf:"override,omitempty"`
+
+	// The name of the managed rule to use with this resource.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The version on the managed rule to use with this resource.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ManagedRuleParameters struct {
@@ -152,6 +224,24 @@ type ManagedRuleParameters struct {
 }
 
 type MatchConditionObservation struct {
+
+	// Up to 600 possible values to match. Limit is in total across all match_condition blocks and match_values arguments. String value itself can be up to 256 characters long.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Should the result of the condition be negated.
+	NegationCondition *bool `json:"negationCondition,omitempty" tf:"negation_condition,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+
+	// Up to 5 transforms to apply. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, URLDecode orURLEncode.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type MatchConditionParameters struct {
@@ -182,6 +272,15 @@ type MatchConditionParameters struct {
 }
 
 type OverrideExclusionObservation struct {
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
 }
 
 type OverrideExclusionParameters struct {
@@ -200,6 +299,15 @@ type OverrideExclusionParameters struct {
 }
 
 type OverrideObservation struct {
+
+	// One or more exclusion blocks as defined below.
+	Exclusion []OverrideExclusionObservation `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+
+	// One or more rule blocks as defined below. If none are specified, all of the rules in the group will be disabled.
+	Rule []OverrideRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// The managed rule group to override.
+	RuleGroupName *string `json:"ruleGroupName,omitempty" tf:"rule_group_name,omitempty"`
 }
 
 type OverrideParameters struct {
@@ -218,6 +326,18 @@ type OverrideParameters struct {
 }
 
 type OverrideRuleObservation struct {
+
+	// The action to be applied when the rule matches. Possible values are Allow, Block, Log, or Redirect.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Is the managed rule override enabled or disabled. Defaults to false
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// One or more exclusion blocks as defined below.
+	Exclusion []RuleExclusionObservation `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+
+	// Identifier for the managed rule.
+	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 }
 
 type OverrideRuleParameters struct {
@@ -240,6 +360,15 @@ type OverrideRuleParameters struct {
 }
 
 type RuleExclusionObservation struct {
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
 }
 
 type RuleExclusionParameters struct {

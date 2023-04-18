@@ -18,8 +18,23 @@ type DataSetDataLakeGen2Observation struct {
 	// The name of the Data Share Dataset.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// The path of the file in the data lake file system to be shared with the receiver. Conflicts with folder_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
+	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
+
+	// The name of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
+	FileSystemName *string `json:"fileSystemName,omitempty" tf:"file_system_name,omitempty"`
+
+	// The folder path in the data lake file system to be shared with the receiver. Conflicts with file_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
+	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
+
 	// The resource ID of the Data Share Data Lake Gen2 Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The resource ID of the Data Share where this Data Share Data Lake Gen2 Dataset should be created. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
+	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`
+
+	// The resource id of the storage account of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type DataSetDataLakeGen2Parameters struct {

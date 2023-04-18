@@ -14,6 +14,12 @@ import (
 )
 
 type LinkedServiceSQLServerKeyVaultConnectionStringObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault that stores SQL Server connection string.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSQLServerKeyVaultConnectionStringParameters struct {
@@ -28,6 +34,12 @@ type LinkedServiceSQLServerKeyVaultConnectionStringParameters struct {
 }
 
 type LinkedServiceSQLServerKeyVaultPasswordObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault that stores SQL Server password.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSQLServerKeyVaultPasswordParameters struct {
@@ -52,8 +64,38 @@ type LinkedServiceSQLServerKeyVaultPasswordParameters struct {
 
 type LinkedServiceSQLServerObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service SQL Server.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service SQL Server.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The connection string in which to authenticate with the SQL Server. Exactly one of either connection_string or key_vault_connection_string is required.
+	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service SQL Server.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Factory SQL Server Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service SQL Server.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_connection_string block as defined below. Use this argument to store SQL Server connection string in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service. Exactly one of either connection_string or key_vault_connection_string is required.
+	KeyVaultConnectionString []LinkedServiceSQLServerKeyVaultConnectionStringObservation `json:"keyVaultConnectionString,omitempty" tf:"key_vault_connection_string,omitempty"`
+
+	// A key_vault_password block as defined below. Use this argument to store SQL Server password in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
+	KeyVaultPassword []LinkedServiceSQLServerKeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service SQL Server.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The on-premises Windows authentication user name.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type LinkedServiceSQLServerParameters struct {

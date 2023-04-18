@@ -17,12 +17,21 @@ type IOTHubDPSCertificateObservation struct {
 
 	// The ID of the IoTHub Device Provisioning Service Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
+	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
+
+	// Specifies if the certificate is created in verified state. Defaults to false. Changing this forces a new resource to be created.
+	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
+
+	// The name of the resource group under which the Iot Device Provisioning Service Certificate resource has to be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type IOTHubDPSCertificateParameters struct {
 
 	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	CertificateContentSecretRef v1.SecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
@@ -80,8 +89,9 @@ type IOTHubDPSCertificateStatus struct {
 type IOTHubDPSCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IOTHubDPSCertificateSpec   `json:"spec"`
-	Status            IOTHubDPSCertificateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateContentSecretRef)",message="certificateContentSecretRef is a required parameter"
+	Spec   IOTHubDPSCertificateSpec   `json:"spec"`
+	Status IOTHubDPSCertificateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

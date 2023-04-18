@@ -15,8 +15,26 @@ import (
 
 type IOTHubEndpointEventHubObservation struct {
 
+	// Type used to authenticate against the Event Hub endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// URI of the Event Hubs Namespace endpoint. This attribute can only be specified and is mandatory when authentication_type is identityBased.
+	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
+
+	// Name of the Event Hub. This attribute can only be specified and is mandatory when authentication_type is identityBased.
+	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path,omitempty"`
+
 	// The ID of the IoTHub EventHub Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The IoTHub ID for the endpoint. Changing this forces a new resource to be created.
+	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
+
+	// ID of the User Managed Identity used to authenticate against the Event Hub endpoint.
+	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
+
+	// The name of the resource group under which the Event Hub has been created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type IOTHubEndpointEventHubParameters struct {

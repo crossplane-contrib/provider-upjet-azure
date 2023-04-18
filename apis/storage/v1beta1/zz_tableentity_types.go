@@ -15,23 +15,38 @@ import (
 
 type TableEntityObservation struct {
 
+	// A map of key/value pairs that describe the entity to be inserted/merged in to the storage table.
+	Entity map[string]*string `json:"entity,omitempty" tf:"entity,omitempty"`
+
 	// The ID of the Entity within the Table in the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource.
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+
+	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource.
+	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
+
+	// Specifies the storage account in which to create the storage table entity. Changing this forces a new resource to be created.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// The name of the storage table in which to create the storage table entity. Changing this forces a new resource to be created.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type TableEntityParameters struct {
 
 	// A map of key/value pairs that describe the entity to be inserted/merged in to the storage table.
-	// +kubebuilder:validation:Required
-	Entity map[string]*string `json:"entity" tf:"entity,omitempty"`
+	// +kubebuilder:validation:Optional
+	Entity map[string]*string `json:"entity,omitempty" tf:"entity,omitempty"`
 
 	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource.
-	// +kubebuilder:validation:Required
-	PartitionKey *string `json:"partitionKey" tf:"partition_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
 	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource.
-	// +kubebuilder:validation:Required
-	RowKey *string `json:"rowKey" tf:"row_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
 	// Specifies the storage account in which to create the storage table entity. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -85,8 +100,11 @@ type TableEntityStatus struct {
 type TableEntity struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TableEntitySpec   `json:"spec"`
-	Status            TableEntityStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.entity)",message="entity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.partitionKey)",message="partitionKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rowKey)",message="rowKey is a required parameter"
+	Spec   TableEntitySpec   `json:"spec"`
+	Status TableEntityStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

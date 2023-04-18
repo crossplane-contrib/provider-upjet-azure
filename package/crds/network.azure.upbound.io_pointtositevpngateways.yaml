@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: pointtositevpngateways.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -404,11 +408,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - connectionConfiguration
-                - location
-                - scaleUnit
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -580,14 +595,129 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: connectionConfiguration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.connectionConfiguration)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: scaleUnit is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scaleUnit)
           status:
             description: PointToSiteVPNGatewayStatus defines the observed state of
               PointToSiteVPNGateway.
             properties:
               atProvider:
                 properties:
+                  connectionConfiguration:
+                    description: A connection_configuration block as defined below.
+                    items:
+                      properties:
+                        internetSecurityEnabled:
+                          description: Should Internet Security be enabled to secure
+                            internet traffic? Changing this forces a new resource
+                            to be created. Defaults to false.
+                          type: boolean
+                        name:
+                          description: The Name which should be used for this Connection
+                            Configuration.
+                          type: string
+                        route:
+                          description: A route block as defined below.
+                          items:
+                            properties:
+                              associatedRouteTableId:
+                                description: The Virtual Hub Route Table resource
+                                  id associated with this Routing Configuration.
+                                type: string
+                              inboundRouteMapId:
+                                description: The resource ID of the Route Map associated
+                                  with this Routing Configuration for inbound learned
+                                  routes.
+                                type: string
+                              outboundRouteMapId:
+                                description: The resource ID of the Route Map associated
+                                  with this Routing Configuration for outbound advertised
+                                  routes.
+                                type: string
+                              propagatedRouteTable:
+                                description: A propagated_route_table block as defined
+                                  below.
+                                items:
+                                  properties:
+                                    ids:
+                                      description: The list of Virtual Hub Route Table
+                                        resource id which the routes will be propagated
+                                        to.
+                                      items:
+                                        type: string
+                                      type: array
+                                    labels:
+                                      description: The list of labels to logically
+                                        group Virtual Hub Route Tables which the routes
+                                        will be propagated to.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        vpnClientAddressPool:
+                          description: A vpn_client_address_pool block as defined
+                            below.
+                          items:
+                            properties:
+                              addressPrefixes:
+                                description: A list of CIDR Ranges which should be
+                                  used as Address Prefixes.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  dnsServers:
+                    description: A list of IP Addresses of DNS Servers for the Point-to-Site
+                      VPN Gateway.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the Point-to-Site VPN Gateway.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Point-to-Site VPN Gateway. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  routingPreferenceInternetEnabled:
+                    description: Is the Routing Preference for the Public IP Interface
+                      of the VPN Gateway enabled? Defaults to false. Changing this
+                      forces a new resource to be created.
+                    type: boolean
+                  scaleUnit:
+                    description: The Scale Unit for this Point-to-Site VPN Gateway.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Point-to-Site
+                      VPN Gateway.
+                    type: object
+                  virtualHubId:
+                    description: The ID of the Virtual Hub where this Point-to-Site
+                      VPN Gateway should exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  vpnServerConfigurationId:
+                    description: The ID of the VPN Server Configuration which this
+                      Point-to-Site VPN Gateway should use. Changing this forces a
+                      new resource to be created.
                     type: string
                 type: object
               conditions:

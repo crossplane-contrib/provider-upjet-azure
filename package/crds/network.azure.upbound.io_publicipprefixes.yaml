@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: publicipprefixes.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -175,9 +179,22 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -349,6 +366,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: PublicIPPrefixStatus defines the observed state of PublicIPPrefix.
             properties:
@@ -360,6 +380,42 @@ spec:
                   ipPrefix:
                     description: The IP address prefix value that was allocated.
                     type: string
+                  ipVersion:
+                    description: The IP Version to use, IPv6 or IPv4. Changing this
+                      forces a new resource to be created. Default is IPv4.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  prefixLength:
+                    description: Specifies the number of bits of the prefix. The value
+                      can be set between 0 (4,294,967,296 addresses) and 31 (2 addresses).
+                      Defaults to 28(16 addresses). Changing this forces a new resource
+                      to be created.
+                    type: number
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Public IP Prefix. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  sku:
+                    description: The SKU of the Public IP Prefix. Accepted values
+                      are Standard. Defaults to Standard. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Public IP Prefix should be located. Changing this forces a new
+                      Public IP Prefix to be created.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

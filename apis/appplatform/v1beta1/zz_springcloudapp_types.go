@@ -14,6 +14,21 @@ import (
 )
 
 type CustomPersistentDiskObservation struct {
+
+	// These are the mount options for a persistent disk.
+	MountOptions []*string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
+
+	// The mount path of the persistent disk.
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+
+	// Indicates whether the persistent disk is a readOnly one.
+	ReadOnlyEnabled *bool `json:"readOnlyEnabled,omitempty" tf:"read_only_enabled,omitempty"`
+
+	// The share name of the Azure File share.
+	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
+
+	// The name of the Spring Cloud Storage.
+	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 }
 
 type CustomPersistentDiskParameters struct {
@@ -41,11 +56,17 @@ type CustomPersistentDiskParameters struct {
 
 type IdentityObservation struct {
 
+	// A list of User Assigned Managed Identity IDs to be assigned to this Spring Cloud Application.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Spring Cloud Application.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Spring Cloud Application.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Spring Cloud Application. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -60,6 +81,21 @@ type IdentityParameters struct {
 }
 
 type IngressSettingsObservation struct {
+
+	// Specifies how ingress should communicate with this app backend service. Allowed values are GRPC and Default. Defaults to Default.
+	BackendProtocol *string `json:"backendProtocol,omitempty" tf:"backend_protocol,omitempty"`
+
+	// Specifies the ingress read time out in seconds. Defaults to 300.
+	ReadTimeoutInSeconds *float64 `json:"readTimeoutInSeconds,omitempty" tf:"read_timeout_in_seconds,omitempty"`
+
+	// Specifies the ingress send time out in seconds. Defaults to 60.
+	SendTimeoutInSeconds *float64 `json:"sendTimeoutInSeconds,omitempty" tf:"send_timeout_in_seconds,omitempty"`
+
+	// Specifies the type of the affinity, set this to Cookie to enable session affinity. Allowed values are Cookie and None. Defaults to None.
+	SessionAffinity *string `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty"`
+
+	// Specifies the time in seconds until the cookie expires.
+	SessionCookieMaxAge *float64 `json:"sessionCookieMaxAge,omitempty" tf:"session_cookie_max_age,omitempty"`
 }
 
 type IngressSettingsParameters struct {
@@ -86,6 +122,12 @@ type IngressSettingsParameters struct {
 }
 
 type PersistentDiskObservation struct {
+
+	// Specifies the mount path of the persistent disk. Defaults to /persistent.
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+
+	// Specifies the size of the persistent disk in GB. Possible values are between 0 and 50.
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 }
 
 type PersistentDiskParameters struct {
@@ -101,15 +143,44 @@ type PersistentDiskParameters struct {
 
 type SpringCloudAppObservation struct {
 
+	// A JSON object that contains the addon configurations of the Spring Cloud Service.
+	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
+
+	// A custom_persistent_disk block as defined below.
+	CustomPersistentDisk []CustomPersistentDiskObservation `json:"customPersistentDisk,omitempty" tf:"custom_persistent_disk,omitempty"`
+
 	// The Fully Qualified DNS Name of the Spring Application in the service.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+
+	// Is only HTTPS allowed? Defaults to false.
+	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// The ID of the Spring Cloud Application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// An ingress_settings block as defined below.
+	IngressSettings []IngressSettingsObservation `json:"ingressSettings,omitempty" tf:"ingress_settings,omitempty"`
+
+	// Does the Spring Cloud Application have public endpoint? Defaults to false.
+	IsPublic *bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
+
+	// An persistent_disk block as defined below.
+	PersistentDisk []PersistentDiskObservation `json:"persistentDisk,omitempty" tf:"persistent_disk,omitempty"`
+
+	// Should the App in vnet injection instance exposes endpoint which could be accessed from Internet?
+	PublicEndpointEnabled *bool `json:"publicEndpointEnabled,omitempty" tf:"public_endpoint_enabled,omitempty"`
+
+	// Specifies the name of the resource group in which to create the Spring Cloud Application. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the name of the Spring Cloud Service resource. Changing this forces a new resource to be created.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
+	// Is End to End TLS Enabled? Defaults to false.
+	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 
 	// The public endpoint of the Spring Cloud Application.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`

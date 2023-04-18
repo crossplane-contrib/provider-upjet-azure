@@ -14,6 +14,12 @@ import (
 )
 
 type DDOSProtectionPlanObservation struct {
+
+	// Enable/disable DDoS Protection Plan on Virtual Network.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// The ID of DDoS Protection Plan.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DDOSProtectionPlanParameters struct {
@@ -29,21 +35,48 @@ type DDOSProtectionPlanParameters struct {
 
 type VirtualNetworkObservation struct {
 
+	// The address space that is used the virtual network. You can supply more than one address space.
+	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
+
+	// The BGP community attribute in format <as-number>:<community-value>.
+	BGPCommunity *string `json:"bgpCommunity,omitempty" tf:"bgp_community,omitempty"`
+
+	// A ddos_protection_plan block as documented below.
+	DDOSProtectionPlan []DDOSProtectionPlanObservation `json:"ddosProtectionPlan,omitempty" tf:"ddos_protection_plan,omitempty"`
+
+	// List of IP addresses of DNS servers
+	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
+
+	// Specifies the Edge Zone within the Azure Region where this Virtual Network should exist. Changing this forces a new Virtual Network to be created.
+	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
+
+	// The flow timeout in minutes for the Virtual Network, which is used to enable connection tracking for intra-VM flows. Possible values are between 4 and 30 minutes.
+	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
+
 	// The GUID of the virtual network.
 	GUID *string `json:"guid,omitempty" tf:"guid,omitempty"`
 
 	// The virtual NetworkConfiguration ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the virtual network. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// Can be specified multiple times to define multiple subnets. Each subnet block supports fields documented below.
 	Subnet []VirtualNetworkSubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VirtualNetworkParameters struct {
 
 	// The address space that is used the virtual network. You can supply more than one address space.
-	// +kubebuilder:validation:Required
-	AddressSpace []*string `json:"addressSpace" tf:"address_space,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// The BGP community attribute in format <as-number>:<community-value>.
 	// +kubebuilder:validation:Optional
@@ -66,8 +99,8 @@ type VirtualNetworkParameters struct {
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
 
 	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the virtual network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -129,8 +162,10 @@ type VirtualNetworkStatus struct {
 type VirtualNetwork struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualNetworkSpec   `json:"spec"`
-	Status            VirtualNetworkStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressSpace)",message="addressSpace is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   VirtualNetworkSpec   `json:"spec"`
+	Status VirtualNetworkStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

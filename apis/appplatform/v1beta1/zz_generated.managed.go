@@ -17,6 +17,11 @@ func (mg *SpringCloudAPIPortal) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudAPIPortal.
 func (mg *SpringCloudAPIPortal) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *SpringCloudAPIPortal) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudAPIPortal.
 func (mg *SpringCloudAPIPortal) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudAPIPortal.
+func (mg *SpringCloudAPIPortal) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudAPIPortal.
@@ -83,6 +93,11 @@ func (mg *SpringCloudAPIPortalCustomDomain) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudAPIPortalCustomDomain.
 func (mg *SpringCloudAPIPortalCustomDomain) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *SpringCloudAPIPortalCustomDomain) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudAPIPortalCustomDomain.
 func (mg *SpringCloudAPIPortalCustomDomain) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudAPIPortalCustomDomain.
+func (mg *SpringCloudAPIPortalCustomDomain) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudAPIPortalCustomDomain.
@@ -149,6 +169,11 @@ func (mg *SpringCloudAccelerator) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudAccelerator.
+func (mg *SpringCloudAccelerator) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudAccelerator.
 func (mg *SpringCloudAccelerator) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *SpringCloudAccelerator) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudAccelerator.
 func (mg *SpringCloudAccelerator) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudAccelerator.
+func (mg *SpringCloudAccelerator) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudAccelerator.
@@ -215,6 +245,11 @@ func (mg *SpringCloudActiveDeployment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudActiveDeployment.
+func (mg *SpringCloudActiveDeployment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudActiveDeployment.
 func (mg *SpringCloudActiveDeployment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *SpringCloudActiveDeployment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudActiveDeployment.
 func (mg *SpringCloudActiveDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudActiveDeployment.
+func (mg *SpringCloudActiveDeployment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudActiveDeployment.
@@ -281,6 +321,11 @@ func (mg *SpringCloudApp) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudApp.
+func (mg *SpringCloudApp) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudApp.
 func (mg *SpringCloudApp) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *SpringCloudApp) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudApp.
 func (mg *SpringCloudApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudApp.
+func (mg *SpringCloudApp) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudApp.
@@ -347,6 +397,11 @@ func (mg *SpringCloudAppCosmosDBAssociation) GetDeletionPolicy() xpv1.DeletionPo
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudAppCosmosDBAssociation.
+func (mg *SpringCloudAppCosmosDBAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudAppCosmosDBAssociation.
 func (mg *SpringCloudAppCosmosDBAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *SpringCloudAppCosmosDBAssociation) SetConditions(c ...xpv1.Condition) 
 // SetDeletionPolicy of this SpringCloudAppCosmosDBAssociation.
 func (mg *SpringCloudAppCosmosDBAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudAppCosmosDBAssociation.
+func (mg *SpringCloudAppCosmosDBAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudAppCosmosDBAssociation.
@@ -413,6 +473,11 @@ func (mg *SpringCloudAppMySQLAssociation) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudAppMySQLAssociation.
+func (mg *SpringCloudAppMySQLAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudAppMySQLAssociation.
 func (mg *SpringCloudAppMySQLAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *SpringCloudAppMySQLAssociation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudAppMySQLAssociation.
 func (mg *SpringCloudAppMySQLAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudAppMySQLAssociation.
+func (mg *SpringCloudAppMySQLAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudAppMySQLAssociation.
@@ -479,6 +549,11 @@ func (mg *SpringCloudAppRedisAssociation) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudAppRedisAssociation.
+func (mg *SpringCloudAppRedisAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudAppRedisAssociation.
 func (mg *SpringCloudAppRedisAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *SpringCloudAppRedisAssociation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudAppRedisAssociation.
 func (mg *SpringCloudAppRedisAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudAppRedisAssociation.
+func (mg *SpringCloudAppRedisAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudAppRedisAssociation.
@@ -545,6 +625,11 @@ func (mg *SpringCloudBuildDeployment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudBuildDeployment.
 func (mg *SpringCloudBuildDeployment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *SpringCloudBuildDeployment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudBuildDeployment.
 func (mg *SpringCloudBuildDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudBuildDeployment.
+func (mg *SpringCloudBuildDeployment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudBuildDeployment.
@@ -611,6 +701,11 @@ func (mg *SpringCloudBuildPackBinding) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudBuildPackBinding.
 func (mg *SpringCloudBuildPackBinding) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -642,6 +737,11 @@ func (mg *SpringCloudBuildPackBinding) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudBuildPackBinding.
 func (mg *SpringCloudBuildPackBinding) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudBuildPackBinding.
+func (mg *SpringCloudBuildPackBinding) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudBuildPackBinding.
@@ -677,6 +777,11 @@ func (mg *SpringCloudBuilder) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudBuilder.
 func (mg *SpringCloudBuilder) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -708,6 +813,11 @@ func (mg *SpringCloudBuilder) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudBuilder.
 func (mg *SpringCloudBuilder) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudBuilder.
+func (mg *SpringCloudBuilder) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudBuilder.
@@ -743,6 +853,11 @@ func (mg *SpringCloudCertificate) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudCertificate.
+func (mg *SpringCloudCertificate) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudCertificate.
 func (mg *SpringCloudCertificate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -774,6 +889,11 @@ func (mg *SpringCloudCertificate) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudCertificate.
 func (mg *SpringCloudCertificate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudCertificate.
+func (mg *SpringCloudCertificate) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudCertificate.
@@ -809,6 +929,11 @@ func (mg *SpringCloudConfigurationService) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudConfigurationService.
 func (mg *SpringCloudConfigurationService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -840,6 +965,11 @@ func (mg *SpringCloudConfigurationService) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudConfigurationService.
 func (mg *SpringCloudConfigurationService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudConfigurationService.
+func (mg *SpringCloudConfigurationService) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudConfigurationService.
@@ -875,6 +1005,11 @@ func (mg *SpringCloudContainerDeployment) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudContainerDeployment.
 func (mg *SpringCloudContainerDeployment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -906,6 +1041,11 @@ func (mg *SpringCloudContainerDeployment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudContainerDeployment.
 func (mg *SpringCloudContainerDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudContainerDeployment.
+func (mg *SpringCloudContainerDeployment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudContainerDeployment.
@@ -941,6 +1081,11 @@ func (mg *SpringCloudCustomDomain) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudCustomDomain.
+func (mg *SpringCloudCustomDomain) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudCustomDomain.
 func (mg *SpringCloudCustomDomain) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -972,6 +1117,11 @@ func (mg *SpringCloudCustomDomain) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudCustomDomain.
 func (mg *SpringCloudCustomDomain) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudCustomDomain.
+func (mg *SpringCloudCustomDomain) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudCustomDomain.
@@ -1007,6 +1157,11 @@ func (mg *SpringCloudCustomizedAccelerator) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudCustomizedAccelerator.
+func (mg *SpringCloudCustomizedAccelerator) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudCustomizedAccelerator.
 func (mg *SpringCloudCustomizedAccelerator) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1038,6 +1193,11 @@ func (mg *SpringCloudCustomizedAccelerator) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudCustomizedAccelerator.
 func (mg *SpringCloudCustomizedAccelerator) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudCustomizedAccelerator.
+func (mg *SpringCloudCustomizedAccelerator) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudCustomizedAccelerator.
@@ -1073,6 +1233,11 @@ func (mg *SpringCloudDevToolPortal) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudDevToolPortal.
+func (mg *SpringCloudDevToolPortal) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudDevToolPortal.
 func (mg *SpringCloudDevToolPortal) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1104,6 +1269,11 @@ func (mg *SpringCloudDevToolPortal) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudDevToolPortal.
 func (mg *SpringCloudDevToolPortal) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudDevToolPortal.
+func (mg *SpringCloudDevToolPortal) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudDevToolPortal.
@@ -1139,6 +1309,11 @@ func (mg *SpringCloudGateway) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudGateway.
+func (mg *SpringCloudGateway) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudGateway.
 func (mg *SpringCloudGateway) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1170,6 +1345,11 @@ func (mg *SpringCloudGateway) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudGateway.
 func (mg *SpringCloudGateway) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudGateway.
+func (mg *SpringCloudGateway) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudGateway.
@@ -1205,6 +1385,11 @@ func (mg *SpringCloudGatewayCustomDomain) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudGatewayCustomDomain.
 func (mg *SpringCloudGatewayCustomDomain) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1236,6 +1421,11 @@ func (mg *SpringCloudGatewayCustomDomain) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudGatewayCustomDomain.
 func (mg *SpringCloudGatewayCustomDomain) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudGatewayCustomDomain.
+func (mg *SpringCloudGatewayCustomDomain) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudGatewayCustomDomain.
@@ -1271,6 +1461,11 @@ func (mg *SpringCloudJavaDeployment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudJavaDeployment.
+func (mg *SpringCloudJavaDeployment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudJavaDeployment.
 func (mg *SpringCloudJavaDeployment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1302,6 +1497,11 @@ func (mg *SpringCloudJavaDeployment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudJavaDeployment.
 func (mg *SpringCloudJavaDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudJavaDeployment.
+func (mg *SpringCloudJavaDeployment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudJavaDeployment.
@@ -1337,6 +1537,11 @@ func (mg *SpringCloudService) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudService.
+func (mg *SpringCloudService) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudService.
 func (mg *SpringCloudService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1368,6 +1573,11 @@ func (mg *SpringCloudService) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudService.
 func (mg *SpringCloudService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudService.
+func (mg *SpringCloudService) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudService.
@@ -1403,6 +1613,11 @@ func (mg *SpringCloudStorage) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SpringCloudStorage.
+func (mg *SpringCloudStorage) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SpringCloudStorage.
 func (mg *SpringCloudStorage) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1434,6 +1649,11 @@ func (mg *SpringCloudStorage) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SpringCloudStorage.
 func (mg *SpringCloudStorage) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SpringCloudStorage.
+func (mg *SpringCloudStorage) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SpringCloudStorage.

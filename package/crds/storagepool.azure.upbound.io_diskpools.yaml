@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: diskpools.storagepool.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -242,11 +246,22 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - location
-                - skuName
-                - zones
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -418,6 +433,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: skuName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)
+            - message: zones is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.zones)
           status:
             description: DiskPoolStatus defines the observed state of DiskPool.
             properties:
@@ -426,6 +448,36 @@ spec:
                   id:
                     description: The ID of the Disk Pool.
                     type: string
+                  location:
+                    description: The Azure Region where the Disk Pool should exist.
+                      Changing this forces a new Disk Pool to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Disk Pool
+                      should exist. Changing this forces a new Disk Pool to be created.
+                    type: string
+                  skuName:
+                    description: The SKU of the Disk Pool. Possible values are Basic_B1,
+                      Standard_S1 and Premium_P1. Changing this forces a new Disk
+                      Pool to be created.
+                    type: string
+                  subnetId:
+                    description: The ID of the Subnet where the Disk Pool should be
+                      created. Changing this forces a new Disk Pool to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Disk Pool.
+                    type: object
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Disk Pool should be located. Changing this forces a new Disk
+                      Pool to be created.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

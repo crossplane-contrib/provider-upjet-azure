@@ -15,11 +15,17 @@ import (
 
 type StaticSiteIdentityObservation struct {
 
+	// A list of Managed Identity IDs which should be assigned to this Static Site resource.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The ID of the Static Web App.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The Type of Managed Identity assigned to this Static Site resource. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StaticSiteIdentityParameters struct {
@@ -42,8 +48,22 @@ type StaticSiteObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []StaticSiteIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Static Web App should exist. Changing this forces a new Static Web App to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Static Web App should exist. Changing this forces a new Static Web App to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the SKU size of the Static Web App. Possible values are Free or Standard. Defaults to Free.
+	SkuSize *string `json:"skuSize,omitempty" tf:"sku_size,omitempty"`
+
+	// Specifies the SKU tier of the Static Web App. Possible values are Free or Standard. Defaults to Free.
+	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type StaticSiteParameters struct {
@@ -53,8 +73,8 @@ type StaticSiteParameters struct {
 	Identity []StaticSiteIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Static Web App should exist. Changing this forces a new Static Web App to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Static Web App should exist. Changing this forces a new Static Web App to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -106,8 +126,9 @@ type StaticSiteStatus struct {
 type StaticSite struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StaticSiteSpec   `json:"spec"`
-	Status            StaticSiteStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   StaticSiteSpec   `json:"spec"`
+	Status StaticSiteStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

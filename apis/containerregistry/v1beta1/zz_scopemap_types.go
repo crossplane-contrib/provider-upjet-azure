@@ -15,15 +15,27 @@ import (
 
 type ScopeMapObservation struct {
 
+	// A list of actions to attach to the scope map (e.g. repo/content/read, repo2/content/delete).
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// The name of the Container Registry. Changing this forces a new resource to be created.
+	ContainerRegistryName *string `json:"containerRegistryName,omitempty" tf:"container_registry_name,omitempty"`
+
+	// The description of the Container Registry.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Container Registry scope map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which to create the Container Registry token. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type ScopeMapParameters struct {
 
 	// A list of actions to attach to the scope map (e.g. repo/content/read, repo2/content/delete).
-	// +kubebuilder:validation:Required
-	Actions []*string `json:"actions" tf:"actions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// The name of the Container Registry. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta1.Registry
@@ -80,8 +92,9 @@ type ScopeMapStatus struct {
 type ScopeMap struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ScopeMapSpec   `json:"spec"`
-	Status            ScopeMapStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actions)",message="actions is a required parameter"
+	Spec   ScopeMapSpec   `json:"spec"`
+	Status ScopeMapStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

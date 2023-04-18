@@ -15,6 +15,9 @@ import (
 
 type FrontdoorRuleSetObservation struct {
 
+	// The ID of the Front Door Profile. Changing this forces a new Front Door Rule Set to be created.
+	CdnFrontdoorProfileID *string `json:"cdnFrontdoorProfileId,omitempty" tf:"cdn_frontdoor_profile_id,omitempty"`
+
 	// The ID of the Front Door Rule Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: monitorscheduledqueryrulesalertv2s.insights.azure.upbound.io
 spec:
@@ -57,9 +57,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -410,12 +414,22 @@ spec:
                       query rule check if storage is configured. Value should be true
                       or false. The default is false.
                     type: boolean
-                required:
-                - criteria
-                - location
-                - severity
-                - windowDuration
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -587,14 +601,136 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: criteria is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.criteria)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: severity is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.severity)
+            - message: windowDuration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.windowDuration)
           status:
             description: MonitorScheduledQueryRulesAlertV2Status defines the observed
               state of MonitorScheduledQueryRulesAlertV2.
             properties:
               atProvider:
                 properties:
+                  action:
+                    description: An action block as defined below.
+                    items:
+                      properties:
+                        actionGroups:
+                          description: List of Action Group resource IDs to invoke
+                            when the alert fires.
+                          items:
+                            type: string
+                          type: array
+                        customProperties:
+                          additionalProperties:
+                            type: string
+                          description: Specifies the properties of an alert payload.
+                          type: object
+                      type: object
+                    type: array
+                  autoMitigationEnabled:
+                    description: Specifies the flag that indicates whether the alert
+                      should be automatically resolved or not. Value should be true
+                      or false. The default is false.
+                    type: boolean
                   createdWithApiVersion:
                     description: The api-version used when creating this alert rule.
+                    type: string
+                  criteria:
+                    description: A criteria block as defined below.
+                    items:
+                      properties:
+                        dimension:
+                          description: A dimension block as defined below.
+                          items:
+                            properties:
+                              name:
+                                description: Specifies the name which should be used
+                                  for this Monitor Scheduled Query Rule. Changing
+                                  this forces a new resource to be created.
+                                type: string
+                              operator:
+                                description: Operator for dimension values. Possible
+                                  values are Exclude,and Include.
+                                type: string
+                              values:
+                                description: List of dimension values. Use a wildcard
+                                  * to collect all.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        failingPeriods:
+                          description: A failing_periods block as defined below.
+                          items:
+                            properties:
+                              minimumFailingPeriodsToTriggerAlert:
+                                description: Specifies the number of violations to
+                                  trigger an alert. Should be smaller or equal to
+                                  number_of_evaluation_periods. Possible value is
+                                  integer between 1 and 6.
+                                type: number
+                              numberOfEvaluationPeriods:
+                                description: Specifies the number of aggregated look-back
+                                  points. The look-back time window is calculated
+                                  based on the aggregation granularity window_duration
+                                  and the selected number of aggregated points. Possible
+                                  value is integer between 1 and 6.
+                                type: number
+                            type: object
+                          type: array
+                        metricMeasureColumn:
+                          description: Specifies the column containing the metric
+                            measure number.
+                          type: string
+                        operator:
+                          description: Specifies the criteria operator. Possible values
+                            are Equal, GreaterThan, GreaterThanOrEqual, LessThan,and
+                            LessThanOrEqual.
+                          type: string
+                        query:
+                          description: The query to run on logs. The results returned
+                            by this query are used to populate the alert.
+                          type: string
+                        resourceIdColumn:
+                          description: Specifies the column containing the resource
+                            ID. The content of the column must be an uri formatted
+                            as resource ID.
+                          type: string
+                        threshold:
+                          description: Specifies the criteria threshold value that
+                            activates the alert.
+                          type: number
+                        timeAggregationMethod:
+                          description: The type of aggregation to apply to the data
+                            points in aggregation granularity. Possible values are
+                            Average, Count, Maximum, Minimum,and Total.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: Specifies the description of the scheduled query
+                      rule.
+                    type: string
+                  displayName:
+                    description: Specifies the display name of the alert rule.
+                    type: string
+                  enabled:
+                    description: Specifies the flag which indicates whether this scheduled
+                      query rule is enabled. Value should be true or false. The default
+                      is true.
+                    type: boolean
+                  evaluationFrequency:
+                    description: How often the scheduled query rule is evaluated,
+                      represented in ISO 8601 duration format. Possible values are
+                      PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H,
+                      PT5H, PT6H, P1D.
                     type: string
                   id:
                     description: The ID of the Monitor Scheduled Query Rule.
@@ -606,6 +742,73 @@ spec:
                   isWorkspaceAlertsStorageConfigured:
                     description: The flag indicates whether this Scheduled Query Rule
                       has been configured to be stored in the customer's storage.
+                    type: boolean
+                  location:
+                    description: Specifies the Azure Region where the Monitor Scheduled
+                      Query Rule should exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  muteActionsAfterAlertDuration:
+                    description: Mute actions for the chosen period of time in ISO
+                      8601 duration format after the alert is fired. Possible values
+                      are PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H,
+                      PT5H, PT6H, P1D and P2D.
+                    type: string
+                  queryTimeRangeOverride:
+                    description: Set this if the alert evaluation period is different
+                      from the query time range. If not specified, the value is window_duration*number_of_evaluation_periods.
+                      Possible values are PT5M, PT10M, PT15M, PT20M, PT30M, PT45M,
+                      PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D and P2D.
+                    type: string
+                  resourceGroupName:
+                    description: Specifies the name of the Resource Group where the
+                      Monitor Scheduled Query Rule should exist. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  scopes:
+                    description: Specifies the list of resource IDs that this scheduled
+                      query rule is scoped to. Changing this forces a new resource
+                      to be created. Currently, the API supports exactly 1 resource
+                      ID in the scopes list.
+                    items:
+                      type: string
+                    type: array
+                  severity:
+                    description: Severity of the alert. Should be an integer between
+                      0 and 4. Value of 0 is severest.
+                    type: number
+                  skipQueryValidation:
+                    description: Specifies the flag which indicates whether the provided
+                      query should be validated or not. The default is false.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Monitor Scheduled Query Rule.
+                    type: object
+                  targetResourceTypes:
+                    description: List of resource type of the target resource(s) on
+                      which the alert is created/updated. For example if the scope
+                      is a resource group and targetResourceTypes is Microsoft.Compute/virtualMachines,
+                      then a different alert will be fired for each virtual machine
+                      in the resource group which meet the alert criteria.
+                    items:
+                      type: string
+                    type: array
+                  windowDuration:
+                    description: Specifies the period of time in ISO 8601 duration
+                      format on which the Scheduled Query Rule will be executed (bin
+                      size). If evaluation_frequency is PT1M, possible values are
+                      PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H,
+                      PT5H, and PT6H. Otherwise, possible values are PT5M, PT10M,
+                      PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D,
+                      and P2D.
+                    type: string
+                  workspaceAlertsStorageEnabled:
+                    description: Specifies the flag which indicates whether this scheduled
+                      query rule check if storage is configured. Value should be true
+                      or false. The default is false.
                     type: boolean
                 type: object
               conditions:

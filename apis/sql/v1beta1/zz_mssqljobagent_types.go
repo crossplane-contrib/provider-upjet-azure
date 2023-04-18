@@ -15,8 +15,20 @@ import (
 
 type MSSQLJobAgentObservation struct {
 
+	// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
+
 	// The ID of the Elastic Job Agent.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Database.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MSSQLJobAgentParameters struct {
@@ -36,12 +48,12 @@ type MSSQLJobAgentParameters struct {
 	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Database.
 	// +kubebuilder:validation:Optional
@@ -72,8 +84,10 @@ type MSSQLJobAgentStatus struct {
 type MSSQLJobAgent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MSSQLJobAgentSpec   `json:"spec"`
-	Status            MSSQLJobAgentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   MSSQLJobAgentSpec   `json:"spec"`
+	Status MSSQLJobAgentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

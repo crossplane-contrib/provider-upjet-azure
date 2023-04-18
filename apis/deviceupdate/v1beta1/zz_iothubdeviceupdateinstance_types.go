@@ -14,6 +14,9 @@ import (
 )
 
 type DiagnosticStorageAccountObservation struct {
+
+	// Resource ID of the Diagnostic Storage Account.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type DiagnosticStorageAccountParameters struct {
@@ -39,8 +42,23 @@ type DiagnosticStorageAccountParameters struct {
 
 type IOTHubDeviceUpdateInstanceObservation struct {
 
+	// Specifies the ID of the IoT Hub Device Update Account where the IoT Hub Device Update Instance exists. Changing this forces a new resource to be created.
+	DeviceUpdateAccountID *string `json:"deviceUpdateAccountId,omitempty" tf:"device_update_account_id,omitempty"`
+
+	// Whether the diagnostic log collection is enabled. Possible values are true and false. Defaults to false.
+	DiagnosticEnabled *bool `json:"diagnosticEnabled,omitempty" tf:"diagnostic_enabled,omitempty"`
+
+	// A diagnostic_storage_account block as defined below.
+	DiagnosticStorageAccount []DiagnosticStorageAccountObservation `json:"diagnosticStorageAccount,omitempty" tf:"diagnostic_storage_account,omitempty"`
+
 	// The ID of the IoT Hub Device Update Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the IoT Hub associated with the IoT Hub Device Update Instance. Changing this forces a new resource to be created.
+	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the IoT Hub Device Update Instance.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type IOTHubDeviceUpdateInstanceParameters struct {

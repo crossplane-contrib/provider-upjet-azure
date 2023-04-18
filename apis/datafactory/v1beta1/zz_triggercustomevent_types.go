@@ -15,8 +15,38 @@ import (
 
 type TriggerCustomEventObservation struct {
 
+	// Specifies if the Data Factory Custom Event Trigger is activated. Defaults to true.
+	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
+
+	// A map of additional properties to associate with the Data Factory Custom Event Trigger.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Custom Event Trigger.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The ID of Data Factory in which to associate the Trigger with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Custom Event Trigger.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The ID of Event Grid Topic in which event will be listened. Changing this forces a new resource.
+	EventGridTopicID *string `json:"eventgridTopicId,omitempty" tf:"eventgrid_topic_id,omitempty"`
+
+	// List of events that will fire this trigger. At least one event must be specified.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
 	// The ID of the Data Factory Custom Event Trigger.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more pipeline blocks as defined below.
+	Pipeline []TriggerCustomEventPipelineObservation `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
+
+	// The pattern that event subject starts with for trigger to fire.
+	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
+
+	// The pattern that event subject ends with for trigger to fire.
+	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
 }
 
 type TriggerCustomEventParameters struct {
@@ -66,12 +96,12 @@ type TriggerCustomEventParameters struct {
 	EventGridTopicIDSelector *v1.Selector `json:"eventgridTopicIdSelector,omitempty" tf:"-"`
 
 	// List of events that will fire this trigger. At least one event must be specified.
-	// +kubebuilder:validation:Required
-	Events []*string `json:"events" tf:"events,omitempty"`
+	// +kubebuilder:validation:Optional
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// One or more pipeline blocks as defined below.
-	// +kubebuilder:validation:Required
-	Pipeline []TriggerCustomEventPipelineParameters `json:"pipeline" tf:"pipeline,omitempty"`
+	// +kubebuilder:validation:Optional
+	Pipeline []TriggerCustomEventPipelineParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The pattern that event subject starts with for trigger to fire.
 	// +kubebuilder:validation:Optional
@@ -83,6 +113,12 @@ type TriggerCustomEventParameters struct {
 }
 
 type TriggerCustomEventPipelineObservation struct {
+
+	// The Data Factory Pipeline name that the trigger will act on.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Data Factory Pipeline parameters that the trigger will act on.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type TriggerCustomEventPipelineParameters struct {
@@ -129,8 +165,10 @@ type TriggerCustomEventStatus struct {
 type TriggerCustomEvent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TriggerCustomEventSpec   `json:"spec"`
-	Status            TriggerCustomEventStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.events)",message="events is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pipeline)",message="pipeline is a required parameter"
+	Spec   TriggerCustomEventSpec   `json:"spec"`
+	Status TriggerCustomEventStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

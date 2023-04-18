@@ -17,6 +17,11 @@ func (mg *Cluster) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Cluster.
+func (mg *Cluster) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Cluster.
 func (mg *Cluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *Cluster) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Cluster.
 func (mg *Cluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Cluster.
+func (mg *Cluster) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Cluster.
@@ -83,6 +93,11 @@ func (mg *FunctionJavascriptUda) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FunctionJavascriptUda.
+func (mg *FunctionJavascriptUda) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FunctionJavascriptUda.
 func (mg *FunctionJavascriptUda) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *FunctionJavascriptUda) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FunctionJavascriptUda.
 func (mg *FunctionJavascriptUda) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FunctionJavascriptUda.
+func (mg *FunctionJavascriptUda) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FunctionJavascriptUda.
@@ -149,6 +169,11 @@ func (mg *Job) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Job.
+func (mg *Job) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Job.
 func (mg *Job) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *Job) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Job.
 func (mg *Job) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Job.
+func (mg *Job) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Job.
@@ -215,6 +245,11 @@ func (mg *ManagedPrivateEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ManagedPrivateEndpoint.
 func (mg *ManagedPrivateEndpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *ManagedPrivateEndpoint) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ManagedPrivateEndpoint.
 func (mg *ManagedPrivateEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ManagedPrivateEndpoint.
@@ -281,6 +321,11 @@ func (mg *OutputBlob) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this OutputBlob.
+func (mg *OutputBlob) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this OutputBlob.
 func (mg *OutputBlob) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *OutputBlob) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this OutputBlob.
 func (mg *OutputBlob) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this OutputBlob.
+func (mg *OutputBlob) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this OutputBlob.
@@ -347,6 +397,11 @@ func (mg *OutputEventHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this OutputEventHub.
+func (mg *OutputEventHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this OutputEventHub.
 func (mg *OutputEventHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *OutputEventHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this OutputEventHub.
 func (mg *OutputEventHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this OutputEventHub.
+func (mg *OutputEventHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this OutputEventHub.
@@ -413,6 +473,11 @@ func (mg *OutputFunction) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this OutputFunction.
+func (mg *OutputFunction) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this OutputFunction.
 func (mg *OutputFunction) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *OutputFunction) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this OutputFunction.
 func (mg *OutputFunction) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this OutputFunction.
+func (mg *OutputFunction) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this OutputFunction.
@@ -479,6 +549,11 @@ func (mg *OutputMSSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this OutputMSSQL.
+func (mg *OutputMSSQL) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this OutputMSSQL.
 func (mg *OutputMSSQL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *OutputMSSQL) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this OutputMSSQL.
 func (mg *OutputMSSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this OutputMSSQL.
+func (mg *OutputMSSQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this OutputMSSQL.
@@ -545,6 +625,11 @@ func (mg *OutputServiceBusQueue) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this OutputServiceBusQueue.
+func (mg *OutputServiceBusQueue) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this OutputServiceBusQueue.
 func (mg *OutputServiceBusQueue) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *OutputServiceBusQueue) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this OutputServiceBusQueue.
 func (mg *OutputServiceBusQueue) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this OutputServiceBusQueue.
+func (mg *OutputServiceBusQueue) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this OutputServiceBusQueue.
@@ -611,6 +701,11 @@ func (mg *OutputServiceBusTopic) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this OutputServiceBusTopic.
+func (mg *OutputServiceBusTopic) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this OutputServiceBusTopic.
 func (mg *OutputServiceBusTopic) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -642,6 +737,11 @@ func (mg *OutputServiceBusTopic) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this OutputServiceBusTopic.
 func (mg *OutputServiceBusTopic) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this OutputServiceBusTopic.
+func (mg *OutputServiceBusTopic) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this OutputServiceBusTopic.
@@ -677,6 +777,11 @@ func (mg *OutputSynapse) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this OutputSynapse.
+func (mg *OutputSynapse) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this OutputSynapse.
 func (mg *OutputSynapse) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -708,6 +813,11 @@ func (mg *OutputSynapse) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this OutputSynapse.
 func (mg *OutputSynapse) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this OutputSynapse.
+func (mg *OutputSynapse) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this OutputSynapse.
@@ -743,6 +853,11 @@ func (mg *ReferenceInputBlob) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ReferenceInputBlob.
+func (mg *ReferenceInputBlob) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ReferenceInputBlob.
 func (mg *ReferenceInputBlob) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -774,6 +889,11 @@ func (mg *ReferenceInputBlob) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ReferenceInputBlob.
 func (mg *ReferenceInputBlob) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ReferenceInputBlob.
+func (mg *ReferenceInputBlob) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ReferenceInputBlob.
@@ -809,6 +929,11 @@ func (mg *ReferenceInputMSSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ReferenceInputMSSQL.
 func (mg *ReferenceInputMSSQL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -840,6 +965,11 @@ func (mg *ReferenceInputMSSQL) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ReferenceInputMSSQL.
 func (mg *ReferenceInputMSSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ReferenceInputMSSQL.
+func (mg *ReferenceInputMSSQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ReferenceInputMSSQL.
@@ -875,6 +1005,11 @@ func (mg *StreamInputBlob) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this StreamInputBlob.
+func (mg *StreamInputBlob) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this StreamInputBlob.
 func (mg *StreamInputBlob) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -906,6 +1041,11 @@ func (mg *StreamInputBlob) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this StreamInputBlob.
 func (mg *StreamInputBlob) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this StreamInputBlob.
+func (mg *StreamInputBlob) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this StreamInputBlob.
@@ -941,6 +1081,11 @@ func (mg *StreamInputEventHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this StreamInputEventHub.
+func (mg *StreamInputEventHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this StreamInputEventHub.
 func (mg *StreamInputEventHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -972,6 +1117,11 @@ func (mg *StreamInputEventHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this StreamInputEventHub.
 func (mg *StreamInputEventHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this StreamInputEventHub.
+func (mg *StreamInputEventHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this StreamInputEventHub.
@@ -1007,6 +1157,11 @@ func (mg *StreamInputIOTHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this StreamInputIOTHub.
+func (mg *StreamInputIOTHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this StreamInputIOTHub.
 func (mg *StreamInputIOTHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1038,6 +1193,11 @@ func (mg *StreamInputIOTHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this StreamInputIOTHub.
 func (mg *StreamInputIOTHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this StreamInputIOTHub.
+func (mg *StreamInputIOTHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this StreamInputIOTHub.

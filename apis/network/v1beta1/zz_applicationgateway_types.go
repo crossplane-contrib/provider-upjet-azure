@@ -16,82 +16,106 @@ import (
 type ApplicationGatewayObservation struct {
 
 	// One or more authentication_certificate blocks as defined below.
-	// +kubebuilder:validation:Optional
 	AuthenticationCertificate []AuthenticationCertificateObservation `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
+	// A autoscale_configuration block as defined below.
+	AutoscaleConfiguration []AutoscaleConfigurationObservation `json:"autoscaleConfiguration,omitempty" tf:"autoscale_configuration,omitempty"`
+
 	// One or more backend_address_pool blocks as defined below.
-	// +kubebuilder:validation:Required
 	BackendAddressPool []BackendAddressPoolObservation `json:"backendAddressPool,omitempty" tf:"backend_address_pool,omitempty"`
 
 	// One or more backend_http_settings blocks as defined below.
-	// +kubebuilder:validation:Required
 	BackendHTTPSettings []BackendHTTPSettingsObservation `json:"backendHttpSettings,omitempty" tf:"backend_http_settings,omitempty"`
 
 	// One or more custom_error_configuration blocks as defined below.
-	// +kubebuilder:validation:Optional
 	CustomErrorConfiguration []CustomErrorConfigurationObservation `json:"customErrorConfiguration,omitempty" tf:"custom_error_configuration,omitempty"`
 
+	// Is HTTP2 enabled on the application gateway resource? Defaults to false.
+	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+
+	// Is FIPS enabled on the Application Gateway?
+	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
+
+	// The ID of the Web Application Firewall Policy.
+	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
+
+	// Is the Firewall Policy associated with the Application Gateway?
+	ForceFirewallPolicyAssociation *bool `json:"forceFirewallPolicyAssociation,omitempty" tf:"force_firewall_policy_association,omitempty"`
+
 	// One or more frontend_ip_configuration blocks as defined below.
-	// +kubebuilder:validation:Required
 	FrontendIPConfiguration []FrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// One or more frontend_port blocks as defined below.
-	// +kubebuilder:validation:Required
 	FrontendPort []FrontendPortObservation `json:"frontendPort,omitempty" tf:"frontend_port,omitempty"`
 
 	// One or more gateway_ip_configuration blocks as defined below.
-	// +kubebuilder:validation:Required
 	GatewayIPConfiguration []GatewayIPConfigurationObservation `json:"gatewayIpConfiguration,omitempty" tf:"gateway_ip_configuration,omitempty"`
 
+	// A global block as defined below.
+	Global []GlobalObservation `json:"global,omitempty" tf:"global,omitempty"`
+
 	// One or more http_listener blocks as defined below.
-	// +kubebuilder:validation:Required
 	HTTPListener []HTTPListenerObservation `json:"httpListener,omitempty" tf:"http_listener,omitempty"`
 
 	// The ID of the Application Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
+	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure region where the Application Gateway should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// A list of private_endpoint_connection blocks as defined below.
 	PrivateEndpointConnection []PrivateEndpointConnectionObservation `json:"privateEndpointConnection,omitempty" tf:"private_endpoint_connection,omitempty"`
 
 	// One or more private_link_configuration blocks as defined below.
-	// +kubebuilder:validation:Optional
 	PrivateLinkConfiguration []PrivateLinkConfigurationObservation `json:"privateLinkConfiguration,omitempty" tf:"private_link_configuration,omitempty"`
 
 	// One or more probe blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Probe []ProbeObservation `json:"probe,omitempty" tf:"probe,omitempty"`
 
 	// One or more redirect_configuration blocks as defined below.
-	// +kubebuilder:validation:Optional
 	RedirectConfiguration []RedirectConfigurationObservation `json:"redirectConfiguration,omitempty" tf:"redirect_configuration,omitempty"`
 
 	// One or more request_routing_rule blocks as defined below.
-	// +kubebuilder:validation:Required
 	RequestRoutingRule []RequestRoutingRuleObservation `json:"requestRoutingRule,omitempty" tf:"request_routing_rule,omitempty"`
 
+	// The name of the resource group in which to the Application Gateway should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// One or more rewrite_rule_set blocks as defined below. Only valid for v2 SKUs.
-	// +kubebuilder:validation:Optional
 	RewriteRuleSet []RewriteRuleSetObservation `json:"rewriteRuleSet,omitempty" tf:"rewrite_rule_set,omitempty"`
 
 	// One or more ssl_certificate blocks as defined below.
-	// +kubebuilder:validation:Optional
 	SSLCertificate []SSLCertificateObservation `json:"sslCertificate,omitempty" tf:"ssl_certificate,omitempty"`
 
+	// a ssl_policy block as defined below.
+	SSLPolicy []SSLPolicyObservation `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
+
 	// One or more ssl_profile blocks as defined below.
-	// +kubebuilder:validation:Optional
 	SSLProfile []SSLProfileObservation `json:"sslProfile,omitempty" tf:"ssl_profile,omitempty"`
 
+	// A sku block as defined below.
+	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// One or more trusted_client_certificate blocks as defined below.
-	// +kubebuilder:validation:Optional
 	TrustedClientCertificate []TrustedClientCertificateObservation `json:"trustedClientCertificate,omitempty" tf:"trusted_client_certificate,omitempty"`
 
 	// One or more trusted_root_certificate blocks as defined below.
-	// +kubebuilder:validation:Optional
 	TrustedRootCertificate []TrustedRootCertificateObservation `json:"trustedRootCertificate,omitempty" tf:"trusted_root_certificate,omitempty"`
 
 	// One or more url_path_map blocks as defined below.
-	// +kubebuilder:validation:Optional
 	URLPathMap []URLPathMapObservation `json:"urlPathMap,omitempty" tf:"url_path_map,omitempty"`
+
+	// A waf_configuration block as defined below.
+	WafConfiguration []WafConfigurationObservation `json:"wafConfiguration,omitempty" tf:"waf_configuration,omitempty"`
+
+	// Specifies a list of Availability Zones in which this Application Gateway should be located. Changing this forces a new Application Gateway to be created.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type ApplicationGatewayParameters struct {
@@ -105,12 +129,12 @@ type ApplicationGatewayParameters struct {
 	AutoscaleConfiguration []AutoscaleConfigurationParameters `json:"autoscaleConfiguration,omitempty" tf:"autoscale_configuration,omitempty"`
 
 	// One or more backend_address_pool blocks as defined below.
-	// +kubebuilder:validation:Required
-	BackendAddressPool []BackendAddressPoolParameters `json:"backendAddressPool" tf:"backend_address_pool,omitempty"`
+	// +kubebuilder:validation:Optional
+	BackendAddressPool []BackendAddressPoolParameters `json:"backendAddressPool,omitempty" tf:"backend_address_pool,omitempty"`
 
 	// One or more backend_http_settings blocks as defined below.
-	// +kubebuilder:validation:Required
-	BackendHTTPSettings []BackendHTTPSettingsParameters `json:"backendHttpSettings" tf:"backend_http_settings,omitempty"`
+	// +kubebuilder:validation:Optional
+	BackendHTTPSettings []BackendHTTPSettingsParameters `json:"backendHttpSettings,omitempty" tf:"backend_http_settings,omitempty"`
 
 	// One or more custom_error_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -133,32 +157,32 @@ type ApplicationGatewayParameters struct {
 	ForceFirewallPolicyAssociation *bool `json:"forceFirewallPolicyAssociation,omitempty" tf:"force_firewall_policy_association,omitempty"`
 
 	// One or more frontend_ip_configuration blocks as defined below.
-	// +kubebuilder:validation:Required
-	FrontendIPConfiguration []FrontendIPConfigurationParameters `json:"frontendIpConfiguration" tf:"frontend_ip_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	FrontendIPConfiguration []FrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// One or more frontend_port blocks as defined below.
-	// +kubebuilder:validation:Required
-	FrontendPort []FrontendPortParameters `json:"frontendPort" tf:"frontend_port,omitempty"`
+	// +kubebuilder:validation:Optional
+	FrontendPort []FrontendPortParameters `json:"frontendPort,omitempty" tf:"frontend_port,omitempty"`
 
 	// One or more gateway_ip_configuration blocks as defined below.
-	// +kubebuilder:validation:Required
-	GatewayIPConfiguration []GatewayIPConfigurationParameters `json:"gatewayIpConfiguration" tf:"gateway_ip_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	GatewayIPConfiguration []GatewayIPConfigurationParameters `json:"gatewayIpConfiguration,omitempty" tf:"gateway_ip_configuration,omitempty"`
 
 	// A global block as defined below.
 	// +kubebuilder:validation:Optional
 	Global []GlobalParameters `json:"global,omitempty" tf:"global,omitempty"`
 
 	// One or more http_listener blocks as defined below.
-	// +kubebuilder:validation:Required
-	HTTPListener []HTTPListenerParameters `json:"httpListener" tf:"http_listener,omitempty"`
+	// +kubebuilder:validation:Optional
+	HTTPListener []HTTPListenerParameters `json:"httpListener,omitempty" tf:"http_listener,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure region where the Application Gateway should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// One or more private_link_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -173,8 +197,8 @@ type ApplicationGatewayParameters struct {
 	RedirectConfiguration []RedirectConfigurationParameters `json:"redirectConfiguration,omitempty" tf:"redirect_configuration,omitempty"`
 
 	// One or more request_routing_rule blocks as defined below.
-	// +kubebuilder:validation:Required
-	RequestRoutingRule []RequestRoutingRuleParameters `json:"requestRoutingRule" tf:"request_routing_rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	RequestRoutingRule []RequestRoutingRuleParameters `json:"requestRoutingRule,omitempty" tf:"request_routing_rule,omitempty"`
 
 	// The name of the resource group in which to the Application Gateway should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -206,8 +230,8 @@ type ApplicationGatewayParameters struct {
 	SSLProfile []SSLProfileParameters `json:"sslProfile,omitempty" tf:"ssl_profile,omitempty"`
 
 	// A sku block as defined below.
-	// +kubebuilder:validation:Required
-	Sku []SkuParameters `json:"sku" tf:"sku,omitempty"`
+	// +kubebuilder:validation:Optional
+	Sku []SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -238,6 +262,9 @@ type AuthenticationCertificateObservation struct {
 
 	// The ID of the Authentication Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the Authentication Certificate to use.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type AuthenticationCertificateParameters struct {
@@ -252,6 +279,12 @@ type AuthenticationCertificateParameters struct {
 }
 
 type AutoscaleConfigurationObservation struct {
+
+	// Maximum capacity for autoscaling. Accepted values are in the range 2 to 125.
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
+	// Minimum capacity for autoscaling. Accepted values are in the range 0 to 100.
+	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 }
 
 type AutoscaleConfigurationParameters struct {
@@ -267,8 +300,17 @@ type AutoscaleConfigurationParameters struct {
 
 type BackendAddressPoolObservation struct {
 
+	// A list of FQDN's which should be part of the Backend Address Pool.
+	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
+
 	// The ID of the Backend Address Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of IP Addresses which should be part of the Backend Address Pool.
+	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
+
+	// The name of the Backend Address Pool.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type BackendAddressPoolParameters struct {
@@ -290,6 +332,9 @@ type BackendHTTPSettingsAuthenticationCertificateObservation struct {
 
 	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the URL Path Map.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type BackendHTTPSettingsAuthenticationCertificateParameters struct {
@@ -301,15 +346,50 @@ type BackendHTTPSettingsAuthenticationCertificateParameters struct {
 
 type BackendHTTPSettingsObservation struct {
 
+	// The name of the affinity cookie.
+	AffinityCookieName *string `json:"affinityCookieName,omitempty" tf:"affinity_cookie_name,omitempty"`
+
 	// One or more authentication_certificate blocks as defined below.
-	// +kubebuilder:validation:Optional
 	AuthenticationCertificate []BackendHTTPSettingsAuthenticationCertificateObservation `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
+
+	// A connection_draining block as defined below.
+	ConnectionDraining []ConnectionDrainingObservation `json:"connectionDraining,omitempty" tf:"connection_draining,omitempty"`
+
+	// Is Cookie-Based Affinity enabled? Possible values are Enabled and Disabled.
+	CookieBasedAffinity *string `json:"cookieBasedAffinity,omitempty" tf:"cookie_based_affinity,omitempty"`
+
+	// Host header to be sent to the backend servers. Cannot be set if pick_host_name_from_backend_address is set to true.
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The ID of the Backend HTTP Settings Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the Backend HTTP Settings Collection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Path which should be used as a prefix for all HTTP requests.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Whether host header should be picked from the host name of the backend server. Defaults to false.
+	PickHostNameFromBackendAddress *bool `json:"pickHostNameFromBackendAddress,omitempty" tf:"pick_host_name_from_backend_address,omitempty"`
+
+	// The port which should be used for this Backend HTTP Settings Collection.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
 	// The ID of the associated Probe.
 	ProbeID *string `json:"probeId,omitempty" tf:"probe_id,omitempty"`
+
+	// The name of an associated HTTP Probe.
+	ProbeName *string `json:"probeName,omitempty" tf:"probe_name,omitempty"`
+
+	// The Protocol which should be used. Possible values are Http and Https.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The request timeout in seconds, which must be between 1 and 86400 seconds. Defaults to 30.
+	RequestTimeout *float64 `json:"requestTimeout,omitempty" tf:"request_timeout,omitempty"`
+
+	// A list of trusted_root_certificate names.
+	TrustedRootCertificateNames []*string `json:"trustedRootCertificateNames,omitempty" tf:"trusted_root_certificate_names,omitempty"`
 }
 
 type BackendHTTPSettingsParameters struct {
@@ -368,6 +448,18 @@ type BackendHTTPSettingsParameters struct {
 }
 
 type ConditionObservation struct {
+
+	// Perform a case in-sensitive comparison. Defaults to false
+	IgnoreCase *bool `json:"ignoreCase,omitempty" tf:"ignore_case,omitempty"`
+
+	// Negate the result of the condition evaluation. Defaults to false
+	Negate *bool `json:"negate,omitempty" tf:"negate,omitempty"`
+
+	// The pattern, either fixed string or regular expression, that evaluates the truthfulness of the condition.
+	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
+
+	// The variable of the condition.
+	Variable *string `json:"variable,omitempty" tf:"variable,omitempty"`
 }
 
 type ConditionParameters struct {
@@ -390,6 +482,12 @@ type ConditionParameters struct {
 }
 
 type ConnectionDrainingObservation struct {
+
+	// The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds.
+	DrainTimeoutSec *float64 `json:"drainTimeoutSec,omitempty" tf:"drain_timeout_sec,omitempty"`
+
+	// Is the Web Application Firewall enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type ConnectionDrainingParameters struct {
@@ -405,8 +503,14 @@ type ConnectionDrainingParameters struct {
 
 type CustomErrorConfigurationObservation struct {
 
+	// Error page URL of the application gateway customer error.
+	CustomErrorPageURL *string `json:"customErrorPageUrl,omitempty" tf:"custom_error_page_url,omitempty"`
+
 	// The ID of the Custom Error Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Status code of the application gateway customer error. Possible values are HttpStatus403 and HttpStatus502
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type CustomErrorConfigurationParameters struct {
@@ -421,6 +525,12 @@ type CustomErrorConfigurationParameters struct {
 }
 
 type DisabledRuleGroupObservation struct {
+
+	// The rule group where specific rules should be disabled. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, General, GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
+	RuleGroupName *string `json:"ruleGroupName,omitempty" tf:"rule_group_name,omitempty"`
+
+	// A list of rules which should be disabled in that group. Disables all rules in the specified group if rules is not specified.
+	Rules []*float64 `json:"rules,omitempty" tf:"rules,omitempty"`
 }
 
 type DisabledRuleGroupParameters struct {
@@ -435,6 +545,15 @@ type DisabledRuleGroupParameters struct {
 }
 
 type ExclusionObservation struct {
+
+	// Match variable of the exclusion rule to exclude header, cookie or GET arguments. Possible values are RequestArgKeys, RequestArgNames, RequestArgValues, RequestCookieKeys, RequestCookieNames, RequestCookieValues, RequestHeaderKeys, RequestHeaderNames and RequestHeaderValues
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// String value which will be used for the filter operation. If empty will exclude all traffic on this match_variable
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+
+	// Operator which will be used to search in the variable content. Possible values are Contains, EndsWith, Equals, EqualsAny and StartsWith. If empty will exclude all traffic on this match_variable
+	SelectorMatchOperator *string `json:"selectorMatchOperator,omitempty" tf:"selector_match_operator,omitempty"`
 }
 
 type ExclusionParameters struct {
@@ -457,8 +576,26 @@ type FrontendIPConfigurationObservation struct {
 	// The ID of the Frontend IP Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The name of the Frontend IP Configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Private IP Address to use for the Application Gateway.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The Allocation Method for the Private IP Address. Possible values are Dynamic and Static.
+	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+
 	// The ID of the associated private link configuration.
 	PrivateLinkConfigurationID *string `json:"privateLinkConfigurationId,omitempty" tf:"private_link_configuration_id,omitempty"`
+
+	// The name of the private link configuration to use for this frontend IP configuration.
+	PrivateLinkConfigurationName *string `json:"privateLinkConfigurationName,omitempty" tf:"private_link_configuration_name,omitempty"`
+
+	// The ID of a Public IP Address which the Application Gateway should use. The allocation method for the Public IP Address depends on the sku of this Application Gateway. Please refer to the Azure documentation for public IP addresses for details.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// The ID of the Subnet.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type FrontendIPConfigurationParameters struct {
@@ -512,6 +649,12 @@ type FrontendPortObservation struct {
 
 	// The ID of the Frontend Port.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Frontend Port.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The port used for this Frontend Port.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type FrontendPortParameters struct {
@@ -529,6 +672,12 @@ type GatewayIPConfigurationObservation struct {
 
 	// The ID of the Gateway IP Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of this Gateway IP Configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Subnet which the Application Gateway should be connected to.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type GatewayIPConfigurationParameters struct {
@@ -553,6 +702,12 @@ type GatewayIPConfigurationParameters struct {
 }
 
 type GlobalObservation struct {
+
+	// Whether Application Gateway's Request buffer is enabled.
+	RequestBufferingEnabled *bool `json:"requestBufferingEnabled,omitempty" tf:"request_buffering_enabled,omitempty"`
+
+	// Whether Application Gateway's Response buffer is enabled.
+	ResponseBufferingEnabled *bool `json:"responseBufferingEnabled,omitempty" tf:"response_buffering_enabled,omitempty"`
 }
 
 type GlobalParameters struct {
@@ -568,8 +723,14 @@ type GlobalParameters struct {
 
 type HTTPListenerCustomErrorConfigurationObservation struct {
 
+	// Error page URL of the application gateway customer error.
+	CustomErrorPageURL *string `json:"customErrorPageUrl,omitempty" tf:"custom_error_page_url,omitempty"`
+
 	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of allowed status codes for this Health Probe.
+	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type HTTPListenerCustomErrorConfigurationParameters struct {
@@ -586,23 +747,52 @@ type HTTPListenerCustomErrorConfigurationParameters struct {
 type HTTPListenerObservation struct {
 
 	// One or more custom_error_configuration blocks as defined below.
-	// +kubebuilder:validation:Optional
 	CustomErrorConfiguration []HTTPListenerCustomErrorConfigurationObservation `json:"customErrorConfiguration,omitempty" tf:"custom_error_configuration,omitempty"`
+
+	// The ID of the Web Application Firewall Policy which should be used for this HTTP Listener.
+	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
 	// The ID of the associated Frontend Configuration.
 	FrontendIPConfigurationID *string `json:"frontendIpConfigurationId,omitempty" tf:"frontend_ip_configuration_id,omitempty"`
 
+	// The Name of the Frontend IP Configuration used for this HTTP Listener.
+	FrontendIPConfigurationName *string `json:"frontendIpConfigurationName,omitempty" tf:"frontend_ip_configuration_name,omitempty"`
+
 	// The ID of the associated Frontend Port.
 	FrontendPortID *string `json:"frontendPortId,omitempty" tf:"frontend_port_id,omitempty"`
+
+	// The Name of the Frontend Port use for this HTTP Listener.
+	FrontendPortName *string `json:"frontendPortName,omitempty" tf:"frontend_port_name,omitempty"`
+
+	// The Hostname which should be used for this HTTP Listener. Setting this value changes Listener Type to 'Multi site'.
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+
+	// A list of Hostname(s) should be used for this HTTP Listener. It allows special wildcard characters.
+	HostNames []*string `json:"hostNames,omitempty" tf:"host_names,omitempty"`
 
 	// The ID of the HTTP Listener.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Name of the HTTP Listener.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Protocol to use for this HTTP Listener. Possible values are Http and Https.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// Should Server Name Indication be Required?
+	RequireSni *bool `json:"requireSni,omitempty" tf:"require_sni,omitempty"`
+
 	// The ID of the associated SSL Certificate.
 	SSLCertificateID *string `json:"sslCertificateId,omitempty" tf:"ssl_certificate_id,omitempty"`
 
+	// The name of the associated SSL Certificate which should be used for this HTTP Listener.
+	SSLCertificateName *string `json:"sslCertificateName,omitempty" tf:"ssl_certificate_name,omitempty"`
+
 	// The ID of the associated SSL Profile.
 	SSLProfileID *string `json:"sslProfileId,omitempty" tf:"ssl_profile_id,omitempty"`
+
+	// The name of the associated SSL Profile which should be used for this HTTP Listener.
+	SSLProfileName *string `json:"sslProfileName,omitempty" tf:"ssl_profile_name,omitempty"`
 }
 
 type HTTPListenerParameters struct {
@@ -653,6 +843,21 @@ type HTTPListenerParameters struct {
 }
 
 type IPConfigurationObservation struct {
+
+	// The Name of the URL Path Map.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is this the Primary IP Configuration?
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// The Static IP Address which should be used.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The allocation method used for the Private IP Address. Possible values are Dynamic and Static.
+	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+
+	// The ID of the subnet the private link configuration should connect to.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type IPConfigurationParameters struct {
@@ -689,6 +894,12 @@ type IPConfigurationParameters struct {
 }
 
 type IdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Application Gateway.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Application Gateway. Only possible value is UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -703,6 +914,12 @@ type IdentityParameters struct {
 }
 
 type MatchObservation struct {
+
+	// A snippet from the Response Body which must be present in the Response.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+	// A list of allowed status codes for this Health Probe.
+	StatusCode []*string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type MatchParameters struct {
@@ -721,17 +938,38 @@ type PathRuleObservation struct {
 	// The ID of the associated Backend Address Pool.
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
+	// The Name of the Backend Address Pool which should be used for this Routing Rule. Cannot be set if redirect_configuration_name is set.
+	BackendAddressPoolName *string `json:"backendAddressPoolName,omitempty" tf:"backend_address_pool_name,omitempty"`
+
 	// The ID of the associated Backend HTTP Settings Configuration.
 	BackendHTTPSettingsID *string `json:"backendHttpSettingsId,omitempty" tf:"backend_http_settings_id,omitempty"`
+
+	// The Name of the Backend HTTP Settings Collection which should be used for this Routing Rule. Cannot be set if redirect_configuration_name is set.
+	BackendHTTPSettingsName *string `json:"backendHttpSettingsName,omitempty" tf:"backend_http_settings_name,omitempty"`
+
+	// The ID of the Web Application Firewall Policy which should be used as a HTTP Listener.
+	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
 	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Name of the URL Path Map.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of Paths used in this Path Rule.
+	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+
 	// The ID of the associated Redirect Configuration.
 	RedirectConfigurationID *string `json:"redirectConfigurationId,omitempty" tf:"redirect_configuration_id,omitempty"`
 
+	// The Name of the Redirect Configuration which should be used for this Routing Rule. Cannot be set if either backend_address_pool_name or backend_http_settings_name is set.
+	RedirectConfigurationName *string `json:"redirectConfigurationName,omitempty" tf:"redirect_configuration_name,omitempty"`
+
 	// The ID of the associated Rewrite Rule Set.
 	RewriteRuleSetID *string `json:"rewriteRuleSetId,omitempty" tf:"rewrite_rule_set_id,omitempty"`
+
+	// The Name of the Rewrite Rule Set which should be used for this Routing Rule. Only valid for v2 SKUs.
+	RewriteRuleSetName *string `json:"rewriteRuleSetName,omitempty" tf:"rewrite_rule_set_name,omitempty"`
 }
 
 type PathRuleParameters struct {
@@ -781,6 +1019,12 @@ type PrivateLinkConfigurationObservation struct {
 
 	// The ID of the private link configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more ip_configuration blocks as defined below.
+	IPConfiguration []IPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// The name of the private link configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type PrivateLinkConfigurationParameters struct {
@@ -796,8 +1040,41 @@ type PrivateLinkConfigurationParameters struct {
 
 type ProbeObservation struct {
 
+	// The Hostname used for this Probe. If the Application Gateway is configured for a single site, by default the Host name should be specified as ‘127.0.0.1’, unless otherwise configured in custom probe. Cannot be set if pick_host_name_from_backend_http_settings is set to true.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
 	// The ID of the Probe.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Interval between two consecutive probes in seconds. Possible values range from 1 second to a maximum of 86,400 seconds.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// A match block as defined above.
+	Match []MatchObservation `json:"match,omitempty" tf:"match,omitempty"`
+
+	// The minimum number of servers that are always marked as healthy. Defaults to 0.
+	MinimumServers *float64 `json:"minimumServers,omitempty" tf:"minimum_servers,omitempty"`
+
+	// The Name of the Probe.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Path used for this Probe.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Whether the host header should be picked from the backend HTTP settings. Defaults to false.
+	PickHostNameFromBackendHTTPSettings *bool `json:"pickHostNameFromBackendHttpSettings,omitempty" tf:"pick_host_name_from_backend_http_settings,omitempty"`
+
+	// Custom port which will be used for probing the backend servers. The valid value ranges from 1 to 65535. In case not set, port from HTTP settings will be used. This property is valid for Standard_v2 and WAF_v2 only.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The Protocol used for this Probe. Possible values are Http and Https.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The Timeout used for this Probe, which indicates when a probe becomes unhealthy. Possible values range from 1 second to a maximum of 86,400 seconds.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// The Unhealthy Threshold for this Probe, which indicates the amount of retries which should be attempted before a node is deemed unhealthy. Possible values are from 1 to 20.
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
 }
 
 type ProbeParameters struct {
@@ -852,8 +1129,26 @@ type RedirectConfigurationObservation struct {
 	// The ID of the Redirect Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Whether or not to include the path in the redirected Url. Defaults to false
+	IncludePath *bool `json:"includePath,omitempty" tf:"include_path,omitempty"`
+
+	// Whether or not to include the query string in the redirected Url. Default to false
+	IncludeQueryString *bool `json:"includeQueryString,omitempty" tf:"include_query_string,omitempty"`
+
+	// Unique name of the redirect configuration block
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of redirect. Possible values are Permanent, Temporary, Found and SeeOther
+	RedirectType *string `json:"redirectType,omitempty" tf:"redirect_type,omitempty"`
+
 	// The ID of the Application Gateway.
 	TargetListenerID *string `json:"targetListenerId,omitempty" tf:"target_listener_id,omitempty"`
+
+	// The name of the listener to redirect to. Cannot be set if target_url is set.
+	TargetListenerName *string `json:"targetListenerName,omitempty" tf:"target_listener_name,omitempty"`
+
+	// The Url to redirect the request to. Cannot be set if target_listener_name is set.
+	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`
 }
 
 type RedirectConfigurationParameters struct {
@@ -884,6 +1179,12 @@ type RedirectConfigurationParameters struct {
 }
 
 type RequestHeaderConfigurationObservation struct {
+
+	// Header name of the header configuration.
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// Header value of the header configuration. To delete a response header set this property to an empty string.
+	HeaderValue *string `json:"headerValue,omitempty" tf:"header_value,omitempty"`
 }
 
 type RequestHeaderConfigurationParameters struct {
@@ -902,23 +1203,50 @@ type RequestRoutingRuleObservation struct {
 	// The ID of the associated Backend Address Pool.
 	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
 
+	// The Name of the Backend Address Pool which should be used for this Routing Rule. Cannot be set if redirect_configuration_name is set.
+	BackendAddressPoolName *string `json:"backendAddressPoolName,omitempty" tf:"backend_address_pool_name,omitempty"`
+
 	// The ID of the associated Backend HTTP Settings Configuration.
 	BackendHTTPSettingsID *string `json:"backendHttpSettingsId,omitempty" tf:"backend_http_settings_id,omitempty"`
+
+	// The Name of the Backend HTTP Settings Collection which should be used for this Routing Rule. Cannot be set if redirect_configuration_name is set.
+	BackendHTTPSettingsName *string `json:"backendHttpSettingsName,omitempty" tf:"backend_http_settings_name,omitempty"`
 
 	// The ID of the associated HTTP Listener.
 	HTTPListenerID *string `json:"httpListenerId,omitempty" tf:"http_listener_id,omitempty"`
 
+	// The Name of the HTTP Listener which should be used for this Routing Rule.
+	HTTPListenerName *string `json:"httpListenerName,omitempty" tf:"http_listener_name,omitempty"`
+
 	// The ID of the Request Routing Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of this Request Routing Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Rule evaluation order can be dictated by specifying an integer value from 1 to 20000 with 1 being the highest priority and 20000 being the lowest priority.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The ID of the associated Redirect Configuration.
 	RedirectConfigurationID *string `json:"redirectConfigurationId,omitempty" tf:"redirect_configuration_id,omitempty"`
 
+	// The Name of the Redirect Configuration which should be used for this Routing Rule. Cannot be set if either backend_address_pool_name or backend_http_settings_name is set.
+	RedirectConfigurationName *string `json:"redirectConfigurationName,omitempty" tf:"redirect_configuration_name,omitempty"`
+
 	// The ID of the associated Rewrite Rule Set.
 	RewriteRuleSetID *string `json:"rewriteRuleSetId,omitempty" tf:"rewrite_rule_set_id,omitempty"`
 
+	// The Name of the Rewrite Rule Set which should be used for this Routing Rule. Only valid for v2 SKUs.
+	RewriteRuleSetName *string `json:"rewriteRuleSetName,omitempty" tf:"rewrite_rule_set_name,omitempty"`
+
+	// The Type of Routing that should be used for this Rule. Possible values are Basic and PathBasedRouting.
+	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
+
 	// The ID of the associated URL Path Map.
 	URLPathMapID *string `json:"urlPathMapId,omitempty" tf:"url_path_map_id,omitempty"`
+
+	// The Name of the URL Path Map which should be associated with this Routing Rule.
+	URLPathMapName *string `json:"urlPathMapName,omitempty" tf:"url_path_map_name,omitempty"`
 }
 
 type RequestRoutingRuleParameters struct {
@@ -961,6 +1289,12 @@ type RequestRoutingRuleParameters struct {
 }
 
 type ResponseHeaderConfigurationObservation struct {
+
+	// Header name of the header configuration.
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// Header value of the header configuration. To delete a response header set this property to an empty string.
+	HeaderValue *string `json:"headerValue,omitempty" tf:"header_value,omitempty"`
 }
 
 type ResponseHeaderConfigurationParameters struct {
@@ -975,6 +1309,24 @@ type ResponseHeaderConfigurationParameters struct {
 }
 
 type RewriteRuleObservation struct {
+
+	// One or more condition blocks as defined above.
+	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The Name of the URL Path Map.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more request_header_configuration blocks as defined above.
+	RequestHeaderConfiguration []RequestHeaderConfigurationObservation `json:"requestHeaderConfiguration,omitempty" tf:"request_header_configuration,omitempty"`
+
+	// One or more response_header_configuration blocks as defined above.
+	ResponseHeaderConfiguration []ResponseHeaderConfigurationObservation `json:"responseHeaderConfiguration,omitempty" tf:"response_header_configuration,omitempty"`
+
+	// Rule sequence of the rewrite rule that determines the order of execution in a set.
+	RuleSequence *float64 `json:"ruleSequence,omitempty" tf:"rule_sequence,omitempty"`
+
+	// One url block as defined above
+	URL []URLObservation `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type RewriteRuleParameters struct {
@@ -1008,6 +1360,12 @@ type RewriteRuleSetObservation struct {
 
 	// The ID of the Rewrite Rule Set
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Unique name of the rewrite rule set block
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more rewrite_rule blocks as defined above.
+	RewriteRule []RewriteRuleObservation `json:"rewriteRule,omitempty" tf:"rewrite_rule,omitempty"`
 }
 
 type RewriteRuleSetParameters struct {
@@ -1025,6 +1383,12 @@ type SSLCertificateObservation struct {
 
 	// The ID of the SSL Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Secret Id of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for keyvault to use this feature. Required if data is not set.
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The Name of the SSL certificate that is unique within this Application Gateway
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Public Certificate Data associated with the SSL Certificate.
 	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
@@ -1050,6 +1414,21 @@ type SSLCertificateParameters struct {
 }
 
 type SSLPolicyObservation struct {
+
+	// A List of accepted cipher suites. Possible values are: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256 and TLS_RSA_WITH_AES_256_GCM_SHA384.
+	CipherSuites []*string `json:"cipherSuites,omitempty" tf:"cipher_suites,omitempty"`
+
+	// A list of SSL Protocols which should be disabled on this Application Gateway. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
+	DisabledProtocols []*string `json:"disabledProtocols,omitempty" tf:"disabled_protocols,omitempty"`
+
+	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
+	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
+
+	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+
+	// The Type of the Policy. Possible values are Predefined, Custom and CustomV2.
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
 
 type SSLPolicyParameters struct {
@@ -1079,6 +1458,18 @@ type SSLProfileObservation struct {
 
 	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the SSL Profile that is unique within this Application Gateway.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// a ssl_policy block as defined below.
+	SSLPolicy []SSLProfileSSLPolicyObservation `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
+
+	// The name of the Trusted Client Certificate that will be used to authenticate requests from clients.
+	TrustedClientCertificateNames []*string `json:"trustedClientCertificateNames,omitempty" tf:"trusted_client_certificate_names,omitempty"`
+
+	// Should client certificate issuer DN be verified? Defaults to false.
+	VerifyClientCertIssuerDn *bool `json:"verifyClientCertIssuerDn,omitempty" tf:"verify_client_cert_issuer_dn,omitempty"`
 }
 
 type SSLProfileParameters struct {
@@ -1101,6 +1492,21 @@ type SSLProfileParameters struct {
 }
 
 type SSLProfileSSLPolicyObservation struct {
+
+	// A List of accepted cipher suites. Possible values are: TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_3DES_EDE_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256 and TLS_RSA_WITH_AES_256_GCM_SHA384.
+	CipherSuites []*string `json:"cipherSuites,omitempty" tf:"cipher_suites,omitempty"`
+
+	// A list of SSL Protocols which should be disabled on this Application Gateway. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
+	DisabledProtocols []*string `json:"disabledProtocols,omitempty" tf:"disabled_protocols,omitempty"`
+
+	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
+	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
+
+	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+
+	// The Type of the Policy. Possible values are Predefined, Custom and CustomV2.
+	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
 
 type SSLProfileSSLPolicyParameters struct {
@@ -1127,6 +1533,15 @@ type SSLProfileSSLPolicyParameters struct {
 }
 
 type SkuObservation struct {
+
+	// The Capacity of the SKU to use for this Application Gateway. When using a V1 SKU this value must be between 1 and 32, and 1 to 125 for a V2 SKU. This property is optional if autoscale_configuration is set.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// The Name of the SKU to use for this Application Gateway. Possible values are Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and WAF_v2.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Tier of the SKU to use for this Application Gateway. Possible values are Standard, Standard_v2, WAF and WAF_v2.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type SkuParameters struct {
@@ -1148,6 +1563,9 @@ type TrustedClientCertificateObservation struct {
 
 	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Trusted Client Certificate that is unique within this Application Gateway.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TrustedClientCertificateParameters struct {
@@ -1165,6 +1583,12 @@ type TrustedRootCertificateObservation struct {
 
 	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Secret ID of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The Name of the Trusted Root Certificate to use.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TrustedRootCertificateParameters struct {
@@ -1183,6 +1607,18 @@ type TrustedRootCertificateParameters struct {
 }
 
 type URLObservation struct {
+
+	// The components used to rewrite the URL. Possible values are path_only and query_string_only to limit the rewrite to the URL Path or URL Query String only.
+	Components *string `json:"components,omitempty" tf:"components,omitempty"`
+
+	// The URL path to rewrite.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The query string to rewrite.
+	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
+
+	// Whether the URL path map should be reevaluated after this rewrite has been applied. More info on rewrite configutation
+	Reroute *bool `json:"reroute,omitempty" tf:"reroute,omitempty"`
 }
 
 type URLParameters struct {
@@ -1209,20 +1645,34 @@ type URLPathMapObservation struct {
 	// The ID of the Default Backend Address Pool.
 	DefaultBackendAddressPoolID *string `json:"defaultBackendAddressPoolId,omitempty" tf:"default_backend_address_pool_id,omitempty"`
 
+	// The Name of the Default Backend Address Pool which should be used for this URL Path Map. Cannot be set if default_redirect_configuration_name is set.
+	DefaultBackendAddressPoolName *string `json:"defaultBackendAddressPoolName,omitempty" tf:"default_backend_address_pool_name,omitempty"`
+
 	// The ID of the Default Backend HTTP Settings Collection.
 	DefaultBackendHTTPSettingsID *string `json:"defaultBackendHttpSettingsId,omitempty" tf:"default_backend_http_settings_id,omitempty"`
+
+	// The Name of the Default Backend HTTP Settings Collection which should be used for this URL Path Map. Cannot be set if default_redirect_configuration_name is set.
+	DefaultBackendHTTPSettingsName *string `json:"defaultBackendHttpSettingsName,omitempty" tf:"default_backend_http_settings_name,omitempty"`
 
 	// The ID of the Default Redirect Configuration.
 	DefaultRedirectConfigurationID *string `json:"defaultRedirectConfigurationId,omitempty" tf:"default_redirect_configuration_id,omitempty"`
 
+	// The Name of the Default Redirect Configuration which should be used for this URL Path Map. Cannot be set if either default_backend_address_pool_name or default_backend_http_settings_name is set.
+	DefaultRedirectConfigurationName *string `json:"defaultRedirectConfigurationName,omitempty" tf:"default_redirect_configuration_name,omitempty"`
+
 	// The ID of the Application Gateway.
 	DefaultRewriteRuleSetID *string `json:"defaultRewriteRuleSetId,omitempty" tf:"default_rewrite_rule_set_id,omitempty"`
+
+	// The Name of the Default Rewrite Rule Set which should be used for this URL Path Map. Only valid for v2 SKUs.
+	DefaultRewriteRuleSetName *string `json:"defaultRewriteRuleSetName,omitempty" tf:"default_rewrite_rule_set_name,omitempty"`
 
 	// The ID of the URL Path Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Name of the URL Path Map.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// One or more path_rule blocks as defined above.
-	// +kubebuilder:validation:Required
 	PathRule []PathRuleObservation `json:"pathRule,omitempty" tf:"path_rule,omitempty"`
 }
 
@@ -1254,6 +1704,33 @@ type URLPathMapParameters struct {
 }
 
 type WafConfigurationObservation struct {
+
+	// one or more disabled_rule_group blocks as defined below.
+	DisabledRuleGroup []DisabledRuleGroupObservation `json:"disabledRuleGroup,omitempty" tf:"disabled_rule_group,omitempty"`
+
+	// Is the Web Application Firewall enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// one or more exclusion blocks as defined below.
+	Exclusion []ExclusionObservation `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+
+	// The File Upload Limit in MB. Accepted values are in the range 1MB to 750MB for the WAF_v2 SKU, and 1MB to 500MB for all other SKUs. Defaults to 100MB.
+	FileUploadLimitMb *float64 `json:"fileUploadLimitMb,omitempty" tf:"file_upload_limit_mb,omitempty"`
+
+	// The Web Application Firewall Mode. Possible values are Detection and Prevention.
+	FirewallMode *string `json:"firewallMode,omitempty" tf:"firewall_mode,omitempty"`
+
+	// The Maximum Request Body Size in KB. Accepted values are in the range 1KB to 128KB. Defaults to 128KB.
+	MaxRequestBodySizeKb *float64 `json:"maxRequestBodySizeKb,omitempty" tf:"max_request_body_size_kb,omitempty"`
+
+	// Is Request Body Inspection enabled? Defaults to true.
+	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
+
+	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP and Microsoft_BotManagerRuleSet.
+	RuleSetType *string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty"`
+
+	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.2.9, 3.0, 3.1 and 3.2.
+	RuleSetVersion *string `json:"ruleSetVersion,omitempty" tf:"rule_set_version,omitempty"`
 }
 
 type WafConfigurationParameters struct {
@@ -1319,8 +1796,17 @@ type ApplicationGatewayStatus struct {
 type ApplicationGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationGatewaySpec   `json:"spec"`
-	Status            ApplicationGatewayStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backendAddressPool)",message="backendAddressPool is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backendHttpSettings)",message="backendHttpSettings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frontendIpConfiguration)",message="frontendIpConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frontendPort)",message="frontendPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.gatewayIpConfiguration)",message="gatewayIpConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.httpListener)",message="httpListener is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.requestRoutingRule)",message="requestRoutingRule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)",message="sku is a required parameter"
+	Spec   ApplicationGatewaySpec   `json:"spec"`
+	Status ApplicationGatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

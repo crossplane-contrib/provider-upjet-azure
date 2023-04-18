@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: springcloudapps.appplatform.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -335,6 +339,21 @@ spec:
                     description: Is End to End TLS Enabled? Defaults to false.
                     type: boolean
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -511,10 +530,42 @@ spec:
             properties:
               atProvider:
                 properties:
+                  addonJson:
+                    description: A JSON object that contains the addon configurations
+                      of the Spring Cloud Service.
+                    type: string
+                  customPersistentDisk:
+                    description: A custom_persistent_disk block as defined below.
+                    items:
+                      properties:
+                        mountOptions:
+                          description: These are the mount options for a persistent
+                            disk.
+                          items:
+                            type: string
+                          type: array
+                        mountPath:
+                          description: The mount path of the persistent disk.
+                          type: string
+                        readOnlyEnabled:
+                          description: Indicates whether the persistent disk is a
+                            readOnly one.
+                          type: boolean
+                        shareName:
+                          description: The share name of the Azure File share.
+                          type: string
+                        storageName:
+                          description: The name of the Spring Cloud Storage.
+                          type: string
+                      type: object
+                    type: array
                   fqdn:
                     description: The Fully Qualified DNS Name of the Spring Application
                       in the service.
                     type: string
+                  httpsOnly:
+                    description: Is only HTTPS allowed? Defaults to false.
+                    type: boolean
                   id:
                     description: The ID of the Spring Cloud Application.
                     type: string
@@ -522,6 +573,12 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Spring Cloud Application.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The Principal ID for the Service Principal
                             associated with the Managed Service Identity of this Spring
@@ -532,8 +589,76 @@ spec:
                             with the Managed Service Identity of this Spring Cloud
                             Application.
                           type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Spring Cloud Application.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
+                          type: string
                       type: object
                     type: array
+                  ingressSettings:
+                    description: An ingress_settings block as defined below.
+                    items:
+                      properties:
+                        backendProtocol:
+                          description: Specifies how ingress should communicate with
+                            this app backend service. Allowed values are GRPC and
+                            Default. Defaults to Default.
+                          type: string
+                        readTimeoutInSeconds:
+                          description: Specifies the ingress read time out in seconds.
+                            Defaults to 300.
+                          type: number
+                        sendTimeoutInSeconds:
+                          description: Specifies the ingress send time out in seconds.
+                            Defaults to 60.
+                          type: number
+                        sessionAffinity:
+                          description: Specifies the type of the affinity, set this
+                            to Cookie to enable session affinity. Allowed values are
+                            Cookie and None. Defaults to None.
+                          type: string
+                        sessionCookieMaxAge:
+                          description: Specifies the time in seconds until the cookie
+                            expires.
+                          type: number
+                      type: object
+                    type: array
+                  isPublic:
+                    description: Does the Spring Cloud Application have public endpoint?
+                      Defaults to false.
+                    type: boolean
+                  persistentDisk:
+                    description: An persistent_disk block as defined below.
+                    items:
+                      properties:
+                        mountPath:
+                          description: Specifies the mount path of the persistent
+                            disk. Defaults to /persistent.
+                          type: string
+                        sizeInGb:
+                          description: Specifies the size of the persistent disk in
+                            GB. Possible values are between 0 and 50.
+                          type: number
+                      type: object
+                    type: array
+                  publicEndpointEnabled:
+                    description: Should the App in vnet injection instance exposes
+                      endpoint which could be accessed from Internet?
+                    type: boolean
+                  resourceGroupName:
+                    description: Specifies the name of the resource group in which
+                      to create the Spring Cloud Application. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  serviceName:
+                    description: Specifies the name of the Spring Cloud Service resource.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  tlsEnabled:
+                    description: Is End to End TLS Enabled? Defaults to false.
+                    type: boolean
                   url:
                     description: The public endpoint of the Spring Cloud Application.
                     type: string

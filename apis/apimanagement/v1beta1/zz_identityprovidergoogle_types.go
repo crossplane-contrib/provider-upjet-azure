@@ -15,8 +15,17 @@ import (
 
 type IdentityProviderGoogleObservation struct {
 
+	// The Name of the API Management Service where this Google Identity Provider should be created. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// Client Id for Google Sign-in.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
 	// The ID of the API Management Google Identity Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type IdentityProviderGoogleParameters struct {
@@ -35,11 +44,11 @@ type IdentityProviderGoogleParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// Client Id for Google Sign-in.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Client secret for Google Sign-in.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -80,8 +89,10 @@ type IdentityProviderGoogleStatus struct {
 type IdentityProviderGoogle struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IdentityProviderGoogleSpec   `json:"spec"`
-	Status            IdentityProviderGoogleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientId)",message="clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
+	Spec   IdentityProviderGoogleSpec   `json:"spec"`
+	Status IdentityProviderGoogleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

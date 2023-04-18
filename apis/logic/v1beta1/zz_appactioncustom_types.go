@@ -15,15 +15,21 @@ import (
 
 type AppActionCustomObservation struct {
 
+	// Specifies the JSON Blob defining the Body of this Custom Action.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
 	// The ID of the Action within the Logic App Workflow.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
+	LogicAppID *string `json:"logicAppId,omitempty" tf:"logic_app_id,omitempty"`
 }
 
 type AppActionCustomParameters struct {
 
 	// Specifies the JSON Blob defining the Body of this Custom Action.
-	// +kubebuilder:validation:Required
-	Body *string `json:"body" tf:"body,omitempty"`
+	// +kubebuilder:validation:Optional
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta1.AppWorkflow
@@ -64,8 +70,9 @@ type AppActionCustomStatus struct {
 type AppActionCustom struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppActionCustomSpec   `json:"spec"`
-	Status            AppActionCustomStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.body)",message="body is a required parameter"
+	Spec   AppActionCustomSpec   `json:"spec"`
+	Status AppActionCustomStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

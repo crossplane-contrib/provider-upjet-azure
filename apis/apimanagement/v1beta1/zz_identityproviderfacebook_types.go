@@ -15,8 +15,17 @@ import (
 
 type IdentityProviderFacebookObservation struct {
 
+	// The Name of the API Management Service where this Facebook Identity Provider should be created. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// App ID for Facebook.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
 	// The ID of the API Management Facebook Identity Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type IdentityProviderFacebookParameters struct {
@@ -35,11 +44,11 @@ type IdentityProviderFacebookParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// App ID for Facebook.
-	// +kubebuilder:validation:Required
-	AppID *string `json:"appId" tf:"app_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// App Secret for Facebook.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AppSecretSecretRef v1.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -80,8 +89,10 @@ type IdentityProviderFacebookStatus struct {
 type IdentityProviderFacebook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IdentityProviderFacebookSpec   `json:"spec"`
-	Status            IdentityProviderFacebookStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.appId)",message="appId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.appSecretSecretRef)",message="appSecretSecretRef is a required parameter"
+	Spec   IdentityProviderFacebookSpec   `json:"spec"`
+	Status IdentityProviderFacebookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

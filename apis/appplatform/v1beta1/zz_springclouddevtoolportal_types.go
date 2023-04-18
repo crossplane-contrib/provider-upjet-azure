@@ -15,8 +15,26 @@ import (
 
 type SpringCloudDevToolPortalObservation struct {
 
+	// Should the Accelerator plugin be enabled?
+	ApplicationAcceleratorEnabled *bool `json:"applicationAcceleratorEnabled,omitempty" tf:"application_accelerator_enabled,omitempty"`
+
+	// Should the Application Live View be enabled?
+	ApplicationLiveViewEnabled *bool `json:"applicationLiveViewEnabled,omitempty" tf:"application_live_view_enabled,omitempty"`
+
 	// The ID of the Spring Cloud Dev Tool Portal.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name which should be used for this Spring Cloud Dev Tool Portal. The only possible value is default. Changing this forces a new Spring Cloud Dev Tool Portal to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is public network access enabled?
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Dev Tool Portal to be created.
+	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
+
+	// A sso block as defined below.
+	Sso []SpringCloudDevToolPortalSsoObservation `json:"sso,omitempty" tf:"sso,omitempty"`
 }
 
 type SpringCloudDevToolPortalParameters struct {
@@ -30,8 +48,8 @@ type SpringCloudDevToolPortalParameters struct {
 	ApplicationLiveViewEnabled *bool `json:"applicationLiveViewEnabled,omitempty" tf:"application_live_view_enabled,omitempty"`
 
 	// The name which should be used for this Spring Cloud Dev Tool Portal. The only possible value is default. Changing this forces a new Spring Cloud Dev Tool Portal to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Is public network access enabled?
 	// +kubebuilder:validation:Optional
@@ -57,6 +75,18 @@ type SpringCloudDevToolPortalParameters struct {
 }
 
 type SpringCloudDevToolPortalSsoObservation struct {
+
+	// Specifies the public identifier for the application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Specifies the secret known only to the application and the authorization server.
+	ClientSecret *string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
+
+	// Specifies the URI of a JSON file with generic OIDC provider configuration.
+	MetadataURL *string `json:"metadataUrl,omitempty" tf:"metadata_url,omitempty"`
+
+	// Specifies a list of specific actions applications can be allowed to do on a user's behalf.
+	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 type SpringCloudDevToolPortalSsoParameters struct {
@@ -102,8 +132,9 @@ type SpringCloudDevToolPortalStatus struct {
 type SpringCloudDevToolPortal struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudDevToolPortalSpec   `json:"spec"`
-	Status            SpringCloudDevToolPortalStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SpringCloudDevToolPortalSpec   `json:"spec"`
+	Status SpringCloudDevToolPortalStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

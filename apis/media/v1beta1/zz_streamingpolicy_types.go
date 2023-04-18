@@ -14,6 +14,15 @@ import (
 )
 
 type CommonEncryptionCbcsObservation struct {
+
+	// A default_content_key block as defined below. Changing this forces a new Streaming Policy to be created.
+	DefaultContentKey []DefaultContentKeyObservation `json:"defaultContentKey,omitempty" tf:"default_content_key,omitempty"`
+
+	// A drm_fairplay block as defined below. Changing this forces a new Streaming Policy to be created.
+	DrmFairplay []DrmFairplayObservation `json:"drmFairplay,omitempty" tf:"drm_fairplay,omitempty"`
+
+	// A enabled_protocols block as defined below. Changing this forces a new Streaming Policy to be created.
+	EnabledProtocols []EnabledProtocolsObservation `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
 }
 
 type CommonEncryptionCbcsParameters struct {
@@ -32,6 +41,12 @@ type CommonEncryptionCbcsParameters struct {
 }
 
 type CommonEncryptionCencDefaultContentKeyObservation struct {
+
+	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Policy used by Default Key. Changing this forces a new Streaming Policy to be created.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 }
 
 type CommonEncryptionCencDefaultContentKeyParameters struct {
@@ -46,6 +61,18 @@ type CommonEncryptionCencDefaultContentKeyParameters struct {
 }
 
 type CommonEncryptionCencEnabledProtocolsObservation struct {
+
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
+	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
+
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
+	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
+
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
+	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
+
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
+	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
 
 type CommonEncryptionCencEnabledProtocolsParameters struct {
@@ -68,6 +95,18 @@ type CommonEncryptionCencEnabledProtocolsParameters struct {
 }
 
 type CommonEncryptionCencObservation struct {
+
+	// A default_content_key block as defined below. Changing this forces a new Streaming Policy to be created.
+	DefaultContentKey []CommonEncryptionCencDefaultContentKeyObservation `json:"defaultContentKey,omitempty" tf:"default_content_key,omitempty"`
+
+	// A drm_playready block as defined below. Changing this forces a new Streaming Policy to be created.
+	DrmPlayready []DrmPlayreadyObservation `json:"drmPlayready,omitempty" tf:"drm_playready,omitempty"`
+
+	// Template for the URL of the custom service delivering licenses to end user players. Not required when using Azure Media Services for issuing licenses. The template supports replaceable tokens that the service will update at runtime with the value specific to the request. The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested. Changing this forces a new Streaming Policy to be created.
+	DrmWidevineCustomLicenseAcquisitionURLTemplate *string `json:"drmWidevineCustomLicenseAcquisitionUrlTemplate,omitempty" tf:"drm_widevine_custom_license_acquisition_url_template,omitempty"`
+
+	// A enabled_protocols block as defined below. Changing this forces a new Streaming Policy to be created.
+	EnabledProtocols []CommonEncryptionCencEnabledProtocolsObservation `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
 }
 
 type CommonEncryptionCencParameters struct {
@@ -90,6 +129,12 @@ type CommonEncryptionCencParameters struct {
 }
 
 type DefaultContentKeyObservation struct {
+
+	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Policy used by Default Key. Changing this forces a new Streaming Policy to be created.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 }
 
 type DefaultContentKeyParameters struct {
@@ -104,6 +149,12 @@ type DefaultContentKeyParameters struct {
 }
 
 type DrmFairplayObservation struct {
+
+	// All license to be persistent or not. Changing this forces a new Streaming Policy to be created.
+	AllowPersistentLicense *bool `json:"allowPersistentLicense,omitempty" tf:"allow_persistent_license,omitempty"`
+
+	// Template for the URL of the custom service delivering licenses to end user players. Not required when using Azure Media Services for issuing licenses. The template supports replaceable tokens that the service will update at runtime with the value specific to the request. The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested. Changing this forces a new Streaming Policy to be created.
+	CustomLicenseAcquisitionURLTemplate *string `json:"customLicenseAcquisitionUrlTemplate,omitempty" tf:"custom_license_acquisition_url_template,omitempty"`
 }
 
 type DrmFairplayParameters struct {
@@ -118,6 +169,12 @@ type DrmFairplayParameters struct {
 }
 
 type DrmPlayreadyObservation struct {
+
+	// Custom attributes for PlayReady. Changing this forces a new Streaming Policy to be created.
+	CustomAttributes *string `json:"customAttributes,omitempty" tf:"custom_attributes,omitempty"`
+
+	// Template for the URL of the custom service delivering licenses to end user players. Not required when using Azure Media Services for issuing licenses. The template supports replaceable tokens that the service will update at runtime with the value specific to the request. The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested. Changing this forces a new Streaming Policy to be created.
+	CustomLicenseAcquisitionURLTemplate *string `json:"customLicenseAcquisitionUrlTemplate,omitempty" tf:"custom_license_acquisition_url_template,omitempty"`
 }
 
 type DrmPlayreadyParameters struct {
@@ -132,6 +189,18 @@ type DrmPlayreadyParameters struct {
 }
 
 type EnabledProtocolsObservation struct {
+
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
+	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
+
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
+	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
+
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
+	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
+
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
+	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
 
 type EnabledProtocolsParameters struct {
@@ -154,6 +223,18 @@ type EnabledProtocolsParameters struct {
 }
 
 type NoEncryptionEnabledProtocolsObservation struct {
+
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
+	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
+
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
+	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
+
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
+	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
+
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
+	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
 
 type NoEncryptionEnabledProtocolsParameters struct {
@@ -177,8 +258,26 @@ type NoEncryptionEnabledProtocolsParameters struct {
 
 type StreamingPolicyObservation struct {
 
+	// A common_encryption_cbcs block as defined below. Changing this forces a new Streaming Policy to be created.
+	CommonEncryptionCbcs []CommonEncryptionCbcsObservation `json:"commonEncryptionCbcs,omitempty" tf:"common_encryption_cbcs,omitempty"`
+
+	// A common_encryption_cenc block as defined below. Changing this forces a new Streaming Policy to be created.
+	CommonEncryptionCenc []CommonEncryptionCencObservation `json:"commonEncryptionCenc,omitempty" tf:"common_encryption_cenc,omitempty"`
+
+	// Default Content Key used by current Streaming Policy. Changing this forces a new Streaming Policy to be created.
+	DefaultContentKeyPolicyName *string `json:"defaultContentKeyPolicyName,omitempty" tf:"default_content_key_policy_name,omitempty"`
+
 	// The ID of the Streaming Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Media Services account name. Changing this forces a new Streaming Policy to be created.
+	MediaServicesAccountName *string `json:"mediaServicesAccountName,omitempty" tf:"media_services_account_name,omitempty"`
+
+	// A no_encryption_enabled_protocols block as defined below. Changing this forces a new Streaming Policy to be created.
+	NoEncryptionEnabledProtocols []NoEncryptionEnabledProtocolsObservation `json:"noEncryptionEnabledProtocols,omitempty" tf:"no_encryption_enabled_protocols,omitempty"`
+
+	// The name of the Resource Group where the Streaming Policy should exist. Changing this forces a new Streaming Policy to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type StreamingPolicyParameters struct {

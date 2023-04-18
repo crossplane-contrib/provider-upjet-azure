@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: frontdoororigingroups.cdn.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -204,9 +208,22 @@ spec:
                     description: Specifies whether session affinity should be enabled
                       on this host. Defaults to true.
                     type: boolean
-                required:
-                - loadBalancing
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -378,15 +395,80 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: loadBalancing is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.loadBalancing)
           status:
             description: FrontdoorOriginGroupStatus defines the observed state of
               FrontdoorOriginGroup.
             properties:
               atProvider:
                 properties:
+                  cdnFrontdoorProfileId:
+                    description: The ID of the Front Door Profile within which this
+                      Front Door Origin Group should exist. Changing this forces a
+                      new Front Door Origin Group to be created.
+                    type: string
+                  healthProbe:
+                    description: A health_probe block as defined below.
+                    items:
+                      properties:
+                        intervalInSeconds:
+                          description: Specifies the number of seconds between health
+                            probes. Possible values are between 5 and 31536000 seconds
+                            (inclusive).
+                          type: number
+                        path:
+                          description: Specifies the path relative to the origin that
+                            is used to determine the health of the origin. Defaults
+                            to /.
+                          type: string
+                        protocol:
+                          description: Specifies the protocol to use for health probe.
+                            Possible values are Http and Https.
+                          type: string
+                        requestType:
+                          description: Specifies the type of health probe request
+                            that is made. Possible values are GET and HEAD. Defaults
+                            to HEAD.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Front Door Origin Group.
                     type: string
+                  loadBalancing:
+                    description: A load_balancing block as defined below.
+                    items:
+                      properties:
+                        additionalLatencyInMilliseconds:
+                          description: Specifies the additional latency in milliseconds
+                            for probes to fall into the lowest latency bucket. Possible
+                            values are between 0 and 1000 seconds (inclusive). Defaults
+                            to 50.
+                          type: number
+                        sampleSize:
+                          description: Specifies the number of samples to consider
+                            for load balancing decisions. Possible values are between
+                            0 and 255 (inclusive). Defaults to 4.
+                          type: number
+                        successfulSamplesRequired:
+                          description: Specifies the number of samples within the
+                            sample period that must succeed. Possible values are between
+                            0 and 255 (inclusive). Defaults to 3.
+                          type: number
+                      type: object
+                    type: array
+                  restoreTrafficTimeToHealedOrNewEndpointInMinutes:
+                    description: Specifies the amount of time which should elapse
+                      before shifting traffic to another endpoint when a healthy endpoint
+                      becomes unhealthy or a new endpoint is added. Possible values
+                      are between 0 and 50 minutes (inclusive). Default is 10 minutes.
+                    type: number
+                  sessionAffinityEnabled:
+                    description: Specifies whether session affinity should be enabled
+                      on this host. Defaults to true.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

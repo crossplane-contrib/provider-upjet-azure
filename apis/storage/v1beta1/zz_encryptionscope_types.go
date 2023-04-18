@@ -17,6 +17,18 @@ type EncryptionScopeObservation struct {
 
 	// The ID of the Storage Encryption Scope.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Is a secondary layer of encryption with Platform Managed Keys for data applied? Changing this forces a new resource to be created.
+	InfrastructureEncryptionRequired *bool `json:"infrastructureEncryptionRequired,omitempty" tf:"infrastructure_encryption_required,omitempty"`
+
+	// The ID of the Key Vault Key. Required when source is Microsoft.KeyVault.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The source of the Storage Encryption Scope. Possible values are Microsoft.KeyVault and Microsoft.Storage.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// The ID of the Storage Account where this Storage Encryption Scope is created. Changing this forces a new Storage Encryption Scope to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type EncryptionScopeParameters struct {
@@ -30,8 +42,8 @@ type EncryptionScopeParameters struct {
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// The source of the Storage Encryption Scope. Possible values are Microsoft.KeyVault and Microsoft.Storage.
-	// +kubebuilder:validation:Required
-	Source *string `json:"source" tf:"source,omitempty"`
+	// +kubebuilder:validation:Optional
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// The ID of the Storage Account where this Storage Encryption Scope is created. Changing this forces a new Storage Encryption Scope to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -72,8 +84,9 @@ type EncryptionScopeStatus struct {
 type EncryptionScope struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EncryptionScopeSpec   `json:"spec"`
-	Status            EncryptionScopeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.source)",message="source is a required parameter"
+	Spec   EncryptionScopeSpec   `json:"spec"`
+	Status EncryptionScopeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

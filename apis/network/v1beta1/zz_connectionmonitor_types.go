@@ -15,19 +15,43 @@ import (
 
 type ConnectionMonitorObservation struct {
 
+	// A endpoint block as defined below.
+	Endpoint []EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
 	// The ID of the Network Connection Monitor.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Network Connection Monitor should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the Network Watcher. Changing this forces a new resource to be created.
+	NetworkWatcherID *string `json:"networkWatcherId,omitempty" tf:"network_watcher_id,omitempty"`
+
+	// The description of the Network Connection Monitor.
+	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
+
+	// A list of IDs of the Log Analytics Workspace which will accept the output from the Network Connection Monitor.
+	OutputWorkspaceResourceIds []*string `json:"outputWorkspaceResourceIds,omitempty" tf:"output_workspace_resource_ids,omitempty"`
+
+	// A mapping of tags which should be assigned to the Network Connection Monitor.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A test_configuration block as defined below.
+	TestConfiguration []TestConfigurationObservation `json:"testConfiguration,omitempty" tf:"test_configuration,omitempty"`
+
+	// A test_group block as defined below.
+	TestGroup []TestGroupObservation `json:"testGroup,omitempty" tf:"test_group,omitempty"`
 }
 
 type ConnectionMonitorParameters struct {
 
 	// A endpoint block as defined below.
-	// +kubebuilder:validation:Required
-	Endpoint []EndpointParameters `json:"endpoint" tf:"endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	Endpoint []EndpointParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The Azure Region where the Network Connection Monitor should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Network Watcher. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Watcher
@@ -56,15 +80,39 @@ type ConnectionMonitorParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A test_configuration block as defined below.
-	// +kubebuilder:validation:Required
-	TestConfiguration []TestConfigurationParameters `json:"testConfiguration" tf:"test_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	TestConfiguration []TestConfigurationParameters `json:"testConfiguration,omitempty" tf:"test_configuration,omitempty"`
 
 	// A test_group block as defined below.
-	// +kubebuilder:validation:Required
-	TestGroup []TestGroupParameters `json:"testGroup" tf:"test_group,omitempty"`
+	// +kubebuilder:validation:Optional
+	TestGroup []TestGroupParameters `json:"testGroup,omitempty" tf:"test_group,omitempty"`
 }
 
 type EndpointObservation struct {
+
+	// The IP address or domain name of the Network Connection Monitor endpoint.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The test coverage for the Network Connection Monitor endpoint. Possible values are AboveAverage, Average, BelowAverage, Default, Full and Low.
+	CoverageLevel *string `json:"coverageLevel,omitempty" tf:"coverage_level,omitempty"`
+
+	// A list of IPv4/IPv6 subnet masks or IPv4/IPv6 IP addresses to be excluded to the Network Connection Monitor endpoint.
+	ExcludedIPAddresses []*string `json:"excludedIpAddresses,omitempty" tf:"excluded_ip_addresses,omitempty"`
+
+	// A filter block as defined below.
+	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// A list of IPv4/IPv6 subnet masks or IPv4/IPv6 IP addresses to be included to the Network Connection Monitor endpoint.
+	IncludedIPAddresses []*string `json:"includedIpAddresses,omitempty" tf:"included_ip_addresses,omitempty"`
+
+	// The name of the endpoint for the Network Connection Monitor .
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The resource ID which is used as the endpoint by the Network Connection Monitor.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// The endpoint type of the Network Connection Monitor. Possible values are AzureSubnet, AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
+	TargetResourceType *string `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
 type EndpointParameters struct {
@@ -103,6 +151,12 @@ type EndpointParameters struct {
 }
 
 type FilterObservation struct {
+
+	// A item block as defined below.
+	Item []ItemObservation `json:"item,omitempty" tf:"item,omitempty"`
+
+	// The type of items included in the filter. Possible values are AgentAddress. Defaults to AgentAddress.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FilterParameters struct {
@@ -117,6 +171,24 @@ type FilterParameters struct {
 }
 
 type HTTPConfigurationObservation struct {
+
+	// The HTTP method for the HTTP request. Possible values are Get and Post. Defaults to Get.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// The path component of the URI. It only accepts the absolute path.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port for the TCP connection.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Should HTTPS be preferred over HTTP in cases where the choice is not explicit? Defaults to false.
+	PreferHTTPS *bool `json:"preferHttps,omitempty" tf:"prefer_https,omitempty"`
+
+	// A request_header block as defined below.
+	RequestHeader []HTTPConfigurationRequestHeaderObservation `json:"requestHeader,omitempty" tf:"request_header,omitempty"`
+
+	// The HTTP status codes to consider successful. For instance, 2xx, 301-304 and 418.
+	ValidStatusCodeRanges []*string `json:"validStatusCodeRanges,omitempty" tf:"valid_status_code_ranges,omitempty"`
 }
 
 type HTTPConfigurationParameters struct {
@@ -147,6 +219,12 @@ type HTTPConfigurationParameters struct {
 }
 
 type HTTPConfigurationRequestHeaderObservation struct {
+
+	// The name of the test group for the Network Connection Monitor.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HTTPConfigurationRequestHeaderParameters struct {
@@ -161,6 +239,9 @@ type HTTPConfigurationRequestHeaderParameters struct {
 }
 
 type IcmpConfigurationObservation struct {
+
+	// Should path evaluation with trace route be enabled? Defaults to true.
+	TraceRouteEnabled *bool `json:"traceRouteEnabled,omitempty" tf:"trace_route_enabled,omitempty"`
 }
 
 type IcmpConfigurationParameters struct {
@@ -171,6 +252,12 @@ type IcmpConfigurationParameters struct {
 }
 
 type ItemObservation struct {
+
+	// The address of the filter item.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The type of items included in the filter. Possible values are AgentAddress. Defaults to AgentAddress.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ItemParameters struct {
@@ -185,6 +272,12 @@ type ItemParameters struct {
 }
 
 type SuccessThresholdObservation struct {
+
+	// The maximum percentage of failed checks permitted for a test to be successful.
+	ChecksFailedPercent *float64 `json:"checksFailedPercent,omitempty" tf:"checks_failed_percent,omitempty"`
+
+	// The maximum round-trip time in milliseconds permitted for a test to be successful.
+	RoundTripTimeMS *float64 `json:"roundTripTimeMs,omitempty" tf:"round_trip_time_ms,omitempty"`
 }
 
 type SuccessThresholdParameters struct {
@@ -199,6 +292,15 @@ type SuccessThresholdParameters struct {
 }
 
 type TCPConfigurationObservation struct {
+
+	// The destination port behavior for the TCP connection. Possible values are None and ListenIfAvailable.
+	DestinationPortBehavior *string `json:"destinationPortBehavior,omitempty" tf:"destination_port_behavior,omitempty"`
+
+	// The port for the TCP connection.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Should path evaluation with trace route be enabled? Defaults to true.
+	TraceRouteEnabled *bool `json:"traceRouteEnabled,omitempty" tf:"trace_route_enabled,omitempty"`
 }
 
 type TCPConfigurationParameters struct {
@@ -217,6 +319,30 @@ type TCPConfigurationParameters struct {
 }
 
 type TestConfigurationObservation struct {
+
+	// A http_configuration block as defined below.
+	HTTPConfiguration []HTTPConfigurationObservation `json:"httpConfiguration,omitempty" tf:"http_configuration,omitempty"`
+
+	// A icmp_configuration block as defined below.
+	IcmpConfiguration []IcmpConfigurationObservation `json:"icmpConfiguration,omitempty" tf:"icmp_configuration,omitempty"`
+
+	// The name of test configuration for the Network Connection Monitor.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The preferred IP version which is used in the test evaluation. Possible values are IPv4 and IPv6.
+	PreferredIPVersion *string `json:"preferredIpVersion,omitempty" tf:"preferred_ip_version,omitempty"`
+
+	// The protocol used to evaluate tests. Possible values are Tcp, Http and Icmp.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// A success_threshold block as defined below.
+	SuccessThreshold []SuccessThresholdObservation `json:"successThreshold,omitempty" tf:"success_threshold,omitempty"`
+
+	// A tcp_configuration block as defined below.
+	TCPConfiguration []TCPConfigurationObservation `json:"tcpConfiguration,omitempty" tf:"tcp_configuration,omitempty"`
+
+	// The time interval in seconds at which the test evaluation will happen. Defaults to 60.
+	TestFrequencyInSeconds *float64 `json:"testFrequencyInSeconds,omitempty" tf:"test_frequency_in_seconds,omitempty"`
 }
 
 type TestConfigurationParameters struct {
@@ -255,6 +381,21 @@ type TestConfigurationParameters struct {
 }
 
 type TestGroupObservation struct {
+
+	// A list of destination endpoint names.
+	DestinationEndpoints []*string `json:"destinationEndpoints,omitempty" tf:"destination_endpoints,omitempty"`
+
+	// Should the test group be enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The name of the test group for the Network Connection Monitor.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of source endpoint names.
+	SourceEndpoints []*string `json:"sourceEndpoints,omitempty" tf:"source_endpoints,omitempty"`
+
+	// A list of test configuration names.
+	TestConfigurationNames []*string `json:"testConfigurationNames,omitempty" tf:"test_configuration_names,omitempty"`
 }
 
 type TestGroupParameters struct {
@@ -304,8 +445,12 @@ type ConnectionMonitorStatus struct {
 type ConnectionMonitor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConnectionMonitorSpec   `json:"spec"`
-	Status            ConnectionMonitorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpoint)",message="endpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.testConfiguration)",message="testConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.testGroup)",message="testGroup is a required parameter"
+	Spec   ConnectionMonitorSpec   `json:"spec"`
+	Status ConnectionMonitorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

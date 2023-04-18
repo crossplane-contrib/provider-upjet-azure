@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: sentinelautomationrules.securityinsights.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -273,11 +277,22 @@ spec:
                     description: Specifies when will this automation rule be triggered.
                       Possible values are Created and Updated. Defaults to Created.
                     type: string
-                required:
-                - displayName
-                - name
-                - order
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -449,14 +464,146 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: displayName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: order is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.order)
           status:
             description: SentinelAutomationRuleStatus defines the observed state of
               SentinelAutomationRule.
             properties:
               atProvider:
                 properties:
+                  actionIncident:
+                    description: One or more action_incident blocks as defined below.
+                    items:
+                      properties:
+                        classification:
+                          description: 'The classification of the incident, when closing
+                            it. Possible values are: BenignPositive_SuspiciousButExpected,
+                            FalsePositive_InaccurateData, FalsePositive_IncorrectAlertLogic,
+                            TruePositive_SuspiciousActivity and Undetermined.'
+                          type: string
+                        classificationComment:
+                          description: The comment why the incident is to be closed.
+                          type: string
+                        labels:
+                          description: Specifies a list of labels to add to the incident.
+                          items:
+                            type: string
+                          type: array
+                        order:
+                          description: The execution order of this action.
+                          type: number
+                        ownerId:
+                          description: The object ID of the entity this incident is
+                            assigned to.
+                          type: string
+                        severity:
+                          description: The severity to add to the incident. Possible
+                            values are High, Informational, Low and Medium.
+                          type: string
+                        status:
+                          description: 'The status to set to the incident. Possible
+                            values are: Active, Closed, New.'
+                          type: string
+                      type: object
+                    type: array
+                  actionPlaybook:
+                    description: One or more action_playbook blocks as defined below.
+                    items:
+                      properties:
+                        logicAppId:
+                          description: The ID of the Logic App that defines the playbook's
+                            logic.
+                          type: string
+                        order:
+                          description: The execution order of this action.
+                          type: number
+                        tenantId:
+                          description: The ID of the Tenant that owns the playbook.
+                          type: string
+                      type: object
+                    type: array
+                  condition:
+                    description: One or more condition blocks as defined below.
+                    items:
+                      properties:
+                        operator:
+                          description: 'The operator to use for evaluate the condition.
+                            Possible values include: Equals, NotEquals, Contains,
+                            NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.'
+                          type: string
+                        property:
+                          description: 'The property to use for evaluate the condition.
+                            Possible values include: AccountAadTenantId, AccountAadUserId,
+                            AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID,
+                            AccountSid, AccountUPNSuffix, AzureResourceResourceId,
+                            AzureResourceSubscriptionId, CloudApplicationAppId, CloudApplicationAppName,
+                            DNSDomainName, FileDirectory, FileHashValue, FileName,
+                            HostAzureID, HostNTDomain, HostName, HostNetBiosName,
+                            HostOSVersion, IPAddress, IncidentDescription, IncidentProviderName,
+                            IncidentRelatedAnalyticRuleIds, IncidentSeverity, IncidentStatus,
+                            IncidentTactics, IncidentTitle, IoTDeviceId, IoTDeviceModel,
+                            IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType,
+                            IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation,
+                            MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient,
+                            MailMessageSenderIP, MailMessageSubject, MailboxDisplayName,
+                            MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName,
+                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData,
+                            Url.'
+                          type: string
+                        values:
+                          description: Specifies a list of values to use for evaluate
+                            the condition.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  conditionJson:
+                    description: A JSON array of one or more condition JSON objects
+                      as is defined here.
+                    type: string
+                  displayName:
+                    description: The display name which should be used for this Sentinel
+                      Automation Rule.
+                    type: string
+                  enabled:
+                    description: Whether this Sentinel Automation Rule is enabled?
+                      Defaults to true.
+                    type: boolean
+                  expiration:
+                    description: The time in RFC3339 format of kind UTC that determines
+                      when this Automation Rule should expire and be disabled.
+                    type: string
                   id:
                     description: The ID of the Sentinel Automation Rule.
+                    type: string
+                  logAnalyticsWorkspaceId:
+                    description: The ID of the Log Analytics Workspace where this
+                      Sentinel applies to. Changing this forces a new Sentinel Automation
+                      Rule to be created.
+                    type: string
+                  name:
+                    description: The UUID which should be used for this Sentinel Automation
+                      Rule. Changing this forces a new Sentinel Automation Rule to
+                      be created.
+                    type: string
+                  order:
+                    description: The order of this Sentinel Automation Rule. Possible
+                      values varies between 1 and 1000.
+                    type: number
+                  triggersOn:
+                    description: Specifies what triggers this automation rule. Possible
+                      values are Alerts and Incidents. Defaults to Incidents.
+                    type: string
+                  triggersWhen:
+                    description: Specifies when will this automation rule be triggered.
+                      Possible values are Created and Updated. Defaults to Created.
                     type: string
                 type: object
               conditions:

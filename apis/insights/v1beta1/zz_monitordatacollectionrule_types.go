@@ -14,6 +14,9 @@ import (
 )
 
 type AzureMonitorMetricsObservation struct {
+
+	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type AzureMonitorMetricsParameters struct {
@@ -24,6 +27,12 @@ type AzureMonitorMetricsParameters struct {
 }
 
 type DataFlowObservation struct {
+
+	// Specifies a list of destination names. A azure_monitor_metrics data source only allows for stream of kind Microsoft-InsightsMetrics.
+	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
+	// Specifies a list of streams. Possible values include but not limited to Microsoft-Event, Microsoft-InsightsMetrics, Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
+	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
 }
 
 type DataFlowParameters struct {
@@ -38,6 +47,18 @@ type DataFlowParameters struct {
 }
 
 type DataSourcesObservation struct {
+
+	// One or more extension blocks as defined below.
+	Extension []ExtensionObservation `json:"extension,omitempty" tf:"extension,omitempty"`
+
+	// One or more performance_counter blocks as defined below.
+	PerformanceCounter []PerformanceCounterObservation `json:"performanceCounter,omitempty" tf:"performance_counter,omitempty"`
+
+	// One or more syslog blocks as defined below.
+	Syslog []SyslogObservation `json:"syslog,omitempty" tf:"syslog,omitempty"`
+
+	// One or more windows_event_log blocks as defined below.
+	WindowsEventLog []WindowsEventLogObservation `json:"windowsEventLog,omitempty" tf:"windows_event_log,omitempty"`
 }
 
 type DataSourcesParameters struct {
@@ -60,6 +81,12 @@ type DataSourcesParameters struct {
 }
 
 type DestinationsObservation struct {
+
+	// A azure_monitor_metrics block as defined above.
+	AzureMonitorMetrics []AzureMonitorMetricsObservation `json:"azureMonitorMetrics,omitempty" tf:"azure_monitor_metrics,omitempty"`
+
+	// One or more log_analytics blocks as defined below.
+	LogAnalytics []LogAnalyticsObservation `json:"logAnalytics,omitempty" tf:"log_analytics,omitempty"`
 }
 
 type DestinationsParameters struct {
@@ -74,6 +101,21 @@ type DestinationsParameters struct {
 }
 
 type ExtensionObservation struct {
+
+	// A JSON String which specifies the extension setting.
+	ExtensionJSON *string `json:"extensionJson,omitempty" tf:"extension_json,omitempty"`
+
+	// The name of the VM extension.
+	ExtensionName *string `json:"extensionName,omitempty" tf:"extension_name,omitempty"`
+
+	// Specifies a list of data sources this extension needs data from. An item should be a name of a supported data source which produces only one stream. Supported data sources type: performance_counter, windows_event_log,and syslog.
+	InputDataSources []*string `json:"inputDataSources,omitempty" tf:"input_data_sources,omitempty"`
+
+	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to. Possible values include but not limited to Microsoft-Event,and Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent, and Microsoft-SecurityEvent.
+	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
 }
 
 type ExtensionParameters struct {
@@ -100,6 +142,12 @@ type ExtensionParameters struct {
 }
 
 type LogAnalyticsObservation struct {
+
+	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of a Log Analytic Workspace resource.
+	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 }
 
 type LogAnalyticsParameters struct {
@@ -125,15 +173,39 @@ type LogAnalyticsParameters struct {
 
 type MonitorDataCollectionRuleObservation struct {
 
+	// One or more data_flow blocks as defined below.
+	DataFlow []DataFlowObservation `json:"dataFlow,omitempty" tf:"data_flow,omitempty"`
+
+	// A data_sources block as defined below. This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
+	DataSources []DataSourcesObservation `json:"dataSources,omitempty" tf:"data_sources,omitempty"`
+
+	// The description of the Data Collection Rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A destinations block as defined below.
+	Destinations []DestinationsObservation `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
 	// The ID of the Data Collection Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The kind of the Data Collection Rule. Possible values are Linux and Windows. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// The Azure Region where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Data Collection Rule.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MonitorDataCollectionRuleParameters struct {
 
 	// One or more data_flow blocks as defined below.
-	// +kubebuilder:validation:Required
-	DataFlow []DataFlowParameters `json:"dataFlow" tf:"data_flow,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataFlow []DataFlowParameters `json:"dataFlow,omitempty" tf:"data_flow,omitempty"`
 
 	// A data_sources block as defined below. This property is optional and can be omitted if the rule is meant to be used via direct calls to the provisioned endpoint.
 	// +kubebuilder:validation:Optional
@@ -144,16 +216,16 @@ type MonitorDataCollectionRuleParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A destinations block as defined below.
-	// +kubebuilder:validation:Required
-	Destinations []DestinationsParameters `json:"destinations" tf:"destinations,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destinations []DestinationsParameters `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// The kind of the Data Collection Rule. Possible values are Linux and Windows. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The Azure Region where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -174,6 +246,18 @@ type MonitorDataCollectionRuleParameters struct {
 }
 
 type PerformanceCounterObservation struct {
+
+	// Specifies a list of specifier names of the performance counters you want to collect. To get a list of performance counters on Windows, run the command typeperf. Please see this document for more information.
+	CounterSpecifiers []*string `json:"counterSpecifiers,omitempty" tf:"counter_specifiers,omitempty"`
+
+	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
+	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds,omitempty" tf:"sampling_frequency_in_seconds,omitempty"`
+
+	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to. Possible values include but not limited to Microsoft-Event,and Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent, and Microsoft-SecurityEvent.
+	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
 }
 
 type PerformanceCounterParameters struct {
@@ -196,6 +280,18 @@ type PerformanceCounterParameters struct {
 }
 
 type SyslogObservation struct {
+
+	// Specifies a list of facility names. Use a wildcard * to collect logs for all facility names. Possible values are auth, authpriv, cron, daemon, kern, lpr, mail, mark, news, syslog, user, uucp, local0, local1, local2, local3, local4, local5, local6, local7,and *.
+	FacilityNames []*string `json:"facilityNames,omitempty" tf:"facility_names,omitempty"`
+
+	// Specifies a list of log levels. Use a wildcard * to collect logs for all log levels. Possible values are Debug, Info, Notice, Warning, Error, Critical, Alert, Emergency,and *.
+	LogLevels []*string `json:"logLevels,omitempty" tf:"log_levels,omitempty"`
+
+	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to. Possible values include but not limited to Microsoft-Event,and Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent, and Microsoft-SecurityEvent.
+	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
 }
 
 type SyslogParameters struct {
@@ -218,6 +314,15 @@ type SyslogParameters struct {
 }
 
 type WindowsEventLogObservation struct {
+
+	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to. Possible values include but not limited to Microsoft-Event,and Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent, and Microsoft-SecurityEvent.
+	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+
+	// Specifies a list of Windows Event Log queries in XPath expression. Please see this document for more information.
+	XPathQueries []*string `json:"xPathQueries,omitempty" tf:"x_path_queries,omitempty"`
 }
 
 type WindowsEventLogParameters struct {
@@ -259,8 +364,11 @@ type MonitorDataCollectionRuleStatus struct {
 type MonitorDataCollectionRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitorDataCollectionRuleSpec   `json:"spec"`
-	Status            MonitorDataCollectionRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataFlow)",message="dataFlow is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinations)",message="destinations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   MonitorDataCollectionRuleSpec   `json:"spec"`
+	Status MonitorDataCollectionRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -86,6 +86,36 @@ func (in *ProviderObservation) DeepCopyInto(out *ProviderObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.PolicySigningCertificateData != nil {
+		in, out := &in.PolicySigningCertificateData, &out.PolicySigningCertificateData
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.TrustModel != nil {
 		in, out := &in.TrustModel, &out.TrustModel
 		*out = new(string)

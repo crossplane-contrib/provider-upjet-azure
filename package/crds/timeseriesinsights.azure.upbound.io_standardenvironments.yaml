@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: standardenvironments.timeseriesinsights.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -180,11 +184,22 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
-                required:
-                - dataRetentionTime
-                - location
-                - skuName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -356,14 +371,62 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: dataRetentionTime is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataRetentionTime)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: skuName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)
           status:
             description: StandardEnvironmentStatus defines the observed state of StandardEnvironment.
             properties:
               atProvider:
                 properties:
+                  dataRetentionTime:
+                    description: Specifies the ISO8601 timespan specifying the minimum
+                      number of days the environment's events will be available for
+                      query. Changing this forces a new resource to be created.
+                    type: string
                   id:
                     description: The ID of the IoT Time Series Insights Standard Environment.
                     type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  partitionKey:
+                    description: The name of the event property which will be used
+                      to partition data. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Azure IoT Time Series Insights Standard Environment. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  skuName:
+                    description: 'Specifies the SKU Name for this IoT Time Series
+                      Insights Standard Environment. It is string consisting of two
+                      parts separated by an underscore(_).The first part is the name,
+                      valid values include: S1 and S2. The second part is the capacity
+                      (e.g. the number of deployed units of the sku), which must be
+                      a positive integer (e.g. S1_1). Possible values are S1_1, S1_2,
+                      S1_3, S1_4, S1_5, S1_6, S1_7, S1_8, S1_9, S1_10, S2_1, S2_2,
+                      S2_3, S2_4, S2_5, S2_6, S2_7, S2_8, S2_9 and S2_10. Changing
+                      this forces a new resource to be created.'
+                    type: string
+                  storageLimitExceededBehavior:
+                    description: Specifies the behaviour the IoT Time Series Insights
+                      service should take when the environment's capacity has been
+                      exceeded. Valid values include PauseIngress and PurgeOldData.
+                      Defaults to PurgeOldData.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

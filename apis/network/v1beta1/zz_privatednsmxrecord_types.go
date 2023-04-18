@@ -20,13 +20,28 @@ type PrivateDNSMXRecordObservation struct {
 
 	// The Private DNS MX Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more record blocks as defined below.
+	Record []PrivateDNSMXRecordRecordObservation `json:"record,omitempty" tf:"record,omitempty"`
+
+	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
+	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 }
 
 type PrivateDNSMXRecordParameters struct {
 
 	// One or more record blocks as defined below.
-	// +kubebuilder:validation:Required
-	Record []PrivateDNSMXRecordRecordParameters `json:"record" tf:"record,omitempty"`
+	// +kubebuilder:validation:Optional
+	Record []PrivateDNSMXRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -42,8 +57,8 @@ type PrivateDNSMXRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -64,6 +79,12 @@ type PrivateDNSMXRecordParameters struct {
 }
 
 type PrivateDNSMXRecordRecordObservation struct {
+
+	// The FQDN of the exchange to MX record points to.
+	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
+
+	// The preference of the MX record.
+	Preference *float64 `json:"preference,omitempty" tf:"preference,omitempty"`
 }
 
 type PrivateDNSMXRecordRecordParameters struct {
@@ -101,8 +122,10 @@ type PrivateDNSMXRecordStatus struct {
 type PrivateDNSMXRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrivateDNSMXRecordSpec   `json:"spec"`
-	Status            PrivateDNSMXRecordStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	Spec   PrivateDNSMXRecordSpec   `json:"spec"`
+	Status PrivateDNSMXRecordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

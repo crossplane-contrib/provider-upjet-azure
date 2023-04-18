@@ -14,6 +14,12 @@ import (
 )
 
 type KeyVaultKeyObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault that stores the system key of the Azure Function.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type KeyVaultKeyParameters struct {
@@ -29,8 +35,32 @@ type KeyVaultKeyParameters struct {
 
 type LinkedServiceAzureFunctionObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Factory Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_key block as defined below. Use this Argument to store the system key of the Azure Function in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service. Exactly one of either key or key_vault_key is required.
+	KeyVaultKey []KeyVaultKeyObservation `json:"keyVaultKey,omitempty" tf:"key_vault_key,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The url of the Azure Function.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type LinkedServiceAzureFunctionParameters struct {
@@ -78,8 +108,8 @@ type LinkedServiceAzureFunctionParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The url of the Azure Function.
-	// +kubebuilder:validation:Required
-	URL *string `json:"url" tf:"url,omitempty"`
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 // LinkedServiceAzureFunctionSpec defines the desired state of LinkedServiceAzureFunction
@@ -106,8 +136,9 @@ type LinkedServiceAzureFunctionStatus struct {
 type LinkedServiceAzureFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkedServiceAzureFunctionSpec   `json:"spec"`
-	Status            LinkedServiceAzureFunctionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.url)",message="url is a required parameter"
+	Spec   LinkedServiceAzureFunctionSpec   `json:"spec"`
+	Status LinkedServiceAzureFunctionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

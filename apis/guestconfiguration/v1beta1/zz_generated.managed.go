@@ -17,6 +17,11 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) GetDeletionPolicy() xpv1.
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this PolicyVirtualMachineConfigurationAssignment.
+func (mg *PolicyVirtualMachineConfigurationAssignment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this PolicyVirtualMachineConfigurationAssignment.
 func (mg *PolicyVirtualMachineConfigurationAssignment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) SetConditions(c ...xpv1.C
 // SetDeletionPolicy of this PolicyVirtualMachineConfigurationAssignment.
 func (mg *PolicyVirtualMachineConfigurationAssignment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this PolicyVirtualMachineConfigurationAssignment.
+func (mg *PolicyVirtualMachineConfigurationAssignment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this PolicyVirtualMachineConfigurationAssignment.

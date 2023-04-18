@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: triggercustomevents.datafactory.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -348,10 +352,22 @@ spec:
                     description: The pattern that event subject ends with for trigger
                       to fire.
                     type: string
-                required:
-                - events
-                - pipeline
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -523,13 +539,76 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: events is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.events)
+            - message: pipeline is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pipeline)
           status:
             description: TriggerCustomEventStatus defines the observed state of TriggerCustomEvent.
             properties:
               atProvider:
                 properties:
+                  activated:
+                    description: Specifies if the Data Factory Custom Event Trigger
+                      is activated. Defaults to true.
+                    type: boolean
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Custom Event Trigger.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Custom Event Trigger.
+                    items:
+                      type: string
+                    type: array
+                  dataFactoryId:
+                    description: The ID of Data Factory in which to associate the
+                      Trigger with. Changing this forces a new resource.
+                    type: string
+                  description:
+                    description: The description for the Data Factory Custom Event
+                      Trigger.
+                    type: string
+                  eventgridTopicId:
+                    description: The ID of Event Grid Topic in which event will be
+                      listened. Changing this forces a new resource.
+                    type: string
+                  events:
+                    description: List of events that will fire this trigger. At least
+                      one event must be specified.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the Data Factory Custom Event Trigger.
+                    type: string
+                  pipeline:
+                    description: One or more pipeline blocks as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The Data Factory Pipeline name that the trigger
+                            will act on.
+                          type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: The Data Factory Pipeline parameters that the
+                            trigger will act on.
+                          type: object
+                      type: object
+                    type: array
+                  subjectBeginsWith:
+                    description: The pattern that event subject starts with for trigger
+                      to fire.
+                    type: string
+                  subjectEndsWith:
+                    description: The pattern that event subject ends with for trigger
+                      to fire.
                     type: string
                 type: object
               conditions:

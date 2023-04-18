@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: labservicelabs.labservices.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -464,12 +468,22 @@ spec:
                       - sku
                       type: object
                     type: array
-                required:
-                - location
-                - security
-                - title
-                - virtualMachine
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -641,13 +655,74 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: security is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.security)
+            - message: title is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.title)
+            - message: virtualMachine is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.virtualMachine)
           status:
             description: LabServiceLabStatus defines the observed state of LabServiceLab.
             properties:
               atProvider:
                 properties:
+                  autoShutdown:
+                    description: An auto_shutdown block as defined below.
+                    items:
+                      properties:
+                        disconnectDelay:
+                          description: The amount of time a VM will stay running after
+                            a user disconnects if this behavior is enabled. This value
+                            must be formatted as an ISO 8601 string.
+                          type: string
+                        idleDelay:
+                          description: The amount of time a VM will idle before it
+                            is shutdown if this behavior is enabled. This value must
+                            be formatted as an ISO 8601 string.
+                          type: string
+                        noConnectDelay:
+                          description: The amount of time a VM will stay running before
+                            it is shutdown if no connection is made and this behavior
+                            is enabled. This value must be formatted as an ISO 8601
+                            string.
+                          type: string
+                        shutdownOnIdle:
+                          description: A VM will get shutdown when it has idled for
+                            a period of time. Possible values are LowUsage and UserAbsence.
+                          type: string
+                      type: object
+                    type: array
+                  connectionSetting:
+                    description: A connection_setting block as defined below.
+                    items:
+                      properties:
+                        clientRdpAccess:
+                          description: The enabled access level for Client Access
+                            over RDP. Possible value is Public.
+                          type: string
+                        clientSshAccess:
+                          description: The enabled access level for Client Access
+                            over SSH. Possible value is Public.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: The description of the Lab Service Lab.
+                    type: string
                   id:
                     description: The ID of the Lab Service Lab.
+                    type: string
+                  labPlanId:
+                    description: The resource ID of the Lab Plan that is used during
+                      resource creation to provide defaults and acts as a permission
+                      container when creating a Lab Service Lab via labs.azure.com.
+                    type: string
+                  location:
+                    description: The Azure Region where the Lab Service Lab should
+                      exist. Changing this forces a new resource to be created.
                     type: string
                   network:
                     description: A network block as defined below.
@@ -661,14 +736,148 @@ spec:
                           description: The resource ID of the Public IP for the network
                             profile of the Lab Service Lab.
                           type: string
+                        subnetId:
+                          description: The resource ID of the Subnet for the network
+                            profile of the Lab Service Lab.
+                          type: string
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Lab Service
+                      Lab should exist. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  roster:
+                    description: A roster block as defined below.
+                    items:
+                      properties:
+                        activeDirectoryGroupId:
+                          description: The AAD group ID which this Lab Service Lab
+                            roster is populated from.
+                          type: string
+                        lmsInstance:
+                          description: The base URI identifying the lms instance.
+                          type: string
+                        ltiClientId:
+                          description: The unique id of the Azure Lab Service tool
+                            in the lms.
+                          type: string
+                        ltiContextId:
+                          description: The unique context identifier for the Lab Service
+                            Lab in the lms.
+                          type: string
+                        ltiRosterEndpoint:
+                          description: The URI of the names and roles service endpoint
+                            on the lms for the class attached to this Lab Service
+                            Lab.
+                          type: string
                       type: object
                     type: array
                   security:
                     description: A security block as defined below.
                     items:
                       properties:
+                        openAccessEnabled:
+                          description: Is open access enabled to allow any user or
+                            only specified users to register to a Lab Service Lab?
+                          type: boolean
                         registrationCode:
                           description: The registration code for the Lab Service Lab.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Lab Service Lab.
+                    type: object
+                  title:
+                    description: The title of the Lab Service Lab.
+                    type: string
+                  virtualMachine:
+                    description: A virtual_machine block as defined below.
+                    items:
+                      properties:
+                        additionalCapabilityGpuDriversInstalled:
+                          description: Is flagged to pre-install dedicated GPU drivers?
+                            Defaults to false. Changing this forces a new resource
+                            to be created.
+                          type: boolean
+                        adminUser:
+                          description: An admin_user block as defined below.
+                          items:
+                            properties:
+                              username:
+                                description: The username to use when signing in to
+                                  Lab Service Lab VMs.
+                                type: string
+                            type: object
+                          type: array
+                        createOption:
+                          description: The create option to indicate what Lab Service
+                            Lab VMs are created from. Possible values are Image and
+                            TemplateVM. Defaults to Image. Changing this forces a
+                            new resource to be created.
+                          type: string
+                        imageReference:
+                          description: An image_reference block as defined below.
+                          items:
+                            properties:
+                              id:
+                                description: The resource ID of the image. Changing
+                                  this forces a new resource to be created.
+                                type: string
+                              offer:
+                                description: The image offer if applicable. Changing
+                                  this forces a new resource to be created.
+                                type: string
+                              publisher:
+                                description: The image publisher. Changing this forces
+                                  a new resource to be created.
+                                type: string
+                              sku:
+                                description: A sku block as defined below.
+                                type: string
+                              version:
+                                description: The image version specified on creation.
+                                  Changing this forces a new resource to be created.
+                                type: string
+                            type: object
+                          type: array
+                        nonAdminUser:
+                          description: A non_admin_user block as defined below.
+                          items:
+                            properties:
+                              username:
+                                description: The username to use when signing in to
+                                  Lab Service Lab VMs.
+                                type: string
+                            type: object
+                          type: array
+                        sharedPasswordEnabled:
+                          description: Is the shared password enabled with the same
+                            password for all user VMs? Defaults to false. Changing
+                            this forces a new resource to be created.
+                          type: boolean
+                        sku:
+                          description: A sku block as defined below.
+                          items:
+                            properties:
+                              capacity:
+                                description: The capacity for the SKU. Possible values
+                                  are between 0 and 400.
+                                type: number
+                              name:
+                                description: The name of the SKU. Changing this forces
+                                  a new resource to be created.
+                                type: string
+                            type: object
+                          type: array
+                        usageQuota:
+                          description: The initial quota allocated to each Lab Service
+                            Lab user. Defaults to PT0S. This value must be formatted
+                            as an ISO 8601 string.
                           type: string
                       type: object
                     type: array

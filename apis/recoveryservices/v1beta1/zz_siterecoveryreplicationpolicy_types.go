@@ -15,19 +15,31 @@ import (
 
 type SiteRecoveryReplicationPolicyObservation struct {
 
+	// Specifies the frequency(in minutes) at which to create application consistent recovery points.
+	ApplicationConsistentSnapshotFrequencyInMinutes *float64 `json:"applicationConsistentSnapshotFrequencyInMinutes,omitempty" tf:"application_consistent_snapshot_frequency_in_minutes,omitempty"`
+
 	// The ID of the Site Recovery Replication Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The duration in minutes for which the recovery points need to be stored.
+	RecoveryPointRetentionInMinutes *float64 `json:"recoveryPointRetentionInMinutes,omitempty" tf:"recovery_point_retention_in_minutes,omitempty"`
+
+	// The name of the vault that should be updated. Changing this forces a new resource to be created.
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// Name of the resource group where the vault that should be updated is located. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type SiteRecoveryReplicationPolicyParameters struct {
 
 	// Specifies the frequency(in minutes) at which to create application consistent recovery points.
-	// +kubebuilder:validation:Required
-	ApplicationConsistentSnapshotFrequencyInMinutes *float64 `json:"applicationConsistentSnapshotFrequencyInMinutes" tf:"application_consistent_snapshot_frequency_in_minutes,omitempty"`
+	// +kubebuilder:validation:Optional
+	ApplicationConsistentSnapshotFrequencyInMinutes *float64 `json:"applicationConsistentSnapshotFrequencyInMinutes,omitempty" tf:"application_consistent_snapshot_frequency_in_minutes,omitempty"`
 
 	// The duration in minutes for which the recovery points need to be stored.
-	// +kubebuilder:validation:Required
-	RecoveryPointRetentionInMinutes *float64 `json:"recoveryPointRetentionInMinutes" tf:"recovery_point_retention_in_minutes,omitempty"`
+	// +kubebuilder:validation:Optional
+	RecoveryPointRetentionInMinutes *float64 `json:"recoveryPointRetentionInMinutes,omitempty" tf:"recovery_point_retention_in_minutes,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.Vault
@@ -80,8 +92,10 @@ type SiteRecoveryReplicationPolicyStatus struct {
 type SiteRecoveryReplicationPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SiteRecoveryReplicationPolicySpec   `json:"spec"`
-	Status            SiteRecoveryReplicationPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.applicationConsistentSnapshotFrequencyInMinutes)",message="applicationConsistentSnapshotFrequencyInMinutes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.recoveryPointRetentionInMinutes)",message="recoveryPointRetentionInMinutes is a required parameter"
+	Spec   SiteRecoveryReplicationPolicySpec   `json:"spec"`
+	Status SiteRecoveryReplicationPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

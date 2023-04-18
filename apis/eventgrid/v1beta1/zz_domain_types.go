@@ -15,6 +15,12 @@ import (
 
 type DomainObservation struct {
 
+	// Whether to create the domain topic when the first event subscription at the scope of the domain topic is created. Defaults to true.
+	AutoCreateTopicWithFirstSubscription *bool `json:"autoCreateTopicWithFirstSubscription,omitempty" tf:"auto_create_topic_with_first_subscription,omitempty"`
+
+	// Whether to delete the domain topic when the last event subscription at the scope of the domain topic is deleted. Defaults to true.
+	AutoDeleteTopicWithLastSubscription *bool `json:"autoDeleteTopicWithLastSubscription,omitempty" tf:"auto_delete_topic_with_last_subscription,omitempty"`
+
 	// The Endpoint associated with the EventGrid Domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
@@ -22,8 +28,34 @@ type DomainObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// One or more inbound_ip_rule blocks as defined below.
+	InboundIPRule []InboundIPRuleObservation `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
+
+	// A input_mapping_default_values block as defined below. Changing this forces a new resource to be created.
+	InputMappingDefaultValues []InputMappingDefaultValuesObservation `json:"inputMappingDefaultValues,omitempty" tf:"input_mapping_default_values,omitempty"`
+
+	// A input_mapping_fields block as defined below. Changing this forces a new resource to be created.
+	InputMappingFields []InputMappingFieldsObservation `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty"`
+
+	// Specifies the schema in which incoming events will be published to this domain. Allowed values are CloudEventSchemaV1_0, CustomEventSchema, or EventGridSchema. Defaults to eventgridschema. Changing this forces a new resource to be created.
+	InputSchema *string `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
+
+	// Whether local authentication methods is enabled for the EventGrid Domain. Defaults to true.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether or not public network access is allowed for this server. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The name of the resource group in which the EventGrid Domain exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DomainParameters struct {
@@ -61,8 +93,8 @@ type DomainParameters struct {
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether or not public network access is allowed for this server. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -88,11 +120,17 @@ type DomainParameters struct {
 
 type IdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Domain.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Event Grid Domain. Possible values are SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -107,6 +145,12 @@ type IdentityParameters struct {
 }
 
 type InboundIPRuleObservation struct {
+
+	// The action to take when the rule is matched. Possible values are Allow.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The IP mask (CIDR) to match on.
+	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
 }
 
 type InboundIPRuleParameters struct {
@@ -121,6 +165,15 @@ type InboundIPRuleParameters struct {
 }
 
 type InputMappingDefaultValuesObservation struct {
+
+	// Specifies the default data version of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	DataVersion *string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
+
+	// Specifies the default event type of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+
+	// Specifies the default subject of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
 type InputMappingDefaultValuesParameters struct {
@@ -139,6 +192,24 @@ type InputMappingDefaultValuesParameters struct {
 }
 
 type InputMappingFieldsObservation struct {
+
+	// Specifies the data version of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	DataVersion *string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
+
+	// Specifies the event time of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	EventTime *string `json:"eventTime,omitempty" tf:"event_time,omitempty"`
+
+	// Specifies the event type of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+
+	// Specifies the id of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the subject of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// Specifies the topic of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type InputMappingFieldsParameters struct {
@@ -192,8 +263,9 @@ type DomainStatus struct {
 type Domain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DomainSpec   `json:"spec"`
-	Status            DomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   DomainSpec   `json:"spec"`
+	Status DomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

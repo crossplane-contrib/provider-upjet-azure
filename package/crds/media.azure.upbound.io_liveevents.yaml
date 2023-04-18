@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: liveevents.media.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -405,10 +409,22 @@ spec:
                       to the live event preview and ingest endpoints. Changing this
                       forces a new Live Event to be created.
                     type: boolean
-                required:
-                - input
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -580,11 +596,82 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: input is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.input)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: LiveEventStatus defines the observed state of LiveEvent.
             properties:
               atProvider:
                 properties:
+                  autoStartEnabled:
+                    description: The flag indicates if the resource should be automatically
+                      started on creation. Default is false. Changing this forces
+                      a new resource to be created.
+                    type: boolean
+                  crossSiteAccessPolicy:
+                    description: A cross_site_access_policy block as defined below.
+                    items:
+                      properties:
+                        clientAccessPolicy:
+                          description: The content of clientaccesspolicy.xml used
+                            by Silverlight.
+                          type: string
+                        crossDomainPolicy:
+                          description: The content of the Cross Domain Policy (crossdomain.xml).
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: A description for the live event.
+                    type: string
+                  encoding:
+                    description: A encoding block as defined below.
+                    items:
+                      properties:
+                        keyFrameInterval:
+                          description: Use an ISO 8601 time value between 0.5 to 20
+                            seconds to specify the output fragment length for the
+                            video and audio tracks of an encoding live event. For
+                            example, use PT2S to indicate 2 seconds. For the video
+                            track it also defines the key frame interval, or the length
+                            of a GoP (group of pictures). If this value is not set
+                            for an encoding live event, the fragment duration defaults
+                            to 2 seconds. The value cannot be set for pass-through
+                            live events.
+                          type: string
+                        presetName:
+                          description: The optional encoding preset name, used when
+                            type is not None. If the type is set to Standard, then
+                            the default preset name is Default720p. Else if the type
+                            is set to Premium1080p, the default preset is Default1080p.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        stretchMode:
+                          description: Specifies how the input video will be resized
+                            to fit the desired output resolution(s). Allowed values
+                            are None, AutoFit or AutoSize. Default is None.
+                          type: string
+                        type:
+                          description: Live event type. Allowed values are None, Premium1080p
+                            or Standard. When set to None, the service simply passes
+                            through the incoming video and audio layer(s) to the output.
+                            When type is set to Standard or Premium1080p, a live encoder
+                            transcodes the incoming stream into multiple bitrates
+                            or layers. Defaults to None. Changing this forces a new
+                            resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  hostnamePrefix:
+                    description: When use_static_hostname is set to true, the hostname_prefix
+                      specifies the first part of the hostname assigned to the live
+                      event preview and ingest endpoints. The final hostname would
+                      be a combination of this prefix, the media service account name
+                      and a short code for the Azure Media Services data center.
+                    type: string
                   id:
                     description: The ID of the Live Event.
                     type: string
@@ -592,6 +679,11 @@ spec:
                     description: A input block as defined below.
                     items:
                       properties:
+                        accessToken:
+                          description: A UUID in string form to uniquely identify
+                            the stream. If omitted, the service will generate a unique
+                            value. Changing this forces a new value to be created.
+                          type: string
                         endpoint:
                           items:
                             properties:
@@ -601,12 +693,58 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        ipAccessControlAllow:
+                          description: One or more ip_access_control_allow blocks
+                            as defined below.
+                          items:
+                            properties:
+                              address:
+                                description: The IP address or CIDR range.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  Live Event. Changing this forces a new Live Event
+                                  to be created.
+                                type: string
+                              subnetPrefixLength:
+                                description: The subnet mask prefix length (see CIDR
+                                  notation).
+                                type: number
+                            type: object
+                          type: array
+                        keyFrameIntervalDuration:
+                          description: ISO 8601 time duration of the key frame interval
+                            duration of the input. This value sets the EXT-X-TARGETDURATION
+                            property in the HLS output. For example, use PT2S to indicate
+                            2 seconds. This field cannot be set when type is set to
+                            Encoding.
+                          type: string
+                        streamingProtocol:
+                          description: The input protocol for the live event. Allowed
+                            values are FragmentedMP4 and RTMP. Changing this forces
+                            a new resource to be created.
+                          type: string
                       type: object
                     type: array
+                  location:
+                    description: The Azure Region where the Live Event should exist.
+                      Changing this forces a new Live Event to be created.
+                    type: string
+                  mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Live Event to be created.
+                    type: string
                   preview:
                     description: A preview block as defined below.
                     items:
                       properties:
+                        alternativeMediaId:
+                          description: An alternative media identifier associated
+                            with the streaming locator created for the preview. The
+                            identifier can be used in the CustomLicenseAcquisitionUrlTemplate
+                            or the CustomKeyAcquisitionUrlTemplate of the Streaming
+                            Policy specified in the streaming_policy_name field.
+                          type: string
                         endpoint:
                           items:
                             properties:
@@ -616,8 +754,72 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        ipAccessControlAllow:
+                          description: One or more ip_access_control_allow blocks
+                            as defined above.
+                          items:
+                            properties:
+                              address:
+                                description: The IP address or CIDR range.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  Live Event. Changing this forces a new Live Event
+                                  to be created.
+                                type: string
+                              subnetPrefixLength:
+                                description: The subnet mask prefix length (see CIDR
+                                  notation).
+                                type: number
+                            type: object
+                          type: array
+                        previewLocator:
+                          description: The identifier of the preview locator in GUID
+                            format. Specifying this at creation time allows the caller
+                            to know the preview locator url before the event is created.
+                            If omitted, the service will generate a random identifier.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        streamingPolicyName:
+                          description: The name of streaming policy used for the live
+                            event preview. Changing this forces a new resource to
+                            be created.
+                          type: string
                       type: object
                     type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Live Event
+                      should exist. Changing this forces a new Live Event to be created.
+                    type: string
+                  streamOptions:
+                    description: A list of options to use for the LiveEvent. Possible
+                      values are Default, LowLatency, LowLatencyV2. Please see more
+                      at this document. Changing this forces a new resource to be
+                      created.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Live Event.
+                    type: object
+                  transcriptionLanguages:
+                    description: 'Specifies a list of languages (locale) to be used
+                      for speech-to-text transcription – it should match the spoken
+                      language in the audio track. The value should be in BCP-47 format
+                      (e.g: en-US). See the Microsoft Documentation for more information
+                      about the live transcription feature and the list of supported
+                      languages.'
+                    items:
+                      type: string
+                    type: array
+                  useStaticHostname:
+                    description: Specifies whether a static hostname would be assigned
+                      to the live event preview and ingest endpoints. Changing this
+                      forces a new Live Event to be created.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -15,15 +15,30 @@ import (
 
 type SentinelAlertRuleFusionObservation struct {
 
+	// The GUID of the alert rule template which is used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
+	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid,omitempty" tf:"alert_rule_template_guid,omitempty"`
+
+	// Should this Sentinel Fusion Alert Rule be enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the Sentinel Fusion Alert Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Log Analytics Workspace this Sentinel Fusion Alert Rule belongs to. Changing this forces a new Sentinel Fusion Alert Rule to be created.
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	// The name which should be used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more source blocks as defined below.
+	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type SentinelAlertRuleFusionParameters struct {
 
 	// The GUID of the alert rule template which is used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
-	// +kubebuilder:validation:Required
-	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid" tf:"alert_rule_template_guid,omitempty"`
+	// +kubebuilder:validation:Optional
+	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid,omitempty" tf:"alert_rule_template_guid,omitempty"`
 
 	// Should this Sentinel Fusion Alert Rule be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -44,8 +59,8 @@ type SentinelAlertRuleFusionParameters struct {
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more source blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -53,6 +68,15 @@ type SentinelAlertRuleFusionParameters struct {
 }
 
 type SourceObservation struct {
+
+	// Whether this source signal is enabled or disabled in Fusion detection? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The name of the Fusion source signal. Refer to Fusion alert rule template for supported values.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more sub_type blocks as defined below.
+	SubType []SubTypeObservation `json:"subType,omitempty" tf:"sub_type,omitempty"`
 }
 
 type SourceParameters struct {
@@ -71,6 +95,15 @@ type SourceParameters struct {
 }
 
 type SubTypeObservation struct {
+
+	// Whether this source subtype under source signal is enabled or disabled in Fusion detection. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The Name of the source subtype under a given source signal in Fusion detection. Refer to Fusion alert rule template for supported values.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of severities that are enabled for this source subtype consumed in Fusion detection. Possible values for each element are High, Medium, Low, Informational.
+	SeveritiesAllowed []*string `json:"severitiesAllowed,omitempty" tf:"severities_allowed,omitempty"`
 }
 
 type SubTypeParameters struct {
@@ -112,8 +145,10 @@ type SentinelAlertRuleFusionStatus struct {
 type SentinelAlertRuleFusion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SentinelAlertRuleFusionSpec   `json:"spec"`
-	Status            SentinelAlertRuleFusionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.alertRuleTemplateGuid)",message="alertRuleTemplateGuid is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SentinelAlertRuleFusionSpec   `json:"spec"`
+	Status SentinelAlertRuleFusionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

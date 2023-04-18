@@ -17,6 +17,18 @@ type QueueAuthorizationRuleObservation struct {
 
 	// The ID of the Authorization Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Does this Authorization Rule have Listen permissions to the ServiceBus Queue? Defaults to false.
+	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
+
+	// Does this Authorization Rule have Manage permissions to the ServiceBus Queue? When this property is true - both listen and send must be too. Defaults to false.
+	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
+
+	// Specifies the ID of the ServiceBus Queue. Changing this forces a new resource to be created.
+	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
+
+	// Does this Authorization Rule have Send permissions to the ServiceBus Queue? Defaults to false.
+	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 
 type QueueAuthorizationRuleParameters struct {

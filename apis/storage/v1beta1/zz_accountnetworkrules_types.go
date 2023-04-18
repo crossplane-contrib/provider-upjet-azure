@@ -15,8 +15,26 @@ import (
 
 type AccountNetworkRulesObservation struct {
 
+	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
+	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
 	// The ID of the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// One or More private_link_access block as defined below.
+	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
+
+	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// A list of virtual network subnet ids to to secure the storage account.
+	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
 type AccountNetworkRulesParameters struct {
@@ -26,8 +44,8 @@ type AccountNetworkRulesParameters struct {
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
-	// +kubebuilder:validation:Required
-	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
 	// +kubebuilder:validation:Optional
@@ -57,6 +75,12 @@ type AccountNetworkRulesParameters struct {
 }
 
 type AccountNetworkRulesPrivateLinkAccessObservation struct {
+
+	// The resource id of the resource access rule to be granted access.
+	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
+
+	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
+	EndpointTenantID *string `json:"endpointTenantId,omitempty" tf:"endpoint_tenant_id,omitempty"`
 }
 
 type AccountNetworkRulesPrivateLinkAccessParameters struct {
@@ -94,8 +118,9 @@ type AccountNetworkRulesStatus struct {
 type AccountNetworkRules struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AccountNetworkRulesSpec   `json:"spec"`
-	Status            AccountNetworkRulesStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultAction)",message="defaultAction is a required parameter"
+	Spec   AccountNetworkRulesSpec   `json:"spec"`
+	Status AccountNetworkRulesStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

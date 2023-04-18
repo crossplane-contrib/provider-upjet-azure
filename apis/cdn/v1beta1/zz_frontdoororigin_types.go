@@ -15,8 +15,41 @@ import (
 
 type FrontdoorOriginObservation struct {
 
+	// The ID of the Front Door Origin Group within which this Front Door Origin should exist. Changing this forces a new Front Door Origin to be created.
+	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
+
+	// Specifies whether certificate name checks are enabled for this origin.
+	CertificateNameCheckEnabled *bool `json:"certificateNameCheckEnabled,omitempty" tf:"certificate_name_check_enabled,omitempty"`
+
+	// Should the origin be enabled? Possible values are true or false. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The value of the HTTP port. Must be between 1 and 65535. Defaults to 80.
+	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
+
+	// The value of the HTTPS port. Must be between 1 and 65535. Defaults to 443.
+	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
+
+	// Should the origin be enabled? Possible values are true or false. Defaults to true.
+	HealthProbesEnabled *bool `json:"healthProbesEnabled,omitempty" tf:"health_probes_enabled,omitempty"`
+
+	// The IPv4 address, IPv6 address or Domain name of the Origin.
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+
 	// The ID of the Front Door Origin.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The host header value (an IPv4 address, IPv6 address or Domain name) which is sent to the origin with each request. If unspecified the hostname from the request will be used.
+	OriginHostHeader *string `json:"originHostHeader,omitempty" tf:"origin_host_header,omitempty"`
+
+	// Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy. Must be between 1 and 5 (inclusive). Defaults to 1.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// A private_link block as defined below.
+	PrivateLink []PrivateLinkObservation `json:"privateLink,omitempty" tf:"private_link,omitempty"`
+
+	// The weight of the origin in a given origin group for load balancing. Must be between 1 and 1000. Defaults to 500.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type FrontdoorOriginParameters struct {
@@ -36,8 +69,8 @@ type FrontdoorOriginParameters struct {
 	CdnFrontdoorOriginGroupIDSelector *v1.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether certificate name checks are enabled for this origin.
-	// +kubebuilder:validation:Required
-	CertificateNameCheckEnabled *bool `json:"certificateNameCheckEnabled" tf:"certificate_name_check_enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	CertificateNameCheckEnabled *bool `json:"certificateNameCheckEnabled,omitempty" tf:"certificate_name_check_enabled,omitempty"`
 
 	// Should the origin be enabled? Possible values are true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -97,6 +130,18 @@ type FrontdoorOriginParameters struct {
 }
 
 type PrivateLinkObservation struct {
+
+	// Specifies the location where the Private Link resource should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the Azure Resource to connect to via the Private Link.
+	PrivateLinkTargetID *string `json:"privateLinkTargetId,omitempty" tf:"private_link_target_id,omitempty"`
+
+	// Specifies the request message that will be submitted to the private_link_target_id when requesting the private link endpoint connection. Values must be between 1 and 140 characters in length. Defaults to Access request for CDN FrontDoor Private Link Origin.
+	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
+
+	// Specifies the type of target for this Private Link Endpoint. Possible values are blob, blob_secondary, web and sites.
+	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 }
 
 type PrivateLinkParameters struct {
@@ -162,8 +207,9 @@ type FrontdoorOriginStatus struct {
 type FrontdoorOrigin struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FrontdoorOriginSpec   `json:"spec"`
-	Status            FrontdoorOriginStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateNameCheckEnabled)",message="certificateNameCheckEnabled is a required parameter"
+	Spec   FrontdoorOriginSpec   `json:"spec"`
+	Status FrontdoorOriginStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

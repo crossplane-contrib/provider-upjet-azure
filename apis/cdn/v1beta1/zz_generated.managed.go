@@ -17,6 +17,11 @@ func (mg *Endpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Endpoint.
+func (mg *Endpoint) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Endpoint.
 func (mg *Endpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *Endpoint) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Endpoint.
 func (mg *Endpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Endpoint.
+func (mg *Endpoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Endpoint.
@@ -83,6 +93,11 @@ func (mg *FrontdoorCustomDomain) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FrontdoorCustomDomain.
+func (mg *FrontdoorCustomDomain) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FrontdoorCustomDomain.
 func (mg *FrontdoorCustomDomain) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *FrontdoorCustomDomain) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FrontdoorCustomDomain.
 func (mg *FrontdoorCustomDomain) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FrontdoorCustomDomain.
+func (mg *FrontdoorCustomDomain) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FrontdoorCustomDomain.
@@ -149,6 +169,11 @@ func (mg *FrontdoorCustomDomainAssociation) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FrontdoorCustomDomainAssociation.
+func (mg *FrontdoorCustomDomainAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FrontdoorCustomDomainAssociation.
 func (mg *FrontdoorCustomDomainAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *FrontdoorCustomDomainAssociation) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FrontdoorCustomDomainAssociation.
 func (mg *FrontdoorCustomDomainAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FrontdoorCustomDomainAssociation.
+func (mg *FrontdoorCustomDomainAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FrontdoorCustomDomainAssociation.
@@ -215,6 +245,11 @@ func (mg *FrontdoorEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FrontdoorEndpoint.
+func (mg *FrontdoorEndpoint) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FrontdoorEndpoint.
 func (mg *FrontdoorEndpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *FrontdoorEndpoint) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FrontdoorEndpoint.
 func (mg *FrontdoorEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FrontdoorEndpoint.
+func (mg *FrontdoorEndpoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FrontdoorEndpoint.
@@ -281,6 +321,11 @@ func (mg *FrontdoorOrigin) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FrontdoorOrigin.
+func (mg *FrontdoorOrigin) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FrontdoorOrigin.
 func (mg *FrontdoorOrigin) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *FrontdoorOrigin) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FrontdoorOrigin.
 func (mg *FrontdoorOrigin) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FrontdoorOrigin.
+func (mg *FrontdoorOrigin) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FrontdoorOrigin.
@@ -347,6 +397,11 @@ func (mg *FrontdoorOriginGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FrontdoorOriginGroup.
+func (mg *FrontdoorOriginGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FrontdoorOriginGroup.
 func (mg *FrontdoorOriginGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *FrontdoorOriginGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FrontdoorOriginGroup.
 func (mg *FrontdoorOriginGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FrontdoorOriginGroup.
+func (mg *FrontdoorOriginGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FrontdoorOriginGroup.
@@ -413,6 +473,11 @@ func (mg *FrontdoorProfile) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FrontdoorProfile.
+func (mg *FrontdoorProfile) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FrontdoorProfile.
 func (mg *FrontdoorProfile) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *FrontdoorProfile) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FrontdoorProfile.
 func (mg *FrontdoorProfile) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FrontdoorProfile.
+func (mg *FrontdoorProfile) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FrontdoorProfile.
@@ -479,6 +549,11 @@ func (mg *FrontdoorRoute) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FrontdoorRoute.
+func (mg *FrontdoorRoute) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FrontdoorRoute.
 func (mg *FrontdoorRoute) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *FrontdoorRoute) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FrontdoorRoute.
 func (mg *FrontdoorRoute) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FrontdoorRoute.
+func (mg *FrontdoorRoute) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FrontdoorRoute.
@@ -545,6 +625,11 @@ func (mg *FrontdoorRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FrontdoorRule.
+func (mg *FrontdoorRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FrontdoorRule.
 func (mg *FrontdoorRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *FrontdoorRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FrontdoorRule.
 func (mg *FrontdoorRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FrontdoorRule.
+func (mg *FrontdoorRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FrontdoorRule.
@@ -611,6 +701,11 @@ func (mg *FrontdoorRuleSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this FrontdoorRuleSet.
+func (mg *FrontdoorRuleSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this FrontdoorRuleSet.
 func (mg *FrontdoorRuleSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -642,6 +737,11 @@ func (mg *FrontdoorRuleSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this FrontdoorRuleSet.
 func (mg *FrontdoorRuleSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this FrontdoorRuleSet.
+func (mg *FrontdoorRuleSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this FrontdoorRuleSet.
@@ -677,6 +777,11 @@ func (mg *Profile) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Profile.
+func (mg *Profile) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Profile.
 func (mg *Profile) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -708,6 +813,11 @@ func (mg *Profile) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Profile.
 func (mg *Profile) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Profile.
+func (mg *Profile) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Profile.

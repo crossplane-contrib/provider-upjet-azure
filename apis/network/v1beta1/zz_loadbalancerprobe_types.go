@@ -18,7 +18,28 @@ type LoadBalancerProbeObservation struct {
 	// The ID of the Load Balancer Probe.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The interval, in seconds between probes to the backend endpoint for health status. The default value is 15, the minimum value is 5.
+	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
+
 	LoadBalancerRules []*string `json:"loadBalancerRules,omitempty" tf:"load_balancer_rules,omitempty"`
+
+	// The ID of the LoadBalancer in which to create the NAT Rule. Changing this forces a new resource to be created.
+	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
+
+	// The number of failed probe attempts after which the backend endpoint is removed from rotation. The default value is 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
+	NumberOfProbes *float64 `json:"numberOfProbes,omitempty" tf:"number_of_probes,omitempty"`
+
+	// Port on which the Probe queries the backend endpoint. Possible values range from 1 to 65535, inclusive.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The number of consecutive successful or failed probes that allow or deny traffic to this endpoint. Possible values range from 1 to 100. The default value is 1.
+	ProbeThreshold *float64 `json:"probeThreshold,omitempty" tf:"probe_threshold,omitempty"`
+
+	// Specifies the protocol of the end point. Possible values are Http, Https or Tcp. If TCP is specified, a received ACK is required for the probe to be successful. If HTTP is specified, a 200 OK response from the specified URI is required for the probe to be successful.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The URI used for requesting health status from the backend endpoint. Required if protocol is set to Http or Https. Otherwise, it is not allowed.
+	RequestPath *string `json:"requestPath,omitempty" tf:"request_path,omitempty"`
 }
 
 type LoadBalancerProbeParameters struct {
@@ -46,8 +67,8 @@ type LoadBalancerProbeParameters struct {
 	NumberOfProbes *float64 `json:"numberOfProbes,omitempty" tf:"number_of_probes,omitempty"`
 
 	// Port on which the Probe queries the backend endpoint. Possible values range from 1 to 65535, inclusive.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The number of consecutive successful or failed probes that allow or deny traffic to this endpoint. Possible values range from 1 to 100. The default value is 1.
 	// +kubebuilder:validation:Optional
@@ -86,8 +107,9 @@ type LoadBalancerProbeStatus struct {
 type LoadBalancerProbe struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LoadBalancerProbeSpec   `json:"spec"`
-	Status            LoadBalancerProbeStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.port)",message="port is a required parameter"
+	Spec   LoadBalancerProbeSpec   `json:"spec"`
+	Status LoadBalancerProbeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

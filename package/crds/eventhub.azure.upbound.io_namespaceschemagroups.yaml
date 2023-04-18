@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: namespaceschemagroups.eventhub.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -153,10 +157,22 @@ spec:
                       values are Avro, Unknown. Changing this forces a new resource
                       to be created.
                     type: string
-                required:
-                - schemaCompatibility
-                - schemaType
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -328,6 +344,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: schemaCompatibility is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schemaCompatibility)
+            - message: schemaType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schemaType)
           status:
             description: NamespaceSchemaGroupStatus defines the observed state of
               NamespaceSchemaGroup.
@@ -336,6 +357,20 @@ spec:
                 properties:
                   id:
                     description: The ID of the EventHub Namespace Schema Group.
+                    type: string
+                  namespaceId:
+                    description: Specifies the ID of the EventHub Namespace. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  schemaCompatibility:
+                    description: Specifies the compatibility of this schema group.
+                      Possible values are None, Backward, Forward. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  schemaType:
+                    description: Specifies the Type of this schema group. Possible
+                      values are Avro, Unknown. Changing this forces a new resource
+                      to be created.
                     type: string
                 type: object
               conditions:

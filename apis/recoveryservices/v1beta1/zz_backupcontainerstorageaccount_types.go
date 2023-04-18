@@ -17,6 +17,15 @@ type BackupContainerStorageAccountObservation struct {
 
 	// The ID of the Backup Storage Account Container.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the vault where the storage account will be registered. Changing this forces a new resource to be created.
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// Name of the resource group where the vault is located. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The ID of the Storage Account to be registered Changing this forces a new resource to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type BackupContainerStorageAccountParameters struct {

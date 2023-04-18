@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: servers.fluidrelay.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -184,10 +188,22 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Fluid Relay Server.
                     type: object
-                required:
-                - location
-                - name
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -359,6 +375,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ServerStatus defines the observed state of Server.
             properties:
@@ -374,6 +395,12 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Fluid Relay Service.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The Principal ID for the Service Principal
                             associated with the Identity of this Fluid Relay Server.
@@ -382,8 +409,23 @@ spec:
                           description: The Tenant ID for the Service Principal associated
                             with the Identity of this Fluid Relay Server.
                           type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Fluid Relay Service.
+                            Possible values are SystemAssigned,UserAssigned and SystemAssigned,
+                            UserAssigned.
+                          type: string
                       type: object
                     type: array
+                  location:
+                    description: The Azure Region where the Fluid Relay Server should
+                      exist. Changing this forces a new Fluid Relay Server to be created.
+                    type: string
+                  name:
+                    description: The name which should be used for this Fluid Relay
+                      Server. Changing this forces a new Fluid Relay Server to be
+                      created.
+                    type: string
                   ordererEndpoints:
                     description: An array of the Fluid Relay Orderer endpoints. This
                       will be deprecated in future version of fluid relay server and
@@ -391,6 +433,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Fluid Relay
+                      Server should exist. Changing this forces a new Fluid Relay
+                      Server to be created.
+                    type: string
                   serviceEndpoints:
                     description: An array of service endpoints for this Fluid Relay
                       Server.
@@ -404,6 +451,17 @@ spec:
                     items:
                       type: string
                     type: array
+                  storageSku:
+                    description: Sku of the storage associated with the resource,
+                      Possible values are standard and basic. Changing this forces
+                      a new Fluid Relay Server to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Fluid Relay Server.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

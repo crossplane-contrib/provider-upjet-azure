@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: contentkeypolicies.media.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -669,9 +673,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - policyOption
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -843,13 +860,324 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: policyOption is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policyOption)
           status:
             description: ContentKeyPolicyStatus defines the observed state of ContentKeyPolicy.
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: A description for the Policy.
+                    type: string
                   id:
                     description: The ID of the Content Key Policy.
+                    type: string
+                  mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Content Key Policy to be created.
+                    type: string
+                  policyOption:
+                    description: One or more policy_option blocks as defined below.
+                    items:
+                      properties:
+                        clearKeyConfigurationEnabled:
+                          description: Enable a configuration for non-DRM keys.
+                          type: boolean
+                        fairplayConfiguration:
+                          description: A fairplay_configuration block as defined above.
+                            Check license requirements here https://docs.microsoft.com/azure/media-services/latest/fairplay-license-overview.
+                          items:
+                            properties:
+                              offlineRentalConfiguration:
+                                description: A offline_rental_configuration block
+                                  as defined below.
+                                items:
+                                  properties:
+                                    playbackDurationSeconds:
+                                      description: Playback duration.
+                                      type: number
+                                    storageDurationSeconds:
+                                      description: Storage duration.
+                                      type: number
+                                  type: object
+                                type: array
+                              rentalAndLeaseKeyType:
+                                description: The rental and lease key type. Supported
+                                  values are DualExpiry, PersistentLimited, PersistentUnlimited
+                                  or Undefined.
+                                type: string
+                              rentalDurationSeconds:
+                                description: The rental duration. Must be greater
+                                  than 0.
+                                type: number
+                            type: object
+                          type: array
+                        name:
+                          description: The name which should be used for this Policy
+                            Option.
+                          type: string
+                        openRestrictionEnabled:
+                          description: Enable an open restriction. License or key
+                            will be delivered on every request.
+                          type: boolean
+                        playreadyConfigurationLicense:
+                          description: One or more playready_configuration_license
+                            blocks as defined above.
+                          items:
+                            properties:
+                              allowTestDevices:
+                                description: A flag indicating whether test devices
+                                  can use the license.
+                                type: boolean
+                              beginDate:
+                                description: The begin date of license.
+                                type: string
+                              contentKeyLocationFromHeaderEnabled:
+                                description: Specifies that the content key ID is
+                                  in the PlayReady header.
+                                type: boolean
+                              contentKeyLocationFromKeyId:
+                                description: The content key ID. Specifies that the
+                                  content key ID is specified in the PlayReady configuration.
+                                type: string
+                              contentType:
+                                description: The PlayReady content type. Supported
+                                  values are UltraVioletDownload, UltraVioletStreaming
+                                  or Unspecified.
+                                type: string
+                              expirationDate:
+                                description: The expiration date of license.
+                                type: string
+                              licenseType:
+                                description: The license type. Supported values are
+                                  NonPersistent or Persistent.
+                                type: string
+                              playRight:
+                                description: A play_right block as defined above.
+                                items:
+                                  properties:
+                                    agcAndColorStripeRestriction:
+                                      description: Configures Automatic Gain Control
+                                        (AGC) and Color Stripe in the license. Must
+                                        be between 0 and 3 inclusive.
+                                      type: number
+                                    allowPassingVideoContentToUnknownOutput:
+                                      description: Configures Unknown output handling
+                                        settings of the license. Supported values
+                                        are Allowed, AllowedWithVideoConstriction
+                                        or NotAllowed.
+                                      type: string
+                                    analogVideoOpl:
+                                      description: Specifies the output protection
+                                        level for compressed digital audio. Supported
+                                        values are 100, 150 or 200.
+                                      type: number
+                                    compressedDigitalAudioOpl:
+                                      description: Specifies the output protection
+                                        level for compressed digital audio.Supported
+                                        values are 100, 150, 200, 250 or 300.
+                                      type: number
+                                    compressedDigitalVideoOpl:
+                                      description: Specifies the output protection
+                                        level for compressed digital video. Supported
+                                        values are 400 or 500.
+                                      type: number
+                                    digitalVideoOnlyContentRestriction:
+                                      description: Enables the Image Constraint For
+                                        Analog Component Video Restriction in the
+                                        license.
+                                      type: boolean
+                                    explicitAnalogTelevisionOutputRestriction:
+                                      description: An explicit_analog_television_output_restriction
+                                        block as defined above.
+                                      items:
+                                        properties:
+                                          bestEffortEnforced:
+                                            description: Indicates whether this restriction
+                                              is enforced on a best effort basis.
+                                              Possible values are true or false. Defaults
+                                              to false.
+                                            type: boolean
+                                          controlBits:
+                                            description: The restriction control bits.
+                                              Possible value is integer between 0
+                                              and 3 inclusive.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    firstPlayExpiration:
+                                      description: The amount of time that the license
+                                        is valid after the license is first used to
+                                        play content.
+                                      type: string
+                                    imageConstraintForAnalogComponentVideoRestriction:
+                                      description: Enables the Image Constraint For
+                                        Analog Component Video Restriction in the
+                                        license.
+                                      type: boolean
+                                    imageConstraintForAnalogComputerMonitorRestriction:
+                                      description: Enables the Image Constraint For
+                                        Analog Component Video Restriction in the
+                                        license.
+                                      type: boolean
+                                    scmsRestriction:
+                                      description: Configures the Serial Copy Management
+                                        System (SCMS) in the license. Must be between
+                                        0 and 3 inclusive.
+                                      type: number
+                                    uncompressedDigitalAudioOpl:
+                                      description: Specifies the output protection
+                                        level for uncompressed digital audio. Supported
+                                        values are 100, 150, 200, 250 or 300.
+                                      type: number
+                                    uncompressedDigitalVideoOpl:
+                                      description: Specifies the output protection
+                                        level for uncompressed digital video. Supported
+                                        values are 100, 250, 270 or 300.
+                                      type: number
+                                  type: object
+                                type: array
+                              relativeBeginDate:
+                                description: The relative begin date of license.
+                                type: string
+                              relativeExpirationDate:
+                                description: The relative expiration date of license.
+                                type: string
+                              securityLevel:
+                                description: The security level of the PlayReady license.
+                                  Possible values are SL150, SL2000 and SL3000. Please
+                                  see this document for more information about security
+                                  level. See this document for more information about
+                                  SL3000 support.
+                                type: string
+                            type: object
+                          type: array
+                        playreadyResponseCustomData:
+                          description: The custom response data of the PlayReady configuration.
+                            This only applies when playready_configuration_license
+                            is specified.
+                          type: string
+                        tokenRestriction:
+                          description: A token_restriction block as defined below.
+                          items:
+                            properties:
+                              alternateKey:
+                                description: One or more alternate_key block as defined
+                                  above.
+                                items:
+                                  properties:
+                                    rsaTokenKeyExponentSecretRef:
+                                      description: The RSA parameter exponent.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    rsaTokenKeyModulusSecretRef:
+                                      description: The RSA parameter modulus.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    symmetricTokenKeySecretRef:
+                                      description: The key value of the key. Specifies
+                                        a symmetric key for token validation.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    x509TokenKeyRawSecretRef:
+                                      description: The raw data field of a certificate
+                                        in PKCS 12 format (X509Certificate2 in .NET).
+                                        Specifies a certificate for token validation.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                  type: object
+                                type: array
+                              audience:
+                                description: The audience for the token.
+                                type: string
+                              issuer:
+                                description: The token issuer.
+                                type: string
+                              openIdConnectDiscoveryDocument:
+                                description: The OpenID connect discovery document.
+                                type: string
+                              requiredClaim:
+                                description: One or more required_claim blocks as
+                                  defined above.
+                                items:
+                                  properties:
+                                    type:
+                                      description: Token claim type.
+                                      type: string
+                                    value:
+                                      description: Token claim value.
+                                      type: string
+                                  type: object
+                                type: array
+                              tokenType:
+                                description: The type of token. Supported values are
+                                  Jwt or Swt.
+                                type: string
+                            type: object
+                          type: array
+                        widevineConfigurationTemplate:
+                          description: The Widevine template.
+                          type: string
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Content
+                      Key Policy should exist. Changing this forces a new Content
+                      Key Policy to be created.
                     type: string
                 type: object
               conditions:

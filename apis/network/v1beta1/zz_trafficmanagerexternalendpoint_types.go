@@ -14,6 +14,12 @@ import (
 )
 
 type TrafficManagerExternalEndpointCustomHeaderObservation struct {
+
+	// The name of the custom header.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of custom header. Applicable for HTTP and HTTPS protocol.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TrafficManagerExternalEndpointCustomHeaderParameters struct {
@@ -29,8 +35,35 @@ type TrafficManagerExternalEndpointCustomHeaderParameters struct {
 
 type TrafficManagerExternalEndpointObservation struct {
 
+	// One or more custom_header blocks as defined below.
+	CustomHeader []TrafficManagerExternalEndpointCustomHeaderObservation `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
+
+	// Is the endpoint enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Specifies the Azure location of the Endpoint, this must be specified for Profiles using the Performance routing method.
+	EndpointLocation *string `json:"endpointLocation,omitempty" tf:"endpoint_location,omitempty"`
+
+	// A list of Geographic Regions used to distribute traffic, such as WORLD, UK or DE. The same location can't be specified in two endpoints. See the Geographic Hierarchies documentation for more information.
+	GeoMappings []*string `json:"geoMappings,omitempty" tf:"geo_mappings,omitempty"`
+
 	// The ID of the External Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the priority of this Endpoint, this must be specified for Profiles using the Priority traffic routing method. Supports values between 1 and 1000, with no Endpoints sharing the same value. If omitted the value will be computed in order of creation.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The ID of the Traffic Manager Profile that this External Endpoint should be created within. Changing this forces a new resource to be created.
+	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`
+
+	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
+	Subnet []TrafficManagerExternalEndpointSubnetObservation `json:"subnet,omitempty" tf:"subnet,omitempty"`
+
+	// The FQDN DNS name of the target.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the Weighted traffic routing method. Valid values are between 1 and 1000.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TrafficManagerExternalEndpointParameters struct {
@@ -74,8 +107,8 @@ type TrafficManagerExternalEndpointParameters struct {
 	Subnet []TrafficManagerExternalEndpointSubnetParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// The FQDN DNS name of the target.
-	// +kubebuilder:validation:Required
-	Target *string `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the Weighted traffic routing method. Valid values are between 1 and 1000.
 	// +kubebuilder:validation:Optional
@@ -83,6 +116,15 @@ type TrafficManagerExternalEndpointParameters struct {
 }
 
 type TrafficManagerExternalEndpointSubnetObservation struct {
+
+	// The first IP Address in this subnet.
+	First *string `json:"first,omitempty" tf:"first,omitempty"`
+
+	// The last IP Address in this subnet.
+	Last *string `json:"last,omitempty" tf:"last,omitempty"`
+
+	// The block size (number of leading bits in the subnet mask).
+	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 type TrafficManagerExternalEndpointSubnetParameters struct {
@@ -124,8 +166,9 @@ type TrafficManagerExternalEndpointStatus struct {
 type TrafficManagerExternalEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TrafficManagerExternalEndpointSpec   `json:"spec"`
-	Status            TrafficManagerExternalEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.target)",message="target is a required parameter"
+	Spec   TrafficManagerExternalEndpointSpec   `json:"spec"`
+	Status TrafficManagerExternalEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

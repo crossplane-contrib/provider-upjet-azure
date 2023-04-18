@@ -15,8 +15,17 @@ import (
 
 type SentinelLogAnalyticsWorkspaceOnboardingObservation struct {
 
+	// Specifies if the Workspace is using Customer managed key. Defaults to false. Changing this forces a new resource to be created.
+	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
+
 	// The ID of the Security Insights Sentinel Onboarding States.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Resource Group where the Security Insights Sentinel Onboarding States should exist. Changing this forces the Log Analytics Workspace off the board and onboard again.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the Workspace Name. Changing this forces the Log Analytics Workspace off the board and onboard again. Changing this forces a new resource to be created.
+	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 }
 
 type SentinelLogAnalyticsWorkspaceOnboardingParameters struct {

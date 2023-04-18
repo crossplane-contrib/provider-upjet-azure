@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: integrationruntimeazures.datafactory.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -176,9 +180,22 @@ spec:
                       Managed Virtual Network? Changing this forces a new resource
                       to be created.
                     type: boolean
-                required:
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -350,14 +367,53 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: IntegrationRuntimeAzureStatus defines the observed state
               of IntegrationRuntimeAzure.
             properties:
               atProvider:
                 properties:
+                  cleanupEnabled:
+                    description: Cluster will not be recycled and it will be used
+                      in next data flow activity run until TTL (time to live) is reached
+                      if this is set as false. Default is true.
+                    type: boolean
+                  computeType:
+                    description: Compute type of the cluster which will execute data
+                      flow job. Valid values are General, ComputeOptimized and MemoryOptimized.
+                      Defaults to General.
+                    type: string
+                  coreCount:
+                    description: Core count of the cluster which will execute data
+                      flow job. Valid values are 8, 16, 32, 48, 80, 144 and 272. Defaults
+                      to 8.
+                    type: number
+                  dataFactoryId:
+                    description: The Data Factory ID in which to associate the Linked
+                      Service with. Changing this forces a new resource.
+                    type: string
+                  description:
+                    description: Integration runtime description.
+                    type: string
                   id:
                     type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Use AutoResolve to create an auto-resolve integration
+                      runtime. Changing this forces a new resource to be created.
+                    type: string
+                  timeToLiveMin:
+                    description: Time to live (in minutes) setting of the cluster
+                      which will execute data flow job. Defaults to 0.
+                    type: number
+                  virtualNetworkEnabled:
+                    description: Is Integration Runtime compute provisioned within
+                      Managed Virtual Network? Changing this forces a new resource
+                      to be created.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

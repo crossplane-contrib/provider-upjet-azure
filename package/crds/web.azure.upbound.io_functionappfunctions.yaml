@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: functionappfunctions.web.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -184,10 +188,22 @@ spec:
                     description: The test data for the function. The test data for
                       the function.
                     type: string
-                required:
-                - configJson
-                - name
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -359,20 +375,63 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: configJson is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configJson)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: FunctionAppFunctionStatus defines the observed state of FunctionAppFunction.
             properties:
               atProvider:
                 properties:
+                  configJson:
+                    description: The config for this Function in JSON format. The
+                      config for this Function in JSON format.
+                    type: string
                   configUrl:
                     description: The URL of the configuration JSON. The URL of the
                       configuration JSON.
+                    type: string
+                  enabled:
+                    description: Should this function be enabled. Defaults to true.
+                      Should this function be enabled. Defaults to `true`.
+                    type: boolean
+                  file:
+                    description: A file block as detailed below. Changing this forces
+                      a new resource to be created.
+                    items:
+                      properties:
+                        content:
+                          description: The content of the file. Changing this forces
+                            a new resource to be created. The content of the file.
+                          type: string
+                        name:
+                          description: The filename of the file to be uploaded. Changing
+                            this forces a new resource to be created. The filename
+                            of the file to be uploaded.
+                          type: string
+                      type: object
+                    type: array
+                  functionAppId:
+                    description: The ID of the Function App in which this function
+                      should reside. Changing this forces a new resource to be created.
+                      The ID of the Function App in which this function should reside.
                     type: string
                   id:
                     description: The ID of the Function App Function
                     type: string
                   invocationUrl:
                     description: The invocation URL. The invocation URL.
+                    type: string
+                  language:
+                    description: The language the Function is written in. Possible
+                      values are CSharp, Custom, Java, Javascript, Python, PowerShell,
+                      and TypeScript. The language the Function is written in.
+                    type: string
+                  name:
+                    description: The name of the function. Changing this forces a
+                      new resource to be created. The name of the function.
                     type: string
                   scriptRootPathUrl:
                     description: The Script root path URL. The Script root path URL.
@@ -383,6 +442,10 @@ spec:
                   secretsFileUrl:
                     description: The URL for the Secrets File. The URL for the Secrets
                       File.
+                    type: string
+                  testData:
+                    description: The test data for the function. The test data for
+                      the function.
                     type: string
                   testDataUrl:
                     description: The Test data URL. The Test data URL.

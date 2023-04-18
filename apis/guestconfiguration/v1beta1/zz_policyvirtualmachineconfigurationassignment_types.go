@@ -14,6 +14,21 @@ import (
 )
 
 type ConfigurationObservation struct {
+
+	// The assignment type for the Guest Configuration Assignment. Possible values are Audit, ApplyAndAutoCorrect, ApplyAndMonitor and DeployAndAutoCorrect.
+	AssignmentType *string `json:"assignmentType,omitempty" tf:"assignment_type,omitempty"`
+
+	// The content hash for the Guest Configuration package.
+	ContentHash *string `json:"contentHash,omitempty" tf:"content_hash,omitempty"`
+
+	// The content URI where the Guest Configuration package is stored.
+	ContentURI *string `json:"contentUri,omitempty" tf:"content_uri,omitempty"`
+
+	// One or more parameter blocks as defined below which define what configuration parameters and values against.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// The version of the Guest Configuration that will be assigned in this Guest Configuration Assignment.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -40,6 +55,12 @@ type ConfigurationParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// The name of the configuration parameter to check.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value to check the configuration parameter with.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ParameterParameters struct {
@@ -55,19 +76,28 @@ type ParameterParameters struct {
 
 type PolicyVirtualMachineConfigurationAssignmentObservation struct {
 
+	// A configuration block as defined below.
+	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
 	// The ID of the Policy Virtual Machine Configuration Assignment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure location where the Policy Virtual Machine Configuration Assignment should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The resource ID of the Policy Virtual Machine which this Guest Configuration Assignment should apply to. Changing this forces a new resource to be created.
+	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
 }
 
 type PolicyVirtualMachineConfigurationAssignmentParameters struct {
 
 	// A configuration block as defined below.
-	// +kubebuilder:validation:Required
-	Configuration []ConfigurationParameters `json:"configuration" tf:"configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// The Azure location where the Policy Virtual Machine Configuration Assignment should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The resource ID of the Policy Virtual Machine which this Guest Configuration Assignment should apply to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.WindowsVirtualMachine
@@ -108,8 +138,10 @@ type PolicyVirtualMachineConfigurationAssignmentStatus struct {
 type PolicyVirtualMachineConfigurationAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PolicyVirtualMachineConfigurationAssignmentSpec   `json:"spec"`
-	Status            PolicyVirtualMachineConfigurationAssignmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configuration)",message="configuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   PolicyVirtualMachineConfigurationAssignmentSpec   `json:"spec"`
+	Status PolicyVirtualMachineConfigurationAssignmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

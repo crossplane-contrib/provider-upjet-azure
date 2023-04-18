@@ -81,12 +81,52 @@ func (in *LogAnalyticsSolutionObservation) DeepCopyInto(out *LogAnalyticsSolutio
 		*out = new(string)
 		**out = **in
 	}
+	if in.Location != nil {
+		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
 	if in.Plan != nil {
 		in, out := &in.Plan, &out.Plan
 		*out = make([]PlanObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SolutionName != nil {
+		in, out := &in.SolutionName, &out.SolutionName
+		*out = new(string)
+		**out = **in
+	}
+	if in.Tags != nil {
+		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				in, out := &val, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.WorkspaceName != nil {
+		in, out := &in.WorkspaceName, &out.WorkspaceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.WorkspaceResourceID != nil {
+		in, out := &in.WorkspaceResourceID, &out.WorkspaceResourceID
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -231,6 +271,21 @@ func (in *PlanObservation) DeepCopyInto(out *PlanObservation) {
 	*out = *in
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.Product != nil {
+		in, out := &in.Product, &out.Product
+		*out = new(string)
+		**out = **in
+	}
+	if in.PromotionCode != nil {
+		in, out := &in.PromotionCode, &out.PromotionCode
+		*out = new(string)
+		**out = **in
+	}
+	if in.Publisher != nil {
+		in, out := &in.Publisher, &out.Publisher
 		*out = new(string)
 		**out = **in
 	}

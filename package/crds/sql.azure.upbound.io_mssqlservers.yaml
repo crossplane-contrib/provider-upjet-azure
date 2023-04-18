@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: mssqlservers.sql.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -253,10 +257,22 @@ spec:
                       2.0 (for v11 server) and 12.0 (for v12 server). Changing this
                       forces a new resource to be created.'
                     type: string
-                required:
-                - location
-                - version
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -428,11 +444,52 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: version is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.version)
           status:
             description: MSSQLServerStatus defines the observed state of MSSQLServer.
             properties:
               atProvider:
                 properties:
+                  administratorLogin:
+                    description: The administrator login name for the new server.
+                      Required unless azuread_authentication_only in the azuread_administrator
+                      block is true. When omitted, Azure will generate a default username
+                      which cannot be subsequently changed. Changing this forces a
+                      new resource to be created.
+                    type: string
+                  azureadAdministrator:
+                    description: An azuread_administrator block as defined below.
+                    items:
+                      properties:
+                        azureadAuthenticationOnly:
+                          description: Specifies whether only AD Users and administrators
+                            (like azuread_administrator.0.login_username) can be used
+                            to login, or also local database users (like administrator_login).
+                            When true, the administrator_login and administrator_login_password
+                            properties can be omitted.
+                          type: boolean
+                        loginUsername:
+                          description: The login username of the Azure AD Administrator
+                            of this SQL Server.
+                          type: string
+                        objectId:
+                          description: The object id of the Azure AD Administrator
+                            of this SQL Server.
+                          type: string
+                        tenantId:
+                          description: The tenant id of the Azure AD Administrator
+                            of this SQL Server.
+                          type: string
+                      type: object
+                    type: array
+                  connectionPolicy:
+                    description: The connection policy the server will use. Possible
+                      values are Default, Proxy, and Redirect. Defaults to Default.
+                    type: string
                   fullyQualifiedDomainName:
                     description: The fully qualified domain name of the Azure SQL
                       Server (e.g. myServerName.database.windows.net)
@@ -444,6 +501,12 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this SQL Server.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The Principal ID for the Service Principal
                             associated with the Identity of this SQL Server.
@@ -452,14 +515,55 @@ spec:
                           description: The Tenant ID for the Service Principal associated
                             with the Identity of this SQL Server.
                           type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this SQL Server. Possible
+                            values are SystemAssigned, UserAssigned.
+                          type: string
                       type: object
                     type: array
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimumTlsVersion:
+                    description: 'The Minimum TLS Version for all SQL Database and
+                      SQL Data Warehouse databases associated with the server. Valid
+                      values are: 1.0, 1.1 , 1.2 and Disabled. Defaults to 1.2.'
+                    type: string
+                  outboundNetworkRestrictionEnabled:
+                    description: Whether outbound network traffic is restricted for
+                      this server. Defaults to false.
+                    type: boolean
+                  primaryUserAssignedIdentityId:
+                    description: Specifies the primary user managed identity id. Required
+                      if type is UserAssigned and should be combined with identity_ids.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Whether public network access is allowed for this
+                      server. Defaults to true.
+                    type: boolean
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Microsoft SQL Server. Changing this forces a new resource
+                      to be created.
+                    type: string
                   restorableDroppedDatabaseIds:
                     description: A list of dropped restorable database IDs on the
                       server.
                     items:
                       type: string
                     type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  version:
+                    description: 'The version for the new server. Valid values are:
+                      2.0 (for v11 server) and 12.0 (for v12 server). Changing this
+                      forces a new resource to be created.'
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

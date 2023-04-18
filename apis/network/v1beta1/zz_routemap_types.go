@@ -14,6 +14,18 @@ import (
 )
 
 type MatchCriterionObservation struct {
+
+	// A list of AS paths.
+	AsPath []*string `json:"asPath,omitempty" tf:"as_path,omitempty"`
+
+	// A list of BGP communities.
+	Community []*string `json:"community,omitempty" tf:"community,omitempty"`
+
+	// The match condition to apply the rule of the Route Map. Possible values are Contains, Equals, NotContains, NotEquals and Unknown.
+	MatchCondition *string `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
+
+	// A list of route prefixes.
+	RoutePrefix []*string `json:"routePrefix,omitempty" tf:"route_prefix,omitempty"`
 }
 
 type MatchCriterionParameters struct {
@@ -36,6 +48,15 @@ type MatchCriterionParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// A list of AS paths.
+	AsPath []*string `json:"asPath,omitempty" tf:"as_path,omitempty"`
+
+	// A list of BGP communities.
+	Community []*string `json:"community,omitempty" tf:"community,omitempty"`
+
+	// A list of route prefixes.
+	RoutePrefix []*string `json:"routePrefix,omitempty" tf:"route_prefix,omitempty"`
 }
 
 type ParameterParameters struct {
@@ -57,6 +78,12 @@ type RouteMapObservation struct {
 
 	// The ID of the Route Map.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A rule block as defined below.
+	Rule []RouteMapRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// The resource ID of the Virtual Hub. Changing this forces a new resource to be created.
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 }
 
 type RouteMapParameters struct {
@@ -81,6 +108,18 @@ type RouteMapParameters struct {
 }
 
 type RouteMapRuleObservation struct {
+
+	// An action block as defined below.
+	Action []RuleActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A match_criterion block as defined below.
+	MatchCriterion []MatchCriterionObservation `json:"matchCriterion,omitempty" tf:"match_criterion,omitempty"`
+
+	// The unique name for the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The next step after the rule is evaluated. Possible values are Continue, Terminate and Unknown. Defaults to Unknown.
+	NextStepIfMatched *string `json:"nextStepIfMatched,omitempty" tf:"next_step_if_matched,omitempty"`
 }
 
 type RouteMapRuleParameters struct {
@@ -103,6 +142,12 @@ type RouteMapRuleParameters struct {
 }
 
 type RuleActionObservation struct {
+
+	// A parameter block as defined below.
+	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RuleActionParameters struct {

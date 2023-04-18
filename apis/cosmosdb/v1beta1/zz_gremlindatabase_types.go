@@ -14,6 +14,9 @@ import (
 )
 
 type GremlinDatabaseAutoscaleSettingsObservation struct {
+
+	// The maximum throughput of the Gremlin database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
 type GremlinDatabaseAutoscaleSettingsParameters struct {
@@ -25,8 +28,20 @@ type GremlinDatabaseAutoscaleSettingsParameters struct {
 
 type GremlinDatabaseObservation struct {
 
+	// The name of the CosmosDB Account to create the Gremlin Database within. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// An autoscale_settings block as defined below.
+	AutoscaleSettings []GremlinDatabaseAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+
 	// The ID of the CosmosDB Gremlin Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the Cosmos DB Gremlin Database is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The throughput of the Gremlin database (RU/s). Must be set in increments of 100. The minimum value is 400.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 type GremlinDatabaseParameters struct {

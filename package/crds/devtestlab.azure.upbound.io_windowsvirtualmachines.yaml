@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: windowsvirtualmachines.devtestlab.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -483,15 +487,22 @@ spec:
                       on this Virtual Machine. Changing this forces a new resource
                       to be created.
                     type: string
-                required:
-                - galleryImageReference
-                - location
-                - name
-                - passwordSecretRef
-                - size
-                - storageType
-                - username
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -663,15 +674,60 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: galleryImageReference is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.galleryImageReference)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: passwordSecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)
+            - message: size is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.size)
+            - message: storageType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageType)
+            - message: username is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.username)
           status:
             description: WindowsVirtualMachineStatus defines the observed state of
               WindowsVirtualMachine.
             properties:
               atProvider:
                 properties:
+                  allowClaim:
+                    description: Can this Virtual Machine be claimed by users? Defaults
+                      to true.
+                    type: boolean
+                  disallowPublicIpAddress:
+                    description: Should the Virtual Machine be created without a Public
+                      IP Address? Changing this forces a new resource to be created.
+                    type: boolean
                   fqdn:
                     description: The FQDN of the Virtual Machine.
                     type: string
+                  galleryImageReference:
+                    description: A gallery_image_reference block as defined below.
+                    items:
+                      properties:
+                        offer:
+                          description: The Offer of the Gallery Image. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        publisher:
+                          description: The Publisher of the Gallery Image. Changing
+                            this forces a new resource to be created.
+                          type: string
+                        sku:
+                          description: The SKU of the Gallery Image. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        version:
+                          description: The Version of the Gallery Image. Changing
+                            this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Virtual Machine.
                     type: string
@@ -680,14 +736,73 @@ spec:
                       Changing this forces a new resource to be created.
                     items:
                       properties:
+                        backendPort:
+                          description: The Backend Port associated with this NAT Rule.
+                            Changing this forces a new resource to be created.
+                          type: number
                         frontendPort:
                           description: The frontend port associated with this Inbound
                             NAT Rule.
                           type: number
+                        protocol:
+                          description: The Protocol used for this NAT Rule. Possible
+                            values are Tcp and Udp.
+                          type: string
                       type: object
                     type: array
+                  labName:
+                    description: Specifies the name of the Dev Test Lab in which the
+                      Virtual Machine should be created. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  labSubnetName:
+                    description: The name of a Subnet within the Dev Test Virtual
+                      Network where this machine should exist. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  labVirtualNetworkId:
+                    description: The ID of the Dev Test Virtual Network where this
+                      Virtual Machine should be created. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      Dev Test Lab exists. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  name:
+                    description: Specifies the name of the Dev Test Machine. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  notes:
+                    description: Any notes about the Virtual Machine.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which the Dev Test
+                      Lab resource exists. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  size:
+                    description: The Machine Size to use for this Virtual Machine,
+                      such as Standard_F2. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  storageType:
+                    description: The type of Storage to use on this Virtual Machine.
+                      Possible values are Standard and Premium.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
                   uniqueIdentifier:
                     description: The unique immutable identifier of the Virtual Machine.
+                    type: string
+                  username:
+                    description: The Username associated with the local administrator
+                      on this Virtual Machine. Changing this forces a new resource
+                      to be created.
                     type: string
                 type: object
               conditions:

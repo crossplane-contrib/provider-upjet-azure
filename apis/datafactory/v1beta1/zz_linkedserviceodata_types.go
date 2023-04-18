@@ -14,6 +14,9 @@ import (
 )
 
 type BasicAuthenticationObservation struct {
+
+	// The username which can be used to authenticate to the OData endpoint.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type BasicAuthenticationParameters struct {
@@ -29,8 +32,32 @@ type BasicAuthenticationParameters struct {
 
 type LinkedServiceODataObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service OData.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service OData.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// A basic_authentication block as defined below.
+	BasicAuthentication []BasicAuthenticationObservation `json:"basicAuthentication,omitempty" tf:"basic_authentication,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service OData.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Factory OData Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service OData.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service OData.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The URL of the OData service endpoint.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type LinkedServiceODataParameters struct {
@@ -74,8 +101,8 @@ type LinkedServiceODataParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The URL of the OData service endpoint.
-	// +kubebuilder:validation:Required
-	URL *string `json:"url" tf:"url,omitempty"`
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 // LinkedServiceODataSpec defines the desired state of LinkedServiceOData
@@ -102,8 +129,9 @@ type LinkedServiceODataStatus struct {
 type LinkedServiceOData struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkedServiceODataSpec   `json:"spec"`
-	Status            LinkedServiceODataStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.url)",message="url is a required parameter"
+	Spec   LinkedServiceODataSpec   `json:"spec"`
+	Status LinkedServiceODataStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

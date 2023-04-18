@@ -22,8 +22,22 @@ type IOTHubDeviceUpdateAccountObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the Azure Region where the IoT Hub Device Update Account should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies whether the public network access is enabled for the IoT Hub Device Update Account. Possible values are true and false. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Specifies the name of the Resource Group where the IoT Hub Device Update Account should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Sku of the IoT Hub Device Update Account. Possible values are Free and Standard. Defaults to Standard.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags which should be assigned to the IoT Hub Device Update Account.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type IOTHubDeviceUpdateAccountParameters struct {
@@ -33,8 +47,8 @@ type IOTHubDeviceUpdateAccountParameters struct {
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the Azure Region where the IoT Hub Device Update Account should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies whether the public network access is enabled for the IoT Hub Device Update Account. Possible values are true and false. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -64,11 +78,17 @@ type IOTHubDeviceUpdateAccountParameters struct {
 
 type IdentityObservation struct {
 
+	// A list of User Assigned Managed Identity IDs to be assigned to this IoT Hub Device Update Account.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this IoT Hub Device Update Account.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this IoT Hub Device Update Account.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this IoT Hub Device Update Account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -106,8 +126,9 @@ type IOTHubDeviceUpdateAccountStatus struct {
 type IOTHubDeviceUpdateAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IOTHubDeviceUpdateAccountSpec   `json:"spec"`
-	Status            IOTHubDeviceUpdateAccountStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   IOTHubDeviceUpdateAccountSpec   `json:"spec"`
+	Status IOTHubDeviceUpdateAccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,11 +15,26 @@ import (
 
 type DatabaseObservation struct {
 
+	// Specifies the name of the Kusto Cluster this database will be added to. Changing this forces a new resource to be created.
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// The time the data that should be kept in cache for fast queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
+	HotCachePeriod *string `json:"hotCachePeriod,omitempty" tf:"hot_cache_period,omitempty"`
+
 	// The Kusto Cluster ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// The size of the database in bytes.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The time the data should be kept before it stops being accessible to queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
+	SoftDeletePeriod *string `json:"softDeletePeriod,omitempty" tf:"soft_delete_period,omitempty"`
 }
 
 type DatabaseParameters struct {
@@ -42,8 +57,8 @@ type DatabaseParameters struct {
 	HotCachePeriod *string `json:"hotCachePeriod,omitempty" tf:"hot_cache_period,omitempty"`
 
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -87,8 +102,9 @@ type DatabaseStatus struct {
 type Database struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DatabaseSpec   `json:"spec"`
-	Status            DatabaseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   DatabaseSpec   `json:"spec"`
+	Status DatabaseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

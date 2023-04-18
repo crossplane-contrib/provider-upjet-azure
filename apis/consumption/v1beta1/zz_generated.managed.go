@@ -17,6 +17,11 @@ func (mg *BudgetManagementGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BudgetManagementGroup.
+func (mg *BudgetManagementGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BudgetManagementGroup.
 func (mg *BudgetManagementGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *BudgetManagementGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BudgetManagementGroup.
 func (mg *BudgetManagementGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BudgetManagementGroup.
+func (mg *BudgetManagementGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BudgetManagementGroup.
@@ -83,6 +93,11 @@ func (mg *BudgetResourceGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BudgetResourceGroup.
+func (mg *BudgetResourceGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BudgetResourceGroup.
 func (mg *BudgetResourceGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *BudgetResourceGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BudgetResourceGroup.
 func (mg *BudgetResourceGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BudgetResourceGroup.
+func (mg *BudgetResourceGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BudgetResourceGroup.
@@ -149,6 +169,11 @@ func (mg *BudgetSubscription) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BudgetSubscription.
+func (mg *BudgetSubscription) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BudgetSubscription.
 func (mg *BudgetSubscription) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *BudgetSubscription) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BudgetSubscription.
 func (mg *BudgetSubscription) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BudgetSubscription.
+func (mg *BudgetSubscription) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BudgetSubscription.

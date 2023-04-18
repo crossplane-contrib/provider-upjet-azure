@@ -14,6 +14,12 @@ import (
 )
 
 type AutomaticUpdateObservation struct {
+
+	// The automation account ID which holds the automatic update runbook and authenticates to Azure resources.
+	AutomationAccountID *string `json:"automationAccountId,omitempty" tf:"automation_account_id,omitempty"`
+
+	// Should the Mobility service installed on Azure virtual machines be automatically updated. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type AutomaticUpdateParameters struct {
@@ -29,8 +35,29 @@ type AutomaticUpdateParameters struct {
 
 type SiteRecoveryProtectionContainerMappingObservation struct {
 
+	// a automatic_update block defined as below.
+	AutomaticUpdate []AutomaticUpdateObservation `json:"automaticUpdate,omitempty" tf:"automatic_update,omitempty"`
+
 	// The ID of the Site Recovery Protection Container Mapping.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of fabric that should contains the protection container to map. Changing this forces a new resource to be created.
+	RecoveryFabricName *string `json:"recoveryFabricName,omitempty" tf:"recovery_fabric_name,omitempty"`
+
+	// Id of the policy to use for this mapping. Changing this forces a new resource to be created.
+	RecoveryReplicationPolicyID *string `json:"recoveryReplicationPolicyId,omitempty" tf:"recovery_replication_policy_id,omitempty"`
+
+	// Name of the source protection container to map. Changing this forces a new resource to be created.
+	RecoverySourceProtectionContainerName *string `json:"recoverySourceProtectionContainerName,omitempty" tf:"recovery_source_protection_container_name,omitempty"`
+
+	// Id of target protection container to map to. Changing this forces a new resource to be created.
+	RecoveryTargetProtectionContainerID *string `json:"recoveryTargetProtectionContainerId,omitempty" tf:"recovery_target_protection_container_id,omitempty"`
+
+	// The name of the vault that should be updated. Changing this forces a new resource to be created.
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// Name of the resource group where the vault that should be updated is located. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type SiteRecoveryProtectionContainerMappingParameters struct {

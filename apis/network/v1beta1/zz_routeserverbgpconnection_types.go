@@ -17,17 +17,26 @@ type RouteServerBGPConnectionObservation struct {
 
 	// The ID of the Route Server Bgp Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The peer autonomous system number for the Route Server Bgp Connection. Changing this forces a new resource to be created.
+	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
+
+	// The peer ip address for the Route Server Bgp Connection. Changing this forces a new resource to be created.
+	PeerIP *string `json:"peerIp,omitempty" tf:"peer_ip,omitempty"`
+
+	// The ID of the Route Server within which this Bgp connection should be created. Changing this forces a new resource to be created.
+	RouteServerID *string `json:"routeServerId,omitempty" tf:"route_server_id,omitempty"`
 }
 
 type RouteServerBGPConnectionParameters struct {
 
 	// The peer autonomous system number for the Route Server Bgp Connection. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	PeerAsn *float64 `json:"peerAsn" tf:"peer_asn,omitempty"`
+	// +kubebuilder:validation:Optional
+	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
 
 	// The peer ip address for the Route Server Bgp Connection. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	PeerIP *string `json:"peerIp" tf:"peer_ip,omitempty"`
+	// +kubebuilder:validation:Optional
+	PeerIP *string `json:"peerIp,omitempty" tf:"peer_ip,omitempty"`
 
 	// The ID of the Route Server within which this Bgp connection should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.RouteServer
@@ -68,8 +77,10 @@ type RouteServerBGPConnectionStatus struct {
 type RouteServerBGPConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteServerBGPConnectionSpec   `json:"spec"`
-	Status            RouteServerBGPConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.peerAsn)",message="peerAsn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.peerIp)",message="peerIp is a required parameter"
+	Spec   RouteServerBGPConnectionSpec   `json:"spec"`
+	Status RouteServerBGPConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

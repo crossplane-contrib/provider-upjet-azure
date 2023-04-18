@@ -15,15 +15,27 @@ import (
 
 type ExpressRouteCircuitConnectionObservation struct {
 
+	// The IPv4 address space from which to allocate customer address for global reach. Changing this forces a new Express Route Circuit Connection to be created.
+	AddressPrefixIPv4 *string `json:"addressPrefixIpv4,omitempty" tf:"address_prefix_ipv4,omitempty"`
+
+	// The IPv6 address space from which to allocate customer addresses for global reach.
+	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
+
 	// The ID of the Express Route Circuit Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
+	PeerPeeringID *string `json:"peerPeeringId,omitempty" tf:"peer_peering_id,omitempty"`
+
+	// The ID of the Express Route Circuit Private Peering that this Express Route Circuit Connection connects with. Changing this forces a new Express Route Circuit Connection to be created.
+	PeeringID *string `json:"peeringId,omitempty" tf:"peering_id,omitempty"`
 }
 
 type ExpressRouteCircuitConnectionParameters struct {
 
 	// The IPv4 address space from which to allocate customer address for global reach. Changing this forces a new Express Route Circuit Connection to be created.
-	// +kubebuilder:validation:Required
-	AddressPrefixIPv4 *string `json:"addressPrefixIpv4" tf:"address_prefix_ipv4,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressPrefixIPv4 *string `json:"addressPrefixIpv4,omitempty" tf:"address_prefix_ipv4,omitempty"`
 
 	// The IPv6 address space from which to allocate customer addresses for global reach.
 	// +kubebuilder:validation:Optional
@@ -86,8 +98,9 @@ type ExpressRouteCircuitConnectionStatus struct {
 type ExpressRouteCircuitConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExpressRouteCircuitConnectionSpec   `json:"spec"`
-	Status            ExpressRouteCircuitConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressPrefixIpv4)",message="addressPrefixIpv4 is a required parameter"
+	Spec   ExpressRouteCircuitConnectionSpec   `json:"spec"`
+	Status ExpressRouteCircuitConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: functionjavascriptudas.streamanalytics.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -176,11 +180,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - input
-                - output
-                - script
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -352,6 +367,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: input is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.input)
+            - message: output is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.output)
+            - message: script is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.script)
           status:
             description: FunctionJavascriptUdaStatus defines the observed state of
               FunctionJavascriptUda.
@@ -360,6 +382,40 @@ spec:
                 properties:
                   id:
                     description: The ID of the Stream Analytics JavaScript UDA Function.
+                    type: string
+                  input:
+                    description: One or more input blocks as defined below.
+                    items:
+                      properties:
+                        configurationParameter:
+                          description: Is this input parameter a configuration parameter?
+                            Defaults to false.
+                          type: boolean
+                        type:
+                          description: The input data type of this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
+                          type: string
+                      type: object
+                    type: array
+                  output:
+                    description: An output block as defined below.
+                    items:
+                      properties:
+                        type:
+                          description: The output data type from this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
+                          type: string
+                      type: object
+                    type: array
+                  script:
+                    description: The JavaScript of this UDA Function.
+                    type: string
+                  streamAnalyticsJobId:
+                    description: The resource ID of the Stream Analytics Job where
+                      this Function should be created. Changing this forces a new
+                      resource to be created.
                     type: string
                 type: object
               conditions:

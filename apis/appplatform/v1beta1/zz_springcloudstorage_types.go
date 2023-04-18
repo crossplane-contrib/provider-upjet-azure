@@ -17,6 +17,15 @@ type SpringCloudStorageObservation struct {
 
 	// The ID of the Spring Cloud Storage.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Spring Cloud Service where the Spring Cloud Storage should exist. Changing this forces a new Spring Cloud Storage to be created.
+	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
+
+	// The access key of the Azure Storage Account.
+	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
+
+	// The account name of the Azure Storage Account.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
 
 type SpringCloudStorageParameters struct {

@@ -20,13 +20,28 @@ type PrivateDNSSRVRecordObservation struct {
 
 	// The Private DNS SRV Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more record blocks as defined below.
+	Record []PrivateDNSSRVRecordRecordObservation `json:"record,omitempty" tf:"record,omitempty"`
+
+	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
+	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 }
 
 type PrivateDNSSRVRecordParameters struct {
 
 	// One or more record blocks as defined below.
-	// +kubebuilder:validation:Required
-	Record []PrivateDNSSRVRecordRecordParameters `json:"record" tf:"record,omitempty"`
+	// +kubebuilder:validation:Optional
+	Record []PrivateDNSSRVRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -42,8 +57,8 @@ type PrivateDNSSRVRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -64,6 +79,18 @@ type PrivateDNSSRVRecordParameters struct {
 }
 
 type PrivateDNSSRVRecordRecordObservation struct {
+
+	// The Port the service is listening on.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The priority of the SRV record.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The FQDN of the service.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// The Weight of the SRV record.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type PrivateDNSSRVRecordRecordParameters struct {
@@ -109,8 +136,10 @@ type PrivateDNSSRVRecordStatus struct {
 type PrivateDNSSRVRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrivateDNSSRVRecordSpec   `json:"spec"`
-	Status            PrivateDNSSRVRecordStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	Spec   PrivateDNSSRVRecordSpec   `json:"spec"`
+	Status PrivateDNSSRVRecordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

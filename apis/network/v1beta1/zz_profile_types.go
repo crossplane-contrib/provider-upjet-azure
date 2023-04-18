@@ -14,6 +14,12 @@ import (
 )
 
 type ContainerNetworkInterfaceIPConfigurationObservation struct {
+
+	// Specifies the name of the Network Profile. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to the subnet associated with the IP Configuration.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type ContainerNetworkInterfaceIPConfigurationParameters struct {
@@ -38,6 +44,12 @@ type ContainerNetworkInterfaceIPConfigurationParameters struct {
 }
 
 type ContainerNetworkInterfaceObservation struct {
+
+	// One or more ip_configuration blocks as documented below.
+	IPConfiguration []ContainerNetworkInterfaceIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// Specifies the name of the IP Configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ContainerNetworkInterfaceParameters struct {
@@ -53,22 +65,34 @@ type ContainerNetworkInterfaceParameters struct {
 
 type ProfileObservation struct {
 
+	// A container_network_interface block as documented below.
+	ContainerNetworkInterface []ContainerNetworkInterfaceObservation `json:"containerNetworkInterface,omitempty" tf:"container_network_interface,omitempty"`
+
 	// A list of Container Network Interface IDs.
 	ContainerNetworkInterfaceIds []*string `json:"containerNetworkInterfaceIds,omitempty" tf:"container_network_interface_ids,omitempty"`
 
 	// The ID of the Network Profile.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ProfileParameters struct {
 
 	// A container_network_interface block as documented below.
-	// +kubebuilder:validation:Required
-	ContainerNetworkInterface []ContainerNetworkInterfaceParameters `json:"containerNetworkInterface" tf:"container_network_interface,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContainerNetworkInterface []ContainerNetworkInterfaceParameters `json:"containerNetworkInterface,omitempty" tf:"container_network_interface,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -112,8 +136,10 @@ type ProfileStatus struct {
 type Profile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProfileSpec   `json:"spec"`
-	Status            ProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.containerNetworkInterface)",message="containerNetworkInterface is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   ProfileSpec   `json:"spec"`
+	Status ProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

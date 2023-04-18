@@ -30,11 +30,25 @@ type InboundNATRulePortMappingParameters struct {
 
 type LoadBalancerBackendAddressPoolAddressObservation struct {
 
+	// The ip config ID of the regional load balancer that's added to the global load balancer's backend address pool.
+	// For global load balancer, user needs to specify the `backend_address_ip_configuration_id` of the added regional load balancers
+	BackendAddressIPConfigurationID *string `json:"backendAddressIpConfigurationId,omitempty" tf:"backend_address_ip_configuration_id,omitempty"`
+
+	// The ID of the Backend Address Pool. Changing this forces a new Backend Address Pool Address to be created.
+	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
+
 	// The ID of the Backend Address Pool Address.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Static IP Address which should be allocated to this Backend Address Pool.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
 	// A list of inbound_nat_rule_port_mapping block as defined below.
 	InboundNATRulePortMapping []InboundNATRulePortMappingObservation `json:"inboundNatRulePortMapping,omitempty" tf:"inbound_nat_rule_port_mapping,omitempty"`
+
+	// The ID of the Virtual Network within which the Backend Address Pool should exist.
+	// For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type LoadBalancerBackendAddressPoolAddressParameters struct {

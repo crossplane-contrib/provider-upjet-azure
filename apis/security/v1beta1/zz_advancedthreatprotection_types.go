@@ -15,19 +15,25 @@ import (
 
 type AdvancedThreatProtectionObservation struct {
 
+	// Should Advanced Threat Protection be enabled on this resource?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the Advanced Threat Protection resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Azure Resource which to enable Advanced Threat Protection on. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type AdvancedThreatProtectionParameters struct {
 
 	// Should Advanced Threat Protection be enabled on this resource?
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The ID of the Azure Resource which to enable Advanced Threat Protection on. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	TargetResourceID *string `json:"targetResourceId" tf:"target_resource_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 // AdvancedThreatProtectionSpec defines the desired state of AdvancedThreatProtection
@@ -54,8 +60,10 @@ type AdvancedThreatProtectionStatus struct {
 type AdvancedThreatProtection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AdvancedThreatProtectionSpec   `json:"spec"`
-	Status            AdvancedThreatProtectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetResourceId)",message="targetResourceId is a required parameter"
+	Spec   AdvancedThreatProtectionSpec   `json:"spec"`
+	Status AdvancedThreatProtectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

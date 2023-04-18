@@ -15,8 +15,17 @@ import (
 
 type SQLDedicatedGatewayObservation struct {
 
+	// The resource ID of the CosmosDB Account. Changing this forces a new resource to be created.
+	CosmosDBAccountID *string `json:"cosmosdbAccountId,omitempty" tf:"cosmosdb_account_id,omitempty"`
+
 	// The ID of the CosmosDB SQL Dedicated Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The instance count for the CosmosDB SQL Dedicated Gateway. Possible value is between 1 and 5.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// The instance size for the CosmosDB SQL Dedicated Gateway. Changing this forces a new resource to be created. Possible values are Cosmos.D4s, Cosmos.D8s and Cosmos.D16s.
+	InstanceSize *string `json:"instanceSize,omitempty" tf:"instance_size,omitempty"`
 }
 
 type SQLDedicatedGatewayParameters struct {
@@ -36,12 +45,12 @@ type SQLDedicatedGatewayParameters struct {
 	CosmosDBAccountIDSelector *v1.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
 
 	// The instance count for the CosmosDB SQL Dedicated Gateway. Possible value is between 1 and 5.
-	// +kubebuilder:validation:Required
-	InstanceCount *float64 `json:"instanceCount" tf:"instance_count,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The instance size for the CosmosDB SQL Dedicated Gateway. Changing this forces a new resource to be created. Possible values are Cosmos.D4s, Cosmos.D8s and Cosmos.D16s.
-	// +kubebuilder:validation:Required
-	InstanceSize *string `json:"instanceSize" tf:"instance_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	InstanceSize *string `json:"instanceSize,omitempty" tf:"instance_size,omitempty"`
 }
 
 // SQLDedicatedGatewaySpec defines the desired state of SQLDedicatedGateway
@@ -68,8 +77,10 @@ type SQLDedicatedGatewayStatus struct {
 type SQLDedicatedGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLDedicatedGatewaySpec   `json:"spec"`
-	Status            SQLDedicatedGatewayStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceCount)",message="instanceCount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceSize)",message="instanceSize is a required parameter"
+	Spec   SQLDedicatedGatewaySpec   `json:"spec"`
+	Status SQLDedicatedGatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

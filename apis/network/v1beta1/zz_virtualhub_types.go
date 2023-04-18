@@ -15,17 +15,38 @@ import (
 
 type VirtualHubObservation_2 struct {
 
+	// The Address Prefix which should be used for this Virtual Hub. Changing this forces a new resource to be created. The address prefix subnet cannot be smaller than a .
+	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
+
 	// The ID of the default Route Table in the Virtual Hub.
 	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
 
 	// The ID of the Virtual Hub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the supported Azure location where the Virtual Hub should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the Resource Group where the Virtual Hub should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// One or more route blocks as defined below.
+	Route []VirtualHubRouteObservation `json:"route,omitempty" tf:"route,omitempty"`
+
+	// The SKU of the Virtual Hub. Possible values are Basic and Standard. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the Virtual Hub.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// The Autonomous System Number of the Virtual Hub BGP router.
 	VirtualRouterAsn *float64 `json:"virtualRouterAsn,omitempty" tf:"virtual_router_asn,omitempty"`
 
 	// The IP addresses of the Virtual Hub BGP router.
 	VirtualRouterIps []*string `json:"virtualRouterIps,omitempty" tf:"virtual_router_ips,omitempty"`
+
+	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
+	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 }
 
 type VirtualHubParameters_2 struct {
@@ -35,8 +56,8 @@ type VirtualHubParameters_2 struct {
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
 
 	// Specifies the supported Azure location where the Virtual Hub should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Virtual Hub should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -79,6 +100,12 @@ type VirtualHubParameters_2 struct {
 }
 
 type VirtualHubRouteObservation struct {
+
+	// A list of Address Prefixes.
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+
+	// The IP Address that Packets should be forwarded to as the Next Hop.
+	NextHopIPAddress *string `json:"nextHopIpAddress,omitempty" tf:"next_hop_ip_address,omitempty"`
 }
 
 type VirtualHubRouteParameters struct {
@@ -116,8 +143,9 @@ type VirtualHubStatus struct {
 type VirtualHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualHubSpec   `json:"spec"`
-	Status            VirtualHubStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   VirtualHubSpec   `json:"spec"`
+	Status VirtualHubStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

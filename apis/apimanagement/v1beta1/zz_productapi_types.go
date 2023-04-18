@@ -15,8 +15,20 @@ import (
 
 type ProductAPIObservation struct {
 
+	// The name of the API Management Service. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// The Name of the API Management API within the API Management Service. Changing this forces a new resource to be created.
+	APIName *string `json:"apiName,omitempty" tf:"api_name,omitempty"`
+
 	// The ID of the API Management Product API.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the API Management Product within the API Management Service. Changing this forces a new resource to be created.
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type ProductAPIParameters struct {

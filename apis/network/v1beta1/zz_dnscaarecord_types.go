@@ -20,13 +20,28 @@ type DNSCAARecordObservation struct {
 
 	// The DNS CAA Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of values that make up the CAA record. Each record block supports fields documented below.
+	Record []RecordObservation `json:"record,omitempty" tf:"record,omitempty"`
+
+	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
+	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 }
 
 type DNSCAARecordParameters struct {
 
 	// A list of values that make up the CAA record. Each record block supports fields documented below.
-	// +kubebuilder:validation:Required
-	Record []RecordParameters `json:"record" tf:"record,omitempty"`
+	// +kubebuilder:validation:Optional
+	Record []RecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -42,8 +57,8 @@ type DNSCAARecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -64,6 +79,15 @@ type DNSCAARecordParameters struct {
 }
 
 type RecordObservation struct {
+
+	// Extensible CAA flags, currently only 1 is implemented to set the issuer critical flag.
+	Flags *float64 `json:"flags,omitempty" tf:"flags,omitempty"`
+
+	// A property tag, options are issue, issuewild and iodef.
+	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+
+	// A property value such as a registrar domain.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RecordParameters struct {
@@ -105,8 +129,10 @@ type DNSCAARecordStatus struct {
 type DNSCAARecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DNSCAARecordSpec   `json:"spec"`
-	Status            DNSCAARecordStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	Spec   DNSCAARecordSpec   `json:"spec"`
+	Status DNSCAARecordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

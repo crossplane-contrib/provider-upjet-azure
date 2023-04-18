@@ -16,20 +16,37 @@ import (
 type LogAnalyticsSolutionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// A plan block as documented below.
-	// +kubebuilder:validation:Required
 	Plan []PlanObservation `json:"plan,omitempty" tf:"plan,omitempty"`
+
+	// The name of the resource group in which the Log Analytics solution is created. Changing this forces a new resource to be created. Note: The solution and its related workspace can only exist in the same resource group.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the name of the solution to be deployed. See here for options.Changing this forces a new resource to be created.
+	SolutionName *string `json:"solutionName,omitempty" tf:"solution_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The full name of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
+	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
+
+	// The full resource ID of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
+	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 }
 
 type LogAnalyticsSolutionParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A plan block as documented below.
-	// +kubebuilder:validation:Required
-	Plan []PlanParameters `json:"plan" tf:"plan,omitempty"`
+	// +kubebuilder:validation:Optional
+	Plan []PlanParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// The name of the resource group in which the Log Analytics solution is created. Changing this forces a new resource to be created. Note: The solution and its related workspace can only exist in the same resource group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -45,8 +62,8 @@ type LogAnalyticsSolutionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the solution to be deployed. See here for options.Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SolutionName *string `json:"solutionName" tf:"solution_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SolutionName *string `json:"solutionName,omitempty" tf:"solution_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -82,6 +99,15 @@ type LogAnalyticsSolutionParameters struct {
 
 type PlanObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The product name of the solution. For example OMSGallery/Containers. Changing this forces a new resource to be created.
+	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+
+	// A promotion code to be used with the solution. Changing this forces a new resource to be created.
+	PromotionCode *string `json:"promotionCode,omitempty" tf:"promotion_code,omitempty"`
+
+	// The publisher of the solution. For example Microsoft. Changing this forces a new resource to be created.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 }
 
 type PlanParameters struct {
@@ -123,8 +149,11 @@ type LogAnalyticsSolutionStatus struct {
 type LogAnalyticsSolution struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LogAnalyticsSolutionSpec   `json:"spec"`
-	Status            LogAnalyticsSolutionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.plan)",message="plan is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.solutionName)",message="solutionName is a required parameter"
+	Spec   LogAnalyticsSolutionSpec   `json:"spec"`
+	Status LogAnalyticsSolutionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: cloudelasticsearches.elastic.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -211,11 +215,22 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Elasticsearch resource.
                     type: object
-                required:
-                - elasticCloudEmailAddress
-                - location
-                - skuName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -387,6 +402,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: elasticCloudEmailAddress is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.elasticCloudEmailAddress)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: skuName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)
           status:
             description: CloudElasticsearchStatus defines the observed state of CloudElasticsearch.
             properties:
@@ -394,6 +416,11 @@ spec:
                 properties:
                   elasticCloudDeploymentId:
                     description: The ID of the Deployment within Elastic Cloud.
+                    type: string
+                  elasticCloudEmailAddress:
+                    description: Specifies the Email Address which should be associated
+                      with this Elasticsearch account. Changing this forces a new
+                      Elasticsearch to be created.
                     type: string
                   elasticCloudSsoDefaultUrl:
                     description: The Default URL used for Single Sign On (SSO) to
@@ -417,6 +444,69 @@ spec:
                     description: The URI used for SSO to the Kibana Dashboard associated
                       with this Elasticsearch.
                     type: string
+                  location:
+                    description: The Azure Region where the Elasticsearch resource
+                      should exist. Changing this forces a new Elasticsearch to be
+                      created.
+                    type: string
+                  logs:
+                    description: A logs block as defined below.
+                    items:
+                      properties:
+                        filteringTag:
+                          description: A list of filtering_tag blocks as defined above.
+                          items:
+                            properties:
+                              action:
+                                description: Specifies the type of action which should
+                                  be taken when the Tag matches the name and value.
+                                  Possible values are Exclude and Include.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  Elasticsearch resource. Changing this forces a new
+                                  Elasticsearch to be created.
+                                type: string
+                              value:
+                                description: Specifies the value of the Tag which
+                                  should be filtered.
+                                type: string
+                            type: object
+                          type: array
+                        sendActivityLogs:
+                          description: Specifies if the Azure Activity Logs should
+                            be sent to the Elasticsearch cluster. Defaults to false.
+                          type: boolean
+                        sendAzureadLogs:
+                          description: Specifies if the AzureAD Logs should be sent
+                            to the Elasticsearch cluster. Defaults to false.
+                          type: boolean
+                        sendSubscriptionLogs:
+                          description: Specifies if the Azure Subscription Logs should
+                            be sent to the Elasticsearch cluster. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  monitoringEnabled:
+                    description: Specifies if the Elasticsearch should have monitoring
+                      configured? Defaults to true. Changing this forces a new Elasticsearch
+                      to be created.
+                    type: boolean
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Elasticsearch
+                      resource should exist. Changing this forces a new Elasticsearch
+                      to be created.
+                    type: string
+                  skuName:
+                    description: Specifies the name of the SKU for this Elasticsearch.
+                      Changing this forces a new Elasticsearch to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Elasticsearch resource.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

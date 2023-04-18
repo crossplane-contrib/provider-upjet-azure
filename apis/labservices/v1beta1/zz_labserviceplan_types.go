@@ -14,6 +14,18 @@ import (
 )
 
 type DefaultAutoShutdownObservation struct {
+
+	// The amount of time a VM will stay running after a user disconnects if this behavior is enabled. This value must be formatted as an ISO 8601 string.
+	DisconnectDelay *string `json:"disconnectDelay,omitempty" tf:"disconnect_delay,omitempty"`
+
+	// The amount of time a VM will idle before it is shutdown if this behavior is enabled. This value must be formatted as an ISO 8601 string.
+	IdleDelay *string `json:"idleDelay,omitempty" tf:"idle_delay,omitempty"`
+
+	// The amount of time a VM will stay running before it is shutdown if no connection is made and this behavior is enabled. This value must be formatted as an ISO 8601 string.
+	NoConnectDelay *string `json:"noConnectDelay,omitempty" tf:"no_connect_delay,omitempty"`
+
+	// Will a VM get shutdown when it has idled for a period of time? Possible values are LowUsage and UserAbsence.
+	ShutdownOnIdle *string `json:"shutdownOnIdle,omitempty" tf:"shutdown_on_idle,omitempty"`
 }
 
 type DefaultAutoShutdownParameters struct {
@@ -36,6 +48,18 @@ type DefaultAutoShutdownParameters struct {
 }
 
 type DefaultConnectionObservation struct {
+
+	// The enabled access level for Client Access over RDP. Possible values are Private and Public.
+	ClientRdpAccess *string `json:"clientRdpAccess,omitempty" tf:"client_rdp_access,omitempty"`
+
+	// The enabled access level for Client Access over SSH. Possible values are Private and Public.
+	ClientSSHAccess *string `json:"clientSshAccess,omitempty" tf:"client_ssh_access,omitempty"`
+
+	// The enabled access level for Web Access over RDP. Possible values are Private and Public.
+	WebRdpAccess *string `json:"webRdpAccess,omitempty" tf:"web_rdp_access,omitempty"`
+
+	// The enabled access level for Web Access over SSH. Possible values are Private and Public.
+	WebSSHAccess *string `json:"webSshAccess,omitempty" tf:"web_ssh_access,omitempty"`
 }
 
 type DefaultConnectionParameters struct {
@@ -59,15 +83,42 @@ type DefaultConnectionParameters struct {
 
 type LabServicePlanObservation struct {
 
+	// The allowed regions for the lab creator to use when creating labs using this Lab Service Plan. The allowed region's count must be between 1 and 28.
+	AllowedRegions []*string `json:"allowedRegions,omitempty" tf:"allowed_regions,omitempty"`
+
+	// A default_auto_shutdown block as defined below.
+	DefaultAutoShutdown []DefaultAutoShutdownObservation `json:"defaultAutoShutdown,omitempty" tf:"default_auto_shutdown,omitempty"`
+
+	// A default_connection block as defined below.
+	DefaultConnection []DefaultConnectionObservation `json:"defaultConnection,omitempty" tf:"default_connection,omitempty"`
+
+	// The resource ID of the Subnet for the Lab Service Plan network profile.
+	DefaultNetworkSubnetID *string `json:"defaultNetworkSubnetId,omitempty" tf:"default_network_subnet_id,omitempty"`
+
 	// The ID of the Lab Service Plan.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Lab Service Plan should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Lab Service Plan should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The resource ID of the Shared Image Gallery attached to this Lab Service Plan. When saving a lab template virtual machine image it will be persisted in this gallery. The shared images from the gallery can be made available to use when creating new labs.
+	SharedGalleryID *string `json:"sharedGalleryId,omitempty" tf:"shared_gallery_id,omitempty"`
+
+	// A support block as defined below.
+	Support []SupportObservation `json:"support,omitempty" tf:"support,omitempty"`
+
+	// A mapping of tags which should be assigned to the Lab Service Plan.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LabServicePlanParameters struct {
 
 	// The allowed regions for the lab creator to use when creating labs using this Lab Service Plan. The allowed region's count must be between 1 and 28.
-	// +kubebuilder:validation:Required
-	AllowedRegions []*string `json:"allowedRegions" tf:"allowed_regions,omitempty"`
+	// +kubebuilder:validation:Optional
+	AllowedRegions []*string `json:"allowedRegions,omitempty" tf:"allowed_regions,omitempty"`
 
 	// A default_auto_shutdown block as defined below.
 	// +kubebuilder:validation:Optional
@@ -92,8 +143,8 @@ type LabServicePlanParameters struct {
 	DefaultNetworkSubnetIDSelector *v1.Selector `json:"defaultNetworkSubnetIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Lab Service Plan should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Lab Service Plan should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -122,6 +173,18 @@ type LabServicePlanParameters struct {
 }
 
 type SupportObservation struct {
+
+	// The email address for the support contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The instructions for users of the Lab Service Plan.
+	Instructions *string `json:"instructions,omitempty" tf:"instructions,omitempty"`
+
+	// The phone number for the support contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+
+	// The web address for users of the Lab Service Plan.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type SupportParameters struct {
@@ -167,8 +230,10 @@ type LabServicePlanStatus struct {
 type LabServicePlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LabServicePlanSpec   `json:"spec"`
-	Status            LabServicePlanStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.allowedRegions)",message="allowedRegions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   LabServicePlanSpec   `json:"spec"`
+	Status LabServicePlanStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

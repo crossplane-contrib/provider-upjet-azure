@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: attacheddatabaseconfigurations.kusto.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -433,10 +437,22 @@ spec:
                           type: array
                       type: object
                     type: array
-                required:
-                - location
-                - name
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -608,6 +624,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: AttachedDatabaseConfigurationStatus defines the observed
               state of AttachedDatabaseConfiguration.
@@ -620,9 +641,83 @@ spec:
                     items:
                       type: string
                     type: array
+                  clusterName:
+                    description: Specifies the name of the Kusto Cluster for which
+                      the configuration will be created. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  clusterResourceId:
+                    description: The resource id of the cluster where the databases
+                      you would like to attach reside. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  databaseName:
+                    description: The name of the database which you would like to
+                      attach, use * if you want to follow all current and future databases.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  defaultPrincipalModificationKind:
+                    description: 'The default principals modification kind. Valid
+                      values are: None (default), Replace and Union.'
+                    type: string
                   id:
                     description: The Kusto Attached Database Configuration ID.
                     type: string
+                  location:
+                    description: Specifies the location of the Kusto Cluster for which
+                      the configuration will be created. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  name:
+                    description: The name of the Kusto Attached Database Configuration
+                      to create. Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: Specifies the resource group of the Kusto Cluster
+                      for which the configuration will be created. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  sharing:
+                    description: A sharing block as defined below.
+                    items:
+                      properties:
+                        externalTablesToExclude:
+                          description: List of external tables exclude from the follower
+                            database.
+                          items:
+                            type: string
+                          type: array
+                        externalTablesToInclude:
+                          description: List of external tables to include in the follower
+                            database.
+                          items:
+                            type: string
+                          type: array
+                        materializedViewsToExclude:
+                          description: List of materialized views exclude from the
+                            follower database.
+                          items:
+                            type: string
+                          type: array
+                        materializedViewsToInclude:
+                          description: List of materialized views to include in the
+                            follower database.
+                          items:
+                            type: string
+                          type: array
+                        tablesToExclude:
+                          description: List of tables to exclude from the follower
+                            database.
+                          items:
+                            type: string
+                          type: array
+                        tablesToInclude:
+                          description: List of tables to include in the follower database.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

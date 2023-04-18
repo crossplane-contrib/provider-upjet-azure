@@ -17,6 +17,11 @@ func (mg *IOTHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHub.
+func (mg *IOTHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHub.
 func (mg *IOTHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *IOTHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHub.
 func (mg *IOTHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHub.
+func (mg *IOTHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHub.
@@ -83,6 +93,11 @@ func (mg *IOTHubCertificate) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubCertificate.
+func (mg *IOTHubCertificate) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubCertificate.
 func (mg *IOTHubCertificate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *IOTHubCertificate) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubCertificate.
 func (mg *IOTHubCertificate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubCertificate.
+func (mg *IOTHubCertificate) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubCertificate.
@@ -149,6 +169,11 @@ func (mg *IOTHubConsumerGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubConsumerGroup.
+func (mg *IOTHubConsumerGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubConsumerGroup.
 func (mg *IOTHubConsumerGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *IOTHubConsumerGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubConsumerGroup.
 func (mg *IOTHubConsumerGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubConsumerGroup.
+func (mg *IOTHubConsumerGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubConsumerGroup.
@@ -215,6 +245,11 @@ func (mg *IOTHubDPS) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubDPS.
+func (mg *IOTHubDPS) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubDPS.
 func (mg *IOTHubDPS) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *IOTHubDPS) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubDPS.
 func (mg *IOTHubDPS) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubDPS.
+func (mg *IOTHubDPS) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubDPS.
@@ -281,6 +321,11 @@ func (mg *IOTHubDPSCertificate) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubDPSCertificate.
+func (mg *IOTHubDPSCertificate) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubDPSCertificate.
 func (mg *IOTHubDPSCertificate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *IOTHubDPSCertificate) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubDPSCertificate.
 func (mg *IOTHubDPSCertificate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubDPSCertificate.
+func (mg *IOTHubDPSCertificate) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubDPSCertificate.
@@ -347,6 +397,11 @@ func (mg *IOTHubDPSSharedAccessPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubDPSSharedAccessPolicy.
+func (mg *IOTHubDPSSharedAccessPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubDPSSharedAccessPolicy.
 func (mg *IOTHubDPSSharedAccessPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *IOTHubDPSSharedAccessPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubDPSSharedAccessPolicy.
 func (mg *IOTHubDPSSharedAccessPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubDPSSharedAccessPolicy.
+func (mg *IOTHubDPSSharedAccessPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubDPSSharedAccessPolicy.
@@ -413,6 +473,11 @@ func (mg *IOTHubEndpointEventHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubEndpointEventHub.
+func (mg *IOTHubEndpointEventHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubEndpointEventHub.
 func (mg *IOTHubEndpointEventHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *IOTHubEndpointEventHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubEndpointEventHub.
 func (mg *IOTHubEndpointEventHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubEndpointEventHub.
+func (mg *IOTHubEndpointEventHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubEndpointEventHub.
@@ -479,6 +549,11 @@ func (mg *IOTHubEndpointServiceBusQueue) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubEndpointServiceBusQueue.
+func (mg *IOTHubEndpointServiceBusQueue) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubEndpointServiceBusQueue.
 func (mg *IOTHubEndpointServiceBusQueue) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *IOTHubEndpointServiceBusQueue) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubEndpointServiceBusQueue.
 func (mg *IOTHubEndpointServiceBusQueue) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubEndpointServiceBusQueue.
+func (mg *IOTHubEndpointServiceBusQueue) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubEndpointServiceBusQueue.
@@ -545,6 +625,11 @@ func (mg *IOTHubEndpointServiceBusTopic) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubEndpointServiceBusTopic.
+func (mg *IOTHubEndpointServiceBusTopic) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubEndpointServiceBusTopic.
 func (mg *IOTHubEndpointServiceBusTopic) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *IOTHubEndpointServiceBusTopic) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubEndpointServiceBusTopic.
 func (mg *IOTHubEndpointServiceBusTopic) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubEndpointServiceBusTopic.
+func (mg *IOTHubEndpointServiceBusTopic) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubEndpointServiceBusTopic.
@@ -611,6 +701,11 @@ func (mg *IOTHubEndpointStorageContainer) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubEndpointStorageContainer.
+func (mg *IOTHubEndpointStorageContainer) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubEndpointStorageContainer.
 func (mg *IOTHubEndpointStorageContainer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -642,6 +737,11 @@ func (mg *IOTHubEndpointStorageContainer) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubEndpointStorageContainer.
 func (mg *IOTHubEndpointStorageContainer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubEndpointStorageContainer.
+func (mg *IOTHubEndpointStorageContainer) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubEndpointStorageContainer.
@@ -677,6 +777,11 @@ func (mg *IOTHubEnrichment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubEnrichment.
+func (mg *IOTHubEnrichment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubEnrichment.
 func (mg *IOTHubEnrichment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -708,6 +813,11 @@ func (mg *IOTHubEnrichment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubEnrichment.
 func (mg *IOTHubEnrichment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubEnrichment.
+func (mg *IOTHubEnrichment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubEnrichment.
@@ -743,6 +853,11 @@ func (mg *IOTHubFallbackRoute) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubFallbackRoute.
+func (mg *IOTHubFallbackRoute) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubFallbackRoute.
 func (mg *IOTHubFallbackRoute) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -774,6 +889,11 @@ func (mg *IOTHubFallbackRoute) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubFallbackRoute.
 func (mg *IOTHubFallbackRoute) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubFallbackRoute.
+func (mg *IOTHubFallbackRoute) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubFallbackRoute.
@@ -809,6 +929,11 @@ func (mg *IOTHubRoute) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubRoute.
+func (mg *IOTHubRoute) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubRoute.
 func (mg *IOTHubRoute) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -840,6 +965,11 @@ func (mg *IOTHubRoute) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubRoute.
 func (mg *IOTHubRoute) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubRoute.
+func (mg *IOTHubRoute) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubRoute.
@@ -875,6 +1005,11 @@ func (mg *IOTHubSharedAccessPolicy) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this IOTHubSharedAccessPolicy.
+func (mg *IOTHubSharedAccessPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this IOTHubSharedAccessPolicy.
 func (mg *IOTHubSharedAccessPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -906,6 +1041,11 @@ func (mg *IOTHubSharedAccessPolicy) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this IOTHubSharedAccessPolicy.
 func (mg *IOTHubSharedAccessPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this IOTHubSharedAccessPolicy.
+func (mg *IOTHubSharedAccessPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this IOTHubSharedAccessPolicy.

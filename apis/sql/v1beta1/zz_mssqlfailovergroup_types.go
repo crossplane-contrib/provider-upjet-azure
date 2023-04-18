@@ -15,12 +15,26 @@ import (
 
 type MSSQLFailoverGroupObservation struct {
 
+	// A set of database names to include in the failover group.
+	Databases []*string `json:"databases,omitempty" tf:"databases,omitempty"`
+
 	// The ID of the Failover Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A partner_server block as defined below.
-	// +kubebuilder:validation:Required
 	PartnerServer []PartnerServerObservation `json:"partnerServer,omitempty" tf:"partner_server,omitempty"`
+
+	// A read_write_endpoint_failover_policy block as defined below.
+	ReadWriteEndpointFailoverPolicy []ReadWriteEndpointFailoverPolicyObservation `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
+
+	// Whether failover is enabled for the readonly endpoint. Defaults to false.
+	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
+
+	// The ID of the primary SQL Server on which to create the failover group. Changing this forces a new resource to be created.
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MSSQLFailoverGroupParameters struct {
@@ -40,12 +54,12 @@ type MSSQLFailoverGroupParameters struct {
 	DatabasesSelector *v1.Selector `json:"databasesSelector,omitempty" tf:"-"`
 
 	// A partner_server block as defined below.
-	// +kubebuilder:validation:Required
-	PartnerServer []PartnerServerParameters `json:"partnerServer" tf:"partner_server,omitempty"`
+	// +kubebuilder:validation:Optional
+	PartnerServer []PartnerServerParameters `json:"partnerServer,omitempty" tf:"partner_server,omitempty"`
 
 	// A read_write_endpoint_failover_policy block as defined below.
-	// +kubebuilder:validation:Required
-	ReadWriteEndpointFailoverPolicy []ReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy" tf:"read_write_endpoint_failover_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReadWriteEndpointFailoverPolicy []ReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
 
 	// Whether failover is enabled for the readonly endpoint. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -72,6 +86,9 @@ type MSSQLFailoverGroupParameters struct {
 
 type PartnerServerObservation struct {
 
+	// The ID of a partner SQL server to include in the failover group.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
 	// The location of the partner server.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -97,6 +114,12 @@ type PartnerServerParameters struct {
 }
 
 type ReadWriteEndpointFailoverPolicyObservation struct {
+
+	// The grace period in minutes, before failover with data loss is attempted for the read-write endpoint. Required when mode is Automatic.
+	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
+
+	// The failover policy of the read-write endpoint for the failover group. Possible values are Automatic or Manual.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type ReadWriteEndpointFailoverPolicyParameters struct {
@@ -134,8 +157,10 @@ type MSSQLFailoverGroupStatus struct {
 type MSSQLFailoverGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MSSQLFailoverGroupSpec   `json:"spec"`
-	Status            MSSQLFailoverGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.partnerServer)",message="partnerServer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.readWriteEndpointFailoverPolicy)",message="readWriteEndpointFailoverPolicy is a required parameter"
+	Spec   MSSQLFailoverGroupSpec   `json:"spec"`
+	Status MSSQLFailoverGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

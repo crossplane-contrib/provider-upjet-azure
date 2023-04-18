@@ -15,8 +15,20 @@ import (
 
 type SpringCloudCertificateObservation struct {
 
+	// The content of uploaded certificate. Changing this forces a new resource to be created.
+	CertificateContent *string `json:"certificateContent,omitempty" tf:"certificate_content,omitempty"`
+
 	// The ID of the Spring Cloud Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
+	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
+
+	// Specifies the name of the resource group in which to create the Spring Cloud Certificate. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the name of the Spring Cloud Service resource. Changing this forces a new resource to be created.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
 	// The thumbprint of the Spring Cloud certificate.
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`

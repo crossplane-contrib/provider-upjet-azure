@@ -15,8 +15,26 @@ import (
 
 type HybridConnectionAuthorizationRuleObservation struct {
 
+	// Name of the Azure Relay Hybrid Connection for which this Azure Relay Hybrid Connection Authorization Rule will be created. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
+	HybridConnectionName *string `json:"hybridConnectionName,omitempty" tf:"hybrid_connection_name,omitempty"`
+
 	// The ID of the Azure Relay Hybrid Connection Authorization Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Grants listen access to this Authorization Rule. Defaults to false.
+	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
+
+	// Grants manage access to this Authorization Rule. When this property is true - both listen and send must be set to true too. Defaults to false.
+	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
+
+	// Name of the Azure Relay Namespace for which this Azure Relay Hybrid Connection Authorization Rule will be created. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The name of the Resource Group where the Azure Relay Hybrid Connection Authorization Rule should exist. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Grants send access to this Authorization Rule. Defaults to false.
+	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 
 type HybridConnectionAuthorizationRuleParameters struct {

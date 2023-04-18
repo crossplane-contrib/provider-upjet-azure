@@ -14,6 +14,18 @@ import (
 )
 
 type AllowRuleObservation struct {
+
+	// Specifies which IP is not allowed to be connected to in current device group for inbound connection.
+	ConnectionFromIpsNotAllowed []*string `json:"connectionFromIpsNotAllowed,omitempty" tf:"connection_from_ips_not_allowed,omitempty"`
+
+	// Specifies which IP is not allowed to be connected to in current device group for outbound connection.
+	ConnectionToIpsNotAllowed []*string `json:"connectionToIpsNotAllowed,omitempty" tf:"connection_to_ips_not_allowed,omitempty"`
+
+	// Specifies which local user is not allowed to login in current device group.
+	LocalUsersNotAllowed []*string `json:"localUsersNotAllowed,omitempty" tf:"local_users_not_allowed,omitempty"`
+
+	// Specifies which process is not allowed to be executed in current device group.
+	ProcessesNotAllowed []*string `json:"processesNotAllowed,omitempty" tf:"processes_not_allowed,omitempty"`
 }
 
 type AllowRuleParameters struct {
@@ -37,8 +49,20 @@ type AllowRuleParameters struct {
 
 type IOTSecurityDeviceGroupObservation struct {
 
+	// an allow_rule blocks as defined below.
+	AllowRule []AllowRuleObservation `json:"allowRule,omitempty" tf:"allow_rule,omitempty"`
+
 	// The ID of the Iot Security Device Group resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the IoT Hub which to link the Security Device Group to. Changing this forces a new resource to be created.
+	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
+
+	// Specifies the name of the Device Security Group. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more range_rule blocks as defined below.
+	RangeRule []RangeRuleObservation `json:"rangeRule,omitempty" tf:"range_rule,omitempty"`
 }
 
 type IOTSecurityDeviceGroupParameters struct {
@@ -62,8 +86,8 @@ type IOTSecurityDeviceGroupParameters struct {
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Device Security Group. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more range_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -71,6 +95,18 @@ type IOTSecurityDeviceGroupParameters struct {
 }
 
 type RangeRuleObservation struct {
+
+	// Specifies the time range. represented in ISO 8601 duration format.
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// The maximum threshold in the given time window.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// The minimum threshold in the given time window.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+
+	// The type of supported rule type. Possible Values are ActiveConnectionsNotInAllowedRange, AmqpC2DMessagesNotInAllowedRange, MqttC2DMessagesNotInAllowedRange, HttpC2DMessagesNotInAllowedRange, AmqpC2DRejectedMessagesNotInAllowedRange, MqttC2DRejectedMessagesNotInAllowedRange, HttpC2DRejectedMessagesNotInAllowedRange, AmqpD2CMessagesNotInAllowedRange, MqttD2CMessagesNotInAllowedRange, HttpD2CMessagesNotInAllowedRange, DirectMethodInvokesNotInAllowedRange, FailedLocalLoginsNotInAllowedRange, FileUploadsNotInAllowedRange, QueuePurgesNotInAllowedRange, TwinUpdatesNotInAllowedRange and UnauthorizedOperationsNotInAllowedRange.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RangeRuleParameters struct {
@@ -116,8 +152,9 @@ type IOTSecurityDeviceGroupStatus struct {
 type IOTSecurityDeviceGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IOTSecurityDeviceGroupSpec   `json:"spec"`
-	Status            IOTSecurityDeviceGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   IOTSecurityDeviceGroupSpec   `json:"spec"`
+	Status IOTSecurityDeviceGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

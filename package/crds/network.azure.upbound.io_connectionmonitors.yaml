@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: connectionmonitors.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -374,12 +378,22 @@ spec:
                       - testConfigurationNames
                       type: object
                     type: array
-                required:
-                - endpoint
-                - location
-                - testConfiguration
-                - testGroup
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -551,14 +565,245 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: endpoint is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpoint)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: testConfiguration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.testConfiguration)
+            - message: testGroup is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.testGroup)
           status:
             description: ConnectionMonitorStatus defines the observed state of ConnectionMonitor.
             properties:
               atProvider:
                 properties:
+                  endpoint:
+                    description: A endpoint block as defined below.
+                    items:
+                      properties:
+                        address:
+                          description: The IP address or domain name of the Network
+                            Connection Monitor endpoint.
+                          type: string
+                        coverageLevel:
+                          description: The test coverage for the Network Connection
+                            Monitor endpoint. Possible values are AboveAverage, Average,
+                            BelowAverage, Default, Full and Low.
+                          type: string
+                        excludedIpAddresses:
+                          description: A list of IPv4/IPv6 subnet masks or IPv4/IPv6
+                            IP addresses to be excluded to the Network Connection
+                            Monitor endpoint.
+                          items:
+                            type: string
+                          type: array
+                        filter:
+                          description: A filter block as defined below.
+                          items:
+                            properties:
+                              item:
+                                description: A item block as defined below.
+                                items:
+                                  properties:
+                                    address:
+                                      description: The address of the filter item.
+                                      type: string
+                                    type:
+                                      description: The type of items included in the
+                                        filter. Possible values are AgentAddress.
+                                        Defaults to AgentAddress.
+                                      type: string
+                                  type: object
+                                type: array
+                              type:
+                                description: The type of items included in the filter.
+                                  Possible values are AgentAddress. Defaults to AgentAddress.
+                                type: string
+                            type: object
+                          type: array
+                        includedIpAddresses:
+                          description: A list of IPv4/IPv6 subnet masks or IPv4/IPv6
+                            IP addresses to be included to the Network Connection
+                            Monitor endpoint.
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          description: The name of the endpoint for the Network Connection
+                            Monitor .
+                          type: string
+                        targetResourceId:
+                          description: The resource ID which is used as the endpoint
+                            by the Network Connection Monitor.
+                          type: string
+                        targetResourceType:
+                          description: The endpoint type of the Network Connection
+                            Monitor. Possible values are AzureSubnet, AzureVM, AzureVNet,
+                            ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Network Connection Monitor.
                     type: string
+                  location:
+                    description: The Azure Region where the Network Connection Monitor
+                      should exist. Changing this forces a new resource to be created.
+                    type: string
+                  networkWatcherId:
+                    description: The ID of the Network Watcher. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  notes:
+                    description: The description of the Network Connection Monitor.
+                    type: string
+                  outputWorkspaceResourceIds:
+                    description: A list of IDs of the Log Analytics Workspace which
+                      will accept the output from the Network Connection Monitor.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Network Connection Monitor.
+                    type: object
+                  testConfiguration:
+                    description: A test_configuration block as defined below.
+                    items:
+                      properties:
+                        httpConfiguration:
+                          description: A http_configuration block as defined below.
+                          items:
+                            properties:
+                              method:
+                                description: The HTTP method for the HTTP request.
+                                  Possible values are Get and Post. Defaults to Get.
+                                type: string
+                              path:
+                                description: The path component of the URI. It only
+                                  accepts the absolute path.
+                                type: string
+                              port:
+                                description: The port for the TCP connection.
+                                type: number
+                              preferHttps:
+                                description: Should HTTPS be preferred over HTTP in
+                                  cases where the choice is not explicit? Defaults
+                                  to false.
+                                type: boolean
+                              requestHeader:
+                                description: A request_header block as defined below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the test group for
+                                        the Network Connection Monitor.
+                                      type: string
+                                    value:
+                                      description: The value of the HTTP header.
+                                      type: string
+                                  type: object
+                                type: array
+                              validStatusCodeRanges:
+                                description: The HTTP status codes to consider successful.
+                                  For instance, 2xx, 301-304 and 418.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        icmpConfiguration:
+                          description: A icmp_configuration block as defined below.
+                          items:
+                            properties:
+                              traceRouteEnabled:
+                                description: Should path evaluation with trace route
+                                  be enabled? Defaults to true.
+                                type: boolean
+                            type: object
+                          type: array
+                        name:
+                          description: The name of test configuration for the Network
+                            Connection Monitor.
+                          type: string
+                        preferredIpVersion:
+                          description: The preferred IP version which is used in the
+                            test evaluation. Possible values are IPv4 and IPv6.
+                          type: string
+                        protocol:
+                          description: The protocol used to evaluate tests. Possible
+                            values are Tcp, Http and Icmp.
+                          type: string
+                        successThreshold:
+                          description: A success_threshold block as defined below.
+                          items:
+                            properties:
+                              checksFailedPercent:
+                                description: The maximum percentage of failed checks
+                                  permitted for a test to be successful.
+                                type: number
+                              roundTripTimeMs:
+                                description: The maximum round-trip time in milliseconds
+                                  permitted for a test to be successful.
+                                type: number
+                            type: object
+                          type: array
+                        tcpConfiguration:
+                          description: A tcp_configuration block as defined below.
+                          items:
+                            properties:
+                              destinationPortBehavior:
+                                description: The destination port behavior for the
+                                  TCP connection. Possible values are None and ListenIfAvailable.
+                                type: string
+                              port:
+                                description: The port for the TCP connection.
+                                type: number
+                              traceRouteEnabled:
+                                description: Should path evaluation with trace route
+                                  be enabled? Defaults to true.
+                                type: boolean
+                            type: object
+                          type: array
+                        testFrequencyInSeconds:
+                          description: The time interval in seconds at which the test
+                            evaluation will happen. Defaults to 60.
+                          type: number
+                      type: object
+                    type: array
+                  testGroup:
+                    description: A test_group block as defined below.
+                    items:
+                      properties:
+                        destinationEndpoints:
+                          description: A list of destination endpoint names.
+                          items:
+                            type: string
+                          type: array
+                        enabled:
+                          description: Should the test group be enabled? Defaults
+                            to true.
+                          type: boolean
+                        name:
+                          description: The name of the test group for the Network
+                            Connection Monitor.
+                          type: string
+                        sourceEndpoints:
+                          description: A list of source endpoint names.
+                          items:
+                            type: string
+                          type: array
+                        testConfigurationNames:
+                          description: A list of test configuration names.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

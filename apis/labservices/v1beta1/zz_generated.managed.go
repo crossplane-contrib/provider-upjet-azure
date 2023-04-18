@@ -17,6 +17,11 @@ func (mg *LabServiceLab) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LabServiceLab.
+func (mg *LabServiceLab) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LabServiceLab.
 func (mg *LabServiceLab) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *LabServiceLab) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LabServiceLab.
 func (mg *LabServiceLab) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LabServiceLab.
+func (mg *LabServiceLab) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LabServiceLab.
@@ -83,6 +93,11 @@ func (mg *LabServicePlan) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LabServicePlan.
+func (mg *LabServicePlan) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LabServicePlan.
 func (mg *LabServicePlan) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *LabServicePlan) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LabServicePlan.
 func (mg *LabServicePlan) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LabServicePlan.
+func (mg *LabServicePlan) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LabServicePlan.

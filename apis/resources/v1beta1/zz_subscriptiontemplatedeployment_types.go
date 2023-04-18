@@ -15,11 +15,29 @@ import (
 
 type SubscriptionTemplateDeploymentObservation struct {
 
+	// The Debug Level which should be used for this Subscription Template Deployment. Possible values are none, requestContent, responseContent and requestContent, responseContent.
+	DebugLevel *string `json:"debugLevel,omitempty" tf:"debug_level,omitempty"`
+
 	// The ID of the Subscription Template Deployment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Azure Region where the Subscription Template Deployment should exist. Changing this forces a new Subscription Template Deployment to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// The JSON Content of the Outputs of the ARM Template Deployment.
 	OutputContent *string `json:"outputContent,omitempty" tf:"output_content,omitempty"`
+
+	// The contents of the ARM Template parameters file - containing a JSON list of parameters.
+	ParametersContent *string `json:"parametersContent,omitempty" tf:"parameters_content,omitempty"`
+
+	// A mapping of tags which should be assigned to the Subscription Template Deployment.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The contents of the ARM Template which should be deployed into this Subscription.
+	TemplateContent *string `json:"templateContent,omitempty" tf:"template_content,omitempty"`
+
+	// The ID of the Template Spec Version to deploy into the Subscription. Cannot be specified with template_content.
+	TemplateSpecVersionID *string `json:"templateSpecVersionId,omitempty" tf:"template_spec_version_id,omitempty"`
 }
 
 type SubscriptionTemplateDeploymentParameters struct {
@@ -29,8 +47,8 @@ type SubscriptionTemplateDeploymentParameters struct {
 	DebugLevel *string `json:"debugLevel,omitempty" tf:"debug_level,omitempty"`
 
 	// The Azure Region where the Subscription Template Deployment should exist. Changing this forces a new Subscription Template Deployment to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The contents of the ARM Template parameters file - containing a JSON list of parameters.
 	// +kubebuilder:validation:Optional
@@ -73,8 +91,9 @@ type SubscriptionTemplateDeploymentStatus struct {
 type SubscriptionTemplateDeployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubscriptionTemplateDeploymentSpec   `json:"spec"`
-	Status            SubscriptionTemplateDeploymentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   SubscriptionTemplateDeploymentSpec   `json:"spec"`
+	Status SubscriptionTemplateDeploymentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

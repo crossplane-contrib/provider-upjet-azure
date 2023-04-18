@@ -15,15 +15,30 @@ import (
 
 type BackupInstancePostgreSQLObservation struct {
 
+	// The ID of the Backup Policy.
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// The ID or versionless ID of the key vault secret which stores the connection string of the database.
+	DatabaseCredentialKeyVaultSecretID *string `json:"databaseCredentialKeyVaultSecretId,omitempty" tf:"database_credential_key_vault_secret_id,omitempty"`
+
+	// The ID of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
+	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
+
 	// The ID of the Backup Instance PostgreSQL.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The location of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the Backup Vault within which the PostgreSQL Backup Instance should exist. Changing this forces a new Backup Instance PostgreSQL to be created.
+	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 }
 
 type BackupInstancePostgreSQLParameters struct {
 
 	// The ID of the Backup Policy.
-	// +kubebuilder:validation:Required
-	BackupPolicyID *string `json:"backupPolicyId" tf:"backup_policy_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
 	// The ID or versionless ID of the key vault secret which stores the connection string of the database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Secret
@@ -54,8 +69,8 @@ type BackupInstancePostgreSQLParameters struct {
 	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// The location of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Backup Vault within which the PostgreSQL Backup Instance should exist. Changing this forces a new Backup Instance PostgreSQL to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupVault
@@ -96,8 +111,10 @@ type BackupInstancePostgreSQLStatus struct {
 type BackupInstancePostgreSQL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BackupInstancePostgreSQLSpec   `json:"spec"`
-	Status            BackupInstancePostgreSQLStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backupPolicyId)",message="backupPolicyId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   BackupInstancePostgreSQLSpec   `json:"spec"`
+	Status BackupInstancePostgreSQLStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

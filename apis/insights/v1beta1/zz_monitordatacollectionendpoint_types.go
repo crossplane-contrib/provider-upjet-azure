@@ -18,11 +18,29 @@ type MonitorDataCollectionEndpointObservation struct {
 	// The endpoint used for accessing configuration, e.g., https://mydce-abcd.eastus-1.control.monitor.azure.com.
 	ConfigurationAccessEndpoint *string `json:"configurationAccessEndpoint,omitempty" tf:"configuration_access_endpoint,omitempty"`
 
+	// Specifies a description for the Data Collection Endpoint.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Collection Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The kind of the Data Collection Endpoint. Possible values are Linux and Windows.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// The Azure Region where the Data Collection Endpoint should exist. Changing this forces a new Data Collection Endpoint to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// The endpoint used for ingesting logs, e.g., https://mydce-abcd.eastus-1.ingest.monitor.azure.com.
 	LogsIngestionEndpoint *string `json:"logsIngestionEndpoint,omitempty" tf:"logs_ingestion_endpoint,omitempty"`
+
+	// Whether network access from public internet to the Data Collection Endpoint are allowed. Possible values are true and false. Default to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The name of the Resource Group where the Data Collection Endpoint should exist. Changing this forces a new Data Collection Endpoint to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Data Collection Endpoint.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MonitorDataCollectionEndpointParameters struct {
@@ -36,8 +54,8 @@ type MonitorDataCollectionEndpointParameters struct {
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The Azure Region where the Data Collection Endpoint should exist. Changing this forces a new Data Collection Endpoint to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether network access from public internet to the Data Collection Endpoint are allowed. Possible values are true and false. Default to true.
 	// +kubebuilder:validation:Optional
@@ -85,8 +103,9 @@ type MonitorDataCollectionEndpointStatus struct {
 type MonitorDataCollectionEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitorDataCollectionEndpointSpec   `json:"spec"`
-	Status            MonitorDataCollectionEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   MonitorDataCollectionEndpointSpec   `json:"spec"`
+	Status MonitorDataCollectionEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

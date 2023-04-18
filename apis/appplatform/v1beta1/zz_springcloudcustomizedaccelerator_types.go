@@ -14,6 +14,9 @@ import (
 )
 
 type BasicAuthObservation struct {
+
+	// Specifies the username of git repository basic auth.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type BasicAuthParameters struct {
@@ -28,6 +31,27 @@ type BasicAuthParameters struct {
 }
 
 type GitRepositoryObservation struct {
+
+	// A basic_auth block as defined below. Conflicts with git_repository.0.ssh_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
+	BasicAuth []BasicAuthObservation `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
+
+	// Specifies the Git repository branch to be used.
+	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// Specifies the Git repository commit to be used.
+	Commit *string `json:"commit,omitempty" tf:"commit,omitempty"`
+
+	// Specifies the Git repository tag to be used.
+	GitTag *string `json:"gitTag,omitempty" tf:"git_tag,omitempty"`
+
+	// Specifies the interval for checking for updates to Git or image repository. It should be greater than 10.
+	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
+
+	// A ssh_auth block as defined below. Conflicts with git_repository.0.basic_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
+	SSHAuth []SSHAuthObservation `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
+
+	// Specifies Git repository URL for the accelerator.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type GitRepositoryParameters struct {
@@ -62,6 +86,9 @@ type GitRepositoryParameters struct {
 }
 
 type SSHAuthObservation struct {
+
+	// Specifies the SSH Key algorithm of git repository basic auth.
+	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 }
 
 type SSHAuthParameters struct {
@@ -81,8 +108,26 @@ type SSHAuthParameters struct {
 
 type SpringCloudCustomizedAcceleratorObservation struct {
 
+	// Specifies a list of accelerator tags.
+	AcceleratorTags []*string `json:"acceleratorTags,omitempty" tf:"accelerator_tags,omitempty"`
+
+	// Specifies the description of the Spring Cloud Customized Accelerator.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the display name of the Spring Cloud Customized Accelerator..
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// A git_repository block as defined below.
+	GitRepository []GitRepositoryObservation `json:"gitRepository,omitempty" tf:"git_repository,omitempty"`
+
 	// The ID of the Spring Cloud Customized Accelerator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the icon URL of the Spring Cloud Customized Accelerator..
+	IconURL *string `json:"iconUrl,omitempty" tf:"icon_url,omitempty"`
+
+	// The ID of the Spring Cloud Accelerator. Changing this forces a new Spring Cloud Customized Accelerator to be created.
+	SpringCloudAcceleratorID *string `json:"springCloudAcceleratorId,omitempty" tf:"spring_cloud_accelerator_id,omitempty"`
 }
 
 type SpringCloudCustomizedAcceleratorParameters struct {
@@ -100,8 +145,8 @@ type SpringCloudCustomizedAcceleratorParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// A git_repository block as defined below.
-	// +kubebuilder:validation:Required
-	GitRepository []GitRepositoryParameters `json:"gitRepository" tf:"git_repository,omitempty"`
+	// +kubebuilder:validation:Optional
+	GitRepository []GitRepositoryParameters `json:"gitRepository,omitempty" tf:"git_repository,omitempty"`
 
 	// Specifies the icon URL of the Spring Cloud Customized Accelerator..
 	// +kubebuilder:validation:Optional
@@ -146,8 +191,9 @@ type SpringCloudCustomizedAcceleratorStatus struct {
 type SpringCloudCustomizedAccelerator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudCustomizedAcceleratorSpec   `json:"spec"`
-	Status            SpringCloudCustomizedAcceleratorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.gitRepository)",message="gitRepository is a required parameter"
+	Spec   SpringCloudCustomizedAcceleratorSpec   `json:"spec"`
+	Status SpringCloudCustomizedAcceleratorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

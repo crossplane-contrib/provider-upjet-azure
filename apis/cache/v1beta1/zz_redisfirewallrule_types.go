@@ -15,15 +15,27 @@ import (
 
 type RedisFirewallRuleObservation struct {
 
+	// The highest IP address included in the range.
+	EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
+
 	// The ID of the Redis Firewall Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Redis Cache. Changing this forces a new resource to be created.
+	RedisCacheName *string `json:"redisCacheName,omitempty" tf:"redis_cache_name,omitempty"`
+
+	// The name of the resource group in which this Redis Cache exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The lowest IP address included in the range
+	StartIP *string `json:"startIp,omitempty" tf:"start_ip,omitempty"`
 }
 
 type RedisFirewallRuleParameters struct {
 
 	// The highest IP address included in the range.
-	// +kubebuilder:validation:Required
-	EndIP *string `json:"endIp" tf:"end_ip,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
 
 	// The name of the Redis Cache. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta1.RedisCache
@@ -52,8 +64,8 @@ type RedisFirewallRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The lowest IP address included in the range
-	// +kubebuilder:validation:Required
-	StartIP *string `json:"startIp" tf:"start_ip,omitempty"`
+	// +kubebuilder:validation:Optional
+	StartIP *string `json:"startIp,omitempty" tf:"start_ip,omitempty"`
 }
 
 // RedisFirewallRuleSpec defines the desired state of RedisFirewallRule
@@ -80,8 +92,10 @@ type RedisFirewallRuleStatus struct {
 type RedisFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RedisFirewallRuleSpec   `json:"spec"`
-	Status            RedisFirewallRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endIp)",message="endIp is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.startIp)",message="startIp is a required parameter"
+	Spec   RedisFirewallRuleSpec   `json:"spec"`
+	Status RedisFirewallRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

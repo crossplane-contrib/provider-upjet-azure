@@ -14,6 +14,12 @@ import (
 )
 
 type AssignToUserObservation struct {
+
+	// User’s AAD Object Id.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// User’s AAD Tenant Id.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type AssignToUserParameters struct {
@@ -29,11 +35,17 @@ type AssignToUserParameters struct {
 
 type ComputeInstanceIdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Instance. Changing this forces a new resource to be created.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Compute Instance.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Compute Instance.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ComputeInstanceIdentityParameters struct {
@@ -49,16 +61,41 @@ type ComputeInstanceIdentityParameters struct {
 
 type ComputeInstanceObservation struct {
 
+	// A assign_to_user block as defined below. A user explicitly assigned to a personal compute instance. Changing this forces a new Machine Learning Compute Instance to be created.
+	AssignToUser []AssignToUserObservation `json:"assignToUser,omitempty" tf:"assign_to_user,omitempty"`
+
+	// The Compute Instance Authorization type. Possible values include: personal. Changing this forces a new Machine Learning Compute Instance to be created.
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
+
+	// The description of the Machine Learning Compute Instance. Changing this forces a new Machine Learning Compute Instance to be created.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Machine Learning Compute Instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +kubebuilder:validation:Optional
 	Identity []ComputeInstanceIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Instance to be created.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// The Azure Region where the Machine Learning Compute Instance should exist. Changing this forces a new Machine Learning Compute Instance to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Instance to be created.
+	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
+
 	// A ssh block as defined below. Specifies policy and settings for SSH access. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +kubebuilder:validation:Optional
 	SSH []ComputeInstanceSSHObservation `json:"ssh,omitempty" tf:"ssh,omitempty"`
+
+	// Virtual network subnet resource ID the compute nodes belong to. Changing this forces a new Machine Learning Compute Instance to be created.
+	SubnetResourceID *string `json:"subnetResourceId,omitempty" tf:"subnet_resource_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the Machine Learning Compute Instance. Changing this forces a new Machine Learning Compute Instance to be created.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Virtual Machine Size. Changing this forces a new Machine Learning Compute Instance to be created.
+	VirtualMachineSize *string `json:"virtualMachineSize,omitempty" tf:"virtual_machine_size,omitempty"`
 }
 
 type ComputeInstanceParameters struct {
@@ -84,8 +121,8 @@ type ComputeInstanceParameters struct {
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// The Azure Region where the Machine Learning Compute Instance should exist. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Instance to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/machinelearningservices/v1beta1.Workspace
@@ -124,14 +161,17 @@ type ComputeInstanceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Virtual Machine Size. Changing this forces a new Machine Learning Compute Instance to be created.
-	// +kubebuilder:validation:Required
-	VirtualMachineSize *string `json:"virtualMachineSize" tf:"virtual_machine_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	VirtualMachineSize *string `json:"virtualMachineSize,omitempty" tf:"virtual_machine_size,omitempty"`
 }
 
 type ComputeInstanceSSHObservation struct {
 
 	// Describes the port for connecting through SSH.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Specifies the SSH rsa public key file as a string. Use "ssh-keygen -t rsa -b 2048" to generate your SSH key pairs.
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The admin username of this Machine Learning Compute Instance.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -168,8 +208,10 @@ type ComputeInstanceStatus struct {
 type ComputeInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ComputeInstanceSpec   `json:"spec"`
-	Status            ComputeInstanceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.virtualMachineSize)",message="virtualMachineSize is a required parameter"
+	Spec   ComputeInstanceSpec   `json:"spec"`
+	Status ComputeInstanceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,6 +14,12 @@ import (
 )
 
 type ACLObservation struct {
+
+	// An access_policy block as defined below.
+	AccessPolicy []AccessPolicyObservation `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
+	// The ID which should be used for this Shared Identifier.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type ACLParameters struct {
@@ -28,6 +34,15 @@ type ACLParameters struct {
 }
 
 type AccessPolicyObservation struct {
+
+	// The time at which this Access Policy should be valid until, in ISO8601 format.
+	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
+
+	// The permissions which should be associated with this Shared Identifier. Possible value is combination of r (read), w (write), d (delete), and l (list).
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// The time at which this Access Policy should be valid from, in ISO8601 format.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type AccessPolicyParameters struct {
@@ -47,11 +62,29 @@ type AccessPolicyParameters struct {
 
 type ShareObservation struct {
 
+	// One or more acl blocks as defined below.
+	ACL []ACLObservation `json:"acl,omitempty" tf:"acl,omitempty"`
+
+	// The access tier of the File Share. Possible values are Hot, Cool and TransactionOptimized, Premium.
+	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
+
+	// The protocol used for the share. Possible values are SMB and NFS. The SMB indicates the share can be accessed by SMBv3.0, SMBv2.1 and REST. The NFS indicates the share can be accessed by NFSv4.1. Defaults to SMB. Changing this forces a new resource to be created.
+	EnabledProtocol *string `json:"enabledProtocol,omitempty" tf:"enabled_protocol,omitempty"`
+
 	// The ID of the File Share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A mapping of MetaData for this File Share.
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
+	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
+
 	// The Resource Manager ID of this File Share.
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
+
+	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// The URL of the File Share
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -76,8 +109,8 @@ type ShareParameters struct {
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
-	// +kubebuilder:validation:Required
-	Quota *float64 `json:"quota" tf:"quota,omitempty"`
+	// +kubebuilder:validation:Optional
+	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 
 	// Specifies the storage account in which to create the share. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -117,8 +150,9 @@ type ShareStatus struct {
 type Share struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ShareSpec   `json:"spec"`
-	Status            ShareStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.quota)",message="quota is a required parameter"
+	Spec   ShareSpec   `json:"spec"`
+	Status ShareStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

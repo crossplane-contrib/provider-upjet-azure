@@ -17,6 +17,11 @@ func (mg *RedisCache) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RedisCache.
+func (mg *RedisCache) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RedisCache.
 func (mg *RedisCache) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *RedisCache) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RedisCache.
 func (mg *RedisCache) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RedisCache.
+func (mg *RedisCache) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RedisCache.
@@ -83,6 +93,11 @@ func (mg *RedisEnterpriseCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RedisEnterpriseCluster.
+func (mg *RedisEnterpriseCluster) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RedisEnterpriseCluster.
 func (mg *RedisEnterpriseCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *RedisEnterpriseCluster) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RedisEnterpriseCluster.
 func (mg *RedisEnterpriseCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RedisEnterpriseCluster.
+func (mg *RedisEnterpriseCluster) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RedisEnterpriseCluster.
@@ -149,6 +169,11 @@ func (mg *RedisEnterpriseDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RedisEnterpriseDatabase.
+func (mg *RedisEnterpriseDatabase) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RedisEnterpriseDatabase.
 func (mg *RedisEnterpriseDatabase) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *RedisEnterpriseDatabase) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RedisEnterpriseDatabase.
 func (mg *RedisEnterpriseDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RedisEnterpriseDatabase.
+func (mg *RedisEnterpriseDatabase) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RedisEnterpriseDatabase.
@@ -215,6 +245,11 @@ func (mg *RedisFirewallRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RedisFirewallRule.
+func (mg *RedisFirewallRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RedisFirewallRule.
 func (mg *RedisFirewallRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *RedisFirewallRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RedisFirewallRule.
 func (mg *RedisFirewallRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RedisFirewallRule.
+func (mg *RedisFirewallRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RedisFirewallRule.
@@ -281,6 +321,11 @@ func (mg *RedisLinkedServer) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this RedisLinkedServer.
+func (mg *RedisLinkedServer) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this RedisLinkedServer.
 func (mg *RedisLinkedServer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *RedisLinkedServer) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this RedisLinkedServer.
 func (mg *RedisLinkedServer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this RedisLinkedServer.
+func (mg *RedisLinkedServer) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this RedisLinkedServer.

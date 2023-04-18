@@ -17,6 +17,11 @@ func (mg *ResourceDeploymentScriptAzureCli) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ResourceDeploymentScriptAzureCli.
 func (mg *ResourceDeploymentScriptAzureCli) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *ResourceDeploymentScriptAzureCli) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ResourceDeploymentScriptAzureCli.
 func (mg *ResourceDeploymentScriptAzureCli) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ResourceDeploymentScriptAzureCli.
+func (mg *ResourceDeploymentScriptAzureCli) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ResourceDeploymentScriptAzureCli.
@@ -83,6 +93,11 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) GetDeletionPolicy() xpv1.Dele
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ResourceDeploymentScriptAzurePowerShell.
 func (mg *ResourceDeploymentScriptAzurePowerShell) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) SetConditions(c ...xpv1.Condi
 // SetDeletionPolicy of this ResourceDeploymentScriptAzurePowerShell.
 func (mg *ResourceDeploymentScriptAzurePowerShell) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ResourceDeploymentScriptAzurePowerShell.
+func (mg *ResourceDeploymentScriptAzurePowerShell) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ResourceDeploymentScriptAzurePowerShell.
@@ -149,6 +169,11 @@ func (mg *ResourceGroupTemplateDeployment) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ResourceGroupTemplateDeployment.
+func (mg *ResourceGroupTemplateDeployment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ResourceGroupTemplateDeployment.
 func (mg *ResourceGroupTemplateDeployment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *ResourceGroupTemplateDeployment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ResourceGroupTemplateDeployment.
 func (mg *ResourceGroupTemplateDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ResourceGroupTemplateDeployment.
+func (mg *ResourceGroupTemplateDeployment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ResourceGroupTemplateDeployment.
@@ -215,6 +245,11 @@ func (mg *SubscriptionTemplateDeployment) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SubscriptionTemplateDeployment.
+func (mg *SubscriptionTemplateDeployment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SubscriptionTemplateDeployment.
 func (mg *SubscriptionTemplateDeployment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *SubscriptionTemplateDeployment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SubscriptionTemplateDeployment.
 func (mg *SubscriptionTemplateDeployment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SubscriptionTemplateDeployment.
+func (mg *SubscriptionTemplateDeployment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SubscriptionTemplateDeployment.

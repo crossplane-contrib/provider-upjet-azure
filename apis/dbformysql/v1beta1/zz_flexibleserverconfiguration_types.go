@@ -17,6 +17,15 @@ type FlexibleServerConfigurationObservation struct {
 
 	// The ID of the MySQL Flexible Server Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the MySQL Flexible Server exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the name of the MySQL Flexible Server. Changing this forces a new resource to be created.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values. Changing this forces a new resource to be created.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FlexibleServerConfigurationParameters struct {
@@ -48,8 +57,8 @@ type FlexibleServerConfigurationParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the value of the MySQL Flexible Server Configuration. See the MySQL documentation for valid values. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // FlexibleServerConfigurationSpec defines the desired state of FlexibleServerConfiguration
@@ -76,8 +85,9 @@ type FlexibleServerConfigurationStatus struct {
 type FlexibleServerConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FlexibleServerConfigurationSpec   `json:"spec"`
-	Status            FlexibleServerConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)",message="value is a required parameter"
+	Spec   FlexibleServerConfigurationSpec   `json:"spec"`
+	Status FlexibleServerConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

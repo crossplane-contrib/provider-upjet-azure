@@ -167,6 +167,7 @@ func GetProvider() *tjconfig.Provider {
 			ExternalNameConfigurations(),
 		),
 		tjconfig.WithReferenceInjectors([]tjconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
+		tjconfig.WithFeaturesPackage("internal/features"),
 	)
 
 	// API group overrides from Terraform import statements

@@ -15,8 +15,23 @@ import (
 
 type HPCCacheNFSTargetObservation struct {
 
+	// The name HPC Cache, which the HPC Cache NFS Target will be added to. Changing this forces a new resource to be created.
+	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
+
 	// The ID of the HPC Cache NFS Target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
+	NamespaceJunction []NamespaceJunctionObservation `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
+
+	// The name of the Resource Group in which to create the HPC Cache NFS Target. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The IP address or fully qualified domain name (FQDN) of the HPC Cache NFS target. Changing this forces a new resource to be created.
+	TargetHostName *string `json:"targetHostName,omitempty" tf:"target_host_name,omitempty"`
+
+	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
 }
 
 type HPCCacheNFSTargetParameters struct {
@@ -35,8 +50,8 @@ type HPCCacheNFSTargetParameters struct {
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
-	// +kubebuilder:validation:Required
-	NamespaceJunction []NamespaceJunctionParameters `json:"namespaceJunction" tf:"namespace_junction,omitempty"`
+	// +kubebuilder:validation:Optional
+	NamespaceJunction []NamespaceJunctionParameters `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
 
 	// The name of the Resource Group in which to create the HPC Cache NFS Target. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -52,15 +67,27 @@ type HPCCacheNFSTargetParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The IP address or fully qualified domain name (FQDN) of the HPC Cache NFS target. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	TargetHostName *string `json:"targetHostName" tf:"target_host_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetHostName *string `json:"targetHostName,omitempty" tf:"target_host_name,omitempty"`
 
 	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
-	// +kubebuilder:validation:Required
-	UsageModel *string `json:"usageModel" tf:"usage_model,omitempty"`
+	// +kubebuilder:validation:Optional
+	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
 }
 
 type NamespaceJunctionObservation struct {
+
+	// The name of the access policy applied to this target. Defaults to default.
+	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
+
+	// The NFS export of this NFS target within the HPC Cache NFS Target.
+	NFSExport *string `json:"nfsExport,omitempty" tf:"nfs_export,omitempty"`
+
+	// The client-facing file path of this NFS target within the HPC Cache NFS Target.
+	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
+
+	// The relative subdirectory path from the nfs_export to map to the namespace_path. Defaults to "", in which case the whole nfs_export is exported.
+	TargetPath *string `json:"targetPath,omitempty" tf:"target_path,omitempty"`
 }
 
 type NamespaceJunctionParameters struct {
@@ -106,8 +133,11 @@ type HPCCacheNFSTargetStatus struct {
 type HPCCacheNFSTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HPCCacheNFSTargetSpec   `json:"spec"`
-	Status            HPCCacheNFSTargetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.namespaceJunction)",message="namespaceJunction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetHostName)",message="targetHostName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.usageModel)",message="usageModel is a required parameter"
+	Spec   HPCCacheNFSTargetSpec   `json:"spec"`
+	Status HPCCacheNFSTargetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

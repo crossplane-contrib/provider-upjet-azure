@@ -18,8 +18,32 @@ type AttachedDatabaseConfigurationObservation struct {
 	// The list of databases from the cluster_resource_id which are currently attached to the cluster.
 	AttachedDatabaseNames []*string `json:"attachedDatabaseNames,omitempty" tf:"attached_database_names,omitempty"`
 
+	// Specifies the name of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// The resource id of the cluster where the databases you would like to attach reside. Changing this forces a new resource to be created.
+	ClusterResourceID *string `json:"clusterResourceId,omitempty" tf:"cluster_resource_id,omitempty"`
+
+	// The name of the database which you would like to attach, use * if you want to follow all current and future databases. Changing this forces a new resource to be created.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The default principals modification kind. Valid values are: None (default), Replace and Union.
+	DefaultPrincipalModificationKind *string `json:"defaultPrincipalModificationKind,omitempty" tf:"default_principal_modification_kind,omitempty"`
+
 	// The Kusto Attached Database Configuration ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the location of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Kusto Attached Database Configuration to create. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the resource group of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A sharing block as defined below.
+	Sharing []SharingObservation `json:"sharing,omitempty" tf:"sharing,omitempty"`
 }
 
 type AttachedDatabaseConfigurationParameters struct {
@@ -69,12 +93,12 @@ type AttachedDatabaseConfigurationParameters struct {
 	DefaultPrincipalModificationKind *string `json:"defaultPrincipalModificationKind,omitempty" tf:"default_principal_modification_kind,omitempty"`
 
 	// Specifies the location of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Kusto Attached Database Configuration to create. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the resource group of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -95,6 +119,24 @@ type AttachedDatabaseConfigurationParameters struct {
 }
 
 type SharingObservation struct {
+
+	// List of external tables exclude from the follower database.
+	ExternalTablesToExclude []*string `json:"externalTablesToExclude,omitempty" tf:"external_tables_to_exclude,omitempty"`
+
+	// List of external tables to include in the follower database.
+	ExternalTablesToInclude []*string `json:"externalTablesToInclude,omitempty" tf:"external_tables_to_include,omitempty"`
+
+	// List of materialized views exclude from the follower database.
+	MaterializedViewsToExclude []*string `json:"materializedViewsToExclude,omitempty" tf:"materialized_views_to_exclude,omitempty"`
+
+	// List of materialized views to include in the follower database.
+	MaterializedViewsToInclude []*string `json:"materializedViewsToInclude,omitempty" tf:"materialized_views_to_include,omitempty"`
+
+	// List of tables to exclude from the follower database.
+	TablesToExclude []*string `json:"tablesToExclude,omitempty" tf:"tables_to_exclude,omitempty"`
+
+	// List of tables to include in the follower database.
+	TablesToInclude []*string `json:"tablesToInclude,omitempty" tf:"tables_to_include,omitempty"`
 }
 
 type SharingParameters struct {
@@ -148,8 +190,10 @@ type AttachedDatabaseConfigurationStatus struct {
 type AttachedDatabaseConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AttachedDatabaseConfigurationSpec   `json:"spec"`
-	Status            AttachedDatabaseConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   AttachedDatabaseConfigurationSpec   `json:"spec"`
+	Status AttachedDatabaseConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

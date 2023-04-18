@@ -14,6 +14,12 @@ import (
 )
 
 type KeyPropertyObservation struct {
+
+	// The name of the key property. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the key property. Valid values include Bool, DateTime, Double, String. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type KeyPropertyParameters struct {
@@ -29,8 +35,23 @@ type KeyPropertyParameters struct {
 
 type ReferenceDataSetObservation struct {
 
+	// The comparison behavior that will be used to compare keys. Valid values include Ordinal and OrdinalIgnoreCase. Defaults to Ordinal. Changing this forces a new resource to be created.
+	DataStringComparisonBehavior *string `json:"dataStringComparisonBehavior,omitempty" tf:"data_string_comparison_behavior,omitempty"`
+
 	// The ID of the IoT Time Series Insights Reference Data Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A key_property block as defined below. Changing this forces a new resource to be created.
+	KeyProperty []KeyPropertyObservation `json:"keyProperty,omitempty" tf:"key_property,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The resource ID of the Azure IoT Time Series Insights Environment in which to create the Azure IoT Time Series Insights Reference Data Set. Changing this forces a new resource to be created.
+	TimeSeriesInsightsEnvironmentID *string `json:"timeSeriesInsightsEnvironmentId,omitempty" tf:"time_series_insights_environment_id,omitempty"`
 }
 
 type ReferenceDataSetParameters struct {
@@ -40,12 +61,12 @@ type ReferenceDataSetParameters struct {
 	DataStringComparisonBehavior *string `json:"dataStringComparisonBehavior,omitempty" tf:"data_string_comparison_behavior,omitempty"`
 
 	// A key_property block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	KeyProperty []KeyPropertyParameters `json:"keyProperty" tf:"key_property,omitempty"`
+	// +kubebuilder:validation:Optional
+	KeyProperty []KeyPropertyParameters `json:"keyProperty,omitempty" tf:"key_property,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -90,8 +111,10 @@ type ReferenceDataSetStatus struct {
 type ReferenceDataSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReferenceDataSetSpec   `json:"spec"`
-	Status            ReferenceDataSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.keyProperty)",message="keyProperty is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   ReferenceDataSetSpec   `json:"spec"`
+	Status ReferenceDataSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

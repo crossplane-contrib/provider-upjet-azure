@@ -15,10 +15,31 @@ import (
 
 type RouteServerObservation struct {
 
+	// Whether to enable route exchange between Azure Route Server and the gateway(s)
+	BranchToBranchTrafficEnabled *bool `json:"branchToBranchTrafficEnabled,omitempty" tf:"branch_to_branch_traffic_enabled,omitempty"`
+
 	// The ID of the Route Server .
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the supported Azure location where the Route Server should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the Public IP Address. This option is required since September 1st 2021. Changing this forces a new resource to be created.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Specifies the name of the Resource Group where the Route Server should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	RoutingState *string `json:"routingState,omitempty" tf:"routing_state,omitempty"`
+
+	// The SKU of the Route Server. The only possible value is Standard. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// The ID of the Subnet that the Route Server will reside. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	VirtualRouterAsn *float64 `json:"virtualRouterAsn,omitempty" tf:"virtual_router_asn,omitempty"`
 
@@ -32,8 +53,8 @@ type RouteServerParameters struct {
 	BranchToBranchTrafficEnabled *bool `json:"branchToBranchTrafficEnabled,omitempty" tf:"branch_to_branch_traffic_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the Route Server should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Public IP Address. This option is required since September 1st 2021. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
@@ -63,8 +84,8 @@ type RouteServerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Route Server. The only possible value is Standard. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Sku *string `json:"sku" tf:"sku,omitempty"`
+	// +kubebuilder:validation:Optional
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// The ID of the Subnet that the Route Server will reside. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
@@ -109,8 +130,10 @@ type RouteServerStatus struct {
 type RouteServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteServerSpec   `json:"spec"`
-	Status            RouteServerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)",message="sku is a required parameter"
+	Spec   RouteServerSpec   `json:"spec"`
+	Status RouteServerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

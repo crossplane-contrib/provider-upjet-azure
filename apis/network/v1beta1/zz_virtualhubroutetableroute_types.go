@@ -15,19 +15,34 @@ import (
 
 type VirtualHubRouteTableRouteObservation_2 struct {
 
+	// A list of destination addresses for this route.
+	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
+	// The type of destinations. Possible values are CIDR, ResourceId and Service.
+	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
+
 	// The ID of the Virtual Hub Route Table.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The next hop's resource ID.
+	NextHop *string `json:"nextHop,omitempty" tf:"next_hop,omitempty"`
+
+	// The type of next hop. Currently the only possible value is ResourceId. Defaults to ResourceId.
+	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
+
+	// The ID of the Virtual Hub Route Table to link this route to. Changing this forces a new resource to be created.
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 }
 
 type VirtualHubRouteTableRouteParameters_2 struct {
 
 	// A list of destination addresses for this route.
-	// +kubebuilder:validation:Required
-	Destinations []*string `json:"destinations" tf:"destinations,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// The type of destinations. Possible values are CIDR, ResourceId and Service.
-	// +kubebuilder:validation:Required
-	DestinationsType *string `json:"destinationsType" tf:"destinations_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
 
 	// The next hop's resource ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHubConnection
@@ -86,8 +101,10 @@ type VirtualHubRouteTableRouteStatus struct {
 type VirtualHubRouteTableRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualHubRouteTableRouteSpec   `json:"spec"`
-	Status            VirtualHubRouteTableRouteStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinations)",message="destinations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.destinationsType)",message="destinationsType is a required parameter"
+	Spec   VirtualHubRouteTableRouteSpec   `json:"spec"`
+	Status VirtualHubRouteTableRouteStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

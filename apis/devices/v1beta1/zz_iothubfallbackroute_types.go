@@ -15,8 +15,26 @@ import (
 
 type IOTHubFallbackRouteObservation struct {
 
+	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// Used to specify whether the fallback route is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
+	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
 	// The ID of the IoTHub Fallback Route.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the IoTHub to which this Fallback Route belongs. Changing this forces a new resource to be created.
+	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
+
+	// The name of the resource group under which the IotHub Storage Container Endpoint resource has to be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type IOTHubFallbackRouteParameters struct {
@@ -26,8 +44,8 @@ type IOTHubFallbackRouteParameters struct {
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Used to specify whether the fallback route is enabled.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
 	// +crossplane:generate:reference:type=IOTHubEndpointStorageContainer
@@ -97,8 +115,9 @@ type IOTHubFallbackRouteStatus struct {
 type IOTHubFallbackRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IOTHubFallbackRouteSpec   `json:"spec"`
-	Status            IOTHubFallbackRouteStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	Spec   IOTHubFallbackRouteSpec   `json:"spec"`
+	Status IOTHubFallbackRouteStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

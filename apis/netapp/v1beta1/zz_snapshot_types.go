@@ -15,8 +15,23 @@ import (
 
 type SnapshotObservation struct {
 
+	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
 	// The ID of the NetApp Snapshot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
+	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
+
+	// The name of the resource group where the NetApp Snapshot should be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the NetApp volume in which the NetApp Snapshot should be created. Changing this forces a new resource to be created.
+	VolumeName *string `json:"volumeName,omitempty" tf:"volume_name,omitempty"`
 }
 
 type SnapshotParameters struct {
@@ -35,8 +50,8 @@ type SnapshotParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Pool
@@ -102,8 +117,9 @@ type SnapshotStatus struct {
 type Snapshot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SnapshotSpec   `json:"spec"`
-	Status            SnapshotStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   SnapshotSpec   `json:"spec"`
+	Status SnapshotStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

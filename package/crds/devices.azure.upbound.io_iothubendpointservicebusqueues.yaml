@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: iothubendpointservicebusqueues.devices.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -261,6 +265,21 @@ spec:
                         type: object
                     type: object
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -438,8 +457,36 @@ spec:
             properties:
               atProvider:
                 properties:
+                  authenticationType:
+                    description: Type used to authenticate against the Service Bus
+                      Queue endpoint. Possible values are keyBased and identityBased.
+                      Defaults to keyBased.
+                    type: string
+                  endpointUri:
+                    description: URI of the Service Bus endpoint. This attribute can
+                      only be specified and is mandatory when authentication_type
+                      is identityBased.
+                    type: string
+                  entityPath:
+                    description: Name of the Service Bus Queue. This attribute can
+                      only be specified and is mandatory when authentication_type
+                      is identityBased.
+                    type: string
                   id:
                     description: The ID of the IoTHub ServiceBus Queue Endpoint.
+                    type: string
+                  identityId:
+                    description: ID of the User Managed Identity used to authenticate
+                      against the Service Bus Queue endpoint.
+                    type: string
+                  iothubId:
+                    description: The IoTHub ID for the endpoint. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group under which the Service
+                      Bus Queue has been created. Changing this forces a new resource
+                      to be created.
                     type: string
                 type: object
               conditions:

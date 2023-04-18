@@ -17,6 +17,12 @@ type SentinelDataConnectorIOTObservation struct {
 
 	// The ID of the Iot Data Connector.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Log Analytics Workspace that this Iot Data Connector resides in. Changing this forces a new Iot Data Connector to be created.
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	// The ID of the subscription that this Iot Data Connector connects to. Changing this forces a new Iot Data Connector to be created.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type SentinelDataConnectorIOTParameters struct {

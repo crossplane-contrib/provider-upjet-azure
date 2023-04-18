@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: vpnserverconfigurations.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -348,10 +352,22 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - location
-                - vpnAuthenticationTypes
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -523,15 +539,182 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: vpnAuthenticationTypes is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpnAuthenticationTypes)
           status:
             description: VPNServerConfigurationStatus defines the observed state of
               VPNServerConfiguration.
             properties:
               atProvider:
                 properties:
+                  azureActiveDirectoryAuthentication:
+                    description: A azure_active_directory_authentication block as
+                      defined below.
+                    items:
+                      properties:
+                        audience:
+                          description: The Audience which should be used for authentication.
+                          type: string
+                        issuer:
+                          description: The Issuer which should be used for authentication.
+                          type: string
+                        tenant:
+                          description: The Tenant which should be used for authentication.
+                          type: string
+                      type: object
+                    type: array
+                  clientRevokedCertificate:
+                    description: One or more client_revoked_certificate blocks as
+                      defined below.
+                    items:
+                      properties:
+                        name:
+                          description: A name used to uniquely identify this certificate.
+                          type: string
+                        thumbprint:
+                          description: The Thumbprint of the Certificate.
+                          type: string
+                      type: object
+                    type: array
+                  clientRootCertificate:
+                    description: One or more client_root_certificate blocks as defined
+                      below.
+                    items:
+                      properties:
+                        name:
+                          description: A name used to uniquely identify this certificate.
+                          type: string
+                        publicCertData:
+                          description: The Public Key Data associated with the Certificate.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the VPN Server Configuration.
                     type: string
+                  ipsecPolicy:
+                    description: A ipsec_policy block as defined below.
+                    items:
+                      properties:
+                        dhGroup:
+                          description: The DH Group, used in IKE Phase 1. Possible
+                            values include DHGroup1, DHGroup2, DHGroup14, DHGroup24,
+                            DHGroup2048, ECP256, ECP384 and None.
+                          type: string
+                        ikeEncryption:
+                          description: The IKE encryption algorithm, used for IKE
+                            Phase 2. Possible values include AES128, AES192, AES256,
+                            DES, DES3, GCMAES128 and GCMAES256.
+                          type: string
+                        ikeIntegrity:
+                          description: The IKE encryption integrity algorithm, used
+                            for IKE Phase 2. Possible values include GCMAES128, GCMAES256,
+                            MD5, SHA1, SHA256 and SHA384.
+                          type: string
+                        ipsecEncryption:
+                          description: The IPSec encryption algorithm, used for IKE
+                            phase 1. Possible values include AES128, AES192, AES256,
+                            DES, DES3, GCMAES128, GCMAES192, GCMAES256 and None.
+                          type: string
+                        ipsecIntegrity:
+                          description: The IPSec integrity algorithm, used for IKE
+                            phase 1. Possible values include GCMAES128, GCMAES192,
+                            GCMAES256, MD5, SHA1 and SHA256.
+                          type: string
+                        pfsGroup:
+                          description: The Pfs Group, used in IKE Phase 2. Possible
+                            values include ECP256, ECP384, PFS1, PFS2, PFS14, PFS24,
+                            PFS2048, PFSMM and None.
+                          type: string
+                        saDataSizeKilobytes:
+                          description: The IPSec Security Association payload size
+                            in KB for a Site-to-Site VPN tunnel.
+                          type: number
+                        saLifetimeSeconds:
+                          description: The IPSec Security Association lifetime in
+                            seconds for a Site-to-Site VPN tunnel.
+                          type: number
+                      type: object
+                    type: array
+                  location:
+                    description: The Azure location where this VPN Server Configuration
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  radius:
+                    description: A radius block as defined below.
+                    items:
+                      properties:
+                        clientRootCertificate:
+                          description: One or more client_root_certificate blocks
+                            as defined above.
+                          items:
+                            properties:
+                              name:
+                                description: A name used to uniquely identify this
+                                  certificate.
+                                type: string
+                              thumbprint:
+                                description: The Thumbprint of the Certificate.
+                                type: string
+                            type: object
+                          type: array
+                        server:
+                          description: One or more server blocks as defined below.
+                          items:
+                            properties:
+                              address:
+                                description: The Address of the Radius Server.
+                                type: string
+                              score:
+                                description: The Score of the Radius Server determines
+                                  the priority of the server. Ranges from 1 to 30.
+                                type: number
+                            type: object
+                          type: array
+                        serverRootCertificate:
+                          description: One or more server_root_certificate blocks
+                            as defined below.
+                          items:
+                            properties:
+                              name:
+                                description: A name used to uniquely identify this
+                                  certificate.
+                                type: string
+                              publicCertData:
+                                description: The Public Key Data associated with the
+                                  Certificate.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The Name of the Resource Group in which this VPN
+                      Server Configuration should be created. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  vpnAuthenticationTypes:
+                    description: A list of Authentication Types applicable for this
+                      VPN Server Configuration. Possible values are AAD (Azure Active
+                      Directory), Certificate and Radius.
+                    items:
+                      type: string
+                    type: array
+                  vpnProtocols:
+                    description: A list of VPN Protocols to use for this Server Configuration.
+                      Possible values are IkeV2 and OpenVPN.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

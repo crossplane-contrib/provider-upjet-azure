@@ -20,6 +20,9 @@ type IdentityObservation struct {
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Search Service. The only possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -43,21 +46,44 @@ type QueryKeysParameters struct {
 
 type ServiceObservation struct {
 
+	// A list of IPv4 addresses or CIDRs that are allowed access to the search service endpoint.
+	AllowedIps []*string `json:"allowedIps,omitempty" tf:"allowed_ips,omitempty"`
+
 	// The ID of the Search Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Search Service should exist. Changing this forces a new Search Service to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The number of partitions which should be created.
+	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// The Primary Key used for Search Service Administration.
 	PrimaryKey *string `json:"primaryKey,omitempty" tf:"primary_key,omitempty"`
 
+	// Whether or not public network access is allowed for this resource. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
 	// A query_keys block as defined below.
 	QueryKeys []QueryKeysObservation `json:"queryKeys,omitempty" tf:"query_keys,omitempty"`
 
+	// The number of replica's which should be created.
+	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// The name of the Resource Group where the Search Service should exist. Changing this forces a new Search Service to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// The Secondary Key used for Search Service Administration.
 	SecondaryKey *string `json:"secondaryKey,omitempty" tf:"secondary_key,omitempty"`
+
+	// The SKU which should be used for this Search Service. Possible values are basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2. Changing this forces a new Search Service to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags which should be assigned to the Search Service.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ServiceParameters struct {
@@ -71,8 +97,8 @@ type ServiceParameters struct {
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Search Service should exist. Changing this forces a new Search Service to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The number of partitions which should be created.
 	// +kubebuilder:validation:Optional
@@ -100,8 +126,8 @@ type ServiceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU which should be used for this Search Service. Possible values are basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2. Changing this forces a new Search Service to be created.
-	// +kubebuilder:validation:Required
-	Sku *string `json:"sku" tf:"sku,omitempty"`
+	// +kubebuilder:validation:Optional
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the Search Service.
 	// +kubebuilder:validation:Optional
@@ -132,8 +158,10 @@ type ServiceStatus struct {
 type Service struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceSpec   `json:"spec"`
-	Status            ServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)",message="sku is a required parameter"
+	Spec   ServiceSpec   `json:"spec"`
+	Status ServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

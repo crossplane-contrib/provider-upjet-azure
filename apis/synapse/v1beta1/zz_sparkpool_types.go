@@ -14,6 +14,9 @@ import (
 )
 
 type AutoPauseObservation struct {
+
+	// Number of minutes of idle time before the Spark Pool is automatically paused. Must be between 5 and 10080.
+	DelayInMinutes *float64 `json:"delayInMinutes,omitempty" tf:"delay_in_minutes,omitempty"`
 }
 
 type AutoPauseParameters struct {
@@ -24,6 +27,12 @@ type AutoPauseParameters struct {
 }
 
 type AutoScaleObservation struct {
+
+	// The maximum number of nodes the Spark Pool can support. Must be between 3 and 200.
+	MaxNodeCount *float64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
+
+	// The minimum number of nodes the Spark Pool can support. Must be between 3 and 200.
+	MinNodeCount *float64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
 }
 
 type AutoScaleParameters struct {
@@ -38,6 +47,12 @@ type AutoScaleParameters struct {
 }
 
 type LibraryRequirementObservation struct {
+
+	// The content of library requirements.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The name of the library requirements file.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 }
 
 type LibraryRequirementParameters struct {
@@ -52,6 +67,12 @@ type LibraryRequirementParameters struct {
 }
 
 type SparkConfigObservation struct {
+
+	// The contents of a spark configuration.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The name of the file where the spark configuration content will be stored.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 }
 
 type SparkConfigParameters struct {
@@ -67,8 +88,62 @@ type SparkConfigParameters struct {
 
 type SparkPoolObservation struct {
 
+	// An auto_pause block as defined below.
+	AutoPause []AutoPauseObservation `json:"autoPause,omitempty" tf:"auto_pause,omitempty"`
+
+	// An auto_scale block as defined below. Exactly one of node_count or auto_scale must be specified.
+	AutoScale []AutoScaleObservation `json:"autoScale,omitempty" tf:"auto_scale,omitempty"`
+
+	// The cache size in the Spark Pool.
+	CacheSize *float64 `json:"cacheSize,omitempty" tf:"cache_size,omitempty"`
+
+	// Indicates whether compute isolation is enabled or not. Defaults to false.
+	ComputeIsolationEnabled *bool `json:"computeIsolationEnabled,omitempty" tf:"compute_isolation_enabled,omitempty"`
+
+	// Indicates whether Dynamic Executor Allocation is enabled or not. Defaults to false.
+	DynamicExecutorAllocationEnabled *bool `json:"dynamicExecutorAllocationEnabled,omitempty" tf:"dynamic_executor_allocation_enabled,omitempty"`
+
 	// The ID of the Synapse Spark Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A library_requirement block as defined below.
+	LibraryRequirement []LibraryRequirementObservation `json:"libraryRequirement,omitempty" tf:"library_requirement,omitempty"`
+
+	// The maximum number of executors allocated only when dynamic_executor_allocation_enabled set to true.
+	MaxExecutors *float64 `json:"maxExecutors,omitempty" tf:"max_executors,omitempty"`
+
+	// The minimum number of executors allocated only when dynamic_executor_allocation_enabled set to true.
+	MinExecutors *float64 `json:"minExecutors,omitempty" tf:"min_executors,omitempty"`
+
+	// The number of nodes in the Spark Pool. Exactly one of node_count or auto_scale must be specified.
+	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
+
+	// The level of node in the Spark Pool. Possible values are Small, Medium, Large, None, XLarge, XXLarge and XXXLarge.
+	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
+
+	// The kind of nodes that the Spark Pool provides. Possible values are MemoryOptimized and None.
+	NodeSizeFamily *string `json:"nodeSizeFamily,omitempty" tf:"node_size_family,omitempty"`
+
+	// Indicates whether session level packages are enabled or not. Defaults to false.
+	SessionLevelPackagesEnabled *bool `json:"sessionLevelPackagesEnabled,omitempty" tf:"session_level_packages_enabled,omitempty"`
+
+	// A spark_config block as defined below.
+	SparkConfig []SparkConfigObservation `json:"sparkConfig,omitempty" tf:"spark_config,omitempty"`
+
+	// The Spark events folder. Defaults to /events.
+	SparkEventsFolder *string `json:"sparkEventsFolder,omitempty" tf:"spark_events_folder,omitempty"`
+
+	// The default folder where Spark logs will be written. Defaults to /logs.
+	SparkLogFolder *string `json:"sparkLogFolder,omitempty" tf:"spark_log_folder,omitempty"`
+
+	// The Apache Spark version. Possible values are 2.4 , 3.1 , 3.2 and 3.3. Defaults to 2.4.
+	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
+
+	// The ID of the Synapse Workspace where the Synapse Spark Pool should exist. Changing this forces a new Synapse Spark Pool to be created.
+	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the Synapse Spark Pool.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SparkPoolParameters struct {
@@ -110,12 +185,12 @@ type SparkPoolParameters struct {
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// The level of node in the Spark Pool. Possible values are Small, Medium, Large, None, XLarge, XXLarge and XXXLarge.
-	// +kubebuilder:validation:Required
-	NodeSize *string `json:"nodeSize" tf:"node_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
 
 	// The kind of nodes that the Spark Pool provides. Possible values are MemoryOptimized and None.
-	// +kubebuilder:validation:Required
-	NodeSizeFamily *string `json:"nodeSizeFamily" tf:"node_size_family,omitempty"`
+	// +kubebuilder:validation:Optional
+	NodeSizeFamily *string `json:"nodeSizeFamily,omitempty" tf:"node_size_family,omitempty"`
 
 	// Indicates whether session level packages are enabled or not. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -180,8 +255,10 @@ type SparkPoolStatus struct {
 type SparkPool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SparkPoolSpec   `json:"spec"`
-	Status            SparkPoolStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeSize)",message="nodeSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeSizeFamily)",message="nodeSizeFamily is a required parameter"
+	Spec   SparkPoolSpec   `json:"spec"`
+	Status SparkPoolStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
